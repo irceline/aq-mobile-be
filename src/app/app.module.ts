@@ -8,20 +8,24 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import {
   ApiInterface,
   CachingInterceptor,
+  GeoSearch,
   GetDataApiInterface,
+  HelgolandMapControlModule,
   HttpCache,
   LocalHttpCache,
   LocalOngoingHttpCache,
+  NominatimGeoSearchService,
   OnGoingHttpCache,
   SettingsService,
 } from 'helgoland-toolbox';
 import { HelgolandMapSelectorModule } from 'helgoland-toolbox/dist/components/map/selector/selector.module';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
+import { ComponentsModule } from '../components/components.module';
 import { DiagramPage } from '../pages/diagram/diagram';
 import { MapPage } from '../pages/map/map';
+import { JSSONSettingsService } from '../providers/settings/settings';
 import { MyApp } from './app.component';
-import { JSSONSettingsService } from './services/settings.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -37,6 +41,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserModule,
     HttpClientModule,
     HelgolandMapSelectorModule,
+    HelgolandMapControlModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -44,7 +49,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    ComponentsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -60,7 +66,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     { provide: HTTP_INTERCEPTORS, useClass: CachingInterceptor, multi: true },
     { provide: HttpCache, useClass: LocalHttpCache },
     { provide: OnGoingHttpCache, useClass: LocalOngoingHttpCache },
-    { provide: ApiInterface, useClass: GetDataApiInterface }
+    { provide: ApiInterface, useClass: GetDataApiInterface },
+    { provide: GeoSearch, useClass: NominatimGeoSearchService },
   ]
 })
 export class AppModule { }

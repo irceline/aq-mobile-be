@@ -15,6 +15,24 @@ page-map {
                 z-index: 9999;
                 background-color: rgba(255, 255, 255, 0.5);
             }
+            mobile-geosearch-control {
+                position: absolute;
+                top: 10px;
+                left: 50px;
+                z-index: 999;
+            }
+            mobile-extent-control {
+                position: absolute;
+                top: 80px;
+                left: 10px;
+                z-index: 999;
+            }
+            mobile-locate-control {
+                position: absolute;
+                top: 120px;
+                left: 10px;
+                z-index: 999;
+            }
         }
     }
 }

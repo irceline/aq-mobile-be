@@ -2,12 +2,11 @@ import { Component, ViewChild } from '@angular/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
-import { SettingsService } from 'helgoland-toolbox';
+import { Settings, SettingsService } from 'helgoland-toolbox';
 import { Nav, Platform } from 'ionic-angular';
 
 import { DiagramPage } from '../pages/diagram/diagram';
 import { MapPage } from '../pages/map/map';
-import { MobileSettings } from './services/settings.service';
 
 @Component({
   templateUrl: 'app.html'
@@ -23,7 +22,7 @@ export class MyApp {
     private platform: Platform,
     private statusBar: StatusBar,
     private splashScreen: SplashScreen,
-    private settingsSrvc: SettingsService<MobileSettings>,
+    private settingsSrvc: SettingsService<Settings>,
     private translate: TranslateService
   ) {
     this.initializeApp();

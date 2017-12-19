@@ -1,0 +1,17 @@
+mobile-locate-control {
+    background-color: white;
+    border-radius: 4px;
+    border: 2px solid rgba(0, 0, 0, 0.4);
+    &:hover {
+        background-color: #f4f4f4;
+    }
+    .toggled {
+        background-color: rgb(163, 163, 255);
+    }
+    ion-icon {
+        padding: 5px 7px;
+        font-size: 20px;
+        width: 30px;
+        height: 30px;
+    }
+}
