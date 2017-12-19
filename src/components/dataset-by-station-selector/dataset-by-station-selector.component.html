@@ -1,0 +1,20 @@
+<ion-list>
+  <ion-list-header *ngIf="counter">
+    {{counter}} timeseries are loading...
+  </ion-list-header>
+  <ion-item *ngFor="let timeseries of timeseriesList">
+    <ion-label>
+      <h2>{{timeseries.parameters.phenomenon.label}}</h2>
+      <h3>
+        <span>{{timeseries.parameters.procedure.label}}</span>
+        <span *ngIf="timeseries.parameters.category.label && timeseries.parameters.category.label != timeseries.parameters.phenomenon.label">({{timeseries.parameters.category.label}})</span>
+      </h3>
+      <p *ngIf="timeseries.lastValue">
+        <span>{{timeseries.lastValue.value}}</span>
+        <span>{{timeseries.uom}}</span>
+        <span>({{timeseries.lastValue.timestamp| date: 'dd.MM.yy HH:mm'}})</span>
+      </p>
+    </ion-label>
+    <ion-radio checked="{{timeseries.selected}}" (ionSelect)="toggle(timeseries)"></ion-radio>
+  </ion-item>
+</ion-list>

@@ -5,6 +5,8 @@ import { SettingsService } from 'helgoland-toolbox/dist/services/settings/settin
 import { ModalController } from 'ionic-angular';
 import * as L from 'leaflet';
 
+import { StationSelectorComponent } from '../../components/station-selector/station-selector';
+
 @Component({
   selector: 'page-map',
   templateUrl: 'map.html'
@@ -55,16 +57,17 @@ export class MapPage {
   }
 
   public onStationSelected(platform: Platform) {
-    // const modal = this.modalCtrl.create(StationSelectorComponent,
-    //   {
-    //     platform,
-    //     providerUrl: this.providerUrl
-    //   }
-    // );
-    // modal.onDidDismiss(data => {
-    //   if (data) { this.navigator.navigate(Page.Diagram); }
-    // });
-    // modal.present();
+    const modal = this.modalCtrl.create(StationSelectorComponent,
+      {
+        platform,
+        providerUrl: this.providerUrl
+      }
+    );
+    modal.onDidDismiss(data => {
+      debugger;
+      // if (data) { this.navigator.navigate(Page.Diagram); }
+    });
+    modal.present();
   }
 
   public onMapLoading(loading: boolean) {
