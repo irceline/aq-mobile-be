@@ -1,3 +1,20 @@
 page-map {
-
+    .map-view {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        .lastupdate {
+            flex: 0 1;
+        }
+        .map {
+            flex: 1;
+            position: relative;
+            .loading-overlay {
+                z-index: 9999;
+                background-color: rgba(255, 255, 255, 0.5);
+            }
+        }
+    }
 }

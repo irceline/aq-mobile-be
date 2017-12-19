@@ -8,11 +8,17 @@
 </ion-header>
 
 <ion-content>
-  <div>last update</div>
-  <n52-station-map-selector [mapId]="'timeseries'" [serviceUrl]="providerUrl" (onSelected)="onStationSelected($event)" [cluster]="true"
-    (onContentLoading)="onMapLoading($event)"></n52-station-map-selector>
-  <div class="loading-overlay" *ngIf="loading">
-    <ion-spinner item-start name="circles"></ion-spinner>
-    <span>{{'timeseries.map-selection.loading' | translate}}...</span>
+  <div ion-fixed class="map-view">
+    <div class="lastupdate">
+      <div text-center>last update goes here</div>
+    </div>
+    <div class="map">
+      <n52-station-map-selector [mapId]="'timeseries'" [serviceUrl]="providerUrl" (onSelected)="onStationSelected($event)" [cluster]="true"
+        (onContentLoading)="onMapLoading($event)"></n52-station-map-selector>
+      <div class="loading-overlay" *ngIf="loading">
+        <ion-spinner item-start name="circles"></ion-spinner>
+        <span>{{'timeseries.map-selection.loading' | translate}}...</span>
+      </div>
+    </div>
   </div>
 </ion-content>
