@@ -1,14 +1,19 @@
 page-map {
     .map-view {
-        height: 100%;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        flex-wrap: nowrap;
+        // height: 100%;
+        // width: 100%;
+        // display: flex;
+        // flex-direction: column;
+        // flex-wrap: nowrap;
+        .scroll-content {
+            overflow: hidden;
+        }
+        position: relative;
         .lastupdate {
             flex: 0 1;
         }
-        .map {
+        // .map {
+            height: 100%;
             flex: 1;
             position: relative;
             .loading-overlay {
@@ -33,6 +38,6 @@ page-map {
                 left: 10px;
                 z-index: 999;
             }
-        }
+        // }
     }
 }

@@ -7,12 +7,11 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-  <div ion-fixed class="map-view">
-    <div class="lastupdate">
+<ion-content class="map-view">
+    <!-- <div class="lastupdate">
       <div text-center>last update goes here</div>
     </div>
-    <div class="map">
+    <div class="map"> -->
       <n52-station-map-selector mapId="timeseries" [serviceUrl]="providerUrl" (onSelected)="onStationSelected($event)" [cluster]="true"
         [mapOptions]="mapOptions" (onContentLoading)="onMapLoading($event)"></n52-station-map-selector>
       <mobile-geosearch-control mapId="timeseries"></mobile-geosearch-control>
@@ -22,6 +21,5 @@
         <ion-spinner item-start name="circles"></ion-spinner>
         <span>{{'timeseries.map-selection.loading' | translate}}...</span>
       </div>
-    </div>
-  </div>
+    <!-- </div> -->
 </ion-content>
