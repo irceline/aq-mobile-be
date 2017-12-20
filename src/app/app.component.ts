@@ -3,7 +3,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { Settings, SettingsService } from 'helgoland-toolbox';
-import { Nav, Platform } from 'ionic-angular';
+import { NavController, Platform } from 'ionic-angular';
 
 import { DiagramPage } from '../pages/diagram/diagram';
 import { MapPage } from '../pages/map/map';
@@ -12,7 +12,7 @@ import { MapPage } from '../pages/map/map';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  @ViewChild(Nav) nav: Nav;
+  @ViewChild('content') nav: NavController;
 
   rootPage: any = MapPage;
 
@@ -56,7 +56,7 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     if (this.nav.getActive().name != page.component.name) {
-      this.nav.setRoot(page.component);
+      this.nav.push(page.component);
     }
   }
 }

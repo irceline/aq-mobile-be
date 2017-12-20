@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { LayerOptions, MapOptions, Platform, Settings, SettingsService } from 'helgoland-toolbox';
-import { ModalController } from 'ionic-angular';
-import { Nav } from 'ionic-angular/components/nav/nav';
+import { ModalController, NavController } from 'ionic-angular';
 import * as L from 'leaflet';
 
 import { StationSelectorComponent } from '../../components/station-selector/station-selector';
@@ -19,7 +18,7 @@ export class MapPage {
 
   constructor(
     private settingsSrvc: SettingsService<Settings>,
-    private nav: Nav,
+    private nav: NavController,
     public modalCtrl: ModalController,
     private cdr: ChangeDetectorRef
   ) {
@@ -69,17 +68,13 @@ export class MapPage {
   }
 
   public onStationSelected(platform: Platform) {
-    this.nav.setRoot(DiagramPage);
     const modal = this.modalCtrl.create(StationSelectorComponent,
       {
         platform,
         providerUrl: this.providerUrl
       }
     );
-    modal.onDidDismiss(data => {
-      // debugger;
-      // if (data) { this.navigator.navigate(Page.Diagram); }
-    });
+    modal.onDidDismiss(data => { if (data) { this.nav.push(DiagramPage) } });
     modal.present();
   }
 
