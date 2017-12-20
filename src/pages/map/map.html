@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Map</ion-title>
+    <ion-title>{{'map.header' | translate}}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -19,7 +19,7 @@
       <mobile-locate-control mapId="timeseries"></mobile-locate-control>
       <div class="loading-overlay" *ngIf="loading">
         <ion-spinner item-start name="circles"></ion-spinner>
-        <span>{{'timeseries.map-selection.loading' | translate}}...</span>
+        <span>{{'map.loading' | translate}}...</span>
       </div>
     <!-- </div> -->
 </ion-content>

@@ -12,14 +12,14 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <h4 padding>{{'timeseries.map-selection.dataset-selection-hint' | translate}}:</h4>
+  <h4 padding>{{'map.dataset-selection-hint' | translate}}:</h4>
   <n52-mobile-dataset-by-station-selector [station]="platform" [url]="providerUrl" (onSelectionChanged)="onDatasetSelectionChanged($event)"></n52-mobile-dataset-by-station-selector>
 </ion-content>
 <ion-footer>
   <ion-toolbar color="primary">
     <ion-buttons end>
       <button *ngIf="datasetSelections.length > 0" ion-button icon-right color="royal" (click)="confirmSelection()">
-        <span translate [translateParams]="{value: datasetSelections.length}">timeseries.map-selection.show-in-diagram</span>
+        <span translate [translateParams]="{value: datasetSelections.length}">map.show-in-diagram</span>
       </button>
     </ion-buttons>
   </ion-toolbar>

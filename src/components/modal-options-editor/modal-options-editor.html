@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>
-      {{'timeseries.style-edit.header' | translate}}
+      {{'style-edit.header' | translate}}
     </ion-title>
     <ion-buttons start>
       <button ion-button (click)="dismiss()">
@@ -16,11 +16,11 @@
     <n52-color-selector [color]="color" (onColorChange)="color = $event"></n52-color-selector>
   </ion-row>
   <ion-item>
-    <ion-label>{{'timeseries.style-edit.generalize' | translate}}</ion-label>
+    <ion-label>{{'style-edit.generalize' | translate}}</ion-label>
     <ion-checkbox [(ngModel)]="generalize"></ion-checkbox>
   </ion-item>
   <ion-item>
-    <ion-label>{{'timeseries.style-edit.zeroBasedYAxe' | translate}}</ion-label>
+    <ion-label>{{'style-edit.zeroBasedYAxe' | translate}}</ion-label>
     <ion-checkbox [(ngModel)]="zeroBasedYAxe"></ion-checkbox>
   </ion-item>
 </ion-content>

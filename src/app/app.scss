@@ -16,3 +16,9 @@
 // automatically applied to the <body> element in the app.
 
 @import '../styles/loading';
+
+ion-menu {
+    .scroll-content {
+        overflow-y: auto;
+    }
+}

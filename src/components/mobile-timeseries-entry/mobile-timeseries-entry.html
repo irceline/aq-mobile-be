@@ -43,13 +43,13 @@
     <div *ngIf="informationVisible">
       <div *ngIf="firstValue" (click)="jumpToFirstTimeStamp(); $event.stopPropagation();">
         <ion-icon name="arrow-forward"></ion-icon>
-        <span>{{'timeseries.legend.first-value-at' | translate}}</span>
+        <span>{{'legend.first-value-at' | translate}}</span>
         <span>{{firstValue.timestamp| date: 'dd.MM.yy HH:mm'}}</span>
         <span>({{firstValue.value}} {{uom}})</span>
       </div>
       <div *ngIf="lastValue" (click)="jumpToLastTimeStamp(); $event.stopPropagation();">
         <ion-icon name="arrow-forward"></ion-icon>
-        <span>{{'timeseries.legend.last-value-at' | translate}}</span>
+        <span>{{'legend.last-value-at' | translate}}</span>
         <span>{{lastValue.timestamp| date: 'dd.MM.yy HH:mm'}}</span>
         <span>({{lastValue.value}} {{uom}})</span>
       </div>

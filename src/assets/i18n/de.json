@@ -1,33 +1,59 @@
 {
-	"favorite": {
-		"notifier": {
-			"add-favorite": "Füge Favoriten hinzu",
-			"remove-favorite": "Entferne Favoriten"
+	"change-timespan": {
+		"custom": {
+			"end": "Ende",
+			"header": "Freier Zeitraum",
+			"start": "Start"
+		},
+		"header": "Ändere Zeitraum",
+		"predefined": {
+			"current-month": "Derzeitiger Monat",
+			"current-week": "Derzeitige Woche",
+			"current-year": "Derzeitiges Jahr",
+			"header": "Vordefinierter Zeitraum",
+			"last-hour": "Letzte Stunde",
+			"last-month": "Letzter Monat",
+			"last-week": "Letzte Woche",
+			"last-year": "Letztes Jahr",
+			"today": "Heute",
+			"today-yesterday": "Heute und gestern",
+			"yesterday": "Gestern"
 		}
 	},
-	"listSelection": {
-		"loading": ""
+	"controls": {
+		"cancel": "Abbrecehn",
+		"close": "Schließen",
+		"ok": "Ok"
 	},
-	"profiles": {
-		"legend": {
-			"delete-subentry": "Entferne dieses Profil",
-			"edit-style": "Verändere das Aussehen dieses Profils",
-			"go-to-combi-view": "Zeige in der kombinierten Ansicht",
-			"show-geometry": "Zeige Profil-Geometry",
-			"visibility": "Zeige/Verstecke das Profil"
-		}
+	"diagram": {
+		"header": "Diagramm",
+		"loading": "Lade",
+		"no-timeseries-selected": "Keine Zeitreihe selektiert!",
+		"select-timeseries": "Bitte wähle eine Zeitreihe"
 	},
-	"provider-selector": {
-		"datasets": "Datensätze",
-		"phenomena": "Phänomene",
-		"platforms": "Platformen",
-		"service-url": "Service-Url",
-		"stations": "Stationen",
-		"timeseries": "Zeitreihen"
+	"legend": {
+		"first-value-at": "Erster Wert am",
+		"header": "Legend",
+		"last-value-at": "Letzter Wert am"
 	},
-	"timeseries": {
-		"map-selection": {
-			"loading": "Lade"
-		}
+	"map": {
+		"dataset-selection-hint": "Bitte wählen Sie eine oder mehrere Zeitreihen zur Darstellung aus",
+		"geosearch": {
+			"placeholder": "Suche..."
+		},
+		"header": "Karte",
+		"loading": "Lade",
+		"show-in-diagram": "Zeige {{value}} Zeitreihen im Diagramm"
+	},
+	"menu": {
+		"header": "Menü"
+	},
+	"show-geometry": {
+		"header": "Position der Station"
+	},
+	"style-edit": {
+		"generalize": "Daten generalisieren",
+		"header": "Zeitreihenerscheinung ändern",
+		"zeroBasedYAxe": "Zeitreihe null-basiert"
 	}
 }

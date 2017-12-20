@@ -1,5 +1,5 @@
 <div class="leaflet-control">
-    <input [(ngModel)]="searchTerm" placeholder="Search..." (keyup.enter)="triggerSearch()">
+    <input [(ngModel)]="searchTerm" placeholder="{{'map.geosearch.placeholder' | translate}}" (keyup.enter)="triggerSearch()">
     <ion-spinner *ngIf="loading" name="dots"></ion-spinner>
     <span (click)="clearSearch()" *ngIf="searchTerm && !loading"><ion-icon name="close"></ion-icon></span>
 </div>

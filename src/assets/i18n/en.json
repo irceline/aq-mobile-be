@@ -1,33 +1,59 @@
 {
-	"favorite": {
-		"notifier": {
-			"add-favorite": "Add favorite",
-			"remove-favorite": "Remove favorite"
+	"change-timespan": {
+		"custom": {
+			"end": "End",
+			"header": "Custom timespan",
+			"start": "Start"
+		},
+		"header": "Change timespan",
+		"predefined": {
+			"current-month": "Current month",
+			"current-week": "Current week",
+			"current-year": "Current year",
+			"header": "Predefined timespan",
+			"last-hour": "Last hour",
+			"last-month": "Last month",
+			"last-week": "Last week",
+			"last-year": "Last year",
+			"today": "Today",
+			"today-yesterday": "Today & Yesterday",
+			"yesterday": "Yesterday"
 		}
 	},
-	"listSelection": {
-		"loading": ""
+	"controls": {
+		"cancel": "Cancel",
+		"close": "Close",
+		"ok": "Ok"
 	},
-	"profiles": {
-		"legend": {
-			"delete-subentry": "Remove this profile",
-			"edit-style": "Edit the style of this profile",
-			"go-to-combi-view": "Show in the combined view",
-			"show-geometry": "Show profile geometry",
-			"visibility": "Show/Hide this profile"
-		}
+	"diagram": {
+		"header": "Diagram",
+		"loading": "loading",
+		"no-timeseries-selected": "No timeseries selected!",
+		"select-timeseries": "Please select timeseries in the"
 	},
-	"provider-selector": {
-		"datasets": "Datasets",
-		"phenomena": "Phenomena",
-		"platforms": "Platforms",
-		"service-url": "Service-Url",
-		"stations": "Stations",
-		"timeseries": "Timeseries"
+	"legend": {
+		"first-value-at": "First value at",
+		"header": "Legend",
+		"last-value-at": "Last value at"
 	},
-	"timeseries": {
-		"map-selection": {
-			"loading": "loading"
-		}
+	"map": {
+		"dataset-selection-hint": "Please select one or more timeseries to display in diagram",
+		"geosearch": {
+			"placeholder": "Search location..."
+		},
+		"header": "Map",
+		"loading": "loading",
+		"show-in-diagram": "Show {{value}} timeseries in diagram"
+	},
+	"menu": {
+		"header": "Menu"
+	},
+	"show-geometry": {
+		"header": "Position of the station"
+	},
+	"style-edit": {
+		"generalize": "Generalize data",
+		"header": "Change style of this timeseries",
+		"zeroBasedYAxe": "Timeseries zero based"
 	}
 }

@@ -3,10 +3,10 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>{{'timeseries.diagram.header' | translate}}</ion-title>
+    <ion-title>{{'diagram.header' | translate}}</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="openLegend()">
-        {{'timeseries.diagram.legend.header' | translate}}
+        {{'legend.header' | translate}}
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -18,18 +18,17 @@
       (onTimespanChanged)="timespanChanged($event)" (onContentLoading)="loading = $event"></n52-flot-timeseries-graph>
     <div class="loading-overlay" *ngIf="loading">
       <ion-spinner item-start name="circles"></ion-spinner>
-      <span>{{'timeseries.diagram.loading' | translate}}...</span>
+      <span>{{'diagram.loading' | translate}}...</span>
     </div>
   </div>
   <div *ngIf="datasetIds.length === 0">
     <ion-card>
       <ion-card-header text-center>
-          {{'timeseries.diagram.no-timeseries-selected' | translate}}
+          {{'diagram.no-timeseries-selected' | translate}}
       </ion-card-header>
       <ion-card-content>
-        <div text-center>{{'timeseries.diagram.select-timeseries' | translate}}:</div>
-        <button ion-button block outline (click)="openMapSelection()">{{'timeseries.map-selection.header' | translate}}</button>
-        <button ion-button block outline (click)="openListSelection()">{{'timeseries.list-selection.header' | translate}}</button>
+        <div text-center>{{'diagram.select-timeseries' | translate}}:</div>
+        <button ion-button block outline (click)="openMapSelection()">{{'map.header' | translate}}</button>
       </ion-card-content>
     </ion-card>
   </div>
