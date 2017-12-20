@@ -10,6 +10,7 @@ import {
   CachingInterceptor,
   GeoSearch,
   GetDataApiInterface,
+  HelgolandFlotGraphModule,
   HelgolandMapControlModule,
   HttpCache,
   LocalHttpCache,
@@ -25,6 +26,7 @@ import { ComponentsModule } from '../components/components.module';
 import { DiagramPage } from '../pages/diagram/diagram';
 import { MapPage } from '../pages/map/map';
 import { JSSONSettingsService } from '../providers/settings/settings';
+import { TimeseriesService } from '../providers/timeseries/timeseries.service';
 import { MyApp } from './app.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -42,6 +44,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     HelgolandMapSelectorModule,
     HelgolandMapControlModule,
+    HelgolandFlotGraphModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -68,6 +71,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     { provide: OnGoingHttpCache, useClass: LocalOngoingHttpCache },
     { provide: ApiInterface, useClass: GetDataApiInterface },
     { provide: GeoSearch, useClass: NominatimGeoSearchService },
+    TimeseriesService,
   ]
 })
 export class AppModule { }

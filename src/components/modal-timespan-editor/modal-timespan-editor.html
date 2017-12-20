@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+        {{'timeseries.change-timespan.header' | translate}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item-group>
+      <ion-item-divider color="light">{{'timeseries.change-timespan.custom.header' | translate}}</ion-item-divider>
+      <ion-item>
+        <ion-label>{{'timeseries.change-timespan.custom.start' | translate}}</ion-label>
+        <ion-datetime pickerFormat="DD.MM.YYYY HH:mm" [(ngModel)]="start"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>{{'timeseries.change-timespan.custom.end' | translate}}</ion-label>
+        <ion-datetime pickerFormat="DD.MM.YYYY HH:mm" [(ngModel)]="end"></ion-datetime>
+      </ion-item>
+    </ion-item-group>
+    <ion-item-group>
+      <ion-item-divider color="light">{{'timeseries.change-timespan.predefined.header' | translate}}</ion-item-divider>
+      <ion-item>
+        <mobile-timespan-button predefined="last_hour" label="{{'timeseries.change-timespan.predefined.last-hour' | translate}}" (onTimespanSelected)="onTimespanSelected($event)"></mobile-timespan-button>
+      </ion-item>
+      <ion-item>
+        <mobile-timespan-button predefined="today" label="{{'timeseries.change-timespan.predefined.today' | translate}}" (onTimespanSelected)="onTimespanSelected($event)"></mobile-timespan-button>
+      </ion-item>
+      <ion-item>
+        <mobile-timespan-button predefined="yesterday" label="{{'timeseries.change-timespan.predefined.yesterday' | translate}}" (onTimespanSelected)="onTimespanSelected($event)"></mobile-timespan-button>
+      </ion-item>
+      <ion-item>
+        <mobile-timespan-button predefined="today_yesterday" label="{{'timeseries.change-timespan.predefined.today-yesterday' | translate}}" (onTimespanSelected)="onTimespanSelected($event)"></mobile-timespan-button>
+      </ion-item>
+      <ion-item>
+        <mobile-timespan-button predefined="current_week" label="{{'timeseries.change-timespan.predefined.current-week' | translate}}" (onTimespanSelected)="onTimespanSelected($event)"></mobile-timespan-button>
+      </ion-item>
+      <ion-item>
+        <mobile-timespan-button predefined="last_week" label="{{'timeseries.change-timespan.predefined.last-week' | translate}}" (onTimespanSelected)="onTimespanSelected($event)"></mobile-timespan-button>
+      </ion-item>
+      <ion-item>
+        <mobile-timespan-button predefined="current_month" label="{{'timeseries.change-timespan.predefined.current-month' | translate}}" (onTimespanSelected)="onTimespanSelected($event)"></mobile-timespan-button>
+      </ion-item>
+      <ion-item>
+        <mobile-timespan-button predefined="last_month" label="{{'timeseries.change-timespan.predefined.last-month' | translate}}" (onTimespanSelected)="onTimespanSelected($event)"></mobile-timespan-button>
+      </ion-item>
+      <ion-item>
+        <mobile-timespan-button predefined="current_year" label="{{'timeseries.change-timespan.predefined.current-year' | translate}}" (onTimespanSelected)="onTimespanSelected($event)"></mobile-timespan-button>
+      </ion-item>
+      <ion-item>
+        <mobile-timespan-button predefined="last_year" label="{{'timeseries.change-timespan.predefined.last-year' | translate}}" (onTimespanSelected)="onTimespanSelected($event)"></mobile-timespan-button>
+      </ion-item>
+    </ion-item-group>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-buttons end>
+      <button ion-button icon-right (click)="confirmTimespan()">
+        {{'controls.ok' | translate}}
+      </button>
+      <button ion-button icon-right (click)="dismiss()">
+        {{'controls.cancel' | translate}}
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      {{'timeseries.show-geometry.header' | translate}}
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span ion-text showWhen="ios">{{'controls.cancel' | translate}}</span>
+        <ion-icon name="md-close" showWhen="android, windows"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <n52-geometry-map-viewer [mapId]="'mapGeometryViewerModal'" [geometry]="geometry" [maxMapZoom]="15"></n52-geometry-map-viewer>
+</ion-content>

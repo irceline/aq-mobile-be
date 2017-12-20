@@ -11,7 +11,11 @@
   },
   "scripts": {
     "clean": "ionic-app-scripts clean",
+    "start": "npm run prepare && npm run ionic:serve",
+    "start:android:device": "npm run prepare && ionic cordova run android --device -lc",
     "build": "ionic-app-scripts build",
+    "build:android:prod": "npm run prepare && ionic cordova build android --prod",
+    "build:android:prod:release": "npm run prepare && ionic cordova build android --prod --release",
     "lint": "ionic-app-scripts lint",
     "ionic:build": "ionic-app-scripts build",
     "ionic:serve": "ionic-app-scripts serve",

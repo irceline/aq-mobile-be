@@ -1,0 +1,13 @@
+<ion-navbar>
+  <ion-buttons start>
+    <button ion-button icon-only (click)="back()">
+      <ion-icon name="arrow-round-back"></ion-icon>
+    </button>
+  </ion-buttons>
+  <div text-center (click)="open()">{{timespan.from | date : 'y-MM-dd'}} &nbsp;&ndash;&nbsp; {{timespan.to | date : 'y-MM-dd'}}</div>
+  <ion-buttons end>
+    <button ion-button icon-only (click)="forward()">
+      <ion-icon name="arrow-round-forward"></ion-icon>
+    </button>
+  </ion-buttons>
+</ion-navbar>

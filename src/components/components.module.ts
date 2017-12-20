@@ -2,7 +2,14 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { HelgolandMapSelectorModule } from 'helgoland-toolbox';
+import {
+	HelgolandDatasetlistModule,
+	HelgolandDepictionModule,
+	HelgolandMapSelectorModule,
+	HelgolandMapViewModule,
+	HelgolandModificationModule,
+	HelgolandServicesModule,
+} from 'helgoland-toolbox';
 import { IonicModule } from 'ionic-angular';
 
 import {
@@ -11,6 +18,13 @@ import {
 import { MobileExtentControlComponent } from './mobile-extent-control/mobile-extent-control';
 import { MobileGeosearchControlComponent } from './mobile-geosearch-control/mobile-geosearch-control';
 import { MobileLocateControlComponent } from './mobile-locate-control/mobile-locate-control';
+import { MobileTimeseriesEntryComponent } from './mobile-timeseries-entry/mobile-timeseries-entry';
+import { MobileTimespanButtonComponent } from './mobile-timespan-button/mobile-timespan-button';
+import { MobileTimespanShiftSelectorComponent } from './mobile-timespan-shift-selector/mobile-timespan-shift-selector';
+import { ModalGeometryViewerComponent } from './modal-geometry-viewer/modal-geometry-viewer';
+import { ModalLegendComponent } from './modal-legend/modal-legend';
+import { ModalOptionsEditorComponent } from './modal-options-editor/modal-options-editor';
+import { ModalTimespanEditorComponent } from './modal-timespan-editor/modal-timespan-editor';
 import { StationSelectorComponent } from './station-selector/station-selector';
 
 @NgModule({
@@ -19,10 +33,22 @@ import { StationSelectorComponent } from './station-selector/station-selector';
 		MobileExtentControlComponent,
 		MobileLocateControlComponent,
 		StationSelectorComponent,
-		MobileDatasetByStationSelectorComponent
+		MobileDatasetByStationSelectorComponent,
+		MobileTimespanShiftSelectorComponent,
+		ModalTimespanEditorComponent,
+		MobileTimespanButtonComponent,
+		ModalLegendComponent,
+		MobileTimeseriesEntryComponent,
+		ModalGeometryViewerComponent,
+		ModalOptionsEditorComponent
 	],
 	imports: [
 		HelgolandMapSelectorModule,
+		HelgolandDepictionModule,
+		HelgolandServicesModule,
+		HelgolandDatasetlistModule,
+		HelgolandMapViewModule,
+		HelgolandModificationModule,
 		CommonModule,
 		FormsModule,
 		IonicModule,
@@ -33,10 +59,21 @@ import { StationSelectorComponent } from './station-selector/station-selector';
 		MobileExtentControlComponent,
 		MobileLocateControlComponent,
 		StationSelectorComponent,
-		MobileDatasetByStationSelectorComponent
+		MobileDatasetByStationSelectorComponent,
+		MobileTimespanShiftSelectorComponent,
+		ModalTimespanEditorComponent,
+		MobileTimespanButtonComponent,
+		ModalLegendComponent,
+		MobileTimeseriesEntryComponent,
+		ModalGeometryViewerComponent,
+		ModalOptionsEditorComponent
 	],
 	entryComponents: [
-		StationSelectorComponent
+		StationSelectorComponent,
+		ModalTimespanEditorComponent,
+		ModalLegendComponent,
+		ModalGeometryViewerComponent,
+		ModalOptionsEditorComponent
 	]
 })
 export class ComponentsModule { }

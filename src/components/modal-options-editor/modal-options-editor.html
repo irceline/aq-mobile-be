@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      {{'timeseries.style-edit.header' | translate}}
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span ion-text showWhen="ios">Cancel</span>
+        <ion-icon name="md-close" showWhen="android, windows"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-row padding class="center">
+    <n52-color-selector [color]="color" (onColorChange)="color = $event"></n52-color-selector>
+  </ion-row>
+  <ion-item>
+    <ion-label>{{'timeseries.style-edit.generalize' | translate}}</ion-label>
+    <ion-checkbox [(ngModel)]="generalize"></ion-checkbox>
+  </ion-item>
+  <ion-item>
+    <ion-label>{{'timeseries.style-edit.zeroBasedYAxe' | translate}}</ion-label>
+    <ion-checkbox [(ngModel)]="zeroBasedYAxe"></ion-checkbox>
+  </ion-item>
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-buttons end>
+      <button ion-button icon-right (click)="updateOption()">
+        {{'controls.ok' | translate}}
+      </button>
+      <button ion-button icon-right (click)="dismiss()">
+        {{'controls.cancel' | translate}}
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
