@@ -43,6 +43,7 @@
 		},
 		"header": "Map",
 		"loading": "loading",
+		"select-phenomenon": "Choose phenomenon",
 		"show-in-diagram": "Show {{value}} timeseries in diagram"
 	},
 	"menu": {

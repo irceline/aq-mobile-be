@@ -10,6 +10,7 @@ import {
 	HelgolandModificationModule,
 	HelgolandServicesModule,
 } from 'helgoland-toolbox';
+import { HelgolandSelectorModule } from 'helgoland-toolbox/dist/components/selector/selector.module';
 import { IonicModule } from 'ionic-angular';
 
 import {
@@ -18,6 +19,7 @@ import {
 import { MobileExtentControlComponent } from './mobile-extent-control/mobile-extent-control';
 import { MobileGeosearchControlComponent } from './mobile-geosearch-control/mobile-geosearch-control';
 import { MobileLocateControlComponent } from './mobile-locate-control/mobile-locate-control';
+import { MobileServiceFilterSelectorComponent } from './mobile-service-filter-selector/mobile-service-filter-selector';
 import { MobileTimeseriesEntryComponent } from './mobile-timeseries-entry/mobile-timeseries-entry';
 import { MobileTimespanButtonComponent } from './mobile-timespan-button/mobile-timespan-button';
 import { MobileTimespanShiftSelectorComponent } from './mobile-timespan-shift-selector/mobile-timespan-shift-selector';
@@ -25,6 +27,7 @@ import { ModalGeometryViewerComponent } from './modal-geometry-viewer/modal-geom
 import { ModalLegendComponent } from './modal-legend/modal-legend';
 import { ModalOptionsEditorComponent } from './modal-options-editor/modal-options-editor';
 import { ModalTimespanEditorComponent } from './modal-timespan-editor/modal-timespan-editor';
+import { PhenomenonSelectorPopoverComponent } from './phenomenon-selector-popover/phenomenon-selector-popover';
 import { StationSelectorComponent } from './station-selector/station-selector';
 
 @NgModule({
@@ -40,7 +43,9 @@ import { StationSelectorComponent } from './station-selector/station-selector';
 		ModalLegendComponent,
 		MobileTimeseriesEntryComponent,
 		ModalGeometryViewerComponent,
-		ModalOptionsEditorComponent
+		ModalOptionsEditorComponent,
+		PhenomenonSelectorPopoverComponent,
+		MobileServiceFilterSelectorComponent
 	],
 	imports: [
 		HelgolandMapSelectorModule,
@@ -48,6 +53,7 @@ import { StationSelectorComponent } from './station-selector/station-selector';
 		HelgolandServicesModule,
 		HelgolandDatasetlistModule,
 		HelgolandMapViewModule,
+		HelgolandSelectorModule,
 		HelgolandModificationModule,
 		CommonModule,
 		FormsModule,
@@ -66,14 +72,17 @@ import { StationSelectorComponent } from './station-selector/station-selector';
 		ModalLegendComponent,
 		MobileTimeseriesEntryComponent,
 		ModalGeometryViewerComponent,
-		ModalOptionsEditorComponent
+		ModalOptionsEditorComponent,
+		PhenomenonSelectorPopoverComponent,
+		MobileServiceFilterSelectorComponent
 	],
 	entryComponents: [
 		StationSelectorComponent,
 		ModalTimespanEditorComponent,
 		ModalLegendComponent,
 		ModalGeometryViewerComponent,
-		ModalOptionsEditorComponent
+		ModalOptionsEditorComponent,
+		PhenomenonSelectorPopoverComponent
 	]
 })
 export class ComponentsModule { }

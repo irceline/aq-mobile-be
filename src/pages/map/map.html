@@ -4,6 +4,12 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>{{'map.header' | translate}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="openPhenomenonSelector($event)">
+        <span *ngIf="!selectedPhenomenon">{{'map.select-phenomenon' | translate}}</span>
+        <span *ngIf="selectedPhenomenon">{{selectedPhenomenon.label}}</span>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -12,7 +18,7 @@
       <div text-center>last update goes here</div>
     </div>
     <div class="map"> -->
-      <n52-station-map-selector mapId="timeseries" [serviceUrl]="providerUrl" (onSelected)="onStationSelected($event)" [cluster]="true"
+      <n52-station-map-selector mapId="timeseries" [serviceUrl]="providerUrl" [filter]="phenomenonFilter" (onSelected)="onStationSelected($event)" [cluster]="true"
         [mapOptions]="mapOptions" (onContentLoading)="onMapLoading($event)"></n52-station-map-selector>
       <mobile-geosearch-control mapId="timeseries"></mobile-geosearch-control>
       <mobile-extent-control mapId="timeseries" [extent]="mapOptions.fitBounds"></mobile-extent-control>

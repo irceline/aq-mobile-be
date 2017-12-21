@@ -43,6 +43,7 @@
 		},
 		"header": "Karte",
 		"loading": "Lade",
+		"select-phenomenon": "Wähle Phänomen",
 		"show-in-diagram": "Zeige {{value}} Zeitreihen im Diagramm"
 	},
 	"menu": {
