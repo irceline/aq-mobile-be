@@ -19,7 +19,7 @@ import {
 import { MobileExtentControlComponent } from './mobile-extent-control/mobile-extent-control';
 import { MobileGeosearchControlComponent } from './mobile-geosearch-control/mobile-geosearch-control';
 import { MobileLocateControlComponent } from './mobile-locate-control/mobile-locate-control';
-import { MobileServiceFilterSelectorComponent } from './mobile-service-filter-selector/mobile-service-filter-selector';
+import { MobilePhenomenonSelectorComponent } from './mobile-phenomenon-selector/mobile-phenomenon-selector';
 import { MobileTimeseriesEntryComponent } from './mobile-timeseries-entry/mobile-timeseries-entry';
 import { MobileTimespanButtonComponent } from './mobile-timespan-button/mobile-timespan-button';
 import { MobileTimespanShiftSelectorComponent } from './mobile-timespan-shift-selector/mobile-timespan-shift-selector';
@@ -45,7 +45,7 @@ import { StationSelectorComponent } from './station-selector/station-selector';
 		ModalGeometryViewerComponent,
 		ModalOptionsEditorComponent,
 		PhenomenonSelectorPopoverComponent,
-		MobileServiceFilterSelectorComponent
+		MobilePhenomenonSelectorComponent
 	],
 	imports: [
 		HelgolandMapSelectorModule,
@@ -74,7 +74,7 @@ import { StationSelectorComponent } from './station-selector/station-selector';
 		ModalGeometryViewerComponent,
 		ModalOptionsEditorComponent,
 		PhenomenonSelectorPopoverComponent,
-		MobileServiceFilterSelectorComponent
+		MobilePhenomenonSelectorComponent
 	],
 	entryComponents: [
 		StationSelectorComponent,

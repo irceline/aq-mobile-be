@@ -2,11 +2,21 @@
   "restApiUrls": [
     "http://geo.irceline.be/sos/api/v1/"
   ],
-  "languages": [{
-    "code": "en",
-    "label": "English"
-  }, {
-    "code": "de",
-    "label": "Deutsch"
-  }]
+  "languages": [
+    {
+      "code": "en",
+      "label": "English"
+    },
+    {
+      "code": "de",
+      "label": "Deutsch"
+    }
+  ],
+  "visiblePhenomenonIDs": [
+    "391",
+    "8",
+    "7",
+    "5",
+    "6001"
+  ]
 }

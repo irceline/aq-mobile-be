@@ -1,0 +1,11 @@
+<ion-list>
+  <ion-item *ngIf="loading" text-center>
+    loading...
+  </ion-item>
+  <div *ngFor="let item of items">
+    <ion-item (click)="onSelectItem(item)" *ngIf="isVisible(item)">
+      <ion-label> {{item.label}} </ion-label>
+      <ion-radio checked="{{selectionId === item.id}}" (ionSelect)="onSelectItem(item)"></ion-radio>
+    </ion-item>
+  </div>
+</ion-list>

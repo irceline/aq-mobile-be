@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Settings, SettingsService } from 'helgoland-toolbox';
 
-export class MobileSettings extends Settings { }
+export class MobileSettings extends Settings { 
+    public visiblePhenomenonIDs: string[] 
+}
 
 @Injectable()
 export class JSSONSettingsService extends SettingsService<MobileSettings> {

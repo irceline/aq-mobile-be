@@ -49,6 +49,10 @@
 	"menu": {
 		"header": "Menü"
 	},
+	"phenomenon-selector": {
+		"hide-some-phenomenons": "Verstecke Phänomene",
+		"list-all-phenomenons": "Zeige alle Phänomene"
+	},
 	"show-geometry": {
 		"header": "Position der Station"
 	},

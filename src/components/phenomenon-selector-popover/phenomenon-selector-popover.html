@@ -1,2 +1,11 @@
-<mobile-service-filter-selector [endpoint]="'phenomenon'" [filter]="phenomenonFilter" [serviceUrl]="providerUrl" [selectionId]="selectedPhenomenonId"
-  (onItemSelected)="onPhenomenonSelected($event)"></mobile-service-filter-selector>
+<mobile-phenomenon-selector [endpoint]="'phenomenon'" [filter]="phenomenonFilter" [serviceUrl]="providerUrl" [selectionId]="selectedPhenomenonId"
+  [visiblePhenomenonIDs]="visiblePhenomenonIDs" (onItemSelected)="onPhenomenonSelected($event)"></mobile-phenomenon-selector>
+
+<div padding>
+  <button *ngIf="visiblePhenomenonIDs" ion-button block (click)="listAllPhenomenons()">
+    {{'phenomenon-selector.list-all-phenomenons' | translate}}
+  </button>
+  <button *ngIf="!visiblePhenomenonIDs" ion-button block (click)="hideSomePhenomenons()">
+    {{'phenomenon-selector.hide-some-phenomenons' | translate}}
+  </button>
+</div>
