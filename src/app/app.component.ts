@@ -7,6 +7,7 @@ import { NavController, Platform } from 'ionic-angular';
 
 import { DiagramPage } from '../pages/diagram/diagram';
 import { MapPage } from '../pages/map/map';
+import { IrcelineSettingsProvider } from '../providers/irceline-settings/irceline-settings';
 
 @Component({
   templateUrl: 'app.html'
@@ -14,18 +15,23 @@ import { MapPage } from '../pages/map/map';
 export class MyApp {
   @ViewChild('content') nav: NavController;
 
-  rootPage: any = MapPage;
+  public rootPage: any = MapPage;
 
-  pages: Array<{ title: string, component: any }>;
+  public pages: Array<{ title: string, component: any }>;
+
+  public lastupdate: Date;
 
   constructor(
     private platform: Platform,
     private statusBar: StatusBar,
     private splashScreen: SplashScreen,
     private settingsSrvc: SettingsService<Settings>,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private ircelineSettings: IrcelineSettingsProvider
   ) {
     this.initializeApp();
+
+    this.ircelineSettings.onLastUpdateChanged.subscribe((lastupdate: Date) => this.lastupdate = lastupdate);
 
     // used for an example of ngFor and navigation
     this.pages = [

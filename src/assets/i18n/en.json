@@ -42,12 +42,14 @@
 			"placeholder": "Search location..."
 		},
 		"header": "Map",
+		"lastupdate": "Last update",
 		"loading": "loading",
 		"select-phenomenon": "Choose phenomenon",
 		"show-in-diagram": "Show {{value}} timeseries in diagram"
 	},
 	"menu": {
-		"header": "Menu"
+		"header": "Menu",
+		"lastUpdate": "Last update"
 	},
 	"phenomenon-selector": {
 		"hide-some-phenomenons": "Hide phenomenons",

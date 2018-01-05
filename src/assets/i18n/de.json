@@ -42,12 +42,14 @@
 			"placeholder": "Suche..."
 		},
 		"header": "Karte",
+		"lastupdate": "Letztes Update",
 		"loading": "Lade",
 		"select-phenomenon": "Wähle Phänomen",
 		"show-in-diagram": "Zeige {{value}} Zeitreihen im Diagramm"
 	},
 	"menu": {
-		"header": "Menü"
+		"header": "Menü",
+		"lastUpdate": "Letztes Update"
 	},
 	"phenomenon-selector": {
 		"hide-some-phenomenons": "Verstecke Phänomene",
