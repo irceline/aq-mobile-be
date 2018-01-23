@@ -19,5 +19,6 @@
     "5",
     "6001"
   ],
-  "ircelineSettingsUrl": "http://www.irceline.be/air/time_app_json.php"
+  "ircelineSettingsUrl": "http://www.irceline.be/air/time_app_json.php",
+  "clusterStationsOnMap": false
 }

@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { ApiInterface, LayerOptions, Phenomenon, Platform, Settings, SettingsService } from 'helgoland-toolbox';
+import { ApiInterface, LayerOptions, Phenomenon, Platform, SettingsService } from 'helgoland-toolbox';
 import { ParameterFilter } from 'helgoland-toolbox/dist/model/api/parameterFilter';
 import { ModalController, NavController, ToastController } from 'ionic-angular';
 import { PopoverController } from 'ionic-angular/components/popover/popover-controller';
@@ -11,6 +11,7 @@ import {
 } from '../../components/phenomenon-selector-popover/phenomenon-selector-popover';
 import { StationSelectorComponent } from '../../components/station-selector/station-selector';
 import { IrcelineSettingsProvider } from '../../providers/irceline-settings/irceline-settings';
+import { MobileSettings } from '../../providers/settings/settings';
 import { DiagramPage } from '../diagram/diagram';
 
 @Component({
@@ -23,6 +24,7 @@ export class MapPage {
   public loading: boolean;
   public phenomenonFilter: ParameterFilter;
   public selectedPhenomenon: Phenomenon;
+  public clusterStations: boolean;
 
   public avoidZoomToSelection = true;
   public overlayMaps: Map<LayerOptions, L.Layer> = new Map<LayerOptions, L.Layer>();
@@ -31,7 +33,7 @@ export class MapPage {
   public zoomControlOptions: L.Control.ZoomOptions = {};
 
   constructor(
-    private settingsSrvc: SettingsService<Settings>,
+    private settingsSrvc: SettingsService<MobileSettings>,
     private nav: NavController,
     private modalCtrl: ModalController,
     private cdr: ChangeDetectorRef,
@@ -41,7 +43,9 @@ export class MapPage {
     private toastCtrl: ToastController,
     private translate: TranslateService
   ) {
-    this.providerUrl = this.settingsSrvc.getSettings().restApiUrls[0];
+    const settings = this.settingsSrvc.getSettings();
+    this.providerUrl = settings.restApiUrls[0];
+    this.clusterStations = settings.clusterStationsOnMap;
 
     this.ircelineSettings.onLastUpdateChanged.subscribe((lastupdate: Date) => {
       this.toastCtrl.create({

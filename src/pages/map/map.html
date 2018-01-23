@@ -20,7 +20,7 @@
     <div class="map"> -->
   <n52-station-map-selector mapId="timeseries" [serviceUrl]="providerUrl" [filter]="phenomenonFilter" [avoidZoomToSelection]="avoidZoomToSelection" [zoomControlOptions]="zoomControlOptions"
     [overlayMaps]="overlayMaps" [fitBounds]="fitBounds" [layerControlOptions]="layerControlOptions" (onSelected)="onStationSelected($event)"
-    [cluster]="true" (onContentLoading)="onMapLoading($event)"></n52-station-map-selector>
+    [cluster]="clusterStations" (onContentLoading)="onMapLoading($event)"></n52-station-map-selector>
   <mobile-geosearch-control mapId="timeseries"></mobile-geosearch-control>
   <mobile-extent-control mapId="timeseries" [extent]="fitBounds"></mobile-extent-control>
   <mobile-locate-control mapId="timeseries"></mobile-locate-control>
