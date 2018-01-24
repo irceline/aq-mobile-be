@@ -29,6 +29,7 @@ import { IrcelineSettingsProvider } from '../providers/irceline-settings/ircelin
 import { JSSONSettingsService } from '../providers/settings/settings';
 import { TimeseriesService } from '../providers/timeseries/timeseries.service';
 import { MyApp } from './app.component';
+import { StartPage } from '../pages/start/start';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -37,6 +38,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     MyApp,
+    StartPage,
     MapPage,
     DiagramPage
   ],
@@ -59,6 +61,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    StartPage,
     MapPage,
     DiagramPage
   ],

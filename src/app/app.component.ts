@@ -7,6 +7,7 @@ import { NavController, Platform } from 'ionic-angular';
 
 import { DiagramPage } from '../pages/diagram/diagram';
 import { MapPage } from '../pages/map/map';
+import { StartPage } from '../pages/start/start';
 import { IrcelineSettingsProvider } from '../providers/irceline-settings/irceline-settings';
 
 @Component({
@@ -15,7 +16,7 @@ import { IrcelineSettingsProvider } from '../providers/irceline-settings/ircelin
 export class MyApp {
   @ViewChild('content') nav: NavController;
 
-  public rootPage: any = MapPage;
+  public rootPage: any = StartPage;
 
   public pages: Array<{ title: string, component: any }>;
 

@@ -1,0 +1,127 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <!-- <ion-title>{{'map.header' | translate}}</ion-title> -->
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="cards-bg">
+  <ion-card class="last-update-card">
+    <ion-card-content>
+      <div text-center>{{'menu.lastUpdate' | translate}}: {{lastupdate | date: 'medium'}}</div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="index-card">
+    <ion-card-header text-center>
+      The BelAQI index
+    </ion-card-header>
+    <ion-card-content>
+      <ion-slides (ionSlideDidChange)="slideChanged($event)" pager="true" loop="true" [slidesPerView]="1">
+        <ion-slide>
+          <div text-center> Belgium </div>
+          <ion-list>
+            <ion-item class="veryGood">
+              <span>very-good - 2</span>
+              <ion-note item-end>yesterday (observation)</ion-note>
+            </ion-item>
+            <ion-item class="good">
+              <span>good - 3</span>
+              <ion-note item-end>today (forecast)</ion-note>
+            </ion-item>
+            <ion-item class="good">
+              <span>good - 3</span>
+              <ion-note item-end>yesterday (observation)</ion-note>
+            </ion-item>
+          </ion-list>
+        </ion-slide>
+
+        <ion-slide>
+          <div text-center> Flanders </div>
+          <ion-list>
+            <ion-item class="good">
+              <span>good - 3</span>
+              <ion-note item-end>yesterday (observation)</ion-note>
+            </ion-item>
+            <ion-item class="good">
+              <span>good - 3</span>
+              <ion-note item-end>today (forecast)</ion-note>
+            </ion-item>
+            <ion-item class="good">
+              <span>good - 3</span>
+              <ion-note item-end>yesterday (observation)</ion-note>
+            </ion-item>
+          </ion-list>
+        </ion-slide>
+
+        <ion-slide>
+          <div text-center> Brussels </div>
+          <ion-list>
+            <ion-item class="fairlyGood">
+              <span>fairly-good - 4</span>
+              <ion-note item-end>yesterday (observation)</ion-note>
+            </ion-item>
+            <ion-item class="veryGood">
+              <span>very-good - 2</span>
+              <ion-note item-end>today (forecast)</ion-note>
+            </ion-item>
+            <ion-item class="good">
+              <span>good - 3</span>
+              <ion-note item-end>yesterday (observation)</ion-note>
+            </ion-item>
+          </ion-list>
+        </ion-slide>
+
+        <ion-slide>
+          <div text-center> Wallonia </div>
+          <ion-list>
+            <ion-item class="good">
+              <span>good - 3</span>
+              <ion-note item-end>yesterday (observation)</ion-note>
+            </ion-item>
+            <ion-item class="good">
+              <span>good - 3</span>
+              <ion-note item-end>today (forecast)</ion-note>
+            </ion-item>
+            <ion-item class="good">
+              <span>good - 3</span>
+              <ion-note item-end>yesterday (observation)</ion-note>
+            </ion-item>
+          </ion-list>
+        </ion-slide>
+      </ion-slides>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="map-card" (click)="navigateToMap()">
+    <ion-card-header>
+      <span>Currently: </span>
+      <span *ngIf="selectedPhenomenon">{{selectedPhenomenon.label}}</span>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="map">
+        <n52-station-map-selector *ngIf="selectedPhenomenon" mapId="start-view" [serviceUrl]="providerUrl" [filter]="phenomenonFilter"
+          [overlayMaps]="overlayMaps" [fitBounds]="fitBounds" [statusIntervals]="true" [cluster]="clusterStations" [mapOptions]="mapOptions"
+          (onContentLoading)="onMapLoading($event)"></n52-station-map-selector>
+        <div class="loading-overlay" *ngIf="loading">
+          <ion-spinner item-start name="circles"></ion-spinner>
+          <span>{{'map.loading' | translate}}...</span>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header text-center>
+      Forcast map
+    </ion-card-header>
+    <ion-card-content style="padding: 2px;">
+      <div style="height: 300px;">
+
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
