@@ -4,21 +4,142 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>{{'map.header' | translate}}</ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only (click)="openPhenomenonSelector($event)">
-        <span *ngIf="!selectedPhenomenon">{{'map.select-phenomenon' | translate}}</span>
-        <span *ngIf="selectedPhenomenon">{{selectedPhenomenon.label}}</span>
-      </button>
-    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content class="map-view">
-  <!-- <div class="lastupdate">
-      <div text-center>last update goes here</div>
-    </div>
-    <div class="map"> -->
-  <n52-station-map-selector mapId="timeseries" [serviceUrl]="providerUrl" [filter]="phenomenonFilter" [avoidZoomToSelection]="avoidZoomToSelection" [zoomControlOptions]="zoomControlOptions"
+<ion-content class="cards-bg">
+  <ion-card>
+    <ion-card-content style="padding: 2px;">
+      <div text-center>{{'menu.lastUpdate' | translate}}: {{lastupdate | date: 'medium'}}</div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="index">
+    <ion-card-header text-center>
+      The BelAQI index
+    </ion-card-header>
+    <ion-card-content>
+      <ion-slides (ionSlideDidChange)="slideChanged($event)" pager="true" loop="true" [slidesPerView]="1">
+        <ion-slide>
+          <div text-center> Belgium </div>
+          <ion-list>
+            <ion-item class="veryGood">
+              <span>very-good - 2</span>
+              <ion-note item-end>yesterday (observation)</ion-note>
+            </ion-item>
+            <ion-item class="good">
+              <span>good - 3</span>
+              <ion-note item-end>today (forecast)</ion-note>
+            </ion-item>
+            <ion-item class="good">
+              <span>good - 3</span>
+              <ion-note item-end>yesterday (observation)</ion-note>
+            </ion-item>
+          </ion-list>
+        </ion-slide>
+
+        <ion-slide>
+          <div text-center> Flanders </div>
+          <ion-list>
+            <ion-item class="good">
+              <span>good - 3</span>
+              <ion-note item-end>yesterday (observation)</ion-note>
+            </ion-item>
+            <ion-item class="good">
+              <span>good - 3</span>
+              <ion-note item-end>today (forecast)</ion-note>
+            </ion-item>
+            <ion-item class="good">
+              <span>good - 3</span>
+              <ion-note item-end>yesterday (observation)</ion-note>
+            </ion-item>
+          </ion-list>
+        </ion-slide>
+
+        <ion-slide>
+          <div text-center> Brussels </div>
+          <ion-list>
+            <ion-item class="fairlyGood">
+              <span>fairly-good - 4</span>
+              <ion-note item-end>yesterday (observation)</ion-note>
+            </ion-item>
+            <ion-item class="veryGood">
+              <span>very-good - 2</span>
+              <ion-note item-end>today (forecast)</ion-note>
+            </ion-item>
+            <ion-item class="good">
+              <span>good - 3</span>
+              <ion-note item-end>yesterday (observation)</ion-note>
+            </ion-item>
+          </ion-list>
+        </ion-slide>
+
+        <ion-slide>
+          <div text-center> Wallonia </div>
+          <ion-list>
+            <ion-item class="good">
+              <span>good - 3</span>
+              <ion-note item-end>yesterday (observation)</ion-note>
+            </ion-item>
+            <ion-item class="good">
+              <span>good - 3</span>
+              <ion-note item-end>today (forecast)</ion-note>
+            </ion-item>
+            <ion-item class="good">
+              <span>good - 3</span>
+              <ion-note item-end>yesterday (observation)</ion-note>
+            </ion-item>
+          </ion-list>
+        </ion-slide>
+      </ion-slides>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <span>Currently: </span>
+      <span *ngIf="selectedPhenomenon">{{selectedPhenomenon.label}}</span>
+      <!-- <ion-buttons end>
+        <button ion-button icon-only (click)="openPhenomenonSelector($event)">
+          <span *ngIf="!selectedPhenomenon">{{'map.select-phenomenon' | translate}}</span>
+          <span *ngIf="selectedPhenomenon">{{selectedPhenomenon.label}}</span>
+        </button>
+      </ion-buttons> -->
+    </ion-card-header>
+    <ion-card-content style="padding: 2px;">
+      <div style="height: 300px;">
+        <n52-station-map-selector mapId="timeseries" [serviceUrl]="providerUrl" [filter]="phenomenonFilter" [avoidZoomToSelection]="avoidZoomToSelection"
+          [zoomControlOptions]="zoomControlOptions" [overlayMaps]="overlayMaps" [fitBounds]="fitBounds" [layerControlOptions]="layerControlOptions"
+          [cluster]="clusterStations" (onContentLoading)="onMapLoading($event)"></n52-station-map-selector>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header text-center>
+      Forcast map
+    </ion-card-header>
+    <ion-card-content style="padding: 2px;">
+      <div style="height: 300px;">
+
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- <ion-card>
+    <ion-card-header text-center>
+      Stations
+    </ion-card-header>
+    <ion-card-content style="padding: 2px;">
+      <div style="height: 300px;">
+        <n52-station-map-selector mapId="timeseries2" [serviceUrl]="providerUrl" [filter]="phenomenonFilter" [avoidZoomToSelection]="avoidZoomToSelection"
+          [zoomControlOptions]="zoomControlOptions" [overlayMaps]="overlayMaps" [fitBounds]="fitBounds" [layerControlOptions]="layerControlOptions"
+          (onSelected)="onStationSelected($event)" [cluster]="clusterStations" (onContentLoading)="onMapLoading($event)"></n52-station-map-selector>
+      </div>
+    </ion-card-content>
+  </ion-card> -->
+
+  <!-- <n52-station-map-selector mapId="timeseries" [serviceUrl]="providerUrl" [filter]="phenomenonFilter" [avoidZoomToSelection]="avoidZoomToSelection" [zoomControlOptions]="zoomControlOptions"
     [overlayMaps]="overlayMaps" [fitBounds]="fitBounds" [layerControlOptions]="layerControlOptions" (onSelected)="onStationSelected($event)"
     [cluster]="clusterStations" (onContentLoading)="onMapLoading($event)"></n52-station-map-selector>
   <mobile-geosearch-control mapId="timeseries"></mobile-geosearch-control>
@@ -27,6 +148,6 @@
   <div class="loading-overlay" *ngIf="loading">
     <ion-spinner item-start name="circles"></ion-spinner>
     <span>{{'map.loading' | translate}}...</span>
-  </div>
+  </div> -->
   <!-- </div> -->
 </ion-content>

@@ -1,19 +1,23 @@
 page-map {
-    .map-view {
+    .cards-bg {
+        background-color: rgb(228, 228, 228);
+    }
+    // .map-view {
         // height: 100%;
         // width: 100%;
         // display: flex;
         // flex-direction: column;
         // flex-wrap: nowrap;
-        .scroll-content {
-            overflow: hidden;
-        }
+        // .scroll-content {
+        //     overflow: hidden;
+        // }
         position: relative;
         .lastupdate {
             flex: 0 1;
         }
-        // .map {
-            height: 100%;
+        .map {
+            padding: 10px;
+            height: 300px;
             flex: 1;
             position: relative;
             .loading-overlay {
@@ -38,6 +42,23 @@ page-map {
                 left: 10px;
                 z-index: 999;
             }
-        // }
-    }
+        }
+        .index {
+            ion-slide {
+                padding-bottom: 20px;
+            }
+            .swiper-container-horizontal > .swiper-pagination-bullets {
+                bottom: 0px;
+            }
+            .veryGood {
+                background-color: rgb(0, 153, 255);
+            }
+            .good {
+                background-color: rgb(0, 153, 0);
+            }
+            .fairlyGood {
+                background-color: rgb(0, 255, 0);
+            }
+        }
+    // }
 }

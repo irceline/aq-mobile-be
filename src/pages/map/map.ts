@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ApiInterface, LayerOptions, Phenomenon, Platform, SettingsService } from 'helgoland-toolbox';
 import { ParameterFilter } from 'helgoland-toolbox/dist/model/api/parameterFilter';
-import { ModalController, NavController, ToastController } from 'ionic-angular';
+import { ModalController, NavController, ToastController, Slides } from 'ionic-angular';
 import { PopoverController } from 'ionic-angular/components/popover/popover-controller';
 import * as L from 'leaflet';
 
@@ -14,11 +14,18 @@ import { IrcelineSettingsProvider } from '../../providers/irceline-settings/irce
 import { MobileSettings } from '../../providers/settings/settings';
 import { DiagramPage } from '../diagram/diagram';
 
+const BELGIUM_BBOX: L.LatLngBoundsExpression = [[49.5, 3.27], [51.5, 5.67]];
+const FLANDERS_BBOX: L.LatLngBoundsExpression = [[50.6874, 2.5456], [51.5051, 5.9111]];
+const BRUSSELS_BBOX: L.LatLngBoundsExpression = [[50.7963, 4.3139], [50.9140, 4.4371]];
+const WALLONIA_BBOX: L.LatLngBoundsExpression = [[49.4969, 2.8420], [50.8120, 6.4081]];
+
 @Component({
   selector: 'page-map',
   templateUrl: 'map.html'
 })
 export class MapPage {
+
+  public lastupdate: Date;
 
   public providerUrl: string;
   public loading: boolean;
@@ -28,7 +35,7 @@ export class MapPage {
 
   public avoidZoomToSelection = true;
   public overlayMaps: Map<LayerOptions, L.Layer> = new Map<LayerOptions, L.Layer>();
-  public fitBounds: L.LatLngBoundsExpression = [[49.5, 3.27], [51.5, 5.67]];
+  public fitBounds: L.LatLngBoundsExpression = BRUSSELS_BBOX;
   public layerControlOptions: L.Control.LayersOptions = { position: 'bottomleft', hideSingleBase: true };
   public zoomControlOptions: L.Control.ZoomOptions = {};
 
@@ -47,13 +54,15 @@ export class MapPage {
     this.providerUrl = settings.restApiUrls[0];
     this.clusterStations = settings.clusterStationsOnMap;
 
-    this.ircelineSettings.onLastUpdateChanged.subscribe((lastupdate: Date) => {
-      this.toastCtrl.create({
-        message: this.translate.instant('map.lastupdate') + ': ' + lastupdate,
-        duration: 3000
-      }).present();
-      this.updateMapOptions(lastupdate);
-    });
+    this.ircelineSettings.onLastUpdateChanged.subscribe((lastupdate: Date) => this.lastupdate = lastupdate);
+
+    // this.ircelineSettings.onLastUpdateChanged.subscribe((lastupdate: Date) => {
+    //   this.toastCtrl.create({
+    //     message: this.translate.instant('map.lastupdate') + ': ' + lastupdate,
+    //     duration: 3000
+    //   }).present();
+    //   this.updateMapOptions(lastupdate);
+    // });
 
     this.ircelineSettings.onTopPollutantTodayChanged.subscribe(pullutantId => {
       this.api.getPhenomenon(pullutantId, this.providerUrl).subscribe(phenomenon => this.setPhenomenon(phenomenon));
@@ -96,6 +105,32 @@ export class MapPage {
     }
   }
 
+  public slideChanged(slides: Slides) {
+    switch (slides.getActiveIndex()) {
+      case 1:
+      case 5:
+        console.log('Belgium');
+        this.fitBounds = BELGIUM_BBOX;
+        break;
+      case 2:
+        console.log('Flanders');
+        this.fitBounds = FLANDERS_BBOX;
+        break;
+      case 3:
+        console.log('Brussels');
+        this.fitBounds = BRUSSELS_BBOX;
+        break;
+      case 0:
+      case 4:
+        console.log('Wallonia');
+        this.fitBounds = WALLONIA_BBOX;
+        break;
+      default:
+        console.log('undefined');
+        break;
+    }
+  }
+
   public onStationSelected(platform: Platform) {
     const modal = this.modalCtrl.create(StationSelectorComponent,
       {
@@ -125,6 +160,10 @@ export class MapPage {
         this.setPhenomenon(selectedPhenomenon);
       }
     })
+  }
+
+  public test() {
+    console.log('clicked map');
   }
 
   private setPhenomenon(selectedPhenomenon: Phenomenon) {
