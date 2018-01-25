@@ -9,11 +9,6 @@ import { LayerGeneratorService } from '../../providers/layer-generator/layer-gen
 import { MobileSettings } from '../../providers/settings/settings';
 import { MapPage } from '../map/map';
 
-const BELGIUM_BBOX: L.LatLngBoundsExpression = [[49.5, 3.27], [51.5, 5.67]];
-const FLANDERS_BBOX: L.LatLngBoundsExpression = [[50.6874, 2.5456], [51.5051, 5.9111]];
-const BRUSSELS_BBOX: L.LatLngBoundsExpression = [[50.7963, 4.3139], [50.9140, 4.4371]];
-const WALLONIA_BBOX: L.LatLngBoundsExpression = [[49.4969, 2.8420], [50.8120, 6.4081]];
-
 @Component({
   selector: 'page-start',
   templateUrl: 'start.html'
@@ -30,7 +25,7 @@ export class StartPage {
 
   public avoidZoomToSelection = true;
   public overlayMaps: Map<LayerOptions, L.Layer> = new Map<LayerOptions, L.Layer>();
-  public fitBounds: L.LatLngBoundsExpression = BRUSSELS_BBOX;
+  public fitBounds: L.LatLngBoundsExpression;
   public mapOptions: L.MapOptions = {
     zoomControl: false,
     scrollWheelZoom: true,
@@ -50,6 +45,7 @@ export class StartPage {
     const settings = this.settingsSrvc.getSettings();
     this.providerUrl = settings.restApiUrls[0];
     this.clusterStations = settings.clusterStationsOnMap;
+    this.fitBounds = settings.bboxes.belgium;
 
     this.ircelineSettings.getSettings().subscribe(settings => {
       this.lastupdate = settings.lastupdate;
@@ -63,20 +59,20 @@ export class StartPage {
       case 1:
       case 5:
         console.log('Belgium');
-        this.fitBounds = BELGIUM_BBOX;
+        this.fitBounds = this.settingsSrvc.getSettings().bboxes.belgium;
         break;
       case 2:
         console.log('Flanders');
-        this.fitBounds = FLANDERS_BBOX;
+        this.fitBounds = this.settingsSrvc.getSettings().bboxes.flanders;
         break;
       case 3:
         console.log('Brussels');
-        this.fitBounds = BRUSSELS_BBOX;
+        this.fitBounds = this.settingsSrvc.getSettings().bboxes.brussels;
         break;
       case 0:
       case 4:
         console.log('Wallonia');
-        this.fitBounds = WALLONIA_BBOX;
+        this.fitBounds = this.settingsSrvc.getSettings().bboxes.wallonia;
         break;
       default:
         console.log('undefined');

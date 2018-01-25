@@ -6,6 +6,7 @@ export interface MobileSettings extends Settings {
     ircelineSettingsUrl: string;
     clusterStationsOnMap: boolean;
     phenomenonLayerMapping: PhenomenonLayerMapping[];
+    bboxes: Bboxes;
 }
 
 export interface PhenomenonLayerMapping {
@@ -18,6 +19,13 @@ export interface LayerConfig {
     visible: boolean;
     baseUrl: string;
     layer: L.Layer;
+}
+
+export interface Bboxes {
+    belgium: L.LatLngBoundsExpression;
+    flanders: L.LatLngBoundsExpression;
+    brussels: L.LatLngBoundsExpression;
+    wallonia: L.LatLngBoundsExpression;
 }
 
 @Injectable()

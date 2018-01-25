@@ -28,7 +28,7 @@ export class MapPage {
 
   public avoidZoomToSelection = true;
   public overlayMaps: Map<LayerOptions, L.Layer> = new Map<LayerOptions, L.Layer>();
-  public fitBounds: L.LatLngBoundsExpression = [[49.5, 3.27], [51.5, 5.67]];
+  public fitBounds: L.LatLngBoundsExpression;
   public layerControlOptions: L.Control.LayersOptions = { position: 'bottomleft', hideSingleBase: true };
   public zoomControlOptions: L.Control.ZoomOptions = {};
 
@@ -45,6 +45,7 @@ export class MapPage {
     const settings = this.settingsSrvc.getSettings();
     this.providerUrl = settings.restApiUrls[0];
     this.clusterStations = settings.clusterStationsOnMap;
+    this.fitBounds = settings.bboxes.belgium;
 
     this.ircelineSettings.getSettings().subscribe((settings) => {
       this.api.getPhenomenon(settings.top_pollutant_today, this.providerUrl).subscribe(phenomenon => this.setPhenomenon(phenomenon));

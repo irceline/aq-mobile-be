@@ -21,6 +21,48 @@
   ],
   "ircelineSettingsUrl": "http://www.irceline.be/air/time_app_json.php",
   "clusterStationsOnMap": false,
+  "bboxes": {
+    "belgium": [
+      [
+        49.5,
+        3.27
+      ],
+      [
+        51.5,
+        5.67
+      ]
+    ],
+    "flanders": [
+      [
+        50.6874,
+        2.5456
+      ],
+      [
+        51.5051,
+        5.9111
+      ]
+    ],
+    "brussels": [
+      [
+        50.7963,
+        4.3139
+      ],
+      [
+        50.9140,
+        4.4371
+      ]
+    ],
+    "wallonia": [
+      [
+        49.4969,
+        2.8420
+      ],
+      [
+        50.8120,
+        6.4081
+      ]
+    ]
+  },
   "phenomenonLayerMapping": [
     {
       "id": "6001",
