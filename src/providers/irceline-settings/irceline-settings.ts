@@ -1,35 +1,45 @@
 import { HttpClient } from '@angular/common/http';
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { SettingsService } from 'helgoland-toolbox';
+import { Observable } from 'rxjs/Observable';
+
 import { MobileSettings } from '../settings/settings';
 
-export class IrcelineSettings {
-  public lastupdate: string;
-  public timestring: string;
-  public timestring_day: string;
-  public top_pollutant_today: string;
+export interface IrcelineSettings {
+  lastupdate: Date;
+  timestring: string;
+  timestring_day: string;
+  top_pollutant_today: string;
 }
 
 @Injectable()
 export class IrcelineSettingsProvider {
 
-  public onLastUpdateChanged: EventEmitter<Date> = new EventEmitter;
-  public onTopPollutantTodayChanged: EventEmitter<string> = new EventEmitter;
+  private settings: IrcelineSettings;
 
   constructor(
     private http: HttpClient,
-    private settings: SettingsService<MobileSettings>
-  ) {
-    // TODO request consecutive
-    this.requestSettings();
+    private settingsService: SettingsService<MobileSettings>
+  ) { }
+
+  public getSettings(): Observable<IrcelineSettings> {
+    if (this.settings) {
+      return Observable.of(this.settings);
+    } else {
+      return this.requestSettings();
+    }
   }
 
-  private requestSettings() {
+  private requestSettings(): Observable<IrcelineSettings> {
     // TODO needs cors response to avoid proxy!
-    const url = 'https://cors-anywhere.herokuapp.com/' + this.settings.getSettings().ircelineSettingsUrl;
-    this.http.get<IrcelineSettings>(url).subscribe(result => {
-      this.onLastUpdateChanged.emit(new Date(result.lastupdate));
-      this.onTopPollutantTodayChanged.emit(result.top_pollutant_today);
-    });
+    const url = 'https://cors-anywhere.herokuapp.com/' + this.settingsService.getSettings().ircelineSettingsUrl;
+    return this.http.get(url).map(result => {
+      return {
+        lastupdate: new Date(result['lastupdate']),
+        timestring: result['timestring'],
+        timestring_day: result['timestring_day'],
+        top_pollutant_today: result['top_pollutant_today']
+      }
+    }).do(settings => this.settings = settings);
   }
 }

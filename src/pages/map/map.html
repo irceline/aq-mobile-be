@@ -14,13 +14,9 @@
 </ion-header>
 
 <ion-content class="map-view">
-  <!-- <div class="lastupdate">
-      <div text-center>last update goes here</div>
-    </div>
-    <div class="map"> -->
-  <n52-station-map-selector mapId="timeseries" [serviceUrl]="providerUrl" [filter]="phenomenonFilter" [avoidZoomToSelection]="avoidZoomToSelection" [zoomControlOptions]="zoomControlOptions"
-    [overlayMaps]="overlayMaps" [fitBounds]="fitBounds" [layerControlOptions]="layerControlOptions" (onSelected)="onStationSelected($event)"
-    [cluster]="clusterStations" (onContentLoading)="onMapLoading($event)"></n52-station-map-selector>
+  <n52-station-map-selector mapId="timeseries" [serviceUrl]="providerUrl" [filter]="phenomenonFilter" [avoidZoomToSelection]="avoidZoomToSelection"
+    [statusIntervals]="true" [zoomControlOptions]="zoomControlOptions" [overlayMaps]="overlayMaps" [fitBounds]="fitBounds"
+    [layerControlOptions]="layerControlOptions" (onSelected)="onStationSelected($event)" [cluster]="clusterStations" (onContentLoading)="onMapLoading($event)"></n52-station-map-selector>
   <mobile-geosearch-control mapId="timeseries"></mobile-geosearch-control>
   <mobile-extent-control mapId="timeseries" [extent]="fitBounds"></mobile-extent-control>
   <mobile-locate-control mapId="timeseries"></mobile-locate-control>
@@ -28,5 +24,4 @@
     <ion-spinner item-start name="circles"></ion-spinner>
     <span>{{'map.loading' | translate}}...</span>
   </div>
-  <!-- </div> -->
 </ion-content>

@@ -25,11 +25,12 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { ComponentsModule } from '../components/components.module';
 import { DiagramPage } from '../pages/diagram/diagram';
 import { MapPage } from '../pages/map/map';
+import { StartPage } from '../pages/start/start';
 import { IrcelineSettingsProvider } from '../providers/irceline-settings/irceline-settings';
+import { LayerGeneratorService } from '../providers/layer-generator/layer-generator';
 import { JSSONSettingsService } from '../providers/settings/settings';
 import { TimeseriesService } from '../providers/timeseries/timeseries.service';
 import { MyApp } from './app.component';
-import { StartPage } from '../pages/start/start';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -77,6 +78,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     { provide: GeoSearch, useClass: NominatimGeoSearchService },
     TimeseriesService,
     IrcelineSettingsProvider,
+    LayerGeneratorService,
   ]
 })
 export class AppModule { }

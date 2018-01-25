@@ -1,10 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Settings, SettingsService } from 'helgoland-toolbox';
 
-export class MobileSettings extends Settings {
-    public visiblePhenomenonIDs: string[];
-    public ircelineSettingsUrl: string;
-    public clusterStationsOnMap: boolean;
+export interface MobileSettings extends Settings {
+    visiblePhenomenonIDs: string[];
+    ircelineSettingsUrl: string;
+    clusterStationsOnMap: boolean;
+    phenomenonLayerMapping: PhenomenonLayerMapping[];
+}
+
+export interface PhenomenonLayerMapping {
+    id: string;
+    layers: LayerConfig[];
+}
+
+export interface LayerConfig {
+    label: string;
+    visible: boolean;
+    baseUrl: string;
+    layer: L.Layer;
 }
 
 @Injectable()

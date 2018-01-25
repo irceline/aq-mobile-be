@@ -20,5 +20,58 @@
     "6001"
   ],
   "ircelineSettingsUrl": "http://www.irceline.be/air/time_app_json.php",
-  "clusterStationsOnMap": false
+  "clusterStationsOnMap": false,
+  "phenomenonLayerMapping": [
+    {
+      "id": "6001",
+      "layers": [
+        {
+          "label": "pm25_hmean_1x1",
+          "visible": true,
+          "baseUrl": "http://geo.irceline.be/rio/wms",
+          "layer": {
+            "layers": "pm25_hmean_1x1",
+            "transparent": true,
+            "format": "image/png",
+            "opacity": 0.7,
+            "projection": "EPSG:4326"
+          }
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "layers": [
+        {
+          "label": "o3_hmean_1x1",
+          "visible": true,
+          "baseUrl": "http://geo.irceline.be/rio/wms",
+          "layer": {
+            "layers": "o3_hmean_1x1",
+            "transparent": true,
+            "format": "image/png",
+            "opacity": 0.7,
+            "projection": "EPSG:4326"
+          }
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "layers": [
+        {
+          "label": "no2_hmean_1x1",
+          "visible": true,
+          "baseUrl": "http://geo.irceline.be/rio/wms",
+          "layer": {
+            "layers": "no2_hmean_1x1",
+            "transparent": true,
+            "format": "image/png",
+            "opacity": 0.7,
+            "projection": "EPSG:4326"
+          }
+        }
+      ]
+    }
+  ]
 }

@@ -5,6 +5,7 @@ import { NavController, Slides } from 'ionic-angular';
 import * as L from 'leaflet';
 
 import { IrcelineSettingsProvider } from '../../providers/irceline-settings/irceline-settings';
+import { LayerGeneratorService } from '../../providers/layer-generator/layer-generator';
 import { MobileSettings } from '../../providers/settings/settings';
 import { MapPage } from '../map/map';
 
@@ -32,62 +33,29 @@ export class StartPage {
   public fitBounds: L.LatLngBoundsExpression = BRUSSELS_BBOX;
   public mapOptions: L.MapOptions = {
     zoomControl: false,
-    scrollWheelZoom: false,
+    scrollWheelZoom: true,
     dragging: true
   }
+
+  public layerControlOptions: L.Control.LayersOptions = {};
 
   constructor(
     private settingsSrvc: SettingsService<MobileSettings>,
     private cdr: ChangeDetectorRef,
     private ircelineSettings: IrcelineSettingsProvider,
     private api: ApiInterface,
-    private nav: NavController
+    private nav: NavController,
+    private layerGen: LayerGeneratorService
   ) {
     const settings = this.settingsSrvc.getSettings();
     this.providerUrl = settings.restApiUrls[0];
     this.clusterStations = settings.clusterStationsOnMap;
 
-    this.ircelineSettings.onLastUpdateChanged.subscribe((lastupdate: Date) => this.lastupdate = lastupdate);
-
-    this.ircelineSettings.onTopPollutantTodayChanged.subscribe(pullutantId => {
-      this.api.getPhenomenon(pullutantId, this.providerUrl).subscribe(phenomenon => this.setPhenomenon(phenomenon));
-    });
-
-    this.updateMapOptions(null);
-  }
-
-  private updateMapOptions(time: Date) {
-    this.overlayMaps = new Map<LayerOptions, L.Layer>();
-    if (time) {
-      this.overlayMaps.set({ name: 'pm10_24hmean_1x1', visible: true },
-        L.tileLayer.wms('http://geo.irceline.be/rio/wms', {
-          layers: 'pm10_hmean_1x1',
-          transparent: true,
-          format: 'image/png',
-          time: '2018-01-05T11:00:00.000Z',
-          opacity: 0.7,
-          tiled: true,
-          visibility: true,
-          pane: 'tilePane',
-          zIndex: -9998,
-          projection: 'EPSG:4326',
-          units: 'm'
-        })
-      );
-      this.overlayMaps.set({ name: 'realtime:o3_station_max', visible: true },
-        L.tileLayer.wms("http://geo.irceline.be/wms", {
-          layers: 'realtime:o3_station_max',
-          transparent: true,
-          format: 'image/png',
-          time: time.toISOString(),
-          visibility: false,
-          pane: 'tilePane',
-          zIndex: -9997,
-          projection: 'EPSG:4326',
-          units: 'm'
-        })
-      );
-    }
+    this.ircelineSettings.getSettings().subscribe(settings => {
+      this.lastupdate = settings.lastupdate;
+      this.api.getPhenomenon(settings.top_pollutant_today, this.providerUrl).subscribe(phenomenon => this.setPhenomenon(phenomenon));
+      this.overlayMaps = this.layerGen.getLayersForPhenomenon(settings.top_pollutant_today, settings.lastupdate);
+    })
   }
 
   public slideChanged(slides: Slides) {
@@ -122,7 +90,6 @@ export class StartPage {
   }
 
   public navigateToMap() {
-    debugger;
     this.nav.push(MapPage);
   }
 
