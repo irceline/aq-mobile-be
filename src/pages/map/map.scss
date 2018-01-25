@@ -1,30 +1,24 @@
 page-map {
-    .map-view {
-        // height: 100%;
-        // width: 100%;
-        // display: flex;
-        // flex-direction: column;
-        // flex-wrap: nowrap;
-        .scroll-content {
-            overflow: hidden;
-        }
-        position: relative;
-        .lastupdate {
-            flex: 0 1;
-        }
-        // .map {
-            height: 100%;
-            flex: 1;
+    .scroll-content {
+        overflow: hidden;
+    }
+    .content {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        .map-wrapper {
             position: relative;
+            flex: 1 0 auto;
+            .map {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+            }
             .loading-overlay {
                 z-index: 9999;
                 background-color: rgba(255, 255, 255, 0.5);
-            }
-            mobile-geosearch-control {
-                position: absolute;
-                top: 10px;
-                left: 50px;
-                z-index: 999;
             }
             mobile-extent-control {
                 position: absolute;
@@ -38,6 +32,6 @@ page-map {
                 left: 10px;
                 z-index: 999;
             }
-        // }
+        }
     }
 }

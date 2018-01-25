@@ -28,8 +28,8 @@ export class StartPage {
   public fitBounds: L.LatLngBoundsExpression;
   public mapOptions: L.MapOptions = {
     zoomControl: false,
-    scrollWheelZoom: true,
-    dragging: true
+    scrollWheelZoom: false,
+    dragging: false
   }
 
   public layerControlOptions: L.Control.LayersOptions = {};

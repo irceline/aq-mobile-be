@@ -7,6 +7,7 @@ export interface MobileSettings extends Settings {
     clusterStationsOnMap: boolean;
     phenomenonLayerMapping: PhenomenonLayerMapping[];
     bboxes: Bboxes;
+    geoSearchContryCodes: string[];
 }
 
 export interface PhenomenonLayerMapping {

@@ -13,15 +13,25 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="map-view">
-  <n52-station-map-selector mapId="timeseries" [serviceUrl]="providerUrl" [filter]="phenomenonFilter" [avoidZoomToSelection]="avoidZoomToSelection"
-    [statusIntervals]="true" [zoomControlOptions]="zoomControlOptions" [overlayMaps]="overlayMaps" [fitBounds]="fitBounds"
-    [layerControlOptions]="layerControlOptions" (onSelected)="onStationSelected($event)" [cluster]="clusterStations" (onContentLoading)="onMapLoading($event)"></n52-station-map-selector>
-  <mobile-geosearch-control mapId="timeseries"></mobile-geosearch-control>
-  <mobile-extent-control mapId="timeseries" [extent]="fitBounds"></mobile-extent-control>
-  <mobile-locate-control mapId="timeseries"></mobile-locate-control>
-  <div class="loading-overlay" *ngIf="loading">
-    <ion-spinner item-start name="circles"></ion-spinner>
-    <span>{{'map.loading' | translate}}...</span>
+<ion-content>
+  <div class="content">
+    <div class="map-wrapper">
+      <div class="map">
+        <n52-station-map-selector mapId="map-view" [serviceUrl]="providerUrl" [filter]="phenomenonFilter" [avoidZoomToSelection]="avoidZoomToSelection"
+          [statusIntervals]="true" [zoomControlOptions]="zoomControlOptions" [overlayMaps]="overlayMaps" [fitBounds]="fitBounds"
+          [layerControlOptions]="layerControlOptions" (onSelected)="onStationSelected($event)" [cluster]="clusterStations"
+          (onContentLoading)="onMapLoading($event)"></n52-station-map-selector>
+      </div>
+      <mobile-extent-control mapId="map-view" [extent]="fitBounds"></mobile-extent-control>
+      <mobile-locate-control mapId="map-view"></mobile-locate-control>
+      <div class="loading-overlay" *ngIf="loading">
+        <ion-spinner item-start name="circles"></ion-spinner>
+        <span>{{'map.loading' | translate}}...</span>
+      </div>
+    </div>
   </div>
 </ion-content>
+
+<ion-footer>
+  <mobile-geosearch-control mapId="map-view" [options]="geoSearchOptions"></mobile-geosearch-control>
+</ion-footer>

@@ -21,6 +21,7 @@
   ],
   "ircelineSettingsUrl": "http://www.irceline.be/air/time_app_json.php",
   "clusterStationsOnMap": false,
+  "geoSearchContryCodes": ["be"],
   "bboxes": {
     "belgium": [
       [
