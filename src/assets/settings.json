@@ -69,15 +69,32 @@
       "id": "6001",
       "layers": [
         {
-          "label": "pm25_hmean_1x1",
+          "label": "Hourly mean PM2.5",
           "visible": true,
-          "baseUrl": "http://geo.irceline.be/rio/wms",
+          "baseUrl": "http://geo.irceline.be/rioifdm/wms",
           "layer": {
-            "layers": "pm25_hmean_1x1",
+            "layers": "pm25_hmean",
             "transparent": true,
+            "tiled": true,
             "format": "image/png",
-            "opacity": 0.7,
-            "projection": "EPSG:4326"
+            "opacity": 0.7
+          }
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "layers": [
+        {
+          "label": "Hourly mean PM10",
+          "visible": true,
+          "baseUrl": "http://geo.irceline.be/rioifdm/wms",
+          "layer": {
+            "layers": "pm10_hmean",
+            "transparent": true,
+            "tiled": true,
+            "format": "image/png",
+            "opacity": 0.7
           }
         }
       ]
@@ -86,15 +103,15 @@
       "id": "7",
       "layers": [
         {
-          "label": "o3_hmean_1x1",
+          "label": "Hourly mean O3",
           "visible": true,
-          "baseUrl": "http://geo.irceline.be/rio/wms",
+          "baseUrl": "http://geo.irceline.be/rioifdm/wms",
           "layer": {
-            "layers": "o3_hmean_1x1",
+            "layers": "o3_hmean",
             "transparent": true,
+            "tiled": true,
             "format": "image/png",
-            "opacity": 0.7,
-            "projection": "EPSG:4326"
+            "opacity": 0.7
           }
         }
       ]
@@ -103,15 +120,32 @@
       "id": "8",
       "layers": [
         {
-          "label": "no2_hmean_1x1",
+          "label": "Hourly mean NO2",
           "visible": true,
-          "baseUrl": "http://geo.irceline.be/rio/wms",
+          "baseUrl": "http://geo.irceline.be/rioifdm/wms",
           "layer": {
-            "layers": "no2_hmean_1x1",
+            "layers": "no2_hmean",
             "transparent": true,
+            "tiled": true,
             "format": "image/png",
-            "opacity": 0.7,
-            "projection": "EPSG:4326"
+            "opacity": 0.7
+          }
+        }
+      ]
+    },
+    {
+      "id": "391",
+      "layers": [
+        {
+          "label": "Hourly mean BC",
+          "visible": true,
+          "baseUrl": "http://geo.irceline.be/rioifdm/wms",
+          "layer": {
+            "layers": "bc_hmean",
+            "transparent": true,
+            "tiled": true,
+            "format": "image/png",
+            "opacity": 0.7
           }
         }
       ]
