@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
+import { Settings, SettingsService } from '@helgoland/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
-import { Settings, SettingsService } from 'helgoland-toolbox';
 import { NavController, Platform } from 'ionic-angular';
 
 import { DiagramPage } from '../pages/diagram/diagram';

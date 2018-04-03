@@ -1,16 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HelgolandLabelMapperModule } from '@helgoland/depiction/label-mapper';
+import { HelgolandMapViewModule } from '@helgoland/map/view';
+import { HelgolandModificationModule } from '@helgoland/modification';
+import { HelgolandSelectorModule } from '@helgoland/selector';
 import { TranslateModule } from '@ngx-translate/core';
-import {
-	HelgolandDatasetlistModule,
-	HelgolandDepictionModule,
-	HelgolandMapSelectorModule,
-	HelgolandMapViewModule,
-	HelgolandModificationModule,
-	HelgolandServicesModule,
-} from 'helgoland-toolbox';
-import { HelgolandSelectorModule } from 'helgoland-toolbox/dist/components/selector/selector.module';
 import { IonicModule } from 'ionic-angular';
 
 import {
@@ -48,13 +43,10 @@ import { StationSelectorComponent } from './station-selector/station-selector';
 		MobilePhenomenonSelectorComponent
 	],
 	imports: [
-		HelgolandMapSelectorModule,
-		HelgolandDepictionModule,
-		HelgolandServicesModule,
-		HelgolandDatasetlistModule,
 		HelgolandMapViewModule,
-		HelgolandSelectorModule,
+		HelgolandLabelMapperModule,
 		HelgolandModificationModule,
+		HelgolandSelectorModule,
 		CommonModule,
 		FormsModule,
 		IonicModule,

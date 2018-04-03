@@ -1,6 +1,6 @@
-import { NavParams, ViewController } from 'ionic-angular';
 import { Component } from '@angular/core';
-import { Timespan } from 'helgoland-toolbox';
+import { Timespan } from '@helgoland/core';
+import { NavParams, ViewController } from 'ionic-angular';
 
 @Component({
   selector: 'modal-timespan-editor',

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TimespanButtonComponent } from 'helgoland-toolbox';
+import { TimespanButtonComponent } from '@helgoland/time';
 
 @Component({
   selector: 'mobile-timespan-button',

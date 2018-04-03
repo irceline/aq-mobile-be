@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { ApiInterface, LayerOptions, Phenomenon, SettingsService } from 'helgoland-toolbox';
-import { ParameterFilter } from 'helgoland-toolbox/dist/model/api/parameterFilter';
+import { ApiInterface, ParameterFilter, Phenomenon, SettingsService } from '@helgoland/core';
+import { LayerOptions } from '@helgoland/map';
 import { NavController, Slides } from 'ionic-angular';
 import * as L from 'leaflet';
 
@@ -24,7 +24,7 @@ export class StartPage {
   public clusterStations: boolean;
 
   public avoidZoomToSelection = true;
-  public overlayMaps: Map<LayerOptions, L.Layer> = new Map<LayerOptions, L.Layer>();
+  public overlayMaps: Map<string, LayerOptions> = new Map<string, LayerOptions>();
   public fitBounds: L.LatLngBoundsExpression;
   public mapOptions: L.MapOptions = {
     zoomControl: false,

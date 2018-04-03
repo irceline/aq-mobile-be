@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ColorService, Dataset, DatasetOptions, Platform } from 'helgoland-toolbox';
+import { ColorService, Dataset, DatasetOptions, Platform } from '@helgoland/core';
 import { NavParams, ViewController } from 'ionic-angular';
 
 import { TimeseriesService } from '../../providers/timeseries/timeseries.service';

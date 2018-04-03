@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { DatasetOptions, PlotOptions, Timespan } from 'helgoland-toolbox';
+import { DatasetOptions, Timespan } from '@helgoland/core';
+import { PlotOptions } from '@helgoland/flot';
 import { ModalController } from 'ionic-angular';
 
 import { ModalLegendComponent } from '../../components/modal-legend/modal-legend';

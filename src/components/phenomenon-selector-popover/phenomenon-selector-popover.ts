@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { SettingsService } from 'helgoland-toolbox';
-import { Phenomenon } from 'helgoland-toolbox/dist/model/api/phenomenon';
+import { Phenomenon, SettingsService } from '@helgoland/core';
 import { NavParams, ViewController } from 'ionic-angular';
 
 import { MobileSettings } from '../../providers/settings/settings';

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Settings, SettingsService } from 'helgoland-toolbox';
+import { Settings, SettingsService } from '@helgoland/core';
 
 export interface MobileSettings extends Settings {
     visiblePhenomenonIDs: string[];

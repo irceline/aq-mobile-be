@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DatasetOptions, Time } from 'helgoland-toolbox';
+import { DatasetOptions, Time } from '@helgoland/core';
 import { ModalController, ViewController } from 'ionic-angular';
 
 import { TimeseriesService } from '../../providers/timeseries/timeseries.service';

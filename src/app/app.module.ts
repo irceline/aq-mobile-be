@@ -1,25 +1,17 @@
-import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HelgolandCachingModule } from '@helgoland/caching';
+import { ApiInterface, GetDataApiInterface, SettingsService } from '@helgoland/core';
+import { HelgolandDatasetlistModule } from '@helgoland/depiction/datasetlist';
+import { HelgolandFlotModule } from '@helgoland/flot';
+import { GeoSearch, NominatimGeoSearchService } from '@helgoland/map';
+import { HelgolandMapControlModule } from '@helgoland/map/control';
+import { HelgolandMapSelectorModule } from '@helgoland/map/selector';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import {
-  ApiInterface,
-  CachingInterceptor,
-  GeoSearch,
-  GetDataApiInterface,
-  HelgolandFlotGraphModule,
-  HelgolandMapControlModule,
-  HttpCache,
-  LocalHttpCache,
-  LocalOngoingHttpCache,
-  NominatimGeoSearchService,
-  OnGoingHttpCache,
-  SettingsService,
-} from 'helgoland-toolbox';
-import { HelgolandMapSelectorModule } from 'helgoland-toolbox/dist/components/map/selector/selector.module';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { ComponentsModule } from '../components/components.module';
@@ -48,7 +40,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     HelgolandMapSelectorModule,
     HelgolandMapControlModule,
-    HelgolandFlotGraphModule,
+    HelgolandFlotModule,
+    HelgolandDatasetlistModule,
+    HelgolandCachingModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -71,9 +65,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     SplashScreen,
     { provide: SettingsService, useClass: JSSONSettingsService },
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    { provide: HTTP_INTERCEPTORS, useClass: CachingInterceptor, multi: true },
-    { provide: HttpCache, useClass: LocalHttpCache },
-    { provide: OnGoingHttpCache, useClass: LocalOngoingHttpCache },
     { provide: ApiInterface, useClass: GetDataApiInterface },
     { provide: GeoSearch, useClass: NominatimGeoSearchService },
     TimeseriesService,

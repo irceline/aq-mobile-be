@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { ApiInterface, LayerOptions, Phenomenon, Platform, SettingsService, GeoSearchOptions } from 'helgoland-toolbox';
-import { ParameterFilter } from 'helgoland-toolbox/dist/model/api/parameterFilter';
+import { ApiInterface, ParameterFilter, Phenomenon, Platform, SettingsService } from '@helgoland/core';
+import { GeoSearchOptions, LayerOptions } from '@helgoland/map';
 import { ModalController, NavController } from 'ionic-angular';
 import { PopoverController } from 'ionic-angular/components/popover/popover-controller';
 import * as L from 'leaflet';
@@ -27,7 +27,7 @@ export class MapPage {
   public clusterStations: boolean;
 
   public avoidZoomToSelection = true;
-  public overlayMaps: Map<LayerOptions, L.Layer> = new Map<LayerOptions, L.Layer>();
+  public overlayMaps: Map<string, LayerOptions> = new Map<string, LayerOptions>();
   public fitBounds: L.LatLngBoundsExpression;
   public layerControlOptions: L.Control.LayersOptions = { position: 'bottomleft', hideSingleBase: true };
   public zoomControlOptions: L.Control.ZoomOptions = {};
@@ -47,7 +47,7 @@ export class MapPage {
     this.providerUrl = settings.restApiUrls[0];
     this.clusterStations = settings.clusterStationsOnMap;
     this.fitBounds = settings.bboxes.belgium;
-    this.geoSearchOptions = { countrycodes : settings.geoSearchContryCodes };
+    this.geoSearchOptions = { countrycodes: settings.geoSearchContryCodes };
 
     this.ircelineSettings.getSettings().subscribe((settings) => {
       this.api.getPhenomenon(settings.top_pollutant_today, this.providerUrl).subscribe(phenomenon => this.setPhenomenon(phenomenon));

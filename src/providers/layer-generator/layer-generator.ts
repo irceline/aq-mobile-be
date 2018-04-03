@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { LayerOptions, SettingsService } from 'helgoland-toolbox';
+import { SettingsService } from '@helgoland/core';
+import { LayerOptions } from '@helgoland/map';
 import * as L from 'leaflet';
 
 import { MobileSettings } from '../settings/settings';
@@ -11,19 +12,25 @@ export class LayerGeneratorService {
     private settingsService: SettingsService<MobileSettings>
   ) { }
 
-  public getLayersForPhenomenon(id: string, time: Date): Map<LayerOptions, L.Layer> {
-    const layers = new Map<LayerOptions, L.Layer>();
+  public getLayersForPhenomenon(id: string, time: Date): Map<string, LayerOptions> {
+    const layers = new Map<string, LayerOptions>();
     if (id && time) {
       const layerMapping = this.settingsService.getSettings().phenomenonLayerMapping.find(e => e.id === id);
       if (layerMapping) {
         layerMapping.layers.forEach(l => {
           const layerOptions = l.layer;
           layerOptions['time'] = time.toISOString();
-          layers.set({ name: l.label, visible: l.visible }, L.tileLayer.wms(l.baseUrl, layerOptions))
-        })
+          layers.set(l.label,
+            {
+              label: l.label,
+              visible: l.visible,
+              layer: L.tileLayer.wms(l.baseUrl, layerOptions)
+            }
+          )
+        });
       }
+      return layers;
     }
-    return layers;
   }
 
 }

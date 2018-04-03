@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DatasetOptions } from 'helgoland-toolbox';
+import { DatasetOptions } from '@helgoland/core';
 import { NavParams, ViewController } from 'ionic-angular';
 
 @Component({
@@ -16,7 +16,7 @@ export class ModalOptionsEditorComponent {
 
   constructor(
     private viewCtrl: ViewController,
-    private navParams : NavParams
+    private navParams: NavParams
   ) {
     this.options = this.navParams.get('options');
     this.color = this.options.color;

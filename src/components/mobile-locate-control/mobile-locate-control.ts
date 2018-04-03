@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LocateControlComponent } from 'helgoland-toolbox';
+import { LocateControlComponent } from '@helgoland/map/control';
 
 @Component({
   selector: 'mobile-locate-control',

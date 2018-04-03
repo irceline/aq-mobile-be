@@ -1,9 +1,6 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
-import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
-import {
-  ServiceFilterSelectorComponent,
-} from 'helgoland-toolbox/dist/components/selector/service-filter-selector/service-filter-selector.component';
-import { Phenomenon } from 'helgoland-toolbox/dist/model/api/phenomenon';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Phenomenon } from '@helgoland/core';
+import { ServiceFilterSelectorComponent } from '@helgoland/selector';
 
 @Component({
   selector: 'mobile-phenomenon-selector',
