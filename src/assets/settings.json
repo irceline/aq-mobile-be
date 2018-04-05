@@ -21,49 +21,33 @@
   ],
   "ircelineSettingsUrl": "http://www.irceline.be/air/time_app_json.php",
   "clusterStationsOnMap": false,
-  "geoSearchContryCodes": ["be"],
-  "bboxes": {
-    "belgium": [
-      [
-        49.5,
-        3.27
-      ],
-      [
-        51.5,
-        5.67
-      ]
+  "geoSearchContryCodes": [
+    "be"
+  ],
+  "regions": [
+    "Belgium",
+    "Flanders",
+    "Brussels",
+    "Wallonia",
+    "Gent",
+    "Antwerpen",
+    "Liège",
+    "Huy",
+    "Brügge",
+    "Ostende",
+    "Hasselt",
+    "Namur"
+  ],
+  "defaultBbox": [
+    [
+      49.5,
+      3.27
     ],
-    "flanders": [
-      [
-        50.6874,
-        2.5456
-      ],
-      [
-        51.5051,
-        5.9111
-      ]
-    ],
-    "brussels": [
-      [
-        50.7963,
-        4.3139
-      ],
-      [
-        50.9140,
-        4.4371
-      ]
-    ],
-    "wallonia": [
-      [
-        49.4969,
-        2.8420
-      ],
-      [
-        50.8120,
-        6.4081
-      ]
+    [
+      51.5,
+      5.67
     ]
-  },
+  ],
   "phenomenonLayerMapping": [
     {
       "id": "6001",

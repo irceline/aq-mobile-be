@@ -46,7 +46,7 @@ export class MapPage {
     const settings = this.settingsSrvc.getSettings();
     this.providerUrl = settings.restApiUrls[0];
     this.clusterStations = settings.clusterStationsOnMap;
-    this.fitBounds = settings.bboxes.belgium;
+    this.fitBounds = settings.defaultBbox;
     this.geoSearchOptions = { countrycodes: settings.geoSearchContryCodes };
 
     this.ircelineSettings.getSettings().subscribe((settings) => {

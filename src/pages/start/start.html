@@ -15,83 +15,8 @@
   </ion-card>
 
   <ion-card class="index-card">
-    <ion-card-header text-center>
-      The BelAQI index
-    </ion-card-header>
     <ion-card-content>
-      <ion-slides (ionSlideDidChange)="slideChanged($event)" pager="true" loop="true" [slidesPerView]="1">
-        <ion-slide>
-          <div text-center> Belgium </div>
-          <ion-list>
-            <ion-item class="veryGood">
-              <span>very-good - 2</span>
-              <ion-note item-end>yesterday (observation)</ion-note>
-            </ion-item>
-            <ion-item class="good">
-              <span>good - 3</span>
-              <ion-note item-end>today (forecast)</ion-note>
-            </ion-item>
-            <ion-item class="good">
-              <span>good - 3</span>
-              <ion-note item-end>tomorrow (forecast)</ion-note>
-            </ion-item>
-          </ion-list>
-        </ion-slide>
-
-        <ion-slide>
-          <div text-center> Flanders </div>
-          <ion-list>
-            <ion-item class="good">
-              <span>good - 3</span>
-              <ion-note item-end>yesterday (observation)</ion-note>
-            </ion-item>
-            <ion-item class="good">
-              <span>good - 3</span>
-              <ion-note item-end>today (forecast)</ion-note>
-            </ion-item>
-            <ion-item class="good">
-              <span>good - 3</span>
-              <ion-note item-end>tomorrow (forecast)</ion-note>
-            </ion-item>
-          </ion-list>
-        </ion-slide>
-
-        <ion-slide>
-          <div text-center> Brussels </div>
-          <ion-list>
-            <ion-item class="fairlyGood">
-              <span>fairly-good - 4</span>
-              <ion-note item-end>yesterday (observation)</ion-note>
-            </ion-item>
-            <ion-item class="veryGood">
-              <span>very-good - 2</span>
-              <ion-note item-end>today (forecast)</ion-note>
-            </ion-item>
-            <ion-item class="good">
-              <span>good - 3</span>
-              <ion-note item-end>tomorrow (forecast)</ion-note>
-            </ion-item>
-          </ion-list>
-        </ion-slide>
-
-        <ion-slide>
-          <div text-center> Wallonia </div>
-          <ion-list>
-            <ion-item class="good">
-              <span>good - 3</span>
-              <ion-note item-end>yesterday (observation)</ion-note>
-            </ion-item>
-            <ion-item class="good">
-              <span>good - 3</span>
-              <ion-note item-end>today (forecast)</ion-note>
-            </ion-item>
-            <ion-item class="good">
-              <span>good - 3</span>
-              <ion-note item-end>tomorrow (forecast)</ion-note>
-            </ion-item>
-          </ion-list>
-        </ion-slide>
-      </ion-slides>
+      <air-quality-index (onBoundsUpdated)="setBounds($event)"></air-quality-index>
     </ion-card-content>
   </ion-card>
 

@@ -8,6 +8,7 @@ import { HelgolandSelectorModule } from '@helgoland/selector';
 import { TranslateModule } from '@ngx-translate/core';
 import { IonicModule } from 'ionic-angular';
 
+import { AirQualityIndexComponent } from './air-quality-index/air-quality-index';
 import {
 	MobileDatasetByStationSelectorComponent,
 } from './dataset-by-station-selector/dataset-by-station-selector.component';
@@ -42,7 +43,8 @@ import { StationSelectorComponent } from './station-selector/station-selector';
 		ModalOptionsEditorComponent,
 		PhenomenonSelectorPopoverComponent,
 		MobilePhenomenonSelectorComponent,
-		ForecastMapComponent
+		ForecastMapComponent,
+		AirQualityIndexComponent
 	],
 	imports: [
 		HelgolandMapViewModule,
@@ -69,7 +71,8 @@ import { StationSelectorComponent } from './station-selector/station-selector';
 		ModalOptionsEditorComponent,
 		PhenomenonSelectorPopoverComponent,
 		MobilePhenomenonSelectorComponent,
-		ForecastMapComponent
+		ForecastMapComponent,
+		AirQualityIndexComponent
 	],
 	entryComponents: [
 		StationSelectorComponent,
