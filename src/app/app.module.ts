@@ -8,6 +8,7 @@ import { HelgolandFlotModule } from '@helgoland/flot';
 import { GeoSearch, NominatimGeoSearchService } from '@helgoland/map';
 import { HelgolandMapControlModule } from '@helgoland/map/control';
 import { HelgolandMapSelectorModule } from '@helgoland/map/selector';
+import { FCM } from '@ionic-native/fcm';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -17,9 +18,11 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { ComponentsModule } from '../components/components.module';
 import { DiagramPage } from '../pages/diagram/diagram';
 import { MapPage } from '../pages/map/map';
+import { SettingsPage } from '../pages/settings/settings';
 import { StartPage } from '../pages/start/start';
 import { IrcelineSettingsProvider } from '../providers/irceline-settings/irceline-settings';
 import { LayerGeneratorService } from '../providers/layer-generator/layer-generator';
+import { PushNotificationsProvider } from '../providers/push-notifications/push-notifications';
 import { JSSONSettingsService } from '../providers/settings/settings';
 import { TimeseriesService } from '../providers/timeseries/timeseries.service';
 import { MyApp } from './app.component';
@@ -33,7 +36,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     MyApp,
     StartPage,
     MapPage,
-    DiagramPage
+    DiagramPage,
+    SettingsPage
   ],
   imports: [
     BrowserModule,
@@ -58,7 +62,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     MyApp,
     StartPage,
     MapPage,
-    DiagramPage
+    DiagramPage,
+    SettingsPage
   ],
   providers: [
     StatusBar,
@@ -70,6 +75,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     TimeseriesService,
     IrcelineSettingsProvider,
     LayerGeneratorService,
+    FCM,
+    PushNotificationsProvider
   ]
 })
 export class AppModule { }

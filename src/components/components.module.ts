@@ -24,6 +24,7 @@ import { ModalGeometryViewerComponent } from './modal-geometry-viewer/modal-geom
 import { ModalLegendComponent } from './modal-legend/modal-legend';
 import { ModalOptionsEditorComponent } from './modal-options-editor/modal-options-editor';
 import { ModalTimespanEditorComponent } from './modal-timespan-editor/modal-timespan-editor';
+import { NotificationComponent } from './notification/notification';
 import { PhenomenonSelectorPopoverComponent } from './phenomenon-selector-popover/phenomenon-selector-popover';
 import { StationSelectorComponent } from './station-selector/station-selector';
 
@@ -44,7 +45,8 @@ import { StationSelectorComponent } from './station-selector/station-selector';
 		PhenomenonSelectorPopoverComponent,
 		MobilePhenomenonSelectorComponent,
 		ForecastMapComponent,
-		AirQualityIndexComponent
+		AirQualityIndexComponent,
+		NotificationComponent
 	],
 	imports: [
 		HelgolandMapViewModule,
@@ -72,7 +74,8 @@ import { StationSelectorComponent } from './station-selector/station-selector';
 		PhenomenonSelectorPopoverComponent,
 		MobilePhenomenonSelectorComponent,
 		ForecastMapComponent,
-		AirQualityIndexComponent
+		AirQualityIndexComponent,
+		NotificationComponent
 	],
 	entryComponents: [
 		StationSelectorComponent,
@@ -80,7 +83,8 @@ import { StationSelectorComponent } from './station-selector/station-selector';
 		ModalLegendComponent,
 		ModalGeometryViewerComponent,
 		ModalOptionsEditorComponent,
-		PhenomenonSelectorPopoverComponent
+		PhenomenonSelectorPopoverComponent,
+		NotificationComponent
 	]
 })
 export class ComponentsModule { }

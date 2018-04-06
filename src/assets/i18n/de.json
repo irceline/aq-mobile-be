@@ -42,7 +42,6 @@
 			"placeholder": "Suche..."
 		},
 		"header": "Karte",
-		"lastupdate": "Letztes Update",
 		"loading": "Lade",
 		"select-phenomenon": "Wähle Phänomen",
 		"show-in-diagram": "Zeige {{value}} Zeitreihen im Diagramm"
@@ -54,6 +53,9 @@
 	"phenomenon-selector": {
 		"hide-some-phenomenons": "Verstecke Phänomene",
 		"list-all-phenomenons": "Zeige alle Phänomene"
+	},
+	"settings": {
+		"header": "Einstellungen"
 	},
 	"show-geometry": {
 		"header": "Position der Station"

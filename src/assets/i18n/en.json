@@ -42,7 +42,6 @@
 			"placeholder": "Search location..."
 		},
 		"header": "Map",
-		"lastupdate": "Last update",
 		"loading": "loading",
 		"select-phenomenon": "Choose phenomenon",
 		"show-in-diagram": "Show {{value}} timeseries in diagram"
@@ -54,6 +53,9 @@
 	"phenomenon-selector": {
 		"hide-some-phenomenons": "Hide phenomenons",
 		"list-all-phenomenons": "List all phenomenons"
+	},
+	"settings": {
+		"header": "Settings"
 	},
 	"show-geometry": {
 		"header": "Position of the station"
