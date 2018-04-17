@@ -55,7 +55,8 @@
 		"list-all-phenomenons": "Zeige alle Phänomene"
 	},
 	"settings": {
-		"header": "Einstellungen"
+		"header": "Einstellungen",
+		"notifications": "Benachrichtigungen"
 	},
 	"show-geometry": {
 		"header": "Position der Station"
