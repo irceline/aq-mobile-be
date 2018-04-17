@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { ApiInterface, ParameterFilter, Phenomenon, SettingsService } from '@helgoland/core';
 import { LayerOptions } from '@helgoland/map';
 import { NavController } from 'ionic-angular';
@@ -36,7 +36,6 @@ export class StartPage {
 
   constructor(
     private settingsSrvc: SettingsService<MobileSettings>,
-    private cdr: ChangeDetectorRef,
     private ircelineSettings: IrcelineSettingsProvider,
     private api: ApiInterface,
     private nav: NavController,
@@ -54,10 +53,10 @@ export class StartPage {
     })
   }
 
-  public onMapLoading(loading: boolean) {
-    this.loading = loading;
-    this.cdr.detectChanges();
-  }
+  // public onMapLoading(loading: boolean) {
+  //   this.loading = loading;
+  //   this.cdr.detectChanges();
+  // }
 
   public navigateToMap() {
     this.nav.push(MapPage);

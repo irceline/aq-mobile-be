@@ -55,9 +55,21 @@
         {
           "label": "Hourly mean PM2.5",
           "visible": true,
-          "baseUrl": "http://geo.irceline.be/rioifdm/wms",
+          "baseUrl": "http://geo.irceline.be/rio/wms",
           "layer": {
             "layers": "pm25_hmean",
+            "transparent": true,
+            "tiled": true,
+            "format": "image/png",
+            "opacity": 0.7
+          }
+        },
+        {
+          "label": "Stationary hourly mean PM2.5",
+          "visible": true,
+          "baseUrl": "http://geo.irceline.be/realtime/wms",
+          "layer": {
+            "layers": "realtime:pm25_24hmean_station",
             "transparent": true,
             "tiled": true,
             "format": "image/png",

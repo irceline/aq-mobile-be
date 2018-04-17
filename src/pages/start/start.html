@@ -27,13 +27,15 @@
     </ion-card-header>
     <ion-card-content>
       <div class="map">
-        <n52-station-map-selector *ngIf="selectedPhenomenon" mapId="start-view" [serviceUrl]="providerUrl" [filter]="phenomenonFilter"
+        <!-- <n52-station-map-selector *ngIf="selectedPhenomenon" mapId="start-view" [serviceUrl]="providerUrl" [filter]="phenomenonFilter"
           [overlayMaps]="overlayMaps" [fitBounds]="fitBounds" [statusIntervals]="true" [cluster]="clusterStations" [mapOptions]="mapOptions"
-          [avoidZoomToSelection]="avoidZoomToSelection" [layerControlOptions]="layerControlOptions" (onContentLoading)="onMapLoading($event)"></n52-station-map-selector>
-        <div class="loading-overlay" *ngIf="loading">
+          [avoidZoomToSelection]="avoidZoomToSelection" [layerControlOptions]="layerControlOptions" (onContentLoading)="onMapLoading($event)"></n52-station-map-selector> -->
+        <n52-geometry-map-viewer mapId="start-view" [overlayMaps]="overlayMaps" [fitBounds]="fitBounds" [mapOptions]="mapOptions"
+          [layerControlOptions]="layerControlOptions"></n52-geometry-map-viewer>
+        <!-- <div class="loading-overlay" *ngIf="loading">
           <ion-spinner item-start name="circles"></ion-spinner>
           <span>{{'map.loading' | translate}}...</span>
-        </div>
+        </div> -->
       </div>
     </ion-card-content>
   </ion-card>

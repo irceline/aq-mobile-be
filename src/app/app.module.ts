@@ -8,6 +8,7 @@ import { HelgolandFlotModule } from '@helgoland/flot';
 import { GeoSearch, NominatimGeoSearchService } from '@helgoland/map';
 import { HelgolandMapControlModule } from '@helgoland/map/control';
 import { HelgolandMapSelectorModule } from '@helgoland/map/selector';
+import { HelgolandMapViewModule } from '@helgoland/map/view';
 import { FCM } from '@ionic-native/fcm';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -47,6 +48,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     HelgolandFlotModule,
     HelgolandDatasetlistModule,
     HelgolandCachingModule,
+    HelgolandMapViewModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
