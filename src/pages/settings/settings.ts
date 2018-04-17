@@ -2,9 +2,11 @@ import { Component } from '@angular/core';
 import { LocalStorage } from '@helgoland/core';
 
 import { PushNotificationsProvider, PushNotificationTopic } from '../../providers/push-notifications/push-notifications';
+import { AqIndexNotifications } from '../../providers/local-notification/local-notification';
 
 const USER_SETTINGS_PUSH_NOTIFICATION_NORMAL = 'user.settings.push.notification.normal';
 const USER_SETTINGS_PUSH_NOTIFICATION_SENSITIVE = 'user.settings.push.notification.sensitive'
+const USER_SETTINGS_INDEX_NOTIFICATION = 'user.settings.index.notification'
 
 @Component({
   selector: 'page-settings',
@@ -14,13 +16,16 @@ export class SettingsPage {
 
   public normalPushNotification: boolean;
   public sensitivePushNotification: boolean;
+  public indexNotification: boolean;
 
   constructor(
     private notifier: PushNotificationsProvider,
+    private aqIndexNotif: AqIndexNotifications,
     private localStorage: LocalStorage
   ) {
     this.normalPushNotification = this.localStorage.load<boolean>(USER_SETTINGS_PUSH_NOTIFICATION_NORMAL) || false;
     this.sensitivePushNotification = this.localStorage.load<boolean>(USER_SETTINGS_PUSH_NOTIFICATION_SENSITIVE) || false;
+    this.indexNotification = false;
   }
 
   public updateNormalNotifications() {
@@ -38,6 +43,15 @@ export class SettingsPage {
       this.notifier.subscribeTopic(PushNotificationTopic.sensitive);
     } else {
       this.notifier.unsubscribeTopic(PushNotificationTopic.sensitive);
+    }
+  }
+
+  public updateIndexNotifications() {
+    this.localStorage.save(USER_SETTINGS_INDEX_NOTIFICATION, this.indexNotification);
+    if (this.indexNotification) {
+      this.aqIndexNotif.activate();
+    } else {
+      this.aqIndexNotif.deactivate();
     }
   }
 

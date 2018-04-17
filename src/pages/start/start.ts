@@ -46,10 +46,10 @@ export class StartPage {
     this.clusterStations = settings.clusterStationsOnMap;
     this.fitBounds = settings.defaultBbox;
 
-    this.ircelineSettings.getSettings().subscribe(settings => {
-      this.lastupdate = settings.lastupdate;
-      this.api.getPhenomenon(settings.top_pollutant_today, this.providerUrl).subscribe(phenomenon => this.setPhenomenon(phenomenon));
-      this.overlayMaps = this.layerGen.getLayersForPhenomenon(settings.top_pollutant_today, settings.lastupdate);
+    this.ircelineSettings.getSettings().subscribe(ircelineSettings => {
+      this.lastupdate = ircelineSettings.lastupdate;
+      this.api.getPhenomenon(ircelineSettings.top_pollutant_today, this.providerUrl).subscribe(phenomenon => this.setPhenomenon(phenomenon));
+      this.overlayMaps = this.layerGen.getLayersForPhenomenon(ircelineSettings.top_pollutant_today, ircelineSettings.lastupdate);
     })
   }
 

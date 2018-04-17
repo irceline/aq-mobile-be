@@ -10,6 +10,8 @@ import { HelgolandMapControlModule } from '@helgoland/map/control';
 import { HelgolandMapSelectorModule } from '@helgoland/map/selector';
 import { HelgolandMapViewModule } from '@helgoland/map/view';
 import { FCM } from '@ionic-native/fcm';
+import { Geolocation } from '@ionic-native/geolocation';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -24,6 +26,7 @@ import { StartPage } from '../pages/start/start';
 import { AqIndex } from '../providers/aq-index/aq-index';
 import { IrcelineSettingsProvider } from '../providers/irceline-settings/irceline-settings';
 import { LayerGeneratorService } from '../providers/layer-generator/layer-generator';
+import { AqIndexNotifications } from '../providers/local-notification/local-notification';
 import { PushNotificationsProvider } from '../providers/push-notifications/push-notifications';
 import { JSSONSettingsService } from '../providers/settings/settings';
 import { TimeseriesService } from '../providers/timeseries/timeseries.service';
@@ -80,7 +83,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     LayerGeneratorService,
     FCM,
     PushNotificationsProvider,
-    AqIndex
+    AqIndex,
+    Geolocation,
+    LocalNotifications,
+    AqIndexNotifications
   ]
 })
 export class AppModule { }
