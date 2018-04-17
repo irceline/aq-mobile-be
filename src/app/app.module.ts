@@ -21,6 +21,7 @@ import { DiagramPage } from '../pages/diagram/diagram';
 import { MapPage } from '../pages/map/map';
 import { SettingsPage } from '../pages/settings/settings';
 import { StartPage } from '../pages/start/start';
+import { AqIndex } from '../providers/aq-index/aq-index';
 import { IrcelineSettingsProvider } from '../providers/irceline-settings/irceline-settings';
 import { LayerGeneratorService } from '../providers/layer-generator/layer-generator';
 import { PushNotificationsProvider } from '../providers/push-notifications/push-notifications';
@@ -78,7 +79,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     IrcelineSettingsProvider,
     LayerGeneratorService,
     FCM,
-    PushNotificationsProvider
+    PushNotificationsProvider,
+    AqIndex
   ]
 })
 export class AppModule { }
