@@ -14,6 +14,7 @@ export class AirQualityIndexComponent {
   public onBoundsUpdated: EventEmitter<L.LatLngBoundsExpression> = new EventEmitter<L.LatLngBoundsExpression>();
 
   public regions: string[];
+  public selectedRegion: string;
 
   constructor(
     private settings: SettingsService<MobileSettings>,

@@ -13,6 +13,7 @@ import {
 	MobileDatasetByStationSelectorComponent,
 } from './dataset-by-station-selector/dataset-by-station-selector.component';
 import { ForecastMapComponent } from './forecast-map/forecast-map';
+import { LanguageSelectorComponent } from './language-selector/language-selector';
 import { MobileExtentControlComponent } from './mobile-extent-control/mobile-extent-control';
 import { MobileGeosearchControlComponent } from './mobile-geosearch-control/mobile-geosearch-control';
 import { MobileLocateControlComponent } from './mobile-locate-control/mobile-locate-control';
@@ -46,7 +47,8 @@ import { StationSelectorComponent } from './station-selector/station-selector';
 		MobilePhenomenonSelectorComponent,
 		ForecastMapComponent,
 		AirQualityIndexComponent,
-		NotificationComponent
+		NotificationComponent,
+		LanguageSelectorComponent
 	],
 	imports: [
 		HelgolandMapViewModule,
@@ -75,7 +77,8 @@ import { StationSelectorComponent } from './station-selector/station-selector';
 		MobilePhenomenonSelectorComponent,
 		ForecastMapComponent,
 		AirQualityIndexComponent,
-		NotificationComponent
+		NotificationComponent,
+		LanguageSelectorComponent
 	],
 	entryComponents: [
 		StationSelectorComponent,

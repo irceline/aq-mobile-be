@@ -1,0 +1,82 @@
+{
+	"air-quality-index": {
+		"header": ""
+	},
+	"change-timespan": {
+		"custom": {
+			"end": "",
+			"header": "",
+			"start": ""
+		},
+		"header": "",
+		"predefined": {
+			"current-month": "",
+			"current-week": "",
+			"current-year": "",
+			"header": "",
+			"last-hour": "",
+			"last-month": "",
+			"last-week": "",
+			"last-year": "",
+			"today": "",
+			"today-yesterday": "",
+			"yesterday": ""
+		}
+	},
+	"controls": {
+		"cancel": "",
+		"close": "",
+		"ok": ""
+	},
+	"diagram": {
+		"header": "",
+		"loading": "",
+		"no-timeseries-selected": "",
+		"select-timeseries": ""
+	},
+	"legend": {
+		"first-value-at": "",
+		"header": "",
+		"last-value-at": ""
+	},
+	"map": {
+		"dataset-selection-hint": "",
+		"geosearch": {
+			"placeholder": ""
+		},
+		"header": "",
+		"loading": "",
+		"select-phenomenon": "",
+		"show-in-diagram": ""
+	},
+	"menu": {
+		"header": "",
+		"lastUpdate": ""
+	},
+	"phenomenon-selector": {
+		"hide-some-phenomenons": "",
+		"list-all-phenomenons": ""
+	},
+	"settings": {
+		"common": "",
+		"header": "",
+		"normal-notification": "",
+		"notifications": "",
+		"select-language": "",
+		"sensitiv-notification": ""
+	},
+	"show-geometry": {
+		"header": ""
+	},
+	"start": {
+		"currently": "",
+		"forecast-map": {
+			"header": ""
+		}
+	},
+	"style-edit": {
+		"generalize": "",
+		"header": "",
+		"zeroBasedYAxe": ""
+	}
+}

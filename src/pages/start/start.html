@@ -22,7 +22,7 @@
 
   <ion-card class="map-card" (click)="navigateToMap()">
     <ion-card-header>
-      <span>Currently: </span>
+      <span>{{'start.currently' | translate}}Currently: </span>
       <span *ngIf="selectedPhenomenon">{{selectedPhenomenon.label}}</span>
     </ion-card-header>
     <ion-card-content>
@@ -42,7 +42,7 @@
 
   <ion-card>
     <ion-card-header text-center>
-      Forcast map
+      {{'start.forecast-map.header' | translate}}
     </ion-card-header>
     <ion-card-content style="padding: 2px;">
       <div style="height: 300px;">

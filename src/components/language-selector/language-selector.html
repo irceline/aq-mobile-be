@@ -1,0 +1,11 @@
+<ion-list>
+  <ion-list-header>
+    {{'settings.common' | translate}}
+  </ion-list-header>
+  <ion-item>
+    <ion-label>{{'settings.select-language' | translate}}</ion-label>
+    <ion-select [(ngModel)]="currentLang" (ngModelChange)="setLanguage($event)" interface="popover">
+      <ion-option *ngFor="let lang of languageList" [value]="lang">{{lang.label}}</ion-option>
+    </ion-select>
+  </ion-item>
+</ion-list>
