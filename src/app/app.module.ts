@@ -31,6 +31,7 @@ import { PushNotificationsProvider } from '../providers/push-notifications/push-
 import { JSSONSettingsService } from '../providers/settings/settings';
 import { TimeseriesService } from '../providers/timeseries/timeseries.service';
 import { MyApp } from './app.component';
+import { BackgroundMode } from '@ionic-native/background-mode';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -72,21 +73,22 @@ export function HttpLoaderFactory(http: HttpClient) {
     SettingsPage
   ],
   providers: [
-    StatusBar,
-    SplashScreen,
     { provide: SettingsService, useClass: JSSONSettingsService },
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     { provide: ApiInterface, useClass: GetDataApiInterface },
     { provide: GeoSearch, useClass: NominatimGeoSearchService },
-    TimeseriesService,
+    AqIndex,
+    AqIndexNotifications,
+    BackgroundMode,
+    FCM,
+    Geolocation,
     IrcelineSettingsProvider,
     LayerGeneratorService,
-    FCM,
-    PushNotificationsProvider,
-    AqIndex,
-    Geolocation,
     LocalNotifications,
-    AqIndexNotifications
+    PushNotificationsProvider,
+    SplashScreen,
+    StatusBar,
+    TimeseriesService,
   ]
 })
 export class AppModule { }
