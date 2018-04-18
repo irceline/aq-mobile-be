@@ -7,19 +7,20 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <language-selector [languageList]="languageList"></language-selector>
   <ion-list>
     <ion-list-header>
       {{'settings.notifications' | translate}}
     </ion-list-header>
     <ion-item>
       <ion-icon name="warning" item-start></ion-icon>
-      <ion-label>{{'settings.sensitiv-notification' | translate}} Sensitive Informations</ion-label>
+      <ion-label>{{'settings.sensitiv-notification' | translate}}</ion-label>
       <ion-toggle color="secondary" [(ngModel)]="sensitivePushNotification" (ngModelChange)="updateSensitiveNotifications($event.value)"></ion-toggle>
     </ion-item>
     <ion-item>
       <ion-icon name="information-circle" item-start></ion-icon>
-      <ion-label>{{'settings.normal-notification' | translate}} Normal Informations</ion-label>
+      <ion-label>{{'settings.normal-notification' | translate}}</ion-label>
       <ion-toggle color="secondary" [(ngModel)]="normalPushNotification" (ngModelChange)="updateNormalNotifications($event.value)"></ion-toggle>
     </ion-item>
   </ion-list>

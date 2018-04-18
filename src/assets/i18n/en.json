@@ -58,9 +58,11 @@
 		"list-all-phenomenons": "List all phenomenons"
 	},
 	"settings": {
+		"common": "Common",
 		"header": "Settings",
 		"normal-notification": "Normal text notification",
 		"notifications": "Notifications",
+		"select-language": "Select a language",
 		"sensitiv-notification": "Sensitiv text notification"
 	},
 	"show-geometry": {

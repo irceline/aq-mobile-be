@@ -58,9 +58,11 @@
 		"list-all-phenomenons": ""
 	},
 	"settings": {
+		"common": "",
 		"header": "",
 		"normal-notification": "",
 		"notifications": "",
+		"select-language": "",
 		"sensitiv-notification": ""
 	},
 	"show-geometry": {

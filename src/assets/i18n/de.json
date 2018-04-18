@@ -58,9 +58,11 @@
 		"list-all-phenomenons": "Zeige alle Phänomene"
 	},
 	"settings": {
+		"common": "Allgemein",
 		"header": "Einstellungen",
 		"normal-notification": "Normale Textbenachrichtigung",
 		"notifications": "Benachrichtigungen",
+		"select-language": "Wähle eine Sprache",
 		"sensitiv-notification": "Sensitive Textbenachrichtigung"
 	},
 	"show-geometry": {

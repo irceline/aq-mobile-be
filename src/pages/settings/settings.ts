@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { LocalStorage } from '@helgoland/core';
+import { Language, LocalStorage, SettingsService } from '@helgoland/core';
 
 import { PushNotificationsProvider, PushNotificationTopic } from '../../providers/push-notifications/push-notifications';
+import { MobileSettings } from '../../providers/settings/settings';
 
 const USER_SETTINGS_PUSH_NOTIFICATION_NORMAL = 'user.settings.push.notification.normal';
 const USER_SETTINGS_PUSH_NOTIFICATION_SENSITIVE = 'user.settings.push.notification.sensitive'
@@ -14,13 +15,16 @@ export class SettingsPage {
 
   public normalPushNotification: boolean;
   public sensitivePushNotification: boolean;
+  public languageList: Language[];
 
   constructor(
     private notifier: PushNotificationsProvider,
-    private localStorage: LocalStorage
+    private localStorage: LocalStorage,
+    private settings: SettingsService<MobileSettings>
   ) {
     this.normalPushNotification = this.localStorage.load<boolean>(USER_SETTINGS_PUSH_NOTIFICATION_NORMAL) || false;
     this.sensitivePushNotification = this.localStorage.load<boolean>(USER_SETTINGS_PUSH_NOTIFICATION_SENSITIVE) || false;
+    this.languageList = this.settings.getSettings().languages;
   }
 
   public updateNormalNotifications() {
