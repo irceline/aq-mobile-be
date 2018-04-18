@@ -1,4 +1,7 @@
 {
+	"air-quality-index": {
+		"header": "BelAQI index in:"
+	},
 	"change-timespan": {
 		"custom": {
 			"end": "Ende",
@@ -56,10 +59,18 @@
 	},
 	"settings": {
 		"header": "Einstellungen",
-		"notifications": "Benachrichtigungen"
+		"normal-notification": "Normale Textbenachrichtigung",
+		"notifications": "Benachrichtigungen",
+		"sensitiv-notification": "Sensitive Textbenachrichtigung"
 	},
 	"show-geometry": {
 		"header": "Position der Station"
+	},
+	"start": {
+		"currently": "Derzeit: ",
+		"forecast-map": {
+			"header": "Vorhersage-Karte"
+		}
 	},
 	"style-edit": {
 		"generalize": "Daten generalisieren",
