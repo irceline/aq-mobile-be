@@ -60,9 +60,15 @@
 	"settings": {
 		"common": "",
 		"header": "",
+		"index-notifications": "",
+		"local-notification": {
+			"header": "",
+			"hint": ""
+		},
 		"normal-notification": "",
-		"notifications": "",
+		"push-notification": "",
 		"select-language": "",
+		"select-local-notifiaction-period": "",
 		"sensitiv-notification": ""
 	},
 	"show-geometry": {

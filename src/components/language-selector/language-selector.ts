@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LocalSelectorComponent, Language } from '@helgoland/core';
+import { LocalSelectorComponent } from '@helgoland/core';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({

@@ -60,9 +60,15 @@
 	"settings": {
 		"common": "Allgemein",
 		"header": "Einstellungen",
+		"index-notifications": "Lokale Luftqualitätswarnung",
+		"local-notification": {
+			"header": "Lokale Benachrichtigung",
+			"hint": "Hinweis: Für diese Funktionalität wird in dem gewünschten Interval einmalig der Standort ermittelt und zu diesem die modellierten Luftqualitätsdaten überprüft. Zur Nutzung dieser Funktionalität, darf die App nicht komplett beendet werden."
+		},
 		"normal-notification": "Normale Textbenachrichtigung",
-		"notifications": "Benachrichtigungen",
+		"push-notification": "Push-Benachrichtigung",
 		"select-language": "Wähle eine Sprache",
+		"select-local-notifiaction-period": "Wähle Intervall",
 		"sensitiv-notification": "Sensitive Textbenachrichtigung"
 	},
 	"show-geometry": {

@@ -23,6 +23,10 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { ComponentsModule } from '../components/components.module';
 import { DiagramPage } from '../pages/diagram/diagram';
 import { MapPage } from '../pages/map/map';
+import {
+  LocalNotificationSettingsComponent,
+} from '../pages/settings/local-notification-settings/local-notification-settings';
+import { PushNotificationSettingsComponent } from '../pages/settings/push-notification-settings/push-notification-settings';
 import { SettingsPage } from '../pages/settings/settings';
 import { StartPage } from '../pages/start/start';
 import { AqIndex } from '../providers/aq-index/aq-index';
@@ -44,7 +48,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     StartPage,
     MapPage,
     DiagramPage,
-    SettingsPage
+    SettingsPage,
+    LocalNotificationSettingsComponent,
+    PushNotificationSettingsComponent
   ],
   imports: [
     BrowserModule,

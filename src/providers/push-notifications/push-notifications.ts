@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { LocalStorage } from '@helgoland/core';
 import { FCM, NotificationData } from '@ionic-native/fcm';
 import { ModalController, Platform } from 'ionic-angular';
 
@@ -15,24 +16,33 @@ export interface PushNotification extends NotificationData {
   body: string;
 }
 
+const LOCALSTORAGE_PUSH_NOTIFICATION = 'localstorage.push.notification';
+
 @Injectable()
 export class PushNotificationsProvider {
 
   constructor(
     private platform: Platform,
     private fcm: FCM,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private localStorage: LocalStorage
   ) {
     this.activate();
   }
 
+  public isTopicActive(topic: PushNotificationTopic): boolean {
+    return this.localStorage.load<boolean>(LOCALSTORAGE_PUSH_NOTIFICATION + topic) || false;
+  }
+
   public subscribeTopic(topic: PushNotificationTopic) {
+    this.localStorage.save(LOCALSTORAGE_PUSH_NOTIFICATION + topic, true);
     if (this.platform.is('cordova')) {
       this.fcm.subscribeToTopic(topic.toString());
     }
   }
 
   public unsubscribeTopic(topic: PushNotificationTopic) {
+    this.localStorage.save(LOCALSTORAGE_PUSH_NOTIFICATION + topic, false);
     if (this.platform.is('cordova')) {
       this.fcm.unsubscribeFromTopic(topic.toString());
     }

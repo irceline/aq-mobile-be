@@ -60,9 +60,15 @@
 	"settings": {
 		"common": "Common",
 		"header": "Settings",
+		"index-notifications": "Local air quality warning",
+		"local-notification": {
+			"header": "Local notification",
+			"hint": "Hint: Your location is determined once for the choosen time interval and then the air quality will be checked. To use this functionality it is not allowed to kill the app."
+		},
 		"normal-notification": "Normal text notification",
-		"notifications": "Notifications",
+		"push-notification": "Push notifications",
 		"select-language": "Select a language",
+		"select-local-notifiaction-period": "Choose time interval",
 		"sensitiv-notification": "Sensitiv text notification"
 	},
 	"show-geometry": {

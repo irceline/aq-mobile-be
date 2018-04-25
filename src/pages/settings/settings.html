@@ -6,24 +6,6 @@
 
 <ion-content>
   <language-selector [languageList]="languageList"></language-selector>
-  <ion-list>
-    <ion-list-header>
-      {{'settings.notifications' | translate}}
-    </ion-list-header>
-    <ion-item>
-      <ion-icon name="information-circle" item-start></ion-icon>
-      <ion-label>{{'settings.normal-notification' | translate}}</ion-label>
-      <ion-toggle color="secondary" [(ngModel)]="normalPushNotification" (ngModelChange)="updateNormalNotifications($event.value)"></ion-toggle>
-    </ion-item>
-    <ion-item>
-      <ion-icon name="warning" item-start></ion-icon>
-      <ion-label>{{'settings.sensitiv-notification' | translate}}</ion-label>
-      <ion-toggle color="secondary" [(ngModel)]="sensitivePushNotification" (ngModelChange)="updateSensitiveNotifications($event.value)"></ion-toggle>
-    </ion-item>
-    <ion-item>
-      <ion-icon name="flash" item-start></ion-icon>
-      <ion-label>{{'settings.index-notifications' | translate}}</ion-label>
-      <ion-toggle color="secondary" [(ngModel)]="indexNotification" (ngModelChange)="updateIndexNotifications($event.value)"></ion-toggle>
-    </ion-item>
-  </ion-list>
+  <push-notification-settings></push-notification-settings>
+  <local-notification-settings></local-notification-settings>
 </ion-content>

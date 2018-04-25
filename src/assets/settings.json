@@ -32,6 +32,26 @@
   "geoSearchContryCodes": [
     "be"
   ],
+  "localnotifications": [
+    {
+      "period": 5
+    },
+    {
+      "period": 15
+    },
+    {
+      "period": 60
+    },
+    {
+      "period": 120
+    },
+    {
+      "period": 720
+    },
+    {
+      "period": 1440
+    }
+  ],
   "regions": [
     "Belgium",
     "Flanders",

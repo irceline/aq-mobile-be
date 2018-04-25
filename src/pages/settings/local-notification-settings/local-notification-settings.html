@@ -1,0 +1,20 @@
+<ion-list>
+  <ion-list-header>
+    {{'settings.local-notification.header' | translate}}
+  </ion-list-header>
+  <div style="padding: 0px 16px; color: red;">
+    {{'settings.local-notification.hint' | translate}}
+  </div>
+  <ion-item>
+    <ion-icon name="flash" item-start></ion-icon>
+    <ion-label>{{'settings.index-notifications' | translate}}</ion-label>
+    <ion-toggle color="secondary" [(ngModel)]="indexNotification" (ngModelChange)="updateIndexNotifications($event.value)"></ion-toggle>
+  </ion-item>
+  <ion-item>
+    <ion-label>{{'settings.select-local-notifiaction-period' | translate}}</ion-label>
+    <ion-select interface="popover">
+      <ion-option *ngFor="let notification of notificationSettings" (ionSelect)="setLocalNotification(notification)" [selected]="currentPeriod === notification.period"
+        [value]="notification">{{getHumanReadablePeriod(notification.period)}}</ion-option>
+    </ion-select>
+  </ion-item>
+</ion-list>

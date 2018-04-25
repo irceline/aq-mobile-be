@@ -1,35 +1,42 @@
 import { Injectable } from '@angular/core';
+import { LocalStorage } from '@helgoland/core';
 import {
   BackgroundGeolocation,
   BackgroundGeolocationConfig,
   BackgroundGeolocationResponse,
 } from '@ionic-native/background-geolocation';
 import { BackgroundMode } from '@ionic-native/background-mode';
-import { Geolocation } from '@ionic-native/geolocation';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 
-import { AqIndex } from '../aq-index/aq-index';
-import { IrcelineSettingsProvider } from '../irceline-settings/irceline-settings';
+const DEFAULT_LOCAL_NOTIFICATION_UPDATE_IN_MINUTES = 60;
 
-const LOCAL_NOTIFICATION_UPDATE_IN_MINUTES = 1;
+const LOCALSTORAGE_INDEX_NOTIFICATION_ACTIVE = 'index.notification.active'
+const LOCALSTORAGE_INDEX_NOTIFICATION_PERIOD = 'index.notification.period'
 
 @Injectable()
 export class AqIndexNotifications {
 
-  private interval: NodeJS.Timer;
+  private timeout: NodeJS.Timer;
 
   constructor(
     private localNotifications: LocalNotifications,
-    private aqIndex: AqIndex,
-    private ircelineSettings: IrcelineSettingsProvider,
-    private geolocation: Geolocation,
+    // private aqIndex: AqIndex,
+    // private ircelineSettings: IrcelineSettingsProvider,
     private backgroundMode: BackgroundMode,
-    private backgroundGeolocation: BackgroundGeolocation
-  ) {
-    console.log('AqIndexNotifications started.');
+    private backgroundGeolocation: BackgroundGeolocation,
+    private localStorage: LocalStorage
+  ) { }
+
+  public isActive(): boolean {
+    return this.localStorage.load<boolean>(LOCALSTORAGE_INDEX_NOTIFICATION_ACTIVE) || false;
+  }
+
+  public getPeriod(): number {
+    return this.localStorage.load<number>(LOCALSTORAGE_INDEX_NOTIFICATION_PERIOD) || DEFAULT_LOCAL_NOTIFICATION_UPDATE_IN_MINUTES
   }
 
   public activate() {
+    this.localStorage.save(LOCALSTORAGE_INDEX_NOTIFICATION_ACTIVE, true);
     this.backgroundMode.enable();
     this.backgroundMode.setDefaults({
       silent: false,
@@ -38,15 +45,26 @@ export class AqIndexNotifications {
       icon: 'fcm_push_icon'
     });
     this.doCheck();
-    this.interval = setInterval(() => this.doCheck(), LOCAL_NOTIFICATION_UPDATE_IN_MINUTES * 60000);
+    this.startNewTimeout();
   }
 
   public deactivate() {
-    if (this.interval) {
+    this.localStorage.save(LOCALSTORAGE_INDEX_NOTIFICATION_ACTIVE, false);
+    if (this.timeout) {
       this.backgroundGeolocation.finish();
       this.backgroundMode.disable();
-      clearInterval(this.interval);
+      clearTimeout(this.timeout);
     }
+  }
+
+  public setPeriod(minutes: number) {
+    this.localStorage.save(LOCALSTORAGE_INDEX_NOTIFICATION_PERIOD, minutes);
+    this.startNewTimeout();
+  }
+
+  private startNewTimeout() {
+    if (this.timeout) { clearTimeout(this.timeout) };
+    this.timeout = setTimeout(() => this.doCheck(), this.getPeriod() * 60000);
   }
 
   private doCheck() {
@@ -63,14 +81,6 @@ export class AqIndexNotifications {
     //     })
     //   }, error => console.error(error));
     // })
-
-    // https://forum.ionicframework.com/t/ionic-geolocation-woes/2471/13
-    // https://www.gajotres.net/ionic-2-having-fun-with-cordova-geolocation-plugin/2/
-    // https://github.com/louisbl/cordova-plugin-locationservices
-    // https://ionicframework.com/docs/native/background-geolocation/
-    // https://www.joshmorony.com/adding-background-geolocation-to-an-ionic-2-application/
-
-    // TODO Probleme zwischen FCM-Plugin und BackgroundGeolocation-Plugin
 
     const config: BackgroundGeolocationConfig = {
       desiredAccuracy: 10,
@@ -96,14 +106,15 @@ export class AqIndexNotifications {
             title: 'Background-Geolocation at: ' + new Date(location.time).toTimeString(),
             smallIcon: 'res://fcm_push_icon'
           })
-          // } else {
-          //   this.localNotifications.schedule({
-          //     id: 2,
-          //     text: 'Get no full response.',
-          //     title: 'Error on Geolocation at: ' + new Date().toTimeString(),
-          //     smallIcon: 'res://fcm_push_icon'
-          //   })
+        } else {
+          this.localNotifications.schedule({
+            id: 2,
+            text: 'Get no full response.',
+            title: 'Error on Geolocation at: ' + new Date().toTimeString(),
+            smallIcon: 'res://fcm_push_icon'
+          })
         }
+        this.startNewTimeout();
         this.backgroundGeolocation.stop();
       });
 

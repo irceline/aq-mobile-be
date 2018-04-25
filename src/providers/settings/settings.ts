@@ -9,6 +9,11 @@ export interface MobileSettings extends Settings {
     regions: string[];
     geoSearchContryCodes: string[];
     defaultBbox: L.LatLngBoundsExpression;
+    localnotifications: LocalNotification[];
+}
+
+export interface LocalNotification {
+    period: number;
 }
 
 export interface PhenomenonLayerMapping {

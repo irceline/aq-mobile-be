@@ -1,13 +1,7 @@
 import { Component } from '@angular/core';
-import { Language, LocalStorage, SettingsService } from '@helgoland/core';
+import { Language, SettingsService } from '@helgoland/core';
 
-import { AqIndexNotifications } from '../../providers/local-notification/local-notification';
-import { PushNotificationsProvider, PushNotificationTopic } from '../../providers/push-notifications/push-notifications';
 import { MobileSettings } from '../../providers/settings/settings';
-
-const USER_SETTINGS_PUSH_NOTIFICATION_NORMAL = 'user.settings.push.notification.normal';
-const USER_SETTINGS_PUSH_NOTIFICATION_SENSITIVE = 'user.settings.push.notification.sensitive'
-const USER_SETTINGS_INDEX_NOTIFICATION = 'user.settings.index.notification'
 
 @Component({
   selector: 'page-settings',
@@ -15,48 +9,12 @@ const USER_SETTINGS_INDEX_NOTIFICATION = 'user.settings.index.notification'
 })
 export class SettingsPage {
 
-  public normalPushNotification: boolean;
-  public sensitivePushNotification: boolean;
-  public indexNotification: boolean;
   public languageList: Language[];
 
   constructor(
-    private notifier: PushNotificationsProvider,
-    private aqIndexNotif: AqIndexNotifications,
-    private localStorage: LocalStorage,
     private settings: SettingsService<MobileSettings>
   ) {
-    this.normalPushNotification = this.localStorage.load<boolean>(USER_SETTINGS_PUSH_NOTIFICATION_NORMAL) || false;
-    this.sensitivePushNotification = this.localStorage.load<boolean>(USER_SETTINGS_PUSH_NOTIFICATION_SENSITIVE) || false;
-    this.indexNotification = false;
     this.languageList = this.settings.getSettings().languages;
-  }
-
-  public updateNormalNotifications() {
-    this.localStorage.save(USER_SETTINGS_PUSH_NOTIFICATION_NORMAL, this.normalPushNotification);
-    if (this.normalPushNotification) {
-      this.notifier.subscribeTopic(PushNotificationTopic.normal);
-    } else {
-      this.notifier.unsubscribeTopic(PushNotificationTopic.normal);
-    }
-  }
-
-  public updateSensitiveNotifications() {
-    this.localStorage.save(USER_SETTINGS_PUSH_NOTIFICATION_SENSITIVE, this.sensitivePushNotification);
-    if (this.sensitivePushNotification) {
-      this.notifier.subscribeTopic(PushNotificationTopic.sensitive);
-    } else {
-      this.notifier.unsubscribeTopic(PushNotificationTopic.sensitive);
-    }
-  }
-
-  public updateIndexNotifications() {
-    this.localStorage.save(USER_SETTINGS_INDEX_NOTIFICATION, this.indexNotification);
-    if (this.indexNotification) {
-      this.aqIndexNotif.activate();
-    } else {
-      this.aqIndexNotif.deactivate();
-    }
   }
 
 }
