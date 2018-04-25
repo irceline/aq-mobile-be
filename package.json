@@ -38,6 +38,7 @@
     "@helgoland/modification": "0.0.1-alpha.41",
     "@helgoland/selector": "0.0.1-alpha.41",
     "@helgoland/time": "0.0.1-alpha.41",
+    "@ionic-native/background-geolocation": "^4.7.0",
     "@ionic-native/background-mode": "^4.7.0",
     "@ionic-native/core": "^4.6.0",
     "@ionic-native/fcm": "^4.6.0",
@@ -51,13 +52,14 @@
     "cordova-android": "6.3.0",
     "cordova-plugin-background-mode": "^0.7.2",
     "cordova-plugin-badge": "^0.8.7",
-    "cordova-plugin-device": "^2.0.1",
+    "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-fcm": "^2.1.2",
     "cordova-plugin-geolocation": "^4.0.1",
-    "cordova-plugin-ionic-webview": "^1.1.19",
+    "cordova-plugin-ionic-webview": "^1.2.1",
     "cordova-plugin-local-notification": "^0.9.0-beta.2",
+    "cordova-plugin-mauron85-background-geolocation": "^2.3.5",
     "cordova-plugin-splashscreen": "^5.0.2",
-    "cordova-plugin-statusbar": "^2.4.1",
+    "cordova-plugin-statusbar": "^2.4.2",
     "cordova-plugin-whitelist": "^1.3.3",
     "ionic-angular": "3.9.2",
     "ionic-plugin-keyboard": "^2.2.1",
@@ -83,12 +85,22 @@
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-statusbar": {},
-      "cordova-plugin-fcm": {},
       "cordova-plugin-geolocation": {
         "GEOLOCATION_USAGE_DESCRIPTION": "To locate you"
       },
       "cordova-plugin-local-notification": {},
-      "cordova-plugin-background-mode": {}
+      "cordova-plugin-background-mode": {},
+      "cordova-plugin-mauron85-background-geolocation": {
+        "GOOGLE_PLAY_SERVICES_VERSION": "11+",
+        "ANDROID_SUPPORT_LIBRARY_VERSION": "23+",
+        "ICON": "@mipmap/icon",
+        "SMALL_ICON": "@mipmap/icon",
+        "ACCOUNT_NAME": "@string/app_name",
+        "ACCOUNT_LABEL": "@string/app_name",
+        "ACCOUNT_TYPE": "$PACKAGE_NAME.account",
+        "CONTENT_AUTHORITY": "$PACKAGE_NAME"
+      },
+      "cordova-plugin-fcm": {}
     },
     "platforms": [
       "android"

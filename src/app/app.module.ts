@@ -9,6 +9,8 @@ import { GeoSearch, NominatimGeoSearchService } from '@helgoland/map';
 import { HelgolandMapControlModule } from '@helgoland/map/control';
 import { HelgolandMapSelectorModule } from '@helgoland/map/selector';
 import { HelgolandMapViewModule } from '@helgoland/map/view';
+import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
+import { BackgroundMode } from '@ionic-native/background-mode';
 import { FCM } from '@ionic-native/fcm';
 import { Geolocation } from '@ionic-native/geolocation';
 import { LocalNotifications } from '@ionic-native/local-notifications';
@@ -31,7 +33,6 @@ import { PushNotificationsProvider } from '../providers/push-notifications/push-
 import { JSSONSettingsService } from '../providers/settings/settings';
 import { TimeseriesService } from '../providers/timeseries/timeseries.service';
 import { MyApp } from './app.component';
-import { BackgroundMode } from '@ionic-native/background-mode';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -82,6 +83,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BackgroundMode,
     FCM,
     Geolocation,
+    BackgroundGeolocation,
     IrcelineSettingsProvider,
     LayerGeneratorService,
     LocalNotifications,
