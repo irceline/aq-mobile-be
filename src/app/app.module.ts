@@ -29,7 +29,7 @@ import {
 import { PushNotificationSettingsComponent } from '../pages/settings/push-notification-settings/push-notification-settings';
 import { SettingsPage } from '../pages/settings/settings';
 import { StartPage } from '../pages/start/start';
-import { AqIndex } from '../providers/aq-index/aq-index';
+import { ModelledValueProvider } from '../providers/aq-index/aq-index';
 import { IrcelineSettingsProvider } from '../providers/irceline-settings/irceline-settings';
 import { LayerGeneratorService } from '../providers/layer-generator/layer-generator';
 import { AqIndexNotifications } from '../providers/local-notification/local-notification';
@@ -80,19 +80,19 @@ export function HttpLoaderFactory(http: HttpClient) {
     SettingsPage
   ],
   providers: [
-    { provide: SettingsService, useClass: JSSONSettingsService },
-    { provide: ErrorHandler, useClass: IonicErrorHandler },
     { provide: ApiInterface, useClass: GetDataApiInterface },
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     { provide: GeoSearch, useClass: NominatimGeoSearchService },
-    AqIndex,
+    { provide: SettingsService, useClass: JSSONSettingsService },
     AqIndexNotifications,
+    BackgroundGeolocation,
     BackgroundMode,
     FCM,
     Geolocation,
-    BackgroundGeolocation,
     IrcelineSettingsProvider,
     LayerGeneratorService,
     LocalNotifications,
+    ModelledValueProvider,
     PushNotificationsProvider,
     SplashScreen,
     StatusBar,

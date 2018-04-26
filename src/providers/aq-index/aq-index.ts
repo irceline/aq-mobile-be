@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export class AqIndex {
+export class ModelledValueProvider {
 
   constructor(
     public http: HttpClient
   ) { }
 
+  // TODO add layerType (NO2, ...)
   public getIndex(latitude: number, longitude: number, time: Date): Observable<number> {
     const url = 'http://geo.irceline.be/rioifdm/wms';
     const params = {
@@ -16,13 +17,12 @@ export class AqIndex {
       request: 'GetFeatureInfo',
       version: '1.1.1',
       layers: 'rioifdm:no2_hmean',
-      styles: '',
       transparent: 'true',
       info_format: 'application/json',
       tiled: 'true',
-      time: '2018-04-14T08:00:00.000Z', // '2018-03-22T08:00:00.000Z',
-      width: '1440',
-      height: '348',
+      time: time.toISOString(), // '2018-03-22T08:00:00.000Z',
+      width: '1',
+      height: '1',
       srs: 'EPSG:4326',
       bbox: this.calculateRequestBbox(latitude, longitude),
       query_layers: 'rioifdm:no2_hmean',
@@ -37,7 +37,7 @@ export class AqIndex {
           }
           return 0;
         } else {
-          throw new Error('No Index returned');
+          throw new Error('No value returned');
         }
       });
   }

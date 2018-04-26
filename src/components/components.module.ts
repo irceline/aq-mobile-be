@@ -28,6 +28,7 @@ import { ModalTimespanEditorComponent } from './modal-timespan-editor/modal-time
 import { NotificationComponent } from './notification/notification';
 import { PhenomenonSelectorPopoverComponent } from './phenomenon-selector-popover/phenomenon-selector-popover';
 import { StationSelectorComponent } from './station-selector/station-selector';
+import { ValuePanelComponent } from './value-panel/value-panel';
 
 @NgModule({
 	declarations: [
@@ -48,7 +49,8 @@ import { StationSelectorComponent } from './station-selector/station-selector';
 		ForecastMapComponent,
 		AirQualityIndexComponent,
 		NotificationComponent,
-		LanguageSelectorComponent
+		LanguageSelectorComponent,
+		ValuePanelComponent
 	],
 	imports: [
 		HelgolandMapViewModule,
@@ -78,7 +80,8 @@ import { StationSelectorComponent } from './station-selector/station-selector';
 		ForecastMapComponent,
 		AirQualityIndexComponent,
 		NotificationComponent,
-		LanguageSelectorComponent
+		LanguageSelectorComponent,
+		ValuePanelComponent
 	],
 	entryComponents: [
 		StationSelectorComponent,
