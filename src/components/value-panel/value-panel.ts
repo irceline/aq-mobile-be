@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ApiInterface, FirstLastValue, SettingsService, Station } from '@helgoland/core';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
+import { Platform } from 'ionic-angular';
 
 import { ModelledValueProvider } from '../../providers/aq-index/aq-index';
 import { IrcelineSettingsProvider } from '../../providers/irceline-settings/irceline-settings';
@@ -25,23 +26,30 @@ export class ValuePanelComponent {
     private geolocate: Geolocation,
     private api: ApiInterface,
     private settingsSrvc: SettingsService<MobileSettings>,
-    private irceline: IrcelineSettingsProvider
+    private irceline: IrcelineSettingsProvider,
+    private platform: Platform
   ) {
     this.determineValues();
   }
 
   private determineValues() {
-    this.geolocate.getCurrentPosition().then(res => {
-      this.position = res;
-      if (this.position.coords) {
-        // const latitude = 50.863892;
-        // const longitude = 4.6337528;
-        const latitude = this.position.coords.latitude;
-        const longitude = this.position.coords.longitude;
-        this.determineModelledValue(latitude, longitude);
-        this.determineNextStationValue(latitude, longitude);
-      }
-    });
+    this.platform.ready().then(() => {
+      this.geolocate.getCurrentPosition({
+        timeout: 10000,
+        enableHighAccuracy: false,
+        maximumAge: 60000
+      }).then(res => {
+        this.position = res;
+        if (this.position.coords) {
+          // const latitude = 50.863892;
+          // const longitude = 4.6337528;
+          const latitude = this.position.coords.latitude;
+          const longitude = this.position.coords.longitude;
+          this.determineModelledValue(latitude, longitude);
+          this.determineNextStationValue(latitude, longitude);
+        }
+      }).catch((error) => console.log(JSON.stringify(error)));
+    })
   }
 
   private determineModelledValue(latitude: number, longitude: number) {
