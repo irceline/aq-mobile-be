@@ -26,29 +26,9 @@ export class PushNotificationsProvider {
     private fcm: FCM,
     private modalCtrl: ModalController,
     private localStorage: LocalStorage
-  ) {
-    this.activate();
-  }
+  ) { }
 
-  public isTopicActive(topic: PushNotificationTopic): boolean {
-    return this.localStorage.load<boolean>(LOCALSTORAGE_PUSH_NOTIFICATION + topic) || false;
-  }
-
-  public subscribeTopic(topic: PushNotificationTopic) {
-    this.localStorage.save(LOCALSTORAGE_PUSH_NOTIFICATION + topic, true);
-    if (this.platform.is('cordova')) {
-      this.fcm.subscribeToTopic(topic.toString());
-    }
-  }
-
-  public unsubscribeTopic(topic: PushNotificationTopic) {
-    this.localStorage.save(LOCALSTORAGE_PUSH_NOTIFICATION + topic, false);
-    if (this.platform.is('cordova')) {
-      this.fcm.unsubscribeFromTopic(topic.toString());
-    }
-  }
-
-  private activate() {
+  public init() {
     this.platform.ready().then(() => {
       if (this.platform.is('cordova')) {
         this.fcm.getToken().then(token => {
@@ -70,6 +50,24 @@ export class PushNotificationsProvider {
         });
       }
     });
+  }
+
+  public isTopicActive(topic: PushNotificationTopic): boolean {
+    return this.localStorage.load<boolean>(LOCALSTORAGE_PUSH_NOTIFICATION + topic) || false;
+  }
+
+  public subscribeTopic(topic: PushNotificationTopic) {
+    this.localStorage.save(LOCALSTORAGE_PUSH_NOTIFICATION + topic, true);
+    if (this.platform.is('cordova')) {
+      this.fcm.subscribeToTopic(topic.toString());
+    }
+  }
+
+  public unsubscribeTopic(topic: PushNotificationTopic) {
+    this.localStorage.save(LOCALSTORAGE_PUSH_NOTIFICATION + topic, false);
+    if (this.platform.is('cordova')) {
+      this.fcm.unsubscribeFromTopic(topic.toString());
+    }
   }
 
   public presentNotification(notification: PushNotification) {
