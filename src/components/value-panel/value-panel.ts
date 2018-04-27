@@ -16,6 +16,7 @@ export class ValuePanelComponent {
   public position: Geoposition;
   public modelledValue: number;
   public lastStationaryValue: FirstLastValue;
+  public uom: string;
   public loadingModelledValue: boolean = true;
   public loadingStationValue: boolean = true;
   public nearestStation: Station;
@@ -88,6 +89,7 @@ export class ValuePanelComponent {
       }).subscribe(series => {
         if (series.length == 1) {
           this.lastStationaryValue = series[0].lastValue
+          this.uom = series[0].uom;
         }
         this.loadingStationValue = false;
       })
