@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { NavParams, ViewController } from 'ionic-angular';
 
-import { PushNotification } from '../../providers/push-notifications/push-notifications';
+import { PushNotification } from '../../providers/notification-presenter/notification-presenter';
 
 @Component({
-  selector: 'notification',
-  templateUrl: 'notification.html'
+  selector: 'push-notification',
+  templateUrl: 'push-notification.html'
 })
-export class NotificationComponent {
+export class PushNotificationComponent {
 
   public notification: PushNotification;
 

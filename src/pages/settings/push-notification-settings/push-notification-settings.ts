@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
-import { PushNotificationsProvider, PushNotificationTopic } from '../../../providers/push-notifications/push-notifications';
+import { PushNotificationTopic } from '../../../providers/notification-presenter/notification-presenter';
+import { PushNotificationsProvider } from '../../../providers/push-notifications/push-notifications';
 
 @Component({
   selector: 'push-notification-settings',

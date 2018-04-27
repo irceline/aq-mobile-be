@@ -6,7 +6,12 @@ import {
   BackgroundGeolocationResponse,
 } from '@ionic-native/background-geolocation';
 import { BackgroundMode } from '@ionic-native/background-mode';
-import { LocalNotifications } from '@ionic-native/local-notifications';
+import { ILocalNotification, LocalNotifications } from '@ionic-native/local-notifications';
+import { Platform } from 'ionic-angular';
+
+import { ModelledValueProvider } from '../aq-index/aq-index';
+import { IrcelineSettingsProvider } from '../irceline-settings/irceline-settings';
+import { LocatedValueNotification, NotificationPresenter } from '../notification-presenter/notification-presenter';
 
 const DEFAULT_LOCAL_NOTIFICATION_UPDATE_IN_MINUTES = 60;
 
@@ -14,18 +19,31 @@ const LOCALSTORAGE_INDEX_NOTIFICATION_ACTIVE = 'index.notification.active'
 const LOCALSTORAGE_INDEX_NOTIFICATION_PERIOD = 'index.notification.period'
 
 @Injectable()
-export class AqIndexNotifications {
+export class LocalNotificationsProvider {
 
   private timeout: NodeJS.Timer;
 
   constructor(
     private localNotifications: LocalNotifications,
-    // private aqIndex: AqIndex,
-    // private ircelineSettings: IrcelineSettingsProvider,
+    private modelledValue: ModelledValueProvider,
+    private ircelineSettings: IrcelineSettingsProvider,
     private backgroundMode: BackgroundMode,
     private backgroundGeolocation: BackgroundGeolocation,
-    private localStorage: LocalStorage
+    private localStorage: LocalStorage,
+    private presenter: NotificationPresenter,
+    private platform: Platform
   ) { }
+
+  public init() {
+    this.platform.ready().then((ready) => {
+      if (this.platform.is('cordova')) {
+        this.localNotifications.on('click').subscribe((notification: ILocalNotification) => {
+          const temp = notification.data as LocatedValueNotification;
+          this.presenter.presentLocatedValueNotification(temp);
+        });
+      }
+    })
+  }
 
   public isActive(): boolean {
     return this.localStorage.load<boolean>(LOCALSTORAGE_INDEX_NOTIFICATION_ACTIVE) || false;
@@ -44,7 +62,7 @@ export class AqIndexNotifications {
       title: 'The app is active in the background.',
       icon: 'fcm_push_icon'
     });
-    this.doCheck();
+    this.runNotificationTask();
     this.startNewTimeout();
   }
 
@@ -64,23 +82,10 @@ export class AqIndexNotifications {
 
   private startNewTimeout() {
     if (this.timeout) { clearTimeout(this.timeout) };
-    this.timeout = setTimeout(() => this.doCheck(), this.getPeriod() * 60000);
+    this.timeout = setTimeout(() => this.runNotificationTask(), this.getPeriod() * 60000);
   }
 
-  private doCheck() {
-    console.log('DoCheck started.');
-    // this.ircelineSettings.getSettings().subscribe(ircelineConfig => {
-    //   this.aqIndex.getIndex(50.863892, 4.6337528, ircelineConfig.lastupdate).subscribe(res => {
-    //     console.log('Get Index with value: ' + res);
-    //     const date = new Date();
-    //     this.localNotifications.schedule({
-    //       id: 1,
-    //       text: 'At: ' + date.toTimeString() + ' with Value: ' + res,
-    //       title: 'Irceline Index Notification at: ' + date.toDateString(),
-    //       smallIcon: 'res://fcm_push_icon'
-    //     })
-    //   }, error => console.error(error));
-    // })
+  private runNotificationTask() {
 
     const config: BackgroundGeolocationConfig = {
       desiredAccuracy: 10,
@@ -96,16 +101,10 @@ export class AqIndexNotifications {
 
     this.backgroundGeolocation.configure(config)
       .subscribe((location: BackgroundGeolocationResponse) => {
-
-        console.log(location);
-
         if (location) {
-          this.localNotifications.schedule({
-            id: 2,
-            text: 'Longitude: ' + location.longitude + ' / Latitude: ' + location.latitude,
-            title: 'Background-Geolocation at: ' + new Date(location.time).toTimeString(),
-            smallIcon: 'res://fcm_push_icon'
-          })
+          // location.latitude = 50.863892;
+          // location.longitude = 4.6337528;
+          this.requestModelledValue(location);
         } else {
           this.localNotifications.schedule({
             id: 2,
@@ -117,9 +116,41 @@ export class AqIndexNotifications {
         this.startNewTimeout();
         this.backgroundGeolocation.stop();
       });
-
-    // start recording location
     this.backgroundGeolocation.start();
   }
 
+
+  private requestModelledValue(location: BackgroundGeolocationResponse) {
+    this.ircelineSettings.getSettings().subscribe(ircelineConfig => {
+      this.modelledValue.getIndex(location.latitude, location.longitude, ircelineConfig.lastupdate)
+        .subscribe(
+          value => {
+            this.notifyValue(new Date(), location, value);
+          },
+          error => {
+            this.notifyValue(new Date(), location, 99999);
+          });
+    });
+  }
+
+  private notifyValue(date: Date, location: BackgroundGeolocationResponse, value: number) {
+    const notificationData: LocatedValueNotification = {
+      latitude: location.latitude,
+      longitude: location.longitude,
+      value,
+      date
+    };
+    if (this.backgroundMode.isActive()) {
+      this.localNotifications.schedule({
+        id: 1,
+        text: 'At: ' + date.toTimeString() + ' with Value: ' + value,
+        title: 'Irceline Index Notification at: ' + date.toDateString(),
+        smallIcon: 'res://fcm_push_icon',
+        group: 'notify',
+        data: notificationData
+      });
+    } else {
+      this.presenter.presentLocatedValueNotification(notificationData);
+    }
+  }
 }

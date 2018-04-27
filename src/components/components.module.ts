@@ -10,10 +10,11 @@ import { IonicModule } from 'ionic-angular';
 
 import { AirQualityIndexComponent } from './air-quality-index/air-quality-index';
 import {
-	MobileDatasetByStationSelectorComponent,
+    MobileDatasetByStationSelectorComponent,
 } from './dataset-by-station-selector/dataset-by-station-selector.component';
 import { ForecastMapComponent } from './forecast-map/forecast-map';
 import { LanguageSelectorComponent } from './language-selector/language-selector';
+import { LocatedValueNotificationComponent } from './located-value-notification/located-value-notification';
 import { MobileExtentControlComponent } from './mobile-extent-control/mobile-extent-control';
 import { MobileGeosearchControlComponent } from './mobile-geosearch-control/mobile-geosearch-control';
 import { MobileLocateControlComponent } from './mobile-locate-control/mobile-locate-control';
@@ -25,8 +26,8 @@ import { ModalGeometryViewerComponent } from './modal-geometry-viewer/modal-geom
 import { ModalLegendComponent } from './modal-legend/modal-legend';
 import { ModalOptionsEditorComponent } from './modal-options-editor/modal-options-editor';
 import { ModalTimespanEditorComponent } from './modal-timespan-editor/modal-timespan-editor';
-import { NotificationComponent } from './notification/notification';
 import { PhenomenonSelectorPopoverComponent } from './phenomenon-selector-popover/phenomenon-selector-popover';
+import { PushNotificationComponent } from './push-notification/push-notification';
 import { StationSelectorComponent } from './station-selector/station-selector';
 import { ValuePanelComponent } from './value-panel/value-panel';
 
@@ -48,9 +49,10 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		MobilePhenomenonSelectorComponent,
 		ForecastMapComponent,
 		AirQualityIndexComponent,
-		NotificationComponent,
+		PushNotificationComponent,
 		LanguageSelectorComponent,
-		ValuePanelComponent
+		ValuePanelComponent,
+		LocatedValueNotificationComponent
 	],
 	imports: [
 		HelgolandMapViewModule,
@@ -79,9 +81,10 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		MobilePhenomenonSelectorComponent,
 		ForecastMapComponent,
 		AirQualityIndexComponent,
-		NotificationComponent,
+		PushNotificationComponent,
 		LanguageSelectorComponent,
-		ValuePanelComponent
+		ValuePanelComponent,
+		LocatedValueNotificationComponent
 	],
 	entryComponents: [
 		StationSelectorComponent,
@@ -90,7 +93,8 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		ModalGeometryViewerComponent,
 		ModalOptionsEditorComponent,
 		PhenomenonSelectorPopoverComponent,
-		NotificationComponent
+		PushNotificationComponent,
+		LocatedValueNotificationComponent
 	]
 })
 export class ComponentsModule { }

@@ -10,6 +10,7 @@ import { MapPage } from '../pages/map/map';
 import { SettingsPage } from '../pages/settings/settings';
 import { StartPage } from '../pages/start/start';
 import { IrcelineSettings, IrcelineSettingsProvider } from '../providers/irceline-settings/irceline-settings';
+import { LocalNotificationsProvider } from '../providers/local-notification/local-notification';
 import { PushNotificationsProvider } from '../providers/push-notifications/push-notifications';
 
 @Component({
@@ -32,6 +33,7 @@ export class MyApp {
     private translate: TranslateService,
     private ircelineSettings: IrcelineSettingsProvider,
     private pushNotification: PushNotificationsProvider,
+    private localNotification: LocalNotificationsProvider
   ) {
     this.initializeApp();
 
@@ -45,6 +47,7 @@ export class MyApp {
     ];
 
     this.pushNotification.init();
+    this.localNotification.init();
   }
 
   initializeApp() {

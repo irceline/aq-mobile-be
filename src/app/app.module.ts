@@ -32,7 +32,8 @@ import { StartPage } from '../pages/start/start';
 import { ModelledValueProvider } from '../providers/aq-index/aq-index';
 import { IrcelineSettingsProvider } from '../providers/irceline-settings/irceline-settings';
 import { LayerGeneratorService } from '../providers/layer-generator/layer-generator';
-import { AqIndexNotifications } from '../providers/local-notification/local-notification';
+import { LocalNotificationsProvider } from '../providers/local-notification/local-notification';
+import { NotificationPresenter } from '../providers/notification-presenter/notification-presenter';
 import { PushNotificationsProvider } from '../providers/push-notifications/push-notifications';
 import { JSSONSettingsService } from '../providers/settings/settings';
 import { TimeseriesService } from '../providers/timeseries/timeseries.service';
@@ -84,7 +85,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     { provide: GeoSearch, useClass: NominatimGeoSearchService },
     { provide: SettingsService, useClass: JSSONSettingsService },
-    AqIndexNotifications,
     BackgroundGeolocation,
     BackgroundMode,
     FCM,
@@ -92,7 +92,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     IrcelineSettingsProvider,
     LayerGeneratorService,
     LocalNotifications,
+    LocalNotificationsProvider,
     ModelledValueProvider,
+    NotificationPresenter,
     PushNotificationsProvider,
     SplashScreen,
     StatusBar,

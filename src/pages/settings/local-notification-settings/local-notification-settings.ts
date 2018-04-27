@@ -3,7 +3,7 @@ import { SettingsService } from '@helgoland/core';
 import { TranslateService } from '@ngx-translate/core';
 import moment from 'moment';
 
-import { AqIndexNotifications } from '../../../providers/local-notification/local-notification';
+import { LocalNotificationsProvider } from '../../../providers/local-notification/local-notification';
 import { LocalNotification, MobileSettings } from '../../../providers/settings/settings';
 
 @Component({
@@ -19,25 +19,25 @@ export class LocalNotificationSettingsComponent {
 
   constructor(
     private settings: SettingsService<MobileSettings>,
-    private aqIndexNotif: AqIndexNotifications,
+    private localNotifications: LocalNotificationsProvider,
     private translate: TranslateService
   ) {
-    this.indexNotification = this.aqIndexNotif.isActive();
-    this.currentPeriod = this.aqIndexNotif.getPeriod();
+    this.indexNotification = this.localNotifications.isActive();
+    this.currentPeriod = this.localNotifications.getPeriod();
     this.notificationSettings = this.settings.getSettings().localnotifications;
   }
 
   public updateIndexNotifications() {
     if (this.indexNotification) {
-      this.aqIndexNotif.activate();
+      this.localNotifications.activate();
     } else {
-      this.aqIndexNotif.deactivate();
+      this.localNotifications.deactivate();
     }
   }
 
   public setLocalNotification(localNotif: LocalNotification) {
     debugger;
-    this.aqIndexNotif.setPeriod(localNotif.period);
+    this.localNotifications.setPeriod(localNotif.period);
   }
 
   public getHumanReadablePeriod(minutes: number) {

@@ -1,20 +1,13 @@
 import { Injectable } from '@angular/core';
 import { LocalStorage } from '@helgoland/core';
-import { FCM, NotificationData } from '@ionic-native/fcm';
-import { ModalController, Platform } from 'ionic-angular';
+import { FCM } from '@ionic-native/fcm';
+import { Platform } from 'ionic-angular';
 
-import { NotificationComponent } from '../../components/notification/notification';
-
-export enum PushNotificationTopic {
-  sensitive = 'sensitive',
-  normal = 'normal'
-}
-
-export interface PushNotification extends NotificationData {
-  topic: PushNotificationTopic;
-  title: string;
-  body: string;
-}
+import {
+  NotificationPresenter,
+  PushNotification,
+  PushNotificationTopic,
+} from '../notification-presenter/notification-presenter';
 
 const LOCALSTORAGE_PUSH_NOTIFICATION = 'localstorage.push.notification';
 
@@ -24,8 +17,8 @@ export class PushNotificationsProvider {
   constructor(
     private platform: Platform,
     private fcm: FCM,
-    private modalCtrl: ModalController,
-    private localStorage: LocalStorage
+    private localStorage: LocalStorage,
+    private presenter: NotificationPresenter
   ) { }
 
   public init() {
@@ -46,7 +39,7 @@ export class PushNotificationsProvider {
           } else {
             //Notification was received in foreground. Maybe the user needs to be notified.
           }
-          this.presentNotification(data as PushNotification);
+          this.presenter.presentPushNotification(data as PushNotification);
         });
       }
     });
@@ -68,10 +61,6 @@ export class PushNotificationsProvider {
     if (this.platform.is('cordova')) {
       this.fcm.unsubscribeFromTopic(topic.toString());
     }
-  }
-
-  public presentNotification(notification: PushNotification) {
-    this.modalCtrl.create(NotificationComponent, { notification }).present();
   }
 
   private doSomethingWithToken(token: string) { }

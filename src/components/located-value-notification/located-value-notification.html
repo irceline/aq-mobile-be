@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">Close</button>
+    </ion-buttons>
+    <ion-title>Located and modelled NO2</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item text-center>
+      <h2>{{notification.value}} at {{notification.date | date:'medium'}}</h2>
+      <p>This value is modelled by your location</p>
+    </ion-item>
+  </ion-list>
+  <div style="width: 100%; height: 50%;">
+    <n52-geometry-map-viewer [mapId]="'notification-map'" [geometry]="location" [mapOptions]="mapOptions" [zoomTo]="false"></n52-geometry-map-viewer>
+  </div>
+</ion-content>
