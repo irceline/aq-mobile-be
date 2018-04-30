@@ -9,8 +9,8 @@ import { BackgroundMode } from '@ionic-native/background-mode';
 import { ILocalNotification, LocalNotifications } from '@ionic-native/local-notifications';
 import { Platform } from 'ionic-angular';
 
-import { ModelledValueProvider } from '../aq-index/aq-index';
 import { IrcelineSettingsProvider } from '../irceline-settings/irceline-settings';
+import { ModelledValueProvider } from '../modelled-value/modelled-value';
 import { LocatedValueNotification, NotificationPresenter } from '../notification-presenter/notification-presenter';
 
 const DEFAULT_LOCAL_NOTIFICATION_UPDATE_IN_MINUTES = 60;

@@ -3,8 +3,8 @@ import { DatasetApiInterface, FirstLastValue, SettingsService, Station } from '@
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 import { Platform } from 'ionic-angular';
 
-import { ModelledValueProvider } from '../../providers/aq-index/aq-index';
 import { IrcelineSettingsProvider } from '../../providers/irceline-settings/irceline-settings';
+import { ModelledValueProvider } from '../../providers/modelled-value/modelled-value';
 import { MobileSettings } from '../../providers/settings/settings';
 
 @Component({
