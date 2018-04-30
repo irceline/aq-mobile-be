@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ApiInterface, FirstLastValue, SettingsService, Station } from '@helgoland/core';
+import { DatasetApiInterface, FirstLastValue, SettingsService, Station } from '@helgoland/core';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 import { Platform } from 'ionic-angular';
 
@@ -25,7 +25,7 @@ export class ValuePanelComponent {
   constructor(
     private modelledService: ModelledValueProvider,
     private geolocate: Geolocation,
-    private api: ApiInterface,
+    private api: DatasetApiInterface,
     private settingsSrvc: SettingsService<MobileSettings>,
     private irceline: IrcelineSettingsProvider,
     private platform: Platform

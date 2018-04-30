@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ApiInterface, ParameterFilter, Phenomenon, SettingsService } from '@helgoland/core';
+import { DatasetApiInterface, ParameterFilter, Phenomenon, SettingsService } from '@helgoland/core';
 import { LayerOptions } from '@helgoland/map';
 import { NavController } from 'ionic-angular';
 import * as L from 'leaflet';
@@ -37,7 +37,7 @@ export class StartPage {
   constructor(
     private settingsSrvc: SettingsService<MobileSettings>,
     private ircelineSettings: IrcelineSettingsProvider,
-    private api: ApiInterface,
+    private api: DatasetApiInterface,
     private nav: NavController,
     private layerGen: LayerGeneratorService
   ) {

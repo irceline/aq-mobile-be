@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { ApiInterface, ParameterFilter, Phenomenon, Platform, SettingsService } from '@helgoland/core';
+import { DatasetApiInterface, ParameterFilter, Phenomenon, Platform, SettingsService } from '@helgoland/core';
 import { GeoSearchOptions, LayerOptions } from '@helgoland/map';
 import { ModalController, NavController } from 'ionic-angular';
 import { PopoverController } from 'ionic-angular/components/popover/popover-controller';
@@ -40,7 +40,7 @@ export class MapPage {
     private cdr: ChangeDetectorRef,
     private popoverCtrl: PopoverController,
     private ircelineSettings: IrcelineSettingsProvider,
-    private api: ApiInterface,
+    private api: DatasetApiInterface,
     private layerGen: LayerGeneratorService
   ) {
     const settings = this.settingsSrvc.getSettings();

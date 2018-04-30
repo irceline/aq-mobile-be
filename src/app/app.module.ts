@@ -2,7 +2,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HelgolandCachingModule } from '@helgoland/caching';
-import { ApiInterface, GetDataApiInterface, SettingsService } from '@helgoland/core';
+import { DatasetApiInterface, SettingsService, SplittedDataDatasetApiInterface } from '@helgoland/core';
 import { HelgolandDatasetlistModule } from '@helgoland/depiction/datasetlist';
 import { HelgolandFlotModule } from '@helgoland/flot';
 import { GeoSearch, NominatimGeoSearchService } from '@helgoland/map';
@@ -81,7 +81,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SettingsPage
   ],
   providers: [
-    { provide: ApiInterface, useClass: GetDataApiInterface },
+    { provide: DatasetApiInterface, useClass: SplittedDataDatasetApiInterface },
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     { provide: GeoSearch, useClass: NominatimGeoSearchService },
     { provide: SettingsService, useClass: JSSONSettingsService },
