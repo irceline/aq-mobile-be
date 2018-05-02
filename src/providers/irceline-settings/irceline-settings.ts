@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { SettingsService } from '@helgoland/core';
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
+
+import { Injectable } from '@angular/core';
+import { HttpService, SettingsService } from '@helgoland/core';
+import { Observable } from 'rxjs/Observable';
 
 import { MobileSettings } from '../settings/settings';
 
@@ -19,7 +19,7 @@ export class IrcelineSettingsProvider {
   private settings: IrcelineSettings;
 
   constructor(
-    private http: HttpClient,
+    private http: HttpService,
     private settingsService: SettingsService<MobileSettings>
   ) { }
 
@@ -34,7 +34,7 @@ export class IrcelineSettingsProvider {
   private requestSettings(): Observable<IrcelineSettings> {
     // TODO needs cors response to avoid proxy!
     const url = 'https://cors-anywhere.herokuapp.com/' + this.settingsService.getSettings().ircelineSettingsUrl;
-    return this.http
+    return this.http.client()
       .get(url)
       .map(result => {
         return {

@@ -1,12 +1,12 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpService } from '@helgoland/core';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class ModelledValueProvider {
 
   constructor(
-    public http: HttpClient
+    public http: HttpService
   ) { }
 
   // TODO add layerType (NO2, ...)
@@ -29,7 +29,7 @@ export class ModelledValueProvider {
       X: '1',
       Y: '1'
     };
-    return this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url, { params })
+    return this.http.client().get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url, { params })
       .map(res => {
         if (res && res.features && res.features.length === 1) {
           if (res.features[0].properties['GRAY_INDEX']) {
