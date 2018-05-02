@@ -29,6 +29,7 @@ import {
 import { PushNotificationSettingsComponent } from '../pages/settings/push-notification-settings/push-notification-settings';
 import { SettingsPage } from '../pages/settings/settings';
 import { StartPage } from '../pages/start/start';
+import { AirQualityIndexProvider } from '../providers/air-quality-index/air-quality-index';
 import { IrcelineSettingsProvider } from '../providers/irceline-settings/irceline-settings';
 import { LayerGeneratorService } from '../providers/layer-generator/layer-generator';
 import { LocalNotificationsProvider } from '../providers/local-notification/local-notification';
@@ -99,6 +100,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SplashScreen,
     StatusBar,
     TimeseriesService,
+    AirQualityIndexProvider,
   ]
 })
 export class AppModule { }

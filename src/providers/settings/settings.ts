@@ -4,6 +4,7 @@ import { Settings, SettingsService } from '@helgoland/core';
 export interface MobileSettings extends Settings {
     visiblePhenomenonIDs: string[];
     ircelineSettingsUrl: string;
+    ircelineAQIndexUrl: string;
     clusterStationsOnMap: boolean;
     phenomenonLayerMapping: PhenomenonLayerMapping[];
     regions: string[];

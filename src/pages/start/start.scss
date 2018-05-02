@@ -7,23 +7,6 @@ page-start {
             padding: 2px;
         }
     }
-    .index-card {
-        ion-slide {
-            padding-bottom: 20px;
-        }
-        .swiper-container-horizontal>.swiper-pagination-bullets {
-            bottom: 0px;
-        }
-        .veryGood {
-            background-color: rgb(0, 153, 255);
-        }
-        .good {
-            background-color: rgb(0, 153, 0);
-        }
-        .fairlyGood {
-            background-color: rgb(0, 255, 0);
-        }
-    }
     .map-card {
         ion-card-content {
             padding: 2px;

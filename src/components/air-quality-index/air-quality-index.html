@@ -7,17 +7,9 @@
   </ion-item>
 </ion-list>
 
-<ion-list>
-  <ion-item class="veryGood">
-    <span>very-good - 2</span>
-    <ion-note item-end>yesterday (observation)</ion-note>
-  </ion-item>
-  <ion-item class="good">
-    <span>good - 3</span>
-    <ion-note item-end>today (forecast)</ion-note>
-  </ion-item>
-  <ion-item class="good">
-    <span>good - 3</span>
-    <ion-note item-end>tomorrow (forecast)</ion-note>
+<ion-list *ngIf="airQualityIndex">
+  <ion-item class="veryGood" ngClass="aqIndex-{{item.value}}" *ngFor="let item of airQualityIndex">
+    <span>{{item.evaluation}} - {{item.value}}</span>
+    <ion-note item-end>{{item.period}} ({{item.type}})</ion-note>
   </ion-item>
 </ion-list>
