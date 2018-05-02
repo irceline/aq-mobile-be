@@ -63,7 +63,11 @@ A local webserver should be launched on port `8100`:
 ## Build quirks
 
  * conflict between the plugins `cordova-plugin-mauron85-background-geolocation` and `cordova-plugin-fcm`
-    * Change in platforms/android/cordova-plugin-fcm/*-FCMPlugin.gradle `com.google.gms:google-services:3.0.0` to `com.google.gms:google-services:+`
+    * In `platforms/android/cordova-plugin-fcm/*-FCMPlugin.gradle`
+      * remove line `classpath 'com.google.gms:google-services:3.0.0'` 
+      * remove line `apply plugin: com.google.gms.googleservices.GoogleServicesPlugin`
+      * add at the end `apply plugin: 'com.google.gms.google-services'`
+    * Add in `build.gradle` the following line `classpath 'com.google.gms:google-services:3.2.1'` at buildscript.dependencies
     * Build with `ionic cordova build android` and you will get a version error response.
     * Change platforms/android/project.properties with your version from above output, version must be the same:
         ```
