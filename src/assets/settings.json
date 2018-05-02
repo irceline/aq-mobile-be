@@ -97,6 +97,7 @@
           "label": "Stationary hourly mean PM2.5",
           "visible": true,
           "baseUrl": "http://geo.irceline.be/realtime/wms",
+          "stations": true,
           "layer": {
             "layers": "realtime:pm25_24hmean_station",
             "transparent": true,

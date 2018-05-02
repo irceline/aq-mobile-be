@@ -27,6 +27,7 @@ export interface LayerConfig {
     visible: boolean;
     baseUrl: string;
     layer: L.Layer;
+    stations: boolean;
 }
 
 @Injectable()

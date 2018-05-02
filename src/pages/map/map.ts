@@ -59,7 +59,7 @@ export class MapPage {
       {
         platform,
         providerUrl: this.providerUrl
-      }
+      } 
     );
     modal.onDidDismiss(data => { if (data) { this.nav.push(DiagramPage) } });
     modal.present();
@@ -88,7 +88,7 @@ export class MapPage {
     this.selectedPhenomenon = selectedPhenomenon;
     this.phenomenonFilter = { phenomenon: selectedPhenomenon.id };
     this.ircelineSettings.getSettings().subscribe(settings =>
-      this.overlayMaps = this.layerGen.getLayersForPhenomenon(selectedPhenomenon.id, settings.lastupdate)
+      this.overlayMaps = this.layerGen.getLayersForPhenomenon(selectedPhenomenon.id, settings.lastupdate, true)
     );
   }
 }
