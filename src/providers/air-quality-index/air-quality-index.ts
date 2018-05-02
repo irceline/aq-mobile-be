@@ -32,8 +32,8 @@ export class AirQualityIndexProvider {
     private settings: SettingsService<MobileSettings>
   ) { }
 
-  getAirQualityIndex(): Observable<AirQualityEntity> {
-    return this.http.client().get<{ entity: AirQualityEntity }>(this.settings.getSettings().ircelineAQIndexUrl,
+  public getAirQualityIndex(reload: boolean): Observable<AirQualityEntity> {
+    return this.http.client({ forceUpdate: reload }).get<{ entity: AirQualityEntity }>(this.settings.getSettings().ircelineAQIndexUrl,
       {
         responseType: 'json',
         params: {

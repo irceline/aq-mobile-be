@@ -29,9 +29,7 @@ export class NotificationPresenter {
 
   constructor(
     private modalCtrl: ModalController
-  ) {
-    console.log('Hello NotificationPresenterProvider Provider');
-  }
+  ) { }
 
   public presentPushNotification(notification: PushNotification) {
     this.modalCtrl.create(PushNotificationComponent, { notification }).present();

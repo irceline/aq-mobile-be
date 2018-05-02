@@ -6,6 +6,7 @@ import { Platform } from 'ionic-angular';
 
 import { IrcelineSettingsProvider } from '../../providers/irceline-settings/irceline-settings';
 import { ModelledValueProvider } from '../../providers/modelled-value/modelled-value';
+import { RefreshHandler } from '../../providers/refresh/refresh';
 import { MobileSettings } from '../../providers/settings/settings';
 
 @Component({
@@ -31,18 +32,26 @@ export class ValuePanelComponent {
     private api: DatasetApiInterface,
     private settingsSrvc: SettingsService<MobileSettings>,
     private irceline: IrcelineSettingsProvider,
-    private platform: Platform
+    private platform: Platform,
+    private refresher: RefreshHandler
   ) {
+    this.triggerTask();
+    this.refresher.onRefresh.subscribe(() => this.triggerTask());
+  }
+
+  private triggerTask() {
     if (this.platform.is('cordova')) {
       this.backGeo.isLocationEnabled().then(res => {
         if (res) {
           this.determineValues();
           this.geolocationDisabled = false;
-        } else {
+        }
+        else {
           this.geolocationDisabled = true;
         }
-      })
-    } else {
+      });
+    }
+    else {
       this.determineValues();
     }
   }
@@ -58,6 +67,8 @@ export class ValuePanelComponent {
         if (this.position.coords) {
           // const latitude = 50.863892;
           // const longitude = 4.6337528;
+          // const latitude = 50 + Math.random();
+          // const longitude = 4 + Math.random();
           const latitude = this.position.coords.latitude;
           const longitude = this.position.coords.longitude;
           this.determineModelledValue(latitude, longitude);
@@ -68,7 +79,7 @@ export class ValuePanelComponent {
   }
 
   private determineModelledValue(latitude: number, longitude: number) {
-    this.irceline.getSettings().subscribe(ircelineValues => {
+    this.irceline.getSettings(false).subscribe(ircelineValues => {
       this.modelledService.getIndex(latitude, longitude, ircelineValues.lastupdate).subscribe(value => {
         this.modelledValue = value;
       }, error => {
@@ -100,7 +111,7 @@ export class ValuePanelComponent {
         phenomenon: phenomenonId,
         station: this.nearestStation.properties.id,
         expanded: true
-      }).subscribe(series => {
+      }, { forceUpdate: true }).subscribe(series => {
         if (series.length == 1) {
           this.lastStationaryValue = series[0].lastValue
           this.uom = series[0].uom;

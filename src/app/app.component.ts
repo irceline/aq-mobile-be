@@ -37,7 +37,7 @@ export class MyApp {
   ) {
     this.initializeApp();
 
-    this.ircelineSettings.getSettings().subscribe((settings: IrcelineSettings) => this.lastupdate = settings.lastupdate);
+    this.ircelineSettings.getSettings(false).subscribe((settings: IrcelineSettings) => this.lastupdate = settings.lastupdate);
 
     // used for an example of ngFor and navigation
     this.pages = [

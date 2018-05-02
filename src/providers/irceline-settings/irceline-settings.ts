@@ -16,25 +16,14 @@ export interface IrcelineSettings {
 @Injectable()
 export class IrcelineSettingsProvider {
 
-  private settings: IrcelineSettings;
-
   constructor(
     private http: HttpService,
     private settingsService: SettingsService<MobileSettings>
   ) { }
 
-  public getSettings(): Observable<IrcelineSettings> {
-    if (this.settings) {
-      return Observable.of(this.settings);
-    } else {
-      return this.requestSettings();
-    }
-  }
-
-  private requestSettings(): Observable<IrcelineSettings> {
-    // TODO needs cors response to avoid proxy!
-    const url = 'https://cors-anywhere.herokuapp.com/' + this.settingsService.getSettings().ircelineSettingsUrl;
-    return this.http.client()
+  public getSettings(reload: boolean): Observable<IrcelineSettings> {
+    const url = this.settingsService.getSettings().ircelineSettingsUrl;
+    return this.http.client({ forceUpdate: reload })
       .get(url)
       .map(result => {
         return {
@@ -44,6 +33,5 @@ export class IrcelineSettingsProvider {
           top_pollutant_today: result['top_pollutant_today']
         }
       })
-      .do(settings => this.settings = settings);
   }
 }

@@ -36,6 +36,7 @@ import { LocalNotificationsProvider } from '../providers/local-notification/loca
 import { ModelledValueProvider } from '../providers/modelled-value/modelled-value';
 import { NotificationPresenter } from '../providers/notification-presenter/notification-presenter';
 import { PushNotificationsProvider } from '../providers/push-notifications/push-notifications';
+import { RefreshHandler } from '../providers/refresh/refresh';
 import { JSSONSettingsService } from '../providers/settings/settings';
 import { TimeseriesService } from '../providers/timeseries/timeseries.service';
 import { MyApp } from './app.component';
@@ -86,6 +87,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     { provide: GeoSearch, useClass: NominatimGeoSearchService },
     { provide: SettingsService, useClass: JSSONSettingsService },
+    AirQualityIndexProvider,
     BackgroundGeolocation,
     BackgroundMode,
     FCM,
@@ -97,10 +99,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     ModelledValueProvider,
     NotificationPresenter,
     PushNotificationsProvider,
+    RefreshHandler,
     SplashScreen,
     StatusBar,
     TimeseriesService,
-    AirQualityIndexProvider,
   ]
 })
 export class AppModule { }

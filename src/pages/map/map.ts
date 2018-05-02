@@ -49,7 +49,7 @@ export class MapPage {
     this.fitBounds = settings.defaultBbox;
     this.geoSearchOptions = { countrycodes: settings.geoSearchContryCodes };
 
-    this.ircelineSettings.getSettings().subscribe((settings) => {
+    this.ircelineSettings.getSettings(false).subscribe((settings) => {
       this.api.getPhenomenon(settings.top_pollutant_today, this.providerUrl).subscribe(phenomenon => this.setPhenomenon(phenomenon));
     })
   }
@@ -59,7 +59,7 @@ export class MapPage {
       {
         platform,
         providerUrl: this.providerUrl
-      } 
+      }
     );
     modal.onDidDismiss(data => { if (data) { this.nav.push(DiagramPage) } });
     modal.present();
@@ -84,10 +84,9 @@ export class MapPage {
   }
 
   private setPhenomenon(selectedPhenomenon: Phenomenon) {
-    console.log(selectedPhenomenon.id + ' ' + selectedPhenomenon.label);
     this.selectedPhenomenon = selectedPhenomenon;
     this.phenomenonFilter = { phenomenon: selectedPhenomenon.id };
-    this.ircelineSettings.getSettings().subscribe(settings =>
+    this.ircelineSettings.getSettings(false).subscribe(settings =>
       this.overlayMaps = this.layerGen.getLayersForPhenomenon(selectedPhenomenon.id, settings.lastupdate, true)
     );
   }

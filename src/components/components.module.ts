@@ -10,7 +10,7 @@ import { IonicModule } from 'ionic-angular';
 
 import { AirQualityIndexComponent } from './air-quality-index/air-quality-index';
 import {
-    MobileDatasetByStationSelectorComponent,
+	MobileDatasetByStationSelectorComponent,
 } from './dataset-by-station-selector/dataset-by-station-selector.component';
 import { ForecastMapComponent } from './forecast-map/forecast-map';
 import { LanguageSelectorComponent } from './language-selector/language-selector';
@@ -28,6 +28,7 @@ import { ModalOptionsEditorComponent } from './modal-options-editor/modal-option
 import { ModalTimespanEditorComponent } from './modal-timespan-editor/modal-timespan-editor';
 import { PhenomenonSelectorPopoverComponent } from './phenomenon-selector-popover/phenomenon-selector-popover';
 import { PushNotificationComponent } from './push-notification/push-notification';
+import { RefreshButtonComponent } from './refresh-button/refresh-button';
 import { StationSelectorComponent } from './station-selector/station-selector';
 import { ValuePanelComponent } from './value-panel/value-panel';
 
@@ -52,7 +53,8 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		PushNotificationComponent,
 		LanguageSelectorComponent,
 		ValuePanelComponent,
-		LocatedValueNotificationComponent
+		LocatedValueNotificationComponent,
+		RefreshButtonComponent
 	],
 	imports: [
 		HelgolandMapViewModule,
@@ -84,7 +86,8 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		PushNotificationComponent,
 		LanguageSelectorComponent,
 		ValuePanelComponent,
-		LocatedValueNotificationComponent
+		LocatedValueNotificationComponent,
+		RefreshButtonComponent
 	],
 	entryComponents: [
 		StationSelectorComponent,

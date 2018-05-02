@@ -6,6 +6,7 @@ import * as L from 'leaflet';
 
 import { IrcelineSettingsProvider } from '../../providers/irceline-settings/irceline-settings';
 import { LayerGeneratorService } from '../../providers/layer-generator/layer-generator';
+import { RefreshHandler } from '../../providers/refresh/refresh';
 import { MobileSettings } from '../../providers/settings/settings';
 import { MapPage } from '../map/map';
 
@@ -39,18 +40,27 @@ export class StartPage {
     private ircelineSettings: IrcelineSettingsProvider,
     private api: DatasetApiInterface,
     private nav: NavController,
-    private layerGen: LayerGeneratorService
+    private layerGen: LayerGeneratorService,
+    private refresher: RefreshHandler
   ) {
     const settings = this.settingsSrvc.getSettings();
     this.providerUrl = settings.restApiUrls[0];
     this.clusterStations = settings.clusterStationsOnMap;
     this.fitBounds = settings.defaultBbox;
 
-    this.ircelineSettings.getSettings().subscribe(ircelineSettings => {
+    this.loadIrcelineSettings();
+
+    this.refresher.onRefresh.subscribe(() => {
+      this.loadIrcelineSettings(true);
+    });
+  }
+
+  private loadIrcelineSettings(refresh = false) {
+    this.ircelineSettings.getSettings(refresh).subscribe(ircelineSettings => {
       this.lastupdate = ircelineSettings.lastupdate;
       this.api.getPhenomenon(ircelineSettings.top_pollutant_today, this.providerUrl).subscribe(phenomenon => this.setPhenomenon(phenomenon));
       this.overlayMaps = this.layerGen.getLayersForPhenomenon(ircelineSettings.top_pollutant_today, ircelineSettings.lastupdate);
-    })
+    });
   }
 
   // public onMapLoading(loading: boolean) {
@@ -67,7 +77,6 @@ export class StartPage {
   }
 
   private setPhenomenon(selectedPhenomenon: Phenomenon) {
-    console.log(selectedPhenomenon.id + ' ' + selectedPhenomenon.label);
     this.selectedPhenomenon = selectedPhenomenon;
     this.phenomenonFilter = { phenomenon: selectedPhenomenon.id };
   }
