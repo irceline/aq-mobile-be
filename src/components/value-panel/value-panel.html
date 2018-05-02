@@ -1,11 +1,15 @@
 <ion-list>
-  <ion-item text-center>
+  <ion-item text-center *ngIf="geolocationDisabled">
+    <h2>{{'value-panel.geolocation.disabled.header' | translate}}</h2>
+    <p>{{'value-panel.geolocation.disabled.hint' | translate}}</p>
+  </ion-item>  
+  <ion-item text-center *ngIf="!geolocationDisabled">
     <h2 *ngIf="loadingModelledValue">loading modelled value...</h2>
     <h2 *ngIf="!loadingModelledValue && modelledValue">Modelled value: {{modelledValue | number:'1.1-3'}} {{uom}}</h2>
     <h2 *ngIf="!loadingModelledValue && !modelledValue">No modelled value calculated</h2>
     <p>Latitude: {{position?.coords?.latitude | number:'1.1-6'}}, Longitude: {{position?.coords?.longitude | number:'1.1-6'}}</p>
   </ion-item>
-  <ion-item text-center>
+  <ion-item text-center *ngIf="!geolocationDisabled">
     <h2 *ngIf="loadingStationValue">loading next station value...</h2>
     <h2 *ngIf="!loadingStationValue && nearestStation">Nearest station: {{nearestStation.properties.label}}</h2>
     <p *ngIf="!loadingStationValue && nearestStation">{{lastStationaryValue?.value | number:'1.1-3'}} {{uom}} at {{lastStationaryValue?.timestamp | date:'medium'}}</p>

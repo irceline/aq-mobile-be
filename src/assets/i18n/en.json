@@ -84,5 +84,13 @@
 		"generalize": "Generalize data",
 		"header": "Change style of this timeseries",
 		"zeroBasedYAxe": "Timeseries zero based"
+	},
+	"value-panel": {
+		"geolocation": {
+			"disabled": {
+				"header": "No location found for your device",
+				"hint": "Please activate your location service"
+			}
+		}
 	}
 }

@@ -84,5 +84,13 @@
 		"generalize": "",
 		"header": "",
 		"zeroBasedYAxe": ""
+	},
+	"value-panel": {
+		"geolocation": {
+			"disabled": {
+				"header": "",
+				"hint": ""
+			}
+		}
 	}
 }

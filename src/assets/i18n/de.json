@@ -84,5 +84,13 @@
 		"generalize": "Daten generalisieren",
 		"header": "Zeitreihenerscheinung ändern",
 		"zeroBasedYAxe": "Zeitreihe null-basiert"
+	},
+	"value-panel": {
+		"geolocation": {
+			"disabled": {
+				"header": "Kein Standort gefunden",
+				"hint": "Bitte aktiviere den Standort-Dienst"
+			}
+		}
 	}
 }

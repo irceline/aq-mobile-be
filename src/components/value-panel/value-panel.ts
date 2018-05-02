@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DatasetApiInterface, FirstLastValue, SettingsService, Station } from '@helgoland/core';
+import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 import { Platform } from 'ionic-angular';
 
@@ -19,18 +20,31 @@ export class ValuePanelComponent {
   public uom: string;
   public loadingModelledValue: boolean = true;
   public loadingStationValue: boolean = true;
+  public geolocationDisabled: boolean = false;
   public nearestStation: Station;
   public stationDistance: number;
 
   constructor(
     private modelledService: ModelledValueProvider,
     private geolocate: Geolocation,
+    private backGeo: BackgroundGeolocation,
     private api: DatasetApiInterface,
     private settingsSrvc: SettingsService<MobileSettings>,
     private irceline: IrcelineSettingsProvider,
     private platform: Platform
   ) {
-    this.determineValues();
+    if (this.platform.is('cordova')) {
+      this.backGeo.isLocationEnabled().then(res => {
+        if (res) {
+          this.determineValues();
+          this.geolocationDisabled = false;
+        } else {
+          this.geolocationDisabled = true;
+        }
+      })
+    } else {
+      this.determineValues();
+    }
   }
 
   private determineValues() {
