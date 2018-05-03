@@ -29,7 +29,7 @@ A local webserver should be launched on port `8100`:
  - Set the following header (authorization key can be find in the settings (Cloud Messaging-tab) of the firebase project):
    - Content-Type: application/json
    - Authorization: key=AAAAinFTu0Axxxxxxxxxxxxxxxxxxxxxxxxx
- - body: 
+ - body:
   ```javascript
 {
   "notification": {
@@ -59,12 +59,38 @@ A local webserver should be launched on port `8100`:
 ```
  - full documentation: https://firebase.google.com/docs/cloud-messaging/http-server-ref
 
+## Build prerequisites
+
+On CentOS:
+```sh
+yum update -y
+yum install epel-release
+yum install nodejs git
+node --version
+```
+
+Add the other prerequisites:
+```sh
+npm install -g ionic cordova
+ionic cordova plugin add cordova-plugin-fcm
+```
+
+Clone the repo:
+```sh
+yum install git
+git clone https://github.com/irceline/aq-mobile-be.git
+cd aq-mobile-be
+```
+Do a build for `Android`:
+```sh
+ionic cordova build android
+```
 
 ## Build quirks
 
  * conflict between the plugins `cordova-plugin-mauron85-background-geolocation` and `cordova-plugin-fcm`
     * In `platforms/android/cordova-plugin-fcm/*-FCMPlugin.gradle`
-      * remove line `classpath 'com.google.gms:google-services:3.0.0'` 
+      * remove line `classpath 'com.google.gms:google-services:3.0.0'`
       * remove line `apply plugin: com.google.gms.googleservices.GoogleServicesPlugin`
       * add at the end `apply plugin: 'com.google.gms.google-services'`
     * Add in `build.gradle` the following line `classpath 'com.google.gms:google-services:3.2.1'` at buildscript.dependencies
@@ -76,4 +102,3 @@ A local webserver should be launched on port `8100`:
         com.google.android.gms:play-services-location:xx.xx.xx
         ```
     * Build again with `ionic cordova build android`
-
