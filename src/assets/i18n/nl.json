@@ -1,95 +1,95 @@
 {
 	"air-quality-index": {
-		"header": ""
+		"header": "BelAQI index voor:"
 	},
 	"change-timespan": {
 		"custom": {
-			"end": "",
-			"header": "",
-			"start": ""
+			"end": "einde",
+			"header": "eigen periode",
+			"start": "begin"
 		},
-		"header": "",
+		"header": "verander periode",
 		"predefined": {
-			"current-month": "",
-			"current-week": "",
-			"current-year": "",
-			"header": "",
-			"last-hour": "",
-			"last-month": "",
-			"last-week": "",
-			"last-year": "",
-			"today": "",
-			"today-yesterday": "",
-			"yesterday": ""
+			"current-month": "huidige maand",
+			"current-week": "huidige week",
+			"current-year": "huidige jaar",
+			"header": "voorgedefineerde periode",
+			"last-hour": "vorig uur",
+			"last-month": "vorige maand",
+			"last-week": "vorige week",
+			"last-year": "vorig jaar",
+			"today": "vandaag",
+			"today-yesterday": "vandaag & gisteren",
+			"yesterday": "gisteren"
 		}
 	},
 	"controls": {
-		"cancel": "",
-		"close": "",
-		"ok": ""
+		"cancel": "annuleer",
+		"close": "sluiten",
+		"ok": "OK"
 	},
 	"diagram": {
-		"header": "",
-		"loading": "",
-		"no-timeseries-selected": "",
-		"select-timeseries": ""
+		"header": "diagram",
+		"loading": "bezig te laden",
+		"no-timeseries-selected": "geen tijdsreeks geselecteerd!",
+		"select-timeseries": "Selecteer een tijdsreeks op de"
 	},
 	"legend": {
-		"first-value-at": "",
-		"header": "",
-		"last-value-at": ""
+		"first-value-at": "eerste waarde",
+		"header": "Legende",
+		"last-value-at": "laatste waarde"
 	},
 	"map": {
-		"dataset-selection-hint": "",
+		"dataset-selection-hint": "Selecteer een of meerdere tijdsreeks(en) voor weergave op een diagram",
 		"geosearch": {
-			"placeholder": ""
+			"placeholder": "Zoek locatie"
 		},
-		"header": "",
-		"loading": "",
-		"select-phenomenon": "",
-		"show-in-diagram": ""
+		"header": "Kaart",
+		"loading": "bezig te laden",
+		"select-phenomenon": "kies een polluent",
+		"show-in-diagram": "toon {{value}} tijdsreeks op een diagram"
 	},
 	"menu": {
-		"header": "",
-		"lastUpdate": ""
+		"header": "Menu",
+		"lastUpdate": "laatste aktualisatie"
 	},
 	"phenomenon-selector": {
-		"hide-some-phenomenons": "",
-		"list-all-phenomenons": ""
+		"hide-some-phenomenons": "verberg polluenten",
+		"list-all-phenomenons": "toon alle polluenten"
 	},
 	"settings": {
-		"common": "",
-		"header": "",
-		"index-notifications": "",
+		"common": "Algemeen",
+		"header": "Instellingen",
+		"index-notifications": "locale luchtkwaliteitsalert",
 		"local-notification": {
-			"header": "",
+			"header": "Lokaal bericht",
 			"hint": ""
 		},
-		"normal-notification": "",
-		"push-notification": "",
-		"select-language": "",
-		"select-local-notifiaction-period": "",
-		"sensitiv-notification": ""
+		"normal-notification": "Normale tekst berichten",
+		"push-notification": "Push berichten",
+		"select-language": "kies een taal",
+		"select-local-notifiaction-period": "kies een tijdsinterval",
+		"sensitiv-notification": "sensitive tekst berichten"
 	},
 	"show-geometry": {
-		"header": ""
+		"header": "locatie van het station"
 	},
 	"start": {
-		"currently": "",
+		"currently": "Huidig:",
 		"forecast-map": {
-			"header": ""
+			"header": "Voorspellingskaart"
 		}
 	},
 	"style-edit": {
-		"generalize": "",
-		"header": "",
-		"zeroBasedYAxe": ""
+		"generalize": "generaliseerde gegevens",
+		"header": "Verander de kleur van de tijdsreeks",
+		"zeroBasedYAxe": "tijdsreeks nullgebaseerd"
 	},
 	"value-panel": {
 		"geolocation": {
 			"disabled": {
-				"header": "",
-				"hint": ""
+				"header": "geen locatie gevonden voor u toestel",
+				"hint": "activeer aub de locatiedienst van u toestel en vernieuw de app (knop boven rechts op u scherm) "
 			}
 		}
 	}
