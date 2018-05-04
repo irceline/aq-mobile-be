@@ -18,7 +18,8 @@ export class RefreshButtonComponent {
   public refresh() {
     if (this.platform.is('cordova')) {
       this.toast.create({
-        message: 'Refresh all'
+        message: 'Refresh all',
+        duration: 3000
       }).present();
     }
     this.refresher.refresh();
