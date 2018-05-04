@@ -93,7 +93,7 @@ ionic cordova build android
       * remove line `classpath 'com.google.gms:google-services:3.0.0'`
       * remove line `apply plugin: com.google.gms.googleservices.GoogleServicesPlugin`
       * add at the end `apply plugin: 'com.google.gms.google-services'`
-    * Add in `build.gradle` the following line `classpath 'com.google.gms:google-services:3.2.1'` at buildscript.dependencies
+    * Add in `build.gradle` the following line `classpath 'com.google.gms:google-services:3.2.1'` at buildscript.dependencies (ca. line 36)
     * Build with `ionic cordova build android` and you will get a version error response.
     * Change platforms/android/project.properties with your version from above output, version must be the same:
         ```
@@ -102,3 +102,7 @@ ionic cordova build android
         com.google.android.gms:play-services-location:xx.xx.xx
         ```
     * Build again with `ionic cordova build android`
+  * on `OSX` you will `Android Studio` and:
+    * `cd ~/Library/Android/sdk/tools/bin/`
+    * run `./sdkmanager --licenses` and accept all
+     do above
