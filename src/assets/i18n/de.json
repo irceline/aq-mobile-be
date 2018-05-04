@@ -89,7 +89,7 @@
 		"geolocation": {
 			"disabled": {
 				"header": "Kein Standort gefunden",
-				"hint": "Bitte aktiviere den Standort-Dienst"
+				"hint": "Bitte aktiviere den Standort-Dienst und aktualisiere die App (oben rechts auf Ihrem Bildschirm) "
 			}
 		}
 	}

@@ -89,7 +89,7 @@
 		"geolocation": {
 			"disabled": {
 				"header": "No location found for your device",
-				"hint": "Please activate your location service"
+				"hint": "Please activate your location service and refresh the app (button top right of your screen)"
 			}
 		}
 	}
