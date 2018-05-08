@@ -1,93 +1,93 @@
 {
 	"air-quality-index": {
-		"header": ""
+		"header": "BelAQI index à:"
 	},
 	"change-timespan": {
 		"custom": {
-			"end": "",
-			"header": "",
-			"start": ""
+			"end": "fin",
+			"header": "délai personnalisé",
+			"start": "début"
 		},
-		"header": "",
+		"header": "changer le délai",
 		"predefined": {
-			"current-month": "",
-			"current-week": "",
-			"current-year": "",
-			"header": "",
-			"last-hour": "",
-			"last-month": "",
-			"last-week": "",
-			"last-year": "",
-			"today": "",
-			"today-yesterday": "",
-			"yesterday": ""
+			"current-month": "mois en cours",
+			"current-week": "semaine en cours",
+			"current-year": "année actuelle",
+			"header": "délai prédéfini",
+			"last-hour": "dernière heure",
+			"last-month": "mois dernier",
+			"last-week": "la semaine dernière",
+			"last-year": "l'année dernière",
+			"today": "aujourd'hui",
+			"today-yesterday": "aujourd'hui & hier",
+			"yesterday": "hier"
 		}
 	},
 	"controls": {
-		"cancel": "",
-		"close": "",
-		"ok": ""
+		"cancel": "annuler",
+		"close": "fermer",
+		"ok": "d'accord"
 	},
 	"diagram": {
-		"header": "",
-		"loading": "",
-		"no-timeseries-selected": "",
-		"select-timeseries": ""
+		"header": "diagramme",
+		"loading": "chargement en cours",
+		"no-timeseries-selected": "aucun timeseries sélectionné!",
+		"select-timeseries": "Veuillez sélectionner une timeseries dans la"
 	},
 	"legend": {
-		"first-value-at": "",
-		"header": "",
-		"last-value-at": ""
+		"first-value-at": "première valeur à",
+		"header": "légende",
+		"last-value-at": "dernière valeur à"
 	},
 	"map": {
-		"dataset-selection-hint": "",
+		"dataset-selection-hint": "Veuillez sélectionner une ou plusieurs timeseries à afficher dans le diagramme",
 		"geosearch": {
-			"placeholder": ""
+			"placeholder": "rechercher un lieu ..."
 		},
-		"header": "",
-		"loading": "",
-		"select-phenomenon": "",
-		"show-in-diagram": ""
+		"header": "carte",
+		"loading": "chargement en cours",
+		"select-phenomenon": "choisissez un polluant",
+		"show-in-diagram": "Afficher timeseries {{value}} dans le diagramme"
 	},
 	"menu": {
-		"header": "",
-		"lastUpdate": ""
+		"header": "Menu",
+		"lastUpdate": "dernière mise à jour"
 	},
 	"network": {
 		"offline": "",
 		"online": ""
 	},
 	"phenomenon-selector": {
-		"hide-some-phenomenons": "",
-		"list-all-phenomenons": ""
+		"hide-some-phenomenons": "masquer les polluants",
+		"list-all-phenomenons": "liste de tous les polluants"
 	},
 	"settings": {
-		"common": "",
-		"header": "",
-		"index-notifications": "",
+		"common": "commun",
+		"header": "paramètres",
+		"index-notifications": "avertissement sur la qualité de l'air local",
 		"local-notification": {
-			"header": "",
-			"hint": ""
+			"header": "notification locale",
+			"hint": "astuce: Votre emplacement est déterminé une fois pour l'intervalle de temps choisi, puis la qualité de l'air sera vérifiée. Pour utiliser cette fonctionnalité, il est interdit de tuer l'application."
 		},
-		"normal-notification": "",
-		"push-notification": "",
-		"select-language": "",
-		"select-local-notifiaction-period": "",
-		"sensitiv-notification": ""
+		"normal-notification": "notification de texte normale",
+		"push-notification": "notifications push",
+		"select-language": "sélectionnez une langue",
+		"select-local-notifiaction-period": "choisissez un intervalle de temps",
+		"sensitiv-notification": "notification de texte sensible"
 	},
 	"show-geometry": {
-		"header": ""
+		"header": "position de la station"
 	},
 	"start": {
-		"currently": "",
+		"currently": "actuellement: ",
 		"forecast-map": {
-			"header": ""
+			"header": "carte de prévision"
 		}
 	},
 	"style-edit": {
-		"generalize": "",
-		"header": "",
-		"zeroBasedYAxe": ""
+		"generalize": "généraliser les données",
+		"header": "changer le style de cette timeseries",
+		"zeroBasedYAxe": "les timeseries à base zéro"
 	},
 	"value-panel": {
 		"forecast": {
@@ -97,8 +97,8 @@
 		},
 		"geolocation": {
 			"disabled": {
-				"header": "",
-				"hint": ""
+				"header": "aucun emplacement trouvé pour votre appareil",
+				"hint": "Veuillez activer votre service de localisation et actualiser l'application (bouton en haut à droite de votre écran)"
 			}
 		}
 	}

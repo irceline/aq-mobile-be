@@ -46,7 +46,7 @@
 		},
 		"header": "Map",
 		"loading": "loading",
-		"select-phenomenon": "Choose phenomenon",
+		"select-phenomenon": "Choose a pollutant",
 		"show-in-diagram": "Show {{value}} timeseries in diagram"
 	},
 	"menu": {
@@ -58,8 +58,8 @@
 		"online": "Your device is online"
 	},
 	"phenomenon-selector": {
-		"hide-some-phenomenons": "Hide phenomenons",
-		"list-all-phenomenons": "List all phenomenons"
+		"hide-some-phenomenons": "Hide pollutants",
+		"list-all-phenomenons": "List all pollutants"
 	},
 	"settings": {
 		"common": "Common",
