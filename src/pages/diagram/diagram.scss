@@ -1,9 +1,20 @@
 page-diagram {
-    .diagram-view {
-        height: 100%;
-        position: relative;
+  .scroll-content {
+    display: flex;
+    flex-direction: column;
+    .diagram-container {
+      flex-grow: 1;
+      position: relative;
+      .diagram {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
     }
-    .scroll-content {
-        overflow-y: auto;
-    }
+  }
+  .scroll-content {
+    overflow-y: auto;
+  }
 }

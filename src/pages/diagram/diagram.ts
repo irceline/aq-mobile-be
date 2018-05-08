@@ -14,6 +14,7 @@ import { MapPage } from '../map/map';
 })
 export class DiagramPage {
 
+  public loading: boolean;
   public datasetIds: string[];
 
   public datasetOptions: Map<string, DatasetOptions> = new Map();

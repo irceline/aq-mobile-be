@@ -13,8 +13,13 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-  <div class="content">
+<ion-content class="cards-bg container">
+
+  <ion-card class="network">
+    <network-panel></network-panel>
+  </ion-card>
+
+  <ion-card class="map-card">
     <div class="map-wrapper">
       <div class="map">
         <n52-station-map-selector mapId="map-view" [serviceUrl]="providerUrl" [filter]="phenomenonFilter" [avoidZoomToSelection]="avoidZoomToSelection"
@@ -29,9 +34,6 @@
         <span>{{'map.loading' | translate}}...</span>
       </div>
     </div>
-  </div>
+    <mobile-geosearch-control mapId="map-view" [options]="geoSearchOptions"></mobile-geosearch-control>
+  </ion-card>
 </ion-content>
-
-<ion-footer>
-  <mobile-geosearch-control mapId="map-view" [options]="geoSearchOptions"></mobile-geosearch-control>
-</ion-footer>

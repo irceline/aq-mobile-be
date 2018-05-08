@@ -12,26 +12,29 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <div class="diagram-view" *ngIf="datasetIds.length > 0">
-    <n52-flot-timeseries-graph [datasetIds]="datasetIds" [datasetOptions]="datasetOptions" [timeInterval]="timespan" [graphOptions]="diagramOptions"
-      (onTimespanChanged)="timespanChanged($event)" (onContentLoading)="loading = $event"></n52-flot-timeseries-graph>
+<ion-content class="cards-bg container">
+  <ion-card class="network">
+    <network-panel></network-panel>
+  </ion-card>
+  <ion-card *ngIf="datasetIds.length > 0" class="diagram-container">
+    <div class="diagram">
+      <n52-flot-timeseries-graph [datasetIds]="datasetIds" [datasetOptions]="datasetOptions" [timeInterval]="timespan" [graphOptions]="diagramOptions"
+        (onTimespanChanged)="timespanChanged($event)" (onContentLoading)="loading = $event"></n52-flot-timeseries-graph>
+    </div>
     <div class="loading-overlay" *ngIf="loading">
       <ion-spinner item-start name="circles"></ion-spinner>
       <span>{{'diagram.loading' | translate}}...</span>
     </div>
-  </div>
-  <div *ngIf="datasetIds.length === 0">
-    <ion-card>
-      <ion-card-header text-center>
-          {{'diagram.no-timeseries-selected' | translate}}
-      </ion-card-header>
-      <ion-card-content>
-        <div text-center>{{'diagram.select-timeseries' | translate}}:</div>
-        <button ion-button block outline (click)="openMapSelection()">{{'map.header' | translate}}</button>
-      </ion-card-content>
-    </ion-card>
-  </div>
+  </ion-card>
+  <ion-card *ngIf="datasetIds.length === 0">
+    <ion-card-header text-center>
+      {{'diagram.no-timeseries-selected' | translate}}
+    </ion-card-header>
+    <ion-card-content>
+      <div text-center>{{'diagram.select-timeseries' | translate}}:</div>
+      <button ion-button block outline (click)="openMapSelection()">{{'map.header' | translate}}</button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
 
 <ion-footer>
