@@ -90,6 +90,11 @@
 		"zeroBasedYAxe": "Zeitreihe null-basiert"
 	},
 	"value-panel": {
+		"forecast": {
+			"dayAfterTomorrow": "Übermorgen",
+			"tomorrow": "Morgen",
+			"twoDaysLater": "Zwei Tage später"
+		},
 		"geolocation": {
 			"disabled": {
 				"header": "Kein Standort gefunden",

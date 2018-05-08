@@ -90,6 +90,11 @@
 		"zeroBasedYAxe": "Timeseries zero based"
 	},
 	"value-panel": {
+		"forecast": {
+			"dayAfterTomorrow": "Day after tomorrow",
+			"tomorrow": "Tomorrow",
+			"twoDaysLater": "Two days later"
+		},
 		"geolocation": {
 			"disabled": {
 				"header": "No location found for your device",

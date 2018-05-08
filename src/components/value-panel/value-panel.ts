@@ -3,7 +3,9 @@ import { DatasetApiInterface, FirstLastValue, SettingsService, Station } from '@
 import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 import { Platform } from 'ionic-angular';
+import moment from 'moment';
 
+import { ForecastValueProvider } from '../../providers/forecast-value/forecast-value';
 import { IrcelineSettingsProvider } from '../../providers/irceline-settings/irceline-settings';
 import { ModelledValueProvider } from '../../providers/modelled-value/modelled-value';
 import { RefreshHandler } from '../../providers/refresh/refresh';
@@ -17,6 +19,9 @@ export class ValuePanelComponent {
 
   public position: Geoposition;
   public modelledValue: number;
+  public tomorrowValue: number;
+  public dayAfterTomorrowValue: number;
+  public twoDaysLaterValue: number;
   public lastStationaryValue: FirstLastValue;
   public uom: string;
   public loadingModelledValue: boolean = true;
@@ -27,6 +32,7 @@ export class ValuePanelComponent {
 
   constructor(
     private modelledService: ModelledValueProvider,
+    private forecastService: ForecastValueProvider,
     private geolocate: Geolocation,
     private backGeo: BackgroundGeolocation,
     private api: DatasetApiInterface,
@@ -72,6 +78,7 @@ export class ValuePanelComponent {
           const latitude = this.position.coords.latitude;
           const longitude = this.position.coords.longitude;
           this.determineModelledValue(latitude, longitude);
+          this.determineForecastValue(latitude, longitude);
           this.determineNextStationValue(latitude, longitude);
         }
       }).catch((error) => console.log(JSON.stringify(error)));
@@ -80,13 +87,33 @@ export class ValuePanelComponent {
 
   private determineModelledValue(latitude: number, longitude: number) {
     this.irceline.getSettings(false).subscribe(ircelineValues => {
-      this.modelledService.getIndex(latitude, longitude, ircelineValues.lastupdate).subscribe(value => {
+      this.modelledService.getValue(latitude, longitude, ircelineValues.lastupdate).subscribe(value => {
         this.modelledValue = value;
       }, error => {
         this.loadingModelledValue = false;
       }, () => {
         this.loadingModelledValue = false;
       });
+    })
+  }
+
+  private determineForecastValue(latitude: number, longitude: number) {
+    this.irceline.getSettings(false).subscribe(ircelineValues => {
+      const tomorrow = moment().add(1, 'day').toDate();
+      this.forecastService.getValue(latitude, longitude, tomorrow).subscribe(
+        value => this.tomorrowValue = value,
+        (error) => { }
+      );
+      const dayAfterTomorrow = moment().add(2, 'day').toDate();
+      this.forecastService.getValue(latitude, longitude, dayAfterTomorrow).subscribe(
+        value => this.dayAfterTomorrowValue = value,
+        (error) => { }
+      );
+      const twoDaysLater = moment().add(3, 'day').toDate();
+      this.forecastService.getValue(latitude, longitude, twoDaysLater).subscribe(
+        value => this.twoDaysLaterValue = value,
+        (error) => { }
+      );
     })
   }
 

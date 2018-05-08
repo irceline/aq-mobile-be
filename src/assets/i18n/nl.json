@@ -90,6 +90,11 @@
 		"zeroBasedYAxe": "tijdsreeks nullgebaseerd"
 	},
 	"value-panel": {
+		"forecast": {
+			"dayAfterTomorrow": "",
+			"tomorrow": "",
+			"twoDaysLater": ""
+		},
 		"geolocation": {
 			"disabled": {
 				"header": "geen locatie gevonden voor u toestel",

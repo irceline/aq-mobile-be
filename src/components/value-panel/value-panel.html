@@ -9,6 +9,12 @@
     <h2 *ngIf="!loadingModelledValue && !modelledValue">No modelled value calculated</h2>
     <p>Latitude: {{position?.coords?.latitude | number:'1.1-6'}}, Longitude: {{position?.coords?.longitude | number:'1.1-6'}}</p>
   </ion-item>
+  <ion-item text-center *ngIf="!geolocationDisabled && (tomorrowValue || dayAfterTomorrowValue || twoDaysLaterValue)">
+    <h2>Forecast values:</h2>
+    <p *ngIf="tomorrowValue">{{'value-panel.forecast.tomorrow' | translate}} {{tomorrowValue | number:'1.1-3'}} {{uom}}</p>
+    <p *ngIf="dayAfterTomorrowValue">{{'value-panel.forecast.dayAfterTomorrow' | translate}} {{dayAfterTomorrowValue | number:'1.1-3'}} {{uom}}</p>
+    <p *ngIf="twoDaysLaterValue">{{'value-panel.forecast.twoDaysLater' | translate}} {{twoDaysLaterValue | number:'1.1-3'}} {{uom}}</p>
+  </ion-item>
   <ion-item text-center *ngIf="!geolocationDisabled">
     <h2 *ngIf="loadingStationValue">loading next station value...</h2>
     <h2 *ngIf="!loadingStationValue && nearestStation">Nearest station: {{nearestStation.properties.label}}</h2>
