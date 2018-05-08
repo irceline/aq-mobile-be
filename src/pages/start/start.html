@@ -11,10 +11,8 @@
 </ion-header>
 
 <ion-content class="cards-bg">
-  <ion-card class="last-update-card">
-    <ion-card-content>
-      <div text-center>{{'menu.lastUpdate' | translate}}: {{lastupdate | date: 'medium'}}</div>
-    </ion-card-content>
+  <ion-card>
+    <network-panel></network-panel>
   </ion-card>
 
   <ion-card class="index-card">

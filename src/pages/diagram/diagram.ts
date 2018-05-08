@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { DatasetOptions, Timespan } from '@helgoland/core';
 import { PlotOptions } from '@helgoland/flot';
-import { ModalController } from 'ionic-angular';
+import { ModalController, NavController } from 'ionic-angular';
 
 import { ModalLegendComponent } from '../../components/modal-legend/modal-legend';
 import { ModalTimespanEditorComponent } from '../../components/modal-timespan-editor/modal-timespan-editor';
 import { TimeseriesService } from '../../providers/timeseries/timeseries.service';
+import { MapPage } from '../map/map';
 
 @Component({
   selector: 'page-diagram',
@@ -13,6 +14,7 @@ import { TimeseriesService } from '../../providers/timeseries/timeseries.service
 })
 export class DiagramPage {
 
+  public loading: boolean;
   public datasetIds: string[];
 
   public datasetOptions: Map<string, DatasetOptions> = new Map();
@@ -41,7 +43,8 @@ export class DiagramPage {
 
   constructor(
     private timeseriesSrvc: TimeseriesService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private nav: NavController
   ) {
     this.datasetIds = this.timeseriesSrvc.datasetIds;
     this.datasetOptions = this.timeseriesSrvc.datasetOptions;
@@ -69,6 +72,10 @@ export class DiagramPage {
       if (data instanceof Timespan) this.timespanChanged(data);
     })
     modal.present();
+  }
+
+  public openMapSelection() {
+    this.nav.push(MapPage);
   }
 
 }

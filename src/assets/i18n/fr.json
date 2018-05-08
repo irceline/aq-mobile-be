@@ -53,6 +53,10 @@
 		"header": "Menu",
 		"lastUpdate": "dernière mise à jour"
 	},
+	"network": {
+		"offline": "",
+		"online": ""
+	},
 	"phenomenon-selector": {
 		"hide-some-phenomenons": "masquer les polluants",
 		"list-all-phenomenons": "liste de tous les polluants"
@@ -86,6 +90,11 @@
 		"zeroBasedYAxe": "les timeseries à base zéro"
 	},
 	"value-panel": {
+		"forecast": {
+			"dayAfterTomorrow": "",
+			"tomorrow": "",
+			"twoDaysLater": ""
+		},
 		"geolocation": {
 			"disabled": {
 				"header": "aucun emplacement trouvé pour votre appareil",

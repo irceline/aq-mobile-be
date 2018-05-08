@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from '@helgoland/core';
+import moment from 'moment';
 import { Observable } from 'rxjs/Observable';
 
 import { ValueProvider } from '../value-provider';
 
 @Injectable()
-export class ModelledValueProvider extends ValueProvider {
+export class ForecastValueProvider extends ValueProvider {
 
   constructor(
     public http: HttpService
@@ -13,23 +14,21 @@ export class ModelledValueProvider extends ValueProvider {
     super(http);
   }
 
-  // TODO add layerType (NO2, ...)
   public getValue(latitude: number, longitude: number, time: Date): Observable<number> {
-    const url = 'http://geo.irceline.be/rioifdm/wms';
+    const url = 'http://geo.irceline.be/forecast/wms';
     const params = {
       service: 'WMS',
       request: 'GetFeatureInfo',
       version: '1.1.1',
-      layers: 'rioifdm:no2_hmean',
-      transparent: 'true',
+      layers: 'no2_maxhmean',
       info_format: 'application/json',
       tiled: 'true',
-      time: time.toISOString(), // '2018-03-22T08:00:00.000Z',
+      time: moment(time).format('YYYY-MM-DD'),
       width: '1',
       height: '1',
       srs: 'EPSG:4326',
       bbox: this.calculateRequestBbox(latitude, longitude),
-      query_layers: 'rioifdm:no2_hmean',
+      query_layers: 'no2_maxhmean',
       X: '1',
       Y: '1'
     };

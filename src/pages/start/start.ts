@@ -16,8 +16,6 @@ import { MapPage } from '../map/map';
 })
 export class StartPage {
 
-  public lastupdate: Date;
-
   public providerUrl: string;
   public loading: boolean = true;
   public phenomenonFilter: ParameterFilter;
@@ -57,16 +55,10 @@ export class StartPage {
 
   private loadIrcelineSettings(refresh = false) {
     this.ircelineSettings.getSettings(refresh).subscribe(ircelineSettings => {
-      this.lastupdate = ircelineSettings.lastupdate;
       this.api.getPhenomenon(ircelineSettings.top_pollutant_today, this.providerUrl).subscribe(phenomenon => this.setPhenomenon(phenomenon));
       this.overlayMaps = this.layerGen.getLayersForPhenomenon(ircelineSettings.top_pollutant_today, ircelineSettings.lastupdate);
     });
   }
-
-  // public onMapLoading(loading: boolean) {
-  //   this.loading = loading;
-  //   this.cdr.detectChanges();
-  // }
 
   public navigateToMap() {
     this.nav.push(MapPage);

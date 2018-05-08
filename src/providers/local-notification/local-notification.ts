@@ -122,7 +122,7 @@ export class LocalNotificationsProvider {
 
   private requestModelledValue(location: BackgroundGeolocationResponse) {
     this.ircelineSettings.getSettings(false).subscribe(ircelineConfig => {
-      this.modelledValue.getIndex(location.latitude, location.longitude, ircelineConfig.lastupdate)
+      this.modelledValue.getValue(location.latitude, location.longitude, ircelineConfig.lastupdate)
         .subscribe(
           value => {
             this.notifyValue(new Date(), location, value);

@@ -26,6 +26,7 @@ import { ModalGeometryViewerComponent } from './modal-geometry-viewer/modal-geom
 import { ModalLegendComponent } from './modal-legend/modal-legend';
 import { ModalOptionsEditorComponent } from './modal-options-editor/modal-options-editor';
 import { ModalTimespanEditorComponent } from './modal-timespan-editor/modal-timespan-editor';
+import { NetworkPanelComponent } from './network-panel/network-panel';
 import { PhenomenonSelectorPopoverComponent } from './phenomenon-selector-popover/phenomenon-selector-popover';
 import { PushNotificationComponent } from './push-notification/push-notification';
 import { RefreshButtonComponent } from './refresh-button/refresh-button';
@@ -54,7 +55,8 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		LanguageSelectorComponent,
 		ValuePanelComponent,
 		LocatedValueNotificationComponent,
-		RefreshButtonComponent
+		RefreshButtonComponent,
+		NetworkPanelComponent
 	],
 	imports: [
 		HelgolandMapViewModule,
@@ -87,7 +89,8 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		LanguageSelectorComponent,
 		ValuePanelComponent,
 		LocatedValueNotificationComponent,
-		RefreshButtonComponent
+		RefreshButtonComponent,
+		NetworkPanelComponent
 	],
 	entryComponents: [
 		StationSelectorComponent,

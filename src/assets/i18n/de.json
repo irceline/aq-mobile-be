@@ -53,6 +53,10 @@
 		"header": "Menü",
 		"lastUpdate": "Letztes Update"
 	},
+	"network": {
+		"offline": "Dein Handy ist offline",
+		"online": "Dein Handy ist online"
+	},
 	"phenomenon-selector": {
 		"hide-some-phenomenons": "Verstecke Phänomene",
 		"list-all-phenomenons": "Zeige alle Phänomene"
@@ -86,6 +90,11 @@
 		"zeroBasedYAxe": "Zeitreihe null-basiert"
 	},
 	"value-panel": {
+		"forecast": {
+			"dayAfterTomorrow": "Übermorgen",
+			"tomorrow": "Morgen",
+			"twoDaysLater": "Zwei Tage später"
+		},
 		"geolocation": {
 			"disabled": {
 				"header": "Kein Standort gefunden",

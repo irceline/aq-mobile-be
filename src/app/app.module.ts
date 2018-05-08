@@ -14,6 +14,7 @@ import { BackgroundMode } from '@ionic-native/background-mode';
 import { FCM } from '@ionic-native/fcm';
 import { Geolocation } from '@ionic-native/geolocation';
 import { LocalNotifications } from '@ionic-native/local-notifications';
+import { Network } from '@ionic-native/network';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -30,6 +31,7 @@ import { PushNotificationSettingsComponent } from '../pages/settings/push-notifi
 import { SettingsPage } from '../pages/settings/settings';
 import { StartPage } from '../pages/start/start';
 import { AirQualityIndexProvider } from '../providers/air-quality-index/air-quality-index';
+import { ForecastValueProvider } from '../providers/forecast-value/forecast-value';
 import { IrcelineSettingsProvider } from '../providers/irceline-settings/irceline-settings';
 import { LayerGeneratorService } from '../providers/layer-generator/layer-generator';
 import { LocalNotificationsProvider } from '../providers/local-notification/local-notification';
@@ -91,12 +93,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     BackgroundGeolocation,
     BackgroundMode,
     FCM,
+    ForecastValueProvider,
     Geolocation,
     IrcelineSettingsProvider,
     LayerGeneratorService,
     LocalNotifications,
     LocalNotificationsProvider,
     ModelledValueProvider,
+    Network,
     NotificationPresenter,
     PushNotificationsProvider,
     RefreshHandler,
