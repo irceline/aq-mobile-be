@@ -3,6 +3,7 @@ import { Network } from '@ionic-native/network';
 import { Subscription } from 'rxjs/Subscription';
 
 import { IrcelineSettingsProvider } from '../../providers/irceline-settings/irceline-settings';
+import { Platform } from 'ionic-angular';
 
 @Component({
   selector: 'network-panel',
@@ -18,18 +19,21 @@ export class NetworkPanelComponent {
 
   constructor(
     private ircelineSettings: IrcelineSettingsProvider,
-    private network: Network
+    private network: Network,
+    private platform: Platform
   ) {
 
-    this.ircelineSettings.getSettings(false).subscribe(ircelineSettings => {
-      this.lastupdate = ircelineSettings.lastupdate;
-    });
-
-    if (this.network.type === 'none') {
-      this.offline = true;
+    if (this.platform.is('cordova')) {
+      this.ircelineSettings.getSettings(false).subscribe(ircelineSettings => {
+        this.lastupdate = ircelineSettings.lastupdate;
+      });
+  
+      if (this.network.type === 'none') {
+        this.offline = true;
+      }
+  
+      this.networkChange = this.network.onchange().subscribe(() => this.updateNetworkStatus());
     }
-
-    this.networkChange = this.network.onchange().subscribe(() => this.updateNetworkStatus());
   }
 
   private updateNetworkStatus() {
@@ -50,7 +54,9 @@ export class NetworkPanelComponent {
   }
 
   public ngOnDestroy() {
-    this.networkChange.unsubscribe();
+    if (this.networkChange) {
+      this.networkChange.unsubscribe();
+    }
   }
 
 }
