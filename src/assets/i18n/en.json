@@ -46,7 +46,7 @@
 		},
 		"header": "Map",
 		"loading": "loading",
-		"select-phenomenon": "Choose phenomenon",
+		"select-phenomenon": "Choose a pollutant",
 		"show-in-diagram": "Show {{value}} timeseries in diagram"
 	},
 	"menu": {
