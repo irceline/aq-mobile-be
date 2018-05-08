@@ -54,8 +54,8 @@
 		"lastUpdate": "Last update"
 	},
 	"phenomenon-selector": {
-		"hide-some-phenomenons": "Hide phenomenons",
-		"list-all-phenomenons": "List all phenomenons"
+		"hide-some-phenomenons": "Hide pollutants",
+		"list-all-phenomenons": "List all pollutants"
 	},
 	"settings": {
 		"common": "Common",
