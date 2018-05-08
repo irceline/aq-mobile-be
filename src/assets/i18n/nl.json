@@ -53,6 +53,10 @@
 		"header": "Menu",
 		"lastUpdate": "laatste aktualisatie"
 	},
+	"network": {
+		"offline": "",
+		"online": ""
+	},
 	"phenomenon-selector": {
 		"hide-some-phenomenons": "verberg polluenten",
 		"list-all-phenomenons": "toon alle polluenten"

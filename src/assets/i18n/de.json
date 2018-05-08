@@ -53,6 +53,10 @@
 		"header": "Menü",
 		"lastUpdate": "Letztes Update"
 	},
+	"network": {
+		"offline": "Dein Handy ist offline",
+		"online": "Dein Handy ist online"
+	},
 	"phenomenon-selector": {
 		"hide-some-phenomenons": "Verstecke Phänomene",
 		"list-all-phenomenons": "Zeige alle Phänomene"

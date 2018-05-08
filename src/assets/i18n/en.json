@@ -53,6 +53,10 @@
 		"header": "Menu",
 		"lastUpdate": "Last update"
 	},
+	"network": {
+		"offline": "Your device is offline",
+		"online": "Your device is online"
+	},
 	"phenomenon-selector": {
 		"hide-some-phenomenons": "Hide phenomenons",
 		"list-all-phenomenons": "List all phenomenons"

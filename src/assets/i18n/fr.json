@@ -53,6 +53,10 @@
 		"header": "",
 		"lastUpdate": ""
 	},
+	"network": {
+		"offline": "",
+		"online": ""
+	},
 	"phenomenon-selector": {
 		"hide-some-phenomenons": "",
 		"list-all-phenomenons": ""

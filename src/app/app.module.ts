@@ -14,6 +14,7 @@ import { BackgroundMode } from '@ionic-native/background-mode';
 import { FCM } from '@ionic-native/fcm';
 import { Geolocation } from '@ionic-native/geolocation';
 import { LocalNotifications } from '@ionic-native/local-notifications';
+import { Network } from '@ionic-native/network';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -97,6 +98,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     LocalNotifications,
     LocalNotificationsProvider,
     ModelledValueProvider,
+    Network,
     NotificationPresenter,
     PushNotificationsProvider,
     RefreshHandler,
