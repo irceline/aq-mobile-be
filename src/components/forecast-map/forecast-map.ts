@@ -23,9 +23,10 @@ export class ForecastMapComponent implements AfterViewInit {
     }).addTo(this.map);
 
     L.tileLayer.wms("http://geo.irceline.be/forecast/wms", {
-		layers: 'belaqi',
+		layers: 'o3_maxhmean',
     transparent: true,
     format: 'image/png',
+    time: '2018-05-08',
     opacity: 0.7
     }).addTo(this.map);
   }
