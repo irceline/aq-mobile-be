@@ -18,7 +18,6 @@
   <ion-card class="index-card">
     <ion-card-content>
       <value-panel></value-panel>
-      <air-quality-index (onBoundsUpdated)="setBounds($event)"></air-quality-index>
     </ion-card-content>
   </ion-card>
 
@@ -39,6 +38,12 @@
           <span>{{'map.loading' | translate}}...</span>
         </div> -->
       </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="index-card">
+    <ion-card-content>
+      <air-quality-index (onBoundsUpdated)="setBounds($event)"></air-quality-index>
     </ion-card-content>
   </ion-card>
 
