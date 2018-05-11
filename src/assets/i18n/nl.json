@@ -54,8 +54,8 @@
 		"lastUpdate": "laatste actualisatie"
 	},
 	"network": {
-		"offline": "",
-		"online": ""
+		"offline": "U toestel offline",
+		"online": "U toestel is online"
 	},
 	"phenomenon-selector": {
 		"hide-some-phenomenons": "verberg polluenten",
@@ -67,7 +67,7 @@
 		"index-notifications": "locale luchtkwaliteitsalert",
 		"local-notification": {
 			"header": "Lokaal bericht",
-			"hint": ""
+			"hint": "Tip: U locatie wordt maar een keer bepaald voor het gekozen tijdsinterval. Om deze functionaliteit te kunnen gebruiken, mag de app niet uitgezet worden."
 		},
 		"normal-notification": "Normale tekst berichten",
 		"push-notification": "Push berichten",
@@ -91,9 +91,9 @@
 	},
 	"value-panel": {
 		"forecast": {
-			"dayAfterTomorrow": "",
-			"tomorrow": "",
-			"twoDaysLater": ""
+			"dayAfterTomorrow": "overmorgen",
+			"tomorrow": "morgen",
+			"twoDaysLater": "twee dagen later"
 		},
 		"geolocation": {
 			"disabled": {
