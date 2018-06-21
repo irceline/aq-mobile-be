@@ -44,7 +44,7 @@ export class MapPage {
     private layerGen: LayerGeneratorService
   ) {
     const settings = this.settingsSrvc.getSettings();
-    this.providerUrl = settings.restApiUrls[0];
+    this.providerUrl = settings.datasetApis[0].url;
     this.clusterStations = settings.clusterStationsOnMap;
     this.fitBounds = settings.defaultBbox;
     this.geoSearchOptions = { countrycodes: settings.geoSearchContryCodes };

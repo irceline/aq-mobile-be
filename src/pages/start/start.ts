@@ -42,7 +42,7 @@ export class StartPage {
     private refresher: RefreshHandler
   ) {
     const settings = this.settingsSrvc.getSettings();
-    this.providerUrl = settings.restApiUrls[0];
+    this.providerUrl = settings.datasetApis[0].url;
     this.clusterStations = settings.clusterStationsOnMap;
     this.fitBounds = settings.defaultBbox;
 

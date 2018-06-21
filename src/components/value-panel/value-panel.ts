@@ -118,7 +118,7 @@ export class ValuePanelComponent {
   }
 
   private determineNextStationValue(latitude: number, longitude: number) {
-    const url = this.settingsSrvc.getSettings().restApiUrls[0];
+    const url = this.settingsSrvc.getSettings().datasetApis[0].url;
     const phenomenonId = '8';
     this.api.getStations(url, {
       phenomenon: phenomenonId,

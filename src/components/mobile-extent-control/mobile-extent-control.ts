@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ExtentControlComponent } from '@helgoland/map/control';
+import { ExtentControlComponent } from '@helgoland/map';
 
 @Component({
   selector: 'mobile-extent-control',

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { GeosearchControlComponent } from '@helgoland/map/control';
+import { GeosearchControlComponent } from '@helgoland/map';
 
 @Component({
   selector: 'mobile-geosearch-control',

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TimeseriesEntryComponent } from '@helgoland/depiction/datasetlist';
+import { TimeseriesEntryComponent } from '@helgoland/depiction';
 
 @Component({
   selector: 'mobile-timeseries-entry',

@@ -23,10 +23,11 @@ export class NetworkPanelComponent {
     private platform: Platform
   ) {
 
+    this.ircelineSettings.getSettings(false).subscribe(ircelineSettings => {
+      this.lastupdate = ircelineSettings.lastupdate;
+    });
+
     if (this.platform.is('cordova')) {
-      this.ircelineSettings.getSettings(false).subscribe(ircelineSettings => {
-        this.lastupdate = ircelineSettings.lastupdate;
-      });
 
       if (this.network.type === 'none') {
         this.offline = true;
