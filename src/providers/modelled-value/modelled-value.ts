@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from '@helgoland/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { ValueProvider } from '../value-provider';
 
@@ -33,8 +34,8 @@ export class ModelledValueProvider extends ValueProvider {
       X: '1',
       Y: '1'
     };
-    return this.http.client().get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url, { params })
-      .map(res => {
+    return this.http.client().get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url, { params }).pipe(
+      map(res => {
         if (res && res.features && res.features.length === 1) {
           if (res.features[0].properties['GRAY_INDEX']) {
             return res.features[0].properties['GRAY_INDEX'];
@@ -43,6 +44,7 @@ export class ModelledValueProvider extends ValueProvider {
         } else {
           throw new Error('No value returned');
         }
-      });
+      })
+    );
   }
 }

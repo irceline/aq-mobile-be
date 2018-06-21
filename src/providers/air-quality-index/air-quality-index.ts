@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpService, SettingsService } from '@helgoland/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { MobileSettings } from '../settings/settings';
 
@@ -42,9 +43,11 @@ export class AirQualityIndexProvider {
           fdays: '3'
         }
       }
-    ).map((res) => {
-      return res.entity;
-    })
+    ).pipe(
+      map((res) => {
+        return res.entity;
+      })
+    )
   }
 
 }

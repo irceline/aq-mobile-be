@@ -1,5 +1,5 @@
 import { HttpService } from '@helgoland/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 export abstract class ValueProvider {
 

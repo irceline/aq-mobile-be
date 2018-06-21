@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Network } from '@ionic-native/network';
-import { Subscription } from 'rxjs/Subscription';
+import { Platform } from 'ionic-angular';
+import { Subscription } from 'rxjs';
 
 import { IrcelineSettingsProvider } from '../../providers/irceline-settings/irceline-settings';
-import { Platform } from 'ionic-angular';
 
 @Component({
   selector: 'network-panel',
@@ -27,11 +27,11 @@ export class NetworkPanelComponent {
       this.ircelineSettings.getSettings(false).subscribe(ircelineSettings => {
         this.lastupdate = ircelineSettings.lastupdate;
       });
-  
+
       if (this.network.type === 'none') {
         this.offline = true;
       }
-  
+
       this.networkChange = this.network.onchange().subscribe(() => this.updateNetworkStatus());
     }
   }
