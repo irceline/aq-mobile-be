@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DatasetApiInterface, FirstLastValue, SettingsService, Station } from '@helgoland/core';
 import { Geoposition } from '@ionic-native/geolocation';
 
+import { LocateProvider } from '../../providers/locate/locate';
 import { MobileSettings } from '../../providers/settings/settings';
 
 interface PanelEntry {
@@ -13,7 +14,7 @@ interface PanelEntry {
   selector: '[closest-measuring-station-panel-entry]',
   templateUrl: 'closest-measuring-station-panel-entry.html'
 })
-export class ClosestMeasuringStationPanelEntryComponent implements OnChanges {
+export class ClosestMeasuringStationPanelEntryComponent {
 
   private nearestStation: Station;
   public stationDistance: number;
@@ -24,28 +25,22 @@ export class ClosestMeasuringStationPanelEntryComponent implements OnChanges {
   @Input()
   public entry: PanelEntry;
 
-  @Input()
-  public position: Geoposition;
-
   @Output()
   public onClicked: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(
     private settingsSrvc: SettingsService<MobileSettings>,
-    private api: DatasetApiInterface
-  ) { }
-
-  public ngOnChanges(changes: SimpleChanges) {
-    if (changes.position && this.position) {
-      this.determineNextStationValue()
-    }
+    private api: DatasetApiInterface,
+    private locate: LocateProvider
+  ) {
+    this.locate.onPositionUpdate.subscribe(pos => this.determineNextStationValue(pos));
   }
 
   public select() {
     this.onClicked.emit(this.entry.id);
   }
 
-  private determineNextStationValue() {
+  private determineNextStationValue(position: Geoposition) {
     const url = this.settingsSrvc.getSettings().datasetApis[0].url;
     const phenomenonId = this.entry.id;
     this.api.getStations(url, {
@@ -56,7 +51,7 @@ export class ClosestMeasuringStationPanelEntryComponent implements OnChanges {
       stations.forEach(station => {
         const stationLat = station.geometry.coordinates[1];
         const stationLon = station.geometry.coordinates[0];
-        const stationDis = this.distanceInKmBetweenEarthCoordinates(this.position.coords.latitude, this.position.coords.longitude, stationLat, stationLon);
+        const stationDis = this.distanceInKmBetweenEarthCoordinates(position.coords.latitude, position.coords.longitude, stationLat, stationLon);
         if (stationDis < this.stationDistance) {
           this.stationDistance = stationDis;
           this.nearestStation = station;

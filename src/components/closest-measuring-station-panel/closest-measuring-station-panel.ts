@@ -1,6 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Geolocation, Geoposition } from '@ionic-native/geolocation';
-import { Platform } from 'ionic-angular/platform/platform';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { Geoposition } from '@ionic-native/geolocation';
 
 interface PanelEntry {
   label: string;
@@ -11,7 +10,7 @@ interface PanelEntry {
   selector: 'closest-measuring-station-panel',
   templateUrl: 'closest-measuring-station-panel.html'
 })
-export class ClosestMeasuringStationPanelComponent implements OnInit {
+export class ClosestMeasuringStationPanelComponent {
 
   @Output()
   public onSelect: EventEmitter<string> = new EventEmitter();
@@ -41,45 +40,10 @@ export class ClosestMeasuringStationPanelComponent implements OnInit {
     }
   ];
 
-  constructor(
-    private platform: Platform,
-    private geolocate: Geolocation
-  ) { }
-
-  public ngOnInit(): void {
-    this.determinePosition();
-  }
+  constructor() { }
 
   public select(id: string) {
     this.onSelect.emit(id);
-  }
-
-  private determinePosition() {
-    this.platform.ready().then(() => {
-      this.geolocate.getCurrentPosition({
-        timeout: 10000,
-        enableHighAccuracy: false,
-        maximumAge: 60000
-      }).then(res => {
-        this.position = res;
-        // const latitude = 50.863892;
-        // const longitude = 4.6337528;
-        // const latitude = 50 + Math.random();
-        // const longitude = 4 + Math.random();
-        // this.position = {
-        //   coords: {
-        //     latitude: latitude,
-        //     longitude: longitude,
-        //     accuracy: 0,
-        //     altitude: 0,
-        //     altitudeAccuracy: 0,
-        //     heading: 0,
-        //     speed: 0
-        //   },
-        //   timestamp: 1234
-        // }
-      }).catch((error) => console.log(JSON.stringify(error)));
-    })
   }
 
 }

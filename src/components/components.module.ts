@@ -9,6 +9,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { IonicModule } from 'ionic-angular';
 
 import { AirQualityIndexComponent } from './air-quality-index/air-quality-index';
+import { AirQualityLocationPanelComponent } from './air-quality-location-panel/air-quality-location-panel';
 import { ClosestMeasuringStationPanelComponent } from './closest-measuring-station-panel/closest-measuring-station-panel';
 import {
 	ClosestMeasuringStationPanelEntryComponent,
@@ -62,7 +63,8 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		RefreshButtonComponent,
 		NetworkPanelComponent,
 		ClosestMeasuringStationPanelComponent,
-		ClosestMeasuringStationPanelEntryComponent
+		ClosestMeasuringStationPanelEntryComponent,
+		AirQualityLocationPanelComponent
 	],
 	imports: [
 		HelgolandMapViewModule,
@@ -98,7 +100,8 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		RefreshButtonComponent,
 		NetworkPanelComponent,
 		ClosestMeasuringStationPanelComponent,
-		ClosestMeasuringStationPanelEntryComponent
+		ClosestMeasuringStationPanelEntryComponent,
+		AirQualityLocationPanelComponent
 	],
 	entryComponents: [
 		StationSelectorComponent,

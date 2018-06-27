@@ -1,0 +1,15 @@
+<div text-center ngClass="aqIndex-{{value}}">
+  <div *ngIf="loading">
+    <div>Loading BelAqi for your location</div>
+    <ion-spinner></ion-spinner>
+  </div>
+  <div *ngIf="!loading && !error">
+    <div class="location">For your location</div>
+    <div class="value">Fairly good ({{value}})</div>
+    <div class="small">modelled value for your location</div>
+    <div class="small">{{time | date: 'medium'}}</div>
+  </div>
+  <div *ngIf="error" class="aqIndex-9">
+    Could not get a Index for you location
+  </div>
+</div>

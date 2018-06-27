@@ -1,0 +1,39 @@
+air-quality-location-panel {
+  .aqIndex-1 {
+    background-color: rgb(43, 5, 255);
+    color: white;
+  }
+  .aqIndex-2 {
+    background-color: rgb(85, 154, 255);
+  }
+  .aqIndex-3 {
+    background-color: rgb(73, 154, 4);
+  }
+  .aqIndex-4 {
+    background-color: rgb(125, 254, 11);
+  }
+  .aqIndex-5 {
+    background-color: rgb(252, 255, 1);
+  }
+  .aqIndex-6 {
+    background-color: rgb(240, 187, 5);
+  }
+  .aqIndex-7 {
+    background-color: rgb(230, 98, 8);
+  }
+  .aqIndex-8 {
+    background-color: rgb(153, 31, 0);
+    color: white;
+  }
+  .aqIndex-9 {
+    background-color: rgb(102, 17, 0);
+    color: white;
+  }
+  .location,
+  .value {
+    font-size: 120%;
+  }
+  .small {
+    font-size: 80%;
+  }
+}
