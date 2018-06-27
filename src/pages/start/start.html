@@ -6,7 +6,6 @@
     <ion-buttons end>
       <refresh-button></refresh-button>
     </ion-buttons>
-    <!-- <ion-title>{{'map.header' | translate}}</ion-title> -->
   </ion-navbar>
 </ion-header>
 
@@ -15,39 +14,44 @@
     <network-panel></network-panel>
   </ion-card>
 
-  <ion-card class="index-card">
+  <ion-card padding>
+    <b>27/06 - SMOG-alarm: </b> Hoge fijnstof concentraties - stook geen hout
+  </ion-card>
+
+  <!-- <ion-card class="index-card">
     <ion-card-content>
       <value-panel></value-panel>
     </ion-card-content>
-  </ion-card>
+  </ion-card> -->
 
-  <ion-card class="map-card" (click)="navigateToMap()">
-    <ion-card-header>
+  <ion-card class="map-card">
+    <!-- <ion-card-header>
       <span>{{'start.currently' | translate}}</span>
       <span *ngIf="selectedPhenomenon">{{selectedPhenomenon.label}}</span>
-    </ion-card-header>
+    </ion-card-header> -->
     <ion-card-content>
       <div class="map">
-        <!-- <n52-station-map-selector *ngIf="selectedPhenomenon" mapId="start-view" [serviceUrl]="providerUrl" [filter]="phenomenonFilter"
-          [overlayMaps]="overlayMaps" [fitBounds]="fitBounds" [statusIntervals]="true" [cluster]="clusterStations" [mapOptions]="mapOptions"
-          [avoidZoomToSelection]="avoidZoomToSelection" [layerControlOptions]="layerControlOptions" (onContentLoading)="onMapLoading($event)"></n52-station-map-selector> -->
         <n52-geometry-map-viewer mapId="start-view" [overlayMaps]="overlayMaps" [fitBounds]="fitBounds" [mapOptions]="mapOptions"
           [layerControlOptions]="layerControlOptions"></n52-geometry-map-viewer>
-        <!-- <div class="loading-overlay" *ngIf="loading">
-          <ion-spinner item-start name="circles"></ion-spinner>
-          <span>{{'map.loading' | translate}}...</span>
-        </div> -->
       </div>
     </ion-card-content>
   </ion-card>
 
-  <ion-card class="index-card">
-    <ion-card-content>
-      <air-quality-index (onBoundsUpdated)="setBounds($event)"></air-quality-index>
-    </ion-card-content>
+  <ion-card>
+    <img src="../../assets/imgs/diagram.png" alt="">
   </ion-card>
 
   <ion-card>
+    <closest-measuring-station-panel (onSelect)="navigateToMap($event)"></closest-measuring-station-panel>
+  </ion-card>
+
+  <!-- <ion-card class="index-card">
+    <ion-card-content>
+      <air-quality-index (onBoundsUpdated)="setBounds($event)"></air-quality-index>
+    </ion-card-content>
+  </ion-card> -->
+
+  <!-- <ion-card>
     <ion-card-header text-center>
       {{'start.forecast-map.header' | translate}}
     </ion-card-header>
@@ -56,6 +60,6 @@
         <forecast-map></forecast-map>
       </div>
     </ion-card-content>
-  </ion-card>
+  </ion-card> -->
 
 </ion-content>

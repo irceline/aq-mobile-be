@@ -1,0 +1,6 @@
+<div text-center (click)="select()" class="entry">
+  <div class="phenomenon-label">{{entry.label}}</div>
+  <div *ngIf="!loadingStationValue">{{lastStationaryValue?.value | number:'1.1-3'}}{{uom}}</div>
+  <div *ngIf="!loadingStationValue">{{stationDistance | number:'1.0-2'}}km</div>
+  <div *ngIf="loadingStationValue"><ion-spinner></ion-spinner></div>
+</div>

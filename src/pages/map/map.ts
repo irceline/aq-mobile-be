@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { DatasetApiInterface, ParameterFilter, Phenomenon, Platform, SettingsService } from '@helgoland/core';
 import { GeoSearchOptions, LayerOptions } from '@helgoland/map';
-import { ModalController, NavController } from 'ionic-angular';
+import { ModalController, NavController, NavParams } from 'ionic-angular';
 import { PopoverController } from 'ionic-angular/components/popover/popover-controller';
 import * as L from 'leaflet';
 
@@ -36,6 +36,7 @@ export class MapPage {
   constructor(
     private settingsSrvc: SettingsService<MobileSettings>,
     private nav: NavController,
+    private navParams: NavParams,
     private modalCtrl: ModalController,
     private cdr: ChangeDetectorRef,
     private popoverCtrl: PopoverController,
@@ -49,9 +50,17 @@ export class MapPage {
     this.fitBounds = settings.defaultBbox;
     this.geoSearchOptions = { countrycodes: settings.geoSearchContryCodes };
 
-    this.ircelineSettings.getSettings(false).subscribe((settings) => {
-      this.api.getPhenomenon(settings.top_pollutant_today, this.providerUrl).subscribe(phenomenon => this.setPhenomenon(phenomenon));
-    })
+    if (this.navParams.get('phenomenonId')) {
+      this.getPhenomenonFromAPI(this.navParams.get('phenomenonId'));
+    } else {
+      this.ircelineSettings.getSettings(false).subscribe((settings) => {
+        this.getPhenomenonFromAPI(settings.top_pollutant_today);
+      })
+    }
+  }
+
+  private getPhenomenonFromAPI(phenId: string) {
+    this.api.getPhenomenon(phenId, this.providerUrl).subscribe(phenomenon => this.setPhenomenon(phenomenon));
   }
 
   public onStationSelected(platform: Platform) {

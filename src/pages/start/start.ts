@@ -60,8 +60,8 @@ export class StartPage {
     });
   }
 
-  public navigateToMap() {
-    this.nav.push(MapPage);
+  public navigateToMap(phenomenonId: string) {
+    this.nav.push(MapPage, { phenomenonId });
   }
 
   public setBounds(bounds: L.LatLngBoundsExpression) {

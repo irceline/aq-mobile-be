@@ -1,0 +1,8 @@
+<ion-grid no-padding>
+  <ion-row>
+    <ion-col text-center>Closest measuring station:</ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col *ngFor="let entry of entries" closest-measuring-station-panel-entry [entry]="entry" [position]="position" (onClicked)="select($event)"></ion-col>
+  </ion-row>
+</ion-grid>

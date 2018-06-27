@@ -1,0 +1,20 @@
+closest-measuring-station-panel {
+  .entry {
+    border: 1px solid rgb(185, 185, 185);
+  }
+  .phenomenon-label {
+    font-size: 150%;
+  }
+  .value-100 {
+    background-color: red; // color: white;
+  }
+  .value-80 {
+    background-color: blue; // color: white;
+  }
+  .value-60 {
+    background-color: yellow;
+  }
+  .value-40 {
+    background-color: green;
+  }
+}
