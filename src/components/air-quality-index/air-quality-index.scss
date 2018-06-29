@@ -1,29 +1,34 @@
 air-quality-index {
     .aqIndex-1 {
-        background-color: rgb(43, 5, 255);
+        background-color: #0000FF;
     }
     .aqIndex-2 {
-        background-color: rgb(85, 154, 255);
+        background-color: #0099FF;
     }
     .aqIndex-3 {
-        background-color: rgb(73, 154, 4);
+        background-color: #009900;
     }
     .aqIndex-4 {
-        background-color: rgb(125, 254, 11);
+        background-color: #00FF00;
     }
     .aqIndex-5 {
-        background-color: rgb(252, 255, 1);
+        background-color: #FFFF00;
     }
     .aqIndex-6 {
-        background-color: rgb(240, 187, 5);
+        background-color: #FFBB00;
     }
     .aqIndex-7 {
-        background-color: rgb(230, 98, 8);
+        background-color: #FF6600;
     }
     .aqIndex-8 {
-        background-color: rgb(153, 31, 0);
+        background-color: #FF0000;
     }
     .aqIndex-9 {
-        background-color: rgb(102, 17, 0);
+        background-color: #990000;
+        color: white;
+    }
+    .aqIndex-10 {
+        background-color: #660000;
+        color: white;
     }
 }
