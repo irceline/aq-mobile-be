@@ -2,6 +2,23 @@
 	"air-quality-index": {
 		"header": "BelAQI index voor:"
 	},
+	"air-quality-location-panel": {
+		"error": "",
+		"hint": "",
+		"level": {
+			"bad": "",
+			"excellent": "",
+			"fairly-good": "",
+			"good": "",
+			"horrible": "",
+			"moderate": "",
+			"poor": "",
+			"very-bad": "",
+			"very-good": "",
+			"very-poor": ""
+		},
+		"loading": ""
+	},
 	"change-timespan": {
 		"custom": {
 			"end": "einde",

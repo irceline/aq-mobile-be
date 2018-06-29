@@ -2,6 +2,23 @@
 	"air-quality-index": {
 		"header": "BelAQI index at:"
 	},
+	"air-quality-location-panel": {
+		"error": "Could not get a Index for you location",
+		"hint": "Modelled value for your location",
+		"level": {
+			"bad": "Bad",
+			"excellent": "Excellent",
+			"fairly-good": "Fairly good",
+			"good": "Good",
+			"horrible": "Horrible",
+			"moderate": "Moderate",
+			"poor": "Poor",
+			"very-bad": "Very bad",
+			"very-good": "Very good",
+			"very-poor": "Very poor"
+		},
+		"loading": "Loading BelAQI for your location"
+	},
 	"change-timespan": {
 		"custom": {
 			"end": "End",

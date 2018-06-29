@@ -1,15 +1,24 @@
 <div text-center ngClass="aqIndex-{{value}}">
   <div *ngIf="loading">
-    <div>Loading BelAqi for your location</div>
+    <div>{{'air-quality-location-panel.loading' | translate}}</div>
     <ion-spinner></ion-spinner>
   </div>
   <div *ngIf="!loading && !error">
-    <div class="location">For your location</div>
-    <div class="value">Fairly good ({{value}})</div>
-    <div class="small">modelled value for your location</div>
+    <div class="location">For your location {{value}}</div>
+    <div [ngSwitch]="value">
+      <div *ngSwitchCase="1">{{'air-quality-location-panel.level.excellent' | translate}} (1)</div>
+      <div *ngSwitchCase="2">{{'air-quality-location-panel.level.very-good' | translate}} (2)</div>
+      <div *ngSwitchCase="3">{{'air-quality-location-panel.level.good' | translate}} (3)</div>
+      <div *ngSwitchCase="4">{{'air-quality-location-panel.level.fairly-good' | translate}} (4)</div>
+      <div *ngSwitchCase="5">{{'air-quality-location-panel.level.moderate' | translate}} (5)</div>
+      <div *ngSwitchCase="6">{{'air-quality-location-panel.level.poor' | translate}} (6)</div>
+      <div *ngSwitchCase="7">{{'air-quality-location-panel.level.very-poor' | translate}} (7)</div>
+      <div *ngSwitchCase="8">{{'air-quality-location-panel.level.bad' | translate}} (8)</div>
+      <div *ngSwitchCase="9">{{'air-quality-location-panel.level.very-bad' | translate}} (9)</div>
+      <div *ngSwitchCase="10">{{'air-quality-location-panel.level.horrible' | translate}} (10)</div>
+    </div>
+    <div class="small">{{'air-quality-location-panel.hint' | translate}}</div>
     <div class="small">{{time | date: 'medium'}}</div>
   </div>
-  <div *ngIf="error" class="aqIndex-9">
-    Could not get a Index for you location
-  </div>
+  <div *ngIf="error" class="aqIndex-9"> {{'air-quality-location-panel.error' | translate}}</div>
 </div>
