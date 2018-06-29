@@ -1,9 +1,16 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { DatasetApiInterface, FirstLastValue, SettingsService, Station } from '@helgoland/core';
+import {
+  DatasetApiInterface,
+  FirstLastValue,
+  SettingsService,
+  Station,
+  StatusIntervalResolverService,
+} from '@helgoland/core';
 import { Geoposition } from '@ionic-native/geolocation';
 
 import { LocateProvider } from '../../providers/locate/locate';
 import { MobileSettings } from '../../providers/settings/settings';
+import invert from 'invert-color';
 
 interface PanelEntry {
   label: string;
@@ -20,6 +27,8 @@ export class ClosestMeasuringStationPanelEntryComponent {
   public stationDistance: number;
   public lastStationaryValue: FirstLastValue;
   public uom: string;
+  public backgroundColor: string;
+  public color: string;
   public loadingStationValue: boolean = true;
 
   @Input()
@@ -31,6 +40,7 @@ export class ClosestMeasuringStationPanelEntryComponent {
   constructor(
     private settingsSrvc: SettingsService<MobileSettings>,
     private api: DatasetApiInterface,
+    private statusIntervalResolver: StatusIntervalResolverService,
     private locate: LocateProvider
   ) {
     this.locate.onPositionUpdate.subscribe(pos => this.determineNextStationValue(pos));
@@ -63,6 +73,8 @@ export class ClosestMeasuringStationPanelEntryComponent {
         expanded: true
       }, { forceUpdate: true }).subscribe(series => {
         if (series.length == 1) {
+          this.backgroundColor = this.statusIntervalResolver.getMatchingInterval(series[0].lastValue.value, series[0].statusIntervals).color;
+          this.color = invert(this.backgroundColor, true);
           this.lastStationaryValue = series[0].lastValue
           this.uom = series[0].uom;
         }
