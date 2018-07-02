@@ -51,6 +51,9 @@
 		"no-timeseries-selected": "geen tijdsreeks geselecteerd!",
 		"select-timeseries": "Selecteer een tijdsreeks op de"
 	},
+	"forecast": {
+		"header": ""
+	},
 	"legend": {
 		"first-value-at": "eerste waarde",
 		"header": "Legende",

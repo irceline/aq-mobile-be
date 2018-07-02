@@ -51,6 +51,9 @@
 		"no-timeseries-selected": "Keine Zeitreihe selektiert!",
 		"select-timeseries": "Bitte wähle eine Zeitreihe"
 	},
+	"forecast": {
+		"header": "Vorhersage-Karte"
+	},
 	"legend": {
 		"first-value-at": "Erster Wert am",
 		"header": "Legend",

@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { NavController, Platform } from 'ionic-angular';
 
 import { DiagramPage } from '../pages/diagram/diagram';
+import { ForecastPage } from '../pages/forecast/forecast';
 import { MapPage } from '../pages/map/map';
 import { SettingsPage } from '../pages/settings/settings';
 import { StartPage } from '../pages/start/start';
@@ -43,7 +44,8 @@ export class MyApp {
     this.pages = [
       { title: 'map.header', component: MapPage },
       { title: 'diagram.header', component: DiagramPage },
-      { title: 'settings.header', component: SettingsPage }
+      { title: 'settings.header', component: SettingsPage },
+      { title: 'forecast.header', component: ForecastPage }
     ];
 
     this.pushNotification.init();

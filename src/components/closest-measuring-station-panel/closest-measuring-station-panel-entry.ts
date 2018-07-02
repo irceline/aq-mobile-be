@@ -7,10 +7,10 @@ import {
   StatusIntervalResolverService,
 } from '@helgoland/core';
 import { Geoposition } from '@ionic-native/geolocation';
+import invert from 'invert-color';
 
 import { LocateProvider } from '../../providers/locate/locate';
 import { MobileSettings } from '../../providers/settings/settings';
-import invert from 'invert-color';
 
 interface PanelEntry {
   label: string;
@@ -73,8 +73,11 @@ export class ClosestMeasuringStationPanelEntryComponent {
         expanded: true
       }, { forceUpdate: true }).subscribe(series => {
         if (series.length == 1) {
-          this.backgroundColor = this.statusIntervalResolver.getMatchingInterval(series[0].lastValue.value, series[0].statusIntervals).color;
-          this.color = invert(this.backgroundColor, true);
+          const matchingInterval = this.statusIntervalResolver.getMatchingInterval(series[0].lastValue.value, series[0].statusIntervals)
+          if (matchingInterval) {
+            this.backgroundColor = matchingInterval.color;
+            this.color = invert(this.backgroundColor, true);
+          }
           this.lastStationaryValue = series[0].lastValue
           this.uom = series[0].uom;
         }

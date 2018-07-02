@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{'forecast.header' | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="container cards-bg">
+
+  <ion-card>
+    <network-panel></network-panel>
+  </ion-card>
+
+  <ion-card class="map">
+    <div>
+      <ion-segment [(ngModel)]="phenomenon" (ngModelChange)="onPhenomenonChange()">
+        <ion-segment-button value="NO2">
+          NO2
+        </ion-segment-button>
+        <ion-segment-button value="O3">
+          O3
+        </ion-segment-button>
+        <ion-segment-button value="PM10">
+          PM10
+        </ion-segment-button>
+        <ion-segment-button value="PM25">
+          PM2.5
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+    <div id="forecast-map" style="height: 100%;"></div>
+    <div>
+      <ion-segment [(ngModel)]="time" (ngModelChange)="onTimeChange()">
+        <ion-segment-button value="today">
+          today
+        </ion-segment-button>
+        <ion-segment-button value="tomorrow">
+          tomorrow
+        </ion-segment-button>
+        <ion-segment-button value="today2">
+          today+2
+        </ion-segment-button>
+        <ion-segment-button value="today3">
+          today+3
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+    <mobile-geosearch-control mapId="forecast-map" [options]="geoSearchOptions"></mobile-geosearch-control>
+  </ion-card>
+
+</ion-content>

@@ -51,6 +51,9 @@
 		"no-timeseries-selected": "No timeseries selected!",
 		"select-timeseries": "Please select timeseries in the"
 	},
+	"forecast": {
+		"header": "Forecast map"
+	},
 	"legend": {
 		"first-value-at": "First value at",
 		"header": "Legend",

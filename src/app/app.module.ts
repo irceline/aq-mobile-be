@@ -26,6 +26,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { ComponentsModule } from '../components/components.module';
 import { DiagramPage } from '../pages/diagram/diagram';
+import { ForecastPage } from '../pages/forecast/forecast';
 import { MapPage } from '../pages/map/map';
 import {
   LocalNotificationSettingsComponent,
@@ -59,6 +60,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MapPage,
     DiagramPage,
     SettingsPage,
+    ForecastPage,
     LocalNotificationSettingsComponent,
     PushNotificationSettingsComponent
   ],
@@ -87,7 +89,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     StartPage,
     MapPage,
     DiagramPage,
-    SettingsPage
+    SettingsPage,
+    ForecastPage
   ],
   providers: [
     { provide: DatasetApiInterface, useClass: SplittedDataDatasetApiInterface },
