@@ -18,7 +18,6 @@ import {
 	MobileDatasetByStationSelectorComponent,
 } from './dataset-by-station-selector/dataset-by-station-selector.component';
 import { ForecastMapComponent } from './forecast-map/forecast-map';
-import { LanguageSelectorComponent } from './language-selector/language-selector';
 import { LocatedValueNotificationComponent } from './located-value-notification/located-value-notification';
 import { MobileExtentControlComponent } from './mobile-extent-control/mobile-extent-control';
 import { MobileGeosearchControlComponent } from './mobile-geosearch-control/mobile-geosearch-control';
@@ -57,7 +56,6 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		ForecastMapComponent,
 		AirQualityIndexComponent,
 		PushNotificationComponent,
-		LanguageSelectorComponent,
 		ValuePanelComponent,
 		LocatedValueNotificationComponent,
 		RefreshButtonComponent,
@@ -94,7 +92,6 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		ForecastMapComponent,
 		AirQualityIndexComponent,
 		PushNotificationComponent,
-		LanguageSelectorComponent,
 		ValuePanelComponent,
 		LocatedValueNotificationComponent,
 		RefreshButtonComponent,

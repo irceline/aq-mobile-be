@@ -54,6 +54,39 @@
 	"forecast": {
 		"header": ""
 	},
+	"intro": {
+		"close-introduction": "",
+		"four": {
+			"header": "",
+			"option": {
+				"alert": "",
+				"information": "",
+				"personal": ""
+			}
+		},
+		"header": "",
+		"next-step": "",
+		"one": {
+			"header": "",
+			"option": {
+				"dutch": "Nederlands",
+				"english": "English",
+				"french": "Français",
+				"german": "Deutsch"
+			}
+		},
+		"three": {
+			"header": ""
+		},
+		"two": {
+			"header": "",
+			"option": {
+				"brussels": "",
+				"flanders": "",
+				"wallonia": ""
+			}
+		}
+	},
 	"legend": {
 		"first-value-at": "première valeur à",
 		"header": "légende",
@@ -93,7 +126,8 @@
 		"push-notification": "notifications push",
 		"select-language": "sélectionnez une langue",
 		"select-local-notifiaction-period": "choisissez un intervalle de temps",
-		"sensitiv-notification": "notification de texte sensible"
+		"sensitiv-notification": "notification de texte sensible",
+		"show-introduction": ""
 	},
 	"show-geometry": {
 		"header": "position de la station"

@@ -20,6 +20,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
 import { Network } from '@ionic-native/network';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { IonicStorageModule } from '@ionic/storage';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -27,7 +28,9 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { ComponentsModule } from '../components/components.module';
 import { DiagramPage } from '../pages/diagram/diagram';
 import { ForecastPage } from '../pages/forecast/forecast';
+import { IntroPage } from '../pages/intro/intro';
 import { MapPage } from '../pages/map/map';
+import { CommonSettingsComponent } from '../pages/settings/common-settings/common-settings';
 import {
   LocalNotificationSettingsComponent,
 } from '../pages/settings/local-notification-settings/local-notification-settings';
@@ -55,14 +58,16 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    MyApp,
-    StartPage,
-    MapPage,
     DiagramPage,
-    SettingsPage,
     ForecastPage,
+    IntroPage,
+    MapPage,
+    MyApp,
+    SettingsPage,
+    StartPage,
     LocalNotificationSettingsComponent,
-    PushNotificationSettingsComponent
+    PushNotificationSettingsComponent,
+    CommonSettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -81,16 +86,18 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     }),
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
     ComponentsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    StartPage,
-    MapPage,
     DiagramPage,
+    ForecastPage,
+    IntroPage,
+    MapPage,
+    MyApp,
     SettingsPage,
-    ForecastPage
+    StartPage
   ],
   providers: [
     { provide: DatasetApiInterface, useClass: SplittedDataDatasetApiInterface },

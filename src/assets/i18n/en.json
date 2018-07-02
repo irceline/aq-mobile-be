@@ -54,6 +54,39 @@
 	"forecast": {
 		"header": "Forecast map"
 	},
+	"intro": {
+		"close-introduction": "Close",
+		"four": {
+			"header": "What type of messages would you like to receive?",
+			"option": {
+				"alert": "Information threshold",
+				"information": "Alert threshold",
+				"personal": "Customised personal alerts"
+			}
+		},
+		"header": "Introduction",
+		"next-step": "Next step",
+		"one": {
+			"header": "Would you like to change the language setting?",
+			"option": {
+				"dutch": "Nederlands",
+				"english": "English",
+				"french": "Français",
+				"german": "Deutsch"
+			}
+		},
+		"three": {
+			"header": "For which locations would you like to receive notifications and personalised data in the app?"
+		},
+		"two": {
+			"header": "From which environmental agency would you like to receive messages?",
+			"option": {
+				"brussels": "Vlaamse Milieumaatschappij (VMM) - Dutch only",
+				"flanders": "Agence wallonne de l’air et du climat (AwAC) - French only",
+				"wallonia": "Brussels Environment - Dutch and French only"
+			}
+		}
+	},
 	"legend": {
 		"first-value-at": "First value at",
 		"header": "Legend",
@@ -93,7 +126,8 @@
 		"push-notification": "Push notifications",
 		"select-language": "Select a language",
 		"select-local-notifiaction-period": "Choose time interval",
-		"sensitiv-notification": "Sensitiv text notification"
+		"sensitiv-notification": "Sensitiv text notification",
+		"show-introduction": "Show Introduction"
 	},
 	"show-geometry": {
 		"header": "Position of the station"

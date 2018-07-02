@@ -1,0 +1,93 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{'intro.header' | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="tutorial-page" padding>
+
+  <ion-slides pager>
+    <ion-slide>
+      <h2 class="slide-title">{{'intro.one.header' | translate}}</h2>
+      <ion-list radio-group [ngModel]="selectedLang">
+        <ion-item>
+          <ion-label>{{'intro.one.option.dutch' | translate}}</ion-label>
+          <ion-radio value="nl" (ionSelect)="languageChanged('nl')"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{'intro.one.option.french' | translate}}</ion-label>
+          <ion-radio value="fr" (ionSelect)="languageChanged('fr')"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{'intro.one.option.english' | translate}}</ion-label>
+          <ion-radio value="en" (ionSelect)="languageChanged('en')"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{'intro.one.option.german' | translate}}</ion-label>
+          <ion-radio value="de" (ionSelect)="languageChanged('de')"></ion-radio>
+        </ion-item>
+      </ion-list>
+      <ion-toolbar>
+        <ion-buttons>
+          <button ion-button color="primary" (click)="nextSlide()">{{'intro.next-step' | translate}}</button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-slide>
+
+    <ion-slide>
+      <h2 class="slide-title">{{'intro.two.header' | translate}}</h2>
+      <ion-list>
+        <ion-item>
+          <ion-label>{{'intro.two.option.flanders' | translate}}</ion-label>
+          <ion-checkbox [(ngModel)]="messagesFlanders"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{'intro.two.option.wallonia' | translate}}</ion-label>
+          <ion-checkbox [(ngModel)]="messagesWallonia"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{'intro.two.option.brussels' | translate}}</ion-label>
+          <ion-checkbox [(ngModel)]="messagesBrussels"></ion-checkbox>
+        </ion-item>
+      </ion-list>
+      <ion-toolbar>
+        <ion-buttons>
+          <button ion-button color="primary"  (click)="nextSlide()">{{'intro.next-step' | translate}}</button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-slide>
+
+    <ion-slide>
+      <h2 class="slide-title">{{'intro.three.header' | translate}}</h2>
+      <ion-toolbar>
+        <ion-buttons>
+          <button ion-button color="primary" (click)="nextSlide()">{{'intro.next-step' | translate}}</button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-slide>
+
+    <ion-slide>
+      <h2 class="slide-title">{{'intro.four.header' | translate}}</h2>
+      <ion-list>
+        <ion-item>
+          <ion-label>{{'intro.four.option.information' | translate}}</ion-label>
+          <ion-checkbox [(ngModel)]="messagesInformation"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{'intro.four.option.alert' | translate}}</ion-label>
+          <ion-checkbox [(ngModel)]="messagesAlert"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{'intro.four.option.personal' | translate}}</ion-label>
+          <ion-checkbox [(ngModel)]="messagesPersonal"></ion-checkbox>
+        </ion-item>
+      </ion-list>
+      <ion-toolbar>
+        <ion-buttons>
+          <button ion-button color="primary" (click)="closeSlides()">{{'intro.close-introduction' | translate}}</button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-slide>
+
+  </ion-slides>
+</ion-content>
