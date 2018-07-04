@@ -5,6 +5,9 @@
 	"air-quality-location-panel": {
 		"error": "Es konnte kein Index für dein Standort Could not get a Index for you location",
 		"hint": "Modelliert für deinen Standort",
+		"loading": "Lädt den BelAQI für deinen Standort"
+	},
+	"belaqi": {
 		"level": {
 			"bad": "Schlecht",
 			"excellent": "Ausgezeichnet",
@@ -16,8 +19,7 @@
 			"very-bad": "Sehr schlecht",
 			"very-good": "Sehr gut",
 			"very-poor": "Sehr dürftig"
-		},
-		"loading": "Lädt den BelAQI für deinen Standort"
+		}
 	},
 	"change-timespan": {
 		"custom": {

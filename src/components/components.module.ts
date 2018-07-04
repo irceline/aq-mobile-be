@@ -11,6 +11,7 @@ import { IonicModule } from 'ionic-angular';
 import { AirQualityIndexComponent } from './air-quality-index/air-quality-index';
 import { AirQualityLocationPanelComponent } from './air-quality-location-panel/air-quality-location-panel';
 import { BelaqiChartComponent } from './belaqi-chart/belaqi-chart';
+import { BelaqiWheelComponent } from './belaqi-wheel/belaqi-wheel';
 import { ClosestMeasuringStationPanelComponent } from './closest-measuring-station-panel/closest-measuring-station-panel';
 import {
 	ClosestMeasuringStationPanelEntryComponent,
@@ -64,7 +65,8 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		ClosestMeasuringStationPanelComponent,
 		ClosestMeasuringStationPanelEntryComponent,
 		AirQualityLocationPanelComponent,
-		BelaqiChartComponent
+		BelaqiChartComponent,
+		BelaqiWheelComponent
 	],
 	imports: [
 		HelgolandMapViewModule,
@@ -101,7 +103,8 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		ClosestMeasuringStationPanelComponent,
 		ClosestMeasuringStationPanelEntryComponent,
 		AirQualityLocationPanelComponent,
-		BelaqiChartComponent
+		BelaqiChartComponent,
+		BelaqiWheelComponent
 	],
 	entryComponents: [
 		StationSelectorComponent,

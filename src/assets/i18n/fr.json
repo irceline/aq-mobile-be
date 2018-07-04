@@ -5,6 +5,9 @@
 	"air-quality-location-panel": {
 		"error": "",
 		"hint": "",
+		"loading": ""
+	},
+	"belaqi": {
 		"level": {
 			"bad": "",
 			"excellent": "",
@@ -16,8 +19,7 @@
 			"very-bad": "",
 			"very-good": "",
 			"very-poor": ""
-		},
-		"loading": ""
+		}
 	},
 	"change-timespan": {
 		"custom": {

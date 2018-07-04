@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from '@helgoland/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -9,7 +10,8 @@ import { ValueProvider } from '../value-provider';
 export class BelaqiIndexProvider extends ValueProvider {
 
   constructor(
-    http: HttpService
+    http: HttpService,
+    private translate: TranslateService
   ) {
     super(http);
   }
@@ -47,6 +49,33 @@ export class BelaqiIndexProvider extends ValueProvider {
         }
       })
     )
+  }
+
+  public getLabelForIndex(index: number) {
+    switch (index) {
+      case 1:
+        return this.translate.instant('belaqi.level.excellent');
+      case 2:
+        return this.translate.instant('belaqi.level.very-good');
+      case 3:
+        return this.translate.instant('belaqi.level.good');
+      case 4:
+        return this.translate.instant('belaqi.level.fairly-good');
+      case 5:
+        return this.translate.instant('belaqi.level.moderate');
+      case 6:
+        return this.translate.instant('belaqi.level.poor');
+      case 7:
+        return this.translate.instant('belaqi.level.very-poor');
+      case 8:
+        return this.translate.instant('belaqi.level.bad');
+      case 9:
+        return this.translate.instant('belaqi.level.very-bad');
+      case 10:
+        return this.translate.instant('belaqi.level.horrible');
+      default:
+        return null;
+    }
   }
 
 }

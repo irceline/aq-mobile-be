@@ -6,16 +6,16 @@
   <div *ngIf="!loading && !error">
     <div class="location">For your location {{value}}</div>
     <div [ngSwitch]="value">
-      <div *ngSwitchCase="1">{{'air-quality-location-panel.level.excellent' | translate}} (1)</div>
-      <div *ngSwitchCase="2">{{'air-quality-location-panel.level.very-good' | translate}} (2)</div>
-      <div *ngSwitchCase="3">{{'air-quality-location-panel.level.good' | translate}} (3)</div>
-      <div *ngSwitchCase="4">{{'air-quality-location-panel.level.fairly-good' | translate}} (4)</div>
-      <div *ngSwitchCase="5">{{'air-quality-location-panel.level.moderate' | translate}} (5)</div>
-      <div *ngSwitchCase="6">{{'air-quality-location-panel.level.poor' | translate}} (6)</div>
-      <div *ngSwitchCase="7">{{'air-quality-location-panel.level.very-poor' | translate}} (7)</div>
-      <div *ngSwitchCase="8">{{'air-quality-location-panel.level.bad' | translate}} (8)</div>
-      <div *ngSwitchCase="9">{{'air-quality-location-panel.level.very-bad' | translate}} (9)</div>
-      <div *ngSwitchCase="10">{{'air-quality-location-panel.level.horrible' | translate}} (10)</div>
+      <div *ngSwitchCase="1">{{'belaqi.level.excellent' | translate}} (1)</div>
+      <div *ngSwitchCase="2">{{'belaqi.level.very-good' | translate}} (2)</div>
+      <div *ngSwitchCase="3">{{'belaqi.level.good' | translate}} (3)</div>
+      <div *ngSwitchCase="4">{{'belaqi.level.fairly-good' | translate}} (4)</div>
+      <div *ngSwitchCase="5">{{'belaqi.level.moderate' | translate}} (5)</div>
+      <div *ngSwitchCase="6">{{'belaqi.level.poor' | translate}} (6)</div>
+      <div *ngSwitchCase="7">{{'belaqi.level.very-poor' | translate}} (7)</div>
+      <div *ngSwitchCase="8">{{'belaqi.level.bad' | translate}} (8)</div>
+      <div *ngSwitchCase="9">{{'belaqi.level.very-bad' | translate}} (9)</div>
+      <div *ngSwitchCase="10">{{'belaqi.level.horrible' | translate}} (10)</div>
     </div>
     <div class="small">{{'air-quality-location-panel.hint' | translate}}</div>
     <div class="small">{{time | date: 'medium'}}</div>
