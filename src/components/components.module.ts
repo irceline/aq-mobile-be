@@ -11,10 +11,10 @@ import { IonicModule } from 'ionic-angular';
 import { AirQualityIndexComponent } from './air-quality-index/air-quality-index';
 import { AirQualityLocationPanelComponent } from './air-quality-location-panel/air-quality-location-panel';
 import { BelaqiChartComponent } from './belaqi-chart/belaqi-chart';
-import { ClosestMeasuringStationPanelComponent } from './closest-measuring-station-panel/closest-measuring-station-panel';
+import { NearestMeasuringStationPanelComponent } from './nearest-measuring-station-panel/nearest-measuring-station-panel';
 import {
-	ClosestMeasuringStationPanelEntryComponent,
-} from './closest-measuring-station-panel/closest-measuring-station-panel-entry';
+	NearestMeasuringStationPanelEntryComponent,
+} from './nearest-measuring-station-panel/nearest-measuring-station-panel-entry';
 import {
 	MobileDatasetByStationSelectorComponent,
 } from './dataset-by-station-selector/dataset-by-station-selector.component';
@@ -61,8 +61,8 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		LocatedValueNotificationComponent,
 		RefreshButtonComponent,
 		NetworkPanelComponent,
-		ClosestMeasuringStationPanelComponent,
-		ClosestMeasuringStationPanelEntryComponent,
+		NearestMeasuringStationPanelComponent,
+		NearestMeasuringStationPanelEntryComponent,
 		AirQualityLocationPanelComponent,
 		BelaqiChartComponent
 	],
@@ -98,8 +98,8 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		LocatedValueNotificationComponent,
 		RefreshButtonComponent,
 		NetworkPanelComponent,
-		ClosestMeasuringStationPanelComponent,
-		ClosestMeasuringStationPanelEntryComponent,
+		NearestMeasuringStationPanelComponent,
+		NearestMeasuringStationPanelEntryComponent,
 		AirQualityLocationPanelComponent,
 		BelaqiChartComponent
 	],

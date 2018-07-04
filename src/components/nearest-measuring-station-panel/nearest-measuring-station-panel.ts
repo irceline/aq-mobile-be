@@ -7,10 +7,10 @@ interface PanelEntry {
 }
 
 @Component({
-  selector: 'closest-measuring-station-panel',
-  templateUrl: 'closest-measuring-station-panel.html'
+  selector: 'nearest-measuring-station-panel',
+  templateUrl: 'nearest-measuring-station-panel.html'
 })
-export class ClosestMeasuringStationPanelComponent {
+export class NearestMeasuringStationPanelComponent {
 
   @Output()
   public onSelect: EventEmitter<string> = new EventEmitter();
