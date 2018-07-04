@@ -26,8 +26,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { ComponentsModule } from '../components/components.module';
+import { CombinedMapPage } from '../pages/combined-map/combined-map';
 import { DiagramPage } from '../pages/diagram/diagram';
-import { ForecastPage } from '../pages/forecast/forecast';
 import { IntroPage } from '../pages/intro/intro';
 import { MapPage } from '../pages/map/map';
 import { CommonSettingsComponent } from '../pages/settings/common-settings/common-settings';
@@ -59,7 +59,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     DiagramPage,
-    ForecastPage,
+    CombinedMapPage,
     IntroPage,
     MapPage,
     MyApp,
@@ -92,7 +92,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   bootstrap: [IonicApp],
   entryComponents: [
     DiagramPage,
-    ForecastPage,
+    CombinedMapPage,
     IntroPage,
     MapPage,
     MyApp,

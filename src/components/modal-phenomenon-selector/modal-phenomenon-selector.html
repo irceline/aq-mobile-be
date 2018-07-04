@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      {{'phenomenon-selector.header' | translate}}
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span ion-text showWhen="ios">{{'controls.cancel' | translate}}</span>
+        <ion-icon name="md-close" showWhen="android, windows"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <mobile-phenomenon-selector [endpoint]="'phenomenon'" [serviceUrl]="providerUrl" [selectionId]="selectedPhenomenonId" [hiddenPhenomenonIDs]="hiddenPhenomenonIDs"
+    (onItemSelected)="onPhenomenonSelected($event)"></mobile-phenomenon-selector>
+</ion-content>

@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{'map.header' | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="container cards-bg">
+
+  <ion-card>
+    <network-panel></network-panel>
+  </ion-card>
+
+  <ion-card class="map">
+    <div>
+      <ion-segment class="phenomenon" [(ngModel)]="phenomenonLabel" (ngModelChange)="onPhenomenonChange()">
+        <ion-segment-button value="NO2">
+          NO2
+        </ion-segment-button>
+        <ion-segment-button value="O3">
+          O3
+        </ion-segment-button>
+        <ion-segment-button value="PM10">
+          PM10
+        </ion-segment-button>
+        <ion-segment-button value="PM25">
+          PM2.5
+        </ion-segment-button>
+        <ion-segment-button value="BC">
+          BC
+        </ion-segment-button>
+        <ion-segment-button value="Others" (click)="openOtherPhenomena()">
+          <span *ngIf="!selectedOtherPhenom">Other</span>
+          <span *ngIf="selectedOtherPhenom">{{selectedOtherPhenom}}</span>
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+    <div class="map-wrapper">
+      <div class="map">
+        <n52-station-map-selector mapId="combined-map" [serviceUrl]="providerUrl" [filter]="phenomenonFilter" [avoidZoomToSelection]="avoidZoomToSelection"
+          [statusIntervals]="true" [zoomControlOptions]="zoomControlOptions" [overlayMaps]="overlayMaps" [fitBounds]="fitBounds"
+          [layerControlOptions]="layerControlOptions" (onSelected)="onStationSelected($event)" [cluster]="clusterStations"
+          (onContentLoading)="onMapLoading($event)"></n52-station-map-selector>
+      </div>
+    </div>
+    <div>
+      <ion-segment class="time" [(ngModel)]="time" (ngModelChange)="onTimeChange()">
+        <ion-segment-button value="currently">
+          currently
+        </ion-segment-button>
+        <ion-segment-button value="today">
+          today
+        </ion-segment-button>
+        <ion-segment-button value="tomorrow">
+          tomorrow
+        </ion-segment-button>
+        <ion-segment-button value="today2">
+          today+2
+        </ion-segment-button>
+        <ion-segment-button value="today3">
+          today+3
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+    <mobile-geosearch-control mapId="combined-map" [options]="geoSearchOptions"></mobile-geosearch-control>
+  </ion-card>
+
+</ion-content>
