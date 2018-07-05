@@ -28,6 +28,7 @@ import { ModalLegendComponent } from './modal-legend/modal-legend';
 import { ModalOptionsEditorComponent } from './modal-options-editor/modal-options-editor';
 import { ModalPhenomenonSelectorComponent } from './modal-phenomenon-selector/modal-phenomenon-selector';
 import { ModalTimespanEditorComponent } from './modal-timespan-editor/modal-timespan-editor';
+import { ModalUserLocationListComponent } from './modal-user-location-list/modal-user-location-list';
 import { NearestMeasuringStationPanelComponent } from './nearest-measuring-station-panel/nearest-measuring-station-panel';
 import {
 	NearestMeasuringStationPanelEntryComponent,
@@ -59,6 +60,7 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		ModalOptionsEditorComponent,
 		ModalPhenomenonSelectorComponent,
 		ModalTimespanEditorComponent,
+		ModalUserLocationListComponent,
 		NearestMeasuringStationPanelComponent,
 		NearestMeasuringStationPanelEntryComponent,
 		NetworkPanelComponent,
@@ -97,6 +99,7 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		ModalOptionsEditorComponent,
 		ModalPhenomenonSelectorComponent,
 		ModalTimespanEditorComponent,
+		ModalUserLocationListComponent,
 		NearestMeasuringStationPanelComponent,
 		NearestMeasuringStationPanelEntryComponent,
 		NetworkPanelComponent,
@@ -113,6 +116,7 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		ModalOptionsEditorComponent,
 		ModalPhenomenonSelectorComponent,
 		ModalTimespanEditorComponent,
+		ModalUserLocationListComponent,
 		PhenomenonSelectorPopoverComponent,
 		PushNotificationComponent,
 		StationSelectorComponent,

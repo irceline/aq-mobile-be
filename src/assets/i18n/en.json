@@ -51,9 +51,6 @@
 		"no-timeseries-selected": "No timeseries selected!",
 		"select-timeseries": "Please select timeseries in the"
 	},
-	"forecast": {
-		"header": "Forecast map"
-	},
 	"intro": {
 		"close-introduction": "Close",
 		"four": {
@@ -76,7 +73,10 @@
 			}
 		},
 		"three": {
-			"header": "For which locations would you like to receive notifications and personalised data in the app?"
+			"addLocationToList": "Add to the list of locations",
+			"header": "For which locations would you like to receive notifications and personalised data in the app?",
+			"locationLabelHint": "Change the location label",
+			"showLocationList": "Show current locations"
 		},
 		"two": {
 			"header": "From which environmental agency would you like to receive messages?",
@@ -111,6 +111,7 @@
 		"online": "Your device is online"
 	},
 	"phenomenon-selector": {
+		"header": "Choose a phenomenon",
 		"hide-some-phenomenons": "Hide pollutants",
 		"list-all-phenomenons": "List all pollutants"
 	},
@@ -142,6 +143,12 @@
 		"generalize": "Generalize data",
 		"header": "Change style of this timeseries",
 		"zeroBasedYAxe": "Timeseries zero based"
+	},
+	"user-location-list": {
+		"edit": "Edit",
+		"edit-the-label": "Edit the location label",
+		"header": "Location list",
+		"remove": "Remove"
 	},
 	"value-panel": {
 		"forecast": {

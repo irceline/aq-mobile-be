@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      {{'user-location-list.header' | translate}}
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span ion-text showWhen="ios">{{'controls.cancel' | translate}}</span>
+        <ion-icon name="md-close" showWhen="android, windows"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card *ngFor="let location of userLocations">
+    <div style="height: 200px;">
+      <n52-geometry-map-viewer [geometry]="location.point" [mapOptions]="mapOptions"></n52-geometry-map-viewer>
+    </div>
+    <ion-item *ngIf="!location.editStatus" (click)="editLabel(location)">
+      {{location.label}}
+      <button ion-button clear item-end>
+        {{'user-location-list.edit' | translate}}
+      </button>
+    </ion-item>
+    <ion-item *ngIf="location.editStatus">
+      <ion-label stacked>{{'user-location-list.edit-the-label' | translate}}</ion-label>
+      <ion-input type="text" [(ngModel)]="location.label"></ion-input>
+      <button ion-button clear item-right (click)="saveLocation(location)">confirm</button>
+    </ion-item>
+    <ion-item>
+      <button ion-button icon-start clear item-end (click)="remove(location)">
+        <ion-icon name="trash"></ion-icon>
+        {{'user-location-list.remove' | translate}}
+      </button>
+    </ion-item>
+  </ion-card>
+</ion-content>

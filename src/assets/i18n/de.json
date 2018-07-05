@@ -51,9 +51,6 @@
 		"no-timeseries-selected": "Keine Zeitreihe selektiert!",
 		"select-timeseries": "Bitte wähle eine Zeitreihe"
 	},
-	"forecast": {
-		"header": "Vorhersage-Karte"
-	},
 	"intro": {
 		"close-introduction": "Beenden",
 		"four": {
@@ -76,7 +73,10 @@
 			}
 		},
 		"three": {
-			"header": "Für welche Standorte wollen Sie Benachrichtigungen in der App erhalten?"
+			"addLocationToList": "Füge zur Liste der Standorte",
+			"header": "Für welche Standorte wollen Sie Benachrichtigungen in der App erhalten?",
+			"locationLabelHint": "Änder die Standortbezeichnung",
+			"showLocationList": "Zeige vorhandene Standorte"
 		},
 		"two": {
 			"header": "Von welchen Umweltagenturen wollen Sie Benachrichtigungen erhalten?",
@@ -111,6 +111,7 @@
 		"online": "Dein Handy ist online"
 	},
 	"phenomenon-selector": {
+		"header": "Wähle ein Phänomen aus",
 		"hide-some-phenomenons": "Verstecke Phänomene",
 		"list-all-phenomenons": "Zeige alle Phänomene"
 	},
@@ -142,6 +143,12 @@
 		"generalize": "Daten generalisieren",
 		"header": "Zeitreihenerscheinung ändern",
 		"zeroBasedYAxe": "Zeitreihe null-basiert"
+	},
+	"user-location-list": {
+		"edit": "Ändern",
+		"edit-the-label": "Ändere die Standortbezeichnung",
+		"header": "Standort liste",
+		"remove": "Entfernen"
 	},
 	"value-panel": {
 		"forecast": {

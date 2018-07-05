@@ -6,7 +6,7 @@
 
 <ion-content class="tutorial-page" padding>
 
-  <ion-slides pager>
+  <ion-slides>
     <ion-slide>
       <h2 class="slide-title">{{'intro.one.header' | translate}}</h2>
       <ion-list radio-group [ngModel]="selectedLang">
@@ -37,15 +37,15 @@
     <ion-slide>
       <h2 class="slide-title">{{'intro.two.header' | translate}}</h2>
       <ion-list>
-        <ion-item>
+        <ion-item text-wrap>
           <ion-label>{{'intro.two.option.flanders' | translate}}</ion-label>
           <ion-checkbox [(ngModel)]="messagesFlanders"></ion-checkbox>
         </ion-item>
-        <ion-item>
+        <ion-item text-wrap>
           <ion-label>{{'intro.two.option.wallonia' | translate}}</ion-label>
           <ion-checkbox [(ngModel)]="messagesWallonia"></ion-checkbox>
         </ion-item>
-        <ion-item>
+        <ion-item text-wrap>
           <ion-label>{{'intro.two.option.brussels' | translate}}</ion-label>
           <ion-checkbox [(ngModel)]="messagesBrussels"></ion-checkbox>
         </ion-item>
@@ -59,6 +59,22 @@
 
     <ion-slide>
       <h2 class="slide-title">{{'intro.three.header' | translate}}</h2>
+      <mobile-geosearch-control [options]="geoSearchOptions" (onResultChanged)="geoSearchResultChanged($event)"></mobile-geosearch-control>
+      <div *ngIf="geoSearchResult">
+        <div style="height: 250px;">
+          <n52-geometry-map-viewer mapId="location-gen" [mapOptions]="mapOptions" [geometry]="geoSearchResult.geometry"></n52-geometry-map-viewer>
+        </div>
+        <ion-list>
+          <ion-item>
+            <ion-label stacked>{{'intro.three.locationLabelHint' | translate}}</ion-label>
+            <ion-input type="text" [value]="locationLabel"></ion-input>
+          </ion-item>
+        </ion-list>
+        <button ion-button round (click)="addLocationToList()">{{'intro.three.addLocationToList' | translate}}</button>
+      </div>
+      <div *ngIf="locationList.hasLocations()">
+        <button ion-button round outline (click)="showLocationList()">{{'intro.three.showLocationList' | translate}}</button>
+      </div>
       <ion-toolbar>
         <ion-buttons>
           <button ion-button color="primary" (click)="nextSlide()">{{'intro.next-step' | translate}}</button>

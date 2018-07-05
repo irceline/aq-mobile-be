@@ -50,6 +50,7 @@ import { PushNotificationsProvider } from '../providers/push-notifications/push-
 import { RefreshHandler } from '../providers/refresh/refresh';
 import { JSSONSettingsService } from '../providers/settings/settings';
 import { TimeseriesService } from '../providers/timeseries/timeseries.service';
+import { UserLocationListProvider } from '../providers/user-location-list/user-location-list';
 import { MyApp } from './app.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -85,7 +86,9 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      scrollAssist: false
+    }),
     IonicStorageModule.forRoot(),
     ComponentsModule
   ],
@@ -107,6 +110,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AirQualityIndexProvider,
     BackgroundGeolocation,
     BackgroundMode,
+    BelaqiIndexProvider,
     FCM,
     ForecastValueProvider,
     Geolocation,
@@ -114,6 +118,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     LayerGeneratorService,
     LocalNotifications,
     LocalNotificationsProvider,
+    LocateProvider,
     ModelledValueProvider,
     Network,
     NotificationPresenter,
@@ -122,8 +127,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SplashScreen,
     StatusBar,
     TimeseriesService,
-    LocateProvider,
-    BelaqiIndexProvider,
+    UserLocationListProvider,
   ]
 })
 export class AppModule { }
