@@ -12,7 +12,7 @@ export class ModalOptionsEditorComponent {
 
   public color: string;
   public generalize: boolean;
-  public zeroBasedYAxe: boolean;
+  public zeroBasedYAxis: boolean;
 
   constructor(
     private viewCtrl: ViewController,
@@ -21,13 +21,13 @@ export class ModalOptionsEditorComponent {
     this.options = this.navParams.get('options');
     this.color = this.options.color;
     this.generalize = this.options.generalize;
-    this.zeroBasedYAxe = this.options.zeroBasedYAxe;
+    this.zeroBasedYAxis = this.options.zeroBasedYAxis;
   }
 
   public updateOption() {
     if (this.color) this.options.color = this.color;
     this.options.generalize = this.generalize;
-    this.options.zeroBasedYAxe = this.zeroBasedYAxe;
+    this.options.zeroBasedYAxis = this.zeroBasedYAxis;
     this.viewCtrl.dismiss(this.options);
   }
 

@@ -6,10 +6,9 @@ import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 import { NavController, Platform } from 'ionic-angular';
 
+import { CombinedMapPage } from '../pages/combined-map/combined-map';
 import { DiagramPage } from '../pages/diagram/diagram';
-import { ForecastPage } from '../pages/forecast/forecast';
 import { IntroPage } from '../pages/intro/intro';
-import { MapPage } from '../pages/map/map';
 import { SettingsPage } from '../pages/settings/settings';
 import { StartPage } from '../pages/start/start';
 import { IrcelineSettings, IrcelineSettingsProvider } from '../providers/irceline-settings/irceline-settings';
@@ -51,10 +50,9 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'map.header', component: MapPage },
+      { title: 'map.header', component: CombinedMapPage },
       { title: 'diagram.header', component: DiagramPage },
       { title: 'settings.header', component: SettingsPage },
-      { title: 'forecast.header', component: ForecastPage }
     ];
 
     this.pushNotification.init();
@@ -87,7 +85,9 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      this.statusBar.styleDefault();
+      this.statusBar.overlaysWebView(false);
+      this.statusBar.styleLightContent();
+      this.statusBar.show();
       this.splashScreen.hide();
     });
   }

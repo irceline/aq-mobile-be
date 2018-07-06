@@ -53,9 +53,6 @@
 		"no-timeseries-selected": "aucun timeseries sélectionné!",
 		"select-timeseries": "Veuillez sélectionner une timeseries dans la"
 	},
-	"forecast": {
-		"header": ""
-	},
 	"intro": {
 		"close-introduction": "",
 		"four": {
@@ -78,7 +75,10 @@
 			}
 		},
 		"three": {
-			"header": ""
+			"addLocationToList": "",
+			"header": "",
+			"locationLabelHint": "",
+			"showLocationList": ""
 		},
 		"two": {
 			"header": "",
@@ -113,6 +113,7 @@
 		"online": ""
 	},
 	"phenomenon-selector": {
+		"header": "",
 		"hide-some-phenomenons": "masquer les polluants",
 		"list-all-phenomenons": "liste de tous les polluants"
 	},
@@ -144,6 +145,12 @@
 		"generalize": "généraliser les données",
 		"header": "changer le style de cette timeseries",
 		"zeroBasedYAxe": "les timeseries à base zéro"
+	},
+	"user-location-list": {
+		"edit": "",
+		"edit-the-label": "",
+		"header": "",
+		"remove": ""
 	},
 	"value-panel": {
 		"forecast": {

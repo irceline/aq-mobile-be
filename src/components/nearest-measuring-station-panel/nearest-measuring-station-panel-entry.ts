@@ -18,10 +18,10 @@ interface PanelEntry {
 }
 
 @Component({
-  selector: '[closest-measuring-station-panel-entry]',
-  templateUrl: 'closest-measuring-station-panel-entry.html'
+  selector: '[nearest-measuring-station-panel-entry]',
+  templateUrl: 'nearest-measuring-station-panel-entry.html'
 })
-export class ClosestMeasuringStationPanelEntryComponent {
+export class NearestMeasuringStationPanelEntryComponent {
 
   private nearestStation: Station;
   public stationDistance: number;

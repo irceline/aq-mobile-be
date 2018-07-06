@@ -11,9 +11,14 @@ export class MobilePhenomenonSelectorComponent extends ServiceFilterSelectorComp
   @Input()
   public visiblePhenomenonIDs: string[];
 
+  @Input()
+  public hiddenPhenomenonIDs: string[];
+
   public isVisible(phenomenon: Phenomenon) {
     if (this.visiblePhenomenonIDs) {
       return this.visiblePhenomenonIDs.indexOf(phenomenon.id) >= 0 ? true : false;
+    } else if (this.hiddenPhenomenonIDs) {
+      return this.hiddenPhenomenonIDs.indexOf(phenomenon.id) >= 0 ? false : true;
     } else {
       return true;
     }

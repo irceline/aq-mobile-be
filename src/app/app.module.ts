@@ -26,8 +26,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { ComponentsModule } from '../components/components.module';
+import { CombinedMapPage } from '../pages/combined-map/combined-map';
 import { DiagramPage } from '../pages/diagram/diagram';
-import { ForecastPage } from '../pages/forecast/forecast';
 import { IntroPage } from '../pages/intro/intro';
 import { MapPage } from '../pages/map/map';
 import { CommonSettingsComponent } from '../pages/settings/common-settings/common-settings';
@@ -50,6 +50,7 @@ import { PushNotificationsProvider } from '../providers/push-notifications/push-
 import { RefreshHandler } from '../providers/refresh/refresh';
 import { JSSONSettingsService } from '../providers/settings/settings';
 import { TimeseriesService } from '../providers/timeseries/timeseries.service';
+import { UserLocationListProvider } from '../providers/user-location-list/user-location-list';
 import { MyApp } from './app.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -59,7 +60,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     DiagramPage,
-    ForecastPage,
+    CombinedMapPage,
     IntroPage,
     MapPage,
     MyApp,
@@ -85,14 +86,16 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      scrollAssist: false
+    }),
     IonicStorageModule.forRoot(),
     ComponentsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     DiagramPage,
-    ForecastPage,
+    CombinedMapPage,
     IntroPage,
     MapPage,
     MyApp,
@@ -107,6 +110,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AirQualityIndexProvider,
     BackgroundGeolocation,
     BackgroundMode,
+    BelaqiIndexProvider,
     FCM,
     ForecastValueProvider,
     Geolocation,
@@ -114,6 +118,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     LayerGeneratorService,
     LocalNotifications,
     LocalNotificationsProvider,
+    LocateProvider,
     ModelledValueProvider,
     Network,
     NotificationPresenter,
@@ -122,8 +127,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SplashScreen,
     StatusBar,
     TimeseriesService,
-    LocateProvider,
-    BelaqiIndexProvider,
+    UserLocationListProvider,
   ]
 })
 export class AppModule { }

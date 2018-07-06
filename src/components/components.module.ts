@@ -12,14 +12,13 @@ import { AirQualityIndexComponent } from './air-quality-index/air-quality-index'
 import { AirQualityLocationPanelComponent } from './air-quality-location-panel/air-quality-location-panel';
 import { BelaqiChartComponent } from './belaqi-chart/belaqi-chart';
 import { BelaqiWheelComponent } from './belaqi-wheel/belaqi-wheel';
-import { ClosestMeasuringStationPanelComponent } from './closest-measuring-station-panel/closest-measuring-station-panel';
-import {
-	ClosestMeasuringStationPanelEntryComponent,
-} from './closest-measuring-station-panel/closest-measuring-station-panel-entry';
+// import { ClosestMeasuringStationPanelComponent } from './closest-measuring-station-panel/closest-measuring-station-panel';
+// import {
+// 	ClosestMeasuringStationPanelEntryComponent,
+// } from './closest-measuring-station-panel/closest-measuring-station-panel-entry';
 import {
 	MobileDatasetByStationSelectorComponent,
 } from './dataset-by-station-selector/dataset-by-station-selector.component';
-import { ForecastMapComponent } from './forecast-map/forecast-map';
 import { LocatedValueNotificationComponent } from './located-value-notification/located-value-notification';
 import { MobileExtentControlComponent } from './mobile-extent-control/mobile-extent-control';
 import { MobileGeosearchControlComponent } from './mobile-geosearch-control/mobile-geosearch-control';
@@ -31,7 +30,13 @@ import { MobileTimespanShiftSelectorComponent } from './mobile-timespan-shift-se
 import { ModalGeometryViewerComponent } from './modal-geometry-viewer/modal-geometry-viewer';
 import { ModalLegendComponent } from './modal-legend/modal-legend';
 import { ModalOptionsEditorComponent } from './modal-options-editor/modal-options-editor';
+import { ModalPhenomenonSelectorComponent } from './modal-phenomenon-selector/modal-phenomenon-selector';
 import { ModalTimespanEditorComponent } from './modal-timespan-editor/modal-timespan-editor';
+import { ModalUserLocationListComponent } from './modal-user-location-list/modal-user-location-list';
+import { NearestMeasuringStationPanelComponent } from './nearest-measuring-station-panel/nearest-measuring-station-panel';
+import {
+	NearestMeasuringStationPanelEntryComponent,
+} from './nearest-measuring-station-panel/nearest-measuring-station-panel-entry';
 import { NetworkPanelComponent } from './network-panel/network-panel';
 import { PhenomenonSelectorPopoverComponent } from './phenomenon-selector-popover/phenomenon-selector-popover';
 import { PushNotificationComponent } from './push-notification/push-notification';
@@ -41,80 +46,84 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 
 @NgModule({
 	declarations: [
-		MobileGeosearchControlComponent,
-		MobileExtentControlComponent,
-		MobileLocateControlComponent,
-		StationSelectorComponent,
-		MobileDatasetByStationSelectorComponent,
-		MobileTimespanShiftSelectorComponent,
-		ModalTimespanEditorComponent,
-		MobileTimespanButtonComponent,
-		ModalLegendComponent,
-		MobileTimeseriesEntryComponent,
-		ModalGeometryViewerComponent,
-		ModalOptionsEditorComponent,
-		PhenomenonSelectorPopoverComponent,
-		MobilePhenomenonSelectorComponent,
-		ForecastMapComponent,
 		AirQualityIndexComponent,
-		PushNotificationComponent,
-		ValuePanelComponent,
-		LocatedValueNotificationComponent,
-		RefreshButtonComponent,
-		NetworkPanelComponent,
-		ClosestMeasuringStationPanelComponent,
-		ClosestMeasuringStationPanelEntryComponent,
 		AirQualityLocationPanelComponent,
 		BelaqiChartComponent,
-		BelaqiWheelComponent
+		BelaqiWheelComponent,
+		LocatedValueNotificationComponent,
+		MobileDatasetByStationSelectorComponent,
+		MobileExtentControlComponent,
+		MobileGeosearchControlComponent,
+		MobileLocateControlComponent,
+		MobilePhenomenonSelectorComponent,
+		MobileTimeseriesEntryComponent,
+		MobileTimespanButtonComponent,
+		MobileTimespanShiftSelectorComponent,
+		ModalGeometryViewerComponent,
+		ModalLegendComponent,
+		ModalOptionsEditorComponent,
+		ModalPhenomenonSelectorComponent,
+		ModalTimespanEditorComponent,
+		ModalUserLocationListComponent,
+		NearestMeasuringStationPanelComponent,
+		NearestMeasuringStationPanelEntryComponent,
+		NetworkPanelComponent,
+		PhenomenonSelectorPopoverComponent,
+		PushNotificationComponent,
+		RefreshButtonComponent,
+		StationSelectorComponent,
+		ValuePanelComponent,
 	],
 	imports: [
-		HelgolandMapViewModule,
-		HelgolandLabelMapperModule,
-		HelgolandModificationModule,
-		HelgolandSelectorModule,
 		CommonModule,
 		FormsModule,
+		HelgolandLabelMapperModule,
+		HelgolandMapViewModule,
+		HelgolandModificationModule,
+		HelgolandSelectorModule,
 		IonicModule,
 		TranslateModule.forChild()
 	],
 	exports: [
-		MobileGeosearchControlComponent,
-		MobileExtentControlComponent,
-		MobileLocateControlComponent,
-		StationSelectorComponent,
-		MobileDatasetByStationSelectorComponent,
-		MobileTimespanShiftSelectorComponent,
-		ModalTimespanEditorComponent,
-		MobileTimespanButtonComponent,
-		ModalLegendComponent,
-		MobileTimeseriesEntryComponent,
-		ModalGeometryViewerComponent,
-		ModalOptionsEditorComponent,
-		PhenomenonSelectorPopoverComponent,
-		MobilePhenomenonSelectorComponent,
-		ForecastMapComponent,
 		AirQualityIndexComponent,
-		PushNotificationComponent,
-		ValuePanelComponent,
-		LocatedValueNotificationComponent,
-		RefreshButtonComponent,
-		NetworkPanelComponent,
-		ClosestMeasuringStationPanelComponent,
-		ClosestMeasuringStationPanelEntryComponent,
 		AirQualityLocationPanelComponent,
 		BelaqiChartComponent,
-		BelaqiWheelComponent
-	],
-	entryComponents: [
-		StationSelectorComponent,
-		ModalTimespanEditorComponent,
-		ModalLegendComponent,
+		BelaqiWheelComponent,
+		LocatedValueNotificationComponent,
+		MobileDatasetByStationSelectorComponent,
+		MobileExtentControlComponent,
+		MobileGeosearchControlComponent,
+		MobileLocateControlComponent,
+		MobilePhenomenonSelectorComponent,
+		MobileTimeseriesEntryComponent,
+		MobileTimespanButtonComponent,
+		MobileTimespanShiftSelectorComponent,
 		ModalGeometryViewerComponent,
+		ModalLegendComponent,
 		ModalOptionsEditorComponent,
+		ModalPhenomenonSelectorComponent,
+		ModalTimespanEditorComponent,
+		ModalUserLocationListComponent,
+		NearestMeasuringStationPanelComponent,
+		NearestMeasuringStationPanelEntryComponent,
+		NetworkPanelComponent,
 		PhenomenonSelectorPopoverComponent,
 		PushNotificationComponent,
-		LocatedValueNotificationComponent
+		RefreshButtonComponent,
+		StationSelectorComponent,
+		ValuePanelComponent,
+	],
+	entryComponents: [
+		LocatedValueNotificationComponent,
+		ModalGeometryViewerComponent,
+		ModalLegendComponent,
+		ModalOptionsEditorComponent,
+		ModalPhenomenonSelectorComponent,
+		ModalTimespanEditorComponent,
+		ModalUserLocationListComponent,
+		PhenomenonSelectorPopoverComponent,
+		PushNotificationComponent,
+		StationSelectorComponent,
 	]
 })
 export class ComponentsModule { }

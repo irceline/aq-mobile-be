@@ -53,9 +53,6 @@
 		"no-timeseries-selected": "geen tijdsreeks geselecteerd!",
 		"select-timeseries": "Selecteer een tijdsreeks op de"
 	},
-	"forecast": {
-		"header": ""
-	},
 	"intro": {
 		"close-introduction": "",
 		"four": {
@@ -78,7 +75,10 @@
 			}
 		},
 		"three": {
-			"header": ""
+			"addLocationToList": "",
+			"header": "",
+			"locationLabelHint": "",
+			"showLocationList": ""
 		},
 		"two": {
 			"header": "",
@@ -113,6 +113,7 @@
 		"online": "U toestel is online"
 	},
 	"phenomenon-selector": {
+		"header": "",
 		"hide-some-phenomenons": "verberg polluenten",
 		"list-all-phenomenons": "toon alle polluenten"
 	},
@@ -144,6 +145,12 @@
 		"generalize": "generaliseerde gegevens",
 		"header": "Verander de kleur van de tijdsreeks",
 		"zeroBasedYAxe": "tijdsreeks nullgebaseerd"
+	},
+	"user-location-list": {
+		"edit": "",
+		"edit-the-label": "",
+		"header": "",
+		"remove": ""
 	},
 	"value-panel": {
 		"forecast": {

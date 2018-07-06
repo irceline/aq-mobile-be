@@ -8,7 +8,7 @@ import { IrcelineSettingsProvider } from '../../providers/irceline-settings/irce
 import { LayerGeneratorService } from '../../providers/layer-generator/layer-generator';
 import { RefreshHandler } from '../../providers/refresh/refresh';
 import { MobileSettings } from '../../providers/settings/settings';
-import { MapPage } from '../map/map';
+import { CombinedMapPage } from '../combined-map/combined-map';
 
 @Component({
   selector: 'page-start',
@@ -61,7 +61,7 @@ export class StartPage {
   }
 
   public navigateToMap(phenomenonId: string) {
-    this.nav.push(MapPage, { phenomenonId });
+    this.nav.push(CombinedMapPage, { phenomenonId });
   }
 
   public setBounds(bounds: L.LatLngBoundsExpression) {
