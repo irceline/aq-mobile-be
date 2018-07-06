@@ -4,17 +4,15 @@ import { MapOptions } from 'leaflet';
 
 import { UserLocation, UserLocationListProvider } from '../../providers/user-location-list/user-location-list';
 
-interface EditableUserLocation extends UserLocation {
-  editStatus: boolean;
-}
-
 @Component({
   selector: 'modal-user-location-list',
   templateUrl: 'modal-user-location-list.html'
 })
 export class ModalUserLocationListComponent {
 
-  public userLocations: EditableUserLocation[];
+  public userLocations: UserLocation[];
+
+  public editing = {};
 
   public mapOptions: MapOptions = {
     maxZoom: 14
@@ -31,22 +29,17 @@ export class ModalUserLocationListComponent {
     this.viewCtrl.dismiss();
   }
 
-  public editLabel(location: EditableUserLocation) {
-    location.editStatus = true;
-  }
-
-  public remove(location: EditableUserLocation) {
+  public remove(location: UserLocation) {
     this.userLocationProvider.removeLocation(location);
     this.setLocations();
   }
 
-  public saveLocation(location: EditableUserLocation) {
-    location.editStatus = false;
+  public saveLocation(location: UserLocation) {
     this.userLocationProvider.saveLocation(location);
   }
 
   private setLocations() {
-    this.userLocations = this.userLocationProvider.getLocations() as EditableUserLocation[];
+    this.userLocations = this.userLocationProvider.getLocations() as UserLocation[];
   }
 
 }

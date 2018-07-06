@@ -12,20 +12,20 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-card *ngFor="let location of userLocations">
+  <ion-card *ngFor="let location of userLocations; let i = index;">
     <div style="height: 200px;">
       <n52-geometry-map-viewer [geometry]="location.point" [mapOptions]="mapOptions"></n52-geometry-map-viewer>
     </div>
-    <ion-item *ngIf="!location.editStatus" (click)="editLabel(location)">
+    <ion-item *ngIf="!editing[i]" (click)="editing[i] = true;">
       {{location.label}}
       <button ion-button clear item-end>
         {{'user-location-list.edit' | translate}}
       </button>
     </ion-item>
-    <ion-item *ngIf="location.editStatus">
+    <ion-item *ngIf="editing[i]">
       <ion-label stacked>{{'user-location-list.edit-the-label' | translate}}</ion-label>
       <ion-input type="text" [(ngModel)]="location.label"></ion-input>
-      <button ion-button clear item-right (click)="saveLocation(location)">confirm</button>
+      <button ion-button clear item-right (click)="saveLocation(location); editing[i] = false">confirm</button>
     </ion-item>
     <ion-item>
       <button ion-button icon-start clear item-end (click)="remove(location)">
