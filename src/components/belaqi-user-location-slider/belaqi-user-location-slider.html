@@ -1,0 +1,15 @@
+<ion-slides pager>
+
+  <ion-slide *ngFor="let loc of belaqiLocations">
+    <div class="location-label">
+      {{loc.locationLabel}}
+    </div>
+    <div class="location-date">
+      {{loc.date | date : 'medium'}}
+    </div>
+    <div class="wheel">
+      <belaqi-wheel [index]="loc.index"></belaqi-wheel>
+    </div>
+  </ion-slide>
+
+</ion-slides>

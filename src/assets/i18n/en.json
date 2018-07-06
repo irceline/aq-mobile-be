@@ -7,6 +7,12 @@
 		"hint": "Modelled value for your location",
 		"loading": "Loading BelAQI for your location"
 	},
+	"belaqi-user-location-slider": {
+		"current-location": "Current location"
+	},
+	"belaqi-wheel": {
+		"modelled-hint": "Modelled for this location"
+	},
 	"belaqi": {
 		"level": {
 			"bad": "Bad",

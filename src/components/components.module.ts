@@ -11,11 +11,8 @@ import { IonicModule } from 'ionic-angular';
 import { AirQualityIndexComponent } from './air-quality-index/air-quality-index';
 import { AirQualityLocationPanelComponent } from './air-quality-location-panel/air-quality-location-panel';
 import { BelaqiChartComponent } from './belaqi-chart/belaqi-chart';
+import { BelaqiUserLocationSliderComponent } from './belaqi-user-location-slider/belaqi-user-location-slider';
 import { BelaqiWheelComponent } from './belaqi-wheel/belaqi-wheel';
-// import { ClosestMeasuringStationPanelComponent } from './closest-measuring-station-panel/closest-measuring-station-panel';
-// import {
-// 	ClosestMeasuringStationPanelEntryComponent,
-// } from './closest-measuring-station-panel/closest-measuring-station-panel-entry';
 import {
 	MobileDatasetByStationSelectorComponent,
 } from './dataset-by-station-selector/dataset-by-station-selector.component';
@@ -49,6 +46,7 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		AirQualityIndexComponent,
 		AirQualityLocationPanelComponent,
 		BelaqiChartComponent,
+		BelaqiUserLocationSliderComponent,
 		BelaqiWheelComponent,
 		LocatedValueNotificationComponent,
 		MobileDatasetByStationSelectorComponent,
@@ -88,6 +86,7 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		AirQualityIndexComponent,
 		AirQualityLocationPanelComponent,
 		BelaqiChartComponent,
+		BelaqiUserLocationSliderComponent,
 		BelaqiWheelComponent,
 		LocatedValueNotificationComponent,
 		MobileDatasetByStationSelectorComponent,

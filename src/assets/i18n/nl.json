@@ -7,6 +7,12 @@
 		"hint": "",
 		"loading": ""
 	},
+	"belaqi-user-location-slider": {
+		"current-location": ""
+	},
+	"belaqi-wheel": {
+		"modelled-hint": ""
+	},
 	"belaqi": {
 		"level": {
 			"bad": "",

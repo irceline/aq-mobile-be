@@ -18,12 +18,12 @@
     <b>27/06 - SMOG-alarm: </b> Hoge fijnstof concentraties - stook geen hout
   </ion-card>
 
-  <ion-card>
+  <!-- <ion-card>
     <air-quality-location-panel></air-quality-location-panel>
-  </ion-card>
+  </ion-card> -->
 
-  <ion-card style="height: 300px;">
-    <belaqi-wheel></belaqi-wheel>
+  <ion-card>
+    <belaqi-user-location-slider></belaqi-user-location-slider>
   </ion-card>
 
   <!-- <ion-card class="index-card">
@@ -32,18 +32,14 @@
     </ion-card-content>
   </ion-card> -->
 
-  <ion-card class="map-card">
-    <!-- <ion-card-header>
-      <span>{{'start.currently' | translate}}</span>
-      <span *ngIf="selectedPhenomenon">{{selectedPhenomenon.label}}</span>
-    </ion-card-header> -->
+  <!-- <ion-card class="map-card">
     <ion-card-content>
       <div class="map">
         <n52-geometry-map-viewer mapId="start-view" [overlayMaps]="overlayMaps" [fitBounds]="fitBounds" [mapOptions]="mapOptions"
           [layerControlOptions]="layerControlOptions"></n52-geometry-map-viewer>
       </div>
     </ion-card-content>
-  </ion-card>
+  </ion-card> -->
 
   <ion-card>
     <belaqi-chart></belaqi-chart>

@@ -18,8 +18,7 @@ export class UserLocationListProvider {
   constructor(
     protected storage: Storage
   ) {
-    this.storage.get(STORAGE_KEY)
-      .then(res => this.userLocations = res ? res : []);
+    this.loadLocations().then(res => this.userLocations = res ? res : []);;
   }
 
   public addLocation(label: string, point: Point) {
@@ -29,6 +28,10 @@ export class UserLocationListProvider {
       id: new Date().getTime()
     });
     this.storeLocations();
+  }
+
+  public getLocationsPromise(): Promise<UserLocation[]> {
+    return this.loadLocations();
   }
 
   public getLocations(): UserLocation[] {
@@ -52,6 +55,10 @@ export class UserLocationListProvider {
 
   private storeLocations() {
     this.storage.set(STORAGE_KEY, this.userLocations);
+  }
+
+  private loadLocations(): Promise<UserLocation[]> {
+    return this.storage.get(STORAGE_KEY);
   }
 
 }

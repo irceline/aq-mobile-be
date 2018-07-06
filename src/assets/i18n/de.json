@@ -7,6 +7,12 @@
 		"hint": "Modelliert für deinen Standort",
 		"loading": "Lädt den BelAQI für deinen Standort"
 	},
+	"belaqi-user-location-slider": {
+		"current-location": "Aktuelle Position"
+	},
+	"belaqi-wheel": {
+		"modelled-hint": "Modelliert für diesen Standort"
+	},
 	"belaqi": {
 		"level": {
 			"bad": "Schlecht",
