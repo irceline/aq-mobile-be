@@ -38,25 +38,24 @@
       <div class="map">
         <n52-station-map-selector mapId="combined-map" [serviceUrl]="providerUrl" [filter]="phenomenonFilter" [avoidZoomToSelection]="avoidZoomToSelection"
           [statusIntervals]="true" [zoomControlOptions]="zoomControlOptions" [overlayMaps]="overlayMaps" [fitBounds]="fitBounds"
-          [layerControlOptions]="layerControlOptions" (onSelected)="onStationSelected($event)" [cluster]="clusterStations"
-          (onContentLoading)="onMapLoading($event)"></n52-station-map-selector>
+          (onSelected)="onStationSelected($event)" [cluster]="clusterStations" (onContentLoading)="onMapLoading($event)"></n52-station-map-selector>
       </div>
     </div>
     <div>
       <ion-segment class="time" [(ngModel)]="time" (ngModelChange)="onTimeChange()">
-        <ion-segment-button value="currently">
+        <ion-segment-button value="current">
           currently
         </ion-segment-button>
-        <ion-segment-button value="today">
+        <ion-segment-button value="today" [disabled]="isDisabled()">
           today
         </ion-segment-button>
-        <ion-segment-button value="tomorrow">
+        <ion-segment-button value="tomorrow" [disabled]="isDisabled()">
           tomorrow
         </ion-segment-button>
-        <ion-segment-button value="today2">
+        <ion-segment-button value="today2" [disabled]="isDisabled()">
           today+2
         </ion-segment-button>
-        <ion-segment-button value="today3">
+        <ion-segment-button value="today3" [disabled]="isDisabled()">
           today+3
         </ion-segment-button>
       </ion-segment>
