@@ -25,6 +25,7 @@ export class NearestMeasuringStationPanelEntryComponent {
 
   private nearestStation: Station;
   public stationDistance: number;
+  public stationLabel: string;
   public lastStationaryValue: FirstLastValue;
   public uom: string;
   public backgroundColor: string;
@@ -67,6 +68,7 @@ export class NearestMeasuringStationPanelEntryComponent {
           this.nearestStation = station;
         }
       })
+      this.stationLabel = this.nearestStation.properties.label;
       this.api.getTimeseries(url, {
         phenomenon: phenomenonId,
         station: this.nearestStation.properties.id,
