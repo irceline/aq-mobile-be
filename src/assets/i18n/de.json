@@ -108,7 +108,14 @@
 		"header": "Karte",
 		"loading": "Lade",
 		"select-phenomenon": "Wähle Phänomen",
-		"show-in-diagram": "Zeige {{value}} Zeitreihen im Diagramm"
+		"show-in-diagram": "Zeige {{value}} Zeitreihen im Diagramm",
+		"time": {
+			"current": "Derzeit",
+			"today": "Heute",
+			"today+2": "Übermorgen",
+			"today+3": "In 3 Tagen",
+			"tomorrow": "Morgen"
+		}
 	},
 	"menu": {
 		"header": "Menü",

@@ -108,7 +108,14 @@
 		"header": "Map",
 		"loading": "loading",
 		"select-phenomenon": "Choose a pollutant",
-		"show-in-diagram": "Show {{value}} timeseries in diagram"
+		"show-in-diagram": "Show {{value}} timeseries in diagram",
+		"time": {
+			"current": "Current",
+			"today": "Today",
+			"today+2": "Today+2",
+			"today+3": "Today+3",
+			"tomorrow": "Tomorrow"
+		}
 	},
 	"menu": {
 		"header": "Menu",

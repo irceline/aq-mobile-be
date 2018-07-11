@@ -108,7 +108,14 @@
 		"header": "carte",
 		"loading": "chargement en cours",
 		"select-phenomenon": "choisissez un polluant",
-		"show-in-diagram": "Afficher timeseries {{value}} dans le diagramme"
+		"show-in-diagram": "Afficher timeseries {{value}} dans le diagramme",
+		"time": {
+			"current": "",
+			"today": "",
+			"today+2": "",
+			"today+3": "",
+			"tomorrow": ""
+		}
 	},
 	"menu": {
 		"header": "Menu",

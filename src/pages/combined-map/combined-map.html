@@ -44,19 +44,19 @@
     <div>
       <ion-segment class="time" [(ngModel)]="time" (ngModelChange)="onTimeChange()">
         <ion-segment-button value="current">
-          currently
+          {{'map.time.current' | translate}}
         </ion-segment-button>
         <ion-segment-button value="today" [disabled]="isDisabled()">
-          today
+          {{'map.time.today' | translate}}
         </ion-segment-button>
         <ion-segment-button value="tomorrow" [disabled]="isDisabled()">
-          tomorrow
+          {{'map.time.tomorrow' | translate}}
         </ion-segment-button>
         <ion-segment-button value="today2" [disabled]="isDisabled()">
-          today+2
+          {{'map.time.today+2' | translate}}
         </ion-segment-button>
         <ion-segment-button value="today3" [disabled]="isDisabled()">
-          today+3
+          {{'map.time.today+3' | translate}}
         </ion-segment-button>
       </ion-segment>
     </div>

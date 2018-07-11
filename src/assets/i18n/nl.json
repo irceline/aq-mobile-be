@@ -108,7 +108,14 @@
 		"header": "Kaart",
 		"loading": "bezig te laden",
 		"select-phenomenon": "kies een polluent",
-		"show-in-diagram": "toon {{value}} tijdsreeks op een diagram"
+		"show-in-diagram": "toon {{value}} tijdsreeks op een diagram",
+		"time": {
+			"current": "",
+			"today": "",
+			"today+2": "",
+			"today+3": "",
+			"tomorrow": ""
+		}
 	},
 	"menu": {
 		"header": "Menu",
