@@ -4,6 +4,8 @@ import { Platform } from 'ionic-angular';
 import { Subscription } from 'rxjs';
 
 import { IrcelineSettingsProvider } from '../../providers/irceline-settings/irceline-settings';
+import { LocateProvider } from '../../providers/locate/locate';
+import { RefreshHandler } from '../../providers/refresh/refresh';
 
 @Component({
   selector: 'network-panel',
@@ -14,27 +16,38 @@ export class NetworkPanelComponent {
   public lastupdate: Date;
   public offline: boolean = false;
   public backOnline: boolean = false;
+  public geolocationEnabled: boolean;
 
   private networkChange: Subscription;
 
   constructor(
     private ircelineSettings: IrcelineSettingsProvider,
     private network: Network,
-    private platform: Platform
+    private platform: Platform,
+    private locate: LocateProvider,
+    private refresh: RefreshHandler
   ) {
+    this.runChecks();
+    this.refresh.onRefresh.subscribe(() => this.runChecks());
+  }
 
+  public ngOnDestroy() {
+    if (this.networkChange) {
+      this.networkChange.unsubscribe();
+    }
+  }
+
+  private runChecks() {
     this.ircelineSettings.getSettings(false).subscribe(ircelineSettings => {
       this.lastupdate = ircelineSettings.lastupdate;
     });
-
     if (this.platform.is('cordova')) {
-
       if (this.network.type === 'none') {
         this.offline = true;
       }
-
       this.networkChange = this.network.onchange().subscribe(() => this.updateNetworkStatus());
     }
+    this.locate.isGeolocationEnabled().subscribe(res => this.geolocationEnabled = res);
   }
 
   private updateNetworkStatus() {
@@ -51,12 +64,6 @@ export class NetworkPanelComponent {
           this.offline = false;
           break;
       }
-    }
-  }
-
-  public ngOnDestroy() {
-    if (this.networkChange) {
-      this.networkChange.unsubscribe();
     }
   }
 

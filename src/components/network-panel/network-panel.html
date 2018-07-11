@@ -2,4 +2,5 @@
   <div>{{'menu.lastUpdate' | translate}}: {{lastupdate | date: 'medium'}}</div>
   <div *ngIf="offline" style="color: red;">{{'network.offline' | translate}}</div>
   <div *ngIf="backOnline">{{'network.online' | translate}}</div>
+  <div *ngIf="!geolocationEnabled">{{'network.geolocationDisabled' | translate}}</div>
 </div>

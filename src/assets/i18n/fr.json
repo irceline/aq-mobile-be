@@ -126,6 +126,7 @@
 		"header": ""
 	},
 	"network": {
+		"geolocationDisabled": "",
 		"offline": "",
 		"online": ""
 	},

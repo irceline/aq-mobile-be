@@ -126,6 +126,7 @@
 		"header": ""
 	},
 	"network": {
+		"geolocationDisabled": "",
 		"offline": "U toestel offline",
 		"online": "U toestel is online"
 	},
