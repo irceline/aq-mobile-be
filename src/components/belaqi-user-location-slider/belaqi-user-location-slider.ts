@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { GeoSearch } from '@helgoland/map';
 import { Geoposition } from '@ionic-native/geolocation';
 import { TranslateService } from '@ngx-translate/core';
 import { forkJoin } from 'rxjs';
@@ -28,21 +29,25 @@ export class BelaqiUserLocationSliderComponent {
     private userLocationProvider: UserLocationListProvider,
     private ircelineSettings: IrcelineSettingsProvider,
     private locate: LocateProvider,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private geoSearch: GeoSearch
   ) {
     this.loadBelaqis();
     this.loadBelaqiForCurrentLocation();
   }
 
   private loadBelaqiForCurrentLocation() {
+
     this.locate.onPositionUpdate.subscribe((pos: Geoposition) => {
       const ircelSetObs = this.ircelineSettings.getSettings(false);
       const belaqiObs = this.belaqiIndexProvider.getValue(pos.coords.latitude, pos.coords.longitude);
-      forkJoin([ircelSetObs, belaqiObs]).subscribe(value => {
+      const reverseObs = this.geoSearch.reverse({ type: 'Point', coordinates: [pos.coords.latitude, pos.coords.longitude] });
+      forkJoin([ircelSetObs, belaqiObs, reverseObs]).subscribe(value => {
+        const locationLabel = value[2].displayName || this.translate.instant('belaqi-user-location-slider.current-location');
         const previous = this.belaqiLocations.findIndex(e => e.isCurrent) || -1;
         const current: BelaqiLocation = {
           index: value[1],
-          locationLabel: this.translate.instant('belaqi-user-location-slider.current-location'),
+          locationLabel,
           date: value[0].lastupdate,
           isCurrent: true
         };
