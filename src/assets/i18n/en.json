@@ -114,6 +114,10 @@
 		"header": "Menu",
 		"lastUpdate": "Last update"
 	},
+	"nearest-measuring-station-panel": {
+		"geoloction-disabled": "The nearest stations cannot be found since the location service of your device is deactivated.",
+		"header": "Nearest measuring station"
+	},
 	"network": {
 		"offline": "Your device is offline",
 		"online": "Your device is online"
@@ -142,7 +146,6 @@
 		"header": "Position of the station"
 	},
 	"start": {
-		"currently": "Currently: ",
 		"forecast-map": {
 			"header": "Forecast-Map"
 		}

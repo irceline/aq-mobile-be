@@ -14,6 +14,7 @@ import {
 } from '@helgoland/map';
 import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
 import { BackgroundMode } from '@ionic-native/background-mode';
+import { Diagnostic } from '@ionic-native/diagnostic';
 import { FCM } from '@ionic-native/fcm';
 import { Geolocation } from '@ionic-native/geolocation';
 import { LocalNotifications } from '@ionic-native/local-notifications';
@@ -111,6 +112,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BackgroundGeolocation,
     BackgroundMode,
     BelaqiIndexProvider,
+    Diagnostic,
     FCM,
     ForecastValueProvider,
     Geolocation,

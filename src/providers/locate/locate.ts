@@ -1,6 +1,8 @@
 import { EventEmitter, Injectable } from '@angular/core';
+import { Diagnostic } from '@ionic-native/diagnostic';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 import { Platform } from 'ionic-angular/platform/platform';
+import { Observable, Observer } from 'rxjs';
 
 @Injectable()
 export class LocateProvider {
@@ -9,9 +11,24 @@ export class LocateProvider {
 
   constructor(
     private platform: Platform,
-    private geolocate: Geolocation
-  ) { 
-    this.determinePosition();
+    private geolocate: Geolocation,
+    public diagnostic: Diagnostic
+  ) {
+    this.isGeolocationEnabled().subscribe(res => res ? this.determinePosition() : false);
+  }
+
+  public isGeolocationEnabled(): Observable<boolean> {
+    return new Observable((observer: Observer<boolean>) => {
+      if (this.platform.is('cordova')) {
+        this.diagnostic.isGpsLocationEnabled().then((res) => {
+          observer.next(res);
+          observer.complete();
+        });
+      } else {
+        observer.next(true);
+        observer.complete();
+      }
+    });
   }
 
   private determinePosition() {

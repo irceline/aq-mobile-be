@@ -114,6 +114,10 @@
 		"header": "Menu",
 		"lastUpdate": "laatste actualisatie"
 	},
+	"nearest-measuring-station-panel": {
+		"geoloction-disabled": "",
+		"header": ""
+	},
 	"network": {
 		"offline": "U toestel offline",
 		"online": "U toestel is online"
@@ -142,7 +146,6 @@
 		"header": "locatie van het station"
 	},
 	"start": {
-		"currently": "Huidig:",
 		"forecast-map": {
 			"header": "Voorspellingskaart"
 		}

@@ -106,5 +106,6 @@
     </plugin>
     <plugin name="cordova-plugin-fcm" spec="^2.1.2" />
     <plugin name="cordova-plugin-network-information" spec="^2.0.1" />
-    <plugin name="cordova-sqlite-storage" spec="^2.3.2" />
+    <plugin name="cordova-sqlite-storage" spec="^2.3.3" />
+    <plugin name="cordova.plugins.diagnostic" spec="^4.0.8" />
 </widget>

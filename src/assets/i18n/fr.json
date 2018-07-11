@@ -114,6 +114,10 @@
 		"header": "Menu",
 		"lastUpdate": "dernière mise à jour"
 	},
+	"nearest-measuring-station-panel": {
+		"geoloction-disabled": "",
+		"header": ""
+	},
 	"network": {
 		"offline": "",
 		"online": ""
@@ -142,7 +146,6 @@
 		"header": "position de la station"
 	},
 	"start": {
-		"currently": "actuellement: ",
 		"forecast-map": {
 			"header": "carte de prévision"
 		}

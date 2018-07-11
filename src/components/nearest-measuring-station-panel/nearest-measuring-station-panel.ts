@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { Geoposition } from '@ionic-native/geolocation';
+
+import { LocateProvider } from '../../providers/locate/locate';
 
 interface PanelEntry {
   label: string;
@@ -15,7 +16,7 @@ export class NearestMeasuringStationPanelComponent {
   @Output()
   public onSelect: EventEmitter<string> = new EventEmitter();
 
-  public position: Geoposition;
+  public geolocationEnabled: boolean;
 
   public entries: PanelEntry[] = [
     {
@@ -40,7 +41,11 @@ export class NearestMeasuringStationPanelComponent {
     }
   ];
 
-  constructor() { }
+  constructor(
+    private locate: LocateProvider
+  ) {
+    this.locate.isGeolocationEnabled().subscribe(res => this.geolocationEnabled = res)
+  }
 
   public select(id: string) {
     this.onSelect.emit(id);

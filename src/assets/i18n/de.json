@@ -114,6 +114,10 @@
 		"header": "Menü",
 		"lastUpdate": "Letztes Update"
 	},
+	"nearest-measuring-station-panel": {
+		"geoloction-disabled": "Die nächstgelegenen Stationen können nicht ermittelt werden, da die Standortermittlung des Gerätes nicht aktiviert ist.",
+		"header": "Nächstgelegene Station"
+	},
 	"network": {
 		"offline": "Dein Handy ist offline",
 		"online": "Dein Handy ist online"
@@ -142,7 +146,6 @@
 		"header": "Position der Station"
 	},
 	"start": {
-		"currently": "Derzeit: ",
 		"forecast-map": {
 			"header": "Vorhersage-Karte"
 		}
