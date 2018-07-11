@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Platform, ToastController } from 'ionic-angular';
 
 import { RefreshHandler } from '../../providers/refresh/refresh';
@@ -11,6 +12,7 @@ export class RefreshButtonComponent {
 
   constructor(
     private toast: ToastController,
+    private translate: TranslateService,
     private platform: Platform,
     private refresher: RefreshHandler
   ) { }
@@ -18,7 +20,7 @@ export class RefreshButtonComponent {
   public refresh() {
     if (this.platform.is('cordova')) {
       this.toast.create({
-        message: 'Refresh all',
+        message: this.translate.instant('refresh-button.message'),
         duration: 3000
       }).present();
     }

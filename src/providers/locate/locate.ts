@@ -4,6 +4,8 @@ import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 import { Platform } from 'ionic-angular/platform/platform';
 import { Observable, Observer } from 'rxjs';
 
+import { RefreshHandler } from '../refresh/refresh';
+
 @Injectable()
 export class LocateProvider {
 
@@ -12,8 +14,14 @@ export class LocateProvider {
   constructor(
     private platform: Platform,
     private geolocate: Geolocation,
-    public diagnostic: Diagnostic
+    private diagnostic: Diagnostic,
+    private refresher: RefreshHandler
   ) {
+    this.checkAndDetermineLocation();
+    this.refresher.onRefresh.subscribe(res => this.checkAndDetermineLocation());
+  }
+
+  private checkAndDetermineLocation() {
     this.isGeolocationEnabled().subscribe(res => res ? this.determinePosition() : false);
   }
 

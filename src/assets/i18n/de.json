@@ -134,6 +134,9 @@
 		"hide-some-phenomenons": "Verstecke Phänomene",
 		"list-all-phenomenons": "Zeige alle Phänomene"
 	},
+	"refresh-button": {
+		"message": "Aktualisiert"
+	},
 	"settings": {
 		"common": "Allgemein",
 		"header": "Einstellungen",

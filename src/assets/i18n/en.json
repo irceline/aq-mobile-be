@@ -134,6 +134,9 @@
 		"hide-some-phenomenons": "Hide pollutants",
 		"list-all-phenomenons": "List all pollutants"
 	},
+	"refresh-button": {
+		"message": "Refresh all"
+	},
 	"settings": {
 		"common": "Common",
 		"header": "Settings",
