@@ -1,3 +1,8 @@
+import { registerLocaleData } from '@angular/common';
+import localeDe from '@angular/common/locales/de';
+import localeEn from '@angular/common/locales/en';
+import localeFr from '@angular/common/locales/fr';
+import localeNl from '@angular/common/locales/nl';
 import { Component, ViewChild } from '@angular/core';
 import { Settings, SettingsService } from '@helgoland/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -14,12 +19,6 @@ import { StartPage } from '../pages/start/start';
 import { IrcelineSettings, IrcelineSettingsProvider } from '../providers/irceline-settings/irceline-settings';
 import { LocalNotificationsProvider } from '../providers/local-notification/local-notification';
 import { PushNotificationsProvider } from '../providers/push-notifications/push-notifications';
-import { registerLocaleData } from '@angular/common';
-
-import localeDe from '@angular/common/locales/de';
-import localeEn from '@angular/common/locales/en';
-import localeFr from '@angular/common/locales/fr';
-import localeNl from '@angular/common/locales/nl';
 
 @Component({
   templateUrl: 'app.html'

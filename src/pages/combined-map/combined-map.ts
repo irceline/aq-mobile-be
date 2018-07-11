@@ -119,6 +119,15 @@ export class CombinedMapPage implements AfterViewInit {
 
   public onTimeChange(): void {
     this.showLayer();
+    this.setPhenomenonFilter();
+  }
+
+  private setPhenomenonFilter() {
+    if (this.time != TimeLabel.current) {
+      this.phenomenonFilter = { phenomenon: '' };
+    } else {
+      this.phenomenonFilter = { phenomenon: this.selectedPhenomenon.id };
+    }
   }
 
   public openOtherPhenomena() {
@@ -132,7 +141,6 @@ export class CombinedMapPage implements AfterViewInit {
     modal.onDidDismiss((selectedPhenomenon: Phenomenon) => {
       if (selectedPhenomenon) {
         this.setPhenomenon(selectedPhenomenon);
-        // this.selectedOtherPhenom = selectedPhenomenon.label;
       }
     });
   }
@@ -159,7 +167,7 @@ export class CombinedMapPage implements AfterViewInit {
 
   private setPhenomenon(selectedPhenomenon: Phenomenon) {
     this.selectedPhenomenon = selectedPhenomenon;
-    this.phenomenonFilter = { phenomenon: selectedPhenomenon.id };
+    this.setPhenomenonFilter();
     this.phenomenonLabel = this.getPhenomenonLabel(selectedPhenomenon.id);
   }
 
