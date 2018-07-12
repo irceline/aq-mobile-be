@@ -47,7 +47,8 @@ export class NetworkPanelComponent {
       }
       this.networkChange = this.network.onchange().subscribe(() => this.updateNetworkStatus());
     }
-    this.locate.isGeolocationEnabled().subscribe(res => this.geolocationEnabled = res);
+    this.geolocationEnabled = this.locate.locationEnabled;
+    this.locate.onLocationStateChange.subscribe(res => this.geolocationEnabled = res);
   }
 
   private updateNetworkStatus() {

@@ -45,6 +45,11 @@ export class NearestMeasuringStationPanelEntryComponent {
     private locate: LocateProvider
   ) {
     this.locate.onPositionUpdate.subscribe(pos => this.determineNextStationValue(pos));
+    this.locate.onLocationStateChange.subscribe(res => {
+      if (res && this.locate.lastPosition) {
+        this.determineNextStationValue(this.locate.lastPosition);
+      }
+    })
   }
 
   public select() {
