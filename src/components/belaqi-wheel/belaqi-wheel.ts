@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { AfterContentInit, Component, ElementRef, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Chart, ChartOptions } from 'chart.js';
 
@@ -14,7 +14,7 @@ interface ExtendedChartOptions extends ChartOptions {
   selector: 'belaqi-wheel',
   templateUrl: 'belaqi-wheel.html'
 })
-export class BelaqiWheelComponent implements AfterContentInit {
+export class BelaqiWheelComponent implements AfterContentInit, OnChanges {
 
   @Input()
   public index: number;
@@ -29,6 +29,12 @@ export class BelaqiWheelComponent implements AfterContentInit {
 
   public ngAfterContentInit(): void {
     this.drawWheel();
+  }
+
+  public ngOnChanges(changes: SimpleChanges) {
+    if (changes.index) {
+      this.drawWheel();
+    }
   }
 
   private drawWheel() {
@@ -92,23 +98,25 @@ export class BelaqiWheelComponent implements AfterContentInit {
             wrapText(ctx, this.translate.instant('belaqi-wheel.modelled-hint'), centerX, centerY + (radius * 1.7), 100, 20);
 
             function wrapText(context: CanvasRenderingContext2D, text: string, x: number, y: number, maxWidth: number, lineHeight: number) {
-              var words = text.split(' ');
-              var line = '';
-
-              for (var n = 0; n < words.length; n++) {
-                var testLine = line + words[n] + ' ';
-                var metrics = context.measureText(testLine);
-                var testWidth = metrics.width;
-                if (testWidth > maxWidth && n > 0) {
-                  context.fillText(line, x, y);
-                  line = words[n] + ' ';
-                  y += lineHeight;
+              if (text) {
+                var words = text.split(' ');
+                var line = '';
+  
+                for (var n = 0; n < words.length; n++) {
+                  var testLine = line + words[n] + ' ';
+                  var metrics = context.measureText(testLine);
+                  var testWidth = metrics.width;
+                  if (testWidth > maxWidth && n > 0) {
+                    context.fillText(line, x, y);
+                    line = words[n] + ' ';
+                    y += lineHeight;
+                  }
+                  else {
+                    line = testLine;
+                  }
                 }
-                else {
-                  line = testLine;
-                }
+                context.fillText(line, x, y);
               }
-              context.fillText(line, x, y);
             }
           }
         }],

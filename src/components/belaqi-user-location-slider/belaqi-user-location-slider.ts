@@ -13,7 +13,6 @@ interface BelaqiLocation {
   index: number;
   locationLabel: string;
   date: Date;
-  isCurrent: boolean;
 }
 
 @Component({
@@ -23,6 +22,7 @@ interface BelaqiLocation {
 export class BelaqiUserLocationSliderComponent {
 
   public belaqiLocations: BelaqiLocation[] = [];
+  public currentLocation: BelaqiLocation;
 
   constructor(
     private belaqiIndexProvider: BelaqiIndexProvider,
@@ -44,18 +44,11 @@ export class BelaqiUserLocationSliderComponent {
       const reverseObs = this.geoSearch.reverse({ type: 'Point', coordinates: [pos.coords.latitude, pos.coords.longitude] });
       forkJoin([ircelSetObs, belaqiObs, reverseObs]).subscribe(value => {
         const locationLabel = value[2].displayName || this.translate.instant('belaqi-user-location-slider.current-location');
-        const previous = this.belaqiLocations.findIndex(e => e.isCurrent) || -1;
-        const current: BelaqiLocation = {
+        this.currentLocation = {
           index: value[1],
           locationLabel,
-          date: value[0].lastupdate,
-          isCurrent: true
+          date: value[0].lastupdate
         };
-        if (previous > -1) {
-          this.belaqiLocations[previous] = current;
-        } else {
-          this.belaqiLocations.push(current);
-        }
       }, error => { });
     });
   }
@@ -70,8 +63,7 @@ export class BelaqiUserLocationSliderComponent {
               this.belaqiLocations.push({
                 index: res,
                 locationLabel: loc.label,
-                date: ircelineSettings.lastupdate,
-                isCurrent: false
+                date: ircelineSettings.lastupdate
               });
             }
           )

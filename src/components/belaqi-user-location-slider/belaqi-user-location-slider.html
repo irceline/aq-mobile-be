@@ -1,11 +1,22 @@
 <ion-slides pager>
+  <ion-slide *ngIf="currentLocation">
+    <div class="location-label">
+      {{currentLocation.locationLabel}}
+    </div>
+    <div class="location-date">
+      <span>{{currentLocation.date | date : 'medium'}} </span>
+      <span> - {{'belaqi-user-location-slider.current-location' | translate}}</span>
+    </div>
+    <div class="wheel">
+      <belaqi-wheel [index]="currentLocation.index"></belaqi-wheel>
+    </div>
+  </ion-slide>
   <ion-slide *ngFor="let loc of belaqiLocations">
     <div class="location-label">
       {{loc.locationLabel}}
     </div>
     <div class="location-date">
       <span>{{loc.date | date : 'medium'}} </span>
-      <span *ngIf="loc.isCurrent"> - {{'belaqi-user-location-slider.current-location' | translate}}</span>
     </div>
     <div class="wheel">
       <belaqi-wheel [index]="loc.index"></belaqi-wheel>
