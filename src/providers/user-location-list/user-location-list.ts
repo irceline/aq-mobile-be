@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Point } from 'geojson';
+import { Observable, Observer } from 'rxjs';
 
 export interface UserLocation {
   id: number;
@@ -18,7 +19,7 @@ export class UserLocationListProvider {
   constructor(
     protected storage: Storage
   ) {
-    this.loadLocations().then(res => this.userLocations = res ? res : []);;
+    this.loadLocations().subscribe(res => this.userLocations = res);
   }
 
   public addLocation(label: string, point: Point) {
@@ -30,7 +31,7 @@ export class UserLocationListProvider {
     this.storeLocations();
   }
 
-  public getLocationsPromise(): Promise<UserLocation[]> {
+  public getLocationsPromise(): Observable<UserLocation[]> {
     return this.loadLocations();
   }
 
@@ -57,8 +58,17 @@ export class UserLocationListProvider {
     this.storage.set(STORAGE_KEY, this.userLocations);
   }
 
-  private loadLocations(): Promise<UserLocation[]> {
-    return this.storage.get(STORAGE_KEY);
+  private loadLocations(): Observable<UserLocation[]> {
+    return new Observable<UserLocation[]>((observer: Observer<UserLocation[]>) => {
+      this.storage.get(STORAGE_KEY).then(res => {
+        if (res instanceof Array) {
+          observer.next(res);
+        } else {
+          observer.next([]);
+        }
+        observer.complete()
+      })
+    });
   }
 
 }
