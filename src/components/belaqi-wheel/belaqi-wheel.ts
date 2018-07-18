@@ -131,22 +131,23 @@ export class BelaqiWheelComponent implements AfterContentInit, OnChanges {
           },
           values: {
             index: this.index
-          }
+          },
+          events: []
         } as ExtendedChartOptions,
         data: {
           datasets: [{
             data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
             backgroundColor: [
-              "#0000FF",
-              "#0099FF",
-              "#009900",
-              "#00FF00",
-              "#FFFF00",
-              "#FFBB00",
-              "#FF6600",
-              "#FF0000",
-              "#990000",
-              "#660000",
+              this.belaqi.getColorForIndex(1),
+              this.belaqi.getColorForIndex(2),
+              this.belaqi.getColorForIndex(3),
+              this.belaqi.getColorForIndex(4),
+              this.belaqi.getColorForIndex(5),
+              this.belaqi.getColorForIndex(6),
+              this.belaqi.getColorForIndex(7),
+              this.belaqi.getColorForIndex(8),
+              this.belaqi.getColorForIndex(9),
+              this.belaqi.getColorForIndex(10),
               '#FFFFFF'
             ]
           }]

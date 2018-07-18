@@ -1,188 +1,202 @@
 {
-  "air-quality-index": {
-    "header": "BelAQI index in:"
-  },
-  "air-quality-location-panel": {
-    "error": "Es konnte kein Index für dein Standort Could not get a Index for you location",
-    "hint": "Modelliert für deinen Standort",
-    "loading": "Lädt den BelAQI für deinen Standort"
-  },
-  "belaqi-user-location-slider": {
-    "current-location": "Aktuelle Position"
-  },
-  "belaqi-wheel": {
-    "modelled-hint": "Modelliert für diesen Standort"
-  },
-  "belaqi": {
-    "level": {
-      "bad": "Schlecht",
-      "excellent": "Ausgezeichnet",
-      "fairly-good": "Einigermaßen gut",
-      "good": "Gut",
-      "horrible": "Entsetzlich",
-      "moderate": "Mäßig",
-      "poor": "Dürftig",
-      "very-bad": "Sehr schlecht",
-      "very-good": "Sehr gut",
-      "very-poor": "Sehr dürftig"
-    }
-  },
-  "change-timespan": {
-    "custom": {
-      "end": "Ende",
-      "header": "Freier Zeitraum",
-      "start": "Start"
-    },
-    "header": "Ändere Zeitraum",
-    "predefined": {
-      "current-month": "Derzeitiger Monat",
-      "current-week": "Derzeitige Woche",
-      "current-year": "Derzeitiges Jahr",
-      "header": "Vordefinierter Zeitraum",
-      "last-hour": "Letzte Stunde",
-      "last-month": "Letzter Monat",
-      "last-week": "Letzte Woche",
-      "last-year": "Letztes Jahr",
-      "today": "Heute",
-      "today-yesterday": "Heute und gestern",
-      "yesterday": "Gestern"
-    }
-  },
-  "controls": {
-    "cancel": "Abbrecehn",
-    "close": "Schließen",
-    "ok": "Ok"
-  },
-  "diagram": {
-    "header": "Diagramm",
-    "loading": "Lade",
-    "no-timeseries-selected": "Keine Zeitreihe selektiert!",
-    "select-timeseries": "Bitte wähle eine Zeitreihe"
-  },
-  "intro": {
-    "close-introduction": "Beenden",
-    "four": {
-      "header": "Welche Benachrichtigungen wollen sie erhalten?",
-      "option": {
-        "alert": "Informationen",
-        "information": "Alarme",
-        "personal": "Individuelle persönliche Alarme"
-      }
-    },
-    "header": "Einführung",
-    "next-step": "Nächste",
-    "one": {
-      "header": "Wollen sie die Sprache ändern?",
-      "option": {
-        "dutch": "Nederlands",
-        "english": "English",
-        "french": "Français",
-        "german": "Deutsch"
-      }
-    },
-    "three": {
-      "addLocationToList": "Füge zur Liste der Standorte",
-      "header": "Für welche Standorte wollen Sie Benachrichtigungen in der App erhalten?",
-      "locationLabelHint": "Änder die Standortbezeichnung",
-      "showLocationList": "Zeige vorhandene Standorte"
-    },
-    "two": {
-      "header": "Von welchen Umweltagenturen wollen Sie Benachrichtigungen erhalten?",
-      "option": {
-        "brussels": "Vlaamse Milieumaatschappij (VMM) - Dutch only",
-        "flanders": "Agence wallonne de l’air et du climat (AwAC) - French only",
-        "wallonia": "Brussels Environment - Dutch and French only"
-      }
-    }
-  },
-  "legend": {
-    "first-value-at": "Erster Wert am",
-    "header": "Legend",
-    "last-value-at": "Letzter Wert am"
-  },
-  "map": {
-    "dataset-selection-hint": "Bitte wählen Sie eine oder mehrere Zeitreihen zur Darstellung aus",
-    "geosearch": {
-      "placeholder": "Suche..."
-    },
-    "header": "Karte",
-    "loading": "Lade",
-    "select-phenomenon": "Wähle Phänomen",
-    "show-in-diagram": "Zeige {{value}} Zeitreihen im Diagramm",
-    "time": {
-      "current": "Derzeit",
-      "today": "Heute",
-      "today+2": "Übermorgen",
-      "today+3": "In 3 Tagen",
-      "tomorrow": "Morgen"
-    }
-  },
-  "menu": {
-    "header": "Menü",
-    "lastUpdate": "Letztes Update"
-  },
-  "nearest-measuring-station-panel": {
-    "geoloction-disabled": "Die nächstgelegenen Stationen können nicht ermittelt werden, da die Standortermittlung des Gerätes nicht aktiviert ist.",
-    "header": "Nächstgelegene Station"
-  },
-  "network": {
-    "geolocationDisabled": "Die Standortermittlung ist deaktiviert",
-    "offline": "Dein Handy ist offline",
-    "online": "Dein Handy ist online"
-  },
-  "phenomenon-selector": {
-    "header": "Wähle ein Phänomen aus",
-    "hide-some-phenomenons": "Verstecke Phänomene",
-    "list-all-phenomenons": "Zeige alle Phänomene"
-  },
-  "refresh-button": {
-    "message": "Aktualisiert"
-  },
-  "settings": {
-    "common": "Allgemein",
-    "header": "Einstellungen",
-    "index-notifications": "Lokale Luftqualitätswarnung",
-    "local-notification": {
-      "header": "Lokale Benachrichtigung",
-      "hint": "Hinweis: Für diese Funktionalität wird in dem gewünschten Interval einmalig der Standort ermittelt und zu diesem die modellierten Luftqualitätsdaten überprüft. Zur Nutzung dieser Funktionalität, darf die App nicht komplett beendet werden."
-    },
-    "normal-notification": "Normale Textbenachrichtigung",
-    "push-notification": "Push-Benachrichtigung",
-    "select-language": "Wähle eine Sprache",
-    "select-local-notifiaction-period": "Wähle Intervall",
-    "sensitiv-notification": "Sensitive Textbenachrichtigung",
-    "show-introduction": "Öffne Einführung"
-  },
-  "show-geometry": {
-    "header": "Position der Station"
-  },
-  "start": {
-    "forecast-map": {
-      "header": "Vorhersage-Karte"
-    }
-  },
-  "style-edit": {
-    "generalize": "Daten generalisieren",
-    "header": "Zeitreihenerscheinung ändern",
-    "zeroBasedYAxe": "Zeitreihe null-basiert"
-  },
-  "user-location-list": {
-    "edit": "Ändern",
-    "edit-the-label": "Ändere die Standortbezeichnung",
-    "header": "Standort liste",
-    "remove": "Entfernen"
-  },
-  "value-panel": {
-    "forecast": {
-      "dayAfterTomorrow": "Übermorgen",
-      "tomorrow": "Morgen",
-      "twoDaysLater": "Zwei Tage später"
-    },
-    "geolocation": {
-      "disabled": {
-        "header": "Kein Standort gefunden",
-        "hint": "Bitte aktiviere den Standort-Dienst und aktualisiere die App (oben rechts auf Ihrem Bildschirm) "
-      }
-    }
-  }
+	"air-quality-index": {
+		"header": "BelAQI index in:"
+	},
+	"air-quality-location-panel": {
+		"error": "Es konnte kein Index für dein Standort Could not get a Index for you location",
+		"hint": "Modelliert für deinen Standort",
+		"loading": "Lädt den BelAQI für deinen Standort"
+	},
+	"belaqi-chart": {
+		"xaxis": {
+			"now": "jetzt",
+			"pre1h": "-1h",
+			"pre2h": "-2h",
+			"pre3h": "-3h",
+			"pre4h": "-4h",
+			"pre5h": "-5h",
+			"pre6h": "-6h",
+			"todayPlusThree": "+3T",
+			"todayPlusTwo": "+2T",
+			"tomorrow": "+1T"
+		}
+	},
+	"belaqi-user-location-slider": {
+		"current-location": "Aktuelle Position"
+	},
+	"belaqi-wheel": {
+		"modelled-hint": "Modelliert für diesen Standort"
+	},
+	"belaqi": {
+		"level": {
+			"bad": "Schlecht",
+			"excellent": "Ausgezeichnet",
+			"fairly-good": "Einigermaßen gut",
+			"good": "Gut",
+			"horrible": "Entsetzlich",
+			"moderate": "Mäßig",
+			"poor": "Dürftig",
+			"very-bad": "Sehr schlecht",
+			"very-good": "Sehr gut",
+			"very-poor": "Sehr dürftig"
+		}
+	},
+	"change-timespan": {
+		"custom": {
+			"end": "Ende",
+			"header": "Freier Zeitraum",
+			"start": "Start"
+		},
+		"header": "Ändere Zeitraum",
+		"predefined": {
+			"current-month": "Derzeitiger Monat",
+			"current-week": "Derzeitige Woche",
+			"current-year": "Derzeitiges Jahr",
+			"header": "Vordefinierter Zeitraum",
+			"last-hour": "Letzte Stunde",
+			"last-month": "Letzter Monat",
+			"last-week": "Letzte Woche",
+			"last-year": "Letztes Jahr",
+			"today": "Heute",
+			"today-yesterday": "Heute und gestern",
+			"yesterday": "Gestern"
+		}
+	},
+	"controls": {
+		"cancel": "Abbrecehn",
+		"close": "Schließen",
+		"ok": "Ok"
+	},
+	"diagram": {
+		"header": "Diagramm",
+		"loading": "Lade",
+		"no-timeseries-selected": "Keine Zeitreihe selektiert!",
+		"select-timeseries": "Bitte wähle eine Zeitreihe"
+	},
+	"intro": {
+		"close-introduction": "Beenden",
+		"four": {
+			"header": "Welche Benachrichtigungen wollen sie erhalten?",
+			"option": {
+				"alert": "Informationen",
+				"information": "Alarme",
+				"personal": "Individuelle persönliche Alarme"
+			}
+		},
+		"header": "Einführung",
+		"next-step": "Nächste",
+		"one": {
+			"header": "Wollen sie die Sprache ändern?",
+			"option": {
+				"dutch": "Nederlands",
+				"english": "English",
+				"french": "Français",
+				"german": "Deutsch"
+			}
+		},
+		"three": {
+			"addLocationToList": "Füge zur Liste der Standorte",
+			"header": "Für welche Standorte wollen Sie Benachrichtigungen in der App erhalten?",
+			"locationLabelHint": "Änder die Standortbezeichnung",
+			"showLocationList": "Zeige vorhandene Standorte"
+		},
+		"two": {
+			"header": "Von welchen Umweltagenturen wollen Sie Benachrichtigungen erhalten?",
+			"option": {
+				"brussels": "Vlaamse Milieumaatschappij (VMM) - Dutch only",
+				"flanders": "Agence wallonne de l’air et du climat (AwAC) - French only",
+				"wallonia": "Brussels Environment - Dutch and French only"
+			}
+		}
+	},
+	"legend": {
+		"first-value-at": "Erster Wert am",
+		"header": "Legend",
+		"last-value-at": "Letzter Wert am"
+	},
+	"map": {
+		"dataset-selection-hint": "Bitte wählen Sie eine oder mehrere Zeitreihen zur Darstellung aus",
+		"geosearch": {
+			"placeholder": "Suche..."
+		},
+		"header": "Karte",
+		"loading": "Lade",
+		"select-phenomenon": "Wähle Phänomen",
+		"show-in-diagram": "Zeige {{value}} Zeitreihen im Diagramm",
+		"time": {
+			"current": "Derzeit",
+			"today": "Heute",
+			"today+2": "Übermorgen",
+			"today+3": "In 3 Tagen",
+			"tomorrow": "Morgen"
+		}
+	},
+	"menu": {
+		"header": "Menü",
+		"lastUpdate": "Letztes Update"
+	},
+	"nearest-measuring-station-panel": {
+		"geoloction-disabled": "Die nächstgelegenen Stationen können nicht ermittelt werden, da die Standortermittlung des Gerätes nicht aktiviert ist.",
+		"header": "Nächstgelegene Station"
+	},
+	"network": {
+		"geolocationDisabled": "Die Standortermittlung ist deaktiviert",
+		"offline": "Dein Handy ist offline",
+		"online": "Dein Handy ist online"
+	},
+	"phenomenon-selector": {
+		"header": "Wähle ein Phänomen aus",
+		"hide-some-phenomenons": "Verstecke Phänomene",
+		"list-all-phenomenons": "Zeige alle Phänomene"
+	},
+	"refresh-button": {
+		"message": "Aktualisiert"
+	},
+	"settings": {
+		"common": "Allgemein",
+		"header": "Einstellungen",
+		"index-notifications": "Lokale Luftqualitätswarnung",
+		"local-notification": {
+			"header": "Lokale Benachrichtigung",
+			"hint": "Hinweis: Für diese Funktionalität wird in dem gewünschten Interval einmalig der Standort ermittelt und zu diesem die modellierten Luftqualitätsdaten überprüft. Zur Nutzung dieser Funktionalität, darf die App nicht komplett beendet werden."
+		},
+		"normal-notification": "Normale Textbenachrichtigung",
+		"push-notification": "Push-Benachrichtigung",
+		"select-language": "Wähle eine Sprache",
+		"select-local-notifiaction-period": "Wähle Intervall",
+		"sensitiv-notification": "Sensitive Textbenachrichtigung",
+		"show-introduction": "Öffne Einführung"
+	},
+	"show-geometry": {
+		"header": "Position der Station"
+	},
+	"start": {
+		"forecast-map": {
+			"header": "Vorhersage-Karte"
+		}
+	},
+	"style-edit": {
+		"generalize": "Daten generalisieren",
+		"header": "Zeitreihenerscheinung ändern",
+		"zeroBasedYAxe": "Zeitreihe null-basiert"
+	},
+	"user-location-list": {
+		"edit": "Ändern",
+		"edit-the-label": "Ändere die Standortbezeichnung",
+		"header": "Standort liste",
+		"remove": "Entfernen"
+	},
+	"value-panel": {
+		"forecast": {
+			"dayAfterTomorrow": "Übermorgen",
+			"tomorrow": "Morgen",
+			"twoDaysLater": "Zwei Tage später"
+		},
+		"geolocation": {
+			"disabled": {
+				"header": "Kein Standort gefunden",
+				"hint": "Bitte aktiviere den Standort-Dienst und aktualisiere die App (oben rechts auf Ihrem Bildschirm) "
+			}
+		}
+	}
 }

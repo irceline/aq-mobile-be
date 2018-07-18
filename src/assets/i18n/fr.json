@@ -7,6 +7,20 @@
 		"hint": "",
 		"loading": ""
 	},
+	"belaqi-chart": {
+		"xaxis": {
+			"now": "",
+			"pre1h": "",
+			"pre2h": "",
+			"pre3h": "",
+			"pre4h": "",
+			"pre5h": "",
+			"pre6h": "",
+			"todayPlusThree": "",
+			"todayPlusTwo": "",
+			"tomorrow": ""
+		}
+	},
 	"belaqi-user-location-slider": {
 		"current-location": ""
 	},

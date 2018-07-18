@@ -1,10 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from '@helgoland/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { ValueProvider } from '../value-provider';
+
+export interface BelaqiTimeline {
+  preSixHour: number;
+  preFiveHour: number;
+  preFourHour: number;
+  preThreeHour: number;
+  preTwoHour: number;
+  preOneHour: number;
+  now: number;
+  tomorrow: number;
+  todayPlusTwo: number;
+  todayPlusThree: number;
+}
 
 @Injectable()
 export class BelaqiIndexProvider extends ValueProvider {
@@ -51,6 +64,39 @@ export class BelaqiIndexProvider extends ValueProvider {
     )
   }
 
+  public getTimeline(latitude: number, longitude: number, time: Date): Observable<BelaqiTimeline> {
+    const randomIndex = () => Math.floor(Math.random() * 10 + 1);
+    const temp: BelaqiTimeline = {
+      preSixHour: randomIndex(),
+      preFiveHour: randomIndex(),
+      preFourHour: randomIndex(),
+      preThreeHour: randomIndex(),
+      preTwoHour: randomIndex(),
+      preOneHour: randomIndex(),
+      now: randomIndex(),
+      tomorrow: randomIndex(),
+      todayPlusTwo: randomIndex(),
+      todayPlusThree: randomIndex()
+    }
+    return of(temp);
+  }
+
+  public getColorForIndex(index: number) {
+    switch (index) {
+      case 1: return '#0000FF';
+      case 2: return '#0099FF';
+      case 3: return '#009900';
+      case 4: return '#00FF00';
+      case 5: return '#FFFF00';
+      case 6: return '#FFBB00';
+      case 7: return '#FF6600';
+      case 8: return '#FF0000';
+      case 9: return '#990000';
+      case 10: return '#660000';
+      default: return null;
+    }
+  }
+
   public getLabelForIndex(index: number) {
     switch (index) {
       case 1:
@@ -77,5 +123,9 @@ export class BelaqiIndexProvider extends ValueProvider {
         return null;
     }
   }
+
+  // http://geo.irceline.be/rioifdm/wcs?request=GetCoverage&service=WCS&version=2.0.1&coverageId=rioifdm__belaqi&Format=text/plain&subset=Lat(50.7116008)&subset=Long(4.1223895)&subset=http://www.opengis.net/def/axis/OGC/0/time(%222018-07-12T09:00:00.000Z%22)
+  // http://geo.irceline.be/rioifdm/wcs?request=GetCoverage&service=WCS&version=2.0.1&coverageId=rioifdm__belaqi&Format=text/plain&subset=http://www.opengis.net/def/axis/OGC/0/X(155700,155800)&subset=http://www.opengis.net/def/axis/OGC/0/Y(132600,132700)&subset=http://www.opengis.net/def/axis/OGC/0/time(%222018-07-12T09:00:00.000Z%22)
+  // http://geo.irceline.be/rioifdm/wcs?request=GetCoverage&service=WCS&version=2.0.1&coverageId=rioifdm__belaqi&Format=gml&subset=http://www.opengis.net/def/axis/OGC/0/X(155700,155800)&subset=http://www.opengis.net/def/axis/OGC/0/Y(132600,132700)&subset=http://www.opengis.net/def/axis/OGC/0/time(%222018-07-12T09:00:00.000Z%22)
 
 }
