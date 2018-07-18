@@ -165,7 +165,12 @@
 		"select-language": "sélectionnez une langue",
 		"select-local-notifiaction-period": "choisissez un intervalle de temps",
 		"sensitiv-notification": "notification de texte sensible",
-		"show-introduction": ""
+		"show-introduction": "",
+		"user-locations": {
+			"create-new-location": "",
+			"header": "",
+			"show-location-list": ""
+		}
 	},
 	"show-geometry": {
 		"header": "position de la station"

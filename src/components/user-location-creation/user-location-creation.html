@@ -1,0 +1,18 @@
+<mobile-geosearch-control [options]="geoSearchOptions" (onResultChanged)="geoSearchResultChanged($event)"></mobile-geosearch-control>
+<div *ngIf="geoSearchResult">
+  <div style="height: 250px;">
+    <n52-geometry-map-viewer mapId="location-gen" [mapOptions]="mapOptions" [geometry]="geoSearchResult.geometry"></n52-geometry-map-viewer>
+  </div>
+  <ion-list>
+    <ion-item>
+      <ion-label stacked>{{'intro.three.locationLabelHint' | translate}}</ion-label>
+      <ion-input type="text" [value]="locationLabel"></ion-input>
+    </ion-item>
+  </ion-list>
+  <div text-center>
+    <button ion-button round (click)="addLocationToList()">{{'intro.three.addLocationToList' | translate}}</button>
+  </div>
+</div>
+<div *ngIf="locationList.hasLocations()" text-center>
+  <button ion-button round outline (click)="showLocationList()">{{'intro.three.showLocationList' | translate}}</button>
+</div>

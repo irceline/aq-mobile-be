@@ -165,7 +165,12 @@
 		"select-language": "kies een taal",
 		"select-local-notifiaction-period": "kies een tijdsinterval",
 		"sensitiv-notification": "sensitive tekst berichten",
-		"show-introduction": ""
+		"show-introduction": "",
+		"user-locations": {
+			"create-new-location": "",
+			"header": "",
+			"show-location-list": ""
+		}
 	},
 	"show-geometry": {
 		"header": "locatie van het station"

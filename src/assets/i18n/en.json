@@ -165,7 +165,12 @@
 		"select-language": "Select a language",
 		"select-local-notifiaction-period": "Choose time interval",
 		"sensitiv-notification": "Sensitiv text notification",
-		"show-introduction": "Show Introduction"
+		"show-introduction": "Show Introduction",
+		"user-locations": {
+			"create-new-location": "Create new location",
+			"header": "User locations",
+			"show-location-list": "Show current locations"
+		}
 	},
 	"show-geometry": {
 		"header": "Position of the station"

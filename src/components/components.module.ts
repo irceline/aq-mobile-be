@@ -29,6 +29,7 @@ import { ModalLegendComponent } from './modal-legend/modal-legend';
 import { ModalOptionsEditorComponent } from './modal-options-editor/modal-options-editor';
 import { ModalPhenomenonSelectorComponent } from './modal-phenomenon-selector/modal-phenomenon-selector';
 import { ModalTimespanEditorComponent } from './modal-timespan-editor/modal-timespan-editor';
+import { ModalUserLocationCreationComponent } from './modal-user-location-creation/modal-user-location-creation';
 import { ModalUserLocationListComponent } from './modal-user-location-list/modal-user-location-list';
 import { NearestMeasuringStationPanelComponent } from './nearest-measuring-station-panel/nearest-measuring-station-panel';
 import {
@@ -39,6 +40,7 @@ import { PhenomenonSelectorPopoverComponent } from './phenomenon-selector-popove
 import { PushNotificationComponent } from './push-notification/push-notification';
 import { RefreshButtonComponent } from './refresh-button/refresh-button';
 import { StationSelectorComponent } from './station-selector/station-selector';
+import { UserLocationCreationComponent } from './user-location-creation/user-location-creation';
 import { ValuePanelComponent } from './value-panel/value-panel';
 
 @NgModule({
@@ -62,6 +64,7 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		ModalOptionsEditorComponent,
 		ModalPhenomenonSelectorComponent,
 		ModalTimespanEditorComponent,
+		ModalUserLocationCreationComponent,
 		ModalUserLocationListComponent,
 		NearestMeasuringStationPanelComponent,
 		NearestMeasuringStationPanelEntryComponent,
@@ -70,6 +73,7 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		PushNotificationComponent,
 		RefreshButtonComponent,
 		StationSelectorComponent,
+		UserLocationCreationComponent,
 		ValuePanelComponent,
 	],
 	imports: [
@@ -102,6 +106,7 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		ModalOptionsEditorComponent,
 		ModalPhenomenonSelectorComponent,
 		ModalTimespanEditorComponent,
+		ModalUserLocationCreationComponent,
 		ModalUserLocationListComponent,
 		NearestMeasuringStationPanelComponent,
 		NearestMeasuringStationPanelEntryComponent,
@@ -110,6 +115,7 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		PushNotificationComponent,
 		RefreshButtonComponent,
 		StationSelectorComponent,
+		UserLocationCreationComponent,
 		ValuePanelComponent,
 	],
 	entryComponents: [
@@ -119,6 +125,7 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		ModalOptionsEditorComponent,
 		ModalPhenomenonSelectorComponent,
 		ModalTimespanEditorComponent,
+		ModalUserLocationCreationComponent,
 		ModalUserLocationListComponent,
 		PhenomenonSelectorPopoverComponent,
 		PushNotificationComponent,

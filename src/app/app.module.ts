@@ -31,12 +31,8 @@ import { CombinedMapPage } from '../pages/combined-map/combined-map';
 import { DiagramPage } from '../pages/diagram/diagram';
 import { IntroPage } from '../pages/intro/intro';
 import { MapPage } from '../pages/map/map';
-import { CommonSettingsComponent } from '../pages/settings/common-settings/common-settings';
-import {
-  LocalNotificationSettingsComponent,
-} from '../pages/settings/local-notification-settings/local-notification-settings';
-import { PushNotificationSettingsComponent } from '../pages/settings/push-notification-settings/push-notification-settings';
 import { SettingsPage } from '../pages/settings/settings';
+import { SettingsModule } from '../pages/settings/settings.module';
 import { StartPage } from '../pages/start/start';
 import { AirQualityIndexProvider } from '../providers/air-quality-index/air-quality-index';
 import { BelaqiIndexProvider } from '../providers/belaqi/belaqi';
@@ -65,11 +61,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     IntroPage,
     MapPage,
     MyApp,
-    SettingsPage,
-    StartPage,
-    LocalNotificationSettingsComponent,
-    PushNotificationSettingsComponent,
-    CommonSettingsComponent
+    StartPage
   ],
   imports: [
     BrowserModule,
@@ -91,7 +83,8 @@ export function HttpLoaderFactory(http: HttpClient) {
       scrollAssist: false
     }),
     IonicStorageModule.forRoot(),
-    ComponentsModule
+    ComponentsModule,
+    SettingsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
