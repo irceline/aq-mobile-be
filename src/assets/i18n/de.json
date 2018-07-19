@@ -67,6 +67,14 @@
 		"close": "Schließen",
 		"ok": "Ok"
 	},
+	"customize-personal-alerts": {
+		"active": "Aktivieren",
+		"alert-index-level": "Belaqi Level",
+		"alert-period": "Benachrichtigungsinterval",
+		"alert-sensitive-active": "Gesundheitsrelevante Nachrichten für empfindliche Personen",
+		"header": "Persönliche Benachrichtigungen",
+		"hint": "Hinweis: Für diese Funktionalität wird in dem gewünschten Interval einmalig der Standort ermittelt und zu diesem die modellierten Luftqualitätsdaten überprüft. Zur Nutzung dieser Funktionalität, darf die App nicht komplett beendet werden."
+	},
 	"diagram": {
 		"header": "Diagramm",
 		"loading": "Lade",
@@ -76,12 +84,7 @@
 	"intro": {
 		"close-introduction": "Beenden",
 		"four": {
-			"header": "Welche Benachrichtigungen wollen sie erhalten?",
-			"option": {
-				"alert": "Informationen",
-				"information": "Alarme",
-				"personal": "Individuelle persönliche Alarme"
-			}
+			"header": "Welche Benachrichtigungen wollen sie erhalten?"
 		},
 		"header": "Einführung",
 		"next-step": "Nächste",
@@ -144,6 +147,48 @@
 		"offline": "Dein Handy ist offline",
 		"online": "Dein Handy ist online"
 	},
+	"personal-alert": {
+		"index-1": {
+			"non-sensitive": "Es ist heute sehr gesund, draußen körperlich aktiv zu sein. Durch die Reduzierung von Emissionen erhalten wir mehr von diesen gesunden Tagen und nehmen auch die Auswirkungen der Langzeitexposition ab.",
+			"sensitive": "Es ist heute sehr gesund, draußen körperlich aktiv zu sein. Durch die Reduzierung von Emissionen erhalten wir mehr von diesen gesunden Tagen und nehmen auch die Auswirkungen der Langzeitexposition ab."
+		},
+		"index-10": {
+			"non-sensitive": "Betrachten Sie, schwere/lange körperliche Anstrengungen zu reduzieren.",
+			"sensitive": "Begrenzen Sie körperliche Anstrengung. Konsultieren Sie Ihren Arzt über angemessenee Medikamente."
+		},
+		"index-2": {
+			"non-sensitive": "Es ist heute sehr gesund, draußen körperlich aktiv zu sein. Durch die Reduzierung von Emissionen erhalten wir mehr von diesen gesunden Tagen und nehmen auch die Auswirkungen der Langzeitexposition ab.",
+			"sensitive": "Es ist heute sehr gesund, draußen körperlich aktiv zu sein. Durch die Reduzierung von Emissionen erhalten wir mehr von diesen gesunden Tagen und nehmen auch die Auswirkungen der Langzeitexposition ab."
+		},
+		"index-3": {
+			"non-sensitive": "Sie müssen Ihre üblichen körperlichen Aktivitäten wegen der Luftqualität nicht anpassen.",
+			"sensitive": "Wenn Sie Beschwerden fühlen, können Sie schwere/lange körperliche Anstrengungen reduzieren."
+		},
+		"index-4": {
+			"non-sensitive": "Sie müssen Ihre üblichen körperlichen Aktivitäten wegen der Luftqualität nicht anpassen.",
+			"sensitive": "Wenn Sie Beschwerden fühlen, können Sie schwere/lange körperliche Anstrengungen reduzieren."
+		},
+		"index-5": {
+			"non-sensitive": "Sie müssen Ihre üblichen körperlichen Aktivitäten wegen der Luftqualität nicht anpassen.",
+			"sensitive": "Reduzieren Sie Ihre körperliche Anstrengung. Konsultieren Sie Ihren Arzt über angemessenee Medikamente."
+		},
+		"index-6": {
+			"non-sensitive": "Sie müssen Ihre üblichen körperlichen Aktivitäten wegen der Luftqualität nicht anpassen.",
+			"sensitive": "Reduzieren Sie Ihre körperliche Anstrengung. Konsultieren Sie Ihren Arzt über angemessenee Medikamente."
+		},
+		"index-7": {
+			"non-sensitive": "Sie müssen Ihre üblichen körperlichen Aktivitäten wegen der Luftqualität nicht anpassen.",
+			"sensitive": "Reduzieren Sie Ihre körperliche Anstrengung. Konsultieren Sie Ihren Arzt über angemessenee Medikamente."
+		},
+		"index-8": {
+			"non-sensitive": "Betrachten Sie, schwere/lange körperliche Anstrengungen zu reduzieren.",
+			"sensitive": "Begrenzen Sie körperliche Anstrengung. Konsultieren Sie Ihren Arzt über angemessenee Medikamente."
+		},
+		"index-9": {
+			"non-sensitive": "Betrachten Sie, schwere/lange körperliche Anstrengungen zu reduzieren.",
+			"sensitive": "Begrenzen Sie körperliche Anstrengung. Konsultieren Sie Ihren Arzt über angemessenee Medikamente."
+		}
+	},
 	"phenomenon-selector": {
 		"header": "Wähle ein Phänomen aus",
 		"hide-some-phenomenons": "Verstecke Phänomene",
@@ -155,15 +200,9 @@
 	"settings": {
 		"common": "Allgemein",
 		"header": "Einstellungen",
-		"index-notifications": "Lokale Luftqualitätswarnung",
-		"local-notification": {
-			"header": "Lokale Benachrichtigung",
-			"hint": "Hinweis: Für diese Funktionalität wird in dem gewünschten Interval einmalig der Standort ermittelt und zu diesem die modellierten Luftqualitätsdaten überprüft. Zur Nutzung dieser Funktionalität, darf die App nicht komplett beendet werden."
-		},
 		"normal-notification": "Normale Textbenachrichtigung",
 		"push-notification": "Push-Benachrichtigung",
 		"select-language": "Wähle eine Sprache",
-		"select-local-notifiaction-period": "Wähle Intervall",
 		"sensitiv-notification": "Sensitive Textbenachrichtigung",
 		"show-introduction": "Öffne Einführung",
 		"user-locations": {

@@ -13,6 +13,7 @@ import { AirQualityLocationPanelComponent } from './air-quality-location-panel/a
 import { BelaqiChartComponent } from './belaqi-chart/belaqi-chart';
 import { BelaqiUserLocationSliderComponent } from './belaqi-user-location-slider/belaqi-user-location-slider';
 import { BelaqiWheelComponent } from './belaqi-wheel/belaqi-wheel';
+import { CustomizePersonalAlertsComponent } from './customize-personal-alerts/customize-personal-alerts';
 import {
 	MobileDatasetByStationSelectorComponent,
 } from './dataset-by-station-selector/dataset-by-station-selector.component';
@@ -50,6 +51,7 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		BelaqiChartComponent,
 		BelaqiUserLocationSliderComponent,
 		BelaqiWheelComponent,
+		CustomizePersonalAlertsComponent,
 		LocatedValueNotificationComponent,
 		MobileDatasetByStationSelectorComponent,
 		MobileExtentControlComponent,
@@ -92,6 +94,7 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		BelaqiChartComponent,
 		BelaqiUserLocationSliderComponent,
 		BelaqiWheelComponent,
+		CustomizePersonalAlertsComponent,
 		LocatedValueNotificationComponent,
 		MobileDatasetByStationSelectorComponent,
 		MobileExtentControlComponent,

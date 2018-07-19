@@ -1,0 +1,30 @@
+<ion-list>
+  <ion-list-header *ngIf="showHeader">
+    {{'customize-personal-alerts.header' | translate}}
+  </ion-list-header>
+  <div class="text-hint" text-left>
+    {{'customize-personal-alerts.hint' | translate}}
+  </div>
+  <ion-item>
+    <ion-label>{{'customize-personal-alerts.active' | translate}}</ion-label>
+    <ion-toggle color="secondary" [(ngModel)]="personalAlertsActive" (ngModelChange)="togglePersonalAlerts($event.value)"></ion-toggle>
+  </ion-item>
+  <ion-item *ngIf="personalAlertsActive">
+    <ion-label>{{'customize-personal-alerts.alert-period' | translate}}</ion-label>
+    <ion-select interface="popover">
+      <ion-option *ngFor="let setting of personalAlertSettings" (ionSelect)="setPersonalAlertPeriod(setting.period)" [selected]="currentPeriod === setting.period"
+        [value]="setting">{{getHumanReadablePeriod(setting.period)}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item *ngIf="personalAlertsActive">
+    <ion-label>{{'customize-personal-alerts.alert-index-level' | translate}}</ion-label>
+    <ion-select interface="popover">
+      <ion-option *ngFor="let level of personalAlertLevel" (ionSelect)="setPersonalAlertLevel(level)" [selected]="currentLevel === level"
+        [value]="level">{{level}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item *ngIf="personalAlertsActive" text-wrap>
+    <ion-label>{{'customize-personal-alerts.alert-sensitive-active' | translate}}</ion-label>
+    <ion-toggle color="secondary" [(ngModel)]="sensitive" (ngModelChange)="toggleSensitive()"></ion-toggle>
+  </ion-item>
+</ion-list>

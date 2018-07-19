@@ -33,7 +33,7 @@
   "geoSearchContryCodes": [
     "be"
   ],
-  "localnotifications": [{
+  "personalAlert": [{
       "period": 5
     },
     {

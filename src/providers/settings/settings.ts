@@ -10,10 +10,10 @@ export interface MobileSettings extends Settings {
     regions: string[];
     geoSearchContryCodes: string[];
     defaultBbox: L.LatLngBoundsExpression;
-    localnotifications: LocalNotification[];
+    personalAlert: PersonalAlert[];
 }
 
-export interface LocalNotification {
+export interface PersonalAlert {
     period: number;
 }
 

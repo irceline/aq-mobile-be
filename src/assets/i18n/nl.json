@@ -67,6 +67,14 @@
 		"close": "sluiten",
 		"ok": "OK"
 	},
+	"customize-personal-alerts": {
+		"active": "",
+		"alert-index-level": "",
+		"alert-period": "",
+		"alert-sensitive-active": "",
+		"header": "",
+		"hint": ""
+	},
 	"diagram": {
 		"header": "diagram",
 		"loading": "bezig te laden",
@@ -76,12 +84,7 @@
 	"intro": {
 		"close-introduction": "",
 		"four": {
-			"header": "",
-			"option": {
-				"alert": "",
-				"information": "",
-				"personal": ""
-			}
+			"header": ""
 		},
 		"header": "",
 		"next-step": "",
@@ -144,6 +147,48 @@
 		"offline": "U toestel offline",
 		"online": "U toestel is online"
 	},
+	"personal-alert": {
+		"index-1": {
+			"non-sensitive": "",
+			"sensitive": ""
+		},
+		"index-10": {
+			"non-sensitive": "",
+			"sensitive": ""
+		},
+		"index-2": {
+			"non-sensitive": "",
+			"sensitive": ""
+		},
+		"index-3": {
+			"non-sensitive": "",
+			"sensitive": ""
+		},
+		"index-4": {
+			"non-sensitive": "",
+			"sensitive": ""
+		},
+		"index-5": {
+			"non-sensitive": "",
+			"sensitive": ""
+		},
+		"index-6": {
+			"non-sensitive": "",
+			"sensitive": ""
+		},
+		"index-7": {
+			"non-sensitive": "",
+			"sensitive": ""
+		},
+		"index-8": {
+			"non-sensitive": "",
+			"sensitive": ""
+		},
+		"index-9": {
+			"non-sensitive": "",
+			"sensitive": ""
+		}
+	},
 	"phenomenon-selector": {
 		"header": "",
 		"hide-some-phenomenons": "verberg polluenten",
@@ -155,15 +200,9 @@
 	"settings": {
 		"common": "Algemeen",
 		"header": "Instellingen",
-		"index-notifications": "locale luchtkwaliteitsalert",
-		"local-notification": {
-			"header": "Lokaal bericht",
-			"hint": "Tip: U locatie wordt maar een keer bepaald voor het gekozen tijdsinterval. Om deze functionaliteit te kunnen gebruiken, mag de app niet uitgezet worden."
-		},
 		"normal-notification": "Normale tekst berichten",
 		"push-notification": "Push berichten",
 		"select-language": "kies een taal",
-		"select-local-notifiaction-period": "kies een tijdsinterval",
 		"sensitiv-notification": "sensitive tekst berichten",
 		"show-introduction": "",
 		"user-locations": {

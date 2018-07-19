@@ -39,10 +39,10 @@ import { BelaqiIndexProvider } from '../providers/belaqi/belaqi';
 import { ForecastValueProvider } from '../providers/forecast-value/forecast-value';
 import { IrcelineSettingsProvider } from '../providers/irceline-settings/irceline-settings';
 import { LayerGeneratorService } from '../providers/layer-generator/layer-generator';
-import { LocalNotificationsProvider } from '../providers/local-notification/local-notification';
 import { LocateProvider } from '../providers/locate/locate';
 import { ModelledValueProvider } from '../providers/modelled-value/modelled-value';
 import { NotificationPresenter } from '../providers/notification-presenter/notification-presenter';
+import { PersonalAlertsProvider } from '../providers/personal-alerts/personal-alerts';
 import { PushNotificationsProvider } from '../providers/push-notifications/push-notifications';
 import { RefreshHandler } from '../providers/refresh/refresh';
 import { JSSONSettingsService } from '../providers/settings/settings';
@@ -112,11 +112,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     IrcelineSettingsProvider,
     LayerGeneratorService,
     LocalNotifications,
-    LocalNotificationsProvider,
     LocateProvider,
     ModelledValueProvider,
     Network,
     NotificationPresenter,
+    PersonalAlertsProvider,
     PushNotificationsProvider,
     RefreshHandler,
     SplashScreen,

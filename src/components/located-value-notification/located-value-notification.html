@@ -8,13 +8,13 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list>
-    <ion-item text-center>
-      <h2>{{notification.value}} at {{notification.date | date:'medium'}}</h2>
-      <p>This value is modelled by your location</p>
-    </ion-item>
-  </ion-list>
-  <div style="width: 100%; height: 50%;">
-    <n52-geometry-map-viewer [mapId]="'notification-map'" [geometry]="location" [mapOptions]="mapOptions" [zoomTo]="false"></n52-geometry-map-viewer>
-  </div>
+  <ion-card *ngFor="let alert of alerts" [ngStyle]="{'background-color': createColor(alert)}">
+    <ion-card-header>
+      <h2>{{alert.locationLabel}}</h2>
+      <p>BelAQI: {{alert.belaqi}} - {{getLabel(alert.belaqi)}}</p>
+    </ion-card-header>
+    <ion-card-content>
+      {{getHint(alert)}}
+    </ion-card-content>
+  </ion-card>
 </ion-content>

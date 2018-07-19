@@ -24,6 +24,12 @@ export interface LocatedValueNotification {
   value: number;
 }
 
+export interface PersonalAlert {
+  locationLabel: string;
+  belaqi: number;
+  sensitive: boolean;
+}
+
 @Injectable()
 export class NotificationPresenter {
 
@@ -35,8 +41,10 @@ export class NotificationPresenter {
     this.modalCtrl.create(PushNotificationComponent, { notification }).present();
   }
 
-  public presentLocatedValueNotification(notification: LocatedValueNotification) {
-    this.modalCtrl.create(LocatedValueNotificationComponent, { notification }).present();
+  public presentPersonalAlerts(alerts: PersonalAlert[]) {
+    if (alerts.length !== 0) {
+      this.modalCtrl.create(LocatedValueNotificationComponent, { alerts }).present();
+    }
   }
 
 }

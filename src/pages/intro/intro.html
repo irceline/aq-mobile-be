@@ -69,20 +69,7 @@
 
     <ion-slide>
       <h2 class="slide-title">{{'intro.four.header' | translate}}</h2>
-      <ion-list>
-        <ion-item>
-          <ion-label>{{'intro.four.option.information' | translate}}</ion-label>
-          <ion-checkbox [(ngModel)]="messagesInformation"></ion-checkbox>
-        </ion-item>
-        <ion-item>
-          <ion-label>{{'intro.four.option.alert' | translate}}</ion-label>
-          <ion-checkbox [(ngModel)]="messagesAlert"></ion-checkbox>
-        </ion-item>
-        <ion-item>
-          <ion-label>{{'intro.four.option.personal' | translate}}</ion-label>
-          <ion-checkbox [(ngModel)]="messagesPersonal"></ion-checkbox>
-        </ion-item>
-      </ion-list>
+      <customize-personal-alerts [showHeader]="false"></customize-personal-alerts>
       <ion-toolbar>
         <ion-buttons>
           <button ion-button color="primary" (click)="closeSlides()">{{'intro.close-introduction' | translate}}</button>

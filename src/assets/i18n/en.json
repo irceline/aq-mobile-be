@@ -67,6 +67,14 @@
 		"close": "Close",
 		"ok": "Ok"
 	},
+	"customize-personal-alerts": {
+		"active": "Activate",
+		"alert-index-level": "Belaqi level",
+		"alert-period": "Alert interval",
+		"alert-sensitive-active": "Health-related messages for individuals sensitive to air pollution",
+		"header": "Personal alerts",
+		"hint": "Hint: Your location is determined once for the choosen time interval and then the air quality will be checked. To use this functionality it is not allowed to kill the app."
+	},
 	"diagram": {
 		"header": "Diagram",
 		"loading": "loading",
@@ -76,12 +84,7 @@
 	"intro": {
 		"close-introduction": "Close",
 		"four": {
-			"header": "What type of messages would you like to receive?",
-			"option": {
-				"alert": "Information threshold",
-				"information": "Alert threshold",
-				"personal": "Customised personal alerts"
-			}
+			"header": "What type of messages would you like to receive?"
 		},
 		"header": "Introduction",
 		"next-step": "Next step",
@@ -144,6 +147,48 @@
 		"offline": "Your device is offline",
 		"online": "Your device is online"
 	},
+	"personal-alert": {
+		"index-1": {
+			"non-sensitive": "It is very healthy today to be physically active outside. By reducing emissions, we get more of these healthy days and also decrease the effects of the low-term exposure.",
+			"sensitive": "It is very healthy today to be physically active outside. By reducing emissions, we get more of these healthy days and also decrease the effects of the low-term exposure."
+		},
+		"index-10": {
+			"non-sensitive": "Consider reducing heavy/long physical exertion.",
+			"sensitive": "Limit physical exertion. Consult your doctor about appropriate changes to medication you might be taking."
+		},
+		"index-2": {
+			"non-sensitive": "It is very healthy today to be physically active outside. By reducing emissions, we get more of these healthy days and also decrease the effects of the low-term exposure.",
+			"sensitive": "It is very healthy today to be physically active outside. By reducing emissions, we get more of these healthy days and also decrease the effects of the low-term exposure."
+		},
+		"index-3": {
+			"non-sensitive": "You do not have to adjust your usual physical activities because of the air quality.",
+			"sensitive": "If you experience discomfort, you can reduce heavy/long physical effort."
+		},
+		"index-4": {
+			"non-sensitive": "You do not have to adjust your usual physical activities because of the air quality.",
+			"sensitive": "If you experience discomfort, you can reduce heavy/long physical effort."
+		},
+		"index-5": {
+			"non-sensitive": "You do not have to adjust your usual physical activities because of the air quality.",
+			"sensitive": "Reduce your physical effort. Consult your doctor about appropriate changes to medication you might be taking."
+		},
+		"index-6": {
+			"non-sensitive": "You do not have to adjust your usual physical activities because of the air quality.",
+			"sensitive": "Reduce your physical effort. Consult your doctor about appropriate changes to medication you might be taking."
+		},
+		"index-7": {
+			"non-sensitive": "You do not have to adjust your usual physical activities because of the air quality.",
+			"sensitive": "Reduce your physical effort. Consult your doctor about appropriate changes to medication you might be taking."
+		},
+		"index-8": {
+			"non-sensitive": "Consider reducing heavy/long physical exertion.",
+			"sensitive": "Limit physical exertion. Consult your doctor about appropriate changes to medication you might be taking."
+		},
+		"index-9": {
+			"non-sensitive": "Consider reducing heavy/long physical exertion.",
+			"sensitive": "Limit physical exertion. Consult your doctor about appropriate changes to medication you might be taking."
+		}
+	},
 	"phenomenon-selector": {
 		"header": "Choose a phenomenon",
 		"hide-some-phenomenons": "Hide pollutants",
@@ -155,15 +200,9 @@
 	"settings": {
 		"common": "Common",
 		"header": "Settings",
-		"index-notifications": "Local air quality warning",
-		"local-notification": {
-			"header": "Local notification",
-			"hint": "Hint: Your location is determined once for the choosen time interval and then the air quality will be checked. To use this functionality it is not allowed to kill the app."
-		},
 		"normal-notification": "Normal text notification",
 		"push-notification": "Push notifications",
 		"select-language": "Select a language",
-		"select-local-notifiaction-period": "Choose time interval",
 		"sensitiv-notification": "Sensitiv text notification",
 		"show-introduction": "Show Introduction",
 		"user-locations": {
