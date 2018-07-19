@@ -59,7 +59,7 @@ export class BelaqiChartComponent implements AfterContentInit {
             ticks: {
               min: 1,
               max: 10,
-              reverse: true
+              reverse: false
             }
           }]
         },
@@ -103,16 +103,16 @@ export class BelaqiChartComponent implements AfterContentInit {
 
   private drawData(ctx: CanvasRenderingContext2D, chart: Chart, belaqiTimeline: BelaqiTimeline) {
     const gradientStroke = ctx.createLinearGradient(chart.chartArea.left, chart.chartArea.top, chart.chartArea.left, chart.chartArea.bottom);
-    gradientStroke.addColorStop(0.0, this.belaqiIndex.getColorForIndex(1));
-    gradientStroke.addColorStop(0.11, this.belaqiIndex.getColorForIndex(2));
-    gradientStroke.addColorStop(0.22, this.belaqiIndex.getColorForIndex(3));
-    gradientStroke.addColorStop(0.33, this.belaqiIndex.getColorForIndex(4));
-    gradientStroke.addColorStop(0.44, this.belaqiIndex.getColorForIndex(5));
-    gradientStroke.addColorStop(0.55, this.belaqiIndex.getColorForIndex(6));
-    gradientStroke.addColorStop(0.66, this.belaqiIndex.getColorForIndex(7));
-    gradientStroke.addColorStop(0.77, this.belaqiIndex.getColorForIndex(8));
-    gradientStroke.addColorStop(0.88, this.belaqiIndex.getColorForIndex(9));
-    gradientStroke.addColorStop(1.0, this.belaqiIndex.getColorForIndex(10));
+    gradientStroke.addColorStop(0.0, this.belaqiIndex.getColorForIndex(10));
+    gradientStroke.addColorStop(0.11, this.belaqiIndex.getColorForIndex(9));
+    gradientStroke.addColorStop(0.22, this.belaqiIndex.getColorForIndex(8));
+    gradientStroke.addColorStop(0.33, this.belaqiIndex.getColorForIndex(7));
+    gradientStroke.addColorStop(0.44, this.belaqiIndex.getColorForIndex(6));
+    gradientStroke.addColorStop(0.55, this.belaqiIndex.getColorForIndex(5));
+    gradientStroke.addColorStop(0.66, this.belaqiIndex.getColorForIndex(4));
+    gradientStroke.addColorStop(0.77, this.belaqiIndex.getColorForIndex(3));
+    gradientStroke.addColorStop(0.88, this.belaqiIndex.getColorForIndex(2));
+    gradientStroke.addColorStop(1.0, this.belaqiIndex.getColorForIndex(1));
     const dataset = chart.data.datasets[0];
     dataset.borderColor = gradientStroke;
     dataset.pointBorderColor = gradientStroke;
