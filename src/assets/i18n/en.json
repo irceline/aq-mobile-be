@@ -104,12 +104,7 @@
 			"showLocationList": "Show current locations"
 		},
 		"two": {
-			"header": "From which environmental agency would you like to receive messages?",
-			"option": {
-				"brussels": "Vlaamse Milieumaatschappij (VMM) - Dutch only",
-				"flanders": "Agence wallonne de l’air et du climat (AwAC) - French only",
-				"wallonia": "Brussels Environment - Dutch and French only"
-			}
+			"header": "From which environmental agency would you like to receive messages?"
 		}
 	},
 	"legend": {
@@ -194,16 +189,19 @@
 		"hide-some-phenomenons": "Hide pollutants",
 		"list-all-phenomenons": "List all pollutants"
 	},
+	"push-notification-subscription": {
+		"brussels": "Vlaamse Milieumaatschappij (VMM) - Dutch only",
+		"flanders": "Agence wallonne de l’air et du climat (AwAC) - French only",
+		"header": "Notifications",
+		"wallonia": "Brussels Environment - Dutch and French only"
+	},
 	"refresh-button": {
 		"message": "Refresh all"
 	},
 	"settings": {
 		"common": "Common",
 		"header": "Settings",
-		"normal-notification": "Normal text notification",
-		"push-notification": "Push notifications",
 		"select-language": "Select a language",
-		"sensitiv-notification": "Sensitiv text notification",
 		"show-introduction": "Show Introduction",
 		"user-locations": {
 			"create-new-location": "Create new location",

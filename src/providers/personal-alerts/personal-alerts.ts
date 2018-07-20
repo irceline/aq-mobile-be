@@ -50,9 +50,10 @@ export class PersonalAlertsProvider {
         });
       }
     })
-    setTimeout(() => {
-      this.runAlertTask();
-    }, 3000);
+
+    // setTimeout(() => {
+    //   this.runAlertTask();
+    // }, 3000);
 
     // setTimeout(() => {
     //   this.requestModelledValue({
@@ -147,7 +148,6 @@ export class PersonalAlertsProvider {
     forkJoin(request).subscribe(res => {
       const alerts = [];
       res.forEach(e => {
-        debugger;
         if (e instanceof Array) {
           alerts.push(...e);
         } else if (e) {

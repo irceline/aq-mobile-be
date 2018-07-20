@@ -3,7 +3,8 @@
     "no-duplicate-variable": true,
     "no-unused-variable": [
       true
-    ]
+    ],
+    "no-debugger": true
   },
   "rulesDirectory": [
     "node_modules/tslint-eslint-rules/dist/rules"

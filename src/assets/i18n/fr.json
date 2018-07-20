@@ -104,12 +104,7 @@
 			"showLocationList": ""
 		},
 		"two": {
-			"header": "",
-			"option": {
-				"brussels": "",
-				"flanders": "",
-				"wallonia": ""
-			}
+			"header": ""
 		}
 	},
 	"legend": {
@@ -194,16 +189,19 @@
 		"hide-some-phenomenons": "masquer les polluants",
 		"list-all-phenomenons": "liste de tous les polluants"
 	},
+	"push-notification-subscription": {
+		"brussels": "",
+		"flanders": "",
+		"header": "",
+		"wallonia": ""
+	},
 	"refresh-button": {
 		"message": ""
 	},
 	"settings": {
 		"common": "commun",
 		"header": "paramètres",
-		"normal-notification": "notification de texte normale",
-		"push-notification": "notifications push",
 		"select-language": "sélectionnez une langue",
-		"sensitiv-notification": "notification de texte sensible",
 		"show-introduction": "",
 		"user-locations": {
 			"create-new-location": "",

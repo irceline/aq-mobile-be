@@ -7,8 +7,9 @@ import { PushNotificationComponent } from '../../components/push-notification/pu
 
 
 export enum PushNotificationTopic {
-  sensitive = 'sensitive',
-  normal = 'normal'
+  flanders = 'flanders',
+  wallonia = 'wallonia',
+  brussels = 'brussels'
 }
 
 export interface PushNotification extends NotificationData {

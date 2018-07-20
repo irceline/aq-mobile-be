@@ -8,8 +8,10 @@
 </ion-header>
 
 <ion-content padding>
-  <div>
-    {{notification.topic}}
+  <div text-center text-wrap [ngSwitch]="notification.topic">
+    <p *ngSwitchCase="'flanders'">{{'push-notification-subscription.flanders' | translate}}</p>
+    <p *ngSwitchCase="'wallonia'">{{'push-notification-subscription.wallonia' | translate}}</p>
+    <p *ngSwitchCase="'brussels'">{{'push-notification-subscription.brussels' | translate}}</p>
   </div>
   <div>
     {{notification.body}}

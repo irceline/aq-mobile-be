@@ -36,20 +36,7 @@
 
     <ion-slide>
       <h2 class="slide-title">{{'intro.two.header' | translate}}</h2>
-      <ion-list>
-        <ion-item text-wrap>
-          <ion-label>{{'intro.two.option.flanders' | translate}}</ion-label>
-          <ion-checkbox [(ngModel)]="messagesFlanders"></ion-checkbox>
-        </ion-item>
-        <ion-item text-wrap>
-          <ion-label>{{'intro.two.option.wallonia' | translate}}</ion-label>
-          <ion-checkbox [(ngModel)]="messagesWallonia"></ion-checkbox>
-        </ion-item>
-        <ion-item text-wrap>
-          <ion-label>{{'intro.two.option.brussels' | translate}}</ion-label>
-          <ion-checkbox [(ngModel)]="messagesBrussels"></ion-checkbox>
-        </ion-item>
-      </ion-list>
+      <push-notification-subscriptions [hideHeader]="true"></push-notification-subscriptions>
       <ion-toolbar>
         <ion-buttons>
           <button ion-button color="primary"  (click)="nextSlide()">{{'intro.next-step' | translate}}</button>

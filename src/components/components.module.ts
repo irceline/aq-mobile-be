@@ -38,6 +38,7 @@ import {
 } from './nearest-measuring-station-panel/nearest-measuring-station-panel-entry';
 import { NetworkPanelComponent } from './network-panel/network-panel';
 import { PhenomenonSelectorPopoverComponent } from './phenomenon-selector-popover/phenomenon-selector-popover';
+import { PushNotificationSubscriptionsComponent } from './push-notification-subscriptions/push-notification-subscriptions';
 import { PushNotificationComponent } from './push-notification/push-notification';
 import { RefreshButtonComponent } from './refresh-button/refresh-button';
 import { StationSelectorComponent } from './station-selector/station-selector';
@@ -73,6 +74,7 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		NetworkPanelComponent,
 		PhenomenonSelectorPopoverComponent,
 		PushNotificationComponent,
+		PushNotificationSubscriptionsComponent,
 		RefreshButtonComponent,
 		StationSelectorComponent,
 		UserLocationCreationComponent,
@@ -116,6 +118,7 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		NetworkPanelComponent,
 		PhenomenonSelectorPopoverComponent,
 		PushNotificationComponent,
+		PushNotificationSubscriptionsComponent,
 		RefreshButtonComponent,
 		StationSelectorComponent,
 		UserLocationCreationComponent,
