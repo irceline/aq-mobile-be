@@ -86,6 +86,7 @@ export class CombinedMapPage implements AfterViewInit {
 
     if (this.navParams.get('phenomenonId')) {
       this.getPhenomenonFromAPI(this.navParams.get('phenomenonId'));
+      this.showLayer();
     } else {
       this.onPhenomenonChange();
     }
