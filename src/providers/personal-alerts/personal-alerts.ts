@@ -24,10 +24,16 @@ const LOCALSTORAGE_INDEX_ALERT_PERIOD = 'personal.alert.period';
 const LOCALSTORAGE_INDEX_ALERT_LEVEL = 'personal.alert.level';
 const LOCALSTORAGE_INDEX_ALERT_SENSITIVE = 'personal.alert.sensitive';
 
+
+/**
+ * Problem with Android 8:
+ *  - https://github.com/katzer/cordova-plugin-background-mode/issues/380
+ *  - https://github.com/katzer/cordova-plugin-background-mode/issues/320
+ */
 @Injectable()
 export class PersonalAlertsProvider {
 
-  private timeout: NodeJS.Timer;
+  private interval: NodeJS.Timer;
 
   constructor(
     private localNotifications: LocalNotifications,
@@ -49,37 +55,11 @@ export class PersonalAlertsProvider {
           this.presenter.presentPersonalAlerts(temp);
         });
       }
+
+      if (this.isActive()) {
+        this.activate();
+      }
     })
-
-    // setTimeout(() => {
-    //   this.runAlertTask();
-    // }, 3000);
-
-    // setTimeout(() => {
-    //   this.requestModelledValue({
-    //     accuracy: 0,
-    //     altitude: 0,
-    //     altitudeAccuracy: 0,
-    //     bearing: 0,
-    //     coords: {
-    //       accuracy: 0,
-    //       altitude: 0,
-    //       altitudeAccuracy: 0,
-    //       heading: 0,
-    //       latitude: 0,
-    //       longitude: 0,
-    //       speed: 0
-    //     },
-    //     debug: true,
-    //     latitude: 50.863892,
-    //     longitude: 4.6337528,
-    //     locationId: 1234566,
-    //     serviceProvider: 'gps',
-    //     speed: 12,
-    //     time: 12352353456,
-    //     timestamp: 23453245
-    //   });
-    // }, 3000);
   }
 
   public isActive(): boolean {
@@ -88,29 +68,45 @@ export class PersonalAlertsProvider {
 
   public activate() {
     this.localStorage.save(LOCALSTORAGE_INDEX_ALERT_ACTIVE, true);
-    this.backgroundMode.enable();
-    this.backgroundMode.setDefaults({
-      silent: false,
-      text: '',
-      title: 'The app is active in the background.',
-      icon: 'fcm_push_icon'
+
+    // this.localNotifications.schedule({ text: 'Activate personal alerts' });
+
+    this.platform.ready().then(() => {
+
+      this.backgroundMode.on('activate').subscribe(res => {
+        // this.backgroundMode.disableWebViewOptimizations();
+        // this.localNotifications.schedule({ text: 'Start BackgroundMode - min: ' + this.getPeriod() + ', level: ' + this.getLevel() });
+        this.interval = setInterval(this.runAlertTask, this.getPeriod() * 60000);
+      });
+
+      this.backgroundMode.on('deactivate').subscribe(res => {
+        if (this.interval) { clearInterval(this.interval); }
+        this.interval = null;
+      });
+
+      // this.backgroundMode.setDefaults({
+      //   silent: false,
+      //   text: '',
+      //   title: 'The app is active in the background.',
+      //   icon: 'fcm_push_icon'
+      // });
+
+      this.backgroundMode.enable();
     });
-    this.runAlertTask();
-    this.startNewTimeout();
+
   }
 
   public deactivate() {
     this.localStorage.save(LOCALSTORAGE_INDEX_ALERT_ACTIVE, false);
-    if (this.timeout) {
+    if (this.interval) {
       this.backgroundGeolocation.finish();
       this.backgroundMode.disable();
-      clearTimeout(this.timeout);
+      clearInterval(this.interval);
     }
   }
 
   public setPeriod(minutes: number) {
     this.localStorage.save(LOCALSTORAGE_INDEX_ALERT_PERIOD, minutes);
-    this.startNewTimeout();
   }
 
   public getPeriod(): number {
@@ -119,7 +115,6 @@ export class PersonalAlertsProvider {
 
   public setLevel(level: number) {
     this.localStorage.save(LOCALSTORAGE_INDEX_ALERT_LEVEL, level);
-    this.startNewTimeout();
   }
 
   public getLevel(): number {
@@ -128,19 +123,13 @@ export class PersonalAlertsProvider {
 
   public setSensitive(sensitive: boolean) {
     this.localStorage.save(LOCALSTORAGE_INDEX_ALERT_SENSITIVE, sensitive);
-    this.startNewTimeout();
   }
 
   public getSensitive(): boolean {
     return this.localStorage.load<boolean>(LOCALSTORAGE_INDEX_ALERT_SENSITIVE) || DEFAULT_LOCAL_ALERT_UPDATE_SENSITIVE
   }
 
-  private startNewTimeout() {
-    if (this.timeout) { clearTimeout(this.timeout) };
-    this.timeout = setTimeout(() => this.runAlertTask(), this.getPeriod() * 60000);
-  }
-
-  private runAlertTask() {
+  runAlertTask = () => {
     const request = [];
     request.push(this.doCurrentLocationCheck());
     request.push(this.doUserLocationsCheck());
@@ -156,12 +145,10 @@ export class PersonalAlertsProvider {
       });
       this.notifyAlerts(alerts);
     });
-
-    this.startNewTimeout();
   }
 
   private doCurrentLocationCheck(): Observable<PersonalAlert> {
-
+    // this.localNotifications.schedule({ text: 'Start geolocation task' + this.getPeriod(), id: 200 });
     return new Observable<PersonalAlert>((observer: Observer<PersonalAlert>) => {
       const config: BackgroundGeolocationConfig = {
         desiredAccuracy: 10,
@@ -177,14 +164,16 @@ export class PersonalAlertsProvider {
       if (this.platform.is('cordova')) {
         this.backgroundGeolocation.configure(config)
           .subscribe((location: BackgroundGeolocationResponse) => {
+            // this.localNotifications.schedule({ text: 'geolocation: ' + location.latitude + ' ' + location.longitude, id: 500 });
             if (location) {
               // TODO remove after tests
               location.latitude = 50.863892;
               location.longitude = 4.6337528;
               forkJoin(
                 this.belaqiProvider.getValue(location.latitude, location.longitude),
-                this.geosearch.reverse({ type: 'Point', coordinates: [] }, {})
+                this.geosearch.reverse({ type: 'Point', coordinates: [location.latitude, location.longitude] }, {})
               ).subscribe(res => {
+                // this.localNotifications.schedule({ text: 'forkJoin: ' + res.toString(), id: 600 });
                 const belaqi = res[0] ? res[0] : null;
                 const label = (res[1] && res[1].displayName) ? res[1].displayName : 'Current location';
                 if (belaqi && label) {
@@ -198,6 +187,9 @@ export class PersonalAlertsProvider {
                   observer.next(null);
                   observer.complete();
                 }
+              }, error => {
+                // this.localNotifications.schedule({ text: 'geolocation error: ' + error.toString(), id: 600 });
+                observer.error(error);
               });
             } else {
               observer.next(null);
@@ -206,6 +198,9 @@ export class PersonalAlertsProvider {
             this.backgroundGeolocation.stop();
           }, (error) => {
             observer.error(error);
+            // this.localNotifications.schedule({
+            //   text: 'geolocation error ' + error
+            // })
           });
         this.backgroundGeolocation.start();
       } else {
@@ -220,15 +215,16 @@ export class PersonalAlertsProvider {
       const requests = [];
       const alerts: PersonalAlert[] = [];
       this.userLocations.getLocations().forEach(loc => {
-        requests.push(this.belaqiProvider.getValue(loc.point.coordinates[1], loc.point.coordinates[0]).do(res => {
-          if (this.getLevel() <= res) {
-            alerts.push({
-              belaqi: res,
-              locationLabel: loc.label,
-              sensitive: this.getSensitive()
-            })
-          }
-        }));
+        requests.push(this.belaqiProvider.getValue(loc.point.coordinates[1], loc.point.coordinates[0])
+          .do(res => {
+            if (this.getLevel() <= res) {
+              alerts.push({
+                belaqi: res,
+                locationLabel: loc.label,
+                sensitive: this.getSensitive()
+              })
+            }
+          }));
       })
       forkJoin(requests).subscribe(() => {
         observer.next(alerts);
@@ -238,13 +234,13 @@ export class PersonalAlertsProvider {
   }
 
   private notifyAlerts(alerts: PersonalAlert[]) {
-    if (this.backgroundMode.isActive()) {
+    if (this.platform.is('cordova') && this.backgroundMode.isActive()) {
       this.localNotifications.schedule({
         id: 1,
         text: 'Checked at: ' + new Date().toLocaleTimeString(),
         title: 'Personal alerts for your locations',
-        smallIcon: 'res://fcm_push_icon',
-        group: 'notify',
+        // smallIcon: 'res://fcm_push_icon',
+        // group: 'notify',
         data: alerts
       });
     } else {

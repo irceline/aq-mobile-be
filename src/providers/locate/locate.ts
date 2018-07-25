@@ -61,20 +61,20 @@ export class LocateProvider {
         
         // const latitude = 50.863892;
         // const longitude = 4.6337528;
-        const latitude = 50 + Math.random();
-        const longitude = 4 + Math.random();
-        res = {
-          coords: {
-            latitude: latitude,
-            longitude: longitude,
-            accuracy: 0,
-            altitude: 0,
-            altitudeAccuracy: 0,
-            heading: 0,
-            speed: 0
-          },
-          timestamp: 1234
-        }
+        // const latitude = 50 + Math.random();
+        // const longitude = 4 + Math.random();
+        // res = {
+        //   coords: {
+        //     latitude: latitude,
+        //     longitude: longitude,
+        //     accuracy: 0,
+        //     altitude: 0,
+        //     altitudeAccuracy: 0,
+        //     heading: 0,
+        //     speed: 0
+        //   },
+        //   timestamp: 1234
+        // }
 
         this.lastPosition = res;
         this.onPositionUpdate.emit(res);
