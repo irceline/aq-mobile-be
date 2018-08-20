@@ -1,95 +1,95 @@
 {
 	"air-quality-index": {
-		"header": "BelAQI index à:"
+		"header": "Indice BelAQI à:"
 	},
 	"air-quality-location-panel": {
-		"error": "",
-		"hint": "",
-		"loading": ""
+		"error": "Pas d'indice obtenu pour votre position",
+		"hint": "Valeur modélisée pour votre position",
+		"loading": "Chargement de BelAQI pour votre position"
 	},
 	"belaqi-chart": {
 		"xaxis": {
-			"now": "",
-			"pre1h": "",
-			"pre2h": "",
-			"pre3h": "",
-			"pre4h": "",
-			"pre5h": "",
-			"pre6h": "",
-			"todayPlusThree": "",
-			"todayPlusTwo": "",
-			"tomorrow": ""
+			"now": "Maintenant",
+			"pre1h": "-1h",
+			"pre2h": "-2h",
+			"pre3h": "-3h",
+			"pre4h": "-4h",
+			"pre5h": "-5h",
+			"pre6h": "-6h",
+			"todayPlusThree": "+3j",
+			"todayPlusTwo": "+2j",
+			"tomorrow": "+1j"
 		}
 	},
 	"belaqi-user-location-slider": {
-		"current-location": ""
+		"current-location": "Position actuelle"
 	},
 	"belaqi-wheel": {
-		"modelled-hint": ""
+		"modelled-hint": "Modélisé pour cette position"
 	},
 	"belaqi": {
 		"level": {
-			"bad": "",
-			"excellent": "",
-			"fairly-good": "",
-			"good": "",
-			"horrible": "",
-			"moderate": "",
-			"poor": "",
-			"very-bad": "",
-			"very-good": "",
-			"very-poor": ""
+			"bad": "Mauvais",
+			"excellent": "Excellent",
+			"fairly-good": "Assez bon",
+			"good": "Bon",
+			"horrible": "Exécrable",
+			"moderate": "Moyen",
+			"poor": "Médiocre",
+			"very-bad": "Très mauvais",
+			"very-good": "Très bon",
+			"very-poor": "Très médiocre"
 		}
 	},
 	"change-timespan": {
 		"custom": {
-			"end": "fin",
-			"header": "délai personnalisé",
-			"start": "début"
+			"end": "Fin",
+			"header": "Période personnalisée",
+			"start": "Début"
 		},
 		"header": "changer le délai",
 		"predefined": {
-			"current-month": "mois en cours",
-			"current-week": "semaine en cours",
-			"current-year": "année actuelle",
-			"header": "délai prédéfini",
-			"last-hour": "dernière heure",
-			"last-month": "mois dernier",
-			"last-week": "la semaine dernière",
-			"last-year": "l'année dernière",
-			"today": "aujourd'hui",
-			"today-yesterday": "aujourd'hui & hier",
-			"yesterday": "hier"
+			"current-month": "Mois en cours",
+			"current-week": "Semaine en cours",
+			"current-year": "Année en cours",
+			"header": "Période prédéfinie",
+			"last-hour": "Heure précédente",
+			"last-month": "Mois précédent",
+			"last-week": "Semaine précédente",
+			"last-year": "Année précédente",
+			"today": "Aujourd'hui",
+			"today-yesterday": "Aujourd'hui & hier",
+			"yesterday": "Hier"
 		}
 	},
 	"controls": {
-		"cancel": "annuler",
-		"close": "fermer",
-		"ok": "d'accord"
+		"cancel": "Annuler",
+		"close": "Fermer",
+		"ok": "OK"
 	},
 	"customize-personal-alerts": {
-		"active": "",
-		"alert-index-level": "",
-		"alert-period": "",
-		"alert-sensitive-active": "",
-		"header": "",
-		"hint": ""
+		"active": "Activer",
+		"alert-index-level": "Indice BelAQI",
+		"alert-period": "Période d'alerte",
+		"alert-sensitive-active": "Messages relatifs à la santé pour les personnes sensibles à la pollution de l'air",
+		"header": "Alertes personnelles",
+		"hint": "Attention: Votre position est déterminé une fois pour la période de temps choisie. Ne pas fermer l'application pour utiliser cette fonction. "
 	},
 	"diagram": {
-		"header": "diagramme",
-		"loading": "chargement en cours",
-		"no-timeseries-selected": "aucun timeseries sélectionné!",
-		"select-timeseries": "Veuillez sélectionner une timeseries dans la"
+		"header": "Diagramme",
+		"loading": "Chargement",
+		"no-timeseries-selected": "Aucune série sélectionnée",
+		"select-timeseries": "Veuillez sélectionner une série"
 	},
 	"intro": {
-		"close-introduction": "",
+		"close-introduction": "Fermer",
 		"four": {
-			"header": ""
+			"header": "Quel type de messages voulez-vous recevoir?"
 		},
-		"header": "",
-		"next-step": "",
+		"header": "Introduction"
+		"next-step": "Suivant",
 		"one": {
-			"header": "",
+			"header": "Voulez-vous changer les paramètres de langue?",
 			"option": {
 				"dutch": "Nederlands",
 				"english": "English",
@@ -98,146 +98,146 @@
 			}
 		},
 		"three": {
-			"addLocationToList": "",
-			"header": "",
-			"locationLabelHint": "",
-			"showLocationList": ""
+			"addLocationToList": "Ajouter à la liste de positions",
+			"header": "Pour quelles localisations souhaitez-vous recevoir des notifications?",
+			"locationLabelHint": "Renommer la position",
+			"showLocationList": "Voir les localisations"
 		},
 		"two": {
-			"header": ""
+			"header": "De quelle agence environnementale souhaitez-vous recevoir les messages?"
 		}
 	},
 	"legend": {
-		"first-value-at": "première valeur à",
-		"header": "légende",
-		"last-value-at": "dernière valeur à"
+		"first-value-at": "Première valeur à",
+		"header": "Légende",
+		"last-value-at": "Dernière valeur à"
 	},
 	"map": {
-		"dataset-selection-hint": "Veuillez sélectionner une ou plusieurs timeseries à afficher dans le diagramme",
+		"dataset-selection-hint": "Veuillez sélectionner une ou plusieurs séries à afficher",
 		"geosearch": {
-			"placeholder": "rechercher un lieu ..."
+			"placeholder": "Recherche la localisation ..."
 		},
-		"header": "carte",
-		"loading": "chargement en cours",
-		"select-phenomenon": "choisissez un polluant",
-		"show-in-diagram": "Afficher timeseries {{value}} dans le diagramme",
+		"header": "Carte",
+		"loading": "Chargement",
+		"select-phenomenon": "Choisissez un polluant",
+		"show-in-diagram": "Afficher la série {{value}} dans le diagramme",
 		"time": {
-			"current": "",
-			"today": "",
-			"today+2": "",
-			"today+3": "",
-			"tomorrow": ""
+			"current": "Actuel",
+			"today": "Aujourd'hui",
+			"today+2": "J+2",
+			"today+3": "J+3",
+			"tomorrow": "J+1"
 		}
 	},
 	"menu": {
 		"header": "Menu",
-		"lastUpdate": "dernière mise à jour"
+		"lastUpdate": "Dernière mise à jour"
 	},
 	"nearest-measuring-station-panel": {
-		"geoloction-disabled": "",
-		"header": ""
+		"geoloction-disabled": "Les stations les plus proches ne peuvent être trouvées si la géolocalisation de votre appareil est désactivé",
+		"header": "Station de mesure la plus proche"
 	},
 	"network": {
-		"geolocationDisabled": "",
-		"offline": "",
-		"online": ""
+		"geolocationDisabled": "La géolocalisation est désactivée",
+		"offline": "Votre appareil est offline",
+		"online": "Votre appareil est online"
 	},
 	"personal-alert": {
 		"index-1": {
-			"non-sensitive": "",
-			"sensitive": ""
+			"non-sensitive": "L'air est très sain aujourd'hui pour des activités physiques à l'extérieur. En réduisant les émissions de polluants, la qualité de l'air comme aujourd'hui est plus fréquente et les effets à long terme sur la santé diminuent.",
+			"sensitive": "L'air est très sain aujourd'hui pour des activités physiques à l'extérieur. En réduisant les émissions de polluants, la qualité de l'air comme aujourd'hui est plus fréquente et les effets à long terme sur la santé diminuent."
 		},
 		"index-10": {
-			"non-sensitive": "",
-			"sensitive": ""
+			"non-sensitive": "En cas de sensibilité, réduisez les efforts physiques lourds et/ou longs",
+			"sensitive": "Limitez les exercices physiques. Consultez votre médecin au sujet d'une éventuelle adaptation de vos médicaments. "
 		},
 		"index-2": {
-			"non-sensitive": "",
-			"sensitive": ""
+			"non-sensitive": "L'air est très sain aujourd'hui pour des activités physiques à l'extérieur. En réduisant les émissions de polluants, la qualité de l'air comme aujourd'hui est plus fréquente et les effets à long terme sur la santé diminuent.",
+			"sensitive": "L'air est très sain aujourd'hui pour des activités physiques à l'extérieur. En réduisant les émissions de polluants, la qualité de l'air comme aujourd'hui est plus fréquente et les effets à long terme sur la santé diminuent."
 		},
 		"index-3": {
-			"non-sensitive": "",
-			"sensitive": ""
+			"non-sensitive": "Vous ne devez actuellement pas adapter vos activités physiques habituelles à la qualité de l'air.",
+			"sensitive": "En cas de forte sensibilité, adaptez les efforts physiques lourds et/ou longs"
 		},
 		"index-4": {
-			"non-sensitive": "",
-			"sensitive": ""
+			"non-sensitive": "Vous ne devez actuellement pas adapter vos activités physiques habituelles à la qualité de l'air.",
+			"sensitive": "En cas de forte sensibilité, adaptez les efforts physiques lourds et/ou longs"
 		},
 		"index-5": {
-			"non-sensitive": "",
-			"sensitive": ""
+			"non-sensitive": "Vous ne devez actuellement pas adapter vos activités physiques habituelles à la qualité de l'air.",
+			"sensitive": "Réduisez vos efforts physiques. Consultez votre médecin au sujet d'une éventuelle adaptation de vos médicaments."
 		},
 		"index-6": {
-			"non-sensitive": "",
-			"sensitive": ""
+			"non-sensitive": "Vous ne devez actuellement pas adapter vos activités physiques habituelles à la qualité de l'air.",
+			"sensitive": "Réduisez vos efforts physiques. Consultez votre médecin au sujet d'une éventuelle adaptation de vos médicaments."
 		},
 		"index-7": {
-			"non-sensitive": "",
-			"sensitive": ""
+			"non-sensitive": "Vous ne devez actuellement pas adapter vos activités physiques habituelles à la qualité de l'air.",
+			"sensitive": "Réduisez vos efforts physiques. Consultez votre médecin au sujet d'une éventuelle adaptation de vos médicaments."
 		},
 		"index-8": {
-			"non-sensitive": "",
-			"sensitive": ""
+			"non-sensitive": "En cas de sensibilité, réduisez les efforts physiques lourds et/ou longs",
+			"sensitive": "Limitez les exercices physiques. Consultez votre médecin au sujet d'une éventuelle adaptation de vos médicaments. "
 		},
 		"index-9": {
-			"non-sensitive": "",
-			"sensitive": ""
+			"non-sensitive": "En cas de sensibilité, réduisez les efforts physiques lourds et/ou longs",
+			"sensitive": "Limitez les exercices physiques. Consultez votre médecin au sujet d'une éventuelle adaptation de vos médicaments. "
 		}
 	},
 	"phenomenon-selector": {
-		"header": "",
-		"hide-some-phenomenons": "masquer les polluants",
-		"list-all-phenomenons": "liste de tous les polluants"
+		"header": "Sélectionnez un polluant",
+		"hide-some-phenomenons": "Masquer les polluants",
+		"list-all-phenomenons": "Liste des polluants"
 	},
 	"push-notification-subscription": {
-		"brussels": "",
-		"flanders": "",
-		"header": "",
-		"wallonia": ""
+		"brussels": "Brussels Environment - Nederlands/Français",
+		"flanders": "Vlaamse Milieumaatschappij (VMM) - Nederlands",
+		"header": "Notifications",
+		"wallonia": "Agence wallonne de l’air et du climat (AwAC) - Français"
 	},
 	"refresh-button": {
-		"message": ""
+		"message": "Actualiser"
 	},
 	"settings": {
-		"common": "commun",
-		"header": "paramètres",
-		"select-language": "sélectionnez une langue",
-		"show-introduction": "",
+		"common": "Généraux",
+		"header": "Paramètres",
+		"select-language": "Sélectionnez une langue",
+		"show-introduction": "Voir l'introduction",
 		"user-locations": {
-			"create-new-location": "",
-			"header": "",
-			"show-location-list": ""
+			"create-new-location": "Ajouter une nouvelle position",
+			"header": "Positions",
+			"show-location-list": "Voir les positions"
 		}
 	},
 	"show-geometry": {
-		"header": "position de la station"
+		"header": "Position de la station"
 	},
 	"start": {
 		"forecast-map": {
-			"header": "carte de prévision"
+			"header": "Carte de prévision"
 		}
 	},
 	"style-edit": {
-		"generalize": "généraliser les données",
-		"header": "changer le style de cette timeseries",
-		"zeroBasedYAxe": "les timeseries à base zéro"
+		"generalize": "Généraliser les données",
+		"header": "Changer le style de cette série",
+		"zeroBasedYAxe": "Série basée à zéro"
 	},
 	"user-location-list": {
-		"edit": "",
-		"edit-the-label": "",
-		"header": "",
-		"remove": ""
+		"edit": "Modifier",
+		"edit-the-label": "Renommer la position",
+		"header": "Liste des positions",
+		"remove": "Effacer"
 	},
 	"value-panel": {
 		"forecast": {
-			"dayAfterTomorrow": "",
-			"tomorrow": "",
-			"twoDaysLater": ""
+			"dayAfterTomorrow": "Après-demain",
+			"tomorrow": "Demain",
+			"twoDaysLater": "Dans deux jours"
 		},
 		"geolocation": {
 			"disabled": {
-				"header": "aucun emplacement trouvé pour votre appareil",
-				"hint": "Veuillez activer votre service de localisation et actualiser l'application (bouton en haut à droite de votre écran)"
+				"header": "Aucune géolocalisation trouvée pour votre appareil",
+				"hint": "Veuillez activer votre service de géolocalisation et actualiser l'application"
 			}
 		}
 	}
