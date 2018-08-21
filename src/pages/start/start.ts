@@ -20,7 +20,7 @@ export class StartPage {
     private userLocations: UserLocationListProvider
   ) {
     this.locate.getLocationStateEnabled().subscribe(enabled => this.locationEnabled = enabled);
-    this.userLocations.getLocationsPromise().subscribe(list => this.locationCount = list.length);
+    this.userLocations.getUserLocations().subscribe(list => this.locationCount = list.length);
   }
 
   public navigateToMap(phenomenonId: string) {

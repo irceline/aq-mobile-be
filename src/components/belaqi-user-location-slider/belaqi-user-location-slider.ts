@@ -56,7 +56,7 @@ export class BelaqiUserLocationSliderComponent {
   private loadBelaqis() {
     this.belaqiLocations = [];
     this.ircelineSettings.getSettings(false).subscribe(ircelineSettings => {
-      this.userLocationProvider.getLocationsPromise().subscribe(
+      this.userLocationProvider.getUserLocations().subscribe(
         locations => locations.forEach((loc, index) => {
           this.belaqiIndexProvider.getValue(loc.point.coordinates[1], loc.point.coordinates[0]).subscribe(
             res => {

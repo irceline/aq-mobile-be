@@ -212,24 +212,27 @@ export class PersonalAlertsProvider {
 
   private doUserLocationsCheck(): Observable<PersonalAlert[]> {
     return new Observable<PersonalAlert[]>((observer: Observer<PersonalAlert[]>) => {
-      const requests = [];
-      const alerts: PersonalAlert[] = [];
-      this.userLocations.getLocations().forEach(loc => {
-        requests.push(this.belaqiProvider.getValue(loc.point.coordinates[1], loc.point.coordinates[0])
-          .do(res => {
-            if (this.getLevel() <= res) {
-              alerts.push({
-                belaqi: res,
-                locationLabel: loc.label,
-                sensitive: this.getSensitive()
-              })
-            }
-          }));
+      const getLocationsObs = this.userLocations.getUserLocations().subscribe(res => {
+        const requests = [];
+        const alerts: PersonalAlert[] = [];
+        res.forEach(loc => {
+          requests.push(this.belaqiProvider.getValue(loc.point.coordinates[1], loc.point.coordinates[0])
+            .do(res => {
+              if (this.getLevel() <= res) {
+                alerts.push({
+                  belaqi: res,
+                  locationLabel: loc.label,
+                  sensitive: this.getSensitive()
+                })
+              }
+            }));
+        })
+        forkJoin(requests).subscribe(() => {
+          observer.next(alerts);
+          getLocationsObs.unsubscribe();
+          observer.complete()
+        });
       })
-      forkJoin(requests).subscribe(() => {
-        observer.next(alerts);
-        observer.complete()
-      });
     });
   }
 

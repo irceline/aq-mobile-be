@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Point } from 'geojson';
-import { Observable, Observer } from 'rxjs';
+import { Observable, Observer, ReplaySubject } from 'rxjs';
 
 export interface UserLocation {
   id: number;
@@ -14,16 +14,21 @@ const STORAGE_KEY = 'userlocation';
 @Injectable()
 export class UserLocationListProvider {
 
-  private userLocations: UserLocation[];
+  private currentUserLocations: UserLocation[];
+
+  private userLocationsSubject: ReplaySubject<UserLocation[]> = new ReplaySubject(1);
 
   constructor(
     protected storage: Storage
   ) {
-    this.loadLocations().subscribe(res => this.userLocations = res);
+    this.loadLocations().subscribe(res => {
+      this.currentUserLocations = res;
+      this.userLocationsSubject.next(this.currentUserLocations);
+    });
   }
 
   public addLocation(label: string, point: Point) {
-    this.userLocations.push({
+    this.currentUserLocations.push({
       label,
       point,
       id: new Date().getTime()
@@ -31,31 +36,28 @@ export class UserLocationListProvider {
     this.storeLocations();
   }
 
-  public getLocationsPromise(): Observable<UserLocation[]> {
-    return this.loadLocations();
-  }
-
-  public getLocations(): UserLocation[] {
-    return this.userLocations;
+  public getUserLocations(): Observable<UserLocation[]> {
+    return this.userLocationsSubject.asObservable();
   }
 
   public removeLocation(userLocation: UserLocation) {
-    this.userLocations = this.userLocations.filter(res => res.id !== userLocation.id);
+    this.currentUserLocations = this.currentUserLocations.filter(res => res.id !== userLocation.id);
     this.storeLocations();
   }
 
   public hasLocations(): boolean {
-    return this.userLocations && this.userLocations.length > 0;
+    return this.currentUserLocations && this.currentUserLocations.length > 0;
   }
 
   public saveLocation(userLocation: UserLocation) {
-    const index = this.userLocations.findIndex(res => res.id === userLocation.id);
-    this.userLocations[index] = userLocation;
+    const index = this.currentUserLocations.findIndex(res => res.id === userLocation.id);
+    this.currentUserLocations[index] = userLocation;
     this.storeLocations();
   }
 
   private storeLocations() {
-    this.storage.set(STORAGE_KEY, this.userLocations);
+    this.userLocationsSubject.next(this.currentUserLocations)
+    this.storage.set(STORAGE_KEY, this.currentUserLocations);
   }
 
   private loadLocations(): Observable<UserLocation[]> {
