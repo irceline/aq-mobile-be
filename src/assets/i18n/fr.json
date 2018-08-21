@@ -73,7 +73,7 @@
 		"alert-period": "Période d'alerte",
 		"alert-sensitive-active": "Messages relatifs à la santé pour les personnes sensibles à la pollution de l'air",
 		"header": "Alertes personnelles",
-		"hint": "Attention: Votre position est déterminé une fois pour la période de temps choisie. Ne pas fermer l'application pour utiliser cette fonction. "
+		"hint": "Attention: Ne pas fermer l'application pour utiliser cette fonction. Votre position est déterminé une fois pour la période de temps choisie."
 	},
 	"diagram": {
 		"header": "Diagramme",

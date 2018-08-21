@@ -73,7 +73,7 @@
 		"alert-period": "Benachrichtigungsinterval",
 		"alert-sensitive-active": "Gesundheitsrelevante Nachrichten für empfindliche Personen",
 		"header": "Persönliche Benachrichtigungen",
-		"hint": "Hinweis: Für diese Funktionalität wird in dem gewünschten Interval einmalig der Standort ermittelt und zu diesem die modellierten Luftqualitätsdaten überprüft. Zur Nutzung dieser Funktionalität, darf die App nicht komplett beendet werden."
+		"hint": "Hinweis: Zur Nutzung dieser Funktionalität, darf die App nicht komplett beendet werden. Für diese Funktionalität wird in dem gewünschten Interval einmalig der Standort ermittelt und zu diesem die modellierten Luftqualitätsdaten überprüft."
 	},
 	"diagram": {
 		"header": "Diagramm",
@@ -190,10 +190,10 @@
 		"list-all-phenomenons": "Zeige alle Phänomene"
 	},
 	"push-notification-subscription": {
-		"brussels": "Vlaamse Milieumaatschappij (VMM) - Dutch only",
-		"flanders": "Agence wallonne de l’air et du climat (AwAC) - French only",
+		"brussels": "Brussels Environment - Dutch and French only",
+		"flanders": "Vlaamse Milieumaatschappij (VMM) - Dutch only",
 		"header": "Benachrichtigungen",
-		"wallonia": "Brussels Environment - Dutch and French only"
+		"wallonia": "Agence wallonne de l’air et du climat (AwAC) - French only"
 	},
 	"refresh-button": {
 		"message": "Aktualisiert"
