@@ -1,11 +1,11 @@
 import { AfterContentInit, Component, ViewChild } from '@angular/core';
 import { Geoposition } from '@ionic-native/geolocation';
+import { TranslateService } from '@ngx-translate/core';
 import { Chart } from 'chart.js';
 
 import { BelaqiIndexProvider, BelaqiTimeline } from '../../providers/belaqi/belaqi';
 import { IrcelineSettingsProvider } from '../../providers/irceline-settings/irceline-settings';
 import { LocateProvider } from '../../providers/locate/locate';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'belaqi-chart',
@@ -25,13 +25,9 @@ export class BelaqiChartComponent implements AfterContentInit {
   ) { }
 
   ngAfterContentInit(): void {
-    this.geolocationEnabled = this.locate.locationEnabled;
-    this.locate.onLocationStateChange.subscribe(res => this.geolocationEnabled = res);
+    this.locate.getLocationStateEnabled().subscribe(res => this.geolocationEnabled = res);
 
-    if (this.locate.lastPosition) {
-      this.loadBelaqiTimeline(this.locate.lastPosition);
-    }
-    this.locate.onPositionUpdate.subscribe(res => this.loadBelaqiTimeline(res));
+    this.locate.getGeoposition().subscribe(res => this.loadBelaqiTimeline(res));
   }
 
   private loadBelaqiTimeline(position: Geoposition) {

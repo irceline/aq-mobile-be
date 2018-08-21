@@ -134,8 +134,11 @@
 		"lastUpdate": "laatste actualisatie"
 	},
 	"nearest-measuring-station-panel": {
-		"geoloction-disabled": "",
-		"header": ""
+		"geolocation-disabled": "",
+		"header": {
+			"geolocation-disabled": "",
+			"geolocation-enabled": ""
+		}
 	},
 	"network": {
 		"geolocationDisabled": "",

@@ -1,15 +1,9 @@
 <ion-grid no-padding>
+  <ion-row class="header">
+    <ion-col *ngIf="geolocationEnabled" text-center>{{'nearest-measuring-station-panel.header.geolocation-enabled' | translate}}</ion-col>
+    <ion-col *ngIf="!geolocationEnabled" text-center>{{'nearest-measuring-station-panel.header.geolocation-disabled' | translate}}</ion-col>
+  </ion-row>
   <ion-row>
-    <ion-col text-center>{{'nearest-measuring-station-panel.header' | translate}}</ion-col>
-  </ion-row>
-  <ion-row *ngIf="geolocationEnabled">
     <ion-col *ngFor="let entry of entries" nearest-measuring-station-panel-entry [entry]="entry" (onClicked)="select($event)"></ion-col>
-  </ion-row>
-  <ion-row *ngIf="!geolocationEnabled">
-    <ion-col>
-      <div padding text-center>
-        {{'nearest-measuring-station-panel.geoloction-disabled' | translate}}
-      </div>
-    </ion-col>
   </ion-row>
 </ion-grid>

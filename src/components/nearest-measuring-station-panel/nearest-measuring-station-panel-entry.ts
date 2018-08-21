@@ -31,6 +31,7 @@ export class NearestMeasuringStationPanelEntryComponent {
   public backgroundColor: string;
   public color: string;
   public loadingStationValue: boolean = true;
+  public locationEnabled: boolean;
 
   @Input()
   public entry: PanelEntry;
@@ -44,12 +45,8 @@ export class NearestMeasuringStationPanelEntryComponent {
     private statusIntervalResolver: StatusIntervalResolverService,
     private locate: LocateProvider
   ) {
-    this.locate.onPositionUpdate.subscribe(pos => this.determineNextStationValue(pos));
-    this.locate.onLocationStateChange.subscribe(res => {
-      if (res && this.locate.lastPosition) {
-        this.determineNextStationValue(this.locate.lastPosition);
-      }
-    })
+    this.locate.getGeoposition().subscribe(pos => this.determineNextStationValue(pos));
+    this.locate.getLocationStateEnabled().subscribe(enabled => this.locationEnabled = enabled);
   }
 
   public select() {

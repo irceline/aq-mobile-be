@@ -1,18 +1,16 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 import { Platform } from 'ionic-angular/platform/platform';
+import { Observable, ReplaySubject } from 'rxjs';
 
 import { RefreshHandler } from '../refresh/refresh';
 
 @Injectable()
 export class LocateProvider {
 
-  public lastPosition: Geoposition;
-  public locationEnabled: boolean;
-
-  public onPositionUpdate: EventEmitter<Geoposition> = new EventEmitter();
-  public onLocationStateChange: EventEmitter<boolean> = new EventEmitter();
+  private position: ReplaySubject<Geoposition> = new ReplaySubject(1);
+  private locationEnabled: ReplaySubject<boolean> = new ReplaySubject(1);
 
   constructor(
     private platform: Platform,
@@ -25,11 +23,17 @@ export class LocateProvider {
     this.refresher.onRefresh.subscribe(res => this.isGeolocationEnabled());
   }
 
+  public getGeoposition(): Observable<Geoposition> {
+    return this.position.asObservable();
+  }
+
+  public getLocationStateEnabled(): Observable<boolean> {
+    return this.locationEnabled.asObservable();
+  }
+
   private registerLocationStateChangeHandler() {
     if (this.platform.is('cordova')) {
-      this.diagnostic.registerLocationStateChangeHandler(() => {
-        this.isGeolocationEnabled();
-      });
+      this.diagnostic.registerLocationStateChangeHandler(() => this.isGeolocationEnabled());
     }
   }
 
@@ -37,16 +41,14 @@ export class LocateProvider {
     if (this.platform.is('cordova')) {
       this.diagnostic.isGpsLocationEnabled().then((res) => {
         if (res) {
-          this.locationEnabled = true;
+          this.locationEnabled.next(true);
           this.determinePosition();
         } else {
-          this.locationEnabled = false;
+          this.locationEnabled.next(false);
         }
-        this.onLocationStateChange.emit(this.locationEnabled);
       });
     } else {
-      this.locationEnabled = true;
-      this.onLocationStateChange.emit(true);
+      this.locationEnabled.next(true);
       this.determinePosition();
     }
   }
@@ -58,7 +60,7 @@ export class LocateProvider {
         enableHighAccuracy: false,
         maximumAge: 60000
       }).then(res => {
-        
+
         // const latitude = 50.863892;
         // const longitude = 4.6337528;
         // const latitude = 50 + Math.random();
@@ -76,8 +78,7 @@ export class LocateProvider {
         //   timestamp: 1234
         // }
 
-        this.lastPosition = res;
-        this.onPositionUpdate.emit(res);
+        this.position.next(res);
       }).catch((error) => console.log(JSON.stringify(error)));
     })
   }

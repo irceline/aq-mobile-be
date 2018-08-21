@@ -134,8 +134,11 @@
 		"lastUpdate": "Last update"
 	},
 	"nearest-measuring-station-panel": {
-		"geoloction-disabled": "The nearest stations cannot be found since the location service of your device is deactivated.",
-		"header": "Nearest measuring station"
+		"geolocation-disabled": "The nearest stations cannot be found since the location service of your device is deactivated.",
+		"header": {
+			"geolocation-disabled": "Show the phenomenon on the map",
+			"geolocation-enabled": "Nearest measuring station"
+		}
 	},
 	"network": {
 		"geolocationDisabled": "The geolocation is disabled",

@@ -22,7 +22,7 @@ export class AirQualityLocationPanelComponent {
     private ircelineSettings: IrcelineSettingsProvider,
   ) {
     this.loading = true;
-    this.locate.onPositionUpdate.subscribe(pos => this.getValue(pos));
+    this.locate.getGeoposition().subscribe(pos => this.getValue(pos));
   }
 
   private getValue(position: Geoposition) {
