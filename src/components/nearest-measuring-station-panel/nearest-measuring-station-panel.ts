@@ -32,7 +32,7 @@ export class NearestMeasuringStationPanelComponent {
       id: '7'
     },
     {
-      label: 'PM',
+      label: 'PM10',
       id: '5'
     },
     {
