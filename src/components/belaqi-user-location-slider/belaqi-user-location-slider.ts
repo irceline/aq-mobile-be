@@ -54,20 +54,22 @@ export class BelaqiUserLocationSliderComponent {
   }
 
   private loadBelaqis() {
-    this.belaqiLocations = [];
     this.ircelineSettings.getSettings(false).subscribe(ircelineSettings => {
       this.userLocationProvider.getUserLocations().subscribe(
-        locations => locations.forEach((loc, index) => {
-          this.belaqiIndexProvider.getValue(loc.point.coordinates[1], loc.point.coordinates[0]).subscribe(
-            res => {
-              this.belaqiLocations.push({
-                index: res,
-                locationLabel: loc.label,
-                date: ircelineSettings.lastupdate
-              });
-            }
-          )
-        })
+        locations => {
+          this.belaqiLocations = [];
+          locations.forEach((loc, index) => {
+            this.belaqiIndexProvider.getValue(loc.point.coordinates[1], loc.point.coordinates[0]).subscribe(
+              res => {
+                this.belaqiLocations.push({
+                  index: res,
+                  locationLabel: loc.label,
+                  date: ircelineSettings.lastupdate
+                });
+              }
+            )
+          })
+        }
       );
     });
   }

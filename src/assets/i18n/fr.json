@@ -134,7 +134,6 @@
 		"lastUpdate": "Dernière mise à jour"
 	},
 	"nearest-measuring-station-panel": {
-		"geolocation-disabled": "Les stations les plus proches ne peuvent être trouvées si la géolocalisation de votre appareil est désactivé",
 		"header": {
 			"geolocation-disabled": "",
 			"geolocation-enabled": "Station de mesure la plus proche"
@@ -230,6 +229,14 @@
 		"edit-the-label": "Renommer la position",
 		"header": "Liste des positions",
 		"remove": "Effacer"
+	},
+	"user-location": {
+		"creation": {
+			"message": {
+				"added": "",
+				"exists": ""
+			}
+		}
 	},
 	"value-panel": {
 		"forecast": {

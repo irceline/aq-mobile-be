@@ -134,7 +134,6 @@
 		"lastUpdate": "Last update"
 	},
 	"nearest-measuring-station-panel": {
-		"geolocation-disabled": "The nearest stations cannot be found since the location service of your device is deactivated.",
 		"header": {
 			"geolocation-disabled": "Show the phenomenon on the map",
 			"geolocation-enabled": "Nearest measuring station"
@@ -230,6 +229,14 @@
 		"edit-the-label": "Edit the location label",
 		"header": "Location list",
 		"remove": "Remove"
+	},
+	"user-location": {
+		"creation": {
+			"message": {
+				"added": "User location added",
+				"exists": "User location already exists"
+			}
+		}
 	},
 	"value-panel": {
 		"forecast": {

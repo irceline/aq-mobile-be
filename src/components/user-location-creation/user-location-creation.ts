@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { SettingsService } from '@helgoland/core';
 import { GeoSearchOptions, GeoSearchResult } from '@helgoland/map';
+import { TranslateService } from '@ngx-translate/core';
 import { Point } from 'geojson';
-import { ModalController } from 'ionic-angular';
+import { ModalController, ToastController } from 'ionic-angular';
 import { MapOptions } from 'leaflet';
 
 import { MobileSettings } from '../../providers/settings/settings';
@@ -21,9 +22,11 @@ export class UserLocationCreationComponent {
   public locationLabel: string;
 
   constructor(
+    private locationList: UserLocationListProvider,
+    private modalCtrl: ModalController,
     private settingsSrvc: SettingsService<MobileSettings>,
-    protected modalCtrl: ModalController,
-    protected locationList: UserLocationListProvider
+    private toast: ToastController,
+    private translate: TranslateService,
   ) {
     const settings = this.settingsSrvc.getSettings();
     this.geoSearchOptions = {
@@ -42,7 +45,21 @@ export class UserLocationCreationComponent {
   }
 
   public addLocationToList() {
-    this.locationList.addLocation(this.locationLabel, this.geoSearchResult.geometry as Point);
+    if (this.locationList.hasLocation(this.locationLabel, this.geoSearchResult.geometry as Point)) {
+      this.toast.create(
+        {
+          message: this.translate.instant('user-location.creation.message.exists'),
+          duration: 3000
+        }
+      ).present();
+    } else {
+      this.locationList.addLocation(this.locationLabel, this.geoSearchResult.geometry as Point);
+      this.toast.create({
+        message: this.translate.instant('user-location.creation.message.added'),
+        duration: 3000
+      }
+      ).present();
+    }
   }
 
   public showLocationList() {

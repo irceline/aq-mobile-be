@@ -134,7 +134,6 @@
 		"lastUpdate": "Letztes Update"
 	},
 	"nearest-measuring-station-panel": {
-		"geolocation-disabled": "Die nächstgelegenen Stationen können nicht ermittelt werden, da die Standortermittlung des Gerätes nicht aktiviert ist.",
 		"header": {
 			"geolocation-disabled": "Zeige das Phänomen auf der Karte",
 			"geolocation-enabled": "Nächstgelegene Station"
@@ -230,6 +229,14 @@
 		"edit-the-label": "Ändere die Standortbezeichnung",
 		"header": "Standort liste",
 		"remove": "Entfernen"
+	},
+	"user-location": {
+		"creation": {
+			"message": {
+				"added": "Nutzerstandort erstellt",
+				"exists": "Nutzerstandort existiert bereits"
+			}
+		}
 	},
 	"value-panel": {
 		"forecast": {

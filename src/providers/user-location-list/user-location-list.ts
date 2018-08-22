@@ -36,6 +36,14 @@ export class UserLocationListProvider {
     this.storeLocations();
   }
 
+  public hasLocation(label: string, point: Point): boolean {
+    return this.currentUserLocations.findIndex(
+      e => e.label === label
+        && e.point.coordinates[0] === point.coordinates[0]
+        && e.point.coordinates[1] === point.coordinates[1]
+    ) > -1;
+  }
+
   public getUserLocations(): Observable<UserLocation[]> {
     return this.userLocationsSubject.asObservable();
   }
