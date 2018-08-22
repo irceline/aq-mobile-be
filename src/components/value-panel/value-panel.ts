@@ -126,9 +126,8 @@ export class ValuePanelComponent {
       this.nearestStation = null;
       this.stationDistance = Infinity;
       stations.forEach(station => {
-        const stationLat = station.geometry.coordinates[1];
-        const stationLon = station.geometry.coordinates[0];
-        const stationDis = this.distanceInKmBetweenEarthCoordinates(latitude, longitude, stationLat, stationLon);
+        const point = station.geometry as GeoJSON.Point;
+        const stationDis = this.distanceInKmBetweenEarthCoordinates(latitude, longitude, point.coordinates[1], point.coordinates[0]);
         if (stationDis < this.stationDistance) {
           this.stationDistance = stationDis;
           this.nearestStation = station;
