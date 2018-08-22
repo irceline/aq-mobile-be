@@ -38,7 +38,7 @@ export class BelaqiUserLocationSliderComponent {
 
   private loadBelaqiForCurrentLocation() {
 
-    this.locate.onPositionUpdate.subscribe((pos: Geoposition) => {
+    this.locate.getGeoposition().subscribe((pos: Geoposition) => {
       const ircelSetObs = this.ircelineSettings.getSettings(false);
       const belaqiObs = this.belaqiIndexProvider.getValue(pos.coords.latitude, pos.coords.longitude);
       const reverseObs = this.geoSearch.reverse({ type: 'Point', coordinates: [pos.coords.latitude, pos.coords.longitude] });
@@ -56,7 +56,7 @@ export class BelaqiUserLocationSliderComponent {
   private loadBelaqis() {
     this.belaqiLocations = [];
     this.ircelineSettings.getSettings(false).subscribe(ircelineSettings => {
-      this.userLocationProvider.getLocationsPromise().subscribe(
+      this.userLocationProvider.getUserLocations().subscribe(
         locations => locations.forEach((loc, index) => {
           this.belaqiIndexProvider.getValue(loc.point.coordinates[1], loc.point.coordinates[0]).subscribe(
             res => {

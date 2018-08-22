@@ -1,7 +1,9 @@
 <div text-center (click)="select()" class="entry" [ngStyle]="{'background-color': backgroundColor, 'color': color}">
-  <div class="phenomenon-label">{{entry.label}}</div>
-  <div class="station-value" *ngIf="!loadingStationValue">{{lastStationaryValue?.value | number:'1.0-1'}}{{uom}}</div>
-  <div class="station-distance" *ngIf="!loadingStationValue">{{stationDistance | number:'1.0-1'}}km</div>
-  <div class="station-label" *ngIf="!loadingStationValue">{{stationLabel}}</div>
-  <div *ngIf="loadingStationValue"><ion-spinner></ion-spinner></div>
+  <div class="phenomenon-label" [ngClass]="{'location-disabled': !locationEnabled}">{{entry.label}}</div>
+  <div *ngIf="locationEnabled">
+    <div class="station-value" *ngIf="!loadingStationValue">{{lastStationaryValue?.value | number:'1.0-1'}}{{uom}}</div>
+    <div class="station-distance" *ngIf="!loadingStationValue">{{stationDistance | number:'1.0-1'}}km</div>
+    <div class="station-label" *ngIf="!loadingStationValue">{{stationLabel}}</div>
+    <div *ngIf="loadingStationValue"><ion-spinner></ion-spinner></div>
+  </div>
 </div>

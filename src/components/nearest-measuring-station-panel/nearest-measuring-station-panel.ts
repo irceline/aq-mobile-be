@@ -44,8 +44,7 @@ export class NearestMeasuringStationPanelComponent {
   constructor(
     private locate: LocateProvider
   ) {
-    this.geolocationEnabled = this.locate.locationEnabled;
-    this.locate.onLocationStateChange.subscribe(res => this.geolocationEnabled = res);
+    this.locate.getLocationStateEnabled().subscribe(res => this.geolocationEnabled = res);
   }
 
   public select(id: string) {

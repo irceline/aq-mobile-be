@@ -134,8 +134,11 @@
 		"lastUpdate": "Letztes Update"
 	},
 	"nearest-measuring-station-panel": {
-		"geoloction-disabled": "Die nächstgelegenen Stationen können nicht ermittelt werden, da die Standortermittlung des Gerätes nicht aktiviert ist.",
-		"header": "Nächstgelegene Station"
+		"geolocation-disabled": "Die nächstgelegenen Stationen können nicht ermittelt werden, da die Standortermittlung des Gerätes nicht aktiviert ist.",
+		"header": {
+			"geolocation-disabled": "Zeige das Phänomen auf der Karte",
+			"geolocation-enabled": "Nächstgelegene Station"
+		}
 	},
 	"network": {
 		"geolocationDisabled": "Die Standortermittlung ist deaktiviert",

@@ -39,7 +39,7 @@ export class ModalUserLocationListComponent {
   }
 
   private setLocations() {
-    this.userLocations = this.userLocationProvider.getLocations();
+    this.userLocationProvider.getUserLocations().subscribe(res => this.userLocations = res);
   }
 
 }

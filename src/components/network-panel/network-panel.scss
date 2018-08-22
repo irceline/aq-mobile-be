@@ -1,5 +1,8 @@
 network-panel {
   div {
     padding: 2px;
+    .warn {
+      color: red;
+    }
   }
 }

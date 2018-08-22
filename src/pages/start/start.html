@@ -22,7 +22,7 @@
     <air-quality-location-panel></air-quality-location-panel>
   </ion-card> -->
 
-  <ion-card>
+  <ion-card *ngIf="locationCount > 0 || locationEnabled">
     <belaqi-user-location-slider></belaqi-user-location-slider>
   </ion-card>
 
@@ -41,7 +41,7 @@
     </ion-card-content>
   </ion-card> -->
 
-  <ion-card>
+  <ion-card *ngIf="locationEnabled">
     <belaqi-chart></belaqi-chart>
   </ion-card>
 
