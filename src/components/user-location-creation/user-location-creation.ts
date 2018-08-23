@@ -22,7 +22,7 @@ export class UserLocationCreationComponent {
   public locationLabel: string;
 
   constructor(
-    private locationList: UserLocationListProvider,
+    protected locationList: UserLocationListProvider,
     private modalCtrl: ModalController,
     private settingsSrvc: SettingsService<MobileSettings>,
     private toast: ToastController,

@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>
-      {{platform.properties.label}}
+      {{station.properties.label}}
     </ion-title>
     <ion-buttons start>
       <button ion-button (click)="dismiss()">
@@ -13,7 +13,7 @@
 </ion-header>
 <ion-content>
   <h4 padding>{{'map.dataset-selection-hint' | translate}}:</h4>
-  <n52-mobile-dataset-by-station-selector [station]="platform" [url]="providerUrl" (onSelectionChanged)="onDatasetSelectionChanged($event)"></n52-mobile-dataset-by-station-selector>
+  <n52-mobile-dataset-by-station-selector [station]="station" [url]="providerUrl" [phenomenonId]="phenomenonId" (onSelectionChanged)="onDatasetSelectionChanged($event)"></n52-mobile-dataset-by-station-selector>
 </ion-content>
 <ion-footer>
   <ion-toolbar color="primary">

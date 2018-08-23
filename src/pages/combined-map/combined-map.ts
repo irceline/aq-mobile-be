@@ -150,7 +150,8 @@ export class CombinedMapPage implements AfterViewInit {
     const modal = this.modalCtrl.create(StationSelectorComponent,
       {
         platform,
-        providerUrl: this.providerUrl
+        providerUrl: this.providerUrl,
+        phenomenonId: this.selectedPhenomenon.id
       }
     );
     modal.onDidDismiss(data => { if (data) { this.navCtrl.push(DiagramPage) } });
