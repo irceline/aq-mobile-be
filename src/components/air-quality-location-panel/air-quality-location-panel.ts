@@ -4,6 +4,7 @@ import { Geoposition } from '@ionic-native/geolocation';
 import { BelaqiIndexProvider } from '../../providers/belaqi/belaqi';
 import { IrcelineSettingsProvider } from '../../providers/irceline-settings/irceline-settings';
 import { LocateProvider } from '../../providers/locate/locate';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'air-quality-location-panel',
@@ -20,6 +21,7 @@ export class AirQualityLocationPanelComponent {
     private locate: LocateProvider,
     private belaqiIndex: BelaqiIndexProvider,
     private ircelineSettings: IrcelineSettingsProvider,
+    protected translateSrvc: TranslateService
   ) {
     this.loading = true;
     this.locate.getGeoposition().subscribe(pos => this.getValue(pos));

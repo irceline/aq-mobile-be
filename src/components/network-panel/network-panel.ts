@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { IrcelineSettingsProvider } from '../../providers/irceline-settings/irceline-settings';
 import { LocateProvider } from '../../providers/locate/locate';
 import { RefreshHandler } from '../../providers/refresh/refresh';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'network-panel',
@@ -25,7 +26,8 @@ export class NetworkPanelComponent {
     private network: Network,
     private platform: Platform,
     private locate: LocateProvider,
-    private refresh: RefreshHandler
+    private refresh: RefreshHandler,
+    protected translate: TranslateService
   ) {
     this.runChecks();
     this.refresh.onRefresh.subscribe(() => this.runChecks());

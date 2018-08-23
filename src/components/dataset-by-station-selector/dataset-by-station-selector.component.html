@@ -16,7 +16,7 @@
         <p *ngIf="timeseries.lastValue">
           <span>{{timeseries.lastValue.value}}</span>
           <span>{{timeseries.uom}}</span>
-          <span>({{timeseries.lastValue.timestamp| date: 'dd.MM.yy HH:mm'}})</span>
+          <span>({{timeseries.lastValue.timestamp| date: 'medium': null: translateSrvc.currentLang}})</span>
         </p>
       </ion-label>
       <ion-radio checked="{{timeseries.selected}}" (ionSelect)="toggle(timeseries)"></ion-radio>
@@ -40,7 +40,7 @@
         <p *ngIf="timeseries.lastValue">
           <span>{{timeseries.lastValue.value}}</span>
           <span>{{timeseries.uom}}</span>
-          <span>({{timeseries.lastValue.timestamp| date: 'dd.MM.yy HH:mm'}})</span>
+          <span>({{timeseries.lastValue.timestamp| date: 'medium': null: translateSrvc.currentLang}})</span>
         </p>
       </ion-label>
       <ion-radio checked="{{timeseries.selected}}" (ionSelect)="toggle(timeseries)"></ion-radio>

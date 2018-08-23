@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { DatasetApiInterface } from '@helgoland/core';
 import { DatasetByStationSelectorComponent } from '@helgoland/selector';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'n52-mobile-dataset-by-station-selector',
@@ -8,5 +10,12 @@ import { DatasetByStationSelectorComponent } from '@helgoland/selector';
 export class MobileDatasetByStationSelectorComponent extends DatasetByStationSelectorComponent {
 
     public toggleShowAll: boolean = false;
+
+    constructor(
+        protected datasetApi: DatasetApiInterface,
+        protected translateSrvc: TranslateService
+    ) {
+        super(datasetApi);
+    }
 
 }

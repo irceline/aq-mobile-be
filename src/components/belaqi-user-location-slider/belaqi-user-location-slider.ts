@@ -29,7 +29,7 @@ export class BelaqiUserLocationSliderComponent {
     private userLocationProvider: UserLocationListProvider,
     private ircelineSettings: IrcelineSettingsProvider,
     private locate: LocateProvider,
-    private translate: TranslateService,
+    protected translateSrvc: TranslateService,
     private geoSearch: GeoSearch
   ) {
     this.loadBelaqis();
@@ -43,7 +43,7 @@ export class BelaqiUserLocationSliderComponent {
       const belaqiObs = this.belaqiIndexProvider.getValue(pos.coords.latitude, pos.coords.longitude);
       const reverseObs = this.geoSearch.reverse({ type: 'Point', coordinates: [pos.coords.latitude, pos.coords.longitude] });
       forkJoin([ircelSetObs, belaqiObs, reverseObs]).subscribe(value => {
-        const locationLabel = value[2].displayName || this.translate.instant('belaqi-user-location-slider.current-location');
+        const locationLabel = value[2].displayName || this.translateSrvc.instant('belaqi-user-location-slider.current-location');
         this.currentLocation = {
           index: value[1],
           locationLabel,

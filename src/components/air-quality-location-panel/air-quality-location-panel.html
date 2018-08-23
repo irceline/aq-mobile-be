@@ -18,7 +18,7 @@
       <div *ngSwitchCase="10">{{'belaqi.level.horrible' | translate}} (10)</div>
     </div>
     <div class="small">{{'air-quality-location-panel.hint' | translate}}</div>
-    <div class="small">{{time | date: 'medium'}}</div>
+    <div class="small">{{time | date: 'medium': null: translateSrvc.currentLang}}</div>
   </div>
   <div *ngIf="error" class="aqIndex-9"> {{'air-quality-location-panel.error' | translate}}</div>
 </div>

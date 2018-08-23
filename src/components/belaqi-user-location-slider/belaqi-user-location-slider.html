@@ -4,7 +4,7 @@
       {{currentLocation.locationLabel}}
     </div>
     <div class="location-date">
-      <span>{{currentLocation.date | date : 'medium'}} </span>
+      <span>{{currentLocation.date | date : 'medium': null: translateSrvc.currentLang}} </span>
       <span> - {{'belaqi-user-location-slider.current-location' | translate}}</span>
     </div>
     <div class="wheel">
@@ -16,7 +16,7 @@
       {{loc.locationLabel}}
     </div>
     <div class="location-date">
-      <span>{{loc.date | date : 'medium'}} </span>
+      <span>{{loc.date | date : 'medium': null: translateSrvc.currentLang}} </span>
     </div>
     <div class="wheel">
       <belaqi-wheel [index]="loc.index"></belaqi-wheel>

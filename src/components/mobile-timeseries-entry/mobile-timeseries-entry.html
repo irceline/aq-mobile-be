@@ -44,13 +44,13 @@
       <div *ngIf="firstValue" (click)="jumpToFirstTimeStamp(); $event.stopPropagation();">
         <ion-icon name="arrow-forward"></ion-icon>
         <span>{{'legend.first-value-at' | translate}}</span>
-        <span>{{firstValue.timestamp| date: 'dd.MM.yy HH:mm'}}</span>
+        <span>{{firstValue.timestamp| date: 'medium': null: translateSrvc.currentLang}}</span>
         <span>({{firstValue.value}} {{uom}})</span>
       </div>
       <div *ngIf="lastValue" (click)="jumpToLastTimeStamp(); $event.stopPropagation();">
         <ion-icon name="arrow-forward"></ion-icon>
         <span>{{'legend.last-value-at' | translate}}</span>
-        <span>{{lastValue.timestamp| date: 'dd.MM.yy HH:mm'}}</span>
+        <span>{{lastValue.timestamp| date: 'medium': null: translateSrvc.currentLang}}</span>
         <span>({{lastValue.value}} {{uom}})</span>
       </div>
       <div *ngIf="dataset?.referenceValues">

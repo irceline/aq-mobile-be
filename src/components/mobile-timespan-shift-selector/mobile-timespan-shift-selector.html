@@ -4,7 +4,8 @@
       <ion-icon name="arrow-round-back"></ion-icon>
     </button>
   </ion-buttons>
-  <div text-center (click)="open()">{{timespan.from | date : 'y-MM-dd'}} &nbsp;&ndash;&nbsp; {{timespan.to | date : 'y-MM-dd'}}</div>
+  <div text-center (click)="open()">{{timespan.from | date : 'short': null: translateSrvc.currentLang}} &nbsp;&ndash;&nbsp; {{timespan.to | date : 'short':
+    null: translateSrvc.currentLang}}</div>
   <ion-buttons end>
     <button ion-button icon-only (click)="forward()">
       <ion-icon name="arrow-round-forward"></ion-icon>
