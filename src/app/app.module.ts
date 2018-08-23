@@ -30,7 +30,6 @@ import { ComponentsModule } from '../components/components.module';
 import { CombinedMapPage } from '../pages/combined-map/combined-map';
 import { DiagramPage } from '../pages/diagram/diagram';
 import { IntroPage } from '../pages/intro/intro';
-import { MapPage } from '../pages/map/map';
 import { SettingsPage } from '../pages/settings/settings';
 import { SettingsModule } from '../pages/settings/settings.module';
 import { StartPage } from '../pages/start/start';
@@ -59,7 +58,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     DiagramPage,
     CombinedMapPage,
     IntroPage,
-    MapPage,
     MyApp,
     StartPage
   ],
@@ -91,7 +89,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     DiagramPage,
     CombinedMapPage,
     IntroPage,
-    MapPage,
     MyApp,
     SettingsPage,
     StartPage

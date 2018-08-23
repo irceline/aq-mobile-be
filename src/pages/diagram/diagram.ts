@@ -6,7 +6,7 @@ import { ModalController, NavController } from 'ionic-angular';
 import { ModalLegendComponent } from '../../components/modal-legend/modal-legend';
 import { ModalTimespanEditorComponent } from '../../components/modal-timespan-editor/modal-timespan-editor';
 import { TimeseriesService } from '../../providers/timeseries/timeseries.service';
-import { MapPage } from '../map/map';
+import { CombinedMapPage } from '../combined-map/combined-map';
 
 @Component({
   selector: 'page-diagram',
@@ -59,7 +59,7 @@ export class DiagramPage {
   }
 
   public openMapSelection() {
-    this.nav.push(MapPage);
+    this.nav.push(CombinedMapPage);
   }
 
 }
