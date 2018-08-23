@@ -6,8 +6,7 @@ module.exports = {
     src: [
       '{{ROOT}}/node_modules/leaflet/dist/leaflet.css',
       '{{ROOT}}/node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css',
-      '{{ROOT}}/node_modules/jquery/dist/jquery.min.js',
-      '{{ROOT}}/node_modules/Flot/jquery.flot.js'
+      '{{ROOT}}/node_modules/jquery/dist/jquery.min.js'
     ],
     dest: '{{BUILD}}'
   },

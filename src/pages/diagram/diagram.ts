@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DatasetOptions, Timespan } from '@helgoland/core';
-import { PlotOptions } from '@helgoland/flot';
+import { D3PlotOptions } from '@helgoland/d3';
 import { ModalController, NavController } from 'ionic-angular';
 
 import { ModalLegendComponent } from '../../components/modal-legend/modal-legend';
@@ -21,24 +21,8 @@ export class DiagramPage {
 
   public timespan = new Timespan(new Date().getTime() - 100000000, new Date().getTime());
 
-  public diagramOptions: PlotOptions = {
-    pan: {
-      frameRate: 10,
-      interactive: true
-    },
-    touch: {
-      delayTouchEnded: 200,
-      pan: 'x',
-      scale: ''
-    },
-    yaxis: {
-      additionalWidth: 17,
-      labelWidth: 40,
-      min: null,
-      panRange: false,
-      show: true,
-    },
-    showReferenceValues: true
+  public diagramOptions: D3PlotOptions = {
+    hoverable: false
   };
 
   constructor(
@@ -48,7 +32,7 @@ export class DiagramPage {
   ) {
     this.datasetIds = this.timeseriesSrvc.datasetIds;
     this.datasetOptions = this.timeseriesSrvc.datasetOptions;
-    this.timeseriesSrvc.onTimespanChanged.subscribe(timespan => this.timespan = timespan);
+    this.timeseriesSrvc.getTimespan().subscribe(timespan => this.timespan = timespan);
   }
 
   public timespanChanged(timespan: Timespan) {

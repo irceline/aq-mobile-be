@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { DatasetOptions, Time } from '@helgoland/core';
+import { DatasetOptions, Time, Timespan } from '@helgoland/core';
 import { ModalController, ViewController } from 'ionic-angular';
+import { first } from 'rxjs/operators';
 
 import { TimeseriesService } from '../../providers/timeseries/timeseries.service';
 import { ModalGeometryViewerComponent } from '../modal-geometry-viewer/modal-geometry-viewer';
@@ -63,8 +64,12 @@ export class ModalLegendComponent {
   }
 
   public jumpToDate(date: Date) {
-    const timespan = this.timeSrvc.centerTimespan(this.timeseriesSrvc.getTimespan(), date);
-    this.viewCtrl.dismiss(timespan);
+    this.timeseriesSrvc.getTimespan()
+      .pipe(first<Timespan>((ts, i, s) => {
+        const timespan = this.timeSrvc.centerTimespan(ts, date);
+        this.viewCtrl.dismiss(timespan);
+        return true;
+      })).subscribe();
   }
 
 }

@@ -3,8 +3,8 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HelgolandCachingModule } from '@helgoland/caching';
 import { DatasetApiInterface, SettingsService, SplittedDataDatasetApiInterface } from '@helgoland/core';
+import { HelgolandD3Module } from '@helgoland/d3';
 import { HelgolandDatasetlistModule } from '@helgoland/depiction';
-import { HelgolandFlotModule } from '@helgoland/flot';
 import {
   GeoSearch,
   HelgolandMapControlModule,
@@ -68,10 +68,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     HelgolandMapSelectorModule,
     HelgolandMapControlModule,
-    HelgolandFlotModule,
     HelgolandDatasetlistModule,
     HelgolandCachingModule,
     HelgolandMapViewModule,
+    HelgolandD3Module,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

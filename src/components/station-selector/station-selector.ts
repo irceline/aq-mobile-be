@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ColorService, Dataset, DatasetOptions, Platform } from '@helgoland/core';
+import { ColorService, Dataset, Platform } from '@helgoland/core';
 import { NavParams, ViewController } from 'ionic-angular';
 
 import { TimeseriesService } from '../../providers/timeseries/timeseries.service';
@@ -31,9 +31,7 @@ export class StationSelectorComponent {
 
   public confirmSelection() {
     this.datasetSelections.forEach(entry => {
-      const option = new DatasetOptions(entry.internalId, this.colorSrvc.getColor());
-      option.generalize = true;
-      this.timeseriesSrvc.addDataset(entry.internalId, option);
+      this.timeseriesSrvc.addDataset(entry.internalId);
     });
     this.viewCtrl.dismiss(true);
   }
