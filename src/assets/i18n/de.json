@@ -31,14 +31,14 @@
 		"level": {
 			"bad": "Schlecht",
 			"excellent": "Ausgezeichnet",
-			"fairly-good": "Einigermaßen gut",
+			"fairly-good": "Relativ gut",
 			"good": "Gut",
-			"horrible": "Entsetzlich",
-			"moderate": "Mäßig",
-			"poor": "Dürftig",
+			"horrible": "Extrem schlecht",
+			"moderate": "Mittelmäßig",
+			"poor": "Ungenügend",
 			"very-bad": "Sehr schlecht",
 			"very-good": "Sehr gut",
-			"very-poor": "Sehr dürftig"
+			"very-poor": "Relativ schlecht"
 		}
 	},
 	"change-timespan": {
