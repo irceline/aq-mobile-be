@@ -17,6 +17,8 @@ export class DiagramPage {
   public loading: boolean;
   public datasetIds: string[];
 
+  public selectedDatasetIds: string[] = [];
+
   public datasetOptions: Map<string, DatasetOptions> = new Map();
 
   public timespan = new Timespan(new Date().getTime() - 100000000, new Date().getTime());
@@ -51,7 +53,7 @@ export class DiagramPage {
   }
 
   public openLegend() {
-    const modal = this.modalCtrl.create(ModalLegendComponent);
+    const modal = this.modalCtrl.create(ModalLegendComponent, {}, { showBackdrop: true, enableBackdropDismiss: true });
     modal.onDidDismiss(data => {
       if (data instanceof Timespan) this.timespanChanged(data);
     })
@@ -60,6 +62,19 @@ export class DiagramPage {
 
   public openMapSelection() {
     this.nav.push(CombinedMapPage);
+  }
+
+  public onSelectedDataset(id: string, selection: boolean) {
+    const idx = this.selectedDatasetIds.indexOf(id);
+    if (selection) {
+      if (idx === -1) {
+        this.selectedDatasetIds.push(id);
+      }
+    } else {
+      if (idx !== -1) {
+        this.selectedDatasetIds.splice(idx, 1);
+      }
+    }
   }
 
 }

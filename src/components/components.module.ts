@@ -41,6 +41,7 @@ import { PhenomenonSelectorPopoverComponent } from './phenomenon-selector-popove
 import { PushNotificationSubscriptionsComponent } from './push-notification-subscriptions/push-notification-subscriptions';
 import { PushNotificationComponent } from './push-notification/push-notification';
 import { RefreshButtonComponent } from './refresh-button/refresh-button';
+import { SimpleLegendEntryComponent } from './simple-legend-entry/simple-legend-entry';
 import { StationSelectorComponent } from './station-selector/station-selector';
 import { UserLocationCreationComponent } from './user-location-creation/user-location-creation';
 import { ValuePanelComponent } from './value-panel/value-panel';
@@ -76,6 +77,7 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		PushNotificationComponent,
 		PushNotificationSubscriptionsComponent,
 		RefreshButtonComponent,
+		SimpleLegendEntryComponent,
 		StationSelectorComponent,
 		UserLocationCreationComponent,
 		ValuePanelComponent,
@@ -120,6 +122,7 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		PushNotificationComponent,
 		PushNotificationSubscriptionsComponent,
 		RefreshButtonComponent,
+		SimpleLegendEntryComponent,
 		StationSelectorComponent,
 		UserLocationCreationComponent,
 		ValuePanelComponent,

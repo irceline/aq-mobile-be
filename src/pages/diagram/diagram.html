@@ -4,11 +4,11 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>{{'diagram.header' | translate}}</ion-title>
-    <ion-buttons end>
+    <!-- <ion-buttons end>
       <button ion-button icon-only (click)="openLegend()">
         {{'legend.header' | translate}}
       </button>
-    </ion-buttons>
+    </ion-buttons> -->
   </ion-navbar>
 </ion-header>
 
@@ -16,14 +16,28 @@
   <ion-card class="network">
     <network-panel></network-panel>
   </ion-card>
-  <ion-card *ngIf="datasetIds.length > 0" class="diagram-container">
-    <div class="diagram">
-      <n52-d3-timeseries-graph [datasetIds]="datasetIds" [datasetOptions]="datasetOptions" [timeInterval]="timespan" [graphOptions]="diagramOptions"
-        (onTimespanChanged)="timespanChanged($event)" (onContentLoading)="loading = $event"></n52-d3-timeseries-graph>
-    </div>
-    <div class="loading-overlay" *ngIf="loading">
-      <ion-spinner item-start name="circles"></ion-spinner>
-      <span>{{'diagram.loading' | translate}}...</span>
+  <ion-card *ngIf="datasetIds.length > 0" class="diagram-card">
+    <div class="diagram-container">
+      <div class="diagram-wrapper">
+        <div class="diagram">
+          <n52-d3-timeseries-graph [datasetIds]="datasetIds" [datasetOptions]="datasetOptions" [timeInterval]="timespan" [graphOptions]="diagramOptions"
+            [selectedDatasetIds]="selectedDatasetIds" (onTimespanChanged)="timespanChanged($event)" (onContentLoading)="loading = $event"></n52-d3-timeseries-graph>
+        </div>
+        <div class="loading-overlay" *ngIf="loading">
+          <ion-spinner item-start name="circles"></ion-spinner>
+          <span>{{'diagram.loading' | translate}}...</span>
+        </div>
+      </div>
+      <div class="legend-wrapper">
+        <div *ngFor="let id of datasetIds">
+          <simple-legend-entry [datasetId]="id" [datasetOptions]="datasetOptions.get(id)" (onSelectDataset)="onSelectedDataset(id, $event)"></simple-legend-entry>
+        </div>
+        <ion-fab bottom right>
+          <button ion-fab mini (click)="openLegend()">
+            <ion-icon name="arrow-dropup"></ion-icon>
+          </button>
+        </ion-fab>
+      </div>
     </div>
   </ion-card>
   <ion-card *ngIf="datasetIds.length === 0">

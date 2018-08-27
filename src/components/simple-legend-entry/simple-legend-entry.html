@@ -1,0 +1,4 @@
+<div (click)="toggleSelection()">
+  <span class="dot" [ngStyle]="{'background-color': datasetOptions.color}"></span>
+  <span [ngClass]="{selected: selected}">{{phenomenonLabel}} @ {{platformLabel}}</span>
+</div>

@@ -1,0 +1,13 @@
+simple-legend-entry {
+    .dot {
+        height: 1em;
+        width: 1em;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 5px;
+        margin-top: 2px;
+    }
+    .selected {
+        font-weight: bold;
+    }
+}

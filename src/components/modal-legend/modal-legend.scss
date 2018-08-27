@@ -3,3 +3,14 @@ modal-legend {
         overflow-y: auto;
     }
 }
+
+ion-modal.modal-legend ion-backdrop {
+    visibility: visible !important;
+    z-index:0;
+}
+ion-modal.modal-legend .modal-wrapper{
+    bottom:0;
+    width:100%;
+    height:75vh;
+    position:absolute;
+}

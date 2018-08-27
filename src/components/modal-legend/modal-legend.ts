@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Renderer } from '@angular/core';
 import { DatasetOptions, Time, Timespan } from '@helgoland/core';
 import { ModalController, ViewController } from 'ionic-angular';
 import { first } from 'rxjs/operators';
@@ -21,10 +21,12 @@ export class ModalLegendComponent {
     private timeseriesSrvc: TimeseriesService,
     private viewCtrl: ViewController,
     private modalCtrl: ModalController,
-    private timeSrvc: Time
+    private timeSrvc: Time,
+    private renderer: Renderer
   ) {
     this.datasetIds = this.timeseriesSrvc.datasetIds;
     this.datasetOptions = this.timeseriesSrvc.datasetOptions;
+    this.renderer.setElementClass(viewCtrl.pageRef().nativeElement, 'modal-legend', true);
   }
 
   public isSelected(id: string): boolean {
