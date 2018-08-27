@@ -30,7 +30,7 @@
       </div>
       <div class="legend-wrapper">
         <div *ngFor="let id of datasetIds">
-          <simple-legend-entry [datasetId]="id" [datasetOptions]="datasetOptions.get(id)" (onSelectDataset)="onSelectedDataset(id, $event)"></simple-legend-entry>
+          <simple-legend-entry [datasetId]="id" [datasetOptions]="datasetOptions.get(id)" [selected]="isSelected(id)" (onSelectDataset)="onSelectedDataset(id, $event)"></simple-legend-entry>
         </div>
         <ion-fab bottom right>
           <button ion-fab mini (click)="openLegend()">

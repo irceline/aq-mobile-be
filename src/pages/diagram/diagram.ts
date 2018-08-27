@@ -77,4 +77,8 @@ export class DiagramPage {
     }
   }
 
+  public isSelected(id: string) {
+    return this.selectedDatasetIds.indexOf(id) > -1;
+  }
+
 }
