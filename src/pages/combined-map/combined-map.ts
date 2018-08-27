@@ -1,6 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component } from '@angular/core';
 import { DatasetApiInterface, ParameterFilter, Phenomenon, Platform, SettingsService } from '@helgoland/core';
 import { GeoSearchOptions, LayerOptions, MapCache } from '@helgoland/map';
+import { TranslateService } from '@ngx-translate/core';
 import { ModalController, NavController, NavParams } from 'ionic-angular';
 import L, { WMSOptions } from 'leaflet';
 import moment from 'moment';
@@ -63,6 +64,7 @@ export class CombinedMapPage implements AfterViewInit {
   public phenomenonFilter: ParameterFilter;
   public avoidZoomToSelection = true;
   public zoomControlOptions: L.Control.ZoomOptions = {};
+  public layerControlOptions: L.Control.LayersOptions = { position: "bottomleft", hideSingleBase: true };
   public overlayMaps: Map<string, LayerOptions> = new Map<string, LayerOptions>();
   public fitBounds: L.LatLngBoundsExpression;
   public clusterStations: boolean;
@@ -76,7 +78,8 @@ export class CombinedMapPage implements AfterViewInit {
     protected modalCtrl: ModalController,
     protected ircelineSettings: IrcelineSettingsProvider,
     protected api: DatasetApiInterface,
-    protected cdr: ChangeDetectorRef
+    protected cdr: ChangeDetectorRef,
+    protected translateSrvc: TranslateService
   ) {
     const settings = this.settingsSrvc.getSettings();
     this.providerUrl = settings.datasetApis[0].url;
@@ -242,7 +245,7 @@ export class CombinedMapPage implements AfterViewInit {
     }
     if (timeParam) { layerOptions.time = timeParam };
     this.overlayMaps.set(layerId + wmsUrl + timeParam, {
-      label: layerId + wmsUrl + timeParam,
+      label: this.translateSrvc.instant('map.interpolated-map'),
       visible: true,
       layer: L.tileLayer.wms(wmsUrl, layerOptions)
     });

@@ -37,7 +37,7 @@
     <div class="map-wrapper">
       <div class="map" *ngIf="selectedPhenomenon">
         <n52-station-map-selector mapId="combined-map" [serviceUrl]="providerUrl" [filter]="phenomenonFilter" [avoidZoomToSelection]="avoidZoomToSelection"
-          [statusIntervals]="true" [zoomControlOptions]="zoomControlOptions" [overlayMaps]="overlayMaps" [fitBounds]="fitBounds"
+          [statusIntervals]="true" [zoomControlOptions]="zoomControlOptions" [layerControlOptions]="layerControlOptions" [overlayMaps]="overlayMaps" [fitBounds]="fitBounds"
           (onSelected)="onStationSelected($event)" [cluster]="clusterStations" (onContentLoading)="onMapLoading($event)"></n52-station-map-selector>
       </div>
     </div>

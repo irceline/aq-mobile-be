@@ -118,8 +118,7 @@
 			"placeholder": "Zoek locatie"
 		},
 		"header": "Kaart",
-		"loading": "bezig te laden",
-		"select-phenomenon": "kies een polluent",
+		"interpolated-map": "",
 		"show-in-diagram": "toon {{value}} tijdsreeks op een diagram",
 		"time": {
 			"current": "actueel",
@@ -218,6 +217,9 @@
 		"forecast-map": {
 			"header": "Voorspellingskaart"
 		}
+	},
+	"station-selection": {
+		"show-other-phenomena": ""
 	},
 	"style-edit": {
 		"generalize": "generaliseerde gegevens",

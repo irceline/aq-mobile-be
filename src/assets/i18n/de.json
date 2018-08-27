@@ -118,8 +118,7 @@
 			"placeholder": "Suche..."
 		},
 		"header": "Karte",
-		"loading": "Lade",
-		"select-phenomenon": "Wähle Phänomen",
+		"interpolated-map": "Interpolierte Karte",
 		"show-in-diagram": "Zeige {{value}} Zeitreihen im Diagramm",
 		"time": {
 			"current": "Derzeit",
@@ -218,6 +217,9 @@
 		"forecast-map": {
 			"header": "Vorhersage-Karte"
 		}
+	},
+	"station-selection": {
+		"show-other-phenomena": "Andere Phänomene an dieser Station"
 	},
 	"style-edit": {
 		"generalize": "Daten generalisieren",

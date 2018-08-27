@@ -118,8 +118,7 @@
 			"placeholder": "Search location..."
 		},
 		"header": "Map",
-		"loading": "loading",
-		"select-phenomenon": "Choose a pollutant",
+		"interpolated-map": "interpolated map",
 		"show-in-diagram": "Show {{value}} timeseries in diagram",
 		"time": {
 			"current": "Current",
@@ -218,6 +217,9 @@
 		"forecast-map": {
 			"header": "Forecast map"
 		}
+	},
+	"station-selection": {
+		"show-other-phenomena": "Other pollutant measured on this location"
 	},
 	"style-edit": {
 		"generalize": "Generalise data",

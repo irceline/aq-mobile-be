@@ -118,8 +118,7 @@
 			"placeholder": "Recherche la localisation ..."
 		},
 		"header": "Carte",
-		"loading": "Chargement",
-		"select-phenomenon": "Choisissez un polluant",
+		"interpolated-map": "",
 		"show-in-diagram": "Afficher la série {{value}} dans le diagramme",
 		"time": {
 			"current": "Actuel",
@@ -218,6 +217,9 @@
 		"forecast-map": {
 			"header": "Carte de prévision"
 		}
+	},
+	"station-selection": {
+		"show-other-phenomena": ""
 	},
 	"style-edit": {
 		"generalize": "Généraliser les données",
