@@ -3,7 +3,7 @@
 		"header": "BelAQI index at:"
 	},
 	"air-quality-location-panel": {
-		"error": "Could not get a Index for you location",
+		"error": "Could not get an index value for your location",
 		"hint": "Modelled value for your location",
 		"loading": "Loading BelAQI for your location"
 	},
@@ -25,7 +25,7 @@
 		"current-location": "Current location"
 	},
 	"belaqi-wheel": {
-		"modelled-hint": "Modelled for this location"
+		"modelled-hint": "Modelled value for this location"
 	},
 	"belaqi": {
 		"level": {
@@ -69,17 +69,17 @@
 	},
 	"customize-personal-alerts": {
 		"active": "Activate",
-		"alert-index-level": "Belaqi level",
+		"alert-index-level": "BelAQI level",
 		"alert-period": "Alert interval",
 		"alert-sensitive-active": "Health-related messages for individuals sensitive to air pollution",
 		"header": "Personal alerts",
-		"hint": "Hint: Your location is determined once for the choosen time interval and then the air quality will be checked. To use this functionality it is not allowed to kill the app."
+		"hint": "Hint: To use this functionality, the app needs to keep running in the background. Your location is determined once for the choosen time interval and then the air quality will be checked."
 	},
 	"diagram": {
 		"header": "Diagram",
 		"loading": "loading",
 		"no-timeseries-selected": "No timeseries selected!",
-		"select-timeseries": "Please select timeseries in the"
+		"select-timeseries": "Please select a timeseries"
 	},
 	"intro": {
 		"close-introduction": "Close",
@@ -187,15 +187,15 @@
 		}
 	},
 	"phenomenon-selector": {
-		"header": "Choose a phenomenon",
+		"header": "Choose a pollutant",
 		"hide-some-phenomenons": "Hide pollutants",
 		"list-all-phenomenons": "List all pollutants"
 	},
 	"push-notification-subscription": {
-		"brussels": "Vlaamse Milieumaatschappij (VMM) - Dutch only",
-		"flanders": "Agence wallonne de l’air et du climat (AwAC) - French only",
+		"brussels": "Brussels Environment - Dutch and French only",
+		"flanders": "Vlaamse Milieumaatschappij (VMM) - Dutch only",
 		"header": "Notifications",
-		"wallonia": "Brussels Environment - Dutch and French only"
+		"wallonia": "Agence wallonne de l’air et du climat (AwAC) - French only"
 	},
 	"refresh-button": {
 		"message": "Refresh all"
@@ -204,7 +204,7 @@
 		"common": "Common",
 		"header": "Settings",
 		"select-language": "Select a language",
-		"show-introduction": "Show Introduction",
+		"show-introduction": "Show introduction",
 		"user-locations": {
 			"create-new-location": "Create new location",
 			"header": "User locations",
@@ -216,11 +216,11 @@
 	},
 	"start": {
 		"forecast-map": {
-			"header": "Forecast-Map"
+			"header": "Forecast map"
 		}
 	},
 	"style-edit": {
-		"generalize": "Generalize data",
+		"generalize": "Generalise data",
 		"header": "Change style of this timeseries",
 		"zeroBasedYAxe": "Timeseries zero based"
 	},

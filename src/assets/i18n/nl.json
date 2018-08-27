@@ -3,42 +3,42 @@
 		"header": "BelAQI index voor:"
 	},
 	"air-quality-location-panel": {
-		"error": "",
-		"hint": "",
-		"loading": ""
+		"error": "Geen indexwaarde gevonden voor uw locatie",
+		"hint": "Gemodelleerde waarde voor uw locatie",
+		"loading": "BelAQI voor uw locatie aan het laden"
 	},
 	"belaqi-chart": {
 		"xaxis": {
-			"now": "",
-			"pre1h": "",
-			"pre2h": "",
-			"pre3h": "",
-			"pre4h": "",
-			"pre5h": "",
-			"pre6h": "",
-			"todayPlusThree": "",
-			"todayPlusTwo": "",
-			"tomorrow": ""
+			"now": "nu",
+			"pre1h": "-1u",
+			"pre2h": "-2u",
+			"pre3h": "-3u",
+			"pre4h": "-4u",
+			"pre5h": "-5u",
+			"pre6h": "-6u",
+			"todayPlusThree": "+3d",
+			"todayPlusTwo": "+2d",
+			"tomorrow": "+1d"
 		}
 	},
 	"belaqi-user-location-slider": {
-		"current-location": ""
+		"current-location": "Huidige locatie"
 	},
 	"belaqi-wheel": {
-		"modelled-hint": ""
+		"modelled-hint": "Gemodelleerd waarde voor deze locatie"
 	},
 	"belaqi": {
 		"level": {
-			"bad": "",
-			"excellent": "",
-			"fairly-good": "",
-			"good": "",
-			"horrible": "",
-			"moderate": "",
-			"poor": "",
-			"very-bad": "",
-			"very-good": "",
-			"very-poor": ""
+			"bad": "slecht",
+			"excellent": "uitstekend",
+			"fairly-good": "vrij goed",
+			"good": "goed",
+			"horrible": "uitermate slecht",
+			"moderate": "middelmatig",
+			"poor": "ondermaats",
+			"very-bad": "zeer slecht",
+			"very-good": "zeer goed",
+			"very-poor": "zeer slecht"
 		}
 	},
 	"change-timespan": {
@@ -68,28 +68,28 @@
 		"ok": "OK"
 	},
 	"customize-personal-alerts": {
-		"active": "",
-		"alert-index-level": "",
-		"alert-period": "",
-		"alert-sensitive-active": "",
-		"header": "",
-		"hint": ""
+		"active": "activeer",
+		"alert-index-level": "BelAQI-niveau",
+		"alert-period": "interval melding",
+		"alert-sensitive-active": "Gezondheidsgerelateerde meldingen voor personen die gevoelig zijn voor luchtvervuiling",
+		"header": "Gepersonaliseerde meldingen",
+		"hint": "Tip: om deze functionaliteit te kunnen gebruiken, moet de app op de achtergrond blijven lopen. Uw locatie wordt één keer bepaald voor het gekozen tijdsinterval en vervolgens wordt de luchtkwaliteit gecontroleerd."
 	},
 	"diagram": {
 		"header": "diagram",
-		"loading": "bezig te laden",
+		"loading": "aan het laden",
 		"no-timeseries-selected": "geen tijdsreeks geselecteerd!",
-		"select-timeseries": "Selecteer een tijdsreeks op de"
+		"select-timeseries": "Selecteer aub een tijdsreeks"
 	},
 	"intro": {
-		"close-introduction": "",
+		"close-introduction": "Sluiten",
 		"four": {
-			"header": ""
+			"header": "Welke soort meldingen zou u graag ontvangen?"
 		},
-		"header": "",
-		"next-step": "",
+		"header": "Introductie",
+		"next-step": "Volgende stap",
 		"one": {
-			"header": "",
+			"header": "Zou u graag de taalinstellingen wijzigen?",
 			"option": {
 				"dutch": "Nederlands",
 				"english": "English",
@@ -98,13 +98,13 @@
 			}
 		},
 		"three": {
-			"addLocationToList": "",
-			"header": "",
-			"locationLabelHint": "",
-			"showLocationList": ""
+			"addLocationToList": "Toevoegen aan de lijst van locaties",
+			"header": "Voor welke locaties zou u graag meldingen en gepersonaliseerde data ontvangen in de app?",
+			"locationLabelHint": "Verander de beschrijving van de locatie",
+			"showLocationList": "Toon actuelle lijst locaties"
 		},
 		"two": {
-			"header": ""
+			"header": "Van welke milieuagentschappen zou u graag meldingen ontvangen?"
 		}
 	},
 	"legend": {
@@ -122,11 +122,11 @@
 		"select-phenomenon": "kies een polluent",
 		"show-in-diagram": "toon {{value}} tijdsreeks op een diagram",
 		"time": {
-			"current": "",
-			"today": "",
-			"today+2": "",
-			"today+3": "",
-			"tomorrow": ""
+			"current": "actueel",
+			"today": "vandaag",
+			"today+2": "vandaag+2",
+			"today+3": "vandaag+3",
+			"tomorrow": "morgen"
 		}
 	},
 	"menu": {
@@ -136,79 +136,79 @@
 	"nearest-measuring-station-panel": {
 		"header": {
 			"geolocation-disabled": "",
-			"geolocation-enabled": ""
+			"geolocation-enabled": "Dichtstbijzijnde meetstation"
 		}
 	},
 	"network": {
-		"geolocationDisabled": "",
+		"geolocationDisabled": "De geolocatie is uitgeschakeld",
 		"offline": "U toestel offline",
 		"online": "U toestel is online"
 	},
 	"personal-alert": {
 		"index-1": {
-			"non-sensitive": "",
-			"sensitive": ""
+			"non-sensitive": "Het is vandaag heel gezond om buiten fysiek actief te zijn. Door emissies (uitstoot) te reduceren krijgen we meer van deze gezonde dagen en dalen ook de effecten van de lnagetermijnblootstelling.",
+			"sensitive": "Het is vandaag heel gezond om buiten fysiek actief te zijn. Door emissies (uitstoot) te reduceren krijgen we meer van deze gezonde dagen en dalen ook de effecten van de lnagetermijnblootstelling."
 		},
 		"index-10": {
-			"non-sensitive": "",
-			"sensitive": ""
+			"non-sensitive": "Overweeg het verminderen van zware/lange lichamelijke inspanning.",
+			"sensitive": "Beperk lichamelijke inspanning. Overleg met u arts over aangepaste medicatie."
 		},
 		"index-2": {
-			"non-sensitive": "",
-			"sensitive": ""
+			"non-sensitive": "Het is vandaag heel gezond om buiten fysiek actief te zijn. Door emissies (uitstoot) te reduceren krijgen we meer van deze gezonde dagen en dalen ook de effecten van de lnagetermijnblootstelling.",
+			"sensitive": "Het is vandaag heel gezond om buiten fysiek actief te zijn. Door emissies (uitstoot) te reduceren krijgen we meer van deze gezonde dagen en dalen ook de effecten van de lnagetermijnblootstelling."
 		},
 		"index-3": {
-			"non-sensitive": "",
-			"sensitive": ""
+			"non-sensitive": "U hoeft uw gebruikelijke fysieke activiteiten niet aan te passen om wille van de luchtkwaliteit.",
+			"sensitive": "Indien u hinder ondervindt kan u zware/lange lichamelijke inspanningen verminderen."
 		},
 		"index-4": {
-			"non-sensitive": "",
-			"sensitive": ""
+			"non-sensitive": "U hoeft uw gebruikelijke fysieke activiteiten niet aan te passen om wille van de luchtkwaliteit.",
+			"sensitive": "Indien u hinder ondervindt kan u zware/lange lichamelijke inspanningen verminderen."
 		},
 		"index-5": {
-			"non-sensitive": "",
-			"sensitive": ""
+			"non-sensitive": "U hoeft uw gebruikelijke fysieke activiteiten niet aan te passen om wille van de luchtkwaliteit.",
+			"sensitive": "Verminder je lichamelijke inspanning. Overleg met u arts over aangepaste medicatie."
 		},
 		"index-6": {
-			"non-sensitive": "",
-			"sensitive": ""
+			"non-sensitive": "U hoeft uw gebruikelijke fysieke activiteiten niet aan te passen om wille van de luchtkwaliteit.",
+			"sensitive": "Verminder je lichamelijke inspanning. Overleg met u arts over aangepaste medicatie."
 		},
 		"index-7": {
-			"non-sensitive": "",
-			"sensitive": ""
+			"non-sensitive": "U hoeft uw gebruikelijke fysieke activiteiten niet aan te passen om wille van de luchtkwaliteit.",
+			"sensitive": "Verminder je lichamelijke inspanning. Overleg met u arts over aangepaste medicatie."
 		},
 		"index-8": {
-			"non-sensitive": "",
-			"sensitive": ""
+			"non-sensitive": "Overweeg het verminderen van zware/lange lichamelijke inspanning.",
+			"sensitive": "Beperk lichamelijke inspanning. Overleg met u arts over aangepaste medicatie."
 		},
 		"index-9": {
-			"non-sensitive": "",
-			"sensitive": ""
+			"non-sensitive": "Overweeg het verminderen van zware/lange lichamelijke inspanning.",
+			"sensitive": "Beperk lichamelijke inspanning. Overleg met u arts over aangepaste medicatie."
 		}
 	},
 	"phenomenon-selector": {
-		"header": "",
+		"header": "Kies een polluent",
 		"hide-some-phenomenons": "verberg polluenten",
 		"list-all-phenomenons": "toon alle polluenten"
 	},
 	"push-notification-subscription": {
-		"brussels": "",
-		"flanders": "",
-		"header": "",
-		"wallonia": ""
+		"brussels": "Brussels Environment - Nederlands/Français",
+		"flanders": "Vlaamse Milieumaatschappij (VMM) - Nederlands",
+		"header": "Meldingen",
+		"wallonia": "Agence wallonne de l’air et du climat (AwAC) - Français"
 	},
 	"refresh-button": {
-		"message": ""
+		"message": "Vernieuw alles"
 	},
 	"settings": {
 		"common": "Algemeen",
 		"header": "Instellingen",
 		"select-language": "kies een taal",
-		"show-introduction": "",
+		"show-introduction": "Toon introductie",
 		"user-locations": {
-			"create-new-location": "",
-			"header": "",
-			"show-location-list": ""
+			"create-new-location": "Maak een nieuwe locatie aan",
+			"header": "Gebruikerslocaties",
+			"show-location-list": "Toon huidige locaties"
 		}
 	},
 	"show-geometry": {
@@ -225,10 +225,10 @@
 		"zeroBasedYAxe": "tijdsreeks nullgebaseerd"
 	},
 	"user-location-list": {
-		"edit": "",
-		"edit-the-label": "",
-		"header": "",
-		"remove": ""
+		"edit": "bewerk",
+		"edit-the-label": "bewerk de lijst van locaties",
+		"header": "Lijs van de locaties",
+		"remove": "verwijder"
 	},
 	"user-location": {
 		"creation": {
