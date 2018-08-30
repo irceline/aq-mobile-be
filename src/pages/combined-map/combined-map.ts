@@ -93,7 +93,6 @@ export class CombinedMapPage {
 
     if (this.navParams.get('phenomenonId')) {
       this.getPhenomenonFromAPI(this.navParams.get('phenomenonId'));
-      this.showLayer();
     } else {
       this.onPhenomenonChange();
     }
@@ -155,7 +154,6 @@ export class CombinedMapPage {
     if (this.phenomenonLabel == PhenomenonLabel.BC) {
       this.time = TimeLabel.current;
     }
-    this.showLayer();
   }
 
   public isDisabled(): boolean {
@@ -226,6 +224,7 @@ export class CombinedMapPage {
     this.selectedPhenomenon = selectedPhenomenon;
     this.setPhenomenonFilter();
     this.phenomenonLabel = this.getPhenomenonLabel(selectedPhenomenon.id);
+    this.showLayer();
   }
 
   private showLayer() {
