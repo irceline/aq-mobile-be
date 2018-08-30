@@ -1,9 +1,12 @@
+import './boundary-canvas';
+
+import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { DatasetApiInterface, ParameterFilter, Phenomenon, Platform, SettingsService } from '@helgoland/core';
 import { GeoSearchOptions, LayerOptions, MapCache } from '@helgoland/map';
 import { TranslateService } from '@ngx-translate/core';
 import { ModalController, NavController, NavParams } from 'ionic-angular';
-import L, { WMSOptions } from 'leaflet';
+import L, { BoundaryCanvasOptions } from 'leaflet';
 import moment from 'moment';
 
 import { ModalPhenomenonSelectorComponent } from '../../components/modal-phenomenon-selector/modal-phenomenon-selector';
@@ -83,7 +86,8 @@ export class CombinedMapPage {
     protected ircelineSettings: IrcelineSettingsProvider,
     protected api: DatasetApiInterface,
     protected cdr: ChangeDetectorRef,
-    protected translateSrvc: TranslateService
+    protected translateSrvc: TranslateService,
+    protected httpClient: HttpClient
   ) {
     const settings = this.settingsSrvc.getSettings();
     this.providerUrl = settings.datasetApis[0].url;
@@ -228,78 +232,82 @@ export class CombinedMapPage {
   }
 
   private showLayer() {
-    this.overlayMaps = new Map<string, LayerOptions>();
-    let layerId: string;
-    let wmsUrl: string;
-    let timeParam: string;
-    if (this.time == TimeLabel.current) {
-      wmsUrl = 'http://geo.irceline.be/rioifdm/wms';
-      switch (this.phenomenonLabel) {
-        case PhenomenonLabel.BC:
-          layerId = 'bc_hmean';
-          break;
-        case PhenomenonLabel.NO2:
-          layerId = 'no2_hmean';
-          break;
-        case PhenomenonLabel.O3:
-          layerId = 'o3_hmean';
-          break;
-        case PhenomenonLabel.PM10:
-          layerId = 'pm10_hmean';
-          break;
-        case PhenomenonLabel.PM25:
-          layerId = 'pm25_hmean';
-          break;
-        default:
-          break;
+    this.httpClient.get('./assets/multipolygon.json').subscribe((geojson: GeoJSON.GeoJsonObject) => {
+      this.overlayMaps = new Map<string, LayerOptions>();
+      let layerId: string;
+      let wmsUrl: string;
+      let timeParam: string;
+      if (this.time == TimeLabel.current) {
+        wmsUrl = 'http://geo.irceline.be/rioifdm/wms';
+        switch (this.phenomenonLabel) {
+          case PhenomenonLabel.BC:
+            layerId = 'bc_hmean';
+            break;
+          case PhenomenonLabel.NO2:
+            layerId = 'no2_hmean';
+            break;
+          case PhenomenonLabel.O3:
+            layerId = 'o3_hmean';
+            break;
+          case PhenomenonLabel.PM10:
+            layerId = 'pm10_hmean';
+            break;
+          case PhenomenonLabel.PM25:
+            layerId = 'pm25_hmean';
+            break;
+          default:
+            break;
+        }
+      } else {
+        wmsUrl = 'http://geo.irceline.be/forecast/wms';
+        switch (this.phenomenonLabel) {
+          case PhenomenonLabel.NO2:
+            layerId = 'no2_maxhmean';
+            break;
+          case PhenomenonLabel.O3:
+            layerId = 'o3_maxhmean';
+            break;
+          case PhenomenonLabel.PM10:
+            layerId = 'pm10_dmean';
+            break;
+          case PhenomenonLabel.PM25:
+            layerId = 'pm25_dmean';
+            break;
+          default:
+            break;
+        }
+        switch (this.time) {
+          case TimeLabel.today:
+            timeParam = moment().format('YYYY-MM-DD');
+            break;
+          case TimeLabel.tomorrow:
+            timeParam = moment().add(1, 'day').format('YYYY-MM-DD');
+            break;
+          case TimeLabel.today2:
+            timeParam = moment().add(2, 'day').format('YYYY-MM-DD');
+            break;
+          case TimeLabel.today3:
+            timeParam = moment().add(3, 'day').format('YYYY-MM-DD');
+            break;
+          default:
+            break;
+        }
       }
-    } else {
-      wmsUrl = 'http://geo.irceline.be/forecast/wms';
-      switch (this.phenomenonLabel) {
-        case PhenomenonLabel.NO2:
-          layerId = 'no2_maxhmean';
-          break;
-        case PhenomenonLabel.O3:
-          layerId = 'o3_maxhmean';
-          break;
-        case PhenomenonLabel.PM10:
-          layerId = 'pm10_dmean';
-          break;
-        case PhenomenonLabel.PM25:
-          layerId = 'pm25_dmean';
-          break;
-        default:
-          break;
+      const layerOptions: BoundaryCanvasOptions = {
+        layers: layerId,
+        transparent: true,
+        format: 'image/png',
+        opacity: 0.7,
+        boundary: geojson,
+        useBoundaryGreaterAsZoom: 9
       }
-      switch (this.time) {
-        case TimeLabel.today:
-          timeParam = moment().format('YYYY-MM-DD');
-          break;
-        case TimeLabel.tomorrow:
-          timeParam = moment().add(1, 'day').format('YYYY-MM-DD');
-          break;
-        case TimeLabel.today2:
-          timeParam = moment().add(2, 'day').format('YYYY-MM-DD');
-          break;
-        case TimeLabel.today3:
-          timeParam = moment().add(3, 'day').format('YYYY-MM-DD');
-          break;
-        default:
-          break;
-      }
-    }
-    const layerOptions: WMSOptions = {
-      layers: layerId,
-      transparent: true,
-      format: 'image/png',
-      opacity: 0.7
-    }
-    if (timeParam) { layerOptions.time = timeParam };
-    this.overlayMaps.set(layerId + wmsUrl + timeParam, {
-      label: this.translateSrvc.instant('map.interpolated-map'),
-      visible: true,
-      layer: L.tileLayer.wms(wmsUrl, layerOptions)
-    });
+      if (timeParam) { layerOptions.time = timeParam };
+      this.overlayMaps.set(layerId + wmsUrl + timeParam, {
+        label: this.translateSrvc.instant('map.interpolated-map'),
+        visible: true,
+        layer: L.tileLayer.boundaryCanvas(wmsUrl, layerOptions)
+      });
+    })
   }
 
 }
