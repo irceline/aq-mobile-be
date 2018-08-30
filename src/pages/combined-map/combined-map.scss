@@ -39,29 +39,27 @@ page-combined-map {
       }
     }
   }
-  // ion-segment {
-  //   display: block;
-  //   white-space: nowrap;
-  //   font-size: 0;
-  //   overflow: auto;
-  //   &::-webkit-scrollbar {
-  //     width: 0;
-  //     height: 0;
-  //     display: none;
-  //   }
-  //   ion-segment-button.segment-button {
-  //     display: inline-block;
-  //     width: auto;
-  //   }
-  // }
-  // .phenomenon {
-  //   ion-segment-button.segment-button {
-  //     min-width: 80px;
-  //   }
-  // }
-  // .time {
-  //   ion-segment-button.segment-button {
-  //     min-width: 100px;
-  //   }
-  // }
+  .info {
+    display: inline-block;
+    font-family: "Ionicons";
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 1;
+    text-rendering: auto;
+    text-transform: none;
+    speak: none;
+    font-size: 20px;
+  }
+  .info::before {
+    content: "\f311";
+  }
+  .legend img {
+    float: left;
+    margin-right: 8px;
+    background: white;
+    opacity: 0.8;
+  }
 }

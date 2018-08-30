@@ -36,9 +36,9 @@
     </div>
     <div class="map-wrapper">
       <div class="map" *ngIf="selectedPhenomenon">
-        <n52-station-map-selector mapId="combined-map" [serviceUrl]="providerUrl" [filter]="phenomenonFilter" [avoidZoomToSelection]="avoidZoomToSelection"
+        <n52-station-map-selector [mapId]="mapId" [serviceUrl]="providerUrl" [filter]="phenomenonFilter" [avoidZoomToSelection]="avoidZoomToSelection"
           [statusIntervals]="true" [zoomControlOptions]="zoomControlOptions" [layerControlOptions]="layerControlOptions" [overlayMaps]="overlayMaps" [fitBounds]="fitBounds"
-          (onSelected)="onStationSelected($event)" [cluster]="clusterStations" (onContentLoading)="onMapLoading($event)"></n52-station-map-selector>
+          (onSelected)="onStationSelected($event)" [cluster]="clusterStations" (onContentLoading)="onMapLoading($event)" (mapInitialized)="mapInitialized($event)"></n52-station-map-selector>
       </div>
     </div>
     <div>
@@ -60,7 +60,7 @@
         </ion-segment-button>
       </ion-segment>
     </div>
-    <mobile-geosearch-control mapId="combined-map" [options]="geoSearchOptions"></mobile-geosearch-control>
+    <mobile-geosearch-control mapId="mapId" [options]="geoSearchOptions"></mobile-geosearch-control>
   </ion-card>
 
 </ion-content>

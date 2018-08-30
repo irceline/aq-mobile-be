@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { DatasetApiInterface, ParameterFilter, Phenomenon, Platform, SettingsService } from '@helgoland/core';
 import { GeoSearchOptions, LayerOptions, MapCache } from '@helgoland/map';
 import { TranslateService } from '@ngx-translate/core';
@@ -52,7 +52,7 @@ const phenomenonMapping = [
   selector: 'page-combined-map',
   templateUrl: 'combined-map.html',
 })
-export class CombinedMapPage implements AfterViewInit {
+export class CombinedMapPage {
 
   public geoSearchOptions: GeoSearchOptions;
   public phenomenonLabel: PhenomenonLabel = PhenomenonLabel.NO2;
@@ -69,6 +69,10 @@ export class CombinedMapPage implements AfterViewInit {
   public fitBounds: L.LatLngBoundsExpression;
   public clusterStations: boolean;
   public selectedPhenomenon: Phenomenon;
+
+  public legend: L.Control;
+
+  public mapId = 'combined-map';
 
   constructor(
     protected navCtrl: NavController,
@@ -95,7 +99,54 @@ export class CombinedMapPage implements AfterViewInit {
     }
   }
 
-  public ngAfterViewInit(): void { }
+  public mapInitialized(mapId: string) {
+    this.showLegend();
+  }
+
+  public showLegend() {
+    if (this.legend) {
+      this.legend.remove();
+    }
+    if (this.mapCache.hasMap(this.mapId)) {
+
+      this.legend = new L.Control({ position: 'topright' });
+
+      this.legend.onAdd = (map) => {
+        const div = L.DomUtil.create('div', 'leaflet-bar legend');
+        let legendVisible = false;
+        const button = '<a class="info" role="button"></a>';
+        div.innerHTML = button;
+        div.onclick = () => {
+          const langCode = this.translateSrvc.currentLang.toLocaleUpperCase();
+          let legendId: string;
+          switch (this.phenomenonLabel) {
+            case PhenomenonLabel.BC:
+              legendId = 'bc_hmean';
+              break;
+            case PhenomenonLabel.NO2:
+              legendId = 'no2_hmean';
+              break;
+            case PhenomenonLabel.O3:
+              legendId = 'o3_hmean';
+              break;
+            case PhenomenonLabel.PM10:
+              legendId = 'pm10_hmean';
+              break;
+            case PhenomenonLabel.PM25:
+              legendId = 'pm25_hmean';
+              break;
+            default:
+              break;
+          }
+          div.innerHTML = legendVisible ? button : '<img src="http://www.irceline.be/air/legend/' + legendId + '_' + langCode + '.svg">';
+          legendVisible = !legendVisible;
+        }
+        return div;
+      };
+
+      this.legend.addTo(this.mapCache.getMap(this.mapId));
+    }
+  }
 
   public onPhenomenonChange(): void {
     const phenID = this.getPhenomenonID(this.phenomenonLabel);
@@ -131,6 +182,7 @@ export class CombinedMapPage implements AfterViewInit {
       this.phenomenonFilter = { phenomenon: '' };
     } else {
       this.phenomenonFilter = { phenomenon: this.selectedPhenomenon.id };
+      this.showLegend();
     }
   }
 
