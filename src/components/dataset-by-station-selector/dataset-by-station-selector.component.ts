@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DatasetApiInterface } from '@helgoland/core';
-import { DatasetByStationSelectorComponent } from '@helgoland/selector';
+import { DatasetByStationSelectorComponent, ExtendedTimeseries } from '@helgoland/selector';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -18,4 +18,7 @@ export class MobileDatasetByStationSelectorComponent extends DatasetByStationSel
         super(datasetApi);
     }
 
+    protected prepareResult(result: ExtendedTimeseries, selection: boolean) {
+        super.prepareResult(result, this.phenomenonId === result.parameters.phenomenon.id);
+    }
 }
