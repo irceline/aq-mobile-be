@@ -34,3 +34,5 @@ google-services.json
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
+tsconfig.scripts.json
+scripts
