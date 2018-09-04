@@ -5,6 +5,7 @@ import localeFr from '@angular/common/locales/fr';
 import localeNl from '@angular/common/locales/nl';
 import { Component, ViewChild } from '@angular/core';
 import { Settings, SettingsService } from '@helgoland/core';
+import { D3TimeFormatLocaleService } from '@helgoland/d3';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Storage } from '@ionic/storage';
@@ -41,6 +42,7 @@ export class MyApp {
     private ircelineSettings: IrcelineSettingsProvider,
     private pushNotification: PushNotificationsProvider,
     private localNotification: PersonalAlertsProvider,
+    private d3translate: D3TimeFormatLocaleService,
     private storage: Storage
   ) {
     this.initializeApp();
@@ -75,6 +77,45 @@ export class MyApp {
     } else {
       this.translate.use('en');
     }
+
+    this.d3translate.addTimeFormatLocale('de',
+      {
+        'dateTime': '%a %b %e %X %Y',
+        'date': '%d-%m-%Y',
+        'time': '%H:%M:%S',
+        'periods': ['AM', 'PM'],
+        'days': ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
+        'shortDays': ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
+        'months': ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+        'shortMonths': ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez']
+      }
+    );
+
+    this.d3translate.addTimeFormatLocale('fr',
+      {
+        'dateTime': '%A, le %e %B %Y, %X',
+        'date': '%d/%m/%Y',
+        'time': '%H:%M:%S',
+        'periods': ['AM', 'PM'],
+        'days': ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'],
+        'shortDays': ['dim.', 'lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.'],
+        'months': ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'],
+        'shortMonths': ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.']
+      }
+    )
+
+    this.d3translate.addTimeFormatLocale('nl',
+      {
+        'dateTime': '%a %e %B %Y %T',
+        'date': '%d-%m-%Y',
+        'time': '%H:%M:%S',
+        'periods': ['AM', 'PM'],
+        'days': ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'],
+        'shortDays': ['zo', 'ma', 'di', 'wo', 'do', 'vr', 'za'],
+        'months': ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'],
+        'shortMonths': ['jan', 'feb', 'mrt', 'apr', 'mei', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec']
+      }
+    )
 
     registerLocaleData(localeDe);
     registerLocaleData(localeEn);
