@@ -16,7 +16,7 @@ import { NotificationPresenter, PersonalAlert } from '../notification-presenter/
 import { UserLocationListProvider } from '../user-location-list/user-location-list';
 
 const DEFAULT_LOCAL_ALERT_UPDATE_IN_MINUTES = 60;
-const DEFAULT_LOCAL_ALERT_UPDATE_LEVEL = 1;
+const DEFAULT_LOCAL_ALERT_UPDATE_LEVEL = 5;
 const DEFAULT_LOCAL_ALERT_UPDATE_SENSITIVE = false;
 
 const LOCALSTORAGE_INDEX_ALERT_ACTIVE = 'personal.alert.active';
