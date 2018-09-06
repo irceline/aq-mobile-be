@@ -25,6 +25,7 @@ export class TimeseriesService extends DatasetService<DatasetOptions> {
     const options = new DatasetOptions(internalId, this.color.getColor());
     options.pointRadius = 2;
     options.generalize = false;
+    options.zeroBasedYAxis = true;
     return options;
   }
 
