@@ -81,6 +81,9 @@
 		"no-timeseries-selected": "Keine Zeitreihe selektiert!",
 		"select-timeseries": "Bitte wähle eine Zeitreihe"
 	},
+	"home": {
+		"header": "Start"
+	},
 	"intro": {
 		"close-introduction": "Beenden",
 		"four": {

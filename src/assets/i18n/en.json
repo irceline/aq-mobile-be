@@ -81,6 +81,9 @@
 		"no-timeseries-selected": "No timeseries selected!",
 		"select-timeseries": "Please select a timeseries"
 	},
+	"home": {
+		"header": "Home"
+	},
 	"intro": {
 		"close-introduction": "Close",
 		"four": {

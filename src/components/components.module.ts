@@ -32,6 +32,7 @@ import { ModalPhenomenonSelectorComponent } from './modal-phenomenon-selector/mo
 import { ModalTimespanEditorComponent } from './modal-timespan-editor/modal-timespan-editor';
 import { ModalUserLocationCreationComponent } from './modal-user-location-creation/modal-user-location-creation';
 import { ModalUserLocationListComponent } from './modal-user-location-list/modal-user-location-list';
+import { NavigationComponent } from './navigation/navigation';
 import { NearestMeasuringStationPanelComponent } from './nearest-measuring-station-panel/nearest-measuring-station-panel';
 import {
 	NearestMeasuringStationPanelEntryComponent,
@@ -70,6 +71,7 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		ModalTimespanEditorComponent,
 		ModalUserLocationCreationComponent,
 		ModalUserLocationListComponent,
+		NavigationComponent,
 		NearestMeasuringStationPanelComponent,
 		NearestMeasuringStationPanelEntryComponent,
 		NetworkPanelComponent,
@@ -115,6 +117,7 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		ModalTimespanEditorComponent,
 		ModalUserLocationCreationComponent,
 		ModalUserLocationListComponent,
+		NavigationComponent,
 		NearestMeasuringStationPanelComponent,
 		NearestMeasuringStationPanelEntryComponent,
 		NetworkPanelComponent,

@@ -81,6 +81,9 @@
 		"no-timeseries-selected": "geen tijdsreeks geselecteerd!",
 		"select-timeseries": "Selecteer aub een tijdsreeks"
 	},
+	"home": {
+		"header": ""
+	},
 	"intro": {
 		"close-introduction": "Sluiten",
 		"four": {

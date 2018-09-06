@@ -12,10 +12,7 @@ import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 import { NavController, Platform } from 'ionic-angular';
 
-import { CombinedMapPage } from '../pages/combined-map/combined-map';
-import { DiagramPage } from '../pages/diagram/diagram';
 import { IntroPage } from '../pages/intro/intro';
-import { SettingsPage } from '../pages/settings/settings';
 import { StartPage } from '../pages/start/start';
 import { IrcelineSettings, IrcelineSettingsProvider } from '../providers/irceline-settings/irceline-settings';
 import { PersonalAlertsProvider } from '../providers/personal-alerts/personal-alerts';
@@ -28,8 +25,6 @@ export class MyApp {
   @ViewChild('content') nav: NavController;
 
   public rootPage: any;
-
-  public pages: Array<{ title: string, component: any }>;
 
   public lastupdate: Date;
 
@@ -49,24 +44,9 @@ export class MyApp {
 
     this.ircelineSettings.getSettings(false).subscribe((settings: IrcelineSettings) => this.lastupdate = settings.lastupdate);
 
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'map.header', component: CombinedMapPage },
-      { title: 'diagram.header', component: DiagramPage },
-      { title: 'settings.header', component: SettingsPage },
-    ];
-
     this.pushNotification.init();
     this.localNotification.init();
     this.decideStartView();
-  }
-
-  public openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    if (this.nav.getActive().name != page.component.name) {
-      this.nav.push(page.component);
-    }
   }
 
   private initializeApp() {
@@ -134,12 +114,12 @@ export class MyApp {
 
   private decideStartView() {
     const firstStartKey = 'firstTimeStarted';
+    this.rootPage = StartPage;
+
     this.storage.get(firstStartKey).then(value => {
-      if (value !== null) {
-        this.rootPage = StartPage;
-      } else {
+      if (value === null) {
+        this.nav.push(IntroPage);
         this.storage.set(firstStartKey, true);
-        this.rootPage = IntroPage;
       }
     })
   }

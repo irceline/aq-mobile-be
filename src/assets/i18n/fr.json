@@ -81,6 +81,9 @@
 		"no-timeseries-selected": "Aucune série sélectionnée",
 		"select-timeseries": "Veuillez sélectionner une série"
 	},
+	"home": {
+		"header": ""
+	},
 	"intro": {
 		"close-introduction": "Fermer",
 		"four": {
