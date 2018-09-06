@@ -39,6 +39,7 @@ export class ModalLegendComponent {
 
   public deleteTimeseries(id: string) {
     this.timeseriesSrvc.removeDataset(id);
+    if (this.timeseriesSrvc.datasetIds.length === 0) { this.dismiss(); }
   }
 
   public updateOptions(options: DatasetOptions, internalId: string) {
@@ -59,7 +60,6 @@ export class ModalLegendComponent {
     modalRef.onDidDismiss((option: DatasetOptions) => {
       if (option) {
         this.timeseriesSrvc.updateDatasetOptions(option, option.internalId);
-        this.dismiss();
       }
     });
     modalRef.present();
