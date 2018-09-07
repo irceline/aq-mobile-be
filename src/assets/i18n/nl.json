@@ -7,20 +7,6 @@
 		"hint": "Gemodelleerde waarde voor uw locatie",
 		"loading": "BelAQI voor uw locatie aan het laden"
 	},
-	"belaqi-chart": {
-		"xaxis": {
-			"now": "nu",
-			"pre1h": "-1u",
-			"pre2h": "-2u",
-			"pre3h": "-3u",
-			"pre4h": "-4u",
-			"pre5h": "-5u",
-			"pre6h": "-6u",
-			"todayPlusThree": "+3d",
-			"todayPlusTwo": "+2d",
-			"tomorrow": "+1d"
-		}
-	},
 	"belaqi-user-location-slider": {
 		"current-location": "Huidige locatie"
 	},
@@ -104,6 +90,7 @@
 			"addLocationToList": "Toevoegen aan de lijst van locaties",
 			"header": "Voor welke locaties zou u graag meldingen en gepersonaliseerde data ontvangen in de app?",
 			"locationLabelHint": "Verander de beschrijving van de locatie",
+			"locationLabelPlaceholder": "",
 			"showLocationList": "Toon actuelle lijst locaties"
 		},
 		"two": {
@@ -132,7 +119,6 @@
 		}
 	},
 	"menu": {
-		"header": "Menu",
 		"lastUpdate": "laatste actualisatie"
 	},
 	"nearest-measuring-station-panel": {

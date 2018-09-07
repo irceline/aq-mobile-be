@@ -7,20 +7,6 @@
 		"hint": "Modelled value for your location",
 		"loading": "Loading BelAQI for your location"
 	},
-	"belaqi-chart": {
-		"xaxis": {
-			"now": "now",
-			"pre1h": "-1h",
-			"pre2h": "-2h",
-			"pre3h": "-3h",
-			"pre4h": "-4h",
-			"pre5h": "-5h",
-			"pre6h": "-6h",
-			"todayPlusThree": "+3d",
-			"todayPlusTwo": "+2d",
-			"tomorrow": "+1d"
-		}
-	},
 	"belaqi-user-location-slider": {
 		"current-location": "Current location"
 	},
@@ -104,6 +90,7 @@
 			"addLocationToList": "Add to the list of locations",
 			"header": "For which locations would you like to receive notifications and personalised data in the app?",
 			"locationLabelHint": "Change the location label",
+			"locationLabelPlaceholder": "e.g. \"Home\", \"Work\", \"School\"",
 			"showLocationList": "Show current locations"
 		},
 		"two": {
@@ -132,7 +119,6 @@
 		}
 	},
 	"menu": {
-		"header": "Menu",
 		"lastUpdate": "Last update"
 	},
 	"nearest-measuring-station-panel": {
