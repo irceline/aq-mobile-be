@@ -24,7 +24,8 @@ export class DiagramPage {
   public timespan = new Timespan(new Date().getTime() - 100000000, new Date().getTime());
 
   public diagramOptions: D3PlotOptions = {
-    hoverable: false
+    hoverable: false,
+    showTimeLabel: false
   };
 
   constructor(
