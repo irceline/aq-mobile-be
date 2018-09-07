@@ -35,6 +35,7 @@ import { SettingsModule } from '../pages/settings/settings.module';
 import { StartPage } from '../pages/start/start';
 import { AirQualityIndexProvider } from '../providers/air-quality-index/air-quality-index';
 import { BelaqiIndexProvider } from '../providers/belaqi/belaqi';
+import { CategorizeValueToIndexProvider } from '../providers/categorize-value-to-index/categorize-value-to-index';
 import { ForecastValueProvider } from '../providers/forecast-value/forecast-value';
 import { IrcelineSettingsProvider } from '../providers/irceline-settings/irceline-settings';
 import { LayerGeneratorService } from '../providers/layer-generator/layer-generator';
@@ -120,6 +121,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     StatusBar,
     TimeseriesService,
     UserLocationListProvider,
+    CategorizeValueToIndexProvider,
   ]
 })
 export class AppModule { }

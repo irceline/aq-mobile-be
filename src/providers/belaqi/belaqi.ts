@@ -1,22 +1,30 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from '@helgoland/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable, of } from 'rxjs';
+import moment from 'moment';
+import { forkJoin, Observable, Observer } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+import { CategorizeValueToIndexProvider } from '../categorize-value-to-index/categorize-value-to-index';
+import { ModelledPhenomenon, ModelledValueProvider } from '../modelled-value/modelled-value';
 import { ValueProvider } from '../value-provider';
 
-export interface BelaqiTimeline {
-  preSixHour: number;
-  preFiveHour: number;
-  preFourHour: number;
-  preThreeHour: number;
-  preTwoHour: number;
-  preOneHour: number;
-  now: number;
-  tomorrow: number;
-  todayPlusTwo: number;
-  todayPlusThree: number;
+export interface BelaqiTimelineEntry {
+  timestamp: Date;
+  index: number;
+}
+
+interface TrendResultEntry {
+  o3: [Date, number][];
+  pm10: [Date, number][];
+}
+
+interface TrendResult {
+  description: string;
+  'lastupdate rioifdm': string;
+  'lastupdate forecasts': string;
+  'latest observations': TrendResultEntry;
+  trend: TrendResultEntry;
 }
 
 @Injectable()
@@ -24,13 +32,15 @@ export class BelaqiIndexProvider extends ValueProvider {
 
   constructor(
     http: HttpService,
+    private modelledValueProvider: ModelledValueProvider,
+    private categorizeValueToIndex: CategorizeValueToIndexProvider,
     private translate: TranslateService
   ) {
     super(http);
   }
 
   public getValue(latitude: number, longitude: number, time?: Date): Observable<number> {
-    const url = 'http://geo.irceline.be/rioifdm/belaqi/wms';
+    const url = 'https://geo.irceline.be/rioifdm/belaqi/wms';
     return this.http.client().get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url,
       {
         responseType: 'json',
@@ -62,23 +72,6 @@ export class BelaqiIndexProvider extends ValueProvider {
         }
       })
     )
-  }
-
-  public getTimeline(latitude: number, longitude: number, time: Date): Observable<BelaqiTimeline> {
-    const randomIndex = () => Math.floor(Math.random() * 10 + 1);
-    const temp: BelaqiTimeline = {
-      preSixHour: randomIndex(),
-      preFiveHour: randomIndex(),
-      preFourHour: randomIndex(),
-      preThreeHour: randomIndex(),
-      preTwoHour: randomIndex(),
-      preOneHour: randomIndex(),
-      now: randomIndex(),
-      tomorrow: randomIndex(),
-      todayPlusTwo: randomIndex(),
-      todayPlusThree: randomIndex()
-    }
-    return of(temp);
   }
 
   public getColorForIndex(index: number) {
@@ -124,8 +117,91 @@ export class BelaqiIndexProvider extends ValueProvider {
     }
   }
 
-  // http://geo.irceline.be/rioifdm/wcs?request=GetCoverage&service=WCS&version=2.0.1&coverageId=rioifdm__belaqi&Format=text/plain&subset=Lat(50.7116008)&subset=Long(4.1223895)&subset=http://www.opengis.net/def/axis/OGC/0/time(%222018-07-12T09:00:00.000Z%22)
-  // http://geo.irceline.be/rioifdm/wcs?request=GetCoverage&service=WCS&version=2.0.1&coverageId=rioifdm__belaqi&Format=text/plain&subset=http://www.opengis.net/def/axis/OGC/0/X(155700,155800)&subset=http://www.opengis.net/def/axis/OGC/0/Y(132600,132700)&subset=http://www.opengis.net/def/axis/OGC/0/time(%222018-07-12T09:00:00.000Z%22)
-  // http://geo.irceline.be/rioifdm/wcs?request=GetCoverage&service=WCS&version=2.0.1&coverageId=rioifdm__belaqi&Format=gml&subset=http://www.opengis.net/def/axis/OGC/0/X(155700,155800)&subset=http://www.opengis.net/def/axis/OGC/0/Y(132600,132700)&subset=http://www.opengis.net/def/axis/OGC/0/time(%222018-07-12T09:00:00.000Z%22)
+  public getTimeline(latitude: number, longitude: number, time: Date): Observable<BelaqiTimelineEntry[]> {
+    return new Observable((observer: Observer<BelaqiTimelineEntry[]>) => {
+      this.getTrends().subscribe(trend => {
+        forkJoin([
+          this.createPhenomenonTimeline(latitude, longitude, time, ModelledPhenomenon.o3, trend["latest observations"].o3, trend.trend.o3),
+          this.createPhenomenonTimeline(latitude, longitude, time, ModelledPhenomenon.pm10, trend["latest observations"].pm10, trend.trend.pm10)
+        ]).map(res => {
+          return res[0].map((entry, i) => {
+            // TODO maybe create a better merge function
+            return {
+              timestamp: entry.timestamp,
+              index: entry.index > res[1][i].index ? entry.index : res[1][i].index
+            };
+          });
+        }).subscribe(res => {
+          observer.next(res);
+          observer.complete();
+        });
+      })
+    });
+  }
 
+  private createPhenomenonTimeline(
+    latitude: number,
+    longitude: number,
+    time: Date,
+    phenomenon: ModelledPhenomenon,
+    latestObs: [Date, number][],
+    trend: [Date, number][]
+  ): Observable<BelaqiTimelineEntry[]> {
+    const timestamps = [
+      moment(time).subtract(5, 'hours').toDate(),
+      moment(time).subtract(4, 'hours').toDate(),
+      moment(time).subtract(3, 'hours').toDate(),
+      moment(time).subtract(2, 'hours').toDate(),
+      moment(time).subtract(1, 'hours').toDate(),
+      time
+    ]
+    return forkJoin(
+      // get modelledValue for the past 6 timestamps
+      timestamps.map(timestamp => this.modelledValueProvider.getValue(latitude, longitude, timestamp, phenomenon))
+    ).map(
+      res => {
+        // categorize results
+        const categorizedPre = res.map(value => this.categorizeValueToIndex.categorize(value, phenomenon));
+        // map results to timeline entries
+        const timelineEntries = categorizedPre.map((e, i) => { return { timestamp: timestamps[i], index: e } });
+        // calculate post entries
+        // calculate difference between current modelled and out of the latest Obs to the same time
+        const matchingValue = this.findMatchingTime(latestObs, time);
+        const difference = res[res.length - 1] - matchingValue;
+        // calculate the new values and add them to the timeline entries
+        let nextHour = moment(time).add(1, 'hours').toDate();
+        let nextTrend = this.findMatchingTime(trend, nextHour);
+        while (nextTrend) {
+          const nextValue = matchingValue * nextTrend + difference;
+          timelineEntries.push({
+            timestamp: nextHour,
+            index: this.categorizeValueToIndex.categorize(nextValue, phenomenon)
+          })
+          nextHour = moment(nextHour).add(1, 'hours').toDate();
+          nextTrend = this.findMatchingTime(trend, nextHour);
+        }
+        return timelineEntries;
+      }
+    )
+  }
+
+  private getTrends(): Observable<TrendResult> {
+    return this.http.client().get<TrendResult>('https://www.irceline.be/tables/forecast/model/trend.php')
+      .map(res => {
+        res["latest observations"].o3.forEach(e => e[0] = new Date(e[0]));
+        res["latest observations"].pm10.forEach(e => e[0] = new Date(e[0]));
+        res.trend.o3.forEach(e => e[0] = new Date(e[0]));
+        res.trend.pm10.forEach(e => e[0] = new Date(e[0]));
+        return res;
+      });
+  }
+
+  private findMatchingTime(list: [Date, number][], time: Date): number {
+    const value = list.find((e) => {
+      if (e[0].getTime() === time.getTime()) {
+        return true;
+      }
+    })
+    return value ? value[1] : null;
+  }
 }

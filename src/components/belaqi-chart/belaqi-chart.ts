@@ -1,11 +1,16 @@
+import 'chartjs-plugin-annotation';
+
 import { AfterContentInit, Component, ViewChild } from '@angular/core';
 import { Geoposition } from '@ionic-native/geolocation';
-import { TranslateService } from '@ngx-translate/core';
-import { Chart } from 'chart.js';
+import { Chart, ChartOptions } from 'chart.js';
 
-import { BelaqiIndexProvider, BelaqiTimeline } from '../../providers/belaqi/belaqi';
+import { BelaqiIndexProvider, BelaqiTimelineEntry } from '../../providers/belaqi/belaqi';
 import { IrcelineSettingsProvider } from '../../providers/irceline-settings/irceline-settings';
 import { LocateProvider } from '../../providers/locate/locate';
+
+interface ExpandedChartOptions extends ChartOptions {
+  annotation: any;
+}
 
 @Component({
   selector: 'belaqi-chart',
@@ -20,8 +25,7 @@ export class BelaqiChartComponent implements AfterContentInit {
   constructor(
     private belaqiIndex: BelaqiIndexProvider,
     private locate: LocateProvider,
-    private ircelineSettings: IrcelineSettingsProvider,
-    private translate: TranslateService
+    private ircelineSettings: IrcelineSettingsProvider
   ) { }
 
   ngAfterContentInit(): void {
@@ -33,14 +37,13 @@ export class BelaqiChartComponent implements AfterContentInit {
   private loadBelaqiTimeline(position: Geoposition) {
     this.ircelineSettings.getSettings(false).subscribe(settings => {
       this.belaqiIndex.getTimeline(position.coords.latitude, position.coords.longitude, settings.lastupdate)
-        .subscribe(res => this.drawChart(res))
+        .subscribe(res => this.drawChart(res, settings.lastupdate))
     });
   }
 
-  private drawChart(belaqiTimeline: BelaqiTimeline) {
+  private drawChart(belaqiTimeline: BelaqiTimelineEntry[], current: Date) {
     const canvas = this.barCanvas.nativeElement as HTMLCanvasElement;
     const ctx = canvas.getContext("2d");
-
     const chart = new Chart(ctx, {
       type: 'line',
       plugins: [{
@@ -49,6 +52,20 @@ export class BelaqiChartComponent implements AfterContentInit {
       options: {
         legend: {
           display: false
+        },
+        annotation: {
+          drawTime: 'beforeDatasetsDraw',
+          events: ['click'],
+          dblClickSpeed: 350,
+          annotations: [{
+            id: 'currentline',
+            type: 'line',
+            mode: 'vertical',
+            scaleID: 'x-axis-0',
+            value: current.getHours().toString(),
+            borderColor: '#488aff',
+            borderWidth: 2,
+          }]
         },
         scales: {
           yAxes: [{
@@ -77,16 +94,17 @@ export class BelaqiChartComponent implements AfterContentInit {
             title: () => ''
           }
         }
-      },
+      } as ExpandedChartOptions,
       data: {
-        labels: this.createLabels(),
+        labels: this.createLabels(belaqiTimeline),
         datasets: [
           {
-            pointBorderWidth: 10,
-            pointHoverRadius: 10,
+            pointBorderWidth: 8,
+            pointHoverRadius: 8,
             pointHoverBorderWidth: 1,
             pointRadius: 3,
             fill: false,
+            cubicInterpolationMode: 'monotone',
             borderWidth: 4,
             data: []
           }
@@ -97,7 +115,7 @@ export class BelaqiChartComponent implements AfterContentInit {
   }
 
 
-  private drawData(ctx: CanvasRenderingContext2D, chart: Chart, belaqiTimeline: BelaqiTimeline) {
+  private drawData(ctx: CanvasRenderingContext2D, chart: Chart, belaqiTimeline: BelaqiTimelineEntry[]) {
     const gradientStroke = ctx.createLinearGradient(chart.chartArea.left, chart.chartArea.top, chart.chartArea.left, chart.chartArea.bottom);
     gradientStroke.addColorStop(0.0, this.belaqiIndex.getColorForIndex(10));
     gradientStroke.addColorStop(0.11, this.belaqiIndex.getColorForIndex(9));
@@ -119,33 +137,11 @@ export class BelaqiChartComponent implements AfterContentInit {
     chart.update();
   }
 
-  private createDataArray(belaqiTimeline: BelaqiTimeline): number[] | Chart.ChartPoint[] {
-    return [
-      belaqiTimeline.preSixHour,
-      belaqiTimeline.preFiveHour,
-      belaqiTimeline.preFourHour,
-      belaqiTimeline.preThreeHour,
-      belaqiTimeline.preTwoHour,
-      belaqiTimeline.preOneHour,
-      belaqiTimeline.now,
-      belaqiTimeline.tomorrow,
-      belaqiTimeline.todayPlusTwo,
-      belaqiTimeline.todayPlusThree
-    ];
+  private createDataArray(belaqiTimeline: BelaqiTimelineEntry[]): number[] | Chart.ChartPoint[] {
+    return belaqiTimeline.map(e => e.index);
   }
 
-  private createLabels(): (string | string[])[] {
-    return [
-      this.translate.instant('belaqi-chart.xaxis.pre6h'),
-      this.translate.instant('belaqi-chart.xaxis.pre5h'),
-      this.translate.instant('belaqi-chart.xaxis.pre4h'),
-      this.translate.instant('belaqi-chart.xaxis.pre3h'),
-      this.translate.instant('belaqi-chart.xaxis.pre2h'),
-      this.translate.instant('belaqi-chart.xaxis.pre1h'),
-      this.translate.instant('belaqi-chart.xaxis.now'),
-      this.translate.instant('belaqi-chart.xaxis.tomorrow'),
-      this.translate.instant('belaqi-chart.xaxis.todayPlusTwo'),
-      this.translate.instant('belaqi-chart.xaxis.todayPlusThree')
-    ];
+  private createLabels(belaqiTimeline: BelaqiTimelineEntry[]): (string | string[])[] {
+    return belaqiTimeline.map(e => e.timestamp.getHours().toString());
   }
 }

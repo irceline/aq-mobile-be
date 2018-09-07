@@ -5,6 +5,12 @@ import { map } from 'rxjs/operators';
 
 import { ValueProvider } from '../value-provider';
 
+export enum ModelledPhenomenon {
+  no2 = 'rioifdm:no2_hmean',
+  o3 = 'rioifdm:o3_hmean',
+  pm10 = 'rioifdm:pm10_hmean'
+}
+
 @Injectable()
 export class ModelledValueProvider extends ValueProvider {
 
@@ -15,13 +21,14 @@ export class ModelledValueProvider extends ValueProvider {
   }
 
   // TODO add layerType (NO2, ...)
-  public getValue(latitude: number, longitude: number, time: Date): Observable<number> {
+  public getValue(latitude: number, longitude: number, time: Date, phenomenon?: ModelledPhenomenon): Observable<number> {
+    const layerId = phenomenon ? phenomenon.toString() : 'rioifdm:no2_hmean';
     const url = 'http://geo.irceline.be/rioifdm/wms';
     const params = {
       service: 'WMS',
       request: 'GetFeatureInfo',
       version: '1.1.1',
-      layers: 'rioifdm:no2_hmean',
+      layers: layerId,
       transparent: 'true',
       info_format: 'application/json',
       tiled: 'true',
@@ -30,7 +37,7 @@ export class ModelledValueProvider extends ValueProvider {
       height: '1',
       srs: 'EPSG:4326',
       bbox: this.calculateRequestBbox(latitude, longitude),
-      query_layers: 'rioifdm:no2_hmean',
+      query_layers: layerId,
       X: '1',
       Y: '1'
     };
