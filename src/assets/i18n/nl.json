@@ -90,7 +90,7 @@
 			"addLocationToList": "Toevoegen aan de lijst van locaties",
 			"header": "Voor welke locaties zou u graag meldingen en gepersonaliseerde data ontvangen in de app?",
 			"locationLabelHint": "Verander de beschrijving van de locatie",
-			"locationLabelPlaceholder": "",
+			"locationLabelPlaceholder": "bv. \"Thuis\", \"Werk\", \"School\"",
 			"showLocationList": "Toon actuelle lijst locaties"
 		},
 		"two": {

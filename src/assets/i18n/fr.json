@@ -90,7 +90,7 @@
 			"addLocationToList": "Ajouter à la liste de positions",
 			"header": "Pour quelles localisations souhaitez-vous recevoir des notifications?",
 			"locationLabelHint": "Renommer la position",
-			"locationLabelPlaceholder": "",
+			"locationLabelPlaceholder": "p.e. \"À la maison\", \"Travail\", \"École\"",
 			"showLocationList": "Voir les localisations"
 		},
 		"two": {
