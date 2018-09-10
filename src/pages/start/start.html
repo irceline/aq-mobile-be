@@ -18,7 +18,7 @@
   </ion-card> -->
 
   <ion-card *ngIf="locationCount > 0 || locationEnabled">
-    <belaqi-user-location-slider></belaqi-user-location-slider>
+    <belaqi-user-location-slider (phenomenonSelected)="navigateToMap($event)"></belaqi-user-location-slider>
   </ion-card>
 
   <!-- <ion-card class="index-card">
@@ -36,13 +36,13 @@
     </ion-card-content>
   </ion-card> -->
 
-  <ion-card *ngIf="locationEnabled">
+  <!-- <ion-card *ngIf="locationEnabled">
     <belaqi-chart></belaqi-chart>
-  </ion-card>
+  </ion-card> -->
 
-  <ion-card>
+  <!-- <ion-card>
     <nearest-measuring-station-panel (onSelect)="navigateToMap($event)"></nearest-measuring-station-panel>
-  </ion-card>
+  </ion-card> -->
 
   <!-- <ion-card class="index-card">
     <ion-card-content>

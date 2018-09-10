@@ -1,12 +1,10 @@
 import 'chartjs-plugin-annotation';
 
-import { AfterContentInit, Component, ViewChild } from '@angular/core';
-import { Geoposition } from '@ionic-native/geolocation';
+import { Component, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { Chart, ChartOptions } from 'chart.js';
 
 import { BelaqiIndexProvider, BelaqiTimelineEntry } from '../../providers/belaqi/belaqi';
-import { IrcelineSettingsProvider } from '../../providers/irceline-settings/irceline-settings';
-import { LocateProvider } from '../../providers/locate/locate';
+import { BelaqiLocation } from '../belaqi-user-location-slider/belaqi-user-location-slider';
 
 interface ExpandedChartOptions extends ChartOptions {
   annotation: any;
@@ -16,32 +14,25 @@ interface ExpandedChartOptions extends ChartOptions {
   selector: 'belaqi-chart',
   templateUrl: 'belaqi-chart.html'
 })
-export class BelaqiChartComponent implements AfterContentInit {
+export class BelaqiChartComponent implements OnChanges {
 
   @ViewChild('testCanvas') barCanvas;
 
-  public geolocationEnabled: boolean;
+  @Input()
+  public location: BelaqiLocation;
 
   constructor(
-    private belaqiIndex: BelaqiIndexProvider,
-    private locate: LocateProvider,
-    private ircelineSettings: IrcelineSettingsProvider
+    private belaqiIndex: BelaqiIndexProvider
   ) { }
 
-  ngAfterContentInit(): void {
-    this.locate.getLocationStateEnabled().subscribe(res => this.geolocationEnabled = res);
-
-    this.locate.getGeoposition().subscribe(res => this.loadBelaqiTimeline(res));
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.location && this.location) {
+      this.belaqiIndex.getTimeline(this.location.latitude, this.location.longitude, this.location.date)
+      .subscribe(res => this.drawChart(res))
+    }
   }
 
-  private loadBelaqiTimeline(position: Geoposition) {
-    this.ircelineSettings.getSettings(false).subscribe(settings => {
-      this.belaqiIndex.getTimeline(position.coords.latitude, position.coords.longitude, settings.lastupdate)
-        .subscribe(res => this.drawChart(res, settings.lastupdate))
-    });
-  }
-
-  private drawChart(belaqiTimeline: BelaqiTimelineEntry[], current: Date) {
+  private drawChart(belaqiTimeline: BelaqiTimelineEntry[]) {
     const canvas = this.barCanvas.nativeElement as HTMLCanvasElement;
     const ctx = canvas.getContext("2d");
     const chart = new Chart(ctx, {
@@ -62,7 +53,7 @@ export class BelaqiChartComponent implements AfterContentInit {
             type: 'line',
             mode: 'vertical',
             scaleID: 'x-axis-0',
-            value: current.getHours().toString(),
+            value: this.location.date.getHours().toString(),
             borderColor: '#488aff',
             borderWidth: 2,
           }]
