@@ -68,7 +68,9 @@
 		"select-timeseries": "Bitte wähle eine Zeitreihe"
 	},
 	"home": {
-		"header": "Start"
+		"header": "Start",
+		"alertheader": "Derzeit keine Warnungen:",
+		"alert": "keine offiziellen Berichte über erhöhter Luftverschmutzung"
 	},
 	"intro": {
 		"close-introduction": "Beenden",

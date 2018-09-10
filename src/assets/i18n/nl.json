@@ -68,7 +68,9 @@
 		"select-timeseries": "Selecteer aub een tijdsreeks"
 	},
 	"home": {
-		"header": "Start"
+		"header": "Start",
+		"alertheader": "Momenteel geen waarschuwingen:",
+		"alert": "geen officiële meldingen met betrekking tot periodes van verhoogde luchtverontreiniging"
 	},
 	"intro": {
 		"close-introduction": "Sluiten",

@@ -68,7 +68,9 @@
 		"select-timeseries": "Veuillez sélectionner une série"
 	},
 	"home": {
-		"header": "Accueil"
+		"header": "Accueil",
+		"alertheader": "Actuellement pas d'alert:",
+		"alert": "aucun rapport officiel concernant les périodes de pollution atmosphérique accrue"
 	},
 	"intro": {
 		"close-introduction": "Fermer",
