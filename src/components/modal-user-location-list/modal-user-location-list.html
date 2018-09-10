@@ -24,7 +24,7 @@
     </ion-item>
     <ion-item *ngIf="editing[i]">
       <ion-label stacked>{{'user-location-list.edit-the-label' | translate}}</ion-label>
-      <ion-input type="text" [(ngModel)]="location.label"></ion-input>
+      <ion-input type="text" [(ngModel)]="location.label" clearInput></ion-input>
       <button ion-button clear item-right (click)="saveLocation(location); editing[i] = false">confirm</button>
     </ion-item>
     <ion-item>

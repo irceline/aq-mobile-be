@@ -68,7 +68,9 @@
 		"select-timeseries": "Please select a timeseries"
 	},
 	"home": {
-		"header": "Home"
+		"header": "Home",
+		"alertheader": "Currently no warnings:",
+		"alert": "no official messages concerning periods of increased air pollution"
 	},
 	"intro": {
 		"close-introduction": "Close",

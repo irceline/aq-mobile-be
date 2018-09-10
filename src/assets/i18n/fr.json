@@ -68,7 +68,9 @@
 		"select-timeseries": "Veuillez sélectionner une série"
 	},
 	"home": {
-		"header": "Accueil"
+		"header": "Accueil",
+		"alertheader": "Actuellement pas d'alert:",
+		"alert": "aucun rapport officiel concernant les périodes de pollution atmosphérique accrue"
 	},
 	"intro": {
 		"close-introduction": "Fermer",
@@ -90,7 +92,7 @@
 			"addLocationToList": "Ajouter à la liste de positions",
 			"header": "Pour quelles localisations souhaitez-vous recevoir des notifications?",
 			"locationLabelHint": "Renommer la position",
-			"locationLabelPlaceholder": "",
+			"locationLabelPlaceholder": "p.e. \"À la maison\", \"Travail\", \"École\"",
 			"showLocationList": "Voir les localisations"
 		},
 		"two": {
