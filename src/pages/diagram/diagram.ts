@@ -15,11 +15,8 @@ import { CombinedMapPage } from '../combined-map/combined-map';
 export class DiagramPage {
 
   public loading: boolean;
-  public datasetIds: string[];
 
   public selectedDatasetIds: string[] = [];
-
-  public datasetOptions: Map<string, DatasetOptions> = new Map();
 
   public timespan = new Timespan(new Date().getTime() - 100000000, new Date().getTime());
 
@@ -29,12 +26,10 @@ export class DiagramPage {
   };
 
   constructor(
-    private timeseriesSrvc: TimeseriesService,
+    public timeseriesSrvc: TimeseriesService,
     private modalCtrl: ModalController,
     private nav: NavController
   ) {
-    this.datasetIds = this.timeseriesSrvc.datasetIds;
-    this.datasetOptions = this.timeseriesSrvc.datasetOptions;
     this.timeseriesSrvc.getTimespan().subscribe(timespan => this.timespan = timespan);
   }
 

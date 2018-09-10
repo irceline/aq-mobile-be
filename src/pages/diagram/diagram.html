@@ -16,11 +16,11 @@
   <ion-card class="network">
     <network-panel></network-panel>
   </ion-card>
-  <ion-card *ngIf="datasetIds.length > 0" class="diagram-card">
+  <ion-card *ngIf="timeseriesSrvc.datasetIds.length > 0" class="diagram-card">
     <div class="diagram-container">
       <div class="diagram-wrapper">
         <div class="diagram">
-          <n52-d3-timeseries-graph [datasetIds]="datasetIds" [datasetOptions]="datasetOptions" [timeInterval]="timespan" [graphOptions]="diagramOptions"
+          <n52-d3-timeseries-graph [datasetIds]="timeseriesSrvc.datasetIds" [datasetOptions]="timeseriesSrvc.datasetOptions" [timeInterval]="timespan" [graphOptions]="diagramOptions"
             [selectedDatasetIds]="selectedDatasetIds" (onTimespanChanged)="timespanChanged($event)" (onContentLoading)="loading = $event"></n52-d3-timeseries-graph>
         </div>
         <div class="loading-overlay" *ngIf="loading">
@@ -29,8 +29,8 @@
         </div>
       </div>
       <div class="legend-wrapper">
-        <div *ngFor="let id of datasetIds">
-          <simple-legend-entry [datasetId]="id" [datasetOptions]="datasetOptions.get(id)" [selected]="isSelected(id)" (onSelectDataset)="onSelectedDataset(id, $event)"></simple-legend-entry>
+        <div *ngFor="let id of timeseriesSrvc.datasetIds">
+          <simple-legend-entry [datasetId]="id" [datasetOptions]="timeseriesSrvc.datasetOptions.get(id)" [selected]="isSelected(id)" (onSelectDataset)="onSelectedDataset(id, $event)"></simple-legend-entry>
         </div>
         <ion-fab bottom right>
           <button ion-fab mini (click)="openLegend()">
@@ -40,7 +40,7 @@
       </div>
     </div>
   </ion-card>
-  <ion-card *ngIf="datasetIds.length === 0">
+  <ion-card *ngIf="timeseriesSrvc.datasetIds.length === 0">
     <ion-card-header text-center>
       {{'diagram.no-timeseries-selected' | translate}}
     </ion-card-header>

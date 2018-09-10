@@ -38,6 +38,7 @@ import { BelaqiIndexProvider } from '../providers/belaqi/belaqi';
 import { CategorizeValueToIndexProvider } from '../providers/categorize-value-to-index/categorize-value-to-index';
 import { ForecastValueProvider } from '../providers/forecast-value/forecast-value';
 import { IrcelineSettingsProvider } from '../providers/irceline-settings/irceline-settings';
+import { LanguageHandlerProvider } from '../providers/language-handler/language-handler';
 import { LayerGeneratorService } from '../providers/layer-generator/layer-generator';
 import { LocateProvider } from '../providers/locate/locate';
 import { ModelledValueProvider } from '../providers/modelled-value/modelled-value';
@@ -103,11 +104,13 @@ export function HttpLoaderFactory(http: HttpClient) {
     BackgroundGeolocation,
     BackgroundMode,
     BelaqiIndexProvider,
+    CategorizeValueToIndexProvider,
     Diagnostic,
     FCM,
     ForecastValueProvider,
     Geolocation,
     IrcelineSettingsProvider,
+    LanguageHandlerProvider,
     LayerGeneratorService,
     LocalNotifications,
     LocateProvider,
@@ -121,7 +124,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     StatusBar,
     TimeseriesService,
     UserLocationListProvider,
-    CategorizeValueToIndexProvider,
   ]
 })
 export class AppModule { }

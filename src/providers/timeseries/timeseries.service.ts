@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ColorService, DatasetOptions, DatasetService, LocalStorage, Time, Timespan } from '@helgoland/core';
+import { ColorService, DatasetOptions, DatasetService, Time, Timespan } from '@helgoland/core';
+import { Storage } from '@ionic/storage';
 import { Observable, ReplaySubject } from 'rxjs';
 
 const TIMESERIES_OPTIONS_CACHE_PARAM = 'timeseriesOptions';
@@ -12,7 +13,7 @@ export class TimeseriesService extends DatasetService<DatasetOptions> {
   private timespan: ReplaySubject<Timespan> = new ReplaySubject();
 
   constructor(
-    protected localStorage: LocalStorage,
+    private storage: Storage,
     protected timeSrvc: Time,
     private color: ColorService
   ) {
@@ -38,14 +39,18 @@ export class TimeseriesService extends DatasetService<DatasetOptions> {
   }
 
   protected saveState(): void {
-    this.localStorage.save(TIMESERIES_IDS_CACHE_PARAM, this.datasetIds);
-    this.localStorage.save(TIMESERIES_OPTIONS_CACHE_PARAM, Array.from(this.datasetOptions.values()));
+    this.storage.set(TIMESERIES_IDS_CACHE_PARAM, this.datasetIds);
+    this.storage.set(TIMESERIES_OPTIONS_CACHE_PARAM, Array.from(this.datasetOptions.values()));
   }
 
   protected loadState(): void {
-    const options = this.localStorage.loadArray<DatasetOptions>(TIMESERIES_OPTIONS_CACHE_PARAM) || [];
-    options.forEach(e => this.datasetOptions.set(e.internalId, e));
-    this.datasetIds = this.localStorage.loadArray<string>(TIMESERIES_IDS_CACHE_PARAM) || [];
+    this.storage.get(TIMESERIES_OPTIONS_CACHE_PARAM)
+      .then(res => {
+        const options = res ? res : [];
+        options.forEach(e => this.datasetOptions.set(e.internalId, e));
+      })
+    this.storage.get(TIMESERIES_IDS_CACHE_PARAM)
+      .then(res => this.datasetIds = res ? res : [])
     this.setTimespan(this.timeSrvc.loadTimespan(TIME_CACHE_PARAM) || this.timeSrvc.initTimespan());
   }
 
