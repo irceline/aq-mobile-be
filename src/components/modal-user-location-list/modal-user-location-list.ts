@@ -15,7 +15,8 @@ export class ModalUserLocationListComponent {
   public editing = {};
 
   public mapOptions: MapOptions = {
-    maxZoom: 14
+    maxZoom: 20,
+    dragging: false
   }
 
   constructor(
