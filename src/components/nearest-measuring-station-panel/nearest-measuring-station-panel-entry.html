@@ -2,8 +2,10 @@
   <div class="phenomenon-label" [ngClass]="{'location-disabled': !locationEnabled}">{{entry.label}}</div>
   <div *ngIf="locationEnabled">
     <div class="station-value" *ngIf="!loadingStationValue">{{lastStationaryValue?.value | number:'1.0-1'}}{{uom}}</div>
-    <div class="station-distance" *ngIf="!loadingStationValue">{{stationDistance | number:'1.0-1'}}km</div>
-    <div class="station-label" *ngIf="!loadingStationValue">{{stationLabel}}</div>
     <div *ngIf="loadingStationValue"><ion-spinner></ion-spinner></div>
   </div>
+</div>
+<div class="entry-footer">
+<div class="station-distance" *ngIf="!loadingStationValue">{{stationDistance | number:'1.0-1'}}km</div>
+<div class="station-label" *ngIf="!loadingStationValue">{{stationLabel}}</div>
 </div>
