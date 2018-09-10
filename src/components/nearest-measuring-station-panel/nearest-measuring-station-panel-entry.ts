@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import {
   DatasetApiInterface,
   FirstLastValue,
@@ -6,11 +6,10 @@ import {
   Station,
   StatusIntervalResolverService,
 } from '@helgoland/core';
-import { Geoposition } from '@ionic-native/geolocation';
 import invert from 'invert-color';
 
-import { LocateProvider } from '../../providers/locate/locate';
 import { MobileSettings } from '../../providers/settings/settings';
+import { BelaqiLocation } from '../belaqi-user-location-slider/belaqi-user-location-slider';
 
 interface PanelEntry {
   label: string;
@@ -21,7 +20,7 @@ interface PanelEntry {
   selector: '[nearest-measuring-station-panel-entry]',
   templateUrl: 'nearest-measuring-station-panel-entry.html'
 })
-export class NearestMeasuringStationPanelEntryComponent {
+export class NearestMeasuringStationPanelEntryComponent implements OnChanges {
 
   private nearestStation: Station;
   public stationDistance: number;
@@ -31,10 +30,12 @@ export class NearestMeasuringStationPanelEntryComponent {
   public backgroundColor: string;
   public color: string;
   public loadingStationValue: boolean = true;
-  public locationEnabled: boolean;
 
   @Input()
   public entry: PanelEntry;
+
+  @Input()
+  public location: BelaqiLocation;
 
   @Output()
   public onClicked: EventEmitter<string> = new EventEmitter<string>();
@@ -42,18 +43,20 @@ export class NearestMeasuringStationPanelEntryComponent {
   constructor(
     private settingsSrvc: SettingsService<MobileSettings>,
     private api: DatasetApiInterface,
-    private statusIntervalResolver: StatusIntervalResolverService,
-    private locate: LocateProvider
-  ) {
-    this.locate.getGeoposition().subscribe(pos => this.determineNextStationValue(pos));
-    this.locate.getLocationStateEnabled().subscribe(enabled => this.locationEnabled = enabled);
+    private statusIntervalResolver: StatusIntervalResolverService
+  ) { }
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes.location && this.location) {
+      this.determineNextStationValue();
+    }
   }
 
   public select() {
     this.onClicked.emit(this.entry.id);
   }
 
-  private determineNextStationValue(position: Geoposition) {
+  private determineNextStationValue() {
     const url = this.settingsSrvc.getSettings().datasetApis[0].url;
     const phenomenonId = this.entry.id;
     this.api.getStations(url, {
@@ -64,8 +67,8 @@ export class NearestMeasuringStationPanelEntryComponent {
       stations.forEach(station => {
         const point = station.geometry as GeoJSON.Point;
         const stationDis = this.distanceInKmBetweenEarthCoordinates(
-          position.coords.latitude,
-          position.coords.longitude,
+          this.location.latitude,
+          this.location.longitude,
           point.coordinates[1],
           point.coordinates[0]
         );

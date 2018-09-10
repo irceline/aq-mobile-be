@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { GeoSearch } from '@helgoland/map';
 import { Geoposition } from '@ionic-native/geolocation';
 import { TranslateService } from '@ngx-translate/core';
@@ -9,10 +9,12 @@ import { IrcelineSettingsProvider } from '../../providers/irceline-settings/irce
 import { LocateProvider } from '../../providers/locate/locate';
 import { UserLocationListProvider } from '../../providers/user-location-list/user-location-list';
 
-interface BelaqiLocation {
+export interface BelaqiLocation {
   index: number;
   locationLabel: string;
   date: Date;
+  longitude: number;
+  latitude: number;
 }
 
 @Component({
@@ -20,6 +22,9 @@ interface BelaqiLocation {
   templateUrl: 'belaqi-user-location-slider.html'
 })
 export class BelaqiUserLocationSliderComponent {
+
+  @Output()
+  public phenomenonSelected: EventEmitter<string> = new EventEmitter();
 
   public belaqiLocations: BelaqiLocation[] = [];
   public currentLocation: BelaqiLocation;
@@ -36,6 +41,10 @@ export class BelaqiUserLocationSliderComponent {
     this.loadBelaqiForCurrentLocation();
   }
 
+  public selectPhenomenon(phenomenonId: string) {
+    this.phenomenonSelected.emit(phenomenonId);
+  }
+
   private loadBelaqiForCurrentLocation() {
 
     this.locate.getGeoposition().subscribe((pos: Geoposition) => {
@@ -47,7 +56,9 @@ export class BelaqiUserLocationSliderComponent {
         this.currentLocation = {
           index: value[1],
           locationLabel,
-          date: value[0].lastupdate
+          date: value[0].lastupdate,
+          latitude: pos.coords.latitude,
+          longitude: pos.coords.longitude
         };
       }, error => { });
     });
@@ -59,12 +70,16 @@ export class BelaqiUserLocationSliderComponent {
         locations => {
           this.belaqiLocations = [];
           locations.forEach((loc, index) => {
-            this.belaqiIndexProvider.getValue(loc.point.coordinates[1], loc.point.coordinates[0]).subscribe(
+            const lat = loc.point.coordinates[1]
+            const lon = loc.point.coordinates[0];
+            this.belaqiIndexProvider.getValue(lat, lon).subscribe(
               res => {
                 this.belaqiLocations.push({
                   index: res,
                   locationLabel: loc.label,
-                  date: ircelineSettings.lastupdate
+                  date: ircelineSettings.lastupdate,
+                  latitude: lat,
+                  longitude: lon
                 });
               }
             )

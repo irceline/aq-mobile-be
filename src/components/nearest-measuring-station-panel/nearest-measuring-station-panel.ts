@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, Input } from '@angular/core';
 
 import { LocateProvider } from '../../providers/locate/locate';
+import { BelaqiLocation } from '../belaqi-user-location-slider/belaqi-user-location-slider';
 
 interface PanelEntry {
   label: string;
@@ -15,6 +16,9 @@ export class NearestMeasuringStationPanelComponent {
 
   @Output()
   public onSelect: EventEmitter<string> = new EventEmitter();
+
+  @Input()
+  public location: BelaqiLocation;
 
   public geolocationEnabled: boolean;
 

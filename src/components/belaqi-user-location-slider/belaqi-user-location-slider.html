@@ -10,6 +10,12 @@
     <div class="wheel">
       <belaqi-wheel [index]="currentLocation.index"></belaqi-wheel>
     </div>
+    <div class="chart">
+      <belaqi-chart [location]="currentLocation"></belaqi-chart>
+    </div>
+    <div>
+      <nearest-measuring-station-panel [location]="currentLocation" (onSelect)="selectPhenomenon($event)"></nearest-measuring-station-panel>
+    </div>
   </ion-slide>
   <ion-slide *ngFor="let loc of belaqiLocations">
     <div class="location-label">
@@ -20,6 +26,12 @@
     </div>
     <div class="wheel">
       <belaqi-wheel [index]="loc.index"></belaqi-wheel>
+    </div>
+    <div class="chart">
+      <belaqi-chart [location]="loc"></belaqi-chart>
+    </div>
+    <div>
+      <nearest-measuring-station-panel [location]="loc" (onSelect)="selectPhenomenon($event)"></nearest-measuring-station-panel>
     </div>
   </ion-slide>
 </ion-slides>
