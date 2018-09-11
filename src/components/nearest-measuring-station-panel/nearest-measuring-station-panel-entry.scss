@@ -1,8 +1,8 @@
 nearest-measuring-station-panel {
   .entry {
-    border: 2px solid rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 8px;
-    height: 3.2em;
+    height: 2.5em;
     text-align: center;
     .location-disabled {
       padding: 25px 0;
@@ -12,10 +12,10 @@ nearest-measuring-station-panel {
     text-align: center;
   }
   .phenomenon-label {
-    font-size: 140%;
+    font-size: 100%;
   }
   .station-value {
-    font-size: 85%;
+    font-size: 60%;
   }
   .station-distance {
     font-size: 80%;
