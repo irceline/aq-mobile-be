@@ -1,4 +1,4 @@
-<ion-slides pager>
+<ion-slides pager #slider>
   <ion-slide *ngIf="currentLocation">
     <div class="location-label">
       {{currentLocation.locationLabel}}
@@ -32,6 +32,11 @@
     </div>
     <div>
       <nearest-measuring-station-panel [location]="loc" (onSelect)="selectPhenomenon($event)"></nearest-measuring-station-panel>
+    </div>
+  </ion-slide>
+  <ion-slide>
+    <div class="create-new-location-slide">
+        <button ion-button outline (click)="createNewLocation()">{{'belaqi-user-location-slider.create-new-location' | translate}}</button>
     </div>
   </ion-slide>
 </ion-slides>

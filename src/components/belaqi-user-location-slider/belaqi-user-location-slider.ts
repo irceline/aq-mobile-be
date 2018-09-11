@@ -1,13 +1,15 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild, AfterViewInit } from '@angular/core';
 import { GeoSearch } from '@helgoland/map';
 import { Geoposition } from '@ionic-native/geolocation';
 import { TranslateService } from '@ngx-translate/core';
+import { ModalController, Slides } from 'ionic-angular';
 import { forkJoin } from 'rxjs';
 
 import { BelaqiIndexProvider } from '../../providers/belaqi/belaqi';
 import { IrcelineSettingsProvider } from '../../providers/irceline-settings/irceline-settings';
 import { LocateProvider } from '../../providers/locate/locate';
 import { UserLocationListProvider } from '../../providers/user-location-list/user-location-list';
+import { ModalUserLocationCreationComponent } from '../modal-user-location-creation/modal-user-location-creation';
 
 export interface BelaqiLocation {
   index: number;
@@ -21,7 +23,10 @@ export interface BelaqiLocation {
   selector: 'belaqi-user-location-slider',
   templateUrl: 'belaqi-user-location-slider.html'
 })
-export class BelaqiUserLocationSliderComponent {
+export class BelaqiUserLocationSliderComponent implements AfterViewInit {
+
+  @ViewChild('slider')
+  slider: Slides;
 
   @Output()
   public phenomenonSelected: EventEmitter<string> = new EventEmitter();
@@ -35,14 +40,23 @@ export class BelaqiUserLocationSliderComponent {
     private ircelineSettings: IrcelineSettingsProvider,
     private locate: LocateProvider,
     protected translateSrvc: TranslateService,
-    private geoSearch: GeoSearch
+    private geoSearch: GeoSearch,
+    protected modalCtrl: ModalController
   ) {
     this.loadBelaqis();
     this.loadBelaqiForCurrentLocation();
   }
 
+  public ngAfterViewInit(): void {
+    this.slider.autoHeight = true;
+  }
+
   public selectPhenomenon(phenomenonId: string) {
     this.phenomenonSelected.emit(phenomenonId);
+  }
+
+  public createNewLocation() {
+    this.modalCtrl.create(ModalUserLocationCreationComponent).present();
   }
 
   private loadBelaqiForCurrentLocation() {

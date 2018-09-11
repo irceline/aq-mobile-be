@@ -8,6 +8,7 @@
 		"loading": "Chargement de BelAQI pour votre position"
 	},
 	"belaqi-user-location-slider": {
+		"create-new-location": "",
 		"current-location": "Position actuelle"
 	},
 	"belaqi-wheel": {

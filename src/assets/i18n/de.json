@@ -8,6 +8,7 @@
 		"loading": "Lädt den BelAQI für deinen Standort"
 	},
 	"belaqi-user-location-slider": {
+		"create-new-location": "Erstelle einen neuen Standort",
 		"current-location": "Aktuelle Position"
 	},
 	"belaqi-wheel": {
@@ -49,7 +50,7 @@
 		}
 	},
 	"controls": {
-		"cancel": "Abbrecehn",
+		"cancel": "Abbrechen",
 		"close": "Schließen",
 		"ok": "Ok"
 	},
