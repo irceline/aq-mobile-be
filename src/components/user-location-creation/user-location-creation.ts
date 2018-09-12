@@ -20,6 +20,7 @@ export class UserLocationCreationComponent {
   public mapOptions: MapOptions;
   public geoSearchResult: GeoSearchResult;
   public locationLabel: string;
+  public location: Point;
 
   constructor(
     protected locationList: UserLocationListProvider,
@@ -35,17 +36,18 @@ export class UserLocationCreationComponent {
     };
     this.mapOptions = {
       maxZoom: 16,
-      dragging: false
+      dragging: true
     }
   }
 
   public geoSearchResultChanged(result: GeoSearchResult) {
     this.geoSearchResult = result;
+    this.location = this.geoSearchResult.geometry as Point;
     this.locationLabel = result.name;
   }
 
   public addLocationToList() {
-    if (this.locationList.hasLocation(this.locationLabel, this.geoSearchResult.geometry as Point)) {
+    if (this.locationList.hasLocation(this.locationLabel, this.location)) {
       this.toast.create(
         {
           message: this.translate.instant('user-location.creation.message.exists'),
@@ -53,13 +55,16 @@ export class UserLocationCreationComponent {
         }
       ).present();
     } else {
-      this.locationList.addLocation(this.locationLabel, this.geoSearchResult.geometry as Point);
-      this.toast.create({
+      this.locationList.addLocation(this.locationLabel, this.location); this.toast.create({
         message: this.translate.instant('user-location.creation.message.added'),
         duration: 3000
       }
       ).present();
     }
+  }
+
+  public onLocationChanged(point: Point) {
+    this.location = point;
   }
 
   public showLocationList() {
