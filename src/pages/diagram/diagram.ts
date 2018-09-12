@@ -1,18 +1,20 @@
 import { Component } from '@angular/core';
-import { DatasetOptions, Timespan } from '@helgoland/core';
+import { Timespan } from '@helgoland/core';
 import { D3PlotOptions } from '@helgoland/d3';
 import { ModalController, NavController } from 'ionic-angular';
 
 import { ModalLegendComponent } from '../../components/modal-legend/modal-legend';
 import { ModalTimespanEditorComponent } from '../../components/modal-timespan-editor/modal-timespan-editor';
 import { TimeseriesService } from '../../providers/timeseries/timeseries.service';
-import { CombinedMapPage } from '../combined-map/combined-map';
+import { MapPage } from '../map/map';
 
 @Component({
   selector: 'page-diagram',
   templateUrl: 'diagram.html'
 })
 export class DiagramPage {
+
+  public name = 'diagram';
 
   public loading: boolean;
 
@@ -57,7 +59,7 @@ export class DiagramPage {
   }
 
   public openMapSelection() {
-    this.nav.push(CombinedMapPage);
+    this.nav.push(MapPage);
   }
 
   public onSelectedDataset(id: string, selection: boolean) {

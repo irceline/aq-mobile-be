@@ -3,7 +3,7 @@ import { NavController } from 'ionic-angular';
 
 import { LocateProvider } from '../../providers/locate/locate';
 import { UserLocationListProvider } from '../../providers/user-location-list/user-location-list';
-import { CombinedMapPage } from '../combined-map/combined-map';
+import { MapPage } from '../map/map';
 
 @Component({
   selector: 'page-start',
@@ -13,6 +13,7 @@ export class StartPage {
 
   public locationEnabled: boolean;
   public locationCount: number;
+  public name = 'start';
 
   constructor(
     private nav: NavController,
@@ -24,7 +25,7 @@ export class StartPage {
   }
 
   public navigateToMap(phenomenonId: string) {
-    this.nav.push(CombinedMapPage, { phenomenonId });
+    this.nav.push(MapPage, { phenomenonId });
   }
 
 }

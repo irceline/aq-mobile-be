@@ -9,6 +9,7 @@ import { MobileSettings } from '../../providers/settings/settings';
 })
 export class SettingsPage {
 
+  public name = 'settings';
   public languageList: Language[];
 
   constructor(

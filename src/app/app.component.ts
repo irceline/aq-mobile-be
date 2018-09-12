@@ -1,10 +1,13 @@
-import { Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Storage } from '@ionic/storage';
-import { NavController, Platform } from 'ionic-angular';
+import { NavController, Platform, ToastController } from 'ionic-angular';
 
+import { MapPage } from '../pages/map/map';
+import { DiagramPage } from '../pages/diagram/diagram';
 import { IntroPage } from '../pages/intro/intro';
+import { SettingsPage } from '../pages/settings/settings';
 import { StartPage } from '../pages/start/start';
 import { IrcelineSettings, IrcelineSettingsProvider } from '../providers/irceline-settings/irceline-settings';
 import { LanguageHandlerProvider } from '../providers/language-handler/language-handler';
@@ -14,10 +17,13 @@ import { PushNotificationsProvider } from '../providers/push-notifications/push-
 @Component({
   templateUrl: 'app.html'
 })
-export class MyApp {
+export class MyApp implements AfterViewInit {
+
   @ViewChild('content') nav: NavController;
 
   public rootPage: any;
+
+  public selectedPage: string;
 
   public lastupdate: Date;
 
@@ -41,6 +47,10 @@ export class MyApp {
     this.decideStartView();
   }
 
+  public ngAfterViewInit(): void {
+    this.registerNavigationChanges();
+  }
+
   private initializeApp() {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -62,6 +72,54 @@ export class MyApp {
         this.storage.set(firstStartKey, true);
       }
     })
+  }
+
+  // navigation
+
+  private registerNavigationChanges() {
+    this.nav.viewDidEnter.subscribe((view) => {
+      if (this.nav.length() > 2) {
+        this.nav.remove(1, 1);
+      }
+      switch (view.instance.name) {
+        case 'start':
+          this.selectedPage = 'start';
+          break;
+        case 'map':
+          this.selectedPage = 'map';
+          break;
+        case 'diagram':
+          this.selectedPage = 'diagram';
+          break;
+        case 'settings':
+          this.selectedPage = 'settings';
+          break;
+      }
+    });
+  }
+
+  public openPage(page: string) {
+    if (this.nav.getActive().instance.name != page) {
+      if (page !== 'start') {
+        this.nav.push(this.getMatchingPage(page));
+      } else {
+        this.selectedPage = 'start';
+        this.nav.pop();
+      }
+    }
+  }
+
+  private getMatchingPage(page: string) {
+    switch (page) {
+      case 'start':
+        return StartPage;
+      case 'map':
+        return MapPage;
+      case 'diagram':
+        return DiagramPage;
+      case 'settings':
+        return SettingsPage;
+    }
   }
 
 }

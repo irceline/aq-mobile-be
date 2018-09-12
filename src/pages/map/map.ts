@@ -52,10 +52,12 @@ const phenomenonMapping = [
 ]
 
 @Component({
-  selector: 'page-combined-map',
-  templateUrl: 'combined-map.html',
+  selector: 'page-map',
+  templateUrl: 'map.html',
 })
-export class CombinedMapPage {
+export class MapPage {
+
+  public name = 'map';
 
   public geoSearchOptions: GeoSearchOptions;
   public phenomenonLabel: PhenomenonLabel = PhenomenonLabel.NO2;
@@ -75,7 +77,7 @@ export class CombinedMapPage {
 
   public legend: L.Control;
 
-  public mapId = 'combined-map';
+  public mapId = 'map';
 
   constructor(
     protected navCtrl: NavController,

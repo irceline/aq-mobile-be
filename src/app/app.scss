@@ -13,12 +13,24 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 @import '../styles/loading';
-ion-menu {
-  .scroll-content {
-    overflow-y: auto;
-  }
-}
+@import '../theme/variables';
 
 .cards-bg {
   background-color: rgb(228, 228, 228);
+}
+
+@media only screen and (max-width: 600px) {
+  .nav-butto-label {
+    display: none;
+  }
+}
+
+.main-navigation {
+  button {
+    color: color($colors, dark);
+
+    &.selected {
+      color: color($colors, primary);
+    }
+  }
 }

@@ -28,10 +28,9 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { ComponentsModule } from '../components/components.module';
-import { CombinedMapPage } from '../pages/combined-map/combined-map';
-import { DiagramPage } from '../pages/diagram/diagram';
+import { MapModule } from '../pages/map/map.module';
+import { DiagramModule } from '../pages/diagram/diagram.module';
 import { IntroPage } from '../pages/intro/intro';
-import { SettingsPage } from '../pages/settings/settings';
 import { SettingsModule } from '../pages/settings/settings.module';
 import { StartPage } from '../pages/start/start';
 import { AirQualityIndexProvider } from '../providers/air-quality-index/air-quality-index';
@@ -58,8 +57,6 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    DiagramPage,
-    CombinedMapPage,
     IntroPage,
     MyApp,
     StartPage
@@ -85,15 +82,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     IonicStorageModule.forRoot(),
     ComponentsModule,
-    SettingsModule
+    SettingsModule,
+    DiagramModule,
+    MapModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    DiagramPage,
-    CombinedMapPage,
     IntroPage,
     MyApp,
-    SettingsPage,
     StartPage
   ],
   providers: [

@@ -1,4 +1,24 @@
 <ion-header>
-  <navigation></navigation>
+  <ion-navbar class="main-navigation">
+    <button ion-button icon-only clear (click)="openPage('start')" [ngClass]="{selected: selectedPage === 'start'}">
+      <ion-icon name="home"></ion-icon>
+      <span class="nav-butto-label">{{'home.header' | translate}}</span>
+    </button>
+    <button ion-button icon-only clear (click)="openPage('map')" [ngClass]="{selected: selectedPage === 'map'}">
+      <ion-icon name="map"></ion-icon>
+      <span class="nav-butto-label">{{'map.header' | translate}}</span>
+    </button>
+    <button ion-button icon-only clear (click)="openPage('diagram')" [ngClass]="{selected: selectedPage === 'diagram'}">
+      <ion-icon name="stats"></ion-icon>
+      <span class="nav-butto-label">{{'diagram.header' | translate}}</span>
+    </button>
+    <ion-buttons end>
+      <refresh-button></refresh-button>
+      <button ion-button icon-only clear (click)="openPage('settings')" [ngClass]="{selected: selectedPage === 'settings'}">
+        <ion-icon name="settings"></ion-icon>
+        <span class="nav-butto-label">{{'settings.header' | translate}}</span>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
 </ion-header>
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
