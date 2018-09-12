@@ -35,7 +35,7 @@ export class UserLocationCreationComponent {
       asPointGeometry: true
     };
     this.mapOptions = {
-      maxZoom: 16,
+      maxZoom: 18,
       dragging: true
     }
   }
