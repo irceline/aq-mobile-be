@@ -48,7 +48,7 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
   }
 
   public ngAfterViewInit(): void {
-    this.slider.autoHeight = true;
+    this.slider.autoHeight = false;
   }
 
   public selectPhenomenon(phenomenonId: string) {

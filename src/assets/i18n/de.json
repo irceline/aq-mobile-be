@@ -69,9 +69,9 @@
 		"select-timeseries": "Bitte wähle eine Zeitreihe"
 	},
 	"home": {
-		"header": "Start",
+		"alert": "keine offiziellen Berichte über erhöhter Luftverschmutzung",
 		"alertheader": "Derzeit keine Warnungen:",
-		"alert": "keine offiziellen Berichte über erhöhter Luftverschmutzung"
+		"header": "Start"
 	},
 	"intro": {
 		"close-introduction": "Beenden",
@@ -192,6 +192,10 @@
 		"message": "Aktualisiert"
 	},
 	"settings": {
+		"about": {
+			"header": "Über die App",
+			"version": "Version"
+		},
 		"common": "Allgemein",
 		"header": "Einstellungen",
 		"select-language": "Wähle eine Sprache",

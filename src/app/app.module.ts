@@ -12,6 +12,7 @@ import {
   HelgolandMapViewModule,
   NominatimGeoSearchService,
 } from '@helgoland/map';
+import { AppVersion } from '@ionic-native/app-version';
 import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
 import { BackgroundMode } from '@ionic-native/background-mode';
 import { Diagnostic } from '@ionic-native/diagnostic';
@@ -101,6 +102,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     { provide: GeoSearch, useClass: NominatimGeoSearchService },
     { provide: SettingsService, useClass: JSSONSettingsService },
     AirQualityIndexProvider,
+    AppVersion,
     BackgroundGeolocation,
     BackgroundMode,
     BelaqiIndexProvider,

@@ -69,9 +69,9 @@
 		"select-timeseries": "Please select a timeseries"
 	},
 	"home": {
-		"header": "Home",
+		"alert": "no official messages concerning periods of increased air pollution",
 		"alertheader": "Currently no warnings:",
-		"alert": "no official messages concerning periods of increased air pollution"
+		"header": "Home"
 	},
 	"intro": {
 		"close-introduction": "Close",
@@ -192,6 +192,10 @@
 		"message": "Refresh all"
 	},
 	"settings": {
+		"about": {
+			"header": "About the app",
+			"version": "Version"
+		},
 		"common": "Common",
 		"header": "Settings",
 		"select-language": "Select a language",

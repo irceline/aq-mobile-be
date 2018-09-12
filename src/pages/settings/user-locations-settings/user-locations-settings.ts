@@ -14,9 +14,7 @@ export class UserLocationsSettingsComponent {
 
   constructor(
     protected modalCtrl: ModalController
-  ) {
-    this.modalCtrl.create(ModalUserLocationCreationComponent).present();
-  }
+  ) { }
 
   public createNewLocation() {
     this.modalCtrl.create(ModalUserLocationCreationComponent).present();
