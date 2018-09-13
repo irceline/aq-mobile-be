@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, ViewChild, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { GeoSearch } from '@helgoland/map';
 import { Geoposition } from '@ionic-native/geolocation';
 import { TranslateService } from '@ngx-translate/core';
@@ -60,21 +60,22 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
   }
 
   private loadBelaqiForCurrentLocation() {
-
     this.locate.getGeoposition().subscribe((pos: Geoposition) => {
       const ircelSetObs = this.ircelineSettings.getSettings(false);
       const belaqiObs = this.belaqiIndexProvider.getValue(pos.coords.latitude, pos.coords.longitude);
       const reverseObs = this.geoSearch.reverse({ type: 'Point', coordinates: [pos.coords.latitude, pos.coords.longitude] });
-      forkJoin([ircelSetObs, belaqiObs, reverseObs]).subscribe(value => {
-        const locationLabel = value[2].displayName || this.translateSrvc.instant('belaqi-user-location-slider.current-location');
-        this.currentLocation = {
-          index: value[1],
-          locationLabel,
-          date: value[0].lastupdate,
-          latitude: pos.coords.latitude,
-          longitude: pos.coords.longitude
-        };
-      }, error => { });
+      forkJoin([ircelSetObs, belaqiObs, reverseObs]).subscribe(
+        value => {
+          const locationLabel = value[2].displayName || this.translateSrvc.instant('belaqi-user-location-slider.current-location');
+          this.currentLocation = {
+            index: value[1],
+            locationLabel,
+            date: value[0].lastupdate,
+            latitude: pos.coords.latitude,
+            longitude: pos.coords.longitude
+          };
+        },
+        error => this.handleError(pos.coords.longitude, pos.coords.latitude, error));
     });
   }
 
@@ -95,12 +96,16 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
                   latitude: lat,
                   longitude: lon
                 });
-              }
-            )
+              },
+              error => this.handleError(lon, lat, error))
           })
         }
       );
     });
+  }
+
+  private handleError(lon: number, lat: number, error: any) {
+    console.error(`Get an error while fetching belaqi for location (latitude: ${lat}, longitude ${lon}): ${error}`);
   }
 
 }

@@ -2,11 +2,11 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Storage } from '@ionic/storage';
-import { NavController, Platform, ToastController } from 'ionic-angular';
+import { NavController, Platform } from 'ionic-angular';
 
-import { MapPage } from '../pages/map/map';
 import { DiagramPage } from '../pages/diagram/diagram';
 import { IntroPage } from '../pages/intro/intro';
+import { MapPage } from '../pages/map/map';
 import { SettingsPage } from '../pages/settings/settings';
 import { StartPage } from '../pages/start/start';
 import { IrcelineSettings, IrcelineSettingsProvider } from '../providers/irceline-settings/irceline-settings';
