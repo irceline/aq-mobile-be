@@ -126,7 +126,7 @@
 	},
 	"nearest-measuring-station-panel": {
 		"header": {
-			"geolocation-disabled": "Zeige das Phänomen auf der Karte",
+			"geolocation-disabled": "Zeige die Messstation auf der Karte",
 			"geolocation-enabled": "Nächstgelegene Station"
 		}
 	},
