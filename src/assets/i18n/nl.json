@@ -8,7 +8,7 @@
 		"loading": "BelAQI voor uw locatie aan het laden"
 	},
 	"belaqi-user-location-slider": {
-		"create-new-location": "",
+		"create-new-location": "Maak een nieuwe locatie aan",
 		"current-location": "Huidige locatie"
 	},
 	"belaqi-wheel": {
@@ -126,7 +126,7 @@
 	},
 	"nearest-measuring-station-panel": {
 		"header": {
-			"geolocation-disabled": "",
+			"geolocation-disabled": "Toon het meetstation op de kaart",
 			"geolocation-enabled": "Dichtstbijzijnde meetstation"
 		}
 	},
@@ -193,8 +193,8 @@
 	},
 	"settings": {
 		"about": {
-			"header": "",
-			"version": ""
+			"header": "Over de app",
+			"version": "Versie"
 		},
 		"common": "Algemeen",
 		"header": "Instellingen",
@@ -215,7 +215,7 @@
 		}
 	},
 	"station-selection": {
-		"show-other-phenomena": ""
+		"show-other-phenomena": "Ander pulluenten die op deze locatie worden gemeten"
 	},
 	"style-edit": {
 		"generalize": "generaliseerde gegevens",
@@ -231,8 +231,8 @@
 	"user-location": {
 		"creation": {
 			"message": {
-				"added": "",
-				"exists": ""
+				"added": "Locatie toegevoegd",
+				"exists": "Locatie bestaat al"
 			}
 		}
 	},

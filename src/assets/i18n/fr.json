@@ -8,7 +8,7 @@
 		"loading": "Chargement de BelAQI pour votre position"
 	},
 	"belaqi-user-location-slider": {
-		"create-new-location": "",
+		"create-new-location": "Ajouter une nouvelle position",
 		"current-location": "Position actuelle"
 	},
 	"belaqi-wheel": {
@@ -126,7 +126,7 @@
 	},
 	"nearest-measuring-station-panel": {
 		"header": {
-			"geolocation-disabled": "",
+			"geolocation-disabled": "Montrer la station de mesure sur la carte",
 			"geolocation-enabled": "Station de mesure la plus proche"
 		}
 	},
@@ -193,8 +193,8 @@
 	},
 	"settings": {
 		"about": {
-			"header": "",
-			"version": ""
+			"header": "A propos de l'application",
+			"version": "Version"
 		},
 		"common": "Généraux",
 		"header": "Paramètres",
@@ -215,7 +215,7 @@
 		}
 	},
 	"station-selection": {
-		"show-other-phenomena": ""
+		"show-other-phenomena": "Autre polluant mesuré à cet endroit"
 	},
 	"style-edit": {
 		"generalize": "Généraliser les données",
@@ -231,8 +231,8 @@
 	"user-location": {
 		"creation": {
 			"message": {
-				"added": "",
-				"exists": ""
+				"added": "Position ajouté",
+				"exists": "Position existe déjà"
 			}
 		}
 	},
