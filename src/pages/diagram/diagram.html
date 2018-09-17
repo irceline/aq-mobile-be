@@ -20,7 +20,7 @@
     <div class="diagram-container">
       <div class="diagram-wrapper">
         <div class="diagram">
-          <n52-d3-timeseries-graph [datasetIds]="timeseriesSrvc.datasetIds" [datasetOptions]="timeseriesSrvc.datasetOptions" [timeInterval]="timespan" [graphOptions]="diagramOptions"
+          <n52-d3-timeseries-graph [datasetIds]="timeseriesSrvc.datasetIds" [datasetOptions]="timeseriesSrvc.datasetOptions" [timeInterval]="timespan" [presenterOptions]="diagramOptions"
             [selectedDatasetIds]="selectedDatasetIds" (onTimespanChanged)="timespanChanged($event)" (onContentLoading)="loading = $event"></n52-d3-timeseries-graph>
         </div>
         <div class="loading-overlay" *ngIf="loading">
