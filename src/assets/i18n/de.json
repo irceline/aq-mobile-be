@@ -223,6 +223,7 @@
 		"zeroBasedYAxe": "Zeitreihe null-basiert"
 	},
 	"user-location-list": {
+		"create-new-location": "Erstelle einen neuen Standort",
 		"edit": "Ändern",
 		"edit-the-label": "Ändere die Standortbezeichnung",
 		"header": "Standort liste",

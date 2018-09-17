@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { ViewController } from 'ionic-angular';
+import { ModalController, ViewController } from 'ionic-angular';
 import { MapOptions } from 'leaflet';
 
 import { UserLocation, UserLocationListProvider } from '../../providers/user-location-list/user-location-list';
+import { ModalUserLocationCreationComponent } from '../modal-user-location-creation/modal-user-location-creation';
 
 @Component({
   selector: 'modal-user-location-list',
@@ -21,7 +22,8 @@ export class ModalUserLocationListComponent {
 
   constructor(
     private userLocationProvider: UserLocationListProvider,
-    private viewCtrl: ViewController
+    private viewCtrl: ViewController,
+    protected modalCtrl: ModalController
   ) {
     this.setLocations();
   }
@@ -37,6 +39,10 @@ export class ModalUserLocationListComponent {
 
   public saveLocation(location: UserLocation) {
     this.userLocationProvider.saveLocation(location);
+  }
+
+  public createNewLocation() {
+    this.modalCtrl.create(ModalUserLocationCreationComponent).present();
   }
 
   private setLocations() {

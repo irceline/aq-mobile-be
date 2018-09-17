@@ -11,7 +11,7 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content class="cards-bg">
   <ion-card *ngFor="let location of userLocations; let i = index;">
     <div style="height: 200px;">
       <n52-geometry-map-viewer [geometry]="location.point" [mapOptions]="mapOptions"></n52-geometry-map-viewer>
@@ -33,5 +33,8 @@
         {{'user-location-list.remove' | translate}}
       </button>
     </ion-item>
+  </ion-card>
+  <ion-card class="create-new-location">
+    <button ion-button outline (click)="createNewLocation()">{{'user-location-list.create-new-location' | translate}}</button>
   </ion-card>
 </ion-content>

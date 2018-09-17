@@ -223,6 +223,7 @@
 		"zeroBasedYAxe": "Série basée à zéro"
 	},
 	"user-location-list": {
+		"create-new-location": "Ajouter une nouvelle position",
 		"edit": "Modifier",
 		"edit-the-label": "Renommer la position",
 		"header": "Liste des positions",

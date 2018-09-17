@@ -223,6 +223,7 @@
 		"zeroBasedYAxe": "tijdsreeks nullgebaseerd"
 	},
 	"user-location-list": {
+		"create-new-location": "Maak een nieuwe locatie aan",
 		"edit": "bewerk",
 		"edit-the-label": "bewerk de lijst van locaties",
 		"header": "Lijs van de locaties",

@@ -223,6 +223,7 @@
 		"zeroBasedYAxe": "Timeseries zero based"
 	},
 	"user-location-list": {
+		"create-new-location": "Create new location",
 		"edit": "Edit",
 		"edit-the-label": "Edit the location label",
 		"header": "Location list",
