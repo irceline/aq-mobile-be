@@ -79,7 +79,8 @@
 			"header": "What type of messages would you like to receive?"
 		},
 		"header": "Introduction",
-		"next-step": "Next step",
+		"next-step": "Next",
+		"prev-step": "Previous",
 		"one": {
 			"header": "Would you like to change the language setting?",
 			"option": {

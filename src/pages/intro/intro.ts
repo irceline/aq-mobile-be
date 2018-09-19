@@ -25,6 +25,10 @@ export class IntroPage {
   public nextSlide() {
     this.slides.slideTo(this.slides.getActiveIndex() + 1, 500);
   }
+  
+  public prevSlide() {
+    this.slides.slideTo(this.slides.getActiveIndex() - 1, 500);
+  }
 
   public closeSlides() {
     this.navCtrl.setRoot(StartPage);

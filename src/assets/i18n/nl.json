@@ -79,7 +79,8 @@
 			"header": "Welke soort meldingen zou u graag ontvangen?"
 		},
 		"header": "Introductie",
-		"next-step": "Volgende stap",
+		"next-step": "Volgende",
+		"prev-step": "Vorige",
 		"one": {
 			"header": "Zou u graag de taalinstellingen wijzigen?",
 			"option": {

@@ -80,6 +80,7 @@
 		},
 		"header": "Einführung",
 		"next-step": "Nächste",
+		"prev-step": "Zurück",
 		"one": {
 			"header": "Wollen sie die Sprache ändern?",
 			"option": {
