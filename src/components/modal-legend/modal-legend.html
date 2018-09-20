@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>
-        {{'legend.header' | translate}}
+      {{'legend.header' | translate}}
     </ion-title>
     <ion-buttons start>
       <button ion-button (click)="dismiss()">
@@ -12,9 +12,11 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
+  <nearest-series-legend-slider></nearest-series-legend-slider>
   <div *ngFor="let id of datasetIds">
-    <mobile-timeseries-entry [datasetId]="id" [selected]="isSelected(id)" [highlight]="id === highlightId" [datasetOptions]="datasetOptions.get(id)"
-      [timeInterval]="timespan" (onDeleteDataset)="deleteTimeseries(id)" (onSelectDataset)="selectTimeseries($event, id)" (onSelectDate)="jumpToDate($event)"
-      (onUpdateOptions)="updateOptions($event, id)" (onEditOptions)="editOption($event)" (onShowGeometry)="showGeometry($event)"></mobile-timeseries-entry>
+    <mobile-timeseries-entry [datasetId]="id" [selected]="isSelected(id)" [highlight]="id === highlightId"
+      [datasetOptions]="datasetOptions.get(id)" [timeInterval]="timespan" (onDeleteDataset)="deleteTimeseries(id)"
+      (onSelectDataset)="selectTimeseries($event, id)" (onSelectDate)="jumpToDate($event)" (onUpdateOptions)="updateOptions($event, id)"
+      (onEditOptions)="editOption($event)" (onShowGeometry)="showGeometry($event)"></mobile-timeseries-entry>
   </div>
 </ion-content>

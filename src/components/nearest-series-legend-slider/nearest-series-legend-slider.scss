@@ -1,0 +1,27 @@
+nearest-series-legend-slider {
+  ion-slides {
+    height: unset;
+
+    .swiper-wrapper {
+      padding-bottom: 20px;
+
+      .swiper-slide {
+        text-align: left;
+
+        .slide-zoom {
+          text-align: unset;
+        }
+
+        div {
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+
+    .swiper-container-horizontal>.swiper-pagination-bullets {
+      bottom: 0px;
+    }
+  }
+}

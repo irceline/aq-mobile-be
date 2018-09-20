@@ -1,0 +1,8 @@
+<ion-slides pager #slider (ionSlideDidChange)="slideChanged()">
+  <ion-slide *ngFor="let entry of legendGroups">
+    <div>{{entry.label}}</div>
+    <div *ngFor="let ds of entry.datasets">
+      <simple-legend-entry [datasetId]="ds.id" [datasetOptions]="ds.option"></simple-legend-entry>
+    </div>
+  </ion-slide>
+</ion-slides>

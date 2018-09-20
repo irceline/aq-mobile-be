@@ -37,6 +37,7 @@ import { NearestMeasuringStationPanelComponent } from './nearest-measuring-stati
 import {
 	NearestMeasuringStationPanelEntryComponent,
 } from './nearest-measuring-station-panel/nearest-measuring-station-panel-entry';
+import { NearestSeriesLegendSliderComponent } from './nearest-series-legend-slider/nearest-series-legend-slider';
 import { NetworkPanelComponent } from './network-panel/network-panel';
 import { PhenomenonSelectorPopoverComponent } from './phenomenon-selector-popover/phenomenon-selector-popover';
 import { PushNotificationSubscriptionsComponent } from './push-notification-subscriptions/push-notification-subscriptions';
@@ -74,6 +75,7 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		ModalUserLocationListComponent,
 		NearestMeasuringStationPanelComponent,
 		NearestMeasuringStationPanelEntryComponent,
+		NearestSeriesLegendSliderComponent,
 		NetworkPanelComponent,
 		PhenomenonSelectorPopoverComponent,
 		PushNotificationComponent,
@@ -120,6 +122,7 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		ModalUserLocationListComponent,
 		NearestMeasuringStationPanelComponent,
 		NearestMeasuringStationPanelEntryComponent,
+		NearestSeriesLegendSliderComponent,
 		NetworkPanelComponent,
 		PhenomenonSelectorPopoverComponent,
 		PushNotificationComponent,

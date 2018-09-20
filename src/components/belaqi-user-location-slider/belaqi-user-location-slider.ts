@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { GeoSearch } from '@helgoland/map';
-import { Geoposition } from '@ionic-native/geolocation';
 import { TranslateService } from '@ngx-translate/core';
 import { ModalController, Slides } from 'ionic-angular';
 import { forkJoin } from 'rxjs';
@@ -45,9 +44,7 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
     private userLocationProvider: UserLocationListProvider,
     private locatedTimeseriesProvider: LocatedTimeseriesService,
     private ircelineSettings: IrcelineSettingsProvider,
-    private locate: LocateProvider,
     protected translateSrvc: TranslateService,
-    private geoSearch: GeoSearch,
     protected modalCtrl: ModalController,
     protected nearestTimeseries: NearestTimeseriesProvider
   ) {
@@ -73,6 +70,7 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
 
   private updateLocationSelection(idx: number) {
     if (idx <= this.belaqiLocations.length - 1) {
+      this.locatedTimeseriesProvider.setSelectedIndex(idx);
       this.locatedTimeseriesProvider.removeAllDatasets();
       for (const key in this.belaqiLocations[idx].nearestSeries) {
         if (this.belaqiLocations[idx].nearestSeries.hasOwnProperty(key)) {
@@ -85,33 +83,27 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
 
   private loadBelaqiForCurrentLocation() {
     if (this.userLocationProvider.showCurrentLocation()) {
-      this.locate.getGeoposition().subscribe((pos: Geoposition) => {
+      this.userLocationProvider.determineCurrentLocation().subscribe(location => {
+        const lat = location.point.coordinates[1];
+        const lon = location.point.coordinates[0];
         const ircelSetObs = this.ircelineSettings.getSettings(false);
-        const belaqiObs = this.belaqiIndexProvider.getValue(pos.coords.latitude, pos.coords.longitude);
-        const reverseObs = this.geoSearch.reverse({ type: 'Point', coordinates: [pos.coords.latitude, pos.coords.longitude] });
-        forkJoin([ircelSetObs, belaqiObs, reverseObs]).subscribe(
+        const belaqiObs = this.belaqiIndexProvider.getValue(lat, lon);
+        forkJoin([ircelSetObs, belaqiObs]).subscribe(
           value => {
-            const locationLabel = value[2].displayName || this.translateSrvc.instant('belaqi-user-location-slider.current-location');
-            const obs = this.userLocationProvider.phenomenonIDs.map(id => this.nearestTimeseries.determineNextTimeseries(pos.coords.latitude, pos.coords.longitude, id));
-            forkJoin(obs).subscribe((resultList) => {
-              const nearestSeries = {};
-              resultList.forEach((entry, idx) => {
-                nearestSeries[this.userLocationProvider.phenomenonIDs[idx]] = entry;
-              });
-              const idx = this.userLocationProvider.getCurrentLocationIndex();
-              this.belaqiLocations.splice(idx, 0, {
-                type: "current",
-                index: value[1],
-                locationLabel,
-                date: value[0].lastupdate,
-                latitude: pos.coords.latitude,
-                longitude: pos.coords.longitude,
-                nearestSeries
-              });
-              this.updateLocationSelection(0);
-            })
+            const idx = this.userLocationProvider.getCurrentLocationIndex();
+            this.belaqiLocations.splice(idx, 0, {
+              type: "current",
+              index: value[1],
+              locationLabel: location.label,
+              date: value[0].lastupdate,
+              latitude: lat,
+              longitude: lon,
+              nearestSeries: location.nearestSeries
+            });
+            this.updateLocationSelection(0);
           },
-          error => this.handleError(pos.coords.longitude, pos.coords.latitude, error));
+          error => this.handleError(lon, lat, error)
+        );
       });
     }
   }

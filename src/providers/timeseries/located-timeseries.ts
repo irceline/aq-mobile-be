@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import { ColorService, DatasetOptions, DatasetService } from '@helgoland/core';
+
 import { TimeseriesService } from './timeseries';
 
 @Injectable()
 export class LocatedTimeseriesService extends DatasetService<DatasetOptions> {
+
+  private selectedIndex: number;
 
   constructor(
     private color: ColorService,
@@ -20,6 +23,14 @@ export class LocatedTimeseriesService extends DatasetService<DatasetOptions> {
   addDataset(internalId: string, options?: DatasetOptions) {
     super.addDataset(internalId, options);
     this.tsSrvc.addDataset(internalId, this.datasetOptions.get(internalId));
+  }
+
+  public setSelectedIndex(idx: number) {
+    this.selectedIndex = idx;
+  }
+
+  public getSelectedIndex(): number {
+    return this.selectedIndex;
   }
 
   protected createStyles(internalId: string): DatasetOptions {

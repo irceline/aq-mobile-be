@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
+import { GeoSearch } from '@helgoland/map';
+import { Geoposition } from '@ionic-native/geolocation';
 import { Storage } from '@ionic/storage';
+import { TranslateService } from '@ngx-translate/core';
 import { Point } from 'geojson';
 import { forkJoin, Observable, Observer, ReplaySubject } from 'rxjs';
 
+import { LocateProvider } from '../locate/locate';
 import { NearestTimeseries, NearestTimeseriesProvider } from '../nearest-timeseries/nearest-timeseries';
 
 export interface UserLocation {
@@ -29,7 +33,10 @@ export class UserLocationListProvider {
 
   constructor(
     protected storage: Storage,
-    protected nearestTimeseries: NearestTimeseriesProvider
+    protected nearestTimeseries: NearestTimeseriesProvider,
+    private geoSearch: GeoSearch,
+    protected translateSrvc: TranslateService,
+    private locate: LocateProvider
   ) {
     this.loadLocations().subscribe(res => {
       this.currentUserLocations = res;
@@ -56,6 +63,40 @@ export class UserLocationListProvider {
     })
   }
 
+  public determineCurrentLocation(): Observable<UserLocation> {
+    return new Observable((observer: Observer<UserLocation>) => {
+      this.locate.getGeoposition().subscribe((pos: Geoposition) => {
+        const reverseObs = this.geoSearch.reverse({ type: 'Point', coordinates: [pos.coords.latitude, pos.coords.longitude] });
+        reverseObs.subscribe(
+          value => {
+            const locationLabel = value.displayName || this.translateSrvc.instant('belaqi-user-location-slider.current-location');
+            const obs = this.phenomenonIDs.map(id => this.nearestTimeseries.determineNextTimeseries(pos.coords.latitude, pos.coords.longitude, id));
+            forkJoin(obs).subscribe((resultList) => {
+              const nearestSeries = {};
+              resultList.forEach((entry, idx) => {
+                nearestSeries[this.phenomenonIDs[idx]] = entry;
+              });
+              const idx = this.getCurrentLocationIndex();
+              observer.next({
+                id: 1,
+                label: locationLabel,
+                point: {
+                  type: 'Point',
+                  coordinates: [pos.coords.longitude, pos.coords.latitude]
+                },
+                nearestSeries
+              });
+              observer.complete();
+            })
+          },
+          error => {
+            observer.error(error);
+            observer.complete();
+          });
+      });
+    })
+  }
+
   public hasLocation(label: string, point: Point): boolean {
     return this.currentUserLocations.findIndex(
       e => e.label === label
@@ -66,6 +107,22 @@ export class UserLocationListProvider {
 
   public getUserLocations(): Observable<UserLocation[]> {
     return this.userLocationsSubject.asObservable();
+  }
+
+  public getAllLocations(): Observable<UserLocation[]> {
+    if (this.showCurrentLocation()) {
+      return new Observable((observer: Observer<UserLocation[]>) => {
+        this.getUserLocations().subscribe(userLocs => {
+          this.determineCurrentLocation().subscribe(currentLoc => {
+            userLocs = Object.assign([], userLocs);
+            userLocs.splice(this.getCurrentLocationIndex(), 0, currentLoc);
+            observer.next(userLocs);
+          })
+        })
+      })
+    } else {
+      return this.getUserLocations();
+    }
   }
 
   public removeLocation(userLocation: UserLocation) {
