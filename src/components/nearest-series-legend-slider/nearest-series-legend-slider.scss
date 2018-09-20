@@ -3,19 +3,24 @@ nearest-series-legend-slider {
     height: unset;
 
     .swiper-wrapper {
-      padding-bottom: 20px;
 
       .swiper-slide {
         text-align: left;
+        padding: 20px;
 
         .slide-zoom {
           text-align: unset;
-        }
 
-        div {
-          overflow: hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
+          .group-header {
+            text-align: center;
+          }
+
+          .group-entry {
+            font-size: smaller;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
         }
       }
     }

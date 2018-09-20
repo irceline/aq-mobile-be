@@ -13,6 +13,7 @@ export interface UserLocation {
   id: number;
   point: Point;
   label: string;
+  type: 'user' | 'current';
   nearestSeries: {
     [key: string]: NearestTimeseries
   }
@@ -44,7 +45,7 @@ export class UserLocationListProvider {
     });
   }
 
-  public addLocation(label: string, point: Point) {
+  public addUserLocation(label: string, point: Point) {
     const lat = point.coordinates[1];
     const lon = point.coordinates[0];
     const obs = this.phenomenonIDs.map(id => this.nearestTimeseries.determineNextTimeseries(lat, lon, id));
@@ -52,6 +53,7 @@ export class UserLocationListProvider {
       const location = {
         label,
         point,
+        type: 'user',
         id: new Date().getTime(),
         nearestSeries: {}
       } as UserLocation;
@@ -76,10 +78,10 @@ export class UserLocationListProvider {
               resultList.forEach((entry, idx) => {
                 nearestSeries[this.phenomenonIDs[idx]] = entry;
               });
-              const idx = this.getCurrentLocationIndex();
               observer.next({
                 id: 1,
                 label: locationLabel,
+                type: 'current',
                 point: {
                   type: 'Point',
                   coordinates: [pos.coords.longitude, pos.coords.latitude]

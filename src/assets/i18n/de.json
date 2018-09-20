@@ -130,6 +130,9 @@
 			"geolocation-enabled": "Nächstgelegene Station"
 		}
 	},
+	"nearest-series-legend-slider": {
+		"show-nearest-series": "Zeige nächstgelegene Messungen"
+	},
 	"network": {
 		"geolocationDisabled": "Die Standortermittlung ist deaktiviert",
 		"offline": "Dein Handy ist offline",
@@ -203,7 +206,8 @@
 		"user-locations": {
 			"create-new-location": "Erstelle neuen Standort",
 			"header": "Nutzer Standorte",
-			"show-location-list": "Zeige vorhandene Standorte"
+			"show-location-list": "Zeige vorhandene Standorte",
+			"show-nearest-series-by-default": "Zeige nächste Messungen im Diagram"
 		}
 	},
 	"show-geometry": {

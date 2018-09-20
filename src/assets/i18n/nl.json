@@ -130,6 +130,9 @@
 			"geolocation-enabled": "Dichtstbijzijnde meetstation"
 		}
 	},
+	"nearest-series-legend-slider": {
+		"show-nearest-series": ""
+	},
 	"network": {
 		"geolocationDisabled": "De geolocatie is uitgeschakeld",
 		"offline": "U toestel offline",
@@ -203,7 +206,8 @@
 		"user-locations": {
 			"create-new-location": "Maak een nieuwe locatie aan",
 			"header": "Gebruikerslocaties",
-			"show-location-list": "Toon huidige locaties"
+			"show-location-list": "Toon huidige locaties",
+			"show-nearest-series-by-default": ""
 		}
 	},
 	"show-geometry": {

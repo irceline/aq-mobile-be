@@ -1,8 +1,14 @@
-<ion-slides pager #slider (ionSlideDidChange)="slideChanged()">
+<ion-slides pager #slider (ionSlideDidChange)="slideChanged()" [hidden]="!locatedTsSrvc.showSeries">
   <ion-slide *ngFor="let entry of legendGroups">
-    <div>{{entry.label}}</div>
-    <div *ngFor="let ds of entry.datasets">
+    <div class="group-header">{{entry.label}}</div>
+    <div *ngFor="let ds of entry.datasets" class="group-entry">
       <simple-legend-entry [datasetId]="ds.id" [datasetOptions]="ds.option"></simple-legend-entry>
     </div>
   </ion-slide>
 </ion-slides>
+<ion-list>
+  <ion-item>
+    <ion-label>{{'nearest-series-legend-slider.show-nearest-series' | translate}}</ion-label>
+    <ion-toggle [checked]="locatedTsSrvc.getShowSeries()" (ionChange)="showSeriesSelectionChanged($event)"></ion-toggle>
+  </ion-item>
+</ion-list>

@@ -30,7 +30,7 @@
         </div>
       </div>
       <div class="legend-wrapper">
-        <div class="timeseries-group">
+        <div class="timeseries-group" *ngIf="locatedTsSrvc.getShowSeries()">
           <div *ngFor="let id of locatedTsSrvc.datasetIds">
             <simple-legend-entry [datasetId]="id" [datasetOptions]="locatedTsSrvc.datasetOptions.get(id)" [selected]="isSelected(id)"
               (onSelectDataset)="onSelectedDataset(id, $event)"></simple-legend-entry>

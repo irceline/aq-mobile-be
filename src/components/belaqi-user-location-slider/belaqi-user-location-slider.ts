@@ -1,12 +1,9 @@
 import { AfterViewInit, Component, EventEmitter, Output, ViewChild } from '@angular/core';
-import { GeoSearch } from '@helgoland/map';
 import { TranslateService } from '@ngx-translate/core';
 import { ModalController, Slides } from 'ionic-angular';
-import { forkJoin } from 'rxjs';
 
 import { BelaqiIndexProvider } from '../../providers/belaqi/belaqi';
 import { IrcelineSettingsProvider } from '../../providers/irceline-settings/irceline-settings';
-import { LocateProvider } from '../../providers/locate/locate';
 import { NearestTimeseries, NearestTimeseriesProvider } from '../../providers/nearest-timeseries/nearest-timeseries';
 import { LocatedTimeseriesService } from '../../providers/timeseries/located-timeseries';
 import { UserLocationListProvider } from '../../providers/user-location-list/user-location-list';
@@ -81,36 +78,9 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
     }
   }
 
-  private loadBelaqiForCurrentLocation() {
-    if (this.userLocationProvider.showCurrentLocation()) {
-      this.userLocationProvider.determineCurrentLocation().subscribe(location => {
-        const lat = location.point.coordinates[1];
-        const lon = location.point.coordinates[0];
-        const ircelSetObs = this.ircelineSettings.getSettings(false);
-        const belaqiObs = this.belaqiIndexProvider.getValue(lat, lon);
-        forkJoin([ircelSetObs, belaqiObs]).subscribe(
-          value => {
-            const idx = this.userLocationProvider.getCurrentLocationIndex();
-            this.belaqiLocations.splice(idx, 0, {
-              type: "current",
-              index: value[1],
-              locationLabel: location.label,
-              date: value[0].lastupdate,
-              latitude: lat,
-              longitude: lon,
-              nearestSeries: location.nearestSeries
-            });
-            this.updateLocationSelection(0);
-          },
-          error => this.handleError(lon, lat, error)
-        );
-      });
-    }
-  }
-
   private loadBelaqis() {
     this.ircelineSettings.getSettings(false).subscribe(ircelineSettings => {
-      this.userLocationProvider.getUserLocations().subscribe(
+      this.userLocationProvider.getAllLocations().subscribe(
         locations => {
           this.belaqiLocations = [];
           locations.forEach((loc, i) => {
@@ -119,7 +89,7 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
             this.belaqiLocations[i] = {
               locationLabel: loc.label,
               date: ircelineSettings.lastupdate,
-              type: 'user',
+              type: loc.type,
               latitude: lat,
               longitude: lon,
               nearestSeries: loc.nearestSeries
@@ -130,11 +100,7 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
               },
               error => this.handleError(lon, lat, error))
           })
-          if (this.userLocationProvider.showCurrentLocation()) {
-            this.loadBelaqiForCurrentLocation();
-          } else {
-            this.updateLocationSelection(0);
-          }
+          this.updateLocationSelection(0);
         }
       );
     });

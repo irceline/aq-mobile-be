@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { ColorService, DatasetOptions } from '@helgoland/core';
-import { Slides } from 'ionic-angular';
+import { Slides, Toggle } from 'ionic-angular';
 
 import { LocatedTimeseriesService } from '../../providers/timeseries/located-timeseries';
 import { UserLocationListProvider } from '../../providers/user-location-list/user-location-list';
@@ -28,7 +28,7 @@ export class NearestSeriesLegendSliderComponent implements AfterViewInit {
 
   constructor(
     private userLocations: UserLocationListProvider,
-    private locatedTsSrvc: LocatedTimeseriesService,
+    public locatedTsSrvc: LocatedTimeseriesService,
     private color: ColorService
   ) {
     this.userLocations.getAllLocations().subscribe(locations => {
@@ -52,7 +52,6 @@ export class NearestSeriesLegendSliderComponent implements AfterViewInit {
   }
 
   public ngAfterViewInit(): void {
-    this.slider.autoHeight = false;
     this.setCurrentIndex();
   }
 
@@ -61,6 +60,16 @@ export class NearestSeriesLegendSliderComponent implements AfterViewInit {
     this.locatedTsSrvc.setSelectedIndex(idx);
     this.locatedTsSrvc.removeAllDatasets();
     this.legendGroups[idx].datasets.forEach(e => this.locatedTsSrvc.addDataset(e.id, e.option));
+  }
+
+  public showSeriesSelectionChanged(toggle: Toggle) {
+    this.locatedTsSrvc.setShowSeries(toggle.checked);
+    if (this.locatedTsSrvc.getShowSeries()) {
+      const idx = this.slider.getActiveIndex();
+      this.legendGroups[idx].datasets.forEach(e => this.locatedTsSrvc.addDataset(e.id, e.option));
+    } else {
+      this.locatedTsSrvc.removeAllDatasets();
+    }
   }
 
   private setCurrentIndex() {

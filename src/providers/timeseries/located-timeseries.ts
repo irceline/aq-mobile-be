@@ -1,18 +1,24 @@
 import { Injectable } from '@angular/core';
-import { ColorService, DatasetOptions, DatasetService } from '@helgoland/core';
+import { ColorService, DatasetOptions, DatasetService, LocalStorage } from '@helgoland/core';
 
 import { TimeseriesService } from './timeseries';
+
+const LOCALSTORAGE_SHOW_DEFAULT_SERIES = 'located-timeseries.show-default.series';
 
 @Injectable()
 export class LocatedTimeseriesService extends DatasetService<DatasetOptions> {
 
   private selectedIndex: number;
 
+  private showSeries;
+
   constructor(
     private color: ColorService,
-    private tsSrvc: TimeseriesService
+    private tsSrvc: TimeseriesService,
+    private storage: LocalStorage
   ) {
     super();
+    this.showSeries = this.getShowNearestSeriesByDefault();
   }
 
   removeAllDatasets() {
@@ -23,6 +29,27 @@ export class LocatedTimeseriesService extends DatasetService<DatasetOptions> {
   addDataset(internalId: string, options?: DatasetOptions) {
     super.addDataset(internalId, options);
     this.tsSrvc.addDataset(internalId, this.datasetOptions.get(internalId));
+  }
+
+  public setShowNearestSeriesByDefault(nearestSeriesByDefault: boolean) {
+    this.storage.save(LOCALSTORAGE_SHOW_DEFAULT_SERIES, nearestSeriesByDefault);
+    this.showSeries = nearestSeriesByDefault;
+  }
+
+  public getShowNearestSeriesByDefault(): boolean {
+    if (this.storage.load(LOCALSTORAGE_SHOW_DEFAULT_SERIES) != null) {
+      return this.storage.load(LOCALSTORAGE_SHOW_DEFAULT_SERIES);
+    } else {
+      return true;
+    }
+  }
+
+  public getShowSeries(): boolean {
+    return this.showSeries;
+  }
+
+  public setShowSeries(showSeries: boolean) {
+    this.showSeries = showSeries;
   }
 
   public setSelectedIndex(idx: number) {
