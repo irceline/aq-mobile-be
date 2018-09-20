@@ -28,9 +28,9 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { ComponentsModule } from '../components/components.module';
-import { MapModule } from '../pages/map/map.module';
 import { DiagramModule } from '../pages/diagram/diagram.module';
 import { IntroPage } from '../pages/intro/intro';
+import { MapModule } from '../pages/map/map.module';
 import { SettingsModule } from '../pages/settings/settings.module';
 import { StartPage } from '../pages/start/start';
 import { AirQualityIndexProvider } from '../providers/air-quality-index/air-quality-index';
@@ -42,12 +42,15 @@ import { LanguageHandlerProvider } from '../providers/language-handler/language-
 import { LayerGeneratorService } from '../providers/layer-generator/layer-generator';
 import { LocateProvider } from '../providers/locate/locate';
 import { ModelledValueProvider } from '../providers/modelled-value/modelled-value';
+import { NearestTimeseriesProvider } from '../providers/nearest-timeseries/nearest-timeseries';
 import { NotificationPresenter } from '../providers/notification-presenter/notification-presenter';
 import { PersonalAlertsProvider } from '../providers/personal-alerts/personal-alerts';
 import { PushNotificationsProvider } from '../providers/push-notifications/push-notifications';
 import { RefreshHandler } from '../providers/refresh/refresh';
 import { JSSONSettingsService } from '../providers/settings/settings';
-import { TimeseriesService } from '../providers/timeseries/timeseries.service';
+import { LocatedTimeseriesService } from '../providers/timeseries/located-timeseries';
+import { TimeseriesService } from '../providers/timeseries/timeseries';
+import { UserTimeseriesService } from '../providers/timeseries/user-timeseries';
 import { UserLocationListProvider } from '../providers/user-location-list/user-location-list';
 import { MyApp } from './app.component';
 
@@ -112,7 +115,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     LayerGeneratorService,
     LocalNotifications,
     LocateProvider,
+    LocatedTimeseriesService,
     ModelledValueProvider,
+    NearestTimeseriesProvider,
     Network,
     NotificationPresenter,
     PersonalAlertsProvider,
@@ -122,6 +127,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     StatusBar,
     TimeseriesService,
     UserLocationListProvider,
+    UserTimeseriesService,
   ]
 })
 export class AppModule { }

@@ -1,14 +1,9 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { ModelledPhenomenon } from '../modelled-value/modelled-value';
 
 @Injectable()
 export class CategorizeValueToIndexProvider {
-
-  constructor(public http: HttpClient) {
-    console.log('Hello CategorizeValueToIndexProvider Provider');
-  }
 
   public categorize(value: number, phenomenon: ModelledPhenomenon): number {
     switch (phenomenon) {

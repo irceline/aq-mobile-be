@@ -3,7 +3,8 @@ import { DatasetOptions, Time, Timespan } from '@helgoland/core';
 import { ModalController, ViewController } from 'ionic-angular';
 import { first } from 'rxjs/operators';
 
-import { TimeseriesService } from '../../providers/timeseries/timeseries.service';
+import { TimeseriesService } from '../../providers/timeseries/timeseries';
+import { UserTimeseriesService } from '../../providers/timeseries/user-timeseries';
 import { ModalGeometryViewerComponent } from '../modal-geometry-viewer/modal-geometry-viewer';
 import { ModalOptionsEditorComponent } from '../modal-options-editor/modal-options-editor';
 
@@ -18,14 +19,15 @@ export class ModalLegendComponent {
   public datasetOptions: Map<string, DatasetOptions>;
 
   constructor(
-    private timeseriesSrvc: TimeseriesService,
+    private userTimeseriesSrvc: UserTimeseriesService,
+    private tsSrvc: TimeseriesService,
     private viewCtrl: ViewController,
     private modalCtrl: ModalController,
     private timeSrvc: Time,
     private renderer: Renderer
   ) {
-    this.datasetIds = this.timeseriesSrvc.datasetIds;
-    this.datasetOptions = this.timeseriesSrvc.datasetOptions;
+    this.datasetIds = this.userTimeseriesSrvc.datasetIds;
+    this.datasetOptions = this.userTimeseriesSrvc.datasetOptions;
     this.renderer.setElementClass(viewCtrl.pageRef().nativeElement, 'modal-legend', true);
   }
 
@@ -38,12 +40,12 @@ export class ModalLegendComponent {
   }
 
   public deleteTimeseries(id: string) {
-    this.timeseriesSrvc.removeDataset(id);
-    if (this.timeseriesSrvc.datasetIds.length === 0) { this.dismiss(); }
+    this.userTimeseriesSrvc.removeDataset(id);
+    if (this.userTimeseriesSrvc.datasetIds.length === 0) { this.dismiss(); }
   }
 
   public updateOptions(options: DatasetOptions, internalId: string) {
-    this.timeseriesSrvc.updateDatasetOptions(options, internalId);
+    this.userTimeseriesSrvc.updateDatasetOptions(options, internalId);
     this.dismiss();
   }
 
@@ -59,14 +61,14 @@ export class ModalLegendComponent {
     })
     modalRef.onDidDismiss((option: DatasetOptions) => {
       if (option) {
-        this.timeseriesSrvc.updateDatasetOptions(option, option.internalId);
+        this.userTimeseriesSrvc.updateDatasetOptions(option, option.internalId);
       }
     });
     modalRef.present();
   }
 
   public jumpToDate(date: Date) {
-    this.timeseriesSrvc.getTimespan()
+    this.tsSrvc.getTimespan()
       .pipe(first<Timespan>((ts, i, s) => {
         const timespan = this.timeSrvc.centerTimespan(ts, date);
         this.viewCtrl.dismiss(timespan);

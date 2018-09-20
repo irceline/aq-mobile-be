@@ -1,28 +1,11 @@
-<ion-slides pager #slider>
-  <ion-slide *ngIf="currentLocation">
-    <div class="location-label">
-      {{currentLocation.locationLabel}}
-    </div>
-    <div class="location-date">
-      <span>{{currentLocation.date | date : 'medium': null: translateSrvc.currentLang}} </span>
-      <span> - {{'belaqi-user-location-slider.current-location' | translate}}</span>
-    </div>
-    <div class="wheel">
-      <belaqi-wheel [index]="currentLocation.index"></belaqi-wheel>
-    </div>
-    <div class="chart">
-      <belaqi-chart [location]="currentLocation"></belaqi-chart>
-    </div>
-    <div>
-      <nearest-measuring-station-panel [location]="currentLocation" (onSelect)="selectPhenomenon($event)"></nearest-measuring-station-panel>
-    </div>
-  </ion-slide>
+<ion-slides pager #slider (ionSlideDidChange)="slideChanged()">
   <ion-slide *ngFor="let loc of belaqiLocations">
     <div class="location-label">
       {{loc.locationLabel}}
     </div>
     <div class="location-date">
       <span>{{loc.date | date : 'medium': null: translateSrvc.currentLang}} </span>
+      <span *ngIf="loc.type === 'current'"> - {{'belaqi-user-location-slider.current-location' | translate}}</span>
     </div>
     <div class="wheel">
       <belaqi-wheel [index]="loc.index"></belaqi-wheel>

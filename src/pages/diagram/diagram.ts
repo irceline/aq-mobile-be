@@ -5,7 +5,9 @@ import { ModalController, NavController } from 'ionic-angular';
 
 import { ModalLegendComponent } from '../../components/modal-legend/modal-legend';
 import { ModalTimespanEditorComponent } from '../../components/modal-timespan-editor/modal-timespan-editor';
-import { TimeseriesService } from '../../providers/timeseries/timeseries.service';
+import { LocatedTimeseriesService } from '../../providers/timeseries/located-timeseries';
+import { TimeseriesService } from '../../providers/timeseries/timeseries';
+import { UserTimeseriesService } from '../../providers/timeseries/user-timeseries';
 import { MapPage } from '../map/map';
 
 @Component({
@@ -28,15 +30,17 @@ export class DiagramPage {
   };
 
   constructor(
-    public timeseriesSrvc: TimeseriesService,
+    public tsSrvc: TimeseriesService,
+    public userTsSrvc: UserTimeseriesService,
+    public locatedTsSrvc: LocatedTimeseriesService,
     private modalCtrl: ModalController,
     private nav: NavController
   ) {
-    this.timeseriesSrvc.getTimespan().subscribe(timespan => this.timespan = timespan);
+    this.tsSrvc.getTimespan().subscribe(timespan => this.timespan = timespan);
   }
 
   public timespanChanged(timespan: Timespan) {
-    this.timeseriesSrvc.setTimespan(timespan);
+    this.tsSrvc.setTimespan(timespan);
     this.timespan = timespan;
   }
 

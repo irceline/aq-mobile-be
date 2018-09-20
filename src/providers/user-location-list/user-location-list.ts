@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Point } from 'geojson';
-import { Observable, Observer, ReplaySubject } from 'rxjs';
+import { forkJoin, Observable, Observer, ReplaySubject } from 'rxjs';
+
+import { NearestTimeseries, NearestTimeseriesProvider } from '../nearest-timeseries/nearest-timeseries';
 
 export interface UserLocation {
   id: number;
   point: Point;
   label: string;
+  nearestSeries: {
+    [key: string]: NearestTimeseries
+  }
 }
 
 const STORAGE_KEY = 'userlocation';
@@ -18,8 +23,13 @@ export class UserLocationListProvider {
 
   private userLocationsSubject: ReplaySubject<UserLocation[]> = new ReplaySubject(1);
 
+  private showCurrentLocationBeforeIndex: number = 0;
+
+  public phenomenonIDs = ['391', '8', '7', '5', '6001'];
+
   constructor(
-    protected storage: Storage
+    protected storage: Storage,
+    protected nearestTimeseries: NearestTimeseriesProvider
   ) {
     this.loadLocations().subscribe(res => {
       this.currentUserLocations = res;
@@ -28,12 +38,22 @@ export class UserLocationListProvider {
   }
 
   public addLocation(label: string, point: Point) {
-    this.currentUserLocations.push({
-      label,
-      point,
-      id: new Date().getTime()
-    });
-    this.storeLocations();
+    const lat = point.coordinates[1];
+    const lon = point.coordinates[0];
+    const obs = this.phenomenonIDs.map(id => this.nearestTimeseries.determineNextTimeseries(lat, lon, id));
+    forkJoin(obs).subscribe((resultList) => {
+      const location = {
+        label,
+        point,
+        id: new Date().getTime(),
+        nearestSeries: {}
+      } as UserLocation;
+      resultList.forEach((entry, idx) => {
+        location.nearestSeries[this.phenomenonIDs[idx]] = entry;
+      })
+      this.currentUserLocations.push(location);
+      this.storeLocations();
+    })
   }
 
   public hasLocation(label: string, point: Point): boolean {
@@ -55,6 +75,14 @@ export class UserLocationListProvider {
 
   public hasLocations(): boolean {
     return this.currentUserLocations && this.currentUserLocations.length > 0;
+  }
+
+  public showCurrentLocation(): boolean {
+    return this.showCurrentLocationBeforeIndex >= 0;
+  }
+
+  public getCurrentLocationIndex(): number {
+    return this.showCurrentLocationBeforeIndex;
   }
 
   public saveLocation(userLocation: UserLocation) {
