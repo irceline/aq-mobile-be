@@ -9,7 +9,8 @@
 	},
 	"belaqi-user-location-slider": {
 		"create-new-location": "Ajouter une nouvelle position",
-		"current-location": "Position actuelle"
+		"current-location": "Position actuelle",
+		"open-user-location": ""
 	},
 	"belaqi-wheel": {
 		"modelled-hint": "Modélisé pour cette position"
@@ -80,7 +81,6 @@
 		},
 		"header": "Introduction",
 		"next-step": "Suivant",
-		"prev-step": "Précédent",
 		"one": {
 			"header": "Voulez-vous changer les paramètres de langue?",
 			"option": {
@@ -90,6 +90,7 @@
 				"german": "Deutsch"
 			}
 		},
+		"prev-step": "Précédent",
 		"three": {
 			"addLocationToList": "Ajouter à la liste de positions",
 			"header": "Pour quelles localisations souhaitez-vous recevoir des notifications?",

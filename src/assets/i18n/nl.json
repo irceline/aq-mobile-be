@@ -9,7 +9,8 @@
 	},
 	"belaqi-user-location-slider": {
 		"create-new-location": "Maak een nieuwe locatie aan",
-		"current-location": "Huidige locatie"
+		"current-location": "Huidige locatie",
+		"open-user-location": ""
 	},
 	"belaqi-wheel": {
 		"modelled-hint": "Gemodelleerd waarde voor deze locatie"
@@ -80,7 +81,6 @@
 		},
 		"header": "Introductie",
 		"next-step": "Volgende",
-		"prev-step": "Vorige",
 		"one": {
 			"header": "Zou u graag de taalinstellingen wijzigen?",
 			"option": {
@@ -90,6 +90,7 @@
 				"german": "Deutsch"
 			}
 		},
+		"prev-step": "Vorige",
 		"three": {
 			"addLocationToList": "Toevoegen aan de lijst van locaties",
 			"header": "Voor welke locaties zou u graag meldingen en gepersonaliseerde data ontvangen in de app?",

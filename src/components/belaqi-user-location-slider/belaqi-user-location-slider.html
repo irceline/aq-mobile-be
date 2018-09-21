@@ -1,4 +1,4 @@
-<ion-slides pager #slider (ionSlideDidChange)="slideChanged()">
+<ion-slides pager #slider (ionSlideDidChange)="slideChanged()" (ionSlideWillChange)="slideWillChange()" [ngStyle]="{'height': slidesHeight}">
   <ion-slide *ngFor="let loc of belaqiLocations">
     <div class="location-label">
       {{loc.locationLabel}}
@@ -19,7 +19,10 @@
   </ion-slide>
   <ion-slide>
     <div class="create-new-location-slide">
-        <button ion-button outline (click)="createNewLocation()">{{'belaqi-user-location-slider.create-new-location' | translate}}</button>
+      <button ion-button outline (click)="createNewLocation()">{{'belaqi-user-location-slider.create-new-location' |
+        translate}}</button>
+      <button ion-button outline (click)="openUserLocation()">{{'belaqi-user-location-slider.open-user-location' |
+        translate}}</button>
     </div>
   </ion-slide>
 </ion-slides>

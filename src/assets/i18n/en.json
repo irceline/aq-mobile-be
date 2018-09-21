@@ -9,7 +9,8 @@
 	},
 	"belaqi-user-location-slider": {
 		"create-new-location": "Create new location",
-		"current-location": "Current location"
+		"current-location": "Current location",
+		"open-user-location": "Edit current locations"
 	},
 	"belaqi-wheel": {
 		"modelled-hint": "Modelled value for this location"
@@ -80,7 +81,6 @@
 		},
 		"header": "Introduction",
 		"next-step": "Next",
-		"prev-step": "Previous",
 		"one": {
 			"header": "Would you like to change the language setting?",
 			"option": {
@@ -90,6 +90,7 @@
 				"german": "Deutsch"
 			}
 		},
+		"prev-step": "Previous",
 		"three": {
 			"addLocationToList": "Add to the list of locations",
 			"header": "For which locations would you like to receive notifications and personalised data in the app?",

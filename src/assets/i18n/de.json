@@ -9,7 +9,8 @@
 	},
 	"belaqi-user-location-slider": {
 		"create-new-location": "Erstelle einen neuen Standort",
-		"current-location": "Aktuelle Position"
+		"current-location": "Aktuelle Position",
+		"open-user-location": "Editiere vorhandene Standorte"
 	},
 	"belaqi-wheel": {
 		"modelled-hint": "Modelliert für diesen Standort"
@@ -80,7 +81,6 @@
 		},
 		"header": "Einführung",
 		"next-step": "Nächste",
-		"prev-step": "Zurück",
 		"one": {
 			"header": "Wollen sie die Sprache ändern?",
 			"option": {
@@ -90,6 +90,7 @@
 				"german": "Deutsch"
 			}
 		},
+		"prev-step": "Zurück",
 		"three": {
 			"addLocationToList": "Füge zur Liste der Standorte",
 			"header": "Für welche Standorte wollen Sie Benachrichtigungen in der App erhalten?",

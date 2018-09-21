@@ -8,6 +8,7 @@ import { NearestTimeseries, NearestTimeseriesProvider } from '../../providers/ne
 import { LocatedTimeseriesService } from '../../providers/timeseries/located-timeseries';
 import { UserLocationListProvider } from '../../providers/user-location-list/user-location-list';
 import { ModalUserLocationCreationComponent } from '../modal-user-location-creation/modal-user-location-creation';
+import { ModalUserLocationListComponent } from '../modal-user-location-list/modal-user-location-list';
 
 export interface BelaqiLocation {
   index?: number;
@@ -36,6 +37,8 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
   public belaqiLocations: BelaqiLocation[] = [];
   public currentLocation: BelaqiLocation;
 
+  public slidesHeight: string;
+
   constructor(
     private belaqiIndexProvider: BelaqiIndexProvider,
     private userLocationProvider: UserLocationListProvider,
@@ -60,9 +63,19 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
     this.modalCtrl.create(ModalUserLocationCreationComponent).present();
   }
 
+  public openUserLocation() {
+    this.modalCtrl.create(ModalUserLocationListComponent).present();
+  }
+
   public slideChanged() {
     let currentIndex = this.slider.getActiveIndex();
+    const slide = this.slider._slides[currentIndex];
+    this.slidesHeight = slide.clientHeight + 'px';
     this.updateLocationSelection(currentIndex);
+  }
+
+  public slideWillChange() {
+    this.slidesHeight = 'auto';
   }
 
   private updateLocationSelection(idx: number) {
