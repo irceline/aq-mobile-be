@@ -80,6 +80,7 @@
 		},
 		"header": "Introduction",
 		"next-step": "Suivant",
+		"prev-step": "Précédent",
 		"one": {
 			"header": "Voulez-vous changer les paramètres de langue?",
 			"option": {

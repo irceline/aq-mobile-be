@@ -39,7 +39,7 @@
       <push-notification-subscriptions [hideHeader]="true"></push-notification-subscriptions>
       <ion-toolbar>
         <ion-buttons>
-          <button ion-button color="primary"  (click)="nextSlide()">{{'intro.next-step' | translate}}</button>
+          <button ion-button color="primary" (click)="prevSlide()"><< {{'intro.prev-step' | translate}}</button> <span style="vertical-align: -18%;">|</span> <button ion-button color="primary" (click)="nextSlide()">{{'intro.next-step' | translate}}  >></button>
         </ion-buttons>
       </ion-toolbar>
     </ion-slide>
@@ -49,7 +49,7 @@
       <user-location-creation></user-location-creation>
       <ion-toolbar>
         <ion-buttons>
-          <button ion-button color="primary" (click)="nextSlide()">{{'intro.next-step' | translate}}</button>
+          <button ion-button color="primary" (click)="prevSlide()"><< {{'intro.prev-step' | translate}}</button> <span style="vertical-align: -18%;">|</span> <button ion-button color="primary" (click)="nextSlide()">{{'intro.next-step' | translate}}  >></button>
         </ion-buttons>
       </ion-toolbar>
     </ion-slide>
