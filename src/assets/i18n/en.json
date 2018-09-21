@@ -209,7 +209,7 @@
 			"create-new-location": "Create new location",
 			"header": "User locations",
 			"show-location-list": "Show current locations",
-			"show-nearest-series-by-default": "Show next measurements in diagram"
+			"show-nearest-series-by-default": "Show nearest measurements in diagram"
 		}
 	},
 	"show-geometry": {
