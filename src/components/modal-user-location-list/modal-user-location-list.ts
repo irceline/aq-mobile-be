@@ -11,7 +11,9 @@ import { ModalUserLocationCreationComponent } from '../modal-user-location-creat
 })
 export class ModalUserLocationListComponent {
 
-  public userLocations: UserLocation[];
+  public locations: UserLocation[];
+
+  public reorder: boolean = false;
 
   public editing = {};
 
@@ -29,12 +31,26 @@ export class ModalUserLocationListComponent {
   }
 
   public dismiss() {
+    const idx = this.locations.findIndex(e => e.type === 'current');
+    this.userLocationProvider.setCurrentLocationIndex(idx);
+    this.locations.splice(idx, 1);
+    this.userLocationProvider.setUserLocations(this.locations);
     this.viewCtrl.dismiss();
   }
 
-  public remove(location: UserLocation) {
+  public removeLocation(location: UserLocation) {
     this.userLocationProvider.removeLocation(location);
     this.setLocations();
+  }
+
+  public reorderItems(indexes) {
+    let element = this.locations[indexes.from];
+    this.locations.splice(indexes.from, 1);
+    this.locations.splice(indexes.to, 0, element);
+  }
+
+  public editLocation(location: UserLocation) {
+    debugger;
   }
 
   public saveLocation(location: UserLocation) {
@@ -45,8 +61,12 @@ export class ModalUserLocationListComponent {
     this.modalCtrl.create(ModalUserLocationCreationComponent).present();
   }
 
+  public toggleReorder() {
+    this.reorder = !this.reorder;
+  }
+
   private setLocations() {
-    this.userLocationProvider.getUserLocations().subscribe(res => this.userLocations = res);
+    this.userLocationProvider.getAllLocations().subscribe(res => this.locations = res);
   }
 
 }

@@ -4,22 +4,23 @@ import { Geoposition } from '@ionic-native/geolocation';
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 import { Point } from 'geojson';
-import { forkJoin, Observable, Observer, ReplaySubject } from 'rxjs';
+import { forkJoin, Observable, Observer, ReplaySubject, from } from 'rxjs';
 
 import { LocateProvider } from '../locate/locate';
 import { NearestTimeseries, NearestTimeseriesProvider } from '../nearest-timeseries/nearest-timeseries';
 
 export interface UserLocation {
   id: number;
+  type: 'user' | 'current';
   point: Point;
   label: string;
-  type: 'user' | 'current';
   nearestSeries: {
     [key: string]: NearestTimeseries
   }
 }
 
-const STORAGE_KEY = 'userlocation';
+const STORAGE_USER_LOCATIONS_KEY = 'userlocation';
+const STORAGE_CURRENT_USERLOCATION_INDEX_KEY = 'current.userlocation.index';
 
 @Injectable()
 export class UserLocationListProvider {
@@ -43,6 +44,7 @@ export class UserLocationListProvider {
       this.currentUserLocations = res;
       this.userLocationsSubject.next(this.currentUserLocations);
     });
+    this.loadCurrentLocationIndex().subscribe(res => this.showCurrentLocationBeforeIndex = res);
   }
 
   public addUserLocation(label: string, point: Point) {
@@ -111,6 +113,11 @@ export class UserLocationListProvider {
     return this.userLocationsSubject.asObservable();
   }
 
+  public setUserLocations(locs: UserLocation[]) {
+    this.currentUserLocations = locs;
+    this.storeLocations();
+  }
+
   public getAllLocations(): Observable<UserLocation[]> {
     if (this.showCurrentLocation()) {
       return new Observable((observer: Observer<UserLocation[]>) => {
@@ -144,6 +151,10 @@ export class UserLocationListProvider {
     return this.showCurrentLocationBeforeIndex;
   }
 
+  public setCurrentLocationIndex(idx: number) {
+    this.showCurrentLocationBeforeIndex = idx;
+  }
+
   public saveLocation(userLocation: UserLocation) {
     const index = this.currentUserLocations.findIndex(res => res.id === userLocation.id);
     this.currentUserLocations[index] = userLocation;
@@ -152,12 +163,13 @@ export class UserLocationListProvider {
 
   private storeLocations() {
     this.userLocationsSubject.next(this.currentUserLocations)
-    this.storage.set(STORAGE_KEY, this.currentUserLocations);
+    this.storage.set(STORAGE_USER_LOCATIONS_KEY, this.currentUserLocations);
+    this.storage.set(STORAGE_CURRENT_USERLOCATION_INDEX_KEY, this.showCurrentLocationBeforeIndex);
   }
 
   private loadLocations(): Observable<UserLocation[]> {
     return new Observable<UserLocation[]>((observer: Observer<UserLocation[]>) => {
-      this.storage.get(STORAGE_KEY).then(res => {
+      this.storage.get(STORAGE_USER_LOCATIONS_KEY).then(res => {
         if (res instanceof Array) {
           observer.next(res);
         } else {
@@ -166,6 +178,10 @@ export class UserLocationListProvider {
         observer.complete()
       })
     });
+  }
+
+  private loadCurrentLocationIndex(): Observable<number> {
+    return from(this.storage.get(STORAGE_CURRENT_USERLOCATION_INDEX_KEY));
   }
 
 }

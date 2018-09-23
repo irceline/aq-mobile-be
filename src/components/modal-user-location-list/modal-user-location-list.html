@@ -4,6 +4,9 @@
       {{'user-location-list.header' | translate}}
     </ion-title>
     <ion-buttons start>
+      <button ion-button (click)="toggleReorder()">
+        <ion-icon name="list"></ion-icon>
+      </button>
       <button ion-button (click)="dismiss()">
         <span ion-text showWhen="ios">{{'controls.cancel' | translate}}</span>
         <ion-icon name="md-close" showWhen="android, windows"></ion-icon>
@@ -12,29 +15,37 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="cards-bg">
-  <ion-card *ngFor="let location of userLocations; let i = index;">
-    <div style="height: 200px;">
-      <n52-geometry-map-viewer [geometry]="location.point" [mapOptions]="mapOptions"></n52-geometry-map-viewer>
-    </div>
-    <ion-item *ngIf="!editing[i]" (click)="editing[i] = true;">
-      {{location.label}}
-      <button ion-button clear item-end>
-        {{'user-location-list.edit' | translate}}
-      </button>
+  <ion-list [reorder]="reorder" class="location-list" (ionItemReorder)="reorderItems($event)">
+    <ion-item *ngFor="let location of locations; let i = index;">
+
+      <div *ngIf="location.type === 'user'">
+        <div class="header">
+          {{location.label}}
+        </div>
+        <div class="map" [hidden]="reorder">
+          <ion-fab bottom right class="button-edit" (click)="editLocation(location)">
+            <button ion-fab mini>
+              <ion-icon name="build"></ion-icon>
+            </button>
+          </ion-fab>
+          <ion-fab bottom right class="button-delete" (click)="removeLocation(location)">
+            <button ion-fab mini>
+              <ion-icon name="trash"></ion-icon>
+            </button>
+          </ion-fab>
+          <extended-geometry-map-viewer [mapId]="location.label" [geometry]="location.point" [mapOptions]="mapOptions"></extended-geometry-map-viewer>
+        </div>
+      </div>
+
+      <div *ngIf="location.type === 'current'">
+        <!-- <ion-list reorder="false"> -->
+          <!-- <ion-item> -->
+            <!-- <ion-label>Daenerys Targaryen</ion-label> -->
+            <ion-checkbox color="dark" checked="true"></ion-checkbox>
+          <!-- </ion-item> -->
+        <!-- </ion-list> -->
+      </div>
+
     </ion-item>
-    <ion-item *ngIf="editing[i]">
-      <ion-label stacked>{{'user-location-list.edit-the-label' | translate}}</ion-label>
-      <ion-input type="text" [(ngModel)]="location.label" clearInput></ion-input>
-      <button ion-button clear item-right (click)="saveLocation(location); editing[i] = false">confirm</button>
-    </ion-item>
-    <ion-item>
-      <button ion-button icon-start clear item-end (click)="remove(location)">
-        <ion-icon name="trash"></ion-icon>
-        {{'user-location-list.remove' | translate}}
-      </button>
-    </ion-item>
-  </ion-card>
-  <ion-card class="create-new-location">
-    <button ion-button outline (click)="createNewLocation()">{{'user-location-list.create-new-location' | translate}}</button>
-  </ion-card>
+  </ion-list>
 </ion-content>
