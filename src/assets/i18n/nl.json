@@ -207,6 +207,7 @@
 		"show-introduction": "Toon introductie",
 		"user-locations": {
 			"create-new-location": "Maak een nieuwe locatie aan",
+			"edit-location": "",
 			"header": "Gebruikerslocaties",
 			"show-location-list": "Toon huidige locaties",
 			"show-nearest-series-by-default": ""
@@ -229,11 +230,7 @@
 		"zeroBasedYAxe": "tijdsreeks nullgebaseerd"
 	},
 	"user-location-list": {
-		"create-new-location": "Maak een nieuwe locatie aan",
-		"edit": "bewerk",
-		"edit-the-label": "bewerk de lijst van locaties",
-		"header": "Lijs van de locaties",
-		"remove": "verwijder"
+		"header": "Lijs van de locaties"
 	},
 	"user-location": {
 		"creation": {

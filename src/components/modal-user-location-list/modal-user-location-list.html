@@ -16,36 +16,37 @@
 </ion-header>
 <ion-content class="cards-bg">
   <ion-list [reorder]="reorder" class="location-list" (ionItemReorder)="reorderItems($event)">
-    <ion-item *ngFor="let location of locations; let i = index;">
+    <div *ngFor="let location of locations; let i = index;">
 
-      <div *ngIf="location.type === 'user'">
-        <div class="header">
-          {{location.label}}
+      <ion-item *ngIf="location.type === 'user'">
+        <div>
+          <div class="header">
+            {{location.label}}
+          </div>
+          <div class="map" [hidden]="reorder">
+            <ion-fab bottom right class="button-edit" (click)="editLocation(location)">
+              <button ion-fab mini>
+                <ion-icon name="build"></ion-icon>
+              </button>
+            </ion-fab>
+            <ion-fab bottom right class="button-delete" (click)="removeLocation(location)">
+              <button ion-fab mini>
+                <ion-icon name="trash"></ion-icon>
+              </button>
+            </ion-fab>
+            <extended-geometry-map-viewer [mapId]="location.label" [geometry]="location.point" [mapOptions]="mapOptions"></extended-geometry-map-viewer>
+          </div>
         </div>
-        <div class="map" [hidden]="reorder">
-          <ion-fab bottom right class="button-edit" (click)="editLocation(location)">
-            <button ion-fab mini>
-              <ion-icon name="build"></ion-icon>
-            </button>
-          </ion-fab>
-          <ion-fab bottom right class="button-delete" (click)="removeLocation(location)">
-            <button ion-fab mini>
-              <ion-icon name="trash"></ion-icon>
-            </button>
-          </ion-fab>
-          <extended-geometry-map-viewer [mapId]="location.label" [geometry]="location.point" [mapOptions]="mapOptions"></extended-geometry-map-viewer>
-        </div>
-      </div>
+      </ion-item>
 
-      <div *ngIf="location.type === 'current'">
-        <!-- <ion-list reorder="false"> -->
-          <!-- <ion-item> -->
-            <!-- <ion-label>Daenerys Targaryen</ion-label> -->
-            <ion-checkbox color="dark" checked="true"></ion-checkbox>
-          <!-- </ion-item> -->
-        <!-- </ion-list> -->
-      </div>
+      <ion-item *ngIf="location.type === 'current'">
+        <ion-label>
+          <h2>Current location</h2>
+          <p>The location where you are currently...</p>
+        </ion-label>
+        <ion-toggle [(ngModel)]="showCurrentLocation"></ion-toggle>
+      </ion-item>
 
-    </ion-item>
+    </div>
   </ion-list>
 </ion-content>

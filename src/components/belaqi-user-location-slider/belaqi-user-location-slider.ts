@@ -93,27 +93,29 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
 
   private loadBelaqis() {
     this.ircelineSettings.getSettings(false).subscribe(ircelineSettings => {
-      this.userLocationProvider.getAllLocations().subscribe(
-        locations => {
+      this.userLocationProvider.getLocationSettings().subscribe(
+        settings => {
           this.belaqiLocations = [];
-          locations.forEach((loc, i) => {
-            const lat = loc.point.coordinates[1]
-            const lon = loc.point.coordinates[0];
-            this.belaqiLocations[i] = {
-              locationLabel: loc.label,
-              date: ircelineSettings.lastupdate,
-              type: loc.type,
-              latitude: lat,
-              longitude: lon,
-              nearestSeries: loc.nearestSeries
-            }
-            this.belaqiIndexProvider.getValue(lat, lon).subscribe(
-              res => {
-                this.belaqiLocations[i].index = res;
-              },
-              error => this.handleError(lon, lat, error))
-          })
-          this.updateLocationSelection(0);
+          this.userLocationProvider.getAllLocations().subscribe(locations => {
+            locations.forEach((loc, i) => {
+              const lat = loc.point.coordinates[1]
+              const lon = loc.point.coordinates[0];
+              this.belaqiLocations[i] = {
+                locationLabel: loc.label,
+                date: ircelineSettings.lastupdate,
+                type: loc.type,
+                latitude: lat,
+                longitude: lon,
+                nearestSeries: loc.nearestSeries
+              }
+              this.belaqiIndexProvider.getValue(lat, lon).subscribe(
+                res => {
+                  this.belaqiLocations[i].index = res;
+                },
+                error => this.handleError(lon, lat, error))
+            })
+            this.updateLocationSelection(0);
+          });
         }
       );
     });

@@ -27,6 +27,7 @@ import { MobilePhenomenonSelectorComponent } from './mobile-phenomenon-selector/
 import { MobileTimeseriesEntryComponent } from './mobile-timeseries-entry/mobile-timeseries-entry';
 import { MobileTimespanButtonComponent } from './mobile-timespan-button/mobile-timespan-button';
 import { MobileTimespanShiftSelectorComponent } from './mobile-timespan-shift-selector/mobile-timespan-shift-selector';
+import { ModalEditUserLocationComponent } from './modal-edit-user-location/modal-edit-user-location';
 import { ModalGeometryViewerComponent } from './modal-geometry-viewer/modal-geometry-viewer';
 import { ModalLegendComponent } from './modal-legend/modal-legend';
 import { ModalOptionsEditorComponent } from './modal-options-editor/modal-options-editor';
@@ -68,6 +69,7 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		MobileTimeseriesEntryComponent,
 		MobileTimespanButtonComponent,
 		MobileTimespanShiftSelectorComponent,
+		ModalEditUserLocationComponent,
 		ModalGeometryViewerComponent,
 		ModalLegendComponent,
 		ModalOptionsEditorComponent,
@@ -116,6 +118,7 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		MobileTimeseriesEntryComponent,
 		MobileTimespanButtonComponent,
 		MobileTimespanShiftSelectorComponent,
+		ModalEditUserLocationComponent,
 		ModalGeometryViewerComponent,
 		ModalLegendComponent,
 		ModalOptionsEditorComponent,
@@ -138,6 +141,7 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 	],
 	entryComponents: [
 		LocatedValueNotificationComponent,
+		ModalEditUserLocationComponent,
 		ModalGeometryViewerComponent,
 		ModalLegendComponent,
 		ModalOptionsEditorComponent,

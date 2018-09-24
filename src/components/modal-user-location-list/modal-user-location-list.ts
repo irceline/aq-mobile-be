@@ -3,6 +3,7 @@ import { ModalController, ViewController } from 'ionic-angular';
 import { MapOptions } from 'leaflet';
 
 import { UserLocation, UserLocationListProvider } from '../../providers/user-location-list/user-location-list';
+import { ModalEditUserLocationComponent } from '../modal-edit-user-location/modal-edit-user-location';
 import { ModalUserLocationCreationComponent } from '../modal-user-location-creation/modal-user-location-creation';
 
 @Component({
@@ -12,6 +13,8 @@ import { ModalUserLocationCreationComponent } from '../modal-user-location-creat
 export class ModalUserLocationListComponent {
 
   public locations: UserLocation[];
+
+  public showCurrentLocation: boolean;
 
   public reorder: boolean = false;
 
@@ -33,6 +36,7 @@ export class ModalUserLocationListComponent {
   public dismiss() {
     const idx = this.locations.findIndex(e => e.type === 'current');
     this.userLocationProvider.setCurrentLocationIndex(idx);
+    this.userLocationProvider.setShowCurrentLocation(this.showCurrentLocation);
     this.locations.splice(idx, 1);
     this.userLocationProvider.setUserLocations(this.locations);
     this.viewCtrl.dismiss();
@@ -50,7 +54,9 @@ export class ModalUserLocationListComponent {
   }
 
   public editLocation(location: UserLocation) {
-    debugger;
+    const modal = this.modalCtrl.create(ModalEditUserLocationComponent, { userlocation: location });
+    modal.onDidDismiss(location => this.userLocationProvider.saveLocation(location));
+    modal.present();
   }
 
   public saveLocation(location: UserLocation) {
@@ -66,7 +72,8 @@ export class ModalUserLocationListComponent {
   }
 
   private setLocations() {
-    this.userLocationProvider.getAllLocations().subscribe(res => this.locations = res);
+    this.userLocationProvider.getAllLocationsForEdit().subscribe(res => this.locations = res);
+    this.showCurrentLocation = this.userLocationProvider.isShowCurrentLocation();
   }
 
 }

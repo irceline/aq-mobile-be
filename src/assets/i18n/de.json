@@ -207,6 +207,7 @@
 		"show-introduction": "Öffne Einführung",
 		"user-locations": {
 			"create-new-location": "Erstelle neuen Standort",
+			"edit-location": "Editiere Standort",
 			"header": "Nutzer Standorte",
 			"show-location-list": "Zeige vorhandene Standorte",
 			"show-nearest-series-by-default": "Zeige nächste Messungen im Diagram"
@@ -229,11 +230,7 @@
 		"zeroBasedYAxe": "Zeitreihe null-basiert"
 	},
 	"user-location-list": {
-		"create-new-location": "Erstelle einen neuen Standort",
-		"edit": "Ändern",
-		"edit-the-label": "Ändere die Standortbezeichnung",
-		"header": "Standort liste",
-		"remove": "Entfernen"
+		"header": "Standort liste"
 	},
 	"user-location": {
 		"creation": {

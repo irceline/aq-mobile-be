@@ -207,6 +207,7 @@
 		"show-introduction": "Show introduction",
 		"user-locations": {
 			"create-new-location": "Create new location",
+			"edit-location": "Edit location",
 			"header": "User locations",
 			"show-location-list": "Show current locations",
 			"show-nearest-series-by-default": "Show next measurements in diagram"
@@ -229,11 +230,7 @@
 		"zeroBasedYAxe": "Timeseries zero based"
 	},
 	"user-location-list": {
-		"create-new-location": "Create new location",
-		"edit": "Edit",
-		"edit-the-label": "Edit the location label",
-		"header": "Location list",
-		"remove": "Remove"
+		"header": "Location list"
 	},
 	"user-location": {
 		"creation": {

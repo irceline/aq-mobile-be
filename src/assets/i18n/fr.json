@@ -207,6 +207,7 @@
 		"show-introduction": "Voir l'introduction",
 		"user-locations": {
 			"create-new-location": "Ajouter une nouvelle position",
+			"edit-location": "",
 			"header": "Positions",
 			"show-location-list": "Voir les positions",
 			"show-nearest-series-by-default": ""
@@ -229,11 +230,7 @@
 		"zeroBasedYAxe": "Série basée à zéro"
 	},
 	"user-location-list": {
-		"create-new-location": "Ajouter une nouvelle position",
-		"edit": "Modifier",
-		"edit-the-label": "Renommer la position",
-		"header": "Liste des positions",
-		"remove": "Effacer"
+		"header": "Liste des positions"
 	},
 	"user-location": {
 		"creation": {
