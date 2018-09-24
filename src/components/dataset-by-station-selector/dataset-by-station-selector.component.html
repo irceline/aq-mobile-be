@@ -9,10 +9,10 @@
     <ion-item *ngIf="timeseries.parameters.phenomenon.id === phenomenonId">
       <ion-label>
         <h2>{{timeseries.parameters.phenomenon.label}}</h2>
-        <h3>
+        <!-- <h3>
           <span>{{timeseries.parameters.procedure.label}}</span>
           <span *ngIf="timeseries.parameters.category.label && timeseries.parameters.category.label != timeseries.parameters.phenomenon.label">({{timeseries.parameters.category.label}})</span>
-        </h3>
+        </h3> -->
         <p *ngIf="timeseries.lastValue">
           <span>{{timeseries.lastValue.value}}</span>
           <span>{{timeseries.uom}}</span>
@@ -33,10 +33,10 @@
     <ion-item *ngIf="timeseries.parameters.phenomenon.id !== phenomenonId">
       <ion-label>
         <h2>{{timeseries.parameters.phenomenon.label}}</h2>
-        <h3>
+        <!-- <h3>
           <span>{{timeseries.parameters.procedure.label}}</span>
           <span *ngIf="timeseries.parameters.category.label && timeseries.parameters.category.label != timeseries.parameters.phenomenon.label">({{timeseries.parameters.category.label}})</span>
-        </h3>
+        </h3> -->
         <p *ngIf="timeseries.lastValue">
           <span>{{timeseries.lastValue.value}}</span>
           <span>{{timeseries.uom}}</span>
