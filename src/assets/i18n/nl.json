@@ -203,11 +203,11 @@
 		},
 		"common": "Algemeen",
 		"header": "Instellingen",
-		"select-language": "kies een taal",
+		"select-language": "Kies een taal",
 		"show-introduction": "Toon introductie",
 		"user-locations": {
 			"create-new-location": "Maak een nieuwe locatie aan",
-			"edit-location": "",
+			"edit-location": "Bewerk locatie",
 			"header": "Gebruikerslocaties",
 			"show-location-list": "Toon huidige locaties",
 			"show-nearest-series-by-default": "Toon de dichtstbijzijnde metingen in het diagram"

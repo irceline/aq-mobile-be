@@ -207,7 +207,7 @@
 		"show-introduction": "Voir l'introduction",
 		"user-locations": {
 			"create-new-location": "Ajouter une nouvelle position",
-			"edit-location": "",
+			"edit-location": "Modifier position",
 			"header": "Positions",
 			"show-location-list": "Voir les positions",
 			"show-nearest-series-by-default": "Montrer les mesures les plus proches dans le diagramme"
