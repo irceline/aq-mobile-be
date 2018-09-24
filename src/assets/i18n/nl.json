@@ -10,7 +10,7 @@
 	"belaqi-user-location-slider": {
 		"create-new-location": "Maak een nieuwe locatie aan",
 		"current-location": "Huidige locatie",
-		"open-user-location": ""
+		"open-user-location": "Bewerk de huidige locaties"
 	},
 	"belaqi-wheel": {
 		"modelled-hint": "Gemodelleerd waarde voor deze locatie"
@@ -113,7 +113,7 @@
 			"placeholder": "Zoek locatie"
 		},
 		"header": "Kaart",
-		"interpolated-map": "",
+		"interpolated-map": "Geïnterpoleerde kaart",
 		"show-in-diagram": "toon {{value}} tijdsreeks op een diagram",
 		"time": {
 			"current": "actueel",
@@ -133,7 +133,7 @@
 		}
 	},
 	"nearest-series-legend-slider": {
-		"show-nearest-series": ""
+		"show-nearest-series": "Toon dichtstbijzijnde metingen"
 	},
 	"network": {
 		"geolocationDisabled": "De geolocatie is uitgeschakeld",
@@ -210,7 +210,7 @@
 			"edit-location": "",
 			"header": "Gebruikerslocaties",
 			"show-location-list": "Toon huidige locaties",
-			"show-nearest-series-by-default": ""
+			"show-nearest-series-by-default": "Toon de dichtstbijzijnde metingen in het diagram"
 		}
 	},
 	"show-geometry": {

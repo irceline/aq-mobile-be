@@ -10,7 +10,7 @@
 	"belaqi-user-location-slider": {
 		"create-new-location": "Ajouter une nouvelle position",
 		"current-location": "Position actuelle",
-		"open-user-location": ""
+		"open-user-location": "Modifier les positions actuels"
 	},
 	"belaqi-wheel": {
 		"modelled-hint": "Modélisé pour cette position"
@@ -113,7 +113,7 @@
 			"placeholder": "Recherche la localisation ..."
 		},
 		"header": "Carte",
-		"interpolated-map": "",
+		"interpolated-map": "Carte interpolée",
 		"show-in-diagram": "Afficher la série {{value}} dans le diagramme",
 		"time": {
 			"current": "Actuel",
@@ -133,7 +133,7 @@
 		}
 	},
 	"nearest-series-legend-slider": {
-		"show-nearest-series": ""
+		"show-nearest-series": "Afficher les mesures les plus proches"
 	},
 	"network": {
 		"geolocationDisabled": "La géolocalisation est désactivée",
@@ -210,7 +210,7 @@
 			"edit-location": "",
 			"header": "Positions",
 			"show-location-list": "Voir les positions",
-			"show-nearest-series-by-default": ""
+			"show-nearest-series-by-default": "Montrer les mesures les plus proches dans le diagramme"
 		}
 	},
 	"show-geometry": {
