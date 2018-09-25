@@ -182,6 +182,12 @@
 			"sensitive": "Begrenzen Sie körperliche Anstrengung. Konsultieren Sie Ihren Arzt über angemessenee Medikamente."
 		}
 	},
+	"personal-alerts": {
+		"background-service": {
+			"hint": "Überwacht die konfigurierten Standorte",
+			"title": "App läuft im Hintergrund"
+		}
+	},
 	"phenomenon-selector": {
 		"header": "Wähle ein Phänomen aus",
 		"hide-some-phenomenons": "Verstecke Phänomene",

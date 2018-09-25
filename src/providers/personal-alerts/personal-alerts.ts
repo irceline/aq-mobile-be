@@ -8,6 +8,7 @@ import {
 } from '@ionic-native/background-geolocation';
 import { BackgroundMode } from '@ionic-native/background-mode';
 import { ILocalNotification, LocalNotifications } from '@ionic-native/local-notifications';
+import { TranslateService } from '@ngx-translate/core';
 import { Platform } from 'ionic-angular';
 import { forkJoin, Observable, Observer } from 'rxjs';
 
@@ -19,11 +20,12 @@ const DEFAULT_LOCAL_ALERT_UPDATE_IN_MINUTES = 60;
 const DEFAULT_LOCAL_ALERT_UPDATE_LEVEL = 5;
 const DEFAULT_LOCAL_ALERT_UPDATE_SENSITIVE = false;
 
+const MINUTE_IN_MILLIS = 60000;
+
 const LOCALSTORAGE_INDEX_ALERT_ACTIVE = 'personal.alert.active';
 const LOCALSTORAGE_INDEX_ALERT_PERIOD = 'personal.alert.period';
 const LOCALSTORAGE_INDEX_ALERT_LEVEL = 'personal.alert.level';
 const LOCALSTORAGE_INDEX_ALERT_SENSITIVE = 'personal.alert.sensitive';
-
 
 /**
  * Problem with Android 8:
@@ -44,7 +46,8 @@ export class PersonalAlertsProvider {
     private userLocations: UserLocationListProvider,
     private belaqiProvider: BelaqiIndexProvider,
     private platform: Platform,
-    private geosearch: GeoSearch
+    private geosearch: GeoSearch,
+    private translateSrvc: TranslateService
   ) { }
 
   public init() {
@@ -76,7 +79,7 @@ export class PersonalAlertsProvider {
       this.backgroundMode.on('activate').subscribe(res => {
         // this.backgroundMode.disableWebViewOptimizations();
         // this.localNotifications.schedule({ text: 'Start BackgroundMode - min: ' + this.getPeriod() + ', level: ' + this.getLevel() });
-        this.interval = setInterval(this.runAlertTask, this.getPeriod() * 60000);
+        this.interval = setInterval(this.runAlertTask, this.getPeriod() * MINUTE_IN_MILLIS);
       });
 
       this.backgroundMode.on('deactivate').subscribe(res => {
@@ -84,16 +87,20 @@ export class PersonalAlertsProvider {
         this.interval = null;
       });
 
-      // this.backgroundMode.setDefaults({
-      //   silent: false,
-      //   text: '',
-      //   title: 'The app is active in the background.',
-      //   icon: 'fcm_push_icon'
-      // });
+      this.translateSrvc.onLangChange.subscribe(res => this.setBackgroundModeInformations());
+      if (this.translateSrvc.currentLang) { this.setBackgroundModeInformations() };
 
       this.backgroundMode.enable();
     });
 
+  }
+
+  private setBackgroundModeInformations() {
+    this.backgroundMode.setDefaults({
+      silent: false,
+      text: this.translateSrvc.instant('personal-alerts.background-service.hint'),
+      title: this.translateSrvc.instant('personal-alerts.background-service.title')
+    });
   }
 
   public deactivate() {
@@ -130,6 +137,7 @@ export class PersonalAlertsProvider {
   }
 
   runAlertTask = () => {
+    // this.localNotifications.schedule({ text: 'Starting task ...' });
     const request = [];
     request.push(this.doCurrentLocationCheck());
     request.push(this.doUserLocationsCheck());
@@ -166,9 +174,6 @@ export class PersonalAlertsProvider {
           .subscribe((location: BackgroundGeolocationResponse) => {
             // this.localNotifications.schedule({ text: 'geolocation: ' + location.latitude + ' ' + location.longitude, id: 500 });
             if (location) {
-              // TODO remove after tests
-              location.latitude = 50.863892;
-              location.longitude = 4.6337528;
               forkJoin(
                 this.belaqiProvider.getValue(location.latitude, location.longitude),
                 this.geosearch.reverse({ type: 'Point', coordinates: [location.latitude, location.longitude] }, {})

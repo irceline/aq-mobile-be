@@ -182,6 +182,12 @@
 			"sensitive": "Beperk lichamelijke inspanning. Overleg met u arts over aangepaste medicatie."
 		}
 	},
+	"personal-alerts": {
+		"background-service": {
+			"hint": "",
+			"title": ""
+		}
+	},
 	"phenomenon-selector": {
 		"header": "Kies een polluent",
 		"hide-some-phenomenons": "verberg polluenten",

@@ -182,6 +182,12 @@
 			"sensitive": "Limitez les exercices physiques. Consultez votre médecin au sujet d'une éventuelle adaptation de vos médicaments. "
 		}
 	},
+	"personal-alerts": {
+		"background-service": {
+			"hint": "",
+			"title": ""
+		}
+	},
 	"phenomenon-selector": {
 		"header": "Sélectionnez un polluant",
 		"hide-some-phenomenons": "Masquer les polluants",

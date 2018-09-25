@@ -182,6 +182,12 @@
 			"sensitive": "Limit physical exertion. Consult your doctor about appropriate changes to medication you might be taking."
 		}
 	},
+	"personal-alerts": {
+		"background-service": {
+			"hint": "Monitors the configured locations",
+			"title": "App is running in background"
+		}
+	},
 	"phenomenon-selector": {
 		"header": "Choose a pollutant",
 		"hide-some-phenomenons": "Hide pollutants",
