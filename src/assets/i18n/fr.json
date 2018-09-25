@@ -184,8 +184,8 @@
 	},
 	"personal-alerts": {
 		"background-service": {
-			"hint": "",
-			"title": ""
+			"hint": "Surveille les positions configurés",
+			"title": "L'application s'exécute en arrière-plan"
 		}
 	},
 	"phenomenon-selector": {

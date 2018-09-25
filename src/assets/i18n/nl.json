@@ -184,8 +184,8 @@
 	},
 	"personal-alerts": {
 		"background-service": {
-			"hint": "",
-			"title": ""
+			"hint": "Monitor de geconfigureerde locaties",
+			"title": "App blijven lopen op de achtergrond"
 		}
 	},
 	"phenomenon-selector": {
