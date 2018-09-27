@@ -301,7 +301,7 @@ export class MapPage {
         format: 'image/png',
         opacity: 0.7,
         boundary: geojson,
-        useBoundaryGreaterAsZoom: 9
+        useBoundaryGreaterAsZoom: 12
       }
       if (timeParam) { layerOptions.time = timeParam };
       this.overlayMaps.set(layerId + wmsUrl + timeParam, {
