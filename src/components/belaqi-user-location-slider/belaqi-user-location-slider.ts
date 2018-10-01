@@ -22,6 +22,12 @@ export interface BelaqiLocation {
   }
 }
 
+export interface HeaderContent {
+  label: string;
+  date: Date;
+  current: boolean;
+}
+
 @Component({
   selector: 'belaqi-user-location-slider',
   templateUrl: 'belaqi-user-location-slider.html'
@@ -33,6 +39,9 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
 
   @Output()
   public phenomenonSelected: EventEmitter<string> = new EventEmitter();
+
+  @Output()
+  public headerContent: EventEmitter<HeaderContent> = new EventEmitter();
 
   public belaqiLocations: BelaqiLocation[] = [];
   public currentLocation: BelaqiLocation;
@@ -80,6 +89,11 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
 
   private updateLocationSelection(idx: number) {
     if (idx <= this.belaqiLocations.length - 1) {
+      this.headerContent.emit({
+        label: this.belaqiLocations[idx].locationLabel,
+        date: this.belaqiLocations[idx].date,
+        current: this.belaqiLocations[idx].type === 'current'
+      })
       this.locatedTimeseriesProvider.setSelectedIndex(idx);
       this.locatedTimeseriesProvider.removeAllDatasets();
       for (const key in this.belaqiLocations[idx].nearestSeries) {
@@ -88,6 +102,8 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
           this.locatedTimeseriesProvider.addDataset(element.seriesId);
         }
       }
+    } else {
+      this.headerContent.emit(null);
     }
   }
 

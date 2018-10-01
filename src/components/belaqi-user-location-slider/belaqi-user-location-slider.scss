@@ -2,20 +2,12 @@ belaqi-user-location-slider {
   .slide-zoom {
     height: 100%;
     padding-bottom: 25px;
-    .location-label {
-      font-size: 1.2em;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
-      padding: 10px;
-    }
-    .location-date {
-      font-size: 0.7em;
-    }
+
     .wheel {
       height: 300px;
     }
   }
+
   .create-new-location-slide {
     padding: 20px 10px;
   }

@@ -3,7 +3,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="cards-bg">
+<ion-content class="cards-bg" #content>
   <ion-card>
     <network-panel></network-panel>
   </ion-card>
@@ -17,8 +17,22 @@
     <air-quality-location-panel></air-quality-location-panel>
   </ion-card> -->
 
-  <ion-card *ngIf="locationCount > 0 || locationEnabled">
-    <belaqi-user-location-slider (phenomenonSelected)="navigateToMap($event)"></belaqi-user-location-slider>
+  <ion-card *ngIf="locationCount > 0 || locationEnabled" class="slider-card">
+    <ion-list>
+      <ion-item [ngClass]="{'ion-affix': isSticky}" ion-affix [content]="content" *ngIf="sliderHeaderContent"
+        (onSticky)="handleOnSticky($event)">
+        <div class="location-label">
+          {{sliderHeaderContent.label}}
+        </div>
+        <div class="location-date">
+          <span>{{sliderHeaderContent.date | date : 'medium': null: translateSrvc.currentLang}} </span>
+          <span *ngIf="sliderHeaderContent.current"> - {{'belaqi-user-location-slider.current-location' | translate}}</span>
+        </div>
+      </ion-item>
+      <ion-item>
+        <belaqi-user-location-slider (phenomenonSelected)="navigateToMap($event)" (headerContent)="setHeaderContent($event)"></belaqi-user-location-slider>
+      </ion-item>
+    </ion-list>
   </ion-card>
 
   <!-- <ion-card class="index-card">

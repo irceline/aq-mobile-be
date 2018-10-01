@@ -25,6 +25,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { IonAffixModule } from 'ion-affix';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { ComponentsModule } from '../components/components.module';
@@ -84,6 +85,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       scrollAssist: false
     }),
     IonicStorageModule.forRoot(),
+    IonAffixModule,
     ComponentsModule,
     SettingsModule,
     DiagramModule,
