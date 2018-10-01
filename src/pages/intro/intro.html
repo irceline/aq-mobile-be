@@ -59,6 +59,8 @@
       <customize-personal-alerts [showHeader]="false"></customize-personal-alerts>
       <ion-toolbar>
         <ion-buttons>
+          <button ion-button color="primary" (click)="prevSlide()"><< {{'intro.prev-step' | translate}}</button><br />
+          <br />
           <button ion-button color="primary" (click)="closeSlides()">{{'intro.close-introduction' | translate}}</button>
         </ion-buttons>
       </ion-toolbar>
