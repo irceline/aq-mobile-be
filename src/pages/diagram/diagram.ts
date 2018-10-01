@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Timespan } from '@helgoland/core';
+import { DefinedTimespan, DefinedTimespanService, Timespan } from '@helgoland/core';
 import { D3PlotOptions } from '@helgoland/d3';
 import { ModalController, NavController } from 'ionic-angular';
 
@@ -22,7 +22,7 @@ export class DiagramPage {
 
   public selectedDatasetIds: string[] = [];
 
-  public timespan = new Timespan(new Date().getTime() - 100000000, new Date().getTime());
+  public timespan: Timespan;
 
   public diagramOptions: D3PlotOptions = {
     hoverable: false,
@@ -33,10 +33,11 @@ export class DiagramPage {
     public tsSrvc: TimeseriesService,
     public userTsSrvc: UserTimeseriesService,
     public locatedTsSrvc: LocatedTimeseriesService,
+    private defTimespanSrvc: DefinedTimespanService,
     private modalCtrl: ModalController,
     private nav: NavController
   ) {
-    this.tsSrvc.getTimespan().subscribe(timespan => this.timespan = timespan);
+    this.timespan = this.defTimespanSrvc.getInterval(DefinedTimespan.TODAY_YESTERDAY);
   }
 
   public timespanChanged(timespan: Timespan) {
