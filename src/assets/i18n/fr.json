@@ -99,7 +99,7 @@
 			"showLocationList": "Voir les localisations"
 		},
 		"two": {
-			"header": "De quelle agence environnementale souhaitez-vous recevoir les messages?"
+			"header": "our quelle région souhaitez-vous recevoir des notifications officielles?"
 		}
 	},
 	"legend": {
@@ -194,10 +194,10 @@
 		"list-all-phenomenons": "Liste des polluants"
 	},
 	"push-notification-subscription": {
-		"brussels": "Brussels Environment - Nederlands/Français",
-		"flanders": "Vlaamse Milieumaatschappij (VMM) - Nederlands",
+		"brussels": "Bruxelles - Brussels Environment - NL/FR",
+		"flanders": "Flandre - Vlaamse Milieumaatschappij (VMM) - NL",
 		"header": "Notifications",
-		"wallonia": "Agence wallonne de l’air et du climat (AwAC) - Français"
+		"wallonia": "Wallonie - Agence wallonne de l’air et du climat (AwAC) - FR"
 	},
 	"refresh-button": {
 		"message": "Actualiser"

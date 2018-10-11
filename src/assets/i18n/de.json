@@ -99,7 +99,7 @@
 			"showLocationList": "Zeige vorhandene Standorte"
 		},
 		"two": {
-			"header": "Von welchen Umweltagenturen wollen Sie Benachrichtigungen erhalten?"
+			"header": "Für welche Region möchten Sie offizielle Benachrichtigungen erhalten?"
 		}
 	},
 	"legend": {
@@ -194,10 +194,10 @@
 		"list-all-phenomenons": "Zeige alle Phänomene"
 	},
 	"push-notification-subscription": {
-		"brussels": "Brussels Environment - Dutch and French only",
-		"flanders": "Vlaamse Milieumaatschappij (VMM) - Dutch only",
+		"brussels": "Brüssel - Brussels Environment - NL/FR",
+		"flanders": "Flandern - Vlaamse Milieumaatschappij (VMM) - NL",
 		"header": "Benachrichtigungen",
-		"wallonia": "Agence wallonne de l’air et du climat (AwAC) - French only"
+		"wallonia": "Wallonien - Agence wallonne de l’air et du climat (AwAC) - FR"
 	},
 	"refresh-button": {
 		"message": "Aktualisiert"
