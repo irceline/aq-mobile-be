@@ -93,7 +93,7 @@
 		"prev-step": "Précédent",
 		"three": {
 			"addLocationToList": "Ajouter à la liste de positions",
-			"header": "Pour quelles localisations souhaitez-vous recevoir des notifications?",
+			"header": "Choisissez les localisations pour lesquels vous souhaitez recevoir des notifications personnalisées",
 			"locationLabelHint": "Renommer la position",
 			"locationLabelPlaceholder": "p.e. \"À la maison\", \"Travail\", \"École\"",
 			"showLocationList": "Voir les localisations"

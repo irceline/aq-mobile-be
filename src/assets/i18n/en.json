@@ -93,7 +93,7 @@
 		"prev-step": "Previous",
 		"three": {
 			"addLocationToList": "Add to the list of locations",
-			"header": "For which locations would you like to receive notifications and personalised data in the app?",
+			"header": "Choose the locations for which you want to receive personalised notifications",
 			"locationLabelHint": "Change the location label",
 			"locationLabelPlaceholder": "e.g. \"Home\", \"Work\", \"School\"",
 			"showLocationList": "Show current locations"

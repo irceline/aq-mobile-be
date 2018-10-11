@@ -93,7 +93,7 @@
 		"prev-step": "Zurück",
 		"three": {
 			"addLocationToList": "Füge zur Liste der Standorte",
-			"header": "Für welche Standorte wollen Sie Benachrichtigungen in der App erhalten?",
+			"header": "Wählen Sie die Standorte aus, für die Sie personalisierte Benachrichtigungen erhalten möchten",
 			"locationLabelHint": "Änder die Standortbezeichnung",
 			"locationLabelPlaceholder": "z.B. \"Zuhause\", \"Arbeit\", \"Schule\"",
 			"showLocationList": "Zeige vorhandene Standorte"
