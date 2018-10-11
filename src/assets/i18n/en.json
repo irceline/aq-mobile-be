@@ -82,7 +82,7 @@
 		"header": "Introduction",
 		"next-step": "Next",
 		"one": {
-			"header": "Would you like to change the language setting?",
+			"header": "Choose a language",
 			"option": {
 				"dutch": "Nederlands",
 				"english": "English",
