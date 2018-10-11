@@ -96,7 +96,7 @@
 			"header": "Choisissez les localisations pour lesquels vous souhaitez recevoir des notifications personnalisées",
 			"locationLabelHint": "Renommer la position",
 			"locationLabelPlaceholder": "p.e. \"À la maison\", \"Travail\", \"École\"",
-			"showLocationList": "Voir les localisations"
+			"showLocationList": "Voir les localisations actuels"
 		},
 		"two": {
 			"header": "our quelle région souhaitez-vous recevoir des notifications officielles?"
