@@ -57,11 +57,11 @@
 	},
 	"customize-personal-alerts": {
 		"active": "activeer",
-		"alert-index-level": "BelAQI-niveau",
+		"alert-index-level": "Melding vanaf BelAQI-niveau",
 		"alert-period": "interval melding",
-		"alert-sensitive-active": "Gezondheidsgerelateerde meldingen voor personen die gevoelig zijn voor luchtvervuiling",
+		"alert-sensitive-active": "Gezondheidsadviezen voor personen gevoelig aan luchtvervuiling",
 		"header": "Gepersonaliseerde meldingen",
-		"hint": "Tip: om deze functionaliteit te kunnen gebruiken, moet de app op de achtergrond blijven lopen. Uw locatie wordt één keer bepaald voor het gekozen tijdsinterval en vervolgens wordt de luchtkwaliteit gecontroleerd."
+		"hint": "Tip: om deze functionaliteit te kunnen gebruiken, moet de app op de achtergrond blijven lopen. Je locatie wordt één keer bepaald voor het gekozen tijdsinterval en vervolgens wordt de luchtkwaliteit gecontroleerd."
 	},
 	"diagram": {
 		"header": "diagram",
@@ -77,7 +77,7 @@
 	"intro": {
 		"close-introduction": "Sluiten",
 		"four": {
-			"header": "Welke soort meldingen zou u graag ontvangen?"
+			"header": "Gepersonaliseerde meldingen"
 		},
 		"header": "Introductie",
 		"next-step": "Volgende",

@@ -57,9 +57,9 @@
 	},
 	"customize-personal-alerts": {
 		"active": "Aktivieren",
-		"alert-index-level": "Belaqi Level",
+		"alert-index-level": "Benachrichtigung ab Belaqi Level",
 		"alert-period": "Benachrichtigungsinterval",
-		"alert-sensitive-active": "Gesundheitsrelevante Nachrichten für empfindliche Personen",
+		"alert-sensitive-active": "Gesundheitsberatung für Menschen empfindlich für Luftverschmutzung",
 		"header": "Persönliche Benachrichtigungen",
 		"hint": "Hinweis: Zur Nutzung dieser Funktionalität, darf die App nicht komplett beendet werden. Für diese Funktionalität wird in dem gewünschten Interval einmalig der Standort ermittelt und zu diesem die modellierten Luftqualitätsdaten überprüft."
 	},
@@ -77,7 +77,7 @@
 	"intro": {
 		"close-introduction": "Beenden",
 		"four": {
-			"header": "Welche Benachrichtigungen wollen sie erhalten?"
+			"header": "Personalisierte Benachrichtigungen"
 		},
 		"header": "Einführung",
 		"next-step": "Nächste",
