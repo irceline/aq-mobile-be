@@ -1,6 +1,6 @@
 <mobile-geosearch-control [options]="geoSearchOptions" (onResultChanged)="geoSearchResultChanged($event)"></mobile-geosearch-control>
 <div>
-  <div style="height: 250px;" *ngIf="geoSearchResult">
+  <div *ngIf="geoSearchResult">
     <location-selection mapId="location-gen" [mapOptions]="mapOptions" [location]="geoSearchResult.geometry" (locationChanged)="onLocationChanged($event)"></location-selection>
   </div>
   <ion-list [hidden]="!geoSearchResult">

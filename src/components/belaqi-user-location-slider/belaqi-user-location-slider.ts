@@ -103,14 +103,26 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
         }
       }
     } else {
+      const height = window.outerHeight - this.getYPosition(this.slider.container);
+      // 58 is the height of the header without padding/margin
+      this.slidesHeight = `${height + 58}px`;
       this.headerContent.emit(null);
     }
+  }
+
+  private getYPosition(el) {
+    var yPos = 0;
+    while (el) {
+      yPos += (el.offsetTop - el.clientTop);
+      el = el.offsetParent;
+    }
+    return yPos;
   }
 
   private loadBelaqis() {
     this.ircelineSettings.getSettings(false).subscribe(ircelineSettings => {
       this.userLocationProvider.getLocationSettings().subscribe(
-        settings => {
+        () => {
           this.belaqiLocations = [];
           this.userLocationProvider.getAllLocations().subscribe(locations => {
             locations.forEach((loc, i) => {
