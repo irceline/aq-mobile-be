@@ -51,13 +51,22 @@ export class BelaqiWheelComponent implements AfterContentInit, OnChanges {
             const centerY = height / 2;
             const radius = Math.min(width, height) / 5;
             const offset = radius / 2;
-            const pointerColor = '#C2C2C2';
+            const pointerColor = '#FFFFFF';
+            const borderColor = '#000000';
 
             const ctx = chartInstance.ctx;
 
             ctx.save();
 
             ctx.fillStyle = pointerColor;
+            ctx.strokeStyle = borderColor;
+            ctx.lineWidth=3;
+
+            // circle
+            ctx.beginPath();
+            ctx.arc(width / 2, height / 2, radius, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.stroke();
 
             // arrow
             ctx.beginPath();
@@ -67,17 +76,15 @@ export class BelaqiWheelComponent implements AfterContentInit, OnChanges {
               const start = 3.5 * step;
               const angle = start + values.index * step;
               const arrowGap = 0.25;
-              ctx.moveTo(centerX, centerY);
-              ctx.lineTo(centerX + Math.cos(angle - arrowGap) * radius, centerY + Math.sin(angle - arrowGap) * radius);
-              ctx.lineTo(centerX + Math.cos(angle) * (radius + offset), centerY + Math.sin(angle) * (radius + offset));
-              ctx.lineTo(centerX + Math.cos(angle + arrowGap) * radius, centerY + Math.sin(angle + arrowGap) * radius);
-              ctx.fill();
-            }
 
-            // circle
-            ctx.beginPath();
-            ctx.arc(width / 2, height / 2, radius, 0, 2 * Math.PI);
-            ctx.fill();
+              // ctx.moveTo(centerX, centerY);
+              // ctx.lineTo(centerX + Math.cos(angle - arrowGap) * radius, centerY + Math.sin(angle - arrowGap) * radius);
+              ctx.moveTo(centerX + Math.cos(angle - arrowGap) * radius + 1.3, centerY + Math.sin(angle - arrowGap) * radius);
+              ctx.lineTo(centerX + Math.cos(angle) * (radius + offset), centerY + Math.sin(angle) * (radius + offset));
+              ctx.lineTo(centerX + Math.cos(angle + arrowGap) * radius + 1.3, centerY + Math.sin(angle + arrowGap) * radius);
+              ctx.fill();
+              ctx.stroke();
+            }
 
             // locationLabel
             ctx.font = "1.5em Roboto";
@@ -90,7 +97,7 @@ export class BelaqiWheelComponent implements AfterContentInit, OnChanges {
             // wrapText(ctx, formatDate(values.timestamp, 'medium', 'de'), centerX, centerY + 10, 100, 20);
 
             // indexLabel
-            ctx.font = "1em Roboto";
+            ctx.font = "1.2em Roboto";
             wrapText(ctx, this.belaqi.getLabelForIndex(values.index), centerX, centerY, 100, 20);
 
             // modelledLabel
@@ -101,7 +108,7 @@ export class BelaqiWheelComponent implements AfterContentInit, OnChanges {
               if (text) {
                 var words = text.split(' ');
                 var line = '';
-  
+
                 for (var n = 0; n < words.length; n++) {
                   var testLine = line + words[n] + ' ';
                   var metrics = context.measureText(testLine);
