@@ -7,16 +7,12 @@ import { Point } from 'geojson';
 import { forkJoin, Observable, Observer, ReplaySubject } from 'rxjs';
 
 import { LocateProvider } from '../locate/locate';
-import { NearestTimeseries, NearestTimeseriesProvider } from '../nearest-timeseries/nearest-timeseries';
 
 export interface UserLocation {
   id?: number;
   type: 'user' | 'current';
   point?: Point;
   label?: string;
-  nearestSeries?: {
-    [key: string]: NearestTimeseries
-  }
 }
 
 export interface UserLocationSettings {
@@ -44,7 +40,6 @@ export class UserLocationListProvider {
 
   constructor(
     protected storage: Storage,
-    protected nearestTimeseries: NearestTimeseriesProvider,
     private geoSearch: GeoSearch,
     protected translateSrvc: TranslateService,
     private locate: LocateProvider
@@ -66,23 +61,15 @@ export class UserLocationListProvider {
   }
 
   public addUserLocation(label: string, point: Point) {
-    const lat = point.coordinates[1];
-    const lon = point.coordinates[0];
-    const obs = this.phenomenonIDs.map(id => this.nearestTimeseries.determineNextTimeseries(lat, lon, id));
-    forkJoin(obs).subscribe((resultList) => {
-      const location = {
-        label,
-        point,
-        type: 'user',
-        id: new Date().getTime(),
-        nearestSeries: {}
-      } as UserLocation;
-      resultList.forEach((entry, idx) => {
-        location.nearestSeries[this.phenomenonIDs[idx]] = entry;
-      })
-      this.currentUserLocations.push(location);
-      this.storeLocations();
-    })
+    const location = {
+      label,
+      point,
+      type: 'user',
+      id: new Date().getTime(),
+      nearestSeries: {}
+    } as UserLocation;
+    this.currentUserLocations.push(location);
+    this.storeLocations();
   }
 
   public determineCurrentLocation(): Observable<UserLocation> {
@@ -92,24 +79,16 @@ export class UserLocationListProvider {
         reverseObs.subscribe(
           value => {
             const locationLabel = value.displayName || this.translateSrvc.instant('belaqi-user-location-slider.current-location');
-            const obs = this.phenomenonIDs.map(id => this.nearestTimeseries.determineNextTimeseries(pos.coords.latitude, pos.coords.longitude, id));
-            forkJoin(obs).subscribe((resultList) => {
-              const nearestSeries = {};
-              resultList.forEach((entry, idx) => {
-                nearestSeries[this.phenomenonIDs[idx]] = entry;
-              });
-              observer.next({
-                id: 1,
-                label: locationLabel,
-                type: 'current',
-                point: {
-                  type: 'Point',
-                  coordinates: [pos.coords.longitude, pos.coords.latitude]
-                },
-                nearestSeries
-              });
-              observer.complete();
-            })
+            observer.next({
+              id: 1,
+              label: locationLabel,
+              type: 'current',
+              point: {
+                type: 'Point',
+                coordinates: [pos.coords.longitude, pos.coords.latitude]
+              }
+            });
+            observer.complete();
           },
           error => {
             observer.error(error);

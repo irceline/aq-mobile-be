@@ -43,6 +43,7 @@ import { LanguageHandlerProvider } from '../providers/language-handler/language-
 import { LayerGeneratorService } from '../providers/layer-generator/layer-generator';
 import { LocateProvider } from '../providers/locate/locate';
 import { ModelledValueProvider } from '../providers/modelled-value/modelled-value';
+import { NearestTimeseriesManagerProvider } from '../providers/nearest-timeseries-manager/nearest-timeseries-manager';
 import { NearestTimeseriesProvider } from '../providers/nearest-timeseries/nearest-timeseries';
 import { NotificationPresenter } from '../providers/notification-presenter/notification-presenter';
 import { PersonalAlertsProvider } from '../providers/personal-alerts/personal-alerts';
@@ -130,6 +131,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     TimeseriesService,
     UserLocationListProvider,
     UserTimeseriesService,
+    NearestTimeseriesManagerProvider,
   ]
 })
 export class AppModule { }

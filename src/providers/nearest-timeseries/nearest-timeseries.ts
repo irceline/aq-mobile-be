@@ -1,15 +1,20 @@
 import { Injectable } from '@angular/core';
-import { DatasetApiInterface, SettingsService, Station } from '@helgoland/core';
+import { DatasetApiInterface, SettingsService, Station, Timeseries } from '@helgoland/core';
+import moment from 'moment';
 import { Observable, Observer } from 'rxjs';
 
 import { MobileSettings } from '../settings/settings';
 
-export interface NearestTimeseries {
-  seriesId: string;
+interface DistancedStation extends Station {
   distance: number;
-  nearestStation: Station;
 }
 
+export interface NearestTimeseries {
+  distance: number;
+  series: Timeseries;
+}
+
+const MAX_TIMEFRAME_FOR_NEAREST_STATION = 24;
 @Injectable()
 export class NearestTimeseriesProvider {
 
@@ -21,35 +26,45 @@ export class NearestTimeseriesProvider {
   public determineNextTimeseries(lat: number, lon: number, phenomenonId: string): Observable<NearestTimeseries> {
     const url = this.settingsSrvc.getSettings().datasetApis[0].url;
     return new Observable((observer: Observer<NearestTimeseries>) => {
-      this.api.getStations(url, { phenomenon: phenomenonId })
-        .subscribe(res => {
-          let distance = Infinity;
-          let nearestStation = null;
-          res.forEach(station => {
+      this.api.getStations(url, { phenomenon: phenomenonId }, { forceUpdate: false })
+        .subscribe((stations: DistancedStation[]) => {
+          const copy = JSON.parse(JSON.stringify(stations));
+          copy.forEach((station: DistancedStation) => {
             const point = station.geometry as GeoJSON.Point;
-            const stationDis = this.distanceInKmBetweenEarthCoordinates(
-              lat,
-              lon,
-              point.coordinates[1],
-              point.coordinates[0]
-            );
-            if (stationDis < distance) {
-              distance = stationDis;
-              nearestStation = station;
-            }
+            station.distance = this.distanceInKmBetweenEarthCoordinates(lat, lon, point.coordinates[1], point.coordinates[0]);
           })
-          this.api.getTimeseries(url, {
-            phenomenon: phenomenonId,
-            station: nearestStation.properties.id,
-            expanded: true
-          }, { forceUpdate: true }).subscribe(series => {
-            if (series.length === 1) {
-              observer.next({ seriesId: series[0].internalId, nearestStation, distance });
-              observer.complete();
-            }
-          })
+          copy.sort((a, b) => a.distance - b.distance);
+          if (copy.length > 0) {
+            this.getNextSeries(url, phenomenonId, copy, 0, observer);
+          } else {
+            observer.complete();
+          }
         });
     });
+  }
+
+  private getNextSeries(url: string, phenomenonId: string, stations: DistancedStation[], index: number, observer: Observer<NearestTimeseries>) {
+    const distance = stations[index].distance;
+    this.api.getTimeseries(url, {
+      phenomenon: phenomenonId,
+      station: stations[index].properties.id,
+      expanded: true
+    }, { expirationAtMs: moment().add(10, 'minutes').unix() * 1000 })
+      .subscribe(series => {
+        if (series.length === 1) {
+          const lastDate = new Date(series[0].lastValue.timestamp).getTime();
+          const maximumTimeframe = (new Date().getTime()) - MAX_TIMEFRAME_FOR_NEAREST_STATION * 3600 * 1000;
+          if (lastDate > maximumTimeframe) {
+            observer.next({
+              distance: distance,
+              series: series[0]
+            });
+            observer.complete();
+          } else {
+            this.getNextSeries(url, phenomenonId, stations, index + 1, observer);
+          }
+        }
+      });
   }
 
   private distanceInKmBetweenEarthCoordinates(lat1: number, lon1: number, lat2: number, lon2: number) {

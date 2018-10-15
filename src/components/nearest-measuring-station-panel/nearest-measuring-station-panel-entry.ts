@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { DatasetApiInterface, FirstLastValue, InternalIdHandler, StatusIntervalResolverService } from '@helgoland/core';
+import { FirstLastValue, StatusIntervalResolverService } from '@helgoland/core';
 import invert from 'invert-color';
 
+import { NearestTimeseriesManagerProvider } from '../../providers/nearest-timeseries-manager/nearest-timeseries-manager';
+import { NearestTimeseriesProvider } from '../../providers/nearest-timeseries/nearest-timeseries';
 import { BelaqiLocation } from '../belaqi-user-location-slider/belaqi-user-location-slider';
 
 interface PanelEntry {
@@ -33,9 +35,9 @@ export class NearestMeasuringStationPanelEntryComponent implements OnChanges {
   public onClicked: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(
-    private api: DatasetApiInterface,
     private statusIntervalResolver: StatusIntervalResolverService,
-    private idHandler: InternalIdHandler
+    protected nearestTimeseries: NearestTimeseriesProvider,
+    protected nearestTimeseriesManager: NearestTimeseriesManagerProvider
   ) { }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -49,22 +51,19 @@ export class NearestMeasuringStationPanelEntryComponent implements OnChanges {
   }
 
   private determineNextStationValue() {
-    const nearestSeries = this.location.nearestSeries[this.entry.id];
-    const seriesid = this.idHandler.resolveInternalId(nearestSeries.seriesId).id;
-    const url = this.idHandler.resolveInternalId(nearestSeries.seriesId).url;
-    this.api.getSingleTimeseries(seriesid, url, { forceUpdate: true }).subscribe(timeseries => {
-      const matchingInterval = this.statusIntervalResolver.getMatchingInterval(timeseries.lastValue.value, timeseries.statusIntervals)
+    this.nearestTimeseries.determineNextTimeseries(this.location.latitude, this.location.longitude, this.entry.id).subscribe(nearestSeries => {
+      this.nearestTimeseriesManager.setNearestTimeseries(this.location.locationLabel, this.entry.id, nearestSeries.series.internalId);
+      this.stationDistance = nearestSeries.distance;
+      this.stationLabel = nearestSeries.series.station.properties.label;
+      const matchingInterval = this.statusIntervalResolver.getMatchingInterval(nearestSeries.series.lastValue.value, nearestSeries.series.statusIntervals)
       if (matchingInterval) {
         this.backgroundColor = matchingInterval.color;
         this.color = invert(this.backgroundColor, true);
       }
-      this.lastStationaryValue = timeseries.lastValue
-      this.uom = timeseries.uom;
+      this.lastStationaryValue = nearestSeries.series.lastValue
+      this.uom = nearestSeries.series.uom;
       this.loadingStationValue = false;
-    })
-
-    this.stationDistance = nearestSeries.distance;
-    this.stationLabel = nearestSeries.nearestStation.properties.label;
+    });
   }
 
 }

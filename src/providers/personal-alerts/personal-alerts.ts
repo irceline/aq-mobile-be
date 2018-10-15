@@ -54,8 +54,8 @@ export class PersonalAlertsProvider {
     this.platform.ready().then(() => {
       if (this.platform.is('cordova')) {
         this.localNotifications.on('click').subscribe((notification: ILocalNotification) => {
-          const temp = notification.data as PersonalAlert[];
-          this.presenter.presentPersonalAlerts(temp);
+          const personalAlert = notification.data as PersonalAlert[];
+          this.presenter.presentPersonalAlerts(personalAlert);
         });
       }
 

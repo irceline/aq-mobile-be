@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { ColorService, DatasetOptions } from '@helgoland/core';
 import { Slides, Toggle } from 'ionic-angular';
 
+import { NearestTimeseriesManagerProvider } from '../../providers/nearest-timeseries-manager/nearest-timeseries-manager';
 import { LocatedTimeseriesService } from '../../providers/timeseries/located-timeseries';
 import { UserLocationListProvider } from '../../providers/user-location-list/user-location-list';
 
@@ -28,21 +29,16 @@ export class NearestSeriesLegendSliderComponent implements AfterViewInit {
 
   constructor(
     private userLocations: UserLocationListProvider,
-    public locatedTsSrvc: LocatedTimeseriesService,
-    private color: ColorService
+    private locatedTsSrvc: LocatedTimeseriesService,
+    private color: ColorService,
+    private nearestTimeseriesManager: NearestTimeseriesManagerProvider
   ) {
     this.userLocations.getAllLocations().subscribe(locations => {
       locations.forEach((location, idx) => {
         const series: LegendGroupEntry[] = [];
-        for (const key in location.nearestSeries) {
-          if (location.nearestSeries.hasOwnProperty(key)) {
-            const element = location.nearestSeries[key];
-            series.push({
-              id: element.seriesId,
-              option: this.createDatasetOption(element.seriesId)
-            });
-          }
-        }
+        this.nearestTimeseriesManager
+          .getNearestTimeseries(location.label)
+          .forEach(e => series.push({ id: e, option: this.createDatasetOption(e) }));
         this.legendGroups[idx] = {
           label: location.label,
           datasets: series
@@ -73,12 +69,12 @@ export class NearestSeriesLegendSliderComponent implements AfterViewInit {
   }
 
   private setCurrentIndex() {
-    const temp = window.setInterval(() => {
+    const interval = window.setInterval(() => {
       if (this.slider && this.slider._slides && this.slider._slides.length === this.legendGroups.length) {
         this.slider.update();
         this.slider.slideTo(this.locatedTsSrvc.getSelectedIndex());
         console.log('disabled');
-        window.clearInterval(temp);
+        window.clearInterval(interval);
       }
     }, 10);
   }

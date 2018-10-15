@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DefinedTimespan, DefinedTimespanService, Timespan } from '@helgoland/core';
 import { D3PlotOptions } from '@helgoland/d3';
 import { ModalController, NavController } from 'ionic-angular';
@@ -14,7 +14,7 @@ import { MapPage } from '../map/map';
   selector: 'page-diagram',
   templateUrl: 'diagram.html'
 })
-export class DiagramPage {
+export class DiagramPage implements OnInit {
 
   public name = 'diagram';
 
@@ -38,6 +38,10 @@ export class DiagramPage {
     private nav: NavController
   ) {
     this.timespan = this.defTimespanSrvc.getInterval(DefinedTimespan.TODAY_YESTERDAY);
+  }
+
+  public ngOnInit(): void {
+    this.locatedTsSrvc.loadNearestSeries();
   }
 
   public timespanChanged(timespan: Timespan) {

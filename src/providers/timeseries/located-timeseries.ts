@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ColorService, DatasetOptions, DatasetService, LocalStorage } from '@helgoland/core';
 
+import { NearestTimeseriesManagerProvider } from '../nearest-timeseries-manager/nearest-timeseries-manager';
+import { UserLocationListProvider } from '../user-location-list/user-location-list';
 import { TimeseriesService } from './timeseries';
 
 const LOCALSTORAGE_SHOW_DEFAULT_SERIES = 'located-timeseries.show-default.series';
@@ -15,7 +17,9 @@ export class LocatedTimeseriesService extends DatasetService<DatasetOptions> {
   constructor(
     private color: ColorService,
     private tsSrvc: TimeseriesService,
-    private storage: LocalStorage
+    private storage: LocalStorage,
+    private userlocation: UserLocationListProvider,
+    private nearestTimeseriesManager: NearestTimeseriesManagerProvider
   ) {
     super();
     this.showSeries = this.getShowNearestSeriesByDefault();
@@ -29,6 +33,14 @@ export class LocatedTimeseriesService extends DatasetService<DatasetOptions> {
   addDataset(internalId: string, options?: DatasetOptions) {
     super.addDataset(internalId, options);
     this.tsSrvc.addDataset(internalId, this.datasetOptions.get(internalId));
+  }
+
+  public loadNearestSeries() {
+    this.userlocation.getAllLocations().subscribe(locations => {
+      this.nearestTimeseriesManager
+        .getNearestTimeseries(locations[this.selectedIndex].label)
+        .forEach(e => this.addDataset(e));
+    });
   }
 
   public setShowNearestSeriesByDefault(nearestSeriesByDefault: boolean) {

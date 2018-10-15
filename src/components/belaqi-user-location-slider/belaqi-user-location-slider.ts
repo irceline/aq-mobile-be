@@ -4,7 +4,6 @@ import { ModalController, Slides } from 'ionic-angular';
 
 import { BelaqiIndexProvider } from '../../providers/belaqi/belaqi';
 import { IrcelineSettingsProvider } from '../../providers/irceline-settings/irceline-settings';
-import { NearestTimeseries, NearestTimeseriesProvider } from '../../providers/nearest-timeseries/nearest-timeseries';
 import { LocatedTimeseriesService } from '../../providers/timeseries/located-timeseries';
 import { UserLocationListProvider } from '../../providers/user-location-list/user-location-list';
 import { ModalUserLocationCreationComponent } from '../modal-user-location-creation/modal-user-location-creation';
@@ -18,7 +17,7 @@ export interface BelaqiLocation {
   longitude?: number;
   latitude?: number;
   nearestSeries?: {
-    [key: string]: NearestTimeseries
+    [key: string]: string;
   }
 }
 
@@ -54,8 +53,7 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
     private locatedTimeseriesProvider: LocatedTimeseriesService,
     private ircelineSettings: IrcelineSettingsProvider,
     protected translateSrvc: TranslateService,
-    protected modalCtrl: ModalController,
-    protected nearestTimeseries: NearestTimeseriesProvider
+    protected modalCtrl: ModalController
   ) {
     this.loadBelaqis();
   }
@@ -96,12 +94,6 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
       })
       this.locatedTimeseriesProvider.setSelectedIndex(idx);
       this.locatedTimeseriesProvider.removeAllDatasets();
-      for (const key in this.belaqiLocations[idx].nearestSeries) {
-        if (this.belaqiLocations[idx].nearestSeries.hasOwnProperty(key)) {
-          const element = this.belaqiLocations[idx].nearestSeries[key];
-          this.locatedTimeseriesProvider.addDataset(element.seriesId);
-        }
-      }
     } else {
       const height = window.outerHeight - this.getYPosition(this.slider.container);
       // 58 is the height of the header without padding/margin
@@ -133,8 +125,7 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
                 date: ircelineSettings.lastupdate,
                 type: loc.type,
                 latitude: lat,
-                longitude: lon,
-                nearestSeries: loc.nearestSeries
+                longitude: lon
               }
               this.belaqiIndexProvider.getValue(lat, lon).subscribe(
                 res => {
