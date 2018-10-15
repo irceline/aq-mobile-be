@@ -63,7 +63,8 @@ export class BelaqiChartComponent implements OnChanges {
             ticks: {
               min: 1,
               max: 10,
-              reverse: false
+              reverse: false,
+              display: false
             }
           }]
         },
@@ -74,7 +75,7 @@ export class BelaqiChartComponent implements OnChanges {
           enabled: true,
           callbacks: {
             label: (tooltip, data) => {
-              return this.belaqiIndex.getLabelForIndex(parseInt(tooltip.yLabel));
+              return " " + this.belaqiIndex.getValueForIndex(parseInt(tooltip.yLabel)) + " - " + this.belaqiIndex.getLabelForIndex(parseInt(tooltip.yLabel));
             },
             labelColor: (tooltip) => {
               return {
@@ -90,13 +91,13 @@ export class BelaqiChartComponent implements OnChanges {
         labels: this.createLabels(belaqiTimeline),
         datasets: [
           {
-            pointBorderWidth: 8,
-            pointHoverRadius: 8,
-            pointHoverBorderWidth: 1,
-            pointRadius: 3,
+            pointBorderWidth: 6,
+            pointHoverRadius: 7,
+            pointHoverBorderWidth: 2,
+            pointRadius: 2,
             fill: false,
             cubicInterpolationMode: 'monotone',
-            borderWidth: 4,
+            borderWidth: 2,
             data: []
           }
         ]
