@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Network } from '@ionic-native/network';
 import { TranslateService } from '@ngx-translate/core';
 import { Platform } from 'ionic-angular';
@@ -12,7 +12,7 @@ import { RefreshHandler } from '../../providers/refresh/refresh';
   selector: 'network-panel',
   templateUrl: 'network-panel.html'
 })
-export class NetworkPanelComponent {
+export class NetworkPanelComponent implements OnInit {
 
   public lastupdate: Date;
   public offline: boolean = false;
@@ -29,7 +29,9 @@ export class NetworkPanelComponent {
     private refresh: RefreshHandler,
     protected translate: TranslateService,
     private ref: ChangeDetectorRef
-  ) {
+  ) { }
+
+  public ngOnInit(): void {
     this.runChecks();
     this.refresh.onRefresh.subscribe(() => this.runChecks());
   }
