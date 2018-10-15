@@ -81,7 +81,7 @@ export class BelaqiWheelComponent implements AfterContentInit, OnChanges {
               // ctx.lineTo(centerX + Math.cos(angle - arrowGap) * radius, centerY + Math.sin(angle - arrowGap) * radius);
               ctx.moveTo(centerX + Math.cos(angle - arrowGap) * radius + 1.3, centerY + Math.sin(angle - arrowGap) * radius);
               ctx.lineTo(centerX + Math.cos(angle) * (radius + offset), centerY + Math.sin(angle) * (radius + offset));
-              ctx.lineTo(centerX + Math.cos(angle + arrowGap) * radius + 1.3, centerY + Math.sin(angle + arrowGap) * radius);
+              ctx.lineTo(centerX + Math.cos(angle + arrowGap) * radius + 1.3, centerY + Math.sin(angle + arrowGap) * radius + 0.42);
               ctx.fill();
               ctx.stroke();
             }
