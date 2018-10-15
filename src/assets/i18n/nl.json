@@ -124,7 +124,7 @@
 		}
 	},
 	"menu": {
-		"lastUpdate": "laatste actualisatie"
+		"lastUpdate": "Laatste actualisatie"
 	},
 	"nearest-measuring-station-panel": {
 		"header": {
@@ -136,7 +136,7 @@
 		"show-nearest-series": "Toon dichtstbijzijnde metingen"
 	},
 	"network": {
-		"geolocationDisabled": "De geolocatie is uitgeschakeld",
+		"geolocationDisabled": "Geolocatie is uitgeschakeld",
 		"offline": "U toestel offline",
 		"online": "U toestel is online"
 	},

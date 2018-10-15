@@ -136,7 +136,7 @@
 		"show-nearest-series": "Show nearest measurements"
 	},
 	"network": {
-		"geolocationDisabled": "The geolocation is disabled",
+		"geolocationDisabled": "Geolocation is disabled",
 		"offline": "Your device is offline",
 		"online": "Your device is online"
 	},
