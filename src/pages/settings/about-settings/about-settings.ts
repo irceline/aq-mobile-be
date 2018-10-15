@@ -16,7 +16,7 @@ export class AboutSettingsComponent {
   constructor(
     public nav: NavController,
     private appVersion: AppVersion,
-    private platform: Platform
+    private platform: Platform,
   ) {
     if (this.platform.is('cordova')) {
       this.appVersion.getVersionNumber().then(res => this.version = res);
