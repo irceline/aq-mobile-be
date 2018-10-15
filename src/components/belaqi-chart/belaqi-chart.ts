@@ -91,10 +91,10 @@ export class BelaqiChartComponent implements OnChanges {
         labels: this.createLabels(belaqiTimeline),
         datasets: [
           {
-            pointBorderWidth: 6,
+            pointBorderWidth: 0,
             pointHoverRadius: 7,
             pointHoverBorderWidth: 2,
-            pointRadius: 2,
+            pointRadius: 5,
             fill: false,
             cubicInterpolationMode: 'monotone',
             borderWidth: 2,
