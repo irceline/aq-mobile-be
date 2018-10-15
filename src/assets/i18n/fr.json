@@ -115,6 +115,9 @@
 		"header": "Carte",
 		"interpolated-map": "Carte interpolée",
 		"show-in-diagram": "Afficher la série {{value}} dans le diagramme",
+		"pollutant":{
+			"other": "autre"
+		},
 		"time": {
 			"current": "Actuel",
 			"today": "Aujourd'hui",

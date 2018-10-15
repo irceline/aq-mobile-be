@@ -115,11 +115,14 @@
 		"header": "Karte",
 		"interpolated-map": "Interpolierte Karte",
 		"show-in-diagram": "Zeige {{value}} Zeitreihen im Diagramm",
+		"pollutant":{
+			"other": "andere"
+		},
 		"time": {
 			"current": "Derzeit",
 			"today": "Heute",
-			"today+2": "Übermorgen",
-			"today+3": "In 3 Tagen",
+			"today+2": "+2 Tage",
+			"today+3": "+3 Tage",
 			"tomorrow": "Morgen"
 		}
 	},

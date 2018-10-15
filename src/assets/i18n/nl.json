@@ -115,11 +115,14 @@
 		"header": "Kaart",
 		"interpolated-map": "Geïnterpoleerde kaart",
 		"show-in-diagram": "toon {{value}} tijdsreeks op een diagram",
+		"pollutant":{
+			"other": "andere"
+		},
 		"time": {
 			"current": "actueel",
 			"today": "vandaag",
-			"today+2": "vandaag+2",
-			"today+3": "vandaag+3",
+			"today+2": "+2 dagen",
+			"today+3": "+3 dagen",
 			"tomorrow": "morgen"
 		}
 	},

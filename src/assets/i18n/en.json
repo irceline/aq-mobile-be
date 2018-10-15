@@ -115,11 +115,14 @@
 		"header": "Map",
 		"interpolated-map": "interpolated map",
 		"show-in-diagram": "Show {{value}} timeseries in diagram",
+		"pollutant":{
+			"other": "other"
+		},
 		"time": {
 			"current": "Current",
 			"today": "Today",
-			"today+2": "Today+2",
-			"today+3": "Today+3",
+			"today+2": "+2 days",
+			"today+3": "+3 days",
 			"tomorrow": "Tomorrow"
 		}
 	},

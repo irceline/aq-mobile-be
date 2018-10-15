@@ -14,22 +14,22 @@
     <div>
       <ion-segment class="phenomenon" [(ngModel)]="phenomenonLabel" (ngModelChange)="onPhenomenonChange()">
         <ion-segment-button value="NO2">
-          NO2
+          NO<sub>2</sub>
         </ion-segment-button>
         <ion-segment-button value="O3">
-          O3
+          O<sub>3</sub>
         </ion-segment-button>
         <ion-segment-button value="PM10">
-          PM10
+          PM<sub>10</sub>
         </ion-segment-button>
         <ion-segment-button value="PM25">
-          PM2.5
+          PM<sub>2.5</sub>
         </ion-segment-button>
         <ion-segment-button value="BC">
           BC
         </ion-segment-button>
-        <ion-segment-button value="Others" (click)="openOtherPhenomena()">
-          <span *ngIf="!selectedOtherPhenom">Other</span>
+        <ion-segment-button class="other" value="Others" (click)="openOtherPhenomena()">
+          <span *ngIf="!selectedOtherPhenom">{{'map.pollutant.other' | translate}}</span>
           <span *ngIf="selectedOtherPhenom">{{selectedOtherPhenom}}</span>
         </ion-segment-button>
       </ion-segment>

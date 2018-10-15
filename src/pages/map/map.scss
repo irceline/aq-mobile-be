@@ -3,6 +3,17 @@ page-map {
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    .time .segment-button {
+      text-transform: none;
+      text-overflow: initial !important;
+    }
+    .phenomenon .other {
+      text-transform: none;
+      text-overflow: initial !important;
+    }
+    ion-segment-button {
+      padding: 0 !important;
+    }
     .map {
       height: 100%;
       display: flex;
