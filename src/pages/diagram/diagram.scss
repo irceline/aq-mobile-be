@@ -20,7 +20,7 @@ page-diagram {
           flex-grow: 1;
           overflow: auto;
           position: relative;
-          height: 100%;
+          height: auto;
 
           .diagram {
             position: absolute;
@@ -38,7 +38,7 @@ page-diagram {
 
           .timeseries-group {
             border: 1px solid black;
-            
+            flex-grow: 1;
             padding: 5px;
 
             div {
