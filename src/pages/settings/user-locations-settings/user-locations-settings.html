@@ -8,7 +8,7 @@
   <ion-item (click)="showLocationList()">
     <ion-label>{{'settings.user-locations.show-location-list' | translate}}</ion-label>
   </ion-item>
-  <ion-item (click)="toggleNearestSeries()">
+  <ion-item text-wrap (click)="toggleNearestSeries()">
     <ion-label>{{'settings.user-locations.show-nearest-series-by-default' | translate}}</ion-label>
     <ion-toggle color="secondary" [(ngModel)]="nearestSeriesByDefault" (ngModelChange)="toggleNearestSeries()"></ion-toggle>
   </ion-item>
