@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AppVersion } from '@ionic-native/app-version';
-import { NavController, Platform } from 'ionic-angular';
+import { Platform } from 'ionic-angular';
+import { NavController } from 'ionic-angular/navigation/nav-controller';
 
 import { IntroPage } from '../../intro/intro';
 
@@ -13,9 +14,9 @@ export class AboutSettingsComponent {
   public version: string;
 
   constructor(
+    public nav: NavController,
     private appVersion: AppVersion,
     private platform: Platform,
-    private nav: NavController
   ) {
     if (this.platform.is('cordova')) {
       this.appVersion.getVersionNumber().then(res => this.version = res);
