@@ -20,7 +20,6 @@ export class LocateProvider {
   ) {
     this.registerLocationStateChangeHandler();
     this.isGeolocationEnabled();
-    this.refresher.onRefresh.subscribe(res => this.isGeolocationEnabled());
   }
 
   public getGeoposition(): Observable<Geoposition> {
@@ -46,6 +45,7 @@ export class LocateProvider {
         } else {
           this.locationEnabled.next(false);
         }
+        this.refresher.refresh();
       });
     } else {
       this.locationEnabled.next(true);

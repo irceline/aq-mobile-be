@@ -121,18 +121,20 @@ export class UserLocationListProvider {
 
   public getAllLocations(): Observable<UserLocation[]> {
     return new Observable((observer: Observer<UserLocation[]>) => {
-      this.userLocationsSubject.subscribe(res => {
-        if (res.showCurrentLocation) {
-          this.determineCurrentLocation().subscribe(currentLoc => {
-            const userLocs = Object.assign([], res.userLocations);
-            userLocs.splice(this.getCurrentLocationIndex(), 0, currentLoc);
-            observer.next(userLocs);
+      this.locate.getLocationStateEnabled().subscribe(enabled => {
+        this.userLocationsSubject.subscribe(res => {
+          if (res.showCurrentLocation && enabled) {
+            this.determineCurrentLocation().subscribe(currentLoc => {
+              const userLocs = Object.assign([], res.userLocations);
+              userLocs.splice(this.getCurrentLocationIndex(), 0, currentLoc);
+              observer.next(userLocs);
+              observer.complete();
+            })
+          } else {
+            observer.next(res.userLocations);
             observer.complete();
-          })
-        } else {
-          observer.next(res.userLocations);
-          observer.complete();
-        }
+          }
+        })
       })
     })
   }

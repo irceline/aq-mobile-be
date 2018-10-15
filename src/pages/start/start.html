@@ -17,7 +17,7 @@
     <air-quality-location-panel></air-quality-location-panel>
   </ion-card> -->
 
-  <ion-card *ngIf="locationCount > 0 || locationEnabled" class="slider-card">
+  <ion-card *ngIf="locationCount > 0" class="slider-card">
     <ion-list>
       <ion-item [ngClass]="{'ion-affix': isSticky}" ion-affix [content]="content" *ngIf="sliderHeaderContent"
         (onSticky)="handleOnSticky($event)">
