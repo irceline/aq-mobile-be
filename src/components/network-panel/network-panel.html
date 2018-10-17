@@ -1,5 +1,5 @@
 <div text-center>
-  <div>{{'menu.lastUpdate' | translate}}: {{lastupdate | date: 'MMM d, y, hh:mm': null : translate.currentLang}}</div>
+  <div>{{'menu.lastUpdate' | translate}}: {{lastupdate | date: 'MMM d, y, HH:mm': null : translate.currentLang}}</div>
   <div *ngIf="offline" class="warn">{{'network.offline' | translate}}</div>
   <div *ngIf="backOnline">{{'network.online' | translate}}</div>
   <div *ngIf="!geolocationEnabled" class="warn">{{'network.geolocationDisabled' | translate}}</div>
