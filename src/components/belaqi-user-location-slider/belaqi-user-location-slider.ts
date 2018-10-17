@@ -5,6 +5,7 @@ import { ModalController, Slides } from 'ionic-angular';
 import { BelaqiIndexProvider } from '../../providers/belaqi/belaqi';
 import { IrcelineSettingsProvider } from '../../providers/irceline-settings/irceline-settings';
 import { LocateProvider } from '../../providers/locate/locate';
+import { RefreshHandler } from '../../providers/refresh/refresh';
 import { LocatedTimeseriesService } from '../../providers/timeseries/located-timeseries';
 import { UserLocationListProvider } from '../../providers/user-location-list/user-location-list';
 import { ModalUserLocationCreationComponent } from '../modal-user-location-creation/modal-user-location-creation';
@@ -55,10 +56,12 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
     private ircelineSettings: IrcelineSettingsProvider,
     private locate: LocateProvider,
     protected translateSrvc: TranslateService,
-    protected modalCtrl: ModalController
+    protected modalCtrl: ModalController,
+    protected refresher: RefreshHandler
   ) {
     this.loadBelaqis();
     this.locate.getLocationStateEnabled().subscribe(enabled => this.loadBelaqis());
+    this.refresher.onRefresh.subscribe(() => this.loadBelaqis());
   }
 
   public ngAfterViewInit(): void {
