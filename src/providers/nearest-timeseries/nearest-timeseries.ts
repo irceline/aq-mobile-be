@@ -3,6 +3,7 @@ import { DatasetApiInterface, SettingsService, Station, Timeseries } from '@helg
 import moment from 'moment';
 import { Observable, Observer } from 'rxjs';
 
+import { IrcelineSettingsProvider } from '../irceline-settings/irceline-settings';
 import { MobileSettings } from '../settings/settings';
 
 interface DistancedStation extends Station {
@@ -14,13 +15,13 @@ export interface NearestTimeseries {
   series: Timeseries;
 }
 
-const MAX_TIMEFRAME_FOR_NEAREST_STATION = 24;
 @Injectable()
 export class NearestTimeseriesProvider {
 
   constructor(
     private api: DatasetApiInterface,
-    private settingsSrvc: SettingsService<MobileSettings>
+    private settingsSrvc: SettingsService<MobileSettings>,
+    private ircelineSettingsProv: IrcelineSettingsProvider
   ) { }
 
   public determineNextTimeseries(lat: number, lon: number, phenomenonId: string): Observable<NearestTimeseries> {
@@ -45,26 +46,27 @@ export class NearestTimeseriesProvider {
 
   private getNextSeries(url: string, phenomenonId: string, stations: DistancedStation[], index: number, observer: Observer<NearestTimeseries>) {
     const distance = stations[index].distance;
-    this.api.getTimeseries(url, {
-      phenomenon: phenomenonId,
-      station: stations[index].properties.id,
-      expanded: true
-    }, { expirationAtMs: moment().add(10, 'minutes').unix() * 1000 })
-      .subscribe(series => {
-        if (series.length === 1) {
-          const lastDate = new Date(series[0].lastValue.timestamp).getTime();
-          const maximumTimeframe = (new Date().getTime()) - MAX_TIMEFRAME_FOR_NEAREST_STATION * 3600 * 1000;
-          if (lastDate > maximumTimeframe) {
-            observer.next({
-              distance: distance,
-              series: series[0]
-            });
-            observer.complete();
-          } else {
-            this.getNextSeries(url, phenomenonId, stations, index + 1, observer);
+    this.ircelineSettingsProv.getSettings(false).subscribe(settings => {
+      this.api.getTimeseries(url, {
+        phenomenon: phenomenonId,
+        station: stations[index].properties.id,
+        expanded: true
+      }, { expirationAtMs: moment().add(10, 'minutes').unix() * 1000 })
+        .subscribe(series => {
+          if (series.length === 1) {
+            const lastDate = new Date(series[0].lastValue.timestamp).getTime();
+            if (lastDate === settings.lastupdate.getTime()) {
+              observer.next({
+                distance: distance,
+                series: series[0]
+              });
+              observer.complete();
+            } else {
+              this.getNextSeries(url, phenomenonId, stations, index + 1, observer);
+            }
           }
-        }
-      });
+        });
+    })
   }
 
   private distanceInKmBetweenEarthCoordinates(lat1: number, lon1: number, lat2: number, lon2: number) {
