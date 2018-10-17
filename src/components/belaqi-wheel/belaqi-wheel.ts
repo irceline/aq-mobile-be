@@ -1,4 +1,5 @@
 import { AfterContentInit, Component, ElementRef, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
+import { LanguageChangNotifier } from '@helgoland/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Chart, ChartOptions } from 'chart.js';
 
@@ -14,7 +15,7 @@ interface ExtendedChartOptions extends ChartOptions {
   selector: 'belaqi-wheel',
   templateUrl: 'belaqi-wheel.html'
 })
-export class BelaqiWheelComponent implements AfterContentInit, OnChanges {
+export class BelaqiWheelComponent extends LanguageChangNotifier implements AfterContentInit, OnChanges {
 
   @Input()
   public index: number;
@@ -24,8 +25,14 @@ export class BelaqiWheelComponent implements AfterContentInit, OnChanges {
 
   constructor(
     private belaqi: BelaqiIndexProvider,
-    private translate: TranslateService
-  ) { }
+    protected translate: TranslateService,
+  ) {
+    super(translate);
+  }
+
+  protected languageChanged(): void {
+    this.drawWheel();
+  }
 
   public ngAfterContentInit(): void {
     this.drawWheel();
@@ -60,7 +67,7 @@ export class BelaqiWheelComponent implements AfterContentInit, OnChanges {
 
             ctx.fillStyle = pointerColor;
             ctx.strokeStyle = borderColor;
-            ctx.lineWidth=3;
+            ctx.lineWidth = 3;
 
             // circle
             ctx.beginPath();
