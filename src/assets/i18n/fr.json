@@ -27,6 +27,18 @@
 			"very-bad": "Très mauvais",
 			"very-good": "Très bon",
 			"very-poor": "Très médiocre"
+		},
+		"level-split": {
+			"bad": "Mauvais",
+			"excellent": "Excellent",
+			"fairly-good": "Assez bon",
+			"good": "Bon",
+			"horrible": "Exécrable",
+			"moderate": "Moyen",
+			"poor": "Médiocre",
+			"very-bad": "Très mauvais",
+			"very-good": "Très bon",
+			"very-poor": "Très médiocre"
 		}
 	},
 	"change-timespan": {

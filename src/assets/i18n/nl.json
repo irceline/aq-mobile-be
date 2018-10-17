@@ -27,6 +27,18 @@
 			"very-bad": "zeer slecht",
 			"very-good": "zeer goed",
 			"very-poor": "zeer slecht"
+		},
+		"level-split": {
+			"bad": "slecht",
+			"excellent": "uit- stekend",
+			"fairly-good": "vrij goed",
+			"good": "goed",
+			"horrible": "uitermate slecht",
+			"moderate": "middel- matig",
+			"poor": "onder- maats",
+			"very-bad": "zeer slecht",
+			"very-good": "zeer goed",
+			"very-poor": "zeer slecht"
 		}
 	},
 	"change-timespan": {

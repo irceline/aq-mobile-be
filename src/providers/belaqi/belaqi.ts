@@ -109,25 +109,25 @@ export class BelaqiIndexProvider extends ValueProvider {
   public getLabelForIndex(index: number) {
     switch (index) {
       case 1:
-        return this.translate.instant('belaqi.level.excellent');
+        return this.translate.instant('belaqi.level-split.excellent');
       case 2:
-        return this.translate.instant('belaqi.level.very-good');
+        return this.translate.instant('belaqi.level-split.very-good');
       case 3:
-        return this.translate.instant('belaqi.level.good');
+        return this.translate.instant('belaqi.level-split.good');
       case 4:
-        return this.translate.instant('belaqi.level.fairly-good');
+        return this.translate.instant('belaqi.level-split.fairly-good');
       case 5:
-        return this.translate.instant('belaqi.level.moderate');
+        return this.translate.instant('belaqi.level-split.moderate');
       case 6:
-        return this.translate.instant('belaqi.level.poor');
+        return this.translate.instant('belaqi.level-split.poor');
       case 7:
-        return this.translate.instant('belaqi.level.very-poor');
+        return this.translate.instant('belaqi.level-split.very-poor');
       case 8:
-        return this.translate.instant('belaqi.level.bad');
+        return this.translate.instant('belaqi.level-split.bad');
       case 9:
-        return this.translate.instant('belaqi.level.very-bad');
+        return this.translate.instant('belaqi.level-split.very-bad');
       case 10:
-        return this.translate.instant('belaqi.level.horrible');
+        return this.translate.instant('belaqi.level-split.horrible');
       default:
         return null;
     }

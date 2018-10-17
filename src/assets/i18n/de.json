@@ -27,6 +27,18 @@
 			"very-bad": "Sehr schlecht",
 			"very-good": "Sehr gut",
 			"very-poor": "Relativ schlecht"
+		},
+		"level-split": {
+			"bad": "Schlecht",
+			"excellent": "Ausge- zeichnet",
+			"fairly-good": "Relativ gut",
+			"good": "Gut",
+			"horrible": "Extrem schlecht",
+			"moderate": "Mittel- mäßig",
+			"poor": "Unge- nügend",
+			"very-bad": "Sehr schlecht",
+			"very-good": "Sehr gut",
+			"very-poor": "Relativ schlecht"
 		}
 	},
 	"change-timespan": {
