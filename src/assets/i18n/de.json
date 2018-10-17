@@ -10,6 +10,7 @@
 	"belaqi-user-location-slider": {
 		"create-new-location": "Erstelle einen neuen Standort",
 		"current-location": "Aktuelle Position",
+		"current-location-description": "Der Ort, an dem Sie sich gerade befinden...",
 		"open-user-location": "Editiere vorhandene Standorte"
 	},
 	"belaqi-wheel": {

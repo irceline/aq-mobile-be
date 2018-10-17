@@ -41,8 +41,8 @@
 
       <ion-item *ngIf="location.type === 'current'">
         <ion-label>
-          <h2>Current location</h2>
-          <p>The location where you are currently...</p>
+          <h2>{{'belaqi-user-location-slider.current-location' | translate}}</h2>
+          <p>{{'belaqi-user-location-slider.current-location-description' | translate}}</p>
         </ion-label>
         <ion-toggle [(ngModel)]="showCurrentLocation"></ion-toggle>
       </ion-item>
