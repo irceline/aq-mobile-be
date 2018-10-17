@@ -25,7 +25,7 @@
 </ion-list>
 
 <div text-center>
-  <button ion-button round outline (click)="toggleShowAll = !toggleShowAll">{{'station-selection.show-other-phenomena' | translate}}</button>
+  <button ion-button text-wrap round outline (click)="toggleShowAll = !toggleShowAll">{{'station-selection.show-other-phenomena' | translate}}</button>
 </div>
 
 <ion-list *ngIf="toggleShowAll">
