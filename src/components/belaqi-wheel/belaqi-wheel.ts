@@ -97,7 +97,7 @@ export class BelaqiWheelComponent implements AfterContentInit, OnChanges {
             // wrapText(ctx, formatDate(values.timestamp, 'medium', 'de'), centerX, centerY + 10, 100, 20);
 
             // indexLabel
-            ctx.font = "1.2em Roboto";
+            ctx.font = "1em Roboto";
             wrapText(ctx, this.belaqi.getLabelForIndex(values.index), centerX, centerY, 100, 20);
 
             // modelledLabel
