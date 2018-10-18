@@ -105,7 +105,7 @@ export class BelaqiWheelComponent extends LanguageChangNotifier implements After
 
             // indexLabel
             ctx.font = "1.3em Roboto";
-            wrapText(ctx, this.belaqi.getLabelForIndex(values.index), centerX, centerY, 100, 25);
+            wrapText(ctx, this.belaqi.getLabelForIndexSplit(values.index), centerX, centerY, 100, 25);
 
             // modelledLabel
             ctx.font = "0.6em Roboto";
