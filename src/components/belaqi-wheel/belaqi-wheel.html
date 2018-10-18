@@ -1,3 +1,6 @@
-<div style="position: relative; width: 100%; height: 100%;">
+<div class="wheel" [hidden]="!index">
   <canvas #belaqiWheel></canvas>
+</div>
+<div *ngIf="!index" class="no-index">
+  {{'belaqi-wheel.no-index-ascertained' | translate}}
 </div>

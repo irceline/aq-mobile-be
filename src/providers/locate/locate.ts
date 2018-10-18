@@ -55,12 +55,11 @@ export class LocateProvider {
 
   private determinePosition() {
     this.platform.ready().then(() => {
-      this.geolocate.getCurrentPosition({
+      this.geolocate.watchPosition({
         timeout: 10000,
         enableHighAccuracy: false,
         maximumAge: 60000
-      }).then(res => {
-
+      }).subscribe(res => {
         // const latitude = 50.863892;
         // const longitude = 4.6337528;
         // const latitude = 50 + Math.random();
@@ -77,9 +76,8 @@ export class LocateProvider {
         //   },
         //   timestamp: 1234
         // }
-
         this.position.next(res);
-      }).catch((error) => console.log(JSON.stringify(error)));
+      }, (error) => console.log(JSON.stringify(error)));
     })
   }
 

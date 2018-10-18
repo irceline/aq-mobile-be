@@ -20,6 +20,15 @@
         <button ion-button outline (click)="openUserLocation()">{{'belaqi-user-location-slider.open-user-location' |
           translate}}</button>
       </div>
+      <ion-list>
+        <ion-item>
+          <ion-label>
+            <h2>{{'belaqi-user-location-slider.current-location' | translate}}</h2>
+            <p>{{'belaqi-user-location-slider.current-location-description' | translate}}</p>
+          </ion-label>
+          <ion-toggle (ionChange)="toggle($event)" [checked]="showCurrentLocation"></ion-toggle>
+        </ion-item>
+      </ion-list>
     </div>
   </ion-slide>
 </ion-slides>

@@ -14,21 +14,10 @@
 		"open-user-location": "Bewerk de huidige locaties"
 	},
 	"belaqi-wheel": {
-		"modelled-hint": "Gemodelleerd waarde voor deze locatie"
+		"modelled-hint": "Gemodelleerd waarde voor deze locatie",
+		"no-index-ascertained": ""
 	},
 	"belaqi": {
-		"level": {
-			"bad": "slecht",
-			"excellent": "uitstekend",
-			"fairly-good": "vrij goed",
-			"good": "goed",
-			"horrible": "uitermate slecht",
-			"moderate": "middelmatig",
-			"poor": "ondermaats",
-			"very-bad": "zeer slecht",
-			"very-good": "zeer goed",
-			"very-poor": "zeer slecht"
-		},
 		"level-split": {
 			"bad": "slecht",
 			"excellent": "uit- stekend",
@@ -37,6 +26,18 @@
 			"horrible": "uitermate slecht",
 			"moderate": "middel- matig",
 			"poor": "onder- maats",
+			"very-bad": "zeer slecht",
+			"very-good": "zeer goed",
+			"very-poor": "zeer slecht"
+		},
+		"level": {
+			"bad": "slecht",
+			"excellent": "uitstekend",
+			"fairly-good": "vrij goed",
+			"good": "goed",
+			"horrible": "uitermate slecht",
+			"moderate": "middelmatig",
+			"poor": "ondermaats",
 			"very-bad": "zeer slecht",
 			"very-good": "zeer goed",
 			"very-poor": "zeer slecht"
@@ -127,10 +128,10 @@
 		},
 		"header": "Kaart",
 		"interpolated-map": "Geïnterpoleerde kaart",
-		"show-in-diagram": "toon {{value}} tijdsreeks op een diagram",
-		"pollutant":{
+		"pollutant": {
 			"other": "andere"
 		},
+		"show-in-diagram": "toon {{value}} tijdsreeks op een diagram",
 		"time": {
 			"current": "actueel",
 			"today": "vandaag",

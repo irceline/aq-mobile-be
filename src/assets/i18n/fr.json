@@ -14,10 +14,11 @@
 		"open-user-location": "Modifier les positions actuels"
 	},
 	"belaqi-wheel": {
-		"modelled-hint": "Modélisé pour cette position"
+		"modelled-hint": "Modélisé pour cette position",
+		"no-index-ascertained": ""
 	},
 	"belaqi": {
-		"level": {
+		"level-split": {
 			"bad": "Mauvais",
 			"excellent": "Excellent",
 			"fairly-good": "Assez bon",
@@ -29,7 +30,7 @@
 			"very-good": "Très bon",
 			"very-poor": "Très médiocre"
 		},
-		"level-split": {
+		"level": {
 			"bad": "Mauvais",
 			"excellent": "Excellent",
 			"fairly-good": "Assez bon",
@@ -127,10 +128,10 @@
 		},
 		"header": "Carte",
 		"interpolated-map": "Carte interpolée",
-		"show-in-diagram": "Afficher la série {{value}} dans le diagramme",
-		"pollutant":{
+		"pollutant": {
 			"other": "autre"
 		},
+		"show-in-diagram": "Afficher la série {{value}} dans le diagramme",
 		"time": {
 			"current": "Actuel",
 			"today": "Aujourd'hui",

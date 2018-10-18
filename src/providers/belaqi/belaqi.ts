@@ -150,6 +150,9 @@ export class BelaqiIndexProvider extends ValueProvider {
         }).subscribe(res => {
           observer.next(res);
           observer.complete();
+        }, error => {
+          observer.error(error);
+          observer.complete();
         });
       })
     });

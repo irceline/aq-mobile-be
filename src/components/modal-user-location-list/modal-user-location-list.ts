@@ -73,7 +73,7 @@ export class ModalUserLocationListComponent {
 
   private setLocations() {
     this.userLocationProvider.getAllLocationsForEdit().subscribe(res => this.locations = res);
-    this.showCurrentLocation = this.userLocationProvider.isShowCurrentLocation();
+    this.userLocationProvider.getLocationSettings().subscribe(settings => this.showCurrentLocation = settings.showCurrentLocation);
   }
 
 }

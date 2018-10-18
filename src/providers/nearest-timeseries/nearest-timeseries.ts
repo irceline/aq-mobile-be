@@ -45,28 +45,32 @@ export class NearestTimeseriesProvider {
   }
 
   private getNextSeries(url: string, phenomenonId: string, stations: DistancedStation[], index: number, observer: Observer<NearestTimeseries>) {
-    const distance = stations[index].distance;
-    this.ircelineSettingsProv.getSettings(false).subscribe(settings => {
-      this.api.getTimeseries(url, {
-        phenomenon: phenomenonId,
-        station: stations[index].properties.id,
-        expanded: true
-      }, { expirationAtMs: moment().add(10, 'minutes').unix() * 1000 })
-        .subscribe(series => {
-          if (series.length === 1) {
-            const lastDate = new Date(series[0].lastValue.timestamp).getTime();
-            if (lastDate === settings.lastupdate.getTime()) {
-              observer.next({
-                distance: distance,
-                series: series[0]
-              });
-              observer.complete();
-            } else {
-              this.getNextSeries(url, phenomenonId, stations, index + 1, observer);
+    if (index < stations.length - 1) {
+      const distance = stations[index].distance;
+      this.ircelineSettingsProv.getSettings(false).subscribe(settings => {
+        this.api.getTimeseries(url, {
+          phenomenon: phenomenonId,
+          station: stations[index].properties.id,
+          expanded: true
+        }, { expirationAtMs: moment().add(10, 'minutes').unix() * 1000 })
+          .subscribe(series => {
+            if (series.length === 1) {
+              const lastDate = new Date(series[0].lastValue.timestamp).getTime();
+              if (lastDate === settings.lastupdate.getTime()) {
+                observer.next({
+                  distance: distance,
+                  series: series[0]
+                });
+                observer.complete();
+              } else {
+                this.getNextSeries(url, phenomenonId, stations, index + 1, observer);
+              }
             }
-          }
-        });
-    })
+          });
+      })
+    } else {
+      observer.complete();
+    }
   }
 
   private distanceInKmBetweenEarthCoordinates(lat1: number, lon1: number, lat2: number, lon2: number) {

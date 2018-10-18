@@ -14,21 +14,10 @@
 		"open-user-location": "Editiere vorhandene Standorte"
 	},
 	"belaqi-wheel": {
-		"modelled-hint": "Modelliert für diesen Standort"
+		"modelled-hint": "Modelliert für diesen Standort",
+		"no-index-ascertained": "Es konnte kein Belaqi index ermittelt werden. Dies könnte damit zusammenhängen, das der Standort nicht innerhalb Belgien's liegt."
 	},
 	"belaqi": {
-		"level": {
-			"bad": "Schlecht",
-			"excellent": "Ausgezeichnet",
-			"fairly-good": "Relativ gut",
-			"good": "Gut",
-			"horrible": "Extrem schlecht",
-			"moderate": "Mittelmäßig",
-			"poor": "Ungenügend",
-			"very-bad": "Sehr schlecht",
-			"very-good": "Sehr gut",
-			"very-poor": "Relativ schlecht"
-		},
 		"level-split": {
 			"bad": "Schlecht",
 			"excellent": "Ausge- zeichnet",
@@ -37,6 +26,18 @@
 			"horrible": "Extrem schlecht",
 			"moderate": "Mittel- mäßig",
 			"poor": "Unge- nügend",
+			"very-bad": "Sehr schlecht",
+			"very-good": "Sehr gut",
+			"very-poor": "Relativ schlecht"
+		},
+		"level": {
+			"bad": "Schlecht",
+			"excellent": "Ausgezeichnet",
+			"fairly-good": "Relativ gut",
+			"good": "Gut",
+			"horrible": "Extrem schlecht",
+			"moderate": "Mittelmäßig",
+			"poor": "Ungenügend",
 			"very-bad": "Sehr schlecht",
 			"very-good": "Sehr gut",
 			"very-poor": "Relativ schlecht"
@@ -127,10 +128,10 @@
 		},
 		"header": "Karte",
 		"interpolated-map": "Interpolierte Karte",
-		"show-in-diagram": "Zeige {{value}} Zeitreihen im Diagramm",
-		"pollutant":{
+		"pollutant": {
 			"other": "andere"
 		},
+		"show-in-diagram": "Zeige {{value}} Zeitreihen im Diagramm",
 		"time": {
 			"current": "Derzeit",
 			"today": "Heute",

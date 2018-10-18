@@ -21,18 +21,30 @@ export class BelaqiChartComponent implements OnChanges {
   @Input()
   public location: BelaqiLocation;
 
+  public error: boolean;
+  public loading: boolean;
+
   constructor(
     private belaqiIndex: BelaqiIndexProvider
   ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.location && this.location) {
+      this.loading = true;
       this.belaqiIndex.getTimeline(this.location.latitude, this.location.longitude, this.location.date)
-      .subscribe(res => this.drawChart(res))
+        .subscribe(
+          res => this.drawChart(res),
+          error => this.handleError(error))
     }
   }
 
+  private handleError(error: any) {
+    this.error = true;
+    this.loading = false;
+  }
+
   private drawChart(belaqiTimeline: BelaqiTimelineEntry[]) {
+    this.loading = false;
     const canvas = this.barCanvas.nativeElement as HTMLCanvasElement;
     const ctx = canvas.getContext("2d");
     const chart = new Chart(ctx, {

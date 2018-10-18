@@ -14,10 +14,11 @@
 		"open-user-location": "Edit current locations"
 	},
 	"belaqi-wheel": {
-		"modelled-hint": "Modelled value for this location"
+		"modelled-hint": "Modelled value for this location",
+		"no-index-ascertained": "No belaqi index could be ascertained. This can be the case that the location is not in Belgium."
 	},
 	"belaqi": {
-		"level": {
+		"level-split": {
 			"bad": "Bad",
 			"excellent": "Excellent",
 			"fairly-good": "Fairly good",
@@ -29,7 +30,7 @@
 			"very-good": "Very good",
 			"very-poor": "Very poor"
 		},
-		"level-split": {
+		"level": {
 			"bad": "Bad",
 			"excellent": "Excellent",
 			"fairly-good": "Fairly good",
@@ -127,10 +128,10 @@
 		},
 		"header": "Map",
 		"interpolated-map": "interpolated map",
-		"show-in-diagram": "Show {{value}} timeseries in diagram",
-		"pollutant":{
+		"pollutant": {
 			"other": "other"
 		},
+		"show-in-diagram": "Show {{value}} timeseries in diagram",
 		"time": {
 			"current": "Current",
 			"today": "Today",

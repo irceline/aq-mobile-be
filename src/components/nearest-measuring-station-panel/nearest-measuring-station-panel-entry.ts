@@ -52,16 +52,18 @@ export class NearestMeasuringStationPanelEntryComponent implements OnChanges {
 
   private determineNextStationValue() {
     this.nearestTimeseries.determineNextTimeseries(this.location.latitude, this.location.longitude, this.entry.id).subscribe(nearestSeries => {
-      this.nearestTimeseriesManager.setNearestTimeseries(this.location.locationLabel, this.entry.id, nearestSeries.series.internalId);
-      this.stationDistance = nearestSeries.distance;
-      this.stationLabel = nearestSeries.series.station.properties.label;
-      const matchingInterval = this.statusIntervalResolver.getMatchingInterval(nearestSeries.series.lastValue.value, nearestSeries.series.statusIntervals)
-      if (matchingInterval) {
-        this.backgroundColor = matchingInterval.color;
-        this.color = invert(this.backgroundColor, true);
+      if (nearestSeries) {
+        this.nearestTimeseriesManager.setNearestTimeseries(this.location.locationLabel, this.entry.id, nearestSeries.series.internalId);
+        this.stationDistance = nearestSeries.distance;
+        this.stationLabel = nearestSeries.series.station.properties.label;
+        const matchingInterval = this.statusIntervalResolver.getMatchingInterval(nearestSeries.series.lastValue.value, nearestSeries.series.statusIntervals)
+        if (matchingInterval) {
+          this.backgroundColor = matchingInterval.color;
+          this.color = invert(this.backgroundColor, true);
+        }
+        this.lastStationaryValue = nearestSeries.series.lastValue
+        this.uom = nearestSeries.series.uom;
       }
-      this.lastStationaryValue = nearestSeries.series.lastValue
-      this.uom = nearestSeries.series.uom;
       this.loadingStationValue = false;
     });
   }

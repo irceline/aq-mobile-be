@@ -158,10 +158,6 @@ export class UserLocationListProvider {
     return this.currentUserLocations && this.currentUserLocations.length > 0;
   }
 
-  public isShowCurrentLocation(): boolean {
-    return this.showCurrentLocation;
-  }
-
   public setShowCurrentLocation(show: boolean) {
     this.showCurrentLocation = show;
     this.storeLocations();
