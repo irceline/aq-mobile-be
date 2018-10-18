@@ -7,5 +7,6 @@
 </div>
 <div class="entry-footer">
 <div class="station-distance" *ngIf="!loadingStationValue">{{stationDistance | number:'1.0-1'}}km</div>
-<div class="station-label" *ngIf="!loadingStationValue">{{stationLabel}}</div>
+<div class="station-label" *ngIf="!loadingStationValue">{{stationLabel | slice : 9 : 50}}</div>
+<div class="station-label" *ngIf="!loadingStationValue">{{stationLabel | slice : 0 : 6}}</div>
 </div>
