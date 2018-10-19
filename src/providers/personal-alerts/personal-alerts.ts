@@ -76,21 +76,23 @@ export class PersonalAlertsProvider {
 
     this.platform.ready().then(() => {
 
-      this.backgroundMode.on('activate').subscribe(res => {
-        // this.backgroundMode.disableWebViewOptimizations();
-        // this.localNotifications.schedule({ text: 'Start BackgroundMode - min: ' + this.getPeriod() + ', level: ' + this.getLevel() });
-        this.interval = setInterval(this.runAlertTask, this.getPeriod() * MINUTE_IN_MILLIS);
-      });
-
-      this.backgroundMode.on('deactivate').subscribe(res => {
-        if (this.interval) { clearInterval(this.interval); }
-        this.interval = null;
-      });
-
-      this.translateSrvc.onLangChange.subscribe(res => this.setBackgroundModeInformations());
-      if (this.translateSrvc.currentLang) { this.setBackgroundModeInformations() };
-
-      this.backgroundMode.enable();
+      if (this.platform.is('cordova')) {
+        this.backgroundMode.on('activate').subscribe(res => {
+          // this.backgroundMode.disableWebViewOptimizations();
+          // this.localNotifications.schedule({ text: 'Start BackgroundMode - min: ' + this.getPeriod() + ', level: ' + this.getLevel() });
+          this.interval = setInterval(this.runAlertTask, this.getPeriod() * MINUTE_IN_MILLIS);
+        });
+  
+        this.backgroundMode.on('deactivate').subscribe(res => {
+          if (this.interval) { clearInterval(this.interval); }
+          this.interval = null;
+        });
+  
+        this.translateSrvc.onLangChange.subscribe(res => this.setBackgroundModeInformations());
+        if (this.translateSrvc.currentLang) { this.setBackgroundModeInformations() };
+  
+        this.backgroundMode.enable();
+      }
     });
 
   }
