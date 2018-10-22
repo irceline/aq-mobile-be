@@ -75,7 +75,7 @@ export class UserLocationListProvider {
   public determineCurrentLocation(): Observable<UserLocation> {
     return new Observable((observer: Observer<UserLocation>) => {
       this.locate.getGeoposition().subscribe((pos: Geoposition) => {
-        const reverseObs = this.geoSearch.reverse({ type: 'Point', coordinates: [pos.coords.latitude, pos.coords.longitude] });
+        const reverseObs = this.geoSearch.reverse({ type: 'Point', coordinates: [pos.coords.latitude, pos.coords.longitude] }, { addressdetails: false });
         reverseObs.subscribe(
           value => {
             const locationLabel = value.displayName || this.translateSrvc.instant('belaqi-user-location-slider.current-location');

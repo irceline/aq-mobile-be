@@ -82,15 +82,15 @@ export class PersonalAlertsProvider {
           // this.localNotifications.schedule({ text: 'Start BackgroundMode - min: ' + this.getPeriod() + ', level: ' + this.getLevel() });
           this.interval = setInterval(this.runAlertTask, this.getPeriod() * MINUTE_IN_MILLIS);
         });
-  
+
         this.backgroundMode.on('deactivate').subscribe(res => {
           if (this.interval) { clearInterval(this.interval); }
           this.interval = null;
         });
-  
+
         this.translateSrvc.onLangChange.subscribe(res => this.setBackgroundModeInformations());
         if (this.translateSrvc.currentLang) { this.setBackgroundModeInformations() };
-  
+
         this.backgroundMode.enable();
       }
     });
@@ -178,7 +178,7 @@ export class PersonalAlertsProvider {
             if (location) {
               forkJoin(
                 this.belaqiProvider.getValue(location.latitude, location.longitude),
-                this.geosearch.reverse({ type: 'Point', coordinates: [location.latitude, location.longitude] }, {})
+                this.geosearch.reverse({ type: 'Point', coordinates: [location.latitude, location.longitude] }, { addressdetails: false })
               ).subscribe(res => {
                 // this.localNotifications.schedule({ text: 'forkJoin: ' + res.toString(), id: 600 });
                 const belaqi = res[0] ? res[0] : null;
