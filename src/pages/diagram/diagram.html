@@ -40,14 +40,14 @@
           <simple-legend-entry [datasetId]="id" [datasetOptions]="userTsSrvc.datasetOptions.get(id)" [selected]="isSelected(id)"
             (onSelectDataset)="onSelectedDataset(id, $event)"></simple-legend-entry>
         </div>
-        <ion-fab bottom right>
-          <button ion-fab mini (click)="openLegend()">
-            <ion-icon name="arrow-dropup"></ion-icon>
-          </button>
-        </ion-fab>
       </div>
     </div>
   </ion-card>
+  <ion-fab bottom right>
+    <button ion-fab mini (click)="openLegend()">
+      <ion-icon name="arrow-dropup"></ion-icon>
+    </button>
+  </ion-fab>
   <ion-card *ngIf="tsSrvc.datasetIds.length === 0">
     <ion-card-header text-center>
       {{'diagram.no-timeseries-selected' | translate}}

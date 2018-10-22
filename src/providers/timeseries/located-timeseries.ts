@@ -12,7 +12,7 @@ export class LocatedTimeseriesService extends DatasetService<DatasetOptions> {
 
   private selectedIndex: number;
 
-  private showSeries;
+  private showSeries: boolean;
 
   constructor(
     private color: ColorService,
@@ -36,11 +36,13 @@ export class LocatedTimeseriesService extends DatasetService<DatasetOptions> {
   }
 
   public loadNearestSeries() {
-    this.userlocation.getAllLocations().subscribe(locations => {
-      this.nearestTimeseriesManager
-        .getNearestTimeseries(locations[this.selectedIndex].label)
-        .forEach(e => this.addDataset(e));
-    });
+    if (this.showSeries) {
+      this.userlocation.getAllLocations().subscribe(locations => {
+        this.nearestTimeseriesManager
+          .getNearestTimeseries(locations[this.selectedIndex].label)
+          .forEach(e => this.addDataset(e));
+      });
+    }
   }
 
   public setShowNearestSeriesByDefault(nearestSeriesByDefault: boolean) {
