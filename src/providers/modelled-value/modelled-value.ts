@@ -8,7 +8,8 @@ import { ValueProvider } from '../value-provider';
 export enum ModelledPhenomenon {
   no2 = 'rioifdm:no2_hmean',
   o3 = 'rioifdm:o3_hmean',
-  pm10 = 'rioifdm:pm10_hmean'
+  pm10 = 'rioifdm:pm10_hmean',
+  pm25 = 'rioifdm:pm25_hmean'
 }
 
 @Injectable()

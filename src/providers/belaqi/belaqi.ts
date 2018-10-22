@@ -17,6 +17,7 @@ export interface BelaqiTimelineEntry {
 interface TrendResultEntry {
   o3: [Date, number][];
   pm10: [Date, number][];
+  pm25: [Date, number][];
 }
 
 interface TrendResult {
@@ -41,24 +42,27 @@ export class BelaqiIndexProvider extends ValueProvider {
 
   public getValue(latitude: number, longitude: number, time?: Date): Observable<number> {
     const url = 'https://geo.irceline.be/rioifdm/belaqi/wms';
+    const params = {
+      request: 'GetFeatureInfo',
+      bbox: this.calculateRequestBbox(latitude, longitude),
+      service: 'WMS',
+      info_format: 'application/json',
+      query_layers: 'rioifdm:belaqi',
+      layers: 'rioifdm:belaqi',
+      width: '1',
+      height: '1',
+      srs: 'EPSG:4326',
+      version: '1.1.1',
+      X: '1',
+      Y: '1'
+    };
+    if (time) {
+      params['time'] = time.toISOString();
+    }
     return this.http.client().get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url,
       {
         responseType: 'json',
-        params: {
-          request: 'GetFeatureInfo',
-          bbox: this.calculateRequestBbox(latitude, longitude),
-          service: 'WMS',
-          info_format: 'application/json',
-          query_layers: 'rioifdm:belaqi',
-          layers: 'rioifdm:belaqi',
-          width: '1',
-          height: '1',
-          srs: 'EPSG:4326',
-          version: '1.1.1',
-          // time: moment(time).format('YYYY-MM-DD'),
-          X: '1',
-          Y: '1'
-        }
+        params: params
       }
     ).pipe(
       map((res) => {
@@ -165,7 +169,8 @@ export class BelaqiIndexProvider extends ValueProvider {
       this.getTrends().subscribe(trend => {
         forkJoin([
           this.createPhenomenonTimeline(latitude, longitude, time, ModelledPhenomenon.o3, trend["latest observations"].o3, trend.trend.o3),
-          this.createPhenomenonTimeline(latitude, longitude, time, ModelledPhenomenon.pm10, trend["latest observations"].pm10, trend.trend.pm10)
+          this.createPhenomenonTimeline(latitude, longitude, time, ModelledPhenomenon.pm10, trend["latest observations"].pm10, trend.trend.pm10),
+          this.createPhenomenonTimeline(latitude, longitude, time, ModelledPhenomenon.pm25, trend["latest observations"].pm25, trend.trend.pm10)
         ]).map(res => {
           return res[0].map((entry, i) => {
             // TODO maybe create a better merge function
@@ -236,8 +241,10 @@ export class BelaqiIndexProvider extends ValueProvider {
       .map(res => {
         res["latest observations"].o3.forEach(e => e[0] = new Date(e[0]));
         res["latest observations"].pm10.forEach(e => e[0] = new Date(e[0]));
+        res["latest observations"].pm25.forEach(e => e[0] = new Date(e[0]));
         res.trend.o3.forEach(e => e[0] = new Date(e[0]));
         res.trend.pm10.forEach(e => e[0] = new Date(e[0]));
+        res.trend.pm25.forEach(e => e[0] = new Date(e[0]));
         return res;
       });
   }

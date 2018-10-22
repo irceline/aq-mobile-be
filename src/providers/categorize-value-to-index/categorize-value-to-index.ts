@@ -11,6 +11,8 @@ export class CategorizeValueToIndexProvider {
         return this.categorizeO3(value);
       case ModelledPhenomenon.pm10:
         return this.categorizePM10(value);
+      case ModelledPhenomenon.pm25:
+        return this.categorizePM25(value);
       default:
         throw "not implemented for " + phenomenon;
     }
@@ -39,6 +41,19 @@ export class CategorizeValueToIndexProvider {
     if (value <= 70) return 7;
     if (value <= 80) return 8;
     if (value <= 90) return 9;
+    return 10;
+  }
+
+  private categorizePM25(value: number): number {
+    if (value <= 5) return 1;
+    if (value <= 10) return 2;
+    if (value <= 15) return 3;
+    if (value <= 25) return 4;
+    if (value <= 35) return 5;
+    if (value <= 40) return 6;
+    if (value <= 50) return 7;
+    if (value <= 60) return 8;
+    if (value <= 70) return 9;
     return 10;
   }
 }
