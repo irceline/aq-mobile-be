@@ -59,6 +59,8 @@ export class MapPage {
 
   public name = 'map';
 
+  // show only status intervals for the last two hours as colored marker
+  public statusIntervalDuration = 2 * 60 * 60 * 1000;
   public geoSearchOptions: GeoSearchOptions;
   public phenomenonLabel: PhenomenonLabel = PhenomenonLabel.NO2;
   public time: TimeLabel = TimeLabel.current;
