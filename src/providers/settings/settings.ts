@@ -11,6 +11,7 @@ export interface MobileSettings extends Settings {
     geoSearchContryCodes: string[];
     defaultBbox: L.LatLngBoundsExpression;
     personalAlert: PersonalAlert[];
+    colorizedMarkerForLastMilliseconds: number;
 }
 
 export interface PersonalAlert {

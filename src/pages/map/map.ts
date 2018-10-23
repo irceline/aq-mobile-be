@@ -60,8 +60,7 @@ export class MapPage {
 
   public name = 'map';
 
-  // show only status intervals for the last two hours as colored marker
-  public statusIntervalDuration = 2 * 60 * 60 * 1000;
+  public statusIntervalDuration: number;
   public geoSearchOptions: GeoSearchOptions;
   public phenomenonLabel: PhenomenonLabel = PhenomenonLabel.NO2;
   public time: TimeLabel = TimeLabel.current;
@@ -99,6 +98,7 @@ export class MapPage {
     const settings = this.settingsSrvc.getSettings();
     this.providerUrl = settings.datasetApis[0].url;
     this.clusterStations = settings.clusterStationsOnMap;
+    this.statusIntervalDuration = settings.colorizedMarkerForLastMilliseconds;
     this.geoSearchOptions = { countrycodes: settings.geoSearchContryCodes };
 
     this.belaqiSelection = this.navParams.get('belaqiSelection') as BelaqiSelection;

@@ -33,6 +33,7 @@
   "geoSearchContryCodes": [
     "be"
   ],
+  "colorizedMarkerForLastMilliseconds": 7200000,
   "personalAlert": [{
       "period": 5
     },
