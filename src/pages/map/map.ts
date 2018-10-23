@@ -118,7 +118,7 @@ export class MapPage {
         this.mapCache.getMap(this.mapId).setView({
           lat: latitude,
           lng: longitude
-        }, 14);
+        }, 12);
       } else {
         this.mapCache.getMap(this.mapId).fitBounds(this.settingsSrvc.getSettings().defaultBbox);
       }
