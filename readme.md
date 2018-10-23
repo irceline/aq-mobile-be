@@ -102,6 +102,7 @@ ionic cordova build android
         com.google.android.gms:play-services-location:xx.xx.xx
         ```
     * Build again with `ionic cordova build android`
+    * Also see here if there are still errors: https://github.com/mauron85/react-native-background-geolocation/issues/216
   * on `OSX` you will `Android Studio` and:
     * `cd ~/Library/Android/sdk/tools/bin/`
     * run `./sdkmanager --licenses` and accept all

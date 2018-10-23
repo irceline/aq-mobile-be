@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="/home/jan/coding/client/irceline/aq-mobile-be/platforms/android/CordovaLib/assets"/><source path="/home/jan/coding/client/irceline/aq-mobile-be/platforms/android/CordovaLib/build/generated/assets/shaders/debug"/></dataSet><dataSet config="debug"><source path="/home/jan/coding/client/irceline/aq-mobile-be/platforms/android/CordovaLib/src/debug/assets"/></dataSet></merger>
