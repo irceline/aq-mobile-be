@@ -3,10 +3,10 @@ import { TranslateService } from '@ngx-translate/core';
 import { IonAffixEvent } from 'ion-affix/dist/directives/ion-affix-event';
 import { NavController } from 'ionic-angular';
 
+import { HeaderContent } from '../../components/belaqi-user-location-slider/belaqi-user-location-slider';
 import {
-  HeaderContent,
   PhenomenonLocationSelection,
-} from '../../components/belaqi-user-location-slider/belaqi-user-location-slider';
+} from '../../components/nearest-measuring-station-panel/nearest-measuring-station-panel-entry';
 import { UserLocationListProvider } from '../../providers/user-location-list/user-location-list';
 import { MapPage } from '../map/map';
 
