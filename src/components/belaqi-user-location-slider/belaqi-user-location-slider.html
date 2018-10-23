@@ -7,7 +7,7 @@
       <belaqi-chart [location]="loc"></belaqi-chart>
     </div>
     <div>
-      <nearest-measuring-station-panel [location]="loc" (onSelect)="selectPhenomenon($event)"></nearest-measuring-station-panel>
+      <nearest-measuring-station-panel [location]="loc" (onSelect)="selectPhenomenon($event, loc)"></nearest-measuring-station-panel>
     </div>
   </ion-slide>
   <ion-slide>

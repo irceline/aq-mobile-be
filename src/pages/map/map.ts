@@ -96,7 +96,6 @@ export class MapPage {
     const settings = this.settingsSrvc.getSettings();
     this.providerUrl = settings.datasetApis[0].url;
     this.clusterStations = settings.clusterStationsOnMap;
-    this.fitBounds = settings.defaultBbox;
     this.geoSearchOptions = { countrycodes: settings.geoSearchContryCodes };
 
     if (this.navParams.get('phenomenonId')) {
@@ -108,6 +107,22 @@ export class MapPage {
 
   public mapInitialized(mapId: string) {
     this.showLegend();
+    this.zoomToLocation();
+  }
+
+  private zoomToLocation() {
+    if (this.mapCache.hasMap(this.mapId)) {
+      const latitude = this.navParams.get('latitude');
+      const longitude = this.navParams.get('longitude');
+      if (latitude && longitude) {
+        this.mapCache.getMap(this.mapId).setView({
+          lat: latitude,
+          lng: longitude
+        }, 14);
+      } else {
+        this.mapCache.getMap(this.mapId).fitBounds(this.settingsSrvc.getSettings().defaultBbox);
+      }
+    }
   }
 
   public showLegend() {

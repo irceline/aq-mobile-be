@@ -10,6 +10,7 @@ import { LocatedTimeseriesService } from '../../providers/timeseries/located-tim
 import { UserLocationListProvider } from '../../providers/user-location-list/user-location-list';
 import { ModalUserLocationCreationComponent } from '../modal-user-location-creation/modal-user-location-creation';
 import { ModalUserLocationListComponent } from '../modal-user-location-list/modal-user-location-list';
+import { PhenomenonLocationSelection } from '../nearest-measuring-station-panel/nearest-measuring-station-panel-entry';
 
 export interface BelaqiLocation {
   index?: number;
@@ -39,7 +40,7 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
   slider: Slides;
 
   @Output()
-  public phenomenonSelected: EventEmitter<string> = new EventEmitter();
+  public phenomenonSelected: EventEmitter<PhenomenonLocationSelection> = new EventEmitter();
 
   @Output()
   public headerContent: EventEmitter<HeaderContent> = new EventEmitter();
@@ -73,8 +74,8 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
     this.slider.autoHeight = false;
   }
 
-  public selectPhenomenon(phenomenonId: string) {
-    this.phenomenonSelected.emit(phenomenonId);
+  public selectPhenomenon(selection: PhenomenonLocationSelection) {
+    this.phenomenonSelected.emit(selection);
   }
 
   public createNewLocation() {

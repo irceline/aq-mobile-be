@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { FirstLastValue, StatusIntervalResolverService } from '@helgoland/core';
+import { FirstLastValue, StatusIntervalResolverService, Timeseries } from '@helgoland/core';
+import { Point } from 'geojson';
 import invert from 'invert-color';
 
 import { NearestTimeseriesManagerProvider } from '../../providers/nearest-timeseries-manager/nearest-timeseries-manager';
@@ -9,6 +10,12 @@ import { BelaqiLocation } from '../belaqi-user-location-slider/belaqi-user-locat
 interface PanelEntry {
   label: string;
   id: string;
+}
+
+export interface PhenomenonLocationSelection {
+  phenomenonId: string;
+  longitude: number;
+  latitude: number;
 }
 
 @Component({
@@ -25,6 +32,8 @@ export class NearestMeasuringStationPanelEntryComponent implements OnChanges {
   public color: string;
   public loadingStationValue: boolean = true;
 
+  public series: Timeseries;
+
   @Input()
   public entry: PanelEntry;
 
@@ -32,7 +41,7 @@ export class NearestMeasuringStationPanelEntryComponent implements OnChanges {
   public location: BelaqiLocation;
 
   @Output()
-  public onClicked: EventEmitter<string> = new EventEmitter<string>();
+  public onClicked: EventEmitter<PhenomenonLocationSelection> = new EventEmitter<PhenomenonLocationSelection>();
 
   constructor(
     private statusIntervalResolver: StatusIntervalResolverService,
@@ -47,13 +56,22 @@ export class NearestMeasuringStationPanelEntryComponent implements OnChanges {
   }
 
   public select() {
-    this.onClicked.emit(this.entry.id);
+    if (this.series.station.geometry.type === 'Point') {
+      const longitude = (this.series.station.geometry as Point).coordinates[0];
+      const latitude = (this.series.station.geometry as Point).coordinates[1];
+      this.onClicked.emit({
+        phenomenonId: this.entry.id,
+        latitude,
+        longitude
+      });
+    }
   }
 
   private determineNextStationValue() {
     this.nearestTimeseries.determineNextTimeseries(this.location.latitude, this.location.longitude, this.entry.id).subscribe(nearestSeries => {
       if (nearestSeries) {
         this.nearestTimeseriesManager.setNearestTimeseries(this.location.locationLabel, this.entry.id, nearestSeries.series.internalId);
+        this.series = nearestSeries.series;
         this.stationDistance = nearestSeries.distance;
         this.stationLabel = nearestSeries.series.station.properties.label;
         const matchingInterval = this.statusIntervalResolver.getMatchingInterval(nearestSeries.series.lastValue.value, nearestSeries.series.statusIntervals)
