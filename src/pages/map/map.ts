@@ -6,9 +6,10 @@ import { DatasetApiInterface, ParameterFilter, Phenomenon, Platform, SettingsSer
 import { GeoSearchOptions, LayerOptions, MapCache } from '@helgoland/map';
 import { TranslateService } from '@ngx-translate/core';
 import { ModalController, NavController, NavParams } from 'ionic-angular';
-import L, { BoundaryCanvasOptions } from 'leaflet';
+import L, { BoundaryCanvasOptions, latLngBounds, LatLngExpression, popup } from 'leaflet';
 import moment from 'moment';
 
+import { BelaqiSelection } from '../../components/belaqi-user-location-slider/belaqi-user-location-slider';
 import { ModalPhenomenonSelectorComponent } from '../../components/modal-phenomenon-selector/modal-phenomenon-selector';
 import { StationSelectorComponent } from '../../components/station-selector/station-selector';
 import { IrcelineSettingsProvider } from '../../providers/irceline-settings/irceline-settings';
@@ -81,6 +82,8 @@ export class MapPage {
 
   public mapId = 'map';
 
+  private belaqiSelection: BelaqiSelection;
+
   constructor(
     protected navCtrl: NavController,
     protected settingsSrvc: SettingsService<MobileSettings>,
@@ -98,8 +101,10 @@ export class MapPage {
     this.clusterStations = settings.clusterStationsOnMap;
     this.geoSearchOptions = { countrycodes: settings.geoSearchContryCodes };
 
-    if (this.navParams.get('phenomenonId')) {
-      this.getPhenomenonFromAPI(this.navParams.get('phenomenonId'));
+    this.belaqiSelection = this.navParams.get('belaqiSelection') as BelaqiSelection;
+
+    if (this.belaqiSelection) {
+      this.getPhenomenonFromAPI(this.belaqiSelection.phenomenonStation.phenomenonId);
     } else {
       this.onPhenomenonChange();
     }
@@ -112,15 +117,25 @@ export class MapPage {
 
   private zoomToLocation() {
     if (this.mapCache.hasMap(this.mapId)) {
-      const latitude = this.navParams.get('latitude');
-      const longitude = this.navParams.get('longitude');
-      if (latitude && longitude) {
-        this.mapCache.getMap(this.mapId).setView({
-          lat: latitude,
-          lng: longitude
-        }, 14);
+      const map = this.mapCache.getMap(this.mapId);
+      const selection = this.navParams.get('belaqiSelection') as BelaqiSelection;
+      if (selection) {
+        const station = { lat: selection.phenomenonStation.latitude, lng: selection.phenomenonStation.longitude } as LatLngExpression;
+        const location = { lat: selection.location.latitude, lng: selection.location.longitude } as LatLngExpression;
+        map.addLayer(
+          popup({ autoPan: false })
+            .setLatLng(station)
+            .setContent(this.translateSrvc.instant('map.nearest-station'))
+        )
+        const label = selection.location.type === 'user' ? this.translateSrvc.instant('map.configured-location') : this.translateSrvc.instant('map.current-location');
+        map.addLayer(
+          popup({ autoPan: false })
+            .setLatLng(location)
+            .setContent(label)
+        )
+        map.fitBounds(latLngBounds(station, station).extend(location), { padding: [70, 70] });
       } else {
-        this.mapCache.getMap(this.mapId).fitBounds(this.settingsSrvc.getSettings().defaultBbox);
+        map.fitBounds(this.settingsSrvc.getSettings().defaultBbox);
       }
     }
   }

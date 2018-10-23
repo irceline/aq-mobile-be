@@ -122,12 +122,15 @@
 		"last-value-at": "laatste waarde"
 	},
 	"map": {
+		"configured-location": "",
+		"current-location": "",
 		"dataset-selection-hint": "Selecteer een of meerdere tijdsreeks(en) voor weergave op een diagram",
 		"geosearch": {
 			"placeholder": "Zoek locatie"
 		},
 		"header": "Kaart",
 		"interpolated-map": "Geïnterpoleerde kaart",
+		"nearest-station": "",
 		"pollutant": {
 			"other": "andere"
 		},

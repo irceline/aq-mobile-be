@@ -122,12 +122,15 @@
 		"last-value-at": "Dernière valeur à"
 	},
 	"map": {
+		"configured-location": "",
+		"current-location": "",
 		"dataset-selection-hint": "Veuillez sélectionner une ou plusieurs séries à afficher",
 		"geosearch": {
 			"placeholder": "Recherche la localisation ..."
 		},
 		"header": "Carte",
 		"interpolated-map": "Carte interpolée",
+		"nearest-station": "",
 		"pollutant": {
 			"other": "autre"
 		},

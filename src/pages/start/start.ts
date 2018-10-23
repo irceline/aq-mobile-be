@@ -3,10 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { IonAffixEvent } from 'ion-affix/dist/directives/ion-affix-event';
 import { NavController } from 'ionic-angular';
 
-import { HeaderContent } from '../../components/belaqi-user-location-slider/belaqi-user-location-slider';
-import {
-  PhenomenonLocationSelection,
-} from '../../components/nearest-measuring-station-panel/nearest-measuring-station-panel-entry';
+import { BelaqiSelection, HeaderContent } from '../../components/belaqi-user-location-slider/belaqi-user-location-slider';
 import { UserLocationListProvider } from '../../providers/user-location-list/user-location-list';
 import { MapPage } from '../map/map';
 
@@ -29,8 +26,8 @@ export class StartPage {
     this.userLocations.getAllLocations().subscribe(list => this.locationCount = list.length);
   }
 
-  public navigateToMap(selection: PhenomenonLocationSelection) {
-    this.nav.push(MapPage, { phenomenonId: selection.phenomenonId, longitude: selection.longitude, latitude: selection.latitude });
+  public navigateToMap(selection: BelaqiSelection) {
+    this.nav.push(MapPage, { belaqiSelection: selection });
   }
 
   public setHeaderContent(headerContent: HeaderContent) {

@@ -30,6 +30,16 @@ export interface HeaderContent {
   current: boolean;
 }
 
+export interface BelaqiSelection {
+  phenomenonStation: PhenomenonLocationSelection,
+  location: {
+    longitude: number;
+    latitude: number;
+    label: string;
+    type: 'user' | 'current';
+  }
+}
+
 @Component({
   selector: 'belaqi-user-location-slider',
   templateUrl: 'belaqi-user-location-slider.html'
@@ -40,7 +50,7 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
   slider: Slides;
 
   @Output()
-  public phenomenonSelected: EventEmitter<PhenomenonLocationSelection> = new EventEmitter();
+  public phenomenonSelected: EventEmitter<BelaqiSelection> = new EventEmitter();
 
   @Output()
   public headerContent: EventEmitter<HeaderContent> = new EventEmitter();
@@ -74,8 +84,16 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
     this.slider.autoHeight = false;
   }
 
-  public selectPhenomenon(selection: PhenomenonLocationSelection) {
-    this.phenomenonSelected.emit(selection);
+  public selectPhenomenon(selection: PhenomenonLocationSelection, userlocation: BelaqiLocation) {
+    this.phenomenonSelected.emit({
+      phenomenonStation: selection,
+      location: {
+        latitude: userlocation.latitude,
+        longitude: userlocation.longitude,
+        label: userlocation.locationLabel,
+        type: userlocation.type
+      }
+    });
   }
 
   public createNewLocation() {
