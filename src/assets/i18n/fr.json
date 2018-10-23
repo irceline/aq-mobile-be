@@ -15,7 +15,7 @@
 	},
 	"belaqi-wheel": {
 		"modelled-hint": "Modélisé pour cette position",
-		"no-index-ascertained": ""
+		"no-index-ascertained": "Aucun indice BelAQI n'a pu être déterminé. Cela peut être le cas si la position n'est pas en Belgique."
 	},
 	"belaqi": {
 		"level-split": {
@@ -122,15 +122,15 @@
 		"last-value-at": "Dernière valeur à"
 	},
 	"map": {
-		"configured-location": "",
-		"current-location": "",
+		"configured-location": "Votre position configuré",
+		"current-location": "Votre position actuelle",
 		"dataset-selection-hint": "Veuillez sélectionner une ou plusieurs séries à afficher",
 		"geosearch": {
 			"placeholder": "Recherche la localisation ..."
 		},
 		"header": "Carte",
 		"interpolated-map": "Carte interpolée",
-		"nearest-station": "",
+		"nearest-station": "Station de mesure la plus proche",
 		"pollutant": {
 			"other": "autre"
 		},

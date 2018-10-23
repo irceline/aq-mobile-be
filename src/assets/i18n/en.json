@@ -15,7 +15,7 @@
 	},
 	"belaqi-wheel": {
 		"modelled-hint": "Modelled value for this location",
-		"no-index-ascertained": "No belaqi index could be ascertained. This can be the case that the location is not in Belgium."
+		"no-index-ascertained": "No BelAQI index could be ascertained. This can be the case that the location is not in Belgium."
 	},
 	"belaqi": {
 		"level-split": {
