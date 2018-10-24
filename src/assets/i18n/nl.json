@@ -85,8 +85,8 @@
 		"select-timeseries": "Selecteer aub een tijdsreeks"
 	},
 	"home": {
-		"alert": "geen officiële meldingen met betrekking tot periodes van verhoogde luchtverontreiniging",
-		"alertheader": "Momenteel geen waarschuwingen:",
+		"noAlert": "geen officiële meldingen met betrekking tot periodes van verhoogde luchtverontreiniging",
+		"noAlertheader": "Momenteel geen waarschuwingen:",
 		"header": "Start"
 	},
 	"intro": {
@@ -161,6 +161,7 @@
 	},
 	"network": {
 		"geolocationDisabled": "Geolocatie is uitgeschakeld",
+		"geolocationEnabled": "Geolocatie is geactiveerd",
 		"offline": "U toestel offline",
 		"online": "U toestel is online"
 	},

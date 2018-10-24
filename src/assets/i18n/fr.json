@@ -85,8 +85,8 @@
 		"select-timeseries": "Veuillez sélectionner une série"
 	},
 	"home": {
-		"alert": "aucun rapport officiel concernant les périodes de pollution atmosphérique accrue",
-		"alertheader": "Actuellement pas d'alert:",
+		"noAlert": "aucun rapport officiel concernant les périodes de pollution atmosphérique accrue",
+		"noAlertheader": "Actuellement pas d'alert:",
 		"header": "Accueil"
 	},
 	"intro": {
@@ -161,6 +161,7 @@
 	},
 	"network": {
 		"geolocationDisabled": "La géolocalisation est désactivée",
+		"geolocationEnabled": "La géolocalisation est activée",
 		"offline": "Votre appareil est offline",
 		"online": "Votre appareil est online"
 	},

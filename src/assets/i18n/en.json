@@ -85,8 +85,8 @@
 		"select-timeseries": "Please select a timeseries"
 	},
 	"home": {
-		"alert": "no official messages concerning periods of increased air pollution",
-		"alertheader": "Currently no warnings:",
+		"noAlert": "no official messages concerning periods of increased air pollution",
+		"noAlertheader": "Currently no warnings:",
 		"header": "Home"
 	},
 	"intro": {
@@ -161,6 +161,7 @@
 	},
 	"network": {
 		"geolocationDisabled": "Geolocation is disabled",
+		"geolocationEnabled": "Geolocation is enabled",
 		"offline": "Your device is offline",
 		"online": "Your device is online"
 	},

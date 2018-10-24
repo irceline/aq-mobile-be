@@ -85,8 +85,8 @@
 		"select-timeseries": "Bitte wähle eine Zeitreihe"
 	},
 	"home": {
-		"alert": "keine offiziellen Berichte über erhöhter Luftverschmutzung",
-		"alertheader": "Derzeit keine Warnungen:",
+		"noAlert": "keine offiziellen Berichte über erhöhter Luftverschmutzung",
+		"noAlertheader": "Derzeit keine Warnungen:",
 		"header": "Start"
 	},
 	"intro": {
@@ -161,6 +161,7 @@
 	},
 	"network": {
 		"geolocationDisabled": "Die Standortermittlung ist deaktiviert",
+		"geolocationEnabled": "Die Standortermittlung ist aktiviert",
 		"offline": "Dein Handy ist offline",
 		"online": "Dein Handy ist online"
 	},
