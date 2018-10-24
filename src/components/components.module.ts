@@ -10,6 +10,7 @@ import { IonicModule } from 'ionic-angular';
 
 import { AirQualityIndexComponent } from './air-quality-index/air-quality-index';
 import { AirQualityLocationPanelComponent } from './air-quality-location-panel/air-quality-location-panel';
+import { AnnualPhenomenonButtonsComponent } from './annual-phenomenon-buttons/annual-phenomenon-buttons';
 import { BelaqiChartComponent } from './belaqi-chart/belaqi-chart';
 import { BelaqiUserLocationSliderComponent } from './belaqi-user-location-slider/belaqi-user-location-slider';
 import { BelaqiWheelComponent } from './belaqi-wheel/belaqi-wheel';
@@ -27,6 +28,7 @@ import { MobilePhenomenonSelectorComponent } from './mobile-phenomenon-selector/
 import { MobileTimeseriesEntryComponent } from './mobile-timeseries-entry/mobile-timeseries-entry';
 import { MobileTimespanButtonComponent } from './mobile-timespan-button/mobile-timespan-button';
 import { MobileTimespanShiftSelectorComponent } from './mobile-timespan-shift-selector/mobile-timespan-shift-selector';
+import { ModalAnnualMapComponent } from './modal-annual-map/modal-annual-map';
 import { ModalEditUserLocationComponent } from './modal-edit-user-location/modal-edit-user-location';
 import { ModalGeometryViewerComponent } from './modal-geometry-viewer/modal-geometry-viewer';
 import { ModalLegendComponent } from './modal-legend/modal-legend';
@@ -54,6 +56,7 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 	declarations: [
 		AirQualityIndexComponent,
 		AirQualityLocationPanelComponent,
+		AnnualPhenomenonButtonsComponent,
 		BelaqiChartComponent,
 		BelaqiUserLocationSliderComponent,
 		BelaqiWheelComponent,
@@ -69,6 +72,7 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		MobileTimeseriesEntryComponent,
 		MobileTimespanButtonComponent,
 		MobileTimespanShiftSelectorComponent,
+		ModalAnnualMapComponent,
 		ModalEditUserLocationComponent,
 		ModalGeometryViewerComponent,
 		ModalLegendComponent,
@@ -103,6 +107,7 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 	exports: [
 		AirQualityIndexComponent,
 		AirQualityLocationPanelComponent,
+		AnnualPhenomenonButtonsComponent,
 		BelaqiChartComponent,
 		BelaqiUserLocationSliderComponent,
 		BelaqiWheelComponent,
@@ -118,6 +123,7 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		MobileTimeseriesEntryComponent,
 		MobileTimespanButtonComponent,
 		MobileTimespanShiftSelectorComponent,
+		ModalAnnualMapComponent,
 		ModalEditUserLocationComponent,
 		ModalGeometryViewerComponent,
 		ModalLegendComponent,
@@ -141,6 +147,7 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 	],
 	entryComponents: [
 		LocatedValueNotificationComponent,
+		ModalAnnualMapComponent,
 		ModalEditUserLocationComponent,
 		ModalGeometryViewerComponent,
 		ModalLegendComponent,

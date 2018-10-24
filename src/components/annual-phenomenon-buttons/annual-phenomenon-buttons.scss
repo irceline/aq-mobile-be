@@ -1,0 +1,20 @@
+annual-phenomenon-buttons {
+  .header {
+    text-align: center;
+  }
+
+  ion-row{
+      padding: 3px;
+
+      ion-col {
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        height: 2.5em;
+        text-align: center;
+        .label {
+          font-size: 150%;
+        }
+      }
+  }
+
+}

@@ -7,6 +7,7 @@
 		"hint": "Modelliert für deinen Standort",
 		"loading": "Lädt den BelAQI für deinen Standort"
 	},
+	"annual-phenomenon-buttons": "Jährliches Mittel",
 	"belaqi-user-location-slider": {
 		"create-new-location": "Erstelle einen neuen Standort",
 		"current-location": "Aktuelle Position",
@@ -145,6 +146,9 @@
 	},
 	"menu": {
 		"lastUpdate": "Letztes Update"
+	},
+	"modal-annual-map": {
+		"header": "Jährliches Mittel"
 	},
 	"nearest-measuring-station-panel": {
 		"header": {

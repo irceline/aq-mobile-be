@@ -7,6 +7,7 @@
 		"hint": "Gemodelleerde waarde voor uw locatie",
 		"loading": "BelAQI voor uw locatie aan het laden"
 	},
+	"annual-phenomenon-buttons": "",
 	"belaqi-user-location-slider": {
 		"create-new-location": "Maak een nieuwe locatie aan",
 		"current-location": "Huidige locatie",
@@ -145,6 +146,9 @@
 	},
 	"menu": {
 		"lastUpdate": "Laatste actualisatie"
+	},
+	"modal-annual-map": {
+		"header": ""
 	},
 	"nearest-measuring-station-panel": {
 		"header": {

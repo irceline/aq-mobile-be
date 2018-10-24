@@ -7,6 +7,7 @@
 		"hint": "Valeur modélisée pour votre position",
 		"loading": "Chargement de BelAQI pour votre position"
 	},
+	"annual-phenomenon-buttons": "",
 	"belaqi-user-location-slider": {
 		"create-new-location": "Ajouter une nouvelle position",
 		"current-location": "Position actuelle",
@@ -145,6 +146,9 @@
 	},
 	"menu": {
 		"lastUpdate": "Dernière mise à jour"
+	},
+	"modal-annual-map": {
+		"header": ""
 	},
 	"nearest-measuring-station-panel": {
 		"header": {

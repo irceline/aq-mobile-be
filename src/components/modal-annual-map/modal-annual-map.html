@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>{{'modal-annual-map.header' | translate}} - {{year}}</ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span ion-text showWhen="ios">{{'controls.cancel' | translate}}</span>
+        <ion-icon name="md-close" showWhen="android, windows"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div>
+    <ion-segment class="phenomenon" [(ngModel)]="phenomenonLabel" (ngModelChange)="onPhenomenonChange()">
+      <ion-segment-button value="NO2">
+        NO<sub>2</sub>
+      </ion-segment-button>
+      <ion-segment-button value="O3">
+        O<sub>3</sub>
+      </ion-segment-button>
+      <ion-segment-button value="PM10">
+        PM<sub>10</sub>
+      </ion-segment-button>
+      <ion-segment-button value="PM25">
+        PM<sub>2.5</sub>
+      </ion-segment-button>
+      <ion-segment-button value="BC">
+        BC
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+  <div class="map-wrapper">
+    <div class="map">
+      <n52-geometry-map-viewer [mapId]="mapId" [fitBounds]="fitBounds" [zoomControlOptions]="zoomControlOptions"
+        [layerControlOptions]="layerControlOptions" [overlayMaps]="overlayMaps"></n52-geometry-map-viewer>
+    </div>
+  </div>
+</ion-content>

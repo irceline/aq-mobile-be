@@ -35,6 +35,7 @@ import { MapModule } from '../pages/map/map.module';
 import { SettingsModule } from '../pages/settings/settings.module';
 import { StartPage } from '../pages/start/start';
 import { AirQualityIndexProvider } from '../providers/air-quality-index/air-quality-index';
+import { AnnualMeanProvider } from '../providers/annual-mean/annual-mean';
 import { BelaqiIndexProvider } from '../providers/belaqi/belaqi';
 import { CategorizeValueToIndexProvider } from '../providers/categorize-value-to-index/categorize-value-to-index';
 import { ForecastValueProvider } from '../providers/forecast-value/forecast-value';
@@ -104,6 +105,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     { provide: GeoSearch, useClass: NominatimGeoSearchService },
     { provide: SettingsService, useClass: JSSONSettingsService },
     AirQualityIndexProvider,
+    AnnualMeanProvider,
     AppVersion,
     BackgroundGeolocation,
     BackgroundMode,
@@ -120,6 +122,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     LocateProvider,
     LocatedTimeseriesService,
     ModelledValueProvider,
+    NearestTimeseriesManagerProvider,
     NearestTimeseriesProvider,
     Network,
     NotificationPresenter,
@@ -131,7 +134,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     TimeseriesService,
     UserLocationListProvider,
     UserTimeseriesService,
-    NearestTimeseriesManagerProvider,
   ]
 })
 export class AppModule { }

@@ -7,6 +7,7 @@
 		"hint": "Modelled value for your location",
 		"loading": "Loading BelAQI for your location"
 	},
+	"annual-phenomenon-buttons": "Annual mean elevation",
 	"belaqi-user-location-slider": {
 		"create-new-location": "Create new location",
 		"current-location": "Current location",
@@ -145,6 +146,9 @@
 	},
 	"menu": {
 		"lastUpdate": "Last update"
+	},
+	"modal-annual-map": {
+		"header": "Annual mean elevation"
 	},
 	"nearest-measuring-station-panel": {
 		"header": {
