@@ -283,5 +283,15 @@
 				"hint": "activeer aub de locatiedienst van u toestel en vernieuw de app (knop boven rechts op u scherm) "
 			}
 		}
+	},
+	"info": {
+		"wheel": {
+			"message": "Deze wijzer toont de actuele BelAQI luchtkwaliteitsindex voor uw locatie. Deze index combineert de gemodelleerde concentraties van de  verschillende polluenten afhankelijk van hun impact op de gezondheid.",
+			"link": "http://www.irceline.be/nl/belaqi"
+		},
+		"chart":{
+			"message": "Deze grafiek toont de evolutie van de BelAQI luchtkwaliteitsindex. De verticale blauwe lijn geeft de actuele waarde weer."
+		},
+		"moreInfo": "Meer info"
 	}
 }
