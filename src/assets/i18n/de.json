@@ -16,7 +16,7 @@
 	},
 	"belaqi-wheel": {
 		"modelled-hint": "Modelliert für diesen Standort",
-		"no-index-ascertained": "Es konnte kein Belaqi index ermittelt werden. Dies könnte damit zusammenhängen, das der Standort nicht innerhalb Belgien's liegt."
+		"no-index-ascertained": "Es konnte kein BelAQI index ermittelt werden. Dies könnte damit zusammenhängen, das der Standort nicht innerhalb Belgien's liegt."
 	},
 	"belaqi": {
 		"level-split": {
@@ -72,7 +72,7 @@
 	},
 	"customize-personal-alerts": {
 		"active": "Aktivieren",
-		"alert-index-level": "Benachrichtigung ab Belaqi Level",
+		"alert-index-level": "Benachrichtigung ab BelAQI Level",
 		"alert-period": "Benachrichtigungsinterval",
 		"alert-sensitive-active": "Gesundheitsberatung für Menschen empfindlich für Luftverschmutzung",
 		"header": "Persönliche Benachrichtigungen",
