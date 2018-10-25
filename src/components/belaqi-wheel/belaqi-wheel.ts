@@ -112,7 +112,7 @@ export class BelaqiWheelComponent extends LanguageChangNotifier implements After
             // wrapText(ctx, formatDate(values.timestamp, 'medium', 'de'), centerX, centerY + 10, 100, 20);
 
             // indexLabel
-            ctx.font = "1.3em Roboto";
+            ctx.font = "1.2em Roboto";
             wrapText(ctx, this.belaqi.getLabelForIndexSplit(values.index), centerX, centerY, 100, 25);
 
             // modelledLabel

@@ -1,296 +1,296 @@
 {
-  "air-quality-index": {
-    "header": "BelAQI index in:"
-  },
-  "air-quality-location-panel": {
-    "error": "Es konnte kein Index für dein Standort Could not get a Index for you location",
-    "hint": "Modelliert für deinen Standort",
-    "loading": "Lädt den BelAQI für deinen Standort"
-  },
-  "annual-phenomenon-buttons": "Jährliches Mittel",
-  "belaqi-user-location-slider": {
-    "create-new-location": "Erstelle einen neuen Standort",
-    "current-location": "Aktuelle Position",
-    "current-location-description": "Der Ort, an dem Sie sich gerade befinden...",
-    "open-user-location": "Editiere vorhandene Standorte"
-  },
-  "belaqi-wheel": {
-    "modelled-hint": "Modelliert für diesen Standort",
-    "no-index-ascertained": "Es konnte kein BelAQI index ermittelt werden. Dies könnte damit zusammenhängen, das der Standort nicht innerhalb Belgien's liegt."
-  },
-  "belaqi": {
-    "level-split": {
-      "bad": "Schlecht",
-      "excellent": "Ausge- zeichnet",
-      "fairly-good": "Relativ gut",
-      "good": "Gut",
-      "horrible": "Extrem schlecht",
-      "moderate": "Mittel- mäßig",
-      "poor": "Unge- nügend",
-      "very-bad": "Sehr schlecht",
-      "very-good": "Sehr gut",
-      "very-poor": "Relativ schlecht"
-    },
-    "level": {
-      "bad": "Schlecht",
-      "excellent": "Ausgezeichnet",
-      "fairly-good": "Relativ gut",
-      "good": "Gut",
-      "horrible": "Extrem schlecht",
-      "moderate": "Mittelmäßig",
-      "poor": "Ungenügend",
-      "very-bad": "Sehr schlecht",
-      "very-good": "Sehr gut",
-      "very-poor": "Relativ schlecht"
-    }
-  },
-  "change-timespan": {
-    "custom": {
-      "end": "Ende",
-      "header": "Freier Zeitraum",
-      "start": "Start"
-    },
-    "header": "Ändere Zeitraum",
-    "predefined": {
-      "current-month": "Derzeitiger Monat",
-      "current-week": "Derzeitige Woche",
-      "current-year": "Derzeitiges Jahr",
-      "header": "Vordefinierter Zeitraum",
-      "last-hour": "Letzte Stunde",
-      "last-month": "Letzter Monat",
-      "last-week": "Letzte Woche",
-      "last-year": "Letztes Jahr",
-      "today": "Heute",
-      "today-yesterday": "Heute und gestern",
-      "yesterday": "Gestern"
-    }
-  },
-  "controls": {
-    "cancel": "Abbrechen",
-    "close": "Schließen",
-    "ok": "Ok"
-  },
-  "customize-personal-alerts": {
-    "active": "Aktivieren",
-    "alert-index-level": "Benachrichtigung ab BelAQI Level",
-    "alert-period": "Benachrichtigungsinterval",
-    "alert-sensitive-active": "Gesundheitsberatung für Menschen empfindlich für Luftverschmutzung",
-    "header": "Persönliche Benachrichtigungen",
-    "hint": "Hinweis: Zur Nutzung dieser Funktionalität, darf die App nicht komplett beendet werden. Für diese Funktionalität wird in dem gewünschten Interval einmalig der Standort ermittelt und zu diesem die modellierten Luftqualitätsdaten überprüft."
-  },
-  "diagram": {
-    "header": "Diagramm",
-    "loading": "Lade",
-    "no-timeseries-selected": "Keine Zeitreihe selektiert!",
-    "select-timeseries": "Bitte wähle eine Zeitreihe"
-  },
-  "home": {
-    "header": "Start",
-    "noAlert": "keine offiziellen Berichte über erhöhter Luftverschmutzung",
-    "noAlertheader": "Derzeit keine Warnungen:"
-  },
-  "info": {
-    "chart": {
-      "message": "Dieses Diagram zeigt die Entwickung des BelAQI Luaftqualitäts-Index. Die vertikale blaue Linie zeigt den aktuellen Zeitpunkt an."
-    },
-    "moreInfo": "Mehr Information",
-    "wheel": {
-      "message": "Hier wird der aktuelle BelAQI Luftqualitäts Index dieses Standorts angezeigt. Dieser Index kombiniert modellierte Konzentrationen verschiedener Schadstoffe, die Auswirkungen auf ihre Gesundheit haben."
-    }
-  },
-  "intro": {
-    "close-introduction": "Beenden",
-    "four": {
-      "header": "Personalisierte Benachrichtigungen"
-    },
-    "header": "Einführung",
-    "next-step": "Nächste",
-    "one": {
-      "header": "Wählen Sie eine Sprache",
-      "option": {
-        "dutch": "Nederlands",
-        "english": "English",
-        "french": "Français",
-        "german": "Deutsch"
-      }
-    },
-    "prev-step": "Zurück",
-    "three": {
-      "addLocationToList": "Füge zur Liste der Standorte",
-      "header": "Wählen Sie die Standorte aus, für die Sie personalisierte Benachrichtigungen erhalten möchten",
-      "locationLabelHint": "Änder die Standortbezeichnung",
-      "locationLabelPlaceholder": "z.B. \"Zuhause\", \"Arbeit\", \"Schule\"",
-      "showLocationList": "Zeige vorhandene Standorte"
-    },
-    "two": {
-      "header": "Für welche Region möchten Sie offizielle Benachrichtigungen erhalten?"
-    }
-  },
-  "legend": {
-    "first-value-at": "Erster Wert am",
-    "header": "Legend",
-    "last-value-at": "Letzter Wert am"
-  },
-  "map": {
-    "configured-location": "Dein konfigurierter Standort",
-    "current-location": "Dein aktueller Standort",
-    "dataset-selection-hint": "Bitte wählen Sie eine oder mehrere Zeitreihen zur Darstellung aus",
-    "geosearch": {
-      "placeholder": "Suche..."
-    },
-    "header": "Karte",
-    "interpolated-map": "Interpolierte Karte",
-    "nearest-station": "Nächste Station",
-    "pollutant": {
-      "other": "andere"
-    },
-    "show-in-diagram": "Zeige {{value}} Zeitreihen im Diagramm",
-    "time": {
-      "current": "Derzeit",
-      "today": "Heute",
-      "today+2": "+2 Tage",
-      "today+3": "+3 Tage",
-      "tomorrow": "Morgen"
-    }
-  },
-  "menu": {
-    "lastUpdate": "Letztes Update"
-  },
-  "modal-annual-map": {
-    "header": "Jährliches Mittel"
-  },
-  "nearest-measuring-station-panel": {
-    "header": {
-      "geolocation-disabled": "Zeige die Messstation auf der Karte",
-      "geolocation-enabled": "Nächstgelegene Station"
-    }
-  },
-  "nearest-series-legend-slider": {
-    "show-nearest-series": "Zeige nächstgelegene Messungen"
-  },
-  "network": {
-    "geolocationDisabled": "Die Standortermittlung ist deaktiviert",
-    "geolocationEnabled": "Die Standortermittlung ist aktiviert",
-    "offline": "Dein Handy ist offline",
-    "online": "Dein Handy ist online"
-  },
-  "personal-alert": {
-    "index-1": {
-      "non-sensitive": "Es ist heute sehr gesund, draußen körperlich aktiv zu sein. Durch die Reduzierung von Emissionen erhalten wir mehr von diesen gesunden Tagen und nehmen auch die Auswirkungen der Langzeitexposition ab.",
-      "sensitive": "Es ist heute sehr gesund, draußen körperlich aktiv zu sein. Durch die Reduzierung von Emissionen erhalten wir mehr von diesen gesunden Tagen und nehmen auch die Auswirkungen der Langzeitexposition ab."
-    },
-    "index-10": {
-      "non-sensitive": "Betrachten Sie, schwere/lange körperliche Anstrengungen zu reduzieren.",
-      "sensitive": "Begrenzen Sie körperliche Anstrengung. Konsultieren Sie Ihren Arzt über angemessenee Medikamente."
-    },
-    "index-2": {
-      "non-sensitive": "Es ist heute sehr gesund, draußen körperlich aktiv zu sein. Durch die Reduzierung von Emissionen erhalten wir mehr von diesen gesunden Tagen und nehmen auch die Auswirkungen der Langzeitexposition ab.",
-      "sensitive": "Es ist heute sehr gesund, draußen körperlich aktiv zu sein. Durch die Reduzierung von Emissionen erhalten wir mehr von diesen gesunden Tagen und nehmen auch die Auswirkungen der Langzeitexposition ab."
-    },
-    "index-3": {
-      "non-sensitive": "Sie müssen Ihre üblichen körperlichen Aktivitäten wegen der Luftqualität nicht anpassen.",
-      "sensitive": "Wenn Sie Beschwerden fühlen, können Sie schwere/lange körperliche Anstrengungen reduzieren."
-    },
-    "index-4": {
-      "non-sensitive": "Sie müssen Ihre üblichen körperlichen Aktivitäten wegen der Luftqualität nicht anpassen.",
-      "sensitive": "Wenn Sie Beschwerden fühlen, können Sie schwere/lange körperliche Anstrengungen reduzieren."
-    },
-    "index-5": {
-      "non-sensitive": "Sie müssen Ihre üblichen körperlichen Aktivitäten wegen der Luftqualität nicht anpassen.",
-      "sensitive": "Reduzieren Sie Ihre körperliche Anstrengung. Konsultieren Sie Ihren Arzt über angemessenee Medikamente."
-    },
-    "index-6": {
-      "non-sensitive": "Sie müssen Ihre üblichen körperlichen Aktivitäten wegen der Luftqualität nicht anpassen.",
-      "sensitive": "Reduzieren Sie Ihre körperliche Anstrengung. Konsultieren Sie Ihren Arzt über angemessenee Medikamente."
-    },
-    "index-7": {
-      "non-sensitive": "Sie müssen Ihre üblichen körperlichen Aktivitäten wegen der Luftqualität nicht anpassen.",
-      "sensitive": "Reduzieren Sie Ihre körperliche Anstrengung. Konsultieren Sie Ihren Arzt über angemessenee Medikamente."
-    },
-    "index-8": {
-      "non-sensitive": "Betrachten Sie, schwere/lange körperliche Anstrengungen zu reduzieren.",
-      "sensitive": "Begrenzen Sie körperliche Anstrengung. Konsultieren Sie Ihren Arzt über angemessenee Medikamente."
-    },
-    "index-9": {
-      "non-sensitive": "Betrachten Sie, schwere/lange körperliche Anstrengungen zu reduzieren.",
-      "sensitive": "Begrenzen Sie körperliche Anstrengung. Konsultieren Sie Ihren Arzt über angemessenee Medikamente."
-    }
-  },
-  "personal-alerts": {
-    "background-service": {
-      "hint": "Überwacht die konfigurierten Standorte",
-      "title": "App läuft im Hintergrund"
-    }
-  },
-  "phenomenon-selector": {
-    "header": "Wähle ein Phänomen aus",
-    "hide-some-phenomenons": "Verstecke Phänomene",
-    "list-all-phenomenons": "Zeige alle Phänomene"
-  },
-  "push-notification-subscription": {
-    "brussels": "Brüssel - Brussels Environment - NL/FR",
-    "flanders": "Flandern - Vlaamse Milieumaatschappij (VMM) - NL",
-    "header": "Benachrichtigungen",
-    "wallonia": "Wallonien - Agence wallonne de l’air et du climat (AwAC) - FR"
-  },
-  "refresh-button": {
-    "message": "Aktualisiert"
-  },
-  "settings": {
-    "about": {
-      "header": "Über die App",
-      "version": "Version"
-    },
-    "common": "Allgemein",
-    "header": "Einstellungen",
-    "select-language": "Wähle eine Sprache",
-    "show-introduction": "Öffne Einführung",
-    "user-locations": {
-      "create-new-location": "Erstelle neuen Standort",
-      "edit-location": "Editiere Standort",
-      "header": "Nutzer Standorte",
-      "show-location-list": "Zeige vorhandene Standorte",
-      "show-nearest-series-by-default": "Zeige nächste Messungen im Diagram"
-    }
-  },
-  "show-geometry": {
-    "header": "Position der Station"
-  },
-  "start": {
-    "forecast-map": {
-      "header": "Vorhersage-Karte"
-    }
-  },
-  "station-selection": {
-    "show-other-phenomena": "Andere Phänomene an dieser Station"
-  },
-  "style-edit": {
-    "generalize": "Daten generalisieren",
-    "header": "Zeitreihenerscheinung ändern",
-    "zeroBasedYAxe": "Zeitreihe null-basiert"
-  },
-  "user-location-list": {
-    "header": "Standortliste"
-  },
-  "user-location": {
-    "creation": {
-      "message": {
-        "added": "Nutzerstandort erstellt",
-        "exists": "Nutzerstandort existiert bereits"
-      }
-    }
-  },
-  "value-panel": {
-    "forecast": {
-      "dayAfterTomorrow": "Übermorgen",
-      "tomorrow": "Morgen",
-      "twoDaysLater": "Zwei Tage später"
-    },
-    "geolocation": {
-      "disabled": {
-        "header": "Kein Standort gefunden",
-        "hint": "Bitte aktiviere den Standort-Dienst und aktualisiere die App (oben rechts auf Ihrem Bildschirm) "
-      }
-    }
-  }
+	"air-quality-index": {
+		"header": "BelAQI index in:"
+	},
+	"air-quality-location-panel": {
+		"error": "Es konnte kein Index für dein Standort Could not get a Index for you location",
+		"hint": "Modelliert für deinen Standort",
+		"loading": "Lädt den BelAQI für deinen Standort"
+	},
+	"annual-phenomenon-buttons": "Jährliches Mittel",
+	"belaqi-user-location-slider": {
+		"create-new-location": "Erstelle einen neuen Standort",
+		"current-location": "Aktuelle Position",
+		"current-location-description": "Der Ort, an dem Sie sich gerade befinden...",
+		"open-user-location": "Editiere vorhandene Standorte"
+	},
+	"belaqi-wheel": {
+		"modelled-hint": "Modelliert für diesen Standort",
+		"no-index-ascertained": "Es konnte kein BelAQI index ermittelt werden. Dies könnte damit zusammenhängen, das der Standort nicht innerhalb Belgien's liegt."
+	},
+	"belaqi": {
+		"level-split": {
+			"bad": "Schlecht",
+			"excellent": "Ausge- zeichnet",
+			"fairly-good": "Relativ gut",
+			"good": "Gut",
+			"horrible": "Extrem schlecht",
+			"moderate": "Mittel- mäßig",
+			"poor": "Unge- nügend",
+			"very-bad": "Sehr schlecht",
+			"very-good": "Sehr gut",
+			"very-poor": "Relativ schlecht"
+		},
+		"level": {
+			"bad": "Schlecht",
+			"excellent": "Ausgezeichnet",
+			"fairly-good": "Relativ gut",
+			"good": "Gut",
+			"horrible": "Extrem schlecht",
+			"moderate": "Mittelmäßig",
+			"poor": "Ungenügend",
+			"very-bad": "Sehr schlecht",
+			"very-good": "Sehr gut",
+			"very-poor": "Relativ schlecht"
+		}
+	},
+	"change-timespan": {
+		"custom": {
+			"end": "Ende",
+			"header": "Freier Zeitraum",
+			"start": "Start"
+		},
+		"header": "Ändere Zeitraum",
+		"predefined": {
+			"current-month": "Derzeitiger Monat",
+			"current-week": "Derzeitige Woche",
+			"current-year": "Derzeitiges Jahr",
+			"header": "Vordefinierter Zeitraum",
+			"last-hour": "Letzte Stunde",
+			"last-month": "Letzter Monat",
+			"last-week": "Letzte Woche",
+			"last-year": "Letztes Jahr",
+			"today": "Heute",
+			"today-yesterday": "Heute und gestern",
+			"yesterday": "Gestern"
+		}
+	},
+	"controls": {
+		"cancel": "Abbrechen",
+		"close": "Schließen",
+		"ok": "Ok"
+	},
+	"customize-personal-alerts": {
+		"active": "Aktivieren",
+		"alert-index-level": "Benachrichtigung ab BelAQI Level",
+		"alert-period": "Benachrichtigungsinterval",
+		"alert-sensitive-active": "Gesundheitsberatung für Menschen empfindlich für Luftverschmutzung",
+		"header": "Persönliche Benachrichtigungen",
+		"hint": "Hinweis: Zur Nutzung dieser Funktionalität, darf die App nicht komplett beendet werden. Für diese Funktionalität wird in dem gewünschten Interval einmalig der Standort ermittelt und zu diesem die modellierten Luftqualitätsdaten überprüft."
+	},
+	"diagram": {
+		"header": "Diagramm",
+		"loading": "Lade",
+		"no-timeseries-selected": "Keine Zeitreihe selektiert!",
+		"select-timeseries": "Bitte wähle eine Zeitreihe"
+	},
+	"home": {
+		"header": "Start",
+		"noAlert": "keine offiziellen Berichte über erhöhter Luftverschmutzung",
+		"noAlertheader": "Derzeit keine Warnungen:"
+	},
+	"info": {
+		"chart": {
+			"message": "Diese Grafik zeigt die Entwicklung des BelAQI Luftqualitätsindex. Die vertikale blaue Linie repräsentiert den aktuellen Wert."
+		},
+		"moreInfo": "Mehr Info",
+		"wheel": {
+			"message": "Dieser Indikator zeigt den aktuellen BelAQI-Luftqualitätsindex für Ihren Standort an. Dieser Index kombiniert die modellierten Konzentrationen der verschiedenen Schadstoffe in Abhängigkeit von ihren Auswirkungen auf die Gesundheit."
+		}
+	},
+	"intro": {
+		"close-introduction": "Beenden",
+		"four": {
+			"header": "Personalisierte Benachrichtigungen"
+		},
+		"header": "Einführung",
+		"next-step": "Nächste",
+		"one": {
+			"header": "Wählen Sie eine Sprache",
+			"option": {
+				"dutch": "Nederlands",
+				"english": "English",
+				"french": "Français",
+				"german": "Deutsch"
+			}
+		},
+		"prev-step": "Zurück",
+		"three": {
+			"addLocationToList": "Füge zur Liste der Standorte",
+			"header": "Wählen Sie die Standorte aus, für die Sie personalisierte Benachrichtigungen erhalten möchten",
+			"locationLabelHint": "Änder die Standortbezeichnung",
+			"locationLabelPlaceholder": "z.B. \"Zuhause\", \"Arbeit\", \"Schule\"",
+			"showLocationList": "Zeige vorhandene Standorte"
+		},
+		"two": {
+			"header": "Für welche Region möchten Sie offizielle Benachrichtigungen erhalten?"
+		}
+	},
+	"legend": {
+		"first-value-at": "Erster Wert am",
+		"header": "Legend",
+		"last-value-at": "Letzter Wert am"
+	},
+	"map": {
+		"configured-location": "Dein konfigurierter Standort",
+		"current-location": "Dein aktueller Standort",
+		"dataset-selection-hint": "Bitte wählen Sie eine oder mehrere Zeitreihen zur Darstellung aus",
+		"geosearch": {
+			"placeholder": "Suche..."
+		},
+		"header": "Karte",
+		"interpolated-map": "Interpolierte Karte",
+		"nearest-station": "Nächste Station",
+		"pollutant": {
+			"other": "andere"
+		},
+		"show-in-diagram": "Zeige {{value}} Zeitreihen im Diagramm",
+		"time": {
+			"current": "Derzeit",
+			"today": "Heute",
+			"today+2": "+2 Tage",
+			"today+3": "+3 Tage",
+			"tomorrow": "Morgen"
+		}
+	},
+	"menu": {
+		"lastUpdate": "Letztes Update"
+	},
+	"modal-annual-map": {
+		"header": "Jährliches Mittel"
+	},
+	"nearest-measuring-station-panel": {
+		"header": {
+			"geolocation-disabled": "Zeige die Messstation auf der Karte",
+			"geolocation-enabled": "Nächstgelegene Station"
+		}
+	},
+	"nearest-series-legend-slider": {
+		"show-nearest-series": "Zeige nächstgelegene Messungen"
+	},
+	"network": {
+		"geolocationDisabled": "Die Standortermittlung ist deaktiviert",
+		"geolocationEnabled": "Die Standortermittlung ist aktiviert",
+		"offline": "Dein Handy ist offline",
+		"online": "Dein Handy ist online"
+	},
+	"personal-alert": {
+		"index-1": {
+			"non-sensitive": "Es ist heute sehr gesund, draußen körperlich aktiv zu sein. Durch die Reduzierung von Emissionen erhalten wir mehr von diesen gesunden Tagen und nehmen auch die Auswirkungen der Langzeitexposition ab.",
+			"sensitive": "Es ist heute sehr gesund, draußen körperlich aktiv zu sein. Durch die Reduzierung von Emissionen erhalten wir mehr von diesen gesunden Tagen und nehmen auch die Auswirkungen der Langzeitexposition ab."
+		},
+		"index-10": {
+			"non-sensitive": "Betrachten Sie, schwere/lange körperliche Anstrengungen zu reduzieren.",
+			"sensitive": "Begrenzen Sie körperliche Anstrengung. Konsultieren Sie Ihren Arzt über angemessenee Medikamente."
+		},
+		"index-2": {
+			"non-sensitive": "Es ist heute sehr gesund, draußen körperlich aktiv zu sein. Durch die Reduzierung von Emissionen erhalten wir mehr von diesen gesunden Tagen und nehmen auch die Auswirkungen der Langzeitexposition ab.",
+			"sensitive": "Es ist heute sehr gesund, draußen körperlich aktiv zu sein. Durch die Reduzierung von Emissionen erhalten wir mehr von diesen gesunden Tagen und nehmen auch die Auswirkungen der Langzeitexposition ab."
+		},
+		"index-3": {
+			"non-sensitive": "Sie müssen Ihre üblichen körperlichen Aktivitäten wegen der Luftqualität nicht anpassen.",
+			"sensitive": "Wenn Sie Beschwerden fühlen, können Sie schwere/lange körperliche Anstrengungen reduzieren."
+		},
+		"index-4": {
+			"non-sensitive": "Sie müssen Ihre üblichen körperlichen Aktivitäten wegen der Luftqualität nicht anpassen.",
+			"sensitive": "Wenn Sie Beschwerden fühlen, können Sie schwere/lange körperliche Anstrengungen reduzieren."
+		},
+		"index-5": {
+			"non-sensitive": "Sie müssen Ihre üblichen körperlichen Aktivitäten wegen der Luftqualität nicht anpassen.",
+			"sensitive": "Reduzieren Sie Ihre körperliche Anstrengung. Konsultieren Sie Ihren Arzt über angemessenee Medikamente."
+		},
+		"index-6": {
+			"non-sensitive": "Sie müssen Ihre üblichen körperlichen Aktivitäten wegen der Luftqualität nicht anpassen.",
+			"sensitive": "Reduzieren Sie Ihre körperliche Anstrengung. Konsultieren Sie Ihren Arzt über angemessenee Medikamente."
+		},
+		"index-7": {
+			"non-sensitive": "Sie müssen Ihre üblichen körperlichen Aktivitäten wegen der Luftqualität nicht anpassen.",
+			"sensitive": "Reduzieren Sie Ihre körperliche Anstrengung. Konsultieren Sie Ihren Arzt über angemessenee Medikamente."
+		},
+		"index-8": {
+			"non-sensitive": "Betrachten Sie, schwere/lange körperliche Anstrengungen zu reduzieren.",
+			"sensitive": "Begrenzen Sie körperliche Anstrengung. Konsultieren Sie Ihren Arzt über angemessenee Medikamente."
+		},
+		"index-9": {
+			"non-sensitive": "Betrachten Sie, schwere/lange körperliche Anstrengungen zu reduzieren.",
+			"sensitive": "Begrenzen Sie körperliche Anstrengung. Konsultieren Sie Ihren Arzt über angemessenee Medikamente."
+		}
+	},
+	"personal-alerts": {
+		"background-service": {
+			"hint": "Überwacht die konfigurierten Standorte",
+			"title": "App läuft im Hintergrund"
+		}
+	},
+	"phenomenon-selector": {
+		"header": "Wähle ein Phänomen aus",
+		"hide-some-phenomenons": "Verstecke Phänomene",
+		"list-all-phenomenons": "Zeige alle Phänomene"
+	},
+	"push-notification-subscription": {
+		"brussels": "Brüssel - Brussels Environment - NL/FR",
+		"flanders": "Flandern - Vlaamse Milieumaatschappij (VMM) - NL",
+		"header": "Benachrichtigungen",
+		"wallonia": "Wallonien - Agence wallonne de l’air et du climat (AwAC) - FR"
+	},
+	"refresh-button": {
+		"message": "Aktualisiert"
+	},
+	"settings": {
+		"about": {
+			"header": "Über die App",
+			"version": "Version"
+		},
+		"common": "Allgemein",
+		"header": "Einstellungen",
+		"select-language": "Wähle eine Sprache",
+		"show-introduction": "Öffne Einführung",
+		"user-locations": {
+			"create-new-location": "Erstelle neuen Standort",
+			"edit-location": "Editiere Standort",
+			"header": "Nutzer Standorte",
+			"show-location-list": "Zeige vorhandene Standorte",
+			"show-nearest-series-by-default": "Zeige nächste Messungen im Diagram"
+		}
+	},
+	"show-geometry": {
+		"header": "Position der Station"
+	},
+	"start": {
+		"forecast-map": {
+			"header": "Vorhersage-Karte"
+		}
+	},
+	"station-selection": {
+		"show-other-phenomena": "Andere Phänomene an dieser Station"
+	},
+	"style-edit": {
+		"generalize": "Daten generalisieren",
+		"header": "Zeitreihenerscheinung ändern",
+		"zeroBasedYAxe": "Zeitreihe null-basiert"
+	},
+	"user-location-list": {
+		"header": "Standortliste"
+	},
+	"user-location": {
+		"creation": {
+			"message": {
+				"added": "Nutzerstandort erstellt",
+				"exists": "Nutzerstandort existiert bereits"
+			}
+		}
+	},
+	"value-panel": {
+		"forecast": {
+			"dayAfterTomorrow": "Übermorgen",
+			"tomorrow": "Morgen",
+			"twoDaysLater": "Zwei Tage später"
+		},
+		"geolocation": {
+			"disabled": {
+				"header": "Kein Standort gefunden",
+				"hint": "Bitte aktiviere den Standort-Dienst und aktualisiere die App (oben rechts auf Ihrem Bildschirm) "
+			}
+		}
+	}
 }
