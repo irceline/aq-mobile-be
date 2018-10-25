@@ -12,8 +12,10 @@ import { AirQualityIndexComponent } from './air-quality-index/air-quality-index'
 import { AirQualityLocationPanelComponent } from './air-quality-location-panel/air-quality-location-panel';
 import { AnnualPhenomenonButtonsComponent } from './annual-phenomenon-buttons/annual-phenomenon-buttons';
 import { BelaqiChartComponent } from './belaqi-chart/belaqi-chart';
+import { BelaqiChartInformationComponent } from './belaqi-chart/belaqi-chart-information';
 import { BelaqiUserLocationSliderComponent } from './belaqi-user-location-slider/belaqi-user-location-slider';
 import { BelaqiWheelComponent } from './belaqi-wheel/belaqi-wheel';
+import { BelaqiWheelInformationComponent } from './belaqi-wheel/belaqi-wheel-information';
 import { CustomizePersonalAlertsComponent } from './customize-personal-alerts/customize-personal-alerts';
 import {
 	MobileDatasetByStationSelectorComponent,
@@ -58,8 +60,10 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		AirQualityLocationPanelComponent,
 		AnnualPhenomenonButtonsComponent,
 		BelaqiChartComponent,
+		BelaqiChartInformationComponent,
 		BelaqiUserLocationSliderComponent,
 		BelaqiWheelComponent,
+		BelaqiWheelInformationComponent,
 		CustomizePersonalAlertsComponent,
 		ExtendedGeometryMapViewerComponent,
 		LocatedValueNotificationComponent,
@@ -109,8 +113,10 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		AirQualityLocationPanelComponent,
 		AnnualPhenomenonButtonsComponent,
 		BelaqiChartComponent,
+		BelaqiChartInformationComponent,
 		BelaqiUserLocationSliderComponent,
 		BelaqiWheelComponent,
+		BelaqiWheelInformationComponent,
 		CustomizePersonalAlertsComponent,
 		ExtendedGeometryMapViewerComponent,
 		LocatedValueNotificationComponent,
@@ -146,6 +152,8 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		ValuePanelComponent,
 	],
 	entryComponents: [
+		BelaqiChartInformationComponent,
+		BelaqiWheelInformationComponent,
 		LocatedValueNotificationComponent,
 		ModalAnnualMapComponent,
 		ModalEditUserLocationComponent,

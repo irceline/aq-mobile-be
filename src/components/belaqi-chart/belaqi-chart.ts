@@ -2,9 +2,11 @@ import 'chartjs-plugin-annotation';
 
 import { Component, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { Chart, ChartOptions } from 'chart.js';
+import { PopoverController } from 'ionic-angular';
 
 import { BelaqiIndexProvider, BelaqiTimelineEntry } from '../../providers/belaqi/belaqi';
 import { BelaqiLocation } from '../belaqi-user-location-slider/belaqi-user-location-slider';
+import { BelaqiChartInformationComponent } from './belaqi-chart-information';
 
 interface ExpandedChartOptions extends ChartOptions {
   annotation: any;
@@ -16,7 +18,7 @@ interface ExpandedChartOptions extends ChartOptions {
 })
 export class BelaqiChartComponent implements OnChanges {
 
-  @ViewChild('testCanvas') barCanvas;
+  @ViewChild('chart') barCanvas;
 
   @Input()
   public location: BelaqiLocation;
@@ -25,7 +27,8 @@ export class BelaqiChartComponent implements OnChanges {
   public loading: boolean;
 
   constructor(
-    private belaqiIndex: BelaqiIndexProvider
+    private belaqiIndex: BelaqiIndexProvider,
+    private popoverCtrl: PopoverController,
   ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -36,6 +39,11 @@ export class BelaqiChartComponent implements OnChanges {
           res => this.drawChart(res),
           error => this.handleError(error))
     }
+  }
+
+  public presentPopover(myEvent) {
+    let popover = this.popoverCtrl.create(BelaqiChartInformationComponent);
+    popover.present({ ev: myEvent });
   }
 
   private handleError(error: any) {

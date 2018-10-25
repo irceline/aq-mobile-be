@@ -1,3 +1,8 @@
-<div [hidden]="error">
-  <canvas #testCanvas></canvas>
+<div [hidden]="error" class="chart">
+  <div class="info-button">
+    <button ion-button icon-only small clear (click)="presentPopover($event)">
+      <ion-icon name="information-circle"></ion-icon>
+    </button>
+  </div>
+  <canvas #chart></canvas>
 </div>

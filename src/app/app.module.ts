@@ -18,6 +18,7 @@ import { BackgroundMode } from '@ionic-native/background-mode';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { FCM } from '@ionic-native/fcm';
 import { Geolocation } from '@ionic-native/geolocation';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { Network } from '@ionic-native/network';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -115,6 +116,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     FCM,
     ForecastValueProvider,
     Geolocation,
+    InAppBrowser,
     IrcelineSettingsProvider,
     LanguageHandlerProvider,
     LayerGeneratorService,

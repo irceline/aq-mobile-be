@@ -85,9 +85,18 @@
 		"select-timeseries": "Selecteer aub een tijdsreeks"
 	},
 	"home": {
+		"header": "Start",
 		"noAlert": "geen officiële meldingen met betrekking tot periodes van verhoogde luchtverontreiniging",
-		"noAlertheader": "Momenteel geen waarschuwingen:",
-		"header": "Start"
+		"noAlertheader": "Momenteel geen waarschuwingen:"
+	},
+	"info": {
+		"chart": {
+			"message": "Deze grafiek toont de evolutie van de BelAQI luchtkwaliteitsindex. De verticale blauwe lijn geeft de actuele waarde weer."
+		},
+		"moreInfo": "Meer info",
+		"wheel": {
+			"message": "Deze wijzer toont de actuele BelAQI luchtkwaliteitsindex voor uw locatie. Deze index combineert de gemodelleerde concentraties van de  verschillende polluenten afhankelijk van hun impact op de gezondheid."
+		}
 	},
 	"intro": {
 		"close-introduction": "Sluiten",
@@ -283,15 +292,5 @@
 				"hint": "activeer aub de locatiedienst van u toestel en vernieuw de app (knop boven rechts op u scherm) "
 			}
 		}
-	},
-	"info": {
-		"wheel": {
-			"message": "Deze wijzer toont de actuele BelAQI luchtkwaliteitsindex voor uw locatie. Deze index combineert de gemodelleerde concentraties van de  verschillende polluenten afhankelijk van hun impact op de gezondheid.",
-			"link": "http://www.irceline.be/nl/belaqi"
-		},
-		"chart":{
-			"message": "Deze grafiek toont de evolutie van de BelAQI luchtkwaliteitsindex. De verticale blauwe lijn geeft de actuele waarde weer."
-		},
-		"moreInfo": "Meer info"
 	}
 }

@@ -1,4 +1,9 @@
 <div class="wheel" [hidden]="!index">
+  <div class="info-button">
+    <button ion-button icon-only small clear (click)="presentPopover($event)">
+      <ion-icon name="information-circle"></ion-icon>
+    </button>
+  </div>
   <canvas #belaqiWheel></canvas>
 </div>
 <div *ngIf="!index" class="no-index">

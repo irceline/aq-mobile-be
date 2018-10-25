@@ -85,9 +85,18 @@
 		"select-timeseries": "Please select a timeseries"
 	},
 	"home": {
+		"header": "Home",
 		"noAlert": "no official messages concerning periods of increased air pollution",
-		"noAlertheader": "Currently no warnings:",
-		"header": "Home"
+		"noAlertheader": "Currently no warnings:"
+	},
+	"info": {
+		"chart": {
+			"message": "This chart shows the evolution of the BelAQI air quality index. The vertical blue line indicates the current value."
+		},
+		"moreInfo": "More info",
+		"wheel": {
+			"message": "This dial shows the current BelAQI air quality index for your location. This index combines the modelled concentrations of different pollutants depending on their health effects."
+		}
 	},
 	"intro": {
 		"close-introduction": "Close",
@@ -283,15 +292,5 @@
 				"hint": "Please activate your location service and refresh the app (button top right of your screen)"
 			}
 		}
-	},
-	"info": {
-		"wheel": {
-			"message": "This dial shows the current BelAQI air quality index for your location. This index combines the modelled concentrations of different pollutants depending on their health effects.",
-			"link": "http://www.irceline.be/en/belaqi"
-		},
-		"chart":{
-			"message": "This chart shows the evolution of the BelAQI air quality index. The vertical blue line indicates the current value."
-		},
-		"moreInfo": "More info"
 	}
 }

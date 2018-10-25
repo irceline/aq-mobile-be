@@ -2,8 +2,10 @@ import { AfterContentInit, Component, ElementRef, Input, OnChanges, SimpleChange
 import { LanguageChangNotifier } from '@helgoland/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Chart, ChartOptions } from 'chart.js';
+import { PopoverController } from 'ionic-angular';
 
 import { BelaqiIndexProvider } from '../../providers/belaqi/belaqi';
+import { BelaqiWheelInformationComponent } from './belaqi-wheel-information';
 
 interface ExtendedChartOptions extends ChartOptions {
   values: {
@@ -25,6 +27,7 @@ export class BelaqiWheelComponent extends LanguageChangNotifier implements After
 
   constructor(
     private belaqi: BelaqiIndexProvider,
+    private popoverCtrl: PopoverController,
     protected translate: TranslateService,
   ) {
     super(translate);
@@ -42,6 +45,11 @@ export class BelaqiWheelComponent extends LanguageChangNotifier implements After
     if (changes.index) {
       this.drawWheel();
     }
+  }
+
+  public presentPopover(myEvent) {
+    let popover = this.popoverCtrl.create(BelaqiWheelInformationComponent);
+    popover.present({ ev: myEvent });
   }
 
   private drawWheel() {

@@ -108,5 +108,6 @@
     <plugin name="cordova-sqlite-storage" spec="^2.3.3" />
     <plugin name="cordova.plugins.diagnostic" spec="^4.0.8" />
     <plugin name="cordova-plugin-app-version" spec="^0.1.9" />
+    <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
     <engine name="android" spec="6.3.0" />
 </widget>

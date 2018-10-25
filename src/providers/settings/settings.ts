@@ -12,6 +12,7 @@ export interface MobileSettings extends Settings {
     defaultBbox: L.LatLngBoundsExpression;
     personalAlert: PersonalAlert[];
     colorizedMarkerForLastMilliseconds: number;
+    belaqiInformationUrl: string;
 }
 
 export interface PersonalAlert {
