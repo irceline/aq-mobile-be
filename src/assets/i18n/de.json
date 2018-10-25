@@ -283,5 +283,15 @@
 				"hint": "Bitte aktiviere den Standort-Dienst und aktualisiere die App (oben rechts auf Ihrem Bildschirm) "
 			}
 		}
+	},
+	"info": {
+		"wheel": {
+			"message": "Dieser Indikator zeigt den aktuellen BelAQI-Luftqualitätsindex für Ihren Standort an. Dieser Index kombiniert die modellierten Konzentrationen der verschiedenen Schadstoffe in Abhängigkeit von ihren Auswirkungen auf die Gesundheit.",
+			"link": "http://www.irceline.be/de/belaqi"
+		},
+		"chart":{
+			"message": "Diese Grafik zeigt die Entwicklung des BelAQI Luftqualitätsindex. Die vertikale blaue Linie repräsentiert den aktuellen Wert."
+		},
+		"moreInfo": "Mehr Info"
 	}
 }

@@ -283,5 +283,15 @@
 				"hint": "Veuillez activer votre service de géolocalisation et actualiser l'application"
 			}
 		}
+	},
+	"info": {
+		"wheel": {
+			"message": "Cet indicateur affiche l’indice de qualité de l’air BelAQI actuel pour votre position. Cet indice combine les concentrations modélisées des différents polluants en fonction de leur impact sur la santé.",
+			"link": "http://www.irceline.be/fr/belaqi"
+		},
+		"chart":{
+			"message": "Ce graphique montre l'évolution de l'indice de qualité de l'air BelAQI. La ligne bleue verticale indique la valeur actuelle."
+		},
+		"moreInfo": "Plus d'info"
 	}
 }
