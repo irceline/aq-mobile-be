@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { SettingsService } from '@helgoland/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-
-import { MobileSettings } from '../../providers/settings/settings';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'belaqi-wheel-information',
@@ -12,11 +10,11 @@ export class BelaqiWheelInformationComponent {
 
   constructor(
     private iab: InAppBrowser,
-    private settings: SettingsService<MobileSettings>
+    private translate: TranslateService
   ) { }
 
   public showMoreInfo() {
-    this.iab.create(this.settings.getSettings().belaqiInformationUrl);
+    this.iab.create(this.translate.instant('info.wheel.link'));
   }
 
 }

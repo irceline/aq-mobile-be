@@ -95,6 +95,7 @@
 		},
 		"moreInfo": "More info",
 		"wheel": {
+			"link": "http://www.irceline.be/en/belaqi",
 			"message": "This dial shows the current BelAQI air quality index for your location. This index combines the modelled concentrations of different pollutants depending on their health effects."
 		}
 	},

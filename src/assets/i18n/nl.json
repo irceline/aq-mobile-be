@@ -95,6 +95,7 @@
 		},
 		"moreInfo": "Meer info",
 		"wheel": {
+			"link": "http://www.irceline.be/nl/belaqi",
 			"message": "Deze wijzer toont de actuele BelAQI luchtkwaliteitsindex voor uw locatie. Deze index combineert de gemodelleerde concentraties van de  verschillende polluenten afhankelijk van hun impact op de gezondheid."
 		}
 	},
