@@ -75,10 +75,13 @@ export class UserLocationListProvider {
   public determineCurrentLocation(): Observable<UserLocation> {
     return new Observable((observer: Observer<UserLocation>) => {
       this.locate.getGeoposition().subscribe((pos: Geoposition) => {
-        const reverseObs = this.geoSearch.reverse({ type: 'Point', coordinates: [pos.coords.latitude, pos.coords.longitude] }, { addressdetails: false });
+        const reverseObs = this.geoSearch.reverse({ type: 'Point', coordinates: [pos.coords.latitude, pos.coords.longitude] });
         reverseObs.subscribe(
           value => {
-            const locationLabel = value.displayName || this.translateSrvc.instant('belaqi-user-location-slider.current-location');
+            let locationLabel = this.translateSrvc.instant('belaqi-user-location-slider.current-location');
+            if (value.address && value.address.road && value.address.houseNumber && value.address.city) {
+              locationLabel = `${value.address.road} ${value.address.houseNumber}, ${value.address.city}`;
+            }
             observer.next({
               id: 1,
               label: locationLabel,

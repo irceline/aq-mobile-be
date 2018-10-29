@@ -178,11 +178,14 @@ export class PersonalAlertsProvider {
             if (location) {
               forkJoin(
                 this.belaqiProvider.getValue(location.latitude, location.longitude),
-                this.geosearch.reverse({ type: 'Point', coordinates: [location.latitude, location.longitude] }, { addressdetails: false })
+                this.geosearch.reverse({ type: 'Point', coordinates: [location.latitude, location.longitude] })
               ).subscribe(res => {
                 // this.localNotifications.schedule({ text: 'forkJoin: ' + res.toString(), id: 600 });
                 const belaqi = res[0] ? res[0] : null;
-                const label = (res[1] && res[1].displayName) ? res[1].displayName : 'Current location';
+                let label = 'Current location';
+                if (res[1] && res[1].address && res[1].address.road && res[1].address.houseNumber && res[1].address.city) {
+                  label = `${res[1].address.road} ${res[1].address.houseNumber}, ${res[1].address.city}`;
+                }
                 if (belaqi && label) {
                   observer.next({
                     belaqi,
