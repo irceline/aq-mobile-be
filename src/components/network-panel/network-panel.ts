@@ -1,11 +1,10 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Network } from '@ionic-native/network';
 import { TranslateService } from '@ngx-translate/core';
 import { Platform } from 'ionic-angular';
 import { Subscription } from 'rxjs';
 
 import { IrcelineSettingsProvider } from '../../providers/irceline-settings/irceline-settings';
-import { LocateProvider } from '../../providers/locate/locate';
 import { RefreshHandler } from '../../providers/refresh/refresh';
 
 @Component({
@@ -17,7 +16,6 @@ export class NetworkPanelComponent implements OnInit {
   public lastupdate: Date;
   public offline: boolean = false;
   public backOnline: boolean = false;
-  public geolocationEnabled: boolean;
 
   private networkChange: Subscription;
 
@@ -25,10 +23,8 @@ export class NetworkPanelComponent implements OnInit {
     private ircelineSettings: IrcelineSettingsProvider,
     private network: Network,
     private platform: Platform,
-    private locate: LocateProvider,
     private refresh: RefreshHandler,
     protected translate: TranslateService,
-    private ref: ChangeDetectorRef
   ) { }
 
   public ngOnInit(): void {
@@ -52,10 +48,6 @@ export class NetworkPanelComponent implements OnInit {
       }
       this.networkChange = this.network.onchange().subscribe(() => this.updateNetworkStatus());
     }
-    this.locate.getLocationStateEnabled().subscribe(res => {
-      this.geolocationEnabled = res;
-      this.ref.detectChanges();
-    });
   }
 
   private updateNetworkStatus() {

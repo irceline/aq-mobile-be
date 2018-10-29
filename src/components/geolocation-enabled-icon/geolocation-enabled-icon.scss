@@ -1,0 +1,8 @@
+geolocation-enabled-icon {
+  button ion-icon {
+    color: #00FF00;
+    &.disabled {
+        color: #FF0000;
+    }
+  }
+}
