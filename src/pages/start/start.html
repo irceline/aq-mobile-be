@@ -4,9 +4,9 @@
 </ion-header>
 
 <ion-content class="cards-bg" #content>
-  <ion-card>
+  <!-- <ion-card>
     <network-panel></network-panel>
-  </ion-card>
+  </ion-card> -->
 
   <ion-card padding>
     <strong>{{'home.noAlertheader' | translate}}</strong>
@@ -21,11 +21,13 @@
     <ion-list>
       <ion-item [ngClass]="{'ion-affix': isSticky}" ion-affix [content]="content" *ngIf="sliderHeaderContent"
         (onSticky)="handleOnSticky($event)">
-        <div class="location-label">
+        <div class="location-label" text-wrap>
           {{sliderHeaderContent.label}}
         </div>
         <div class="location-date">
-          <!-- <span>{{sliderHeaderContent.date | date : 'medium': null: translateSrvc.currentLang}} </span> -->
+          <span>{{'menu.lastUpdate' | translate}}: </span>
+          <span>{{sliderHeaderContent.date | date : 'd MMMM y, HH:mm': null: translateSrvc.currentLang}} </span>
+          <!-- <span>{{'menu.lastUpdate' | translate}}: {{sliderHeaderContent.date | date: 'MMM d, y, HH:mm': null : translate.currentLang}}</span> -->
           <span *ngIf="sliderHeaderContent.current"> - {{'belaqi-user-location-slider.current-location' | translate}}</span>
         </div>
       </ion-item>

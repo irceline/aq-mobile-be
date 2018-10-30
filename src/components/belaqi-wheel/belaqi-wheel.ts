@@ -113,11 +113,11 @@ export class BelaqiWheelComponent extends LanguageChangNotifier implements After
 
             // indexLabel
             ctx.font = "1.2em Roboto";
-            wrapText(ctx, this.belaqi.getLabelForIndexSplit(values.index), centerX, centerY, 100, 25);
+            wrapText(ctx, this.belaqi.getLabelForIndexSplit(values.index), centerX, centerY, 90, 25);
 
             // modelledLabel
             ctx.font = "0.6em Roboto";
-            wrapText(ctx, this.translate.instant('belaqi-wheel.modelled-hint'), centerX, centerY + (radius * 1.7), 100, 20);
+            wrapText(ctx, this.translate.instant('belaqi-wheel.modelled-hint'), centerX, centerY + (radius * 1.7), 90, 20);
 
             function wrapText(context: CanvasRenderingContext2D, text: string, x: number, y: number, maxWidth: number, lineHeight: number) {
               if (text) {
