@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Platform, ToastController } from 'ionic-angular';
+import { Platform, PopoverController, ToastController } from 'ionic-angular';
 
 import { LocateProvider } from '../../providers/locate/locate';
+import { GeolocationEnabledIconPopupComponent } from './geolocation-enabled-icon-popup';
 
 @Component({
   selector: 'geolocation-enabled-icon',
@@ -16,8 +17,9 @@ export class GeolocationEnabledIconComponent implements OnInit {
 
   constructor(
     private locate: LocateProvider,
-    private toast: ToastController,
     private platform: Platform,
+    private popoverCtrl: PopoverController,
+    private toast: ToastController,
     private translate: TranslateService,
   ) { }
 
@@ -30,6 +32,12 @@ export class GeolocationEnabledIconComponent implements OnInit {
       }
       this.init = true;
     });
+  }
+
+  public inform(ev) {
+    this.popoverCtrl.create(
+      GeolocationEnabledIconPopupComponent, { geolocationEnabled: this.geolocationEnabled }
+    ).present({ ev });
   }
 
 }

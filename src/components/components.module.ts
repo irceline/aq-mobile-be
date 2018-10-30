@@ -22,6 +22,7 @@ import {
 } from './dataset-by-station-selector/dataset-by-station-selector.component';
 import { ExtendedGeometryMapViewerComponent } from './extended-geometry-map-viewer/extended-geometry-map-viewer';
 import { GeolocationEnabledIconComponent } from './geolocation-enabled-icon/geolocation-enabled-icon';
+import { GeolocationEnabledIconPopupComponent } from './geolocation-enabled-icon/geolocation-enabled-icon-popup';
 import { LocatedValueNotificationComponent } from './located-value-notification/located-value-notification';
 import { LocationSelectionComponent } from './location-selection/location-selection';
 import { MobileExtentControlComponent } from './mobile-extent-control/mobile-extent-control';
@@ -68,6 +69,7 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		CustomizePersonalAlertsComponent,
 		ExtendedGeometryMapViewerComponent,
 		GeolocationEnabledIconComponent,
+		GeolocationEnabledIconPopupComponent,
 		LocatedValueNotificationComponent,
 		LocationSelectionComponent,
 		MobileDatasetByStationSelectorComponent,
@@ -122,6 +124,7 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		CustomizePersonalAlertsComponent,
 		ExtendedGeometryMapViewerComponent,
 		GeolocationEnabledIconComponent,
+		GeolocationEnabledIconPopupComponent,
 		LocatedValueNotificationComponent,
 		LocationSelectionComponent,
 		MobileDatasetByStationSelectorComponent,
@@ -157,6 +160,7 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 	entryComponents: [
 		BelaqiChartInformationComponent,
 		BelaqiWheelInformationComponent,
+		GeolocationEnabledIconPopupComponent,
 		LocatedValueNotificationComponent,
 		ModalAnnualMapComponent,
 		ModalEditUserLocationComponent,
