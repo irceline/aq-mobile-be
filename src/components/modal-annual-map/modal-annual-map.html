@@ -32,7 +32,7 @@
   <div class="map-wrapper">
     <div class="map">
       <n52-geometry-map-viewer [mapId]="mapId" [fitBounds]="fitBounds" [zoomControlOptions]="zoomControlOptions"
-        [layerControlOptions]="layerControlOptions" [overlayMaps]="overlayMaps"></n52-geometry-map-viewer>
+        [layerControlOptions]="layerControlOptions" [overlayMaps]="overlayMaps" (mapInitialized)="mapInitialized()"></n52-geometry-map-viewer>
     </div>
   </div>
 </ion-content>

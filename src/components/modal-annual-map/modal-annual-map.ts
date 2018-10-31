@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { SettingsService } from '@helgoland/core';
-import { LayerOptions } from '@helgoland/map';
+import { LayerOptions, MapCache } from '@helgoland/map';
+import { TranslateService } from '@ngx-translate/core';
 import { NavParams, ViewController } from 'ionic-angular';
-import { tileLayer, TileLayerOptions } from 'leaflet';
+import { LatLngExpression, popup, tileLayer, TileLayerOptions } from 'leaflet';
 
 import { AnnualMeanProvider, AnnualPhenomenonMapping } from '../../providers/annual-mean/annual-mean';
 import { MobileSettings } from '../../providers/settings/settings';
@@ -26,11 +27,34 @@ export class ModalAnnualMapComponent {
     private params: NavParams,
     private viewCtrl: ViewController,
     private settingsSrvc: SettingsService<MobileSettings>,
-    private annualMean: AnnualMeanProvider
-  ) {
-    const settings = this.settingsSrvc.getSettings();
-    this.fitBounds = settings.defaultBbox;
+    private annualMean: AnnualMeanProvider,
+    private mapCache: MapCache,
+    private translateSrvc: TranslateService
+  ) { }
+
+  public mapInitialized() {
     this.setOverlayMap(this.params.get('phenomenon'));
+    const location = this.params.get('location') as GeoJSON.Point;
+    if (location) {
+      const label = this.translateSrvc.instant('map.configured-location');
+      const point: LatLngExpression = { lng: location.coordinates[0], lat: location.coordinates[1] };
+      this.mapCache.getMap(this.mapId).addLayer(
+        popup({ autoPan: false })
+          .setLatLng(point)
+          .setContent(label)
+      )
+      this.mapCache.getMap(this.mapId).setView(point, 12);
+    } else {
+      this.fitBounds = this.settingsSrvc.getSettings().defaultBbox;
+    }
+  }
+
+  public onPhenomenonChange(): void {
+    this.setOverlayMap(this.phenomenonLabel);
+  }
+
+  public dismiss() {
+    this.viewCtrl.dismiss();
   }
 
   private setOverlayMap(phenomenon) {
@@ -63,14 +87,6 @@ export class ModalAnnualMapComponent {
       case 'PM25': return this.annualMean.getLayerId(year, AnnualPhenomenonMapping.PM25);
       case 'BC': return this.annualMean.getLayerId(year, AnnualPhenomenonMapping.BC);
     }
-  }
-
-  public onPhenomenonChange(): void {
-    this.setOverlayMap(this.phenomenonLabel);
-  }
-
-  public dismiss() {
-    this.viewCtrl.dismiss();
   }
 
 }

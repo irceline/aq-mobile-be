@@ -48,7 +48,7 @@ export class AnnualPhenomenonButtonsComponent implements OnInit {
   }
 
   public openMap(phenomenon: string) {
-    this.modalCtrl.create(ModalAnnualMapComponent, { phenomenon }).present();
+    this.modalCtrl.create(ModalAnnualMapComponent, { phenomenon, location: this.location }).present();
   }
 
 }
