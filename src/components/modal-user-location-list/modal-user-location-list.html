@@ -36,7 +36,7 @@
             </ion-fab>
             <extended-geometry-map-viewer [mapId]="location.label" [geometry]="location.point" [mapOptions]="mapOptions"></extended-geometry-map-viewer>
           </div>
-          <annual-phenomenon-buttons></annual-phenomenon-buttons>
+          <annual-phenomenon-buttons [location]="location.point"></annual-phenomenon-buttons>
         </div>
       </ion-item>
 

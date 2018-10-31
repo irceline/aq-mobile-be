@@ -1,13 +1,10 @@
 import { HttpService } from '@helgoland/core';
-import { Observable } from 'rxjs';
 
 export abstract class ValueProvider {
 
     constructor(
         protected http: HttpService
     ) { }
-
-    public abstract getValue(latitude: number, longitude: number, time: Date): Observable<number>;
 
     protected calculateRequestBbox(latitude: number, longitude: number): string {
         const r_earth = 6378;

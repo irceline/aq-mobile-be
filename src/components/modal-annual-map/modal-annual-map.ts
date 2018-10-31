@@ -4,7 +4,7 @@ import { LayerOptions } from '@helgoland/map';
 import { NavParams, ViewController } from 'ionic-angular';
 import { tileLayer, TileLayerOptions } from 'leaflet';
 
-import { AnnualMeanProvider } from '../../providers/annual-mean/annual-mean';
+import { AnnualMeanProvider, AnnualPhenomenonMapping } from '../../providers/annual-mean/annual-mean';
 import { MobileSettings } from '../../providers/settings/settings';
 
 @Component({
@@ -18,7 +18,7 @@ export class ModalAnnualMapComponent {
   public zoomControlOptions: L.Control.ZoomOptions = {};
   public layerControlOptions: L.Control.LayersOptions = { position: "bottomleft", hideSingleBase: true };
   public overlayMaps: Map<string, LayerOptions> = new Map<string, LayerOptions>();
-  
+
   public year: string;
   public phenomenonLabel: string;
 
@@ -37,28 +37,9 @@ export class ModalAnnualMapComponent {
     this.annualMean.getYear().subscribe(year => {
       this.overlayMaps.clear();
       this.year = year;
-      let layerId;
+      const layerId = this.createLayerId(phenomenon, year);
       this.phenomenonLabel = phenomenon;
-      switch (phenomenon) {
-        case 'NO2':
-          layerId = `no2_anmean_${year}`;
-          break;
-        case 'O3':
-          layerId = `o3_anmean_${year}`;
-          break;
-        case 'PM10':
-          layerId = `pm10_anmean_${year}`;
-          break;
-        case 'PM25':
-          layerId = `pm25_anmean_${year}`;
-          break;
-        case 'BC':
-          layerId = `bc_anmean_${year}`;
-          break;
-        default:
-          break;
-      }
-      const wmsUrl = `http://geo.irceline.be/rioifdm/${layerId}/wms`;;
+      const wmsUrl = `http://geo.irceline.be/rioifdm/${layerId}/wms`;
       const layerOptions: TileLayerOptions = {
         layers: layerId,
         transparent: true,
@@ -72,6 +53,16 @@ export class ModalAnnualMapComponent {
         layer: tileLayer.wms(wmsUrl, layerOptions)
       })
     })
+  }
+
+  private createLayerId(phenomenon: string, year: string): string {
+    switch (phenomenon) {
+      case 'NO2': return this.annualMean.getLayerId(year, AnnualPhenomenonMapping.NO2);
+      case 'O3': return this.annualMean.getLayerId(year, AnnualPhenomenonMapping.O3);
+      case 'PM10': return this.annualMean.getLayerId(year, AnnualPhenomenonMapping.PM10);
+      case 'PM25': return this.annualMean.getLayerId(year, AnnualPhenomenonMapping.PM25);
+      case 'BC': return this.annualMean.getLayerId(year, AnnualPhenomenonMapping.BC);
+    }
   }
 
   public onPhenomenonChange(): void {

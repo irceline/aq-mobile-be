@@ -2,19 +2,19 @@
   {{'annual-phenomenon-buttons' | translate}}
 </div>
 <ion-row nowrap>
-  <ion-col (click)="openMap('NO2')">
+  <ion-col (click)="openMap('NO2')" [ngStyle]="{'background-color': colorNO2}">
     <div class="label">NO<sub>2</sub></div>
   </ion-col>
-  <ion-col (click)="openMap('O3')">
+  <ion-col (click)="openMap('O3')" [ngStyle]="{'background-color': colorO3}">
     <div class="label">O<sub>3</sub></div>
   </ion-col>
-  <ion-col (click)="openMap('PM10')">
+  <ion-col (click)="openMap('PM10')" [ngStyle]="{'background-color': colorPM10}">
     <div class="label">PM<sub>10</sub></div>
   </ion-col>
-  <ion-col (click)="openMap('PM25')">
+  <ion-col (click)="openMap('PM25')" [ngStyle]="{'background-color': colorPM25}">
     <div class="label">PM<sub>2.5</sub></div>
   </ion-col>
-  <ion-col (click)="openMap('BC')">
+  <ion-col (click)="openMap('BC')" [ngStyle]="{'background-color': colorBC}">
     <div class="label">BC</div>
   </ion-col>
 </ion-row>
