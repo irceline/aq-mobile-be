@@ -14,10 +14,13 @@ page-map {
     ion-segment-button {
       padding: 0 !important;
     }
-    .map {
+    .map-card {
       height: 100%;
       display: flex;
       flex-direction: column;
+      .full-phenomenon-label {
+        text-align: center;
+      }
       .map-wrapper {
         position: relative;
         flex: 1 0 auto;

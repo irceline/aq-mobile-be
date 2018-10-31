@@ -228,6 +228,15 @@
 		"hide-some-phenomenons": "Verstecke Phänomene",
 		"list-all-phenomenons": "Zeige alle Phänomene"
 	},
+	"phenomenon": {
+		"long-label": {
+			"bc": "Schwarzer Kohlenstoff",
+			"no2": "Stickstoffdioxid",
+			"o3": "Ozon",
+			"pm10": "Feinstaub < 10µm",
+			"pm25": "Feinstaub < 25µm"
+		}
+	},
 	"push-notification-subscription": {
 		"brussels": "Brüssel - Brussels Environment - NL/FR",
 		"flanders": "Flandern - Vlaamse Milieumaatschappij (VMM) - NL",

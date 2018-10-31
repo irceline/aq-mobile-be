@@ -228,6 +228,15 @@
 		"hide-some-phenomenons": "Hide pollutants",
 		"list-all-phenomenons": "List all pollutants"
 	},
+	"phenomenon": {
+		"long-label": {
+			"bc": "Black carbon",
+			"no2": "Nitrogen dioxide",
+			"o3": "Ozone",
+			"pm10": "Particulate Matter < 10 µm",
+			"pm25": "Particulate Matter < 25 µm"
+		}
+	},
 	"push-notification-subscription": {
 		"brussels": "Brussels - Brussels Environment - NL/FR",
 		"flanders": "Flanders - Vlaamse Milieumaatschappij (VMM) - NL",

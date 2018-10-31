@@ -228,6 +228,15 @@
 		"hide-some-phenomenons": "Masquer les polluants",
 		"list-all-phenomenons": "Liste des polluants"
 	},
+	"phenomenon": {
+		"long-label": {
+			"bc": "",
+			"no2": "",
+			"o3": "",
+			"pm10": "",
+			"pm25": ""
+		}
+	},
 	"push-notification-subscription": {
 		"brussels": "Bruxelles - Brussels Environment - NL/FR",
 		"flanders": "Flandre - Vlaamse Milieumaatschappij (VMM) - NL",

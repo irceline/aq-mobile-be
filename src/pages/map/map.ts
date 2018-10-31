@@ -63,6 +63,7 @@ export class MapPage {
   public statusIntervalDuration: number;
   public geoSearchOptions: GeoSearchOptions;
   public phenomenonLabel: PhenomenonLabel = PhenomenonLabel.NO2;
+  public otherPhenomenonLabel: string;
   public time: TimeLabel = TimeLabel.current;
   public selectedOtherPhenom: string;
 
@@ -144,7 +145,7 @@ export class MapPage {
     if (this.legend) {
       this.legend.remove();
     }
-    if (this.mapCache.hasMap(this.mapId)) {
+    if (this.mapCache.hasMap(this.mapId) && this.phenomenonLabel !== 'Others') {
 
       this.legend = new L.Control({ position: 'topright' });
 
@@ -186,6 +187,7 @@ export class MapPage {
   }
 
   public onPhenomenonChange(): void {
+    this.otherPhenomenonLabel = '';
     const phenID = this.getPhenomenonID(this.phenomenonLabel);
     if (phenID) { this.getPhenomenonFromAPI(phenID) }
     this.selectedOtherPhenom = '';
@@ -223,6 +225,7 @@ export class MapPage {
   }
 
   public openOtherPhenomena() {
+    this.otherPhenomenonLabel = '';
     const modal = this.modalCtrl.create(ModalPhenomenonSelectorComponent, {
       providerUrl: this.providerUrl,
       selectedPhenomenonId: this.selectedPhenomenon ? this.selectedPhenomenon.id : null,
@@ -232,6 +235,7 @@ export class MapPage {
     modal.present();
     modal.onDidDismiss((selectedPhenomenon: Phenomenon) => {
       if (selectedPhenomenon) {
+        this.otherPhenomenonLabel = selectedPhenomenon.label;
         this.setPhenomenon(selectedPhenomenon);
       }
     });
