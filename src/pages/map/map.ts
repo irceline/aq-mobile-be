@@ -77,6 +77,7 @@ export class MapPage {
   public fitBounds: L.LatLngBoundsExpression;
   public clusterStations: boolean;
   public selectedPhenomenon: Phenomenon;
+  public nextStationPopup: L.Popup;
 
   public legend: L.Control;
 
@@ -123,11 +124,10 @@ export class MapPage {
       if (selection) {
         const station = { lat: selection.phenomenonStation.latitude, lng: selection.phenomenonStation.longitude } as LatLngExpression;
         const location = { lat: selection.location.latitude, lng: selection.location.longitude } as LatLngExpression;
-        map.addLayer(
-          popup({ autoPan: false })
-            .setLatLng(station)
-            .setContent(this.translateSrvc.instant('map.nearest-station'))
-        )
+        this.nextStationPopup = popup({ autoPan: false })
+          .setLatLng(station)
+          .setContent(this.translateSrvc.instant('map.nearest-station'));
+        map.addLayer(this.nextStationPopup);
         const label = selection.location.type === 'user' ? this.translateSrvc.instant('map.configured-location') : this.translateSrvc.instant('map.current-location');
         map.addLayer(
           popup({ autoPan: false })
@@ -187,6 +187,7 @@ export class MapPage {
   }
 
   public onPhenomenonChange(): void {
+    if (this.nextStationPopup) { this.nextStationPopup.remove(); }
     this.otherPhenomenonLabel = '';
     const phenID = this.getPhenomenonID(this.phenomenonLabel);
     if (phenID) { this.getPhenomenonFromAPI(phenID) }
