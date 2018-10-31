@@ -8,6 +8,9 @@
 		"loading": "BelAQI voor uw locatie aan het laden"
 	},
 	"annual-phenomenon-buttons": "",
+	"belaqi-chart": {
+		"error": ""
+	},
 	"belaqi-user-location-slider": {
 		"create-new-location": "Maak een nieuwe locatie aan",
 		"current-location": "Huidige locatie",

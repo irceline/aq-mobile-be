@@ -8,6 +8,9 @@
 		"loading": "Lädt den BelAQI für deinen Standort"
 	},
 	"annual-phenomenon-buttons": "Jährliches Mittel",
+	"belaqi-chart": {
+		"error": "Bei der Ermittlung des Graphen ist leider ein Fehler aufgetreten."
+	},
 	"belaqi-user-location-slider": {
 		"create-new-location": "Erstelle einen neuen Standort",
 		"current-location": "Aktuelle Position",

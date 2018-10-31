@@ -8,6 +8,9 @@
 		"loading": "Chargement de BelAQI pour votre position"
 	},
 	"annual-phenomenon-buttons": "",
+	"belaqi-chart": {
+		"error": ""
+	},
 	"belaqi-user-location-slider": {
 		"create-new-location": "Ajouter une nouvelle position",
 		"current-location": "Position actuelle",

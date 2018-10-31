@@ -46,7 +46,8 @@ export class BelaqiChartComponent implements OnChanges {
     popover.present({ ev: myEvent });
   }
 
-  private handleError(error: any) {
+  private handleError(error) {
+    console.error(error);
     this.error = true;
     this.loading = false;
   }
