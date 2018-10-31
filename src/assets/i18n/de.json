@@ -167,6 +167,9 @@
 		"header": {
 			"geolocation-disabled": "Zeige die Messstation auf der Karte",
 			"geolocation-enabled": "Nächstgelegene Station"
+		},
+		"information-popup": {
+			"text": "Here goes the information"
 		}
 	},
 	"nearest-series-legend-slider": {

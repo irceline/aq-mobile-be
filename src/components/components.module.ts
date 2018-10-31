@@ -45,6 +45,9 @@ import { NearestMeasuringStationPanelComponent } from './nearest-measuring-stati
 import {
 	NearestMeasuringStationPanelEntryComponent,
 } from './nearest-measuring-station-panel/nearest-measuring-station-panel-entry';
+import {
+	NearestMeasuringStationPanelInformationPopupComponent,
+} from './nearest-measuring-station-panel/nearest-measuring-station-panel-information-popup';
 import { NearestSeriesLegendSliderComponent } from './nearest-series-legend-slider/nearest-series-legend-slider';
 import { NetworkPanelComponent } from './network-panel/network-panel';
 import { PhenomenonSelectorPopoverComponent } from './phenomenon-selector-popover/phenomenon-selector-popover';
@@ -91,6 +94,7 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		ModalUserLocationListComponent,
 		NearestMeasuringStationPanelComponent,
 		NearestMeasuringStationPanelEntryComponent,
+		NearestMeasuringStationPanelInformationPopupComponent,
 		NearestSeriesLegendSliderComponent,
 		NetworkPanelComponent,
 		PhenomenonSelectorPopoverComponent,
@@ -146,6 +150,7 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		ModalUserLocationListComponent,
 		NearestMeasuringStationPanelComponent,
 		NearestMeasuringStationPanelEntryComponent,
+		NearestMeasuringStationPanelInformationPopupComponent,
 		NearestSeriesLegendSliderComponent,
 		NetworkPanelComponent,
 		PhenomenonSelectorPopoverComponent,
@@ -171,6 +176,7 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		ModalTimespanEditorComponent,
 		ModalUserLocationCreationComponent,
 		ModalUserLocationListComponent,
+		NearestMeasuringStationPanelInformationPopupComponent,
 		PhenomenonSelectorPopoverComponent,
 		PushNotificationComponent,
 		StationSelectorComponent,

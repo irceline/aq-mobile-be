@@ -1,8 +1,18 @@
 nearest-measuring-station-panel {
-    .header {
-        padding: 5px;
+  .header {
+    padding: 5px;
+    display: flex;
+    align-content: center;
+    align-items: center;
+  }
+
+  .col {
+    overflow: hidden;
+  }
+
+  .info-button {
+    button {
+      color: black;
     }
-    .col {
-      overflow: hidden;
-    }
+  }
 }

@@ -167,6 +167,9 @@
 		"header": {
 			"geolocation-disabled": "Toon het meetstation op de kaart",
 			"geolocation-enabled": "Dichtstbijzijnde meetstation"
+		},
+		"information-popup": {
+			"text": "Here goes the information"
 		}
 	},
 	"nearest-series-legend-slider": {
