@@ -56,7 +56,8 @@ export class NearestTimeseriesProvider {
           .subscribe(series => {
             if (series.length === 1) {
               const lastDate = new Date(series[0].lastValue.timestamp).getTime();
-              if (lastDate === settings.lastupdate.getTime()) {
+              const maximumTimeframe = settings.lastupdate.getTime() - this.settingsSrvc.getSettings().nearestStationTimeBufferInMillseconds;
+              if (lastDate >= maximumTimeframe) {
                 observer.next({
                   distance: distance,
                   series: series[0]
