@@ -161,7 +161,7 @@
 		"lastUpdate": "Dernière mise à jour"
 	},
 	"modal-annual-map": {
-		"header": ""
+		"header": "Carte moyenne annuelle"
 	},
 	"nearest-measuring-station-panel": {
 		"header": {
@@ -169,7 +169,12 @@
 			"geolocation-enabled": "Station de mesure la plus proche"
 		},
 		"information-popup": {
-			"text": "Here goes the information"
+			"text": "Les concentrations réelles mesurées des stations de mesure les plus proches sont données ici. Les différents polluants sont:",
+			"list-bc":"ou black carbon",
+			"list-no2":"ou dioxyde d'azote",
+			"list-o3":"ou ozone",
+			"list-pm10":"ou particules d'un diamètre inférieur à 10 micromètres",
+			"list-pm25":"ou particules d'un diamètre inférieur à 2,5 micromètres"
 		}
 	},
 	"nearest-series-legend-slider": {

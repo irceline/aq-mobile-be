@@ -161,7 +161,7 @@
 		"lastUpdate": "Laatste actualisatie"
 	},
 	"modal-annual-map": {
-		"header": ""
+		"header": "jaargemiddelde kaart"
 	},
 	"nearest-measuring-station-panel": {
 		"header": {
@@ -169,7 +169,12 @@
 			"geolocation-enabled": "Dichtstbijzijnde meetstation"
 		},
 		"information-popup": {
-			"text": "Here goes the information"
+			"text": "Hier ziet u de actuele gemeten concentraties voor de dichtstbijzijnde meetstations. De verschillende polluenten zijn:",
+			"list-bc":"BC of zwarte koolstof",
+			"list-no2":"NO2 of stikstofdioxide",
+			"list-o3":"O3 of ozon",
+			"list-pm10":"PM10 of fijn stof met een diameter kleiner dan 10 micrometer",
+			"list-pm25":"PM2.5 of fijn stof met een diameter kleiner dan 2,5 micrometer"
 		}
 	},
 	"nearest-series-legend-slider": {

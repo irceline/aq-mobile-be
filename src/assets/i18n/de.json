@@ -161,7 +161,7 @@
 		"lastUpdate": "Letztes Update"
 	},
 	"modal-annual-map": {
-		"header": "Jährliches Mittel"
+		"header": "Jahresmittelwert Karte"
 	},
 	"nearest-measuring-station-panel": {
 		"header": {
@@ -169,7 +169,12 @@
 			"geolocation-enabled": "Nächstgelegene Station"
 		},
 		"information-popup": {
-			"text": "Here goes the information"
+			"text": "Die tatsächlich gemessenen Konzentrationen der nächstgelegenen Überwachungsstationen werden hier angegeben. Die verschiedenen Schadstoffe sind:",
+			"list-bc":"oder black carbon",
+			"list-no2":"oder Stickstoffdioxid",
+			"list-o3":"oder Ozon",
+			"list-pm10":"oder Partikel mit einem Durchmesser kleiner als 10 Mikrometer",
+			"list-pm25":"oder Partikel mit einem Durchmesser kleiner als 2,5 Mikrometer"
 		}
 	},
 	"nearest-series-legend-slider": {
