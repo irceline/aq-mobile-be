@@ -7,7 +7,7 @@
 		"hint": "Modelliert für deinen Standort",
 		"loading": "Lädt den BelAQI für deinen Standort"
 	},
-	"annual-phenomenon-buttons": "Jährliches Mittel",
+	"annual-phenomenon-buttons": "Modellierter Jahresmittelwert für diesen Standort:",
 	"belaqi-chart": {
 		"error": "Bei der Ermittlung des Graphen ist leider ein Fehler aufgetreten."
 	},

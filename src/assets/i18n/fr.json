@@ -7,9 +7,9 @@
 		"hint": "Valeur modélisée pour votre position",
 		"loading": "Chargement de BelAQI pour votre position"
 	},
-	"annual-phenomenon-buttons": "",
+	"annual-phenomenon-buttons": "Valeur moyenne annuelle modélisée pour ce position:",
 	"belaqi-chart": {
-		"error": ""
+		"error": "Malheureusement, une erreur est survenue lors de la détermination du graphique."
 	},
 	"belaqi-user-location-slider": {
 		"create-new-location": "Ajouter une nouvelle position",
@@ -241,11 +241,11 @@
 	},
 	"phenomenon": {
 		"long-label": {
-			"bc": "",
-			"no2": "",
-			"o3": "",
-			"pm10": "",
-			"pm25": ""
+			"bc": "Black Carbon",
+			"no2": "Dioxyde d'azote",
+			"o3": "Ozone",
+			"pm10": "Particules < 10 µm",
+			"pm25": "Particules < 2.5 µm"
 		}
 	},
 	"push-notification-subscription": {
