@@ -98,7 +98,7 @@
 		},
 		"moreInfo": "Mehr Info",
 		"wheel": {
-			"link": "http://www.irceline.be/de/belaqi",
+			"link": "http://www.irceline.be/en/belaqi",
 			"message": "Dieser Indikator zeigt den aktuellen BelAQI-Luftqualitätsindex für Ihren Standort an. Dieser Index kombiniert die modellierten Konzentrationen der verschiedenen Schadstoffe in Abhängigkeit von ihren Auswirkungen auf die Gesundheit."
 		}
 	},
