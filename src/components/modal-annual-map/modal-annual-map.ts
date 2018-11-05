@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { SettingsService } from '@helgoland/core';
 import { LayerOptions, MapCache } from '@helgoland/map';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { NavParams, ViewController } from 'ionic-angular';
-import { LatLngExpression, popup, tileLayer, TileLayerOptions } from 'leaflet';
+import { Control, DomUtil, LatLngExpression, popup, tileLayer, TileLayerOptions } from 'leaflet';
 
 import { AnnualMeanProvider, AnnualPhenomenonMapping } from '../../providers/annual-mean/annual-mean';
 import { MobileSettings } from '../../providers/settings/settings';
@@ -19,7 +20,7 @@ export class ModalAnnualMapComponent {
   public zoomControlOptions: L.Control.ZoomOptions = {};
   public layerControlOptions: L.Control.LayersOptions = { position: "bottomleft", hideSingleBase: true };
   public overlayMaps: Map<string, LayerOptions> = new Map<string, LayerOptions>();
-
+  public legend: L.Control;
   public year: string;
   public phenomenonLabel: string;
 
@@ -29,7 +30,8 @@ export class ModalAnnualMapComponent {
     private settingsSrvc: SettingsService<MobileSettings>,
     private annualMean: AnnualMeanProvider,
     private mapCache: MapCache,
-    private translateSrvc: TranslateService
+    private translateSrvc: TranslateService,
+    private iab: InAppBrowser,
   ) { }
 
   public mapInitialized() {
@@ -47,6 +49,7 @@ export class ModalAnnualMapComponent {
     } else {
       this.fitBounds = this.settingsSrvc.getSettings().defaultBbox;
     }
+    this.showLegend();
   }
 
   public onPhenomenonChange(): void {
@@ -55,6 +58,58 @@ export class ModalAnnualMapComponent {
 
   public dismiss() {
     this.viewCtrl.dismiss();
+  }
+
+  public showLegend() {
+    if (this.legend) {
+      this.legend.remove();
+    }
+    if (this.mapCache.hasMap(this.mapId)) {
+
+      this.legend = new Control({ position: 'topright' });
+
+      this.legend.onAdd = (map) => {
+        const div = DomUtil.create('div', 'leaflet-bar legend');
+        let legendVisible = false;
+        const button = '<a class="info" role="button"></a>';
+        div.innerHTML = button;
+        div.onclick = () => {
+          const langCode = this.translateSrvc.currentLang.toLocaleUpperCase();
+          let legendId: string;
+          switch (this.phenomenonLabel) {
+            case 'BC':
+              legendId = 'bc_anmean';
+              break;
+            case 'NO2':
+              legendId = 'no2_anmean';
+              break;
+            case 'O3':
+              legendId = 'o3_anmean';
+              break;
+            case 'PM10':
+              legendId = 'pm10_anmean';
+              break;
+            case 'PM25':
+              legendId = 'pm25_anmean';
+              break;
+          }
+          let legend = '<img src="http://www.irceline.be/air/legend/' + legendId + '_' + langCode + '.svg">';
+          legend += `<div id="annual-more-link">${this.translateSrvc.instant('annual-map.legeng.link-more')}</div>`;
+          div.innerHTML = legendVisible ? button : legend;
+          const moreLink = DomUtil.get('annual-more-link');
+          if (moreLink) {
+            moreLink.onclick = (event) => {
+              this.iab.create(this.translateSrvc.instant('annual-map.legeng.link-more-url'));
+              event.stopPropagation();
+            }
+          }
+          legendVisible = !legendVisible;
+        }
+        return div;
+      };
+
+      this.legend.addTo(this.mapCache.getMap(this.mapId));
+    }
   }
 
   private setOverlayMap(phenomenon) {

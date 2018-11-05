@@ -7,6 +7,13 @@
 		"hint": "Valeur modélisée pour votre position",
 		"loading": "Chargement de BelAQI pour votre position"
 	},
+	"annual-map": {
+		"header": "Carte moyenne annuelle",
+		"legeng": {
+			"link-more": "",
+			"link-more-url": ""
+		}
+	},
 	"annual-phenomenon-buttons": "",
 	"belaqi-chart": {
 		"error": ""
@@ -160,21 +167,18 @@
 	"menu": {
 		"lastUpdate": "Dernière mise à jour"
 	},
-	"modal-annual-map": {
-		"header": "Carte moyenne annuelle"
-	},
 	"nearest-measuring-station-panel": {
 		"header": {
 			"geolocation-disabled": "Montrer la station de mesure sur la carte",
 			"geolocation-enabled": "Station de mesure la plus proche"
 		},
 		"information-popup": {
-			"text": "Les concentrations réelles mesurées des stations de mesure les plus proches sont données ici. Les différents polluants sont:",
-			"list-bc":"ou black carbon",
-			"list-no2":"ou dioxyde d'azote",
-			"list-o3":"ou ozone",
-			"list-pm10":"ou particules d'un diamètre inférieur à 10 micromètres",
-			"list-pm25":"ou particules d'un diamètre inférieur à 2,5 micromètres"
+			"list-bc": "ou black carbon",
+			"list-no2": "ou dioxyde d'azote",
+			"list-o3": "ou ozone",
+			"list-pm10": "ou particules d'un diamètre inférieur à 10 micromètres",
+			"list-pm25": "ou particules d'un diamètre inférieur à 2,5 micromètres",
+			"text": "Les concentrations réelles mesurées des stations de mesure les plus proches sont données ici. Les différents polluants sont:"
 		}
 	},
 	"nearest-series-legend-slider": {

@@ -17,4 +17,31 @@ modal-annual-map {
       }
     }
   }
+
+  .info {
+    display: inline-block;
+    font-family: "Ionicons";
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 1;
+    text-rendering: auto;
+    text-transform: none;
+    speak: none;
+    font-size: 20px;
+  }
+
+  .info::before {
+    content: "\f311";
+  }
+
+  .legend {
+    background: white;
+    opacity: 0.8;
+    #annual-more-link {
+      text-align: center;
+    }
+  }
 }

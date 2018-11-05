@@ -52,14 +52,12 @@ export class UserLocationCreationComponent {
         {
           message: this.translate.instant('user-location.creation.message.exists'),
           duration: 3000
-        }
-      ).present();
+        }).present();
     } else {
       this.locationList.addUserLocation(this.locationLabel, this.location); this.toast.create({
         message: this.translate.instant('user-location.creation.message.added'),
         duration: 3000
-      }
-      ).present();
+      }).present();
     }
   }
 

@@ -7,6 +7,13 @@
 		"hint": "Modelled value for your location",
 		"loading": "Loading BelAQI for your location"
 	},
+	"annual-map": {
+		"header": "Annual mean map",
+		"legeng": {
+			"link-more": "Show more",
+			"link-more-url": ""
+		}
+	},
 	"annual-phenomenon-buttons": "Annual mean elevation",
 	"belaqi-chart": {
 		"error": ""
@@ -160,21 +167,18 @@
 	"menu": {
 		"lastUpdate": "Last update"
 	},
-	"modal-annual-map": {
-		"header": "Annual mean map"
-	},
 	"nearest-measuring-station-panel": {
 		"header": {
 			"geolocation-disabled": "Show the measuring station on the map",
 			"geolocation-enabled": "Nearest measuring station"
 		},
 		"information-popup": {
-			"text": "The actual measured concentrations of the nearest monitoring stations are given here. The different pollutants are:",
-			"list-bc":"or black carbon",
-			"list-no2":"or nitrogen dioxide",
-			"list-o3":"or ozone",
-			"list-pm10":"or particulate matter with a diameter below 10 micrometer",
-			"list-pm25":"or particulate matter with a diameter below 2,5 micrometer"
+			"list-bc": "or black carbon",
+			"list-no2": "or nitrogen dioxide",
+			"list-o3": "or ozone",
+			"list-pm10": "or particulate matter with a diameter below 10 micrometer",
+			"list-pm25": "or particulate matter with a diameter below 2,5 micrometer",
+			"text": "The actual measured concentrations of the nearest monitoring stations are given here. The different pollutants are:"
 		}
 	},
 	"nearest-series-legend-slider": {

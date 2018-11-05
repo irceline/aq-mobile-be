@@ -7,6 +7,13 @@
 		"hint": "Modelliert für deinen Standort",
 		"loading": "Lädt den BelAQI für deinen Standort"
 	},
+	"annual-map": {
+		"header": "Jahresmittelwert Karte",
+		"legeng": {
+			"link-more": "Zeige mehr",
+			"link-more-url": "http://www.irceline.be/de"
+		}
+	},
 	"annual-phenomenon-buttons": "Jährliches Mittel",
 	"belaqi-chart": {
 		"error": "Bei der Ermittlung des Graphen ist leider ein Fehler aufgetreten."
@@ -160,21 +167,18 @@
 	"menu": {
 		"lastUpdate": "Letztes Update"
 	},
-	"modal-annual-map": {
-		"header": "Jahresmittelwert Karte"
-	},
 	"nearest-measuring-station-panel": {
 		"header": {
 			"geolocation-disabled": "Zeige die Messstation auf der Karte",
 			"geolocation-enabled": "Nächstgelegene Station"
 		},
 		"information-popup": {
-			"text": "Die tatsächlich gemessenen Konzentrationen der nächstgelegenen Überwachungsstationen werden hier angegeben. Die verschiedenen Schadstoffe sind:",
-			"list-bc":"oder black carbon",
-			"list-no2":"oder Stickstoffdioxid",
-			"list-o3":"oder Ozon",
-			"list-pm10":"oder Partikel mit einem Durchmesser kleiner als 10 Mikrometer",
-			"list-pm25":"oder Partikel mit einem Durchmesser kleiner als 2,5 Mikrometer"
+			"list-bc": "oder black carbon",
+			"list-no2": "oder Stickstoffdioxid",
+			"list-o3": "oder Ozon",
+			"list-pm10": "oder Partikel mit einem Durchmesser kleiner als 10 Mikrometer",
+			"list-pm25": "oder Partikel mit einem Durchmesser kleiner als 2,5 Mikrometer",
+			"text": "Die tatsächlich gemessenen Konzentrationen der nächstgelegenen Überwachungsstationen werden hier angegeben. Die verschiedenen Schadstoffe sind:"
 		}
 	},
 	"nearest-series-legend-slider": {
