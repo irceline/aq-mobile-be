@@ -14,9 +14,9 @@
 			"link-more-url": ""
 		}
 	},
-	"annual-phenomenon-buttons": "",
+	"annual-phenomenon-buttons": "Gemoduleerde jaargemiddelde waarde voor deze locatie:",
 	"belaqi-chart": {
-		"error": ""
+		"error": "Helaas is er een fout opgetreden bij het bepalen van de grafiek."
 	},
 	"belaqi-user-location-slider": {
 		"create-new-location": "Maak een nieuwe locatie aan",
@@ -245,11 +245,11 @@
 	},
 	"phenomenon": {
 		"long-label": {
-			"bc": "",
-			"no2": "",
-			"o3": "",
-			"pm10": "",
-			"pm25": ""
+			"bc": "Zwarte koolstof",
+			"no2": "Stikstofdioxide",
+			"o3": "Ozon",
+			"pm10": "Fijn stof < 10 µm",
+			"pm25": "Fijn stof < 10 µm"
 		}
 	},
 	"push-notification-subscription": {

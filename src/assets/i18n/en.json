@@ -14,9 +14,9 @@
 			"link-more-url": ""
 		}
 	},
-	"annual-phenomenon-buttons": "Annual mean elevation",
+	"annual-phenomenon-buttons": "Modelled annual mean value for this location:",
 	"belaqi-chart": {
-		"error": ""
+		"error": "Unfortunately, an error occurred while determining the graph."
 	},
 	"belaqi-user-location-slider": {
 		"create-new-location": "Create new location",

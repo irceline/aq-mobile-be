@@ -14,7 +14,7 @@
 			"link-more-url": "http://www.irceline.be/de"
 		}
 	},
-	"annual-phenomenon-buttons": "Jährliches Mittel",
+	"annual-phenomenon-buttons": "Modellierter Jahresmittelwert für diesen Standort:",
 	"belaqi-chart": {
 		"error": "Bei der Ermittlung des Graphen ist leider ein Fehler aufgetreten."
 	},
@@ -105,7 +105,7 @@
 		},
 		"moreInfo": "Mehr Info",
 		"wheel": {
-			"link": "http://www.irceline.be/de/belaqi",
+			"link": "http://www.irceline.be/en/belaqi",
 			"message": "Dieser Indikator zeigt den aktuellen BelAQI-Luftqualitätsindex für Ihren Standort an. Dieser Index kombiniert die modellierten Konzentrationen der verschiedenen Schadstoffe in Abhängigkeit von ihren Auswirkungen auf die Gesundheit."
 		}
 	},
