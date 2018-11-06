@@ -91,67 +91,67 @@ export class AnnualMeanProvider extends ValueProvider {
   }
 
   private categorizeBC(value: number): string {
-    if (value <= 0.5) return this.belaqi.getColorForIndex(1);
-    if (value <= 1) return this.belaqi.getColorForIndex(2);
-    if (value <= 1.25) return this.belaqi.getColorForIndex(3);
-    if (value <= 1.5) return this.belaqi.getColorForIndex(4);
-    if (value <= 1.75) return this.belaqi.getColorForIndex(5);
-    if (value <= 2) return this.belaqi.getColorForIndex(6);
-    if (value <= 2.5) return this.belaqi.getColorForIndex(7);
-    if (value <= 3) return this.belaqi.getColorForIndex(8);
-    if (value <= 3.5) return this.belaqi.getColorForIndex(9);
+    if (value <= 0.505) return this.belaqi.getColorForIndex(1);
+    if (value <= 1.005) return this.belaqi.getColorForIndex(2);
+    if (value <= 1.255) return this.belaqi.getColorForIndex(3);
+    if (value <= 1.505) return this.belaqi.getColorForIndex(4);
+    if (value <= 1.755) return this.belaqi.getColorForIndex(5);
+    if (value <= 2.005) return this.belaqi.getColorForIndex(6);
+    if (value <= 2.505) return this.belaqi.getColorForIndex(7);
+    if (value <= 3.005) return this.belaqi.getColorForIndex(8);
+    if (value <= 3.505) return this.belaqi.getColorForIndex(9);
     return this.belaqi.getColorForIndex(10);
   }
 
   private categorizePM25(value: number): string {
-    if (value <= 5) return this.belaqi.getColorForIndex(1);
-    if (value <= 7) return this.belaqi.getColorForIndex(2);
-    if (value <= 10) return this.belaqi.getColorForIndex(3);
-    if (value <= 12) return this.belaqi.getColorForIndex(4);
-    if (value <= 15) return this.belaqi.getColorForIndex(5);
-    if (value <= 20) return this.belaqi.getColorForIndex(6);
-    if (value <= 25) return this.belaqi.getColorForIndex(7);
-    if (value <= 30) return this.belaqi.getColorForIndex(8);
-    if (value <= 35) return this.belaqi.getColorForIndex(9);
+    if (value <= 5.5) return this.belaqi.getColorForIndex(1);
+    if (value <= 7.5) return this.belaqi.getColorForIndex(2);
+    if (value <= 10.5) return this.belaqi.getColorForIndex(3);
+    if (value <= 12.5) return this.belaqi.getColorForIndex(4);
+    if (value <= 15.5) return this.belaqi.getColorForIndex(5);
+    if (value <= 20.5) return this.belaqi.getColorForIndex(6);
+    if (value <= 25.5) return this.belaqi.getColorForIndex(7);
+    if (value <= 30.5) return this.belaqi.getColorForIndex(8);
+    if (value <= 35.5) return this.belaqi.getColorForIndex(9);
     return this.belaqi.getColorForIndex(10);
   }
 
   private categorizePM10(value: number): string {
-    if (value <= 10) return this.belaqi.getColorForIndex(1);
-    if (value <= 15) return this.belaqi.getColorForIndex(2);
-    if (value <= 20) return this.belaqi.getColorForIndex(3);
-    if (value <= 25) return this.belaqi.getColorForIndex(4);
-    if (value <= 30) return this.belaqi.getColorForIndex(5);
-    if (value <= 35) return this.belaqi.getColorForIndex(6);
-    if (value <= 40) return this.belaqi.getColorForIndex(7);
-    if (value <= 45) return this.belaqi.getColorForIndex(8);
-    if (value <= 50) return this.belaqi.getColorForIndex(9);
+    if (value <= 10.5) return this.belaqi.getColorForIndex(1);
+    if (value <= 15.5) return this.belaqi.getColorForIndex(2);
+    if (value <= 20.5) return this.belaqi.getColorForIndex(3);
+    if (value <= 25.5) return this.belaqi.getColorForIndex(4);
+    if (value <= 30.5) return this.belaqi.getColorForIndex(5);
+    if (value <= 35.5) return this.belaqi.getColorForIndex(6);
+    if (value <= 40.5) return this.belaqi.getColorForIndex(7);
+    if (value <= 45.5) return this.belaqi.getColorForIndex(8);
+    if (value <= 50.5) return this.belaqi.getColorForIndex(9);
     return this.belaqi.getColorForIndex(10);
   }
 
   private categorizeO3(value: number): string {
-    if (value <= 10) return this.belaqi.getColorForIndex(1);
-    if (value <= 20) return this.belaqi.getColorForIndex(2);
-    if (value <= 30) return this.belaqi.getColorForIndex(3);
-    if (value <= 35) return this.belaqi.getColorForIndex(4);
-    if (value <= 40) return this.belaqi.getColorForIndex(5);
-    if (value <= 45) return this.belaqi.getColorForIndex(6);
-    if (value <= 50) return this.belaqi.getColorForIndex(7);
-    if (value <= 55) return this.belaqi.getColorForIndex(8);
-    if (value <= 60) return this.belaqi.getColorForIndex(9);
+    if (value <= 10.5) return this.belaqi.getColorForIndex(1);
+    if (value <= 20.5) return this.belaqi.getColorForIndex(2);
+    if (value <= 30.5) return this.belaqi.getColorForIndex(3);
+    if (value <= 35.5) return this.belaqi.getColorForIndex(4);
+    if (value <= 40.5) return this.belaqi.getColorForIndex(5);
+    if (value <= 45.5) return this.belaqi.getColorForIndex(6);
+    if (value <= 50.5) return this.belaqi.getColorForIndex(7);
+    if (value <= 55.5) return this.belaqi.getColorForIndex(8);
+    if (value <= 60.5) return this.belaqi.getColorForIndex(9);
     return this.belaqi.getColorForIndex(10);
   }
 
   private categorizeNO2(value: number): string {
-    if (value <= 10) return this.belaqi.getColorForIndex(1);
-    if (value <= 15) return this.belaqi.getColorForIndex(2);
-    if (value <= 20) return this.belaqi.getColorForIndex(3);
-    if (value <= 25) return this.belaqi.getColorForIndex(4);
-    if (value <= 30) return this.belaqi.getColorForIndex(5);
-    if (value <= 35) return this.belaqi.getColorForIndex(6);
-    if (value <= 40) return this.belaqi.getColorForIndex(7);
-    if (value <= 45) return this.belaqi.getColorForIndex(8);
-    if (value <= 50) return this.belaqi.getColorForIndex(9);
+    if (value <= 10.5) return this.belaqi.getColorForIndex(1);
+    if (value <= 15.5) return this.belaqi.getColorForIndex(2);
+    if (value <= 20.5) return this.belaqi.getColorForIndex(3);
+    if (value <= 25.5) return this.belaqi.getColorForIndex(4);
+    if (value <= 30.5) return this.belaqi.getColorForIndex(5);
+    if (value <= 35.5) return this.belaqi.getColorForIndex(6);
+    if (value <= 40.5) return this.belaqi.getColorForIndex(7);
+    if (value <= 45.5) return this.belaqi.getColorForIndex(8);
+    if (value <= 50.5) return this.belaqi.getColorForIndex(9);
     return this.belaqi.getColorForIndex(10);
   }
 
