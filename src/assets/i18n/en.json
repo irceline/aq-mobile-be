@@ -186,7 +186,9 @@
 	},
 	"network": {
 		"geolocationDisabled": "Geolocation is disabled",
+		"geolocationDisabledExplanation": "If you want to make use of the \"current position\" functionalities, please enable the location service of your device.",
 		"geolocationEnabled": "Geolocation is enabled",
+		"geolocationEnabledExplanation": "The \"current position\" functionalities are available to you.",
 		"offline": "Your device is offline",
 		"online": "Your device is online"
 	},

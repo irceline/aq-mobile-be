@@ -186,7 +186,9 @@
 	},
 	"network": {
 		"geolocationDisabled": "Die Standortermittlung ist deaktiviert",
+		"geolocationDisabledExplanation": "Falls sie die \"Aktuelle Position\"-funktionalitäten nutzen wollen, aktivieren sie bitte den Standortdienst Ihres Geräts.",
 		"geolocationEnabled": "Die Standortermittlung ist aktiviert",
+		"geolocationEnabledExplanation": "Die \"Aktuelle Position\"-funktionalitäten stehen Ihnen zur Verfügung.",
 		"offline": "Dein Handy ist offline",
 		"online": "Dein Handy ist online"
 	},

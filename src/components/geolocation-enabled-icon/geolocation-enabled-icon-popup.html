@@ -1,7 +1,9 @@
-<div *ngIf="geolocationEnabled">
-  {{'network.geolocationEnabled' | translate}}
+<div *ngIf="geolocationEnabled" text-wrap>
+  <strong>{{'network.geolocationEnabled' | translate}}</strong>
+  <p>{{'network.geolocationEnabledExplanation' | translate}}</p>
 </div>
 
-<div *ngIf="!geolocationEnabled">
-  {{'network.geolocationDisabled' | translate}}
+<div *ngIf="!geolocationEnabled" text-wrap>
+  <strong>{{'network.geolocationDisabled' | translate}}</strong>
+  <p>{{'network.geolocationDisabledExplanation' | translate}}</p>
 </div>

@@ -186,7 +186,9 @@
 	},
 	"network": {
 		"geolocationDisabled": "Geolocatie is uitgeschakeld",
+		"geolocationDisabledExplanation": "Als u gebruik wilt maken van de \"huidige locatie\"-functionaliteiten, schakel dan de locatieservice van uw apparaat in.",
 		"geolocationEnabled": "Geolocatie is geactiveerd",
+		"geolocationEnabledExplanation": "De \"huidige locatie\"-functionaliteiten zijn voor u beschikbaar.",
 		"offline": "U toestel offline",
 		"online": "U toestel is online"
 	},
