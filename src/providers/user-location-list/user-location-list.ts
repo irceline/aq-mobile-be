@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { GeoSearch } from '@helgoland/map';
+import { GeoReverseResult, GeoSearch } from '@helgoland/map';
 import { Geoposition } from '@ionic-native/geolocation';
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
@@ -78,10 +78,7 @@ export class UserLocationListProvider {
         const reverseObs = this.geoSearch.reverse({ type: 'Point', coordinates: [pos.coords.latitude, pos.coords.longitude] });
         reverseObs.subscribe(
           value => {
-            let locationLabel = this.translateSrvc.instant('belaqi-user-location-slider.current-location');
-            if (value.address && value.address.road && value.address.houseNumber && value.address.city) {
-              locationLabel = `${value.address.road} ${value.address.houseNumber}, ${value.address.city}`;
-            }
+            let locationLabel = this.createGeoLabel(value);
             observer.next({
               id: 1,
               label: locationLabel,
@@ -99,6 +96,18 @@ export class UserLocationListProvider {
           });
       });
     })
+  }
+
+  private createGeoLabel(geo: GeoReverseResult) {
+    let locationLabel;
+    if (geo && geo.address && geo.address.road && geo.address.houseNumber && geo.address.city) {
+      if (geo.address.road && geo.address.houseNumber) { locationLabel = `${geo.address.road} ${geo.address.houseNumber}, `; }
+      if (geo.address.city) { locationLabel += geo.address.city + ', ' }
+      if (geo.address.country) { locationLabel += geo.address.country }
+    } else {
+      locationLabel = this.translateSrvc.instant('belaqi-user-location-slider.current-location');
+    }
+    return locationLabel;
   }
 
   public hasLocation(label: string, point: Point): boolean {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LocalStorage } from '@helgoland/core';
-import { GeoSearch } from '@helgoland/map';
+import { GeoSearch, GeoReverseResult } from '@helgoland/map';
 import {
   BackgroundGeolocation,
   BackgroundGeolocationConfig,
@@ -182,10 +182,7 @@ export class PersonalAlertsProvider {
               ).subscribe(res => {
                 // this.localNotifications.schedule({ text: 'forkJoin: ' + res.toString(), id: 600 });
                 const belaqi = res[0] ? res[0] : null;
-                let label = 'Current location';
-                if (res[1] && res[1].address && res[1].address.road && res[1].address.houseNumber && res[1].address.city) {
-                  label = `${res[1].address.road} ${res[1].address.houseNumber}, ${res[1].address.city}`;
-                }
+                const label = this.createGeoLabel(res[1]);
                 if (belaqi && label) {
                   observer.next({
                     belaqi,
@@ -218,6 +215,18 @@ export class PersonalAlertsProvider {
         observer.complete();
       }
     });
+  }
+
+  private createGeoLabel(geo: GeoReverseResult) {
+    let locationLabel;
+    if (geo && geo.address && geo.address.road && geo.address.houseNumber && geo.address.city) {
+      if (geo.address.road && geo.address.houseNumber) { locationLabel = `${geo.address.road} ${geo.address.houseNumber}, `; }
+      if (geo.address.city) { locationLabel += geo.address.city + ', ' }
+      if (geo.address.country) { locationLabel += geo.address.country }
+    } else {
+      locationLabel = this.translateSrvc.instant('belaqi-user-location-slider.current-location');
+    }
+    return locationLabel;
   }
 
   private doUserLocationsCheck(): Observable<PersonalAlert[]> {

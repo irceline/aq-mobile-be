@@ -32,7 +32,8 @@ export class UserLocationCreationComponent {
     const settings = this.settingsSrvc.getSettings();
     this.geoSearchOptions = {
       countrycodes: settings.geoSearchContryCodes,
-      asPointGeometry: true
+      asPointGeometry: true,
+      addressdetails: true
     };
     this.mapOptions = {
       maxZoom: 18,
@@ -43,7 +44,19 @@ export class UserLocationCreationComponent {
   public geoSearchResultChanged(result: GeoSearchResult) {
     this.geoSearchResult = result;
     this.location = this.geoSearchResult.geometry as Point;
-    this.locationLabel = result.name;
+    this.locationLabel = this.createGeoLabel(result);
+  }
+  
+  private createGeoLabel(geo: GeoSearchResult) {
+    if (geo && geo.address) {
+      let locationLabel = '';
+      if (geo.address.road) { locationLabel = `${geo.address.road}${geo.address.house_number ? geo.address.house_number : ''}, `; }
+      if (geo.address.city || geo.address.town) { locationLabel += (geo.address.city ? geo.address.city : geo.address.town) + ', ' }
+      if (geo.address.country) { locationLabel += geo.address.country }
+      return locationLabel;
+    } else {
+      return geo.name;
+    }
   }
 
   public addLocationToList() {
