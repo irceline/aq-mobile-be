@@ -152,6 +152,7 @@
 		"header": "Carte",
 		"interpolated-map": "Carte interpolée",
 		"nearest-station": "Station de mesure la plus proche",
+		"no-legend": "",
 		"pollutant": {
 			"other": "autre"
 		},

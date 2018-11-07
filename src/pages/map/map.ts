@@ -36,19 +36,37 @@ enum TimeLabel {
 const phenomenonMapping = [
   {
     id: '8',
-    label: PhenomenonLabel.NO2
+    label: PhenomenonLabel.NO2,
+    legendId: 'no2_hmean'
   }, {
     id: '7',
-    label: PhenomenonLabel.O3
+    label: PhenomenonLabel.O3,
+    legendId: 'o3_hmean'
   }, {
     id: '5',
-    label: PhenomenonLabel.PM10
+    label: PhenomenonLabel.PM10,
+    legendId: 'pm10_hmean'
   }, {
     id: '6001',
-    label: PhenomenonLabel.PM25
+    label: PhenomenonLabel.PM25,
+    legendId: 'pm25_hmean'
   }, {
     id: '391',
-    label: PhenomenonLabel.BC
+    label: PhenomenonLabel.BC,
+    legendId: 'bc_hmean'
+  }
+]
+
+const otherPhenomenonMapping = [
+  {
+    id: '10',
+    legendId: 'co_hmean'
+  }, {
+    id: '20',
+    legendId: 'c6h6_24hmean'
+  }, {
+    id: '1',
+    legendId: 'so2_hmean'
   }
 ]
 
@@ -63,7 +81,6 @@ export class MapPage {
   public statusIntervalDuration: number;
   public geoSearchOptions: GeoSearchOptions;
   public phenomenonLabel: PhenomenonLabel = PhenomenonLabel.NO2;
-  public otherPhenomenonLabel: string;
   public time: TimeLabel = TimeLabel.current;
   public selectedOtherPhenom: string;
 
@@ -145,7 +162,7 @@ export class MapPage {
     if (this.legend) {
       this.legend.remove();
     }
-    if (this.mapCache.hasMap(this.mapId) && this.phenomenonLabel !== 'Others') {
+    if (this.mapCache.hasMap(this.mapId)) {
 
       this.legend = new L.Control({ position: 'topright' });
 
@@ -156,27 +173,16 @@ export class MapPage {
         div.innerHTML = button;
         div.onclick = () => {
           const langCode = this.translateSrvc.currentLang.toLocaleUpperCase();
-          let legendId: string;
-          switch (this.phenomenonLabel) {
-            case PhenomenonLabel.BC:
-              legendId = 'bc_hmean';
-              break;
-            case PhenomenonLabel.NO2:
-              legendId = 'no2_hmean';
-              break;
-            case PhenomenonLabel.O3:
-              legendId = 'o3_hmean';
-              break;
-            case PhenomenonLabel.PM10:
-              legendId = 'pm10_hmean';
-              break;
-            case PhenomenonLabel.PM25:
-              legendId = 'pm25_hmean';
-              break;
-            default:
-              break;
+          let legendId = this.getPhenomenonLegendId(this.selectedPhenomenon.id);
+          if (legendVisible) {
+            div.innerHTML = button;
+          } else {
+            if (legendId) {
+              div.innerHTML = `<img src="http://www.irceline.be/air/legend/${legendId}_${langCode}.svg">`
+            } else {
+              div.innerHTML = `<div>${this.translateSrvc.instant('map.no-legend')}</div>`;
+            }
           }
-          div.innerHTML = legendVisible ? button : '<img src="http://www.irceline.be/air/legend/' + legendId + '_' + langCode + '.svg">';
           legendVisible = !legendVisible;
         }
         return div;
@@ -188,7 +194,6 @@ export class MapPage {
 
   public onPhenomenonChange(): void {
     if (this.nextStationPopup) { this.nextStationPopup.remove(); }
-    this.otherPhenomenonLabel = '';
     const phenID = this.getPhenomenonID(this.phenomenonLabel);
     if (phenID) { this.getPhenomenonFromAPI(phenID) }
     this.selectedOtherPhenom = '';
@@ -211,6 +216,13 @@ export class MapPage {
     if (phen) return phen.label;
   }
 
+  private getPhenomenonLegendId(id: string): string {
+    let phen = phenomenonMapping.find(e => id === e.id);
+    if (phen && phen.legendId) return phen.legendId;
+    let otherPhen = otherPhenomenonMapping.find(e => id === e.id);
+    if (otherPhen && otherPhen.legendId) return otherPhen.legendId;
+  }
+
   public onTimeChange(): void {
     this.showLayer();
     this.setPhenomenonFilter();
@@ -226,7 +238,6 @@ export class MapPage {
   }
 
   public openOtherPhenomena() {
-    this.otherPhenomenonLabel = '';
     const modal = this.modalCtrl.create(ModalPhenomenonSelectorComponent, {
       providerUrl: this.providerUrl,
       selectedPhenomenonId: this.selectedPhenomenon ? this.selectedPhenomenon.id : null,
@@ -236,7 +247,6 @@ export class MapPage {
     modal.present();
     modal.onDidDismiss((selectedPhenomenon: Phenomenon) => {
       if (selectedPhenomenon) {
-        this.otherPhenomenonLabel = selectedPhenomenon.label;
         this.setPhenomenon(selectedPhenomenon);
       }
     });

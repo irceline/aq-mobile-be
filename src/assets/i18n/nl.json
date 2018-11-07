@@ -152,6 +152,7 @@
 		"header": "Kaart",
 		"interpolated-map": "Geïnterpoleerde kaart",
 		"nearest-station": "Dichtstbijzijnde meetstation",
+		"no-legend": "",
 		"pollutant": {
 			"other": "andere"
 		},

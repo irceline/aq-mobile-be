@@ -152,6 +152,7 @@
 		"header": "Karte",
 		"interpolated-map": "Interpolierte Karte",
 		"nearest-station": "Nächste Station",
+		"no-legend": "Keine Legend verfügbar",
 		"pollutant": {
 			"other": "andere"
 		},

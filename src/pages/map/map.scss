@@ -70,10 +70,13 @@ page-map {
   .info::before {
     content: "\f311";
   }
-  .legend img {
+  .legend {
     float: left;
     margin-right: 8px;
     background: white;
     opacity: 0.8;
+    div {
+      padding: 10px;
+    }
   }
 }

@@ -34,12 +34,7 @@
         </ion-segment-button>
       </ion-segment>
       <div class="full-phenomenon-label">
-        <div *ngIf="phenomenonLabel === 'NO2'">{{'phenomenon.long-label.no2' | translate}}</div>
-        <div *ngIf="phenomenonLabel === 'O3'">{{'phenomenon.long-label.o3' | translate}}</div>
-        <div *ngIf="phenomenonLabel === 'PM10'">{{'phenomenon.long-label.pm10' | translate}}</div>
-        <div *ngIf="phenomenonLabel === 'PM25'">{{'phenomenon.long-label.pm25' | translate}}</div>
-        <div *ngIf="phenomenonLabel === 'BC'">{{'phenomenon.long-label.bc' | translate}}</div>
-        <div *ngIf="otherPhenomenonLabel">{{otherPhenomenonLabel}}</div>
+        <div *ngIf="selectedPhenomenon">{{selectedPhenomenon.label}}</div>
       </div>
     </div>
     <div class="map-wrapper">
