@@ -23,6 +23,7 @@ export class ModalAnnualMapComponent {
   public legend: L.Control;
   public year: string;
   public phenomenonLabel: string;
+  private legendVisible: boolean = false;
 
   constructor(
     private params: NavParams,
@@ -30,7 +31,7 @@ export class ModalAnnualMapComponent {
     private settingsSrvc: SettingsService<MobileSettings>,
     private annualMean: AnnualMeanProvider,
     private mapCache: MapCache,
-    private translateSrvc: TranslateService,
+    private translate: TranslateService,
     private iab: InAppBrowser,
   ) { }
 
@@ -38,7 +39,7 @@ export class ModalAnnualMapComponent {
     this.setOverlayMap(this.params.get('phenomenon'));
     const location = this.params.get('location') as GeoJSON.Point;
     if (location) {
-      const label = this.translateSrvc.instant('map.configured-location');
+      const label = this.translate.instant('map.configured-location');
       const point: LatLngExpression = { lng: location.coordinates[0], lat: location.coordinates[1] };
       this.mapCache.getMap(this.mapId).addLayer(
         popup({ autoPan: false })
@@ -49,18 +50,19 @@ export class ModalAnnualMapComponent {
     } else {
       this.fitBounds = this.settingsSrvc.getSettings().defaultBbox;
     }
-    this.showLegend();
+    this.updateLegend();
   }
 
   public onPhenomenonChange(): void {
     this.setOverlayMap(this.phenomenonLabel);
+    this.updateLegend();
   }
 
   public dismiss() {
     this.viewCtrl.dismiss();
   }
 
-  public showLegend() {
+  private updateLegend() {
     if (this.legend) {
       this.legend.remove();
     }
@@ -68,48 +70,53 @@ export class ModalAnnualMapComponent {
 
       this.legend = new Control({ position: 'topright' });
 
-      this.legend.onAdd = (map) => {
+      this.legend.onAdd = () => {
         const div = DomUtil.create('div', 'leaflet-bar legend');
-        let legendVisible = false;
-        const button = '<a class="info" role="button"></a>';
-        div.innerHTML = button;
-        div.onclick = () => {
-          const langCode = this.translateSrvc.currentLang.toLocaleUpperCase();
-          let legendId: string;
-          switch (this.phenomenonLabel) {
-            case 'BC':
-              legendId = 'bc_anmean';
-              break;
-            case 'NO2':
-              legendId = 'no2_anmean';
-              break;
-            case 'O3':
-              legendId = 'o3_anmean';
-              break;
-            case 'PM10':
-              legendId = 'pm10_anmean';
-              break;
-            case 'PM25':
-              legendId = 'pm25_anmean';
-              break;
-          }
-          let legend = '<img src="http://www.irceline.be/air/legend/' + legendId + '_' + langCode + '.svg">';
-          legend += `<div id="annual-more-link">${this.translateSrvc.instant('annual-map.legeng.link-more')}</div>`;
-          div.innerHTML = legendVisible ? button : legend;
-          const moreLink = DomUtil.get('annual-more-link');
-          if (moreLink) {
-            moreLink.onclick = (event) => {
-              this.iab.create(this.translateSrvc.instant('annual-map.legeng.link-more-url'));
-              event.stopPropagation();
-            }
-          }
-          legendVisible = !legendVisible;
-        }
+        div.innerHTML = this.getLegendContent();
+        div.onclick = () => this.toggleLegend(div)
         return div;
       };
-
       this.legend.addTo(this.mapCache.getMap(this.mapId));
     }
+  }
+
+  private toggleLegend(div: HTMLElement) {
+    this.legendVisible = !this.legendVisible;
+    div.innerHTML = this.getLegendContent();
+    const moreLink = DomUtil.get('annual-more-link');
+    if (moreLink) {
+      moreLink.onclick = (event) => {
+        this.iab.create(this.translate.instant('annual-map.legeng.link-more-url'));
+        event.stopPropagation();
+      };
+    }
+  }
+
+  private getLegendContent() {
+    if (this.legendVisible) {
+      const langCode = this.translate.currentLang.toLocaleUpperCase();
+      let legendId: string;
+      switch (this.phenomenonLabel) {
+        case 'BC':
+          legendId = 'bc_anmean';
+          break;
+        case 'NO2':
+          legendId = 'no2_anmean';
+          break;
+        case 'O3':
+          legendId = 'o3_anmean';
+          break;
+        case 'PM10':
+          legendId = 'pm10_anmean';
+          break;
+        case 'PM25':
+          legendId = 'pm25_anmean';
+          break;
+      }
+      let legend = '<img src="http://www.irceline.be/air/legend/' + legendId + '_' + langCode + '.svg">';
+      return legend += `<div id="annual-more-link">${this.translate.instant('annual-map.legeng.link-more')}</div>`;
+    }
+    return '<a class="info" role="button"></a>';
   }
 
   private setOverlayMap(phenomenon) {
