@@ -9,9 +9,9 @@
 	},
 	"annual-map": {
 		"header": "Carte moyenne annuelle",
-		"legeng": {
-			"link-more": "",
-			"link-more-url": ""
+		"legend": {
+			"link-more": "Afficher plus",
+			"link-more-url": "http://www.irceline.be/fr"
 		}
 	},
 	"annual-phenomenon-buttons": "Valeur moyenne annuelle modélisée pour ce position:",
@@ -152,7 +152,7 @@
 		"header": "Carte",
 		"interpolated-map": "Carte interpolée",
 		"nearest-station": "Station de mesure la plus proche",
-		"no-legend": "",
+		"no-legend": "aucune légende disponible",
 		"pollutant": {
 			"other": "autre"
 		},

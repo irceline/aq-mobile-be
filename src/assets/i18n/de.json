@@ -9,7 +9,7 @@
 	},
 	"annual-map": {
 		"header": "Jahresmittelwert Karte",
-		"legeng": {
+		"legend": {
 			"link-more": "Zeige mehr",
 			"link-more-url": "http://www.irceline.be/de"
 		}

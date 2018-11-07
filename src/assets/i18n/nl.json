@@ -9,9 +9,9 @@
 	},
 	"annual-map": {
 		"header": "jaargemiddelde kaart",
-		"legeng": {
-			"link-more": "",
-			"link-more-url": ""
+		"legend": {
+			"link-more": "Meer weergeven",
+			"link-more-url": "http://www.irceline.be/fr"
 		}
 	},
 	"annual-phenomenon-buttons": "Gemoduleerde jaargemiddelde waarde voor deze locatie:",
@@ -152,7 +152,7 @@
 		"header": "Kaart",
 		"interpolated-map": "Geïnterpoleerde kaart",
 		"nearest-station": "Dichtstbijzijnde meetstation",
-		"no-legend": "",
+		"no-legend": "geen legende beschikbaar",
 		"pollutant": {
 			"other": "andere"
 		},

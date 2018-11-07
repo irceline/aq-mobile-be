@@ -9,9 +9,9 @@
 	},
 	"annual-map": {
 		"header": "Annual mean map",
-		"legeng": {
+		"legend": {
 			"link-more": "Show more",
-			"link-more-url": ""
+			"link-more-url": "http://www.irceline.be/en"
 		}
 	},
 	"annual-phenomenon-buttons": "Modelled annual mean value for this location:",

@@ -86,7 +86,7 @@ export class ModalAnnualMapComponent {
     const moreLink = DomUtil.get('annual-more-link');
     if (moreLink) {
       moreLink.onclick = (event) => {
-        this.iab.create(this.translate.instant('annual-map.legeng.link-more-url'));
+        this.iab.create(this.translate.instant('annual-map.legend.link-more-url'));
         event.stopPropagation();
       };
     }
@@ -114,7 +114,7 @@ export class ModalAnnualMapComponent {
           break;
       }
       let legend = '<img src="http://www.irceline.be/air/legend/' + legendId + '_' + langCode + '.svg">';
-      return legend += `<div id="annual-more-link">${this.translate.instant('annual-map.legeng.link-more')}</div>`;
+      return legend += `<div id="annual-more-link">${this.translate.instant('annual-map.legend.link-more')}</div>`;
     }
     return '<a class="info" role="button"></a>';
   }
