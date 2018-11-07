@@ -28,6 +28,10 @@ page-diagram {
             left: 0;
             bottom: 0;
             right: 0;
+
+            .yaxisTextLabel {
+              font: 12px roboto !important;
+            }
           }
         }
 
