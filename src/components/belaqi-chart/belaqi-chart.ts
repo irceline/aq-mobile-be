@@ -75,7 +75,7 @@ export class BelaqiChartComponent implements OnChanges {
             mode: 'vertical',
             scaleID: 'x-axis-0',
             value: this.location.date.getHours().toString(),
-            borderColor: '#488aff',
+            borderColor: '#26b8eb',
             borderWidth: 2,
           }]
         },
