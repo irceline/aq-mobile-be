@@ -31,24 +31,25 @@ A local webserver should be launched on port `8100`:
    - Authorization: key=AAAAinFTu0Axxxxxxxxxxxxxxxxxxxxxxxxx
  - body:
   ```javascript
-{
-  "notification": {
-    "title": "Title",
-    "body": "Body",
-    "sound": "default",
-    "click_action": "FCM_PLUGIN_ACTIVITY",
-    "icon": "fcm_push_icon",
-    "subtitle": "subtitle"
-  },
-  "data": {
-    "title": "Title",
-    "body": "Body",
-    "topic": "normal"
-  },
-  "to":"/topics/normal",
-  "priority": "high",
-  "restricted_package_name": ""
-}
+  {
+    "notification": {
+      "title": "Title",
+      "body": "Body",
+      "sound": "default",
+      "click_action": "FCM_PLUGIN_ACTIVITY",
+      "icon": "fcm_push_icon",
+      "subtitle": "subtitle"
+    },
+    "data": {
+      "title": "Title",
+      "body": "Body",
+      "topic": "flanders",
+      "expiration": "2018-11-08T14:00:00+01:00"
+    },
+    "to":"/topics/flanders",
+    "priority": "high",
+    "restricted_package_name": ""
+  }
 //sound: optional field if you want sound with the notification
 //click_action: must be present with the specified value for Android
 //icon: white icon resource name for Android >5.0
