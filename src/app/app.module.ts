@@ -47,6 +47,7 @@ import { LocateProvider } from '../providers/locate/locate';
 import { ModelledValueProvider } from '../providers/modelled-value/modelled-value';
 import { NearestTimeseriesManagerProvider } from '../providers/nearest-timeseries-manager/nearest-timeseries-manager';
 import { NearestTimeseriesProvider } from '../providers/nearest-timeseries/nearest-timeseries';
+import { NotificationMaintainerProvider } from '../providers/notification-maintainer/notification-maintainer';
 import { NotificationPresenter } from '../providers/notification-presenter/notification-presenter';
 import { PersonalAlertsProvider } from '../providers/personal-alerts/personal-alerts';
 import { PushNotificationsProvider } from '../providers/push-notifications/push-notifications';
@@ -127,6 +128,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     NearestTimeseriesManagerProvider,
     NearestTimeseriesProvider,
     Network,
+    NotificationMaintainerProvider,
     NotificationPresenter,
     PersonalAlertsProvider,
     PushNotificationsProvider,

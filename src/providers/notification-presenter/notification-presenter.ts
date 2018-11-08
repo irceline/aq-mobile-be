@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { NotificationData } from '@ionic-native/fcm';
 import { ModalController } from 'ionic-angular';
 
 import { LocatedValueNotificationComponent } from '../../components/located-value-notification/located-value-notification';
@@ -12,10 +11,11 @@ export enum PushNotificationTopic {
   brussels = 'brussels'
 }
 
-export interface PushNotification extends NotificationData {
+export interface PushNotification {
   topic: PushNotificationTopic;
   title: string;
   body: string;
+  expiration: Date;
 }
 
 export interface LocatedValueNotification {
