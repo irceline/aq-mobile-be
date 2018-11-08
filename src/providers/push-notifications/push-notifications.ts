@@ -3,11 +3,8 @@ import { LocalStorage } from '@helgoland/core';
 import { FCM } from '@ionic-native/fcm';
 import { Platform } from 'ionic-angular';
 
-import {
-  NotificationPresenter,
-  PushNotification,
-  PushNotificationTopic,
-} from '../notification-presenter/notification-presenter';
+import { NotificationMaintainerProvider } from '../notification-maintainer/notification-maintainer';
+import { PushNotification, PushNotificationTopic } from '../notification-presenter/notification-presenter';
 
 const LOCALSTORAGE_PUSH_NOTIFICATION = 'localstorage.push.notification';
 
@@ -18,7 +15,7 @@ export class PushNotificationsProvider {
     private platform: Platform,
     private fcm: FCM,
     private localStorage: LocalStorage,
-    private presenter: NotificationPresenter
+    private notifications: NotificationMaintainerProvider
   ) { }
 
   public init() {
@@ -39,8 +36,18 @@ export class PushNotificationsProvider {
           } else {
             //Notification was received in foreground. Maybe the user needs to be notified.
           }
-          this.presenter.presentPushNotification(data as PushNotification);
+          if (data.title && data.body && data.expiration && data.topic) {
+            const notification: PushNotification = {
+              title: data.title,
+              body: data.body,
+              topic: PushNotificationTopic[data.topic as string],
+              expiration: new Date(data.expiration)
+            };
+            this.notifications.addNotification(notification);
+          }
+          // this.presenter.presentPushNotification(data as PushNotification);
         });
+
       }
     });
   }

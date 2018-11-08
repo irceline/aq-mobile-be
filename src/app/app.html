@@ -13,6 +13,7 @@
       <span class="nav-butto-label">{{'diagram.header' | translate}}</span>
     </button>
     <ion-buttons end>
+      <notification-icon></notification-icon>
       <geolocation-enabled-icon></geolocation-enabled-icon>
       <refresh-button></refresh-button>
       <button ion-button icon-only clear (click)="openPage('settings')" [ngClass]="{selected: selectedPage === 'settings'}">

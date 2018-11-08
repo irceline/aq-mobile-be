@@ -1,0 +1,16 @@
+notification-icon {
+  #notifications-badge {
+    background-color: color($colors, danger);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    border-radius: 100%;
+  }
+}
+
+.notification-popover {
+  .popover-content {
+    width: 70%;
+    background-color: color($colors, card-background);
+  }
+}

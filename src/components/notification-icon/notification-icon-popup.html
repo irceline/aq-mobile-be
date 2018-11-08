@@ -1,0 +1,14 @@
+<div>
+  <div *ngFor="let notification of notifications">
+    <ion-card>
+      <ion-item>
+        <h2>{{notification.title}}</h2>
+        <p>{{notification.expiration | date}}</p>
+        <p>{{('push-notification-subscription.' + notification.topic) | translate}}</p>
+      </ion-item>
+      <ion-card-content>
+        {{notification.body}}
+      </ion-card-content>
+    </ion-card>
+  </div>
+</div>

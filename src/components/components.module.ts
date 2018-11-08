@@ -50,6 +50,8 @@ import {
 } from './nearest-measuring-station-panel/nearest-measuring-station-panel-information-popup';
 import { NearestSeriesLegendSliderComponent } from './nearest-series-legend-slider/nearest-series-legend-slider';
 import { NetworkPanelComponent } from './network-panel/network-panel';
+import { NotificationIconComponent } from './notification-icon/notification-icon';
+import { NotificationIconPopupComponent } from './notification-icon/notification-icon-popup';
 import { PhenomenonSelectorPopoverComponent } from './phenomenon-selector-popover/phenomenon-selector-popover';
 import { PushNotificationSubscriptionsComponent } from './push-notification-subscriptions/push-notification-subscriptions';
 import { PushNotificationComponent } from './push-notification/push-notification';
@@ -97,6 +99,8 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		NearestMeasuringStationPanelInformationPopupComponent,
 		NearestSeriesLegendSliderComponent,
 		NetworkPanelComponent,
+		NotificationIconComponent,
+		NotificationIconPopupComponent,
 		PhenomenonSelectorPopoverComponent,
 		PushNotificationComponent,
 		PushNotificationSubscriptionsComponent,
@@ -153,6 +157,8 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		NearestMeasuringStationPanelInformationPopupComponent,
 		NearestSeriesLegendSliderComponent,
 		NetworkPanelComponent,
+		NotificationIconComponent,
+		NotificationIconPopupComponent,
 		PhenomenonSelectorPopoverComponent,
 		PushNotificationComponent,
 		PushNotificationSubscriptionsComponent,
@@ -177,6 +183,7 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		ModalUserLocationCreationComponent,
 		ModalUserLocationListComponent,
 		NearestMeasuringStationPanelInformationPopupComponent,
+		NotificationIconPopupComponent,
 		PhenomenonSelectorPopoverComponent,
 		PushNotificationComponent,
 		StationSelectorComponent,
