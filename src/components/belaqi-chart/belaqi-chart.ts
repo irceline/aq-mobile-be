@@ -5,7 +5,7 @@ import { Chart, ChartOptions } from 'chart.js';
 import { PopoverController } from 'ionic-angular';
 
 import { BelaqiIndexProvider, BelaqiTimelineEntry } from '../../providers/belaqi/belaqi';
-import { BelaqiLocation } from '../belaqi-user-location-slider/belaqi-user-location-slider';
+import { UserLocation } from '../../providers/user-location-list/user-location-list';
 import { BelaqiChartInformationComponent } from './belaqi-chart-information';
 
 interface ExpandedChartOptions extends ChartOptions {
@@ -21,7 +21,7 @@ export class BelaqiChartComponent implements OnChanges {
   @ViewChild('chart') barCanvas;
 
   @Input()
-  public location: BelaqiLocation;
+  public location: UserLocation;
 
   public error: boolean;
   public loading: boolean;

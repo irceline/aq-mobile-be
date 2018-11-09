@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LocalStorage } from '@helgoland/core';
-import { GeoSearch, GeoReverseResult } from '@helgoland/map';
+import { GeoReverseResult, GeoSearch } from '@helgoland/map';
 import {
   BackgroundGeolocation,
   BackgroundGeolocationConfig,
@@ -235,7 +235,7 @@ export class PersonalAlertsProvider {
         const requests = [];
         const alerts: PersonalAlert[] = [];
         res.forEach(loc => {
-          requests.push(this.belaqiProvider.getValue(loc.point.coordinates[1], loc.point.coordinates[0])
+          requests.push(this.belaqiProvider.getValue(loc.latitude, loc.longitude)
             .do(res => {
               if (this.getLevel() <= res) {
                 alerts.push({

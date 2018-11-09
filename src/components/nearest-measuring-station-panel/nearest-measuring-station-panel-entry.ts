@@ -5,7 +5,7 @@ import invert from 'invert-color';
 
 import { NearestTimeseriesManagerProvider } from '../../providers/nearest-timeseries-manager/nearest-timeseries-manager';
 import { NearestTimeseriesProvider } from '../../providers/nearest-timeseries/nearest-timeseries';
-import { BelaqiLocation } from '../belaqi-user-location-slider/belaqi-user-location-slider';
+import { UserLocation } from '../../providers/user-location-list/user-location-list';
 
 interface PanelEntry {
   label: string;
@@ -38,7 +38,7 @@ export class NearestMeasuringStationPanelEntryComponent implements OnChanges {
   public entry: PanelEntry;
 
   @Input()
-  public location: BelaqiLocation;
+  public location: UserLocation;
 
   @Output()
   public onClicked: EventEmitter<PhenomenonLocationSelection> = new EventEmitter<PhenomenonLocationSelection>();
@@ -70,7 +70,7 @@ export class NearestMeasuringStationPanelEntryComponent implements OnChanges {
   private determineNextStationValue() {
     this.nearestTimeseries.determineNextTimeseries(this.location.latitude, this.location.longitude, this.entry.id).subscribe(nearestSeries => {
       if (nearestSeries) {
-        this.nearestTimeseriesManager.setNearestTimeseries(this.location.locationLabel, this.entry.id, nearestSeries.series.internalId);
+        this.nearestTimeseriesManager.setNearestTimeseries(this.location, this.entry.id, nearestSeries.series.internalId);
         this.series = nearestSeries.series;
         this.stationDistance = nearestSeries.distance;
         this.stationLabel = nearestSeries.series.station.properties.label;

@@ -20,6 +20,7 @@ export class LocateProvider {
   ) {
     this.registerLocationStateChangeHandler();
     this.isGeolocationEnabled();
+    this.refresher.onRefresh.subscribe(() => this.determinePosition());
   }
 
   public getGeoposition(): Observable<Geoposition> {
@@ -45,7 +46,6 @@ export class LocateProvider {
         } else {
           this.locationEnabled.next(false);
         }
-        this.refresher.refresh();
       });
     } else {
       this.locationEnabled.next(true);
@@ -55,11 +55,11 @@ export class LocateProvider {
 
   private determinePosition() {
     this.platform.ready().then(() => {
-      this.geolocate.watchPosition({
+      this.geolocate.getCurrentPosition({
         timeout: 10000,
         enableHighAccuracy: false,
         maximumAge: 60000
-      }).subscribe(res => {
+      }).then(res => {
         // const latitude = 50.863892;
         // const longitude = 4.6337528;
         // const latitude = 50 + Math.random();
@@ -77,7 +77,10 @@ export class LocateProvider {
         //   timestamp: 1234
         // }
         this.position.next(res);
-      }, (error) => console.log(JSON.stringify(error)));
+      }, (error) => {
+        console.log(JSON.stringify(error));
+        this.determinePosition();
+      });
     })
   }
 

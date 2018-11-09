@@ -39,7 +39,7 @@ export class LocatedTimeseriesService extends DatasetService<DatasetOptions> {
     if (this.showSeries) {
       this.userlocation.getAllLocations().subscribe(locations => {
         this.nearestTimeseriesManager
-          .getNearestTimeseries(locations[this.selectedIndex].label)
+          .getNearestTimeseries(locations[this.selectedIndex])
           .forEach(e => this.addDataset(e));
       });
     }
