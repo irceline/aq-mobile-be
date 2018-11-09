@@ -93,6 +93,8 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
 
   public slideChanged() {
     let currentIndex = this.slider.getActiveIndex();
+    this.slider.isEnd() ? this.slider.lockSwipeToNext(true) : this.slider.lockSwipeToNext(false);
+    this.slider.isBeginning() ? this.slider.lockSwipeToPrev(true) : this.slider.lockSwipeToPrev(false);
     const slide = this.slider._slides[currentIndex];
     this.slidesHeight = slide.clientHeight + 'px';
     this.updateLocationSelection(currentIndex);
@@ -174,7 +176,7 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
   }
 
   private handleError(lon: number, lat: number, error: any) {
-    console.error(`Get an error while fetching belaqi for location (latitude: ${lat}, longitude ${lon}): ${error}`);
+    console.warn(`Belaqi for (latitude: ${lat}, longitude ${lon}): ${error} - maybe outside of Belgium`);
   }
 
 }

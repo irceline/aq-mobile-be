@@ -47,7 +47,7 @@ export class BelaqiChartComponent implements OnChanges {
   }
 
   private handleError(error) {
-    console.error(error);
+    console.warn(error);
     this.error = true;
     this.loading = false;
   }
