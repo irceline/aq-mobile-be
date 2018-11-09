@@ -55,6 +55,7 @@ export class BelaqiChartComponent implements OnChanges {
   private drawChart(belaqiTimeline: BelaqiTimelineEntry[]) {
     this.loading = false;
     const canvas = this.barCanvas.nativeElement as HTMLCanvasElement;
+    if (canvas.clientHeight <= 0) { return };
     const ctx = canvas.getContext("2d");
     const chart = new Chart(ctx, {
       type: 'line',
