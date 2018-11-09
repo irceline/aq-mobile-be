@@ -3,26 +3,14 @@ import { TranslateService } from '@ngx-translate/core';
 import { ModalController, Slides, Toggle } from 'ionic-angular';
 
 import { BelaqiIndexProvider } from '../../providers/belaqi/belaqi';
-import { IrcelineSettingsProvider } from '../../providers/irceline-settings/irceline-settings';
+import { IrcelineSettings, IrcelineSettingsProvider } from '../../providers/irceline-settings/irceline-settings';
 import { LocateProvider } from '../../providers/locate/locate';
 import { RefreshHandler } from '../../providers/refresh/refresh';
 import { LocatedTimeseriesService } from '../../providers/timeseries/located-timeseries';
-import { UserLocationListProvider } from '../../providers/user-location-list/user-location-list';
+import { UserLocation, UserLocationListProvider } from '../../providers/user-location-list/user-location-list';
 import { ModalUserLocationCreationComponent } from '../modal-user-location-creation/modal-user-location-creation';
 import { ModalUserLocationListComponent } from '../modal-user-location-list/modal-user-location-list';
 import { PhenomenonLocationSelection } from '../nearest-measuring-station-panel/nearest-measuring-station-panel-entry';
-
-export interface BelaqiLocation {
-  index?: number;
-  locationLabel: string;
-  type: 'user' | 'current';
-  date: Date;
-  longitude?: number;
-  latitude?: number;
-  nearestSeries?: {
-    [key: string]: string;
-  }
-}
 
 export interface HeaderContent {
   label: string;
@@ -55,8 +43,8 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
   @Output()
   public headerContent: EventEmitter<HeaderContent> = new EventEmitter();
 
-  public belaqiLocations: BelaqiLocation[] = [];
-  public currentLocation: BelaqiLocation;
+  public belaqiLocations: UserLocation[] = [];
+  public currentLocation: UserLocation;
 
   public showCurrentLocation: boolean;
 
@@ -74,7 +62,6 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
     protected modalCtrl: ModalController,
     protected refresher: RefreshHandler
   ) {
-    this.loadBelaqis();
     this.locate.getLocationStateEnabled().subscribe(enabled => this.loadBelaqis());
     this.refresher.onRefresh.subscribe(() => this.loadBelaqis());
     this.userLocationProvider.getLocationSettings().subscribe(setts => this.showCurrentLocation = setts.showCurrentLocation);
@@ -84,13 +71,13 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
     this.slider.autoHeight = false;
   }
 
-  public selectPhenomenon(selection: PhenomenonLocationSelection, userlocation: BelaqiLocation) {
+  public selectPhenomenon(selection: PhenomenonLocationSelection, userlocation: UserLocation) {
     this.phenomenonSelected.emit({
       phenomenonStation: selection,
       location: {
         latitude: userlocation.latitude,
         longitude: userlocation.longitude,
-        label: userlocation.locationLabel,
+        label: userlocation.label,
         type: userlocation.type
       }
     });
@@ -122,7 +109,7 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
   private updateLocationSelection(idx: number) {
     if (idx <= this.belaqiLocations.length - 1) {
       this.headerContent.emit({
-        label: this.belaqiLocations[idx].locationLabel,
+        label: this.belaqiLocations[idx].label,
         date: this.belaqiLocations[idx].date,
         current: this.belaqiLocations[idx].type === 'current'
       })
@@ -154,20 +141,14 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
             this.belaqiLocations = [];
             this.userLocationProvider.getAllLocations().subscribe(locations => {
               locations.forEach((loc, i) => {
-                const lat = loc.point.coordinates[1]
-                const lon = loc.point.coordinates[0];
-                this.belaqiLocations[i] = {
-                  locationLabel: loc.label,
-                  date: ircelineSettings.lastupdate,
-                  type: loc.type,
-                  latitude: lat,
-                  longitude: lon
+                if (loc.type !== 'current') {
+                  this.setLocation(loc, i, ircelineSettings);
+                } else {
+                  this.userLocationProvider.determineCurrentLocation().subscribe(currentLoc => {
+                    this.setLocation(currentLoc, i, ircelineSettings);
+                    if (i === 0) { this.updateLocationSelection(0); }
+                  })
                 }
-                this.belaqiIndexProvider.getValue(lat, lon).subscribe(
-                  res => {
-                    this.belaqiLocations[i].index = res;
-                  },
-                  error => this.handleError(lon, lat, error))
               })
               if (this.slider) {
                 this.slider.slideTo(0);
@@ -179,6 +160,17 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
         );
       });
     }
+  }
+
+  private setLocation(loc: UserLocation, i: number, ircelineSettings: IrcelineSettings) {
+    this.belaqiLocations[i] = {
+      label: loc.label,
+      date: ircelineSettings.lastupdate,
+      type: loc.type,
+      latitude: loc.latitude,
+      longitude: loc.longitude
+    };
+    this.belaqiIndexProvider.getValue(loc.latitude, loc.longitude).subscribe(res => this.belaqiLocations[i].index = res, error => this.handleError(loc.longitude, loc.latitude, error));
   }
 
   private handleError(lon: number, lat: number, error: any) {

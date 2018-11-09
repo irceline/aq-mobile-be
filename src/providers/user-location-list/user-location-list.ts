@@ -10,9 +10,12 @@ import { LocateProvider } from '../locate/locate';
 
 export interface UserLocation {
   id?: number;
-  type: 'user' | 'current';
-  point?: Point;
+  index?: number;
   label?: string;
+  type: 'user' | 'current';
+  date?: Date;
+  longitude?: number;
+  latitude?: number;
 }
 
 export interface UserLocationSettings {
@@ -62,8 +65,9 @@ export class UserLocationListProvider {
 
   public addUserLocation(label: string, point: Point) {
     const location = {
-      label,
-      point,
+      label: label,
+      latitude: point.coordinates[1],
+      longitude: point.coordinates[0],
       type: 'user',
       id: new Date().getTime(),
       nearestSeries: {}
@@ -83,10 +87,8 @@ export class UserLocationListProvider {
               id: 1,
               label: locationLabel,
               type: 'current',
-              point: {
-                type: 'Point',
-                coordinates: [pos.coords.longitude, pos.coords.latitude]
-              }
+              latitude: pos.coords.latitude,
+              longitude: pos.coords.longitude
             });
             observer.complete();
           },
@@ -99,10 +101,10 @@ export class UserLocationListProvider {
   }
 
   private createGeoLabel(geo: GeoReverseResult) {
-    let locationLabel;
-    if (geo && geo.address && geo.address.road && geo.address.houseNumber && geo.address.city) {
-      if (geo.address.road && geo.address.houseNumber) { locationLabel = `${geo.address.road} ${geo.address.houseNumber}, `; }
-      if (geo.address.city) { locationLabel += geo.address.city + ', ' }
+    let locationLabel = '';
+    if (geo && geo.address) {
+      if (geo.address.road) { locationLabel = `${geo.address.road}${geo.address.houseNumber ? ' ' + geo.address.houseNumber : ''}, `; }
+      if (geo.address.city || geo.address.cityDistrict) { locationLabel += (geo.address.city || geo.address.cityDistrict) + ', ' }
       if (geo.address.country) { locationLabel += geo.address.country }
     } else {
       locationLabel = this.translateSrvc.instant('belaqi-user-location-slider.current-location');
@@ -113,8 +115,8 @@ export class UserLocationListProvider {
   public hasLocation(label: string, point: Point): boolean {
     return this.currentUserLocations.findIndex(
       e => e.label === label
-        && e.point.coordinates[0] === point.coordinates[0]
-        && e.point.coordinates[1] === point.coordinates[1]
+        && e.longitude === point.coordinates[0]
+        && e.latitude === point.coordinates[1]
     ) > -1;
   }
 
@@ -133,15 +135,13 @@ export class UserLocationListProvider {
 
   public getAllLocations(): Observable<UserLocation[]> {
     return new Observable((observer: Observer<UserLocation[]>) => {
-      this.locate.getLocationStateEnabled().subscribe(enabled => {
-        this.userLocationsSubject.subscribe(res => {
+      this.userLocationsSubject.subscribe(res => {
+        this.locate.getLocationStateEnabled().subscribe(enabled => {
           if (res.showCurrentLocation && enabled) {
-            this.determineCurrentLocation().subscribe(currentLoc => {
-              const userLocs = Object.assign([], res.userLocations);
-              userLocs.splice(this.getCurrentLocationIndex(), 0, currentLoc);
-              observer.next(userLocs);
-              observer.complete();
-            })
+            const userLocs: UserLocation[] = Object.assign([], res.userLocations);
+            userLocs.splice(this.getCurrentLocationIndex(), 0, { type: 'current' });
+            observer.next(userLocs);
+            observer.complete();
           } else {
             observer.next(res.userLocations);
             observer.complete();

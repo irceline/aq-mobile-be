@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Point } from 'geojson';
 import { ModalController, ViewController } from 'ionic-angular';
 import { MapOptions } from 'leaflet';
 
@@ -13,6 +14,8 @@ import { ModalUserLocationCreationComponent } from '../modal-user-location-creat
 export class ModalUserLocationListComponent {
 
   public locations: UserLocation[];
+
+  public points: Point[] = [];
 
   public showCurrentLocation: boolean;
 
@@ -71,8 +74,18 @@ export class ModalUserLocationListComponent {
     this.reorder = !this.reorder;
   }
 
+  public createPoint(location: UserLocation): Point {
+    return {
+      type: 'Point',
+      coordinates: [location.longitude, location.latitude]
+    }
+  }
+
   private setLocations() {
-    this.userLocationProvider.getAllLocationsForEdit().subscribe(res => this.locations = res);
+    this.userLocationProvider.getAllLocationsForEdit().subscribe(res => {
+      this.locations = res;
+      this.locations.forEach(e => this.points.push(this.createPoint(e)));
+    });
     this.userLocationProvider.getLocationSettings().subscribe(settings => this.showCurrentLocation = settings.showCurrentLocation);
   }
 

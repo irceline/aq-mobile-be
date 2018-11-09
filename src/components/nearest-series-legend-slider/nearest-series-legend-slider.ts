@@ -37,7 +37,7 @@ export class NearestSeriesLegendSliderComponent implements AfterViewInit {
       locations.forEach((location, idx) => {
         const series: LegendGroupEntry[] = [];
         this.nearestTimeseriesManager
-          .getNearestTimeseries(location.label)
+          .getNearestTimeseries(location)
           .forEach(e => series.push({ id: e, option: this.createDatasetOption(e) }));
         this.legendGroups[idx] = {
           label: location.label,

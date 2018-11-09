@@ -34,9 +34,9 @@
                 <ion-icon name="trash"></ion-icon>
               </button>
             </ion-fab>
-            <extended-geometry-map-viewer [mapId]="location.label" [geometry]="location.point" [mapOptions]="mapOptions"></extended-geometry-map-viewer>
+            <extended-geometry-map-viewer [mapId]="location.label" [geometry]="points[i]" [mapOptions]="mapOptions"></extended-geometry-map-viewer>
           </div>
-          <annual-phenomenon-buttons [location]="location.point"></annual-phenomenon-buttons>
+          <annual-phenomenon-buttons [location]="points[i]"></annual-phenomenon-buttons>
         </div>
       </ion-item>
 
@@ -51,6 +51,7 @@
     </div>
   </ion-list>
   <ion-card class="create-new-location">
-    <button ion-button outline (click)="createNewLocation()">{{'settings.user-locations.create-new-location' | translate}}</button>
+    <button ion-button outline (click)="createNewLocation()">{{'settings.user-locations.create-new-location' |
+      translate}}</button>
   </ion-card>
 </ion-content>

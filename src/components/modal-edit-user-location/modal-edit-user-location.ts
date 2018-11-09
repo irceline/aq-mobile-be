@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
+import { Point } from 'geojson';
 import { NavParams, ViewController } from 'ionic-angular';
 import { MapOptions } from 'leaflet';
 
 import { UserLocation } from '../../providers/user-location-list/user-location-list';
-import { Point } from 'geojson';
 
 @Component({
   selector: 'modal-edit-user-location',
@@ -12,6 +12,8 @@ import { Point } from 'geojson';
 export class ModalEditUserLocationComponent {
 
   public userLocation: UserLocation;
+
+  public point: Point;
 
   public label: string;
 
@@ -26,10 +28,12 @@ export class ModalEditUserLocationComponent {
   ) {
     this.userLocation = this.params.get('userlocation');
     this.label = this.userLocation.label;
+    this.point = { type: 'Point', coordinates: [this.userLocation.longitude, this.userLocation.latitude] };
   }
 
   public onLocationChanged(point: Point) {
-    this.userLocation.point = point;
+    this.userLocation.latitude = point.coordinates[1];
+    this.userLocation.longitude = point.coordinates[0];
   }
 
   public updateLocation() {

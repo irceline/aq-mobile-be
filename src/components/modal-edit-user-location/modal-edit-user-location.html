@@ -13,8 +13,7 @@
 </ion-header>
 <ion-content>
   <div style="height: 300px;">
-    <location-selection mapId="location-gen" [mapOptions]="mapOptions" [location]="userLocation.point"
-      (locationChanged)="onLocationChanged($event)"></location-selection>
+    <location-selection mapId="location-gen" [mapOptions]="mapOptions" [location]="point" (locationChanged)="onLocationChanged($event)"></location-selection>
   </div>
   <ion-list>
     <ion-item>
