@@ -20,9 +20,7 @@ export class NotificationIconComponent {
   }
 
   public openPopup(ev) {
-    if (this.notificationCount > 0) {
-      this.popoverCtrl.create(NotificationIconPopupComponent, {}, { cssClass: 'notification-popover' }).present({ ev });
-    }
+    this.popoverCtrl.create(NotificationIconPopupComponent, {}, { cssClass: 'notification-popover' }).present({ ev });
   }
 
 }
