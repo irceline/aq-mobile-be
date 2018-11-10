@@ -22,6 +22,7 @@
 		"create-new-location": "Ajouter une nouvelle position",
 		"current-location": "Position actuelle",
 		"current-location-description": "Le lieu où vous vous trouvez actuellement...",
+		"loading-current-location": "",
 		"open-user-location": "Modifier les positions actuels"
 	},
 	"belaqi-wheel": {
@@ -245,15 +246,6 @@
 		"header": "Sélectionnez un polluant",
 		"hide-some-phenomenons": "Masquer les polluants",
 		"list-all-phenomenons": "Liste des polluants"
-	},
-	"phenomenon": {
-		"long-label": {
-			"bc": "Black Carbon",
-			"no2": "Dioxyde d'azote",
-			"o3": "Ozone",
-			"pm10": "Particules < 10 µm",
-			"pm25": "Particules < 2.5 µm"
-		}
 	},
 	"push-notification-subscription": {
 		"brussels": "Bruxelles - Brussels Environment - NL/FR",

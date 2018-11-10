@@ -10,7 +10,8 @@ import { RefreshHandler } from '../refresh/refresh';
 export class LocateProvider {
 
   private position: ReplaySubject<Geoposition> = new ReplaySubject(1);
-  private locationEnabled: ReplaySubject<boolean> = new ReplaySubject(1);
+  private locationEnabledReplay: ReplaySubject<boolean> = new ReplaySubject(1);
+  private locationEnabled: boolean;
 
   constructor(
     private platform: Platform,
@@ -28,7 +29,11 @@ export class LocateProvider {
   }
 
   public getLocationStateEnabled(): Observable<boolean> {
-    return this.locationEnabled.asObservable();
+    return this.locationEnabledReplay.asObservable();
+  }
+
+  public getLocationEnabled(): boolean {
+    return this.locationEnabled;
   }
 
   private registerLocationStateChangeHandler() {
@@ -41,16 +46,21 @@ export class LocateProvider {
     if (this.platform.is('cordova')) {
       this.diagnostic.isGpsLocationEnabled().then((res) => {
         if (res) {
-          this.locationEnabled.next(true);
+          this.setLocationEnabled(true);
           this.determinePosition();
         } else {
-          this.locationEnabled.next(false);
+          this.setLocationEnabled(false);
         }
       });
     } else {
-      this.locationEnabled.next(true);
+      this.setLocationEnabled(true);
       this.determinePosition();
     }
+  }
+
+  private setLocationEnabled(enabled: boolean) {
+    this.locationEnabled = enabled;
+    this.locationEnabledReplay.next(this.locationEnabled);
   }
 
   private determinePosition() {

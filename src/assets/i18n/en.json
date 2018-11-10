@@ -22,6 +22,7 @@
 		"create-new-location": "Create new location",
 		"current-location": "Current location",
 		"current-location-description": "The location where you are currently...",
+		"loading-current-location": "Determine the data for the current position",
 		"open-user-location": "Edit current locations"
 	},
 	"belaqi-wheel": {
@@ -245,15 +246,6 @@
 		"header": "Choose a pollutant",
 		"hide-some-phenomenons": "Hide pollutants",
 		"list-all-phenomenons": "List all pollutants"
-	},
-	"phenomenon": {
-		"long-label": {
-			"bc": "Black carbon",
-			"no2": "Nitrogen dioxide",
-			"o3": "Ozone",
-			"pm10": "Particulate Matter < 10 µm",
-			"pm25": "Particulate Matter < 25 µm"
-		}
 	},
 	"push-notification-subscription": {
 		"brussels": "Brussels - Brussels Environment - NL/FR",
