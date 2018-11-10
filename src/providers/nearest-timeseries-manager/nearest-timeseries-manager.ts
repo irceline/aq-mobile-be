@@ -11,11 +11,14 @@ export class NearestTimeseriesManagerProvider {
 
     public getNearestTimeseries(location: UserLocation): string[] {
         if (location.type === 'user') {
-            return Array.from(this.nearestTimeseriesMap.get(location.label).values());
+            if (this.nearestTimeseriesMap.get(location.label)) {
+                return Array.from(this.nearestTimeseriesMap.get(location.label).values());
+            }
         }
         if (location.type === 'current') {
             return Array.from(this.currentLocationTimeseries.values());
         }
+        return []
     }
 
     public setNearestTimeseries(location: UserLocation, phenomenonId: string, seriesId: string) {

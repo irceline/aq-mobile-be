@@ -41,11 +41,11 @@ export class LocatedTimeseriesService extends DatasetService<DatasetOptions> {
 
   public loadNearestSeries() {
     if (this.showSeries) {
-      this.userlocation.getUserLocations().subscribe(locations => {
+      this.userlocation.getVisibleUserLocations().subscribe(locations => {
         this.nearestTimeseriesManager
           .getNearestTimeseries(locations[this.selectedIndex])
           .forEach(e => this.addDataset(e));
-      });
+      }).unsubscribe();
     }
   }
 
