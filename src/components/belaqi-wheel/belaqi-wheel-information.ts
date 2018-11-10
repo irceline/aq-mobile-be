@@ -14,7 +14,7 @@ export class BelaqiWheelInformationComponent {
   ) { }
 
   public showMoreInfo() {
-    this.iab.create(this.translate.instant('info.wheel.link'));
+    this.iab.create(this.translate.instant('info.wheel.link'), '_system', 'hidden=yes');
   }
 
 }
