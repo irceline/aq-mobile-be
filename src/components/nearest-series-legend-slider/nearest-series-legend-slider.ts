@@ -1,8 +1,10 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { ColorService, DatasetOptions } from '@helgoland/core';
+import { DatasetOptions } from '@helgoland/core';
 import { Slides, Toggle } from 'ionic-angular';
+import { Observable, of } from 'rxjs';
 
 import { NearestTimeseriesManagerProvider } from '../../providers/nearest-timeseries-manager/nearest-timeseries-manager';
+import { PhenomenonOptionsMapperProvider } from '../../providers/phenomenon-options-mapper/phenomenon-options-mapper';
 import { LocatedTimeseriesService } from '../../providers/timeseries/located-timeseries';
 import { UserLocationListProvider } from '../../providers/user-location-list/user-location-list';
 
@@ -29,8 +31,8 @@ export class NearestSeriesLegendSliderComponent implements AfterViewInit {
 
   constructor(
     private userLocations: UserLocationListProvider,
-    private locatedTsSrvc: LocatedTimeseriesService,
-    private color: ColorService,
+    public locatedTsSrvc: LocatedTimeseriesService,
+    private phenomenonColorMapper: PhenomenonOptionsMapperProvider,
     private nearestTimeseriesManager: NearestTimeseriesManagerProvider
   ) {
     this.userLocations.getVisibleUserLocations().subscribe(locations => {
@@ -38,7 +40,7 @@ export class NearestSeriesLegendSliderComponent implements AfterViewInit {
         const series: LegendGroupEntry[] = [];
         this.nearestTimeseriesManager
           .getNearestTimeseries(location)
-          .forEach(e => series.push({ id: e, option: this.createDatasetOption(e) }));
+          .forEach(e => this.createDatasetOption(e).subscribe(options => series.push({ id: e, option: options })));
         this.legendGroups[idx] = {
           label: location.label,
           datasets: series
@@ -79,15 +81,11 @@ export class NearestSeriesLegendSliderComponent implements AfterViewInit {
     }, 10);
   }
 
-  private createDatasetOption(id: string): DatasetOptions {
+  private createDatasetOption(id: string): Observable<DatasetOptions> {
     if (this.locatedTsSrvc.datasetOptions.has(id)) {
-      return this.locatedTsSrvc.datasetOptions.get(id);
+      return of(this.locatedTsSrvc.datasetOptions.get(id));
     }
-    const options = new DatasetOptions(id, this.color.getColor());
-    options.pointRadius = 2;
-    options.generalize = false;
-    options.zeroBasedYAxis = true;
-    return options;
+    return this.phenomenonColorMapper.createOptions(id);
   }
 
 }
