@@ -33,7 +33,7 @@ export class NearestSeriesLegendSliderComponent implements AfterViewInit {
     private color: ColorService,
     private nearestTimeseriesManager: NearestTimeseriesManagerProvider
   ) {
-    this.userLocations.getAllLocations().subscribe(locations => {
+    this.userLocations.getVisibleUserLocations().subscribe(locations => {
       locations.forEach((location, idx) => {
         const series: LegendGroupEntry[] = [];
         this.nearestTimeseriesManager

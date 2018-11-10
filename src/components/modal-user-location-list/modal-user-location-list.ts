@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Point } from 'geojson';
-import { ModalController, ViewController } from 'ionic-angular';
+import { ModalController, Toggle, ViewController } from 'ionic-angular';
 import { MapOptions } from 'leaflet';
 
 import { UserLocation, UserLocationListProvider } from '../../providers/user-location-list/user-location-list';
@@ -37,11 +37,7 @@ export class ModalUserLocationListComponent {
   }
 
   public dismiss() {
-    const idx = this.locations.findIndex(e => e.type === 'current');
-    this.userLocationProvider.setCurrentLocationIndex(idx);
-    this.userLocationProvider.setShowCurrentLocation(this.showCurrentLocation);
-    this.locations.splice(idx, 1);
-    this.userLocationProvider.setUserLocations(this.locations);
+    this.userLocationProvider.setLocationList(this.locations);
     this.viewCtrl.dismiss();
   }
 
@@ -54,16 +50,16 @@ export class ModalUserLocationListComponent {
     let element = this.locations[indexes.from];
     this.locations.splice(indexes.from, 1);
     this.locations.splice(indexes.to, 0, element);
+
+    let point = this.points[indexes.from];
+    this.points.splice(indexes.from, 1);
+    this.points.splice(indexes.to, 0, point);
   }
 
   public editLocation(location: UserLocation) {
     const modal = this.modalCtrl.create(ModalEditUserLocationComponent, { userlocation: location });
     modal.onDidDismiss(location => this.userLocationProvider.saveLocation(location));
     modal.present();
-  }
-
-  public saveLocation(location: UserLocation) {
-    this.userLocationProvider.saveLocation(location);
   }
 
   public createNewLocation() {
@@ -81,12 +77,16 @@ export class ModalUserLocationListComponent {
     }
   }
 
+  public toggleShowCurrentLocation(toggle: Toggle) {
+    this.userLocationProvider.setCurrentLocationVisisble(toggle.value);
+  }
+
   private setLocations() {
-    this.userLocationProvider.getAllLocationsForEdit().subscribe(res => {
+    this.userLocationProvider.getUserLocations().subscribe(res => {
       this.locations = res;
       this.locations.forEach(e => this.points.push(this.createPoint(e)));
     });
-    this.userLocationProvider.getLocationSettings().subscribe(settings => this.showCurrentLocation = settings.showCurrentLocation);
+    this.userLocationProvider.isCurrentLocationVisible().subscribe(vis => this.showCurrentLocation = vis);
   }
 
 }
