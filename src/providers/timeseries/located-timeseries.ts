@@ -37,7 +37,7 @@ export class LocatedTimeseriesService extends DatasetService<DatasetOptions> {
 
   public loadNearestSeries() {
     if (this.showSeries) {
-      this.userlocation.getAllLocations().subscribe(locations => {
+      this.userlocation.getUserLocations().subscribe(locations => {
         this.nearestTimeseriesManager
           .getNearestTimeseries(locations[this.selectedIndex])
           .forEach(e => this.addDataset(e));

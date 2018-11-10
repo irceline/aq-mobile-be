@@ -4,7 +4,8 @@ import { Geoposition } from '@ionic-native/geolocation';
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 import { Point } from 'geojson';
-import { forkJoin, Observable, Observer, ReplaySubject } from 'rxjs';
+import { Observable, Observer, ReplaySubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { LocateProvider } from '../locate/locate';
 
@@ -13,31 +14,20 @@ export interface UserLocation {
   index?: number;
   label?: string;
   type: 'user' | 'current';
+  isCurrentVisible?: boolean;
   date?: Date;
   longitude?: number;
   latitude?: number;
 }
 
-export interface UserLocationSettings {
-  currentLocationIndex: number;
-  showCurrentLocation: boolean;
-  userLocations: UserLocation[];
-}
-
 const STORAGE_USER_LOCATIONS_KEY = 'userlocation';
-const STORAGE_CURRENT_USERLOCATION_INDEX_KEY = 'current.userlocation.index';
-const STORAGE_SHOW_CURRENT_USERLOCATION = 'current.userlocation.index';
 
 @Injectable()
 export class UserLocationListProvider {
 
-  private currentUserLocations: UserLocation[];
+  private userLocations: UserLocation[];
 
-  private userLocationsSubject: ReplaySubject<UserLocationSettings> = new ReplaySubject(1);
-
-  private showCurrentLocationAt: number = 0;
-
-  private showCurrentLocation: boolean = true;
+  private userLocationsSubject: ReplaySubject<UserLocation[]> = new ReplaySubject(1);
 
   public phenomenonIDs = ['391', '8', '7', '5', '6001'];
 
@@ -47,20 +37,10 @@ export class UserLocationListProvider {
     protected translateSrvc: TranslateService,
     private locate: LocateProvider
   ) {
-    forkJoin([this.loadLocations(), this.loadCurrentLocationIndex(), this.loadShowCurrentLocation()]).subscribe(values => {
-      this.currentUserLocations = values[0];
-      this.showCurrentLocationAt = values[1];
-      this.showCurrentLocation = values[2];
-      this.setSubject();
+    this.loadLocations().subscribe(locations => {
+      this.userLocations = locations || [{ type: 'current', isCurrentVisible: false }];
+      this.userLocationsSubject.next(this.userLocations);
     })
-  }
-
-  private setSubject() {
-    this.userLocationsSubject.next({
-      userLocations: this.currentUserLocations,
-      currentLocationIndex: this.showCurrentLocationAt,
-      showCurrentLocation: this.showCurrentLocation,
-    });
   }
 
   public addUserLocation(label: string, point: Point) {
@@ -72,7 +52,7 @@ export class UserLocationListProvider {
       id: new Date().getTime(),
       nearestSeries: {}
     } as UserLocation;
-    this.currentUserLocations.push(location);
+    this.userLocations.push(location);
     this.storeLocations();
   }
 
@@ -100,6 +80,63 @@ export class UserLocationListProvider {
     })
   }
 
+  public hasLocation(label: string, point: Point): boolean {
+    return this.userLocations.findIndex(
+      e => e.label === label
+        && e.longitude === point.coordinates[0]
+        && e.latitude === point.coordinates[1]
+    ) > -1;
+  }
+
+  public getUserLocations(): Observable<UserLocation[]> {
+    return this.userLocationsSubject.asObservable();
+  }
+
+  public getVisibleUserLocations(): any {
+    return this.userLocationsSubject.asObservable()
+      .pipe(
+        map(locs => locs.filter(e => (e.type === 'current' && e.isCurrentVisible) || e.type === 'user'))
+      );
+  }
+
+  public isCurrentLocationVisible(): Observable<boolean> {
+    return this.userLocationsSubject.asObservable().pipe(map(locations => {
+      const current = locations.find(e => e.type === 'current');
+      return current.isCurrentVisible;
+    }))
+  }
+
+  public setCurrentLocationVisisble(visible: boolean) {
+    const current = this.userLocations.find(e => e.type === 'current');
+    current.isCurrentVisible = visible;
+    this.storeLocations();
+  }
+
+  public setUserLocations(locs: UserLocation[]) {
+    this.userLocations = locs;
+    this.storeLocations();
+  }
+
+  public setLocationList(locations: UserLocation[]) {
+    this.userLocations = locations;
+    this.storeLocations();
+  }
+
+  public removeLocation(userLocation: UserLocation) {
+    this.userLocations = this.userLocations.filter(res => res.id !== userLocation.id);
+    this.storeLocations();
+  }
+
+  public hasLocations(): boolean {
+    return this.userLocations && this.userLocations.length > 0;
+  }
+
+  public saveLocation(userLocation: UserLocation) {
+    const index = this.userLocations.findIndex(res => res.id === userLocation.id);
+    this.userLocations[index] = userLocation;
+    this.storeLocations();
+  }
+
   private createGeoLabel(geo: GeoReverseResult) {
     let locationLabel = '';
     if (geo && geo.address) {
@@ -112,88 +149,9 @@ export class UserLocationListProvider {
     return locationLabel;
   }
 
-  public hasLocation(label: string, point: Point): boolean {
-    return this.currentUserLocations.findIndex(
-      e => e.label === label
-        && e.longitude === point.coordinates[0]
-        && e.latitude === point.coordinates[1]
-    ) > -1;
-  }
-
-  public getUserLocations(): Observable<UserLocation[]> {
-    return this.userLocationsSubject.asObservable().map(e => e.userLocations);
-  }
-
-  public getLocationSettings(): Observable<UserLocationSettings> {
-    return this.userLocationsSubject.asObservable();
-  }
-
-  public setUserLocations(locs: UserLocation[]) {
-    this.currentUserLocations = locs;
-    this.storeLocations();
-  }
-
-  public getAllLocations(): Observable<UserLocation[]> {
-    return new Observable((observer: Observer<UserLocation[]>) => {
-      this.userLocationsSubject.subscribe(res => {
-        this.locate.getLocationStateEnabled().subscribe(enabled => {
-          if (res.showCurrentLocation && enabled) {
-            const userLocs: UserLocation[] = Object.assign([], res.userLocations);
-            userLocs.splice(this.getCurrentLocationIndex(), 0, { type: 'current' });
-            observer.next(userLocs);
-            observer.complete();
-          } else {
-            observer.next(res.userLocations);
-            observer.complete();
-          }
-        })
-      })
-    })
-  }
-
-  public getAllLocationsForEdit(): Observable<UserLocation[]> {
-    return new Observable((observer: Observer<UserLocation[]>) => {
-      this.getUserLocations().subscribe(userLocs => {
-        userLocs = Object.assign([], userLocs);
-        userLocs.splice(this.getCurrentLocationIndex(), 0, { type: 'current', });
-        observer.next(userLocs);
-      })
-    })
-  }
-
-  public removeLocation(userLocation: UserLocation) {
-    this.currentUserLocations = this.currentUserLocations.filter(res => res.id !== userLocation.id);
-    this.storeLocations();
-  }
-
-  public hasLocations(): boolean {
-    return this.currentUserLocations && this.currentUserLocations.length > 0;
-  }
-
-  public setShowCurrentLocation(show: boolean) {
-    this.showCurrentLocation = show;
-    this.storeLocations();
-  }
-
-  public getCurrentLocationIndex(): number {
-    return this.showCurrentLocationAt;
-  }
-
-  public setCurrentLocationIndex(idx: number) {
-    this.showCurrentLocationAt = idx;
-  }
-
-  public saveLocation(userLocation: UserLocation) {
-    const index = this.currentUserLocations.findIndex(res => res.id === userLocation.id);
-    this.currentUserLocations[index] = userLocation;
-    this.storeLocations();
-  }
-
   private storeLocations() {
-    this.setSubject();
-    this.storage.set(STORAGE_USER_LOCATIONS_KEY, this.currentUserLocations);
-    this.storage.set(STORAGE_CURRENT_USERLOCATION_INDEX_KEY, this.showCurrentLocationAt);
-    this.storage.set(STORAGE_SHOW_CURRENT_USERLOCATION, this.showCurrentLocation)
+    this.userLocationsSubject.next(this.userLocations);
+    this.storage.set(STORAGE_USER_LOCATIONS_KEY, this.userLocations);
   }
 
   private loadLocations(): Observable<UserLocation[]> {
@@ -202,37 +160,11 @@ export class UserLocationListProvider {
         if (res instanceof Array) {
           observer.next(res);
         } else {
-          observer.next([]);
+          observer.next(null);
         }
         observer.complete();
       })
     });
-  }
-
-  private loadCurrentLocationIndex(): Observable<number> {
-    return new Observable<number>((observer: Observer<number>) => {
-      this.storage.get(STORAGE_CURRENT_USERLOCATION_INDEX_KEY).then(res => {
-        if (res !== undefined) {
-          observer.next(res)
-        } else {
-          observer.next(0)
-        }
-        observer.complete();
-      })
-    })
-  }
-
-  private loadShowCurrentLocation(): Observable<boolean> {
-    return new Observable<boolean>((observer: Observer<boolean>) => {
-      this.storage.get(STORAGE_SHOW_CURRENT_USERLOCATION).then(res => {
-        if (res !== undefined) {
-          observer.next(res)
-        } else {
-          observer.next(true)
-        }
-        observer.complete();
-      })
-    })
   }
 
 }

@@ -4,7 +4,6 @@ import { IonAffixEvent } from 'ion-affix/dist/directives/ion-affix-event';
 import { NavController } from 'ionic-angular';
 
 import { BelaqiSelection, HeaderContent } from '../../components/belaqi-user-location-slider/belaqi-user-location-slider';
-import { UserLocationListProvider } from '../../providers/user-location-list/user-location-list';
 import { MapPage } from '../map/map';
 
 @Component({
@@ -13,18 +12,14 @@ import { MapPage } from '../map/map';
 })
 export class StartPage {
 
-  public locationCount: number;
   public name = 'start';
 
   public sliderHeaderContent: HeaderContent;
 
   constructor(
     private nav: NavController,
-    private userLocations: UserLocationListProvider,
     public translateSrvc: TranslateService
-  ) {
-    this.userLocations.getAllLocations().subscribe(list => this.locationCount = list.length);
-  }
+  ) { }
 
   public navigateToMap(selection: BelaqiSelection) {
     this.nav.push(MapPage, { belaqiSelection: selection });

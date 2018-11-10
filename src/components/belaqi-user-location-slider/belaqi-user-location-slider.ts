@@ -64,7 +64,7 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
   ) {
     this.locate.getLocationStateEnabled().subscribe(enabled => this.loadBelaqis());
     this.refresher.onRefresh.subscribe(() => this.loadBelaqis());
-    this.userLocationProvider.getLocationSettings().subscribe(setts => this.showCurrentLocation = setts.showCurrentLocation);
+    this.userLocationProvider.isCurrentLocationVisible().subscribe(vis => this.showCurrentLocation = vis);
   }
 
   public ngAfterViewInit(): void {
@@ -93,10 +93,10 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
 
   public slideChanged() {
     let currentIndex = this.slider.getActiveIndex();
-    this.slider.isEnd() ? this.slider.lockSwipeToNext(true) : this.slider.lockSwipeToNext(false);
-    this.slider.isBeginning() ? this.slider.lockSwipeToPrev(true) : this.slider.lockSwipeToPrev(false);
     const slide = this.slider._slides[currentIndex];
-    this.slidesHeight = slide.clientHeight + 'px';
+    if (slide) {
+      this.slidesHeight = slide.clientHeight + 'px';
+    }
     this.updateLocationSelection(currentIndex);
   }
 
@@ -105,10 +105,11 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
   }
 
   public toggle(toggle: Toggle) {
-    this.userLocationProvider.setShowCurrentLocation(toggle.value);
+    this.userLocationProvider.setCurrentLocationVisisble(toggle.value);
   }
 
   private updateLocationSelection(idx: number) {
+    const height = window.outerHeight - this.getYPosition(this.slider.container);
     if (idx <= this.belaqiLocations.length - 1) {
       this.headerContent.emit({
         label: this.belaqiLocations[idx].label,
@@ -118,7 +119,6 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
       this.locatedTimeseriesProvider.setSelectedIndex(idx);
       this.locatedTimeseriesProvider.removeAllDatasets();
     } else {
-      const height = window.outerHeight - this.getYPosition(this.slider.container);
       // 58 is the height of the header without padding/margin
       this.slidesHeight = `${height + 58}px`;
       this.headerContent.emit(null);
@@ -138,28 +138,27 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
     if (!this.loading) {
       this.loading = true;
       this.ircelineSettings.getSettings(false).subscribe(ircelineSettings => {
-        this.userLocationProvider.getLocationSettings().subscribe(
-          () => {
-            this.belaqiLocations = [];
-            this.userLocationProvider.getAllLocations().subscribe(locations => {
-              locations.forEach((loc, i) => {
-                if (loc.type !== 'current') {
-                  this.setLocation(loc, i, ircelineSettings);
-                } else {
-                  this.userLocationProvider.determineCurrentLocation().subscribe(currentLoc => {
-                    this.setLocation(currentLoc, i, ircelineSettings);
-                    if (i === 0) { this.updateLocationSelection(0); }
-                  })
-                }
-              })
-              if (this.slider) {
-                this.slider.slideTo(0);
+        this.userLocationProvider.getVisibleUserLocations().subscribe(locations => {
+          this.belaqiLocations = [];
+          locations.forEach((loc, i) => {
+            if (loc.type !== 'current') {
+              this.setLocation(loc, i, ircelineSettings);
+            } else {
+              this.belaqiLocations[i] = {
+                type: 'current'
               }
-              this.updateLocationSelection(0);
-              this.loading = false;
-            });
+              this.userLocationProvider.determineCurrentLocation().subscribe(currentLoc => {
+                this.setLocation(currentLoc, i, ircelineSettings);
+                this.updateLocationSelection(0);
+              })
+            }
+          })
+          this.updateLocationSelection(0);
+          if (this.slider) {
+            this.slider.slideTo(0);
           }
-        );
+          this.loading = false;
+        });
       });
     }
   }
