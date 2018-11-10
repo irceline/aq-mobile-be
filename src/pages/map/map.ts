@@ -95,6 +95,7 @@ export class MapPage {
   public clusterStations: boolean;
   public selectedPhenomenon: Phenomenon;
   public nextStationPopup: L.Popup;
+  public disabled: boolean;
 
   public legend: L.Control;
 
@@ -200,10 +201,11 @@ export class MapPage {
     if (this.phenomenonLabel == PhenomenonLabel.BC) {
       this.time = TimeLabel.current;
     }
+    this.setDisabled();
   }
 
-  public isDisabled(): boolean {
-    return this.phenomenonLabel == PhenomenonLabel.BC;
+  private setDisabled() {
+    this.disabled = this.phenomenonLabel === PhenomenonLabel.BC || this.phenomenonLabel === PhenomenonLabel.OTHERS;
   }
 
   private getPhenomenonID(label: PhenomenonLabel): string {
@@ -342,20 +344,22 @@ export class MapPage {
             break;
         }
       }
-      const layerOptions: BoundaryCanvasOptions = {
-        layers: layerId,
-        transparent: true,
-        format: 'image/png',
-        opacity: 0.7,
-        boundary: geojson,
-        useBoundaryGreaterAsZoom: 12
+      if (layerId) {
+        const layerOptions: BoundaryCanvasOptions = {
+          layers: layerId,
+          transparent: true,
+          format: 'image/png',
+          opacity: 0.7,
+          boundary: geojson,
+          useBoundaryGreaterAsZoom: 12
+        }
+        if (timeParam) { layerOptions.time = timeParam };
+        this.overlayMaps.set(layerId + wmsUrl + timeParam, {
+          label: this.translateSrvc.instant('map.interpolated-map'),
+          visible: true,
+          layer: L.tileLayer.boundaryCanvas(wmsUrl, layerOptions)
+        });
       }
-      if (timeParam) { layerOptions.time = timeParam };
-      this.overlayMaps.set(layerId + wmsUrl + timeParam, {
-        label: this.translateSrvc.instant('map.interpolated-map'),
-        visible: true,
-        layer: L.tileLayer.boundaryCanvas(wmsUrl, layerOptions)
-      });
     })
   }
 
