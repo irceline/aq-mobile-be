@@ -12,7 +12,8 @@
       </div>
     </div>
     <div *ngIf="!loc.latitude" style="height: 300px;">
-      location loading...
+      <div>{{'belaqi-user-location-slider.loading-current-location' | translate}}</div>
+      <ion-spinner></ion-spinner>
     </div>
   </ion-slide>
   <ion-slide>

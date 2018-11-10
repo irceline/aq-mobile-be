@@ -95,7 +95,7 @@ export class UserLocationListProvider {
   public getVisibleUserLocations(): any {
     return this.userLocationsSubject.asObservable()
       .pipe(
-        map(locs => locs.filter(e => (e.type === 'current' && e.isCurrentVisible) || e.type === 'user'))
+        map(locs => locs.filter(e => (e.type === 'current' && e.isCurrentVisible && this.locate.getLocationEnabled()) || e.type === 'user'))
       );
   }
 

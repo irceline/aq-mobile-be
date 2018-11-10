@@ -22,6 +22,7 @@
 		"create-new-location": "Maak een nieuwe locatie aan",
 		"current-location": "Huidige locatie",
 		"current-location-description": "De locatie waar je momenteel bent...",
+		"loading-current-location": "",
 		"open-user-location": "Bewerk de huidige locaties"
 	},
 	"belaqi-wheel": {
@@ -245,15 +246,6 @@
 		"header": "Kies een polluent",
 		"hide-some-phenomenons": "verberg polluenten",
 		"list-all-phenomenons": "toon alle polluenten"
-	},
-	"phenomenon": {
-		"long-label": {
-			"bc": "Zwarte koolstof",
-			"no2": "Stikstofdioxide",
-			"o3": "Ozon",
-			"pm10": "Fijn stof < 10 µm",
-			"pm25": "Fijn stof < 10 µm"
-		}
 	},
 	"push-notification-subscription": {
 		"brussels": "Brussel - Leefmilieu Brussel - NL/FR",

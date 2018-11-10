@@ -83,6 +83,7 @@ export class ModalUserLocationListComponent {
 
   private setLocations() {
     this.userLocationProvider.getUserLocations().subscribe(res => {
+      this.points = [];
       this.locations = res;
       this.locations.forEach(e => this.points.push(this.createPoint(e)));
     });
