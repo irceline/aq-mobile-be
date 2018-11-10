@@ -92,7 +92,7 @@ export class UserLocationListProvider {
     return this.userLocationsSubject.asObservable();
   }
 
-  public getVisibleUserLocations(): any {
+  public getVisibleUserLocations(): Observable<UserLocation[]> {
     return this.userLocationsSubject.asObservable()
       .pipe(
         map(locs => locs.filter(e => (e.type === 'current' && e.isCurrentVisible && this.locate.getLocationEnabled()) || e.type === 'user'))
