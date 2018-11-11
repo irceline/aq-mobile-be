@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
+import { ToastController } from 'ionic-angular';
 import { Platform } from 'ionic-angular/platform/platform';
 import { Observable, ReplaySubject } from 'rxjs';
 
@@ -17,7 +18,8 @@ export class LocateProvider {
     private platform: Platform,
     private geolocate: Geolocation,
     private diagnostic: Diagnostic,
-    private refresher: RefreshHandler
+    private refresher: RefreshHandler,
+    private toast: ToastController
   ) {
     this.registerLocationStateChangeHandler();
     this.isGeolocationEnabled();
@@ -64,31 +66,18 @@ export class LocateProvider {
   }
 
   private determinePosition() {
+    this.toast.create({ message: `Start determine position`, duration: 1000 }).present();
     this.platform.ready().then(() => {
       this.geolocate.getCurrentPosition({
         timeout: 10000,
-        enableHighAccuracy: false,
+        enableHighAccuracy: true,
         maximumAge: 60000
       }).then(res => {
-        // const latitude = 50.863892;
-        // const longitude = 4.6337528;
-        // const latitude = 50 + Math.random();
-        // const longitude = 4 + Math.random();
-        // res = {
-        //   coords: {
-        //     latitude: latitude,
-        //     longitude: longitude,
-        //     accuracy: 0,
-        //     altitude: 0,
-        //     altitudeAccuracy: 0,
-        //     heading: 0,
-        //     speed: 0
-        //   },
-        //   timestamp: 1234
-        // }
         this.position.next(res);
-      }, (error) => {
+        this.toast.create({ message: `Find position: lat: ${res.coords.latitude}, lon: ${res.coords.longitude}`, duration: 3000 }).present();
+      }).catch((error) => {
         console.log(JSON.stringify(error));
+        this.toast.create({ message: `Location-Error: ${error}`, duration: 3000 }).present();
         this.determinePosition();
       });
     })
