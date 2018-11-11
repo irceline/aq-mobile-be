@@ -12,7 +12,7 @@
       </div>
     </div>
     <div *ngIf="!loc.latitude" style="height: 300px;">
-      <div>{{'belaqi-user-location-slider.loading-current-location' | translate}}</div>
+      <div text-wrap>{{'belaqi-user-location-slider.loading-current-location' | translate}}</div>
       <ion-spinner></ion-spinner>
     </div>
   </ion-slide>
@@ -30,7 +30,7 @@
         <ion-item>
           <ion-label>
             <h2>{{'belaqi-user-location-slider.current-location' | translate}}</h2>
-            <p>{{'belaqi-user-location-slider.current-location-description' | translate}}</p>
+            <p text-wrap>{{'belaqi-user-location-slider.current-location-description' | translate}}</p>
           </ion-label>
           <ion-toggle (ionChange)="toggle($event)" [checked]="showCurrentLocation"></ion-toggle>
         </ion-item>
