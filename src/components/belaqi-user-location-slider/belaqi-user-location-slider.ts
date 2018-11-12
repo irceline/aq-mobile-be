@@ -109,19 +109,21 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
   }
 
   private updateLocationSelection(idx: number) {
-    const height = window.outerHeight - this.getYPosition(this.slider.container);
-    if (idx <= this.belaqiLocations.length - 1) {
-      this.headerContent.emit({
-        label: this.belaqiLocations[idx].label,
-        date: this.belaqiLocations[idx].date,
-        current: this.belaqiLocations[idx].type === 'current'
-      })
-      this.locatedTimeseriesProvider.setSelectedIndex(idx);
-      this.locatedTimeseriesProvider.removeAllDatasets();
-    } else {
-      // 58 is the height of the header without padding/margin
-      this.slidesHeight = `${height + 58}px`;
-      this.headerContent.emit(null);
+    if (this.slider) {
+      const height = window.outerHeight - this.getYPosition(this.slider.container);
+      if (idx <= this.belaqiLocations.length - 1) {
+        this.headerContent.emit({
+          label: this.belaqiLocations[idx].label,
+          date: this.belaqiLocations[idx].date,
+          current: this.belaqiLocations[idx].type === 'current'
+        })
+        this.locatedTimeseriesProvider.setSelectedIndex(idx);
+        this.locatedTimeseriesProvider.removeAllDatasets();
+      } else {
+        // 58 is the height of the header without padding/margin
+        this.slidesHeight = `${height + 58}px`;
+        this.headerContent.emit(null);
+      }
     }
   }
 
