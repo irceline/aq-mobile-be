@@ -170,10 +170,7 @@
 		"lastUpdate": "Last update"
 	},
 	"nearest-measuring-station-panel": {
-		"header": {
-			"geolocation-disabled": "Show the measuring station on the map",
-			"geolocation-enabled": "Nearest measuring station"
-		},
+		"header": "Nearest measuring station",
 		"information-popup": {
 			"list-bc": "or black carbon",
 			"list-no2": "or nitrogen dioxide",

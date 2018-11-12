@@ -1,8 +1,6 @@
 <ion-grid no-padding>
   <ion-row class="header">
-    <ion-col *ngIf="geolocationEnabled" text-center>{{'nearest-measuring-station-panel.header.geolocation-enabled' |
-      translate}}</ion-col>
-    <ion-col *ngIf="!geolocationEnabled" text-center>{{'nearest-measuring-station-panel.header.geolocation-disabled' |
+    <ion-col text-center text-wrap>{{'nearest-measuring-station-panel.header' |
       translate}}</ion-col>
     <div class="info-button">
       <button ion-button icon-only clear (click)="presentPopover($event)">
