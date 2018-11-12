@@ -170,10 +170,7 @@
 		"lastUpdate": "Laatste actualisatie"
 	},
 	"nearest-measuring-station-panel": {
-		"header": {
-			"geolocation-disabled": "Toon het meetstation op de kaart",
-			"geolocation-enabled": "Dichtstbijgelegen meetstation"
-		},
+		"header": "Dichtstbijgelegen meetstation",
 		"information-popup": {
 			"list-bc": "BC of zwarte koolstof",
 			"list-no2": "NO2 of stikstofdioxide",

@@ -170,10 +170,7 @@
 		"lastUpdate": "Dernière mise à jour"
 	},
 	"nearest-measuring-station-panel": {
-		"header": {
-			"geolocation-disabled": "Montrer la station de mesure sur la carte",
-			"geolocation-enabled": "Station de mesure la plus proche"
-		},
+		"header": "Station de mesure la plus proche",
 		"information-popup": {
 			"list-bc": "ou black carbon",
 			"list-no2": "ou dioxyde d'azote",
