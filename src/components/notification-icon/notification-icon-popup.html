@@ -1,7 +1,7 @@
 <div *ngIf="notifications.length > 0">
   <div *ngFor="let notification of notifications">
     <ion-card>
-      <ion-item>
+      <ion-item text-wrap>
         <h2>{{notification.title}}</h2>
         <p>{{notification.expiration | date}}</p>
         <p>{{('push-notification-subscription.' + notification.topic) | translate}}</p>
@@ -14,7 +14,7 @@
 </div>
 <div *ngIf="notifications.length === 0">
   <ion-card>
-    <ion-item>
+    <ion-item text-wrap>
       <strong>{{'home.noAlertheader' | translate}}</strong>
     </ion-item>
     <ion-card-content>
