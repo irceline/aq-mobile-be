@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
+import { TranslateService } from '@ngx-translate/core';
 import { ToastController } from 'ionic-angular';
 import { Platform } from 'ionic-angular/platform/platform';
 import { Observable, ReplaySubject } from 'rxjs';
@@ -19,11 +20,13 @@ export class LocateProvider {
     private geolocate: Geolocation,
     private diagnostic: Diagnostic,
     private refresher: RefreshHandler,
+    private translate: TranslateService,
     private toast: ToastController
   ) {
     this.registerLocationStateChangeHandler();
     this.isGeolocationEnabled();
     this.refresher.onRefresh.subscribe(() => this.determinePosition());
+    this.platform.resume.subscribe(() => this.isGeolocationEnabled());
   }
 
   public getGeoposition(): Observable<Geoposition> {
@@ -40,7 +43,13 @@ export class LocateProvider {
 
   private registerLocationStateChangeHandler() {
     if (this.platform.is('cordova')) {
-      this.diagnostic.registerLocationStateChangeHandler(() => this.isGeolocationEnabled());
+      this.diagnostic.registerLocationStateChangeHandler(() => {
+        this.isGeolocationEnabled();
+        this.diagnostic.isGpsLocationEnabled().then((res) => {
+          const message = res ? this.translate.instant('network.geolocationEnabled') : this.translate.instant('network.geolocationDisabled');
+          this.toast.create({ message, duration: 5000 }).present();
+        })
+      });
     }
   }
 
@@ -66,21 +75,17 @@ export class LocateProvider {
   }
 
   private determinePosition() {
-    this.toast.create({ message: `Start determine position`, duration: 1000 }).present();
     this.platform.ready().then(() => {
       this.geolocate.getCurrentPosition({
         timeout: 10000,
         enableHighAccuracy: true,
-        maximumAge: 60000
+        maximumAge: 0
       }).then(res => {
         this.position.next(res);
-        this.toast.create({ message: `Find position: lat: ${res.coords.latitude}, lon: ${res.coords.longitude}`, duration: 3000 }).present();
       }).catch((error) => {
         console.log(JSON.stringify(error));
-        this.toast.create({ message: `Location-Error: ${error}`, duration: 3000 }).present();
         this.determinePosition();
       });
     })
   }
-
 }
