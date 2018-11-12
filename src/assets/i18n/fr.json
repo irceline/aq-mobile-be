@@ -14,20 +14,20 @@
 			"link-more-url": "http://www.irceline.be/fr"
 		}
 	},
-	"annual-phenomenon-buttons": "Valeur moyenne annuelle modélisée pour ce position:",
+	"annual-phenomenon-buttons": "Valeur moyenne annuelle modélisée pour cette position:",
 	"belaqi-chart": {
-		"error": "Malheureusement, une erreur est survenue lors de la détermination du graphique."
+		"error": "Malheureusement, une erreur est survenue lors du chargement du graphique."
 	},
 	"belaqi-user-location-slider": {
-		"create-new-location": "Ajouter une nouvelle position",
-		"current-location": "Position actuelle",
+		"create-new-location": "Ajouter une nouvelle localisation",
+		"current-location": "Localisation actuelle",
 		"current-location-description": "Le lieu où vous vous trouvez actuellement...",
 		"loading-current-location": "Votre appareil cherche actuellement votre position",
-		"open-user-location": "Modifier les positions actuels"
+		"open-user-location": "Modifier les localisations"
 	},
 	"belaqi-wheel": {
-		"modelled-hint": "Modélisé pour cette position",
-		"no-index-ascertained": "Aucun indice BelAQI n'a pu être déterminé. Cela peut être le cas si la position n'est pas en Belgique."
+		"modelled-hint": "Modélisé pour cette localisation",
+		"no-index-ascertained": "Aucun indice BelAQI n'a pu être déterminé. Cela peut être le cas si votre localisation n'est pas en Belgique."
 	},
 	"belaqi": {
 		"level-split": {
@@ -61,7 +61,7 @@
 			"header": "Période personnalisée",
 			"start": "Début"
 		},
-		"header": "changer le délai",
+		"header": "Changer le délai",
 		"predefined": {
 			"current-month": "Mois en cours",
 			"current-week": "Semaine en cours",
@@ -83,22 +83,22 @@
 	},
 	"customize-personal-alerts": {
 		"active": "Activer",
-		"alert-index-level": "Notification à partir du niveau BelAQI",
+		"alert-index-level": "Notification à partir de l'indice BelAQI",
 		"alert-period": "Période d'alerte",
 		"alert-sensitive-active": "Conseils de santé pour les personnes sensibles à la pollution de l'air",
-		"header": "Alertes personnelles",
-		"hint": "Attention: Ne pas fermer l'application pour utiliser cette fonction. Votre position est déterminé une fois pour la période de temps choisie."
+		"header": "Alertes personnalisées",
+		"hint": "Attention: Ne pas fermer l'application pour utiliser cette fonction. Les alertes personnalisées sont déterminées pour toutes les positions sélectionnées et la période d'alerte choisie."
 	},
 	"diagram": {
-		"header": "Diagramme",
+		"header": "Graphique",
 		"loading": "Chargement",
-		"no-timeseries-selected": "Aucune série sélectionnée",
-		"select-timeseries": "Veuillez sélectionner une série"
+		"no-timeseries-selected": "Aucune période sélectionnée",
+		"select-timeseries": "Veuillez sélectionner une période"
 	},
 	"home": {
 		"header": "Accueil",
-		"noAlert": "aucun rapport officiel concernant les périodes de pollution atmosphérique accrue",
-		"noAlertheader": "Actuellement pas d'alert:"
+		"noAlert": "Aucun rapport officiel d'épisode de pollution n'a été émis",
+		"noAlertheader": "Pas d'alerte:"
 	},
 	"info": {
 		"chart": {
@@ -107,7 +107,7 @@
 		"moreInfo": "Plus d'info",
 		"wheel": {
 			"link": "http://www.irceline.be/fr/belaqi",
-			"message": "Cet indicateur affiche l’indice de qualité de l’air BelAQI actuel pour votre position. Cet indice combine les concentrations modélisées des différents polluants en fonction de leur impact sur la santé."
+			"message": "Cet indicateur affiche l’indice de qualité de l’air BelAQI actuel pour votre position. Cet indice est une combinaison des concentrations modélisées des différents polluants pondérée par leur impact sur la santé."
 		}
 	},
 	"intro": {
@@ -128,14 +128,14 @@
 		},
 		"prev-step": "Précédent",
 		"three": {
-			"addLocationToList": "Ajouter à la liste de positions",
-			"header": "Choisissez les localisations pour lesquels vous souhaitez recevoir des notifications personnalisées",
-			"locationLabelHint": "Renommer la position",
+			"addLocationToList": "Ajouter à la liste de localisations",
+			"header": "Choisissez les localisations pour lesquelles vous souhaitez recevoir des notifications personnalisées",
+			"locationLabelHint": "Renommer la localisation",
 			"locationLabelPlaceholder": "p.e. \"À la maison\", \"Travail\", \"École\"",
-			"showLocationList": "Voir les localisations actuels"
+			"showLocationList": "Voir les localisations actuelles"
 		},
 		"two": {
-			"header": "our quelle région souhaitez-vous recevoir des notifications officielles?"
+			"header": "Pour quelle région souhaitez-vous recevoir des notifications officielles?"
 		}
 	},
 	"legend": {
@@ -144,7 +144,7 @@
 		"last-value-at": "Dernière valeur à"
 	},
 	"map": {
-		"configured-location": "Votre position configuré",
+		"configured-location": "Votre position configurée",
 		"current-location": "Votre position actuelle",
 		"dataset-selection-hint": "Veuillez sélectionner une ou plusieurs séries à afficher",
 		"geosearch": {
@@ -153,9 +153,9 @@
 		"header": "Carte",
 		"interpolated-map": "Carte interpolée",
 		"nearest-station": "Station de mesure la plus proche",
-		"no-legend": "aucune légende disponible",
+		"no-legend": "Aucune légende disponible",
 		"pollutant": {
-			"other": "autre"
+			"other": "Autre"
 		},
 		"show-in-diagram": "Afficher la série {{value}} dans le diagramme",
 		"time": {
@@ -180,7 +180,7 @@
 			"list-o3": "ou ozone",
 			"list-pm10": "ou particules d'un diamètre inférieur à 10 micromètres",
 			"list-pm25": "ou particules d'un diamètre inférieur à 2,5 micromètres",
-			"text": "Les concentrations réelles mesurées des stations de mesure les plus proches sont données ici. Les différents polluants sont:"
+			"text": "Les concentrations mesurées par les stations les plus proches sont données ici. Les différents polluants sont:"
 		}
 	},
 	"nearest-series-legend-slider": {
@@ -238,7 +238,7 @@
 	},
 	"personal-alerts": {
 		"background-service": {
-			"hint": "Surveille les positions configurés",
+			"hint": "Surveille les localisations configurées",
 			"title": "L'application s'exécute en arrière-plan"
 		}
 	},
@@ -261,16 +261,16 @@
 			"header": "A propos de l'application",
 			"version": "Version"
 		},
-		"common": "Généraux",
+		"common": "Paramètre généraux",
 		"header": "Paramètres",
 		"select-language": "Sélectionnez une langue",
 		"show-introduction": "Voir l'introduction",
 		"user-locations": {
-			"create-new-location": "Ajouter une nouvelle position",
-			"edit-location": "Modifier position",
-			"header": "Positions",
-			"show-location-list": "Voir les positions",
-			"show-nearest-series-by-default": "Montrer les mesures les plus proches dans le diagramme"
+			"create-new-location": "Ajouter une nouvelle localisation",
+			"edit-location": "Modifier la localisation",
+			"header": "Localisations",
+			"show-location-list": "Voir les localisations",
+			"show-nearest-series-by-default": "Montrer les mesures les plus proches dans le graphique"
 		}
 	},
 	"show-geometry": {
@@ -287,7 +287,7 @@
 	"style-edit": {
 		"generalize": "Généraliser les données",
 		"header": "Changer le style de cette série",
-		"zeroBasedYAxe": "Série basée à zéro"
+		"zeroBasedYAxe": "Axe Y à zéro"
 	},
 	"user-location-list": {
 		"header": "Liste des positions"
@@ -295,8 +295,8 @@
 	"user-location": {
 		"creation": {
 			"message": {
-				"added": "Position ajouté",
-				"exists": "Position existe déjà"
+				"added": "Localisation ajoutée",
+				"exists": "La localisation existe déjà"
 			}
 		}
 	},
