@@ -14,9 +14,9 @@
 			"link-more-url": "http://www.irceline.be/fr"
 		}
 	},
-	"annual-phenomenon-buttons": "Gemodelleerd jaargemiddelde waarde voor deze locatie:",
+	"annual-phenomenon-buttons": "Gemodelleerde jaargemiddelde waarde voor deze locatie:",
 	"belaqi-chart": {
-		"error": "Helaas is er een fout opgetreden bij het bepalen van de grafiek."
+		"error": "Helaas is er een fout opgetreden bij het maken van de grafiek."
 	},
 	"belaqi-user-location-slider": {
 		"create-new-location": "Maak een nieuwe locatie aan",
@@ -26,8 +26,8 @@
 		"open-user-location": "Bewerk de huidige locaties"
 	},
 	"belaqi-wheel": {
-		"modelled-hint": "Gemodelleerd waarde voor deze locatie",
-		"no-index-ascertained": "Er kon geen BelAQI-index worden berekend. Dit kan het geval zijn als de locatie niet in België ligt."
+		"modelled-hint": "Gemodelleerde waarde voor deze locatie",
+		"no-index-ascertained": "Er kon geen BelAQI-index worden berekend. Dit kan het geval zijn wanneer de locatie niet in België ligt."
 	},
 	"belaqi": {
 		"level-split": {
@@ -65,7 +65,7 @@
 		"predefined": {
 			"current-month": "huidige maand",
 			"current-week": "huidige week",
-			"current-year": "huidige jaar",
+			"current-year": "huidig jaar",
 			"header": "voorgedefineerde periode",
 			"last-hour": "vorig uur",
 			"last-month": "vorige maand",
@@ -87,7 +87,7 @@
 		"alert-period": "interval melding",
 		"alert-sensitive-active": "Gezondheidsadviezen voor personen gevoelig aan luchtvervuiling",
 		"header": "Gepersonaliseerde meldingen",
-		"hint": "Tip: om deze functionaliteit te kunnen gebruiken, moet de app op de achtergrond blijven lopen. Je locatie wordt één keer bepaald voor het gekozen tijdsinterval en vervolgens wordt de luchtkwaliteit gecontroleerd."
+		"hint": "Tip: om deze functionaliteit te kunnen gebruiken, moet de app op de achtergrond blijven lopen. Je locatie wordt één keer bepaald voor het gekozen tijdsinterval en vervolgens wordt de luchtkwaliteit bepaald."
 	},
 	"diagram": {
 		"header": "diagram",
@@ -97,17 +97,17 @@
 	},
 	"home": {
 		"header": "Start",
-		"noAlert": "geen officiële meldingen met betrekking tot periodes van verhoogde luchtverontreiniging",
+		"noAlert": "geen officiële waarschuwingen over verhoogde luchtvervuiling",
 		"noAlertheader": "Momenteel geen waarschuwingen:"
 	},
 	"info": {
 		"chart": {
-			"message": "Deze grafiek toont de evolutie van de BelAQI luchtkwaliteitsindex. De verticale blauwe lijn geeft de actuele waarde weer."
+			"message": "Deze grafiek toont de evolutie van de BelAQI luchtkwaliteitsindex. De verticale blauwe lijn geeft het huidige tijdstip weer."
 		},
 		"moreInfo": "Meer info",
 		"wheel": {
 			"link": "http://www.irceline.be/nl/belaqi",
-			"message": "Deze wijzer toont de actuele BelAQI luchtkwaliteitsindex voor uw locatie. Deze index combineert de gemodelleerde concentraties van de  verschillende polluenten afhankelijk van hun impact op de gezondheid."
+			"message": "Deze wijzer toont de actuele BelAQI luchtkwaliteitsindex voor uw locatie. Deze index combineert de gemodelleerde concentraties van de  verschillende polluenten afhankelijk van hun kortetermijnimpact op de gezondheid."
 		}
 	},
 	"intro": {
@@ -135,7 +135,7 @@
 			"showLocationList": "Toon huidige locaties"
 		},
 		"two": {
-			"header": "Voor welke regio wil je officiële meldingen ontvangen?"
+			"header": "Voor welke regio wil je officiële waarschuwingen ontvangen?"
 		}
 	},
 	"legend": {
@@ -146,13 +146,13 @@
 	"map": {
 		"configured-location": "Uw geconfigureerde locatie",
 		"current-location": "Uw huidige locatie",
-		"dataset-selection-hint": "Selecteer een of meerdere tijdsreeks(en) voor weergave op een diagram",
+		"dataset-selection-hint": "Selecteer één of meerdere tijdsreeks(en) voor weergave op een diagram",
 		"geosearch": {
 			"placeholder": "Zoek locatie"
 		},
 		"header": "Kaart",
 		"interpolated-map": "Geïnterpoleerde kaart",
-		"nearest-station": "Dichtstbijzijnde meetstation",
+		"nearest-station": "Dichtstbijgelegen meetstation",
 		"no-legend": "geen legende beschikbaar",
 		"pollutant": {
 			"other": "andere"
@@ -172,7 +172,7 @@
 	"nearest-measuring-station-panel": {
 		"header": {
 			"geolocation-disabled": "Toon het meetstation op de kaart",
-			"geolocation-enabled": "Dichtstbijzijnde meetstation"
+			"geolocation-enabled": "Dichtstbijgelegen meetstation"
 		},
 		"information-popup": {
 			"list-bc": "BC of zwarte koolstof",
@@ -180,7 +180,7 @@
 			"list-o3": "O3 of ozon",
 			"list-pm10": "PM10 of fijn stof met een diameter kleiner dan 10 micrometer",
 			"list-pm25": "PM2.5 of fijn stof met een diameter kleiner dan 2,5 micrometer",
-			"text": "Hier ziet u de actuele gemeten concentraties voor de dichtstbijzijnde meetstations. De verschillende polluenten zijn:"
+			"text": "Hier ziet u de actuele gemeten concentraties voor de Dichtstbijgelegen meetstations. De verschillende polluenten zijn:"
 		}
 	},
 	"nearest-series-legend-slider": {
@@ -191,33 +191,33 @@
 		"geolocationDisabledExplanation": "Als u gebruik wilt maken van de \"huidige locatie\"-functionaliteiten, schakel dan de locatieservice van uw apparaat in.",
 		"geolocationEnabled": "Geolocatie is geactiveerd",
 		"geolocationEnabledExplanation": "De \"huidige locatie\"-functionaliteiten zijn voor u beschikbaar.",
-		"offline": "U toestel offline",
+		"offline": "U toestel is offline",
 		"online": "U toestel is online"
 	},
 	"personal-alert": {
 		"index-1": {
-			"non-sensitive": "Het is vandaag heel gezond om buiten fysiek actief te zijn. Door emissies (uitstoot) te reduceren krijgen we meer van deze gezonde dagen en dalen ook de effecten van de lnagetermijnblootstelling.",
-			"sensitive": "Het is vandaag heel gezond om buiten fysiek actief te zijn. Door emissies (uitstoot) te reduceren krijgen we meer van deze gezonde dagen en dalen ook de effecten van de lnagetermijnblootstelling."
+			"non-sensitive": "Het is vandaag gezond om buiten fysiek actief te zijn. Door emissies (uitstoot) te reduceren krijgen we meer van deze gezonde dagen en dalen ook de effecten van de langetermijnblootstelling.",
+			"sensitive": "Het is vandaag gezond om buiten fysiek actief te zijn. Door emissies (uitstoot) te reduceren krijgen we meer van deze gezonde dagen en dalen ook de effecten van de langetermijnblootstelling."
 		},
 		"index-10": {
 			"non-sensitive": "Overweeg het verminderen van zware/lange lichamelijke inspanning.",
 			"sensitive": "Beperk lichamelijke inspanning. Overleg met u arts over aangepaste medicatie."
 		},
 		"index-2": {
-			"non-sensitive": "Het is vandaag heel gezond om buiten fysiek actief te zijn. Door emissies (uitstoot) te reduceren krijgen we meer van deze gezonde dagen en dalen ook de effecten van de lnagetermijnblootstelling.",
-			"sensitive": "Het is vandaag heel gezond om buiten fysiek actief te zijn. Door emissies (uitstoot) te reduceren krijgen we meer van deze gezonde dagen en dalen ook de effecten van de lnagetermijnblootstelling."
+			"non-sensitive": "Het is vandaag gezond om buiten fysiek actief te zijn. Door emissies (uitstoot) te reduceren krijgen we meer van deze gezonde dagen en dalen ook de effecten van de langetermijnblootstelling.",
+			"sensitive": "Het is vandaag gezond om buiten fysiek actief te zijn. Door emissies (uitstoot) te reduceren krijgen we meer van deze gezonde dagen en dalen ook de effecten van de langetermijnblootstelling."
 		},
 		"index-3": {
 			"non-sensitive": "U hoeft uw gebruikelijke fysieke activiteiten niet aan te passen om wille van de luchtkwaliteit.",
-			"sensitive": "Indien u hinder ondervindt kan u zware/lange lichamelijke inspanningen verminderen."
+			"sensitive": "Indien u hinder ondervindt kan u zware/lange lichamelijke inspanningen best vermijden."
 		},
 		"index-4": {
 			"non-sensitive": "U hoeft uw gebruikelijke fysieke activiteiten niet aan te passen om wille van de luchtkwaliteit.",
-			"sensitive": "Indien u hinder ondervindt kan u zware/lange lichamelijke inspanningen verminderen."
+			"sensitive": "Indien u hinder ondervindt kan u zware/lange lichamelijke inspanningen best vermijden."
 		},
 		"index-5": {
 			"non-sensitive": "U hoeft uw gebruikelijke fysieke activiteiten niet aan te passen om wille van de luchtkwaliteit.",
-			"sensitive": "Verminder je lichamelijke inspanning. Overleg met u arts over aangepaste medicatie."
+			"sensitive": "Verminder lichamelijke inspanningen. Overleg met u arts over aangepaste medicatie."
 		},
 		"index-6": {
 			"non-sensitive": "U hoeft uw gebruikelijke fysieke activiteiten niet aan te passen om wille van de luchtkwaliteit.",
@@ -225,21 +225,21 @@
 		},
 		"index-7": {
 			"non-sensitive": "U hoeft uw gebruikelijke fysieke activiteiten niet aan te passen om wille van de luchtkwaliteit.",
-			"sensitive": "Verminder je lichamelijke inspanning. Overleg met u arts over aangepaste medicatie."
+			"sensitive": "Verminder lichamelijke inspanningen. Overleg met u arts over aangepaste medicatie."
 		},
 		"index-8": {
-			"non-sensitive": "Overweeg het verminderen van zware/lange lichamelijke inspanning.",
-			"sensitive": "Beperk lichamelijke inspanning. Overleg met u arts over aangepaste medicatie."
+			"non-sensitive": "Overweeg het verminderen van zware/lange lichamelijke inspanningen.",
+			"sensitive": "Beperk lichamelijke inspanningen. Overleg met u arts over aangepaste medicatie."
 		},
 		"index-9": {
-			"non-sensitive": "Overweeg het verminderen van zware/lange lichamelijke inspanning.",
-			"sensitive": "Beperk lichamelijke inspanning. Overleg met u arts over aangepaste medicatie."
+			"non-sensitive": "Overweeg het verminderen van zware/lange lichamelijke inspanningen.",
+			"sensitive": "Beperk lichamelijke inspanningen. Overleg met u arts over aangepaste medicatie."
 		}
 	},
 	"personal-alerts": {
 		"background-service": {
 			"hint": "Monitor de geconfigureerde locaties",
-			"title": "App blijven lopen op de achtergrond"
+			"title": "App blijft actief op de achtergrond"
 		}
 	},
 	"phenomenon-selector": {
@@ -270,7 +270,7 @@
 			"edit-location": "Bewerk locatie",
 			"header": "Gebruikerslocaties",
 			"show-location-list": "Toon huidige locaties",
-			"show-nearest-series-by-default": "Toon de dichtstbijzijnde metingen in het diagram"
+			"show-nearest-series-by-default": "Toon de dichtstbijgelegen metingen in het diagram"
 		}
 	},
 	"show-geometry": {
@@ -285,9 +285,9 @@
 		"show-other-phenomena": "Andere polluenten die op deze locatie worden gemeten"
 	},
 	"style-edit": {
-		"generalize": "generaliseerde gegevens",
+		"generalize": "gegeneraliseerde gegevens",
 		"header": "Verander de kleur van de tijdsreeks",
-		"zeroBasedYAxe": "tijdsreeks nullgebaseerd"
+		"zeroBasedYAxe": "tijdsreeks nul gebaseerd"
 	},
 	"user-location-list": {
 		"header": "Lijst van de locaties"
@@ -308,8 +308,8 @@
 		},
 		"geolocation": {
 			"disabled": {
-				"header": "geen locatie gevonden voor u toestel",
-				"hint": "activeer aub de locatiedienst van u toestel en vernieuw de app (knop boven rechts op u scherm) "
+				"header": "geen locatie gevonden voor uw toestel",
+				"hint": "activeer de locatiedienst van u toestel en vernieuw de app aub (knop boven rechts op u scherm)"
 			}
 		}
 	}
