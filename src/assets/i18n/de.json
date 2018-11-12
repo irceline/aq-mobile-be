@@ -22,7 +22,7 @@
 		"create-new-location": "Erstelle einen neuen Standort",
 		"current-location": "Aktuelle Position",
 		"current-location-description": "Der Ort, an dem Sie sich gerade befinden...",
-		"loading-current-location": "Ermittelt die Daten für die aktuelle Position",
+		"loading-current-location": "Ihr Gerät ermittelt Ihren aktuelle Standort",
 		"open-user-location": "Editiere vorhandene Standorte"
 	},
 	"belaqi-wheel": {
