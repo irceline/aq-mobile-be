@@ -86,7 +86,7 @@ export class ModalAnnualMapComponent {
     const moreLink = DomUtil.get('annual-more-link');
     if (moreLink) {
       moreLink.onclick = (event) => {
-        this.iab.create(this.translate.instant('annual-map.legend.link-more-url'));
+        this.iab.create(this.translate.instant('annual-map.legend.link-more-url'), '_system', 'hidden=yes');
         event.stopPropagation();
       };
     }
