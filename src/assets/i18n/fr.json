@@ -108,6 +108,7 @@
 		"wheel": {
 			"link": "http://www.irceline.be/fr/belaqi",
 			"message": "Cet indicateur est une estimation modélisée pour le quartier correspondant à votre position. L'indice de qualité de l'air BelAQI est le plus défavorable des 4 sous-indices calculés pour les différents polluants (PM10, PM2.5, O3 et NO2) selon une échelle pondérée par leur impact santé"
+		}
 	},
 	"intro": {
 		"close-introduction": "Fermer",
@@ -175,7 +176,7 @@
 			"list-no2": "ou dioxyde d'azote",
 			"list-o3": "ou ozone",
 			"list-pm10": "ou particules d'un diamètre inférieur à 10 micromètres",
-			"list-pm25": "ou particules d'un diamètre inférieur à 2.5 micromètres",
+			"list-pm25": "ou particules d'un diamètre inférieur à 2,5 micromètres",
 			"text": "Les concentrations mesurées par les stations les plus proches sont données ici. Les différents polluants sont:"
 		}
 	},
