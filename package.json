@@ -56,6 +56,7 @@
     "chart.js": "^2.7.2",
     "chartjs-plugin-annotation": "^0.5.7",
     "cordova-android": "6.3.0",
+    "cordova-ios": "4.5.5",
     "cordova-plugin-app-version": "^0.1.9",
     "cordova-plugin-background-mode": "^0.7.2",
     "cordova-plugin-badge": "^0.8.7",
@@ -87,7 +88,7 @@
   },
   "devDependencies": {
     "@biesbjerg/ngx-translate-extract": "^2.3.4",
-    "@ionic/app-scripts": "3.1.10",
+    "@ionic/app-scripts": "^3.2.0",
     "typescript": "2.7.2"
   },
   "description": "An Ionic project",
@@ -100,7 +101,7 @@
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-statusbar": {},
       "cordova-plugin-geolocation": {
-        "GEOLOCATION_USAGE_DESCRIPTION": "To locate you"
+        "GEOLOCATION_USAGE_DESCRIPTION": "To fetch the data relevant for your location from the servers feeding the BelAir app."
       },
       "cordova-plugin-local-notification": {},
       "cordova-plugin-background-mode": {},
@@ -122,7 +123,8 @@
       "cordova-plugin-inappbrowser": {}
     },
     "platforms": [
-      "android"
+      "android",
+      "ios"
     ]
   }
 }
