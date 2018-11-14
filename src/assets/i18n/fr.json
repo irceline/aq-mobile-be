@@ -14,19 +14,19 @@
 			"link-more-url": "http://www.irceline.be/fr"
 		}
 	},
-	"annual-phenomenon-buttons": "Valeur moyenne annuelle modélisée pour cette position:",
+	"annual-phenomenon-buttons": "Indice moyen annuel modélisé pour cette position:",
 	"belaqi-chart": {
 		"error": "Malheureusement, une erreur est survenue lors du chargement du graphique."
 	},
 	"belaqi-user-location-slider": {
 		"create-new-location": "Ajouter une nouvelle localisation",
 		"current-location": "Localisation actuelle",
-		"current-location-description": "Le lieu où vous vous trouvez actuellement...",
+		"current-location-description": "La position où vous vous trouvez actuellement",
 		"loading-current-location": "Votre appareil cherche actuellement votre position",
 		"open-user-location": "Modifier les localisations"
 	},
 	"belaqi-wheel": {
-		"modelled-hint": "Modélisé pour cette localisation",
+		"modelled-hint": "Modélisé pour cette position",
 		"no-index-ascertained": "Aucun indice BelAQI n'a pu être déterminé. Cela peut être le cas si votre localisation n'est pas en Belgique."
 	},
 	"belaqi": {
@@ -92,23 +92,22 @@
 	"diagram": {
 		"header": "Graphique",
 		"loading": "Chargement",
-		"no-timeseries-selected": "Aucune période sélectionnée",
-		"select-timeseries": "Veuillez sélectionner une période"
+		"no-timeseries-selected": "Aucun polluant sélectionné",
+		"select-timeseries": "Veuillez sélectionner un polluant"
 	},
 	"home": {
 		"header": "Accueil",
-		"noAlert": "Aucun rapport officiel d'épisode de pollution n'a été émis",
+		"noAlert": "Aucun bulletin de pic de pollution n'a été émis",
 		"noAlertheader": "Pas d'alerte:"
 	},
 	"info": {
 		"chart": {
-			"message": "Ce graphique montre l'évolution de l'indice de qualité de l'air BelAQI. La ligne bleue verticale indique la valeur actuelle."
+			"message": "Ce graphique montre l'évolution de l'indice de qualité de l'air BelAQI. La ligne bleue verticale indique la valeur horaire actuelle."
 		},
 		"moreInfo": "Plus d'info",
 		"wheel": {
 			"link": "http://www.irceline.be/fr/belaqi",
-			"message": "Cet indicateur affiche l’indice de qualité de l’air BelAQI actuel pour votre position. Cet indice est une combinaison des concentrations modélisées des différents polluants pondérée par leur impact sur la santé."
-		}
+			"message": "Cet indicateur est une estimation modélisée pour le quartier correspondant à votre position. L'indice de qualité de l'air BelAQI est le plus défavorable des 4 sous-indices calculés pour les différents polluants (PM10, PM2.5, O3 et NO2) selon une échelle pondérée par leur impact santé"
 	},
 	"intro": {
 		"close-introduction": "Fermer",
@@ -157,7 +156,7 @@
 		"pollutant": {
 			"other": "Autre"
 		},
-		"show-in-diagram": "Afficher la série {{value}} dans le diagramme",
+		"show-in-diagram": "Afficher la série {{value}} dans le graphique",
 		"time": {
 			"current": "Actuel",
 			"today": "Aujourd'hui",
@@ -176,7 +175,7 @@
 			"list-no2": "ou dioxyde d'azote",
 			"list-o3": "ou ozone",
 			"list-pm10": "ou particules d'un diamètre inférieur à 10 micromètres",
-			"list-pm25": "ou particules d'un diamètre inférieur à 2,5 micromètres",
+			"list-pm25": "ou particules d'un diamètre inférieur à 2.5 micromètres",
 			"text": "Les concentrations mesurées par les stations les plus proches sont données ici. Les différents polluants sont:"
 		}
 	},
@@ -258,7 +257,7 @@
 			"header": "A propos de l'application",
 			"version": "Version"
 		},
-		"common": "Paramètre généraux",
+		"common": "Paramètres généraux",
 		"header": "Paramètres",
 		"select-language": "Sélectionnez une langue",
 		"show-introduction": "Voir l'introduction",
@@ -287,7 +286,7 @@
 		"zeroBasedYAxe": "Axe Y à zéro"
 	},
 	"user-location-list": {
-		"header": "Liste des positions"
+		"header": "Liste des localisations"
 	},
 	"user-location": {
 		"creation": {
