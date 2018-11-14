@@ -78,7 +78,7 @@ export class LocateProvider {
     this.platform.ready().then(() => {
       this.geolocate.getCurrentPosition({
         timeout: 10000,
-        enableHighAccuracy: true,
+        enableHighAccuracy: false,
         maximumAge: 0
       }).then(res => {
         this.position.next(res);
