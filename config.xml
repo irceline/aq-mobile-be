@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="507" id="be.irceline.aqmobile" version="0.5.7" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-versionCode="509" id="be.irceline.aqmobile" version="0.5.9" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>BelAir</name>
-    <description>Personalised air quality in Belgium</description>
+    <description>Personalised air quality data throughout Belgium</description>
     <author email="peeters@irceline.be" href="http://www.irceline.be/">Olav Peeters</author>
     <content src="index.html" />
     <access origin="*" />
@@ -89,7 +89,7 @@
     <plugin name="cordova-plugin-ionic-webview" spec="^1.2.1" />
     <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1">
-        <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To locate you" />
+        <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To fetch the data relevant for your location from the servers feeding the BelAir app." />
     </plugin>
     <plugin name="cordova-plugin-local-notification" spec="^0.9.0-beta.3" />
     <plugin name="cordova-plugin-background-mode" spec="^0.7.2" />
