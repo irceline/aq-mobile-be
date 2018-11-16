@@ -1,4 +1,4 @@
-<ion-slides pager #slider (ionSlideDidChange)="slideChanged()" (ionSlideWillChange)="slideWillChange()" [ngStyle]="{'height': slidesHeight}">
+<ion-slides *ngIf="belaqiLocations && belaqiLocations.length" pager #slider (ionSlideDidChange)="slideChanged()" (ionSlideWillChange)="slideWillChange()" [ngStyle]="{'height': slidesHeight}">
   <ion-slide *ngFor="let loc of belaqiLocations">
     <div *ngIf="loc.latitude">
       <div class="wheel">
@@ -11,9 +11,12 @@
         <nearest-measuring-station-panel [location]="loc" (onSelect)="selectPhenomenon($event, loc)"></nearest-measuring-station-panel>
       </div>
     </div>
-    <div *ngIf="!loc.latitude" style="height: 300px;">
+    <div *ngIf="!currentLocationError && !loc.latitude" style="height: 300px;">
       <div text-wrap>{{'belaqi-user-location-slider.loading-current-location' | translate}}</div>
       <ion-spinner></ion-spinner>
+    </div>
+    <div *ngIf="currentLocationError" style="height: 300px;">
+      <div text-wrap>{{'belaqi-user-location-slider.current-location-error' | translate}}</div>
     </div>
   </ion-slide>
   <ion-slide>
