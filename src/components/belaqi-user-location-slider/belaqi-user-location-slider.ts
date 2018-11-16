@@ -8,6 +8,7 @@ import { LocateProvider } from '../../providers/locate/locate';
 import { RefreshHandler } from '../../providers/refresh/refresh';
 import { LocatedTimeseriesService } from '../../providers/timeseries/located-timeseries';
 import { UserLocation, UserLocationListProvider } from '../../providers/user-location-list/user-location-list';
+import { ModalUserLocationCreationComponent } from '../modal-user-location-creation/modal-user-location-creation';
 import { ModalUserLocationListComponent } from '../modal-user-location-list/modal-user-location-list';
 import { PhenomenonLocationSelection } from '../nearest-measuring-station-panel/nearest-measuring-station-panel-entry';
 
@@ -87,6 +88,7 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
   }
 
   public createNewLocation() {
+    this.modalCtrl.create(ModalUserLocationCreationComponent).present();
   }
 
   public openUserLocation() {
@@ -111,14 +113,10 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
   }
 
   private updateLocationSelection(idx: number) {
+    this.setHeader(idx);
     if (this.slider) {
       const height = window.outerHeight - this.getYPosition(this.slider.container);
       if (idx <= this.belaqiLocations.length - 1) {
-        this.headerContent.emit({
-          label: this.belaqiLocations[idx].label,
-          date: this.belaqiLocations[idx].date,
-          current: this.belaqiLocations[idx].type === 'current'
-        })
         this.locatedTimeseriesProvider.setSelectedIndex(idx);
         this.locatedTimeseriesProvider.removeAllDatasets();
       } else {
@@ -126,6 +124,17 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
         this.slidesHeight = `${height + 58}px`;
         this.headerContent.emit(null);
       }
+    }
+  }
+
+  private setHeader(idx: number): any {
+    if (idx <= this.belaqiLocations.length - 1) {
+
+      this.headerContent.emit({
+        label: this.belaqiLocations[idx].label,
+        date: this.belaqiLocations[idx].date,
+        current: this.belaqiLocations[idx].type === 'current'
+      });
     }
   }
 
