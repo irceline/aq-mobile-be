@@ -8,7 +8,6 @@ import { LocateProvider } from '../../providers/locate/locate';
 import { RefreshHandler } from '../../providers/refresh/refresh';
 import { LocatedTimeseriesService } from '../../providers/timeseries/located-timeseries';
 import { UserLocation, UserLocationListProvider } from '../../providers/user-location-list/user-location-list';
-import { ModalUserLocationCreationComponent } from '../modal-user-location-creation/modal-user-location-creation';
 import { ModalUserLocationListComponent } from '../modal-user-location-list/modal-user-location-list';
 import { PhenomenonLocationSelection } from '../nearest-measuring-station-panel/nearest-measuring-station-panel-entry';
 
@@ -50,6 +49,8 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
 
   public slidesHeight: string;
 
+  public currentLocationError: string;
+
   private loading: boolean;
 
   constructor(
@@ -68,7 +69,9 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
   }
 
   public ngAfterViewInit(): void {
-    this.slider.autoHeight = false;
+    if (this.slider) {
+      this.slider.autoHeight = false;
+    }
   }
 
   public selectPhenomenon(selection: PhenomenonLocationSelection, userlocation: UserLocation) {
@@ -84,7 +87,6 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
   }
 
   public createNewLocation() {
-    this.modalCtrl.create(ModalUserLocationCreationComponent).present();
   }
 
   public openUserLocation() {
@@ -149,10 +151,15 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
               this.belaqiLocations[i] = {
                 type: 'current'
               }
-              this.userLocationProvider.determineCurrentLocation().subscribe(currentLoc => {
-                this.setLocation(currentLoc, i, ircelineSettings);
-                this.updateLocationSelection(0);
-              })
+              this.userLocationProvider.determineCurrentLocation().subscribe(
+                currentLoc => {
+                  this.setLocation(currentLoc, i, ircelineSettings);
+                  this.updateLocationSelection(0);
+                },
+                error => {
+                  this.currentLocationError = error;
+                }
+              )
             }
           })
           this.updateLocationSelection(0);

@@ -58,25 +58,30 @@ export class UserLocationListProvider {
 
   public determineCurrentLocation(): Observable<UserLocation> {
     return new Observable((observer: Observer<UserLocation>) => {
-      this.locate.getGeoposition().subscribe((pos: Geoposition) => {
-        const reverseObs = this.geoSearch.reverse({ type: 'Point', coordinates: [pos.coords.latitude, pos.coords.longitude] });
-        reverseObs.subscribe(
-          value => {
-            let locationLabel = this.createGeoLabel(value);
-            observer.next({
-              id: 1,
-              label: locationLabel,
-              type: 'current',
-              latitude: pos.coords.latitude,
-              longitude: pos.coords.longitude
+      this.locate.getGeoposition().subscribe(
+        (pos: Geoposition) => {
+          const reverseObs = this.geoSearch.reverse({ type: 'Point', coordinates: [pos.coords.latitude, pos.coords.longitude] });
+          reverseObs.subscribe(
+            value => {
+              let locationLabel = this.createGeoLabel(value);
+              observer.next({
+                id: 1,
+                label: locationLabel,
+                type: 'current',
+                latitude: pos.coords.latitude,
+                longitude: pos.coords.longitude
+              });
+              observer.complete();
+            },
+            error => {
+              observer.error(error);
+              observer.complete();
             });
-            observer.complete();
-          },
-          error => {
-            observer.error(error);
-            observer.complete();
-          });
-      });
+        },
+        error => {
+          observer.error(error);
+          observer.complete();
+        });
     })
   }
 

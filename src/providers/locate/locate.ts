@@ -76,15 +76,17 @@ export class LocateProvider {
 
   private determinePosition() {
     this.platform.ready().then(() => {
-      this.geolocate.getCurrentPosition({
-        timeout: 10000,
-        enableHighAccuracy: false,
-        maximumAge: 0
-      }).then(res => {
+      this.geolocate.getCurrentPosition().then(res => {
         this.position.next(res);
       }).catch((error) => {
-        console.log(JSON.stringify(error));
-        this.determinePosition();
+        let errorMessage: string;
+        if (error && error.message) {
+          errorMessage = error.message;
+        } else {
+          errorMessage = JSON.stringify(error);
+        }
+        this.position.error(error);
+        this.toast.create({ message: `Error occured, while fetch location: ${errorMessage}`, duration: 3000 }).present();
       });
     })
   }
