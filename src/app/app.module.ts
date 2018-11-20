@@ -13,7 +13,6 @@ import {
   NominatimGeoSearchService,
 } from '@helgoland/map';
 import { AppVersion } from '@ionic-native/app-version';
-import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
 import { BackgroundMode } from '@ionic-native/background-mode';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { FCM } from '@ionic-native/fcm';
@@ -110,7 +109,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     AirQualityIndexProvider,
     AnnualMeanProvider,
     AppVersion,
-    BackgroundGeolocation,
     BackgroundMode,
     BelaqiIndexProvider,
     CategorizeValueToIndexProvider,

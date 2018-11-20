@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LocalStorage } from '@helgoland/core';
 import { GeoSearch } from '@helgoland/map';
-import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
+// import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
 import { BackgroundMode } from '@ionic-native/background-mode';
 import { ILocalNotification, LocalNotifications } from '@ionic-native/local-notifications';
 import { TranslateService } from '@ngx-translate/core';
@@ -36,7 +36,7 @@ export class PersonalAlertsProvider {
   constructor(
     private localNotifications: LocalNotifications,
     private backgroundMode: BackgroundMode,
-    private backgroundGeolocation: BackgroundGeolocation,
+    // private backgroundGeolocation: BackgroundGeolocation,
     private localStorage: LocalStorage,
     private presenter: NotificationPresenter,
     private userLocations: UserLocationListProvider,
@@ -104,7 +104,7 @@ export class PersonalAlertsProvider {
   public deactivate() {
     this.localStorage.save(LOCALSTORAGE_INDEX_ALERT_ACTIVE, false);
     if (this.interval) {
-      this.backgroundGeolocation.finish();
+      // this.backgroundGeolocation.finish();
       this.backgroundMode.disable();
       clearInterval(this.interval);
     }
