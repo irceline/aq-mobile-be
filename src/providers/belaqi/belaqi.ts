@@ -170,7 +170,7 @@ export class BelaqiIndexProvider extends ValueProvider {
         forkJoin([
           this.createPhenomenonTimeline(latitude, longitude, time, ModelledPhenomenon.o3, trend["latest observations"].o3, trend.trend.o3),
           this.createPhenomenonTimeline(latitude, longitude, time, ModelledPhenomenon.pm10, trend["latest observations"].pm10, trend.trend.pm10),
-          this.createPhenomenonTimeline(latitude, longitude, time, ModelledPhenomenon.pm25, trend["latest observations"].pm25, trend.trend.pm10)
+          this.createPhenomenonTimeline(latitude, longitude, time, ModelledPhenomenon.pm25, trend["latest observations"].pm25, trend.trend.pm25)
         ]).map(res => {
           return res[0].map((entry, i) => {
             // TODO maybe create a better merge function
@@ -239,12 +239,12 @@ export class BelaqiIndexProvider extends ValueProvider {
   private getTrends(): Observable<TrendResult> {
     return this.http.client().get<TrendResult>('https://www.irceline.be/tables/forecast/model/trend.php')
       .map(res => {
-        res["latest observations"].o3.forEach(e => e[0] = new Date(e[0]));
-        res["latest observations"].pm10.forEach(e => e[0] = new Date(e[0]));
-        res["latest observations"].pm25.forEach(e => e[0] = new Date(e[0]));
-        res.trend.o3.forEach(e => e[0] = new Date(e[0]));
-        res.trend.pm10.forEach(e => e[0] = new Date(e[0]));
-        res.trend.pm25.forEach(e => e[0] = new Date(e[0]));
+        res["latest observations"].o3.forEach(e => e[0] = moment(e[0]).toDate());
+        res["latest observations"].pm10.forEach(e => e[0] = moment(e[0]).toDate());
+        res["latest observations"].pm25.forEach(e => e[0] = moment(e[0]).toDate());
+        res.trend.o3.forEach(e => e[0] = moment(e[0]).toDate());
+        res.trend.pm10.forEach(e => e[0] = moment(e[0]).toDate());
+        res.trend.pm25.forEach(e => e[0] = moment(e[0]).toDate());
         return res;
       });
   }
