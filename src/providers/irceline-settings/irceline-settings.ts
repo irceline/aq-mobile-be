@@ -2,6 +2,7 @@ import 'rxjs/add/operator/do';
 
 import { Injectable } from '@angular/core';
 import { HttpService, SettingsService } from '@helgoland/core';
+import moment from 'moment';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -27,7 +28,7 @@ export class IrcelineSettingsProvider {
     return this.http.client({ forceUpdate: reload }).get(url).pipe(
       map(result => {
         return {
-          lastupdate: new Date(result['lastupdate']),
+          lastupdate: moment(result['lastupdate']).toDate(),
           timestring: result['timestring'],
           timestring_day: result['timestring_day'],
           top_pollutant_today: result['top_pollutant_today']
@@ -35,5 +36,5 @@ export class IrcelineSettingsProvider {
       })
     )
   }
-  
+
 }
