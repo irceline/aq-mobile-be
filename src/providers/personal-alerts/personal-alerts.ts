@@ -1,11 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LocalStorage } from '@helgoland/core';
-import { GeoReverseResult, GeoSearch } from '@helgoland/map';
-import {
-  BackgroundGeolocation,
-  BackgroundGeolocationConfig,
-  BackgroundGeolocationResponse,
-} from '@ionic-native/background-geolocation';
+import { GeoSearch } from '@helgoland/map';
+import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
 import { BackgroundMode } from '@ionic-native/background-mode';
 import { ILocalNotification, LocalNotifications } from '@ionic-native/local-notifications';
 import { TranslateService } from '@ngx-translate/core';
@@ -141,7 +137,7 @@ export class PersonalAlertsProvider {
   runAlertTask = () => {
     // this.localNotifications.schedule({ text: 'Starting task ...' });
     const request = [];
-    request.push(this.doCurrentLocationCheck());
+    // request.push(this.doCurrentLocationCheck());
     request.push(this.doUserLocationsCheck());
 
     forkJoin(request).subscribe(res => {
@@ -154,119 +150,133 @@ export class PersonalAlertsProvider {
         }
       });
       this.notifyAlerts(alerts);
+    }, error => {
+      this.localNotifications.schedule({ text: 'Error while tasking: ' + error, id: 200 });
     });
-  }
-
-  private doCurrentLocationCheck(): Observable<PersonalAlert> {
-    // this.localNotifications.schedule({ text: 'Start geolocation task' + this.getPeriod(), id: 200 });
-    return new Observable<PersonalAlert>((observer: Observer<PersonalAlert>) => {
-      const config: BackgroundGeolocationConfig = {
-        desiredAccuracy: 10,
-        stationaryRadius: 20,
-        distanceFilter: 30,
-        debug: false,
-        stopOnTerminate: true,
-        notificationTitle: 'Background works',
-        notificationText: 'Determine location and air quality'
-        // notificationIconLarge: 'res://fcm_push_icon',
-        // notificationIconSmall: 'res://fcm_push_icon'
-      };
-      if (this.platform.is('cordova')) {
-        this.backgroundGeolocation.configure(config)
-          .subscribe((location: BackgroundGeolocationResponse) => {
-            // this.localNotifications.schedule({ text: 'geolocation: ' + location.latitude + ' ' + location.longitude, id: 500 });
-            if (location) {
-              forkJoin(
-                this.belaqiProvider.getValue(location.latitude, location.longitude),
-                this.geosearch.reverse({ type: 'Point', coordinates: [location.latitude, location.longitude] })
-              ).subscribe(res => {
-                // this.localNotifications.schedule({ text: 'forkJoin: ' + res.toString(), id: 600 });
-                const belaqi = res[0] ? res[0] : null;
-                const label = this.createGeoLabel(res[1]);
-                if (belaqi && label) {
-                  observer.next({
-                    belaqi,
-                    locationLabel: label,
-                    sensitive: this.getSensitive()
-                  })
-                  observer.complete();
-                } else {
-                  observer.next(null);
-                  observer.complete();
-                }
-              }, error => {
-                // this.localNotifications.schedule({ text: 'geolocation error: ' + error.toString(), id: 600 });
-                observer.error(error);
-              });
-            } else {
-              observer.next(null);
-              observer.complete();
-            }
-            this.backgroundGeolocation.stop();
-          }, (error) => {
-            observer.error(error);
-            // this.localNotifications.schedule({
-            //   text: 'geolocation error ' + error
-            // })
-          });
-        this.backgroundGeolocation.start();
-      } else {
-        observer.next(null);
-        observer.complete();
-      }
-    });
-  }
-
-  private createGeoLabel(geo: GeoReverseResult) {
-    let locationLabel;
-    if (geo && geo.address && geo.address.road && geo.address.houseNumber && geo.address.city) {
-      if (geo.address.road && geo.address.houseNumber) { locationLabel = `${geo.address.road} ${geo.address.houseNumber}, `; }
-      if (geo.address.city) { locationLabel += geo.address.city + ', ' }
-      if (geo.address.country) { locationLabel += geo.address.country }
-    } else {
-      locationLabel = this.translateSrvc.instant('belaqi-user-location-slider.current-location');
-    }
-    return locationLabel;
   }
 
   private doUserLocationsCheck(): Observable<PersonalAlert[]> {
+    // this.localNotifications.schedule({ text: `User locations check` });
     return new Observable<PersonalAlert[]>((observer: Observer<PersonalAlert[]>) => {
-      const getLocationsObs = this.userLocations.getUserLocations().subscribe(res => {
+      this.userLocations.getUserLocations().subscribe(res => {
+        // this.localNotifications.schedule({ text: `Has user locations: ${res}` });
         const requests = [];
         const alerts: PersonalAlert[] = [];
         res.forEach(loc => {
-          requests.push(this.belaqiProvider.getValue(loc.latitude, loc.longitude)
-            .do(res => {
-              if (this.getLevel() <= res) {
-                alerts.push({
-                  belaqi: res,
-                  locationLabel: loc.label,
-                  sensitive: this.getSensitive()
-                })
-              }
-            }));
-        })
-        forkJoin(requests).subscribe(() => {
-          observer.next(alerts);
-          getLocationsObs.unsubscribe();
-          observer.complete()
+          if (loc.type === 'user') {
+            requests.push(this.belaqiProvider.getValue(loc.latitude, loc.longitude)
+              .do(res => {
+                if (this.getLevel() <= res) {
+                  alerts.push({
+                    belaqi: res,
+                    locationLabel: loc.label,
+                    sensitive: this.getSensitive()
+                  })
+                }
+              })
+            );
+          }
         });
-      })
+
+        forkJoin(requests).subscribe(() => {
+          // this.localNotifications.schedule({ text: `User locations results: ${alerts}` });
+          observer.next(alerts);
+          observer.complete();
+        });
+      }).unsubscribe();
     });
   }
 
   private notifyAlerts(alerts: PersonalAlert[]) {
-    if (this.platform.is('cordova') && this.backgroundMode.isActive()) {
-      this.localNotifications.schedule({
-        id: 1,
-        text: 'Checked at: ' + new Date().toLocaleTimeString(),
-        title: 'Personal alerts for your locations',
-        // smallIcon: 'res://fcm_push_icon',
-        // group: 'notify',
-        data: alerts
-      });
-    } else {
-      this.presenter.presentPersonalAlerts(alerts);
+    if (alerts.length > 0) {
+      if (this.platform.is('cordova') && this.backgroundMode.isActive()) {
+        this.localNotifications.schedule({
+          id: new Date().getTime(),
+          text: `${alerts.length} Alerts at ${new Date().toLocaleTimeString()}`,
+          title: 'Personal alerts for your locations',
+          // smallIcon: 'res://fcm_push_icon',
+          // group: 'notify',
+          data: alerts
+        });
+      } else {
+        this.presenter.presentPersonalAlerts(alerts);
+      }
     }
   }
+
+  // private doCurrentLocationCheck(): Observable<PersonalAlert> {
+  //   this.localNotifications.schedule({ text: 'Start geolocation task' + this.getPeriod(), id: 200 });
+  //   return new Observable<PersonalAlert>((observer: Observer<PersonalAlert>) => {
+  //     const config: BackgroundGeolocationConfig = {
+  //       desiredAccuracy: 1000,
+  //       stationaryRadius: 20,
+  //       distanceFilter: 30,
+  //       debug: false,
+  //       stopOnTerminate: true,
+  //       notificationTitle: 'Background works',
+  //       notificationText: 'Determine location and air quality'
+  //       // notificationIconLarge: 'res://fcm_push_icon',
+  //       // notificationIconSmall: 'res://fcm_push_icon'
+  //     };
+  //     if (this.platform.is('cordova')) {
+  //       this.backgroundGeolocation.configure(config)
+  //         .subscribe(
+  //           (location: BackgroundGeolocationResponse) => {
+  //             if (location) {
+  //               location.latitude = 51.05;
+  //               location.longitude = 3.7;
+  //             }
+  //             this.localNotifications.schedule({ text: 'geolocation: ' + location.latitude + ' ' + location.longitude, id: 500 });
+  //             if (location) {
+  //               forkJoin(
+  //                 this.belaqiProvider.getValue(location.latitude, location.longitude),
+  //                 this.geosearch.reverse({ type: 'Point', coordinates: [location.latitude, location.longitude] })
+  //               ).subscribe(res => {
+  //                 const belaqi = res[0] ? res[0] : null;
+  //                 const label = this.createGeoLabel(res[1]);
+  //                 // this.localNotifications.schedule({ text: `Index: ${belaqi} at ${label}`, id: 600 });
+  //                 if (belaqi && label) {
+  //                   observer.next({
+  //                     belaqi,
+  //                     locationLabel: label,
+  //                     sensitive: this.getSensitive()
+  //                   })
+  //                   observer.complete();
+  //                 } else {
+  //                   observer.next(null);
+  //                   observer.complete();
+  //                 }
+  //               }, error => {
+  //                 this.localNotifications.schedule({ text: 'geolocation error: ' + error.toString(), id: 600 });
+  //                 observer.error(error);
+  //               });
+  //             } else {
+  //               observer.next(null);
+  //               observer.complete();
+  //             }
+  //             this.backgroundGeolocation.stop();
+  //           }, (error) => {
+  //             observer.error(error);
+  //             this.localNotifications.schedule({ text: 'geolocation error ' + error })
+  //           });
+  //       this.backgroundGeolocation.start();
+  //     } else {
+  //       observer.next(null);
+  //       observer.complete();
+  //     }
+  //   });
+  // }
+
+  // private createGeoLabel(geo: GeoReverseResult) {
+  //   let locationLabel;
+  //   if (geo && geo.address && geo.address.road && geo.address.houseNumber && geo.address.city) {
+  //     if (geo.address.road && geo.address.houseNumber) { locationLabel = `${geo.address.road} ${geo.address.houseNumber}, `; }
+  //     if (geo.address.city) { locationLabel += geo.address.city + ', ' }
+  //     if (geo.address.country) { locationLabel += geo.address.country }
+  //   } else {
+  //     locationLabel = this.translateSrvc.instant('belaqi-user-location-slider.current-location');
+  //   }
+  //   return locationLabel;
+  // }
+
 }

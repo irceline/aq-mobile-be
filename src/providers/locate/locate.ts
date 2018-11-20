@@ -76,7 +76,21 @@ export class LocateProvider {
 
   private determinePosition() {
     this.platform.ready().then(() => {
-      this.geolocate.getCurrentPosition().then(res => {
+      this.geolocate.getCurrentPosition({
+        timeout: 10000
+      }).then(res => {
+        // res = {
+        //   coords: {
+        //     accuracy: 0,
+        //     altitude: 0,
+        //     altitudeAccuracy: 0,
+        //     heading: 0,
+        //     latitude: 51.05,
+        //     longitude: 3.7,
+        //     speed: 0
+        //   },
+        //   timestamp: 1234566789
+        // }
         this.position.next(res);
       }).catch((error) => {
         let errorMessage: string;
