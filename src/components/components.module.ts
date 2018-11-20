@@ -59,7 +59,6 @@ import { RefreshButtonComponent } from './refresh-button/refresh-button';
 import { SimpleLegendEntryComponent } from './simple-legend-entry/simple-legend-entry';
 import { StationSelectorComponent } from './station-selector/station-selector';
 import { UserLocationCreationComponent } from './user-location-creation/user-location-creation';
-import { ValuePanelComponent } from './value-panel/value-panel';
 
 @NgModule({
 	declarations: [
@@ -108,7 +107,6 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		SimpleLegendEntryComponent,
 		StationSelectorComponent,
 		UserLocationCreationComponent,
-		ValuePanelComponent,
 	],
 	imports: [
 		CommonModule,
@@ -166,7 +164,6 @@ import { ValuePanelComponent } from './value-panel/value-panel';
 		SimpleLegendEntryComponent,
 		StationSelectorComponent,
 		UserLocationCreationComponent,
-		ValuePanelComponent,
 	],
 	entryComponents: [
 		BelaqiChartInformationComponent,
