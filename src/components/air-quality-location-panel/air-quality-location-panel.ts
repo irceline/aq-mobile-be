@@ -24,7 +24,7 @@ export class AirQualityLocationPanelComponent {
     protected translateSrvc: TranslateService
   ) {
     this.loading = true;
-    this.locate.getGeoposition().subscribe(pos => this.getValue(pos));
+    this.locate.determinePosition().subscribe(pos => this.getValue(pos));
   }
 
   private getValue(position: Geoposition) {
