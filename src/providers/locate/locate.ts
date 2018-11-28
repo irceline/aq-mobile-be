@@ -4,14 +4,11 @@ import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastController } from 'ionic-angular';
 import { Platform } from 'ionic-angular/platform/platform';
-import { Observable, ReplaySubject } from 'rxjs';
-
-import { RefreshHandler } from '../refresh/refresh';
+import { Observable, Observer, ReplaySubject } from 'rxjs';
 
 @Injectable()
 export class LocateProvider {
 
-  private position: ReplaySubject<Geoposition> = new ReplaySubject(1);
   private locationEnabledReplay: ReplaySubject<boolean> = new ReplaySubject(1);
   private locationEnabled: boolean;
 
@@ -19,18 +16,12 @@ export class LocateProvider {
     private platform: Platform,
     private geolocate: Geolocation,
     private diagnostic: Diagnostic,
-    private refresher: RefreshHandler,
     private translate: TranslateService,
     private toast: ToastController
   ) {
     this.registerLocationStateChangeHandler();
     this.isGeolocationEnabled();
-    this.refresher.onRefresh.subscribe(() => this.determinePosition());
     this.platform.resume.subscribe(() => this.isGeolocationEnabled());
-  }
-
-  public getGeoposition(): Observable<Geoposition> {
-    return this.position.asObservable();
   }
 
   public getLocationStateEnabled(): Observable<boolean> {
@@ -45,7 +36,7 @@ export class LocateProvider {
     if (this.platform.is('cordova')) {
       this.diagnostic.registerLocationStateChangeHandler(() => {
         this.isGeolocationEnabled();
-        this.diagnostic.isGpsLocationEnabled().then((res) => {
+        this.diagnostic.isLocationEnabled().then((res) => {
           const message = res ? this.translate.instant('network.geolocationEnabled') : this.translate.instant('network.geolocationDisabled');
           this.toast.create({ message, duration: 5000 }).present();
         })
@@ -55,17 +46,15 @@ export class LocateProvider {
 
   private isGeolocationEnabled() {
     if (this.platform.is('cordova')) {
-      this.diagnostic.isGpsLocationEnabled().then((res) => {
+      this.diagnostic.isLocationEnabled().then((res) => {
         if (res) {
           this.setLocationEnabled(true);
-          this.determinePosition();
         } else {
           this.setLocationEnabled(false);
         }
       });
     } else {
       this.setLocationEnabled(true);
-      this.determinePosition();
     }
   }
 
@@ -74,34 +63,26 @@ export class LocateProvider {
     this.locationEnabledReplay.next(this.locationEnabled);
   }
 
-  private determinePosition() {
-    this.platform.ready().then(() => {
-      this.geolocate.getCurrentPosition({
-        timeout: 10000
-      }).then(res => {
-        // res = {
-        //   coords: {
-        //     accuracy: 0,
-        //     altitude: 0,
-        //     altitudeAccuracy: 0,
-        //     heading: 0,
-        //     latitude: 51.05,
-        //     longitude: 3.7,
-        //     speed: 0
-        //   },
-        //   timestamp: 1234566789
-        // }
-        this.position.next(res);
-      }).catch((error) => {
-        let errorMessage: string;
-        if (error && error.message) {
-          errorMessage = error.message;
-        } else {
-          errorMessage = JSON.stringify(error);
-        }
-        this.position.error(error);
-        this.toast.create({ message: `Error occured, while fetch location: ${errorMessage}`, duration: 3000 }).present();
-      });
+  public determinePosition(): Observable<Geoposition> {
+    return new Observable((observer: Observer<Geoposition>) => {
+      this.platform.ready().then(() => {
+        this.geolocate.getCurrentPosition({
+          timeout: 30000
+        }).then(res => {
+          observer.next(res);
+          observer.complete();
+        }).catch((error) => {
+          let errorMessage: string;
+          if (error && error.message) {
+            errorMessage = error.message;
+          } else {
+            errorMessage = JSON.stringify(error);
+          }
+          observer.error(error);
+          observer.complete();
+          this.toast.create({ message: `Error occured, while fetch location: ${errorMessage}`, duration: 3000 }).present();
+        });
+      })
     })
   }
 }

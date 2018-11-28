@@ -52,8 +52,6 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
 
   public currentLocationError: string;
 
-  private loading: boolean;
-
   constructor(
     private belaqiIndexProvider: BelaqiIndexProvider,
     private userLocationProvider: UserLocationListProvider,
@@ -64,9 +62,9 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
     protected modalCtrl: ModalController,
     protected refresher: RefreshHandler
   ) {
-    this.locate.getLocationStateEnabled().subscribe(enabled => this.loadBelaqis());
+    this.locate.getLocationStateEnabled().subscribe(() => this.loadBelaqis());
     this.refresher.onRefresh.subscribe(() => this.loadBelaqis());
-    this.userLocationProvider.isCurrentLocationVisible().subscribe(vis => this.showCurrentLocation = vis);
+    this.userLocationProvider.locationsChanged.subscribe(() => this.loadBelaqis());
   }
 
   public ngAfterViewInit(): void {
@@ -148,35 +146,37 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
   }
 
   private loadBelaqis() {
-    if (!this.loading) {
-      this.loading = true;
+    if (this.userLocationProvider.hasLocations()) {
+      this.currentLocationError = null;
+      const previousActiveIndex = this.slider.getActiveIndex();
       this.ircelineSettings.getSettings(false).subscribe(ircelineSettings => {
-        this.userLocationProvider.getVisibleUserLocations().subscribe(locations => {
-          this.belaqiLocations = [];
-          locations.forEach((loc, i) => {
-            if (loc.type !== 'current') {
-              this.setLocation(loc, i, ircelineSettings);
-            } else {
-              this.belaqiLocations[i] = {
-                type: 'current'
-              }
-              this.userLocationProvider.determineCurrentLocation().subscribe(
-                currentLoc => {
-                  this.setLocation(currentLoc, i, ircelineSettings);
-                  this.updateLocationSelection(0);
-                },
-                error => {
-                  this.currentLocationError = error;
-                }
-              )
+        this.belaqiLocations = [];
+        this.userLocationProvider.getVisibleUserLocations().forEach((loc, i) => {
+          if (loc.type !== 'current') {
+            this.setLocation(loc, i, ircelineSettings);
+          } else {
+            this.belaqiLocations[i] = {
+              type: 'current'
             }
-          })
-          this.updateLocationSelection(0);
-          if (this.slider) {
+            this.userLocationProvider.determineCurrentLocation().subscribe(
+              currentLoc => {
+                this.setLocation(currentLoc, i, ircelineSettings);
+                this.updateLocationSelection(0);
+              },
+              error => {
+                this.currentLocationError = error;
+              }
+            )
+          }
+        });
+        setTimeout(() => {
+          if (this.slider && previousActiveIndex !== 0) {
+            this.slider.update();
             this.slider.slideTo(0);
           }
-          this.loading = false;
-        });
+          this.updateLocationSelection(0);
+        }, 300);
+        this.showCurrentLocation = this.userLocationProvider.isCurrentLocationVisible();
       });
     }
   }
