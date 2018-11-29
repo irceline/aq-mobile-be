@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { LocalStorage } from '@helgoland/core';
-import { GeoSearch } from '@helgoland/map';
-// import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
 import { BackgroundMode } from '@ionic-native/background-mode';
 import { ILocalNotification, LocalNotifications } from '@ionic-native/local-notifications';
 import { TranslateService } from '@ngx-translate/core';
@@ -12,6 +10,7 @@ import { BelaqiIndexProvider } from '../belaqi/belaqi';
 import { NotificationPresenter, PersonalAlert } from '../notification-presenter/notification-presenter';
 import { UserLocationListProvider } from '../user-location-list/user-location-list';
 
+// import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
 const DEFAULT_LOCAL_ALERT_UPDATE_IN_MINUTES = 60;
 const DEFAULT_LOCAL_ALERT_UPDATE_LEVEL = 5;
 const DEFAULT_LOCAL_ALERT_UPDATE_SENSITIVE = false;
@@ -42,7 +41,6 @@ export class PersonalAlertsProvider {
     private userLocations: UserLocationListProvider,
     private belaqiProvider: BelaqiIndexProvider,
     private platform: Platform,
-    private geosearch: GeoSearch,
     private translateSrvc: TranslateService
   ) { }
 
@@ -158,32 +156,30 @@ export class PersonalAlertsProvider {
   private doUserLocationsCheck(): Observable<PersonalAlert[]> {
     // this.localNotifications.schedule({ text: `User locations check` });
     return new Observable<PersonalAlert[]>((observer: Observer<PersonalAlert[]>) => {
-      this.userLocations.getUserLocations().subscribe(res => {
-        // this.localNotifications.schedule({ text: `Has user locations: ${res}` });
-        const requests = [];
-        const alerts: PersonalAlert[] = [];
-        res.forEach(loc => {
-          if (loc.type === 'user') {
-            requests.push(this.belaqiProvider.getValue(loc.latitude, loc.longitude)
-              .do(res => {
-                if (this.getLevel() <= res) {
-                  alerts.push({
-                    belaqi: res,
-                    locationLabel: loc.label,
-                    sensitive: this.getSensitive()
-                  })
-                }
-              })
-            );
-          }
-        });
+      // this.localNotifications.schedule({ text: `Has user locations: ${res}` });
+      const requests = [];
+      const alerts: PersonalAlert[] = [];
+      this.userLocations.getUserLocations().forEach(loc => {
+        if (loc.type === 'user') {
+          requests.push(this.belaqiProvider.getValue(loc.latitude, loc.longitude)
+            .do(res => {
+              if (this.getLevel() <= res) {
+                alerts.push({
+                  belaqi: res,
+                  locationLabel: loc.label,
+                  sensitive: this.getSensitive()
+                })
+              }
+            })
+          );
+        }
+      });
 
-        forkJoin(requests).subscribe(() => {
-          // this.localNotifications.schedule({ text: `User locations results: ${alerts}` });
-          observer.next(alerts);
-          observer.complete();
-        });
-      }).unsubscribe();
+      forkJoin(requests).subscribe(() => {
+        // this.localNotifications.schedule({ text: `User locations results: ${alerts}` });
+        observer.next(alerts);
+        observer.complete();
+      });
     });
   }
 

@@ -1,11 +1,10 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { GeoReverseResult, GeoSearch } from '@helgoland/map';
 import { Geoposition } from '@ionic-native/geolocation';
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 import { Point } from 'geojson';
-import { Observable, Observer, ReplaySubject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, Observer } from 'rxjs';
 
 import { LocateProvider } from '../locate/locate';
 
@@ -27,9 +26,9 @@ export class UserLocationListProvider {
 
   private userLocations: UserLocation[];
 
-  private userLocationsSubject: ReplaySubject<UserLocation[]> = new ReplaySubject(1);
-
   public phenomenonIDs = ['391', '8', '7', '5', '6001'];
+
+  public locationsChanged: EventEmitter<void> = new EventEmitter();
 
   constructor(
     protected storage: Storage,
@@ -39,7 +38,7 @@ export class UserLocationListProvider {
   ) {
     this.loadLocations().subscribe(locations => {
       this.userLocations = locations || [{ type: 'current', isCurrentVisible: false }];
-      this.userLocationsSubject.next(this.userLocations);
+      this.locationsChanged.emit();
     })
   }
 
@@ -58,7 +57,7 @@ export class UserLocationListProvider {
 
   public determineCurrentLocation(): Observable<UserLocation> {
     return new Observable((observer: Observer<UserLocation>) => {
-      this.locate.getGeoposition().subscribe(
+      this.locate.determinePosition().subscribe(
         (pos: Geoposition) => {
           const reverseObs = this.geoSearch.reverse({ type: 'Point', coordinates: [pos.coords.latitude, pos.coords.longitude] });
           reverseObs.subscribe(
@@ -93,22 +92,17 @@ export class UserLocationListProvider {
     ) > -1;
   }
 
-  public getUserLocations(): Observable<UserLocation[]> {
-    return this.userLocationsSubject.asObservable();
+  public getUserLocations(): UserLocation[] {
+    return this.userLocations;
   }
 
-  public getVisibleUserLocations(): Observable<UserLocation[]> {
-    return this.userLocationsSubject.asObservable()
-      .pipe(
-        map(locs => locs.filter(e => (e.type === 'current' && e.isCurrentVisible && this.locate.getLocationEnabled()) || e.type === 'user'))
-      );
+  public getVisibleUserLocations(): UserLocation[] {
+    return this.userLocations.filter(e => (e.type === 'current' && e.isCurrentVisible && this.locate.getLocationEnabled()) || e.type === 'user');
   }
 
-  public isCurrentLocationVisible(): Observable<boolean> {
-    return this.userLocationsSubject.asObservable().pipe(map(locations => {
-      const current = locations.find(e => e.type === 'current');
-      return current.isCurrentVisible;
-    }))
+  public isCurrentLocationVisible(): boolean {
+    const current = this.userLocations.find(e => e.type === 'current');
+    return current.isCurrentVisible;
   }
 
   public setCurrentLocationVisisble(visible: boolean) {
@@ -155,7 +149,7 @@ export class UserLocationListProvider {
   }
 
   private storeLocations() {
-    this.userLocationsSubject.next(this.userLocations);
+    this.locationsChanged.emit();
     this.storage.set(STORAGE_USER_LOCATIONS_KEY, this.userLocations);
   }
 
