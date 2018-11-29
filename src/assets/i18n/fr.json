@@ -192,6 +192,10 @@
 		"offline": "Votre appareil est offline",
 		"online": "Votre appareil est online"
 	},
+	"no-network-connection": {
+		"body": "",
+		"header": ""
+	},
 	"personal-alert": {
 		"index-1": {
 			"non-sensitive": "L'air est très sain aujourd'hui pour des activités physiques à l'extérieur. En réduisant les émissions de polluants, la qualité de l'air comme aujourd'hui est plus fréquente et les effets à long terme sur la santé diminuent.",
@@ -295,19 +299,6 @@
 			"message": {
 				"added": "Localisation ajoutée",
 				"exists": "La localisation existe déjà"
-			}
-		}
-	},
-	"value-panel": {
-		"forecast": {
-			"dayAfterTomorrow": "Après-demain",
-			"tomorrow": "Demain",
-			"twoDaysLater": "Dans deux jours"
-		},
-		"geolocation": {
-			"disabled": {
-				"header": "Aucune géolocalisation trouvée pour votre appareil",
-				"hint": "Veuillez activer votre service de géolocalisation et actualiser l'application"
 			}
 		}
 	}

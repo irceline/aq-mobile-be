@@ -192,6 +192,10 @@
 		"offline": "U toestel is offline",
 		"online": "U toestel is online"
 	},
+	"no-network-connection": {
+		"body": "",
+		"header": ""
+	},
 	"personal-alert": {
 		"index-1": {
 			"non-sensitive": "Het is vandaag gezond om buiten fysiek actief te zijn. Door emissies (uitstoot) te reduceren krijgen we meer van deze gezonde dagen en dalen ook de effecten van de langetermijnblootstelling.",
@@ -295,19 +299,6 @@
 			"message": {
 				"added": "Locatie toegevoegd",
 				"exists": "Locatie bestaat al"
-			}
-		}
-	},
-	"value-panel": {
-		"forecast": {
-			"dayAfterTomorrow": "overmorgen",
-			"tomorrow": "morgen",
-			"twoDaysLater": "twee dagen later"
-		},
-		"geolocation": {
-			"disabled": {
-				"header": "geen locatie gevonden voor uw toestel",
-				"hint": "activeer de locatiedienst van u toestel en vernieuw de app aub (knop boven rechts op u scherm)"
 			}
 		}
 	}
