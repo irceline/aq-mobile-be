@@ -8,6 +8,7 @@ import { Settings, SettingsService } from '@helgoland/core';
 import { D3TimeFormatLocaleService } from '@helgoland/d3';
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
+import { Observable, Observer } from 'rxjs';
 
 const LANGUAGE_STORAGE_KEY = 'LANGUAGE_STORAGE_KEY';
 
@@ -74,6 +75,22 @@ export class LanguageHandlerProvider {
       'shortDays': ['zo', 'ma', 'di', 'wo', 'do', 'vr', 'za'],
       'months': ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'],
       'shortMonths': ['jan', 'feb', 'mrt', 'apr', 'mei', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec']
+    });
+  }
+
+
+  public waitForTranslation(): Observable<boolean> {
+    return new Observable<boolean>((observer: Observer<boolean>) => {
+      if (this.translate.currentLang) {
+        observer.next(true);
+        observer.complete();
+      } else {
+        const langChanged = this.translate.onLangChange.subscribe(() => {
+          observer.next(true);
+          observer.complete();
+          langChanged.unsubscribe();
+        })
+      }
     });
   }
 }

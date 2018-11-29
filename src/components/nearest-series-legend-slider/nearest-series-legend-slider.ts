@@ -35,17 +35,15 @@ export class NearestSeriesLegendSliderComponent implements AfterViewInit {
     private phenomenonColorMapper: PhenomenonOptionsMapperProvider,
     private nearestTimeseriesManager: NearestTimeseriesManagerProvider
   ) {
-    this.userLocations.getVisibleUserLocations().subscribe(locations => {
-      locations.forEach((location, idx) => {
-        const series: LegendGroupEntry[] = [];
-        this.nearestTimeseriesManager
-          .getNearestTimeseries(location)
-          .forEach(e => this.createDatasetOption(e).subscribe(options => series.push({ id: e, option: options })));
-        this.legendGroups[idx] = {
-          label: location.label,
-          datasets: series
-        };
-      });
+    this.userLocations.getVisibleUserLocations().forEach((location, idx) => {
+      const series: LegendGroupEntry[] = [];
+      this.nearestTimeseriesManager
+        .getNearestTimeseries(location)
+        .forEach(e => this.createDatasetOption(e).subscribe(options => series.push({ id: e, option: options })));
+      this.legendGroups[idx] = {
+        label: location.label,
+        datasets: series
+      };
     });
   }
 

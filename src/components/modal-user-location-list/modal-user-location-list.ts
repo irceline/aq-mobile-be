@@ -82,12 +82,10 @@ export class ModalUserLocationListComponent {
   }
 
   private setLocations() {
-    this.userLocationProvider.getUserLocations().subscribe(res => {
-      this.points = [];
-      this.locations = res;
-      this.locations.forEach(e => this.points.push(this.createPoint(e)));
-    });
-    this.userLocationProvider.isCurrentLocationVisible().subscribe(vis => this.showCurrentLocation = vis);
+    this.points = [];
+    this.locations = this.userLocationProvider.getUserLocations();
+    this.locations.forEach(e => this.points.push(this.createPoint(e)));
+    this.showCurrentLocation = this.userLocationProvider.isCurrentLocationVisible();
   }
 
 }
