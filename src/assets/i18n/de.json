@@ -192,6 +192,10 @@
 		"offline": "Dein Handy ist offline",
 		"online": "Dein Handy ist online"
 	},
+	"no-network-connection": {
+		"body": "Ihr Smartphone hat keine Verbindung zum Netzwerk.",
+		"header": "Keine Verbindung"
+	},
 	"personal-alert": {
 		"index-1": {
 			"non-sensitive": "Es ist heute sehr gesund, draußen körperlich aktiv zu sein. Durch die Reduzierung von Emissionen erhalten wir mehr von diesen gesunden Tagen und nehmen auch die Auswirkungen der Langzeitexposition ab.",
@@ -295,19 +299,6 @@
 			"message": {
 				"added": "Nutzerstandort erstellt",
 				"exists": "Nutzerstandort existiert bereits"
-			}
-		}
-	},
-	"value-panel": {
-		"forecast": {
-			"dayAfterTomorrow": "Übermorgen",
-			"tomorrow": "Morgen",
-			"twoDaysLater": "Zwei Tage später"
-		},
-		"geolocation": {
-			"disabled": {
-				"header": "Kein Standort gefunden",
-				"hint": "Bitte aktiviere den Standort-Dienst und aktualisiere die App (oben rechts auf Ihrem Bildschirm) "
 			}
 		}
 	}
