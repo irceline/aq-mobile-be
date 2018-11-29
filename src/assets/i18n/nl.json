@@ -22,7 +22,7 @@
 		"create-new-location": "Maak een nieuwe locatie aan",
 		"current-location": "Huidige locatie",
 		"current-location-description": "De locatie waar je momenteel bent...",
-		"current-location-error": "Er is een fout opgetreden. Start de app opnieuw.",
+		"current-location-error": "Uw apparaat heeft uw huidige locatie niet kunnen vaststellen. U zou de instellingen van de locatiedienst van uw apparaat naar hoge nauwkeurigheidsmodus kunnen veranderen. Als u eerder persoonlijke gebruikerslocaties hebt geconfigureerd, moeten deze beschikbaar zijn als u dit scherm naar links veegt.",
 		"loading-current-location": "Uw apparaat bepaalt uw huidige locatie",
 		"open-user-location": "Bewerk de huidige locaties"
 	},
@@ -186,7 +186,7 @@
 	},
 	"network": {
 		"geolocationDisabled": "Geolocatie is uitgeschakeld",
-		"geolocationDisabledExplanation": "Als u gebruik wilt maken van de \"huidige locatie\"-functionaliteiten, schakel dan de locatieservice van uw apparaat in.",
+		"geolocationDisabledExplanation": "Als u gebruik wilt maken van de \"huidige locatie\"-functionaliteiten, schakel dan de locatiedienst van uw apparaat in.",
 		"geolocationEnabled": "Geolocatie is geactiveerd",
 		"geolocationEnabledExplanation": "De \"huidige locatie\"-functionaliteiten zijn voor u beschikbaar.",
 		"offline": "U toestel is offline",
