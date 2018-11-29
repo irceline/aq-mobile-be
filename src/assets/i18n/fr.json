@@ -22,7 +22,7 @@
 		"create-new-location": "Ajouter une nouvelle localisation",
 		"current-location": "Localisation actuelle",
 		"current-location-description": "La position où vous vous trouvez actuellement",
-		"current-location-error": "Une erreur est survenue. Veuillez redémarrer l'application.",
+		"current-location-error": "Votre appareil n'a pas pu établir votre position actuelle. Vous pouvez modifier les paramètres du service de localisation de votre appareil en mode haute précision. Si vous avez précédemment configuré des localisations personnalisées, ceux-ci devraient être disponibles en glissant cet écran vers la gauche.",
 		"loading-current-location": "Votre appareil cherche actuellement votre position",
 		"open-user-location": "Modifier les localisations"
 	},
