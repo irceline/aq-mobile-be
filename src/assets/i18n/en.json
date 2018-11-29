@@ -193,7 +193,7 @@
 		"online": "Your device is online"
 	},
 	"no-network-connection": {
-		"body": "Your device has no connection to the network, please activate and then refresh.",
+		"body": "Your device has no data network connection. The BelAir app heavily depends on fresh data being fetched from our servers. Please activate a data network (mobile data or wifi connection) and refresh the app or try again when you are in range of a data network you have access to.",
 		"header": "No connection"
 	},
 	"personal-alert": {
