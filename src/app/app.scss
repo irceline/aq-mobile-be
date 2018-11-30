@@ -21,13 +21,14 @@
 
 @media only screen and (max-width: 600px) {
   .nav-butto-label {
-    display: none;
+
   }
 }
 
 .main-navigation {
   button {
     color: color($colors, dark);
+    text-align: center;
 
     &.selected {
       color: color($colors, primary);
@@ -38,4 +39,8 @@
 ion-list-header div {
   font-size:1.2em;
   font-weight: bold;
+}
+
+.text-on-bottom > .button-inner {
+  flex-direction: column;
 }

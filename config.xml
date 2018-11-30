@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="600" id="be.irceline.aqmobile" version="0.6.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-versionCode="602" id="be.irceline.aqmobile" version="0.6.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>BelAir</name>
     <description>Personalised air quality data throughout Belgium</description>
-    <author email="peeters@irceline.be" href="http://www.irceline.be/">Olav Peeters</author>
+    <author email="belair@irceline.be" href="http://www.irceline.be/"The BelAir Team</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
@@ -103,5 +103,5 @@
     <plugin name="cordova-plugin-app-version" spec="^0.1.9" />
     <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
     <engine name="android" spec="6.3.0" />
-    <engine name="ios" spec="~4.5.5" />
+    <engine name="ios" spec="4.5.5" />
 </widget>
