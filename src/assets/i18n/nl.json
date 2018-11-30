@@ -11,7 +11,7 @@
 		"header": "jaargemiddelde kaart",
 		"legend": {
 			"link-more": "Meer weergeven",
-			"link-more-url": "http://www.irceline.be/fr"
+			"link-more-url": "http://www.irceline.be/nl/"
 		}
 	},
 	"annual-phenomenon-buttons": "Gemodelleerde jaargemiddelde waarde voor deze locatie:",
@@ -194,7 +194,7 @@
 	},
 	"no-network-connection": {
 		"body": "Uw apparaat heeft geen gegevensnetwerkverbinding. De BelAir-app is sterk afhankelijk van het ophalen van nieuwe gegevens van onze servers. Activeer alstublieft een datanetwerk (mobiele data- of wifi-verbinding) en ververs de app of probeer het opnieuw wanneer u binnen bereik bent van een datanetwerk waartoe u toegang hebt.",
-		"header": "Geen verbinding"
+		"header": "Geen dataverbinding"
 	},
 	"personal-alert": {
 		"index-1": {
