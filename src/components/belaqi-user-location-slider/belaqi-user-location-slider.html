@@ -31,6 +31,9 @@
       </div>
       <ion-list>
         <ion-item>
+          <geolocation-enabled-icon></geolocation-enabled-icon>
+        </ion-item>
+        <ion-item>
           <ion-label>
             <h2>{{'belaqi-user-location-slider.current-location' | translate}}</h2>
             <p text-wrap>{{'belaqi-user-location-slider.current-location-description' | translate}}</p>
@@ -38,6 +41,12 @@
           <ion-toggle (ionChange)="toggle($event)" [checked]="showCurrentLocation"></ion-toggle>
         </ion-item>
       </ion-list>
+    </div>
+    <div class="settings">
+      <button ion-button icon-only clear (click)="navigateSettings()">
+        <ion-icon name="settings"></ion-icon>
+        <span class="nav-butto-label">{{'settings.header' | translate}}</span>
+      </button>
     </div>
   </ion-slide>
 </ion-slides>

@@ -1,7 +1,8 @@
 import { AfterViewInit, Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { ModalController, Slides, Toggle } from 'ionic-angular';
+import { ModalController, NavController, Slides, Toggle } from 'ionic-angular';
 
+import { SettingsPage } from '../../pages/settings/settings';
 import { BelaqiIndexProvider } from '../../providers/belaqi/belaqi';
 import { IrcelineSettings, IrcelineSettingsProvider } from '../../providers/irceline-settings/irceline-settings';
 import { LocateProvider } from '../../providers/locate/locate';
@@ -60,6 +61,7 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
     private ircelineSettings: IrcelineSettingsProvider,
     private locate: LocateProvider,
     private networkAlert: NetworkAlertProvider,
+    private nav: NavController,
     protected translateSrvc: TranslateService,
     protected modalCtrl: ModalController,
     protected refresher: RefreshHandler
@@ -111,6 +113,10 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
 
   public toggle(toggle: Toggle) {
     this.userLocationProvider.setCurrentLocationVisisble(toggle.value);
+  }
+
+  public navigateSettings() {
+    this.nav.push(SettingsPage);
   }
 
   private updateLocationSelection(idx: number) {
