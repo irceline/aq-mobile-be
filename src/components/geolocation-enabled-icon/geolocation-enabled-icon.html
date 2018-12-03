@@ -1,3 +1,9 @@
-<button ion-button icon-only clear (click)="inform($event)">
-  <ion-icon name="locate" [ngClass]="{disabled: !geolocationEnabled}"></ion-icon>
-</button>
+<div *ngIf="geolocationEnabled" text-wrap>
+  <h2 class="enabled">{{'network.geolocationEnabled' | translate}}</h2>
+  <p>{{'network.geolocationEnabledExplanation' | translate}}</p>
+</div>
+
+<div *ngIf="!geolocationEnabled" text-wrap>
+  <h2 class="disabled">{{'network.geolocationDisabled' | translate}}</h2>
+  <p>{{'network.geolocationDisabledExplanation' | translate}}</p>
+</div>
