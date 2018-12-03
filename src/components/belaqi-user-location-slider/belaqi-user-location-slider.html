@@ -22,11 +22,11 @@
   <ion-slide>
     <div class="create-new-location-slide">
       <div>
-        <button ion-button outline (click)="createNewLocation()">{{'belaqi-user-location-slider.create-new-location' |
+        <button ion-button outline text-wrap (click)="createNewLocation()">{{'belaqi-user-location-slider.create-new-location' |
           translate}}</button>
       </div>
       <div>
-        <button ion-button outline (click)="openUserLocation()">{{'belaqi-user-location-slider.open-user-location' |
+        <button ion-button outline text-wrap (click)="openUserLocation()">{{'belaqi-user-location-slider.open-user-location' |
           translate}}</button>
       </div>
       <ion-list>
@@ -35,13 +35,14 @@
         </ion-item>
         <ion-item>
           <ion-label>
-            <h2>{{'belaqi-user-location-slider.current-location' | translate}}</h2>
+            <h2 text-wrap>{{'belaqi-user-location-slider.current-location' | translate}}</h2>
             <p text-wrap>{{'belaqi-user-location-slider.current-location-description' | translate}}</p>
           </ion-label>
           <ion-toggle (ionChange)="toggle($event)" [checked]="showCurrentLocation"></ion-toggle>
         </ion-item>
       </ion-list>
     </div>
+    <hr />
     <div class="settings">
       <button ion-button icon-only clear (click)="navigateSettings()">
         <ion-icon name="settings"></ion-icon>
