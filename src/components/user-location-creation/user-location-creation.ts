@@ -31,7 +31,7 @@ export class UserLocationCreationComponent {
   ) {
     const settings = this.settingsSrvc.getSettings();
     this.geoSearchOptions = {
-      countrycodes: settings.geoSearchContryCodes,
+      countrycodes: settings.geoSearchCountryCodes,
       asPointGeometry: true,
       addressdetails: true
     };
@@ -46,13 +46,13 @@ export class UserLocationCreationComponent {
     this.location = this.geoSearchResult.geometry as Point;
     this.locationLabel = this.createGeoLabel(result);
   }
-  
+
   private createGeoLabel(geo: GeoSearchResult) {
     if (geo && geo.address) {
       let locationLabel = '';
       if (geo.address.road) { locationLabel = `${geo.address.road}${geo.address.house_number ? geo.address.house_number : ''}, `; }
       if (geo.address.city || geo.address.town) { locationLabel += (geo.address.city ? geo.address.city : geo.address.town) + ', ' }
-      if (geo.address.country) { locationLabel += geo.address.country }
+      // if (geo.address.country) { locationLabel += geo.address.country }
       return locationLabel;
     } else {
       return geo.name;

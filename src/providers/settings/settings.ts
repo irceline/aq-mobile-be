@@ -8,7 +8,7 @@ export interface MobileSettings extends Settings {
     clusterStationsOnMap: boolean;
     phenomenonLayerMapping: PhenomenonLayerMapping[];
     regions: string[];
-    geoSearchContryCodes: string[];
+    geoSearchCountryCodes: string[];
     defaultBbox: L.LatLngBoundsExpression;
     personalAlert: PersonalAlert[];
     colorizedMarkerForLastMilliseconds: number;

@@ -41,7 +41,7 @@ export class AirQualityIndexComponent extends LanguageChangNotifier {
 
   public onChange(region: string, reload: boolean = false) {
     this.selectAqIndex(region, reload);
-    this.geoSearch.searchTerm(region, { countrycodes: this.settings.getSettings().geoSearchContryCodes }).subscribe(res => {
+    this.geoSearch.searchTerm(region, { countrycodes: this.settings.getSettings().geoSearchCountryCodes }).subscribe(res => {
       if (res.bounds) {
         this.onBoundsUpdated.emit(res.bounds)
       }
