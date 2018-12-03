@@ -258,6 +258,10 @@
 	"refresh-button": {
 		"message": "Vernieuw alles"
 	},
+	"refresh": {
+		"pull-message": "Trek om te vernieuwen",
+		"progress": "bezig om te vernieuwen"
+	},
 	"settings": {
 		"about": {
 			"header": "Over de app",

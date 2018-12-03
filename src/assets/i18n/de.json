@@ -258,6 +258,10 @@
 	"refresh-button": {
 		"message": "Aktualisiert"
 	},
+	"refresh": {
+		"pull-message": "Ziehen um zu Aktualisieren",
+		"progress": "Beschäftigt um zu Aktualisieren"
+	},
 	"settings": {
 		"about": {
 			"header": "Über die App",
