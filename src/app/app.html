@@ -1,30 +1,42 @@
-<ion-header center>
+<ion-header>
   <ion-navbar class="main-navigation">
-    <button ion-button clear class="text-on-bottom" (click)="openPage('start')" [ngClass]="{selected: selectedPage === 'start'}">
-      <ion-icon name="home"></ion-icon>
-      <span class="nav-butto-label">{{'home.header' | translate}}</span>
-    </button>
-    <button ion-button clear class="text-on-bottom" (click)="openPage('map')" [ngClass]="{selected: selectedPage === 'map'}">
-      <ion-icon name="map"></ion-icon>
-      <span class="nav-butto-label">{{'map.header' | translate}}</span>
-    </button>
-    <button ion-button clear class="text-on-bottom" (click)="openPage('diagram')" [ngClass]="{selected: selectedPage === 'diagram'}">
-      <ion-icon name="stats"></ion-icon>
-      <span class="nav-butto-label">{{'diagram.header' | translate}}</span>
-    </button>
+    <div class="row" style="max-width:300px;margin:auto;vertical-align: middle;align-items: center!important;">
+      <div class="col">
+        <button ion-button clear  style="margin: none;" class="text-on-bottom" (click)="openPage('start')" [ngClass]="{selected: selectedPage === 'start'}">
+          <ion-icon name="home"></ion-icon>
+          <span class="nav-butto-label">{{'home.header' | translate}}</span>
+        </button>
+      </div>
+      <div class="col" style="text-align: center">
+        <ion-buttons>
+          <button ion-button clear center class="text-on-bottom" (click)="openPage('map')" [ngClass]="{selected: selectedPage === 'map'}">
+            <ion-icon name="map"></ion-icon>
+            <span class="nav-butto-label">{{'map.header' | translate}}</span>
+          </button>
+        </ion-buttons>
+      </div>
+      <div class="col">
+        <ion-buttons right>
+          <button ion-button clear right class="text-on-bottom" (click)="openPage('diagram')" [ngClass]="{selected: selectedPage === 'diagram'}">
+            <ion-icon name="stats"></ion-icon>
+            <span class="nav-butto-label">{{'diagram.header' | translate}}</span>
+          </button>
+      </ion-buttons>
 
-    <!-- <geolocation-enabled-icon float-right></geolocation-enabled-icon>
-    <notification-icon float-right></notification-icon> -->
+      <!-- <geolocation-enabled-icon float-right></geolocation-enabled-icon>
+      <notification-icon float-right></notification-icon> -->
 
-    <ion-buttons end>
-      <!--
+      <ion-buttons end>
 
-      <refresh-button></refresh-button>
-      <button ion-button icon-only clear (click)="openPage('settings')" [ngClass]="{selected: selectedPage === 'settings'}">
-        <ion-icon name="settings"></ion-icon>
-        <span class="nav-butto-label">{{'settings.header' | translate}}</span>
-      </button> -->
-    </ion-buttons>
+        <!--
+        <refresh-button float-right></refresh-button>
+        <button ion-button icon-only clear (click)="openPage('settings')" [ngClass]="{selected: selectedPage === 'settings'}">
+          <ion-icon name="settings"></ion-icon>
+          <span class="nav-butto-label">{{'settings.header' | translate}}</span>
+        </button> -->
+      </ion-buttons>
+    </div>
+    </div>
   </ion-navbar>
 </ion-header>
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
