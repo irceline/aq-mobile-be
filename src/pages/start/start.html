@@ -4,6 +4,11 @@
 </ion-header>
 
 <ion-content class="cards-bg" #content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
   <!-- <ion-card>
     <network-panel></network-panel>
   </ion-card> -->
