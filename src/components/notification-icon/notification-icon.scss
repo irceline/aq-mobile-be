@@ -6,6 +6,9 @@ notification-icon {
     right: 0px;
     border-radius: 100%;
   }
+  .button {
+    color: color($colors, dark);
+  }
 }
 
 .notification-popover {
