@@ -119,7 +119,7 @@ export class MapPage {
     this.providerUrl = settings.datasetApis[0].url;
     this.clusterStations = settings.clusterStationsOnMap;
     this.statusIntervalDuration = settings.colorizedMarkerForLastMilliseconds;
-    this.geoSearchOptions = { countrycodes: settings.geoSearchContryCodes };
+    this.geoSearchOptions = { countrycodes: settings.geoSearchCountryCodes };
 
     this.belaqiSelection = this.navParams.get('belaqiSelection') as BelaqiSelection;
 
