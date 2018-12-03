@@ -258,6 +258,10 @@
 	"refresh-button": {
 		"message": "Actualiser"
 	},
+	"refresh": {
+		"pull-message": "Tirer pour rafraîchir",
+		"progress": "occupé à rafraîchir"
+	},
 	"settings": {
 		"about": {
 			"header": "A propos de l'application",

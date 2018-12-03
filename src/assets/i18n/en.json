@@ -258,6 +258,10 @@
 	"refresh-button": {
 		"message": "Refresh all"
 	},
+	"refresh": {
+		"pull-message": "Pull to refresh",
+		"progress": "busy refreshing"
+	},
 	"settings": {
 		"about": {
 			"header": "About the app",
