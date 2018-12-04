@@ -140,8 +140,7 @@ export class UserLocationListProvider {
     let locationLabel = '';
     if (geo && geo.address) {
       if (geo.address.road) { locationLabel = `${geo.address.road}${geo.address.houseNumber ? ' ' + geo.address.houseNumber : ''}, `; }
-      if (geo.address.city || geo.address.cityDistrict) { locationLabel += (geo.address.city || geo.address.cityDistrict) + ', ' }
-      // if (geo.address.country) { locationLabel += geo.address.country }
+      if (geo.address.city || geo.address.cityDistrict) { locationLabel += (geo.address.city || geo.address.cityDistrict) }
     } else {
       locationLabel = this.translateSrvc.instant('belaqi-user-location-slider.current-location');
     }

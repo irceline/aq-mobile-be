@@ -50,9 +50,8 @@ export class UserLocationCreationComponent {
   private createGeoLabel(geo: GeoSearchResult) {
     if (geo && geo.address) {
       let locationLabel = '';
-      if (geo.address.road) { locationLabel = `${geo.address.road}${geo.address.house_number ? geo.address.house_number : ''}, `; }
-      if (geo.address.city || geo.address.town) { locationLabel += (geo.address.city ? geo.address.city : geo.address.town) + ', ' }
-      // if (geo.address.country) { locationLabel += geo.address.country }
+      if (geo.address.road) { locationLabel = `${geo.address.road} ${geo.address.house_number ? geo.address.house_number : ''}, `; }
+      if (geo.address.city || geo.address.town) { locationLabel += (geo.address.city ? geo.address.city : geo.address.town) }
       return locationLabel;
     } else {
       return geo.name;
