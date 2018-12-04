@@ -55,7 +55,7 @@ export class MyApp implements AfterViewInit {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      this.statusBar.overlaysWebView(false);
+      this.statusBar.overlaysWebView(true);
       this.statusBar.styleLightContent();
       this.statusBar.show();
       this.splashScreen.hide();
