@@ -54,22 +54,22 @@
     "@types/chart.js": "^2.7.25",
     "chart.js": "^2.7.2",
     "chartjs-plugin-annotation": "^0.5.7",
-    "cordova-android": "6.3.0",
+    "cordova-android": "7.1.4",
     "cordova-ios": "4.5.5",
     "cordova-plugin-app-version": "^0.1.9",
     "cordova-plugin-background-mode": "^0.7.2",
     "cordova-plugin-badge": "^0.8.8",
     "cordova-plugin-device": "^2.0.2",
-    "cordova-plugin-fcm": "^2.1.2",
+    "cordova-plugin-fcm-with-dependecy-updated": "^2.3.0",
     "cordova-plugin-geolocation": "^4.0.1",
     "cordova-plugin-inappbrowser": "^3.0.0",
-    "cordova-plugin-ionic-webview": "^1.2.1",
+    "cordova-plugin-ionic-webview": "^2.3.1",
     "cordova-plugin-local-notification": "^0.9.0-beta.3",
     "cordova-plugin-network-information": "^2.0.1",
     "cordova-plugin-splashscreen": "^5.0.2",
     "cordova-plugin-statusbar": "^2.4.2",
     "cordova-plugin-whitelist": "^1.3.3",
-    "cordova-sqlite-storage": "^2.5.1",
+    "cordova-sqlite-storage": "^2.5.2",
     "cordova.plugins.diagnostic": "^4.0.10",
     "invert-color": "^1.2.3",
     "ion-affix": "^1.1.1",
@@ -86,7 +86,7 @@
   },
   "devDependencies": {
     "@biesbjerg/ngx-translate-extract": "^2.3.4",
-    "@ionic/app-scripts": "^3.2.0",
+    "@ionic/app-scripts": "^3.2.1",
     "typescript": "2.7.2"
   },
   "description": "An Ionic project",
@@ -96,23 +96,25 @@
       "cordova-plugin-whitelist": {},
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
-      "cordova-plugin-ionic-webview": {},
       "cordova-plugin-statusbar": {},
       "cordova-plugin-geolocation": {
         "GEOLOCATION_USAGE_DESCRIPTION": "To fetch the data relevant for your location from the servers feeding the BelAir app."
       },
-      "cordova-plugin-local-notification": {},
       "cordova-plugin-background-mode": {},
-      "cordova-plugin-fcm": {},
       "cordova-plugin-network-information": {},
-      "cordova-sqlite-storage": {},
       "cordova.plugins.diagnostic": {},
       "cordova-plugin-app-version": {},
-      "cordova-plugin-inappbrowser": {}
+      "cordova-plugin-inappbrowser": {},
+      "cordova-plugin-ionic-webview": {
+        "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
+      },
+      "cordova-sqlite-storage": {},
+      "cordova-plugin-local-notification": {},
+      "cordova-plugin-fcm-with-dependecy-updated": {}
     },
     "platforms": [
-      "android",
-      "ios"
+      "ios",
+      "android"
     ]
   }
 }
