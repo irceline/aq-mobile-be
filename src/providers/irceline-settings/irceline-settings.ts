@@ -1,4 +1,4 @@
-import 'rxjs/add/operator/do';
+
 
 import { Injectable } from '@angular/core';
 import { HttpService, SettingsService } from '@helgoland/core';

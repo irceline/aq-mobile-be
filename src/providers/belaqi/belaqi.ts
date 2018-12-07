@@ -171,7 +171,7 @@ export class BelaqiIndexProvider extends ValueProvider {
           this.createPhenomenonTimeline(latitude, longitude, time, ModelledPhenomenon.o3, trend["latest observations"].o3, trend.trend.o3),
           this.createPhenomenonTimeline(latitude, longitude, time, ModelledPhenomenon.pm10, trend["latest observations"].pm10, trend.trend.pm10),
           this.createPhenomenonTimeline(latitude, longitude, time, ModelledPhenomenon.pm25, trend["latest observations"].pm25, trend.trend.pm25)
-        ]).map(res => {
+        ]).pipe(map(res => {
           return res[0].map((entry, i) => {
             // TODO maybe create a better merge function
             return {
@@ -179,7 +179,7 @@ export class BelaqiIndexProvider extends ValueProvider {
               index: entry.index > res[1][i].index ? entry.index : res[1][i].index
             };
           });
-        }).subscribe(res => {
+        })).subscribe(res => {
           observer.next(res);
           observer.complete();
         }, error => {
@@ -209,7 +209,7 @@ export class BelaqiIndexProvider extends ValueProvider {
     return forkJoin(
       // get modelledValue for the past 6 timestamps
       timestamps.map(timestamp => this.modelledValueProvider.getValue(latitude, longitude, timestamp, phenomenon))
-    ).map(
+    ).pipe(map(
       res => {
         // categorize results
         const categorizedPre = res.map(value => this.categorizeValueToIndex.categorize(value, phenomenon));
@@ -233,12 +233,12 @@ export class BelaqiIndexProvider extends ValueProvider {
         }
         return timelineEntries;
       }
-    )
+    ))
   }
 
   private getTrends(): Observable<TrendResult> {
-    return this.http.client().get<TrendResult>('https://www.irceline.be/tables/forecast/model/trend.php')
-      .map(res => {
+    return this.http.client().get<TrendResult>('https://www.irceline.be/tables/forecast/model/trend.php').pipe(
+      map(res => {
         res["latest observations"].o3.forEach(e => e[0] = moment(e[0]).toDate());
         res["latest observations"].pm10.forEach(e => e[0] = moment(e[0]).toDate());
         res["latest observations"].pm25.forEach(e => e[0] = moment(e[0]).toDate());
@@ -246,7 +246,7 @@ export class BelaqiIndexProvider extends ValueProvider {
         res.trend.pm10.forEach(e => e[0] = moment(e[0]).toDate());
         res.trend.pm25.forEach(e => e[0] = moment(e[0]).toDate());
         return res;
-      });
+      }));
   }
 
   private findMatchingTime(list: [Date, number][], time: Date): number {
