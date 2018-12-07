@@ -98,6 +98,7 @@ export class MapPage {
   public disabled: boolean;
 
   public legend: L.Control;
+  private legendVisible: boolean = false;
 
   public mapId = 'map';
 
@@ -131,7 +132,7 @@ export class MapPage {
   }
 
   public mapInitialized(mapId: string) {
-    this.showLegend();
+    this.updateLegend();
     this.zoomToLocation();
   }
 
@@ -159,7 +160,41 @@ export class MapPage {
     }
   }
 
-  public showLegend() {
+  // public updateLegend() {
+  //   if (this.legend) {
+  //     this.legend.remove();
+  //   }
+  //   if (this.mapCache.hasMap(this.mapId)) {
+
+  //     this.legend = new L.Control({ position: 'topright' });
+
+  //     this.legend.onAdd = (map) => {
+  //       const div = L.DomUtil.create('div', 'leaflet-bar legend');
+  //       // let legendVisible = false;
+  //       // const button = '<a class="info" role="button"></a>';
+  //       div.innerHTML = this.getLegendContent();
+  //       div.onclick = () => {
+  //         const langCode = this.translateSrvc.currentLang.toLocaleUpperCase();
+  //         let legendId = this.getPhenomenonLegendId(this.selectedPhenomenon.id);
+  //         if (legendVisible) {
+  //           div.innerHTML = button;
+  //         } else {
+  //           if (legendId) {
+  //             div.innerHTML = `<img src="http://www.irceline.be/air/legend/${legendId}_${langCode}.svg">`
+  //           } else {
+  //             div.innerHTML = `<div>${this.translateSrvc.instant('map.no-legend')}</div>`;
+  //           }
+  //         }
+  //         legendVisible = !legendVisible;
+  //       }
+  //       return div;
+  //     };
+
+  //     this.legend.addTo(this.mapCache.getMap(this.mapId));
+  //   }
+  // }
+
+  private updateLegend() {
     if (this.legend) {
       this.legend.remove();
     }
@@ -167,30 +202,39 @@ export class MapPage {
 
       this.legend = new L.Control({ position: 'topright' });
 
-      this.legend.onAdd = (map) => {
+      this.legend.onAdd = () => {
         const div = L.DomUtil.create('div', 'leaflet-bar legend');
-        let legendVisible = false;
-        const button = '<a class="info" role="button"></a>';
-        div.innerHTML = button;
-        div.onclick = () => {
-          const langCode = this.translateSrvc.currentLang.toLocaleUpperCase();
-          let legendId = this.getPhenomenonLegendId(this.selectedPhenomenon.id);
-          if (legendVisible) {
-            div.innerHTML = button;
-          } else {
-            if (legendId) {
-              div.innerHTML = `<img src="http://www.irceline.be/air/legend/${legendId}_${langCode}.svg">`
-            } else {
-              div.innerHTML = `<div>${this.translateSrvc.instant('map.no-legend')}</div>`;
-            }
-          }
-          legendVisible = !legendVisible;
-        }
+        div.innerHTML = this.getLegendContent();
+        div.onclick = () => this.toggleLegend(div)
         return div;
       };
-
       this.legend.addTo(this.mapCache.getMap(this.mapId));
     }
+  }
+
+  private toggleLegend(div: HTMLElement) {
+    this.legendVisible = !this.legendVisible;
+    div.innerHTML = this.getLegendContent();
+    const moreLink = L.DomUtil.get('annual-more-link');
+    if (moreLink) {
+      moreLink.onclick = (event) => {
+        // this.iab.create(this.translate.instant('annual-map.legend.link-more-url'), '_system', 'hidden=yes');
+        event.stopPropagation();
+      };
+    }
+  }
+
+  private getLegendContent(): string {
+    if (this.legendVisible) {
+      const langCode = this.translateSrvc.currentLang.toLocaleUpperCase();
+      let legendId = this.getPhenomenonLegendId(this.selectedPhenomenon.id);
+      if (legendId){
+        return `<img src="http://www.irceline.be/air/legend/${legendId}_${langCode}.svg">`;
+      } else {
+        return `<div>${this.translateSrvc.instant('map.no-legend')}</div>`;
+      }
+    }
+    return '<a class="info" role="button"></a>';
   }
 
   public onPhenomenonChange(): void {
@@ -235,7 +279,7 @@ export class MapPage {
       this.phenomenonFilter = { phenomenon: '' };
     } else {
       this.phenomenonFilter = { phenomenon: this.selectedPhenomenon.id };
-      this.showLegend();
+      this.updateLegend();
     }
   }
 
