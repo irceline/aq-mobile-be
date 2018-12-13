@@ -148,6 +148,7 @@
 		"configured-location": "Uw geconfigureerde locatie",
 		"current-location": "Uw huidige locatie",
 		"dataset-selection-hint": "Selecteer één of meerdere tijdsreeks(en) voor weergave op een diagram",
+		"error": "",
 		"geosearch": {
 			"placeholder": "Zoek locatie"
 		},

@@ -40,6 +40,9 @@ export class NearestTimeseriesProvider {
           } else {
             observer.complete();
           }
+        }, error => {
+          observer.error(error);
+          observer.complete();
         });
     });
   }
@@ -67,7 +70,13 @@ export class NearestTimeseriesProvider {
                 this.getNextSeries(url, phenomenonId, stations, index + 1, observer);
               }
             }
+          }, error => {
+            observer.error(error);
+            observer.complete();
           });
+      }, error => {
+        observer.error(error);
+        observer.complete();
       })
     } else {
       observer.complete();

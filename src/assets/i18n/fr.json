@@ -148,6 +148,7 @@
 		"configured-location": "Votre position configurée",
 		"current-location": "Votre position actuelle",
 		"dataset-selection-hint": "Veuillez sélectionner une ou plusieurs séries à afficher",
+		"error": "",
 		"geosearch": {
 			"placeholder": "Recherche la localisation ..."
 		},
