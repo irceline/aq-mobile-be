@@ -11,8 +11,12 @@ const colorMapping = {
   '6001': '#55AA00', // PM25
 }
 
+const seperateYAxisForPhenomenon = [
+  '391' // BC
+]
+
 @Injectable()
-export class PhenomenonOptionsMapperProvider {
+export class DatasetOptionsModifier {
 
   constructor(
     private api: DatasetApiInterface,
@@ -26,6 +30,7 @@ export class PhenomenonOptionsMapperProvider {
       options.pointRadius = 2;
       options.generalize = false;
       options.zeroBasedYAxis = true;
+      options.separateYAxis = seperateYAxisForPhenomenon.findIndex(e => e === res.parameters.phenomenon.id) > -1;
       return options;
     }))
   }
