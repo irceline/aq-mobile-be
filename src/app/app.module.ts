@@ -39,6 +39,7 @@ import { AnnualMeanProvider } from '../providers/annual-mean/annual-mean';
 import { BelaqiIndexProvider } from '../providers/belaqi/belaqi';
 import { CategorizeValueToIndexProvider } from '../providers/categorize-value-to-index/categorize-value-to-index';
 import { ForecastValueProvider } from '../providers/forecast-value/forecast-value';
+import { GeoLabelsProvider } from '../providers/geo-labels/geo-labels';
 import { IrcelineSettingsProvider } from '../providers/irceline-settings/irceline-settings';
 import { LanguageHandlerProvider } from '../providers/language-handler/language-handler';
 import { LayerGeneratorService } from '../providers/layer-generator/layer-generator';
@@ -115,6 +116,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     Diagnostic,
     FCM,
     ForecastValueProvider,
+    GeoLabelsProvider,
     Geolocation,
     InAppBrowser,
     IrcelineSettingsProvider,

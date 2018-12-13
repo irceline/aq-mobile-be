@@ -130,6 +130,7 @@
 		"prev-step": "Précédent",
 		"three": {
 			"addLocationToList": "Ajouter à la liste de localisations",
+			"baseOnCurrentLocation": "",
 			"header": "Choisissez les localisations pour lesquelles vous souhaitez recevoir des notifications personnalisées",
 			"locationLabelHint": "Renommer la localisation",
 			"locationLabelPlaceholder": "p.e. \"À la maison\", \"Travail\", \"École\"",

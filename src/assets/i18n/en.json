@@ -130,6 +130,7 @@
 		"prev-step": "Previous",
 		"three": {
 			"addLocationToList": "Add to the list of locations",
+			"baseOnCurrentLocation": "Use current location",
 			"header": "Choose the locations for which you want to receive personalised notifications",
 			"locationLabelHint": "Change the location label",
 			"locationLabelPlaceholder": "e.g. \"Home\", \"Work\", \"School\"",

@@ -1,11 +1,12 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { GeoReverseResult, GeoSearch } from '@helgoland/map';
+import { GeoSearch } from '@helgoland/map';
 import { Geoposition } from '@ionic-native/geolocation';
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 import { Point } from 'geojson';
 import { Observable, Observer } from 'rxjs';
 
+import { GeoLabelsProvider } from '../geo-labels/geo-labels';
 import { LocateProvider } from '../locate/locate';
 
 export interface UserLocation {
@@ -34,7 +35,8 @@ export class UserLocationListProvider {
     protected storage: Storage,
     private geoSearch: GeoSearch,
     protected translateSrvc: TranslateService,
-    private locate: LocateProvider
+    private locate: LocateProvider,
+    private geolabels: GeoLabelsProvider
   ) {
     this.loadLocations().subscribe(locations => {
       this.userLocations = locations || [{ type: 'current', isCurrentVisible: false }];
@@ -65,7 +67,7 @@ export class UserLocationListProvider {
           );
           reverseObs.subscribe(
             value => {
-              let locationLabel = this.createGeoLabel(value);
+              let locationLabel = this.geolabels.createLabelOfReverseResult(value);
               observer.next({
                 id: 1,
                 label: locationLabel,
@@ -137,17 +139,6 @@ export class UserLocationListProvider {
     const index = this.userLocations.findIndex(res => res.id === userLocation.id);
     this.userLocations[index] = userLocation;
     this.storeLocations();
-  }
-
-  private createGeoLabel(geo: GeoReverseResult) {
-    let locationLabel = '';
-    if (geo && geo.address) {
-      if (geo.address.road) { locationLabel = `${geo.address.road}${geo.address.houseNumber ? ' ' + geo.address.houseNumber : ''}, `; }
-      if (geo.address.city || geo.address.cityDistrict) { locationLabel += (geo.address.city || geo.address.cityDistrict) }
-    } else {
-      locationLabel = this.translateSrvc.instant('belaqi-user-location-slider.current-location');
-    }
-    return locationLabel;
   }
 
   private storeLocations() {

@@ -6,6 +6,8 @@ import { Point } from 'geojson';
 import { ModalController, ToastController } from 'ionic-angular';
 import { MapOptions } from 'leaflet';
 
+import { GeoLabelsProvider } from '../../providers/geo-labels/geo-labels';
+import { LocateProvider } from '../../providers/locate/locate';
 import { MobileSettings } from '../../providers/settings/settings';
 import { UserLocationListProvider } from '../../providers/user-location-list/user-location-list';
 import { ModalUserLocationListComponent } from '../modal-user-location-list/modal-user-location-list';
@@ -18,9 +20,10 @@ export class UserLocationCreationComponent {
 
   public geoSearchOptions: GeoSearchOptions;
   public mapOptions: MapOptions;
-  public geoSearchResult: GeoSearchResult;
   public locationLabel: string;
   public location: Point;
+  public loadCurrentLocation: boolean;
+  public locationEnabled: boolean;
 
   constructor(
     protected locationList: UserLocationListProvider,
@@ -28,6 +31,8 @@ export class UserLocationCreationComponent {
     private settingsSrvc: SettingsService<MobileSettings>,
     private toast: ToastController,
     private translate: TranslateService,
+    private locate: LocateProvider,
+    private geolabels: GeoLabelsProvider
   ) {
     const settings = this.settingsSrvc.getSettings();
     this.geoSearchOptions = {
@@ -40,23 +45,32 @@ export class UserLocationCreationComponent {
       maxZoom: 18,
       dragging: true
     }
+    this.locationEnabled = this.locate.getLocationEnabled();
   }
 
   public geoSearchResultChanged(result: GeoSearchResult) {
-    this.geoSearchResult = result;
-    this.location = this.geoSearchResult.geometry as Point;
-    this.locationLabel = this.createGeoLabel(result);
+    this.resetLocation();
+    if (result) {
+      this.location = result.geometry as Point;
+      this.locationLabel = this.geolabels.createLabelOfSearchResult(result);
+    }
   }
 
-  private createGeoLabel(geo: GeoSearchResult) {
-    if (geo && geo.address) {
-      let locationLabel = '';
-      if (geo.address.road) { locationLabel = `${geo.address.road} ${geo.address.house_number ? geo.address.house_number : ''}, `; }
-      if (geo.address.city || geo.address.town) { locationLabel += (geo.address.city ? geo.address.city : geo.address.town) }
-      return locationLabel;
-    } else {
-      return geo.name;
-    }
+  public getCurrentLocation() {
+    this.loadCurrentLocation = true;
+    this.resetLocation();
+    this.locate.determineGeoLocation().subscribe(res => {
+      const lat = parseFloat(res.lat);
+      const lon = parseFloat(res.lon);
+      this.location = { type: 'Point', coordinates: [lon, lat] }
+      this.locationLabel = this.geolabels.createLabelOfReverseResult(res);
+      this.loadCurrentLocation = false;
+    })
+  }
+
+  public resetLocation() {
+    this.locationLabel = null;
+    this.location = null;
   }
 
   public addLocationToList() {
