@@ -130,6 +130,7 @@
 		"prev-step": "Previous",
 		"three": {
 			"addLocationToList": "Add to the list of locations",
+			"baseOnCurrentLocation": "Use current location",
 			"header": "Choose the locations for which you want to receive personalised notifications",
 			"locationLabelHint": "Change the location label",
 			"locationLabelPlaceholder": "e.g. \"Home\", \"Work\", \"School\"",
@@ -148,6 +149,7 @@
 		"configured-location": "Your configured location",
 		"current-location": "Your current location",
 		"dataset-selection-hint": "Please select one or more timeseries to display in diagram",
+		"error": "An error occured. It is not possible to determine data for the selected phenomenon.",
 		"geosearch": {
 			"placeholder": "Search location..."
 		},

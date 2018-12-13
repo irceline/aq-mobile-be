@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ColorService, DatasetOptions, DatasetService, LocalStorage } from '@helgoland/core';
 
 import { NearestTimeseriesManagerProvider } from '../nearest-timeseries-manager/nearest-timeseries-manager';
-import { PhenomenonOptionsMapperProvider } from '../phenomenon-options-mapper/phenomenon-options-mapper';
+import { DatasetOptionsModifier } from '../phenomenon-options-mapper/phenomenon-options-mapper';
 import { UserLocationListProvider } from '../user-location-list/user-location-list';
 import { TimeseriesService } from './timeseries';
 
@@ -21,7 +21,7 @@ export class LocatedTimeseriesService extends DatasetService<DatasetOptions> {
     private storage: LocalStorage,
     private userlocation: UserLocationListProvider,
     private nearestTimeseriesManager: NearestTimeseriesManagerProvider,
-    private phenomenonColorMapper: PhenomenonOptionsMapperProvider
+    private phenomenonColorMapper: DatasetOptionsModifier
   ) {
     super();
     this.showSeries = this.getShowNearestSeriesByDefault();
@@ -43,8 +43,8 @@ export class LocatedTimeseriesService extends DatasetService<DatasetOptions> {
     if (this.showSeries) {
       const locations = this.userlocation.getVisibleUserLocations();
       this.nearestTimeseriesManager
-          .getNearestTimeseries(locations[this.selectedIndex])
-          .forEach(e => this.addDataset(e));
+        .getNearestTimeseries(locations[this.selectedIndex])
+        .forEach(e => this.addDataset(e));
     }
   }
 

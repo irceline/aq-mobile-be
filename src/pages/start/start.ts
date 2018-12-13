@@ -22,7 +22,7 @@ export class StartPage {
     private refreshHandler: RefreshHandler,
     private platform: Platform,
     private toast: ToastController,
-    private translateSrvc: TranslateService
+    public translateSrvc: TranslateService
   ) { }
 
   public navigateToMap(selection: BelaqiSelection) {

@@ -130,6 +130,7 @@
 		"prev-step": "Zurück",
 		"three": {
 			"addLocationToList": "Füge zur Liste der Standorte",
+			"baseOnCurrentLocation": "Nutze aktuellen Standort",
 			"header": "Wählen Sie die Standorte aus, für die Sie personalisierte Benachrichtigungen erhalten möchten",
 			"locationLabelHint": "Änder die Standortbezeichnung",
 			"locationLabelPlaceholder": "z.B. \"Zuhause\", \"Arbeit\", \"Schule\"",
@@ -148,6 +149,7 @@
 		"configured-location": "Dein konfigurierter Standort",
 		"current-location": "Dein aktueller Standort",
 		"dataset-selection-hint": "Bitte wählen Sie eine oder mehrere Zeitreihen zur Darstellung aus",
+		"error": "Ein Fehler ist aufgetreten. Es konnten keine Daten zum ausgewählten Phänomen ermittelt werden.",
 		"geosearch": {
 			"placeholder": "Suche..."
 		},

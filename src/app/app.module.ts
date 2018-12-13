@@ -39,6 +39,7 @@ import { AnnualMeanProvider } from '../providers/annual-mean/annual-mean';
 import { BelaqiIndexProvider } from '../providers/belaqi/belaqi';
 import { CategorizeValueToIndexProvider } from '../providers/categorize-value-to-index/categorize-value-to-index';
 import { ForecastValueProvider } from '../providers/forecast-value/forecast-value';
+import { GeoLabelsProvider } from '../providers/geo-labels/geo-labels';
 import { IrcelineSettingsProvider } from '../providers/irceline-settings/irceline-settings';
 import { LanguageHandlerProvider } from '../providers/language-handler/language-handler';
 import { LayerGeneratorService } from '../providers/layer-generator/layer-generator';
@@ -49,7 +50,7 @@ import { NearestTimeseriesProvider } from '../providers/nearest-timeseries/neare
 import { NotificationMaintainerProvider } from '../providers/notification-maintainer/notification-maintainer';
 import { NotificationPresenter } from '../providers/notification-presenter/notification-presenter';
 import { PersonalAlertsProvider } from '../providers/personal-alerts/personal-alerts';
-import { PhenomenonOptionsMapperProvider } from '../providers/phenomenon-options-mapper/phenomenon-options-mapper';
+import { DatasetOptionsModifier } from '../providers/phenomenon-options-mapper/phenomenon-options-mapper';
 import { PushNotificationsProvider } from '../providers/push-notifications/push-notifications';
 import { RefreshHandler } from '../providers/refresh/refresh';
 import { JSSONSettingsService } from '../providers/settings/settings';
@@ -112,9 +113,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     BackgroundMode,
     BelaqiIndexProvider,
     CategorizeValueToIndexProvider,
+    DatasetOptionsModifier,
     Diagnostic,
     FCM,
     ForecastValueProvider,
+    GeoLabelsProvider,
     Geolocation,
     InAppBrowser,
     IrcelineSettingsProvider,
@@ -130,7 +133,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     NotificationMaintainerProvider,
     NotificationPresenter,
     PersonalAlertsProvider,
-    PhenomenonOptionsMapperProvider,
     PushNotificationsProvider,
     RefreshHandler,
     SplashScreen,
