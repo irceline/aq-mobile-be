@@ -59,7 +59,10 @@ export class UserLocationListProvider {
     return new Observable((observer: Observer<UserLocation>) => {
       this.locate.determinePosition().subscribe(
         (pos: Geoposition) => {
-          const reverseObs = this.geoSearch.reverse({ type: 'Point', coordinates: [pos.coords.latitude, pos.coords.longitude] });
+          const reverseObs = this.geoSearch.reverse(
+            { type: 'Point', coordinates: [pos.coords.latitude, pos.coords.longitude] },
+            { acceptLanguage: this.translateSrvc.currentLang }
+          );
           reverseObs.subscribe(
             value => {
               let locationLabel = this.createGeoLabel(value);

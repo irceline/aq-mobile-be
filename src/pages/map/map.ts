@@ -120,7 +120,9 @@ export class MapPage {
     this.providerUrl = settings.datasetApis[0].url;
     this.clusterStations = settings.clusterStationsOnMap;
     this.statusIntervalDuration = settings.colorizedMarkerForLastMilliseconds;
-    this.geoSearchOptions = { countrycodes: settings.geoSearchCountryCodes };
+
+    this.setGeosearchOptions(settings);
+    this.translateSrvc.onLangChange.subscribe(() => this.setGeosearchOptions);
 
     this.belaqiSelection = this.navParams.get('belaqiSelection') as BelaqiSelection;
 
@@ -129,6 +131,10 @@ export class MapPage {
     } else {
       this.onPhenomenonChange();
     }
+  }
+
+  private setGeosearchOptions(settings: MobileSettings) {
+    this.geoSearchOptions = { countrycodes: settings.geoSearchCountryCodes, acceptLanguage: this.translateSrvc.currentLang };
   }
 
   public mapInitialized(mapId: string) {
@@ -228,7 +234,7 @@ export class MapPage {
     if (this.legendVisible) {
       const langCode = this.translateSrvc.currentLang.toLocaleUpperCase();
       let legendId = this.getPhenomenonLegendId(this.selectedPhenomenon.id);
-      if (legendId){
+      if (legendId) {
         return `<img src="http://www.irceline.be/air/legend/${legendId}_${langCode}.svg">`;
       } else {
         return `<div>${this.translateSrvc.instant('map.no-legend')}</div>`;

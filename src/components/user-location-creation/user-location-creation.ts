@@ -33,6 +33,7 @@ export class UserLocationCreationComponent {
     this.geoSearchOptions = {
       countrycodes: settings.geoSearchCountryCodes,
       asPointGeometry: true,
+      acceptLanguage: this.translate.currentLang,
       addressdetails: true
     };
     this.mapOptions = {
