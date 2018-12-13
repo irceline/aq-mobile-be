@@ -4,7 +4,7 @@ import { Slides, Toggle } from 'ionic-angular';
 import { Observable, of } from 'rxjs';
 
 import { NearestTimeseriesManagerProvider } from '../../providers/nearest-timeseries-manager/nearest-timeseries-manager';
-import { PhenomenonOptionsMapperProvider } from '../../providers/phenomenon-options-mapper/phenomenon-options-mapper';
+import { DatasetOptionsModifier } from '../../providers/phenomenon-options-mapper/phenomenon-options-mapper';
 import { LocatedTimeseriesService } from '../../providers/timeseries/located-timeseries';
 import { UserLocationListProvider } from '../../providers/user-location-list/user-location-list';
 
@@ -32,7 +32,7 @@ export class NearestSeriesLegendSliderComponent implements AfterViewInit {
   constructor(
     private userLocations: UserLocationListProvider,
     public locatedTsSrvc: LocatedTimeseriesService,
-    private phenomenonColorMapper: PhenomenonOptionsMapperProvider,
+    private phenomenonColorMapper: DatasetOptionsModifier,
     private nearestTimeseriesManager: NearestTimeseriesManagerProvider
   ) {
     this.userLocations.getVisibleUserLocations().forEach((location, idx) => {

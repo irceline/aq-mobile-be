@@ -50,7 +50,7 @@ import { NearestTimeseriesProvider } from '../providers/nearest-timeseries/neare
 import { NotificationMaintainerProvider } from '../providers/notification-maintainer/notification-maintainer';
 import { NotificationPresenter } from '../providers/notification-presenter/notification-presenter';
 import { PersonalAlertsProvider } from '../providers/personal-alerts/personal-alerts';
-import { PhenomenonOptionsMapperProvider } from '../providers/phenomenon-options-mapper/phenomenon-options-mapper';
+import { DatasetOptionsModifier } from '../providers/phenomenon-options-mapper/phenomenon-options-mapper';
 import { PushNotificationsProvider } from '../providers/push-notifications/push-notifications';
 import { RefreshHandler } from '../providers/refresh/refresh';
 import { JSSONSettingsService } from '../providers/settings/settings';
@@ -113,6 +113,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BackgroundMode,
     BelaqiIndexProvider,
     CategorizeValueToIndexProvider,
+    DatasetOptionsModifier,
     Diagnostic,
     FCM,
     ForecastValueProvider,
@@ -132,7 +133,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     NotificationMaintainerProvider,
     NotificationPresenter,
     PersonalAlertsProvider,
-    PhenomenonOptionsMapperProvider,
     PushNotificationsProvider,
     RefreshHandler,
     SplashScreen,
