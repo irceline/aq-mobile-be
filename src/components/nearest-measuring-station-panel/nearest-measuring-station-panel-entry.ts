@@ -56,7 +56,7 @@ export class NearestMeasuringStationPanelEntryComponent implements OnChanges {
   }
 
   public select() {
-    if (this.series.station.geometry.type === 'Point') {
+    if (this.series && this.series.station.geometry.type === 'Point') {
       const longitude = (this.series.station.geometry as Point).coordinates[0];
       const latitude = (this.series.station.geometry as Point).coordinates[1];
       this.onClicked.emit({
@@ -82,6 +82,8 @@ export class NearestMeasuringStationPanelEntryComponent implements OnChanges {
         this.lastStationaryValue = nearestSeries.series.lastValue
         this.uom = nearestSeries.series.uom;
       }
+      this.loadingStationValue = false;
+    }, (error) => {
       this.loadingStationValue = false;
     });
   }

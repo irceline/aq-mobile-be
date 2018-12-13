@@ -43,6 +43,9 @@
           [statusIntervals]="true" [ignoreStatusIntervalIfBeforeDuration]="statusIntervalDuration" [zoomControlOptions]="zoomControlOptions" [layerControlOptions]="layerControlOptions" [overlayMaps]="overlayMaps" [fitBounds]="fitBounds"
           (onSelected)="onStationSelected($event)" [cluster]="clusterStations" (onContentLoading)="onMapLoading($event)" (mapInitialized)="mapInitialized($event)"></n52-station-map-selector>
       </div>
+      <div class="error" *ngIf="!selectedPhenomenon"> 
+        {{'map.error' | translate}}
+      </div>
     </div>
     <div>
       <ion-segment class="time" [(ngModel)]="time" (ngModelChange)="onTimeChange()">
