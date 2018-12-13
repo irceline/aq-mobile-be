@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { GeoSearch, GeosearchControlComponent, MapCache } from '@helgoland/map';
 import { Keyboard } from 'ionic-angular';
 
@@ -7,6 +7,9 @@ import { Keyboard } from 'ionic-angular';
   templateUrl: 'mobile-geosearch-control.html'
 })
 export class MobileGeosearchControlComponent extends GeosearchControlComponent {
+
+  @Output()
+  public onSearchTriggered: EventEmitter<void> = new EventEmitter();
 
   constructor(
     protected mapCache: MapCache,
@@ -17,6 +20,7 @@ export class MobileGeosearchControlComponent extends GeosearchControlComponent {
   }
 
   public triggerSearch() {
+    this.onSearchTriggered.emit();
     super.triggerSearch();
     this.keyboard.close();
   }

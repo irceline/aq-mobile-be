@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
+import { GeoReverseResult, GeoSearch } from '@helgoland/map';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastController } from 'ionic-angular';
 import { Platform } from 'ionic-angular/platform/platform';
 import { Observable, Observer, ReplaySubject } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class LocateProvider {
@@ -17,17 +19,24 @@ export class LocateProvider {
     private geolocate: Geolocation,
     private diagnostic: Diagnostic,
     private translate: TranslateService,
-    private toast: ToastController
+    private toast: ToastController,
+    private geosearch: GeoSearch
   ) {
     this.registerLocationStateChangeHandler();
     this.isGeolocationEnabled();
     this.platform.resume.subscribe(() => this.isGeolocationEnabled());
   }
 
+  /**
+   * Returns the location state as Observable.
+   */
   public getLocationStateEnabled(): Observable<boolean> {
     return this.locationEnabledReplay.asObservable();
   }
 
+  /**
+   * Return the current state of enabled location.
+   */
   public getLocationEnabled(): boolean {
     return this.locationEnabled;
   }
@@ -84,5 +93,14 @@ export class LocateProvider {
         });
       })
     })
+  }
+
+  public determineGeoLocation(): Observable<GeoReverseResult> {
+    return this.determinePosition().pipe(switchMap(location =>
+      this.geosearch.reverse(
+        { type: 'Point', coordinates: [location.coords.latitude, location.coords.longitude] },
+        { acceptLanguage: this.translate.currentLang }
+      )
+    ))
   }
 }

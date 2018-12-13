@@ -1,15 +1,21 @@
-<mobile-geosearch-control [options]="geoSearchOptions" (onResultChanged)="geoSearchResultChanged($event)"></mobile-geosearch-control>
+<mobile-geosearch-control [options]="geoSearchOptions" (onSearchTriggered)="resetLocation()" (onResultChanged)="geoSearchResultChanged($event)"></mobile-geosearch-control>
+<div text-center>
+  <button ion-button round outline (click)="getCurrentLocation()">
+    <span>{{'intro.three.baseOnCurrentLocation' | translate}}</span>
+    <ion-spinner *ngIf="loadCurrentLocation"></ion-spinner>
+  </button>
+</div>
 <div>
-  <div *ngIf="geoSearchResult">
-    <location-selection [mapOptions]="mapOptions" [location]="geoSearchResult.geometry" (locationChanged)="onLocationChanged($event)"></location-selection>
+  <div class="location-selection" *ngIf="location">
+    <location-selection [mapOptions]="mapOptions" [location]="location" (locationChanged)="onLocationChanged($event)"></location-selection>
   </div>
-  <ion-list [hidden]="!geoSearchResult">
+  <ion-list [hidden]="!locationLabel">
     <ion-item>
       <ion-label stacked>{{'intro.three.locationLabelHint' | translate}}</ion-label>
-      <ion-input type="text" [(ngModel)]="locationLabel" clearInput placeholder="{{'intro.three.locationLabelPlaceholder' | translate}}" ></ion-input>
+      <ion-input type="text" [(ngModel)]="locationLabel" clearInput placeholder="{{'intro.three.locationLabelPlaceholder' | translate}}"></ion-input>
     </ion-item>
   </ion-list>
-  <div text-center *ngIf="geoSearchResult">
+  <div text-center *ngIf="locationLabel">
     <button ion-button round (click)="addLocationToList()">{{'intro.three.addLocationToList' | translate}}</button>
   </div>
 </div>

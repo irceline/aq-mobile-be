@@ -130,6 +130,7 @@
 		"prev-step": "Vorige",
 		"three": {
 			"addLocationToList": "Toevoegen aan de lijst van locaties",
+			"baseOnCurrentLocation": "",
 			"header": "Kies de locaties waarvoor je gepersonaliseerde meldingen wil ontvangen",
 			"locationLabelHint": "Verander de beschrijving van de locatie",
 			"locationLabelPlaceholder": "bv. \"Thuis\", \"Werk\", \"School\"",
