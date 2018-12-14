@@ -68,6 +68,7 @@ export class BelaqiWheelComponent extends LanguageChangNotifier implements After
             const offset = radius / 2;
             const pointerColor = '#FFFFFF';
             const borderColor = '#000000';
+            const lineWidth = 3;
 
             const ctx = chartInstance.ctx;
 
@@ -75,28 +76,29 @@ export class BelaqiWheelComponent extends LanguageChangNotifier implements After
 
             ctx.fillStyle = pointerColor;
             ctx.strokeStyle = borderColor;
-            ctx.lineWidth = 3;
-
-            // circle
-            ctx.beginPath();
-            ctx.arc(width / 2, height / 2, radius, 0, 2 * Math.PI);
-            ctx.fill();
-            ctx.stroke();
+            ctx.lineWidth = lineWidth;
+            ctx.lineCap = 'round';
 
             // arrow
             ctx.beginPath();
-            const values = (chartInstance['chart'].options as ExtendedChartOptions).values;
-            if (values.index > 0 && values.index <= 10) {
+            const index = (chartInstance['chart'].options as ExtendedChartOptions).values.index;
+            if (index > 0 && index <= 10) {
               const step = (Math.PI / 6);
               const start = 3.5 * step;
-              const angle = start + values.index * step;
+              const angle = start + index * step;
               const arrowGap = 0.25;
+
+              // circle
+              ctx.beginPath();
+              ctx.arc(width / 2, height / 2, radius, angle + arrowGap, angle - arrowGap);
+              ctx.fill();
+              ctx.stroke();
 
               // ctx.moveTo(centerX, centerY);
               // ctx.lineTo(centerX + Math.cos(angle - arrowGap) * radius, centerY + Math.sin(angle - arrowGap) * radius);
-              ctx.moveTo(centerX + Math.cos(angle - arrowGap) * radius + 1.3, centerY + Math.sin(angle - arrowGap) * radius);
+              ctx.moveTo(centerX + Math.cos(angle - arrowGap) * radius, centerY + Math.sin(angle - arrowGap) * radius);
               ctx.lineTo(centerX + Math.cos(angle) * (radius + offset), centerY + Math.sin(angle) * (radius + offset));
-              ctx.lineTo(centerX + Math.cos(angle + arrowGap) * radius + 1.3, centerY + Math.sin(angle + arrowGap) * radius + 0.42);
+              ctx.lineTo(centerX + Math.cos(angle + arrowGap) * radius, centerY + Math.sin(angle + arrowGap) * radius + 0.42);
               ctx.fill();
               ctx.stroke();
             }
@@ -113,7 +115,7 @@ export class BelaqiWheelComponent extends LanguageChangNotifier implements After
 
             // indexLabel
             ctx.font = "1.2em Roboto";
-            wrapText(ctx, this.belaqi.getLabelForIndexSplit(values.index), centerX, centerY, 90, 25);
+            wrapText(ctx, this.belaqi.getLabelForIndexSplit(index), centerX, centerY, 90, 25);
 
             // modelledLabel
             ctx.font = "0.6em Roboto";
