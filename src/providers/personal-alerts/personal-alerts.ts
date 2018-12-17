@@ -11,7 +11,6 @@ import { BelaqiIndexProvider } from '../belaqi/belaqi';
 import { NotificationPresenter, PersonalAlert } from '../notification-presenter/notification-presenter';
 import { UserLocationListProvider } from '../user-location-list/user-location-list';
 
-
 // import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
 const DEFAULT_LOCAL_ALERT_UPDATE_IN_MINUTES = 60;
 const DEFAULT_LOCAL_ALERT_UPDATE_LEVEL = 5;
