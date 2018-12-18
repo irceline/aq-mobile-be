@@ -1,9 +1,9 @@
-<div *ngIf="geolocationEnabled" text-wrap>
+<div *ngIf="locationMode" text-wrap>
   <strong>{{'network.geolocationEnabled' | translate}}</strong>
   <p>{{'network.geolocationEnabledExplanation' | translate}}</p>
 </div>
 
-<div *ngIf="!geolocationEnabled" text-wrap>
+<div *ngIf="!locationMode" text-wrap>
   <strong>{{'network.geolocationDisabled' | translate}}</strong>
   <p>{{'network.geolocationDisabledExplanation' | translate}}</p>
 </div>

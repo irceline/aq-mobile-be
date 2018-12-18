@@ -7,7 +7,7 @@ import { Point } from 'geojson';
 import { Observable, Observer } from 'rxjs';
 
 import { GeoLabelsProvider } from '../geo-labels/geo-labels';
-import { LocateProvider } from '../locate/locate';
+import { LocateProvider, LocationMode } from '../locate/locate';
 
 export interface UserLocation {
   id?: number;
@@ -102,7 +102,7 @@ export class UserLocationListProvider {
   }
 
   public getVisibleUserLocations(): UserLocation[] {
-    return this.userLocations.filter(e => (e.type === 'current' && e.isCurrentVisible && this.locate.getLocationEnabled()) || e.type === 'user');
+    return this.userLocations.filter(e => (e.type === 'current' && e.isCurrentVisible && this.locate.getLocationMode() !== LocationMode.off) || e.type === 'user');
   }
 
   public isCurrentLocationVisible(): boolean {

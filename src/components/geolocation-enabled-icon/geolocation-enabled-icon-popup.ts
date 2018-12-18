@@ -1,18 +1,20 @@
 import { Component } from '@angular/core';
 import { NavParams } from 'ionic-angular';
 
+import { LocationMode } from '../../providers/locate/locate';
+
 @Component({
   selector: 'geolocation-enabled-icon-popup',
   templateUrl: 'geolocation-enabled-icon-popup.html'
 })
 export class GeolocationEnabledIconPopupComponent {
 
-  geolocationEnabled: boolean;
+  locationMode: LocationMode;
 
   constructor(
     private navParams: NavParams
   ) {
-    this.geolocationEnabled = this.navParams.get('geolocationEnabled');
+    this.locationMode = this.navParams.get('locationMode');
   }
 
 }

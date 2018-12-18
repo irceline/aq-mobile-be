@@ -8,11 +8,17 @@ import { Platform } from 'ionic-angular/platform/platform';
 import { Observable, Observer, ReplaySubject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
+export const enum LocationMode {
+  on,
+  off,
+  partial
+}
+
 @Injectable()
 export class LocateProvider {
 
-  private locationEnabledReplay: ReplaySubject<boolean> = new ReplaySubject(1);
-  private locationEnabled: boolean;
+  private locationModeReplay: ReplaySubject<LocationMode> = new ReplaySubject(1);
+  private locationMode: LocationMode;
 
   constructor(
     private platform: Platform,
@@ -30,15 +36,15 @@ export class LocateProvider {
   /**
    * Returns the location state as Observable.
    */
-  public getLocationStateEnabled(): Observable<boolean> {
-    return this.locationEnabledReplay.asObservable();
+  public getLocationModeAsObservable(): Observable<LocationMode> {
+    return this.locationModeReplay.asObservable();
   }
 
   /**
    * Return the current state of enabled location.
    */
-  public getLocationEnabled(): boolean {
-    return this.locationEnabled;
+  public getLocationMode(): LocationMode {
+    return this.locationMode;
   }
 
   private registerLocationStateChangeHandler() {
@@ -56,20 +62,37 @@ export class LocateProvider {
   private isGeolocationEnabled() {
     if (this.platform.is('cordova')) {
       this.diagnostic.isLocationEnabled().then((res) => {
-        if (res) {
-          this.setLocationEnabled(true);
+        if (this.platform.is('android')) {
+          this.diagnostic.getLocationMode().then(locMode => {
+            switch (locMode) {
+              case this.diagnostic.locationMode.HIGH_ACCURACY:
+                this.setLocationEnabled(LocationMode.on);
+                break;
+              case this.diagnostic.locationMode.BATTERY_SAVING:
+                this.setLocationEnabled(LocationMode.partial);
+                break;
+              case this.diagnostic.locationMode.DEVICE_ONLY:
+                this.setLocationEnabled(LocationMode.partial);
+                break;
+              case this.diagnostic.locationMode.LOCATION_OFF:
+                this.setLocationEnabled(LocationMode.off);
+                break;
+            }
+          }, error => this.setLocationEnabled(LocationMode.off));
+        } else if (res) {
+          this.setLocationEnabled(LocationMode.on);
         } else {
-          this.setLocationEnabled(false);
+          this.setLocationEnabled(LocationMode.off);
         }
       });
     } else {
-      this.setLocationEnabled(true);
+      this.setLocationEnabled(LocationMode.off);
     }
   }
 
-  private setLocationEnabled(enabled: boolean) {
-    this.locationEnabled = enabled;
-    this.locationEnabledReplay.next(this.locationEnabled);
+  private setLocationEnabled(mode: LocationMode) {
+    this.locationMode = mode;
+    this.locationModeReplay.next(this.locationMode);
   }
 
   public determinePosition(): Observable<Geoposition> {

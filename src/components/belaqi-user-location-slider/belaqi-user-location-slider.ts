@@ -70,7 +70,7 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
     protected refresher: RefreshHandler,
     private popoverCtrl: PopoverController
   ) {
-    this.locate.getLocationStateEnabled().subscribe(() => this.loadBelaqis());
+    this.locate.getLocationModeAsObservable().subscribe(() => this.loadBelaqis());
     this.refresher.onRefresh.subscribe(() => this.loadBelaqis());
     this.userLocationProvider.locationsChanged.subscribe(() => this.loadBelaqis());
     this.networkAlert.onConnected.subscribe(() => this.loadBelaqis());

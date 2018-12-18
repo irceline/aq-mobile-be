@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PopoverController } from 'ionic-angular';
 
-import { LocateProvider } from '../../providers/locate/locate';
 import { UserLocation } from '../../providers/user-location-list/user-location-list';
 import { NearestMeasuringStationPanelInformationPopupComponent } from './nearest-measuring-station-panel-information-popup';
 
@@ -21,8 +20,6 @@ export class NearestMeasuringStationPanelComponent {
 
   @Input()
   public location: UserLocation;
-
-  public geolocationEnabled: boolean;
 
   public entries: PanelEntry[] = [
     {
@@ -48,11 +45,8 @@ export class NearestMeasuringStationPanelComponent {
   ];
 
   constructor(
-    private popoverCtrl: PopoverController,
-    private locate: LocateProvider
-  ) {
-    this.locate.getLocationStateEnabled().subscribe(res => this.geolocationEnabled = res);
-  }
+    private popoverCtrl: PopoverController
+  ) { }
 
   public select(id: string) {
     this.onSelect.emit(id);
