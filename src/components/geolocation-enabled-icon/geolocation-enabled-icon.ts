@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PopoverController } from 'ionic-angular';
 
-import { LocateProvider } from '../../providers/locate/locate';
-import { GeolocationEnabledIconPopupComponent } from './geolocation-enabled-icon-popup';
+import { LocateProvider, LocationMode } from '../../providers/locate/locate';
 
 @Component({
   selector: 'geolocation-enabled-icon',
@@ -10,23 +8,26 @@ import { GeolocationEnabledIconPopupComponent } from './geolocation-enabled-icon
 })
 export class GeolocationEnabledIconComponent implements OnInit {
 
-  public geolocationEnabled: boolean;
-
-  public init = false;
+  public locationMode: LocationMode;
 
   constructor(
-    private locate: LocateProvider,
-    private popoverCtrl: PopoverController
+    private locate: LocateProvider
   ) { }
 
   public ngOnInit(): void {
-    this.locate.getLocationStateEnabled().subscribe(res => this.geolocationEnabled = res);
+    this.locate.getLocationModeAsObservable().subscribe(res => this.locationMode = res);
   }
 
-  public inform(ev) {
-    this.popoverCtrl
-      .create(GeolocationEnabledIconPopupComponent, { geolocationEnabled: this.geolocationEnabled })
-      .present({ ev });
+  public isActive(): boolean {
+    return this.locationMode === LocationMode.on;
+  }
+
+  public isDeactive(): boolean {
+    return this.locationMode === LocationMode.off;
+  }
+
+  public isPartial(): boolean {
+    return this.locationMode === LocationMode.partial;
   }
 
 }

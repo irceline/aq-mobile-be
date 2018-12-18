@@ -23,7 +23,6 @@ export class UserLocationCreationComponent {
   public locationLabel: string;
   public location: Point;
   public loadCurrentLocation: boolean;
-  public locationEnabled: boolean;
 
   constructor(
     protected locationList: UserLocationListProvider,
@@ -45,7 +44,6 @@ export class UserLocationCreationComponent {
       maxZoom: 18,
       dragging: true
     }
-    this.locationEnabled = this.locate.getLocationEnabled();
   }
 
   public geoSearchResultChanged(result: GeoSearchResult) {
