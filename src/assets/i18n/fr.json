@@ -24,7 +24,7 @@
 		"current-location-description": "La position où vous vous trouvez actuellement",
 		"current-location-error": "Votre appareil n'a pas pu établir votre position actuelle. Vous pouvez modifier les paramètres du service de localisation de votre appareil en mode haute précision. Si vous avez précédemment configuré des localisations personnalisées, ceux-ci devraient être disponibles en glissant cet écran vers la gauche.",
 		"loading-current-location": "Votre appareil cherche actuellement votre position",
-		"locate-delayed-information": "",
+		"locate-delayed-information": "Votre appareil n'a pas pu établir votre position actuelle.",
 		"open-user-location": "Modifier les localisations"
 	},
 	"belaqi-wheel": {
@@ -131,7 +131,7 @@
 		"prev-step": "Précédent",
 		"three": {
 			"addLocationToList": "Ajouter à la liste de localisations",
-			"baseOnCurrentLocation": "",
+			"baseOnCurrentLocation": "Utiliser la position actuelle",
 			"header": "Choisissez les localisations pour lesquelles vous souhaitez recevoir des notifications personnalisées",
 			"locationLabelHint": "Renommer la localisation",
 			"locationLabelPlaceholder": "p.e. \"À la maison\", \"Travail\", \"École\"",
@@ -150,7 +150,7 @@
 		"configured-location": "Votre position configurée",
 		"current-location": "Votre position actuelle",
 		"dataset-selection-hint": "Veuillez sélectionner une ou plusieurs séries à afficher",
-		"error": "",
+		"error": "Une erreur s'est produite. Il n'est pas possible de déterminer les données pour le polluant sélectionné.",
 		"geosearch": {
 			"placeholder": "Recherche la localisation ..."
 		},
