@@ -24,6 +24,7 @@
 		"current-location-description": "De locatie waar je momenteel bent...",
 		"current-location-error": "Uw apparaat heeft uw huidige locatie niet kunnen vaststellen. U zou de instellingen van de locatiedienst van uw apparaat naar hoge nauwkeurigheidsmodus kunnen veranderen. Als u eerder persoonlijke gebruikerslocaties hebt geconfigureerd, moeten deze beschikbaar zijn als u dit scherm naar links veegt.",
 		"loading-current-location": "Uw apparaat bepaalt uw huidige locatie",
+		"locate-delayed-information": "",
 		"open-user-location": "Bewerk de huidige locaties"
 	},
 	"belaqi-wheel": {
