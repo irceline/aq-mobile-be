@@ -150,7 +150,7 @@
 		"configured-location": "Your configured location",
 		"current-location": "Your current location",
 		"dataset-selection-hint": "Please select one or more timeseries to display in diagram",
-		"error": "An error occured. It is not possible to determine data for the selected phenomenon.",
+		"error": "An error occured. It is not possible to determine data for the selected pollutant.",
 		"geosearch": {
 			"placeholder": "Search location..."
 		},
