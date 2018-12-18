@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { ModalController, NavController, Slides, Toggle } from 'ionic-angular';
+import { ModalController, NavController, PopoverController, Slides, Toggle } from 'ionic-angular';
 
 import { SettingsPage } from '../../pages/settings/settings';
 import { BelaqiIndexProvider } from '../../providers/belaqi/belaqi';
@@ -13,6 +13,7 @@ import { UserLocation, UserLocationListProvider } from '../../providers/user-loc
 import { ModalUserLocationCreationComponent } from '../modal-user-location-creation/modal-user-location-creation';
 import { ModalUserLocationListComponent } from '../modal-user-location-list/modal-user-location-list';
 import { PhenomenonLocationSelection } from '../nearest-measuring-station-panel/nearest-measuring-station-panel-entry';
+import { BelaqiLocateDelayedInformationComponent } from './belaqi-locate-delayed-information';
 
 export interface HeaderContent {
   label: string;
@@ -29,6 +30,8 @@ export interface BelaqiSelection {
     type: 'user' | 'current';
   }
 }
+
+// const LOCATION_DELAYED_NOTIFICATION_IN_MILLISECONDS = 3000;
 
 @Component({
   selector: 'belaqi-user-location-slider',
@@ -64,7 +67,8 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
     private nav: NavController,
     protected translateSrvc: TranslateService,
     protected modalCtrl: ModalController,
-    protected refresher: RefreshHandler
+    protected refresher: RefreshHandler,
+    private popoverCtrl: PopoverController
   ) {
     this.locate.getLocationStateEnabled().subscribe(() => this.loadBelaqis());
     this.refresher.onRefresh.subscribe(() => this.loadBelaqis());
@@ -167,12 +171,15 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
             this.belaqiLocations[i] = {
               type: 'current'
             }
+            // let timeout = window.setTimeout(() => this.presentDelayedLocateHint(), LOCATION_DELAYED_NOTIFICATION_IN_MILLISECONDS);
             this.userLocationProvider.determineCurrentLocation().subscribe(
               currentLoc => {
                 this.setLocation(currentLoc, i, ircelineSettings);
                 this.updateLocationSelection(0);
+                // clearTimeout(timeout);
               },
               error => {
+                this.presentDelayedLocateHint();
                 this.currentLocationError = error;
               }
             )
@@ -203,6 +210,17 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
 
   private handleError(lon: number, lat: number, error: any) {
     console.warn(`Belaqi for (latitude: ${lat}, longitude ${lon}): ${error} - maybe outside of Belgium`);
+  }
+
+  private presentDelayedLocateHint() {
+    const idx = this.slider.getActiveIndex();
+    if (idx >= 0 && idx < this.belaqiLocations.length) {
+      if (this.belaqiLocations[idx].type === 'current') {
+        this.slider.slideNext();
+        const popover = this.popoverCtrl.create(BelaqiLocateDelayedInformationComponent, {}, { showBackdrop: true });
+        popover.present();
+      }
+    }
   }
 
 }

@@ -13,6 +13,7 @@ import { AirQualityLocationPanelComponent } from './air-quality-location-panel/a
 import { AnnualPhenomenonButtonsComponent } from './annual-phenomenon-buttons/annual-phenomenon-buttons';
 import { BelaqiChartComponent } from './belaqi-chart/belaqi-chart';
 import { BelaqiChartInformationComponent } from './belaqi-chart/belaqi-chart-information';
+import { BelaqiLocateDelayedInformationComponent } from './belaqi-user-location-slider/belaqi-locate-delayed-information';
 import { BelaqiUserLocationSliderComponent } from './belaqi-user-location-slider/belaqi-user-location-slider';
 import { BelaqiWheelComponent } from './belaqi-wheel/belaqi-wheel';
 import { BelaqiWheelInformationComponent } from './belaqi-wheel/belaqi-wheel-information';
@@ -67,6 +68,7 @@ import { UserLocationCreationComponent } from './user-location-creation/user-loc
 		AnnualPhenomenonButtonsComponent,
 		BelaqiChartComponent,
 		BelaqiChartInformationComponent,
+		BelaqiLocateDelayedInformationComponent,
 		BelaqiUserLocationSliderComponent,
 		BelaqiWheelComponent,
 		BelaqiWheelInformationComponent,
@@ -124,6 +126,7 @@ import { UserLocationCreationComponent } from './user-location-creation/user-loc
 		AnnualPhenomenonButtonsComponent,
 		BelaqiChartComponent,
 		BelaqiChartInformationComponent,
+		BelaqiLocateDelayedInformationComponent,
 		BelaqiUserLocationSliderComponent,
 		BelaqiWheelComponent,
 		BelaqiWheelInformationComponent,
