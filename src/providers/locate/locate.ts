@@ -86,7 +86,7 @@ export class LocateProvider {
         }
       });
     } else {
-      this.setLocationEnabled(LocationMode.off);
+      this.setLocationEnabled(LocationMode.on);
     }
   }
 

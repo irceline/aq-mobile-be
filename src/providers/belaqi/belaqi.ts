@@ -165,38 +165,18 @@ export class BelaqiIndexProvider extends ValueProvider {
   }
 
   public getTimeline(latitude: number, longitude: number, time: Date): Observable<BelaqiTimelineEntry[]> {
-    return new Observable((observer: Observer<BelaqiTimelineEntry[]>) => {
-      this.getTrends().subscribe(trend => {
-        forkJoin([
-          this.createPhenomenonTimeline(latitude, longitude, time, ModelledPhenomenon.o3, trend["latest observations"].o3, trend.trend.o3),
-          this.createPhenomenonTimeline(latitude, longitude, time, ModelledPhenomenon.pm10, trend["latest observations"].pm10, trend.trend.pm10),
-          this.createPhenomenonTimeline(latitude, longitude, time, ModelledPhenomenon.pm25, trend["latest observations"].pm25, trend.trend.pm25)
-        ]).map(res => {
-          return res[0].map((entry, i) => {
-            // TODO maybe create a better merge function
-            return {
-              timestamp: entry.timestamp,
-              index: entry.index > res[1][i].index ? entry.index : res[1][i].index
-            };
-          });
-        }).subscribe(res => {
-          observer.next(res);
-          observer.complete();
-        }, error => {
-          observer.error(error);
-          observer.complete();
-        });
-      })
-    });
+    return forkJoin([
+      this.getPastTimeline(latitude, longitude, time),
+      this.getFutureTimeline(latitude, longitude, time)
+    ]).pipe(
+      map(res => res[0].concat(res[1]))
+    )
   }
 
-  private createPhenomenonTimeline(
+  private getPastTimeline(
     latitude: number,
     longitude: number,
-    time: Date,
-    phenomenon: ModelledPhenomenon,
-    latestObs: [Date, number][],
-    trend: [Date, number][]
+    time: Date
   ): Observable<BelaqiTimelineEntry[]> {
     const timestamps = [
       moment(time).subtract(5, 'hours').toDate(),
@@ -207,18 +187,63 @@ export class BelaqiIndexProvider extends ValueProvider {
       time
     ]
     return forkJoin(
-      // get modelledValue for the past 6 timestamps
-      timestamps.map(timestamp => this.modelledValueProvider.getValue(latitude, longitude, timestamp, phenomenon))
-    ).map(
-      res => {
-        // categorize results
-        const categorizedPre = res.map(value => this.categorizeValueToIndex.categorize(value, phenomenon));
+      timestamps.map(ts => this.getValue(latitude, longitude, ts))
+    ).pipe(
+      map(res => {
+        const timelineEntries: BelaqiTimelineEntry[] = [];
+        res.forEach((e, i) => {
+          timelineEntries.push({
+            timestamp: timestamps[i],
+            index: e
+          })
+        })
+        return timelineEntries;
+      })
+    )
+  }
+
+  private getFutureTimeline(latitude: number, longitude: number, time: Date): Observable<BelaqiTimelineEntry[]> {
+    return new Observable((observer: Observer<BelaqiTimelineEntry[]>) => {
+      this.getTrends().subscribe(trend => {
+        forkJoin([
+          this.createFuturePhenomenonTimeline(latitude, longitude, time, ModelledPhenomenon.o3, trend["latest observations"].o3, trend.trend.o3),
+          this.createFuturePhenomenonTimeline(latitude, longitude, time, ModelledPhenomenon.pm10, trend["latest observations"].pm10, trend.trend.pm10),
+          this.createFuturePhenomenonTimeline(latitude, longitude, time, ModelledPhenomenon.pm25, trend["latest observations"].pm25, trend.trend.pm25)
+        ]).pipe(map(res => {
+          return res[0].map((entry, i) => {
+            // TODO maybe create a better merge function
+            return {
+              timestamp: entry.timestamp,
+              index: entry.index > res[1][i].index ? entry.index : res[1][i].index
+            };
+          });
+        })).subscribe(res => {
+          observer.next(res);
+          observer.complete();
+        }, error => {
+          observer.error(error);
+          observer.complete();
+        });
+      })
+    });
+  }
+
+  private createFuturePhenomenonTimeline(
+    latitude: number,
+    longitude: number,
+    time: Date,
+    phenomenon: ModelledPhenomenon,
+    latestObs: [Date, number][],
+    trend: [Date, number][]
+  ): Observable<BelaqiTimelineEntry[]> {
+    return this.modelledValueProvider.getValue(latitude, longitude, time, phenomenon).pipe(
+      map(res => {
         // map results to timeline entries
-        const timelineEntries = categorizedPre.map((e, i) => { return { timestamp: timestamps[i], index: e } });
+        const timelineEntries = [];
         // calculate post entries
         // calculate difference between current modelled and out of the latest Obs to the same time
         const matchingValue = this.findMatchingTime(latestObs, time);
-        const difference = res[res.length - 1] - matchingValue;
+        const difference = res - matchingValue;
         // calculate the new values and add them to the timeline entries
         let nextHour = moment(time).add(1, 'hours').toDate();
         let nextTrend = this.findMatchingTime(trend, nextHour);
@@ -232,13 +257,13 @@ export class BelaqiIndexProvider extends ValueProvider {
           nextTrend = this.findMatchingTime(trend, nextHour);
         }
         return timelineEntries;
-      }
+      })
     )
   }
 
   private getTrends(): Observable<TrendResult> {
-    return this.http.client().get<TrendResult>('https://www.irceline.be/tables/forecast/model/trend.php')
-      .map(res => {
+    return this.http.client().get<TrendResult>('https://www.irceline.be/tables/forecast/model/trend.php').pipe(
+      map(res => {
         res["latest observations"].o3.forEach(e => e[0] = moment(e[0]).toDate());
         res["latest observations"].pm10.forEach(e => e[0] = moment(e[0]).toDate());
         res["latest observations"].pm25.forEach(e => e[0] = moment(e[0]).toDate());
@@ -246,7 +271,8 @@ export class BelaqiIndexProvider extends ValueProvider {
         res.trend.pm10.forEach(e => e[0] = moment(e[0]).toDate());
         res.trend.pm25.forEach(e => e[0] = moment(e[0]).toDate());
         return res;
-      });
+      })
+    )
   }
 
   private findMatchingTime(list: [Date, number][], time: Date): number {
