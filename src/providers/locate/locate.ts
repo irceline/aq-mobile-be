@@ -112,7 +112,7 @@ export class LocateProvider {
           }
           observer.error(error);
           observer.complete();
-          this.toast.create({ message: `Error occured, while fetch location: ${errorMessage}`, duration: 3000 }).present();
+          this.toast.create({ message: `Error occured, while fetching location: ${errorMessage}`, duration: 3000 }).present();
         });
       })
     })
