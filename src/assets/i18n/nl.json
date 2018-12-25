@@ -192,8 +192,8 @@
 		"geolocationDisabledExplanation": "Als u gebruik wilt maken van de \"huidige locatie\"-functionaliteiten, schakel dan de locatiedienst van uw apparaat in.",
 		"geolocationEnabled": "Geolocatie is geactiveerd",
 		"geolocationEnabledExplanation": "De \"huidige locatie\"-functionaliteiten zijn voor u beschikbaar.",
-		"geolocationPartial": "",
-		"geolocationPartialExplanation": "",
+		"geolocationPartial": "Geolocatie zonder 'hoge precisie'",
+		"geolocationPartialExplanation": "Om een ​​optimale bepaling van u locatie te hebben, activeer de locatiemethode 'hoge precisie'.",
 		"offline": "U toestel is offline",
 		"online": "U toestel is online"
 	},
