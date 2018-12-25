@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { LocalSelectorComponent } from '@helgoland/core';
 import { TranslateService } from '@ngx-translate/core';
-import { NavController } from 'ionic-angular/navigation/nav-controller';
+import { NavController } from 'ionic-angular';
 
 @Component({
   selector: 'common-settings',
