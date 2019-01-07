@@ -28,7 +28,7 @@
 		"open-user-location": "Modifier les localisations"
 	},
 	"belaqi-wheel": {
-		"modelled-hint": "Modélisé pour cette position",
+		"modelled-hint": "Indice de qualité de l'air modélisé pour cette position",
 		"no-index-ascertained": "Aucun indice BelAQI n'a pu être déterminé. Cela peut être le cas si votre localisation n'est pas en Belgique."
 	},
 	"belaqi": {

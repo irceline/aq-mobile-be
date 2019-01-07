@@ -28,7 +28,7 @@
 		"open-user-location": "Edit current locations"
 	},
 	"belaqi-wheel": {
-		"modelled-hint": "Modelled value for this location",
+		"modelled-hint": "Modelled air quality index for this location",
 		"no-index-ascertained": "No BelAQI index could be ascertained. This can be the case that the location is not in Belgium."
 	},
 	"belaqi": {

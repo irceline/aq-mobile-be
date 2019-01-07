@@ -28,7 +28,7 @@
 		"open-user-location": "Editiere vorhandene Standorte"
 	},
 	"belaqi-wheel": {
-		"modelled-hint": "Modelliert für diesen Standort",
+		"modelled-hint": "Modellierter Luftqualitätsindex für diesen Standort",
 		"no-index-ascertained": "Es konnte kein BelAQI index ermittelt werden. Dies könnte damit zusammenhängen, das der Standort nicht innerhalb Belgien's liegt."
 	},
 	"belaqi": {
