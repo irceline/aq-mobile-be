@@ -4,7 +4,7 @@ import { Diagnostic } from '@ionic-native/diagnostic';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastController } from 'ionic-angular';
-import { Platform } from 'ionic-angular/platform/platform';
+import { Platform } from 'ionic-angular';
 import { Observable, Observer, ReplaySubject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 

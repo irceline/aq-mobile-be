@@ -5,6 +5,7 @@ import { ILocalNotification, LocalNotifications } from '@ionic-native/local-noti
 import { TranslateService } from '@ngx-translate/core';
 import { Platform } from 'ionic-angular';
 import { forkJoin, Observable, Observer } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import { BelaqiIndexProvider } from '../belaqi/belaqi';
 import { NotificationPresenter, PersonalAlert } from '../notification-presenter/notification-presenter';
@@ -161,8 +162,8 @@ export class PersonalAlertsProvider {
       const alerts: PersonalAlert[] = [];
       this.userLocations.getUserLocations().forEach(loc => {
         if (loc.type === 'user') {
-          requests.push(this.belaqiProvider.getValue(loc.latitude, loc.longitude)
-            .do(res => {
+          requests.push(this.belaqiProvider.getValue(loc.latitude, loc.longitude).pipe(
+            tap(res => {
               if (this.getLevel() <= res) {
                 alerts.push({
                   belaqi: res,
@@ -171,7 +172,7 @@ export class PersonalAlertsProvider {
                 })
               }
             })
-          );
+          ));
         }
       });
 

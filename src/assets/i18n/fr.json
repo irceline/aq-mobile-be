@@ -192,8 +192,8 @@
 		"geolocationDisabledExplanation": "Si vous souhaitez utiliser les fonctionnalités \"position actuelle\", activez le service de localisation de votre appareil.",
 		"geolocationEnabled": "La géolocalisation est activée",
 		"geolocationEnabledExplanation": "Les fonctionnalités \"position actuelle\" sont à votre disposition.",
-		"geolocationPartial": "",
-		"geolocationPartialExplanation": "",
+		"geolocationPartial": "Géolocalisation sans \"haute précision\".",
+		"geolocationPartialExplanation": "Pour obtenir une géolocalisation optimale, activez le méthode de localisation \"haute précision\".",
 		"offline": "Votre appareil est offline",
 		"online": "Votre appareil est online"
 	},
