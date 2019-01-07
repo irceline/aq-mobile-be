@@ -192,8 +192,8 @@
 		"geolocationDisabledExplanation": "Falls sie die \"Aktuelle Position\"-funktionalitäten nutzen wollen, aktivieren sie bitte den Standortdienst Ihres Geräts.",
 		"geolocationEnabled": "Die Standortermittlung ist aktiviert",
 		"geolocationEnabledExplanation": "Die \"Aktuelle Position\"-funktionalitäten stehen Ihnen zur Verfügung.",
-		"geolocationPartial": "Die Standortermittlung ohne 'Hohe Genauigkeit'",
-		"geolocationPartialExplanation": "Um eine optimale Lokalisierung zu gewährleisten, müssen sie die Suchmethode 'Hohe Genauigkeit' verwenden.",
+		"geolocationPartial": "Die Standortermittlung ohne \"Hohe Genauigkeit\".",
+		"geolocationPartialExplanation": "Um eine optimale Lokalisierung zu gewährleisten, müssen sie die Suchmethode \"Hohe Genauigkeit\" verwenden.",
 		"offline": "Dein Handy ist offline",
 		"online": "Dein Handy ist online"
 	},
