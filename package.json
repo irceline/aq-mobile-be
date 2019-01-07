@@ -52,7 +52,7 @@
     "@ionic/storage": "^2.2.0",
     "@ngx-translate/http-loader": "^3.0.1",
     "@types/chart.js": "^2.7.42",
-    "chart.js": "^2.7.3",
+    "chart.js": "^2.7.2",
     "chartjs-plugin-annotation": "^0.5.7",
     "cordova-android": "7.1.4",
     "cordova-ios": "4.5.5",
