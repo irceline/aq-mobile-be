@@ -4,7 +4,7 @@
 	},
 	"air-quality-location-panel": {
 		"error": "Geen indexwaarde gevonden voor uw locatie",
-		"hint": "Gemodelleerde waarde voor uw locatie",
+		"hint": "Gemodelleerde luchtkwaliteitsindex voor uw locatie",
 		"loading": "BelAQI voor uw locatie aan het laden"
 	},
 	"annual-map": {

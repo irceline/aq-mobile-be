@@ -4,7 +4,7 @@
 	},
 	"air-quality-location-panel": {
 		"error": "Es konnte kein Index für dein Standort Could not get a Index for you location",
-		"hint": "Modelliert für deinen Standort",
+		"hint": "Modellierter Luftqualitätsindex für deinen Standort",
 		"loading": "Lädt den BelAQI für deinen Standort"
 	},
 	"annual-map": {

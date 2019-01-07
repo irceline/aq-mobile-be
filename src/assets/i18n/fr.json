@@ -4,7 +4,7 @@
 	},
 	"air-quality-location-panel": {
 		"error": "Pas d'indice obtenu pour votre position",
-		"hint": "Valeur modélisée pour votre position",
+		"hint": "Indice de qualité de l'air modélisé pour votre position",
 		"loading": "Chargement de BelAQI pour votre position"
 	},
 	"annual-map": {
