@@ -20,7 +20,8 @@
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
     <platform name="android">
-        <preference name="StatusBarOverlaysWebView" value="false" />
+        <preference name="StatusBarOverlaysWebView" value="true" />
+        <preference name="StatusBarStyle" value="lightcontent" />
         <allow-intent href="market:*" />
         <icon density="mdpi" src="resources/android/icon/drawable-mdpi-icon.png" />
         <icon density="hdpi" src="resources/android/icon/drawable-hdpi-icon.png" />
@@ -48,6 +49,7 @@
     </platform>
     <platform name="ios">
         <preference name="StatusBarOverlaysWebView" value="true" />
+        <preference name="StatusBarStyle" value="default" />
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
         <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
@@ -105,6 +107,6 @@
     <plugin name="cordova-plugin-app-version" spec="^0.1.9" />
     <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
     <plugin name="cordova-plugin-fcm-with-dependecy-updated" spec="^2.3.0" />
-    <engine name="ios" spec="4.5.5" />
     <engine name="android" spec="7.1.4" />
+    <engine name="ios" spec="^4.5.5" />
 </widget>
