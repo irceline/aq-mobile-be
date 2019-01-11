@@ -131,6 +131,7 @@ export class BelaqiChartComponent implements OnChanges {
 
   private drawData(ctx: CanvasRenderingContext2D, chart: Chart, belaqiTimeline: BelaqiTimelineEntry[]) {
     const gradientStroke = ctx.createLinearGradient(chart.chartArea.left, chart.chartArea.top, chart.chartArea.left, chart.chartArea.bottom);
+    const colorPalette = belaqiTimeline.map(e => this.belaqiIndex.getColorForIndex(e.index));
     gradientStroke.addColorStop(0.0, this.belaqiIndex.getColorForIndex(10));
     gradientStroke.addColorStop(0.11, this.belaqiIndex.getColorForIndex(9));
     gradientStroke.addColorStop(0.22, this.belaqiIndex.getColorForIndex(8));
@@ -143,10 +144,10 @@ export class BelaqiChartComponent implements OnChanges {
     gradientStroke.addColorStop(1.0, this.belaqiIndex.getColorForIndex(1));
     const dataset = chart.data.datasets[0];
     dataset.borderColor = gradientStroke;
-    dataset.pointBorderColor = gradientStroke;
-    dataset.pointBackgroundColor = gradientStroke;
-    dataset.pointHoverBackgroundColor = gradientStroke;
-    dataset.pointHoverBorderColor = gradientStroke;
+    dataset.pointBorderColor = colorPalette;
+    dataset.pointBackgroundColor = colorPalette;
+    dataset.pointHoverBackgroundColor = colorPalette;
+    dataset.pointHoverBorderColor = colorPalette;
     dataset.data = this.createDataArray(belaqiTimeline);
     chart.update();
   }

@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpService } from '@helgoland/core';
 import { TranslateService } from '@ngx-translate/core';
 import moment from 'moment';
-import { forkJoin, Observable, Observer } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { forkJoin, Observable, Observer, of } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 import { CategorizeValueToIndexProvider } from '../categorize-value-to-index/categorize-value-to-index';
 import { ModelledPhenomenon, ModelledValueProvider } from '../modelled-value/modelled-value';
@@ -187,7 +187,7 @@ export class BelaqiIndexProvider extends ValueProvider {
       time
     ]
     return forkJoin(
-      timestamps.map(ts => this.getValue(latitude, longitude, ts))
+      timestamps.map(ts => this.getValue(latitude, longitude, ts).pipe(map(res => res), catchError(e => of(null))))
     ).pipe(
       map(res => {
         const timelineEntries: BelaqiTimelineEntry[] = [];
