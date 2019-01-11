@@ -18,6 +18,7 @@ import { BelaqiUserLocationSliderComponent } from './belaqi-user-location-slider
 import { BelaqiWheelComponent } from './belaqi-wheel/belaqi-wheel';
 import { BelaqiWheelInformationComponent } from './belaqi-wheel/belaqi-wheel-information';
 import { CustomizePersonalAlertsComponent } from './customize-personal-alerts/customize-personal-alerts';
+import { CustomizedStationMapSelectorComponent } from './customized-station-map-selector/customized-station-map-selector';
 import {
 	MobileDatasetByStationSelectorComponent,
 } from './dataset-by-station-selector/dataset-by-station-selector.component';
@@ -73,6 +74,7 @@ import { UserLocationCreationComponent } from './user-location-creation/user-loc
 		BelaqiWheelComponent,
 		BelaqiWheelInformationComponent,
 		CustomizePersonalAlertsComponent,
+		CustomizedStationMapSelectorComponent,
 		ExtendedGeometryMapViewerComponent,
 		GeolocationEnabledIconComponent,
 		GeolocationEnabledIconPopupComponent,
@@ -131,6 +133,7 @@ import { UserLocationCreationComponent } from './user-location-creation/user-loc
 		BelaqiWheelComponent,
 		BelaqiWheelInformationComponent,
 		CustomizePersonalAlertsComponent,
+		CustomizedStationMapSelectorComponent,
 		ExtendedGeometryMapViewerComponent,
 		GeolocationEnabledIconComponent,
 		GeolocationEnabledIconPopupComponent,

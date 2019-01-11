@@ -2,12 +2,22 @@ import './boundary-canvas';
 
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { DatasetApiInterface, ParameterFilter, Phenomenon, Platform, SettingsService } from '@helgoland/core';
+import { DatasetApiInterface, ParameterFilter, Phenomenon, Platform, SettingsService, Station } from '@helgoland/core';
 import { GeoSearchOptions, LayerOptions, MapCache } from '@helgoland/map';
 import { TranslateService } from '@ngx-translate/core';
 import { ModalController, NavController, NavParams } from 'ionic-angular';
-import L, { BoundaryCanvasOptions, latLngBounds, LatLngExpression, popup } from 'leaflet';
+import L, {
+  BoundaryCanvasOptions,
+  CircleMarker,
+  circleMarker,
+  geoJSON,
+  latLngBounds,
+  LatLngExpression,
+  Layer,
+  popup,
+} from 'leaflet';
 import moment from 'moment';
+import { MarkerSelectorGenerator } from 'src/components/customized-station-map-selector/customized-station-map-selector';
 
 import { BelaqiSelection } from '../../components/belaqi-user-location-slider/belaqi-user-location-slider';
 import { ModalPhenomenonSelectorComponent } from '../../components/modal-phenomenon-selector/modal-phenomenon-selector';
@@ -96,6 +106,7 @@ export class MapPage {
   public selectedPhenomenon: Phenomenon;
   public nextStationPopup: L.Popup;
   public disabled: boolean;
+  public markerSelectorGenerator: MarkerSelectorGenerator;
 
   public legend: L.Control;
   private legendVisible: boolean = false;
@@ -120,6 +131,7 @@ export class MapPage {
     this.providerUrl = settings.datasetApis[0].url;
     this.clusterStations = settings.clusterStationsOnMap;
     this.statusIntervalDuration = settings.colorizedMarkerForLastMilliseconds;
+    this.markerSelectorGenerator = new MarkerSelectorGeneratorImpl(this.mapCache, this.mapId);
 
     this.setGeosearchOptions(settings);
     this.translateSrvc.onLangChange.subscribe(() => this.setGeosearchOptions);
@@ -411,6 +423,54 @@ export class MapPage {
         });
       }
     })
+  }
+
+}
+
+class MarkerSelectorGeneratorImpl implements MarkerSelectorGenerator {
+
+  constructor(
+    private mapCache: MapCache,
+    private mapId: string
+  ) { }
+
+  createFilledMarker(station: Station, color: string): Layer {
+    let geometry: Layer;
+    if (station.geometry.type === 'Point') {
+      const point = station.geometry as GeoJSON.Point;
+      geometry = circleMarker([point.coordinates[1], point.coordinates[0]], {
+        color: '#000',
+        fillColor: color,
+        fillOpacity: 0.8,
+        radius: this.calculateRadius(),
+        weight: 2
+      });
+      this.mapCache.getMap(this.mapId).on('zoomend', () => {
+        (geometry as CircleMarker).setRadius(this.calculateRadius());
+      })
+    } else {
+      geometry = geoJSON(station.geometry, {
+        style: (feature) => {
+          return {
+            color: '#000',
+            fillColor: color,
+            fillOpacity: 0.8,
+            weight: 2
+          };
+        }
+      });
+    }
+    return geometry;
+  };
+  
+  createDefaultFilledMarker(station: Station): Layer {
+    return this.createFilledMarker(station, '#fff');
+  };
+
+  private calculateRadius(): number {
+    const currentZoom = this.mapCache.getMap(this.mapId).getZoom();
+    if (currentZoom <= 7) return 6;
+    return currentZoom;
   }
 
 }
