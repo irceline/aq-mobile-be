@@ -9,7 +9,7 @@
   <div class="location-selection" *ngIf="location">
     <location-selection [mapOptions]="mapOptions" [location]="location" (locationChanged)="onLocationChanged($event)"></location-selection>
   </div>
-  <ion-list [hidden]="!locationLabel">
+  <ion-list [hidden]="!location">
     <ion-item>
       <ion-label stacked>{{'intro.three.locationLabelHint' | translate}}</ion-label>
       <ion-input type="text" [(ngModel)]="locationLabel" clearInput placeholder="{{'intro.three.locationLabelPlaceholder' | translate}}"></ion-input>

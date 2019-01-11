@@ -305,6 +305,8 @@
 	},
 	"user-location": {
 		"creation": {
+			"locate-error": "",
+			"location-mode-off": "",
 			"message": {
 				"added": "Localisation ajoutée",
 				"exists": "La localisation existe déjà"
