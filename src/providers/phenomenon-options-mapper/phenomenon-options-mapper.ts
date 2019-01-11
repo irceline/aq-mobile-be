@@ -12,7 +12,7 @@ const colorMapping = {
 }
 
 const seperateYAxisForPhenomenon = [
-  // '391' // BC
+  '391' // BC
 ]
 
 @Injectable()
