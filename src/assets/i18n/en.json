@@ -22,7 +22,10 @@
 		"create-new-location": "Create new location",
 		"current-location": "Current location",
 		"current-location-description": "The location where you are currently...",
-		"current-location-error": "Your device was not able to establish your current location. You could change the settings of the location service of your device to high accuracy mode. If you previously configured personal user locations, these should be available if you swipe this screen to the left.",
+		"current-location-error-header": "Your device was not able to establish your current location.",
+		"current-location-error-1": "You could change the settings of the location service of your device to high accuracy mode.",
+		"current-location-error-2": "If you previously configured personal user locations, these should be available if you swipe this screen to the left.",
+		"current-location-error-3": "Otherwise you can configure a location manually:",
 		"loading-current-location": "Your device is determining your current location",
 		"locate-delayed-information": "Your device was not able to establish your current location.",
 		"open-user-location": "Edit current locations"

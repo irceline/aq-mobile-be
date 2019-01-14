@@ -22,7 +22,10 @@
 		"create-new-location": "Erstelle einen neuen Standort",
 		"current-location": "Aktuelle Position",
 		"current-location-description": "Der Ort, an dem Sie sich gerade befinden...",
-		"current-location-error": "Ihr Gerät konnte Ihren aktuellen Standort nicht ermitteln. Sie können die Einstellungen Ihres Geräts auf den Modus hoher Genauigkeit ändern. Wenn Sie zuvor persönliche Benutzerstandorte konfiguriert haben, sollten diese verfügbar sein, wenn Sie diesen Bildschirm nach links streichen.",
+		"current-location-error-header": "Ihr Gerät konnte Ihren aktuellen Standort nicht ermitteln.",
+		"current-location-error-1": "Sie können die Einstellungen Ihres Geräts auf den Modus hoher Genauigkeit ändern.",
+		"current-location-error-2": "Wenn Sie zuvor persönliche Benutzerstandorte konfiguriert haben, sollten diese verfügbar sein, wenn Sie diesen Bildschirm nach links streichen.",
+		"current-location-error-3": "Ansonsten können Sie einen Standort manuell konfigurieren:",
 		"loading-current-location": "Ihr Gerät ermittelt Ihren aktuelle Standort",
 		"locate-delayed-information": "Ihr Gerät konnte Ihren aktuellen Standort nicht ermitteln.",
 		"open-user-location": "Editiere vorhandene Standorte"
