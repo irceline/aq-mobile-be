@@ -308,8 +308,8 @@
 	},
 	"user-location": {
 		"creation": {
-			"locate-error": "An error occured, while determining your current location",
-			"location-mode-off": "Please activate the location.",
+			"locate-error": "An error occurred, while determining your current location.",
+			"location-mode-off": "Please activate the location service of your device.",
 			"message": {
 				"added": "User location added",
 				"exists": "User location already exists"

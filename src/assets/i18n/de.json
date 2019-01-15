@@ -309,7 +309,7 @@
 	"user-location": {
 		"creation": {
 			"locate-error": "Bei der Standortermittlung ist ein Fehler aufgetreten.",
-			"location-mode-off": "Bitte aktivieren sie die Standortermittlung.",
+			"location-mode-off": "Bitte aktivieren sie die Standortermittlung Ihres Geräts.",
 			"message": {
 				"added": "Nutzerstandort erstellt",
 				"exists": "Nutzerstandort existiert bereits"

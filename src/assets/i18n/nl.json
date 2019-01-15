@@ -308,8 +308,8 @@
 	},
 	"user-location": {
 		"creation": {
-			"locate-error": "",
-			"location-mode-off": "",
+			"locate-error": "Er is een fout opgetreden bij het bepalen van uw huidige locatie.",
+			"location-mode-off": "Activeer alstublieft de locatiedienst van uw apparaat.",
 			"message": {
 				"added": "Locatie toegevoegd",
 				"exists": "Locatie bestaat al"
