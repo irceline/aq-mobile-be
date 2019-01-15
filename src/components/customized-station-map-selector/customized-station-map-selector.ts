@@ -90,10 +90,12 @@ export class CustomizedStationMapSelectorComponent extends MapSelectorComponent<
             }
           }
           if (!marker) { marker = this.createDefaultColoredMarker(ts.station); }
-          marker.on('click', () => {
-            this.onSelected.emit(ts.station);
-          });
-          this.markerFeatureGroup.addLayer(marker);
+          if (marker) {
+            marker.on('click', () => {
+              this.onSelected.emit(ts.station);
+            });
+            this.markerFeatureGroup.addLayer(marker);
+          }
         });
       });
 

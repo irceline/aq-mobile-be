@@ -173,6 +173,7 @@ import { UserLocationCreationComponent } from './user-location-creation/user-loc
 	],
 	entryComponents: [
 		BelaqiChartInformationComponent,
+		BelaqiLocateDelayedInformationComponent,
 		BelaqiWheelInformationComponent,
 		GeolocationEnabledIconPopupComponent,
 		LocatedValueNotificationComponent,

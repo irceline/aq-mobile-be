@@ -445,9 +445,11 @@ class MarkerSelectorGeneratorImpl implements MarkerSelectorGenerator {
         radius: this.calculateRadius(),
         weight: 2
       });
-      this.mapCache.getMap(this.mapId).on('zoomend', () => {
-        (geometry as CircleMarker).setRadius(this.calculateRadius());
-      })
+      if (this.mapCache.hasMap(this.mapId)) {
+        this.mapCache.getMap(this.mapId).on('zoomend', () => {
+          (geometry as CircleMarker).setRadius(this.calculateRadius());
+        })
+      }
     } else {
       geometry = geoJSON(station.geometry, {
         style: (feature) => {
@@ -468,9 +470,13 @@ class MarkerSelectorGeneratorImpl implements MarkerSelectorGenerator {
   };
 
   private calculateRadius(): number {
-    const currentZoom = this.mapCache.getMap(this.mapId).getZoom();
-    if (currentZoom <= 7) return 6;
-    return currentZoom;
+    if (this.mapCache.hasMap(this.mapId)) {
+      const currentZoom = this.mapCache.getMap(this.mapId).getZoom();
+      if (currentZoom <= 7) return 6;
+      return currentZoom;
+    } else {
+      return 6;
+    }
   }
 
 }
