@@ -89,7 +89,7 @@
 	"customize-personal-alerts": {
 		"active": "Aktivieren",
 		"alert-index-level": "Benachrichtigung ab BelAQI Level",
-		"alert-period": "Benachrichtigungsinterval",
+		"alert-period": "Verifikationsintervall Benachrichtigung",
 		"alert-sensitive-active": "Gesundheitsberatung für Menschen empfindlich für Luftverschmutzung",
 		"header": "Persönliche Benachrichtigungen",
 		"hint": "Hinweis: Zur Nutzung dieser Funktionalität, darf die App nicht komplett beendet werden. Für diese Funktionalität wird in dem gewünschten Interval einmalig der Standort ermittelt und zu diesem die modellierten Luftqualitätsdaten überprüft."
