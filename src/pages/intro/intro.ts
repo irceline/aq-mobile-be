@@ -31,7 +31,7 @@ export class IntroPage {
   }
 
   public closeSlides() {
-    this.navCtrl.setRoot(StartPage);
+    this.navCtrl.pop();
   }
 
   public languageChanged(lang: string) {
