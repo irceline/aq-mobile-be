@@ -139,7 +139,10 @@ export class MapPage {
     this.belaqiSelection = this.navParams.get('belaqiSelection') as BelaqiSelection;
 
     if (this.belaqiSelection) {
-      this.getPhenomenonFromAPI(this.belaqiSelection.phenomenonStation.phenomenonId);
+      const phenId = this.belaqiSelection.phenomenonStation.phenomenonId;
+      this.getPhenomenonFromAPI(phenId);
+      this.phenomenonLabel = this.getPhenomenonLabel(phenId);
+      this.showLayer();
     } else {
       this.onPhenomenonChange();
     }
@@ -256,6 +259,7 @@ export class MapPage {
   }
 
   public onPhenomenonChange(): void {
+    this.showLayer();
     if (this.nextStationPopup) { this.nextStationPopup.remove(); }
     const phenID = this.getPhenomenonID(this.phenomenonLabel);
     if (phenID) { this.getPhenomenonFromAPI(phenID) }
@@ -341,7 +345,6 @@ export class MapPage {
     this.selectedPhenomenon = selectedPhenomenon;
     this.setPhenomenonFilter();
     this.phenomenonLabel = this.getPhenomenonLabel(selectedPhenomenon.id);
-    this.showLayer();
   }
 
   private showLayer() {

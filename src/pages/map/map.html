@@ -38,14 +38,14 @@
       </div>
     </div>
     <div class="map-wrapper">
-      <div class="map" *ngIf="selectedPhenomenon">
+      <div class="map" *ngIf="phenomenonLabel">
         <customized-station-map-selector [mapId]="mapId" [serviceUrl]="providerUrl" [filter]="phenomenonFilter"
           [avoidZoomToSelection]="avoidZoomToSelection" [statusIntervals]="true" [ignoreStatusIntervalIfBeforeDuration]="statusIntervalDuration"
           [zoomControlOptions]="zoomControlOptions" [layerControlOptions]="layerControlOptions" [overlayMaps]="overlayMaps"
           [fitBounds]="fitBounds" [markerSelectorGenerator]="markerSelectorGenerator" (onSelected)="onStationSelected($event)"
           [cluster]="clusterStations" (onContentLoading)="onMapLoading($event)" (mapInitialized)="mapInitialized($event)"></customized-station-map-selector>
       </div>
-      <div class="error" *ngIf="!selectedPhenomenon">
+      <div class="error" *ngIf="!phenomenonLabel">
         {{'map.error' | translate}}
       </div>
     </div>
