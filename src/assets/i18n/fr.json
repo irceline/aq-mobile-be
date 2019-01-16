@@ -89,7 +89,7 @@
 	"customize-personal-alerts": {
 		"active": "Activer",
 		"alert-index-level": "Notification à partir de l'indice BelAQI",
-		"alert-period": "Période d'alerte",
+		"alert-period": "Intervalle de vérification d'alerte",
 		"alert-sensitive-active": "Conseils de santé pour les personnes sensibles à la pollution de l'air",
 		"header": "Alertes personnalisées",
 		"hint": "Attention: Ne pas fermer l'application pour utiliser cette fonction. Les alertes personnalisées sont déterminées pour toutes les positions sélectionnées et la période d'alerte choisie."
@@ -308,8 +308,8 @@
 	},
 	"user-location": {
 		"creation": {
-			"locate-error": "",
-			"location-mode-off": "",
+			"locate-error": "Une erreur est survenue lors de la détermination de votre position actuelle.",
+			"location-mode-off": "Veuillez activer le service de localisation de votre appareil.",
 			"message": {
 				"added": "Localisation ajoutée",
 				"exists": "La localisation existe déjà"

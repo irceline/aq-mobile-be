@@ -89,7 +89,7 @@
 	"customize-personal-alerts": {
 		"active": "activeer",
 		"alert-index-level": "Melding vanaf BelAQI-niveau",
-		"alert-period": "interval melding",
+		"alert-period": "verificatieinterval melding",
 		"alert-sensitive-active": "Gezondheidsadviezen voor personen gevoelig aan luchtvervuiling",
 		"header": "Gepersonaliseerde meldingen",
 		"hint": "Tip: om deze functionaliteit te kunnen gebruiken, moet de app op de achtergrond blijven lopen. Je locatie wordt één keer bepaald voor het gekozen tijdsinterval en vervolgens wordt de luchtkwaliteit bepaald."
@@ -308,8 +308,8 @@
 	},
 	"user-location": {
 		"creation": {
-			"locate-error": "",
-			"location-mode-off": "",
+			"locate-error": "Er is een fout opgetreden bij het bepalen van uw huidige locatie.",
+			"location-mode-off": "Activeer alstublieft de locatiedienst van uw apparaat.",
 			"message": {
 				"added": "Locatie toegevoegd",
 				"exists": "Locatie bestaat al"

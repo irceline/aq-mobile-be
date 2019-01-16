@@ -89,7 +89,7 @@
 	"customize-personal-alerts": {
 		"active": "Aktivieren",
 		"alert-index-level": "Benachrichtigung ab BelAQI Level",
-		"alert-period": "Benachrichtigungsinterval",
+		"alert-period": "Verifikationsintervall Benachrichtigung",
 		"alert-sensitive-active": "Gesundheitsberatung für Menschen empfindlich für Luftverschmutzung",
 		"header": "Persönliche Benachrichtigungen",
 		"hint": "Hinweis: Zur Nutzung dieser Funktionalität, darf die App nicht komplett beendet werden. Für diese Funktionalität wird in dem gewünschten Interval einmalig der Standort ermittelt und zu diesem die modellierten Luftqualitätsdaten überprüft."
@@ -309,7 +309,7 @@
 	"user-location": {
 		"creation": {
 			"locate-error": "Bei der Standortermittlung ist ein Fehler aufgetreten.",
-			"location-mode-off": "Bitte aktivieren sie die Standortermittlung.",
+			"location-mode-off": "Bitte aktivieren sie die Standortermittlung Ihres Geräts.",
 			"message": {
 				"added": "Nutzerstandort erstellt",
 				"exists": "Nutzerstandort existiert bereits"

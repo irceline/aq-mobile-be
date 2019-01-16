@@ -99,7 +99,7 @@ export class LocateProvider {
     return new Observable((observer: Observer<Geoposition>) => {
       this.platform.ready().then(() => {
         this.geolocate.getCurrentPosition({
-          timeout: 15000
+          timeout: 30000
         }).then(res => {
           observer.next(res);
           observer.complete();
