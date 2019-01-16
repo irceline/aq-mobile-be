@@ -5,10 +5,10 @@ import { map } from 'rxjs/operators';
 
 const colorMapping = {
   '391': '#000000', // BC
-  '8': '#FF8000', // NO2
+  '8': '#FFA405', // NO2
   '7': '#0000FF', // O3
   '5': '#00E600', // PM10
-  '6001': '#FF0000', // PM25
+  '6001': '#FF0010', // PM25
 }
 
 const seperateYAxisForPhenomenon = [
