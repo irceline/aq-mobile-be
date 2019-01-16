@@ -4,11 +4,11 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 const colorMapping = {
-  '391': '#224444', // BC
-  '8': '#5522CC', // NO2
-  '7': '#227799', // O3
-  '5': '#777711', // PM10
-  '6001': '#55AA00', // PM25
+  '391': '#000000', // BC
+  '8': '#FF8000', // NO2
+  '7': '#0000FF', // O3
+  '5': '#00E600', // PM10
+  '6001': '#FF0000', // PM25
 }
 
 const seperateYAxisForPhenomenon = [
