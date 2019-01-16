@@ -21,7 +21,7 @@
 	"belaqi-user-location-slider": {
 		"create-new-location": "Create new location",
 		"current-location": "Current location",
-		"current-location-description": "The location where you are currently...",
+		"current-location-description": "Activate this option to display air quality data for your current location.",
 		"current-location-error-header": "Your device was not able to establish your current location.",
 		"current-location-error-1": "You could change the settings of the location service of your device to high accuracy mode.",
 		"current-location-error-2": "If you previously configured personal user locations, these should be available if you swipe this screen to the left.",
@@ -92,7 +92,7 @@
 		"alert-period": "Verification interval alert",
 		"alert-sensitive-active": "Health advice for people sensitive to air pollution",
 		"header": "Personal alerts",
-		"hint": "Hint: To use this functionality, the app needs to keep running in the background. Your location is determined once for the choosen time interval and then the air quality will be checked."
+		"hint": "To use this functionality, the app needs to keep running in the background. Your location is only determined once for the choosen verification interval if you want to have the air quality checked for your current location. All personally configured locations will also be checked."
 	},
 	"diagram": {
 		"header": "Diagram",

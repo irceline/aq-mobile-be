@@ -21,7 +21,7 @@
 	"belaqi-user-location-slider": {
 		"create-new-location": "Erstelle einen neuen Standort",
 		"current-location": "Aktuelle Position",
-		"current-location-description": "Der Ort, an dem Sie sich gerade befinden...",
+		"current-location-description": "Aktivieren Sie diese Option, um Luftqualitätsdaten für Ihren aktuellen Standort anzuzeigen.",
 		"current-location-error-header": "Ihr Gerät konnte Ihren aktuellen Standort nicht ermitteln.",
 		"current-location-error-1": "Sie können die Einstellungen Ihres Geräts auf den Modus hoher Genauigkeit ändern.",
 		"current-location-error-2": "Wenn Sie zuvor persönliche Benutzerstandorte konfiguriert haben, sollten diese verfügbar sein, wenn Sie diesen Bildschirm nach links streichen.",
@@ -92,7 +92,7 @@
 		"alert-period": "Verifikationsintervall Benachrichtigung",
 		"alert-sensitive-active": "Gesundheitsberatung für Menschen empfindlich für Luftverschmutzung",
 		"header": "Persönliche Benachrichtigungen",
-		"hint": "Hinweis: Zur Nutzung dieser Funktionalität, darf die App nicht komplett beendet werden. Für diese Funktionalität wird in dem gewünschten Interval einmalig der Standort ermittelt und zu diesem die modellierten Luftqualitätsdaten überprüft."
+		"hint": "Um diese Funktion nutzen zu können, muss die App im Hintergrund laufen bleiben. Ihr Standort wird nur einmal für den ausgewählte Überprüfungsintervall bestimmt, wenn die Luftqualität für Ihren aktuellen Standort überprüft werden soll. Alle persönlich konfigurierten Standorte werden ebenfalls überprüft."
 	},
 	"diagram": {
 		"header": "Diagramm",

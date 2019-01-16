@@ -21,7 +21,7 @@
 	"belaqi-user-location-slider": {
 		"create-new-location": "Maak een nieuwe locatie aan",
 		"current-location": "Huidige locatie",
-		"current-location-description": "De locatie waar je momenteel bent...",
+		"current-location-description": "Activeer deze optie om luchtkwaliteitsgegevens voor u huidige locatie weer te geven.",
 		"current-location-error-header": "Uw apparaat heeft uw huidige locatie niet kunnen vaststellen.",
 		"current-location-error-1": "U zou de instellingen van de locatiedienst van uw apparaat naar hoge nauwkeurigheidsmodus kunnen veranderen.",
 		"current-location-error-2": "Als u eerder persoonlijke gebruikerslocaties hebt geconfigureerd, zijn deze beschikbaar als u dit scherm naar links veegt.",
@@ -92,7 +92,7 @@
 		"alert-period": "verificatieinterval melding",
 		"alert-sensitive-active": "Gezondheidsadviezen voor personen gevoelig aan luchtvervuiling",
 		"header": "Gepersonaliseerde meldingen",
-		"hint": "Tip: om deze functionaliteit te kunnen gebruiken, moet de app op de achtergrond blijven lopen. Je locatie wordt één keer bepaald voor het gekozen tijdsinterval en vervolgens wordt de luchtkwaliteit bepaald."
+		"hint": "Om deze functionaliteit te gebruiken, moet de app op de achtergrond blijven draaien. Uw locatie wordt slechts één keer bepaald voor het gekozen verificatieinterval als u de luchtkwaliteit op uw huidige locatie wilt controleren. Alle persoonlijk geconfigureerde locaties worden ook gecontroleerd."
 	},
 	"diagram": {
 		"header": "diagram",
