@@ -196,7 +196,7 @@
 		"geolocationEnabled": "Geolocatie is geactiveerd",
 		"geolocationEnabledExplanation": "De \"huidige locatie\"-functionaliteiten zijn voor u beschikbaar.",
 		"geolocationPartial": "Geolocatie zonder \"hoge precisie\"",
-		"geolocationPartialExplanation": "Om een optimale bepaling van u locatie te hebben, activeer de locatiemethode \"hoge precisie\".",
+		"geolocationPartialExplanation": "Om een optimale bepaling van uw locatie te hebben, activeer de locatiemethode \"hoge precisie\".",
 		"offline": "U toestel is offline",
 		"online": "U toestel is online"
 	},
