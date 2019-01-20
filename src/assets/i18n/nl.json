@@ -45,7 +45,7 @@
 			"poor": "onder- maats",
 			"very-bad": "zeer slecht",
 			"very-good": "zeer goed",
-			"very-poor": "zeer slecht"
+			"very-poor": "vrij slecht"
 		},
 		"level": {
 			"bad": "slecht",
@@ -57,7 +57,7 @@
 			"poor": "ondermaats",
 			"very-bad": "zeer slecht",
 			"very-good": "zeer goed",
-			"very-poor": "zeer slecht"
+			"very-poor": "vrij slecht"
 		}
 	},
 	"change-timespan": {
