@@ -40,7 +40,7 @@ export class CategorizeValueToIndexProvider {
     if (value <= 60) return 6;
     if (value <= 70) return 7;
     if (value <= 80) return 8;
-    if (value <= 90) return 9;
+    if (value <= 100) return 9;
     return 10;
   }
 
