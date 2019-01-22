@@ -243,12 +243,12 @@ export class BelaqiIndexProvider extends ValueProvider {
         // calculate post entries
         // calculate difference between current modelled and out of the latest Obs to the same time
         const matchingValue = this.findMatchingTime(latestObs, time);
-        const difference = res - matchingValue;
+        // const difference = res - matchingValue;
         // calculate the new values and add them to the timeline entries
         let nextHour = moment(time).add(1, 'hours').toDate();
         let nextTrend = this.findMatchingTime(trend, nextHour);
         while (nextTrend) {
-          const nextValue = matchingValue * nextTrend + difference;
+          const nextValue = matchingValue * nextTrend;
           timelineEntries.push({
             timestamp: nextHour,
             index: this.categorizeValueToIndex.categorize(nextValue, phenomenon)
