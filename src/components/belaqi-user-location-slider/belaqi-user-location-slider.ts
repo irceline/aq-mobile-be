@@ -3,7 +3,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { ModalController, NavController, PopoverController, Slides, Toggle } from 'ionic-angular';
 
 import { SettingsPage } from '../../pages/settings/settings';
-import { BelaqiIndexProvider } from '../../providers/belaqi/belaqi';
 import { IrcelineSettings, IrcelineSettingsProvider } from '../../providers/irceline-settings/irceline-settings';
 import { LocateProvider } from '../../providers/locate/locate';
 import { NetworkAlertProvider } from '../../providers/network-alert/network-alert';
@@ -58,7 +57,6 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
   public currentLocationError: string;
 
   constructor(
-    private belaqiIndexProvider: BelaqiIndexProvider,
     private userLocationProvider: UserLocationListProvider,
     private locatedTimeseriesProvider: LocatedTimeseriesService,
     private ircelineSettings: IrcelineSettingsProvider,
@@ -205,7 +203,6 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
       latitude: loc.latitude,
       longitude: loc.longitude
     };
-    this.belaqiIndexProvider.getValue(loc.latitude, loc.longitude).subscribe(res => this.belaqiLocations[i].index = res, error => this.handleError(loc.longitude, loc.latitude, error));
   }
 
   private handleError(lon: number, lat: number, error: any) {

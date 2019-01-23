@@ -11,7 +11,6 @@ import { LocateProvider, LocationMode } from '../locate/locate';
 
 export interface UserLocation {
   id?: number;
-  index?: number;
   label?: string;
   type: 'user' | 'current';
   isCurrentVisible?: boolean;

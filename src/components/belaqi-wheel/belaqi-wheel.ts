@@ -20,10 +20,17 @@ interface ExtendedChartOptions extends ChartOptions {
 export class BelaqiWheelComponent extends LanguageChangNotifier implements AfterContentInit, OnChanges {
 
   @Input()
-  public index: number;
+  public latitude: number;
+
+  @Input()
+  public longitude: number;
 
   @ViewChild('belaqiWheel') belaqiWheelCanvas: ElementRef;
   belaqiWheel: Chart;
+
+  public index: number;
+  public error: boolean = false;
+  public loading: boolean = false;
 
   constructor(
     private belaqi: BelaqiIndexProvider,
@@ -42,8 +49,26 @@ export class BelaqiWheelComponent extends LanguageChangNotifier implements After
   }
 
   public ngOnChanges(changes: SimpleChanges) {
-    if (changes.index) {
-      this.drawWheel();
+    if (changes.latitude || changes.longitude) {
+      this.fetchIndex();
+    }
+  }
+
+  public fetchIndex() {
+    if (this.latitude && this.longitude) {
+      this.loading = true;
+      this.belaqi.getValue(this.latitude, this.longitude)
+        .subscribe(
+          res => {
+            this.index = res;
+            this.loading = false;
+            this.drawWheel();
+          },
+          error => {
+            this.error = true;
+            this.loading = false;
+          }
+        );
     }
   }
 

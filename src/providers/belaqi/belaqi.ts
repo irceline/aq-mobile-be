@@ -3,7 +3,7 @@ import { HttpService } from '@helgoland/core';
 import { TranslateService } from '@ngx-translate/core';
 import moment from 'moment';
 import { forkJoin, Observable, Observer, of } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 import { CategorizeValueToIndexProvider } from '../categorize-value-to-index/categorize-value-to-index';
 import { ModelledPhenomenon, ModelledValueProvider } from '../modelled-value/modelled-value';
@@ -70,10 +70,8 @@ export class BelaqiIndexProvider extends ValueProvider {
           if (res.features[0].properties['GRAY_INDEX']) {
             return res.features[0].properties['GRAY_INDEX'];
           }
-          return 0;
-        } else {
-          throw new Error('No value returned');
         }
+        return 0;
       })
     )
   }

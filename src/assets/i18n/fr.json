@@ -22,15 +22,17 @@
 		"create-new-location": "Ajouter une nouvelle localisation",
 		"current-location": "Localisation actuelle",
 		"current-location-description": "Activez cette option pour afficher les données sur la qualité de l’air pour votre position actuelle.",
-		"current-location-error-header": "Votre appareil n'a pas pu établir votre position actuelle.",
 		"current-location-error-1": "Vous pouvez modifier les paramètres du service de localisation de votre appareil en mode haute précision.",
 		"current-location-error-2": "Si vous avez précédemment configuré des localisations personnalisées, ceux-ci devraient être disponibles en glissant cet écran vers la gauche.",
 		"current-location-error-3": "Sinon, vous pouvez configurer un emplacement manuellement:",
+		"current-location-error-header": "Votre appareil n'a pas pu établir votre position actuelle.",
 		"loading-current-location": "Votre appareil cherche actuellement votre position",
 		"locate-delayed-information": "Votre appareil n'a pas pu établir votre position actuelle.",
 		"open-user-location": "Modifier les localisations"
 	},
 	"belaqi-wheel": {
+		"error-occured": "",
+		"loading": "",
 		"modelled-hint": "Indice de qualité de l'air modélisé pour cette position",
 		"no-index-ascertained": "Aucun indice BelAQI n'a pu être déterminé. Cela peut être le cas si votre localisation n'est pas en Belgique."
 	},

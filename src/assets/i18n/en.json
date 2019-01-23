@@ -22,15 +22,17 @@
 		"create-new-location": "Create new location",
 		"current-location": "Current location",
 		"current-location-description": "Activate this option to display air quality data for your current location.",
-		"current-location-error-header": "Your device was not able to establish your current location.",
 		"current-location-error-1": "You could change the settings of the location service of your device to high accuracy mode.",
 		"current-location-error-2": "If you previously configured personal user locations, these should be available if you swipe this screen to the left.",
 		"current-location-error-3": "Otherwise you can configure a location manually:",
+		"current-location-error-header": "Your device was not able to establish your current location.",
 		"loading-current-location": "Your device is determining your current location",
 		"locate-delayed-information": "Your device was not able to establish your current location.",
 		"open-user-location": "Edit current locations"
 	},
 	"belaqi-wheel": {
+		"error-occured": "It is taking longer than usual to fetch the data. Please try again later.",
+		"loading": "Load the BelAQI index...",
 		"modelled-hint": "Modelled air quality index for this location",
 		"no-index-ascertained": "No BelAQI index could be ascertained. This can be the case that the location is not in Belgium."
 	},

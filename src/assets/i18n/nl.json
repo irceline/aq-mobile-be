@@ -22,15 +22,17 @@
 		"create-new-location": "Maak een nieuwe locatie aan",
 		"current-location": "Huidige locatie",
 		"current-location-description": "Activeer deze optie om luchtkwaliteitsgegevens voor u huidige locatie weer te geven.",
-		"current-location-error-header": "Uw apparaat heeft uw huidige locatie niet kunnen vaststellen.",
 		"current-location-error-1": "U zou de instellingen van de locatiedienst van uw apparaat naar hoge nauwkeurigheidsmodus kunnen veranderen.",
 		"current-location-error-2": "Als u eerder persoonlijke gebruikerslocaties hebt geconfigureerd, zijn deze beschikbaar als u dit scherm naar links veegt.",
 		"current-location-error-3": "Anders kunt u een locatie handmatig configureren:",
+		"current-location-error-header": "Uw apparaat heeft uw huidige locatie niet kunnen vaststellen.",
 		"loading-current-location": "Uw apparaat bepaalt uw huidige locatie",
 		"locate-delayed-information": "Uw apparaat heeft uw huidige locatie niet kunnen vaststellen.",
 		"open-user-location": "Bewerk de huidige locaties"
 	},
 	"belaqi-wheel": {
+		"error-occured": "",
+		"loading": "",
 		"modelled-hint": "Gemodelleerde luchtkwaliteitsindex voor deze locatie",
 		"no-index-ascertained": "Er kon geen BelAQI-index worden berekend. Dit kan het geval zijn wanneer de locatie niet in België ligt."
 	},
