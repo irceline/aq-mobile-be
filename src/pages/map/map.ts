@@ -282,6 +282,7 @@ export class MapPage {
   private getPhenomenonLabel(id: string): PhenomenonLabel {
     const phen = phenomenonMapping.find(e => id === e.id);
     if (phen) return phen.label;
+    return PhenomenonLabel.OTHERS;
   }
 
   private getPhenomenonLegendId(id: string): string {

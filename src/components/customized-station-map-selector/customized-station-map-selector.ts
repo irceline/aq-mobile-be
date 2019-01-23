@@ -65,8 +65,6 @@ export class CustomizedStationMapSelectorComponent extends MapSelectorComponent<
     if (this.map && this.markerFeatureGroup) { this.map.removeLayer(this.markerFeatureGroup); }
     if (this.statusIntervals && this.filter && this.filter.phenomenon) {
       this.createValuedMarkers();
-    } else {
-      this.createStationGeometries();
     }
   }
 
