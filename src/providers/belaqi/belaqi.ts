@@ -204,9 +204,9 @@ export class BelaqiIndexProvider extends ValueProvider {
     return new Observable((observer: Observer<BelaqiTimelineEntry[]>) => {
       this.getTrends().subscribe(trend => {
         forkJoin([
-          this.createFuturePhenomenonTimeline(latitude, longitude, time, ModelledPhenomenon.o3, trend["latest observations"].o3, trend.trend.o3),
-          this.createFuturePhenomenonTimeline(latitude, longitude, time, ModelledPhenomenon.pm10, trend["latest observations"].pm10, trend.trend.pm10),
-          this.createFuturePhenomenonTimeline(latitude, longitude, time, ModelledPhenomenon.pm25, trend["latest observations"].pm25, trend.trend.pm25)
+          this.createFuturePhenomenonTimeline(latitude, longitude, time, ModelledPhenomenon.o3, trend.trend.o3),
+          this.createFuturePhenomenonTimeline(latitude, longitude, time, ModelledPhenomenon.pm10, trend.trend.pm10),
+          this.createFuturePhenomenonTimeline(latitude, longitude, time, ModelledPhenomenon.pm25, trend.trend.pm25)
         ]).pipe(map(res => {
           return res[0].map((entry, i) => {
             // TODO maybe create a better merge function
@@ -231,22 +231,17 @@ export class BelaqiIndexProvider extends ValueProvider {
     longitude: number,
     time: Date,
     phenomenon: ModelledPhenomenon,
-    latestObs: [Date, number][],
     trend: [Date, number][]
   ): Observable<BelaqiTimelineEntry[]> {
     return this.modelledValueProvider.getValue(latitude, longitude, time, phenomenon).pipe(
-      map(res => {
+      map(currentValue => {
         // map results to timeline entries
         const timelineEntries = [];
-        // calculate post entries
-        // calculate difference between current modelled and out of the latest Obs to the same time
-        const matchingValue = this.findMatchingTime(latestObs, time);
-        // const difference = res - matchingValue;
         // calculate the new values and add them to the timeline entries
         let nextHour = moment(time).add(1, 'hours').toDate();
         let nextTrend = this.findMatchingTime(trend, nextHour);
         while (nextTrend) {
-          const nextValue = matchingValue * nextTrend;
+          const nextValue = currentValue * nextTrend;
           timelineEntries.push({
             timestamp: nextHour,
             index: this.categorizeValueToIndex.categorize(nextValue, phenomenon)
