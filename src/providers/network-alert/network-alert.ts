@@ -46,7 +46,8 @@ export class NetworkAlertProvider {
     this.alert = this.alertCtrl.create({
       title: this.translate.instant('no-network-connection.header'),
       message: this.translate.instant('no-network-connection.body'),
-      enableBackdropDismiss: false
+      enableBackdropDismiss: false,
+      buttons: ['no-network-connection.close']
     });
     this.alert.present();
   }

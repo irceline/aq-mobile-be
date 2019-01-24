@@ -204,7 +204,8 @@
 	},
 	"no-network-connection": {
 		"body": "Uw apparaat heeft geen gegevensnetwerkverbinding. De BelAir-app is sterk afhankelijk van het ophalen van nieuwe gegevens van onze servers. Activeer alstublieft een datanetwerk (mobiele data- of wifi-verbinding) en ververs de app of probeer het opnieuw wanneer u binnen bereik bent van een datanetwerk waartoe u toegang hebt.",
-		"header": "Geen dataverbinding"
+		"header": "Geen dataverbinding",
+		"close": "Sluiten"
 	},
 	"personal-alert": {
 		"index-1": {

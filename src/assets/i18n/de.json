@@ -204,7 +204,8 @@
 	},
 	"no-network-connection": {
 		"body": "Ihr Gerät hat keine Datennetzwerkverbindung. Die BelAir-App hängt stark davon ab, dass frische Daten von unseren Servern abgerufen werden. Aktivieren Sie ein Datennetzwerk (mobile Daten- oder WLAN-Verbindung) und aktualisieren Sie die App oder versuchen Sie es erneut, wenn Sie sich in Reichweite eines Datennetzwerks befinden, auf das Sie Zugriff haben.",
-		"header": "Keine Datenverbindung"
+		"header": "Keine Datenverbindung",
+		"close": "Schließen"
 	},
 	"personal-alert": {
 		"index-1": {
