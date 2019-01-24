@@ -207,14 +207,14 @@ export class BelaqiIndexProvider extends ValueProvider {
           this.createFuturePhenomenonTimeline(latitude, longitude, time, ModelledPhenomenon.o3, trend.trend.o3),
           this.createFuturePhenomenonTimeline(latitude, longitude, time, ModelledPhenomenon.pm10, trend.trend.pm10),
           this.createFuturePhenomenonTimeline(latitude, longitude, time, ModelledPhenomenon.pm25, trend.trend.pm25)
-        ]).pipe(map(res => {
-          return res[0].map((entry, i) => {
-            // TODO maybe create a better merge function
+        ]).pipe(map(forecasts => {
+          // find the max of each entry
+          return forecasts[0].map((entry, i) => {
             return {
               timestamp: entry.timestamp,
-              index: entry.index > res[1][i].index ? entry.index : res[1][i].index
+              index: Math.max(...forecasts.map(e => e[i].index))
             };
-          });
+          })
         })).subscribe(res => {
           observer.next(res);
           observer.complete();
