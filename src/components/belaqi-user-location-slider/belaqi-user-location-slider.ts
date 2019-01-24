@@ -75,8 +75,9 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
   }
 
   public ngAfterViewInit(): void {
+    this.setHeight();
     if (this.slider) {
-      this.slider.autoHeight = false;
+      this.slider.autoHeight = true;
     }
   }
 
@@ -102,15 +103,7 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
 
   public slideChanged() {
     let currentIndex = this.slider.getActiveIndex();
-    const slide = this.slider._slides[currentIndex];
-    if (slide) {
-      this.slidesHeight = slide.clientHeight + 'px';
-    }
     this.updateLocationSelection(currentIndex);
-  }
-
-  public slideWillChange() {
-    this.slidesHeight = 'auto';
   }
 
   public toggle(toggle: Toggle) {
@@ -121,16 +114,21 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
     this.nav.push(SettingsPage);
   }
 
+  private setHeight() {
+    const outerElem = document.querySelector('.scroll-content');
+    const headerHeight = document.querySelector('.location-header').clientHeight;
+    const height = outerElem.clientHeight - headerHeight - (13 * 2) - 19;
+    this.slidesHeight = `${height}px`;
+  }
+
   private updateLocationSelection(idx: number) {
     this.setHeader(idx);
     if (this.slider) {
-      const height = window.outerHeight - this.getYPosition(this.slider.container);
+      this.setHeight();
       if (idx <= this.belaqiLocations.length - 1) {
         this.locatedTimeseriesProvider.setSelectedIndex(idx);
         this.locatedTimeseriesProvider.removeAllDatasets();
       } else {
-        // 58 is the height of the header without padding/margin
-        this.slidesHeight = `${height + 58}px`;
         this.headerContent.emit(null);
       }
     }

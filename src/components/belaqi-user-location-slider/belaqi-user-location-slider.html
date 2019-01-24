@@ -1,5 +1,5 @@
-<ion-slides pager #slider (ionSlideDidChange)="slideChanged()" (ionSlideWillChange)="slideWillChange()" [ngStyle]="{'height': slidesHeight}">
-  <ion-slide *ngFor="let loc of belaqiLocations">
+<ion-slides pager #slider (ionSlideDidChange)="slideChanged()">
+  <ion-slide *ngFor="let loc of belaqiLocations" [ngStyle]="{'min-height': slidesHeight}">
     <div *ngIf="loc.latitude">
       <div class="wheel">
         <belaqi-wheel [latitude]="loc.latitude" [longitude]="loc.longitude"></belaqi-wheel>
@@ -25,7 +25,7 @@
       </div>
     </div>
   </ion-slide>
-  <ion-slide>
+  <ion-slide [ngStyle]="{'min-height': slidesHeight}">
     <div class="create-new-location-slide">
       <div>
         <button ion-button outline text-wrap (click)="createNewLocation()">{{'belaqi-user-location-slider.create-new-location' |

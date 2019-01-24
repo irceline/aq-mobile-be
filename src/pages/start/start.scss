@@ -20,6 +20,9 @@ page-start {
   }
 
   ion-content {
+    .location-header {
+      height: 84px;
+    }
     .ion-affix {
       margin: 0 10px;
       border-bottom: 1px solid #dedede;
