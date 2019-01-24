@@ -32,7 +32,7 @@
 	},
 	"belaqi-wheel": {
 		"error-occured": "It is taking longer than usual to fetch the data. Please try again later.",
-		"loading": "Load the BelAQI index...",
+		"loading": "Loading the BelAQI index...",
 		"modelled-hint": "Modelled air quality index for this location",
 		"no-index-ascertained": "No BelAQI index could be ascertained. This can be the case that the location is not in Belgium."
 	},

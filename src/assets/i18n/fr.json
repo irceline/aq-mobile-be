@@ -31,8 +31,8 @@
 		"open-user-location": "Modifier les localisations"
 	},
 	"belaqi-wheel": {
-		"error-occured": "",
-		"loading": "",
+		"error-occured": "Il faut plus de temps que d'habitude pour récupérer les données. Veuillez réessayer plus tard.",
+		"loading": "En train de charger l'index BelAQI ...",
 		"modelled-hint": "Indice de qualité de l'air modélisé pour cette position",
 		"no-index-ascertained": "Aucun indice BelAQI n'a pu être déterminé. Cela peut être le cas si votre localisation n'est pas en Belgique."
 	},

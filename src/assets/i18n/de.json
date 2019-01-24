@@ -32,7 +32,7 @@
 	},
 	"belaqi-wheel": {
 		"error-occured": "Es dauert länger als üblich um den BelAQI index zu ermittlen. Bitte versuchen Sie es später erneut.",
-		"loading": "Läd den BelAQI Index...",
+		"loading": "BelAQI-Index wird geladen ...",
 		"modelled-hint": "Modellierter Luftqualitätsindex für diesen Standort",
 		"no-index-ascertained": "Es konnte kein BelAQI index ermittelt werden. Dies könnte damit zusammenhängen, das der Standort nicht innerhalb Belgien's liegt."
 	},
