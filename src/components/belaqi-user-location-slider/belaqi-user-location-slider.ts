@@ -81,7 +81,7 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit {
     }
     setTimeout(() => {
       document.querySelector('.swiper-wrapper')['style'].height = 'auto';
-    }, 500)
+    }, 2000)
   }
 
   public selectPhenomenon(selection: PhenomenonLocationSelection, userlocation: UserLocation) {
