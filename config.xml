@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="673" id="be.irceline.aqmobile" version="0.6.7" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-versionCode="685" id="be.irceline.aqmobile" version="0.6.8" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>BelAir</name>
     <description>Personalised air quality data throughout Belgium</description>
     <author email="belair@irceline.be" href="http://www.irceline.be/">The BelAir Team</author>
@@ -109,4 +109,5 @@
     <plugin name="cordova-plugin-fcm-with-dependecy-updated" spec="^2.3.0" />
     <engine name="android" spec="7.1.4" />
     <engine name="ios" spec="4.5.5" />
+    <engine name="browser" spec="5.0.4" />
 </widget>
