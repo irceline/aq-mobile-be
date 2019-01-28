@@ -130,6 +130,7 @@ export class ModalAnnualMapComponent {
         layers: layerId,
         transparent: true,
         format: 'image/png',
+        tiled: 'true',
         opacity: 0.7,
         useBoundaryGreaterAsZoom: 12
       }

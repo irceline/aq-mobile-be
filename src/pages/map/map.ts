@@ -415,6 +415,7 @@ export class MapPage {
           layers: layerId,
           transparent: true,
           format: 'image/png',
+          tiled: 'true',
           opacity: 0.7,
           boundary: geojson,
           useBoundaryGreaterAsZoom: 12
@@ -468,7 +469,7 @@ class MarkerSelectorGeneratorImpl implements MarkerSelectorGenerator {
     }
     return geometry;
   };
-  
+
   createDefaultFilledMarker(station: Station): Layer {
     return this.createFilledMarker(station, '#fff');
   };

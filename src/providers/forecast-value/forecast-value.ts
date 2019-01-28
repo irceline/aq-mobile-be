@@ -23,7 +23,6 @@ export class ForecastValueProvider extends ValueProvider {
       version: '1.1.1',
       layers: 'no2_maxhmean',
       info_format: 'application/json',
-      tiled: 'true',
       time: moment(time).format('YYYY-MM-DD'),
       width: '1',
       height: '1',
