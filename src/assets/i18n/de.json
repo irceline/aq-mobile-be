@@ -318,5 +318,8 @@
 				"exists": "Nutzerstandort existiert bereits"
 			}
 		}
+	},
+	"located-value-notification": {
+		"title": "BelAQI-Index"
 	}
 }

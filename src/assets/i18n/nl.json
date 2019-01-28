@@ -318,5 +318,8 @@
 				"exists": "Locatie bestaat al"
 			}
 		}
+	},
+	"located-value-notification": {
+		"title": "BelAQI index"
 	}
 }
