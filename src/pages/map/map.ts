@@ -142,6 +142,7 @@ export class MapPage {
       const phenId = this.belaqiSelection.phenomenonStation.phenomenonId;
       this.getPhenomenonFromAPI(phenId);
       this.phenomenonLabel = this.getPhenomenonLabel(phenId);
+      this.setDisabled();
       this.showLayer();
     } else {
       this.onPhenomenonChange();
