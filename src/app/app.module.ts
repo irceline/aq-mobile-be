@@ -1,5 +1,5 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { APP_INITIALIZER, ErrorHandler, Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HelgolandCachingModule } from '@helgoland/caching';
 import { DatasetApiInterface, SettingsService, SplittedDataDatasetApiInterface } from '@helgoland/core';
@@ -23,7 +23,7 @@ import { Network } from '@ionic-native/network';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule } from '@ionic/storage';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { IonAffixModule } from 'ion-affix';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -41,7 +41,7 @@ import { CategorizeValueToIndexProvider } from '../providers/categorize-value-to
 import { ForecastValueProvider } from '../providers/forecast-value/forecast-value';
 import { GeoLabelsProvider } from '../providers/geo-labels/geo-labels';
 import { IrcelineSettingsProvider } from '../providers/irceline-settings/irceline-settings';
-import { LanguageHandlerProvider } from '../providers/language-handler/language-handler';
+import { LanguageHandlerProvider, languageInitializerFactory } from '../providers/language-handler/language-handler';
 import { LayerGeneratorService } from '../providers/layer-generator/layer-generator';
 import { LocateProvider } from '../providers/locate/locate';
 import { ModelledValueProvider } from '../providers/modelled-value/modelled-value';
@@ -107,6 +107,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     { provide: GeoSearch, useClass: NominatimGeoSearchService },
     { provide: SettingsService, useClass: JSSONSettingsService },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: languageInitializerFactory,
+      deps: [TranslateService, Injector, LanguageHandlerProvider, SettingsService],
+      multi: true
+    },
     AirQualityIndexProvider,
     AnnualMeanProvider,
     AppVersion,
@@ -139,7 +145,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     StatusBar,
     TimeseriesService,
     UserLocationListProvider,
-    UserTimeseriesService,
+    UserTimeseriesService
   ]
 })
 export class AppModule { }
