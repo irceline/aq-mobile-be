@@ -13,6 +13,9 @@
   <ion-card class="map-card">
     <div>
       <ion-segment class="phenomenon" [(ngModel)]="phenomenonLabel" (ngModelChange)="onPhenomenonChange()">
+        <ion-segment-button value="BelAQI">
+          BelAQI
+        </ion-segment-button>
         <ion-segment-button value="NO2">
           NO<sub>2</sub>
         </ion-segment-button>
@@ -28,10 +31,10 @@
         <ion-segment-button value="BC">
           BC
         </ion-segment-button>
-        <ion-segment-button class="other" value="Others" (click)="openOtherPhenomena()">
+        <!-- <ion-segment-button class="other" value="Others" (click)="openOtherPhenomena()">
           <span *ngIf="!selectedOtherPhenom">{{'map.pollutant.other' | translate}}</span>
           <span *ngIf="selectedOtherPhenom">{{selectedOtherPhenom}}</span>
-        </ion-segment-button>
+        </ion-segment-button> -->
       </ion-segment>
       <div class="full-phenomenon-label">
         <div *ngIf="selectedPhenomenon">{{selectedPhenomenon.label}}</div>

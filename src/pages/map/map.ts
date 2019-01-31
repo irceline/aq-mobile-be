@@ -27,12 +27,12 @@ import { MobileSettings } from '../../providers/settings/settings';
 import { DiagramPage } from '../diagram/diagram';
 
 enum PhenomenonLabel {
+  BelAQI = 'BelAQI',
   NO2 = 'NO2',
   O3 = 'O3',
   PM10 = 'PM10',
   PM25 = 'PM25',
-  BC = 'BC',
-  OTHERS = 'Others'
+  BC = 'BC'
 }
 
 enum TimeLabel {
@@ -67,18 +67,18 @@ const phenomenonMapping = [
   }
 ]
 
-const otherPhenomenonMapping = [
-  {
-    id: '10',
-    legendId: 'co_hmean'
-  }, {
-    id: '20',
-    legendId: 'c6h6_24hmean'
-  }, {
-    id: '1',
-    legendId: 'so2_hmean'
-  }
-]
+// const otherPhenomenonMapping = [
+//   {
+//     id: '10',
+//     legendId: 'co_hmean'
+//   }, {
+//     id: '20',
+//     legendId: 'c6h6_24hmean'
+//   }, {
+//     id: '1',
+//     legendId: 'so2_hmean'
+//   }
+// ]
 
 @Component({
   selector: 'page-map',
@@ -90,9 +90,9 @@ export class MapPage {
 
   public statusIntervalDuration: number;
   public geoSearchOptions: GeoSearchOptions;
-  public phenomenonLabel: PhenomenonLabel = PhenomenonLabel.NO2;
+  public phenomenonLabel: PhenomenonLabel = PhenomenonLabel.BelAQI;
   public time: TimeLabel = TimeLabel.current;
-  public selectedOtherPhenom: string;
+  // public selectedOtherPhenom: string;
 
   public providerUrl: string;
   public loading: boolean;
@@ -263,7 +263,7 @@ export class MapPage {
     if (this.nextStationPopup) { this.nextStationPopup.remove(); }
     const phenID = this.getPhenomenonID(this.phenomenonLabel);
     if (phenID) { this.getPhenomenonFromAPI(phenID) }
-    this.selectedOtherPhenom = '';
+    // this.selectedOtherPhenom = '';
     if (this.phenomenonLabel == PhenomenonLabel.BC) {
       this.time = TimeLabel.current;
     }
@@ -271,7 +271,7 @@ export class MapPage {
   }
 
   private setDisabled() {
-    this.disabled = this.phenomenonLabel === PhenomenonLabel.BC || this.phenomenonLabel === PhenomenonLabel.OTHERS;
+    this.disabled = this.phenomenonLabel === PhenomenonLabel.BC;
   }
 
   private getPhenomenonID(label: PhenomenonLabel): string {
@@ -282,14 +282,13 @@ export class MapPage {
   private getPhenomenonLabel(id: string): PhenomenonLabel {
     const phen = phenomenonMapping.find(e => id === e.id);
     if (phen) return phen.label;
-    return PhenomenonLabel.OTHERS;
   }
 
   private getPhenomenonLegendId(id: string): string {
     let phen = phenomenonMapping.find(e => id === e.id);
     if (phen && phen.legendId) return phen.legendId;
-    let otherPhen = otherPhenomenonMapping.find(e => id === e.id);
-    if (otherPhen && otherPhen.legendId) return otherPhen.legendId;
+    // let otherPhen = otherPhenomenonMapping.find(e => id === e.id);
+    // if (otherPhen && otherPhen.legendId) return otherPhen.legendId;
   }
 
   public onTimeChange(): void {
@@ -306,20 +305,20 @@ export class MapPage {
     }
   }
 
-  public openOtherPhenomena() {
-    const modal = this.modalCtrl.create(ModalPhenomenonSelectorComponent, {
-      providerUrl: this.providerUrl,
-      selectedPhenomenonId: this.selectedPhenomenon ? this.selectedPhenomenon.id : null,
-      hiddenPhenomenonIDs: phenomenonMapping.map(e => e.id)
-    })
-    modal._component
-    modal.present();
-    modal.onDidDismiss((selectedPhenomenon: Phenomenon) => {
-      if (selectedPhenomenon) {
-        this.setPhenomenon(selectedPhenomenon);
-      }
-    });
-  }
+  // public openOtherPhenomena() {
+  //   const modal = this.modalCtrl.create(ModalPhenomenonSelectorComponent, {
+  //     providerUrl: this.providerUrl,
+  //     selectedPhenomenonId: this.selectedPhenomenon ? this.selectedPhenomenon.id : null,
+  //     hiddenPhenomenonIDs: phenomenonMapping.map(e => e.id)
+  //   })
+  //   modal._component
+  //   modal.present();
+  //   modal.onDidDismiss((selectedPhenomenon: Phenomenon) => {
+  //     if (selectedPhenomenon) {
+  //       this.setPhenomenon(selectedPhenomenon);
+  //     }
+  //   });
+  // }
 
   public onStationSelected(platform: Platform) {
     const modal = this.modalCtrl.create(StationSelectorComponent,
@@ -357,6 +356,9 @@ export class MapPage {
       if (this.time == TimeLabel.current) {
         wmsUrl = 'http://geo.irceline.be/rioifdm/wms';
         switch (this.phenomenonLabel) {
+          case PhenomenonLabel.BelAQI:
+            layerId = 'belaqi';
+            break;
           case PhenomenonLabel.BC:
             layerId = 'bc_hmean';
             break;
@@ -378,6 +380,9 @@ export class MapPage {
       } else {
         wmsUrl = 'http://geo.irceline.be/forecast/wms';
         switch (this.phenomenonLabel) {
+          case PhenomenonLabel.BelAQI:
+            layerId = 'belaqi';
+            break;
           case PhenomenonLabel.NO2:
             layerId = 'no2_maxhmean';
             break;
