@@ -3,9 +3,10 @@ import { HttpService } from '@helgoland/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+import { MainPhenomenon } from '../../model/phenomenon';
 import { ValueProvider } from '../value-provider';
 
-export enum ModelledPhenomenon {
+enum ModelledPhenomenon {
   no2 = 'rioifdm:no2_hmean',
   o3 = 'rioifdm:o3_hmean',
   pm10 = 'rioifdm:pm10_24hmean',
@@ -22,8 +23,8 @@ export class ModelledValueProvider extends ValueProvider {
   }
 
   // TODO add layerType (NO2, ...)
-  public getValue(latitude: number, longitude: number, time: Date, phenomenon?: ModelledPhenomenon): Observable<number> {
-    const layerId = phenomenon ? phenomenon.toString() : 'rioifdm:no2_hmean';
+  public getValue(latitude: number, longitude: number, time: Date, phenomenon?: MainPhenomenon): Observable<number> {
+    const layerId = this.createLayerId(phenomenon);
     const url = 'http://geo.irceline.be/rioifdm/wms';
     const params = {
       service: 'WMS',
@@ -52,5 +53,18 @@ export class ModelledValueProvider extends ValueProvider {
         }
       })
     );
+  }
+
+  private createLayerId(phenomenon: MainPhenomenon) {
+    switch (phenomenon) {
+      case MainPhenomenon.NO2:
+        return ModelledPhenomenon.no2.toString();
+      case MainPhenomenon.O3:
+        return ModelledPhenomenon.o3.toString();
+      case MainPhenomenon.PM10:
+        return ModelledPhenomenon.pm10.toString();
+      case MainPhenomenon.PM25:
+        return ModelledPhenomenon.pm25.toString();
+    }
   }
 }

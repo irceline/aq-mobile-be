@@ -5,8 +5,9 @@ import moment from 'moment';
 import { forkJoin, Observable, Observer, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
+import { MainPhenomenon } from '../../model/phenomenon';
 import { CategorizeValueToIndexProvider } from '../categorize-value-to-index/categorize-value-to-index';
-import { ModelledPhenomenon, ModelledValueProvider } from '../modelled-value/modelled-value';
+import { ModelledValueProvider } from '../modelled-value/modelled-value';
 import { ValueProvider } from '../value-provider';
 
 export interface BelaqiTimelineEntry {
@@ -204,9 +205,9 @@ export class BelaqiIndexProvider extends ValueProvider {
     return new Observable((observer: Observer<BelaqiTimelineEntry[]>) => {
       this.getTrends().subscribe(trend => {
         forkJoin([
-          this.createFuturePhenomenonTimeline(latitude, longitude, time, ModelledPhenomenon.o3, trend.trend.o3),
-          this.createFuturePhenomenonTimeline(latitude, longitude, time, ModelledPhenomenon.pm10, trend.trend.pm10),
-          this.createFuturePhenomenonTimeline(latitude, longitude, time, ModelledPhenomenon.pm25, trend.trend.pm25)
+          this.createFuturePhenomenonTimeline(latitude, longitude, time, MainPhenomenon.O3, trend.trend.o3),
+          this.createFuturePhenomenonTimeline(latitude, longitude, time, MainPhenomenon.PM10, trend.trend.pm10),
+          this.createFuturePhenomenonTimeline(latitude, longitude, time, MainPhenomenon.PM25, trend.trend.pm25)
         ]).pipe(map(forecasts => {
           // find the max of each entry
           return forecasts[0].map((entry, i) => {
@@ -230,7 +231,7 @@ export class BelaqiIndexProvider extends ValueProvider {
     latitude: number,
     longitude: number,
     time: Date,
-    phenomenon: ModelledPhenomenon,
+    phenomenon: MainPhenomenon,
     trend: [Date, number][]
   ): Observable<BelaqiTimelineEntry[]> {
     return this.modelledValueProvider.getValue(latitude, longitude, time, phenomenon).pipe(

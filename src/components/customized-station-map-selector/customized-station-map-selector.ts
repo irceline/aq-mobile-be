@@ -15,11 +15,13 @@ import {
   Station,
   StatusIntervalResolverService,
   Timeseries,
-  TimeseriesExtras,
 } from '@helgoland/core';
 import { MapCache, MapSelectorComponent } from '@helgoland/map';
 import { CircleMarker, circleMarker, featureGroup, geoJSON, Layer, markerClusterGroup } from 'leaflet';
-import { forkJoin, Observable } from 'rxjs';
+
+import { getMainPhenomenonForID } from '../../model/phenomenon';
+import { BelaqiIndexProvider } from '../../providers/belaqi/belaqi';
+import { CategorizeValueToIndexProvider } from '../../providers/categorize-value-to-index/categorize-value-to-index';
 
 @Component({
   selector: 'customized-station-map-selector',
@@ -50,7 +52,9 @@ export class CustomizedStationMapSelectorComponent extends MapSelectorComponent<
     protected apiInterface: DatasetApiInterface,
     protected mapCache: MapCache,
     protected differs: KeyValueDiffers,
-    protected cd: ChangeDetectorRef
+    protected cd: ChangeDetectorRef,
+    protected categorizer: CategorizeValueToIndexProvider,
+    protected belaqi: BelaqiIndexProvider
   ) {
     super(mapCache, differs, cd);
   }
@@ -58,6 +62,10 @@ export class CustomizedStationMapSelectorComponent extends MapSelectorComponent<
   public ngOnChanges(changes: SimpleChanges) {
     super.ngOnChanges(changes);
     if (this.map && changes.statusIntervals) { this.drawGeometries(); }
+  }
+
+  public ngAfterViewInit() {
+    this.createMap();
   }
 
   protected drawGeometries() {
@@ -75,18 +83,13 @@ export class CustomizedStationMapSelectorComponent extends MapSelectorComponent<
     };
     this.apiInterface.getTimeseries(this.serviceUrl, tempFilter).subscribe((timeseries: Timeseries[]) => {
       this.markerFeatureGroup = featureGroup();
-      const obsList: Array<Observable<TimeseriesExtras>> = [];
-      timeseries.forEach((ts: Timeseries) => {
-        const obs = this.apiInterface.getTimeseriesExtras(ts.id, this.serviceUrl);
-        obsList.push(obs);
-        obs.subscribe((extras: TimeseriesExtras) => {
+      timeseries.forEach(ts => {
+        if ((ts.lastValue.timestamp) > new Date().getTime() - this.ignoreStatusIntervalIfBeforeDuration) {
+          const phenomenon = getMainPhenomenonForID(ts.parameters.phenomenon.id);
+          const index = this.categorizer.categorize(ts.lastValue.value, phenomenon);
+          const color = this.belaqi.getColorForIndex(index);
           let marker;
-          if (extras.statusIntervals) {
-            if ((ts.lastValue.timestamp) > new Date().getTime() - this.ignoreStatusIntervalIfBeforeDuration) {
-              const interval = this.statusIntervalResolver.getMatchingInterval(ts.lastValue.value, extras.statusIntervals);
-              if (interval) { marker = this.createColoredMarker(ts.station, interval.color); }
-            }
-          }
+          if (color) { marker = this.createColoredMarker(ts.station, color); }
           if (!marker) { marker = this.createDefaultColoredMarker(ts.station); }
           if (marker) {
             marker.on('click', () => {
@@ -94,15 +97,12 @@ export class CustomizedStationMapSelectorComponent extends MapSelectorComponent<
             });
             this.markerFeatureGroup.addLayer(marker);
           }
-        });
+        }
       });
 
-      forkJoin(obsList).subscribe(() => {
-        this.zoomToMarkerBounds(this.markerFeatureGroup.getBounds());
-        if (this.map) { this.map.invalidateSize(); }
-        this.isContentLoading(false);
-      });
-
+      this.zoomToMarkerBounds(this.markerFeatureGroup.getBounds());
+      if (this.map) { this.map.invalidateSize(); }
+      this.isContentLoading(false);
       if (this.map) { this.markerFeatureGroup.addTo(this.map); }
     });
   }
