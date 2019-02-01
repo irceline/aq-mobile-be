@@ -146,8 +146,8 @@ export class MapPage {
     } else {
       this.phenomenonLabel = PhenomenonLabel.BelAQI;
     }
-      this.onPhenomenonChange();
-    }
+    this.onPhenomenonChange();
+  }
 
   private setGeosearchOptions(settings: MobileSettings) {
     this.geoSearchOptions = { countrycodes: settings.geoSearchCountryCodes, acceptLanguage: this.translateSrvc.currentLang };
@@ -360,29 +360,33 @@ export class MapPage {
       let wmsUrl: string;
       let timeParam: string;
       if (this.time == TimeLabel.current) {
-        wmsUrl = 'http://geo.irceline.be/rioifdm/wms';
-        switch (this.phenomenonLabel) {
-          case PhenomenonLabel.BelAQI:
-            layerId = 'belaqi';
-            break;
-          case PhenomenonLabel.BC:
-            layerId = 'bc_hmean';
-            break;
-          case PhenomenonLabel.NO2:
-            layerId = 'no2_hmean';
-            break;
-          case PhenomenonLabel.O3:
-            layerId = 'o3_hmean';
-            break;
-          case PhenomenonLabel.PM10:
-            layerId = 'pm10_hmean';
-            break;
-          case PhenomenonLabel.PM25:
-            layerId = 'pm25_hmean';
-            break;
-          default:
-            break;
-        }
+        this.ircelineSettings.getSettings(false).subscribe(ircSetts => {
+          wmsUrl = 'http://geo.irceline.be/rioifdm/wms';
+          timeParam = ircSetts.lastupdate.toISOString();
+          switch (this.phenomenonLabel) {
+            case PhenomenonLabel.BelAQI:
+              layerId = 'belaqi';
+              break;
+            case PhenomenonLabel.BC:
+              layerId = 'bc_hmean';
+              break;
+            case PhenomenonLabel.NO2:
+              layerId = 'no2_hmean';
+              break;
+            case PhenomenonLabel.O3:
+              layerId = 'o3_hmean';
+              break;
+            case PhenomenonLabel.PM10:
+              layerId = 'pm10_hmean';
+              break;
+            case PhenomenonLabel.PM25:
+              layerId = 'pm25_hmean';
+              break;
+            default:
+              break;
+          }
+          this.drawLayer(layerId, geojson, timeParam, wmsUrl);
+        });
       } else {
         wmsUrl = 'http://geo.irceline.be/forecast/wms';
         switch (this.phenomenonLabel) {
@@ -421,26 +425,32 @@ export class MapPage {
             break;
         }
       }
-      if (layerId) {
-        const layerOptions: BoundaryCanvasOptions = {
-          layers: layerId,
-          transparent: true,
-          format: 'image/png',
-          tiled: 'true',
-          opacity: 0.7,
-          boundary: geojson,
-          useBoundaryGreaterAsZoom: 12
-        }
-        if (timeParam) { layerOptions.time = timeParam };
-        this.overlayMaps.set(layerId + wmsUrl + timeParam, {
-          label: this.translateSrvc.instant('map.interpolated-map'),
-          visible: true,
-          layer: L.tileLayer.boundaryCanvas(wmsUrl, layerOptions)
-        });
-      }
+      this.drawLayer(layerId, geojson, timeParam, wmsUrl);
     })
   }
 
+  private drawLayer(layerId: string, geojson, timeParam: string, wmsUrl: string) {
+    if (layerId) {
+      const layerOptions: BoundaryCanvasOptions = {
+        layers: layerId,
+        transparent: true,
+        format: 'image/png',
+        tiled: 'true',
+        opacity: 0.7,
+        boundary: geojson,
+        useBoundaryGreaterAsZoom: 12
+      };
+      if (timeParam) {
+        layerOptions.time = timeParam;
+      }
+      ;
+      this.overlayMaps.set(layerId + wmsUrl + timeParam, {
+        label: this.translateSrvc.instant('map.interpolated-map'),
+        visible: true,
+        layer: L.tileLayer.boundaryCanvas(wmsUrl, layerOptions)
+      });
+    }
+  }
 }
 
 class MarkerSelectorGeneratorImpl implements MarkerSelectorGenerator {
