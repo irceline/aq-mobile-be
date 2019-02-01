@@ -20,7 +20,6 @@ import moment from 'moment';
 import { MarkerSelectorGenerator } from 'src/components/customized-station-map-selector/customized-station-map-selector';
 
 import { BelaqiSelection } from '../../components/belaqi-user-location-slider/belaqi-user-location-slider';
-import { ModalPhenomenonSelectorComponent } from '../../components/modal-phenomenon-selector/modal-phenomenon-selector';
 import { StationSelectorComponent } from '../../components/station-selector/station-selector';
 import { IrcelineSettingsProvider } from '../../providers/irceline-settings/irceline-settings';
 import { MobileSettings } from '../../providers/settings/settings';
@@ -45,6 +44,9 @@ enum TimeLabel {
 
 const phenomenonMapping = [
   {
+    label: PhenomenonLabel.BelAQI,
+    legendId: 'index'
+  }, {
     id: '8',
     label: PhenomenonLabel.NO2,
     legendId: 'no2_hmean'
@@ -90,7 +92,7 @@ export class MapPage {
 
   public statusIntervalDuration: number;
   public geoSearchOptions: GeoSearchOptions;
-  public phenomenonLabel: PhenomenonLabel = PhenomenonLabel.BelAQI;
+  public phenomenonLabel: PhenomenonLabel;
   public time: TimeLabel = TimeLabel.current;
   // public selectedOtherPhenom: string;
 
@@ -140,13 +142,12 @@ export class MapPage {
 
     if (this.belaqiSelection) {
       const phenId = this.belaqiSelection.phenomenonStation.phenomenonId;
-      this.getPhenomenonFromAPI(phenId);
       this.phenomenonLabel = this.getPhenomenonLabel(phenId);
-      this.showLayer();
     } else {
+      this.phenomenonLabel = PhenomenonLabel.BelAQI;
+    }
       this.onPhenomenonChange();
     }
-  }
 
   private setGeosearchOptions(settings: MobileSettings) {
     this.geoSearchOptions = { countrycodes: settings.geoSearchCountryCodes, acceptLanguage: this.translateSrvc.currentLang };
@@ -248,7 +249,7 @@ export class MapPage {
   private getLegendContent(): string {
     if (this.legendVisible) {
       const langCode = this.translateSrvc.currentLang.toLocaleUpperCase();
-      let legendId = this.getPhenomenonLegendId(this.selectedPhenomenon.id);
+      let legendId = this.getPhenomenonLegendId(this.phenomenonLabel);
       if (legendId) {
         return `<img src="http://www.irceline.be/air/legend/${legendId}_${langCode}.svg">`;
       } else {
@@ -262,11 +263,16 @@ export class MapPage {
     this.showLayer();
     if (this.nextStationPopup) { this.nextStationPopup.remove(); }
     const phenID = this.getPhenomenonID(this.phenomenonLabel);
-    if (phenID) { this.getPhenomenonFromAPI(phenID) }
-    // this.selectedOtherPhenom = '';
+    if (phenID) {
+      this.getPhenomenonFromAPI(phenID)
+    } else {
+      this.selectedPhenomenon = null;
+      this.phenomenonFilter = { phenomenon: '' }
+    }
     if (this.phenomenonLabel == PhenomenonLabel.BC) {
       this.time = TimeLabel.current;
     }
+    if (this.legendVisible) { this.legendVisible = false }
     this.setDisabled();
   }
 
@@ -284,8 +290,8 @@ export class MapPage {
     if (phen) return phen.label;
   }
 
-  private getPhenomenonLegendId(id: string): string {
-    let phen = phenomenonMapping.find(e => id === e.id);
+  private getPhenomenonLegendId(phenLabel: PhenomenonLabel): string {
+    let phen = phenomenonMapping.find(e => phenLabel === e.label);
     if (phen && phen.legendId) return phen.legendId;
     // let otherPhen = otherPhenomenonMapping.find(e => id === e.id);
     // if (otherPhen && otherPhen.legendId) return otherPhen.legendId;
@@ -297,7 +303,7 @@ export class MapPage {
   }
 
   private setPhenomenonFilter() {
-    if (this.time != TimeLabel.current) {
+    if (this.time != TimeLabel.current || !this.selectedPhenomenon) {
       this.phenomenonFilter = { phenomenon: '' };
     } else {
       this.phenomenonFilter = { phenomenon: this.selectedPhenomenon.id };
