@@ -10,7 +10,6 @@ import { MapPage } from '../pages/map/map';
 import { SettingsPage } from '../pages/settings/settings';
 import { StartPage } from '../pages/start/start';
 import { IrcelineSettings, IrcelineSettingsProvider } from '../providers/irceline-settings/irceline-settings';
-import { LanguageHandlerProvider } from '../providers/language-handler/language-handler';
 import { PersonalAlertsProvider } from '../providers/personal-alerts/personal-alerts';
 import { PushNotificationsProvider } from '../providers/push-notifications/push-notifications';
 
@@ -31,13 +30,11 @@ export class MyApp implements AfterViewInit {
     private platform: Platform,
     private statusBar: StatusBar,
     private splashScreen: SplashScreen,
-    private languageHandler: LanguageHandlerProvider,
     private ircelineSettings: IrcelineSettingsProvider,
     private pushNotification: PushNotificationsProvider,
     private localNotification: PersonalAlertsProvider,
     private storage: Storage
   ) {
-    this.languageHandler.init();
     this.initializeApp();
 
     this.ircelineSettings.getSettings(false).subscribe((settings: IrcelineSettings) => this.lastupdate = settings.lastupdate);

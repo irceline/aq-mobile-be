@@ -1,9 +1,9 @@
-import { registerLocaleData } from '@angular/common';
+import { LOCATION_INITIALIZED, registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 import localeEn from '@angular/common/locales/en';
 import localeFr from '@angular/common/locales/fr';
 import localeNl from '@angular/common/locales/nl';
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { Settings, SettingsService } from '@helgoland/core';
 import { D3TimeFormatLocaleService } from '@helgoland/d3';
 import { Storage } from '@ionic/storage';
@@ -16,23 +16,10 @@ const LANGUAGE_STORAGE_KEY = 'LANGUAGE_STORAGE_KEY';
 export class LanguageHandlerProvider {
 
   constructor(
-    private settingsSrvc: SettingsService<Settings>,
     private translate: TranslateService,
     private d3translate: D3TimeFormatLocaleService,
     private storage: Storage
-  ) { }
-
-  public init() {
-    this.storage.get(LANGUAGE_STORAGE_KEY).then(value => {
-      if (value) {
-        this.translate.use(value);
-      } else {
-        const langCode = navigator.language.split('-')[0];
-        const language = this.settingsSrvc.getSettings().languages.find(lang => lang.code === langCode);
-        this.translate.use(language ? language.code : 'en');
-      }
-    })
-
+  ) {
     this.translate.onLangChange.subscribe(language => {
       this.storage.set(LANGUAGE_STORAGE_KEY, language.lang);
     });
@@ -43,6 +30,10 @@ export class LanguageHandlerProvider {
     registerLocaleData(localeEn);
     registerLocaleData(localeFr);
     registerLocaleData(localeNl);
+  }
+
+  public getSavedLanguage(): Promise<string> {
+    return this.storage.get(LANGUAGE_STORAGE_KEY);
   }
 
   private addD3TimeFormatLocales() {
@@ -78,7 +69,6 @@ export class LanguageHandlerProvider {
     });
   }
 
-
   public waitForTranslation(): Observable<boolean> {
     return new Observable<boolean>((observer: Observer<boolean>) => {
       if (this.translate.currentLang) {
@@ -94,3 +84,28 @@ export class LanguageHandlerProvider {
     });
   }
 }
+
+export function languageInitializerFactory(translate: TranslateService, injector: Injector, handler: LanguageHandlerProvider, settingsSrvc: SettingsService<Settings>) {
+  return () => new Promise<any>((resolve: any) => {
+    const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
+    locationInitialized.then(() => {
+      handler.getSavedLanguage().then(
+        lang => {
+          if (lang) {
+            translate.use(lang);
+          } else {
+            const langCode = navigator.language.split('-')[0];
+            const language = settingsSrvc.getSettings().languages.find(lang => lang.code === langCode);
+            translate.use(language ? language.code : 'en');
+          }
+          resolve(null)
+        },
+        () => {
+          // set language to english
+          translate.use('en');
+          resolve(null);
+        })
+    });
+  });
+}
+
