@@ -38,6 +38,7 @@
       </ion-segment>
       <div class="full-phenomenon-label">
         <div *ngIf="selectedPhenomenon">{{selectedPhenomenon.label}}</div>
+        <div *ngIf="!selectedPhenomenon">{{'map.index' | translate}}</div>
       </div>
     </div>
     <div class="map-wrapper">

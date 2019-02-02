@@ -173,7 +173,8 @@
 			"today+2": "+2 dagen",
 			"today+3": "+3 dagen",
 			"tomorrow": "morgen"
-		}
+		},
+		"index": "BelAQI index"
 	},
 	"menu": {
 		"lastUpdate": "Laatste actualisatie"

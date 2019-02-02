@@ -173,7 +173,8 @@
 			"today+2": "+2 days",
 			"today+3": "+3 days",
 			"tomorrow": "Tomorrow"
-		}
+		},
+		"index": "BelAQI index"
 	},
 	"menu": {
 		"lastUpdate": "Last update"

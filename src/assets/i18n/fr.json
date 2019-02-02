@@ -173,7 +173,8 @@
 			"today+2": "J+2",
 			"today+3": "J+3",
 			"tomorrow": "J+1"
-		}
+		},
+		"index": "Indice BelAQI"
 	},
 	"menu": {
 		"lastUpdate": "Dernière mise à jour"
