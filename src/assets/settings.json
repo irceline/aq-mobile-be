@@ -1,0 +1,172 @@
+{
+  "datasetApis": [{
+    "name": "IRCEL - CELINE: timeseries-api (SOS 2.0)",
+    "url": "http://geo.irceline.be/sos/api/v1/"
+  }],
+  "languages": [{
+      "code": "en",
+      "label": "English"
+    },
+    {
+      "code": "de",
+      "label": "Deutsch"
+    },
+    {
+      "code": "nl",
+      "label": "Nederlands"
+    },
+    {
+      "code": "fr",
+      "label": "Français"
+    }
+  ],
+  "visiblePhenomenonIDs": [
+    "391",
+    "8",
+    "7",
+    "5",
+    "6001"
+  ],
+  "ircelineSettingsUrl": "http://www.irceline.be/air/time_app_json.php",
+  "ircelineAQIndexUrl": "https://www.irceline.be/tables/forecast/model/belaqi.php",
+  "clusterStationsOnMap": false,
+  "geoSearchCountryCodes": [
+    "be"
+  ],
+  "colorizedMarkerForLastMilliseconds": 7200000,
+  "nearestStationTimeBufferInMillseconds": 7200000,
+  "personalAlert": [{
+      "period": 5
+    },
+    {
+      "period": 15
+    },
+    {
+      "period": 60
+    },
+    {
+      "period": 120
+    },
+    {
+      "period": 720
+    },
+    {
+      "period": 1440
+    }
+  ],
+  "regions": [
+    "Belgium",
+    "Flanders",
+    "Brussels",
+    "Wallonia",
+    "Gent",
+    "Antwerpen",
+    "Liège",
+    "Huy",
+    "Brugge",
+    "Ostende",
+    "Hasselt",
+    "Namur"
+  ],
+  "defaultBbox": [
+    [
+      49.23,
+      3.27
+    ],
+    [
+      51.23,
+      5.67
+    ]
+  ],
+  "phenomenonLayerMapping": [{
+      "id": "6001",
+      "layers": [{
+          "label": "Hourly mean PM2.5",
+          "visible": true,
+          "baseUrl": "http://geo.irceline.be/rioifdm/wms",
+          "layer": {
+            "layers": "pm25_hmean",
+            "transparent": true,
+            "tiled": true,
+            "format": "image/png",
+            "opacity": 0.7
+          }
+        },
+        {
+          "label": "Stationary hourly mean PM2.5",
+          "visible": true,
+          "baseUrl": "http://geo.irceline.be/realtime/wms",
+          "stations": true,
+          "layer": {
+            "layers": "realtime:pm25_24hmean_station",
+            "transparent": true,
+            "tiled": true,
+            "format": "image/png",
+            "opacity": 0.7
+          }
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "layers": [{
+        "label": "Hourly mean PM10",
+        "visible": true,
+        "baseUrl": "http://geo.irceline.be/rioifdm/wms",
+        "layer": {
+          "layers": "pm10_hmean",
+          "transparent": true,
+          "tiled": true,
+          "format": "image/png",
+          "opacity": 0.7
+        }
+      }]
+    },
+    {
+      "id": "7",
+      "layers": [{
+        "label": "Hourly mean O3",
+        "visible": true,
+        "baseUrl": "http://geo.irceline.be/rioifdm/wms",
+        "layer": {
+          "layers": "o3_hmean",
+          "transparent": true,
+          "tiled": true,
+          "format": "image/png",
+          "opacity": 0.7
+        }
+      }]
+    },
+    {
+      "id": "8",
+      "layers": [{
+        "label": "Hourly mean NO2",
+        "visible": true,
+        "baseUrl": "http://geo.irceline.be/rioifdm/wms",
+        "layer": {
+          "layers": "no2_hmean",
+          "transparent": true,
+          "tiled": true,
+          "format": "image/png",
+          "opacity": 0.7
+        }
+      }]
+    },
+    {
+      "id": "391",
+      "layers": [{
+        "label": "Hourly mean BC",
+        "visible": true,
+        "baseUrl": "http://geo.irceline.be/rioifdm/wms",
+        "layer": {
+          "layers": "bc_hmean",
+          "transparent": true,
+          "tiled": true,
+          "format": "image/png",
+          "opacity": 0.7
+        }
+      }]
+    }
+  ],
+  "limitOfAllowedUserLocations": 5
+}

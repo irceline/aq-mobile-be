@@ -1,0 +1,431 @@
+{
+  "air-quality-index": {
+    "header": "BelAQI index at:"
+  },
+  "air-quality-location-panel": {
+    "error": "Could not get an index value for your location",
+    "hint": "Modelled air quality index for your location",
+    "loading": "Loading BelAQI for your location"
+  },
+  "annual-map": {
+    "header": "Annual mean map",
+    "legend": {
+      "link-more": "Show more",
+      "link-more-url": "http://www.irceline.be/en"
+    }
+  },
+  "annual-mean-panel": {
+    "header": "Long-term exposure",
+    "information-popup": {
+      "text": "NO2 (Nitrogen dioxide), PM10 (particulate matter with a diameter of less than 10 micrometers) and PM2.5 (particulate matter with a diameter of less than 2.5 micrometres) are the three pollutants where the most scientific burden of proof exists with regard to the impact of long-term exposure."
+    }
+  },
+  "annual-phenomenon-buttons": "Modelled annual mean value for this location:",
+  "belaqi-chart": {
+    "error": "Unfortunately, an error occurred while determining the graph."
+  },
+  "belaqi-user-location-slider": {
+    "create-new-location": "Create new location",
+    "current-location": "Current location",
+    "current-location-description": "Activate this option to display air quality data for your current location.",
+    "current-location-error-1": "You could change the settings of the location service of your device to high accuracy mode.",
+    "current-location-error-2": "If you previously configured personal user locations, these should be available if you swipe this screen to the left.",
+    "current-location-error-3": "Otherwise you can configure a location manually:",
+    "current-location-error-header": "Your device was not able to establish your current location.",
+    "faq": "Frequently asked questions (FAQ)",
+    "loading-current-location": "Your device is determining your current location",
+    "locate-delayed-information": "Your device was not able to establish your current location.",
+    "open-user-location": "Edit current locations"
+  },
+  "belaqi-wheel": {
+    "error-occured": "It is taking longer than usual to fetch the data. Please try again later.",
+    "loading": "Loading the BelAQI index...",
+    "modelled-hint": "Modelled air quality index for this location",
+    "no-index-ascertained": "No BelAQI index could be ascertained. This can be the case that the location is not in Belgium."
+  },
+  "belaqi": {
+    "level-split": {
+      "bad": "Bad",
+      "excellent": "Excellent",
+      "fairly-good": "Fairly good",
+      "good": "Good",
+      "horrible": "Horrible",
+      "moderate": "Moderate",
+      "poor": "Poor",
+      "very-bad": "Very bad",
+      "very-good": "Very good",
+      "very-poor": "Very poor"
+    },
+    "level": {
+      "bad": "Bad",
+      "excellent": "Excellent",
+      "fairly-good": "Fairly good",
+      "good": "Good",
+      "horrible": "Horrible",
+      "moderate": "Moderate",
+      "poor": "Poor",
+      "very-bad": "Very bad",
+      "very-good": "Very good",
+      "very-poor": "Very poor"
+    }
+  },
+  "change-timespan": {
+    "custom": {
+      "end": "End",
+      "header": "Custom timespan",
+      "start": "Start"
+    },
+    "header": "Change timespan",
+    "predefined": {
+      "current-month": "Current month",
+      "current-week": "Current week",
+      "current-year": "Current year",
+      "header": "Predefined timespan",
+      "last-hour": "Last hour",
+      "last-month": "Last month",
+      "last-week": "Last week",
+      "last-year": "Last year",
+      "today": "Today",
+      "today-yesterday": "Today & Yesterday",
+      "yesterday": "Yesterday"
+    }
+  },
+  "controls": {
+    "cancel": "Cancel",
+    "close": "Close",
+    "ok": "Ok"
+  },
+  "customize-personal-alerts": {
+    "active": "Activate",
+    "alert-index-level": "Notification above BelAQI level",
+    "alert-period": "Verification interval alert",
+    "alert-sensitive-active": "Health advice for people sensitive to air pollution",
+    "header": "Personal alerts",
+    "hint": "To use this functionality, the app needs to keep running in the background. Your location is only determined once for the choosen verification interval if you want to have the air quality checked for your current location. All personally configured locations will also be checked."
+  },
+  "diagram": {
+    "header": "Diagram",
+    "loading": "loading",
+    "loading-nearest-stations": "Load nearest measurements",
+    "no-timeseries-selected": "No timeseries selected!",
+    "select-timeseries": "Please select a timeseries"
+  },
+  "faq": {
+    "accuracy": {
+      "link": "http://www.irceline.be/en/documentation/models/rio-ifdm",
+      "moreInfo": "More info about RIO-IFDM",
+      "p1": "The model calculation of which the app shows you the result is a combination of two air quality models: RIO and IFDM. Both models have been thoroughly tested on the basis of additional measurements and are constantly fed with up-to-date air quality data.",
+      "p2": "With each model calculation there is a chance of over- or underestimation of the actual situation. These 2 models, for example, do not yet take into account obstacles along roads (noise barriers, closed rows of houses, etc.). For example, an underestimation can be shown for street canyons.",
+      "p3": "Meanwhile, a third model (OSPM) has already been built into the model chain that better assesses air quality in narrow streets. This is already being applied to the air quality maps that show the long-term impact. But the OSPM model requires a lot of calculations and we can not apply to current air quality results for the time being. To add the OSPM result to the app, a number of technical thresholds must first be overcome.",
+      "p4": "We are constantly working on improving the quality of the air quality models and the results you see in the app.",
+      "summary": "Comparisons with measurement results show that the model can estimate the air quality with a sufficiently high reliability according to current scientific quality requirements. However, a model can never fully correctly calculate the air quality. In a number of places, an over- or underestimation of the actual air quality can still be shown.",
+      "title": "How reliable is the model calculation behind the app?"
+    },
+    "calculatedHow": {
+      "24hmean": "24-hours",
+      "classification": "Classification",
+      "hmean": "1-hour",
+      "index": "Index",
+      "index1": "Excellent",
+      "index10": "Horrible",
+      "index2": "Very good",
+      "index3": "Good",
+      "index4": "Fairly good",
+      "index5": "Moderate",
+      "index6": "Poor",
+      "index7": "Very poor",
+      "index8": "Bad",
+      "index9": "Very bad",
+      "link": "http://www.irceline.be/en/belaqi",
+      "moreInfo": "Read here how the index takes short term health effects into account.",
+      "p1": "The index given by the app is not only based on the result of all monitoring stations in our monitoring networks, where the nearest station is possibly several kilometers away. The concentrations measured at all government monitoring stations are added to a computer model, which also takes into account emission data (traffic, industry and shipping) and meteorological conditions (wind direction and wind speed). This computer model then calculates detailed air quality maps for the geese country. The combination of the result for nitrogen dioxide, particulate matter and ozone is shown as one index in the app.",
+      "p2": "The index that the app shows also gives you an estimate of the health impact in the short term.",
+      "p3": "For the calculation of the air quality index, the indices for each pollutant are calculated separately on the basis of the scale classification in the table below. The highest (\"worst\") subindex then determines the index number that the app shows for your location.",
+      "p4": "The impact of very local emissions (eg wood stoves, fireplaces, non-structural traffic jams, etc.) or accidental emissions (residential fire, etc.) is not shown by the app.",
+      "summary": "The app shows the result of a model calculation for your location that is refreshed every hour. To assess the air quality, we use an air quality index. This shows one representative figure for the various relevant pollutants.",
+      "title": "How is the air quality calculated for my location?"
+    },
+    "compareCurieuzeneuzen": {
+      "link": "https://curieuzeneuzen.be/in-english/",
+      "moreInfo": "More info about CurieuzeNeuzen",
+      "p1": "Your CurieuzeNeuzen result gives you an idea of ​​the air quality on the long term and the chronic health effects.",
+      "p2": "In the app, on the other hand, we show the model calculation based on the current air quality results for various parameters (particulate matter, ozone, nitrogen dioxide, etc.). The results can vary from day to day and even hour to hour. The results are checked against the short-term objectives for air quality. For example, the app estimates the impact on the health of air pollution in the short term (= acute health effects).",
+      "p3": "Your result of CurieuzeNeuzen and the calculation of the current situation in the app can therefore vary considerably.",
+      "summary": "This is possible. In the case of CurieuzeNeuzen, only nitrogen dioxide was measured for a month. The result was converted to an annual average and compared with the long-term target for nitrogen dioxide.",
+      "title": "CurieuzeNeuzen gave a different result than the app?"
+    },
+    "header": "Frequently asked questions (FAQ)",
+    "hide": "hide",
+    "longtermShortterm": {
+      "item1": "hourly limit (short term): 200 µg/m³",
+      "item2": "annual limit (long term): 40 µg/m³",
+      "list": "The WHO recommended values ​​are:",
+      "p1": "Acute effects are for example an asthma or heart attack. Chronic effects are, for example, a higher risk of heart and lung diseases or lung cancer.",
+      "p2": "For nitrogen dioxide (NO2), the World Health Organization has recommended exposure limits to protect us from the long-term and short-term effects. NO2 is a good traffic-related indicator (better than particulate matter) and is one of the air pollutants that is included in the air quality index that the BelAir app shows.",
+      "p3": "The app gives an idea of ​​the short-term effects. If a concentration of 100 µg/m³ NO2 (half of the WHO hourly limit) is calculated at a certain location, the app gives index 4 (good).",
+      "p4": "But if the annual average in the same location is 50 µg/m³ (higher than the WHO annual limit), this is classified as poorly.",
+      "p5": "Acute (short-term) effects therefore occur at significantly higher concentrations. Chronic effects are the result of prolonged exposure. Compare it with smoking: a smoker will experience few acute health effects by smoking a couple of cigarettes a day. The acute effects will only occur by smoking a lot of cigarettes in a short time. But by smoking a few cigarettes every day, the risk of getting lung cancer nonetheless increases.",
+      "p6": "Due to the different assessment for the short-term and long-term impact, it is possible that the BelAir app shows good air quality at a certain time and location, while the annual average air quality there is poor.",
+      "summary": "The BelAIR app gives an idea of ​​the short-term impact (the acute effects) of the current air pollution. It can change from hour to hour. But in addition to acute short-term effects, air pollution also causes long-term or chronic effects.",
+      "title": "What is the difference between short and long-term effects of air pollution?"
+    },
+    "readMore": "read more"
+  },
+  "home": {
+    "header": "Home",
+    "noAlert": "no official messages concerning periods of increased air pollution",
+    "noAlertheader": "Currently no warnings:"
+  },
+  "info": {
+    "chart": {
+      "message": "This chart shows the evolution of the BelAQI air quality index. The vertical blue line indicates the current value."
+    },
+    "moreInfo": "More info",
+    "wheel": {
+      "link": "http://www.irceline.be/en/belaqi",
+      "message": "This dial shows the current BelAQI air quality index for your location. This index combines the modelled concentrations of different pollutants depending on their health effects."
+    }
+  },
+  "intro": {
+    "close-introduction": "Close",
+    "four": {
+      "header": "Personalised notifications"
+    },
+    "header": "Introduction",
+    "next-step": "Next",
+    "one": {
+      "header": "Choose a language",
+      "option": {
+        "dutch": "Nederlands",
+        "english": "English",
+        "french": "Français",
+        "german": "Deutsch"
+      }
+    },
+    "prev-step": "Previous",
+    "three": {
+      "addLocationToList": "Add to the list of locations",
+      "baseOnCurrentLocation": "Use current location",
+      "header": "Choose the locations for which you want to receive personalised notifications",
+      "locationLabelHint": "Change the location label",
+      "locationLabelPlaceholder": "e.g. \"Home\", \"Work\", \"School\"",
+      "showLocationList": "Show current locations"
+    },
+    "two": {
+      "header": "For which region would you like to receive official notifications?"
+    }
+  },
+  "legend": {
+    "first-value-at": "First value at",
+    "header": "Legend",
+    "last-value-at": "Last value at"
+  },
+  "located-value-notification": {
+    "title": "BelAQI index"
+  },
+  "map": {
+    "configured-location": "Your configured location",
+    "current-location": "Your current location",
+    "dataset-selection-hint": "Please select one or more timeseries to display in diagram",
+    "error": "An error occured. It is not possible to determine data for the selected pollutant.",
+    "geosearch": {
+      "placeholder": "Search location..."
+    },
+    "header": "Map",
+    "index": "BelAQI index",
+    "interpolated-map": "interpolated map",
+    "mean": {
+      "24hour": "24-hour",
+      "hourly": "Hourly",
+      "yearly": "Yearly"
+    },
+    "nearest-station": "Nearest station",
+    "no-legend": "No legend available",
+    "pollutant": {
+      "other": "other"
+    },
+    "show-in-diagram": "Show {{value}} timeseries in diagram",
+    "time": {
+      "current": "Current",
+      "today": "Today",
+      "today+2": "+2 days",
+      "today+3": "+3 days",
+      "tomorrow": "Tomorrow"
+    }
+  },
+  "menu": {
+    "lastUpdate": "Last update"
+  },
+  "nearest-measuring-station-panel": {
+    "header": "Nearest measuring station",
+    "information-popup": {
+      "list-bc": "or black carbon",
+      "list-no2": "or nitrogen dioxide",
+      "list-o3": "or ozone",
+      "list-pm10": "or particulate matter with a diameter below 10 micrometer",
+      "list-pm25": "or particulate matter with a diameter below 2,5 micrometer",
+      "text": "The actual measured concentrations of the nearest monitoring stations are given here. The different pollutants are:"
+    }
+  },
+  "nearest-series-legend-slider": {
+    "show-nearest-series": "Show nearest measurements"
+  },
+  "network": {
+    "geolocationDenied": "You have not allowed the use of your location to the app.",
+    "geolocationDeniedExplanation": "If you want to make use of the \"current position\" functionalities, you can activate the location service of your device here.",
+    "geolocationDisabled": "Geolocation is disabled",
+    "geolocationDisabledExplanation": "If you want to make use of the \"current position\" functionalities, please enable the location service of your device.",
+    "geolocationEnabled": "Geolocation is enabled",
+    "geolocationEnabledExplanation": "The \"current position\" functionalities are available to you.",
+    "geolocationPartial": "Geolocation without \"high accuracy\".",
+    "geolocationPartialExplanation": "To have an optimal geolocation, please activate the location method \"high accuracy\".",
+    "offline": "Your device is offline",
+    "online": "Your device is online"
+  },
+  "no-network-connection": {
+    "body": "Your device has no data network connection. The BelAir app heavily depends on fresh data being fetched from our servers. Please activate a data network (mobile data or wifi connection) and refresh the app or try again when you are in range of a data network you have access to.",
+    "close": "Close",
+    "header": "No data connection"
+  },
+  "personal-alert": {
+    "index-1": {
+      "non-sensitive": "It is very healthy today to be physically active outside. By reducing emissions, we get more of these healthy days and also decrease the effects of the low-term exposure.",
+      "sensitive": "It is very healthy today to be physically active outside. By reducing emissions, we get more of these healthy days and also decrease the effects of the low-term exposure."
+    },
+    "index-10": {
+      "non-sensitive": "Consider reducing heavy/long physical exertion.",
+      "sensitive": "Limit physical exertion. Consult your doctor about appropriate changes to medication you might be taking."
+    },
+    "index-2": {
+      "non-sensitive": "It is very healthy today to be physically active outside. By reducing emissions, we get more of these healthy days and also decrease the effects of the low-term exposure.",
+      "sensitive": "It is very healthy today to be physically active outside. By reducing emissions, we get more of these healthy days and also decrease the effects of the low-term exposure."
+    },
+    "index-3": {
+      "non-sensitive": "You do not have to adjust your usual physical activities because of the air quality.",
+      "sensitive": "If you experience discomfort, you can reduce heavy/long physical effort."
+    },
+    "index-4": {
+      "non-sensitive": "You do not have to adjust your usual physical activities because of the air quality.",
+      "sensitive": "If you experience discomfort, you can reduce heavy/long physical effort."
+    },
+    "index-5": {
+      "non-sensitive": "You do not have to adjust your usual physical activities because of the air quality.",
+      "sensitive": "Reduce your physical effort. Consult your doctor about appropriate changes to medication you might be taking."
+    },
+    "index-6": {
+      "non-sensitive": "You do not have to adjust your usual physical activities because of the air quality.",
+      "sensitive": "Reduce your physical effort. Consult your doctor about appropriate changes to medication you might be taking."
+    },
+    "index-7": {
+      "non-sensitive": "You do not have to adjust your usual physical activities because of the air quality.",
+      "sensitive": "Reduce your physical effort. Consult your doctor about appropriate changes to medication you might be taking."
+    },
+    "index-8": {
+      "non-sensitive": "Consider reducing heavy/long physical exertion.",
+      "sensitive": "Limit physical exertion. Consult your doctor about appropriate changes to medication you might be taking."
+    },
+    "index-9": {
+      "non-sensitive": "Consider reducing heavy/long physical exertion.",
+      "sensitive": "Limit physical exertion. Consult your doctor about appropriate changes to medication you might be taking."
+    }
+  },
+  "personal-alerts": {
+    "background-service": {
+      "hint": "Monitors the configured locations",
+      "title": "App is running in background"
+    }
+  },
+  "phenomenon-selector": {
+    "header": "Choose a pollutant",
+    "hide-some-phenomenons": "Hide pollutants",
+    "list-all-phenomenons": "List all pollutants"
+  },
+  "push-notification-subscription": {
+    "brussels": "Brussels - Brussels Environment - NL/FR",
+    "flanders": "Flanders - Vlaamse Milieumaatschappij (VMM) - NL",
+    "header": "Notifications",
+    "wallonia": "Wallonia - Agence wallonne de l’air et du climat (AwAC) - FR"
+  },
+  "refresh-button": {
+    "message": "Refresh all"
+  },
+  "refresh": {
+    "pull-message": "Pull to refresh"
+  },
+  "settings": {
+    "about": {
+      "header": "About the app",
+      "version": "Version"
+    },
+    "clear-cache": {
+      "button": "Clear cache",
+      "confirm": "Cache is cleared."
+    },
+    "common": "Common",
+    "header": "Settings",
+    "select-language": "Select a language",
+    "show-introduction": "Show introduction",
+    "start-page": {
+      "header": "Settings start page",
+      "show-annual-mean-panel": "Show annual mean on start page",
+      "show-nearest-stations": "Show nearest measuring stations on start page",
+      "show-sub-index-panel": "Show BelAQI subindicies on start page"
+    },
+    "user-locations": {
+      "create-new-location": "Create new location",
+      "edit-location": "Edit location",
+      "header": "User locations",
+      "show-location-list": "Show current locations",
+      "show-nearest-series-by-default": "Show nearest measurements in diagram"
+    }
+  },
+  "show-geometry": {
+    "header": "Position of the station"
+  },
+  "start": {
+    "forecast-map": {
+      "header": "Forecast map"
+    }
+  },
+  "station-selection": {
+    "show-other-phenomena": "Other pollutant measured on this location"
+  },
+  "style-edit": {
+    "generalize": "Generalise data",
+    "header": "Change style of this timeseries",
+    "zeroBasedYAxe": "Timeseries zero based"
+  },
+  "sub-index-panel": {
+    "header": "Short-term exposure",
+    "information-popup": {
+      "link": "http://www.irceline.be/en/belaqi",
+      "moreInfo": "More info",
+      "no2": "NO2 or nitrogen dioxide (hourly mean)",
+      "o3": "O3 or ozone (hourly mean)",
+      "pm10": "PM10 or particulate matter with a diameter below 10 micrometer (running 24 hour mean)",
+      "pm25": "PM2.5 or particulate matter with a diameter below 2,5 micrometer (running 24 hour mean)",
+      "text": "These are calculated \"subindices\" for your location. The global BelAQI index is the highest value of these 4 subindices. The concentration scales were determined in function of their short-term health effects. The 4 pollutants used to calculate the BelAQI index are:"
+    }
+  },
+  "update": {
+    "hint": {
+      "popover": {
+        "content-p1": "What is the short-term effect of the air quality in your neighborhood on your health?",
+   			"content-p2": "BelAir makes a calculated estimate of exposure to air pollution in the short term. This calculation is updated every hour. Would you like to know more about how exactly this calculation is made, what you will see and why the result may differ from other measurement result (e.g. CurieuzeNeuzen)?",
+    		"dont-show": "Do not show this message again when you start the app",
+    		"link-faq": "Read more information here",
+    		"link-faq-url": "http://www.irceline.be/en/documentation/belair/faq"
+      }
+    }
+  },
+  "user-location-list": {
+    "header": "Location list"
+  },
+  "user-location": {
+    "creation": {
+      "limit-reached": "You can not create more than 5 locations. Please first remove one of the exiting locations.",
+      "message-added": "User location added",
+      "message-exists": "User location already exists"
+    }
+  }
+}

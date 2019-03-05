@@ -2,6 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "allowSyntheticDefaultImports": true,
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -14,6 +15,9 @@
     "typeRoots": [
       "node_modules/@types"
     ],
+    "paths": {
+      "@angular/*": ["node_modules/@angular/*"]
+    },
     "lib": [
       "es2018",
       "dom"

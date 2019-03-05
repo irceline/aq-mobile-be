@@ -1,5 +1,7 @@
 {
   "name": "aq-mobile-be",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
