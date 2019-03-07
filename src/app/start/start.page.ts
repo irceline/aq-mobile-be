@@ -1,15 +1,54 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { IonRefresher, Platform, ToastController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+
+import {
+  BelaqiSelection,
+  HeaderContent,
+} from '../components/belaqi-user-location-slider/belaqi-user-location-slider.component';
 
 @Component({
   selector: 'app-start',
   templateUrl: './start.page.html',
   styleUrls: ['./start.page.scss'],
 })
-export class StartPage implements OnInit {
+export class StartPage {
 
-  constructor() { }
+  public sliderHeaderContent: HeaderContent;
 
-  ngOnInit() {
+  constructor(
+    // private nav: NavController,
+    // private refreshHandler: RefreshHandler,
+    private platform: Platform,
+    private toast: ToastController,
+    public translateSrvc: TranslateService
+  ) { }
+
+  public navigateToMap(selection: BelaqiSelection) {
+    // this.nav.push(MapPage, { belaqiSelection: selection });
+  }
+
+  public setHeaderContent(headerContent: HeaderContent) {
+    let visibility;
+    if (headerContent) {
+      visibility = 'inherit';
+      this.sliderHeaderContent = headerContent;
+    } else {
+      visibility = 'hidden';
+    }
+    const locationHeaderElems = document.querySelectorAll('.location-header');
+    for (let i = 0; i < locationHeaderElems.length; i++) {
+      (locationHeaderElems[i] as HTMLElement).style.visibility = visibility;
+    }
+  }
+
+  public async doRefresh(refresher: IonRefresher) {
+    // this.refreshHandler.refresh();
+    if (this.platform.is('cordova')) {
+      const toast = await this.toast.create({ message: this.translateSrvc.instant('refresh-button.message'), duration: 3000 });
+      toast.present();
+    }
+    setTimeout(() => refresher.complete(), 1000);
   }
 
 }

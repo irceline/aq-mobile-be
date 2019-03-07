@@ -1,0 +1,78 @@
+<!-- <ion-slides pager #slider (ionSlideDidChange)="slideChanged()">
+  <ion-slide *ngFor="let loc of belaqiLocations" [ngStyle]="{'min-height': slidesHeight}">
+    <div *ngIf="loc.latitude">
+      <div class="wheel">
+        <belaqi-wheel [latitude]="loc.latitude" [longitude]="loc.longitude" (onReady)="resizeSlide()"></belaqi-wheel>
+      </div>
+      <div class="chart">
+        <belaqi-chart [location]="loc" (onReady)="resizeSlide()"></belaqi-chart>
+      </div>
+      <div *ngIf="showSubIndexPanel">
+        <sub-index-panel [location]="loc" (onReady)="resizeSlide()" (onSelect)="selectPhenomenon($event, loc, false)"></sub-index-panel>
+      </div>
+      <div *ngIf="showAnnualMeanPanel">
+        <annual-mean-panel [location]="loc" (onReady)="resizeSlide()" (onSelect)="selectPhenomenon($event, loc, true)"></annual-mean-panel>
+      </div>
+      <div *ngIf="showNearestStationsPanel">
+        <nearest-measuring-station-panel [location]="loc" (onSelect)="selectPhenomenonLocation($event, loc, false)"
+          (onReady)="resizeSlide()"></nearest-measuring-station-panel>
+      </div>
+    </div>
+    <div *ngIf="!currentLocationError && !loc.latitude" style="height: 300px;">
+      <div text-wrap>{{'belaqi-user-location-slider.loading-current-location' | translate}}</div>
+      <ion-spinner></ion-spinner>
+    </div>
+    <div *ngIf="currentLocationError && !loc.latitude" style="height: 350px;">
+      <div text-wrap>{{'belaqi-user-location-slider.current-location-error-header' | translate}}</div>
+      <ion-item text-wrap>{{'belaqi-user-location-slider.current-location-error-1' | translate}}</ion-item>
+      <ion-item text-wrap>{{'belaqi-user-location-slider.current-location-error-2' | translate}}</ion-item>
+      <ion-item text-wrap>{{'belaqi-user-location-slider.current-location-error-3' | translate}}</ion-item>
+      <div>
+        <button ion-button outline text-wrap (click)="createNewLocation()">
+          {{'belaqi-user-location-slider.create-new-location' | translate}}
+        </button>
+      </div>
+    </div>
+    <p></p>
+  </ion-slide>
+  <ion-slide [ngStyle]="{'min-height': slidesHeight}">
+    <div class="faq-slide">
+      <div>
+        <button ion-button outline text-wrap (click)="navigateFAQ()">
+          {{'belaqi-user-location-slider.faq' | translate}}
+        </button>
+      </div>
+    </div>
+    <div class="create-new-location-slide">
+      <div>
+        <button ion-button outline text-wrap (click)="createNewLocation()">
+          {{'belaqi-user-location-slider.create-new-location' | translate}}
+        </button>
+      </div>
+      <div>
+        <button ion-button outline text-wrap (click)="openUserLocation()">
+          {{'belaqi-user-location-slider.open-user-location' | translate}}
+        </button>
+      </div>
+      <ion-list mode="md">
+        <ion-item>
+          <geolocation-enabled></geolocation-enabled>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <h2 text-wrap>{{'belaqi-user-location-slider.current-location' | translate}}</h2>
+            <p text-wrap>{{'belaqi-user-location-slider.current-location-description' | translate}}</p>
+          </ion-label>
+          <ion-toggle (ionChange)="changeCurrentLocation()" [(ngModel)]="showCurrentLocation"></ion-toggle>
+        </ion-item>
+      </ion-list>
+    </div>
+    <hr />
+    <div class="settings">
+      <button ion-button icon-only clear (click)="navigateSettings()">
+        <ion-icon name="settings"></ion-icon>
+        <span class="nav-butto-label">{{'settings.header' | translate}}</span>
+      </button>
+    </div>
+  </ion-slide>
+</ion-slides> -->

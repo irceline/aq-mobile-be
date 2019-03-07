@@ -1,10 +1,11 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
-
+import { RouterModule, Routes } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
 
+import { ComponentsModule } from '../components/components.module';
 import { MapPage } from './map.page';
 
 const routes: Routes = [
@@ -19,8 +20,10 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    TranslateModule,
+    ComponentsModule,
     RouterModule.forChild(routes)
   ],
   declarations: [MapPage]
 })
-export class MapPageModule {}
+export class MapPageModule { }

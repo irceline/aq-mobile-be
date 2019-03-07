@@ -1,3 +1,37 @@
-node_modules
-plugins
+# Specifies intentionally untracked files to ignore when using Git
+# http://git-scm.com/docs/gitignore
 
+*~
+*.sw[mnpcod]
+*.log
+*.tmp
+*.tmp.*
+log.txt
+*.sublime-project
+*.sublime-workspace
+.vscode/
+npm-debug.log*
+
+.idea/
+.sourcemaps/
+.sass-cache/
+.tmp/
+.versions/
+coverage/
+dist/
+node_modules/
+tmp/
+temp/
+hooks/
+platforms/
+plugins/
+www/
+$RECYCLE.BIN/
+google-services.json
+GoogleService-Info.plist
+
+.DS_Store
+Thumbs.db
+UserInterfaceState.xcuserstate
+tsconfig.scripts.json
+scripts
