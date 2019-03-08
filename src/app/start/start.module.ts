@@ -1,13 +1,12 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
-
+import { RouterModule, Routes } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-
-import { StartPage } from './start.page';
 import { TranslateModule } from '@ngx-translate/core';
+
 import { ComponentsModule } from '../components/components.module';
+import { StartPage } from './start.page';
 
 const routes: Routes = [
   {
@@ -27,4 +26,4 @@ const routes: Routes = [
   ],
   declarations: [StartPage]
 })
-export class StartPageModule {}
+export class StartPageModule { }

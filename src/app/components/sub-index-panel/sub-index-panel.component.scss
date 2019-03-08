@@ -1,0 +1,18 @@
+:host {
+    .header {
+        padding: 5px;
+        display: flex;
+        align-content: center;
+        align-items: center;
+    }
+
+    .col {
+        overflow: hidden;
+    }
+
+    .info-button {
+        ion-button {
+            color: black;
+        }
+    }
+}

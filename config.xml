@@ -86,4 +86,6 @@
     <plugin name="cordova-plugin-geolocation" spec="4.0.1" />
     <plugin name="cordova.plugins.diagnostic" spec="4.0.12" />
     <plugin name="cordova-plugin-request-location-accuracy" spec="2.2.3" />
+    <plugin name="cordova-plugin-network-information" spec="2.0.1" />
+    <plugin name="cordova-plugin-inappbrowser" spec="3.0.0" />
 </widget>

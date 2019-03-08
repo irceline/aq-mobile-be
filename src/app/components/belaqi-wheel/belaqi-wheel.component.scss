@@ -1,0 +1,42 @@
+:host {
+
+  .wheel-wrapper {
+    width: 100%;
+    position: relative;
+
+    .info-button {
+      display: inline;
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 1;
+
+      ion-button {
+        color: black;
+      }
+    }
+  }
+
+  .notification-button {
+    z-index: 1;
+  }
+
+  .wheel {
+    position: relative;
+    width: 90%;
+    height: 14em;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: -1;
+  }
+
+  .no-index {
+    padding: 50px 10px;
+    white-space: normal;
+  }
+
+  // .chartjs-render-monitor {
+  //   position: relative;
+  //   top: -45px;
+  // }
+}

@@ -1,0 +1,23 @@
+:host {
+    width: 100%;
+    height: 100%;
+
+    .chart {
+        position: relative;
+    }
+
+    .error {
+        padding: 10px;
+        white-space: normal;
+    }
+
+    .info-button {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        ion-button {
+            color: black;
+        }
+    }
+}

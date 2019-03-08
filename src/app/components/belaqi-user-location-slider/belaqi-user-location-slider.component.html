@@ -1,21 +1,21 @@
-<!-- <ion-slides pager #slider (ionSlideDidChange)="slideChanged()">
-  <ion-slide *ngFor="let loc of belaqiLocations" [ngStyle]="{'min-height': slidesHeight}">
-    <div *ngIf="loc.latitude">
+<ion-slides pager #slider (ionSlideDidChange)="slideChanged()">
+  <ion-slide *ngFor="let loc of belaqiLocations">
+    <div *ngIf="loc.latitude" style="width: 100%">
       <div class="wheel">
-        <belaqi-wheel [latitude]="loc.latitude" [longitude]="loc.longitude" (onReady)="resizeSlide()"></belaqi-wheel>
+        <belaqi-wheel [latitude]="loc.latitude" [longitude]="loc.longitude" (ready)="resizeSlide()"></belaqi-wheel>
       </div>
       <div class="chart">
-        <belaqi-chart [location]="loc" (onReady)="resizeSlide()"></belaqi-chart>
+        <belaqi-chart [location]="loc" (ready)="resizeSlide()"></belaqi-chart>
       </div>
       <div *ngIf="showSubIndexPanel">
-        <sub-index-panel [location]="loc" (onReady)="resizeSlide()" (onSelect)="selectPhenomenon($event, loc, false)"></sub-index-panel>
+        <sub-index-panel [location]="loc" (ready)="resizeSlide()" (selected)="selectPhenomenon($event, loc, false)"></sub-index-panel>
       </div>
       <div *ngIf="showAnnualMeanPanel">
-        <annual-mean-panel [location]="loc" (onReady)="resizeSlide()" (onSelect)="selectPhenomenon($event, loc, true)"></annual-mean-panel>
+        <annual-mean-panel [location]="loc" (ready)="resizeSlide()" (selected)="selectPhenomenon($event, loc, true)"></annual-mean-panel>
       </div>
       <div *ngIf="showNearestStationsPanel">
-        <nearest-measuring-station-panel [location]="loc" (onSelect)="selectPhenomenonLocation($event, loc, false)"
-          (onReady)="resizeSlide()"></nearest-measuring-station-panel>
+        <nearest-measuring-station-panel [location]="loc" (selected)="selectPhenomenonLocation($event, loc, false)"
+          (ready)="resizeSlide()"></nearest-measuring-station-panel>
       </div>
     </div>
     <div *ngIf="!currentLocationError && !loc.latitude" style="height: 300px;">
@@ -28,35 +28,34 @@
       <ion-item text-wrap>{{'belaqi-user-location-slider.current-location-error-2' | translate}}</ion-item>
       <ion-item text-wrap>{{'belaqi-user-location-slider.current-location-error-3' | translate}}</ion-item>
       <div>
-        <button ion-button outline text-wrap (click)="createNewLocation()">
-          {{'belaqi-user-location-slider.create-new-location' | translate}}
-        </button>
+        <!-- <button ion-button outline text-wrap (click)="createNewLocation()">
+            {{'belaqi-user-location-slider.create-new-location' | translate}}
+          </button> -->
       </div>
     </div>
-    <p></p>
   </ion-slide>
   <ion-slide [ngStyle]="{'min-height': slidesHeight}">
     <div class="faq-slide">
       <div>
-        <button ion-button outline text-wrap (click)="navigateFAQ()">
+        <!-- <button ion-button outline text-wrap (click)="navigateFAQ()">
           {{'belaqi-user-location-slider.faq' | translate}}
-        </button>
+        </button> -->
       </div>
     </div>
     <div class="create-new-location-slide">
       <div>
-        <button ion-button outline text-wrap (click)="createNewLocation()">
+        <!-- <button ion-button outline text-wrap (click)="createNewLocation()">
           {{'belaqi-user-location-slider.create-new-location' | translate}}
-        </button>
+        </button> -->
       </div>
       <div>
-        <button ion-button outline text-wrap (click)="openUserLocation()">
+        <!-- <button ion-button outline text-wrap (click)="openUserLocation()">
           {{'belaqi-user-location-slider.open-user-location' | translate}}
-        </button>
+        </button> -->
       </div>
       <ion-list mode="md">
         <ion-item>
-          <geolocation-enabled></geolocation-enabled>
+          <!-- <geolocation-enabled></geolocation-enabled> -->
         </ion-item>
         <ion-item>
           <ion-label>
@@ -69,10 +68,10 @@
     </div>
     <hr />
     <div class="settings">
-      <button ion-button icon-only clear (click)="navigateSettings()">
+      <!-- <button ion-button icon-only clear (click)="navigateSettings()">
         <ion-icon name="settings"></ion-icon>
         <span class="nav-butto-label">{{'settings.header' | translate}}</span>
-      </button>
+      </button> -->
     </div>
   </ion-slide>
-</ion-slides> -->
+</ion-slides>

@@ -1,0 +1,23 @@
+<div class="wheel-wrapper">
+  <div class="info-button">
+    <ion-button fill="clear" (click)="presentPopover($event)">
+      <ion-icon slot="icon-only" name="information-circle"></ion-icon>
+    </ion-button>
+  </div>
+  <div class="notification-button">
+    <notification-icon float-left></notification-icon>
+  </div>
+  <div class="wheel" [hidden]="!index">
+    <canvas #belaqiWheel></canvas>
+  </div>
+  <div class="no-index" *ngIf="loading">
+    {{'belaqi-wheel.loading' | translate}}
+  </div>
+</div>
+<div *ngIf="index === 0" class="no-index">
+  {{'belaqi-wheel.no-index-ascertained' | translate}}
+</div>
+<div *ngIf="error" class="no-index">
+  {{'belaqi-wheel.error-occured' | translate}}
+</div>
+<div id="check-height-div" style="height:0;width:0;outline:none;border:none;padding:none;margin:none;"></div>

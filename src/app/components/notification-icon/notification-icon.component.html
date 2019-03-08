@@ -1,0 +1,5 @@
+<ion-button fill="clear" (click)="openPopup($event)">
+  <ion-icon slot="icon-only" name="megaphone" id="notification-button">
+    <ion-badge *ngIf="notificationCount" id="notifications-badge" color="danger">{{notificationCount}}</ion-badge>
+  </ion-icon>
+</ion-button>

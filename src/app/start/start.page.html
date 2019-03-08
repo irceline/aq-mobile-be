@@ -1,13 +1,12 @@
-<ion-content class="cards-bg" #content>
+<ion-content>
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="{{'refresh.pull-message' | translate}}"
       refreshingSpinner="circles" refreshingText="">
     </ion-refresher-content>
   </ion-refresher>
 
-  <ion-card class="slider-card">
-    <ion-list mode="md">
-      <!-- <ion-item class="location-header" [ngClass]="{'ion-affix': isSticky}" ion-affix [content]="content"> -->
+  <!-- <ion-list>
+    <ion-item class="location-header">
       <div class="location-label" text-wrap *ngIf="sliderHeaderContent">
         {{sliderHeaderContent?.label}}
       </div>
@@ -16,11 +15,11 @@
         <span>{{sliderHeaderContent?.date | date : 'd MMMM y, HH:mm': null: translateSrvc.currentLang}} </span>
         <span *ngIf="sliderHeaderContent?.current"> - {{'belaqi-user-location-slider.current-location' | translate}}</span>
       </div>
-      <!-- </ion-item> -->
-      <ion-item>
-        <belaqi-user-location-slider (phenomenonSelected)="navigateToMap($event)" (headerContent)="setHeaderContent($event)"></belaqi-user-location-slider>
-      </ion-item>
-    </ion-list>
-  </ion-card>
+    </ion-item>
+    <ion-item>
+      <belaqi-user-location-slider (phenomenonSelected)="navigateToMap($event)" (headerContent)="setHeaderContent($event)"></belaqi-user-location-slider>
+    </ion-item>
+  </ion-list> -->
+  <belaqi-user-location-slider (phenomenonSelected)="navigateToMap($event)" (headerContent)="setHeaderContent($event)"></belaqi-user-location-slider>
 
 </ion-content>

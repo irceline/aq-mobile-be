@@ -1,9 +1,16 @@
 import { AfterViewInit, Component, EventEmitter, OnDestroy, Output, ViewChild } from '@angular/core';
-import { ModalController, ToastController } from '@ionic/angular';
+import { IonSlides, ModalController, ToastController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
+import { IrcelineSettings, IrcelineSettingsService } from '../../services/irceline-settings/irceline-settings.service';
 import { LocateService, LocationStatus } from '../../services/locate/locate.service';
+import { NetworkAlertService } from '../../services/network-alert/network-alert.service';
+import { StartPageSettingsService } from '../../services/start-page-settings/start-page-settings.service';
 import { UserLocation, UserLocationListService } from '../../services/user-location-list/user-location-list.service';
+import {
+  PhenomenonLocationSelection,
+} from '../nearest-measuring-station-panel/nearest-measuring-station-panel-entry.component';
 
 export interface HeaderContent {
   label: string;
@@ -34,7 +41,7 @@ export interface BelaqiSelection {
 export class BelaqiUserLocationSliderComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild('slider')
-  // slider: Slides;
+  slider: IonSlides;
 
   @Output()
   public phenomenonSelected: EventEmitter<BelaqiSelection> = new EventEmitter();
@@ -66,35 +73,35 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit, OnDestr
   private networkSubscriber: Subscription;
 
   constructor(
-    private userLocationProvider: UserLocationListService,
-    // private startPageSettingsProvider: StartPageSettingsProvider,
+    private userLocationService: UserLocationListService,
+    private startPageSettingsService: StartPageSettingsService,
     // private locatedTimeseriesProvider: LocatedTimeseriesService,
-    // private ircelineSettings: IrcelineSettingsProvider,
+    private ircelineSettings: IrcelineSettingsService,
     private locate: LocateService,
-    // private networkAlert: NetworkAlertProvider,
+    private networkAlert: NetworkAlertService,
     // private nav: NavController,
-    // protected translateSrvc: TranslateService,
+    protected translateSrvc: TranslateService,
     protected modalCtrl: ModalController,
     // protected refreshHandler: RefreshHandler,
     // private popoverCtrl: PopoverController,
     private toast: ToastController
   ) {
-    // this.locate.getLocationStatusAsObservable().subscribe(locationStatus => {
-    //   if (locationStatus !== LocationStatus.DENIED) {
-    //     this.loadBelaqis(false);
-    //   }
-    // });
+    this.locate.getLocationStatusAsObservable().subscribe(locationStatus => {
+      if (locationStatus !== LocationStatus.DENIED) {
+        this.loadBelaqis(false);
+      }
+    });
     // this.refreshHandler.onRefresh.subscribe(() => this.loadBelaqis(true));
-    // this.userLocationProvider.locationsChanged.subscribe(() => this.loadBelaqis(false));
-    // this.userLocationProvider.locationsChanged.subscribe(() => this.loadBelaqis(false));
-    // this.networkAlert.onConnected.subscribe(() => this.loadBelaqis(false));
+    this.userLocationService.locationsChanged.subscribe(() => this.loadBelaqis(false));
+    this.userLocationService.locationsChanged.subscribe(() => this.loadBelaqis(false));
+    this.networkAlert.onConnected.subscribe(() => this.loadBelaqis(false));
 
-    // this.showNearestStationsSubscriber = this.startPageSettingsProvider.getShowNearestStations()
-    //   .subscribe(val => this.showNearestStationsPanel = val);
-    // this.showSubIndexPanelSubscriber = this.startPageSettingsProvider.getShowSubIndexPanel()
-    //   .subscribe(val => this.showSubIndexPanel = val);
-    // this.showAnnualMeanPanelSubscriber = this.startPageSettingsProvider.getShowAnnualMeanPanel()
-    //   .subscribe(val => this.showAnnualMeanPanel = val);
+    this.showNearestStationsSubscriber = this.startPageSettingsService.getShowNearestStations()
+      .subscribe(val => this.showNearestStationsPanel = val);
+    this.showSubIndexPanelSubscriber = this.startPageSettingsService.getShowSubIndexPanel()
+      .subscribe(val => this.showSubIndexPanel = val);
+    this.showAnnualMeanPanelSubscriber = this.startPageSettingsService.getShowAnnualMeanPanel()
+      .subscribe(val => this.showAnnualMeanPanel = val);
   }
 
   public ngAfterViewInit() {
@@ -114,22 +121,22 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit, OnDestr
     if (this.showAnnualMeanPanelSubscriber) { this.showAnnualMeanPanelSubscriber.unsubscribe(); }
   }
 
-  // public selectPhenomenonLocation(selection: PhenomenonLocationSelection, userlocation: UserLocation, yearly: boolean) {
-  //   this.phenomenonSelected.emit({
-  //     phenomenonID: selection.phenomenonId,
-  //     stationlocation: {
-  //       latitude: selection.latitude,
-  //       longitude: selection.longitude
-  //     },
-  //     userlocation: {
-  //       latitude: userlocation.latitude,
-  //       longitude: userlocation.longitude,
-  //       label: userlocation.label,
-  //       type: userlocation.type
-  //     },
-  //     yearly
-  //   });
-  // }
+  public selectPhenomenonLocation(selection: PhenomenonLocationSelection, userlocation: UserLocation, yearly: boolean) {
+    this.phenomenonSelected.emit({
+      phenomenonID: selection.phenomenonId,
+      stationlocation: {
+        latitude: selection.latitude,
+        longitude: selection.longitude
+      },
+      userlocation: {
+        latitude: userlocation.latitude,
+        longitude: userlocation.longitude,
+        label: userlocation.label,
+        type: userlocation.type
+      },
+      yearly
+    });
+  }
 
   public selectPhenomenon(phenId: string, userlocation: UserLocation, yearly: boolean) {
     this.phenomenonSelected.emit({
@@ -152,37 +159,36 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit, OnDestr
   //   this.modalCtrl.create(ModalUserLocationListComponent).present();
   // }
 
-  // public slideChanged() {
-  //   let currentIndex = this.slider.getActiveIndex();
-  //   this.updateLocationSelection(currentIndex);
-  // }
+  public slideChanged() {
+    this.slider.getActiveIndex().then(idx => this.updateLocationSelection(idx));
+  }
 
-  // public changeCurrentLocation() {
-  //   if (this.showCurrentLocation) {
-  //     if (this.locate.getLocationStatus() === LocationStatus.DENIED) {
-  //       this.locate.askForPermission()
-  //         .then(permission => {
-  //           if (permission) {
-  //             this.updateShowCurrentLocation(true);
-  //           } else {
-  //             this.showCurrentLocation = false;
-  //           }
-  //         })
-  //         .catch(error => this.presentError(error));
-  //     } else {
-  //       this.updateShowCurrentLocation(true);
-  //     }
-  //   } else {
-  //     this.updateShowCurrentLocation(false);
-  //   }
-  // }
+  public changeCurrentLocation() {
+    if (this.showCurrentLocation) {
+      if (this.locate.getLocationStatus() === LocationStatus.DENIED) {
+        this.locate.askForPermission()
+          .then(permission => {
+            if (permission) {
+              this.updateShowCurrentLocation(true);
+            } else {
+              this.showCurrentLocation = false;
+            }
+          })
+          .catch(error => this.presentError(error));
+      } else {
+        this.updateShowCurrentLocation(true);
+      }
+    } else {
+      this.updateShowCurrentLocation(false);
+    }
+  }
 
   private presentError(error: any) {
     this.toast.create({ message: `Error occured: ${JSON.stringify(error)}`, duration: 3000 }).then(toast => toast.present());
   }
 
   private updateShowCurrentLocation(value: boolean) {
-    this.userLocationProvider.setCurrentLocationVisisble(value);
+    this.userLocationService.setCurrentLocationVisisble(value);
     this.showCurrentLocation = value;
   }
 
@@ -199,24 +205,24 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit, OnDestr
   }
 
   private setHeight() {
-    const outerElem = document.querySelector('.scroll-content');
-    const headerHeight = document.querySelector('.location-header').clientHeight;
-    const height = outerElem.clientHeight - headerHeight - (13 * 2) - 19;
-    this.slidesHeight = `${height}px`;
+    // const outerElem = document.querySelector('.scroll-content');
+    // const headerHeight = document.querySelector('.location-header').clientHeight;
+    // const height = outerElem.clientHeight - headerHeight - (13 * 2) - 19;
+    // this.slidesHeight = `${height}px`;
   }
 
-  // private updateLocationSelection(idx: number) {
-  //   this.setHeader(idx);
-  //   if (this.slider) {
-  //     this.setHeight();
-  //     if (idx <= this.belaqiLocations.length - 1) {
-  //       this.locatedTimeseriesProvider.setSelectedIndex(idx);
-  //       this.locatedTimeseriesProvider.removeAllDatasets();
-  //     } else {
-  //       this.headerContent.emit(null);
-  //     }
-  //   }
-  // }
+  private updateLocationSelection(idx: number) {
+    this.setHeader(idx);
+    if (this.slider) {
+      this.setHeight();
+      if (idx <= this.belaqiLocations.length - 1) {
+        // this.locatedTimeseriesProvider.setSelectedIndex(idx);
+        // this.locatedTimeseriesProvider.removeAllDatasets();
+      } else {
+        this.headerContent.emit(null);
+      }
+    }
+  }
 
   private setHeader(idx: number): any {
     if (idx <= this.belaqiLocations.length - 1) {
@@ -237,54 +243,54 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit, OnDestr
     return yPos;
   }
 
-  // private loadBelaqis(reload: boolean) {
-  //   if (this.userLocationProvider.hasLocations()) {
-  //     this.currentLocationError = null;
-  //     const previousActiveIndex = this.slider.getActiveIndex();
-  //     this.ircelineSettings.getSettings(reload).subscribe(ircelineSettings => {
-  //       this.belaqiLocations = [];
-  //       this.userLocationProvider.getVisibleUserLocations().forEach((loc, i) => {
-  //         if (loc.type !== 'current') {
-  //           this.setLocation(loc, i, ircelineSettings);
-  //         } else {
-  //           this.belaqiLocations[i] = {
-  //             type: 'current'
-  //           }
-  //           // let timeout = window.setTimeout(() => this.presentDelayedLocateHint(), LOCATION_DELAYED_NOTIFICATION_IN_MILLISECONDS);
-  //           this.userLocationProvider.determineCurrentLocation().subscribe(
-  //             currentLoc => {
-  //               this.setLocation(currentLoc, i, ircelineSettings);
-  //               this.updateLocationSelection(0);
-  //               // clearTimeout(timeout);
-  //             },
-  //             error => {
-  //               // this.presentDelayedLocateHint();
-  //               this.currentLocationError = error || true;
-  //             }
-  //           )
-  //         }
-  //       });
-  //       setTimeout(() => {
-  //         if (this.slider && previousActiveIndex !== 0) {
-  //           this.slider.update();
-  //           this.slider.slideTo(0);
-  //         }
-  //         this.updateLocationSelection(0);
-  //       }, 300);
-  //       this.showCurrentLocation = this.userLocationProvider.isCurrentLocationVisible();
-  //     });
-  //   }
-  // }
+  private async loadBelaqis(reload: boolean) {
+    if (this.userLocationService.hasLocations()) {
+      this.currentLocationError = null;
+      const previousActiveIndex = await this.slider.getActiveIndex();
+      this.ircelineSettings.getSettings(reload).subscribe(ircelineSettings => {
+        this.belaqiLocations = [];
+        this.userLocationService.getVisibleUserLocations().forEach((loc, i) => {
+          if (loc.type !== 'current') {
+            this.setLocation(loc, i, ircelineSettings);
+          } else {
+            this.belaqiLocations[i] = {
+              type: 'current'
+            };
+            // let timeout = window.setTimeout(() => this.presentDelayedLocateHint(), LOCATION_DELAYED_NOTIFICATION_IN_MILLISECONDS);
+            this.userLocationService.determineCurrentLocation().subscribe(
+              currentLoc => {
+                this.setLocation(currentLoc, i, ircelineSettings);
+                this.updateLocationSelection(0);
+                // clearTimeout(timeout);
+              },
+              error => {
+                // this.presentDelayedLocateHint();
+                this.currentLocationError = error || true;
+              }
+            );
+          }
+        });
+        setTimeout(() => {
+          if (this.slider && previousActiveIndex !== 0) {
+            this.slider.update();
+            this.slider.slideTo(0);
+          }
+          this.updateLocationSelection(0);
+        }, 300);
+        this.showCurrentLocation = this.userLocationService.isCurrentLocationVisible();
+      });
+    }
+  }
 
-  // private setLocation(loc: UserLocation, i: number, ircelineSettings: IrcelineSettings) {
-  //   this.belaqiLocations[i] = {
-  //     label: loc.label,
-  //     date: ircelineSettings.lastupdate,
-  //     type: loc.type,
-  //     latitude: loc.latitude,
-  //     longitude: loc.longitude
-  //   };
-  // }
+  private setLocation(loc: UserLocation, i: number, ircelineSettings: IrcelineSettings) {
+    this.belaqiLocations[i] = {
+      label: loc.label,
+      date: ircelineSettings.lastupdate,
+      type: loc.type,
+      latitude: loc.latitude,
+      longitude: loc.longitude
+    };
+  }
 
   private handleError(lon: number, lat: number, error: any) {
     console.warn(`Belaqi for (latitude: ${lat}, longitude ${lon}): ${error} - maybe outside of Belgium`);

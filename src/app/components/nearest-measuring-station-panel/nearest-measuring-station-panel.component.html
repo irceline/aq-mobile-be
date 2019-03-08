@@ -1,0 +1,15 @@
+<ion-grid no-padding>
+  <ion-row class="header">
+    <ion-col text-center text-wrap>{{'nearest-measuring-station-panel.header' | translate}}</ion-col>
+    <div class="info-button">
+      <ion-button fill="clear" (click)="presentPopover($event)">
+        <ion-icon slot="icon-only" name="information-circle"></ion-icon>
+      </ion-button>
+    </div>
+  </ion-row>
+  <ion-row nowrap>
+    <ion-col *ngFor="let entry of entries">
+      <nearest-measuring-station-panel-entry [location]="location" [entry]="entry" (clicked)="select($event)" (ready)="entryReady()"></nearest-measuring-station-panel-entry>
+    </ion-col>
+  </ion-row>
+</ion-grid>

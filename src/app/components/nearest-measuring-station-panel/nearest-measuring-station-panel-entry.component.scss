@@ -1,0 +1,32 @@
+:host {
+    .entry {
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        height: 2.5em;
+        text-align: center;
+
+        .location-disabled {
+            padding: 25px 0;
+        }
+    }
+
+    .entry-footer {
+        text-align: center;
+    }
+
+    .phenomenon-label {
+        font-size: 100%;
+    }
+
+    .station-value {
+        font-size: 60%;
+    }
+
+    .station-distance {
+        font-size: 80%;
+    }
+
+    .station-label {
+        font-size: 50%;
+    }
+}

@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
-import { IonRefresher, Platform, ToastController } from '@ionic/angular';
+import { Platform, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import {
   BelaqiSelection,
   HeaderContent,
 } from '../components/belaqi-user-location-slider/belaqi-user-location-slider.component';
+import { RefreshHandler } from '../services/refresh/refresh.service';
 
 @Component({
-  selector: 'app-start',
+  selector: 'page-start',
   templateUrl: './start.page.html',
   styleUrls: ['./start.page.scss'],
 })
@@ -18,7 +19,7 @@ export class StartPage {
 
   constructor(
     // private nav: NavController,
-    // private refreshHandler: RefreshHandler,
+    private refreshHandler: RefreshHandler,
     private platform: Platform,
     private toast: ToastController,
     public translateSrvc: TranslateService
@@ -42,13 +43,13 @@ export class StartPage {
     }
   }
 
-  public async doRefresh(refresher: IonRefresher) {
-    // this.refreshHandler.refresh();
+  public async doRefresh(event) {
+    this.refreshHandler.refresh();
     if (this.platform.is('cordova')) {
       const toast = await this.toast.create({ message: this.translateSrvc.instant('refresh-button.message'), duration: 3000 });
       toast.present();
     }
-    setTimeout(() => refresher.complete(), 1000);
+    setTimeout(() => event.target.complete(), 1000);
   }
 
 }
