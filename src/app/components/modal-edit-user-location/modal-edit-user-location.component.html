@@ -15,7 +15,7 @@
   <div style="height: 300px;">
     <location-selection mapId="location-gen" [mapOptions]="mapOptions" [location]="point" (locationChanged)="onLocationChanged($event)"></location-selection>
   </div>
-  <ion-list mode="md">
+  <ion-list>
     <ion-item>
       <ion-label position="stacked">{{'intro.three.locationLabelHint' | translate}}</ion-label>
       <ion-input type="text" [(ngModel)]="label" clearInput placeholder="{{'intro.three.locationLabelPlaceholder' | translate}}"></ion-input>

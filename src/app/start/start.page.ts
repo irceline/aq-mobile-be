@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
-import { Platform, ToastController } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+import { ModalController, Platform, ToastController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 
 import {
   BelaqiSelection,
   HeaderContent,
 } from '../components/belaqi-user-location-slider/belaqi-user-location-slider.component';
+import { ModalIntroComponent } from '../components/settings/modal-intro/modal-intro.component';
 import { RefreshHandler } from '../services/refresh/refresh.service';
 
 @Component({
@@ -13,17 +15,23 @@ import { RefreshHandler } from '../services/refresh/refresh.service';
   templateUrl: './start.page.html',
   styleUrls: ['./start.page.scss'],
 })
-export class StartPage {
+export class StartPage implements OnInit {
 
   public sliderHeaderContent: HeaderContent;
 
   constructor(
     // private nav: NavController,
+    private storage: Storage,
     private refreshHandler: RefreshHandler,
+    private modalCtrl: ModalController,
     private platform: Platform,
     private toast: ToastController,
     public translateSrvc: TranslateService
   ) { }
+
+  public ngOnInit(): void {
+    this.checkToShowIntroduction();
+  }
 
   public navigateToMap(selection: BelaqiSelection) {
     // this.nav.push(MapPage, { belaqiSelection: selection });
@@ -50,6 +58,16 @@ export class StartPage {
       toast.present();
     }
     setTimeout(() => event.target.complete(), 1000);
+  }
+
+  private checkToShowIntroduction() {
+    const firstStartKey = 'firstTimeStarted';
+    this.storage.get(firstStartKey).then(value => {
+      if (value === null) {
+        this.modalCtrl.create({ component: ModalIntroComponent }).then(modal => modal.present());
+        this.storage.set(firstStartKey, true);
+      }
+    });
   }
 
 }

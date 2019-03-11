@@ -32,12 +32,22 @@ import {
 import { NotificationIconPopupComponent } from './notification-icon/notification-icon-popup.component';
 import { NotificationIconComponent } from './notification-icon/notification-icon.component';
 import { PushNotificationComponent } from './push-notification/push-notification.component';
+import { AboutSettingsComponent } from './settings/about-settings/about-settings.component';
+import { CommonSettingsComponent } from './settings/common-settings/common-settings.component';
+import { ModalIntroComponent } from './settings/modal-intro/modal-intro.component';
+import { ModalSettingsComponent } from './settings/modal-settings/modal-settings.component';
+import {
+  PushNotificationSubscriptionsSettingsComponent,
+} from './settings/push-notification-subscriptions-settings/push-notification-subscriptions-settings.component';
+import { StartPageSettingsComponent } from './settings/start-page-settings/start-page-settings.component';
+import { UserLocationsSettingsComponent } from './settings/user-locations-settings/user-locations-settings.component';
 import { SubIndexPanelEntryComponent } from './sub-index-panel/sub-index-panel-entry.component';
 import { SubIndexPanelInformationPopupComponent } from './sub-index-panel/sub-index-panel-information-popup.component';
 import { SubIndexPanelComponent } from './sub-index-panel/sub-index-panel.component';
 import { UserLocationCreationComponent } from './user-location-creation/user-location-creation.component';
 
 const COMPONENTS = [
+  AboutSettingsComponent,
   AnnualMeanPanelComponent,
   AnnualMeanPanelEntryComponent,
   AnnualMeanPanelInformationPopupComponent,
@@ -46,10 +56,14 @@ const COMPONENTS = [
   BelaqiUserLocationSliderComponent,
   BelaqiWheelComponent,
   BelaqiWheelInformationComponent,
+  CommonSettingsComponent,
   ExtendedGeometryMapViewerComponent,
   LocationSelectionComponent,
   MobileGeosearchControlComponent,
   ModalEditUserLocationComponent,
+  ModalIntroComponent,
+  ModalSettingsComponent,
+  ModalSettingsComponent,
   ModalUserLocationCreationComponent,
   ModalUserLocationListComponent,
   NearestMeasuringStationPanelComponent,
@@ -58,10 +72,13 @@ const COMPONENTS = [
   NotificationIconComponent,
   NotificationIconPopupComponent,
   PushNotificationComponent,
+  PushNotificationSubscriptionsSettingsComponent,
+  StartPageSettingsComponent,
   SubIndexPanelComponent,
   SubIndexPanelEntryComponent,
   SubIndexPanelInformationPopupComponent,
   UserLocationCreationComponent,
+  UserLocationsSettingsComponent,
 ];
 
 @NgModule({

@@ -13,6 +13,7 @@ import { ModalUserLocationListComponent } from '../modal-user-location-list/moda
 import {
   PhenomenonLocationSelection,
 } from '../nearest-measuring-station-panel/nearest-measuring-station-panel-entry.component';
+import { ModalSettingsComponent } from '../settings/modal-settings/modal-settings.component';
 
 export interface HeaderContent {
   label: string;
@@ -93,6 +94,7 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit, OnDestr
         this.loadBelaqis(false);
       }
     });
+
     // this.refreshHandler.onRefresh.subscribe(() => this.loadBelaqis(true));
     this.userLocationService.locationsChanged.subscribe(() => this.loadBelaqis(false));
     this.userLocationService.locationsChanged.subscribe(() => this.loadBelaqis(false));
@@ -194,9 +196,9 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit, OnDestr
     this.showCurrentLocation = value;
   }
 
-  // public navigateSettings() {
-  //   this.nav.push(SettingsPage);
-  // }
+  public navigateSettings() {
+    this.modalCtrl.create({ component: ModalSettingsComponent }).then(modal => modal.present());
+  }
 
   // public navigateFAQ() {
   //   this.modalCtrl.create(FAQPage).present();

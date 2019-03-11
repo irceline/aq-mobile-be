@@ -53,7 +53,7 @@
           {{'belaqi-user-location-slider.open-user-location' | translate}}
         </ion-button>
       </div>
-      <ion-list mode="md">
+      <ion-list>
         <ion-item>
           <!-- <geolocation-enabled></geolocation-enabled> -->
         </ion-item>
@@ -68,10 +68,10 @@
     </div>
     <hr />
     <div class="settings">
-      <!-- <ion-button (click)="navigateSettings()">
-        <ion-icon name="settings"></ion-icon>
+      <ion-button fill="outline" (click)="navigateSettings()">
+        <ion-icon slot="start" name="settings"></ion-icon>
         <span class="nav-butto-label">{{'settings.header' | translate}}</span>
-      </ion-button> -->
+      </ion-button>
     </div>
   </ion-slide>
 </ion-slides>
