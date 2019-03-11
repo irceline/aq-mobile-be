@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      {{'settings.user-locations.create-new-location' | translate}}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()" id="close-modal">
+          <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <user-location-creation></user-location-creation>
+</ion-content>

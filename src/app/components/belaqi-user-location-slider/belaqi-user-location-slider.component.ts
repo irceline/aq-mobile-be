@@ -8,6 +8,8 @@ import { LocateService, LocationStatus } from '../../services/locate/locate.serv
 import { NetworkAlertService } from '../../services/network-alert/network-alert.service';
 import { StartPageSettingsService } from '../../services/start-page-settings/start-page-settings.service';
 import { UserLocation, UserLocationListService } from '../../services/user-location-list/user-location-list.service';
+import { ModalUserLocationCreationComponent } from '../modal-user-location-creation/modal-user-location-creation.component';
+import { ModalUserLocationListComponent } from '../modal-user-location-list/modal-user-location-list.component';
 import {
   PhenomenonLocationSelection,
 } from '../nearest-measuring-station-panel/nearest-measuring-station-panel-entry.component';
@@ -151,13 +153,13 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit, OnDestr
     });
   }
 
-  // public createNewLocation() {
-  //   this.modalCtrl.create(ModalUserLocationCreationComponent).present();
-  // }
+  public createNewLocation() {
+    this.modalCtrl.create({ component: ModalUserLocationCreationComponent }).then(modal => modal.present());
+  }
 
-  // public openUserLocation() {
-  //   this.modalCtrl.create(ModalUserLocationListComponent).present();
-  // }
+  public openUserLocation() {
+    this.modalCtrl.create({ component: ModalUserLocationListComponent }).then(modal => modal.present());
+  }
 
   public slideChanged() {
     this.slider.getActiveIndex().then(idx => this.updateLocationSelection(idx));

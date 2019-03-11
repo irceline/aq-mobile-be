@@ -28,30 +28,30 @@
       <ion-item text-wrap>{{'belaqi-user-location-slider.current-location-error-2' | translate}}</ion-item>
       <ion-item text-wrap>{{'belaqi-user-location-slider.current-location-error-3' | translate}}</ion-item>
       <div>
-        <!-- <button ion-button outline text-wrap (click)="createNewLocation()">
-            {{'belaqi-user-location-slider.create-new-location' | translate}}
-          </button> -->
+        <ion-button fill="outline" (click)="createNewLocation()">
+          {{'belaqi-user-location-slider.create-new-location' | translate}}
+        </ion-button>
       </div>
     </div>
   </ion-slide>
   <ion-slide [ngStyle]="{'min-height': slidesHeight}">
     <div class="faq-slide">
       <div>
-        <!-- <button ion-button outline text-wrap (click)="navigateFAQ()">
+        <!-- <ion-button fill="outline" (click)="navigateFAQ()">
           {{'belaqi-user-location-slider.faq' | translate}}
-        </button> -->
+        </ion-button> -->
       </div>
     </div>
     <div class="create-new-location-slide">
       <div>
-        <!-- <button ion-button outline text-wrap (click)="createNewLocation()">
+        <ion-button fill="outline" (click)="createNewLocation()">
           {{'belaqi-user-location-slider.create-new-location' | translate}}
-        </button> -->
+        </ion-button>
       </div>
       <div>
-        <!-- <button ion-button outline text-wrap (click)="openUserLocation()">
+        <ion-button fill="outline" (click)="openUserLocation()">
           {{'belaqi-user-location-slider.open-user-location' | translate}}
-        </button> -->
+        </ion-button>
       </div>
       <ion-list mode="md">
         <ion-item>
@@ -68,10 +68,10 @@
     </div>
     <hr />
     <div class="settings">
-      <!-- <button ion-button icon-only clear (click)="navigateSettings()">
+      <!-- <ion-button (click)="navigateSettings()">
         <ion-icon name="settings"></ion-icon>
         <span class="nav-butto-label">{{'settings.header' | translate}}</span>
-      </button> -->
+      </ion-button> -->
     </div>
   </ion-slide>
 </ion-slides>
