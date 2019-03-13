@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalController, Platform, ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
@@ -8,10 +9,11 @@ import {
   HeaderContent,
 } from '../components/belaqi-user-location-slider/belaqi-user-location-slider.component';
 import { ModalIntroComponent } from '../components/settings/modal-intro/modal-intro.component';
+import { MapDataService } from '../services/map-data/map-data.service';
 import { RefreshHandler } from '../services/refresh/refresh.service';
 
 @Component({
-  selector: 'page-start',
+  selector: 'start',
   templateUrl: './start.page.html',
   styleUrls: ['./start.page.scss'],
 })
@@ -26,7 +28,9 @@ export class StartPage implements OnInit {
     private modalCtrl: ModalController,
     private platform: Platform,
     private toast: ToastController,
-    public translateSrvc: TranslateService
+    private translateSrvc: TranslateService,
+    private router: Router,
+    private mapDataService: MapDataService
   ) { }
 
   public ngOnInit(): void {
@@ -34,7 +38,8 @@ export class StartPage implements OnInit {
   }
 
   public navigateToMap(selection: BelaqiSelection) {
-    // this.nav.push(MapPage, { belaqiSelection: selection });
+    this.mapDataService.selection = selection;
+    this.router.navigate(['tabs/map']);
   }
 
   public setHeaderContent(headerContent: HeaderContent) {

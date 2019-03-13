@@ -36,7 +36,12 @@
               }
             ],
             "styles": [
-              "node_modules/leaflet/dist/leaflet.css",
+              {
+                "input": "node_modules/leaflet/dist/leaflet.css"
+              },
+              {
+                "input": "node_modules/leaflet-geosearch/assets/css/leaflet.css"
+              },
               {
                 "input": "src/theme/variables.scss"
               },

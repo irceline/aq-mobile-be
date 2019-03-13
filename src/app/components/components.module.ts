@@ -14,6 +14,9 @@ import { BelaqiChartComponent } from './belaqi-chart/belaqi-chart.component';
 import { BelaqiUserLocationSliderComponent } from './belaqi-user-location-slider/belaqi-user-location-slider.component';
 import { BelaqiWheelInformationComponent } from './belaqi-wheel/belaqi-wheel-information.component';
 import { BelaqiWheelComponent } from './belaqi-wheel/belaqi-wheel.component';
+import {
+  CustomizedStationMapSelectorComponent,
+} from './customized-station-map-selector/customized-station-map-selector.component';
 import { ExtendedGeometryMapViewerComponent } from './extended-geometry-map-viewer/extended-geometry-map-viewer.component';
 import { LocationSelectionComponent } from './location-selection/location-selection.component';
 import { MobileGeosearchControlComponent } from './mobile-geosearch-control/mobile-geosearch-control.component';
@@ -55,6 +58,7 @@ const COMPONENTS = [
   BelaqiChartInformationComponent,
   BelaqiUserLocationSliderComponent,
   BelaqiWheelComponent,
+  CustomizedStationMapSelectorComponent,
   BelaqiWheelInformationComponent,
   CommonSettingsComponent,
   ExtendedGeometryMapViewerComponent,

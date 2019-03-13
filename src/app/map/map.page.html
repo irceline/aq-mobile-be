@@ -1,9 +1,80 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>map</ion-title>
-  </ion-toolbar>
-</ion-header> -->
+<ion-content>
 
-<ion-content padding>
+  <div class="container">
+    <div class="segment">
+      <ion-segment class="phenomenon" [(ngModel)]="phenomenonLabel" (ngModelChange)="onPhenomenonChange()">
+        <ion-segment-button value="BelAQI">
+          <ion-label>BelAQI</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="NO2">
+          <ion-label>NO<sub>2</sub></ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="O3">
+          <ion-label>O<sub>3</sub></ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="PM10">
+          <ion-label>PM<sub>10</sub></ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="PM25">
+          <ion-label>PM<sub>2.5</sub></ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="BC">
+          <ion-label>BC</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+
+    <div class="full-phenomenon-label">
+      <div *ngIf="selectedPhenomenonLabel">{{selectedPhenomenonLabel}}</div>
+      <div *ngIf="!selectedPhenomenonLabel">{{'map.index' | translate}}</div>
+    </div>
+
+    <div class="map-wrapper">
+      <div class="map" *ngIf="phenomenonLabel">
+        <customized-station-map-selector [mapId]="mapId" [serviceUrl]="providerUrl" [filter]="phenomenonFilter"
+          [avoidZoomToSelection]="avoidZoomToSelection" [statusIntervals]="true" [ignoreStatusIntervalIfBeforeDuration]="statusIntervalDuration"
+          [zoomControlOptions]="zoomControlOptions" [overlayMaps]="overlayMaps" [fitBounds]="fitBounds"
+          [markerSelectorGenerator]="markerSelectorGenerator" (onSelected)="onStationSelected($event)" [cluster]="clusterStations"
+          (onContentLoading)="onMapLoading($event)" (mapInitialized)="mapInitialized($event)"></customized-station-map-selector>
+      </div>
+      <div class="error" *ngIf="!phenomenonLabel">
+        {{'map.error' | translate}}
+      </div>
+    </div>
+
+    <div class="segment">
+      <ion-segment class="mean" [(ngModel)]="mean" (ngModelChange)="onMeanChange()">
+        <ion-segment-button value="hourly" [disabled]="disableMeans">
+          {{'map.mean.hourly' | translate}}
+        </ion-segment-button>
+        <ion-segment-button value="24hour" *ngIf="show24hourMean" [disabled]="disableMeans">
+          {{'map.mean.24hour' | translate}}
+        </ion-segment-button>
+        <ion-segment-button value="yearly" *ngIf="showYearlyMean" [disabled]="disableMeans">
+          {{'map.mean.yearly' | translate}}
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+
+    <div class="segment">
+      <ion-segment class="time" [(ngModel)]="time" (ngModelChange)="onTimeChange()">
+        <ion-segment-button value="current">
+          {{'map.time.current' | translate}}
+        </ion-segment-button>
+        <ion-segment-button value="today" [disabled]="disabled">
+          {{'map.time.today' | translate}}
+        </ion-segment-button>
+        <ion-segment-button value="tomorrow" [disabled]="disabled">
+          {{'map.time.tomorrow' | translate}}
+        </ion-segment-button>
+        <ion-segment-button value="today2" [disabled]="disabled">
+          {{'map.time.today+2' | translate}}
+        </ion-segment-button>
+        <ion-segment-button value="today3" [disabled]="disabled">
+          {{'map.time.today+3' | translate}}
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+  </div>
 
 </ion-content>

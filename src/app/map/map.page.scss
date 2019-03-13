@@ -1,0 +1,41 @@
+:host {
+
+    .container {
+        height: 100%;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+
+        .segment {
+            flex: none;
+        }
+
+        .full-phenomenon-label {
+            text-align: center;
+            flex: none;
+        }
+
+        .map-wrapper {
+            flex: 1;
+            position: relative;
+
+            .map {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+            }
+        }
+
+        .segment {
+            ion-segment {
+                ion-segment-button {
+                    min-width: 10px;
+                    --padding-start: 0px;
+                    --padding-end: 0px;
+                }
+            }
+        }
+    }
+}

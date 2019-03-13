@@ -1,0 +1,19 @@
+.leaflet-control-container {
+
+    .info {
+        padding-top: 4px;
+        font-size: 20px;
+    }
+
+    .legend {
+        float: left;
+        margin-right: 8px;
+        background: white;
+        opacity: 0.8;
+
+        div {
+            padding: 10px;
+        }
+    }
+
+}

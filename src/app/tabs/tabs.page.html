@@ -1,15 +1,17 @@
 <ion-tabs>
 
   <ion-tab-bar slot="bottom">
+
     <ion-tab-button tab="start">
       <ion-icon name="home"></ion-icon>
       <ion-label>{{'home.header' | translate}}</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="map">
+    <ion-tab-button tab="map" (click)="resetMapSelection()">
       <ion-icon name="map"></ion-icon>
       <ion-label>{{'map.header' | translate}}</ion-label>
     </ion-tab-button>
+
   </ion-tab-bar>
 
 </ion-tabs>

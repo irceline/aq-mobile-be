@@ -53,6 +53,7 @@
     "invert-color": "^2.0.0",
     "ion-affix": "^2.0.0",
     "ionic-cache": "^4.0.1",
+    "leaflet-geosearch": "^2.7.0",
     "rxjs": "~6.3.3",
     "rxjs-compat": "^6.4.0",
     "zone.js": "~0.8.29"
