@@ -23,12 +23,12 @@ export class StartPage implements OnInit {
 
   constructor(
     // private nav: NavController,
+    public translateSrvc: TranslateService,
     private storage: Storage,
     private refreshHandler: RefreshHandler,
     private modalCtrl: ModalController,
     private platform: Platform,
     private toast: ToastController,
-    private translateSrvc: TranslateService,
     private router: Router,
     private mapDataService: MapDataService
   ) { }
