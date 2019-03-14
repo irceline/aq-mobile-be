@@ -35,11 +35,16 @@ export class AnnualMeanPanelEntryComponent implements AfterViewInit {
     this.annualMeanProvider.getYear().subscribe(year => {
       this.annualMeanProvider.getValue(this.location.latitude, this.location.longitude, year, this.entry.phenomenon)
         .pipe(map(value => this.annualMeanProvider.getCategorizeColor(this.entry.phenomenon, value)))
-        .subscribe(res => {
-          this.backgroundColor = res;
-          this.color = invert(this.backgroundColor, true);
-          this.loading = false;
-        });
+        .subscribe(
+          res => {
+            this.backgroundColor = res;
+            this.color = invert(this.backgroundColor, true);
+            this.loading = false;
+          },
+          error => {
+            this.loading = false;
+          }
+        );
     });
   }
 
