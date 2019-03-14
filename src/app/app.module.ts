@@ -1,4 +1,4 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -31,6 +31,7 @@ import { NearestTimeseriesManagerService } from './services/nearest-timeseries-m
 import { NearestTimeseriesService } from './services/nearest-timeseries/nearest-timeseries.service';
 import { NetworkAlertService } from './services/network-alert/network-alert.service';
 import { NotificationMaintainerService } from './services/notification-maintainer/notification-maintainer.service';
+import { CachingInterceptor, OngoingHttpCacheService } from './services/ongoing-http-cache/ongoing-http-cache.service';
 import { RefreshHandler } from './services/refresh/refresh.service';
 import { JSSONSettingsService } from './services/settings/settings.service';
 import { StartPageSettingsService } from './services/start-page-settings/start-page-settings.service';
@@ -70,23 +71,29 @@ export function HttpLoaderFactory(http: HttpClient) {
       deps: [TranslateService, Injector, LanguageHandlerService, SettingsService],
       multi: true
     },
-    NearestTimeseriesService,
-    NearestTimeseriesManagerService,
-    LocateService,
-    SplashScreen,
-    StatusBar,
-    GeoLabelsService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CachingInterceptor,
+      multi: true
+    },
     AnnualMeanService,
-    UserLocationListService,
-    StartPageSettingsService,
-    RefreshHandler,
-    IrcelineSettingsService,
-    NetworkAlertService,
-    Network,
     BelaqiIndexService,
-    ModelledValueService,
     CategorizedValueService,
+    GeoLabelsService,
+    IrcelineSettingsService,
+    LocateService,
+    ModelledValueService,
+    NearestTimeseriesManagerService,
+    NearestTimeseriesService,
+    Network,
+    NetworkAlertService,
     NotificationMaintainerService,
+    OngoingHttpCacheService,
+    RefreshHandler,
+    SplashScreen,
+    StartPageSettingsService,
+    StatusBar,
+    UserLocationListService,
   ],
   bootstrap: [AppComponent]
 })

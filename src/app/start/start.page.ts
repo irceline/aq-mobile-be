@@ -22,7 +22,6 @@ export class StartPage implements OnInit {
   public sliderHeaderContent: HeaderContent;
 
   constructor(
-    // private nav: NavController,
     public translateSrvc: TranslateService,
     private storage: Storage,
     private refreshHandler: RefreshHandler,

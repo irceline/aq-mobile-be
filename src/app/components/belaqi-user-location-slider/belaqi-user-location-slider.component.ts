@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { IrcelineSettings, IrcelineSettingsService } from '../../services/irceline-settings/irceline-settings.service';
 import { LocateService, LocationStatus } from '../../services/locate/locate.service';
 import { NetworkAlertService } from '../../services/network-alert/network-alert.service';
+import { RefreshHandler } from '../../services/refresh/refresh.service';
 import { StartPageSettingsService } from '../../services/start-page-settings/start-page-settings.service';
 import { UserLocation, UserLocationListService } from '../../services/user-location-list/user-location-list.service';
 import { ModalUserLocationCreationComponent } from '../modal-user-location-creation/modal-user-location-creation.component';
@@ -75,6 +76,8 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit, OnDestr
   private locChangedSubscriber: Subscription;
   private networkSubscriber: Subscription;
 
+  private loadingLocations = false;
+
   constructor(
     private userLocationService: UserLocationListService,
     private startPageSettingsService: StartPageSettingsService,
@@ -85,7 +88,7 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit, OnDestr
     // private nav: NavController,
     protected translateSrvc: TranslateService,
     protected modalCtrl: ModalController,
-    // protected refreshHandler: RefreshHandler,
+    protected refreshHandler: RefreshHandler,
     // private popoverCtrl: PopoverController,
     private toast: ToastController
   ) {
@@ -95,8 +98,7 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit, OnDestr
       }
     });
 
-    // this.refreshHandler.onRefresh.subscribe(() => this.loadBelaqis(true));
-    this.userLocationService.locationsChanged.subscribe(() => this.loadBelaqis(false));
+    this.refreshHandler.onRefresh.subscribe(() => this.loadBelaqis(true));
     this.userLocationService.locationsChanged.subscribe(() => this.loadBelaqis(false));
     this.networkAlert.onConnected.subscribe(() => this.loadBelaqis(false));
 
@@ -167,8 +169,8 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit, OnDestr
     this.slider.getActiveIndex().then(idx => this.updateLocationSelection(idx));
   }
 
-  public changeCurrentLocation() {
-    if (this.showCurrentLocation) {
+  public changeCurrentLocation(newVal) {
+    if (newVal) {
       if (this.locate.getLocationStatus() === LocationStatus.DENIED) {
         this.locate.askForPermission()
           .then(permission => {
@@ -248,41 +250,47 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit, OnDestr
   }
 
   private async loadBelaqis(reload: boolean) {
-    if (this.userLocationService.hasLocations()) {
+    if (this.userLocationService.hasLocations() && !this.loadingLocations) {
       this.currentLocationError = null;
       const previousActiveIndex = await this.slider.getActiveIndex();
-      this.ircelineSettings.getSettings(reload).subscribe(ircelineSettings => {
-        this.belaqiLocations = [];
-        this.userLocationService.getVisibleUserLocations().forEach((loc, i) => {
-          if (loc.type !== 'current') {
-            this.setLocation(loc, i, ircelineSettings);
-          } else {
-            this.belaqiLocations[i] = {
-              type: 'current'
-            };
-            // let timeout = window.setTimeout(() => this.presentDelayedLocateHint(), LOCATION_DELAYED_NOTIFICATION_IN_MILLISECONDS);
-            this.userLocationService.determineCurrentLocation().subscribe(
-              currentLoc => {
-                this.setLocation(currentLoc, i, ircelineSettings);
-                this.updateLocationSelection(0);
-                // clearTimeout(timeout);
-              },
-              error => {
-                // this.presentDelayedLocateHint();
-                this.currentLocationError = error || true;
-              }
-            );
-          }
+      this.loadingLocations = true;
+      this.ircelineSettings.getSettings(reload).subscribe(
+        ircelineSettings => {
+          this.belaqiLocations = [];
+          this.userLocationService.getVisibleUserLocations().forEach((loc, i) => {
+            if (loc.type !== 'current') {
+              this.setLocation(loc, i, ircelineSettings);
+            } else {
+              this.belaqiLocations[i] = {
+                type: 'current'
+              };
+              // let timeout = window.setTimeout(() => this.presentDelayedLocateHint(), LOCATION_DELAYED_NOTIFICATION_IN_MILLISECONDS);
+              this.userLocationService.determineCurrentLocation().subscribe(
+                currentLoc => {
+                  this.setLocation(currentLoc, i, ircelineSettings);
+                  this.updateLocationSelection(0);
+                  // clearTimeout(timeout);
+                },
+                error => {
+                  // this.presentDelayedLocateHint();
+                  this.currentLocationError = error || true;
+                }
+              );
+            }
+          });
+          setTimeout(() => {
+            if (this.slider && previousActiveIndex !== 0) {
+              this.slider.update();
+              this.slider.slideTo(0);
+            }
+            this.updateLocationSelection(0);
+          }, 300);
+          this.showCurrentLocation = this.userLocationService.isCurrentLocationVisible();
+          this.loadingLocations = false;
+        },
+        error => {
+          this.loadingLocations = false;
         });
-        setTimeout(() => {
-          if (this.slider && previousActiveIndex !== 0) {
-            this.slider.update();
-            this.slider.slideTo(0);
-          }
-          this.updateLocationSelection(0);
-        }, 300);
-        this.showCurrentLocation = this.userLocationService.isCurrentLocationVisible();
-      });
     }
   }
 

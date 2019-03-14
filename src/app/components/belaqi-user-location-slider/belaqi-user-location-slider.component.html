@@ -62,7 +62,7 @@
             <h2 text-wrap>{{'belaqi-user-location-slider.current-location' | translate}}</h2>
             <p text-wrap>{{'belaqi-user-location-slider.current-location-description' | translate}}</p>
           </ion-label>
-          <ion-toggle (ionChange)="changeCurrentLocation()" [(ngModel)]="showCurrentLocation"></ion-toggle>
+          <ion-toggle (ngModelChange)="changeCurrentLocation($event)" [(ngModel)]="showCurrentLocation"></ion-toggle>
         </ion-item>
       </ion-list>
     </div>
