@@ -3,12 +3,13 @@
 
   --border-style: none;
   --ion-color-step-400: white;
+  --ion-color-step-600: white;
 
   .list-md {
     background: inherit;
   }
 
-  ion-label {
+  ion-label, slide-title {
     text-align: center;
     color: white;
     text-emphasis: bold;

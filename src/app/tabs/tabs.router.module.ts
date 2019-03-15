@@ -27,15 +27,6 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'welcome',
-        children: [
-          {
-            path: '',
-            loadChildren: '../welcome/welcome.module#WelcomePageModule'
-          }
-        ]
-      },
-      {
         path: '',
         redirectTo: '/tabs/start',
         pathMatch: 'full'

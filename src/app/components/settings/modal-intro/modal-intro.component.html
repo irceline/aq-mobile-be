@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-title>{{'intro.header' | translate}}</ion-title>
     <ion-buttons slot="end">
@@ -7,13 +7,12 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content>
-
   <ion-slides style="height: 100%;">
     <ion-slide>
-        <h2 class="slide-title">{{'intro.one.header' | translate}}</h2>
+      <h2 class="slide-title">{{'intro.one.header' | translate}}</h2>
       <div style="width: 50%; margin: auto;">
         <ion-list lines="none">
           <ion-radio-group [(ngModel)]="selectedLang">
@@ -36,6 +35,28 @@
           </ion-radio-group>
         </ion-list>
       </div>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-list mode="md">
+        <ion-item text-center>
+          <ion-label text-wrap>
+            <div class="welcomeTitle">
+              {{'welcome.title' | translate}}
+            </div>
+          </ion-label>
+        </ion-item>
+        <ion-item text-center>
+          <ion-label text-wrap>
+            <div class="welcomeText">
+              {{'welcome.text' | translate}}
+            </div>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+      <!-- <ion-button class="locationButton">
+        {{'welcome.button' | translate}}
+      </ion-button> -->
     </ion-slide>
 
     <ion-slide>
@@ -70,6 +91,10 @@
         {{'intro.next-step' | translate}}
         <ion-icon name="arrow-forward"></ion-icon>
       </ion-button>
+      <ion-button *ngIf="isEnd" (click)="closeModal()">
+          {{'intro.next-step' | translate}}
+          <ion-icon name="arrow-forward"></ion-icon>
+        </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>

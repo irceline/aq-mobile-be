@@ -1,4 +1,5 @@
-<mobile-geosearch-control [options]="geoSearchOptions" (onSearchTriggered)="resetLocation()" (onResultChanged)="geoSearchResultChanged($event)"></mobile-geosearch-control>
+<mobile-geosearch-control [options]="geoSearchOptions" (onSearchTriggered)="resetLocation()"
+  (onResultChanged)="geoSearchResultChanged($event)"></mobile-geosearch-control>
 <div text-center>
   <ion-button fill="outline" (click)="getCurrentLocation()">
     <span>{{'intro.three.baseOnCurrentLocation' | translate}}</span>
@@ -7,12 +8,14 @@
 </div>
 <div>
   <div class="location-selection" *ngIf="location">
-    <location-selection [mapOptions]="mapOptions" [location]="location" (locationChanged)="onLocationChanged($event)"></location-selection>
+    <location-selection [mapOptions]="mapOptions" [location]="location" (locationChanged)="onLocationChanged($event)">
+    </location-selection>
   </div>
   <ion-list [hidden]="!location">
     <ion-item>
       <ion-label position="stacked">{{'intro.three.locationLabelHint' | translate}}</ion-label>
-      <ion-input type="text" [(ngModel)]="locationLabel" clearInput placeholder="{{'intro.three.locationLabelPlaceholder' | translate}}"></ion-input>
+      <ion-input type="text" [(ngModel)]="locationLabel" clearInput
+        placeholder="{{'intro.three.locationLabelPlaceholder' | translate}}"></ion-input>
     </ion-item>
   </ion-list>
   <div text-center *ngIf="locationLabel">
