@@ -10,7 +10,7 @@
 </ion-header> -->
 
 <ion-content>
-  <ion-slides style="height: 100%;">
+  <ion-slides>
     <ion-slide>
       <h2 class="slide-title">{{'intro.one.header' | translate}}</h2>
       <div style="width: 50%; margin: auto;">
@@ -92,9 +92,9 @@
         <ion-icon name="arrow-forward"></ion-icon>
       </ion-button>
       <ion-button *ngIf="isEnd" (click)="closeModal()">
-          {{'intro.next-step' | translate}}
-          <ion-icon name="arrow-forward"></ion-icon>
-        </ion-button>
+        {{'intro.finish' | translate}}
+        <ion-icon name="arrow-forward"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>
