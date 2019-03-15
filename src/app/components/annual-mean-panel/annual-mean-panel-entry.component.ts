@@ -1,5 +1,4 @@
 import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/core';
-import invert from 'invert-color';
 import { map } from 'rxjs/operators';
 
 import { AnnualMeanService } from '../../services/annual-mean/annual-mean.service';
@@ -13,8 +12,7 @@ import { AnnualMeanEntry } from './annual-mean-panel.component';
 })
 export class AnnualMeanPanelEntryComponent implements AfterViewInit {
 
-  public color: string;
-  public backgroundColor: string;
+  public borderColor: string;
 
   public loading = true;
 
@@ -37,8 +35,7 @@ export class AnnualMeanPanelEntryComponent implements AfterViewInit {
         .pipe(map(value => this.annualMeanProvider.getCategorizeColor(this.entry.phenomenon, value)))
         .subscribe(
           res => {
-            this.backgroundColor = res;
-            this.color = invert(this.backgroundColor, true);
+            this.borderColor = res;
             this.loading = false;
           },
           error => {

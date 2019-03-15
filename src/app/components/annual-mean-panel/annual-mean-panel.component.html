@@ -1,13 +1,8 @@
 <ion-grid no-padding>
   <ion-row class="header">
     <ion-col text-center text-wrap>{{'annual-mean-panel.header' | translate}}</ion-col>
-    <div class="info-button">
-      <ion-button fill="clear" (click)="presentPopover($event)">
-        <ion-icon slot="icon-only" name="information-circle"></ion-icon>
-      </ion-button>
-    </div>
   </ion-row>
-  <ion-row nowrap>
+  <ion-row nowrap class="entries">
     <ion-col *ngFor="let entry of entries">
       <annual-mean-panel-entry [entry]="entry" [location]="location" (selected)="select($event)"></annual-mean-panel-entry>
     </ion-col>

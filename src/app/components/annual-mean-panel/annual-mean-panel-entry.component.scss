@@ -1,13 +1,19 @@
 :host {
     .entry {
-        border: 1px solid rgba(0, 0, 0, 0.2);
-        border-radius: 8px;
+        border: solid white;
+        border-radius: 50%;
         height: 2.5em;
-        padding: 10px;
+        width: 2.5em;
+        margin-left: 30%;
+        margin-top: 6%;
+        margin-bottom: 6%;
         text-align: center;
 
         .phenomenon-label {
-            height: 100%;
+            height: 2.5em;
+            font-weight: bold;
+            font-size: 60%;
+            line-height: 300%;
         }
 
         ion-spinner {

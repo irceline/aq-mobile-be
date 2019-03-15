@@ -1,9 +1,13 @@
 :host {
     .header {
         padding: 5px;
+        padding-top: 10px;
         display: flex;
         align-content: center;
         align-items: center;
+        color: white;
+        text-emphasis: bold;
+        font-size: 80%;
     }
 
     .col {
@@ -15,4 +19,12 @@
             color: black;
         }
     }
+
+    .entries {
+        background-color: var(--panel-background);
+        border-radius: 2.5em;
+        color: var(--ion-color-dark-tint);
+        width: 90%;
+        margin-left: 5%;
+      }
 }
