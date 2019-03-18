@@ -53,6 +53,10 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit, OnDestr
   @Output()
   public headerContent: EventEmitter<HeaderContent> = new EventEmitter();
 
+  public sliderOptions = {
+    zoom: false
+  };
+
   public belaqiLocations: UserLocation[] = [];
   public currentLocation: UserLocation;
 

@@ -1,5 +1,5 @@
-<ion-slides pager #slider (ionSlideDidChange)="slideChanged()">
-  <ion-slide *ngFor="let loc of belaqiLocations">
+<ion-slides pager #slider (ionSlideDidChange)="slideChanged()" [options]="sliderOptions">
+  <ion-slide *ngFor="let loc of belaqiLocations" >
     <div *ngIf="loc.latitude" style="width: 100%">
       <div class="wheel">
         <belaqi-wheel [latitude]="loc.latitude" [longitude]="loc.longitude" (ready)="resizeSlide()"></belaqi-wheel>
