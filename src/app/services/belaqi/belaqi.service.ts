@@ -35,6 +35,8 @@ interface TrendResult {
 @Injectable()
 export class BelaqiIndexService extends ValueProvider {
 
+  private no2Trends = require('../../../assets/no2_trend.json');
+
   constructor(
     http: HttpClient,
     private modelledValueProvider: ModelledValueService,
@@ -204,6 +206,12 @@ export class BelaqiIndexService extends ValueProvider {
     time: Date
   ): Observable<BelaqiTimelineEntry[]> {
     const timestamps = [
+      moment(time).subtract(11, 'hours').toDate(),
+      moment(time).subtract(10, 'hours').toDate(),
+      moment(time).subtract(9, 'hours').toDate(),
+      moment(time).subtract(8, 'hours').toDate(),
+      moment(time).subtract(7, 'hours').toDate(),
+      moment(time).subtract(6, 'hours').toDate(),
       moment(time).subtract(5, 'hours').toDate(),
       moment(time).subtract(4, 'hours').toDate(),
       moment(time).subtract(3, 'hours').toDate(),
@@ -233,7 +241,8 @@ export class BelaqiIndexService extends ValueProvider {
         forkJoin([
           this.createFuturePhenomenonTimeline(latitude, longitude, time, MainPhenomenon.O3, trend.trend.o3),
           this.createFuturePhenomenonTimeline(latitude, longitude, time, MainPhenomenon.PM10, trend.trend.pm10),
-          this.createFuturePhenomenonTimeline(latitude, longitude, time, MainPhenomenon.PM25, trend.trend.pm25)
+          this.createFuturePhenomenonTimeline(latitude, longitude, time, MainPhenomenon.PM25, trend.trend.pm25),
+          this.createFuturePhenomenonTimelineForNO2(latitude, longitude, time)
         ]).pipe(map(forecasts => {
           // find the max of each entry
           return forecasts[0].map((entry, i) => {
@@ -253,6 +262,28 @@ export class BelaqiIndexService extends ValueProvider {
     });
   }
 
+  private createFuturePhenomenonTimelineForNO2(
+    latitude: number,
+    longitude: number,
+    time: Date
+  ): Observable<BelaqiTimelineEntry[]> {
+    const phenomenon = MainPhenomenon.NO2;
+    return this.modelledValueProvider.getValue(latitude, longitude, time, phenomenon).pipe(
+      map(currentValue => {
+        const timelineEntries: BelaqiTimelineEntry[] = [];
+        const hour = time.getUTCHours();
+        const trend = this.no2Trends[hour];
+        trend.forEach((e, i) => {
+          timelineEntries.push({
+            timestamp: moment(time).add(i + 1, 'hours').toDate(),
+            index: this.categorizeValueToIndex.categorize(currentValue * e, phenomenon)
+          });
+        });
+        return timelineEntries;
+      })
+    );
+  }
+
   private createFuturePhenomenonTimeline(
     latitude: number,
     longitude: number,
@@ -263,7 +294,7 @@ export class BelaqiIndexService extends ValueProvider {
     return this.modelledValueProvider.getValue(latitude, longitude, time, phenomenon).pipe(
       map(currentValue => {
         // map results to timeline entries
-        const timelineEntries = [];
+        const timelineEntries: BelaqiTimelineEntry[] = [];
         // calculate the new values and add them to the timeline entries
         let nextHour = moment(time).add(1, 'hours').toDate();
         let nextTrend = this.findMatchingTime(trend, nextHour);
