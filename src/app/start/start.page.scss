@@ -1,68 +1,101 @@
 // page-start {
 :host {
 
+  --border-style: none;
+  --ion-color-step-400: white;
+  --ion-color-step-600: white;
+
+  .list-md {
+    background: inherit;
+  }
+
+  ion-label, slide-title {
+    text-align: center;
+    color: white;
+    text-emphasis: bold;
+    font-size: 1.2em;
+
+    .location-label {
+      font-size: 1.2em;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .date-label {
+      font-size: 0.8em;
+    }
+  }
+
+  ion-item {
+    --inner-border-width: 0;
+  }
+
+  ion-content {
+    --background: linear-gradient(135deg, #91c0d5 50%, #53a38f); 
+  }
+
+  // .map-card {
+  //     ion-card-content {
+  //         padding: 2px;
+
+  //         .map {
+  //             height: 300px;
+  //             position: relative;
+
+  //             .loading-overlay {
+  //                 z-index: 9999;
+  //                 background-color: rgba(255, 255, 255, 0.5);
+  //             }
+
+  //             .leaflet-control-layers {
+  //                 display: none;
+  //             }
+  //         }
+  //     }
+  // }
+
+  // ion-content {
+  //     .scroll-content {
+  //         margin-bottom: 58px;
+  //     }
+
+  //     .location-header {
+  //         height: 84px;
+  //     }
+
+  //     .ion-affix {
+  //         margin: 0 10px;
+  //         border-bottom: 1px solid #dedede;
+
+  //         &.item-md.item-block .item-inner {
+  //             border: none;
+  //         }
+  //     }
+  // }
+
+  // ion-refresher {
+  //     height: 80px;
+  // }
+
+  // ion-refresher-content {
+  //     height: 80px;
+  // }
+
+  // .label {
+  //     text-align: center;
+
+  //     .location-label {
+  //         font-size: 1.2em;
+  //         text-overflow: ellipsis;
+  //         white-space: nowrap;
+  //         overflow: hidden;
+  //         padding: 10px;
+  //     }
+
+  //     .location-date {
+  //         font-size: 0.8em;
+  //     }
+  // }
+  // }
 }
-
-// .map-card {
-//     ion-card-content {
-//         padding: 2px;
-
-//         .map {
-//             height: 300px;
-//             position: relative;
-
-//             .loading-overlay {
-//                 z-index: 9999;
-//                 background-color: rgba(255, 255, 255, 0.5);
-//             }
-
-//             .leaflet-control-layers {
-//                 display: none;
-//             }
-//         }
-//     }
-// }
-
-// ion-content {
-//     .scroll-content {
-//         margin-bottom: 58px;
-//     }
-
-//     .location-header {
-//         height: 84px;
-//     }
-
-//     .ion-affix {
-//         margin: 0 10px;
-//         border-bottom: 1px solid #dedede;
-
-//         &.item-md.item-block .item-inner {
-//             border: none;
-//         }
-//     }
-// }
-
-// ion-refresher {
-//     height: 80px;
-// }
-
-// ion-refresher-content {
-//     height: 80px;
-// }
-
-// .label {
-//     text-align: center;
-
-//     .location-label {
-//         font-size: 1.2em;
-//         text-overflow: ellipsis;
-//         white-space: nowrap;
-//         overflow: hidden;
-//         padding: 10px;
-//     }
-
-//     .location-date {
-//         font-size: 0.8em;
-//     }
-// }
-// }

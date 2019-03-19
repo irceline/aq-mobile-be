@@ -1,9 +1,6 @@
-<div [hidden]="error" class="chart">
-  <div class="info-button">
-    <ion-button fill="clear" (click)="presentPopover($event)">
-      <ion-icon slot="icon-only" name="information-circle"></ion-icon>
-    </ion-button>
+<div class="chart-wrapper">
+  <div [hidden]="error" class="chart">
+    <canvas #chart></canvas>
   </div>
-  <canvas #chart></canvas>
+  <div *ngIf="error" class="error">{{'belaqi-chart.error' | translate }}</div>
 </div>
-<div *ngIf="error" class="error">{{'belaqi-chart.error' | translate }}</div>

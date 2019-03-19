@@ -131,16 +131,17 @@ export class BelaqiWheelComponent extends LanguageChangNotifier implements After
         type: 'doughnut',
         plugins: [{
           afterDraw: (chartInstance: Chart, easing: string, options?: any) => {
+            const index = (chartInstance['chart'].options as ExtendedChartOptions).values.index;
 
             const width = chartInstance.chartArea.right - chartInstance.chartArea.left;
             const height = chartInstance.chartArea.bottom - chartInstance.chartArea.top;
             const centerX = width / 2;
-            const centerY = height / 2;
+            const centerY = height / 2 + 10;
             const radius = Math.min(width, height) / 5;
             const offset = radius / 2;
             const pointerColor = '#FFFFFF';
-            const borderColor = '#000000';
-            const lineWidth = 1.9;
+            const borderColor = this.belaqi.getColorForIndex(index);
+            const lineWidth = 3;
 
             const ctx = chartInstance.ctx;
 
@@ -153,7 +154,6 @@ export class BelaqiWheelComponent extends LanguageChangNotifier implements After
 
             // arrow
             ctx.beginPath();
-            const index = (chartInstance['chart'].options as ExtendedChartOptions).values.index;
             if (index > 0 && index <= 10) {
               const step = (Math.PI / 6);
               const start = 3.5 * step;
@@ -162,7 +162,7 @@ export class BelaqiWheelComponent extends LanguageChangNotifier implements After
 
               // circle
               ctx.beginPath();
-              ctx.arc(width / 2, height / 2, radius, angle + arrowGap, angle - arrowGap);
+              ctx.arc(width / 2, height / 2 + 10, radius, angle + arrowGap, angle - arrowGap);
               ctx.fill();
               ctx.stroke();
 
@@ -180,15 +180,16 @@ export class BelaqiWheelComponent extends LanguageChangNotifier implements After
 
             // indexLabel
             ctx.font = '1.1em Open Sans';
-            this.wrapText(ctx, this.belaqi.getLabelForIndexSplit(index), centerX + 2, centerY - 3, 90, 1.2);
+            this.wrapText(ctx, this.belaqi.getLabelForIndexSplit(index), centerX + 2, centerY - 8, 90, 1.2);
+            ctx.font = "0.6em Open Sans";
+            this.wrapText(ctx, index + '/10', centerX + 2, centerY + 15, 90, 2);
 
             // modelledLabel
-            ctx.font = '0.6em Open Sans';
-            this.wrapText(ctx, this.translate.instant('belaqi-wheel.modelled-hint'), centerX, centerY + (radius * 1.7), 90, 0.6);
             this.ready.emit();
           }
         }],
         options: {
+          circumference: (20/12) * Math.PI,
           tooltips: {
             enabled: false
           },
@@ -204,7 +205,7 @@ export class BelaqiWheelComponent extends LanguageChangNotifier implements After
         } as ExtendedChartOptions,
         data: {
           datasets: [{
-            data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
+            data: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
             backgroundColor: [
               this.belaqi.getColorForIndex(1),
               this.belaqi.getColorForIndex(2),
@@ -215,8 +216,7 @@ export class BelaqiWheelComponent extends LanguageChangNotifier implements After
               this.belaqi.getColorForIndex(7),
               this.belaqi.getColorForIndex(8),
               this.belaqi.getColorForIndex(9),
-              this.belaqi.getColorForIndex(10),
-              '#FFFFFF'
+              this.belaqi.getColorForIndex(10)
             ]
           }]
         }

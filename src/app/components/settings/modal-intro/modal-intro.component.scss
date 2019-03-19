@@ -1,11 +1,80 @@
 :host {
+  ion-content {
+    --background: linear-gradient(135deg, #91c0d5 50%, #53a38f);
+  }
 
-    .swiper-slide {
-        display: block;
+  ion-item {
+    --inner-border-width: 0;
+  }
+
+  ion-label {
+    text-align: center;
+    color: white;
+    text-emphasis: bold;
+    width: 70%;
+
+    .welcomeTitle {
+      text-emphasis: bold;
+      padding-top: 10%;
+      font-size: 3em;
+      padding-bottom: 5%;
+      border-bottom: 1px solid white;
     }
+  }
 
-    .slide-title {
-        margin-top: 2.8rem;
+  .locationButton {
+    --background: var(--panel-background);
+    --border-radius: 2.5em;
+    color: var(--ion-color-dark-tint);
+    width: 80%;
+    margin-left: 10%;
+  }
+
+  .swiper-slide {
+    display: block;
+  }
+
+  .slide-title {
+    margin-top: 2.8rem;
+    color: white;
+    width: 80%;
+    margin-left: 10%;  
+  }
+
+
+  /*  --border-style: none;
+  --ion-color-step-400: white;
+
+  ion-item {
+    --inner-border-width: 0;
+  }
+
+  ion-label {
+    text-align: center;
+    color: white;
+    text-emphasis: bold;
+    width: 70%;
+
+    .welcomeTitle {
+      text-emphasis: bold;
+      padding-top: 10%;
+      font-size: 3em;
+      padding-bottom: 5%;
+      border-bottom: 1px solid white;
     }
+  }
 
+  ion-button {
+    --background: var(--panel-background);
+    --border-radius: 2.5em;
+    color: var(--ion-color-dark-tint);
+    width: 80%;
+    margin-left: 10%;
+  }
+
+
+  ion-content {
+    --background: linear-gradient(135deg, #91c0d5 50%, #53a38f); 
+  }
+*/
 }

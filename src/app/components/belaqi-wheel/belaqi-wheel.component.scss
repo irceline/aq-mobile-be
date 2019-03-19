@@ -1,14 +1,16 @@
 :host {
 
   .wheel-wrapper {
-    width: 100%;
+    width: 90%;
+    left:5%;
+    height: 15em;
     position: relative;
 
     .info-button {
       display: inline;
       position: absolute;
       top: 0;
-      right: 0;
+      left: 0;
       z-index: 1;
 
       ion-button {
@@ -17,14 +19,12 @@
     }
   }
 
-  .notification-button {
-    z-index: 1;
-  }
-
   .wheel {
     position: relative;
-    width: 90%;
+    width: 100%;
     height: 14em;
+    background-color: var(--panel-background);
+    border-radius: 1em;
     margin-left: auto;
     margin-right: auto;
     z-index: -1;
@@ -35,8 +35,7 @@
     white-space: normal;
   }
 
-  // .chartjs-render-monitor {
-  //   position: relative;
-  //   top: -45px;
-  // }
+  .chartjs-render-monitor {
+    top: 10px;
+  }
 }

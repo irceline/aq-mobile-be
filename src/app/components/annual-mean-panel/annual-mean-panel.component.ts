@@ -8,6 +8,7 @@ import { AnnualMeanPanelInformationPopupComponent } from './annual-mean-panel-in
 
 export interface AnnualMeanEntry {
   label: string;
+  subscript: string;
   phenomenon: AnnualPhenomenonMapping;
   id: string;
 }
@@ -30,17 +31,20 @@ export class AnnualMeanPanelComponent implements OnChanges {
 
   public entries: AnnualMeanEntry[] = [
     {
-      label: 'NO2',
+      label: 'NO',
+      subscript: '2',
       phenomenon: AnnualPhenomenonMapping.NO2,
       id: PhenomenonSeriesID.NO2
     },
     {
-      label: 'PM10',
+      label: 'PM',
+      subscript: '10',
       phenomenon: AnnualPhenomenonMapping.PM10,
       id: PhenomenonSeriesID.PM10
     },
     {
-      label: 'PM2.5',
+      label: 'PM',
+      subscript: '2.5',
       phenomenon: AnnualPhenomenonMapping.PM25,
       id: PhenomenonSeriesID.PM25
     }

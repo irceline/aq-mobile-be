@@ -20,15 +20,15 @@
       <belaqi-user-location-slider (phenomenonSelected)="navigateToMap($event)" (headerContent)="setHeaderContent($event)"></belaqi-user-location-slider>
     </ion-item>
   </ion-list> -->
-  <ion-list>
+  <ion-list mode="md">
     <ion-item text-center class="location-header">
       <ion-label text-wrap *ngIf="sliderHeaderContent">
-        <ion-text>
+        <ion-text class="location-label">
           <h2>{{sliderHeaderContent?.label}}</h2>
         </ion-text>
-        <p>
+        <p class="date-label">
           <span>{{'menu.lastUpdate' | translate}}: </span>
-          <span>{{sliderHeaderContent?.date | date : 'd MMMM y, HH:mm': null: translateSrvc.currentLang}} </span>
+          <span class="date-label">{{sliderHeaderContent?.date | date : 'd MMMM y, HH:mm': null: translateSrvc.currentLang}} </span>
           <span *ngIf="sliderHeaderContent?.current"> - {{'belaqi-user-location-slider.current-location' | translate}}</span>
         </p>
       </ion-label>

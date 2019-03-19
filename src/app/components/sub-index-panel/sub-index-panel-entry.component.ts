@@ -1,5 +1,4 @@
 import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/core';
-import invert from 'invert-color';
 
 import { getMainPhenomenonForID } from '../../model/phenomenon';
 import { BelaqiIndexService } from '../../services/belaqi/belaqi.service';
@@ -16,8 +15,7 @@ import { SubIndexEntry } from './sub-index-panel.component';
 })
 export class SubIndexPanelEntryComponent implements AfterViewInit {
 
-  public color: string;
-  public backgroundColor: string;
+  public borderColor: string;
 
   public loading = true;
 
@@ -43,8 +41,7 @@ export class SubIndexPanelEntryComponent implements AfterViewInit {
       this.modelledValue.getValue(this.location.latitude, this.location.longitude, setts.lastupdate, phenomenon).subscribe(
         val => {
           const index = this.categorizeValue.categorize(val, phenomenon)
-          this.backgroundColor = this.belaqi.getColorForIndex(index);
-          this.color = invert(this.backgroundColor, true);
+          this.borderColor = this.belaqi.getColorForIndex(index);
           this.loading = false;
         },
         () => { this.loading = false; }

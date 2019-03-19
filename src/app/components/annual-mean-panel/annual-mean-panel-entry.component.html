@@ -1,4 +1,4 @@
-<div text-center (click)="select()" class="entry" [ngStyle]="{'background-color': backgroundColor, 'color': color}">
-  <div class="phenomenon-label" *ngIf="!loading" [ngClass]="{'location-disabled': !location}">{{entry.label}}</div>
+<div text-center (click)="select()" class="entry" [ngStyle]="{'border-color': borderColor}">
+  <div class="phenomenon-label" *ngIf="!loading" [ngClass]="{'location-disabled': !location}">{{entry.label}}<sub>{{entry.subscript}}</sub></div>
   <ion-spinner *ngIf="loading"></ion-spinner>
 </div>

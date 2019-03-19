@@ -84,9 +84,9 @@ export class BelaqiChartComponent implements OnChanges {
             type: 'line',
             mode: 'vertical',
             scaleID: 'x-axis-0',
-            value: this.location.date.getHours().toString(),
-            borderColor: '#26b8eb',
-            borderWidth: 2,
+            value: this.location.date.getHours().toString() + ":00",
+            borderColor: '#91c0d5',
+            borderWidth: 3,
           }]
         },
         scales: {
@@ -97,8 +97,15 @@ export class BelaqiChartComponent implements OnChanges {
               reverse: false,
               display: false
             }
-          }]
-        },
+          }],
+          xAxes: [{
+            ticks: {
+              maxRotation: 0,
+              padding: 5,
+              autoSkip: false,
+            }
+          }],
+         },
         layout: {
           padding: 10
         },
@@ -120,7 +127,7 @@ export class BelaqiChartComponent implements OnChanges {
         }
       } as ExpandedChartOptions,
       data: {
-        labels: this.createLabels(belaqiTimeline),
+        labels: this.createLabels(belaqiTimeline, this.location.date),
         datasets: [
           {
             pointBorderWidth: 0,
@@ -208,7 +215,13 @@ export class BelaqiChartComponent implements OnChanges {
     return belaqiTimeline.map(e => e.index);
   }
 
-  private createLabels(belaqiTimeline: BelaqiTimelineEntry[]): (string | string[])[] {
-    return belaqiTimeline.map(e => e.timestamp.getHours().toString());
+  private createLabels(belaqiTimeline: BelaqiTimelineEntry[], currentTime: Date): (string | string[])[] {
+    const hours = currentTime.getHours() % 4;
+
+    return belaqiTimeline.map(e => {
+      if (e.timestamp.getHours() % 4 == hours) {
+        return e.timestamp.getHours().toString()+ ":00"
+      } else return "";
+    });
   }
 }
