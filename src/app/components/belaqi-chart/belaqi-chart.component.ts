@@ -12,6 +12,8 @@ interface ExpandedChartOptions extends ChartOptions {
   annotation: any;
 }
 
+const FORCAST_UNCERTAINTY_BUFFER_FACTOR = 0.1;
+
 @Component({
   selector: 'belaqi-chart',
   templateUrl: 'belaqi-chart.component.html',
@@ -124,7 +126,27 @@ export class BelaqiChartComponent implements OnChanges {
             pointBorderWidth: 0,
             pointHoverRadius: 7,
             pointHoverBorderWidth: 2,
-            pointRadius: 5,
+            pointRadius: 3,
+            fill: false,
+            cubicInterpolationMode: 'monotone',
+            borderWidth: 2,
+            data: []
+          },
+          {
+            pointBorderWidth: 0,
+            pointHoverRadius: 7,
+            pointHoverBorderWidth: 2,
+            pointRadius: 0,
+            fill: false,
+            cubicInterpolationMode: 'monotone',
+            borderWidth: 2,
+            data: []
+          },
+          {
+            pointBorderWidth: 0,
+            pointHoverRadius: 7,
+            pointHoverBorderWidth: 2,
+            pointRadius: 0,
             fill: false,
             cubicInterpolationMode: 'monotone',
             borderWidth: 2,
@@ -134,9 +156,28 @@ export class BelaqiChartComponent implements OnChanges {
       }
     });
     this.drawData(ctx, chart, belaqiTimeline);
+    this.drawBuffer(chart, belaqiTimeline);
     this.ready.emit();
   }
 
+  private drawBuffer(chart: Chart, belaqiTimeline: BelaqiTimelineEntry[]) {
+    const upperDs = chart.data.datasets[1];
+    const lowerDs = chart.data.datasets[2];
+    lowerDs.fill = '-1';
+    let timeIdx = 0;
+    belaqiTimeline.forEach((entry, i) => {
+      if (entry.timestamp.getTime() <= this.location.date.getTime()) {
+        upperDs.data.push(entry.index);
+        lowerDs.data.push(entry.index);
+        timeIdx = i;
+      } else {
+        const dist = timeIdx - i;
+        upperDs.data.push(entry.index + FORCAST_UNCERTAINTY_BUFFER_FACTOR * dist);
+        lowerDs.data.push(entry.index - FORCAST_UNCERTAINTY_BUFFER_FACTOR * dist);
+      }
+    });
+    chart.update();
+  }
 
   private drawData(ctx: CanvasRenderingContext2D, chart: Chart, belaqiTimeline: BelaqiTimelineEntry[]) {
     const gradientStroke = ctx.createLinearGradient(
