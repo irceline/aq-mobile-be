@@ -1,0 +1,15 @@
+<ion-content>
+  <div class="header">
+    <div class="close-button" (click)="openClose()">
+      {{'overlay-info-drawer.button' | translate}}
+    </div>
+  </div>
+  <div class="content" [ngClass]="{open: state === 'open'}">
+    <ng-content></ng-content>
+  </div>
+  <div *ngIf="state === 'docked'" class="footer">
+    <div class="open-button" (click)="openClose()" style="height: 50px;">
+      {{'overlay-info-drawer.button' | translate}}
+    </div>
+  </div>
+</ion-content>

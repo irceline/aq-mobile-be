@@ -8,6 +8,7 @@ import {
   BelaqiSelection,
   HeaderContent,
 } from '../components/belaqi-user-location-slider/belaqi-user-location-slider.component';
+import { DrawerState } from '../components/overlay-info-drawer/overlay-info-drawer';
 import { ModalIntroComponent } from '../components/settings/modal-intro/modal-intro.component';
 import { MapDataService } from '../services/map-data/map-data.service';
 import { RefreshHandler } from '../services/refresh/refresh.service';
@@ -18,6 +19,10 @@ import { RefreshHandler } from '../services/refresh/refresh.service';
   styleUrls: ['./start.page.scss'],
 })
 export class StartPage implements OnInit {
+
+  dockedHeight = 107;
+  drawerState = DrawerState.Docked;
+  states = DrawerState;
 
   public sliderHeaderContent: HeaderContent;
 

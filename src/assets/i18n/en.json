@@ -287,6 +287,9 @@
     "close": "Close",
     "header": "No data connection"
   },
+  "overlay-info-drawer": {
+    "button": "What do you see here?"
+  },
   "personal-alert": {
     "index-1": {
       "non-sensitive": "It is very healthy today to be physically active outside. By reducing emissions, we get more of these healthy days and also decrease the effects of the low-term exposure.",

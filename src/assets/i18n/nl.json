@@ -287,6 +287,9 @@
     "close": "Sluiten",
     "header": "Geen dataverbinding"
   },
+  "overlay-info-drawer": {
+    "button": ""
+  },
   "personal-alert": {
     "index-1": {
       "non-sensitive": "Het is vandaag gezond om buiten fysiek actief te zijn. Door emissies (uitstoot) te reduceren krijgen we meer van deze gezonde dagen en dalen ook de effecten van de langetermijnblootstelling.",

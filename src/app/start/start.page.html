@@ -1,39 +1,83 @@
+<overlay-info-drawer [(state)]="drawerState" [dockedHeight]="dockedHeight">
+  <div class="drawer-content">
+    <div>
+      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+      dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+      clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+      consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
+      diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+      takimata sanctus est Lorem ipsum dolor sit amet.
+    </div>
+    <div>
+      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+      dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+      clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+      consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
+      diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+      takimata sanctus est Lorem ipsum dolor sit amet.
+    </div>
+    <div>
+      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+      dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+      clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+      consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
+      diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+      takimata sanctus est Lorem ipsum dolor sit amet.
+    </div>
+    <div>
+      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+      dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+      clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+      consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
+      diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+      takimata sanctus est Lorem ipsum dolor sit amet.
+    </div>
+    <div>
+      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+      dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+      clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+      consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
+      diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+      takimata sanctus est Lorem ipsum dolor sit amet.
+    </div>
+    <div>
+      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+      dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+      clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+      consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
+      diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+      takimata sanctus est Lorem ipsum dolor sit amet.
+    </div>
+    <div>
+      ENDE
+    </div>
+  </div>
+</overlay-info-drawer>
+
 <ion-content>
-  <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="{{'refresh.pull-message' | translate}}"
-      refreshingSpinner="circles" refreshingText="">
-    </ion-refresher-content>
-  </ion-refresher>
+  <div style="margin-top: 50px;">
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="{{'refresh.pull-message' | translate}}"
+        refreshingSpinner="circles" refreshingText="">
+      </ion-refresher-content>
+    </ion-refresher>
 
-  <!-- <ion-list>
-    <ion-item class="location-header">
-      <div class="location-label" text-wrap *ngIf="sliderHeaderContent">
-        {{sliderHeaderContent?.label}}
-      </div>
-      <div class="location-date" text-wrap *ngIf="sliderHeaderContent">
-        <span>{{'menu.lastUpdate' | translate}}: </span>
-        <span>{{sliderHeaderContent?.date | date : 'd MMMM y, HH:mm': null: translateSrvc.currentLang}} </span>
-        <span *ngIf="sliderHeaderContent?.current"> - {{'belaqi-user-location-slider.current-location' | translate}}</span>
-      </div>
-    </ion-item>
-    <ion-item>
-      <belaqi-user-location-slider (phenomenonSelected)="navigateToMap($event)" (headerContent)="setHeaderContent($event)"></belaqi-user-location-slider>
-    </ion-item>
-  </ion-list> -->
-  <ion-list mode="md">
-    <ion-item text-center class="location-header">
-      <ion-label text-wrap *ngIf="sliderHeaderContent">
-        <ion-text class="location-label">
-          <h2>{{sliderHeaderContent?.label}}</h2>
-        </ion-text>
-        <p class="date-label">
-          <span>{{'menu.lastUpdate' | translate}}: </span>
-          <span class="date-label">{{sliderHeaderContent?.date | date : 'd MMMM y, HH:mm': null: translateSrvc.currentLang}} </span>
-          <span *ngIf="sliderHeaderContent?.current"> - {{'belaqi-user-location-slider.current-location' | translate}}</span>
-        </p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
-  <belaqi-user-location-slider (phenomenonSelected)="navigateToMap($event)" (headerContent)="setHeaderContent($event)"></belaqi-user-location-slider>
-
+    <ion-list mode="md">
+      <ion-item text-center class="location-header">
+        <ion-label text-wrap *ngIf="sliderHeaderContent">
+          <ion-text class="location-label">
+            <h2>{{sliderHeaderContent?.label}}</h2>
+          </ion-text>
+          <p class="date-label">
+            <span>{{'menu.lastUpdate' | translate}}: </span>
+            <span class="date-label">{{sliderHeaderContent?.date | date : 'd MMMM y, HH:mm': null:
+              translateSrvc.currentLang}} </span>
+            <span *ngIf="sliderHeaderContent?.current"> - {{'belaqi-user-location-slider.current-location' |
+              translate}}</span>
+          </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+    <belaqi-user-location-slider (phenomenonSelected)="navigateToMap($event)" (headerContent)="setHeaderContent($event)"></belaqi-user-location-slider>
+  </div>
 </ion-content>

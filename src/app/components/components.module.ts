@@ -34,6 +34,7 @@ import {
 } from './nearest-measuring-station-panel/nearest-measuring-station-panel.component';
 import { NotificationIconPopupComponent } from './notification-icon/notification-icon-popup.component';
 import { NotificationIconComponent } from './notification-icon/notification-icon.component';
+import { OverlayInfoDrawerComponent } from './overlay-info-drawer/overlay-info-drawer';
 import { PushNotificationComponent } from './push-notification/push-notification.component';
 import { AboutSettingsComponent } from './settings/about-settings/about-settings.component';
 import { CommonSettingsComponent } from './settings/common-settings/common-settings.component';
@@ -58,9 +59,9 @@ const COMPONENTS = [
   BelaqiChartInformationComponent,
   BelaqiUserLocationSliderComponent,
   BelaqiWheelComponent,
-  CustomizedStationMapSelectorComponent,
   BelaqiWheelInformationComponent,
   CommonSettingsComponent,
+  CustomizedStationMapSelectorComponent,
   ExtendedGeometryMapViewerComponent,
   LocationSelectionComponent,
   MobileGeosearchControlComponent,
@@ -75,6 +76,7 @@ const COMPONENTS = [
   NearestMeasuringStationPanelInformationPopupComponent,
   NotificationIconComponent,
   NotificationIconPopupComponent,
+  OverlayInfoDrawerComponent,
   PushNotificationComponent,
   PushNotificationSubscriptionsSettingsComponent,
   StartPageSettingsComponent,

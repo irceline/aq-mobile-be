@@ -287,6 +287,9 @@
     "close": "Fermer",
     "header": "Pas de connexion de données"
   },
+  "overlay-info-drawer": {
+    "button": ""
+  },
   "personal-alert": {
     "index-1": {
       "non-sensitive": "L'air est très sain aujourd'hui pour des activités physiques à l'extérieur. En réduisant les émissions de polluants, la qualité de l'air comme aujourd'hui est plus fréquente et les effets à long terme sur la santé diminuent.",
