@@ -386,9 +386,8 @@
     "header": "Localisation de la station"
   },
   "start": {
-    "forecast-map": {
-      "header": "Carte de prévision"
-    }
+    "content": "",
+    "header": ""
   },
   "station-selection": {
     "show-other-phenomena": "Autre polluant mesuré à cet endroit"
@@ -410,17 +409,17 @@
       "text": "Ce sont les \"sous-indices\" calculés pour votre position. L'indice BelAQI global est la valeur la plus élevée de ces 4 sous-indices. Les échelles de concentration ont été déterminées en fonction de l’impact à court terme sur la santé. Les 4 polluants utilisés pour calculer BelAQI sont:"
     }
   },
-	"update": {
-		"hint": {
-			"popover": {
-				"content-p1": "Quel est l’effet à court terme de la qualité de l’air de votre quartier sur votre santé?",
-    		"content-p2": "BelAir calcule l'exposition court terme à la pollution atmosphérique pour votre localisation. Cette information est mise à jour toutes les heures. Souhaitez-vous plus d’explications sur l’information fournie, la méthode de calcul ou les raisons pour lesquelles ce calcul diffère d’autres études (comme par exemple CurieuzeNeuzen)?",
-    		"dont-show": "Ne plus afficher ce message lorsque vous démarrez l'application",
-    		"link-faq": "Lire plus",
-    		"link-faq-url": "http://www.irceline.be/fr/documentation/belair/faq"
-			}
-		}
-	},
+  "update": {
+    "hint": {
+      "popover": {
+        "content-p1": "Quel est l’effet à court terme de la qualité de l’air de votre quartier sur votre santé?",
+        "content-p2": "BelAir calcule l'exposition court terme à la pollution atmosphérique pour votre localisation. Cette information est mise à jour toutes les heures. Souhaitez-vous plus d’explications sur l’information fournie, la méthode de calcul ou les raisons pour lesquelles ce calcul diffère d’autres études (comme par exemple CurieuzeNeuzen)?",
+        "dont-show": "Ne plus afficher ce message lorsque vous démarrez l'application",
+        "link-faq": "Lire plus",
+        "link-faq-url": "http://www.irceline.be/fr/documentation/belair/faq"
+      }
+    }
+  },
   "user-location-list": {
     "header": "Liste des localisations"
   },

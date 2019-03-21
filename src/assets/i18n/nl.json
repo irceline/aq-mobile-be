@@ -386,9 +386,8 @@
     "header": "locatie van het station"
   },
   "start": {
-    "forecast-map": {
-      "header": "Voorspellingskaart"
-    }
+    "content": "Content",
+    "header": "Header"
   },
   "station-selection": {
     "show-other-phenomena": "Andere polluenten die op deze locatie worden gemeten"
