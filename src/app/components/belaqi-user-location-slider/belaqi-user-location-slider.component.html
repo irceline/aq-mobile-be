@@ -1,5 +1,5 @@
 <ion-slides pager #slider (ionSlideDidChange)="slideChanged()" [options]="sliderOptions">
-  <ion-slide *ngFor="let loc of belaqiLocations" >
+  <ion-slide *ngFor="let loc of belaqiLocations">
     <div *ngIf="loc.latitude" style="width: 100%">
       <div class="wheel">
         <belaqi-wheel [latitude]="loc.latitude" [longitude]="loc.longitude" (ready)="resizeSlide()"></belaqi-wheel>
@@ -43,16 +43,12 @@
       </div>
     </div>
     <div class="create-new-location-slide">
-      <div>
-        <ion-button fill="outline" (click)="createNewLocation()">
-          {{'belaqi-user-location-slider.create-new-location' | translate}}
-        </ion-button>
-      </div>
-      <div>
-        <ion-button fill="outline" (click)="openUserLocation()">
-          {{'belaqi-user-location-slider.open-user-location' | translate}}
-        </ion-button>
-      </div>
+      <ion-button (click)="createNewLocation()">
+        {{'belaqi-user-location-slider.create-new-location' | translate}}
+      </ion-button>
+      <ion-button (click)="openUserLocation()">
+        {{'belaqi-user-location-slider.open-user-location' | translate}}
+      </ion-button>
       <ion-list>
         <ion-item>
           <!-- <geolocation-enabled></geolocation-enabled> -->
@@ -68,7 +64,7 @@
     </div>
     <hr />
     <div class="settings">
-      <ion-button fill="outline" (click)="navigateSettings()">
+      <ion-button (click)="navigateSettings()">
         <ion-icon slot="start" name="settings"></ion-icon>
         <span class="nav-butto-label">{{'settings.header' | translate}}</span>
       </ion-button>

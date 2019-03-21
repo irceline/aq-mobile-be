@@ -1,13 +1,11 @@
-<ion-list>
+<ion-list lines="none">
   <ion-list-header>
     {{'settings.user-locations.header' | translate}}
   </ion-list-header>
-  <ion-item (click)="createNewLocation()">
-    <ion-label>{{'settings.user-locations.create-new-location' | translate}}</ion-label>
-  </ion-item>
-  <ion-item (click)="showLocationList()">
-    <ion-label>{{'settings.user-locations.show-location-list' | translate}}</ion-label>
-  </ion-item>
+  <div text-center (click)="createNewLocation()">
+    <ion-button>{{'settings.user-locations.create-new-location' | translate}}</ion-button>
+    <ion-button (click)="showLocationList()">{{'settings.user-locations.show-location-list' | translate}}</ion-button>
+  </div>
   <!-- <ion-item text-wrap (click)="toggleNearestSeries()">
     <ion-label>{{'settings.user-locations.show-nearest-series-by-default' | translate}}</ion-label>
     <ion-toggle color="secondary" [(ngModel)]="nearestSeriesByDefault" (ngModelChange)="toggleNearestSeries()"></ion-toggle>
