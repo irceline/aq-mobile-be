@@ -217,10 +217,12 @@ export class BelaqiChartComponent implements OnChanges {
 
   private createLabels(belaqiTimeline: BelaqiTimelineEntry[], currentTime: Date): (string | string[])[] {
     const hours = currentTime.getHours() % 4;
+    var labelcount = 0;
 
     return belaqiTimeline.map(e => {
-      if (e.timestamp.getHours() % 4 == hours) {
-        return e.timestamp.getHours().toString()+ ":00"
+      if (e.timestamp.getHours() % 4 == hours && labelcount < 5) {
+        labelcount++;
+        return e.timestamp.getHours().toString()+ ":00";
       } else return "";
     });
   }
