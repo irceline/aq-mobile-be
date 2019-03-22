@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController, Platform, ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
@@ -7,6 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 import {
   BelaqiSelection,
   HeaderContent,
+  BelaqiUserLocationSliderComponent,
 } from '../components/belaqi-user-location-slider/belaqi-user-location-slider.component';
 import { DrawerState } from '../components/overlay-info-drawer/overlay-info-drawer';
 import { ModalIntroComponent } from '../components/settings/modal-intro/modal-intro.component';
@@ -24,6 +25,9 @@ export class StartPage implements OnInit {
   drawerState = DrawerState.Docked;
   states = DrawerState;
 
+  @ViewChild('slider')
+  private sliderComponent: BelaqiUserLocationSliderComponent;
+
   public sliderHeaderContent: HeaderContent;
 
   constructor(
@@ -39,6 +43,10 @@ export class StartPage implements OnInit {
 
   public ngOnInit(): void {
     this.checkToShowIntroduction();
+  }
+
+  public ionViewDidEnter() {
+    this.sliderComponent.gotToFirstSlide();
   }
 
   public navigateToMap(selection: BelaqiSelection) {

@@ -114,6 +114,12 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit, OnDestr
       .subscribe(val => this.showAnnualMeanPanel = val);
   }
 
+  public gotToFirstSlide() {
+    if (this.slider) {
+      this.slider.slideTo(0, 0);
+    }
+  }
+
   public ngAfterViewInit() {
     // this.setHeight();
     // if (this.slider) {
