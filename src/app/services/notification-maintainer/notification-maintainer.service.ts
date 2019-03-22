@@ -29,7 +29,7 @@ export class NotificationMaintainerService {
 
   public getNotifications(): Observable<PushNotification[]> {
     this.saveNotifications();
-    return this.notificationsReplay.asObservable()
+    return this.notificationsReplay.asObservable();
   }
 
   public hasNotifications(): Observable<boolean> {

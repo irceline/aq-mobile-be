@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ModalController } from '@ionic/angular';
-
-import { PushNotificationComponent } from '../../components/push-notification/push-notification.component';
+import { AlertController, ModalController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 export enum PushNotificationTopic {
   flanders = 'flanders',
@@ -10,7 +9,7 @@ export enum PushNotificationTopic {
 }
 
 export interface PushNotification {
-  topic: PushNotificationTopic;
+  topic: string;
   title: string;
   body: string;
   expiration: Date;
@@ -33,22 +32,40 @@ export interface PersonalAlert {
 export class NotificationPresenterService {
 
   constructor(
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private alertCtrl: AlertController,
+    private translate: TranslateService
   ) { }
 
-  public presentPushNotification(notification: PushNotification) {
-    this.modalCtrl.create({
-      component: PushNotificationComponent,
-      componentProps: {
-        notification
-      }
-    }).then(modal => modal.present());
+  public async presentPushNotification(notification: PushNotification) {
+    // this.modalCtrl.create({
+    //   component: PushNotificationComponent,
+    //   componentProps: {
+    //     notification
+    //   }
+    // }).then(modal => modal.present());
+
+    const alert = await this.alertCtrl.create({
+      header: notification.title,
+      subHeader: this.getSubHeader(notification.topic),
+      message: notification.body,
+      buttons: ['OK']
+    });
+    await alert.present();
   }
 
-  // public presentPersonalAlerts(alerts: PersonalAlert[]) {
-  //   if (alerts.length !== 0) {
-  //     this.modalCtrl.create(LocatedValueNotificationComponent, { alerts }).present();
-  //   }
-  // }
+  private getSubHeader(topic: string): string {
+    if (topic) {
+      if (topic.startsWith(PushNotificationTopic.brussels.toString())) {
+        return this.translate.instant('push-notification-subscription.brussels');
+      }
+      if (topic.startsWith(PushNotificationTopic.flanders.toString())) {
+        return this.translate.instant('push-notification-subscription.flanders');
+      }
+      if (topic.startsWith(PushNotificationTopic.wallonia.toString())) {
+        return this.translate.instant('push-notification-subscription.wallonia');
+      }
+    }
+  }
 
 }

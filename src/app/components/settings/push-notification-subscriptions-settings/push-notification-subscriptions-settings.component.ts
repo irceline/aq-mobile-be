@@ -1,7 +1,9 @@
 import { Component, Input } from '@angular/core';
 
 import { PushNotificationTopic } from '../../../services/notification-presenter/notification-presenter.service';
-import { PushNotificationsService } from '../../../services/push-notifications/push-notifications.service';
+import {
+  PushNotificationsHandlerService,
+} from '../../../services/push-notifications-handler/push-notifications-handler.service';
 
 @Component({
   selector: 'push-notification-subscriptions-settings',
@@ -18,34 +20,34 @@ export class PushNotificationSubscriptionsSettingsComponent {
   public brussels: boolean;
 
   constructor(
-    private notifier: PushNotificationsService
+    private notificationHandler: PushNotificationsHandlerService
   ) {
-    this.flanders = this.notifier.isTopicActive(PushNotificationTopic.flanders);
-    this.wallonia = this.notifier.isTopicActive(PushNotificationTopic.wallonia);
-    this.brussels = this.notifier.isTopicActive(PushNotificationTopic.brussels);
+    this.flanders = this.notificationHandler.isTopicActive(PushNotificationTopic.flanders);
+    this.wallonia = this.notificationHandler.isTopicActive(PushNotificationTopic.wallonia);
+    this.brussels = this.notificationHandler.isTopicActive(PushNotificationTopic.brussels);
   }
 
   public toggleFlandersNotification() {
     if (this.flanders) {
-      this.notifier.subscribeTopic(PushNotificationTopic.flanders);
+      this.notificationHandler.subscribeTopic(PushNotificationTopic.flanders);
     } else {
-      this.notifier.unsubscribeTopic(PushNotificationTopic.flanders);
+      this.notificationHandler.unsubscribeTopic(PushNotificationTopic.flanders);
     }
   }
 
   public toggleWalloniaNotification() {
     if (this.wallonia) {
-      this.notifier.subscribeTopic(PushNotificationTopic.wallonia);
+      this.notificationHandler.subscribeTopic(PushNotificationTopic.wallonia);
     } else {
-      this.notifier.unsubscribeTopic(PushNotificationTopic.wallonia);
+      this.notificationHandler.unsubscribeTopic(PushNotificationTopic.wallonia);
     }
   }
 
   public toggleBrusselsNotification() {
     if (this.brussels) {
-      this.notifier.subscribeTopic(PushNotificationTopic.brussels);
+      this.notificationHandler.subscribeTopic(PushNotificationTopic.brussels);
     } else {
-      this.notifier.unsubscribeTopic(PushNotificationTopic.brussels);
+      this.notificationHandler.unsubscribeTopic(PushNotificationTopic.brussels);
     }
   }
 

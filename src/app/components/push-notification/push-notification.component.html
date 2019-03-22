@@ -1,12 +1,15 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons start right>
-      <button ion-button (click)="dismiss()">Close</button>
+    <ion-title>
+      {{'settings.user-locations.create-new-location' | translate}}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()" id="close-modal">
+          <ion-icon name="close"></ion-icon>
+      </ion-button>
     </ion-buttons>
-    <ion-title>{{notification.title}}</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content padding>
   <div text-center text-wrap [ngSwitch]="notification.topic">
     <p *ngSwitchCase="'flanders'">{{'push-notification-subscription.flanders' | translate}}</p>

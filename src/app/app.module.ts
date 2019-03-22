@@ -15,6 +15,7 @@ import { CacheModule } from 'ionic-cache';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ComponentsModule } from './components/components.module';
 import { AnnualMeanService } from './services/annual-mean/annual-mean.service';
 import { BelaqiIndexService } from './services/belaqi/belaqi.service';
 import { CategorizedValueService } from './services/categorized-value/categorized-value.service';
@@ -31,6 +32,7 @@ import { NearestTimeseriesManagerService } from './services/nearest-timeseries-m
 import { NearestTimeseriesService } from './services/nearest-timeseries/nearest-timeseries.service';
 import { NetworkAlertService } from './services/network-alert/network-alert.service';
 import { NotificationMaintainerService } from './services/notification-maintainer/notification-maintainer.service';
+import { NotificationPresenterService } from './services/notification-presenter/notification-presenter.service';
 import { CachingInterceptor, OngoingHttpCacheService } from './services/ongoing-http-cache/ongoing-http-cache.service';
 import { RefreshHandler } from './services/refresh/refresh.service';
 import { JSSONSettingsService } from './services/settings/settings.service';
@@ -50,6 +52,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppRoutingModule,
     HttpClientModule,
     HelgolandCoreModule,
+    ComponentsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -88,6 +91,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     Network,
     NetworkAlertService,
     NotificationMaintainerService,
+    NotificationPresenterService,
     OngoingHttpCacheService,
     RefreshHandler,
     SplashScreen,

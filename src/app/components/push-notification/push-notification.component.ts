@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+
 import { PushNotification } from '../../services/notification-presenter/notification-presenter.service';
 
 @Component({
@@ -11,13 +13,11 @@ export class PushNotificationComponent {
   public notification: PushNotification;
 
   constructor(
-    // private viewCtrl: ViewController,
-    // private params: NavParams
-  ) {
-    // this.notification = this.params.get('notification');
+    private modalCtrl: ModalController
+  ) { }
+
+  closeModal() {
+    this.modalCtrl.dismiss();
   }
 
-  public dismiss() {
-    // this.viewCtrl.dismiss();
-  }
 }
