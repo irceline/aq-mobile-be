@@ -3,8 +3,24 @@
 
 @import 'leaflet.scss';
 
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../assets/fonts/opensans/OpenSans-Regular.ttf');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: bold;
+  src: url('../assets/fonts/opensans/OpenSans-Bold.ttf');
+}
+
 /** Ionic CSS Variables **/
 :root {
+  /** default font **/
+  --ion-font-family: 'Open Sans';
+
   /** primary **/
   --ion-color-primary: #3880ff;
   --ion-color-primary-rgb: 56, 128, 255;
