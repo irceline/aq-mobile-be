@@ -137,7 +137,7 @@ export class BelaqiWheelComponent extends LanguageChangNotifier implements After
             const height = chartInstance.chartArea.bottom - chartInstance.chartArea.top;
             const centerX = width / 2;
             const centerY = height / 2 + 10;
-            const radius = Math.min(width, height) / 5;
+            const radius = Math.min(width, height) / 3.8;
             const offset = radius / 2;
             const pointerColor = '#FFFFFF';
             const borderColor = this.belaqi.getColorForIndex(index);
@@ -174,21 +174,22 @@ export class BelaqiWheelComponent extends LanguageChangNotifier implements After
               ctx.fill();
               ctx.stroke();
             }
-
-            ctx.fillStyle = 'black';
+            // manually set color to var(--ion-color-dark-tint)
+            ctx.fillStyle = '#383a3e';
             ctx.textAlign = 'center';
 
             // indexLabel
-            ctx.font = '1.1em Open Sans';
-            this.wrapText(ctx, this.belaqi.getLabelForIndexSplit(index), centerX + 2, centerY - 8, 90, 1.2);
-            ctx.font = "0.6em Open Sans";
-            this.wrapText(ctx, index + '/10', centerX + 2, centerY + 15, 90, 2);
+            ctx.font = '1.3em Open Sans';
+            this.wrapText(ctx, this.belaqi.getLabelForIndexSplit(index), centerX + 2, centerY - 14, 90, 1.2);
+            ctx.font = "0.8em Open Sans";
+            this.wrapText(ctx, index + '/10', centerX + 2, centerY + 17, 90, 2);
 
             // modelledLabel
             this.ready.emit();
           }
         }],
         options: {
+          cutoutPercentage: 70,
           circumference: (20/12) * Math.PI,
           tooltips: {
             enabled: false
