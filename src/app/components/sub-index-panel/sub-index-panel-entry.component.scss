@@ -1,23 +1,43 @@
 :host {
   .entry {
-    border: solid white;
-    border-radius: 50%;
-    border-width: 0.2em;
     height: 2.5em;
     width: 2.5em;
-    margin-left: 20%;
+    margin-left: 30%;
     margin-top: 6%;
     margin-bottom: 6%;
+    text-align: center;
+    border: solid var(--panel-background);;
+    border-radius: 50%;
+    border-width: 0.2em;
+    position: relative;
+
+    .spinningborder {
+        animation: loading 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        border-color: black transparent transparent transparent;
+        border-style: solid;
+        border-radius: inherit;
+        border-width: inherit;
+        height: inherit;
+        width: inherit;
+        position: absolute;
+        top: -3px;
+        left: -3px;
+
+        @keyframes loading {
+            0% {
+              transform: rotate(0deg);
+            }
+            100% {
+              transform: rotate(360deg);
+            }
+          }
+    }
 
     .phenomenon-label {
       height: 2.5em;
       font-weight: bold;
       font-size: 60%;
       line-height: 350%;
-    }
-
-    ion-spinner {
-      height: 100%;
     }
   }
 }
