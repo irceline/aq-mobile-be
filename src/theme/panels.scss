@@ -1,72 +1,70 @@
-:host {
-    .header {
-        padding: 5px;
-        padding-top: 10px;
-        display: flex;
-        align-content: center;
-        align-items: center;
-        color: white;
-        text-emphasis: bold;
-        font-size: 80%;
+.header {
+  padding: 5px;
+  padding-top: 10px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  color: white;
+  text-emphasis: bold;
+  font-size: 80%;
+}
+
+.col {
+  overflow: hidden;
+}
+
+.info-button {
+  ion-button {
+    color: black;
+  }
+}
+
+.entries {
+  background-color: var(--panel-background);
+  border-radius: 2.5em;
+  color: var(--ion-color-dark-tint);
+  width: 90%;
+  margin-left: 5%;
+}
+
+.entry {
+  height: 2.5em;
+  width: 2.5em;
+  margin-left: 30%;
+/*   margin-top: 6%;
+  margin-bottom: 6%; */
+  text-align: center;
+  border: solid var(--panel-background);
+  border-radius: 50%;
+  border-width: 0.2em;
+  position: relative;
+
+  .spinningborder {
+    animation: loading 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: black transparent transparent transparent;
+    border-style: solid;
+    border-radius: inherit;
+    border-width: inherit;
+    height: inherit;
+    width: inherit;
+    position: absolute;
+    top: -3px;
+    left: -3px;
+
+    @keyframes loading {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
     }
+  }
 
-    .col {
-        overflow: hidden;
-    }
-
-    .info-button {
-        ion-button {
-            color: black;
-        }
-    }
-    
-    .entries {
-        background-color: var(--panel-background);
-        border-radius: 2.5em;
-        color: var(--ion-color-dark-tint);
-        width: 90%;
-        margin-left: 5%;
-    }
-
-    .entry {
-        height: 2.5em;
-        width: 2.5em;
-        margin-left: 30%;
-        margin-top: 6%;
-        margin-bottom: 6%;
-        text-align: center;
-        border: solid var(--panel-background);;
-        border-radius: 50%;
-        border-width: 0.2em;
-        position: relative;
-
-        .spinningborder {
-            animation: loading 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-            border-color: black transparent transparent transparent;
-            border-style: solid;
-            border-radius: inherit;
-            border-width: inherit;
-            height: inherit;
-            width: inherit;
-            position: absolute;
-            top: -3px;
-            left: -3px;
-
-            @keyframes loading {
-                0% {
-                  transform: rotate(0deg);
-                }
-                100% {
-                  transform: rotate(360deg);
-                }
-              }
-        }
-
-        .phenomenon-label {
-            height: 2.5em;
-            font-weight: bold;
-            font-size: 60%;
-            line-height: 350%;
-        }
-    }
+  .phenomenon-label {
+    height: 2.5em;
+    font-weight: bold;
+    font-size: 60%;
+    line-height: 350%;
+  }
 }

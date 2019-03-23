@@ -9,6 +9,7 @@ import {
 
 interface PanelEntry {
   label: string;
+  subscript: string;
   id: string;
 }
 
@@ -31,22 +32,27 @@ export class NearestMeasuringStationPanelComponent implements OnChanges {
   public entries: PanelEntry[] = [
     {
       label: 'BC',
+      subscript: '',
       id: PhenomenonSeriesID.BC
     },
     {
-      label: 'NO2',
+      label: 'NO',
+      subscript: '2',
       id: PhenomenonSeriesID.NO2
     },
     {
-      label: 'O3',
+      label: 'O',
+      subscript: '3',
       id: PhenomenonSeriesID.O3
     },
     {
-      label: 'PM10',
+      label: 'PM',
+      subscript: '10',
       id: PhenomenonSeriesID.PM10
     },
     {
-      label: 'PM2.5',
+      label: 'PM',
+      subscript: '2.5',
       id: PhenomenonSeriesID.PM25
     }
   ];

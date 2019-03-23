@@ -30,8 +30,7 @@ export class NearestMeasuringStationPanelEntryComponent implements OnChanges {
   public stationLabel: string;
   public lastStationaryValue: FirstLastValue;
   public uom: string;
-  public backgroundColor: string;
-  public color: string;
+  public borderColor: string;
   public loadingStationValue = true;
 
   public series: Timeseries;
@@ -83,8 +82,7 @@ export class NearestMeasuringStationPanelEntryComponent implements OnChanges {
           const matchingInterval = this.statusIntervalResolver
             .getMatchingInterval(nearestSeries.series.lastValue.value, nearestSeries.series.statusIntervals);
           if (matchingInterval) {
-            this.backgroundColor = matchingInterval.color;
-            this.color = invert(this.backgroundColor, true);
+            this.borderColor = matchingInterval.color;
           }
           this.lastStationaryValue = nearestSeries.series.lastValue;
           this.uom = nearestSeries.series.uom;
