@@ -288,7 +288,8 @@
     "header": "Pas de connexion de données"
   },
   "overlay-info-drawer": {
-    "button": "Que voyez-vous sur cet écran?"
+    "button": "Que voyez-vous sur cet écran?",
+    "button-close": "Fermer"
   },
   "personal-alert": {
     "index-1": {
@@ -386,8 +387,13 @@
     "header": "Localisation de la station"
   },
   "start": {
-    "content": "",
-    "header": ""
+    "overlay": {
+      "content-p1": "L'impact de la qualité de l'air est calculé sur la base de l'indice de qualité de l'air. Il s’agit d’un chiffre compris entre 1 et 10, où 10 correspond à très médiocre et 1 à une excellente qualité d’air. Pour ce score, l'application est basée sur des données provenant de stations de surveillance réparties dans toute la Belgique, sur la météo, la circulation et les polluants pertinents.",
+      "content-p2": "L'index de l'emplacement choisi est mis à jour toutes les heures. L'application peut également faire des prédictions basées sur les informations disponibles.",
+      "content-p3": "L'indice de la qualité de l'air reflète l'impact sur la santé à court terme. Cet impact peut varier d’une heure à l’autre et entraîner des problèmes de santé temporaires. À des concentrations plus élevées de polluants atmosphériques, des effets aigus peuvent survenir, tels qu'un asthme ou même une crise cardiaque.",
+      "content-p4": "Une exposition prolongée aux polluants atmosphériques peut provoquer des effets chroniques et augmenter le risque de maladies cardiaques et pulmonaires, y compris le cancer du poumon.",
+      "header": "Que voyez-vous sur cet écran?"
+    }
   },
   "station-selection": {
     "show-other-phenomena": "Autre polluant mesuré à cet endroit"

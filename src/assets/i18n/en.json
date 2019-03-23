@@ -288,7 +288,8 @@
     "header": "No data connection"
   },
   "overlay-info-drawer": {
-    "button": "What do you see on this screen?"
+    "button": "What do you see on this screen?",
+    "button-close": "Close"
   },
   "personal-alert": {
     "index-1": {
@@ -386,8 +387,13 @@
     "header": "Position of the station"
   },
   "start": {
-    "content": "Content",
-    "header": "Header"
+    "overlay": {
+      "content-p1": "The impact of air quality is calculated on the basis of the air quality index. That is a figure between 1 and 10, where 10 stands for very poor and 1 for excellent air quality. For this score, the app is based on data from monitoring stations throughout Belgium, weather and traffic and relevant pollutants.",
+      "content-p2": "The index for the chosen location is updated every hour. The app can also make predictions based on the available information.",
+      "content-p3": "The air quality index reflects the impact on health in the short term. This impact can vary from hour to hour and lead to temporary health problems. At higher concentrations of air pollutants, acute effects can occur, such as an asthma or even a heart attack.",
+      "content-p4": "Prolonged exposure to air pollutants can provoke chronic effects and can lead to a higher risk of heart and lung diseases including lung cancer.",
+      "header": "What do you see on this screen?"
+    }
   },
   "station-selection": {
     "show-other-phenomena": "Other pollutant measured on this location"
