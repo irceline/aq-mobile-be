@@ -241,6 +241,12 @@
     },
     "nearest-station": "Dichtstbijgelegen meetstation",
     "no-legend": "Geen legende beschikbaar",
+    "overlay": {
+      "content-p1": "De kaart geeft je een overzicht van de luchtkwaliteit in België. Aan de hand van een kleurencode, kan je de luchtkwaliteit op jouw locatie vergelijken met die van andere locaties. Rood is zeer slecht, terwijl blauw staat voor een uitstekende luchtkwaliteit.",
+      "content-p2": "Elk uur wordt het indexcijfer voor de gekozen locatie vernieuwd. De app kan ook voorspellingen doen op basis van de beschikbare informatie.",
+      "header": "Wat zie je op dit scherm?",
+      "url-svg": "../../assets/svg/belaqi_NL.svg"
+    },
     "pollutant": {
       "other": "andere"
     },

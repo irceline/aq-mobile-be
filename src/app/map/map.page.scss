@@ -5,6 +5,8 @@
         overflow: hidden;
         display: flex;
         flex-direction: column;
+        padding-top: 27px;
+        margin: auto;
 
         .segment {
             flex: none;
@@ -48,5 +50,8 @@
         .segment-button-checked {
             background-color: var(--ion-color-secondary-contrast);
         }
+    }
+    .drawer-content {
+      padding: 0 2em;
     }
 }

@@ -1,5 +1,21 @@
-<ion-content>
+<overlay-info-drawer [(state)]="drawerState" [dockedHeight]="dockedHeight">
+  <div class="drawer-content">
+    <div>
+      <h2 text-center>{{'map.overlay.header' | translate}}</h2>
+    </div>
+    <div>
+      <p>{{'map.overlay.content-p1' | translate}}</p>
+    </div>
+    <div>
+      <p text-center><img src="{{'map.overlay.url-svg' | translate}}"></p>
+    </div>
+    <div>
+      <p>{{'map.overlay.content-p2' | translate}}</p>
+    </div>
+  </div>
+</overlay-info-drawer>
 
+<ion-content>
   <div class="container">
     <div class="segment">
       <ion-segment class="phenomenon" [(ngModel)]="phenomenonLabel" (ngModelChange)="onPhenomenonChange()">

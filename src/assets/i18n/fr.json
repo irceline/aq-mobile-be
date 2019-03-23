@@ -241,6 +241,12 @@
     },
     "nearest-station": "Station de mesure la plus proche",
     "no-legend": "Aucune légende disponible",
+    "overlay": {
+			"content-p1": "La carte vous donne un aperçu de la qualité de l'air en Belgique. À l'aide d'un code de couleur, vous pouvez comparer la qualité de l'air de votre position avec celle d'autres sites. Le rouge est très mauvais, tandis que le bleu représente une excellente qualité de l'air.",
+			"content-p2": "L'index de l'emplacement choisi est mis à jour toutes les heures. L'application peut également faire des prédictions basées sur les informations disponibles.",
+			"header": "Que voyez-vous sur cet écran?",
+      "url-svg": "../../assets/svg/belaqi_FR.svg"
+		},
     "pollutant": {
       "other": "Autre"
     },
