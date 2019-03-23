@@ -1,16 +1,25 @@
 <overlay-info-drawer [(state)]="drawerState" [dockedHeight]="dockedHeight">
   <div class="drawer-content">
     <div>
-      {{'start.header' | translate}}
+      <h2 text-center>{{'start.overlay.header' | translate}}</h2>
     </div>
     <div>
-      {{'start.content' | translate}}
+      <p>{{'start.overlay.content-p1' | translate}}</p>
+    </div>
+    <div>
+      <p>{{'start.overlay.content-p2' | translate}}</p>
+    </div>
+    <div>
+      <p>{{'start.overlay.content-p3' | translate}}</p>
+    </div>
+    <div>
+      <p>{{'start.overlay.content-p4' | translate}}</p>
     </div>
   </div>
 </overlay-info-drawer>
 
 <ion-content>
-  <div style="margin-top: 50px;">
+  <div style="margin-top: 25px;">
     <ion-refresher (ionRefresh)="doRefresh($event)">
       <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="{{'refresh.pull-message' | translate}}"
         refreshingSpinner="circles" refreshingText="">

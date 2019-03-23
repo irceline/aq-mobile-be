@@ -22,11 +22,11 @@
       <div text-wrap>{{'belaqi-user-location-slider.loading-current-location' | translate}}</div>
       <ion-spinner></ion-spinner>
     </div>
-    <div *ngIf="currentLocationError && !loc.latitude" style="height: 350px;">
-      <div text-wrap>{{'belaqi-user-location-slider.current-location-error-header' | translate}}</div>
-      <ion-item text-wrap>{{'belaqi-user-location-slider.current-location-error-1' | translate}}</ion-item>
-      <ion-item text-wrap>{{'belaqi-user-location-slider.current-location-error-2' | translate}}</ion-item>
-      <ion-item text-wrap>{{'belaqi-user-location-slider.current-location-error-3' | translate}}</ion-item>
+    <div *ngIf="currentLocationError && !loc.latitude" style="height: 400px;">
+      <div text-wrap><h2 text-wrap>{{'belaqi-user-location-slider.current-location-error-header' | translate}}</h2></div>
+      <ion-item text-wrap><p>{{'belaqi-user-location-slider.current-location-error-1' | translate}}</p></ion-item>
+      <ion-item text-wrap><p>{{'belaqi-user-location-slider.current-location-error-2' | translate}}</p></ion-item>
+      <ion-item text-wrap><p>{{'belaqi-user-location-slider.current-location-error-3' | translate}}</p></ion-item>
       <div>
         <ion-button fill="outline" (click)="createNewLocation()">
           {{'belaqi-user-location-slider.create-new-location' | translate}}

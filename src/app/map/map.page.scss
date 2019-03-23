@@ -5,6 +5,8 @@
         overflow: hidden;
         display: flex;
         flex-direction: column;
+        padding-top: 27px;
+        margin: auto;
 
         .segment {
             flex: none;
@@ -13,6 +15,7 @@
         .full-phenomenon-label {
             text-align: center;
             flex: none;
+            background-color: var(--ion-color-secondary-contrast);
         }
 
         .map-wrapper {
@@ -34,8 +37,21 @@
                     min-width: 10px;
                     --padding-start: 0px;
                     --padding-end: 0px;
+                    text-transform: capitalize;
+                    --background: var(--ion-color-primary-contrast);
                 }
             }
         }
+
+        .segment {
+            background-color: var(--ion-color-primary-contrast);
+        }
+
+        .segment-button-checked {
+            background-color: var(--ion-color-secondary-contrast);
+        }
+    }
+    .drawer-content {
+      padding: 0 2em;
     }
 }

@@ -3,6 +3,7 @@ import './boundary-canvas';
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { DatasetApiInterface, ParameterFilter, Phenomenon, Platform, SettingsService, Station } from '@helgoland/core';
+import { DrawerState } from '../components/overlay-info-drawer/overlay-info-drawer';
 import { GeoSearchOptions, LayerOptions, MapCache } from '@helgoland/map';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
@@ -89,6 +90,9 @@ const phenomenonMapping = [
   styleUrls: ['./map.page.scss'],
 })
 export class MapPage {
+  dockedHeight = 92;
+  drawerState = DrawerState.Docked;
+  states = DrawerState;
 
   public statusIntervalDuration: number;
   public geoSearchOptions: GeoSearchOptions;

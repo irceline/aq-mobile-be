@@ -241,6 +241,12 @@
     },
     "nearest-station": "Dichtstbijgelegen meetstation",
     "no-legend": "Geen legende beschikbaar",
+    "overlay": {
+      "content-p1": "De kaart geeft je een overzicht van de luchtkwaliteit in België. Aan de hand van een kleurencode, kan je de luchtkwaliteit op jouw locatie vergelijken met die van andere locaties. Rood is zeer slecht, terwijl blauw staat voor een uitstekende luchtkwaliteit.",
+      "content-p2": "Elk uur wordt het indexcijfer voor de gekozen locatie vernieuwd. De app kan ook voorspellingen doen op basis van de beschikbare informatie.",
+      "header": "Wat zie je op dit scherm?",
+      "url-svg": "../../assets/svg/belaqi_NL.svg"
+    },
     "pollutant": {
       "other": "andere"
     },
@@ -288,7 +294,8 @@
     "header": "Geen dataverbinding"
   },
   "overlay-info-drawer": {
-    "button": "Wat zie je op dit scherm?"
+    "button": "Wat zie je op dit scherm?",
+    "button-close": "Sluiten"
   },
   "personal-alert": {
     "index-1": {
@@ -386,8 +393,13 @@
     "header": "locatie van het station"
   },
   "start": {
-    "content": "Content",
-    "header": "Header"
+    "overlay": {
+      "content-p1": "De impact van de luchtkwaliteit wordt berekend aan de hand van de luchtkwaliteitsindex. Dat is een cijfer tussen 1 en 10, waarbij 10 staat voor erg slechte en 1 voor uitstekende luchtkwaliteit. De app baseert zich voor deze score op data van meetstations in heel België, het weer en verkeer en relevante verontreinigende stoffen.",
+      "content-p2": "Elk uur wordt het indexcijfer voor de gekozen locatie vernieuwd. De app kan ook voorspellingen doen op basis van de beschikbare informatie.",
+      "content-p3": "De luchtkwaliteitsindex weerspiegelt de impact op de gezondheid op korte termijn. Die impact kan van uur tot uur verschillen en leiden tot tijdelijke gezondheidsproblemen. Bij hogere concentraties van luchtvervuilende stoffen kunnen acute effecten optreden, zoals een astma- of zelfs een hartaanval.",
+      "content-p4": "Langdurige blootstelling aan luchtvervuilende stoffen kan chronische effecten uitlokken en kan voor een hoger risico op hart- en longziekten waaronder longkanker zorgen.",
+      "header": "Wat zie je op dit scherm?"
+    }
   },
   "station-selection": {
     "show-other-phenomena": "Andere polluenten die op deze locatie worden gemeten"

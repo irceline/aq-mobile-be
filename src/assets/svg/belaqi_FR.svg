@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"	 width="148px" height="250px" viewBox="0 0 148 250" enable-background="new 0 0 148 250" xml:space="preserve">
+  <rect x="6" y="22" fill="#0000FF" width="31" height="19"/>
+  <rect x="6" y="44.381" fill="#0099FF" width="31" height="19"/>
+  <rect x="6" y="66.762" fill="#009900" width="31" height="19"/>
+  <rect x="6" y="89.143" fill="#00FF00" width="31" height="19"/>
+  <rect x="6" y="111.524" fill="#FFFF00" width="31" height="19"/>
+  <rect x="6" y="133.905" fill="#FFBB00" width="31" height="19"/>
+  <rect x="6" y="156.286" fill="#FF6600" width="31" height="19"/>
+  <rect x="6" y="178.668" fill="#FF0000" width="31" height="19"/>
+  <rect x="6" y="201.049" fill="#990000" width="31" height="19"/>
+  <rect x="6" y="223.43" fill="#660000" width="31" height="19"/>
+  <text transform="matrix(1 0 0 1 46.853 36.1304)" fill="#231F20" font-family="Arial" font-size="14">1 - excellent</text>
+  <text transform="matrix(1 0 0 1 46.853 58.5112)" fill="#231F20" font-family="Arial" font-size="14">2 - très bon</text>
+  <text transform="matrix(1 0 0 1 46.853 80.8926)" fill="#231F20" font-family="Arial" font-size="14">3 - bon</text>
+  <text transform="matrix(1 0 0 1 46.853 103.2734)" fill="#231F20" font-family="Arial" font-size="14">4 - assez bon</text>
+  <text transform="matrix(1 0 0 1 46.853 125.6548)" fill="#231F20" font-family="Arial" font-size="14">5 - moyen</text>
+  <text transform="matrix(1 0 0 1 46.853 148.0352)" fill="#231F20" font-family="Arial" font-size="14">6 - médiocre</text>
+  <text transform="matrix(1 0 0 1 46.853 170.417)" fill="#231F20" font-family="Arial" font-size="14">7 - très médiocre</text>
+  <text transform="matrix(1 0 0 1 46.853 192.7988)" fill="#231F20" font-family="Arial" font-size="14">8 - mauvais</text>
+  <text transform="matrix(1 0 0 1 46.853 215.1797)" fill="#231F20" font-family="Arial" font-size="14">9 - très mauvais</text>
+  <text transform="matrix(1 0 0 1 46.853 237.5605)" fill="#231F20" font-family="Arial" font-size="14">10 - exécrable</text>
+</svg>

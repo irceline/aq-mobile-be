@@ -3,7 +3,7 @@
   height: 100%;
   position: absolute;
   left: 0;
-  z-index: 11 !important;
+  z-index: 1001 !important;
   transform: translateY(100vh);
 
   ion-content {
@@ -15,17 +15,17 @@
       position: absolute;
       top: 0px;
       left: 0px;
-      height: 50px;
+      height: 40px;
       right: 0px;
       overflow: hidden;
-      background:  #91c0d5; 
+      background:  #91c0d5;
     }
 
     .content {
       position: absolute;
       background: linear-gradient(135deg, #91c0d5 50%, #53a38f);
-      top: 50px;
-      bottom: 50px;
+      top: 40px;
+      bottom: 40px;
       left: 0px;
       right: 0px;
       overflow: auto;
@@ -38,7 +38,7 @@
     .footer {
       position: absolute;
       bottom: 0px;
-      height: 50px;
+      height: 40px;
       left: 0px;
       right: 0px;
       overflow: hidden;
@@ -49,8 +49,8 @@
       background-color: #495359;
       color: white;
       text-align: center;
-      line-height: 50px;
-      height: 50px;
+      line-height: 40px;
+      height: 40px;
       width: 100%;
       border-radius: 0px 0px 100% 100%/20px;
     }

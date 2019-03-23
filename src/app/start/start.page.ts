@@ -21,7 +21,7 @@ import { RefreshHandler } from '../services/refresh/refresh.service';
 })
 export class StartPage implements OnInit {
 
-  dockedHeight = 107;
+  dockedHeight = 92;
   drawerState = DrawerState.Docked;
   states = DrawerState;
 
