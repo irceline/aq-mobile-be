@@ -5,6 +5,7 @@
 
   ion-item {
     --inner-border-width: 0;
+    padding: 1em;
   }
 
   ion-label {
@@ -14,11 +15,14 @@
     width: 70%;
 
     .welcomeTitle {
-      text-emphasis: bold;
-      padding-top: 10%;
+      font-weight: lighter;
+      padding-top: 0;
       font-size: 3em;
       padding-bottom: 5%;
       border-bottom: 1px solid white;
+    }
+    .welcomeText {
+      padding: 0.4em;
     }
   }
 
@@ -38,7 +42,7 @@
     margin-top: 2.8rem;
     color: white;
     width: 80%;
-    margin-left: 10%;  
+    margin-left: 10%;
   }
 
 
@@ -74,7 +78,7 @@
 
 
   ion-content {
-    --background: linear-gradient(135deg, #91c0d5 50%, #53a38f); 
+    --background: linear-gradient(135deg, #91c0d5 50%, #53a38f);
   }
 */
 }

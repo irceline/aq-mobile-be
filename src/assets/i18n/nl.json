@@ -443,8 +443,10 @@
     }
   },
   "welcome": {
-    "title": "Welkom bij BelAir",
-    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla volutpat tellus tellus, id tincidunt tellus egestas vitae. Phasellus at nunc tincidunt lorem tincidunt porttitor. Vestibulum tristique ullamcorper turpis, eget imperdiet mauris ornare sit amet. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed dapibus sem vel augue condimentum pharetra. Fusce tristique volutpat lectus id interdum. Praesent nec ultrices ante, non imperdiet augue. Curabitur eget sodales justo. Sed varius nisi eu mauris interdum bibendum.",
-    "button": "Geef jouw locatie in"
-  }
+		"button": "Geef jouw locatie in",
+		"text-p1": "Hoe is het gesteld met de impact van de luchtkwaliteit op jouw locatie? Dat weet de BelAir app je meteen te vertellen.",
+		"text-p2": "De BelAir app baseert zich op data van meetstations, verspreid doorheen heel België. Die data worden omgezet in een BelAQI-luchtkwaliteitsindex. Je krijgt een cijfer tussen 1 en 10 dat meteen de impact inschat van de actuele luchtkwaliteit op jouw gezondheid.",
+		"text-p2": "Om dat cijfer te berekenen, wordt er ook gekeken naar relevante, vervuilende stoffen op jouw locatie zoals stikstofdioxide, ozon en fijn stof.",
+		"title": "Welkom bij"
+	}
 }
