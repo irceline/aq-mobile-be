@@ -94,7 +94,9 @@ export class BelaqiWheelComponent extends LanguageChangNotifier implements After
   private getEmHeight() {
     const div = document.getElementById('check-height-div');
     div.style.height = '1em';
-    return div.offsetHeight;
+    const height = div.offsetHeight;
+    div.style.height = '0';
+    return height;
   }
 
   private wrapText(context: CanvasRenderingContext2D, text: string, x: number, y: number, maxWidth: number, emFactor: number) {
