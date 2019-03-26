@@ -1,7 +1,28 @@
 :host {    
     @import'../../../theme/panels.scss';
 
+
     .entry {
-        margin-left: 10%;
+        margin-left: 3%;
+    }
+
+    .station-description {
+        font-size: 0.7em;
+        color: var(--ion-color-dark-tint);
+    }
+
+    .station-value {
+        font-size: 0.7em;
+        color: var(--ion-color-dark-tint);
+        padding-left:10%;
+        white-space: nowrap;
+        font-weight: bold;
+    }
+
+    ion-row {
+        align-items: center;
+        justify-content: left;
+        padding-top: 5px;
+        padding-bottom: 5px;
     }
 }

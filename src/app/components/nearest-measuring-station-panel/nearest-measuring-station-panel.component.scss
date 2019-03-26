@@ -1,3 +1,7 @@
 :host {
     @import'../../../theme/panels.scss';
+
+    .entries {
+        border-radius: 1em;
+    }
 }
