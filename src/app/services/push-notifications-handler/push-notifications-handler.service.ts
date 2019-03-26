@@ -7,9 +7,7 @@ import { PushNotificationsService } from '../push-notifications/push-notificatio
 
 const LOCALSTORAGE_PUSH_NOTIFICATION = 'localstorage.push.notification';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class PushNotificationsHandlerService {
 
   constructor(

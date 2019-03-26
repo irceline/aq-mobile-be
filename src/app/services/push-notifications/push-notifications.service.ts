@@ -9,9 +9,7 @@ import {
   PushNotificationTopic,
 } from '../notification-presenter/notification-presenter.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class PushNotificationsService {
 
   constructor(
