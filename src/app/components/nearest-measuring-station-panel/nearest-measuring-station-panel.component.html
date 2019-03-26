@@ -7,9 +7,10 @@
       </ion-button>
     </div> -->
   </ion-row>
-  <ion-row nowrap class="entries">
-    <ion-col *ngFor="let entry of entries">
-      <nearest-measuring-station-panel-entry [location]="location" [entry]="entry" (clicked)="select($event)" (ready)="entryReady()"></nearest-measuring-station-panel-entry>
-    </ion-col>
-  </ion-row>
+  <div class="entries">
+    <div *ngFor="let entry of entries">
+      <nearest-measuring-station-panel-entry [location]="location" [entry]="entry" (clicked)="select($event)"
+        (ready)="entryReady()"></nearest-measuring-station-panel-entry>
+    </div>
+  </div>
 </ion-grid>
