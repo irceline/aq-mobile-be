@@ -248,7 +248,7 @@ export class BelaqiIndexService extends ValueProvider {
           return forecasts[0].map((entry, i) => {
             return {
               timestamp: entry.timestamp,
-              index: Math.max(...forecasts.map(e => e[i].index))
+              index: Math.max(...forecasts.map(e => e[i] ? e[i].index : 0))
             };
           });
         })).subscribe(res => {
@@ -313,16 +313,17 @@ export class BelaqiIndexService extends ValueProvider {
   }
 
   private getTrends(): Observable<TrendResult> {
-    const trendUrl = 'https://www.irceline.be/tables/forecast/model/trend.php';
+    // const trendUrl = 'https://www.irceline.be/tables/forecast/model/trend.php';
+    const trendUrl = 'https://www.irceline.be/air/forecast/trend.php';
     return new Observable((observer: Observer<TrendResult>) => {
       this.ircelineSettings.getSettings().subscribe(settings => {
         const request = this.http.get<TrendResult>(trendUrl);
         const cacheKey = createCacheKey(trendUrl, null, settings.lastupdate);
         this.cacheService.loadFromObservable(cacheKey, request).subscribe(
           res => {
-            res['latest observations'].o3.forEach(e => e[0] = moment(e[0]).toDate());
-            res['latest observations'].pm10.forEach(e => e[0] = moment(e[0]).toDate());
-            res['latest observations'].pm25.forEach(e => e[0] = moment(e[0]).toDate());
+            // res['latest observations'].o3.forEach(e => e[0] = moment(e[0]).toDate());
+            // res['latest observations'].pm10.forEach(e => e[0] = moment(e[0]).toDate());
+            // res['latest observations'].pm25.forEach(e => e[0] = moment(e[0]).toDate());
             res.trend.o3.forEach(e => e[0] = moment(e[0]).toDate());
             res.trend.pm10.forEach(e => e[0] = moment(e[0]).toDate());
             res.trend.pm25.forEach(e => e[0] = moment(e[0]).toDate());
