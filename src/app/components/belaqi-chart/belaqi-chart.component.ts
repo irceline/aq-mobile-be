@@ -19,6 +19,7 @@ interface Timeframe {
 }
 
 const FORCAST_UNCERTAINTY_BUFFER_FACTOR = 0.1;
+const MAX_UNCERTAINTY_BUFFER = 2;
 const INITIAL_HOURS_BUFFER = 11;
 const HOUR_STEPS = 11;
 
@@ -248,7 +249,8 @@ export class BelaqiChartComponent implements OnChanges {
         lowerDs.data.push(val);
         timeIdx = i;
       } else {
-        const factor = FORCAST_UNCERTAINTY_BUFFER_FACTOR * (i - timeIdx);
+        let factor = FORCAST_UNCERTAINTY_BUFFER_FACTOR * (i - timeIdx);
+        if (factor > MAX_UNCERTAINTY_BUFFER) { factor = MAX_UNCERTAINTY_BUFFER; }
         upperDs.data.push({ x: entry.timestamp, y: entry.index + factor });
         lowerDs.data.push({ x: entry.timestamp, y: entry.index - factor });
       }
