@@ -3,6 +3,7 @@ import 'chartjs-plugin-annotation';
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 import { Chart, ChartOptions } from 'chart.js';
+import moment, { Moment } from 'moment';
 
 import { BelaqiIndexService, BelaqiTimelineEntry } from '../../services/belaqi/belaqi.service';
 import { UserLocation } from '../../services/user-location-list/user-location-list.service';
@@ -12,7 +13,14 @@ interface ExpandedChartOptions extends ChartOptions {
   annotation: any;
 }
 
+interface Timeframe {
+  start: Moment;
+  end: Moment;
+}
+
 const FORCAST_UNCERTAINTY_BUFFER_FACTOR = 0.1;
+const INITIAL_HOURS_BUFFER = 11;
+const HOUR_STEPS = 11;
 
 @Component({
   selector: 'belaqi-chart',
@@ -32,6 +40,13 @@ export class BelaqiChartComponent implements OnChanges {
   public error: boolean;
   public loading: boolean;
 
+  public showPrevButton: boolean;
+  public showNextButton: boolean;
+
+  private timespan: Timeframe;
+  private chart: any;
+  private timeline: BelaqiTimelineEntry[];
+
   constructor(
     private belaqiIndex: BelaqiIndexService,
     private popoverCtrl: PopoverController,
@@ -47,13 +62,6 @@ export class BelaqiChartComponent implements OnChanges {
     }
   }
 
-  public presentPopover(myEvent) {
-    this.popoverCtrl.create({
-      component: BelaqiChartInformationComponent,
-      event: myEvent
-    }).then(popover => popover.present());
-  }
-
   private handleError(error) {
     console.warn(error);
     this.error = true;
@@ -61,12 +69,54 @@ export class BelaqiChartComponent implements OnChanges {
     this.ready.emit();
   }
 
+  public presentPopover(myEvent) {
+    this.popoverCtrl.create({
+      component: BelaqiChartInformationComponent,
+      event: myEvent
+    }).then(popover => popover.present());
+  }
+
+  public previousTime() {
+    this.timespan.start = moment(this.timespan.start).subtract(HOUR_STEPS, 'hours');
+    this.timespan.end = moment(this.timespan.end).subtract(HOUR_STEPS, 'hours');
+    this.updateTimespan();
+  }
+
+  public nextTime() {
+    this.timespan.start = moment(this.timespan.start).add(HOUR_STEPS, 'hours');
+    this.timespan.end = moment(this.timespan.end).add(HOUR_STEPS, 'hours');
+    this.updateTimespan();
+  }
+
+  private updateTimespan() {
+    this.checkButtons();
+    this.chart.options.scales.xAxes[0].time.min = this.timespan.start.toDate();
+    this.chart.options.scales.xAxes[0].time.max = this.timespan.end.toDate();
+    this.chart.update();
+  }
+
+  private checkButtons() {
+    this.showPrevButton = this.timespan.start.isAfter(moment(this.timeline[0].timestamp));
+    this.showNextButton = this.timespan.end.isBefore(moment(this.timeline[this.timeline.length - 1].timestamp));
+  }
+
+  private initTimespan() {
+    this.timespan = {
+      start: moment(this.location.date).subtract(INITIAL_HOURS_BUFFER, 'hours'),
+      end: moment(this.location.date).add(INITIAL_HOURS_BUFFER, 'hours')
+    };
+    this.checkButtons();
+  }
+
   private drawChart(belaqiTimeline: BelaqiTimelineEntry[]) {
+    this.timeline = belaqiTimeline;
+    this.initTimespan();
     this.loading = false;
     const canvas = this.barCanvas.nativeElement as HTMLCanvasElement;
     if (canvas.clientHeight <= 0) { return; }
     const ctx = canvas.getContext('2d');
-    const chart = new Chart(ctx, {
+
+    this.chart = new Chart(ctx, {
       type: 'line',
       plugins: [{
         resize: c => this.drawData(ctx, c, belaqiTimeline)
@@ -74,6 +124,9 @@ export class BelaqiChartComponent implements OnChanges {
       options: {
         legend: {
           display: false
+        },
+        animation: {
+          duration: 300
         },
         annotation: {
           drawTime: 'beforeDatasetsDraw',
@@ -84,7 +137,7 @@ export class BelaqiChartComponent implements OnChanges {
             type: 'line',
             mode: 'vertical',
             scaleID: 'x-axis-0',
-            value: this.location.date.getHours().toString() + ":00",
+            value: this.location.date,
             borderColor: '#91c0d5',
             borderWidth: 3,
           }]
@@ -99,20 +152,37 @@ export class BelaqiChartComponent implements OnChanges {
             }
           }],
           xAxes: [{
+            type: 'time',
+            time: {
+              parser: 'MM/DD/YYYY HH:mm',
+              min: this.timespan.start.toDate(),
+              max: this.timespan.end.toDate(),
+              unit: 'hour',
+              displayFormats: {
+                hour: 'HH:mm'
+              }
+            },
             ticks: {
+              source: 'data',
               maxRotation: 0,
-              padding: 5,
-              autoSkip: false,
+              callback: (val, i, values) => {
+                const hours = this.location.date.getHours() % 6;
+                if (new Date(values[i].value).getHours() % 6 === hours) {
+                  return val;
+                } else {
+                  return '';
+                }
+              }
             }
           }],
-         },
+        },
         layout: {
           padding: 10
         },
         tooltips: {
           enabled: true,
           callbacks: {
-            label: (tooltip, data) => {
+            label: (tooltip) => {
               return ' ' + this.belaqiIndex.getValueForIndex(parseInt(tooltip.yLabel, 10)) +
                 ' - ' + this.belaqiIndex.getLabelForIndex(parseInt(tooltip.yLabel, 10));
             },
@@ -127,7 +197,6 @@ export class BelaqiChartComponent implements OnChanges {
         }
       } as ExpandedChartOptions,
       data: {
-        labels: this.createLabels(belaqiTimeline, this.location.date),
         datasets: [
           {
             pointBorderWidth: 0,
@@ -162,8 +231,8 @@ export class BelaqiChartComponent implements OnChanges {
         ]
       }
     });
-    this.drawData(ctx, chart, belaqiTimeline);
-    this.drawBuffer(chart, belaqiTimeline);
+    this.drawData(ctx, this.chart, belaqiTimeline);
+    this.drawBuffer(this.chart, belaqiTimeline);
     this.ready.emit();
   }
 
@@ -174,13 +243,14 @@ export class BelaqiChartComponent implements OnChanges {
     let timeIdx = 0;
     belaqiTimeline.forEach((entry, i) => {
       if (entry.timestamp.getTime() <= this.location.date.getTime()) {
-        upperDs.data.push(entry.index);
-        lowerDs.data.push(entry.index);
+        const val = { x: entry.timestamp, y: entry.index };
+        upperDs.data.push(val);
+        lowerDs.data.push(val);
         timeIdx = i;
       } else {
-        const dist = timeIdx - i;
-        upperDs.data.push(entry.index + FORCAST_UNCERTAINTY_BUFFER_FACTOR * dist);
-        lowerDs.data.push(entry.index - FORCAST_UNCERTAINTY_BUFFER_FACTOR * dist);
+        const factor = FORCAST_UNCERTAINTY_BUFFER_FACTOR * (i - timeIdx);
+        upperDs.data.push({ x: entry.timestamp, y: entry.index + factor });
+        lowerDs.data.push({ x: entry.timestamp, y: entry.index - factor });
       }
     });
     chart.update();
@@ -212,18 +282,12 @@ export class BelaqiChartComponent implements OnChanges {
   }
 
   private createDataArray(belaqiTimeline: BelaqiTimelineEntry[]): number[] | Chart.ChartPoint[] {
-    return belaqiTimeline.map(e => e.index);
-  }
-
-  private createLabels(belaqiTimeline: BelaqiTimelineEntry[], currentTime: Date): (string | string[])[] {
-    const hours = currentTime.getHours() % 4;
-    var labelcount = 0;
-
     return belaqiTimeline.map(e => {
-      if (e.timestamp.getHours() % 4 == hours && labelcount < 5) {
-        labelcount++;
-        return e.timestamp.getHours().toString()+ ":00";
-      } else return "";
+      return {
+        x: e.timestamp,
+        y: e.index
+      };
     });
   }
+
 }

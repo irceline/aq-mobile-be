@@ -24,7 +24,24 @@
         left: 5%;
         position: relative;
         background-color: var(--panel-background);
-        z-index: -10;
         border-radius: 1em;
-      }
+
+        .prev-button,
+        .next-button {
+            display: inline;
+            position: absolute;
+            top: 0;
+            z-index: 1;
+            color: black;
+            --background: transparent;
+        }
+
+        .next-button {
+            right: 0;
+        }
+
+        .prev-button {
+            left: 0;
+        }
+    }
 }
