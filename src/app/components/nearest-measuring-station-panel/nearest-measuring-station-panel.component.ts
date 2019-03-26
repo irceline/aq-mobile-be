@@ -7,7 +7,7 @@ import {
   NearestMeasuringStationPanelInformationPopupComponent,
 } from './nearest-measuring-station-panel-information-popup.component';
 
-interface PanelEntry {
+export interface NearestMeasuringStationPanelEntry {
   label: string;
   subscript: string;
   id: string;
@@ -29,7 +29,7 @@ export class NearestMeasuringStationPanelComponent implements OnChanges {
   @Input()
   public location: UserLocation;
 
-  public entries: PanelEntry[] = [
+  public entries: NearestMeasuringStationPanelEntry[] = [
     {
       label: 'BC',
       subscript: '',

@@ -26,7 +26,7 @@ export class UserLocationCreationComponent {
   public loadCurrentLocation: boolean;
 
   constructor(
-    protected locationList: UserLocationListService,
+    public locationList: UserLocationListService,
     private modalCtrl: ModalController,
     private settingsSrvc: SettingsService<MobileSettings>,
     private toastCtrl: ToastController,

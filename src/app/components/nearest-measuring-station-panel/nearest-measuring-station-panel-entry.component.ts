@@ -1,18 +1,13 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FirstLastValue, StatusIntervalResolverService, Timeseries } from '@helgoland/core';
 import { Point } from 'geojson';
-import invert from 'invert-color';
 
 import {
   NearestTimeseriesManagerService,
 } from '../../services/nearest-timeseries-manager/nearest-timeseries-manager.service';
 import { NearestTimeseriesService } from '../../services/nearest-timeseries/nearest-timeseries.service';
 import { UserLocation } from '../../services/user-location-list/user-location-list.service';
-
-interface PanelEntry {
-  label: string;
-  id: string;
-}
+import { NearestMeasuringStationPanelEntry } from './nearest-measuring-station-panel.component';
 
 export interface PhenomenonLocationSelection {
   phenomenonId: string;
@@ -36,7 +31,7 @@ export class NearestMeasuringStationPanelEntryComponent implements OnChanges {
   public series: Timeseries;
 
   @Input()
-  public entry: PanelEntry;
+  public entry: NearestMeasuringStationPanelEntry;
 
   @Input()
   public location: UserLocation;

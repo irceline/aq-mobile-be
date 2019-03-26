@@ -4,14 +4,14 @@
   </ion-list-header>
   <ion-item>
     <ion-label text-wrap>{{'push-notification-subscription.flanders' | translate}}</ion-label>
-    <ion-toggle [(ngModel)]="flanders" (ngModelChange)="toggleFlandersNotification($event.value)"></ion-toggle>
+    <ion-toggle [(ngModel)]="flanders" (ngModelChange)="toggleFlandersNotification()"></ion-toggle>
   </ion-item>
   <ion-item>
     <ion-label text-wrap>{{'push-notification-subscription.wallonia' | translate}}</ion-label>
-    <ion-toggle [(ngModel)]="wallonia" (ngModelChange)="toggleWalloniaNotification($event.value)"></ion-toggle>
+    <ion-toggle [(ngModel)]="wallonia" (ngModelChange)="toggleWalloniaNotification()"></ion-toggle>
   </ion-item>
   <ion-item>
     <ion-label text-wrap>{{'push-notification-subscription.brussels' | translate}}</ion-label>
-    <ion-toggle [(ngModel)]="brussels" (ngModelChange)="toggleBrusselsNotification($event.value)"></ion-toggle>
+    <ion-toggle [(ngModel)]="brussels" (ngModelChange)="toggleBrusselsNotification()"></ion-toggle>
   </ion-item>
 </ion-list>
