@@ -20,9 +20,7 @@ export enum AnnualPhenomenonMapping {
 
 const TTL_ANNUAL_YEAR_REQUEST = 60 * 60 * 24; // one day
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AnnualMeanService extends ValueProvider {
 
   constructor(

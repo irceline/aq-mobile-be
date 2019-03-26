@@ -4,6 +4,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { DatasetApiInterface, HelgolandCoreModule, SettingsService } from '@helgoland/core';
 import { GeoSearch } from '@helgoland/map';
+import { AppVersion } from '@ionic-native/app-version/ngx';
+import { Diagnostic } from '@ionic-native/diagnostic/ngx';
+import { FCM } from '@ionic-native/fcm/ngx';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Keyboard } from '@ionic-native/keyboard/ngx';
+import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 import { Network } from '@ionic-native/network/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -27,6 +33,7 @@ import { GeoSearchService } from './services/geo-search/geo-search.service';
 import { IrcelineSettingsService } from './services/irceline-settings/irceline-settings.service';
 import { LanguageHandlerService, languageInitializerFactory } from './services/language-handler/language-handler.service';
 import { LocateService } from './services/locate/locate.service';
+import { MapDataService } from './services/map-data/map-data.service';
 import { ModelledValueService } from './services/modelled-value/modelled-value.service';
 import { NearestTimeseriesManagerService } from './services/nearest-timeseries-manager/nearest-timeseries-manager.service';
 import { NearestTimeseriesService } from './services/nearest-timeseries/nearest-timeseries.service';
@@ -34,6 +41,8 @@ import { NetworkAlertService } from './services/network-alert/network-alert.serv
 import { NotificationMaintainerService } from './services/notification-maintainer/notification-maintainer.service';
 import { NotificationPresenterService } from './services/notification-presenter/notification-presenter.service';
 import { CachingInterceptor, OngoingHttpCacheService } from './services/ongoing-http-cache/ongoing-http-cache.service';
+import { PushNotificationsHandlerService } from './services/push-notifications-handler/push-notifications-handler.service';
+import { PushNotificationsService } from './services/push-notifications/push-notifications.service';
 import { RefreshHandler } from './services/refresh/refresh.service';
 import { JSSONSettingsService } from './services/settings/settings.service';
 import { StartPageSettingsService } from './services/start-page-settings/start-page-settings.service';
@@ -81,10 +90,17 @@ export function HttpLoaderFactory(http: HttpClient) {
     },
     AnnualMeanService,
     BelaqiIndexService,
+    AppVersion,
+    Diagnostic,
+    LocationAccuracy,
     CategorizedValueService,
     GeoLabelsService,
     IrcelineSettingsService,
+    LanguageHandlerService,
+    Geolocation,
+    Keyboard,
     LocateService,
+    MapDataService,
     ModelledValueService,
     NearestTimeseriesManagerService,
     NearestTimeseriesService,
@@ -93,8 +109,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     NotificationMaintainerService,
     NotificationPresenterService,
     OngoingHttpCacheService,
+    PushNotificationsHandlerService,
+    PushNotificationsService,
     RefreshHandler,
     SplashScreen,
+    FCM,
     StartPageSettingsService,
     StatusBar,
     UserLocationListService,

@@ -18,23 +18,23 @@
 <ion-content>
   <div class="container">
     <div class="segment">
-      <ion-segment class="phenomenon" [(ngModel)]="phenomenonLabel" (ngModelChange)="onPhenomenonChange()">
-        <ion-segment-button value="BelAQI">
+      <ion-segment class="phenomenon" [(ngModel)]="phenomenonLabel" (ngModelChange)="onPhenomenonChange()" mode="md">
+        <ion-segment-button value="BelAQI" mode="md">
           <ion-label>BelAQI</ion-label>
         </ion-segment-button>
-        <ion-segment-button value="NO2">
+        <ion-segment-button value="NO2" mode="md">
           <ion-label>NO<sub>2</sub></ion-label>
         </ion-segment-button>
-        <ion-segment-button value="O3">
+        <ion-segment-button value="O3" mode="md">
           <ion-label>O<sub>3</sub></ion-label>
         </ion-segment-button>
-        <ion-segment-button value="PM10">
+        <ion-segment-button value="PM10" mode="md">
           <ion-label>PM<sub>10</sub></ion-label>
         </ion-segment-button>
-        <ion-segment-button value="PM25">
+        <ion-segment-button value="PM25" mode="md">
           <ion-label>PM<sub>2.5</sub></ion-label>
         </ion-segment-button>
-        <ion-segment-button value="BC">
+        <ion-segment-button value="BC" mode="md">
           <ion-label>BC</ion-label>
         </ion-segment-button>
       </ion-segment>
@@ -59,34 +59,34 @@
     </div>
 
     <div class="segment">
-      <ion-segment class="mean" [(ngModel)]="mean" (ngModelChange)="onMeanChange()">
-        <ion-segment-button value="hourly" [disabled]="disableMeans">
+      <ion-segment class="mean" [(ngModel)]="mean" (ngModelChange)="onMeanChange()" mode="md">
+        <ion-segment-button value="hourly" [disabled]="disableMeans" mode="md">
           {{'map.mean.hourly' | translate}}
         </ion-segment-button>
-        <ion-segment-button value="24hour" *ngIf="show24hourMean" [disabled]="disableMeans">
+        <ion-segment-button value="24hour" *ngIf="show24hourMean" [disabled]="disableMeans" mode="md">
           {{'map.mean.24hour' | translate}}
         </ion-segment-button>
-        <ion-segment-button value="yearly" *ngIf="showYearlyMean" [disabled]="disableMeans">
+        <ion-segment-button value="yearly" *ngIf="showYearlyMean" [disabled]="disableMeans" mode="md">
           {{'map.mean.yearly' | translate}}
         </ion-segment-button>
       </ion-segment>
     </div>
 
     <div class="segment">
-      <ion-segment class="time" [(ngModel)]="time" (ngModelChange)="onTimeChange()">
-        <ion-segment-button value="current">
+      <ion-segment class="time" [(ngModel)]="time" (ngModelChange)="onTimeChange()" mode="md">
+        <ion-segment-button value="current" mode="md">
           {{'map.time.current' | translate}}
         </ion-segment-button>
-        <ion-segment-button value="today" [disabled]="disabled">
+        <ion-segment-button value="today" [disabled]="disabled" mode="md">
           {{'map.time.today' | translate}}
         </ion-segment-button>
-        <ion-segment-button value="tomorrow" [disabled]="disabled">
+        <ion-segment-button value="tomorrow" [disabled]="disabled" mode="md">
           {{'map.time.tomorrow' | translate}}
         </ion-segment-button>
-        <ion-segment-button value="today2" [disabled]="disabled">
+        <ion-segment-button value="today2" [disabled]="disabled" mode="md">
           {{'map.time.today+2' | translate}}
         </ion-segment-button>
-        <ion-segment-button value="today3" [disabled]="disabled">
+        <ion-segment-button value="today3" [disabled]="disabled" mode="md">
           {{'map.time.today+3' | translate}}
         </ion-segment-button>
       </ion-segment>

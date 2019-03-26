@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { LanguageHandlerService } from '../language-handler/language-handler.service';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class NetworkAlertService {
 
   private alert: HTMLIonAlertElement;

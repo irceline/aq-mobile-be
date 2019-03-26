@@ -12,9 +12,7 @@ import { Storage } from '@ionic/storage';
 
 const LANGUAGE_STORAGE_KEY = 'LANGUAGE_STORAGE_KEY';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class LanguageHandlerService {
 
   constructor(

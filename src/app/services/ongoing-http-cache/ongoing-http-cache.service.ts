@@ -3,9 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Observer } from 'rxjs';
 import { share } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class OngoingHttpCacheService {
 
   private cache: { [key: string]: { request: Observable<HttpEvent<any>> } } = {};
