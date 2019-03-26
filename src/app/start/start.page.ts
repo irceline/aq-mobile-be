@@ -11,6 +11,7 @@ import {
 } from '../components/belaqi-user-location-slider/belaqi-user-location-slider.component';
 import { DrawerState } from '../components/overlay-info-drawer/overlay-info-drawer';
 import { ModalIntroComponent } from '../components/settings/modal-intro/modal-intro.component';
+import { ModalSettingsComponent } from '../components/settings/modal-settings/modal-settings.component';
 import { MapDataService } from '../services/map-data/map-data.service';
 import { RefreshHandler } from '../services/refresh/refresh.service';
 
@@ -85,6 +86,10 @@ export class StartPage implements OnInit {
         this.storage.set(firstStartKey, true);
       }
     });
+  }
+
+  public navigateSettings() {
+    this.modalCtrl.create({ component: ModalSettingsComponent }).then(modal => modal.present());
   }
 
 }

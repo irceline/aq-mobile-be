@@ -2,9 +2,40 @@
   <ion-list-header>
     {{'settings.user-locations.header' | translate}}
   </ion-list-header>
+
+  <div class="currentLocationToggler">
+    <ion-row>
+      <ion-col>
+        <ion-label>
+          <h2>{{'belaqi-user-location-slider.current-location' | translate}}</h2>
+          <p text-wrap>{{'belaqi-user-location-slider.current-location-description' | translate}}</p>
+        </ion-label>
+      </ion-col>
+      <ion-toggle color="success" [checked]="showCurrentLocation" (ionChange)="toggleShowCurrentLocation($event)">
+      </ion-toggle>
+    </ion-row>
+  </div>
+  <ion-list class="location-list" (ionItemReorder)="reorderItems($event)">
+    <div *ngFor="let location of locations; let i = index;">
+      <ion-row nowrap *ngIf="location.type === 'user'">
+        <div class="location-item" *ngIf="location.type === 'user'">
+          <ion-label text-left class="header">
+            {{location.label}}
+          </ion-label>
+        </div>
+        <div *ngIf="location.type === 'user'">
+          <ion-button (click)="editLocation(location)">
+            <ion-icon slot="icon-only" name="build"></ion-icon>
+          </ion-button>
+          <ion-button (click)="removeLocation(location)">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-row>
+    </div>
+  </ion-list>
   <div text-center (click)="createNewLocation()">
     <ion-button>{{'settings.user-locations.create-new-location' | translate}}</ion-button>
-    <ion-button (click)="showLocationList()">{{'settings.user-locations.show-location-list' | translate}}</ion-button>
   </div>
   <!-- <ion-item text-wrap (click)="toggleNearestSeries()">
     <ion-label>{{'settings.user-locations.show-nearest-series-by-default' | translate}}</ion-label>

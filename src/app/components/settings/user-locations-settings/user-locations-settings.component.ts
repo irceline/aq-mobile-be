@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { IonToggle, ModalController } from '@ionic/angular';
+import { Point } from 'geojson';
 
-import { UserLocationListService } from '../../../services/user-location-list/user-location-list.service';
+import { UserLocation, UserLocationListService } from '../../../services/user-location-list/user-location-list.service';
 import {
   ModalUserLocationCreationComponent,
 } from '../../modal-user-location-creation/modal-user-location-creation.component';
 import { ModalUserLocationListComponent } from '../../modal-user-location-list/modal-user-location-list.component';
+import { ModalEditUserLocationComponent } from '../../modal-edit-user-location/modal-edit-user-location.component';
 
 @Component({
   selector: 'user-locations-settings',
@@ -14,14 +16,15 @@ import { ModalUserLocationListComponent } from '../../modal-user-location-list/m
 })
 export class UserLocationsSettingsComponent {
 
-  public nearestSeriesByDefault: boolean;
+  public locations: UserLocation[];
+
+  public points: Point[] = [];
 
   constructor(
     protected modalCtrl: ModalController,
-    // protected locatedTsSrvc: LocatedTimeseriesService,
     protected userLocationListProvider: UserLocationListService
   ) {
-    // this.nearestSeriesByDefault = this.locatedTsSrvc.getShowNearestSeriesByDefault();
+    this.setLocations();
   }
 
   public createNewLocation() {
@@ -32,8 +35,43 @@ export class UserLocationsSettingsComponent {
     this.modalCtrl.create({ component: ModalUserLocationListComponent }).then(modal => modal.present());
   }
 
-  // public toggleNearestSeries() {
-  //   this.locatedTsSrvc.setShowNearestSeriesByDefault(this.nearestSeriesByDefault);
-  // }
+  private setLocations() {
+    this.points = [];
+    this.locations = this.userLocationListProvider.getUserLocations();
+  }
+
+  public removeLocation(location: UserLocation) {
+    this.userLocationListProvider.removeLocation(location);
+    this.setLocations();
+  }
+
+  public reorderItems(indexes) {
+    const element = this.locations[indexes.from];
+    this.locations.splice(indexes.from, 1);
+    this.locations.splice(indexes.to, 0, element);
+
+    const point = this.points[indexes.from];
+    this.points.splice(indexes.from, 1);
+    this.points.splice(indexes.to, 0, point);
+  }
+
+  public async editLocation(location: UserLocation) {
+    const modal = await this.modalCtrl.create({
+      component: ModalEditUserLocationComponent,
+      componentProps: {
+        userlocation: location
+      }
+    });
+    modal.onDidDismiss().then(res => {
+      if (res.data) {
+        this.userLocationListProvider.saveLocation(res.data);
+      }
+    });
+    modal.present();
+  }
+
+  public toggleShowCurrentLocation(toggle: CustomEvent<IonToggle>) {
+    this.userLocationListProvider.setCurrentLocationVisisble(toggle.detail.checked);
+  }
 
 }

@@ -1,6 +1,13 @@
 :host {
-    ion-label {
-        text-align: center;
-        color: white;
+    --color: white;
+    color: white;
+    --ion-color-step-600: white;
+
+    ion-row {
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid white;
+        width: 90%;
+        margin-left: 5%;
     }
 }

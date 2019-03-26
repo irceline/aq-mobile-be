@@ -1,9 +1,22 @@
 ion-button {
-    --background: var(--panel-background);
-    --border-radius: 2.5em;
-    color: var(--ion-color-dark-tint);
-    border: 0;
-    --border-style: none;
-    --background-focused: #ffffff;
-    --background-activated: #ffffff;
+  --background: var(--panel-background);
+  --border-radius: 2.5em;
+  color: var(--ion-color-dark-tint);
+  border: 0;
+  --border-style: none;
+  --background-focused: #ffffff;
+  --background-activated: #ffffff;
+}
+
+ion-label {
+  color: white;
+  --color: white;
+  p {
+    color: white;
+  }
+}
+
+ion-list-header {
+  color: white;
+  font-weight: bold;
 }

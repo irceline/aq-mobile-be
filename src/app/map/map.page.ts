@@ -156,17 +156,17 @@ export class MapPage {
       if (this.mapDataService.selection.yearly) {
         this.mean = MeanLabel.yearly;
       } else {
-        switch (this.selectedPhenomenonId) {
+        this.mean = MeanLabel.hourly;
+/*         switch (this.selectedPhenomenonId) {
           case getIDForMainPhenomenon(MainPhenomenon.BC):
           case getIDForMainPhenomenon(MainPhenomenon.NO2):
           case getIDForMainPhenomenon(MainPhenomenon.O3):
-            this.mean = MeanLabel.hourly;
             break;
           case getIDForMainPhenomenon(MainPhenomenon.PM10):
           case getIDForMainPhenomenon(MainPhenomenon.PM25):
             this.mean = MeanLabel.daily;
             break;
-        }
+        } */
       }
     } else {
       this.phenomenonLabel = PhenomenonLabel.BelAQI;

@@ -2,16 +2,16 @@
   <ion-list-header *ngIf="!hideHeader">
     {{'push-notification-subscription.header' | translate}}
   </ion-list-header>
-  <ion-item>
+  <ion-row nowrap>
     <ion-label text-wrap>{{'push-notification-subscription.flanders' | translate}}</ion-label>
-    <ion-toggle [(ngModel)]="flanders" (ngModelChange)="toggleFlandersNotification()"></ion-toggle>
-  </ion-item>
-  <ion-item>
+    <ion-toggle color="success" [(ngModel)]="flanders" (ngModelChange)="toggleFlandersNotification()"></ion-toggle>
+  </ion-row>
+  <ion-row nowrap>
     <ion-label text-wrap>{{'push-notification-subscription.wallonia' | translate}}</ion-label>
-    <ion-toggle [(ngModel)]="wallonia" (ngModelChange)="toggleWalloniaNotification()"></ion-toggle>
-  </ion-item>
-  <ion-item>
+    <ion-toggle color="success" [(ngModel)]="wallonia" (ngModelChange)="toggleWalloniaNotification()"></ion-toggle>
+  </ion-row>
+  <ion-row nowrap>
     <ion-label text-wrap>{{'push-notification-subscription.brussels' | translate}}</ion-label>
-    <ion-toggle [(ngModel)]="brussels" (ngModelChange)="toggleBrusselsNotification()"></ion-toggle>
-  </ion-item>
+    <ion-toggle color="success" [(ngModel)]="brussels" (ngModelChange)="toggleBrusselsNotification()"></ion-toggle>
+  </ion-row>
 </ion-list>

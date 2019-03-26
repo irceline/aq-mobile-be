@@ -2,16 +2,17 @@
   <ion-list-header>
     {{'settings.start-page.header' | translate}}
   </ion-list-header>
-  <ion-item text-wrap (click)="toggleShowNearestStations()">
-    <ion-label>{{'settings.start-page.show-nearest-stations' | translate}}</ion-label>
-    <ion-toggle [(ngModel)]="showNearestStations" (ngModelChange)="toggleShowNearestStations()"></ion-toggle>
-  </ion-item>
-  <ion-item text-wrap (click)="toggleShowSubIndexPanel()">
-    <ion-label>{{'settings.start-page.show-sub-index-panel' | translate}}</ion-label>
-    <ion-toggle [(ngModel)]="showSubIndexPanel" (ngModelChange)="toggleShowSubIndexPanel()"></ion-toggle>
-  </ion-item>
-  <ion-item text-wrap (click)="toggleShowAnnualMeanPanel()">
-    <ion-label>{{'settings.start-page.show-annual-mean-panel' | translate}}</ion-label>
-    <ion-toggle [(ngModel)]="showAnnualMeanPanel" (ngModelChange)="toggleShowAnnualMeanPanel()"></ion-toggle>
-  </ion-item>
+
+  <ion-row nowrap (click)="toggleShowNearestStations()">
+    <ion-label text-wrap>{{'settings.start-page.show-nearest-stations' | translate}}</ion-label>
+    <ion-toggle color="success" [(ngModel)]="showNearestStations" (ngModelChange)="toggleShowNearestStations()"></ion-toggle>
+  </ion-row>
+  <ion-row nowrap (click)="toggleShowSubIndexPanel()">
+    <ion-label text-wrap>{{'settings.start-page.show-sub-index-panel' | translate}}</ion-label>
+    <ion-toggle color="success" [(ngModel)]="showSubIndexPanel" (ngModelChange)="toggleShowSubIndexPanel()"></ion-toggle>
+  </ion-row>
+  <ion-row nowrap (click)="toggleShowAnnualMeanPanel()">
+    <ion-label text-wrap>{{'settings.start-page.show-annual-mean-panel' | translate}}</ion-label>
+    <ion-toggle color="success" [(ngModel)]="showAnnualMeanPanel" (ngModelChange)="toggleShowAnnualMeanPanel()"></ion-toggle>
+  </ion-row>
 </ion-list>
