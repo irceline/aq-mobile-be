@@ -3,11 +3,11 @@ import { IonToggle, ModalController } from '@ionic/angular';
 import { Point } from 'geojson';
 
 import { UserLocation, UserLocationListService } from '../../../services/user-location-list/user-location-list.service';
+import { ModalEditUserLocationComponent } from '../../modal-edit-user-location/modal-edit-user-location.component';
 import {
   ModalUserLocationCreationComponent,
 } from '../../modal-user-location-creation/modal-user-location-creation.component';
 import { ModalUserLocationListComponent } from '../../modal-user-location-list/modal-user-location-list.component';
-import { ModalEditUserLocationComponent } from '../../modal-edit-user-location/modal-edit-user-location.component';
 
 @Component({
   selector: 'user-locations-settings',
@@ -18,6 +18,8 @@ export class UserLocationsSettingsComponent {
 
   public locations: UserLocation[];
 
+  public currentLocationActive: boolean;
+
   public points: Point[] = [];
 
   constructor(
@@ -25,6 +27,7 @@ export class UserLocationsSettingsComponent {
     protected userLocationListProvider: UserLocationListService
   ) {
     this.setLocations();
+    this.currentLocationActive = this.userLocationListProvider.isCurrentLocationVisible();
   }
 
   public createNewLocation() {
