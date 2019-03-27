@@ -45,14 +45,16 @@ export class UserLocationsSettingsComponent {
     this.setLocations();
   }
 
-  public reorderItems(indexes) {
-    const element = this.locations[indexes.from];
-    this.locations.splice(indexes.from, 1);
-    this.locations.splice(indexes.to, 0, element);
+  public reorderItems(event) {
+    const element = this.locations[event.detail.from];
+    this.locations.splice(event.detail.from, 1);
+    this.locations.splice(event.detail.to, 0, element);
 
-    const point = this.points[indexes.from];
-    this.points.splice(indexes.from, 1);
-    this.points.splice(indexes.to, 0, point);
+    const point = this.points[event.detail.from];
+    this.points.splice(event.detail.from, 1);
+    this.points.splice(event.detail.to, 0, point);
+
+    event.detail.complete(true);
   }
 
   public async editLocation(location: UserLocation) {

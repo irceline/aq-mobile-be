@@ -15,24 +15,29 @@
       </ion-toggle>
     </ion-row>
   </div>
-  <ion-list class="location-list" (ionItemReorder)="reorderItems($event)">
-    <div *ngFor="let location of locations; let i = index;">
-      <ion-row nowrap *ngIf="location.type === 'user'">
-        <div class="location-item" *ngIf="location.type === 'user'">
-          <ion-label text-left class="header">
-            {{location.label}}
-          </ion-label>
-        </div>
-        <div *ngIf="location.type === 'user'">
-          <ion-button (click)="editLocation(location)">
-            <ion-icon slot="icon-only" name="build"></ion-icon>
-          </ion-button>
-          <ion-button (click)="removeLocation(location)">
-            <ion-icon slot="icon-only" name="trash"></ion-icon>
-          </ion-button>
-        </div>
-      </ion-row>
-    </div>
+  <ion-list class="location-list">
+    <ion-reorder-group (ionItemReorder)="reorderItems($event)" disabled="false">
+      <ng-container *ngFor="let location of locations; let i = index;">
+        <ion-item *ngIf="location.type === 'user'">
+          <ion-row nowrap>
+            <ion-reorder></ion-reorder>
+            <div class="location-item">
+              <ion-label text-left text-wrap class="header">
+                {{location.label}}
+              </ion-label>
+            </div>
+            <div class="right">
+              <ion-button (click)="editLocation(location)">
+                <ion-icon slot="icon-only" name="build"></ion-icon>
+              </ion-button>
+              <ion-button (click)="removeLocation(location)">
+                <ion-icon slot="icon-only" name="trash"></ion-icon>
+              </ion-button>
+            </div>
+          </ion-row>
+        </ion-item>
+      </ng-container>
+    </ion-reorder-group>
   </ion-list>
   <div text-center (click)="createNewLocation()">
     <ion-button>{{'settings.user-locations.create-new-location' | translate}}</ion-button>
