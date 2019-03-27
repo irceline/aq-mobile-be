@@ -124,6 +124,10 @@ export class MapPage {
 
   public mapId = 'map';
 
+  //TODO: Actually set those values
+  public loading_colors = [true,true,true,true,true,true];
+  public borderColor = ["","","","","",""]
+
   constructor(
     protected settingsSrvc: SettingsService<MobileSettings>,
     protected mapCache: MapCache,

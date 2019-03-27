@@ -20,22 +20,40 @@
     <div class="segment">
       <ion-segment class="phenomenon" [(ngModel)]="phenomenonLabel" (ngModelChange)="onPhenomenonChange()" mode="md">
         <ion-segment-button value="BelAQI" mode="md">
-          <ion-label>BelAQI</ion-label>
+          <div text-center class="entry" [ngStyle]="{'border-color': borderColor[0]}">
+            <div *ngIf="loading_colors[0]" class="spinningborder"></div>
+            <div class="phenomenon-label">AQI</div>
+          </div>
         </ion-segment-button>
         <ion-segment-button value="NO2" mode="md">
-          <ion-label>NO<sub>2</sub></ion-label>
+          <div text-center class="entry" [ngStyle]="{'border-color': borderColor[1]}">
+            <div *ngIf="loading_colors[1]" class="spinningborder"></div>
+            <div class="phenomenon-label">NO<sub>2</sub></div>
+          </div>
         </ion-segment-button>
         <ion-segment-button value="O3" mode="md">
-          <ion-label>O<sub>3</sub></ion-label>
+          <div text-center class="entry" [ngStyle]="{'border-color': borderColor[2]}">
+            <div *ngIf="loading_colors[2]" class="spinningborder"></div>
+            <div class="phenomenon-label">O<sub>3</sub></div>
+          </div>
         </ion-segment-button>
         <ion-segment-button value="PM10" mode="md">
-          <ion-label>PM<sub>10</sub></ion-label>
+          <div text-center class="entry" [ngStyle]="{'border-color': borderColor[3]}">
+            <div *ngIf="loading_colors[3]" class="spinningborder"></div>
+            <div class="phenomenon-label">PM<sub>10</sub></div>
+          </div>
         </ion-segment-button>
         <ion-segment-button value="PM25" mode="md">
-          <ion-label>PM<sub>2.5</sub></ion-label>
+          <div text-center class="entry" [ngStyle]="{'border-color': borderColor[4]}">
+            <div *ngIf="loading_colors[4]" class="spinningborder"></div>
+            <div class="phenomenon-label">PM<sub>2.5</sub></div>
+          </div>
         </ion-segment-button>
         <ion-segment-button value="BC" mode="md">
-          <ion-label>BC</ion-label>
+          <div text-center class="entry" [ngStyle]="{'border-color': borderColor[5]}">
+            <div *ngIf="loading_colors[5]" class="spinningborder"></div>
+            <div class="phenomenon-label">BC</div>
+          </div>
         </ion-segment-button>
       </ion-segment>
     </div>
@@ -48,10 +66,11 @@
     <div class="map-wrapper">
       <div class="map" *ngIf="phenomenonLabel">
         <customized-station-map-selector [mapId]="mapId" [serviceUrl]="providerUrl" [filter]="phenomenonFilter"
-          [avoidZoomToSelection]="avoidZoomToSelection" [statusIntervals]="true" [ignoreStatusIntervalIfBeforeDuration]="statusIntervalDuration"
-          [zoomControlOptions]="zoomControlOptions" [overlayMaps]="overlayMaps" [fitBounds]="fitBounds"
-          [markerSelectorGenerator]="markerSelectorGenerator" (onSelected)="onStationSelected($event)" [cluster]="clusterStations"
-          (onContentLoading)="onMapLoading($event)" (mapInitialized)="mapInitialized($event)"></customized-station-map-selector>
+          [avoidZoomToSelection]="avoidZoomToSelection" [statusIntervals]="true"
+          [ignoreStatusIntervalIfBeforeDuration]="statusIntervalDuration" [zoomControlOptions]="zoomControlOptions"
+          [overlayMaps]="overlayMaps" [fitBounds]="fitBounds" [markerSelectorGenerator]="markerSelectorGenerator"
+          (onSelected)="onStationSelected($event)" [cluster]="clusterStations" (onContentLoading)="onMapLoading($event)"
+          (mapInitialized)="mapInitialized($event)"></customized-station-map-selector>
       </div>
       <div class="error" *ngIf="!phenomenonLabel">
         {{'map.error' | translate}}

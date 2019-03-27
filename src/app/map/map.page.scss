@@ -1,5 +1,11 @@
 :host {
 
+    @import'../../theme/panels.scss';
+
+    .entry {
+        margin: auto;
+    }
+
     .container {
         height: 100%;
         overflow: hidden;
