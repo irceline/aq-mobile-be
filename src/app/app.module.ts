@@ -8,6 +8,7 @@ import { AppVersion } from '@ionic-native/app-version/ngx';
 import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { FCM } from '@ionic-native/fcm/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 import { Network } from '@ionic-native/network/ngx';
@@ -89,17 +90,19 @@ export function HttpLoaderFactory(http: HttpClient) {
       multi: true
     },
     AnnualMeanService,
-    BelaqiIndexService,
     AppVersion,
-    Diagnostic,
-    LocationAccuracy,
+    BelaqiIndexService,
     CategorizedValueService,
+    Diagnostic,
+    FCM,
     GeoLabelsService,
-    IrcelineSettingsService,
-    LanguageHandlerService,
     Geolocation,
+    InAppBrowser,
+    IrcelineSettingsService,
     Keyboard,
+    LanguageHandlerService,
     LocateService,
+    LocationAccuracy,
     MapDataService,
     ModelledValueService,
     NearestTimeseriesManagerService,
@@ -113,7 +116,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     PushNotificationsService,
     RefreshHandler,
     SplashScreen,
-    FCM,
     StartPageSettingsService,
     StatusBar,
     UserLocationListService,
