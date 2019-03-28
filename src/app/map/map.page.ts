@@ -127,8 +127,8 @@ export class MapPage {
   public mapId = 'map';
 
   //TODO: Actually set those values
-  public loading_colors = [true,true,true,true,true,true];
-  public borderColor = ["","","","","",""]
+  public loading_colors = [true, true, true, true, true, true];
+  public borderColor = ["", "", "", "", "", ""]
 
   constructor(
     protected settingsSrvc: SettingsService<MobileSettings>,
@@ -163,16 +163,16 @@ export class MapPage {
         this.mean = MeanLabel.yearly;
       } else {
         this.mean = MeanLabel.hourly;
-/*         switch (this.selectedPhenomenonId) {
-          case getIDForMainPhenomenon(MainPhenomenon.BC):
-          case getIDForMainPhenomenon(MainPhenomenon.NO2):
-          case getIDForMainPhenomenon(MainPhenomenon.O3):
-            break;
-          case getIDForMainPhenomenon(MainPhenomenon.PM10):
-          case getIDForMainPhenomenon(MainPhenomenon.PM25):
-            this.mean = MeanLabel.daily;
-            break;
-        } */
+        /*         switch (this.selectedPhenomenonId) {
+                  case getIDForMainPhenomenon(MainPhenomenon.BC):
+                  case getIDForMainPhenomenon(MainPhenomenon.NO2):
+                  case getIDForMainPhenomenon(MainPhenomenon.O3):
+                    break;
+                  case getIDForMainPhenomenon(MainPhenomenon.PM10):
+                  case getIDForMainPhenomenon(MainPhenomenon.PM25):
+                    this.mean = MeanLabel.daily;
+                    break;
+                } */
       }
     } else {
       this.phenomenonLabel = PhenomenonLabel.BelAQI;
@@ -223,12 +223,31 @@ export class MapPage {
 
   public onTimeChange() {
     this.time = TimeLabel[TimeLabel[this.timeAsNumber]];
+    switch (this.timeAsNumber) {
+      case 0: this.time = TimeLabel.current;
+        break;
+      case 1: this.time = TimeLabel.today;
+        break;
+      case 2: this.time = TimeLabel.tomorrow;
+        break;
+      case 3: this.time = TimeLabel.today2;
+        break;
+      case 4: this.time = TimeLabel.today3;
+        break;
+    }
     this.adjustMeanUI();
     this.adjustUI();
   }
 
   public onMeanChange() {
-    this.mean = MeanLabel[MeanLabel[this.meanAsNumber]];
+    switch(this.meanAsNumber) {
+      case 1: this.mean = MeanLabel.hourly
+      break;
+      case 2: this.mean = MeanLabel.daily
+      break;
+      case 3: this.mean = MeanLabel.yearly
+      break;
+    }
     this.adjustUI();
   }
 
