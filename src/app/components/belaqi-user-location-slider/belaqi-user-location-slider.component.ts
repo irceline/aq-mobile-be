@@ -60,8 +60,6 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit, OnDestr
   public belaqiLocations: UserLocation[] = [];
   public currentLocation: UserLocation;
 
-  public showCurrentLocation: boolean;
-
   public slidesHeight: string;
 
   public currentLocationError: string;
@@ -179,35 +177,6 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit, OnDestr
     this.slider.getActiveIndex().then(idx => this.updateLocationSelection(idx));
   }
 
-  public changeCurrentLocation(newVal) {
-    if (newVal) {
-      if (this.locate.getLocationStatus() === LocationStatus.DENIED) {
-        this.locate.askForPermission()
-          .then(permission => {
-            if (permission) {
-              this.updateShowCurrentLocation(true);
-            } else {
-              this.showCurrentLocation = false;
-            }
-          })
-          .catch(error => this.presentError(error));
-      } else {
-        this.updateShowCurrentLocation(true);
-      }
-    } else {
-      this.updateShowCurrentLocation(false);
-    }
-  }
-
-  private presentError(error: any) {
-    this.toast.create({ message: `Error occured: ${JSON.stringify(error)}`, duration: 3000 }).then(toast => toast.present());
-  }
-
-  private updateShowCurrentLocation(value: boolean) {
-    this.userLocationService.setCurrentLocationVisisble(value);
-    this.showCurrentLocation = value;
-  }
-
   public navigateSettings() {
     this.modalCtrl.create({ component: ModalSettingsComponent }).then(modal => modal.present());
   }
@@ -295,7 +264,6 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit, OnDestr
             }
             this.updateLocationSelection(0);
           }, 300);
-          this.showCurrentLocation = this.userLocationService.isCurrentLocationVisible();
           this.loadingLocations = false;
         },
         error => {

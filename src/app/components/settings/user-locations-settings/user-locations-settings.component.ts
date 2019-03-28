@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { IonToggle, ModalController } from '@ionic/angular';
-import { Point } from 'geojson';
+import { Component, OnInit } from '@angular/core';
+import { ModalController, ToastController } from '@ionic/angular';
 
+import { LocateService, LocationStatus } from '../../../services/locate/locate.service';
 import { UserLocation, UserLocationListService } from '../../../services/user-location-list/user-location-list.service';
 import { ModalEditUserLocationComponent } from '../../modal-edit-user-location/modal-edit-user-location.component';
 import {
@@ -14,20 +14,23 @@ import { ModalUserLocationListComponent } from '../../modal-user-location-list/m
   templateUrl: './user-locations-settings.component.html',
   styleUrls: ['./user-locations-settings.component.scss'],
 })
-export class UserLocationsSettingsComponent {
+export class UserLocationsSettingsComponent implements OnInit {
 
   public locations: UserLocation[];
 
-  public currentLocationActive: boolean;
-
-  public points: Point[] = [];
+  public showCurrentLocation: boolean;
 
   constructor(
     protected modalCtrl: ModalController,
-    protected userLocationListProvider: UserLocationListService
+    protected userLocationService: UserLocationListService,
+    private locate: LocateService,
+    private toast: ToastController
   ) {
     this.setLocations();
-    this.currentLocationActive = this.userLocationListProvider.isCurrentLocationVisible();
+  }
+
+  public ngOnInit(): void {
+    this.showCurrentLocation = this.userLocationService.isCurrentLocationVisible();
   }
 
   public createNewLocation() {
@@ -39,12 +42,11 @@ export class UserLocationsSettingsComponent {
   }
 
   private setLocations() {
-    this.points = [];
-    this.locations = this.userLocationListProvider.getUserLocations();
+    this.locations = this.userLocationService.getUserLocations();
   }
 
   public removeLocation(location: UserLocation) {
-    this.userLocationListProvider.removeLocation(location);
+    this.userLocationService.removeLocation(location);
     this.setLocations();
   }
 
@@ -53,10 +55,7 @@ export class UserLocationsSettingsComponent {
     this.locations.splice(event.detail.from, 1);
     this.locations.splice(event.detail.to, 0, element);
 
-    const point = this.points[event.detail.from];
-    this.points.splice(event.detail.from, 1);
-    this.points.splice(event.detail.to, 0, point);
-
+    this.userLocationService.setLocationList(this.locations);
     event.detail.complete(true);
   }
 
@@ -69,14 +68,39 @@ export class UserLocationsSettingsComponent {
     });
     modal.onDidDismiss().then(res => {
       if (res.data) {
-        this.userLocationListProvider.saveLocation(res.data);
+        this.userLocationService.saveLocation(res.data);
       }
     });
     modal.present();
   }
 
-  public toggleShowCurrentLocation(toggle: CustomEvent<IonToggle>) {
-    this.userLocationListProvider.setCurrentLocationVisisble(toggle.detail.checked);
+  public changeCurrentLocation(newVal) {
+    if (newVal) {
+      if (this.locate.getLocationStatus() === LocationStatus.DENIED) {
+        this.locate.askForPermission()
+          .then(permission => {
+            if (permission) {
+              this.updateShowCurrentLocation(true);
+            } else {
+              this.showCurrentLocation = false;
+            }
+          })
+          .catch(error => this.presentError(error));
+      } else {
+        this.updateShowCurrentLocation(true);
+      }
+    } else {
+      this.updateShowCurrentLocation(false);
+    }
+  }
+
+  private presentError(error: any) {
+    this.toast.create({ message: `Error occured: ${JSON.stringify(error)}`, duration: 3000 }).then(toast => toast.present());
+  }
+
+  private updateShowCurrentLocation(value: boolean) {
+    this.userLocationService.setCurrentLocationVisisble(value);
+    this.showCurrentLocation = value;
   }
 
 }
