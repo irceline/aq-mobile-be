@@ -87,8 +87,10 @@ export class BelaqiWheelComponent extends LanguageChangNotifier implements After
     }
   }
 
-  public async presentPopover(myEvent) {
-    this.popoverCtrl.create({ component: BelaqiWheelInformationComponent }).then(popover => popover.present());
+  public async presentPopover() {
+    this.popoverCtrl.create({
+      component: BelaqiWheelInformationComponent
+    }).then(popover => popover.present());
   }
 
   private getEmHeight() {
@@ -183,7 +185,7 @@ export class BelaqiWheelComponent extends LanguageChangNotifier implements After
             // indexLabel
             ctx.font = '1.3em Open Sans';
             this.wrapText(ctx, this.belaqi.getLabelForIndexSplit(index), centerX + 2, centerY - 14, 90, 1.2);
-            ctx.font = "0.8em Open Sans";
+            ctx.font = '0.8em Open Sans';
             this.wrapText(ctx, index + '/10', centerX + 2, centerY + 17, 90, 2);
 
             // modelledLabel
@@ -192,7 +194,7 @@ export class BelaqiWheelComponent extends LanguageChangNotifier implements After
         }],
         options: {
           cutoutPercentage: 70,
-          circumference: (20/12) * Math.PI,
+          circumference: (20 / 12) * Math.PI,
           tooltips: {
             enabled: false
           },
