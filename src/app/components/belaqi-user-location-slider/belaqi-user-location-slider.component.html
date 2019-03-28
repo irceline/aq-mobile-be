@@ -44,28 +44,19 @@
       </div>
     </div>
   </ion-slide>
-  <ion-slide [ngStyle]="{'min-height': slidesHeight}">
-    <div class="faq-slide">
-      <div>
-        <!-- <ion-button fill="outline" (click)="navigateFAQ()">
-          {{'belaqi-user-location-slider.faq' | translate}}
-        </ion-button> -->
-      </div>
-    </div>
+  <ion-slide *ngIf="!belaqiLocations?.length">
     <div class="create-new-location-slide">
       <ion-button (click)="createNewLocation()">
         {{'belaqi-user-location-slider.create-new-location' | translate}}
       </ion-button>
-      <ion-button (click)="openUserLocation()">
-        {{'belaqi-user-location-slider.open-user-location' | translate}}
-      </ion-button>
+      <hr />
+      <div class="settings">
+        <ion-button (click)="navigateSettings()">
+          <ion-icon slot="start" name="settings"></ion-icon>
+          <span class="nav-butto-label">{{'settings.header' | translate}}</span>
+        </ion-button>
+      </div>
     </div>
     <hr />
-    <div class="settings">
-      <ion-button (click)="navigateSettings()">
-        <ion-icon slot="start" name="settings"></ion-icon>
-        <span class="nav-butto-label">{{'settings.header' | translate}}</span>
-      </ion-button>
-    </div>
   </ion-slide>
 </ion-slides>
