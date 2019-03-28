@@ -3,21 +3,21 @@
     {{'settings.user-locations.header' | translate}}
   </ion-list-header>
 
-  <div class="currentLocationToggler">
-    <ion-row>
-      <ion-col>
-        <ion-label>
-          <h2>{{'belaqi-user-location-slider.current-location' | translate}}</h2>
-          <p text-wrap>{{'belaqi-user-location-slider.current-location-description' | translate}}</p>
-        </ion-label>
-      </ion-col>
-      <ion-toggle color="success" [checked]="currentLocationActive" (ionChange)="toggleShowCurrentLocation($event)">
-      </ion-toggle>
-    </ion-row>
-  </div>
   <ion-list class="location-list">
     <ion-reorder-group (ionItemReorder)="reorderItems($event)" disabled="false">
       <ng-container *ngFor="let location of locations; let i = index;">
+        <ion-item *ngIf="location.type === 'current'">
+          <ion-row nowrap>
+            <ion-reorder></ion-reorder>
+            <ion-col>
+              <ion-label>
+                {{'belaqi-user-location-slider.current-location' | translate}}
+                <p text-wrap>{{'belaqi-user-location-slider.current-location-description' | translate}}</p>
+              </ion-label>
+            </ion-col>
+            <ion-toggle [(ngModel)]="showCurrentLocation" (ngModelChange)="changeCurrentLocation($event)"></ion-toggle>
+          </ion-row>
+        </ion-item>
         <ion-item *ngIf="location.type === 'user'">
           <ion-row nowrap>
             <ion-reorder></ion-reorder>
