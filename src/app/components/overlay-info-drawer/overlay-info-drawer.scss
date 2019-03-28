@@ -5,11 +5,15 @@
   left: 0;
   z-index: 1001 !important;
   transform: translateY(100vh);
+  color: white;
+  --color: white;
 
   ion-content {
     --background: transparent;
     position: relative;
     height: 100%;
+    color: white;
+    --color: white;
 
     .header {
       position: absolute;

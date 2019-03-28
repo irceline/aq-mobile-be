@@ -52,4 +52,12 @@
   .drawer-content {
     padding: 0 2em;
   }
+
+  ion-refresher {
+    background: white;
+    border-radius: 0 0 1em 1em;
+    color: white;
+    z-index: 10;
+    --ion-text-color: var(--ion-color-dark-tint);
+  }
 }

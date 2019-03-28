@@ -3,7 +3,7 @@
     <ion-col text-center text-wrap>{{'annual-mean-panel.header' | translate}}</ion-col>
   </ion-row>
   <ion-row nowrap class="entries">
-    <ion-col *ngFor="let entry of entries">
+    <ion-col width-33 *ngFor="let entry of entries">
       <annual-mean-panel-entry [entry]="entry" [location]="location" (selected)="select($event)"></annual-mean-panel-entry>
     </ion-col>
   </ion-row>
