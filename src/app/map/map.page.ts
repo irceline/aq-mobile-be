@@ -3,7 +3,6 @@ import './boundary-canvas';
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { DatasetApiInterface, ParameterFilter, Phenomenon, Platform, SettingsService, Station } from '@helgoland/core';
-import { DrawerState } from '../components/overlay-info-drawer/overlay-info-drawer';
 import { GeoSearchOptions, LayerOptions, MapCache } from '@helgoland/map';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
@@ -28,6 +27,7 @@ import { forkJoin } from 'rxjs';
 import {
   MarkerSelectorGenerator,
 } from '../components/customized-station-map-selector/customized-station-map-selector.component';
+import { DrawerState } from '../components/overlay-info-drawer/overlay-info-drawer';
 import { getIDForMainPhenomenon, MainPhenomenon } from '../model/phenomenon';
 import { AnnualMeanService } from '../services/annual-mean/annual-mean.service';
 import { IrcelineSettingsService } from '../services/irceline-settings/irceline-settings.service';

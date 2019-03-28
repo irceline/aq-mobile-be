@@ -446,7 +446,7 @@
 		"button": "Geef jouw locatie in",
 		"text-p1": "Hoe is het gesteld met de impact van de luchtkwaliteit op jouw locatie? Dat weet de BelAir app je meteen te vertellen.",
 		"text-p2": "De BelAir app baseert zich op data van meetstations, verspreid doorheen heel België. Die data worden omgezet in een BelAQI-luchtkwaliteitsindex. Je krijgt een cijfer tussen 1 en 10 dat meteen de impact inschat van de actuele luchtkwaliteit op jouw gezondheid.",
-		"text-p2": "Om dat cijfer te berekenen, wordt er ook gekeken naar relevante, vervuilende stoffen op jouw locatie zoals stikstofdioxide, ozon en fijn stof.",
+		"text-p3": "Om dat cijfer te berekenen, wordt er ook gekeken naar relevante, vervuilende stoffen op jouw locatie zoals stikstofdioxide, ozon en fijn stof.",
 		"title": "Welkom bij"
 	}
 }

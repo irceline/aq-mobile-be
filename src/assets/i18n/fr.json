@@ -3,9 +3,9 @@
     "header": "Indice BelAQI à:"
   },
   "air-quality-location-panel": {
-    "error": "Pas d'indice obtenu pour votre position",
-    "hint": "Indice de qualité de l'air modélisé pour votre position",
-    "loading": "Chargement de BelAQI pour votre position"
+    "error": "Pas d'indice obtenu pour votre localisation",
+    "hint": "Indice de qualité de l'air modélisé pour votre localisation",
+    "loading": "Chargement de BelAQI pour votre localisation"
   },
   "annual-map": {
     "header": "Carte moyenne annuelle",
@@ -17,31 +17,31 @@
   "annual-mean-panel": {
     "header": "Exposition à long terme",
     "information-popup": {
-      "text": "Le NO2 (dioxyde d'azote), les PM10 (particules d'un diamètre inférieur à 10 micromètres) et les PM2,5 (particules d'un diamètre inférieur à 2,5 micromètres) sont les trois polluants pour lesquels le fardeau de la preuve est le plus scientifique en ce qui concerne l'impact d'une exposition à long terme."
+      "text": "Le NO2 (dioxyde d'azote), les PM10 (particules d'un diamètre inférieur à 10 micromètres) et les PM2,5 (particules d'un diamètre inférieur à 2,5 micromètres) sont les trois polluants majeurs pour lesquels il existe de nombreuses preuves scientifiques de l'impact de leur exposition à long terme."
     }
   },
-  "annual-phenomenon-buttons": "Indice moyen annuel modélisé pour cette position:",
+  "annual-phenomenon-buttons": "Indice moyen annuel modélisé pour cette localisation:",
   "belaqi-chart": {
     "error": "Malheureusement, une erreur est survenue lors du chargement du graphique."
   },
   "belaqi-user-location-slider": {
-    "create-new-location": "Ajouter une nouvelle position",
-    "current-location": "position actuelle",
-    "current-location-description": "Activez cette option pour afficher les données de qualité de l’air pour votre position actuelle.",
-    "current-location-error-1": "Vous pouvez modifier les paramètres du service de position de votre appareil pour une plus grande précision.",
-    "current-location-error-2": "Si vous avez précédemment configuré des positions, celles-ci sont disponibles en glissant cet écran vers la gauche.",
-    "current-location-error-3": "Vous pouvez configurer une position manuellement:",
-    "current-location-error-header": "Votre appareil n'a pas pu établir votre position actuelle.",
+    "create-new-location": "Ajouter une nouvelle localisation",
+    "current-location": "Localisation actuelle",
+    "current-location-description": "Activez cette option pour afficher les données de qualité de l’air pour votre localisation actuelle.",
+    "current-location-error-1": "Vous pouvez modifier les paramètres du service de localisation de votre appareil pour une plus grande précision.",
+    "current-location-error-2": "Si vous avez précédemment configuré des localisations, celles-ci sont disponibles en glissant cet écran vers la gauche.",
+    "current-location-error-3": "Vous pouvez configurer une localisation manuellement:",
+    "current-location-error-header": "Votre appareil n'a pas pu établir votre localisation actuelle.",
     "faq": "Foire Aux Questions (FAQ)",
-    "loading-current-location": "Votre appareil cherche actuellement votre position",
-    "locate-delayed-information": "Votre appareil n'a pas pu établir votre position actuelle.",
-    "open-user-location": "Modifier les positions"
+    "loading-current-location": "Votre appareil cherche actuellement votre localisation",
+    "locate-delayed-information": "Votre appareil n'a pas pu établir votre localisation actuelle.",
+    "open-user-location": "Modifier les localisations"
   },
   "belaqi-wheel": {
     "error-occured": "La récupération des données prend trop de temps. Veuillez réessayer plus tard.",
     "loading": "Chargement de l'indice BelAQI ...",
-    "modelled-hint": "Indice de qualité de l'air modélisé pour cette position",
-    "no-index-ascertained": "Aucun indice BelAQI n'a pu être déterminé. Cela peut être le cas si votre position n'est pas en Belgique."
+    "modelled-hint": "Indice de qualité de l'air modélisé pour cette localisation",
+    "no-index-ascertained": "Aucun indice BelAQI n'a pu être déterminé. Cela peut être le cas si votre localisation n'est pas en Belgique."
   },
   "belaqi": {
     "level-split": {
@@ -101,7 +101,7 @@
     "alert-period": "Intervalle de vérification de dépassement",
     "alert-sensitive-active": "Conseils de santé pour les personnes sensibles à la pollution de l'air",
     "header": "Notifications personnalisées",
-    "hint": "Pour utiliser cette fonctionnalité, l'application doit continuer à fonctionner en arrière-plan. Les dépassements des seuils définis seront vérifiés pour les positions configurées à la fin de chaque intervalle de vérification défini."
+    "hint": "Pour utiliser cette fonctionnalité, l'application doit continuer à fonctionner en arrière-plan. Les dépassements des seuils définis seront vérifiés pour les localisations configurées à la fin de chaque intervalle de vérification défini."
   },
   "diagram": {
     "header": "Graphique",
@@ -114,59 +114,59 @@
     "accuracy": {
       "link": "http://www.irceline.be/fr/documentation/modeles/rio-ifdm",
       "moreInfo": "Plus d'infos sur RIO-IFDM",
-      "p1": "Le calcul du modèle dont l'application vous montre le résultat est une combinaison de deux modèles de qualité de l'air: RIO et IFDM. Les deux modèles ont été minutieusement testés sur la base de mesures supplémentaires et sont alimentés en permanence avec des données actualisées sur la qualité de l'air.",
-      "p2": "Avec chaque calcul de modèle, il existe un risque de surestimation ou de sous-estimation de la situation réelle. Ces 2 modèles, par exemple, ne prennent pas encore en compte les obstacles le long des routes (murs antibruit, maisons en rangées fermées, etc.). Par exemple, une sous-estimation peut être montrée pour les canyons de rue.",
-      "p3": "Pendant ce temps, un troisième modèle (OSPM) a déjà été intégré à la chaîne de modèles afin de mieux évaluer la qualité de l'air dans les rues étroites. Ceci est déjà appliqué aux cartes de qualité de l'air qui montrent l'impact à long terme. Mais le modèle OSPM nécessite beaucoup de calculs et nous ne pouvons pas appliquer les résultats actuels de la qualité de l'air. Pour ajouter le résultat OSPM à l'application, un certain nombre de seuils techniques doivent d'abord être dépassés.",
-      "p4": "Nous travaillons constamment à l'amélioration de la qualité des modèles de qualité de l'air et des résultats que vous voyez dans l'application.",
-      "summary": "Les comparaisons avec les résultats de mesure montrent que le modèle peut estimer la qualité de l'air avec une fiabilité suffisamment élevée par rapport aux exigences de qualité scientifiques actuelles. Cependant, un modèle ne peut jamais calculer complètement correctement la qualité de l'air. Dans un certain nombre d'endroits, une surestimation ou une sous-estimation de la qualité réelle de l'air peut encore être démontrée.",
-      "title": "Quelle est la fiabilité du calcul du modèle derrière l'application?"
+      "p1": "Le modèle de calcul sous-jacent est une combinaison de deux modèles de qualité de l'air: RIO et IFDM. Les deux modèles ont été testés sur base de campagnes de mesures indépendantes. Ils utilisent en continu les données de qualité de l'air collectées en quasi temps réel.",
+      "p2": "Il existe toutefois un risque de surestimation ou de sous-estimation de la situation réelle. Ces 2 modèles, par exemple, ne prennent pas encore en compte les obstacles le long des routes (murs antibruit, rues de type "canyon", etc.). Une légère sous-estimation des concentrations est ainsi souvent observée dans les rues de type "canyon".",
+      "p3": "Un troisième modèle (OSPM) peut être intégré à la chaîne de modélisation afin de mieux évaluer la qualité de l'air dans les rues encaissées. Cette chaîne de modélisation n'est actuellement disponible que pour les cartes annuelles de qualité de l'air, nous travaillons à rendre prochainement ces cartes accessibles en temps réel.",
+      "p4": "Afin de fournir au public les cartes les plus précises, les modèles et les résultats de qualité de l'air sont en continuelle amélioration.",
+      "summary": "La validation de la chaîne de modélisation montre que les concentrations sont calculées avec une fiabilité suffisamment élevée par rapport aux normes. Toutefois, il existe, fort heureusement, une part d'imprévu dans ce bas-monde et un modèle ne pourra jamais l'appréhender complètement. Dans un certain nombre d'endroits, il y aura donc forcément une sur- ou sous-estimation de la pollution.",
+      "title": "Quelle est la fiabilité du modèle sous-jacent de l'application?"
     },
     "calculatedHow": {
       "24hmean": "24-heures",
       "classification": "Classification",
       "hmean": "1-heure",
       "index": "Index",
-      "index1": "excellent",
-      "index10": "exécrable",
-      "index2": "très bon",
-      "index3": "bon",
-      "index4": "assez bon",
-      "index5": "moyen",
-      "index6": "médiocre",
-      "index7": "très médiocre",
-      "index8": "mauvais",
-      "index9": "très mauvais",
+      "index1": "Excellent",
+      "index10": "Exécrable",
+      "index2": "Très bon",
+      "index3": "Bon",
+      "index4": "Assez bon",
+      "index5": "Moyen",
+      "index6": "Médiocre",
+      "index7": "Très médiocre",
+      "index8": "Mauvais",
+      "index9": "Très mauvais",
       "link": "http://www.irceline.be/fr/belaqi",
-      "moreInfo": "Lisez ici comment l’indice prend en compte les effets sur la santé à court terme.",
-      "p1": "L'indice fourni par l'application n'est pas uniquement basé sur les résultats de toutes les stations de surveillance de nos réseaux de surveillance, la station la plus proche pouvant se trouver à plusieurs kilomètres. Les concentrations mesurées à toutes les stations de surveillance gouvernementales sont ajoutées à un modèle informatique, qui prend également en compte les données d'émission (trafic, industrie et navigation) et les conditions météorologiques (direction et vitesse du vent). Ce modèle informatique calcule ensuite des cartes détaillées de la qualité de l'air pour le pays des oies. La combinaison du résultat pour le dioxyde d'azote, les particules et l'ozone apparaît sous la forme d'un indice dans l'application.",
-      "p2": "L'indice affiché par l'application vous donne également une estimation de l'impact sur la santé à court terme.",
-      "p3": "Pour le calcul de l'indice de qualité de l'air, les indices pour chaque polluant sont calculés séparément sur la base de la classification de l'échelle dans le tableau ci-dessous. Le sous-index le plus élevé (le plus «mauvais») détermine ensuite le numéro d'index que l'application affiche pour votre position.",
-      "p4": "L'application ne montre pas l'impact d'émissions très locales (par exemple, poêles à bois, cheminées, embouteillages non structurels, etc.) ou accidentelles (incendies résidentiels, etc.).",
-      "summary": "L'application affiche le résultat d'un calcul de modèle pour votre position qui est actualisé toutes les heures. Pour évaluer la qualité de l'air, nous utilisons un indice de qualité de l'air. Ceci montre un chiffre représentatif des différents polluants pertinents.",
-      "title": "Comment la qualité de l'air est-elle calculée pour ma position?"
+      "moreInfo": "Lisez ici comment l’indice est calculé en prenant en compte les effets à court terme sur la santé.",
+      "p1": "L'indice fourni par l'application n'est pas uniquement basé sur les résultats des stations des réseaux de surveillance, car la station la plus proche peut se trouver à plusieurs kilomètres. Ces mesures aux stations sont intégrées dans le modèle, qui prend également en compte les données d'émission (trafic, industrie et navigation) et les conditions météorologiques (direction et vitesse du vent) pour calculer les concentrations en tout endroit du territoire. Les concentrations calculées en dioxyde d'azote, particules et ozone sont alors intégrés dans l'indice BelAQI de la localisation choisie.",
+      "p2": "Cet indice vous donne également une estimation de l'impact sur la santé à court terme.",
+      "p3": "Pour le calcul de l'indice de qualité de l'air, les sous-indices de chaque polluant sont calculés séparément sur base de la classification ci-dessous. Le sous-indice le plus élevé (le plus «mauvais») détermine ensuite l'indice qui vous est présenté dans l'application.",
+      "p4": "L'application ne montre pas l'impact d'émissions très locales (par exemple, poêles à bois, cheminées, embouteillages, etc.) ou accidentelles (incendies résidentiels, etc.).",
+      "summary": "L'application affiche toutes les heures le résultat d'un calcul pour votre localisation. Pour donner une estimation représentative de la pollution, nous utilisons un indice de qualité de l'air. Celui-ci intègre les concentrations de différents polluants pertinents.",
+      "title": "Comment la qualité de l'air est-elle calculée pour ma localisation?"
     },
     "compareCurieuzeneuzen": {
       "link": "https://curieuzeneuzen.be/in-english/",
       "moreInfo": "Plus d'info sur CurieuzeNeuzen",
-      "p1": "Votre résultat CurieuzeNeuzen vous donne une idée de la qualité de l’air à long terme et de ses effets chroniques sur la santé.",
-      "p2": "Dans l'application, en revanche, nous présentons le calcul du modèle basé sur les résultats actuels de la qualité de l'air pour divers paramètres (particules, ozone, dioxyde d'azote, etc.). Les résultats peuvent varier d'un jour à l'autre et même d'une heure à l'autre. Les résultats sont comparés aux objectifs à court terme en matière de qualité de l'air. Par exemple, l'application estime l'impact de la pollution atmosphérique sur la santé à court terme (= effets aigus sur la santé).",
-      "p3": "Votre résultat de CurieuzeNeuzen et le calcul réel dans l'application peuvent donc varier considérablement.",
-      "summary": "C'est possible. Dans le cas de CurieuzeNeuzen, seul le dioxyde d’azote a été mesuré pendant un mois. Le résultat a été converti en moyenne annuelle et testé par rapport à l'objectif à long terme de dioxyde d'azote.",
-      "title": "CurieuzeNeuzen a donné un résultat différent de celui de l'application?"
+      "p1": "Votre résultat CurieuzeNeuzen vous donne une mesure à long terme du dioxyde d'azote et de ses effets chroniques sur la santé.",
+      "p2": "Dans l'application, en revanche, nous présentons le calcul du modèle basé sur les concentrations horaires de divers polluants (particules, ozone, dioxyde d'azote, etc.). Les résultats peuvent donc varier d'une heure à l'autre. Ils sont comparés aux normes à court terme en matière de pollution, et donnent ainsi une estimation des effets à court terme sur la santé (= effets aigus).",
+      "p3": "Les résultats de CurieuzeNeuzen et ceux présentés dans l'application peuvent donc varier considérablement.",
+      "summary": "C'est possible. Dans le cas de CurieuzeNeuzen, seul le dioxyde d’azote a été mesuré pendant un mois. Le résultat a été converti en moyenne annuelle et comparé aux normes à long terme du dioxyde d'azote.",
+      "title": "CurieuzeNeuzen a donné un résultat différent de celui présenté dans l'application."
     },
     "header": "Foire Aux Questions (FAQ)",
     "hide": "cacher",
     "longtermShortterm": {
-      "item1": "limite horaire (court terme): 200 µg/m³",
-      "item2": "limite annuelle (long terme): 40 µg/m³",
+      "item1": "Limite horaire (court terme): 200 µg/m³",
+      "item2": "Limite annuelle (long terme): 40 µg/m³",
       "list": "Les valeurs recommandées par l'OMS sont:",
-      "p1": "Les effets aigus sont par exemple un asthme ou une crise cardiaque. Les effets chroniques sont, par exemple, un risque accru de maladies cardiaques et pulmonaires ou de cancer du poumon.",
-      "p2": "Pour le dioxyde d'azote (NO2), l'Organisation mondiale de la santé a recommandé des limites d'exposition afin de nous protéger des effets à court et à long terme. Le NO2 est un bon indicateur lié au trafic (meilleur que les particules) et est l'un des polluants atmosphériques inclus dans l'indice de qualité de l'air présenté par l'application BelAir.",
-      "p3": "L'application donne une idée des effets à court terme. Si une concentration de 100 µg/m³ NO2 (la moitié de la limite horaire de l'OMS) est calculée à un certain endroit, l'application donne l'indice 4 (bon).",
-      "p4": "Mais si la moyenne annuelle au même endroit est de 50 µg/m³ (supérieure à la limite annuelle de l’OMS), cela est considéré comme médiocre.",
-      "p5": "Les effets aigus (à court terme) se produisent donc à des concentrations nettement plus élevées. Les effets chroniques sont le résultat d’une exposition prolongée. Comparez le tabagisme: un fumeur aura peu d’effets aigus sur sa santé en fumant plusieurs cigarettes par jour. Les effets aigus ne se produiront qu'en fumant beaucoup de cigarettes en peu de temps. Mais en fumant quelques cigarettes chaque jour, le risque de cancer du poumon augmente.",
+      "p1": "Les effets aigus sont par exemple l'asthme ou la crise cardiaque. Les effets chroniques sont par exemple un risque accru de maladies cardiaques et pulmonaires ou de cancer du poumon.",
+      "p2": "Pour le dioxyde d'azote (NO2), l'Organisation Mondiale de la Santé a recommandé des limites d'exposition afin de nous protéger des effets à court et à long terme. Le NO2 est un bon indicateur de la pollution liée au trafic (meilleur que les particules) et est l'un des polluants atmosphériques inclus dans l'indice de qualité de l'air présenté dans l'application BelAir.",
+      "p3": "L'application donne une idée des effets à court terme. Si une concentration de 100 µg/m³ NO2 (la moitié de la limite horaire de l'OMS) est calculée à un certain endroit, l'application donnera un sous-indice 4 (bon).",
+      "p4": "Mais si la moyenne annuelle au même endroit est de 50 µg/m³ (supérieure à la limite annuelle de l’OMS), cela est considéré comme très mauvaise.",
+      "p5": "Les effets aigus (à court terme) se produisent donc à des concentrations nettement plus élevées. Alors que les effets chroniques sont le résultat d’une exposition prolongée. Comparez le tabagisme: un fumeur aura peu d’effets aigus sur sa santé en fumant plusieurs cigarettes par jour. Les effets aigus ne se produiront qu'en fumant beaucoup de cigarettes en peu de temps. Mais en fumant quelques cigarettes chaque jour, le risque de cancer du poumon augmente.",
       "p6": "En raison de l’évaluation différente de l’impact à court terme et à long terme, il est possible que l’application BelAir présente une bonne qualité de l’air à une heure et à un lieu donnés, alors que la qualité moyenne annuelle de l’air la est médiocre.",
-      "summary": "L'application BelAIR donne une idée de l'impact à court terme (les effets aigus) de la pollution atmosphérique actuelle. Cela peut changer d'heure en heure. Mais en plus des effets aigus à court terme, la pollution atmosphérique provoque également des effets à long terme ou chroniques.",
+      "summary": "L'application BelAIR donne une idée de l'impact à court terme (les effets aigus) de la pollution atmosphérique. Cela peut changer d'heure en heure. Mais en plus des effets aigus à court terme, la pollution atmosphérique provoque également des effets à long terme ou chroniques.",
       "title": "Quelle est la différence entre les effets à court et à long terme de la pollution atmosphérique?"
     },
     "readMore": "lire plus"
@@ -183,7 +183,7 @@
     "moreInfo": "Plus d'info",
     "wheel": {
       "link": "http://www.irceline.be/fr/belaqi",
-      "message": "Cet indicateur est une estimation modélisée pour le quartier correspondant à votre position. L'indice de qualité de l'air BelAQI est le plus défavorable des 4 sous-indices calculés pour les différents polluants (PM10, PM2.5, O3 et NO2) selon une échelle pondérée par leur impact santé"
+      "message": "Cet indicateur est une estimation modélisée pour le quartier correspondant à votre localisation. L'indice de qualité de l'air BelAQI est le plus défavorable des 4 sous-indices calculés pour les différents polluants (PM10, PM2.5, O3 et NO2) selon une échelle pondérée par leur impact santé"
     }
   },
   "intro": {
@@ -204,12 +204,12 @@
     },
     "prev-step": "Précédent",
     "three": {
-      "addLocationToList": "Ajouter à la liste de positions",
-      "baseOnCurrentLocation": "Utiliser la position actuelle",
-      "header": "Choisissez les positions pour lesquelles vous souhaitez recevoir des notifications personnalisées",
-      "locationLabelHint": "Renommer la position",
+      "addLocationToList": "Ajouter à la liste de localisations",
+      "baseOnCurrentLocation": "Utiliser la localisation actuelle",
+      "header": "Choisissez les localisations pour lesquelles vous souhaitez recevoir des notifications personnalisées",
+      "locationLabelHint": "Renommer la localisation",
       "locationLabelPlaceholder": "p.e. \"À la maison\", \"Travail\", \"École\"",
-      "showLocationList": "Voir les positions actuelles"
+      "showLocationList": "Voir les localisations actuelles"
     },
     "two": {
       "header": "Pour quelle région souhaitez-vous recevoir des notifications officielles?"
@@ -224,26 +224,26 @@
     "title": "Indice BelAQI"
   },
   "map": {
-    "configured-location": "Votre position configurée",
-    "current-location": "Votre position actuelle",
+    "configured-location": "Votre localisation configurée",
+    "current-location": "Votre localisation actuelle",
     "dataset-selection-hint": "Veuillez sélectionner un ou plusieurs polluants à afficher",
     "error": "Une erreur s'est produite. Il n'est pas possible de déterminer les données pour le polluant sélectionné.",
     "geosearch": {
-      "placeholder": "Recherche la position ..."
+      "placeholder": "Recherche la localisation ..."
     },
     "header": "Carte",
     "index": "Indice BelAQI",
     "interpolated-map": "Carte interpolée",
     "mean": {
-      "24hour": "24-heures",
+      "24hour": "24 heures",
       "hourly": "heure",
-      "yearly": "an"
+      "yearly": "année"
     },
     "nearest-station": "Station de mesure la plus proche",
     "no-legend": "Aucune légende disponible",
     "overlay": {
-			"content-p1": "La carte vous donne un aperçu de la qualité de l'air en Belgique. À l'aide d'un code de couleur, vous pouvez comparer la qualité de l'air de votre position avec celle d'autres sites. Le rouge est très mauvais, tandis que le bleu représente une excellente qualité de l'air.",
-			"content-p2": "L'index de l'emplacement choisi est mis à jour toutes les heures. L'application peut également faire des prédictions basées sur les informations disponibles.",
+			"content-p1": "La carte vous donne un aperçu de la qualité de l'air en Belgique. À l'aide d'un code de couleur, vous pouvez comparer la qualité de l'air de votre localisation avec celle d'autres sites. Le rouge indique une très mauvaise qualité de l'air, tandis que le bleu en représente une excellente.",
+			"content-p2": "L'indice de l'emplacement choisi est mis à jour toutes les heures. L'application peut également faire des prédictions basées sur les informations disponibles.",
 			"header": "Que voyez-vous sur cet écran?",
       "url-svg": "../../assets/svg/belaqi_FR.svg"
 		},
@@ -289,7 +289,7 @@
     "online": "Votre appareil est online"
   },
   "no-network-connection": {
-    "body": "Votre appareil n'a pas de connexion réseau. L'application BelAir dépend des nouvelles données extraites de nos serveurs. Veuillez active votre connexion aux données mobiles ou à un réseau wifi et actualiser l'application.",
+    "body": "Votre appareil n'a pas de connexion réseau. L'application BelAir dépend des données extraites de nos serveurs. Veuillez vous connecter aux données mobiles ou à un réseau wifi et actualiser l'application.",
     "close": "Fermer",
     "header": "Pas de connexion de données"
   },
@@ -341,7 +341,7 @@
   },
   "personal-alerts": {
     "background-service": {
-      "hint": "Surveille les localisations configurées",
+      "hint": "Contrôle les localisations configurées",
       "title": "L'application s'exécute en arrière-plan"
     }
   },
@@ -376,8 +376,8 @@
     "select-language": "Sélectionnez une langue",
     "show-introduction": "Voir l'introduction",
     "start-page": {
-      "header": "Paramètres page d'accueile",
-      "show-annual-mean-panel": "Afficher les moyenne annuelle sur la page d'accueile",
+      "header": "Paramètres page d'accueil",
+      "show-annual-mean-panel": "Afficher les moyennes annuelles sur la page d'accueil",
       "show-nearest-stations": "Afficher les stations de mesure les plus proches sur la page d'accueil",
       "show-sub-index-panel": "Afficher les sous-indices BelAQI sur la page d'accueil"
     },
@@ -394,9 +394,9 @@
   },
   "start": {
     "overlay": {
-      "content-p1": "L'impact de la qualité de l'air est calculé sur la base de l'indice de qualité de l'air. Il s’agit d’un chiffre compris entre 1 et 10, où 10 correspond à très médiocre et 1 à une excellente qualité d’air. Pour ce score, l'application est basée sur des données provenant de stations de surveillance réparties dans toute la Belgique, sur la météo, la circulation et les polluants pertinents.",
-      "content-p2": "L'index de l'emplacement choisi est mis à jour toutes les heures. L'application peut également faire des prédictions basées sur les informations disponibles.",
-      "content-p3": "L'indice de la qualité de l'air reflète l'impact sur la santé à court terme. Cet impact peut varier d’une heure à l’autre et entraîner des problèmes de santé temporaires. À des concentrations plus élevées de polluants atmosphériques, des effets aigus peuvent survenir, tels qu'un asthme ou même une crise cardiaque.",
+      "content-p1": "L'impact de la qualité de l'air est résumé sous la forme d'un indice de qualité de l'air. Il s’agit d’un chiffre compris entre 1 et 10, où 10 correspond à très médiocre et 1 à une excellente qualité d’air. Pour le calculer, l'application est basée sur des données provenant des stations de surveillance belges, sur la météo, le trafic et les polluants pertinents.",
+      "content-p2": "L'indice de l'emplacement choisi est mis à jour toutes les heures. L'application peut également faire des prédictions basées sur les informations disponibles.",
+      "content-p3": "L'indice de la qualité de l'air reflète l'impact sur la santé à court terme. Cet impact peut varier d’une heure à l’autre et entraîner des problèmes de santé temporaires. À des concentrations très élevées de polluants atmosphériques, des effets aigus peuvent survenir, tels que l'asthme ou, à l'extrême, une crise cardiaque.",
       "content-p4": "Une exposition prolongée aux polluants atmosphériques peut provoquer des effets chroniques et augmenter le risque de maladies cardiaques et pulmonaires, y compris le cancer du poumon.",
       "header": "Que voyez-vous sur cet écran?"
     }
@@ -418,14 +418,14 @@
       "o3": "O3 ou ozone (moyenne horaire)",
       "pm10": "PM10 ou particules d'un diamètre inférieur à 10 micromètres (moyenne glissant sur 24 heures)",
       "pm25": "PM2.5 ou particules d'un diamètre inférieur à 2.5 micromètres (moyenne glissant sur 24 heures)",
-      "text": "Ce sont les \"sous-indices\" calculés pour votre position. L'indice BelAQI global est la valeur la plus élevée de ces 4 sous-indices. Les échelles de concentration ont été déterminées en fonction de l’impact à court terme sur la santé. Les 4 polluants utilisés pour calculer BelAQI sont:"
+      "text": "Ce sont les \"sous-indices\" calculés pour votre localisation. L'indice BelAQI global est la valeur la plus élevée de ces 4 sous-indices. Les échelles de concentration ont été déterminées en fonction de l’impact à court terme sur la santé. Les 4 polluants utilisés pour calculer BelAQI sont:"
     }
   },
   "update": {
     "hint": {
       "popover": {
         "content-p1": "Quel est l’effet à court terme de la qualité de l’air de votre quartier sur votre santé?",
-        "content-p2": "BelAir calcule l'exposition court terme à la pollution atmosphérique pour votre localisation. Cette information est mise à jour toutes les heures. Souhaitez-vous plus d’explications sur l’information fournie, la méthode de calcul ou les raisons pour lesquelles ce calcul diffère d’autres études (comme par exemple CurieuzeNeuzen)?",
+        "content-p2": "BelAir calcule l'exposition à court terme à la pollution atmosphérique pour votre localisation. Cette information est mise à jour toutes les heures. Souhaitez-vous plus d’explications sur l’information fournie, la méthode de calcul ou les raisons pour lesquelles ce calcul diffère d’autres études (comme par exemple CurieuzeNeuzen)?",
         "dont-show": "Ne plus afficher ce message lorsque vous démarrez l'application",
         "link-faq": "Lire plus",
         "link-faq-url": "http://www.irceline.be/fr/documentation/belair/faq"
@@ -433,20 +433,20 @@
     }
   },
   "user-location-list": {
-    "header": "Liste des positions"
+    "header": "Liste des localisations"
   },
   "user-location": {
     "creation": {
-      "limit-reached": "Vous ne pouvez pas créer plus de 5 positions. Veuillez d'abord supprimer une des positions existantes.",
-      "message-added": "position ajoutée",
-      "message-exists": "La position existe déjà"
+      "limit-reached": "Vous ne pouvez pas créer plus de 5 localisations. Veuillez d'abord supprimer une des localisations existantes.",
+      "message-added": "localisation ajoutée",
+      "message-exists": "La localisation existe déjà"
     }
   },
   "welcome": {
-		"button": "Entrez votre position",
-		"text-p1": "Qu'en est-il de l'impact de la qualité de l'air sur votre site? L'application BelAir le sait tout de suite.",
-		"text-p2": "L'application BelAir est basée sur des données provenant de stations de surveillance dans toute la Belgique. Ces données sont converties en un indice de qualité de l’air BelAQI. Vous obtenez un score entre 1 et 10 qui évalue immédiatement l'impact de la qualité de l'air actuelle sur votre santé.",
-		"text-p3": "Pour calculer ce chiffre, nous examinons également les substances polluantes pertinentes présentes chez vous, telles que le dioxyde d'azote, l'ozone et les particules.",
-		"title": "Bienvenue chez"
+		"button": "Entrez votre localisation",
+		"text-p1": "Quel est l'impact de la qualité de l'air à votre emplacement? L'application BelAir vous l'indique de suite.",
+		"text-p2": "L'application BelAir est basée sur des données provenant des stations de surveillance dans toute la Belgique. Ces données sont converties en un indice de qualité de l’air BelAQI. Vous obtenez un score entre 1 et 10 qui évalue immédiatement l'impact de la qualité de l'air actuelle sur votre santé.",
+		"text-p3": "Pour calculer ce chiffre, nous prenons en compte les polluants majeurs présents chez vous: le dioxyde d'azote, l'ozone et les particules.",
+		"title": "Bienvenue"
 	}
 }

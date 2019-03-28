@@ -32,6 +32,8 @@ interface TrendResult {
   trend: TrendResultEntry;
 }
 
+const NO2_TREND_DAYS_CALCULATION = 3;
+
 @Injectable()
 export class BelaqiIndexService extends ValueProvider {
 
@@ -273,12 +275,14 @@ export class BelaqiIndexService extends ValueProvider {
         const timelineEntries: BelaqiTimelineEntry[] = [];
         const hour = time.getUTCHours();
         const trend = this.no2Trends[hour];
-        trend.forEach((e, i) => {
-          timelineEntries.push({
-            timestamp: moment(time).add(i + 1, 'hours').toDate(),
-            index: this.categorizeValueToIndex.categorize(currentValue * e, phenomenon)
+        for (let day = 0; day < NO2_TREND_DAYS_CALCULATION; day++) {
+          trend.forEach((e, i) => {
+            timelineEntries.push({
+              timestamp: moment(time).add(i + 1, 'hours').toDate(),
+              index: this.categorizeValueToIndex.categorize(currentValue * e, phenomenon)
+            });
           });
-        });
+        }
         return timelineEntries;
       })
     );
