@@ -1,105 +1,63 @@
 :host {
-  @import "../../theme/panels.scss";
 
-  .entry {
-    margin: auto;
-  }
+    @import'../../theme/panels.scss';
 
-  ion-content {
-    --background: linear-gradient(135deg, #91c0d5 50%, #53a38f);
-  }
-
-  .container {
-    height: 100%;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    padding-top: 27px;
-    margin: auto;
-
-    .segment {
-      flex: none;
+    .entry {
+        margin: auto;
     }
 
-    .full-phenomenon-label {
-      position: relative;
-      text-align: center;
-      flex: none;
-      width: 90%;
-      left: 5%;
-      background-color: var(--ion-color-secondary-contrast);
-      border-radius: 0 0 1em 1em;
-    }
+    .container {
+        height: 100%;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        padding-top: 27px;
+        margin: auto;
 
-    .map-wrapper {
-      position: relative;
-      width: 90%;
-      left: 5%;
-      height: 75%;
-      margin-top: 3%;
-      margin-bottom: 3%;
-
-      .map {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-      }
-    }
-
-    .segment {
-      ion-segment {
-        ion-segment-button {
-          min-width: 10px;
-          --padding-start: 0px;
-          --padding-end: 0px;
-          text-transform: capitalize;
-          --background: var(--ion-color-primary-contrast);
+        .segment {
+            flex: none;
         }
-      }
+
+        .full-phenomenon-label {
+            text-align: center;
+            flex: none;
+            background-color: var(--ion-color-secondary-contrast);
+        }
+
+        .map-wrapper {
+            flex: 1;
+            position: relative;
+
+            .map {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+            }
+        }
+
+        .segment {
+            ion-segment {
+                ion-segment-button {
+                    min-width: 10px;
+                    --padding-start: 0px;
+                    --padding-end: 0px;
+                    text-transform: capitalize;
+                    --background: var(--ion-color-primary-contrast);
+                }
+            }
+        }
+
+        .segment {
+            background-color: var(--ion-color-primary-contrast);
+        }
+
+        .segment-button-checked {
+            background-color: var(--ion-color-secondary-contrast);
+        }
     }
-
-    .segment {
-      position: relative;
-      background-color: var(--ion-color-primary-contrast);
-      width: 90%;
-      left: 5%;
+    .drawer-content {
+      padding: 0 2em;
     }
-
-    .segment-button-checked {
-      background-color: var(--ion-color-secondary-contrast);
-    }
-
-    .toolbar-background {
-      border-radius: 1em;
-    }
-
-    .panel {
-      position: relative;
-      background: var(--panel-background);
-      border-radius: 1em;
-      width: 90%;
-      left: 5%;
-      margin-top: 2%;
-    }
-
-    ion-toolbar {
-      --background: none;
-
-      ion-row {
-        font-size: 0.8em;
-      }
-
-      ion-range {
-        --height: 1em;
-        padding-top: 0;
-        padding-bottom: 0;
-      }
-    }
-  }
-
-  .drawer-content {
-    padding: 0 2em;
-  }
 }
