@@ -98,7 +98,6 @@ export class MapPage {
   public geoSearchOptions: GeoSearchOptions;
   public phenomenonLabel: PhenomenonLabel;
   public time: TimeLabel = TimeLabel.current;
-  public timeAsNumber: number;
 
   public providerUrl: string;
   public loading: boolean;
@@ -116,7 +115,6 @@ export class MapPage {
   public markerSelectorGenerator: MarkerSelectorGenerator;
 
   public mean: string;
-  public meanAsNumber: number;
   public show24hourMean = true;
   public showYearlyMean = true;
   public disableMeans: boolean;
@@ -222,13 +220,11 @@ export class MapPage {
   }
 
   public onTimeChange() {
-    this.time = TimeLabel[TimeLabel[this.timeAsNumber]];
     this.adjustMeanUI();
     this.adjustUI();
   }
 
   public onMeanChange() {
-    this.mean = MeanLabel[MeanLabel[this.meanAsNumber]];
     this.adjustUI();
   }
 
