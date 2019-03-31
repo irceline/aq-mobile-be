@@ -444,9 +444,9 @@
   },
   "welcome": {
 		"button": "Enter your location",
-		"text-p1": "What about the impact of air quality at your location? The BelAir app knows that right away.",
-		"text-p2": "The BelAir app is based on data from monitoring stations throughout Belgium. That data is converted into a BelAQI air quality index. You receive a figure between 1 and 10 that immediately assesses the impact of current air quality on your health.",
-		"text-p3": "To calculate that figure, we also look at relevant, polluting substances at your location such as nitrogen dioxide, ozone and particulate matter.",
+		"text-p1": "What is the impact of air quality at your location? The BelAir app informs you right away.",
+		"text-p2": "The BelAir app is based on data from monitoring stations throughout Belgium. This data is converted into a BelAQI air quality index. You receive a figure between 1 and 10 that immediately assesses the impact of current air quality on your health.",
+		"text-p3": "To calculate this figure, we also look at several relevant, polluting substances at your location such as nitrogen dioxide, ozone and particulate matter.",
 		"title": "Welcome to"
 	}
 }
