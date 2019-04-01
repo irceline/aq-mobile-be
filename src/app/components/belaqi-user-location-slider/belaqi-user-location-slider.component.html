@@ -20,7 +20,7 @@
           (ready)="resizeSlide()"></nearest-measuring-station-panel>
       </div>
     </div>
-    <div *ngIf="!currentLocationError && !loc.latitude" style="height: 300px;">
+    <div *ngIf="!currentLocationError && !loc.latitude" style="height: 300px; color: white;">
       <div text-wrap>{{'belaqi-user-location-slider.loading-current-location' | translate}}</div>
       <ion-spinner></ion-spinner>
     </div>

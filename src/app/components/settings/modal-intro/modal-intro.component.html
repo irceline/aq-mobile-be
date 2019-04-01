@@ -13,23 +13,23 @@
   <ion-slides>
     <ion-slide>
       <h2 class="slide-title">{{'intro.one.header' | translate}}</h2>
-      <div style="width: 50%; margin: auto;">
+      <div style="width: 80%; margin: auto;">
         <ion-list lines="none">
           <ion-radio-group [(ngModel)]="selectedLang">
             <ion-item>
-              <ion-label>{{'intro.one.option.dutch' | translate}}</ion-label>
+              <ion-label nowrap>{{'intro.one.option.dutch' | translate}}</ion-label>
               <ion-radio value="nl" (ionSelect)="languageChanged('nl')"></ion-radio>
             </ion-item>
             <ion-item>
-              <ion-label>{{'intro.one.option.french' | translate}}</ion-label>
+              <ion-label nowrap>{{'intro.one.option.french' | translate}}</ion-label>
               <ion-radio value="fr" (ionSelect)="languageChanged('fr')"></ion-radio>
             </ion-item>
             <ion-item>
-              <ion-label>{{'intro.one.option.english' | translate}}</ion-label>
+              <ion-label nowrap>{{'intro.one.option.english' | translate}}</ion-label>
               <ion-radio value="en" (ionSelect)="languageChanged('en')"></ion-radio>
             </ion-item>
             <ion-item>
-              <ion-label>{{'intro.one.option.german' | translate}}</ion-label>
+              <ion-label nowrap>{{'intro.one.option.german' | translate}}</ion-label>
               <ion-radio value="de" (ionSelect)="languageChanged('de')"></ion-radio>
             </ion-item>
           </ion-radio-group>

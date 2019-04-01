@@ -126,7 +126,7 @@ export class MapPage {
 
   //TODO: Actually set those values
   public loading_colors = [false,false,false,false,false,false];
-  public borderColor = ["none","none","none","none","none","none"]
+  public borderColor = ["gray","gray","gray","gray","gray","gray"]
 
   constructor(
     protected settingsSrvc: SettingsService<MobileSettings>,
