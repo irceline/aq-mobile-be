@@ -72,7 +72,7 @@ export class CustomizedStationMapSelectorComponent extends MapSelectorComponent<
     setTimeout(() => {
       this.createMap();
       this.drawGeometries();
-    }, 200);
+    }, 300);
   }
 
   protected drawGeometries() {
