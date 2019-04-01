@@ -77,7 +77,7 @@ export class BelaqiIndexService extends ValueProvider {
   }
 
   private createValueRequest(latitude: number, longitude: number, time: Date) {
-    const url = 'https://geo.irceline.be/rioifdm/belaqi/wms';
+    const url = 'http://geo5.irceline.be/rioifdm/belaqi/wms';
     const params = {
       request: 'GetFeatureInfo',
       bbox: this.calculateRequestBbox(latitude, longitude),

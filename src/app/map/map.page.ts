@@ -383,7 +383,7 @@ export class MapPage {
           this.annualProvider.getYear(),
           this.ircelineSettings.getSettings(false)
         ).subscribe(result => {
-          wmsUrl = 'http://geo.irceline.be/rioifdm/wms';
+          wmsUrl = 'http://geo5.irceline.be/rioifdm/wms';
           const lastUpdate = result[1].lastupdate.toISOString();
           const year = result[0];
           switch (this.phenomenonLabel) {
@@ -416,7 +416,7 @@ export class MapPage {
           }
         });
       } else {
-        wmsUrl = 'http://geo.irceline.be/forecast/wms';
+        wmsUrl = 'http://geo5.irceline.be/forecast/wms';
         switch (this.phenomenonLabel) {
           case PhenomenonLabel.BelAQI:
             layerId = 'belaqi';
