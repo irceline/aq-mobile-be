@@ -1,10 +1,15 @@
 :host {
+
+    color: white;
+    --color: white;
+
     .toolbar-title {
         text-overflow: unset;
         white-space: normal;
     }
 
     .location-list {
+
         .location-item {
             width: 100%;
 
