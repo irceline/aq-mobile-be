@@ -15,7 +15,7 @@
                 <p text-wrap>{{'belaqi-user-location-slider.current-location-description' | translate}}</p>
               </ion-label>
             </ion-col>
-            <ion-toggle color="success" [(ngModel)]="showCurrentLocation" (ngModelChange)="changeCurrentLocation($event)"></ion-toggle>
+            <ion-toggle mode="md" color="success" [(ngModel)]="showCurrentLocation" (ngModelChange)="changeCurrentLocation($event)"></ion-toggle>
           </ion-row>
         </ion-item>
         <ion-item *ngIf="location.type === 'user'">
@@ -44,6 +44,6 @@
   </div>
   <!-- <ion-item text-wrap (click)="toggleNearestSeries()">
     <ion-label>{{'settings.user-locations.show-nearest-series-by-default' | translate}}</ion-label>
-    <ion-toggle color="secondary" [(ngModel)]="nearestSeriesByDefault" (ngModelChange)="toggleNearestSeries()"></ion-toggle>
+    <ion-toggle mode="md" color="secondary" [(ngModel)]="nearestSeriesByDefault" (ngModelChange)="toggleNearestSeries()"></ion-toggle>
   </ion-item> -->
 </ion-list>
