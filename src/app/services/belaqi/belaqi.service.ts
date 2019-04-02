@@ -77,7 +77,7 @@ export class BelaqiIndexService extends ValueProvider {
   }
 
   private createValueRequest(latitude: number, longitude: number, time: Date) {
-    const url = 'https://geo.irceline.be/rioifdm/belaqi/wms';
+    const url = 'http://geo5.irceline.be/rioifdm/belaqi/wms';
     const params = {
       request: 'GetFeatureInfo',
       bbox: this.calculateRequestBbox(latitude, longitude),
@@ -241,13 +241,24 @@ export class BelaqiIndexService extends ValueProvider {
     return new Observable((observer: Observer<BelaqiTimelineEntry[]>) => {
       this.getTrends().subscribe(trend => {
         forkJoin([
-          this.createFuturePhenomenonTimeline(latitude, longitude, time, MainPhenomenon.O3, trend.trend.o3),
-          this.createFuturePhenomenonTimeline(latitude, longitude, time, MainPhenomenon.PM10, trend.trend.pm10),
-          this.createFuturePhenomenonTimeline(latitude, longitude, time, MainPhenomenon.PM25, trend.trend.pm25),
+          this.createFuturePhenomenonTimeline(latitude, longitude, time, MainPhenomenon.O3, trend.trend.o3)
+            .pipe(map(res => res), catchError(() => of([] as BelaqiTimelineEntry[]))),
+          this.createFuturePhenomenonTimeline(latitude, longitude, time, MainPhenomenon.PM10, trend.trend.pm10)
+            .pipe(map(res => res), catchError(() => of([] as BelaqiTimelineEntry[]))),
+          this.createFuturePhenomenonTimeline(latitude, longitude, time, MainPhenomenon.PM25, trend.trend.pm25)
+            .pipe(map(res => res), catchError(() => of([] as BelaqiTimelineEntry[]))),
           this.createFuturePhenomenonTimelineForNO2(latitude, longitude, time)
         ]).pipe(map(forecasts => {
           // find the max of each entry
-          return forecasts[0].map((entry, i) => {
+          let index = 0;
+          let max = 0;
+          for (let i = 0; i < forecasts.length; i++) {
+            if (forecasts[i].length > max) {
+              max = forecasts[i].length;
+              index = i;
+            }
+          }
+          return forecasts[index].map((entry, i) => {
             return {
               timestamp: entry.timestamp,
               index: Math.max(...forecasts.map(e => e[i] ? e[i].index : 0))

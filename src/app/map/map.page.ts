@@ -98,6 +98,7 @@ export class MapPage {
   public geoSearchOptions: GeoSearchOptions;
   public phenomenonLabel: PhenomenonLabel;
   public time: TimeLabel = TimeLabel.current;
+  public timeAsNumber: number;
 
   public providerUrl: string;
   public loading: boolean;
@@ -115,6 +116,7 @@ export class MapPage {
   public markerSelectorGenerator: MarkerSelectorGenerator;
 
   public mean: string;
+  public meanAsNumber: number;
   public show24hourMean = true;
   public showYearlyMean = true;
   public disableMeans: boolean;
@@ -161,16 +163,16 @@ export class MapPage {
         this.mean = MeanLabel.yearly;
       } else {
         this.mean = MeanLabel.hourly;
-/*         switch (this.selectedPhenomenonId) {
-          case getIDForMainPhenomenon(MainPhenomenon.BC):
-          case getIDForMainPhenomenon(MainPhenomenon.NO2):
-          case getIDForMainPhenomenon(MainPhenomenon.O3):
-            break;
-          case getIDForMainPhenomenon(MainPhenomenon.PM10):
-          case getIDForMainPhenomenon(MainPhenomenon.PM25):
-            this.mean = MeanLabel.daily;
-            break;
-        } */
+        /*         switch (this.selectedPhenomenonId) {
+                  case getIDForMainPhenomenon(MainPhenomenon.BC):
+                  case getIDForMainPhenomenon(MainPhenomenon.NO2):
+                  case getIDForMainPhenomenon(MainPhenomenon.O3):
+                    break;
+                  case getIDForMainPhenomenon(MainPhenomenon.PM10):
+                  case getIDForMainPhenomenon(MainPhenomenon.PM25):
+                    this.mean = MeanLabel.daily;
+                    break;
+                } */
       }
     } else {
       this.phenomenonLabel = PhenomenonLabel.BelAQI;
@@ -182,6 +184,7 @@ export class MapPage {
     this.removePopups();
     this.zoomToLocation();
     this.adjustUI();
+    this.adjustLegend();
   }
 
   private removePopups() {
@@ -190,13 +193,12 @@ export class MapPage {
   }
 
   public mapInitialized(mapId: string) {
-    this.updateLegend();
     this.zoomToLocation();
     if (this.mapCache.hasMap(this.mapId)) {
-      const provider = new OpenStreetMapProvider();
+      const provider = new OpenStreetMapProvider({params: {countrycodes: 'be'}});
       const searchControl = new GeoSearchControl({
         provider: provider,
-        autoComplete: false
+        autoComplete: true
       });
       this.mapCache.getMap(this.mapId).addControl(searchControl);
     }
@@ -217,14 +219,36 @@ export class MapPage {
     if (this.legendVisible) { this.legendVisible = false; }
     this.adjustMeanUI();
     this.adjustUI();
+    this.adjustLegend();
   }
 
   public onTimeChange() {
+    this.time = TimeLabel[TimeLabel[this.timeAsNumber]];
+    switch (this.timeAsNumber) {
+      case 0: this.time = TimeLabel.current;
+        break;
+      case 1: this.time = TimeLabel.today;
+        break;
+      case 2: this.time = TimeLabel.tomorrow;
+        break;
+      case 3: this.time = TimeLabel.today2;
+        break;
+      case 4: this.time = TimeLabel.today3;
+        break;
+    }
     this.adjustMeanUI();
     this.adjustUI();
   }
 
   public onMeanChange() {
+    switch(this.meanAsNumber) {
+      case 1: this.mean = MeanLabel.hourly
+      break;
+      case 2: this.mean = MeanLabel.daily
+      break;
+      case 3: this.mean = MeanLabel.yearly
+      break;
+    }
     this.adjustUI();
   }
 
@@ -279,47 +303,10 @@ export class MapPage {
     }
   }
 
-  private updateLegend() {
-    if (this.legend) {
-      this.legend.remove();
-    }
-    if (this.mapCache.hasMap(this.mapId)) {
-
-      this.legend = new Control({ position: 'topright' });
-
-      this.legend.onAdd = () => {
-        const div = DomUtil.create('div', 'leaflet-bar legend');
-        div.innerHTML = this.getLegendContent();
-        div.onclick = () => this.toggleLegend(div);
-        return div;
-      };
-      this.legend.addTo(this.mapCache.getMap(this.mapId));
-    }
-  }
-
-  private toggleLegend(div: HTMLElement) {
-    this.legendVisible = !this.legendVisible;
-    div.innerHTML = this.getLegendContent();
-    const moreLink = DomUtil.get('annual-more-link');
-    if (moreLink) {
-      moreLink.onclick = (event) => {
-        // this.iab.create(this.translate.instant('annual-map.legend.link-more-url'), '_system', 'hidden=yes');
-        event.stopPropagation();
-      };
-    }
-  }
-
-  private getLegendContent(): string {
-    if (this.legendVisible) {
-      const langCode = this.translateSrvc.currentLang.toLocaleUpperCase();
-      const legendId = this.getPhenomenonLegendId(this.phenomenonLabel);
-      if (legendId) {
-        return `<img src="http://www.irceline.be/air/legend/${legendId}_${langCode}.svg">`;
-      } else {
-        return `<div>${this.translateSrvc.instant('map.no-legend')}</div>`;
-      }
-    }
-    return '<a class="info" role="button"><ion-icon name="information-circle"></ion-icon></a>';
+  private adjustLegend(): void {
+    const langCode = this.translateSrvc.currentLang.toLocaleUpperCase();
+    const legendId = this.getPhenomenonLegendId(this.phenomenonLabel);
+    document.getElementById('legend').innerHTML = ` <object style='width:100%' data='../../assets/svg/${legendId}_${langCode}_wide.svg'></object>`
   }
 
   private clearSelectedPhenomenon() {
@@ -383,7 +370,7 @@ export class MapPage {
           this.annualProvider.getYear(),
           this.ircelineSettings.getSettings(false)
         ).subscribe(result => {
-          wmsUrl = 'http://geo.irceline.be/rioifdm/wms';
+          wmsUrl = 'http://geo5.irceline.be/rioifdm/wms';
           const lastUpdate = result[1].lastupdate.toISOString();
           const year = result[0];
           switch (this.phenomenonLabel) {
@@ -416,7 +403,7 @@ export class MapPage {
           }
         });
       } else {
-        wmsUrl = 'http://geo.irceline.be/forecast/wms';
+        wmsUrl = 'http://geo5.irceline.be/forecast/wms';
         switch (this.phenomenonLabel) {
           case PhenomenonLabel.BelAQI:
             layerId = 'belaqi';

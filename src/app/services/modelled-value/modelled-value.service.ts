@@ -28,7 +28,7 @@ export class ModelledValueService extends ValueProvider {
   // TODO add layerType (NO2, ...)
   public getValue(latitude: number, longitude: number, time: Date, phenomenon?: MainPhenomenon): Observable<number> {
     const layerId = this.createLayerId(phenomenon);
-    const url = 'http://geo.irceline.be/rioifdm/wms';
+    const url = 'http://geo5.irceline.be/rioifdm/wms';
     const params = {
       service: 'WMS',
       request: 'GetFeatureInfo',
