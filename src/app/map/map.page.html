@@ -17,6 +17,12 @@
 
 <ion-content>
   <div class="container">
+
+    <div class="full-phenomenon-label">
+      <div *ngIf="selectedPhenomenonLabel">{{selectedPhenomenonLabel}}</div>
+      <div *ngIf="!selectedPhenomenonLabel">{{'map.index' | translate}}</div>
+    </div>
+
     <div class="segment">
       <ion-segment class="phenomenon" [(ngModel)]="phenomenonLabel" (ngModelChange)="onPhenomenonChange()" mode="md">
         <ion-segment-button value="BelAQI" mode="md">
@@ -58,11 +64,6 @@
       </ion-segment>
     </div>
 
-    <div class="full-phenomenon-label">
-      <div *ngIf="selectedPhenomenonLabel">{{selectedPhenomenonLabel}}</div>
-      <div *ngIf="!selectedPhenomenonLabel">{{'map.index' | translate}}</div>
-    </div>
-
     <div class="map-wrapper">
       <div class="map" *ngIf="phenomenonLabel">
         <customized-station-map-selector [mapId]="mapId" [serviceUrl]="providerUrl" [filter]="phenomenonFilter"
@@ -96,7 +97,9 @@
           </ion-segment-button>
         </ion-segment>
       </div> -->
-
+    <div class="panel legend-panel">
+      <div id='legend' class='legend'></div>
+    </div>
     <div class="panel">
       <ion-toolbar>
         <ion-row>

@@ -184,6 +184,7 @@ export class MapPage {
     this.removePopups();
     this.zoomToLocation();
     this.adjustUI();
+    this.adjustLegend();
   }
 
   private removePopups() {
@@ -192,7 +193,6 @@ export class MapPage {
   }
 
   public mapInitialized(mapId: string) {
-    this.updateLegend();
     this.zoomToLocation();
     if (this.mapCache.hasMap(this.mapId)) {
       const provider = new OpenStreetMapProvider({params: {countrycodes: 'be'}});
@@ -219,6 +219,7 @@ export class MapPage {
     if (this.legendVisible) { this.legendVisible = false; }
     this.adjustMeanUI();
     this.adjustUI();
+    this.adjustLegend();
   }
 
   public onTimeChange() {
@@ -302,47 +303,10 @@ export class MapPage {
     }
   }
 
-  private updateLegend() {
-    if (this.legend) {
-      this.legend.remove();
-    }
-    if (this.mapCache.hasMap(this.mapId)) {
-
-      this.legend = new Control({ position: 'topright' });
-
-      this.legend.onAdd = () => {
-        const div = DomUtil.create('div', 'leaflet-bar legend');
-        div.innerHTML = this.getLegendContent();
-        div.onclick = () => this.toggleLegend(div);
-        return div;
-      };
-      this.legend.addTo(this.mapCache.getMap(this.mapId));
-    }
-  }
-
-  private toggleLegend(div: HTMLElement) {
-    this.legendVisible = !this.legendVisible;
-    div.innerHTML = this.getLegendContent();
-    const moreLink = DomUtil.get('annual-more-link');
-    if (moreLink) {
-      moreLink.onclick = (event) => {
-        // this.iab.create(this.translate.instant('annual-map.legend.link-more-url'), '_system', 'hidden=yes');
-        event.stopPropagation();
-      };
-    }
-  }
-
-  private getLegendContent(): string {
-    if (this.legendVisible) {
-      const langCode = this.translateSrvc.currentLang.toLocaleUpperCase();
-      const legendId = this.getPhenomenonLegendId(this.phenomenonLabel);
-      if (legendId) {
-        return `<img src="http://www.irceline.be/air/legend/${legendId}_${langCode}.svg">`;
-      } else {
-        return `<div>${this.translateSrvc.instant('map.no-legend')}</div>`;
-      }
-    }
-    return '<a class="info" role="button"><ion-icon name="information-circle"></ion-icon></a>';
+  private adjustLegend(): void {
+    const langCode = this.translateSrvc.currentLang.toLocaleUpperCase();
+    const legendId = this.getPhenomenonLegendId(this.phenomenonLabel);
+    document.getElementById('legend').innerHTML = ` <object style='width:100%' data='../../assets/svg/${legendId}_${langCode}_wide.svg'></object>`
   }
 
   private clearSelectedPhenomenon() {
