@@ -68,7 +68,7 @@ export class OverlayInfoDrawerComponent implements AfterViewInit, OnChanges {
         this.setTranslateY(this.distanceBottom + 'px');
         break;
       case DrawerState.Docked:
-        this.setTranslateY(-(this.platform.height() - this.dockedHeight + 5) + 'px');
+        this.setTranslateY('calc(40px - 100%)');
         break;
     }
     this.state = state;
