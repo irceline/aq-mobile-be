@@ -166,6 +166,7 @@ export class LocateService {
                               this.diagnostic.requestLocationAuthorization().then(permissionStatus => {
                                 switch (permissionStatus) {
                                   case this.diagnostic.permissionStatus.NOT_REQUESTED:
+                                    // This should never happen as we just requested Authorization.
                                     console.log("Permission not requested");
                                     break;
                                   case this.diagnostic.permissionStatus.DENIED:
@@ -174,7 +175,7 @@ export class LocateService {
                                     break;
                                   case this.diagnostic.permissionStatus.GRANTED:
                                   case this.diagnostic.permissionStatus.GRANTED_WHEN_IN_USE:
-                                    console.log("Permission granted always");
+                                    console.log("Permission granted");
                                     this.getCurrentLocation(observer);
                                     break;
                                 }
@@ -182,7 +183,7 @@ export class LocateService {
                               break;
                             case this.diagnostic.permissionStatus.DENIED:
                               console.log("Permission denied");
-                              this.toast.create({ message: `Get Permission outside of the app in the settings`, duration: 3000 }).then(toast => toast.present());
+                              this.toast.create({ message: this.translate.instant('network.geolocationDenied'), duration: 5000 }).then(toast => toast.present());
                               break;
                             case this.diagnostic.permissionStatus.GRANTED:
                             case this.diagnostic.permissionStatus.GRANTED_WHEN_IN_USE:
@@ -190,7 +191,6 @@ export class LocateService {
                               break;
                           }
                         }).catch(error => console.log(`Error occured ${JSON.stringify(error)}`));
-                        console.log(`After Diagnostic`);
                       } catch (e) {
                         console.log(`Error occured ${JSON.stringify(e)}`)
                       }
@@ -289,6 +289,7 @@ export class LocateService {
   private processErrorString(observer: Observer<Geoposition>, error: string) {
     console.error(`Error while gathering location: ${error}`);
     observer.error(error);
+    observer.complete();
   }
 
   private subscribeToResume() {
