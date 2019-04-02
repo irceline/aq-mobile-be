@@ -124,8 +124,10 @@ export class LocateService {
       if (this.locationStatus !== LocationStatus.DENIED || askForPermission) {
         if (this.platform.is('cordova')) {
           this.platform.ready().then(() => {
+            console.log(`getUserLocation platform ready`);
             this.diagnostic.isLocationEnabled().then(enabled => {
               if (enabled) {
+                console.log(`Try to get user location`);
                 if (this.platform.is('android')) {
                   this.diagnostic.getLocationMode().then(locationMode => {
                     // high accuracy => do locate
@@ -148,8 +150,52 @@ export class LocateService {
                         });
                     }
                   });
-                } else {
-                  this.getCurrentLocation(observer);
+                } else if (this.platform.is('ios')) {
+                  console.log(`getUserLocation for ios ready`);
+                  this.diagnostic.isLocationAuthorized().then(locAuthorized => {
+                    if (locAuthorized) {
+                      console.log(`Location authotized ... so get location`);
+                      this.getCurrentLocation(observer);
+                    } else {
+                      console.log(`Location not authorized ... so request user to get location`);
+                      try {
+                        this.diagnostic.getLocationAuthorizationStatus().then(status => {
+                          switch (status) {
+                            case this.diagnostic.permissionStatus.NOT_REQUESTED:
+                              console.log("Permission not requested");
+                              this.diagnostic.requestLocationAuthorization().then(permissionStatus => {
+                                switch (permissionStatus) {
+                                  case this.diagnostic.permissionStatus.NOT_REQUESTED:
+                                    console.log("Permission not requested");
+                                    break;
+                                  case this.diagnostic.permissionStatus.DENIED:
+                                    console.log("Permission denied");
+                                    this.processErrorString(observer, "Permission denied");
+                                    break;
+                                  case this.diagnostic.permissionStatus.GRANTED:
+                                  case this.diagnostic.permissionStatus.GRANTED_WHEN_IN_USE:
+                                    console.log("Permission granted always");
+                                    this.getCurrentLocation(observer);
+                                    break;
+                                }
+                              })
+                              break;
+                            case this.diagnostic.permissionStatus.DENIED:
+                              console.log("Permission denied");
+                              this.toast.create({ message: `Get Permission outside of the app in the settings`, duration: 3000 }).then(toast => toast.present());
+                              break;
+                            case this.diagnostic.permissionStatus.GRANTED:
+                            case this.diagnostic.permissionStatus.GRANTED_WHEN_IN_USE:
+                              this.getCurrentLocation(observer);
+                              break;
+                          }
+                        }).catch(error => console.log(`Error occured ${JSON.stringify(error)}`));
+                        console.log(`After Diagnostic`);
+                      } catch (e) {
+                        console.log(`Error occured ${JSON.stringify(e)}`)
+                      }
+                    }
+                  })
                 }
               } else {
                 this.askForHighAccuracy().then(() => this.getCurrentLocation(observer), error => this.processError(observer, error));
@@ -193,7 +239,8 @@ export class LocateService {
               this.setLocationMode(LocationStatus.DENIED);
             }
           });
-        } else if (this.platform.is('ios') && res) {
+        } else if (this.platform.is('ios')) {
+          console.log(`ios try to get geolocation`);
           this.setLocationMode(LocationStatus.HIGH_ACCURACY);
         } else {
           this.setLocationMode(LocationStatus.OFF);
@@ -222,16 +269,26 @@ export class LocateService {
   }
 
   private processError(observer: Observer<Geoposition>, error: PositionError) {
-    // permission denied
-    if (error.code === 1) { this.setLocationMode(LocationStatus.DENIED); }
-    // position unavailable
-    if (error.code === 2) { }
-    // timeout
-    if (error.code === 3) { }
-    console.error(`Code: ${error.code}, Message ${error.message}`);
-    // this.toast.create({ message: `Code: ${error.code}, Message ${error.message || error}`, duration: 3000 }).present();
-    observer.error(error.message);
+    if (error && error.code && error.message) {
+      // permission denied
+      if (error.code === 1) { this.setLocationMode(LocationStatus.DENIED); }
+      // position unavailable
+      if (error.code === 2) { }
+      // timeout
+      if (error.code === 3) { }
+      console.error(`Error while gathering location. Error-Code: ${error.code}, Error-Message ${error.message}`);
+      // this.toast.create({ message: `Code: ${error.code}, Message ${error.message || error}`, duration: 3000 }).present();
+      observer.error(error.message);
+    } else {
+      console.error(`Error while gathering location: ${error}`);
+      observer.error(error);
+    }
     observer.complete();
+  }
+
+  private processErrorString(observer: Observer<Geoposition>, error: string) {
+    console.error(`Error while gathering location: ${error}`);
+    observer.error(error);
   }
 
   private subscribeToResume() {
