@@ -102,9 +102,9 @@ export class LocateService {
       this.diagnostic.registerLocationStateChangeHandler(() => {
         this.isGeolocationEnabled();
         this.diagnostic.isLocationEnabled().then((res) => {
-          const message = res ? this.translate.instant('network.geolocationEnabled')
-            : this.translate.instant('network.geolocationDisabled');
-          this.toast.create({ message, duration: 5000 }).then(toast => toast.present());
+          if (!res) {
+            this.toast.create({ message: this.translate.instant('network.geolocationDisabled'), duration: 5000 }).then(toast => toast.present());
+          }
         });
       });
     }
