@@ -184,6 +184,7 @@ export class LocateService {
                             case this.diagnostic.permissionStatus.DENIED:
                               console.log("Permission denied");
                               this.toast.create({ message: this.translate.instant('network.geolocationDenied'), duration: 5000 }).then(toast => toast.present());
+                              observer.error("Permission denied");
                               observer.complete();
                               break;
                             case this.diagnostic.permissionStatus.GRANTED:
