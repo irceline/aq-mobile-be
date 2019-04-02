@@ -193,10 +193,10 @@ export class MapPage {
     this.updateLegend();
     this.zoomToLocation();
     if (this.mapCache.hasMap(this.mapId)) {
-      const provider = new OpenStreetMapProvider();
+      const provider = new OpenStreetMapProvider({params: {countrycodes: 'be'}});
       const searchControl = new GeoSearchControl({
         provider: provider,
-        autoComplete: false
+        autoComplete: true
       });
       this.mapCache.getMap(this.mapId).addControl(searchControl);
     }
