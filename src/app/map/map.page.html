@@ -16,91 +16,34 @@
 </overlay-info-drawer>
 
 <ion-content>
-  <div class="container">
+  <div style="margin-top: 45px; height: calc(100% - 45px)">
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="{{'refresh.pull-message' | translate}}"
+        refreshingSpinner="circles" refreshingText="">
+      </ion-refresher-content>
+    </ion-refresher>
 
-    <div class="full-phenomenon-label">
-      <div *ngIf="selectedPhenomenonLabel">{{selectedPhenomenonLabel}}</div>
-      <div *ngIf="!selectedPhenomenonLabel">{{'map.index' | translate}}</div>
-    </div>
-
-    <div class="segment">
-      <ion-segment class="phenomenon" [(ngModel)]="phenomenonLabel" (ngModelChange)="onPhenomenonChange()" mode="md">
-        <ion-segment-button value="BelAQI" mode="md">
-          <div text-center class="entry" [ngStyle]="{'border-color': borderColor[0]}">
-            <div *ngIf="loading_colors[0]" class="spinningborder"></div>
-            <div class="phenomenon-label">AQI</div>
-          </div>
-        </ion-segment-button>
-        <ion-segment-button value="NO2" mode="md">
-          <div text-center class="entry" [ngStyle]="{'border-color': borderColor[1]}">
-            <div *ngIf="loading_colors[1]" class="spinningborder"></div>
-            <div class="phenomenon-label">NO<sub>2</sub></div>
-          </div>
-        </ion-segment-button>
-        <ion-segment-button value="O3" mode="md">
-          <div text-center class="entry" [ngStyle]="{'border-color': borderColor[2]}">
-            <div *ngIf="loading_colors[2]" class="spinningborder"></div>
-            <div class="phenomenon-label">O<sub>3</sub></div>
-          </div>
-        </ion-segment-button>
-        <ion-segment-button value="PM10" mode="md">
-          <div text-center class="entry" [ngStyle]="{'border-color': borderColor[3]}">
-            <div *ngIf="loading_colors[3]" class="spinningborder"></div>
-            <div class="phenomenon-label">PM<sub>10</sub></div>
-          </div>
-        </ion-segment-button>
-        <ion-segment-button value="PM25" mode="md">
-          <div text-center class="entry" [ngStyle]="{'border-color': borderColor[4]}">
-            <div *ngIf="loading_colors[4]" class="spinningborder"></div>
-            <div class="phenomenon-label">PM<sub>2.5</sub></div>
-          </div>
-        </ion-segment-button>
-        <ion-segment-button value="BC" mode="md">
-          <div text-center class="entry" [ngStyle]="{'border-color': borderColor[5]}">
-            <div *ngIf="loading_colors[5]" class="spinningborder"></div>
-            <div class="phenomenon-label">BC</div>
-          </div>
-        </ion-segment-button>
-      </ion-segment>
-    </div>
-
-    <div class="map-wrapper">
-      <div class="map" *ngIf="phenomenonLabel">
-        <customized-station-map-selector [mapId]="mapId" [serviceUrl]="providerUrl" [filter]="phenomenonFilter"
-          [avoidZoomToSelection]="avoidZoomToSelection" [statusIntervals]="true"
-          [ignoreStatusIntervalIfBeforeDuration]="statusIntervalDuration" [zoomControlOptions]="zoomControlOptions"
-          [overlayMaps]="overlayMaps" [fitBounds]="fitBounds" [markerSelectorGenerator]="markerSelectorGenerator"
-          (onSelected)="onStationSelected($event)" [cluster]="clusterStations" (onContentLoading)="onMapLoading($event)"
-          (mapInitialized)="mapInitialized($event)"></customized-station-map-selector>
+    <ion-list mode="md">
+      <ion-row text-center class="location-header">
+        <ion-label text-wrap *ngIf="sliderHeaderContent">
+          <ion-text class="location-label">
+            <h2>{{sliderHeaderContent?.label}}</h2>
+          </ion-text>
+          <p class="date-label">
+            <span>{{'menu.lastUpdate' | translate}}: </span>
+            <span class="date-label">{{sliderHeaderContent?.date | date : 'd MMMM y, HH:mm': null:
+              translateSrvc.currentLang}} </span>
+            <span *ngIf="sliderHeaderContent?.current"> - {{'belaqi-user-location-slider.current-location' |
+              translate}}</span>
+          </p>
+        </ion-label>
+        <div class="settingsButton">
+          <ion-button (click)="navigateSettings()">
+            <ion-icon slot="icon-only" name="settings"></ion-icon>
+          </ion-button>
       </div>
-      <div class="error" *ngIf="!phenomenonLabel">
-        {{'map.error' | translate}}
-      </div>
-    </div>
-    <div class="panel legend-panel">
-      <div id='legend' class='legend'></div>
-    </div>
-    <div class="panel">
-      <ion-toolbar>
-        <ion-row>
-          <ion-col text-center>
-            <span ng-bind="sliderHeader" style="top: -20%;">{{ sliderHeader }}</span>
-          </ion-col>
         </ion-row>
-        <!-- PM10 + PM 2.5-->
-        <ion-range *ngIf="showYearlyMean && show24hourMean && !disabled" mode="md" (ionChange)="onSliderChange()"
-          min="0" max="6" step="1" snaps="true" [(ngModel)]="sliderPosition"></ion-range>
-        <!-- NO2 + O3 -->
-        <ion-range *ngIf="showYearlyMean && !show24hourMean && !disabled" mode="md" (ionChange)="onSliderChange()"
-          min="0" max="5" step="1" snaps="true" [(ngModel)]="sliderPosition"></ion-range>
-        <!-- BC -->
-        <ion-range *ngIf="disabled" mode="md" (ionChange)="onSliderChange()" min="0" max="1" step="1" snaps="true"
-          [(ngModel)]="sliderPosition"></ion-range>
-        <!-- BelAQI-->
-        <ion-range *ngIf="!showYearlyMean && !show24hourMean && !disabled" mode="md" (ionChange)="onSliderChange()"
-          min="1" max="5" step="1" snaps="true" [(ngModel)]="sliderPosition"></ion-range>
-      </ion-toolbar>
-    </div>
+    </ion-list>
+    <belaqi-map-slider #slider (headerContent)="setHeaderContent($event)"></belaqi-map-slider>
   </div>
-
 </ion-content>

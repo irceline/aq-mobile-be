@@ -1,0 +1,111 @@
+<ion-slides pager #slider (ionSlideDidChange)="slideChanged()" [options]="sliderOptions">
+  <ion-slide *ngFor="let view of belaqiMapviews">
+    <div class="container">
+
+      <div class="full-phenomenon-label">
+        <div *ngIf="view.selectedPhenomenonLabel">{{view.selectedPhenomenonLabel}}</div>
+        <div *ngIf="!view.selectedPhenomenonLabel">{{'map.index' | translate}}</div>
+      </div>
+
+      <div class="segment">
+        <ion-segment class="phenomenon" [(ngModel)]="view.phenomenonLabel" (ngModelChange)="view.onPhenomenonChange()"
+          mode="md">
+          <ion-segment-button value="BelAQI" mode="md">
+            <div text-center class="entry" [ngStyle]="{'border-color': view.borderColor[0]}">
+              <div *ngIf="view.loading_colors[0]" class="spinningborder"></div>
+              <div class="phenomenon-label">AQI</div>
+            </div>
+          </ion-segment-button>
+          <ion-segment-button value="NO2" mode="md">
+            <div text-center class="entry" [ngStyle]="{'border-color': view.borderColor[1]}">
+              <div *ngIf="view.loading_colors[1]" class="spinningborder"></div>
+              <div class="phenomenon-label">NO<sub>2</sub></div>
+            </div>
+          </ion-segment-button>
+          <ion-segment-button value="O3" mode="md">
+            <div text-center class="entry" [ngStyle]="{'border-color': view.borderColor[2]}">
+              <div *ngIf="view.loading_colors[2]" class="spinningborder"></div>
+              <div class="phenomenon-label">O<sub>3</sub></div>
+            </div>
+          </ion-segment-button>
+          <ion-segment-button value="PM10" mode="md">
+            <div text-center class="entry" [ngStyle]="{'border-color': view.borderColor[3]}">
+              <div *ngIf="view.loading_colors[3]" class="spinningborder"></div>
+              <div class="phenomenon-label">PM<sub>10</sub></div>
+            </div>
+          </ion-segment-button>
+          <ion-segment-button value="PM25" mode="md">
+            <div text-center class="entry" [ngStyle]="{'border-color': view.borderColor[4]}">
+              <div *ngIf="view.loading_colors[4]" class="spinningborder"></div>
+              <div class="phenomenon-label">PM<sub>2.5</sub></div>
+            </div>
+          </ion-segment-button>
+          <ion-segment-button value="BC" mode="md">
+            <div text-center class="entry" [ngStyle]="{'border-color': view.borderColor[5]}">
+              <div *ngIf="view.loading_colors[5]" class="spinningborder"></div>
+              <div class="phenomenon-label">BC</div>
+            </div>
+          </ion-segment-button>
+        </ion-segment>
+      </div>
+
+      <div class="map-wrapper">
+        <div class="map" *ngIf="view.phenomenonLabel">
+          <customized-station-map-selector [mapId]="view.mapId" [serviceUrl]="view.providerUrl"
+            [filter]="view.phenomenonFilter" [avoidZoomToSelection]="view.avoidZoomToSelection"
+            [statusIntervals]="view.true" [ignoreStatusIntervalIfBeforeDuration]="view.statusIntervalDuration"
+            [zoomControlOptions]="view.zoomControlOptions" [overlayMaps]="view.overlayMaps" [fitBounds]="view.fitBounds"
+            [markerSelectorGenerator]="view.markerSelectorGenerator" (onSelected)="view.onStationSelected($event)"
+            [cluster]="view.clusterStations" (onContentLoading)="view.onMapLoading($event)"
+            (mapInitialized)="view.mapInitialized($event)">
+          </customized-station-map-selector>
+        </div>
+        <div class="error" *ngIf="!view.phenomenonLabel">
+          {{'view.map.error' | translate}}
+        </div>
+      </div>
+      <div class="panel legend-panel">
+        <div class='legend' ng-bind-html='view.legend'></div>
+      </div>
+      <div class="panel">
+        <ion-toolbar>
+          <ion-row>
+            <ion-col text-center>
+              <span ng-bind="view.sliderHeader" style="top: -20%;">{{ view.sliderHeader }}</span>
+            </ion-col>
+          </ion-row>
+          <!-- PM10 + PM 2.5-->
+          <ion-range *ngIf="view.showYearlyMean && view.show24hourMean && !view.disabled" mode="md"
+            (ionChange)="view.onSliderChange()" min="0" max="6" step="1" snaps="true" [(ngModel)]="view.sliderPosition">
+          </ion-range>
+          <!-- NO2 + O3 -->
+          <ion-range *ngIf="view.showYearlyMean && !view.show24hourMean && !view.disabled" mode="md"
+            (ionChange)="view.onSliderChange()" min="0" max="5" step="1" snaps="true" [(ngModel)]="view.sliderPosition">
+          </ion-range>
+          <!-- BC -->
+          <ion-range *ngIf="view.disabled" mode="md" (ionChange)="view.onSliderChange()" min="0" max="1" step="1"
+            snaps="true" [(ngModel)]="view.sliderPosition"></ion-range>
+          <!-- BelAQI-->
+          <ion-range *ngIf="!view.showYearlyMean && !view.show24hourMean && !view.disabled" mode="md"
+            (ionChange)="view.onSliderChange()" min="1" max="5" step="1" snaps="true"
+            [(ngModel)]="view.sliderPosition"></ion-range>
+        </ion-toolbar>
+      </div>
+    </div>
+  </ion-slide>
+  <ion-slide *ngIf="!belaqiMapviews?.length">
+      <div class="create-new-location-slide">
+        <ion-button (click)="createNewLocation()">
+          {{'belaqi-user-location-slider.create-new-location' | translate}}
+        </ion-button>
+        <hr />
+        <div class="settings">
+          <ion-button (click)="navigateSettings()">
+            <ion-icon slot="start" name="settings"></ion-icon>
+            <span class="nav-butto-label">{{'settings.header' | translate}}</span>
+          </ion-button>
+        </div>
+      </div>
+      <hr />
+    </ion-slide>
+</ion-slides>
