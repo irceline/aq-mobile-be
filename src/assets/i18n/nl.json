@@ -257,6 +257,15 @@
       "today+2": "+2 dagen",
       "today+3": "+3 dagen",
       "tomorrow": "morgen"
+    },
+    "timestepLabels": {
+      "amean": "annual mean (long term exposure)",
+      "hmean": "TODO",
+      "24hmean": "TODO",
+      "dmean_forecast_today": "TODO",
+      "dmean_forecast_tomorrow": "TODO",
+      "dmean_forecast_today+2": "TODO",
+      "dmean_forecast_today+3": "TODO"
     }
   },
   "menu": {

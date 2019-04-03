@@ -98,7 +98,6 @@ export class MapPage {
   public geoSearchOptions: GeoSearchOptions;
   public phenomenonLabel: PhenomenonLabel;
   public time: TimeLabel = TimeLabel.current;
-  public timeAsNumber: number;
 
   public providerUrl: string;
   public loading: boolean;
@@ -112,14 +111,15 @@ export class MapPage {
   public selectedPhenomenonLabel: string;
   public nextStationPopup: L.Popup;
   public userLocationPopup: L.Popup;
-  public disabled: boolean;
   public markerSelectorGenerator: MarkerSelectorGenerator;
 
   public mean: string;
-  public meanAsNumber: number;
   public show24hourMean = true;
   public showYearlyMean = true;
-  public disableMeans: boolean;
+  public disabled = false;
+
+  public sliderHeader: string;
+  public sliderPosition: number;
 
   public legend: L.Control;
   private legendVisible = false;
@@ -127,8 +127,8 @@ export class MapPage {
   public mapId = 'map';
 
   //TODO: Actually set those values
-  public loading_colors = [false,false,false,false,false,false];
-  public borderColor = ["gray","gray","gray","gray","gray","gray"]
+  public loading_colors = [false, false, false, false, false, false];
+  public borderColor = ["gray", "gray", "gray", "gray", "gray", "gray"]
 
   constructor(
     protected settingsSrvc: SettingsService<MobileSettings>,
@@ -151,6 +151,8 @@ export class MapPage {
 
     this.setGeosearchOptions(settings);
     this.translateSrvc.onLangChange.subscribe(() => this.setGeosearchOptions);
+    this.adjustMeanUI();
+    this.onSliderChange();
   }
 
   public ionViewDidEnter() {
@@ -183,6 +185,7 @@ export class MapPage {
     }
     this.removePopups();
     this.zoomToLocation();
+    this.onSliderChange();
     this.adjustUI();
     this.adjustLegend();
   }
@@ -195,7 +198,7 @@ export class MapPage {
   public mapInitialized(mapId: string) {
     this.zoomToLocation();
     if (this.mapCache.hasMap(this.mapId)) {
-      const provider = new OpenStreetMapProvider({params: {countrycodes: 'be'}});
+      const provider = new OpenStreetMapProvider({ params: { countrycodes: 'be' } });
       const searchControl = new GeoSearchControl({
         provider: provider,
         autoComplete: true
@@ -218,38 +221,104 @@ export class MapPage {
     }
     if (this.legendVisible) { this.legendVisible = false; }
     this.adjustMeanUI();
+    this.onSliderChange();
     this.adjustUI();
     this.adjustLegend();
   }
 
-  public onTimeChange() {
-    this.time = TimeLabel[TimeLabel[this.timeAsNumber]];
-    switch (this.timeAsNumber) {
-      case 0: this.time = TimeLabel.current;
-        break;
-      case 1: this.time = TimeLabel.today;
-        break;
-      case 2: this.time = TimeLabel.tomorrow;
-        break;
-      case 3: this.time = TimeLabel.today2;
-        break;
-      case 4: this.time = TimeLabel.today3;
-        break;
+  /**
+   * Translates slider position into time+mean combinations
+   */
+  public onSliderChange() {
+    var correctedSliderPos = this.sliderPosition;
+
+    if (!this.show24hourMean && this.sliderPosition > 1) {
+      correctedSliderPos++;
     }
-    this.adjustMeanUI();
+
+    switch (correctedSliderPos) {
+      case 0:
+        // amean
+        this.time = TimeLabel.current;
+        this.mean = MeanLabel.yearly;
+        this.sliderHeader = this.translateSrvc.instant("map.timestepLabels.amean");
+        break;
+      case 1:
+        // hmean
+        this.time = TimeLabel.current;
+        this.mean = MeanLabel.hourly;
+        this.sliderHeader = this.translateSrvc.instant("map.timestepLabels.hmean");
+        break;
+      case 2:
+        // 24hmean
+        this.time = TimeLabel.current;
+        this.mean = MeanLabel.daily;
+        this.sliderHeader = this.translateSrvc.instant("map.timestepLabels.24hmean");
+        break;
+      case 3:
+        // dmean forecast today
+        this.time = TimeLabel.today;
+        this.sliderHeader = this.translateSrvc.instant("map.timestepLabels.dmean_forecast_today");
+        break;
+      case 4:
+        // dmean forecast tomorrow
+        this.time = TimeLabel.tomorrow;
+        this.sliderHeader = this.translateSrvc.instant("map.timestepLabels.dmean_forecast_tomorrow");
+        break;
+      case 5:
+        // dmean forecast today+2
+        this.time = TimeLabel.today2;
+        this.sliderHeader = this.translateSrvc.instant("map.timestepLabels.dmean_forecast_today+2");
+        break;
+      case 6:
+        // dmean forecast today+3
+        this.time = TimeLabel.today3;
+        this.sliderHeader = this.translateSrvc.instant("map.timestepLabels.dmean_forecast_today+3");
+    }
+
     this.adjustUI();
   }
 
-  public onMeanChange() {
-    switch(this.meanAsNumber) {
-      case 1: this.mean = MeanLabel.hourly
-      break;
-      case 2: this.mean = MeanLabel.daily
-      break;
-      case 3: this.mean = MeanLabel.yearly
-      break;
+  /**
+   * Sets up showYearly + show24Hour upon selecting a Phenomenon in the Top bar.
+   */
+  private adjustMeanUI() {
+    let show24hour = false;
+    let showYearly = false;
+    switch (this.selectedPhenomenonId) {
+      case getIDForMainPhenomenon(MainPhenomenon.BC):
+        showYearly = true;
+        this.disabled = true;
+        break;
+      case getIDForMainPhenomenon(MainPhenomenon.NO2):
+        showYearly = true;
+        show24hour = false;
+        break;
+      case getIDForMainPhenomenon(MainPhenomenon.O3):
+        break;
+      case getIDForMainPhenomenon(MainPhenomenon.PM10):
+        show24hour = true;
+        showYearly = true;
+        break;
+      case getIDForMainPhenomenon(MainPhenomenon.PM25):
+        show24hour = true;
+        showYearly = true;
+        break;
+      default:
+        break;
     }
-    this.adjustUI();
+    this.show24hourMean = show24hour;
+    this.showYearlyMean = showYearly;
+    if (this.time !== TimeLabel.current) {
+      this.mean = null;
+    }
+
+    // Reset slider
+    if (!this.showYearlyMean) {
+      this.sliderPosition = 1;
+    } else {
+      this.sliderPosition = 0;
+    }
   }
 
   public onStationSelected(platform: Platform) {
@@ -314,10 +383,6 @@ export class MapPage {
     this.selectedPhenomenonLabel = null;
   }
 
-  private disabledTimeForBC() {
-    this.disabled = this.phenomenonLabel === PhenomenonLabel.BC;
-  }
-
   private getPhenomenonID(label: PhenomenonLabel): string {
     const phen = phenomenonMapping.find(e => label === e.label);
     if (phen) { return phen.id; }
@@ -354,7 +419,6 @@ export class MapPage {
     } else {
       this.phenomenonFilter = { phenomenon: '' };
     }
-    this.disabledTimeForBC();
     this.adjustLayer();
   }
 
@@ -442,44 +506,6 @@ export class MapPage {
       }
       this.drawLayer(wmsUrl, layerId, geojson, timeParam);
     });
-  }
-
-  private adjustMeanUI() {
-    let show24hour = false;
-    let showYearly = false;
-    switch (this.selectedPhenomenonId) {
-      case getIDForMainPhenomenon(MainPhenomenon.BC):
-        showYearly = true;
-        this.mean = MeanLabel.hourly;
-        break;
-      case getIDForMainPhenomenon(MainPhenomenon.NO2):
-        showYearly = true;
-        this.mean = MeanLabel.hourly;
-        break;
-      case getIDForMainPhenomenon(MainPhenomenon.O3):
-        this.mean = MeanLabel.hourly;
-        break;
-      case getIDForMainPhenomenon(MainPhenomenon.PM10):
-        show24hour = true;
-        showYearly = true;
-        this.mean = MeanLabel.hourly;
-        break;
-      case getIDForMainPhenomenon(MainPhenomenon.PM25):
-        show24hour = true;
-        showYearly = true;
-        this.mean = MeanLabel.hourly;
-        break;
-      default:
-        break;
-    }
-    this.show24hourMean = show24hour;
-    this.showYearlyMean = showYearly;
-    if (this.time !== TimeLabel.current) {
-      this.disableMeans = true;
-      this.mean = null;
-    } else {
-      this.disableMeans = false;
-    }
   }
 
   private drawLayer(wmsUrl: string, layerId: string, geojson: GeoJSON.GeoJsonObject, timeParam?: string) {

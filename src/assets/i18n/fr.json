@@ -115,7 +115,7 @@
       "link": "http://www.irceline.be/fr/documentation/modeles/rio-ifdm",
       "moreInfo": "Plus d'infos sur RIO-IFDM",
       "p1": "Le modèle de calcul sous-jacent est une combinaison de deux modèles de qualité de l'air: RIO et IFDM. Les deux modèles ont été testés sur base de campagnes de mesures indépendantes. Ils utilisent en continu les données de qualité de l'air collectées en quasi temps réel.",
-      "p2": "Il existe toutefois un risque de surestimation ou de sous-estimation de la situation réelle. Ces 2 modèles, par exemple, ne prennent pas encore en compte les obstacles le long des routes (murs antibruit, rues de type "canyon", etc.). Une légère sous-estimation des concentrations est ainsi souvent observée dans les rues de type "canyon".",
+      "p2": "Il existe toutefois un risque de surestimation ou de sous-estimation de la situation réelle. Ces 2 modèles, par exemple, ne prennent pas encore en compte les obstacles le long des routes (murs antibruit, rues de type \"canyon\", etc.). Une légère sous-estimation des concentrations est ainsi souvent observée dans les rues de type \"canyon\".",
       "p3": "Un troisième modèle (OSPM) peut être intégré à la chaîne de modélisation afin de mieux évaluer la qualité de l'air dans les rues encaissées. Cette chaîne de modélisation n'est actuellement disponible que pour les cartes annuelles de qualité de l'air, nous travaillons à rendre prochainement ces cartes accessibles en temps réel.",
       "p4": "Afin de fournir au public les cartes les plus précises, les modèles et les résultats de qualité de l'air sont en continuelle amélioration.",
       "summary": "La validation de la chaîne de modélisation montre que les concentrations sont calculées avec une fiabilité suffisamment élevée par rapport aux normes. Toutefois, il existe, fort heureusement, une part d'imprévu dans ce bas-monde et un modèle ne pourra jamais l'appréhender complètement. Dans un certain nombre d'endroits, il y aura donc forcément une sur- ou sous-estimation de la pollution.",
@@ -257,6 +257,15 @@
       "today+2": "J+2",
       "today+3": "J+3",
       "tomorrow": "J+1"
+    },
+    "timestepLabels": {
+      "amean": "annual mean (long term exposure)",
+      "hmean": "TODO",
+      "24hmean": "TODO",
+      "dmean_forecast_today": "TODO",
+      "dmean_forecast_tomorrow": "TODO",
+      "dmean_forecast_today+2": "TODO",
+      "dmean_forecast_today+3": "TODO"
     }
   },
   "menu": {

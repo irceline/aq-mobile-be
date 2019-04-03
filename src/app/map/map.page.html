@@ -77,102 +77,30 @@
         {{'map.error' | translate}}
       </div>
     </div>
-
-    <!--     <div class="segment">
-        <ion-segment class="time" [(ngModel)]="time" (ngModelChange)="onTimeChange()" mode="md">
-          <ion-segment-button value="current" mode="md">
-            {{'map.time.current' | translate}}
-          </ion-segment-button>
-          <ion-segment-button value="today" [disabled]="disabled" mode="md">
-            {{'map.time.today' | translate}}
-          </ion-segment-button>
-          <ion-segment-button value="tomorrow" [disabled]="disabled" mode="md">
-            {{'map.time.tomorrow' | translate}}
-          </ion-segment-button>
-          <ion-segment-button value="today2" [disabled]="disabled" mode="md">
-            {{'map.time.today+2' | translate}}
-          </ion-segment-button>
-          <ion-segment-button value="today3" [disabled]="disabled" mode="md">
-            {{'map.time.today+3' | translate}}
-          </ion-segment-button>
-        </ion-segment>
-      </div> -->
     <div class="panel legend-panel">
       <div id='legend' class='legend'></div>
     </div>
     <div class="panel">
       <ion-toolbar>
         <ion-row>
-          <ion-col width-20 text-left>
-            {{'map.time.current' | translate}}
-          </ion-col>
-          <ion-col width-20 text-center>
-            {{'map.time.today' | translate}}
-          </ion-col>
-          <ion-col width-20 text-center>
-            {{'map.time.tomorrow' | translate}}
-          </ion-col>
-          <ion-col width-20 text-center>
-            {{'map.time.today+2' | translate}}
-          </ion-col>
-          <ion-col width-20 text-right>
-            {{'map.time.today+3' | translate}}
+          <ion-col text-center>
+            <span ng-bind="sliderHeader" style="top: -20%;">{{ sliderHeader }}</span>
           </ion-col>
         </ion-row>
-        <ion-range (ionChange)="onTimeChange()" min="0" max="4" step="1" snaps="true" [(ngModel)]="timeAsNumber"
-          mode="md">
-        </ion-range>
+        <!-- PM10 + PM 2.5-->
+        <ion-range *ngIf="showYearlyMean && show24hourMean && !disabled" mode="md" (ionChange)="onSliderChange()"
+          min="0" max="6" step="1" snaps="true" [(ngModel)]="sliderPosition"></ion-range>
+        <!-- NO2 + O3 -->
+        <ion-range *ngIf="showYearlyMean && !show24hourMean && !disabled" mode="md" (ionChange)="onSliderChange()"
+          min="0" max="5" step="1" snaps="true" [(ngModel)]="sliderPosition"></ion-range>
+        <!-- BC -->
+        <ion-range *ngIf="disabled" mode="md" (ionChange)="onSliderChange()" min="0" max="1" step="1" snaps="true"
+          [(ngModel)]="sliderPosition"></ion-range>
+        <!-- BelAQI-->
+        <ion-range *ngIf="!showYearlyMean && !show24hourMean && !disabled" mode="md" (ionChange)="onSliderChange()"
+          min="1" max="5" step="1" snaps="true" [(ngModel)]="sliderPosition"></ion-range>
       </ion-toolbar>
     </div>
-    <div class="panel">
-      <ion-toolbar *ngIf="show24hourMean && showYearlyMean && !disableMeans">
-        <ion-row>
-          <ion-col width-33 text-left>
-            {{'map.mean.hourly' | translate}}
-          </ion-col>
-          <ion-col width-33 text-center>
-            {{'map.mean.24hour' | translate}}
-          </ion-col>
-          <ion-col width-33 text-right>
-            {{'map.mean.yearly' | translate}}
-          </ion-col>
-        </ion-row>
-        <ion-range (ionChange)="onMeanChange()" min="0" max="2" step="1" snaps="true" [(ngModel)]="meanAsNumber"
-          mode="md">
-        </ion-range>
-      </ion-toolbar>
-    </div>
-    <div class="panel">
-      <ion-toolbar *ngIf="!show24hourMean && showYearlyMean && !disableMeans">
-        <ion-row>
-          <ion-col width-50 text-left>
-            {{'map.mean.hourly' | translate}}
-          </ion-col>
-          <ion-col width-50 text-right>
-            {{'map.mean.yearly' | translate}}
-          </ion-col>
-        </ion-row>
-        <ion-range (ionChange)="onMeanChange()" min="0" max="2" step="2" snaps="true" [(ngModel)]="meanAsNumber"
-          mode="md">
-        </ion-range>
-      </ion-toolbar>
-    </div>
-
-    <!--     <div class="segment">
-      <ion-segment class="mean" [(ngModel)]="mean" (ngModelChange)="onMeanChange()" mode="md">
-        <ion-segment-button value="hourly"  mode="md">
-          {{'map.mean.hourly' | translate}}
-        </ion-segment-button>
-        <ion-segment-button value="24hour" *ngIf="show24hourMean" [disabled]="disableMeans" mode="md">
-          {{'map.mean.24hour' | translate}}
-        </ion-segment-button>
-        <ion-segment-button value="yearly" *ngIf="showYearlyMean" [disabled]="disableMeans" mode="md">
-          {{'map.mean.yearly' | translate}}
-        </ion-segment-button>
-      </ion-segment>
-    </div> -->
-
-
   </div>
 
 </ion-content>
