@@ -11,7 +11,7 @@
   <rect x="285" y="20" fill="#FF0000" width="40" height="15"/>
   <rect x="325" y="20" fill="#990000" width="40" height="15"/>
   <rect x="365" y="20" fill="#660000" width="40" height="15"/>
-  <text transform="matrix(1 0 0 1 10 15)" fill="#231F20" font-family="Open Sans, sans-serif" font-size="12">ausgezeichnet</text>
-  <text transform="matrix(1 0 0 1 170 15)" fill="#231F20" font-family="Open Sans, sans-serif" font-size="12">mittelmäßig</text>
-  <text transform="matrix(1 0 0 1 290 15)" fill="#231F20" font-family="Open Sans, sans-serif" font-size="12">schlecht</text>
+  <text transform="matrix(1 0 0 1 10 15)" fill="#231F20" font-family="Open Sans, sans-serif" font-size="1em">ausgezeichnet</text>
+  <text transform="matrix(1 0 0 1 170 15)" fill="#231F20" font-family="Open Sans, sans-serif" font-size="1em">mittelmäßig</text>
+  <text transform="matrix(1 0 0 1 290 15)" fill="#231F20" font-family="Open Sans, sans-serif" font-size="1em">schlecht</text>
 </svg>
