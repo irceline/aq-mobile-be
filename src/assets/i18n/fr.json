@@ -259,13 +259,13 @@
       "tomorrow": "J+1"
     },
     "timestepLabels": {
-      "amean": "annual mean (long term exposure)",
-      "hmean": "TODO",
-      "24hmean": "TODO",
-      "dmean_forecast_today": "TODO",
-      "dmean_forecast_tomorrow": "TODO",
-      "dmean_forecast_today+2": "TODO",
-      "dmean_forecast_today+3": "TODO"
+      "amean": "moyenne annuelle (exposition à long terme)",
+      "hmean": "moyenne horaire actuelle (exposition à court terme)",
+      "24hmean": "moyenne sur 24 heure courante (exposition à court terme)",
+      "dmean_forecast_today": "moyenne journalière (aujourd'hui)",
+      "dmean_forecast_tomorrow": "moyenne journalière (demain)",
+      "dmean_forecast_today+2": "moyenne journalière (dans 2 jours)",
+      "dmean_forecast_today+3": "moyenne journalière (dans 3 jours)"
     }
   },
   "menu": {

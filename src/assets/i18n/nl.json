@@ -259,13 +259,13 @@
       "tomorrow": "morgen"
     },
     "timestepLabels": {
-      "amean": "annual mean (long term exposure)",
-      "hmean": "TODO",
-      "24hmean": "TODO",
-      "dmean_forecast_today": "TODO",
-      "dmean_forecast_tomorrow": "TODO",
-      "dmean_forecast_today+2": "TODO",
-      "dmean_forecast_today+3": "TODO"
+      "amean": "jaargemiddelde (lange termijn blootstelling)",
+      "hmean": "uurgemiddelde (korte termijn blootstelling)",
+      "24hmean": "glijdend 24-uurgemiddelde (korte termijn blootstelling)",
+      "dmean_forecast_today": "daggemiddelde (vandaag)",
+      "dmean_forecast_tomorrow": "daggemiddelde (morgen)",
+      "dmean_forecast_today+2": "daggemiddelde (binnen 2 dagen)",
+      "dmean_forecast_today+3": "daggemiddelde (binnen 3 dagen)"
     }
   },
   "menu": {

@@ -260,12 +260,12 @@
     },
     "timestepLabels": {
       "amean": "annual mean (long term exposure)",
-      "hmean": "TODO_hmean",
-      "24hmean": "TODO_24hmean",
-      "dmean_forecast_today": "TODO_today",
-      "dmean_forecast_tomorrow": "TODO_tomorrow",
-      "dmean_forecast_today+2": "TODO_today+2",
-      "dmean_forecast_today+3": "TODO_today+3"
+      "hmean": "hourly mean (short term exposure)",
+      "24hmean": "running 24-hour mean (short term exposure)",
+      "dmean_forecast_today": "forecast daily mean (today)",
+      "dmean_forecast_tomorrow": "forecast daily mean (tomorrow)",
+      "dmean_forecast_today+2": "forecast daily mean (in 2 days)",
+      "dmean_forecast_today+3": "forecast daily mean (in 3 days)"
     }
   },
   "menu": {
