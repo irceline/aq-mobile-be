@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"	 width="410px" height="40px" viewBox="0 0 410 40" enable-background="new 0 0 410 40" xml:space="preserve">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"	 width="410px" height="40px" viewBox="0 0 414 40" enable-background="new 0 0 410 40" xml:space="preserve">
   <rect x="5" y="20" fill="#0000FF" width="40" height="15"/>
   <rect x="45" y="20" fill="#0099FF" width="40" height="15"/>
   <rect x="85" y="20" fill="#009900" width="40" height="15"/>
@@ -11,7 +11,15 @@
   <rect x="285" y="20" fill="#FF0000" width="40" height="15"/>
   <rect x="325" y="20" fill="#990000" width="40" height="15"/>
   <rect x="365" y="20" fill="#660000" width="40" height="15"/>
-  <text transform="matrix(1 0 0 1 10 15)" fill="#231F20" font-family="Open Sans, sans-serif" font-size="1em">ausgezeichnet</text>
-  <text transform="matrix(1 0 0 1 170 15)" fill="#231F20" font-family="Open Sans, sans-serif" font-size="1em">mittelmäßig</text>
-  <text transform="matrix(1 0 0 1 290 15)" fill="#231F20" font-family="Open Sans, sans-serif" font-size="1em">schlecht</text>
+  <text transform="matrix(1 0 0 1 5 15)" fill="#231F20" font-family="Open Sans, sans-serif" font-size="1em">0</text>
+  <text transform="matrix(1 0 0 1 40 15)" fill="#231F20" font-family="Open Sans, sans-serif" font-size="1em">1</text>
+  <text transform="matrix(1 0 0 1 80 15)" fill="#231F20" font-family="Open Sans, sans-serif" font-size="1em">2</text>
+  <text transform="matrix(1 0 0 1 120 15)" fill="#231F20" font-family="Open Sans, sans-serif" font-size="1em">3</text>
+  <text transform="matrix(1 0 0 1 160 15)" fill="#231F20" font-family="Open Sans, sans-serif" font-size="1em">4</text>
+  <text transform="matrix(1 0 0 1 200 15)" fill="#231F20" font-family="Open Sans, sans-serif" font-size="1em">5</text>
+  <text transform="matrix(1 0 0 1 240 15)" fill="#231F20" font-family="Open Sans, sans-serif" font-size="1em">7</text>
+  <text transform="matrix(1 0 0 1 276 15)" fill="#231F20" font-family="Open Sans, sans-serif" font-size="1em">10</text>
+  <text transform="matrix(1 0 0 1 316 15)" fill="#231F20" font-family="Open Sans, sans-serif" font-size="1em">15</text>
+  <text transform="matrix(1 0 0 1 356 15)" fill="#231F20" font-family="Open Sans, sans-serif" font-size="1em">20</text>
+  <text transform="matrix(1 0 0 1 398 18)" fill="#231F20" font-family="Open Sans, sans-serif" font-size="1.4em">∞</text>
 </svg>
