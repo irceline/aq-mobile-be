@@ -7,6 +7,7 @@ import { GeoSearch } from '@helgoland/map';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { FCM } from '@ionic-native/fcm/ngx';
+import { FirebaseAnalytics } from '@ionic-native/firebase-analytics/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
@@ -95,6 +96,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     CategorizedValueService,
     Diagnostic,
     FCM,
+    FirebaseAnalytics,
     GeoLabelsService,
     Geolocation,
     InAppBrowser,
