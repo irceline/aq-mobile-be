@@ -19,6 +19,8 @@ export interface NearestTimeseries {
 @Injectable()
 export class NearestTimeseriesService {
 
+  private maximumSearchCounter: number = 5;
+
   constructor(
     private api: DatasetApiInterface,
     private settingsSrvc: SettingsService<MobileSettings>,
@@ -53,6 +55,7 @@ export class NearestTimeseriesService {
   ) {
     if (index < stations.length - 1) {
       const distance = stations[index].distance;
+      var counter = 0;
       this.ircelineSettingsProv.getSettings(false).subscribe(settings => {
         this.api.getTimeseries(url, {
           phenomenon: phenomenonId,
@@ -71,7 +74,13 @@ export class NearestTimeseriesService {
                 });
                 observer.complete();
               } else {
-                this.getNextSeries(url, phenomenonId, stations, index + 1, observer);
+                if (counter < this.maximumSearchCounter) {
+                  counter++;
+                  this.getNextSeries(url, phenomenonId, stations, index + 1, observer);
+                } else {
+                  observer.error("Could not get valid Timeseries from " + this.maximumSearchCounter + " nearest stations.");
+                  observer.complete();
+                }
               }
             }
           }, error => {
