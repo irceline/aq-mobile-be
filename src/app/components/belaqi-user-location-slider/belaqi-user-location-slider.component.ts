@@ -284,22 +284,4 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit, OnDestr
   private handleError(lon: number, lat: number, error: any) {
     console.warn(`Belaqi for (latitude: ${lat}, longitude ${lon}): ${error} - maybe outside of Belgium`);
   }
-
-  // private presentDelayedLocateHint() {
-  //   const idx = this.slider.getActiveIndex();
-  //   if (idx >= 0 && idx < this.belaqiLocations.length) {
-  //     if (this.belaqiLocations[idx].type === 'current') {
-  //       this.slider.slideNext();
-  //       const popover = this.popoverCtrl.create(BelaqiLocateDelayedInformationComponent, {}, { showBackdrop: true });
-  //       popover.present();
-  //     }
-  //   }
-  // }
-
-  public resizeSlide() {
-    if (document.querySelector('.swiper-wrapper')) {
-      document.querySelector('.swiper-wrapper')['style'].height = 'auto';
-    }
-  }
-
 }

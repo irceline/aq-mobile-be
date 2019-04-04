@@ -17,7 +17,7 @@ import {
   Layer,
   popup,
   tileLayer,
-  marker,
+  LatLngBounds,
 } from 'leaflet';
 import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
 import moment from 'moment';
@@ -149,7 +149,6 @@ export class BelaqiMapSliderComponent {
       }
     });
 
-    this.refreshHandler.onRefresh.subscribe(() => this.loadBelaqis(true));
     this.userLocationListService.locationsChanged.subscribe(() => this.loadBelaqis(false));
     this.networkAlert.onConnected.subscribe(() => this.loadBelaqis(false));
   }
@@ -158,6 +157,23 @@ export class BelaqiMapSliderComponent {
     if (this.refreshHandler) { this.refreshHandler.onRefresh.unsubscribe(); }
     if (this.userLocationListService) { this.userLocationListService.locationsChanged.unsubscribe(); }
     if (this.networkAlert) { this.networkAlert.onConnected.unsubscribe(); }
+  }
+
+  public changeToMap() {
+    if (this.mapDataService.selection) {
+      console.log("changing to map ");
+      var label = this.mapDataService.selection.userlocation.label;
+      this.belaqiMapviews.some((element, i) => {
+        if (element.location.label === label) {
+          this.belaqiMapviews[i].selectMap();
+          this.slider.slideTo(i);
+          this.setHeader(i);
+          return true;
+        } else {
+          return false;
+        }
+      });
+    }
   }
 
   private async loadBelaqis(reload: boolean) {
@@ -265,7 +281,7 @@ class MapView {
 
   private phenomenonLabel: PhenomenonLabel;
   private nextStationPopup: L.Popup;
-  private userLocationMarker: L.Marker;
+  private userLocationPopup: L.Popup;
   public markerSelectorGenerator: MarkerSelectorGenerator;
 
   private time: TimeLabel;
@@ -281,7 +297,7 @@ class MapView {
   public langCode: string;
 
   public loading: boolean;
-  public loading_colors: boolean[] = [true, true, true, true, true, true];
+  public loading_colors: boolean[] = [false, false, false, false, false, false];
   public borderColor: string[] = ["gray", "gray", "gray", "gray", "gray", "gray"]
 
   public statusIntervalDuration: number;
@@ -314,30 +330,27 @@ class MapView {
     this.setGeosearchOptions(settings);
     this.translateSrvc.onLangChange.subscribe(() => this.setGeosearchOptions);
 
-    // Navigate from normal pane by clicking on panel
-    if (this.mapDataService.selection) {
-      const phenId = this.mapDataService.selection.phenomenonID;
-      this.selectedPhenomenonId = this.mapDataService.selection.phenomenonID;
-      this.phenomenonLabel = this.getPhenomenonLabel(phenId);
-      this.adjustMeanUI();
-      if (this.mapDataService.selection.yearly) {
-        this.mean = MeanLabel.yearly;
-      } else {
-        this.mean = MeanLabel.hourly;
-      }
-    } else {
-      this.phenomenonLabel = PhenomenonLabel.BelAQI;
-      this.show24hourMean = false;
-      this.showYearlyMean = false;
-      this.mean = MeanLabel.hourly;
-      this.clearSelectedPhenomenon();
-    }
+    this.phenomenonLabel = PhenomenonLabel.BelAQI;
+    this.show24hourMean = false;
+    this.showYearlyMean = false;
+    this.disabled = false;
+    this.mean = MeanLabel.hourly;
+    this.clearSelectedPhenomenon();
     this.removePopups();
+  }
+
+  // Navigating to Map View by clicking on Panel
+  public selectMap() {
+    this.phenomenonLabel = this.getPhenomenonLabel(this.mapDataService.selection.phenomenonID);
+    this.onPhenomenonChange();
+    if (!this.mapDataService.selection.yearly) {
+      this.sliderPosition++;
+    }
   }
 
   public init() {
     this.adjustMeanUI();
-    this.zoomToLocation();
+    this.adjustPopups(true);
     this.onSliderChange();
     this.adjustUI();
     this.adjustLegend();
@@ -345,11 +358,11 @@ class MapView {
 
   private removePopups() {
     if (this.nextStationPopup) { this.nextStationPopup.remove(); }
-    if (this.userLocationMarker) { this.userLocationMarker.remove(); }
+    if (this.userLocationPopup) { this.userLocationPopup.remove(); }
   }
 
   public mapInitialized(mapId: string) {
-    this.zoomToLocation();
+    this.adjustPopups(true);
     if (this.mapCache.hasMap(this.mapId)) {
       const provider = new OpenStreetMapProvider({ params: { countrycodes: 'be' } });
       const searchControl = new GeoSearchControl({
@@ -365,6 +378,9 @@ class MapView {
       }))
       map.addEventListener("moveend", ((ev) => {
         this.slider.lockSwipes(false);
+      }))
+      map.addEventListener("zoomend ", ((ev) => {
+        this.adjustPopups(false);
       }))
     }
   }
@@ -447,10 +463,11 @@ class MapView {
   private adjustMeanUI() {
     let show24hour = false;
     let showYearly = false;
+    let disabled = false;
     switch (this.selectedPhenomenonId) {
       case getIDForMainPhenomenon(MainPhenomenon.BC):
         showYearly = true;
-        this.disabled = true;
+        disabled = true;
         break;
       case getIDForMainPhenomenon(MainPhenomenon.NO2):
         showYearly = true;
@@ -471,6 +488,8 @@ class MapView {
     }
     this.show24hourMean = show24hour;
     this.showYearlyMean = showYearly;
+    this.disabled = disabled;
+
     if (this.time !== TimeLabel.current) {
       this.mean = null;
     }
@@ -481,6 +500,8 @@ class MapView {
     } else {
       this.sliderPosition = 0;
     }
+
+    this.adjustLegend()
   }
 
   public onStationSelected(platform: Platform) {
@@ -504,38 +525,44 @@ class MapView {
     this.geoSearchOptions = { countrycodes: settings.geoSearchCountryCodes, acceptLanguage: this.translateSrvc.currentLang };
   }
 
-  private zoomToLocation() {
+  private adjustPopups(zoom: boolean) {
     if (this.mapCache.hasMap(this.mapId)) {
       const map = this.mapCache.getMap(this.mapId);
       const selection = this.mapDataService.selection;
+      this.removePopups();
       if (selection) {
         const location = { lat: selection.userlocation.latitude, lng: selection.userlocation.longitude } as LatLngExpression;
-        /*         const label = selection.userlocation.type === 'user'
-                  ? this.translateSrvc.instant('map.configured-location') : this.translateSrvc.instant('map.current-location');
-                this.userLocationMarker = popup({ autoPan: false })
-                  .setLatLng(location)
-                  .setContent(label);
-                map.addLayer(this.userLocationPopup); */
+        const label = selection.userlocation.type === 'user'
+          ? this.translateSrvc.instant('map.configured-location') : this.translateSrvc.instant('map.current-location');
 
-        this.userLocationMarker = marker(location);
-        map.addLayer(this.userLocationMarker);
+        this.userLocationPopup = popup({ autoPan: false })
+          .setLatLng(location)
+          .setContent(label);
+        map.addLayer(this.userLocationPopup);
 
-        const bounds = latLngBounds(location, location);
         if (selection.stationlocation) {
           const station = { lat: selection.stationlocation.latitude, lng: selection.stationlocation.longitude } as LatLngExpression;
           this.nextStationPopup = popup({ autoPan: false })
             .setLatLng(station)
             .setContent(this.translateSrvc.instant('map.nearest-station'));
           map.addLayer(this.nextStationPopup);
-          bounds.extend(station);
+          if (zoom) {
+            const bounds = latLngBounds(location, location);
+            bounds.extend(station);
+            map.fitBounds(bounds, { padding: [70, 70], maxZoom: 12 });
+          }
         }
-
-        map.fitBounds(bounds, { padding: [70, 70], maxZoom: 12 });
       } else {
         const location = { lat: this.location.latitude, lng: this.location.longitude } as LatLngExpression;
-        this.userLocationMarker = marker(location);
-        map.addLayer(this.userLocationMarker);
-        map.fitBounds(latLngBounds(location, location), { padding: [200, 200], maxZoom: 12 });
+        const label = this.location.type === 'user'
+          ? this.translateSrvc.instant('map.configured-location') : this.translateSrvc.instant('map.current-location');
+        this.userLocationPopup = popup({ autoPan: false })
+          .setLatLng(location)
+          .setContent(label);
+        map.addLayer(this.userLocationPopup);
+        if (zoom) {
+          map.fitBounds(latLngBounds(location, location), { padding: [200, 200], maxZoom: 12 });
+        }
       }
     }
   }

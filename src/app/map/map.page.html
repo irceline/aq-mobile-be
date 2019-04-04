@@ -17,12 +17,6 @@
 
 <ion-content>
   <div style="margin-top: 45px; height: calc(100% - 45px)">
-    <ion-refresher (ionRefresh)="doRefresh($event)">
-      <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="{{'refresh.pull-message' | translate}}"
-        refreshingSpinner="circles" refreshingText="">
-      </ion-refresher-content>
-    </ion-refresher>
-
     <ion-list mode="md">
       <ion-row text-center class="location-header">
         <ion-label text-wrap *ngIf="sliderHeaderContent">

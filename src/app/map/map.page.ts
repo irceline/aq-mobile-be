@@ -37,17 +37,15 @@ export class MapPage implements OnInit {
     private modalCtrl: ModalController,
     private platform: Platform,
     private toast: ToastController,
-    private router: Router,
-    private mapDataService: MapDataService
   ) { }
 
   public ngOnInit(): void {
-    this.checkToShowIntroduction();
+    this.sliderComponent.changeToMap();
   }
 
-/*   public ionViewDidEnter() {
-    this.sliderComponent.gotToFirstSlide();
-  } */
+  public ionViewDidEnter() {
+    this.sliderComponent.changeToMap();
+  }
 
   public setHeaderContent(headerContent: HeaderContent) {
     let visibility;
@@ -61,25 +59,6 @@ export class MapPage implements OnInit {
     for (let i = 0; i < locationHeaderElems.length; i++) {
       (locationHeaderElems[i] as HTMLElement).style.visibility = visibility;
     }
-  }
-
-  public async doRefresh(event) {
-    this.refreshHandler.refresh();
-    if (this.platform.is('cordova')) {
-      const toast = await this.toast.create({ message: this.translateSrvc.instant('refresh-button.message'), duration: 3000 });
-      toast.present();
-    }
-    setTimeout(() => event.target.complete(), 1000);
-  }
-
-  private checkToShowIntroduction() {
-    const firstStartKey = 'firstTimeStarted';
-    this.storage.get(firstStartKey).then(value => {
-      if (value === null) {
-        this.modalCtrl.create({ component: ModalIntroComponent }).then(modal => modal.present());
-        this.storage.set(firstStartKey, true);
-      }
-    });
   }
 
   public navigateSettings() {
