@@ -49,8 +49,12 @@
     height: 10%;
   }
 
-  ion-content {
-    --background: linear-gradient(135deg, #91c0d5 50%, #53a38f);
+    .legend {
+      width: 100%;
+      max-width: 450px;
+      margin: 0 auto;
+      padding: 0 0.6em;
+    }
   }
 
   .drawer-content {
