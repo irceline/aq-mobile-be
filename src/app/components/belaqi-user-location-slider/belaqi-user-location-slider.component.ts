@@ -96,7 +96,7 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit, OnDestr
   ) {
     this.locate.getLocationStatusAsObservable().subscribe(locationStatus => {
       if (locationStatus !== LocationStatus.DENIED) {
-        console.dir(this.loadBelaqis(false));
+        this.loadBelaqis(false);
       }
     });
 
