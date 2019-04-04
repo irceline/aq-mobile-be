@@ -1,19 +1,51 @@
 .leaflet-control-container {
+  .info {
+    padding-top: 4px;
+    font-size: 20px;
+  }
 
-    .info {
-        padding-top: 4px;
-        font-size: 20px;
+  .legend {
+    float: left;
+    margin-right: 8px;
+    background: white;
+    opacity: 0.8;
+
+    div {
+      padding: 10px;
     }
+  }
+}
 
-    .legend {
-        float: left;
-        margin-right: 8px;
-        background: white;
-        opacity: 0.8;
+.leaflet-pane {
+  .marker:after {
+    content: "";
+    height: 0px;
+    width: 0px;
+    display: block;
+    position: relative;
+    bottom: 2px;
+    left: 1px;
+    border: 10px transparent solid;
+    border-top-color: #333;
+    border-width: 20px 10px 0px 10px;
+  }
 
-        div {
-            padding: 10px;
-        }
-    }
-
+  .marker:before {
+    content: "";
+    height: 12px;
+    width: 12px;
+    border: 5px solid #333;
+    display: block;
+    position: relative;
+    top: 4px;
+    left: 0px;
+    z-index: 1;
+    background: #fff;
+    line-height: 26px;
+    border-radius: 40px;
+    -webkit-border-radius: 40px;
+    -moz-border-radius: 40px;
+    color: #fff;
+    text-align: center;
+  }
 }

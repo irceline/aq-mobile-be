@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, EventEmitter, Input, KeyValueDiffers, Output } from '@angular/core';
 import { CachedMapComponent, MapCache } from '@helgoland/map';
-import { DragEndEvent, LatLng, latLng, marker } from 'leaflet';
+import { DragEndEvent, LatLng, latLng, marker, divIcon, point } from 'leaflet';
 
 @Component({
   selector: 'location-selection',
@@ -31,7 +31,8 @@ export class LocationSelectionComponent extends CachedMapComponent implements Af
 
   protected drawLocation() {
     if (this.location) {
-      const createdMarker = marker(latLng(this.location.coordinates[1], this.location.coordinates[0]), { draggable: true });
+      var icondiv = divIcon({className: 'marker', iconAnchor: point(10,40)});
+      const createdMarker = marker(latLng(this.location.coordinates[1], this.location.coordinates[0]), { draggable: true, icon: icondiv });
       createdMarker.on('dragend', (evt: DragEndEvent) => {
         const latlng: LatLng = evt.target.getLatLng();
         this.locationChanged.emit({

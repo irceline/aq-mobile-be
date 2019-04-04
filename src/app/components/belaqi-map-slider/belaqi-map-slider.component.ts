@@ -18,6 +18,9 @@ import {
   popup,
   tileLayer,
   LatLngBounds,
+  divIcon,
+  marker,
+  point,
 } from 'leaflet';
 import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
 import moment from 'moment';
@@ -161,7 +164,6 @@ export class BelaqiMapSliderComponent {
 
   public changeToMap() {
     if (this.mapDataService.selection) {
-      console.log("changing to map ");
       var label = this.mapDataService.selection.userlocation.label;
       this.belaqiMapviews.some((element, i) => {
         if (element.location.label === label) {
@@ -281,7 +283,7 @@ class MapView {
 
   private phenomenonLabel: PhenomenonLabel;
   private nextStationPopup: L.Popup;
-  private userLocationPopup: L.Popup;
+  private userLocationMarker: L.Marker;
   public markerSelectorGenerator: MarkerSelectorGenerator;
 
   private time: TimeLabel;
@@ -358,7 +360,7 @@ class MapView {
 
   private removePopups() {
     if (this.nextStationPopup) { this.nextStationPopup.remove(); }
-    if (this.userLocationPopup) { this.userLocationPopup.remove(); }
+    if (this.userLocationMarker) { this.userLocationMarker.remove(); }
   }
 
   public mapInitialized(mapId: string) {
@@ -529,16 +531,12 @@ class MapView {
     if (this.mapCache.hasMap(this.mapId)) {
       const map = this.mapCache.getMap(this.mapId);
       const selection = this.mapDataService.selection;
+      var icondiv = divIcon({ className: 'marker', iconAnchor: point(10,40) });
       this.removePopups();
       if (selection) {
         const location = { lat: selection.userlocation.latitude, lng: selection.userlocation.longitude } as LatLngExpression;
-        const label = selection.userlocation.type === 'user'
-          ? this.translateSrvc.instant('map.configured-location') : this.translateSrvc.instant('map.current-location');
-
-        this.userLocationPopup = popup({ autoPan: false })
-          .setLatLng(location)
-          .setContent(label);
-        map.addLayer(this.userLocationPopup);
+        this.userLocationMarker = marker(location, { draggable: false, icon: icondiv });
+        map.addLayer(this.userLocationMarker);
 
         if (selection.stationlocation) {
           const station = { lat: selection.stationlocation.latitude, lng: selection.stationlocation.longitude } as LatLngExpression;
@@ -554,12 +552,8 @@ class MapView {
         }
       } else {
         const location = { lat: this.location.latitude, lng: this.location.longitude } as LatLngExpression;
-        const label = this.location.type === 'user'
-          ? this.translateSrvc.instant('map.configured-location') : this.translateSrvc.instant('map.current-location');
-        this.userLocationPopup = popup({ autoPan: false })
-          .setLatLng(location)
-          .setContent(label);
-        map.addLayer(this.userLocationPopup);
+        this.userLocationMarker = marker(location, { draggable: false, icon: icondiv });
+        map.addLayer(this.userLocationMarker);
         if (zoom) {
           map.fitBounds(latLngBounds(location, location), { padding: [200, 200], maxZoom: 12 });
         }
