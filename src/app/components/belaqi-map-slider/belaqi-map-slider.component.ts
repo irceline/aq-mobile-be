@@ -70,23 +70,23 @@ const phenomenonMapping = [
   }, {
     id: getIDForMainPhenomenon(MainPhenomenon.NO2),
     label: PhenomenonLabel.NO2,
-    legendId: 'no2_hmean'
+    legendId: 'no2_'
   }, {
     id: getIDForMainPhenomenon(MainPhenomenon.O3),
     label: PhenomenonLabel.O3,
-    legendId: 'o3_hmean'
+    legendId: 'o3_'
   }, {
     id: getIDForMainPhenomenon(MainPhenomenon.PM10),
     label: PhenomenonLabel.PM10,
-    legendId: 'pm10_hmean'
+    legendId: 'pm10_'
   }, {
     id: getIDForMainPhenomenon(MainPhenomenon.PM25),
     label: PhenomenonLabel.PM25,
-    legendId: 'pm25_hmean'
+    legendId: 'pm25_'
   }, {
     id: getIDForMainPhenomenon(MainPhenomenon.BC),
     label: PhenomenonLabel.BC,
-    legendId: 'bc_hmean'
+    legendId: 'bc_'
   }
 ];
 
@@ -101,11 +101,7 @@ export interface HeaderContent {
   templateUrl: './belaqi-map-slider.component.html',
   styleUrls: ['./belaqi-map-slider.component.scss'],
 })
-export class BelaqiMapSliderComponent implements AfterViewChecked {
-  ngAfterViewChecked(): void {
-    console.log(document.getElementById('legendmap#0'));
-  }
-  
+export class BelaqiMapSliderComponent {
 
   public belaqiMapviews: MapView[];
 
@@ -281,7 +277,8 @@ class MapView {
   public sliderHeader: string = "test";
   public sliderPosition: number;
 
-  public legend: string;
+  public legendId: string;
+  public langCode: string;
 
   public loading: boolean;
   public loading_colors: boolean[] = [true, true, true, true, true, true];
@@ -441,6 +438,7 @@ class MapView {
     }
 
     this.adjustUI();
+    this.adjustLegend();
   }
 
   /**
@@ -543,10 +541,8 @@ class MapView {
   }
 
   private adjustLegend(): void {
-    const langCode = this.translateSrvc.currentLang.toLocaleUpperCase();
-    const legendId = this.getPhenomenonLegendId(this.phenomenonLabel);
-    console.log(document.getElementById('legend' + this.mapId));
-    this.legend = ` <object style='width:100%' data='../../assets/svg/${legendId}_${langCode}_wide.svg'></object>`;
+    this.langCode = this.translateSrvc.currentLang.toLocaleUpperCase();
+    this.legendId = this.getPhenomenonLegendId(this.phenomenonLabel);
   }
 
   private clearSelectedPhenomenon() {
@@ -566,7 +562,21 @@ class MapView {
 
   private getPhenomenonLegendId(phenLabel: PhenomenonLabel): string {
     const phen = phenomenonMapping.find(e => phenLabel === e.label);
-    if (phen && phen.legendId) { return phen.legendId; }
+    if (phen && phen.legendId) {
+      if (phen.legendId === 'index') {
+        return 'index';
+      }
+      switch (this.mean) {
+        case MeanLabel.daily:
+          return phen.legendId + '24hmean';
+        case MeanLabel.hourly:
+          return phen.legendId + 'hmean';
+        case MeanLabel.yearly:
+          return phen.legendId + 'anmean';
+        default: return "";
+      }
+
+    }
   }
 
   private getPhenomenonFromAPI(phenId: string) {

@@ -96,7 +96,7 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit, OnDestr
   ) {
     this.locate.getLocationStatusAsObservable().subscribe(locationStatus => {
       if (locationStatus !== LocationStatus.DENIED) {
-        this.loadBelaqis(false);
+        console.dir(this.loadBelaqis(false));
       }
     });
 
@@ -231,7 +231,6 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit, OnDestr
   private async loadBelaqis(reload: boolean) {
     if (this.userLocationService.hasLocations() && !this.loadingLocations) {
       this.currentLocationError = null;
-      const previousActiveIndex = await this.slider.getActiveIndex();
       this.loadingLocations = true;
       this.ircelineSettings.getSettings(reload).subscribe(
         ircelineSettings => {
@@ -258,7 +257,7 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit, OnDestr
             }
           });
           setTimeout(() => {
-            if (this.slider && previousActiveIndex !== 0) {
+            if (this.slider) {
               this.slider.update();
               this.slider.slideTo(0);
             }
@@ -298,7 +297,9 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit, OnDestr
   // }
 
   public resizeSlide() {
-    document.querySelector('.swiper-wrapper')['style'].height = 'auto';
+    if (document.querySelector('.swiper-wrapper')) {
+      document.querySelector('.swiper-wrapper')['style'].height = 'auto';
+    }
   }
 
 }
