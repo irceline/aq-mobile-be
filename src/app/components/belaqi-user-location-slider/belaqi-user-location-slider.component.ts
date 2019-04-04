@@ -231,7 +231,6 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit, OnDestr
   private async loadBelaqis(reload: boolean) {
     if (this.userLocationService.hasLocations() && !this.loadingLocations) {
       this.currentLocationError = null;
-      const previousActiveIndex = await this.slider.getActiveIndex();
       this.loadingLocations = true;
       this.ircelineSettings.getSettings(reload).subscribe(
         ircelineSettings => {
@@ -258,7 +257,7 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit, OnDestr
             }
           });
           setTimeout(() => {
-            if (this.slider && previousActiveIndex !== 0) {
+            if (this.slider) {
               this.slider.update();
               this.slider.slideTo(0);
             }
@@ -285,20 +284,4 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit, OnDestr
   private handleError(lon: number, lat: number, error: any) {
     console.warn(`Belaqi for (latitude: ${lat}, longitude ${lon}): ${error} - maybe outside of Belgium`);
   }
-
-  // private presentDelayedLocateHint() {
-  //   const idx = this.slider.getActiveIndex();
-  //   if (idx >= 0 && idx < this.belaqiLocations.length) {
-  //     if (this.belaqiLocations[idx].type === 'current') {
-  //       this.slider.slideNext();
-  //       const popover = this.popoverCtrl.create(BelaqiLocateDelayedInformationComponent, {}, { showBackdrop: true });
-  //       popover.present();
-  //     }
-  //   }
-  // }
-
-  public resizeSlide() {
-    document.querySelector('.swiper-wrapper')['style'].height = 'auto';
-  }
-
 }

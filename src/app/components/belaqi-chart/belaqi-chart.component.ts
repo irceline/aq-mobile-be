@@ -114,7 +114,7 @@ export class BelaqiChartComponent implements OnChanges {
     this.initTimespan();
     this.loading = false;
     const canvas = this.barCanvas.nativeElement as HTMLCanvasElement;
-    if (canvas.clientHeight <= 0) { return; }
+    // if (canvas.clientHeight <= 0) { console.log("invalid canvas height"); return; }
     const ctx = canvas.getContext('2d');
 
     this.chart = new Chart(ctx, {

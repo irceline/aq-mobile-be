@@ -2,22 +2,21 @@
   <ion-slide *ngFor="let loc of belaqiLocations">
     <div *ngIf="loc.latitude" style="width: 100%">
       <div class="wheel">
-        <belaqi-wheel [latitude]="loc.latitude" [longitude]="loc.longitude" (ready)="resizeSlide()"></belaqi-wheel>
+        <belaqi-wheel [latitude]="loc.latitude" [longitude]="loc.longitude"></belaqi-wheel>
       </div>
       <div class="chart">
-        <belaqi-chart [location]="loc" (ready)="resizeSlide()"></belaqi-chart>
+        <belaqi-chart [location]="loc"></belaqi-chart>
       </div>
       <div *ngIf="showSubIndexPanel">
-        <sub-index-panel [location]="loc" (ready)="resizeSlide()" (selected)="selectPhenomenon($event, loc, false)">
+        <sub-index-panel [location]="loc" (selected)="selectPhenomenon($event, loc, false)">
         </sub-index-panel>
       </div>
       <div *ngIf="showAnnualMeanPanel">
-        <annual-mean-panel [location]="loc" (ready)="resizeSlide()" (selected)="selectPhenomenon($event, loc, true)">
-        </annual-mean-panel>
+        <annual-mean-panel [location]="loc" (selected)="selectPhenomenon($event, loc, true)"></annual-mean-panel>
       </div>
       <div *ngIf="showNearestStationsPanel">
-        <nearest-measuring-station-panel [location]="loc" (selected)="selectPhenomenonLocation($event, loc, false)"
-          (ready)="resizeSlide()"></nearest-measuring-station-panel>
+        <nearest-measuring-station-panel [location]="loc" (selected)="selectPhenomenonLocation($event, loc, false)">
+        </nearest-measuring-station-panel>
       </div>
     </div>
     <div *ngIf="!currentLocationError && !loc.latitude" style="height: 300px; color: white;">

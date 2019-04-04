@@ -1,0 +1,126 @@
+:host {
+  @import "../../../theme/panels.scss";
+
+  .entry {
+    margin: auto;
+  }
+
+  .swiper-slide {
+    overflow-y: scroll;
+    display: block;
+    padding-bottom: 30px;
+  }
+
+  ion-slides {
+    height: 90%;
+  }
+
+  .swiper-wrapper {
+    height: none;
+  }
+
+  .container {
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+
+    .segment {
+      flex: none;
+    }
+
+    .full-phenomenon-label {
+      position: relative;
+      text-align: center;
+      flex: none;
+      width: 90%;
+      left: 5%;
+      background-color: var(--ion-color-secondary-contrast);
+      border-radius: 1em 1em 0 0;
+      margin-top: 5%;
+    }
+
+    .map-wrapper {
+      position: relative;
+      width: 90%;
+      left: 5%;
+      height: 75%;
+
+      .map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+    }
+
+    .segment {
+      ion-segment {
+        ion-segment-button {
+          min-width: 10px;
+          --padding-start: 0px;
+          --padding-end: 0px;
+          text-transform: capitalize;
+          --background: var(--ion-color-primary-contrast);
+        }
+      }
+    }
+
+    .segment {
+      position: relative;
+      background-color: var(--ion-color-primary-contrast);
+      width: 90%;
+      left: 5%;
+    }
+
+    .segment-button-checked {
+      background-color: var(--ion-color-secondary-contrast);
+    }
+
+    .toolbar-background {
+      border-radius: 1em;
+    }
+
+    .panel {
+      position: relative;
+      background: var(--panel-background);
+      border-radius: 1em;
+      width: 90%;
+      left: 5%;
+      margin-top: 2%;
+      margin-bottom: 3%;
+    }
+
+    ion-toolbar {
+      --background: none;
+
+      ion-row {
+        font-size: 0.8em;
+      }
+
+      ion-range {
+        --height: 1em;
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+    }
+
+    .legend-panel {
+      margin: 0;
+      border-radius: 0 0 1em 1em;
+    }
+
+    .legend {
+      width: 100%;
+      max-width: 450px;
+      margin: 0 auto;
+      padding: 0 0.6em;
+    }
+  }
+
+  .drawer-content {
+    padding: 0 2em;
+  }
+}
