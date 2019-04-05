@@ -1,18 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { ModalController, Platform, ToastController } from '@ionic/angular';
-import { Storage } from '@ionic/storage';
+import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
-import {
-  HeaderContent,
-  BelaqiMapSliderComponent,
-} from '../components/belaqi-map-slider/belaqi-map-slider.component';
+import { BelaqiMapSliderComponent, HeaderContent } from '../components/belaqi-map-slider/belaqi-map-slider.component';
 import { DrawerState } from '../components/overlay-info-drawer/overlay-info-drawer';
-import { ModalIntroComponent } from '../components/settings/modal-intro/modal-intro.component';
 import { ModalSettingsComponent } from '../components/settings/modal-settings/modal-settings.component';
-import { MapDataService } from '../services/map-data/map-data.service';
-import { RefreshHandler } from '../services/refresh/refresh.service';
+import { AnalyticsService } from '../services/analytics/analytics.service';
 
 @Component({
   selector: 'map',
@@ -32,11 +25,8 @@ export class MapPage implements OnInit {
 
   constructor(
     public translateSrvc: TranslateService,
-    private storage: Storage,
-    private refreshHandler: RefreshHandler,
     private modalCtrl: ModalController,
-    private platform: Platform,
-    private toast: ToastController,
+    private analytics: AnalyticsService,
   ) { }
 
   public ngOnInit(): void {
@@ -45,6 +35,7 @@ export class MapPage implements OnInit {
 
   public ionViewDidEnter() {
     this.sliderComponent.changeToMap();
+    this.analytics.logEvent('open_map');
   }
 
   public setHeaderContent(headerContent: HeaderContent) {
