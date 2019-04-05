@@ -23,7 +23,7 @@ export class PushNotificationsHandlerService {
     });
   }
 
-  public isTopicActive(topic: PushNotificationTopic): boolean {
+  public isTopicActive(topic: PushNotificationTopic | string): boolean {
     return this.localStorage.load<boolean>(LOCALSTORAGE_PUSH_NOTIFICATION + topic) || false;
   }
 
@@ -64,6 +64,16 @@ export class PushNotificationsHandlerService {
         this.notifier.unsubscribeTopic(`${topic.toString()}_fr`);
         break;
     }
+  }
+
+  public listOfNotifications(): string[] {
+    const notifications = [];
+    for (const topic in PushNotificationTopic) {
+      if (this.isTopicActive(topic)) {
+        notifications.push(topic);
+      }
+    }
+    return notifications;
   }
 
 }
