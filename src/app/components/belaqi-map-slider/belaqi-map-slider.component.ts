@@ -1,7 +1,7 @@
 import './boundary-canvas';
 
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectorRef, Component, EventEmitter, Output, ViewChild, AfterViewInit, AfterViewChecked } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, Output, ViewChild } from '@angular/core';
 import { DatasetApiInterface, ParameterFilter, Phenomenon, Platform, SettingsService, Station } from '@helgoland/core';
 import { GeoSearchOptions, LayerOptions, MapCache } from '@helgoland/map';
 import { IonSlides, ModalController } from '@ionic/angular';
@@ -11,37 +11,34 @@ import {
   BoundaryCanvasOptions,
   circleMarker,
   CircleMarker,
+  divIcon,
+  FitBoundsOptions,
   geoJSON,
   latLngBounds,
   LatLngExpression,
   Layer,
-  popup,
-  tileLayer,
-  LatLngBounds,
-  divIcon,
   marker,
   point,
+  popup,
+  tileLayer,
 } from 'leaflet';
 import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
 import moment from 'moment';
 import { forkJoin } from 'rxjs';
 
-import {
-  MarkerSelectorGenerator,
-} from '../customized-station-map-selector/customized-station-map-selector.component';
-import { DrawerState } from '../overlay-info-drawer/overlay-info-drawer';
 import { getIDForMainPhenomenon, MainPhenomenon } from '../../model/phenomenon';
 import { AnnualMeanService } from '../../services/annual-mean/annual-mean.service';
-import { IrcelineSettingsService, IrcelineSettings } from '../../services/irceline-settings/irceline-settings.service';
-import { MapDataService } from '../../services/map-data/map-data.service';
-import { MobileSettings } from '../../services/settings/settings.service';
-import { UserLocationListService } from '../../services/user-location-list/user-location-list.service';
-import { UserLocation } from '../../services/user-location-list/user-location-list.service';
+import { IrcelineSettings, IrcelineSettingsService } from '../../services/irceline-settings/irceline-settings.service';
 import { LocateService, LocationStatus } from '../../services/locate/locate.service';
-import { RefreshHandler } from '../../services/refresh/refresh.service';
+import { MapDataService } from '../../services/map-data/map-data.service';
 import { NetworkAlertService } from '../../services/network-alert/network-alert.service';
-import { ModalSettingsComponent } from '../settings/modal-settings/modal-settings.component';
+import { RefreshHandler } from '../../services/refresh/refresh.service';
+import { MobileSettings } from '../../services/settings/settings.service';
+import { UserLocation, UserLocationListService } from '../../services/user-location-list/user-location-list.service';
+import { MarkerSelectorGenerator } from '../customized-station-map-selector/customized-station-map-selector.component';
 import { ModalUserLocationCreationComponent } from '../modal-user-location-creation/modal-user-location-creation.component';
+import { DrawerState } from '../overlay-info-drawer/overlay-info-drawer';
+import { ModalSettingsComponent } from '../settings/modal-settings/modal-settings.component';
 
 enum PhenomenonLabel {
   BelAQI = 'BelAQI',
@@ -104,7 +101,7 @@ export interface HeaderContent {
   templateUrl: './belaqi-map-slider.component.html',
   styleUrls: ['./belaqi-map-slider.component.scss'],
 })
-export class BelaqiMapSliderComponent {
+export class BelaqiMapSliderComponent implements OnDestroy {
 
   public belaqiMapviews: MapView[];
 
@@ -126,7 +123,7 @@ export class BelaqiMapSliderComponent {
   public clusterStations: boolean;
   public providerUrl: string;
 
-  private loadingLocations: boolean = false;
+  private loadingLocations = false;
   public currentLocationError: string;
 
   constructor(
@@ -164,17 +161,19 @@ export class BelaqiMapSliderComponent {
 
   public changeToMap() {
     if (this.mapDataService.selection) {
-      var label = this.mapDataService.selection.userlocation.label;
-      this.belaqiMapviews.some((element, i) => {
-        if (element.location.label === label) {
-          this.belaqiMapviews[i].selectMap();
-          this.slider.slideTo(i);
-          this.setHeader(i);
-          return true;
-        } else {
-          return false;
-        }
-      });
+      const label = this.mapDataService.selection.userlocation.label;
+      if (this.belaqiMapviews) {
+        this.belaqiMapviews.some((element, i) => {
+          if (element.location.label === label) {
+            this.belaqiMapviews[i].selectMap();
+            this.slider.slideTo(i);
+            this.setHeader(i);
+            return true;
+          } else {
+            return false;
+          }
+        });
+      }
     }
   }
 
@@ -199,9 +198,8 @@ export class BelaqiMapSliderComponent {
               this.annualProvider,
               this.mapDataService,
               this.userLocationListService,
-              "map#" + i.toString(),
-              this.slider)
-
+              'map#' + i.toString(),
+              this.slider);
             // Set MapView Location
             if (loc.type !== 'current') {
               this.setLocation(loc, i, ircelineSettings);
@@ -234,6 +232,31 @@ export class BelaqiMapSliderComponent {
         });
     }
   }
+
+  // private setSelection() {
+  //   if (this.mapDataService.selection) {
+  //     const label = this.mapDataService.selection.userlocation.label;
+  //     if (this.belaqiMapviews) {
+  //       this.belaqiMapviews.some((element, i) => {
+  //         if (element.location.label === label) {
+  //           this.belaqiMapviews[i].selectMap();
+  //           this.slider.update();
+  //           this.slider.slideTo(i);
+  //           this.setHeader(i);
+  //           return true;
+  //         } else {
+  //           return false;
+  //         }
+  //       });
+  //     }
+  //   } else {
+  //     if (this.slider && this.belaqiMapviews) {
+  //       this.slider.update();
+  //       this.slider.slideTo(0);
+  //       this.setHeader(0);
+  //     }
+  //   }
+  // }
 
   private setLocation(loc: UserLocation, i: number, ircelineSettings: IrcelineSettings) {
     this.belaqiMapviews[i].location = {
@@ -288,11 +311,11 @@ class MapView {
 
   private time: TimeLabel;
   private mean: string;
-  public show24hourMean: boolean = true;
-  public showYearlyMean: boolean = true;
-  public disabled: boolean = false;
+  public show24hourMean = true;
+  public showYearlyMean = true;
+  public disabled = false;
 
-  public sliderHeader: string = "test";
+  public sliderHeader = 'test';
   public sliderPosition: number;
 
   public legendId: string;
@@ -300,7 +323,7 @@ class MapView {
 
   public loading: boolean;
   public loading_colors: boolean[] = [false, false, false, false, false, false];
-  public borderColor: string[] = ["gray", "gray", "gray", "gray", "gray", "gray"]
+  public borderColor: string[] = ['gray', 'gray', 'gray', 'gray', 'gray', 'gray'];
 
   public statusIntervalDuration: number;
   public geoSearchOptions: GeoSearchOptions;
@@ -371,19 +394,19 @@ class MapView {
         provider: provider,
         autoComplete: true
       });
-      var map = this.mapCache.getMap(mapId);
+      const map = this.mapCache.getMap(mapId);
       this.mapCache.getMap(mapId).addControl(searchControl);
       // Disable Panning
       map.clearAllEventListeners();
-      map.addEventListener("movestart", ((ev) => {
+      map.addEventListener('movestart', ((ev) => {
         this.slider.lockSwipes(true);
-      }))
-      map.addEventListener("moveend", ((ev) => {
+      }));
+      map.addEventListener('moveend', ((ev) => {
         this.slider.lockSwipes(false);
-      }))
-      map.addEventListener("zoomend ", ((ev) => {
+      }));
+      map.addEventListener('zoomend ', ((ev) => {
         this.adjustPopups(false);
-      }))
+      }));
     }
   }
 
@@ -409,7 +432,7 @@ class MapView {
    * Translates slider position into time+mean combinations
    */
   public onSliderChange() {
-    var correctedSliderPos = this.sliderPosition;
+    let correctedSliderPos = this.sliderPosition;
 
     if (!this.show24hourMean && this.sliderPosition > 1) {
       correctedSliderPos++;
@@ -420,39 +443,39 @@ class MapView {
         // amean
         this.time = TimeLabel.current;
         this.mean = MeanLabel.yearly;
-        this.sliderHeader = this.translateSrvc.instant("map.timestepLabels.amean");
+        this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.amean');
         break;
       case 1:
         // hmean
         this.time = TimeLabel.current;
         this.mean = MeanLabel.hourly;
-        this.sliderHeader = this.translateSrvc.instant("map.timestepLabels.hmean");
+        this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.hmean');
         break;
       case 2:
         // 24hmean
         this.time = TimeLabel.current;
         this.mean = MeanLabel.daily;
-        this.sliderHeader = this.translateSrvc.instant("map.timestepLabels.24hmean");
+        this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.24hmean');
         break;
       case 3:
         // dmean forecast today
         this.time = TimeLabel.today;
-        this.sliderHeader = this.translateSrvc.instant("map.timestepLabels.dmean_forecast_today");
+        this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_today');
         break;
       case 4:
         // dmean forecast tomorrow
         this.time = TimeLabel.tomorrow;
-        this.sliderHeader = this.translateSrvc.instant("map.timestepLabels.dmean_forecast_tomorrow");
+        this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_tomorrow');
         break;
       case 5:
         // dmean forecast today+2
         this.time = TimeLabel.today2;
-        this.sliderHeader = this.translateSrvc.instant("map.timestepLabels.dmean_forecast_today+2");
+        this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_today+2');
         break;
       case 6:
         // dmean forecast today+3
         this.time = TimeLabel.today3;
-        this.sliderHeader = this.translateSrvc.instant("map.timestepLabels.dmean_forecast_today+3");
+        this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_today+3');
     }
 
     this.adjustUI();
@@ -503,7 +526,7 @@ class MapView {
       this.sliderPosition = 0;
     }
 
-    this.adjustLegend()
+    this.adjustLegend();
   }
 
   public onStationSelected(platform: Platform) {
@@ -531,32 +554,31 @@ class MapView {
     if (this.mapCache.hasMap(this.mapId)) {
       const map = this.mapCache.getMap(this.mapId);
       const selection = this.mapDataService.selection;
-      var icondiv = divIcon({ className: 'marker', iconAnchor: point(10,40) });
+      const icondiv = divIcon({ className: 'marker', iconAnchor: point(10, 40) });
+      let location;
+      let bounds;
+      let boundsOptions: FitBoundsOptions = { padding: [200, 200], maxZoom: 12 };
       this.removePopups();
       if (selection) {
-        const location = { lat: selection.userlocation.latitude, lng: selection.userlocation.longitude } as LatLngExpression;
-        this.userLocationMarker = marker(location, { draggable: false, icon: icondiv });
-        map.addLayer(this.userLocationMarker);
-
+        location = { lat: selection.userlocation.latitude, lng: selection.userlocation.longitude } as LatLngExpression;
+        bounds = latLngBounds(location, location);
         if (selection.stationlocation) {
           const station = { lat: selection.stationlocation.latitude, lng: selection.stationlocation.longitude } as LatLngExpression;
           this.nextStationPopup = popup({ autoPan: false })
             .setLatLng(station)
             .setContent(this.translateSrvc.instant('map.nearest-station'));
           map.addLayer(this.nextStationPopup);
-          if (zoom) {
-            const bounds = latLngBounds(location, location);
-            bounds.extend(station);
-            map.fitBounds(bounds, { padding: [70, 70], maxZoom: 12 });
-          }
+          bounds.extend(station);
+          boundsOptions = { padding: [70, 70], maxZoom: 12 };
         }
       } else {
-        const location = { lat: this.location.latitude, lng: this.location.longitude } as LatLngExpression;
-        this.userLocationMarker = marker(location, { draggable: false, icon: icondiv });
-        map.addLayer(this.userLocationMarker);
-        if (zoom) {
-          map.fitBounds(latLngBounds(location, location), { padding: [200, 200], maxZoom: 12 });
-        }
+        location = { lat: this.location.latitude, lng: this.location.longitude } as LatLngExpression;
+        bounds = latLngBounds(location, location);
+      }
+      this.userLocationMarker = marker(location, { draggable: false, icon: icondiv });
+      map.addLayer(this.userLocationMarker);
+      if (zoom) {
+        map.fitBounds(bounds, boundsOptions);
       }
     }
   }
@@ -594,7 +616,7 @@ class MapView {
           return phen.legendId + 'hmean';
         case MeanLabel.yearly:
           return phen.legendId + 'anmean';
-        default: return "";
+        default: return '';
       }
 
     }
