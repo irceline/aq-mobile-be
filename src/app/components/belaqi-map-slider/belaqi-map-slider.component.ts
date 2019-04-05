@@ -368,8 +368,20 @@ class MapView {
   public selectMap() {
     this.phenomenonLabel = this.getPhenomenonLabel(this.mapDataService.selection.phenomenonID);
     this.onPhenomenonChange();
+
+    // Navigate to correct slider position
     if (!this.mapDataService.selection.yearly) {
-      this.sliderPosition++;
+      switch(this.mapDataService.selection.phenomenonID) {
+        case '8': {
+          this.sliderPosition++;
+          break;
+        }
+        case '5':
+        case '6001': {
+          this.sliderPosition++;
+          this.sliderPosition++;
+        }
+      }
     }
     this.adjustSlider();
   }
@@ -377,7 +389,7 @@ class MapView {
   public init() {
     this.adjustMeanUI();
     this.adjustPopups(true);
-    this.onSliderChange();
+    this.adjustSlider();
     this.adjustUI();
     this.adjustLegend();
   }
