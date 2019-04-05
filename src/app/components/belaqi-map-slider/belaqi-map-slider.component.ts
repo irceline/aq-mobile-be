@@ -353,7 +353,10 @@ class MapView {
     this.markerSelectorGenerator = new MarkerSelectorGeneratorImpl(this.mapCache, this.mapId);
 
     this.setGeosearchOptions(settings);
-    this.translateSrvc.onLangChange.subscribe(() => this.setGeosearchOptions);
+    this.translateSrvc.onLangChange.subscribe(() =>  {
+      this.setGeosearchOptions;
+      this.onPhenomenonChange();
+    });
 
     this.phenomenonLabel = PhenomenonLabel.BelAQI;
     this.show24hourMean = false;
@@ -372,14 +375,15 @@ class MapView {
     // Navigate to correct slider position
     if (!this.mapDataService.selection.yearly) {
       switch(this.mapDataService.selection.phenomenonID) {
-        case '8': {
+        case getIDForMainPhenomenon(MainPhenomenon.NO2): {
           this.sliderPosition++;
           break;
         }
-        case '5':
-        case '6001': {
+        case getIDForMainPhenomenon(MainPhenomenon.PM10):
+        case getIDForMainPhenomenon(MainPhenomenon.PM25): {
           this.sliderPosition++;
           this.sliderPosition++;
+          break;
         }
       }
     }
