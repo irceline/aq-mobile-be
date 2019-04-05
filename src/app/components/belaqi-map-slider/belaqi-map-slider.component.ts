@@ -371,6 +371,7 @@ class MapView {
     if (!this.mapDataService.selection.yearly) {
       this.sliderPosition++;
     }
+    this.adjustSlider();
   }
 
   public init() {
@@ -423,7 +424,7 @@ class MapView {
       this.time = TimeLabel.current;
     }
     this.adjustMeanUI();
-    this.onSliderChange();
+    this.adjustSlider();
     this.adjustUI();
     this.adjustLegend();
   }
@@ -432,6 +433,12 @@ class MapView {
    * Translates slider position into time+mean combinations
    */
   public onSliderChange() {
+    this.adjustSlider();
+    this.adjustUI();
+    this.adjustLegend();
+  }
+
+  private adjustSlider() {
     let correctedSliderPos = this.sliderPosition;
 
     if (!this.show24hourMean && this.sliderPosition > 1) {
@@ -477,11 +484,7 @@ class MapView {
         this.time = TimeLabel.today3;
         this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_today+3');
     }
-
-    this.adjustUI();
-    this.adjustLegend();
   }
-
   /**
    * Sets up showYearly + show24Hour upon selecting a Phenomenon in the Top bar.
    */
@@ -525,8 +528,6 @@ class MapView {
     } else {
       this.sliderPosition = 0;
     }
-
-    this.adjustLegend();
   }
 
   public onStationSelected(platform: Platform) {
