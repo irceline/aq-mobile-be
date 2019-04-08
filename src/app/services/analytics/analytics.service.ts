@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { FirebaseAnalytics } from '@ionic-native/firebase-analytics/ngx';
 import { Platform } from '@ionic/angular';
+import { Firebase } from '@ionic-native/firebase/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ export class AnalyticsService {
 
   constructor(
     private platform: Platform,
-    private firebaseAnalytics: FirebaseAnalytics
+    private firebaseAnalytics: Firebase
   ) { }
 
   public logEvent(eventName: string, params: any = {}) {

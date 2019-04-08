@@ -6,8 +6,7 @@ import { DatasetApiInterface, HelgolandCoreModule, SettingsService } from '@helg
 import { GeoSearch } from '@helgoland/map';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { Diagnostic } from '@ionic-native/diagnostic/ngx';
-import { FCM } from '@ionic-native/fcm/ngx';
-import { FirebaseAnalytics } from '@ionic-native/firebase-analytics/ngx';
+import { Firebase } from '@ionic-native/firebase/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
@@ -95,8 +94,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BelaqiIndexService,
     CategorizedValueService,
     Diagnostic,
-    FCM,
-    FirebaseAnalytics,
+    Firebase,
     GeoLabelsService,
     Geolocation,
     InAppBrowser,

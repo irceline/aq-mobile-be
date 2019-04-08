@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { FCM } from '@ionic-native/fcm/ngx';
 import { Platform } from '@ionic/angular';
 
 import { NotificationMaintainerService } from '../notification-maintainer/notification-maintainer.service';
@@ -8,13 +7,14 @@ import {
   PushNotification,
   PushNotificationTopic,
 } from '../notification-presenter/notification-presenter.service';
+import { Firebase } from '@ionic-native/firebase/ngx';
 
 @Injectable()
 export class PushNotificationsService {
 
   constructor(
     private platform: Platform,
-    private fcm: FCM,
+    private fcm: Firebase,
     private notifications: NotificationMaintainerService,
     private presenter: NotificationPresenterService
   ) { }
@@ -32,7 +32,7 @@ export class PushNotificationsService {
 
         this.fcm.onTokenRefresh().subscribe(token => this.doSomethingWithToken(token));
 
-        this.fcm.onNotification().subscribe(data => {
+        this.fcm.onNotificationOpen().subscribe(data => {
           console.log(`onNotification: ${data.wasTapped}`);
           if (data.wasTapped) {
             // Notification was received on device tray and tapped by the user.
@@ -59,14 +59,14 @@ export class PushNotificationsService {
   public subscribeTopic(topic: string) {
     if (this.platform.is('cordova')) {
       console.log(`subscribe topic: ${topic}`);
-      this.fcm.subscribeToTopic(topic);
+      this.fcm.subscribe(topic);
     }
   }
 
   public unsubscribeTopic(topic: string) {
     if (this.platform.is('cordova')) {
       console.log(`unsubscribe topic: ${topic}`);
-      this.fcm.unsubscribeFromTopic(topic);
+      this.fcm.unsubscribe(topic);
     }
   }
 
