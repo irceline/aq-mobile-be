@@ -15,12 +15,7 @@ import {
   PhenomenonLocationSelection,
 } from '../nearest-measuring-station-panel/nearest-measuring-station-panel-entry.component';
 import { ModalSettingsComponent } from '../settings/modal-settings/modal-settings.component';
-
-export interface HeaderContent {
-  label: string;
-  date: Date;
-  current: boolean;
-}
+import { HeaderContent } from '../slider-header/slider-header.component';
 
 export interface BelaqiSelection {
   stationlocation?: {

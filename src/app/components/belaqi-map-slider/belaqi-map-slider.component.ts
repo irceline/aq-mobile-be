@@ -39,6 +39,7 @@ import { MarkerSelectorGenerator } from '../customized-station-map-selector/cust
 import { ModalUserLocationCreationComponent } from '../modal-user-location-creation/modal-user-location-creation.component';
 import { DrawerState } from '../overlay-info-drawer/overlay-info-drawer';
 import { ModalSettingsComponent } from '../settings/modal-settings/modal-settings.component';
+import { HeaderContent } from '../slider-header/slider-header.component';
 
 enum PhenomenonLabel {
   BelAQI = 'BelAQI',
@@ -89,12 +90,6 @@ const phenomenonMapping = [
     legendId: 'bc_'
   }
 ];
-
-export interface HeaderContent {
-  label: string;
-  date: Date;
-  current: boolean;
-}
 
 @Component({
   selector: 'belaqi-map-slider',
@@ -304,7 +299,7 @@ class MapView {
   public selectedPhenomenonId: string;
   public selectedPhenomenonLabel: string;
 
-  private phenomenonLabel: PhenomenonLabel;
+  public phenomenonLabel: PhenomenonLabel;
   private nextStationPopup: L.Popup;
   private userLocationMarker: L.Marker;
   public markerSelectorGenerator: MarkerSelectorGenerator;
@@ -328,7 +323,7 @@ class MapView {
   public statusIntervalDuration: number;
   public geoSearchOptions: GeoSearchOptions;
   public clusterStations: boolean;
-  private providerUrl: string;
+  public providerUrl: string;
 
   constructor(
     protected settingsSrvc: SettingsService<MobileSettings>,
@@ -353,8 +348,8 @@ class MapView {
     this.markerSelectorGenerator = new MarkerSelectorGeneratorImpl(this.mapCache, this.mapId);
 
     this.setGeosearchOptions(settings);
-    this.translateSrvc.onLangChange.subscribe(() =>  {
-      this.setGeosearchOptions;
+    this.translateSrvc.onLangChange.subscribe(() => {
+      this.setGeosearchOptions(settings);
       this.onPhenomenonChange();
     });
 
@@ -374,7 +369,7 @@ class MapView {
 
     // Navigate to correct slider position
     if (!this.mapDataService.selection.yearly) {
-      switch(this.mapDataService.selection.phenomenonID) {
+      switch (this.mapDataService.selection.phenomenonID) {
         case getIDForMainPhenomenon(MainPhenomenon.NO2): {
           this.sliderPosition++;
           break;

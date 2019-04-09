@@ -47,6 +47,7 @@ import {
 } from './settings/push-notification-subscriptions-settings/push-notification-subscriptions-settings.component';
 import { StartPageSettingsComponent } from './settings/start-page-settings/start-page-settings.component';
 import { UserLocationsSettingsComponent } from './settings/user-locations-settings/user-locations-settings.component';
+import { SliderHeaderComponent } from './slider-header/slider-header.component';
 import { SubIndexPanelEntryComponent } from './sub-index-panel/sub-index-panel-entry.component';
 import { SubIndexPanelInformationPopupComponent } from './sub-index-panel/sub-index-panel-information-popup.component';
 import { SubIndexPanelComponent } from './sub-index-panel/sub-index-panel.component';
@@ -59,8 +60,8 @@ const COMPONENTS = [
   AnnualMeanPanelInformationPopupComponent,
   BelaqiChartComponent,
   BelaqiChartInformationComponent,
-  BelaqiUserLocationSliderComponent,
   BelaqiMapSliderComponent,
+  BelaqiUserLocationSliderComponent,
   BelaqiWheelComponent,
   BelaqiWheelInformationComponent,
   CommonSettingsComponent,
@@ -83,6 +84,7 @@ const COMPONENTS = [
   OverlayInfoDrawerComponent,
   PushNotificationComponent,
   PushNotificationSubscriptionsSettingsComponent,
+  SliderHeaderComponent,
   StartPageSettingsComponent,
   SubIndexPanelComponent,
   SubIndexPanelEntryComponent,
