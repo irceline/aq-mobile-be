@@ -36,26 +36,9 @@
       <ion-item text-wrap>
         <p>{{'belaqi-user-location-slider.current-location-error-3' | translate}}</p>
       </ion-item>
-      <div>
-        <ion-button fill="outline" (click)="createNewLocation()">
-          {{'belaqi-user-location-slider.create-new-location' | translate}}
-        </ion-button>
-      </div>
     </div>
   </ion-slide>
   <ion-slide *ngIf="!belaqiLocations?.length">
-    <div class="create-new-location-slide">
-      <ion-button (click)="createNewLocation()">
-        {{'belaqi-user-location-slider.create-new-location' | translate}}
-      </ion-button>
-      <hr />
-      <div class="settings">
-        <ion-button (click)="navigateSettings()">
-          <ion-icon slot="start" name="settings"></ion-icon>
-          <span class="nav-butto-label">{{'settings.header' | translate}}</span>
-        </ion-button>
-      </div>
-    </div>
-    <hr />
+    <last-slide></last-slide>
   </ion-slide>
 </ion-slides>

@@ -1,0 +1,21 @@
+<ion-list mode="md">
+  <ion-row text-center class="location-header">
+    <ion-label text-wrap *ngIf="header">
+      <ion-text class="location-label">
+        <h2>{{header?.label}}</h2>
+      </ion-text>
+      <p class="date-label">
+        <span>{{'menu.lastUpdate' | translate}}: </span>
+        <span class="date-label">{{header?.date | date : 'd MMMM y, HH:mm': null:
+          translateSrvc.currentLang}} </span>
+        <span *ngIf="header?.current"> - {{'belaqi-user-location-slider.current-location' |
+          translate}}</span>
+      </p>
+    </ion-label>
+    <div class="settingsButton">
+      <ion-button (click)="navigateSettings()">
+        <ion-icon slot="icon-only" name="settings"></ion-icon>
+      </ion-button>
+    </div>
+  </ion-row>
+</ion-list>

@@ -53,7 +53,7 @@
         <div class="map" *ngIf="view.phenomenonLabel">
           <customized-station-map-selector [mapId]="view.mapId" [serviceUrl]="view.providerUrl"
             [filter]="view.phenomenonFilter" [avoidZoomToSelection]="view.avoidZoomToSelection"
-            [statusIntervals]="view.true" [ignoreStatusIntervalIfBeforeDuration]="view.statusIntervalDuration"
+            [ignoreStatusIntervalIfBeforeDuration]="view.statusIntervalDuration"
             [zoomControlOptions]="view.zoomControlOptions" [overlayMaps]="view.overlayMaps" [fitBounds]="view.fitBounds"
             [markerSelectorGenerator]="view.markerSelectorGenerator" (onSelected)="view.onStationSelected($event)"
             [cluster]="view.clusterStations" (onContentLoading)="view.onMapLoading($event)"
@@ -82,53 +82,53 @@
           </div>
         </div>
         <div class='legend' *ngSwitchCase="'DE'">
-            <div [ngSwitch]="view.legendId">
-              <object style='width:100%' *ngSwitchCase="'index'" data='../../assets/svg/index_DE_wide.svg'></object>
-              <object style='width:100%' *ngSwitchCase="'no2_hmean'" data='../../assets/svg/no2_hmean_DE_wide.svg'></object>
-              <object style='width:100%' *ngSwitchCase="'no2_anmean'" data='../../assets/svg/no2_anmean_DE_wide.svg'></object>
-              <object style='width:100%' *ngSwitchCase="'o3_hmean'" data='../../assets/svg/o3_hmean_DE_wide.svg'></object>
-              <object style='width:100%' *ngSwitchCase="'pm10_hmean'" data='../../assets/svg/pm10_hmean_DE_wide.svg'></object>
-              <object style='width:100%' *ngSwitchCase="'pm10_24hmean'" data='../../assets/svg/pm10_24hmean_DE_wide.svg'></object>
-              <object style='width:100%' *ngSwitchCase="'pm10_anmean'" data='../../assets/svg/pm10_anmean_DE_wide.svg'></object>
-              <object style='width:100%' *ngSwitchCase="'pm25_hmean'" data='../../assets/svg/pm25_hmean_DE_wide.svg'></object>
-              <object style='width:100%' *ngSwitchCase="'pm25_24hmean'" data='../../assets/svg/pm25_24hmean_DE_wide.svg'></object>
-              <object style='width:100%' *ngSwitchCase="'pm25_anmean'" data='../../assets/svg/pm25_anmean_DE_wide.svg'></object>
-              <object style='width:100%' *ngSwitchCase="'bc_anmean'" data='../../assets/svg/bc_anmean_DE_wide.svg'></object>
-              <object style='width:100%' *ngSwitchCase="'bc_hmean'" data='../../assets/svg/bc_hmean_DE_wide.svg'></object>
-            </div>
+          <div [ngSwitch]="view.legendId">
+            <object style='width:100%' *ngSwitchCase="'index'" data='../../assets/svg/index_DE_wide.svg'></object>
+            <object style='width:100%' *ngSwitchCase="'no2_hmean'" data='../../assets/svg/no2_hmean_DE_wide.svg'></object>
+            <object style='width:100%' *ngSwitchCase="'no2_anmean'" data='../../assets/svg/no2_anmean_DE_wide.svg'></object>
+            <object style='width:100%' *ngSwitchCase="'o3_hmean'" data='../../assets/svg/o3_hmean_DE_wide.svg'></object>
+            <object style='width:100%' *ngSwitchCase="'pm10_hmean'" data='../../assets/svg/pm10_hmean_DE_wide.svg'></object>
+            <object style='width:100%' *ngSwitchCase="'pm10_24hmean'" data='../../assets/svg/pm10_24hmean_DE_wide.svg'></object>
+            <object style='width:100%' *ngSwitchCase="'pm10_anmean'" data='../../assets/svg/pm10_anmean_DE_wide.svg'></object>
+            <object style='width:100%' *ngSwitchCase="'pm25_hmean'" data='../../assets/svg/pm25_hmean_DE_wide.svg'></object>
+            <object style='width:100%' *ngSwitchCase="'pm25_24hmean'" data='../../assets/svg/pm25_24hmean_DE_wide.svg'></object>
+            <object style='width:100%' *ngSwitchCase="'pm25_anmean'" data='../../assets/svg/pm25_anmean_DE_wide.svg'></object>
+            <object style='width:100%' *ngSwitchCase="'bc_anmean'" data='../../assets/svg/bc_anmean_DE_wide.svg'></object>
+            <object style='width:100%' *ngSwitchCase="'bc_hmean'" data='../../assets/svg/bc_hmean_DE_wide.svg'></object>
           </div>
-          <div class='legend' *ngSwitchCase="'FR'">
-              <div [ngSwitch]="view.legendId">
-                <object style='width:100%' *ngSwitchCase="'index'" data='../../assets/svg/index_FR_wide.svg'></object>
-                <object style='width:100%' *ngSwitchCase="'no2_hmean'" data='../../assets/svg/no2_hmean_FR_wide.svg'></object>
-                <object style='width:100%' *ngSwitchCase="'no2_anmean'" data='../../assets/svg/no2_anmean_FR_wide.svg'></object>
-                <object style='width:100%' *ngSwitchCase="'o3_hmean'" data='../../assets/svg/o3_hmean_FR_wide.svg'></object>
-                <object style='width:100%' *ngSwitchCase="'pm10_hmean'" data='../../assets/svg/pm10_hmean_FR_wide.svg'></object>
-                <object style='width:100%' *ngSwitchCase="'pm10_24hmean'" data='../../assets/svg/pm10_24hmean_FR_wide.svg'></object>
-                <object style='width:100%' *ngSwitchCase="'pm10_anmean'" data='../../assets/svg/pm10_anmean_FR_wide.svg'></object>
-                <object style='width:100%' *ngSwitchCase="'pm25_hmean'" data='../../assets/svg/pm25_hmean_FR_wide.svg'></object>
-                <object style='width:100%' *ngSwitchCase="'pm25_24hmean'" data='../../assets/svg/pm25_24hmean_FR_wide.svg'></object>
-                <object style='width:100%' *ngSwitchCase="'pm25_anmean'" data='../../assets/svg/pm25_anmean_FR_wide.svg'></object>
-                <object style='width:100%' *ngSwitchCase="'bc_anmean'" data='../../assets/svg/bc_anmean_FR_wide.svg'></object>
-                <object style='width:100%' *ngSwitchCase="'bc_hmean'" data='../../assets/svg/bc_hmean_FR_wide.svg'></object>
-              </div>
-            </div>
-            <div class='legend' *ngSwitchCase="'NL'">
-                <div [ngSwitch]="view.legendId">
-                  <object style='width:100%' *ngSwitchCase="'index'" data='../../assets/svg/index_NL_wide.svg'></object>
-                  <object style='width:100%' *ngSwitchCase="'no2_hmean'" data='../../assets/svg/no2_hmean_NL_wide.svg'></object>
-                  <object style='width:100%' *ngSwitchCase="'no2_anmean'" data='../../assets/svg/no2_anmean_NL_wide.svg'></object>
-                  <object style='width:100%' *ngSwitchCase="'o3_hmean'" data='../../assets/svg/o3_hmean_NL_wide.svg'></object>
-                  <object style='width:100%' *ngSwitchCase="'pm10_hmean'" data='../../assets/svg/pm10_hmean_NL_wide.svg'></object>
-                  <object style='width:100%' *ngSwitchCase="'pm10_24hmean'" data='../../assets/svg/pm10_24hmean_NL_wide.svg'></object>
-                  <object style='width:100%' *ngSwitchCase="'pm10_anmean'" data='../../assets/svg/pm10_anmean_NL_wide.svg'></object>
-                  <object style='width:100%' *ngSwitchCase="'pm25_hmean'" data='../../assets/svg/pm25_hmean_NL_wide.svg'></object>
-                  <object style='width:100%' *ngSwitchCase="'pm25_24hmean'" data='../../assets/svg/pm25_24hmean_NL_wide.svg'></object>
-                  <object style='width:100%' *ngSwitchCase="'pm25_anmean'" data='../../assets/svg/pm25_anmean_NL_wide.svg'></object>
-                  <object style='width:100%' *ngSwitchCase="'bc_anmean'" data='../../assets/svg/bc_anmean_NL_wide.svg'></object>
-                  <object style='width:100%' *ngSwitchCase="'bc_hmean'" data='../../assets/svg/bc_hmean_NL_wide.svg'></object>
-                </div>
-              </div>
+        </div>
+        <div class='legend' *ngSwitchCase="'FR'">
+          <div [ngSwitch]="view.legendId">
+            <object style='width:100%' *ngSwitchCase="'index'" data='../../assets/svg/index_FR_wide.svg'></object>
+            <object style='width:100%' *ngSwitchCase="'no2_hmean'" data='../../assets/svg/no2_hmean_FR_wide.svg'></object>
+            <object style='width:100%' *ngSwitchCase="'no2_anmean'" data='../../assets/svg/no2_anmean_FR_wide.svg'></object>
+            <object style='width:100%' *ngSwitchCase="'o3_hmean'" data='../../assets/svg/o3_hmean_FR_wide.svg'></object>
+            <object style='width:100%' *ngSwitchCase="'pm10_hmean'" data='../../assets/svg/pm10_hmean_FR_wide.svg'></object>
+            <object style='width:100%' *ngSwitchCase="'pm10_24hmean'" data='../../assets/svg/pm10_24hmean_FR_wide.svg'></object>
+            <object style='width:100%' *ngSwitchCase="'pm10_anmean'" data='../../assets/svg/pm10_anmean_FR_wide.svg'></object>
+            <object style='width:100%' *ngSwitchCase="'pm25_hmean'" data='../../assets/svg/pm25_hmean_FR_wide.svg'></object>
+            <object style='width:100%' *ngSwitchCase="'pm25_24hmean'" data='../../assets/svg/pm25_24hmean_FR_wide.svg'></object>
+            <object style='width:100%' *ngSwitchCase="'pm25_anmean'" data='../../assets/svg/pm25_anmean_FR_wide.svg'></object>
+            <object style='width:100%' *ngSwitchCase="'bc_anmean'" data='../../assets/svg/bc_anmean_FR_wide.svg'></object>
+            <object style='width:100%' *ngSwitchCase="'bc_hmean'" data='../../assets/svg/bc_hmean_FR_wide.svg'></object>
+          </div>
+        </div>
+        <div class='legend' *ngSwitchCase="'NL'">
+          <div [ngSwitch]="view.legendId">
+            <object style='width:100%' *ngSwitchCase="'index'" data='../../assets/svg/index_NL_wide.svg'></object>
+            <object style='width:100%' *ngSwitchCase="'no2_hmean'" data='../../assets/svg/no2_hmean_NL_wide.svg'></object>
+            <object style='width:100%' *ngSwitchCase="'no2_anmean'" data='../../assets/svg/no2_anmean_NL_wide.svg'></object>
+            <object style='width:100%' *ngSwitchCase="'o3_hmean'" data='../../assets/svg/o3_hmean_NL_wide.svg'></object>
+            <object style='width:100%' *ngSwitchCase="'pm10_hmean'" data='../../assets/svg/pm10_hmean_NL_wide.svg'></object>
+            <object style='width:100%' *ngSwitchCase="'pm10_24hmean'" data='../../assets/svg/pm10_24hmean_NL_wide.svg'></object>
+            <object style='width:100%' *ngSwitchCase="'pm10_anmean'" data='../../assets/svg/pm10_anmean_NL_wide.svg'></object>
+            <object style='width:100%' *ngSwitchCase="'pm25_hmean'" data='../../assets/svg/pm25_hmean_NL_wide.svg'></object>
+            <object style='width:100%' *ngSwitchCase="'pm25_24hmean'" data='../../assets/svg/pm25_24hmean_NL_wide.svg'></object>
+            <object style='width:100%' *ngSwitchCase="'pm25_anmean'" data='../../assets/svg/pm25_anmean_NL_wide.svg'></object>
+            <object style='width:100%' *ngSwitchCase="'bc_anmean'" data='../../assets/svg/bc_anmean_NL_wide.svg'></object>
+            <object style='width:100%' *ngSwitchCase="'bc_hmean'" data='../../assets/svg/bc_hmean_NL_wide.svg'></object>
+          </div>
+        </div>
       </div>
       <div class="panel">
         <ion-toolbar>
@@ -150,25 +150,13 @@
             snaps="true" [(ngModel)]="view.sliderPosition"></ion-range>
           <!-- BelAQI-->
           <ion-range *ngIf="!view.showYearlyMean && !view.show24hourMean && !view.disabled" mode="md"
-            (ionChange)="view.onSliderChange()" min="1" max="5" step="1" snaps="true"
-            [(ngModel)]="view.sliderPosition"></ion-range>
+            (ionChange)="view.onSliderChange()" min="1" max="5" step="1" snaps="true" [(ngModel)]="view.sliderPosition">
+          </ion-range>
         </ion-toolbar>
       </div>
     </div>
   </ion-slide>
   <ion-slide *ngIf="!belaqiMapviews?.length">
-      <div class="create-new-location-slide">
-        <ion-button (click)="createNewLocation()">
-          {{'belaqi-user-location-slider.create-new-location' | translate}}
-        </ion-button>
-        <hr />
-        <div class="settings">
-          <ion-button (click)="navigateSettings()">
-            <ion-icon slot="start" name="settings"></ion-icon>
-            <span class="nav-butto-label">{{'settings.header' | translate}}</span>
-          </ion-button>
-        </div>
-      </div>
-      <hr />
-    </ion-slide>
+    <last-slide></last-slide>
+  </ion-slide>
 </ion-slides>

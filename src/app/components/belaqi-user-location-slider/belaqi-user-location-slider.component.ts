@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, OnDestroy, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, Output, ViewChild } from '@angular/core';
 import { IonSlides, ModalController, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
@@ -9,18 +9,11 @@ import { NetworkAlertService } from '../../services/network-alert/network-alert.
 import { RefreshHandler } from '../../services/refresh/refresh.service';
 import { StartPageSettingsService } from '../../services/start-page-settings/start-page-settings.service';
 import { UserLocation, UserLocationListService } from '../../services/user-location-list/user-location-list.service';
-import { ModalUserLocationCreationComponent } from '../modal-user-location-creation/modal-user-location-creation.component';
 import { ModalUserLocationListComponent } from '../modal-user-location-list/modal-user-location-list.component';
 import {
   PhenomenonLocationSelection,
 } from '../nearest-measuring-station-panel/nearest-measuring-station-panel-entry.component';
-import { ModalSettingsComponent } from '../settings/modal-settings/modal-settings.component';
-
-export interface HeaderContent {
-  label: string;
-  date: Date;
-  current: boolean;
-}
+import { HeaderContent } from '../slider-header/slider-header.component';
 
 export interface BelaqiSelection {
   stationlocation?: {
@@ -42,7 +35,7 @@ export interface BelaqiSelection {
   templateUrl: './belaqi-user-location-slider.component.html',
   styleUrls: ['./belaqi-user-location-slider.component.scss'],
 })
-export class BelaqiUserLocationSliderComponent implements AfterViewInit, OnDestroy {
+export class BelaqiUserLocationSliderComponent implements OnDestroy {
 
   @ViewChild('slider')
   slider: IonSlides;
@@ -83,15 +76,12 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit, OnDestr
   constructor(
     private userLocationService: UserLocationListService,
     private startPageSettingsService: StartPageSettingsService,
-    // private locatedTimeseriesProvider: LocatedTimeseriesService,
     private ircelineSettings: IrcelineSettingsService,
     private locate: LocateService,
     private networkAlert: NetworkAlertService,
-    // private nav: NavController,
     protected translateSrvc: TranslateService,
     protected modalCtrl: ModalController,
     protected refreshHandler: RefreshHandler,
-    // private popoverCtrl: PopoverController,
     private toast: ToastController
   ) {
     this.locate.getLocationStatusAsObservable().subscribe(locationStatus => {
@@ -116,13 +106,6 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit, OnDestr
     if (this.slider) {
       this.slider.slideTo(0, 0);
     }
-  }
-
-  public ngAfterViewInit() {
-    // this.setHeight();
-    // if (this.slider) {
-    //   this.slider.autoHeight = true;
-    // }
   }
 
   public ngOnDestroy(): void {
@@ -165,10 +148,6 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit, OnDestr
     });
   }
 
-  public createNewLocation() {
-    this.modalCtrl.create({ component: ModalUserLocationCreationComponent }).then(modal => modal.present());
-  }
-
   public openUserLocation() {
     this.modalCtrl.create({ component: ModalUserLocationListComponent }).then(modal => modal.present());
   }
@@ -177,32 +156,14 @@ export class BelaqiUserLocationSliderComponent implements AfterViewInit, OnDestr
     this.slider.getActiveIndex().then(idx => this.updateLocationSelection(idx));
   }
 
-  public navigateSettings() {
-    this.modalCtrl.create({ component: ModalSettingsComponent }).then(modal => modal.present());
-  }
-
-  // public navigateFAQ() {
-  //   this.modalCtrl.create(FAQPage).present();
-  // }
-
   public isLocateDenied(): boolean {
     return this.locate.getLocationStatus() === LocationStatus.DENIED;
-  }
-
-  private setHeight() {
-    // const outerElem = document.querySelector('.scroll-content');
-    // const headerHeight = document.querySelector('.location-header').clientHeight;
-    // const height = outerElem.clientHeight - headerHeight - (13 * 2) - 19;
-    // this.slidesHeight = `${height}px`;
   }
 
   private updateLocationSelection(idx: number) {
     this.setHeader(idx);
     if (this.slider) {
-      this.setHeight();
       if (idx <= this.belaqiLocations.length - 1) {
-        // this.locatedTimeseriesProvider.setSelectedIndex(idx);
-        // this.locatedTimeseriesProvider.removeAllDatasets();
       } else {
         this.headerContent.emit(null);
       }

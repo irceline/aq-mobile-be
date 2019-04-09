@@ -1,10 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
-import { BelaqiMapSliderComponent, HeaderContent } from '../components/belaqi-map-slider/belaqi-map-slider.component';
+import { BelaqiMapSliderComponent } from '../components/belaqi-map-slider/belaqi-map-slider.component';
 import { DrawerState } from '../components/overlay-info-drawer/overlay-info-drawer';
-import { ModalSettingsComponent } from '../components/settings/modal-settings/modal-settings.component';
+import { HeaderContent } from '../components/slider-header/slider-header.component';
 import { AnalyticsService } from '../services/analytics/analytics.service';
 
 @Component({
@@ -21,11 +20,10 @@ export class MapPage implements OnInit {
   @ViewChild('slider')
   private sliderComponent: BelaqiMapSliderComponent;
 
-  public sliderHeaderContent: HeaderContent;
+  public sliderHeader: HeaderContent;
 
   constructor(
     public translateSrvc: TranslateService,
-    private modalCtrl: ModalController,
     private analytics: AnalyticsService,
   ) { }
 
@@ -36,24 +34,6 @@ export class MapPage implements OnInit {
   public ionViewDidEnter() {
     this.sliderComponent.changeToMap();
     this.analytics.logEvent('open_map');
-  }
-
-  public setHeaderContent(headerContent: HeaderContent) {
-    let visibility;
-    if (headerContent) {
-      visibility = 'inherit';
-      this.sliderHeaderContent = headerContent;
-    } else {
-      visibility = 'hidden';
-    }
-    const locationHeaderElems = document.querySelectorAll('.location-header');
-    for (let i = 0; i < locationHeaderElems.length; i++) {
-      (locationHeaderElems[i] as HTMLElement).style.visibility = visibility;
-    }
-  }
-
-  public navigateSettings() {
-    this.modalCtrl.create({ component: ModalSettingsComponent }).then(modal => modal.present());
   }
 
 }

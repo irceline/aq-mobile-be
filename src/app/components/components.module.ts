@@ -21,6 +21,7 @@ import {
 } from './customized-station-map-selector/customized-station-map-selector.component';
 import { ExtendedGeometryMapViewerComponent } from './extended-geometry-map-viewer/extended-geometry-map-viewer.component';
 import { GeolocationEnabledComponent } from './geolocation-enabled/geolocation-enabled.component';
+import { LastSlideComponent } from './last-slide/last-slide.component';
 import { LocationSelectionComponent } from './location-selection/location-selection.component';
 import { MobileGeosearchControlComponent } from './mobile-geosearch-control/mobile-geosearch-control.component';
 import { ModalEditUserLocationComponent } from './modal-edit-user-location/modal-edit-user-location.component';
@@ -48,6 +49,7 @@ import {
 } from './settings/push-notification-subscriptions-settings/push-notification-subscriptions-settings.component';
 import { StartPageSettingsComponent } from './settings/start-page-settings/start-page-settings.component';
 import { UserLocationsSettingsComponent } from './settings/user-locations-settings/user-locations-settings.component';
+import { SliderHeaderComponent } from './slider-header/slider-header.component';
 import { SubIndexPanelEntryComponent } from './sub-index-panel/sub-index-panel-entry.component';
 import { SubIndexPanelInformationPopupComponent } from './sub-index-panel/sub-index-panel-information-popup.component';
 import { SubIndexPanelComponent } from './sub-index-panel/sub-index-panel.component';
@@ -69,6 +71,7 @@ const COMPONENTS = [
   CustomizedStationMapSelectorComponent,
   ExtendedGeometryMapViewerComponent,
   GeolocationEnabledComponent,
+  LastSlideComponent,
   LocationSelectionComponent,
   MobileGeosearchControlComponent,
   ModalEditUserLocationComponent,
@@ -85,6 +88,7 @@ const COMPONENTS = [
   OverlayInfoDrawerComponent,
   PushNotificationComponent,
   PushNotificationSubscriptionsSettingsComponent,
+  SliderHeaderComponent,
   StartPageSettingsComponent,
   SubIndexPanelComponent,
   SubIndexPanelEntryComponent,
