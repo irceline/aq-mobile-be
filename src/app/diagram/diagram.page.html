@@ -1,3 +1,26 @@
 <ion-content>
-
+  <div style="margin-top: 45px;">
+    <ion-list mode="md">
+      <ion-row text-center class="location-header">
+        <ion-label text-wrap *ngIf="sliderHeaderContent">
+          <ion-text class="location-label">
+            <h2>{{sliderHeaderContent?.label}}</h2>
+          </ion-text>
+          <p class="date-label">
+            <span>{{'menu.lastUpdate' | translate}}: </span>
+            <span class="date-label">{{sliderHeaderContent?.date | date : 'd MMMM y, HH:mm': null:
+                  translateSrvc.currentLang}} </span>
+            <span *ngIf="sliderHeaderContent?.current"> - {{'belaqi-user-location-slider.current-location' |
+                  translate}}</span>
+          </p>
+        </ion-label>
+        <div class="settingsButton">
+          <ion-button (click)="navigateSettings()">
+            <ion-icon slot="icon-only" name="settings"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-row>
+    </ion-list>
+    <belaqi-diagram-slider #slider (headerContent)="setHeaderContent($event)"></belaqi-diagram-slider>
+  </div>
 </ion-content>

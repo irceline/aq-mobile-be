@@ -11,6 +11,7 @@ import { AnnualMeanPanelInformationPopupComponent } from './annual-mean-panel/an
 import { AnnualMeanPanelComponent } from './annual-mean-panel/annual-mean-panel.component';
 import { BelaqiChartInformationComponent } from './belaqi-chart/belaqi-chart-information.component';
 import { BelaqiChartComponent } from './belaqi-chart/belaqi-chart.component';
+import { BelaqiDiagramSliderComponent } from './belaqi-diagram-slider/belaqi-diagram-slider.component';
 import { BelaqiMapSliderComponent } from './belaqi-map-slider/belaqi-map-slider.component';
 import { BelaqiUserLocationSliderComponent } from './belaqi-user-location-slider/belaqi-user-location-slider.component';
 import { BelaqiWheelInformationComponent } from './belaqi-wheel/belaqi-wheel-information.component';
@@ -59,8 +60,9 @@ const COMPONENTS = [
   AnnualMeanPanelInformationPopupComponent,
   BelaqiChartComponent,
   BelaqiChartInformationComponent,
-  BelaqiUserLocationSliderComponent,
+  BelaqiDiagramSliderComponent,
   BelaqiMapSliderComponent,
+  BelaqiUserLocationSliderComponent,
   BelaqiWheelComponent,
   BelaqiWheelInformationComponent,
   CommonSettingsComponent,
