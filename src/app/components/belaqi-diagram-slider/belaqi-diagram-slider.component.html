@@ -1,22 +1,14 @@
 <ion-slides pager #slider (ionSlideDidChange)="slideChanged()" [options]="sliderOptions">
   <ion-slide *ngFor="let view of diagramViews">
     <div class="container">
-      
+      <div class="chart">
+        <single-chart [location]="view.location" [data]="view.dataNO2" [loading]="view.loadingNO2" [timespan]="timespan"
+          [label]="view.labelNO2"></single-chart>
+      </div>
+
     </div>
   </ion-slide>
-  <ion-slide *ngIf="!belaqiMapviews?.length">
-    <div class="create-new-location-slide">
-      <ion-button (click)="createNewLocation()">
-        {{'belaqi-user-location-slider.create-new-location' | translate}}
-      </ion-button>
-      <hr />
-      <div class="settings">
-        <ion-button (click)="navigateSettings()">
-          <ion-icon slot="start" name="settings"></ion-icon>
-          <span class="nav-butto-label">{{'settings.header' | translate}}</span>
-        </ion-button>
-      </div>
-    </div>
-    <hr />
+  <ion-slide *ngIf="!diagramViews?.length">
+    <last-slide></last-slide>
   </ion-slide>
 </ion-slides>

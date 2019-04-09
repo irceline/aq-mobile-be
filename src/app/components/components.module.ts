@@ -49,6 +49,7 @@ import {
 } from './settings/push-notification-subscriptions-settings/push-notification-subscriptions-settings.component';
 import { StartPageSettingsComponent } from './settings/start-page-settings/start-page-settings.component';
 import { UserLocationsSettingsComponent } from './settings/user-locations-settings/user-locations-settings.component';
+import { SingleChartComponent } from './single-chart/single-chart.component';
 import { SliderHeaderComponent } from './slider-header/slider-header.component';
 import { SubIndexPanelEntryComponent } from './sub-index-panel/sub-index-panel-entry.component';
 import { SubIndexPanelInformationPopupComponent } from './sub-index-panel/sub-index-panel-information-popup.component';
@@ -88,6 +89,7 @@ const COMPONENTS = [
   OverlayInfoDrawerComponent,
   PushNotificationComponent,
   PushNotificationSubscriptionsSettingsComponent,
+  SingleChartComponent,
   SliderHeaderComponent,
   StartPageSettingsComponent,
   SubIndexPanelComponent,

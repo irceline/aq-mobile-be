@@ -19,7 +19,7 @@ export interface NearestTimeseries {
 @Injectable()
 export class NearestTimeseriesService {
 
-  private maximumSearchCounter: number = 5;
+  private maximumSearchCounter = 5;
 
   constructor(
     private api: DatasetApiInterface,
@@ -36,7 +36,7 @@ export class NearestTimeseriesService {
           copy.forEach((station: DistancedStation) => {
             const point = station.geometry as GeoJSON.Point;
             station.distance = this.distanceInKmBetweenEarthCoordinates(lat, lon, point.coordinates[1], point.coordinates[0]);
-          })
+          });
           copy.sort((a, b) => a.distance - b.distance);
           if (copy.length > 0) {
             this.getNextSeries(url, phenomenonId, copy, 0, observer);
@@ -55,7 +55,7 @@ export class NearestTimeseriesService {
   ) {
     if (index < stations.length - 1) {
       const distance = stations[index].distance;
-      var counter = 0;
+      let counter = 0;
       this.ircelineSettingsProv.getSettings(false).subscribe(settings => {
         this.api.getTimeseries(url, {
           phenomenon: phenomenonId,
@@ -78,7 +78,7 @@ export class NearestTimeseriesService {
                   counter++;
                   this.getNextSeries(url, phenomenonId, stations, index + 1, observer);
                 } else {
-                  observer.error("Could not get valid Timeseries from " + this.maximumSearchCounter + " nearest stations.");
+                  observer.error('Could not get valid Timeseries from ' + this.maximumSearchCounter + ' nearest stations.');
                   observer.complete();
                 }
               }
