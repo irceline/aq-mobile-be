@@ -278,14 +278,6 @@ export class BelaqiMapSliderComponent implements OnDestroy {
     this.slider.getActiveIndex().then(idx => this.setHeader(idx));
   }
 
-  public navigateSettings() {
-    this.modalCtrl.create({ component: ModalSettingsComponent }).then(modal => modal.present());
-  }
-
-  public createNewLocation() {
-    this.modalCtrl.create({ component: ModalUserLocationCreationComponent }).then(modal => modal.present());
-  }
-
 }
 
 class MapView {

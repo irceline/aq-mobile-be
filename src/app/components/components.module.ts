@@ -20,6 +20,7 @@ import {
 } from './customized-station-map-selector/customized-station-map-selector.component';
 import { ExtendedGeometryMapViewerComponent } from './extended-geometry-map-viewer/extended-geometry-map-viewer.component';
 import { GeolocationEnabledComponent } from './geolocation-enabled/geolocation-enabled.component';
+import { LastSlideComponent } from './last-slide/last-slide.component';
 import { LocationSelectionComponent } from './location-selection/location-selection.component';
 import { MobileGeosearchControlComponent } from './mobile-geosearch-control/mobile-geosearch-control.component';
 import { ModalEditUserLocationComponent } from './modal-edit-user-location/modal-edit-user-location.component';
@@ -68,6 +69,7 @@ const COMPONENTS = [
   CustomizedStationMapSelectorComponent,
   ExtendedGeometryMapViewerComponent,
   GeolocationEnabledComponent,
+  LastSlideComponent,
   LocationSelectionComponent,
   MobileGeosearchControlComponent,
   ModalEditUserLocationComponent,
