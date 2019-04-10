@@ -61,20 +61,17 @@ export class SingleChartComponent implements OnChanges {
         animation: {
           duration: 300
         },
-        // annotation: {
-        //   drawTime: 'beforeDatasetsDraw',
-        //   events: ['click'],
-        //   dblClickSpeed: 350,
-        //   annotations: [{
-        //     id: 'currentline',
-        //     type: 'line',
-        //     mode: 'vertical',
-        //     scaleID: 'x-axis-0',
-        //     value: this.location.date,
-        //     borderColor: '#91c0d5',
-        //     borderWidth: 3,
-        //   }]
-        // },
+        annotation: {
+          drawTime: 'beforeDatasetsDraw',
+          annotations: [{
+            type: 'box',
+            id: 'a-box-1',
+            xScaleID: 'x-axis-0',
+            xMin: new Date().setHours(0, 0, 0, 0),
+            xMax: new Date(this.timespan.to),
+            backgroundColor: 'rgba(0,0,0,0.1)',
+          }]
+        },
         scales: {
           yAxes: [{
             ticks: {
@@ -96,16 +93,16 @@ export class SingleChartComponent implements OnChanges {
               }
             },
             ticks: {
-              source: 'data',
+              // source: 'data',
               maxRotation: 0,
-              callback: (val, i, values) => {
-                const hours = this.location.date.getHours() % 6;
-                if (new Date(values[i].value).getHours() % 6 === hours) {
-                  return val;
-                } else {
-                  return '';
-                }
-              }
+              // callback: (val, i, values) => {
+              //   const hours = this.location.date.getHours() % 6;
+              //   if (new Date(values[i].value).getHours() % 6 === hours) {
+              //     return val;
+              //   } else {
+              //     return '';
+              //   }
+              // }
             }
           }],
         },
