@@ -1,7 +1,9 @@
 <div class="chart-label">{{label}}</div>
 <div class="chart-wrapper">
-  <div [hidden]="error" class="chart">
+  <div [hidden]="!loading">
+    {{'single-chart.loading' | translate}}
+  </div>
+  <div [hidden]="loading">
     <canvas #chart></canvas>
   </div>
-  <div *ngIf="error" class="error">{{'belaqi-chart.error' | translate }}</div>
 </div>

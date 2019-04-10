@@ -401,6 +401,9 @@
   "show-geometry": {
     "header": "locatie van het station"
   },
+  "single-chart": {
+		"loading": ""
+	},
   "start": {
     "overlay": {
       "content-p1": "De impact van de luchtkwaliteit wordt berekend aan de hand van de luchtkwaliteitsindex. Dat is een cijfer tussen 1 en 10, waarbij 10 staat voor erg slechte en 1 voor uitstekende luchtkwaliteit. De app baseert zich voor deze score op data van meetstations in heel België, het weer en verkeer en relevante verontreinigende stoffen.",

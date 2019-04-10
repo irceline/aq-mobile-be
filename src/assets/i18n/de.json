@@ -401,6 +401,9 @@
 	"show-geometry": {
 		"header": "Position der Überwachungsstation"
 	},
+	"single-chart": {
+		"loading": "Lädt..."
+	},
 	"start": {
     "overlay": {
       "content-p1": "Der Einfluss der Luftqualität wird auf der Grundlage des Luftqualitätsindex berechnet. Das ist eine Zahl zwischen 1 und 10, wobei 10 für sehr schlecht und 1 für ausgezeichnete Luftqualität steht. Für diese Bewertung basiert die App auf Daten von Überwachungsstationen in ganz Belgien, Wetter und Verkehr sowie relevanten Schadstoffen.",

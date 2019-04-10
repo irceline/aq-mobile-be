@@ -189,7 +189,8 @@ class DiagramView {
       (series) => this.labelPM10 = this.createLabel(series),
       (loading) => this.loadingPM10 = loading,
       (value) => this.belaqiSrvc.getColorForIndex(this.categorizeValSrvc.categorize(value, MainPhenomenon.PM10)),
-      (data) => this.dataPM10 = data
+      (data) => this.dataPM10 = data,
+      (error) => this.handleError(error)
     );
   }
 
@@ -199,7 +200,8 @@ class DiagramView {
       (series) => this.labelPM25 = this.createLabel(series),
       (loading) => this.loadingPM25 = loading,
       (value) => this.belaqiSrvc.getColorForIndex(this.categorizeValSrvc.categorize(value, MainPhenomenon.PM25)),
-      (data) => this.dataPM25 = data
+      (data) => this.dataPM25 = data,
+      (error) => this.handleError(error)
     );
   }
 
@@ -209,7 +211,8 @@ class DiagramView {
       (series) => this.labelO3 = this.createLabel(series),
       (loading) => this.loadingO3 = loading,
       (value) => this.belaqiSrvc.getColorForIndex(this.categorizeValSrvc.categorize(value, MainPhenomenon.O3)),
-      (data) => this.dataO3 = data
+      (data) => this.dataO3 = data,
+      (error) => this.handleError(error)
     );
   }
 
@@ -219,7 +222,8 @@ class DiagramView {
       (series) => this.labelBC = this.createLabel(series),
       (loading) => this.loadingBC = loading,
       (value) => 'grey',
-      (data) => this.dataBC = data
+      (data) => this.dataBC = data,
+      (error) => this.handleError(error)
     );
   }
 
@@ -229,8 +233,13 @@ class DiagramView {
       (series) => this.labelNO2 = this.createLabel(series),
       (loading) => this.loadingNO2 = loading,
       (value) => this.belaqiSrvc.getColorForIndex(this.categorizeValSrvc.categorize(value, MainPhenomenon.NO2)),
-      (data) => this.dataNO2 = data
+      (data) => this.dataNO2 = data,
+      (error) => this.handleError(error)
     );
+  }
+
+  private handleError(error: any) {
+    // TODO what should happen?
   }
 
   private createLabel(series: Timeseries): string {
@@ -242,7 +251,8 @@ class DiagramView {
     setLabel: (series: Timeseries) => void,
     setLoading: (loading: boolean) => void,
     setColor: (value: number) => string,
-    setData: (data: DataEntry[]) => void
+    setData: (data: DataEntry[]) => void,
+    setError: (error: any) => void
   ) {
     setLoading(true);
     this.nearestTimeseries.determineNextTimeseries(
@@ -254,16 +264,24 @@ class DiagramView {
         timestamp: number;
         value: number;
       }>(nearest.series.id, nearest.series.url, this.timespan)
-        .pipe(map(res => {
-          return res.values.map(e => {
-            return {
-              timestamp: e.timestamp,
-              value: e.value,
-              color: setColor(e.value)
-            } as DataEntry;
-          });
-        }))
-        .subscribe(res => setData(res));
+        .pipe(
+          map(res => this.mapValues(res, setColor))
+        )
+        .subscribe(
+          res => setData(res),
+          error => setError(error),
+          () => setLoading(false)
+        );
+    });
+  }
+
+  private mapValues(res, setColor: (value: number) => string): DataEntry[] {
+    return res.values.map(e => {
+      return {
+        timestamp: e.timestamp,
+        value: e.value,
+        color: setColor(e.value)
+      } as DataEntry;
     });
   }
 }
