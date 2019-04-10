@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from
 import { FirstLastValue, StatusIntervalResolverService, Timeseries } from '@helgoland/core';
 import { Point } from 'geojson';
 
+import { sliceStationLabel } from '../../model/helper';
 import {
   NearestTimeseriesManagerService,
 } from '../../services/nearest-timeseries-manager/nearest-timeseries-manager.service';
@@ -73,7 +74,7 @@ export class NearestMeasuringStationPanelEntryComponent implements OnChanges {
           this.nearestTimeseriesManager.setNearestTimeseries(this.location, this.entry.id, nearestSeries.series.internalId);
           this.series = nearestSeries.series;
           this.stationDistance = nearestSeries.distance;
-          this.stationLabel = nearestSeries.series.station.properties.label;
+          this.stationLabel = sliceStationLabel(nearestSeries.series.station);
           const matchingInterval = this.statusIntervalResolver
             .getMatchingInterval(nearestSeries.series.lastValue.value, nearestSeries.series.statusIntervals);
           if (matchingInterval) {

@@ -1,9 +1,30 @@
 <ion-slides pager #slider (ionSlideDidChange)="slideChanged()" [options]="sliderOptions">
   <ion-slide *ngFor="let view of diagramViews">
     <div class="container">
+
       <div class="chart">
         <single-chart [location]="view.location" [data]="view.dataNO2" [loading]="view.loadingNO2" [timespan]="timespan"
           [label]="view.labelNO2"></single-chart>
+      </div>
+
+      <div class="chart">
+        <single-chart class="chart" [location]="view.location" [data]="view.dataO3" [loading]="view.loadingO3"
+          [timespan]="timespan" [label]="view.labelO3"></single-chart>
+      </div>
+
+      <div class="chart">
+        <single-chart class="chart" [location]="view.location" [data]="view.dataPM10" [loading]="view.loadingPM10"
+          [timespan]="timespan" [label]="view.labelPM10"></single-chart>
+      </div>
+
+      <div class="chart">
+        <single-chart class="chart" [location]="view.location" [data]="view.dataPM25" [loading]="view.loadingPM25"
+          [timespan]="timespan" [label]="view.labelPM25"></single-chart>
+      </div>
+
+      <div class="chart">
+        <single-chart class="chart" [location]="view.location" [data]="view.dataBC" [loading]="view.loadingBC"
+          [timespan]="timespan" [label]="view.labelBC"></single-chart>
       </div>
 
     </div>

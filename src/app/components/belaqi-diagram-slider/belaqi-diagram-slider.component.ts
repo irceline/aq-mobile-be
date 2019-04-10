@@ -3,6 +3,7 @@ import { DatasetApiInterface, DefinedTimespan, DefinedTimespanService, Timeserie
 import { IonSlides } from '@ionic/angular';
 import { map } from 'rxjs/operators';
 
+import { sliceStationLabel } from '../../model/helper';
 import { getIDForMainPhenomenon, MainPhenomenon } from '../../model/phenomenon';
 import { BelaqiIndexService } from '../../services/belaqi/belaqi.service';
 import { CategorizedValueService } from '../../services/categorized-value/categorized-value.service';
@@ -154,6 +155,18 @@ class DiagramView {
   public dataBC: DataEntry[];
   public labelBC: string;
 
+  public loadingO3: boolean;
+  public dataO3: DataEntry[];
+  public labelO3: string;
+
+  public loadingPM25: boolean;
+  public dataPM25: DataEntry[];
+  public labelPM25: string;
+
+  public loadingPM10: boolean;
+  public dataPM10: DataEntry[];
+  public labelPM10: string;
+
   constructor(
     private nearestTimeseries: NearestTimeseriesService,
     private api: DatasetApiInterface,
@@ -164,17 +177,64 @@ class DiagramView {
 
   public init() {
     this.determineNextStationNO2();
+    this.determineNextStationBC();
+    this.determineNextStationO3();
+    this.determineNextStationPM25();
+    this.determineNextStationPM10();
+  }
+
+  private determineNextStationPM10() {
+    this.determineNextStation(
+      MainPhenomenon.PM10,
+      (series) => this.labelPM10 = this.createLabel(series),
+      (loading) => this.loadingPM10 = loading,
+      (value) => this.belaqiSrvc.getColorForIndex(this.categorizeValSrvc.categorize(value, MainPhenomenon.PM10)),
+      (data) => this.dataPM10 = data
+    );
+  }
+
+  private determineNextStationPM25() {
+    this.determineNextStation(
+      MainPhenomenon.PM25,
+      (series) => this.labelPM25 = this.createLabel(series),
+      (loading) => this.loadingPM25 = loading,
+      (value) => this.belaqiSrvc.getColorForIndex(this.categorizeValSrvc.categorize(value, MainPhenomenon.PM25)),
+      (data) => this.dataPM25 = data
+    );
+  }
+
+  private determineNextStationO3() {
+    this.determineNextStation(
+      MainPhenomenon.O3,
+      (series) => this.labelO3 = this.createLabel(series),
+      (loading) => this.loadingO3 = loading,
+      (value) => this.belaqiSrvc.getColorForIndex(this.categorizeValSrvc.categorize(value, MainPhenomenon.O3)),
+      (data) => this.dataO3 = data
+    );
+  }
+
+  private determineNextStationBC() {
+    this.determineNextStation(
+      MainPhenomenon.BC,
+      (series) => this.labelBC = this.createLabel(series),
+      (loading) => this.loadingBC = loading,
+      (value) => 'grey',
+      (data) => this.dataBC = data
+    );
   }
 
   private determineNextStationNO2() {
     this.determineNextStation(
       MainPhenomenon.NO2,
-      (series) => this.labelNO2 = `${series.parameters.phenomenon.label} @ ${series.station.properties.label}`,
+      (series) => this.labelNO2 = this.createLabel(series),
       (loading) => this.loadingNO2 = loading,
       (value) => this.belaqiSrvc.getColorForIndex(this.categorizeValSrvc.categorize(value, MainPhenomenon.NO2)),
       (data) => this.dataNO2 = data
     );
+  }
 
+  private createLabel(series: Timeseries): string {
+    return `${series.parameters.phenomenon.label} @ ${sliceStationLabel(series.station)}`;
   }
 
   private determineNextStation(
@@ -207,3 +267,4 @@ class DiagramView {
     });
   }
 }
+

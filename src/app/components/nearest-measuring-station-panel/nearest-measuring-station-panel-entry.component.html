@@ -13,7 +13,7 @@
       {{stationDistance | number:'1.0-1'}}km
     </div>
     <div class="station-description" *ngIf="!loadingStationValue && stationLabel" text-wrap>
-      {{stationLabel | slice : 9 : 50}}
+      {{stationLabel}}
     </div>
   </ion-col>
 </ion-row>
