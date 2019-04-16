@@ -271,6 +271,9 @@ export class BelaqiIndexService extends ValueProvider {
           observer.error(error);
           observer.complete();
         });
+      }, error => {
+        observer.error(error);
+        observer.complete();
       });
     });
   }
@@ -329,7 +332,7 @@ export class BelaqiIndexService extends ValueProvider {
 
   private getTrends(): Observable<TrendResult> {
     // const trendUrl = 'https://www.irceline.be/tables/forecast/model/trend.php';
-    const trendUrl = 'https://www.irceline.be/air/forecast/trend.php';
+    const trendUrl = 'https://www.irceline.be/air/forecast/trends.php';
     return new Observable((observer: Observer<TrendResult>) => {
       this.ircelineSettings.getSettings().subscribe(settings => {
         const request = this.http.get<TrendResult>(trendUrl);
