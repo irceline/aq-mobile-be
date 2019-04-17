@@ -188,7 +188,7 @@ class DiagramView {
       MainPhenomenon.PM10,
       (series) => this.labelPM10 = this.createLabel(series),
       (loading) => this.loadingPM10 = loading,
-      (value) => this.belaqiSrvc.getColorForIndex(this.categorizeValSrvc.categorize(value, MainPhenomenon.PM10)),
+      (value) => 'grey',
       (data) => this.dataPM10 = data,
       (error) => this.handleError(error)
     );
@@ -199,7 +199,7 @@ class DiagramView {
       MainPhenomenon.PM25,
       (series) => this.labelPM25 = this.createLabel(series),
       (loading) => this.loadingPM25 = loading,
-      (value) => this.belaqiSrvc.getColorForIndex(this.categorizeValSrvc.categorize(value, MainPhenomenon.PM25)),
+      (value) => 'grey',
       (data) => this.dataPM25 = data,
       (error) => this.handleError(error)
     );

@@ -67,8 +67,8 @@ export class SingleChartComponent implements OnChanges {
             type: 'box',
             id: 'a-box-1',
             xScaleID: 'x-axis-0',
-            xMin: new Date().setHours(0, 0, 0, 0),
-            xMax: new Date(this.timespan.to),
+            xMin: new Date(this.timespan.from),
+            xMax: new Date().setHours(0, 0, 0, 0),
             backgroundColor: 'rgba(0,0,0,0.1)',
           }]
         },
