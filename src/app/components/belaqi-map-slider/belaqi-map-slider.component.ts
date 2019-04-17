@@ -2,7 +2,7 @@ import './boundary-canvas';
 
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, Output, ViewChild } from '@angular/core';
-import { DatasetApiInterface, ParameterFilter, Phenomenon, Platform, SettingsService, Station } from '@helgoland/core';
+import { DatasetApiInterface, ParameterFilter, Phenomenon, SettingsService, Station } from '@helgoland/core';
 import { GeoSearchOptions, LayerOptions, MapCache } from '@helgoland/map';
 import { IonSlides, ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
@@ -16,6 +16,7 @@ import {
   geoJSON,
   latLngBounds,
   LatLngExpression,
+  LatLngLiteral,
   Layer,
   marker,
   point,
@@ -27,6 +28,7 @@ import moment from 'moment';
 import { forkJoin } from 'rxjs';
 
 import { getIDForMainPhenomenon, MainPhenomenon } from '../../model/phenomenon';
+import { forecastWmsURL, realtimeWmsURL, rioifdmWmsURL } from '../../model/wms';
 import { AnnualMeanService } from '../../services/annual-mean/annual-mean.service';
 import { IrcelineSettings, IrcelineSettingsService } from '../../services/irceline-settings/irceline-settings.service';
 import { LocateService, LocationStatus } from '../../services/locate/locate.service';
@@ -38,7 +40,6 @@ import { UserLocation, UserLocationListService } from '../../services/user-locat
 import { MarkerSelectorGenerator } from '../customized-station-map-selector/customized-station-map-selector.component';
 import { DrawerState } from '../overlay-info-drawer/overlay-info-drawer';
 import { HeaderContent } from '../slider-header/slider-header.component';
-import { realtimeWmsURL, rioifdmWmsURL, forecastWmsURL } from '../../model/wms';
 
 enum PhenomenonLabel {
   BelAQI = 'BelAQI',
@@ -154,6 +155,10 @@ export class BelaqiMapSliderComponent implements OnDestroy {
   }
 
   public changeToMap() {
+    this.navigatToSelection();
+  }
+
+  private navigatToSelection() {
     if (this.mapDataService.selection) {
       const label = this.mapDataService.selection.userlocation.label;
       if (this.belaqiMapviews) {
@@ -215,7 +220,7 @@ export class BelaqiMapSliderComponent implements OnDestroy {
           setTimeout(() => {
             if (this.slider) {
               this.slider.update();
-              this.slider.slideTo(0);
+              this.navigatToSelection();
             }
             this.setHeader(0);
           }, 300);
@@ -374,6 +379,7 @@ class MapView {
       }
     }
     this.adjustSlider();
+    this.adjustPopups(true);
   }
 
   public init() {
@@ -532,18 +538,6 @@ class MapView {
     }
   }
 
-  public onStationSelected(platform: Platform) {
-    // const modal = this.modalCtrl.create(StationSelectorComponent,
-    //   {
-    //     platform,
-    //     providerUrl: this.providerUrl,
-    //     phenomenonId: this.selectedPhenomenonId
-    //   }
-    // );
-    // modal.onDidDismiss(data => { if (data) { this.navCtrl.push(DiagramPage) } });
-    // modal.present();
-  }
-
   public onMapLoading(loading: boolean) {
     this.loading = loading;
     this.cdr.detectChanges();
@@ -558,13 +552,11 @@ class MapView {
       const map = this.mapCache.getMap(this.mapId);
       const selection = this.mapDataService.selection;
       const icondiv = divIcon({ className: 'marker', iconAnchor: point(10, 40) });
-      let location;
-      let bounds;
+      const location = { lat: this.location.latitude, lng: this.location.longitude } as LatLngLiteral;
+      const bounds = latLngBounds(location, location);
       let boundsOptions: FitBoundsOptions = { padding: [200, 200], maxZoom: 12 };
       this.removePopups();
       if (selection) {
-        location = { lat: selection.userlocation.latitude, lng: selection.userlocation.longitude } as LatLngExpression;
-        bounds = latLngBounds(location, location);
         if (selection.stationlocation) {
           const station = { lat: selection.stationlocation.latitude, lng: selection.stationlocation.longitude } as LatLngExpression;
           this.nextStationPopup = popup({ autoPan: false })
@@ -574,9 +566,6 @@ class MapView {
           bounds.extend(station);
           boundsOptions = { padding: [70, 70], maxZoom: 12 };
         }
-      } else {
-        location = { lat: this.location.latitude, lng: this.location.longitude } as LatLngExpression;
-        bounds = latLngBounds(location, location);
       }
       this.userLocationMarker = marker(location, { draggable: false, icon: icondiv });
       map.addLayer(this.userLocationMarker);
@@ -654,7 +643,6 @@ class MapView {
     this.cacheService.loadFromObservable('multipolygon', request, null, 60 * 60 * 24).subscribe((geojson: GeoJSON.GeoJsonObject) => {
       this.overlayMaps = new Map<string, LayerOptions>();
       let layerId: string;
-      // let wmsUrl: string;
       let timeParam: string;
       if (this.time === TimeLabel.current) {
         forkJoin(
