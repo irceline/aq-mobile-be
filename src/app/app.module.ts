@@ -29,6 +29,7 @@ import { CategorizedValueService } from './services/categorized-value/categorize
 import {
   CustomDatasetApiInterfaceService,
 } from './services/custom-dataset-api-interface/custom-dataset-api-interface.service';
+import { DailyMeanValueService } from './services/daily-mean-value/daily-mean-value.service';
 import { GeoLabelsService } from './services/geo-labels/geo-labels.service';
 import { GeoSearchService } from './services/geo-search/geo-search.service';
 import { IrcelineSettingsService } from './services/irceline-settings/irceline-settings.service';
@@ -93,6 +94,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppVersion,
     BelaqiIndexService,
     CategorizedValueService,
+    DailyMeanValueService,
     Diagnostic,
     Firebase,
     GeoLabelsService,

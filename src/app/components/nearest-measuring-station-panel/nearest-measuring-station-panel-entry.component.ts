@@ -1,7 +1,10 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { FirstLastValue, StatusIntervalResolverService, Timeseries } from '@helgoland/core';
+import { StatusIntervalResolverService, Timeseries } from '@helgoland/core';
 import { Point } from 'geojson';
 
+import { getMainPhenomenonForID, MainPhenomenon } from '../../model/phenomenon';
+import { DailyMeanValueService } from '../../services/daily-mean-value/daily-mean-value.service';
+import { IrcelineSettingsService } from '../../services/irceline-settings/irceline-settings.service';
 import {
   NearestTimeseriesManagerService,
 } from '../../services/nearest-timeseries-manager/nearest-timeseries-manager.service';
@@ -23,7 +26,7 @@ export interface PhenomenonLocationSelection {
 export class NearestMeasuringStationPanelEntryComponent implements OnChanges {
   public stationDistance: number;
   public stationLabel: string;
-  public lastStationaryValue: FirstLastValue;
+  public lastStationaryValue: number;
   public uom: string;
   public borderColor: string;
   public loadingStationValue = true;
@@ -44,6 +47,8 @@ export class NearestMeasuringStationPanelEntryComponent implements OnChanges {
 
   constructor(
     private statusIntervalResolver: StatusIntervalResolverService,
+    private dailyMeanValueSrvc: DailyMeanValueService,
+    private ircelineSettings: IrcelineSettingsService,
     protected nearestTimeseries: NearestTimeseriesService,
     protected nearestTimeseriesManager: NearestTimeseriesManagerService
   ) { }
@@ -74,13 +79,26 @@ export class NearestMeasuringStationPanelEntryComponent implements OnChanges {
           this.series = nearestSeries.series;
           this.stationDistance = nearestSeries.distance;
           this.stationLabel = nearestSeries.series.station.properties.label;
-          const matchingInterval = this.statusIntervalResolver
-            .getMatchingInterval(nearestSeries.series.lastValue.value, nearestSeries.series.statusIntervals);
-          if (matchingInterval) {
-            this.borderColor = matchingInterval.color;
-          }
-          this.lastStationaryValue = nearestSeries.series.lastValue;
           this.uom = nearestSeries.series.uom;
+
+          const phenomenon = getMainPhenomenonForID(this.entry.phenomenonId);
+          if (phenomenon === MainPhenomenon.PM10 || phenomenon === MainPhenomenon.PM25) {
+            this.dailyMeanValueSrvc.get24hValue(
+              this.stationLabel,
+              this.location.date,
+              phenomenon
+            ).subscribe(res => {
+              this.borderColor = res.color;
+              this.lastStationaryValue = res.value;
+            });
+          } else {
+            const matchingInterval = this.statusIntervalResolver
+              .getMatchingInterval(nearestSeries.series.lastValue.value, nearestSeries.series.statusIntervals);
+            if (matchingInterval) {
+              this.borderColor = matchingInterval.color;
+            }
+            this.lastStationaryValue = nearestSeries.series.lastValue.value;
+          }
         }
         this.loadingStationValue = false;
         this.ready.emit();

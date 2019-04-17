@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 
 import { createCacheKey } from '../../model/caching';
 import { MainPhenomenon } from '../../model/phenomenon';
-import { rioifdmWmsURL } from '../../model/wms';
+import { rioifdmWmsURL } from '../../model/services';
 import { ValueProvider } from '../value-provider';
 
 enum ModelledPhenomenon {

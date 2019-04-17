@@ -28,7 +28,7 @@ import moment from 'moment';
 import { forkJoin } from 'rxjs';
 
 import { getIDForMainPhenomenon, MainPhenomenon } from '../../model/phenomenon';
-import { forecastWmsURL, realtimeWmsURL, rioifdmWmsURL } from '../../model/wms';
+import { forecastWmsURL, realtimeWmsURL, rioifdmWmsURL } from '../../model/services';
 import { AnnualMeanService } from '../../services/annual-mean/annual-mean.service';
 import { IrcelineSettings, IrcelineSettingsService } from '../../services/irceline-settings/irceline-settings.service';
 import { LocateService, LocationStatus } from '../../services/locate/locate.service';

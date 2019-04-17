@@ -6,7 +6,7 @@
   </div>
   <div *ngIf="location" nowrap>
     <div class="station-value" *ngIf="!loadingStationValue">
-      {{lastStationaryValue?.value | number:'1.0-1'}}{{uom}}</div>
+      {{lastStationaryValue | number:'1.0-1'}}{{uom}}</div>
   </div>
   <ion-col>
     <div class="station-description" *ngIf="!loadingStationValue && stationDistance">
