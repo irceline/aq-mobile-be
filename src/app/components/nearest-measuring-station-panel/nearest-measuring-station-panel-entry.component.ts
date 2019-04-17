@@ -59,7 +59,7 @@ export class NearestMeasuringStationPanelEntryComponent implements OnChanges {
       const longitude = (this.series.station.geometry as Point).coordinates[0];
       const latitude = (this.series.station.geometry as Point).coordinates[1];
       this.clicked.emit({
-        phenomenonId: this.entry.id,
+        phenomenonId: this.entry.phenomenonId,
         latitude,
         longitude
       });
@@ -67,10 +67,10 @@ export class NearestMeasuringStationPanelEntryComponent implements OnChanges {
   }
 
   private determineNextStationValue() {
-    this.nearestTimeseries.determineNextTimeseries(this.location.latitude, this.location.longitude, this.entry.id)
+    this.nearestTimeseries.determineNextTimeseries(this.location.latitude, this.location.longitude, this.entry.phenomenonId)
       .subscribe(nearestSeries => {
         if (nearestSeries) {
-          this.nearestTimeseriesManager.setNearestTimeseries(this.location, this.entry.id, nearestSeries.series.internalId);
+          this.nearestTimeseriesManager.setNearestTimeseries(this.location, this.entry.phenomenonId, nearestSeries.series.internalId);
           this.series = nearestSeries.series;
           this.stationDistance = nearestSeries.distance;
           this.stationLabel = nearestSeries.series.station.properties.label;

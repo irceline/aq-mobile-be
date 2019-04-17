@@ -18,23 +18,23 @@ export const PhenomenonSeriesID = {
 export const PhenomenonIDMapping = [
     {
         phenomenon: MainPhenomenon.BC,
-        id: '391'
+        id: PhenomenonSeriesID.BC
     },
     {
         phenomenon: MainPhenomenon.NO2,
-        id: '8'
+        id: PhenomenonSeriesID.NO2
     },
     {
         phenomenon: MainPhenomenon.O3,
-        id: '7'
+        id: PhenomenonSeriesID.O3
     },
     {
         phenomenon: MainPhenomenon.PM10,
-        id: '5'
+        id: PhenomenonSeriesID.PM10
     },
     {
         phenomenon: MainPhenomenon.PM25,
-        id: '6001'
+        id: PhenomenonSeriesID.PM25
     }
 ];
 
