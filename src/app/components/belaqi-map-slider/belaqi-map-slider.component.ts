@@ -36,10 +36,9 @@ import { RefreshHandler } from '../../services/refresh/refresh.service';
 import { MobileSettings } from '../../services/settings/settings.service';
 import { UserLocation, UserLocationListService } from '../../services/user-location-list/user-location-list.service';
 import { MarkerSelectorGenerator } from '../customized-station-map-selector/customized-station-map-selector.component';
-import { ModalUserLocationCreationComponent } from '../modal-user-location-creation/modal-user-location-creation.component';
 import { DrawerState } from '../overlay-info-drawer/overlay-info-drawer';
-import { ModalSettingsComponent } from '../settings/modal-settings/modal-settings.component';
 import { HeaderContent } from '../slider-header/slider-header.component';
+import { realtimeWmsURL, rioifdmWmsURL, forecastWmsURL } from '../../model/wms';
 
 enum PhenomenonLabel {
   BelAQI = 'BelAQI',
@@ -655,47 +654,51 @@ class MapView {
     this.cacheService.loadFromObservable('multipolygon', request, null, 60 * 60 * 24).subscribe((geojson: GeoJSON.GeoJsonObject) => {
       this.overlayMaps = new Map<string, LayerOptions>();
       let layerId: string;
-      let wmsUrl: string;
+      // let wmsUrl: string;
       let timeParam: string;
       if (this.time === TimeLabel.current) {
         forkJoin(
           this.annualProvider.getYear(),
           this.ircelineSettings.getSettings(false)
         ).subscribe(result => {
-          wmsUrl = 'http://geo5.irceline.be/rioifdm/wms';
           const lastUpdate = result[1].lastupdate.toISOString();
           const year = result[0];
           switch (this.phenomenonLabel) {
             case PhenomenonLabel.BelAQI:
-              this.drawLayer(wmsUrl, 'belaqi', geojson, lastUpdate);
+              this.drawLayer(rioifdmWmsURL, 'belaqi', geojson, lastUpdate);
               break;
             case PhenomenonLabel.BC:
-              if (this.mean === MeanLabel.hourly) { this.drawLayer(wmsUrl, 'bc_hmean', geojson, lastUpdate); }
-              if (this.mean === MeanLabel.yearly) { this.drawLayer(wmsUrl, `bc_anmean_${year}_atmostreet`, geojson); }
+              if (this.mean === MeanLabel.hourly) { this.drawLayer(rioifdmWmsURL, 'bc_hmean', geojson, lastUpdate); }
+              if (this.mean === MeanLabel.yearly) { this.drawLayer(rioifdmWmsURL, `bc_anmean_${year}_atmostreet`, geojson); }
               break;
             case PhenomenonLabel.NO2:
-              if (this.mean === MeanLabel.hourly) { this.drawLayer(wmsUrl, 'no2_hmean', geojson, lastUpdate); }
-              if (this.mean === MeanLabel.yearly) { this.drawLayer(wmsUrl, `no2_anmean_${year}_atmostreet`, geojson); }
+              if (this.mean === MeanLabel.hourly) { this.drawLayer(rioifdmWmsURL, 'no2_hmean', geojson, lastUpdate); }
+              if (this.mean === MeanLabel.yearly) { this.drawLayer(rioifdmWmsURL, `no2_anmean_${year}_atmostreet`, geojson); }
               break;
             case PhenomenonLabel.O3:
-              if (this.mean === MeanLabel.hourly) { this.drawLayer(wmsUrl, 'o3_hmean', geojson, lastUpdate); }
+              if (this.mean === MeanLabel.hourly) { this.drawLayer(rioifdmWmsURL, 'o3_hmean', geojson, lastUpdate); }
               break;
             case PhenomenonLabel.PM10:
-              if (this.mean === MeanLabel.hourly) { this.drawLayer(wmsUrl, 'pm10_hmean', geojson, lastUpdate); }
-              if (this.mean === MeanLabel.daily) { this.drawLayer(wmsUrl, 'pm10_24hmean', geojson, lastUpdate); }
-              if (this.mean === MeanLabel.yearly) { this.drawLayer(wmsUrl, `pm10_anmean_${year}_atmostreet`, geojson); }
+              if (this.mean === MeanLabel.hourly) { this.drawLayer(rioifdmWmsURL, 'pm10_hmean', geojson, lastUpdate); }
+              if (this.mean === MeanLabel.daily) {
+                this.drawLayer(rioifdmWmsURL, 'pm10_24hmean', geojson, lastUpdate);
+                this.drawLayer(realtimeWmsURL, 'pm10_24hmean_station', geojson, lastUpdate);
+              }
+              if (this.mean === MeanLabel.yearly) { this.drawLayer(rioifdmWmsURL, `pm10_anmean_${year}_atmostreet`, geojson); }
               break;
             case PhenomenonLabel.PM25:
-              if (this.mean === MeanLabel.hourly) { this.drawLayer(wmsUrl, 'pm25_hmean', geojson, lastUpdate); }
-              if (this.mean === MeanLabel.daily) { this.drawLayer(wmsUrl, 'pm25_24hmean', geojson, lastUpdate); }
-              if (this.mean === MeanLabel.yearly) { this.drawLayer(wmsUrl, `pm25_anmean_${year}_atmostreet`, geojson); }
+              if (this.mean === MeanLabel.hourly) { this.drawLayer(rioifdmWmsURL, 'pm25_hmean', geojson, lastUpdate); }
+              if (this.mean === MeanLabel.daily) {
+                this.drawLayer(rioifdmWmsURL, 'pm25_24hmean', geojson, lastUpdate);
+                this.drawLayer(realtimeWmsURL, 'pm25_24hmean_station', geojson, lastUpdate);
+              }
+              if (this.mean === MeanLabel.yearly) { this.drawLayer(rioifdmWmsURL, `pm25_anmean_${year}_atmostreet`, geojson); }
               break;
             default:
               break;
           }
         });
       } else {
-        wmsUrl = 'http://geo5.irceline.be/forecast/wms';
         switch (this.phenomenonLabel) {
           case PhenomenonLabel.BelAQI:
             layerId = 'belaqi';
@@ -731,8 +734,8 @@ class MapView {
           default:
             break;
         }
+        this.drawLayer(forecastWmsURL, layerId, geojson, timeParam);
       }
-      this.drawLayer(wmsUrl, layerId, geojson, timeParam);
     });
   }
 
