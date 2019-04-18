@@ -307,7 +307,8 @@ class MapView {
   public disabled = false;
 
   public sliderHeader = 'test';
-  public sliderPosition: number;
+  public sliderPosition = 0;
+  public sliderLength = 5;
 
   public legendId: string;
   public langCode: string;
@@ -365,18 +366,21 @@ class MapView {
 
     // Navigate to correct slider position
     if (!this.mapDataService.selection.yearly) {
+      // Navigating to short-term
       switch (this.mapDataService.selection.phenomenonID) {
         case getIDForMainPhenomenon(MainPhenomenon.NO2): {
-          this.sliderPosition++;
+          this.sliderPosition = 1;
           break;
         }
         case getIDForMainPhenomenon(MainPhenomenon.PM10):
         case getIDForMainPhenomenon(MainPhenomenon.PM25): {
-          this.sliderPosition++;
-          this.sliderPosition++;
+          this.sliderPosition = 2;
           break;
         }
       }
+    } else {
+      // Navigating to long-term
+      this.sliderPosition = 0;
     }
     this.adjustSlider();
     this.adjustPopups(true);
@@ -428,10 +432,10 @@ class MapView {
     } else {
       this.clearSelectedPhenomenon();
     }
-    if (this.phenomenonLabel === PhenomenonLabel.BC) {
-      this.time = TimeLabel.current;
-    }
+
+    const oldSliderLen = this.sliderLength;
     this.adjustMeanUI();
+    this.adjustSliderKeepAggregation(oldSliderLen, this.sliderLength, this.sliderPosition);
     this.adjustSlider();
     this.adjustUI();
     this.adjustLegend();
@@ -446,9 +450,51 @@ class MapView {
     this.adjustLegend();
   }
 
+  private adjustSliderKeepAggregation(oldSliderLen, newSliderLen, oldSliderPos: number) {
+    let transitionNumber = 0;
+
+    if (oldSliderLen !== newSliderLen) {
+      // Assign each transition a positive number for easy matrix access
+      switch (oldSliderLen - newSliderLen) {
+        case 1:
+          transitionNumber = 0; // 7 to 6 slider
+          break;
+        case -1:
+          transitionNumber = 1; // 6 to 7 slider
+          break;
+        case 5:
+          transitionNumber = 2; // 7 to 2 slider
+          break;
+        case -5:
+          transitionNumber = 3; // 2 to 7 slider
+          break;
+        case 4:
+          transitionNumber = 4; // 6 to 2 slider
+          break;
+        case -4:
+          transitionNumber = 5; // 2 to 6 slider
+          break;
+      }
+
+      let transitionTable = [
+        [0, 0, 0, 0, 0, 0], //amean
+        [0, 0, 0, 0, 0, 0], //hmean
+        [-1, 1, -1, 1, 0, 0], //24hmean
+        [-1, 1, -2, 2, -1, 1], //today
+        [-1, 1, -3, 3, -2, 2], //tomorrow
+        [-1, 1, -4, 4, -3, 3], //today+2
+        [-1, 1, -5, 5, -4, 4]  //today+3
+      ];
+      // Adjust sliderPosition accordingly
+      this.sliderPosition += transitionTable[oldSliderPos][transitionNumber];
+      console.log(this.sliderPosition);
+    }
+  }
+
   private adjustSlider() {
     let correctedSliderPos = this.sliderPosition;
 
+    // Sometimes skip 24hmean
     if (!this.show24hourMean && this.sliderPosition > 1) {
       correctedSliderPos++;
     }
@@ -504,22 +550,28 @@ class MapView {
       case getIDForMainPhenomenon(MainPhenomenon.BC):
         showYearly = true;
         disabled = true;
+        this.sliderLength = 1;
         break;
       case getIDForMainPhenomenon(MainPhenomenon.NO2):
         showYearly = true;
         show24hour = false;
+        this.sliderLength = 5;
         break;
       case getIDForMainPhenomenon(MainPhenomenon.O3):
+        this.sliderLength = 5;
         break;
       case getIDForMainPhenomenon(MainPhenomenon.PM10):
         show24hour = true;
         showYearly = true;
+        this.sliderLength = 6;
         break;
       case getIDForMainPhenomenon(MainPhenomenon.PM25):
         show24hour = true;
         showYearly = true;
+        this.sliderLength = 6;
         break;
       default:
+        this.sliderLength = 5;
         break;
     }
     this.show24hourMean = show24hour;
@@ -528,13 +580,6 @@ class MapView {
 
     if (this.time !== TimeLabel.current) {
       this.mean = null;
-    }
-
-    // Reset slider
-    if (!this.showYearlyMean) {
-      this.sliderPosition = 1;
-    } else {
-      this.sliderPosition = 0;
     }
   }
 
