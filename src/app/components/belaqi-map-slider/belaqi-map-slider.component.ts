@@ -489,7 +489,7 @@ class MapView {
       ];
       if (this.mode === 'belaqi') {
         // belaqi-mode
-        transitionTable[1] = [0, 1, 0, 1, 1, 1];
+        transitionTable[1] = [0, 1, 0, 1, 0, 0];
       }
       // Adjust sliderPosition accordingly
       this.sliderPosition += transitionTable[oldSliderPos][transitionNumber];
