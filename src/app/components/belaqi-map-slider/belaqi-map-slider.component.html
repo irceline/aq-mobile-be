@@ -173,18 +173,18 @@
             </ion-col>
           </ion-row>
           <!-- PM10 + PM 2.5-->
-          <ion-range *ngIf="view.showYearlyMean && view.show24hourMean && !view.disabled" mode="md"
+          <ion-range *ngIf="view.showYearlyMean && view.show24hourMean && !view.disabled" mode="ios"
             (ionChange)="view.onSliderChange()" min="0" max="6" step="1" snaps="true" [(ngModel)]="view.sliderPosition">
           </ion-range>
           <!-- NO2 + O3 -->
-          <ion-range *ngIf="view.showYearlyMean && !view.show24hourMean && !view.disabled" mode="md"
+          <ion-range *ngIf="view.showYearlyMean && !view.show24hourMean && !view.disabled" mode="ios"
             (ionChange)="view.onSliderChange()" min="0" max="5" step="1" snaps="true" [(ngModel)]="view.sliderPosition">
           </ion-range>
           <!-- BC -->
-          <ion-range *ngIf="view.disabled" mode="md" (ionChange)="view.onSliderChange()" min="0" max="1" step="1"
+          <ion-range *ngIf="view.disabled" mode="ios" (ionChange)="view.onSliderChange()" min="0" max="1" step="1"
             snaps="true" [(ngModel)]="view.sliderPosition"></ion-range>
           <!-- BelAQI-->
-          <ion-range *ngIf="!view.showYearlyMean && !view.show24hourMean && !view.disabled" mode="md"
+          <ion-range *ngIf="!view.showYearlyMean && !view.show24hourMean && !view.disabled" mode="ios"
             (ionChange)="view.onSliderChange()" min="1" max="5" step="1" snaps="true" [(ngModel)]="view.sliderPosition">
           </ion-range>
         </ion-toolbar>
