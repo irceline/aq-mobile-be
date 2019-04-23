@@ -309,6 +309,7 @@ class MapView {
   public sliderHeader = 'test';
   public sliderPosition = 0;
   public sliderLength = 5;
+  private mode = 'hmean';
 
   public legendId: string;
   public langCode: string;
@@ -476,6 +477,7 @@ class MapView {
           break;
       }
 
+      //hmean-mode
       let transitionTable = [
         [0, 0, 0, 0, 0, 0], //amean
         [0, 0, 0, 0, 0, 0], //hmean
@@ -485,9 +487,12 @@ class MapView {
         [-1, 1, -4, 4, -3, 3], //today+2
         [-1, 1, -5, 5, -4, 4]  //today+3
       ];
+      if (this.mode === 'belaqi') {
+        // belaqi-mode
+        transitionTable[1] = [0, 1, 0, 1, 1, 1];
+      }
       // Adjust sliderPosition accordingly
       this.sliderPosition += transitionTable[oldSliderPos][transitionNumber];
-      console.log(this.sliderPosition);
     }
   }
 
@@ -498,6 +503,9 @@ class MapView {
     if (!this.show24hourMean && this.sliderPosition > 1) {
       correctedSliderPos++;
     }
+
+    // Set belaqi as default mode;
+    // this.mode = 'belaqi';
 
     switch (correctedSliderPos) {
       case 0:
@@ -537,6 +545,16 @@ class MapView {
         // dmean forecast today+3
         this.time = TimeLabel.today3;
         this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_today+3');
+    }
+
+    // Switch modes when adjusting Slider in Phenomena
+    if (this.selectedPhenomenonId === getIDForMainPhenomenon(MainPhenomenon.PM10)
+      || this.selectedPhenomenonId === getIDForMainPhenomenon(MainPhenomenon.PM25)) {
+      if (correctedSliderPos === 2) {
+        this.mode = 'belaqi';
+      } else {
+        this.mode = 'hmean';
+      }
     }
   }
   /**
