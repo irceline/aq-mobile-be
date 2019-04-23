@@ -41,7 +41,6 @@ import { NearestTimeseriesManagerService } from './services/nearest-timeseries-m
 import { NearestTimeseriesService } from './services/nearest-timeseries/nearest-timeseries.service';
 import { NetworkAlertService } from './services/network-alert/network-alert.service';
 import { NotificationMaintainerService } from './services/notification-maintainer/notification-maintainer.service';
-import { NotificationPresenterService } from './services/notification-presenter/notification-presenter.service';
 import { CachingInterceptor, OngoingHttpCacheService } from './services/ongoing-http-cache/ongoing-http-cache.service';
 import { PushNotificationsHandlerService } from './services/push-notifications-handler/push-notifications-handler.service';
 import { PushNotificationsService } from './services/push-notifications/push-notifications.service';
@@ -112,7 +111,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     Network,
     NetworkAlertService,
     NotificationMaintainerService,
-    NotificationPresenterService,
     OngoingHttpCacheService,
     PushNotificationsHandlerService,
     PushNotificationsService,

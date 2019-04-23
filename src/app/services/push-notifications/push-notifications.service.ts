@@ -1,13 +1,21 @@
 import { Injectable } from '@angular/core';
+import { Firebase } from '@ionic-native/firebase/ngx';
 import { Platform } from '@ionic/angular';
 
 import { NotificationMaintainerService } from '../notification-maintainer/notification-maintainer.service';
-import {
-  NotificationPresenterService,
-  PushNotification,
-  PushNotificationTopic,
-} from '../notification-presenter/notification-presenter.service';
-import { Firebase } from '@ionic-native/firebase/ngx';
+
+export interface PushNotification {
+  topic: string;
+  title: string;
+  body: string;
+  expiration: Date;
+}
+
+export enum PushNotificationTopic {
+  flanders = 'flanders',
+  wallonia = 'wallonia',
+  brussels = 'brussels'
+}
 
 @Injectable()
 export class PushNotificationsService {
@@ -15,8 +23,7 @@ export class PushNotificationsService {
   constructor(
     private platform: Platform,
     private fcm: Firebase,
-    private notifications: NotificationMaintainerService,
-    private presenter: NotificationPresenterService
+    private notificationMaintainer: NotificationMaintainerService
   ) { }
 
   public init() {
@@ -46,9 +53,9 @@ export class PushNotificationsService {
               topic: data.topic,
               expiration: new Date(data.expiration)
             };
+            console.log(`${JSON.stringify(data)}`);
             console.log(`add Notification: ${data.title}, ${data.body}, ${data.expiration}, ${data.topic}`);
-            this.notifications.addNotification(notification);
-            this.presenter.presentPushNotification(notification);
+            this.notificationMaintainer.addNotification(notification);
           }
         });
 

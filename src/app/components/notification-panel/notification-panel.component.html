@@ -1,0 +1,6 @@
+<div class="notification" *ngIf="notificationList.length > 0" (click)="openPopup()">
+  <div *ngFor="let item of notificationList">
+    <ion-icon name="warning"></ion-icon>
+    <span>{{item.title}}</span>
+  </div>
+</div>

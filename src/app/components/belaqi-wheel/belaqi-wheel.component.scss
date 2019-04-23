@@ -1,17 +1,12 @@
 :host {
 
   .wheel-wrapper {
-    width: 90%;
-    left:5%;
-    height: 15em;
-    position: relative;
-
     .info-button {
       display: inline;
       position: absolute;
       top: 0;
       right: 0;
-      z-index: 1;
+      z-index: 2;
 
       ion-button {
         color: black;
@@ -27,7 +22,7 @@
     border-radius: 1em;
     margin-left: auto;
     margin-right: auto;
-    z-index: -1;
+    z-index: 1;
   }
 
   .no-index {

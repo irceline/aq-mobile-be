@@ -35,10 +35,9 @@ import {
 import {
   NearestMeasuringStationPanelComponent,
 } from './nearest-measuring-station-panel/nearest-measuring-station-panel.component';
-import { NotificationIconPopupComponent } from './notification-icon/notification-icon-popup.component';
-import { NotificationIconComponent } from './notification-icon/notification-icon.component';
+import { NotificationPanelComponent } from './notification-panel/notification-panel.component';
+import { NotificationPopupComponent } from './notification-panel/notification-popup.component';
 import { OverlayInfoDrawerComponent } from './overlay-info-drawer/overlay-info-drawer';
-import { PushNotificationComponent } from './push-notification/push-notification.component';
 import { AboutSettingsComponent } from './settings/about-settings/about-settings.component';
 import { CommonSettingsComponent } from './settings/common-settings/common-settings.component';
 import { ModalIntroComponent } from './settings/modal-intro/modal-intro.component';
@@ -81,10 +80,9 @@ const COMPONENTS = [
   NearestMeasuringStationPanelComponent,
   NearestMeasuringStationPanelEntryComponent,
   NearestMeasuringStationPanelInformationPopupComponent,
-  NotificationIconComponent,
-  NotificationIconPopupComponent,
+  NotificationPopupComponent,
+  NotificationPanelComponent,
   OverlayInfoDrawerComponent,
-  PushNotificationComponent,
   PushNotificationSubscriptionsSettingsComponent,
   SliderHeaderComponent,
   StartPageSettingsComponent,

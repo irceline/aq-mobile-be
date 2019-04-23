@@ -3,7 +3,7 @@ import { Storage } from '@ionic/storage';
 import { Observable, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { PushNotification } from '../notification-presenter/notification-presenter.service';
+import { PushNotification } from '../push-notifications/push-notifications.service';
 
 const NOTIFICATION_PARAM = 'notifications';
 @Injectable()

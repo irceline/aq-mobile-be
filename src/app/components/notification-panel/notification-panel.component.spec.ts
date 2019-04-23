@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PushNotificationPage } from './push-notification.page';
+import { NotificationPanelComponent } from './notification-panel.component';
 
-describe('PushNotificationPage', () => {
-  let component: PushNotificationPage;
-  let fixture: ComponentFixture<PushNotificationPage>;
+describe('NotificationPanelComponent', () => {
+  let component: NotificationPanelComponent;
+  let fixture: ComponentFixture<NotificationPanelComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PushNotificationPage ],
+      declarations: [ NotificationPanelComponent ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PushNotificationPage);
+    fixture = TestBed.createComponent(NotificationPanelComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,15 +1,36 @@
 :host {
 
-  .swiper-slide {
-    overflow-y: scroll;
-    display: block;
-    padding-bottom: 30px;
-  }
+    .swiper-slide {
+        overflow-y: scroll;
+        display: block;
+        padding-bottom: 30px;
+    }
 
-  ion-item {
-    color: white;
-    --color: white;
-  }
+    ion-item {
+        color: white;
+        --color: white;
+    }
+
+    .first-panel {
+        width: 90%;
+        left: 5%;
+        position: relative;
+
+        .notification {
+            background-color: #cf5756;
+            color: white;
+            padding: 5px;
+            padding-bottom: 20px;
+            margin-bottom: -15px;
+            border-top-left-radius: 1em;
+            border-top-right-radius: 1em;
+        }
+
+        .wheel {
+            height: 15em;
+            position: relative;
+        }
+    }
 }
 
 // .slide-zoom {

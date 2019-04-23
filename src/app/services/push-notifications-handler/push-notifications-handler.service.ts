@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { LocalStorage } from '@helgoland/core';
 import { TranslateService } from '@ngx-translate/core';
 
-import { PushNotificationTopic } from '../notification-presenter/notification-presenter.service';
-import { PushNotificationsService } from '../push-notifications/push-notifications.service';
+import { PushNotificationsService, PushNotificationTopic } from '../push-notifications/push-notifications.service';
 
 const LOCALSTORAGE_PUSH_NOTIFICATION = 'localstorage.push.notification';
 

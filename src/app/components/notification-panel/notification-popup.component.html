@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      {{'notifications-popup.header' | translate}}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()" id="close-modal">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="notifications.length > 0">
+    <div *ngFor="let notification of notifications">
+
+      <div class="notification">
+        <div class="title">{{notification.title}}</div>
+        <div class="content">
+
+          <div class="info">
+            <div>{{'notifications-popup.valid-until' | translate}}</div>
+            <div>{{notification.expiration | date : 'd MMMM y, HH:mm'}}</div>
+          </div>
+
+          <div class="info">
+            <div>{{'notifications-popup.channel' | translate}}</div>
+            <div>{{('push-notification-subscription.' + notification.topic) | translate}}</div>
+          </div>
+
+          <div>
+            {{notification.body}}
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</ion-content>
