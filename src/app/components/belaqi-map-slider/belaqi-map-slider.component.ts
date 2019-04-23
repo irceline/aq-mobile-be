@@ -787,7 +787,7 @@ class MapView {
         layerOptions.time = timeParam;
       }
       this.overlayMaps.set(layerId + wmsUrl + timeParam, {
-        label: this.translateSrvc.instant('map.interpolated-map'),
+        label: layerId,
         visible: true,
         layer: tileLayer.boundaryCanvas(wmsUrl, layerOptions)
       });
