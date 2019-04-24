@@ -1,4 +1,4 @@
 <div text-center (click)="select()" class="entry" [ngStyle]="{'border-color': borderColor}">
   <div *ngIf="loading" class="spinningborder"></div>
-  <div class="phenomenon-label" *ngIf="!loading" [ngClass]="{'location-disabled': !location}">{{entry.label}}<sub>{{entry.subscript}}</sub></div>
+  <div class="phenomenon-label" [ngClass]="{'location-disabled': !location}">{{entry.label}}<sub>{{entry.subscript}}</sub></div>
 </div>
