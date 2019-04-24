@@ -11,13 +11,17 @@ import { PushNotification } from '../../services/push-notifications/push-notific
 })
 export class NotificationPopupComponent {
 
-  public notifications: PushNotification[];
+  public notificationMap: Map<string, PushNotification[]>;
 
   constructor(
     private notificationMaintainer: NotificationMaintainerService,
     private modalCtrl: ModalController
   ) {
-    this.notificationMaintainer.getNotifications().subscribe(e => this.notifications = e);
+    this.notificationMaintainer.getNotifications().subscribe(e => this.notificationMap = e);
+  }
+
+  public trimTopic(topic: string): string {
+    return topic.indexOf('_') === -1 ? topic : topic.substring(0, topic.indexOf('_'));
   }
 
   public closeModal() {

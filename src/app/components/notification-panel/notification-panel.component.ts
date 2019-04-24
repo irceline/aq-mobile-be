@@ -12,7 +12,7 @@ import { NotificationPopupComponent } from './notification-popup.component';
 })
 export class NotificationPanelComponent implements OnInit {
 
-  public notificationList: PushNotification[] = [];
+  public notificationMap: Map<string, PushNotification[]> = new Map();
 
   constructor(
     private modalCtrl: ModalController,
@@ -22,7 +22,7 @@ export class NotificationPanelComponent implements OnInit {
 
   public ngOnInit() {
     this.notifications.getNotifications().subscribe(e => {
-      this.zone.run(() => this.notificationList = e);
+      this.zone.run(() => this.notificationMap = e);
     });
   }
 

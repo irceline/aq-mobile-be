@@ -22,7 +22,17 @@
             .info {
                 text-align: center;
                 font-size: 80%;
-                color: darkgray;
+                color: #7b7b7b;
+            }
+
+            .additional-language {
+                border-top: var(--ion-color-secondary-contrast) solid 2px;
+                padding-top: 5px; 
+                margin-top: 5px; 
+
+                .additional-title {
+                    text-align: center;
+                }
             }
         }
     }

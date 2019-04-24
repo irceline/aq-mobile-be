@@ -1,8 +1,6 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { Platform } from '@ionic/angular';
-
-import { NotificationMaintainerService } from '../notification-maintainer/notification-maintainer.service';
 
 export interface PushNotification {
   topic: string;
@@ -20,10 +18,11 @@ export enum PushNotificationTopic {
 @Injectable()
 export class PushNotificationsService {
 
+  public notificationReceived: EventEmitter<PushNotification> = new EventEmitter();
+
   constructor(
     private platform: Platform,
     private fcm: Firebase,
-    private notificationMaintainer: NotificationMaintainerService
   ) { }
 
   public init() {
@@ -55,7 +54,7 @@ export class PushNotificationsService {
             };
             console.log(`${JSON.stringify(data)}`);
             console.log(`add Notification: ${data.title}, ${data.body}, ${data.expiration}, ${data.topic}`);
-            this.notificationMaintainer.addNotification(notification);
+            this.notificationReceived.emit(notification);
           }
         });
 

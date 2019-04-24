@@ -300,7 +300,9 @@
   "notifications-popup": {
     "header": "Notifications",
     "valid-until": "Message is valid until:",
-    "channels": "For your notification channel:"
+    "channels": "For your notification channel:",
+    "french-version-below": "(There is a french version below)",
+    "dutch-version-below": "(There is a dutch version below)"
 	},
   "no-network-connection": {
     "body": "Your device has no data network connection. The BelAir app heavily depends on fresh data being fetched from our servers. Please activate a data network (mobile data or wifi connection) and refresh the app or try again when you are in range of a data network you have access to.",
