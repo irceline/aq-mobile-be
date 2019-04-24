@@ -479,7 +479,7 @@ class MapView {
 
       //hmean-mode
       let transitionTable = [
-        [0, 0, 0, 0, 0, 0], //amean
+        [1, 0, 0, 0, 0, 1], //amean
         [0, 0, 0, 0, 0, 0], //hmean
         [-1, 1, -1, 1, 0, 0], //24hmean
         [-1, 1, -2, 2, -1, 1], //today
