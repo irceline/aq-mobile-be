@@ -5,11 +5,9 @@
         <h2>{{header?.label}}</h2>
       </ion-text>
       <p class="date-label">
+        <span *ngIf="header?.current">({{'belaqi-user-location-slider.current-location' | translate}})<br /></span>
         <span>{{'menu.lastUpdate' | translate}}: </span>
-        <span class="date-label">{{header?.date | date : 'd MMMM y, HH:mm': null:
-          translateSrvc.currentLang}} </span>
-        <span *ngIf="header?.current"> - {{'belaqi-user-location-slider.current-location' |
-          translate}}</span>
+        <span class="date-label">{{header?.date | date : 'd MMMM y, HH:mm': null: translateSrvc.currentLang}} </span>
       </p>
     </ion-label>
     <div class="settingsButton">
