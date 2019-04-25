@@ -38,7 +38,6 @@ import { RefreshHandler } from '../../services/refresh/refresh.service';
 import { MobileSettings } from '../../services/settings/settings.service';
 import { UserLocation, UserLocationListService } from '../../services/user-location-list/user-location-list.service';
 import { MarkerSelectorGenerator } from '../customized-station-map-selector/customized-station-map-selector.component';
-import { DrawerState } from '../overlay-info-drawer/overlay-info-drawer';
 import { HeaderContent } from '../slider-header/slider-header.component';
 
 enum PhenomenonLabel {
@@ -109,9 +108,6 @@ export class BelaqiMapSliderComponent implements OnDestroy {
   public sliderOptions = {
     zoom: false
   };
-  dockedHeight = 92;
-  drawerState = DrawerState.Docked;
-  states = DrawerState;
 
   public statusIntervalDuration: number;
   public geoSearchOptions: GeoSearchOptions;

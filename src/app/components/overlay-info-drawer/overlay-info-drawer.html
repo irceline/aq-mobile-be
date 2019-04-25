@@ -4,10 +4,10 @@
       {{'overlay-info-drawer.button-close' | translate}}
     </div>
   </div>
-  <div class="content" [ngClass]="{open: state === 'open'}">
+  <div class="content" [ngClass]="{open: !docked}">
     <ng-content></ng-content>
   </div>
-  <div *ngIf="state === 'docked'" class="footer">
+  <div *ngIf="docked" class="footer">
     <div class="open-button" (click)="openClose()" style="height: 40px;">
       {{'overlay-info-drawer.button' | translate}}
     </div>

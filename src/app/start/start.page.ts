@@ -8,7 +8,6 @@ import {
   BelaqiSelection,
   BelaqiUserLocationSliderComponent,
 } from '../components/belaqi-user-location-slider/belaqi-user-location-slider.component';
-import { DrawerState } from '../components/overlay-info-drawer/overlay-info-drawer';
 import { ModalIntroComponent } from '../components/settings/modal-intro/modal-intro.component';
 import { HeaderContent } from '../components/slider-header/slider-header.component';
 import { MapDataService } from '../services/map-data/map-data.service';
@@ -20,10 +19,6 @@ import { RefreshHandler } from '../services/refresh/refresh.service';
   styleUrls: ['./start.page.scss'],
 })
 export class StartPage implements OnInit {
-
-  dockedHeight = 92;
-  drawerState = DrawerState.Docked;
-  states = DrawerState;
 
   @ViewChild('slider')
   private sliderComponent: BelaqiUserLocationSliderComponent;

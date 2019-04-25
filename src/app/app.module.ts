@@ -48,6 +48,7 @@ import { RefreshHandler } from './services/refresh/refresh.service';
 import { JSSONSettingsService } from './services/settings/settings.service';
 import { StartPageSettingsService } from './services/start-page-settings/start-page-settings.service';
 import { UserLocationListService } from './services/user-location-list/user-location-list.service';
+import { InfoOverlayService } from './services/overlay-info-drawer/overlay-info-drawer.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -99,6 +100,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     GeoLabelsService,
     Geolocation,
     InAppBrowser,
+    InfoOverlayService,
     IrcelineSettingsService,
     Keyboard,
     LanguageHandlerService,

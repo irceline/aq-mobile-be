@@ -12,66 +12,55 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { DomController, Platform } from '@ionic/angular';
-
-export enum DrawerState {
-  Open = 'open',
-  Docked = 'docked'
-}
+import { InfoOverlayService, DrawerState } from '../../services/overlay-info-drawer/overlay-info-drawer.service';
 
 @Component({
   selector: 'overlay-info-drawer',
   templateUrl: 'overlay-info-drawer.html',
   styleUrls: ['overlay-info-drawer.scss']
 })
-export class OverlayInfoDrawerComponent implements AfterViewInit, OnChanges {
-
-  @Input() dockedHeight = 50;
-
+export class OverlayInfoDrawerComponent implements OnChanges {
+  
   @Input() distanceBottom = 0;
 
   @Input() transition = '0.5s ease-in-out';
-
-  @Input() state: DrawerState = DrawerState.Docked;
 
   @Input() minimumHeight = 0;
 
   @Output() stateChange: EventEmitter<DrawerState> = new EventEmitter<DrawerState>();
 
+  public docked = true;
+
   constructor(
     private element: ElementRef,
     private renderer: Renderer2,
     private domCtrl: DomController,
-    private platform: Platform
-  ) { }
-
-  ngAfterViewInit() {
-    this.setDrawerState(this.state);
+    private infoOverlayService: InfoOverlayService,
+  ) {
+    this.infoOverlayService.state.subscribe(state => this.setDrawerState(state));
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (!changes.state) { return; }
-    this.setDrawerState(changes.state.currentValue);
+    this.infoOverlayService.openClose();
   }
 
   openClose() {
-    if (this.state === DrawerState.Open) {
-      this.setDrawerState(DrawerState.Docked);
-    } else {
-      this.setDrawerState(DrawerState.Open);
-    }
+    this.infoOverlayService.openClose();
   }
 
   private setDrawerState(state: DrawerState) {
     this.renderer.setStyle(this.element.nativeElement, 'transition', this.transition);
     switch (state) {
       case DrawerState.Open:
+        this.docked = false;
         this.setTranslateY(this.distanceBottom + 'px');
         break;
       case DrawerState.Docked:
+        this.docked = true;
         this.setTranslateY('calc(40px - 100%)');
         break;
     }
-    this.state = state;
   }
 
   private setTranslateY(value) {
