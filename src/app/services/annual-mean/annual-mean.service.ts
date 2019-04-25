@@ -47,7 +47,7 @@ export class AnnualMeanService extends ValueProvider {
 
   public getWMSUrl(year: string, phenomenon: AnnualPhenomenonMapping): string {
     const layerId = this.getLayerId(year, phenomenon);
-    return `http://geo5.irceline.be/rioifdm/${layerId}/wms`;
+    return `http://geo.irceline.be/rioifdm/${layerId}/wms`;
   }
 
   public getValue(latitude: number, longitude: number, year: string, phenomenon: AnnualPhenomenonMapping): Observable<number> {
