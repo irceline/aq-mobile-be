@@ -277,6 +277,7 @@
 	},
 	"nearest-measuring-station-panel": {
 		"header": "Nächstgelegene Überwachungsstation",
+		"error": "Ein Fehler ist aufgetreten. Es konnten keine Daten für die nächstgelegenen Überwachungsstationen abgerufen werden. Bitte versuchen Sie es später erneut.",
 		"information-popup": {
 			"list-bc": "oder black carbon",
 			"list-no2": "oder Stickstoffdioxid",

@@ -277,6 +277,7 @@
   },
   "nearest-measuring-station-panel": {
     "header": "Dichtstbijgelegen meetstation",
+    "error": "Er is een fout opgetreden. Het is niet mogelijk om gegevens op te halen voor de dichtstbijgelegene meetstations. Probeer het later opnieuw.",
     "information-popup": {
       "list-bc": "BC of zwarte koolstof",
       "list-no2": "NO2 of stikstofdioxide",

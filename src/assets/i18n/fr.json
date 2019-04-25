@@ -277,6 +277,7 @@
   },
   "nearest-measuring-station-panel": {
     "header": "Station de mesure la plus proche",
+    "error": "Une erreur s'est produite. Il est impossible de charger les données pour les stations de mesure la plus proche. Veuillez réessayer plus tard.",
     "information-popup": {
       "list-bc": "ou black carbon",
       "list-no2": "ou dioxyde d'azote",
