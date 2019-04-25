@@ -44,8 +44,8 @@ export class SliderHeaderComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     if (this.header) {
-      // Show Warning if Data is older than 2hours 7200000
-      if ((new Date().getTime() - this.header.date.getTime()) > 200) {
+      // Show Warning if Data is older than 2h aka 7200000ms
+      if ((new Date().getTime() - this.header.date.getTime()) > 7200000) {
         this.oldDataWarning = true;
       } else {
         this.oldDataWarning = false;
