@@ -259,7 +259,8 @@
 			"tomorrow": "Morgen"
 		},
     "timestepLabels": {
-      "amean": "Jahresmittelwert (Langzeitbelastung)",
+      "loading": "beschäftigt zu laden",
+      "anmean": "Jahresmittelwert (Langzeitbelastung)",
       "hmean": "Stundenmittelwert (Kurzzeitbelastung)",
       "24hmean": "laufender 24-Stundenmittelwert",
       "dmean_forecast_today": "Tagesmittelwert (heute)",

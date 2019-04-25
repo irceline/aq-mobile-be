@@ -259,7 +259,8 @@
       "tomorrow": "J+1"
     },
     "timestepLabels": {
-      "amean": "moyenne annuelle (exposition à long terme)",
+      "loading": "chargement en cours",
+      "anmean": "moyenne annuelle (exposition à long terme)",
       "hmean": "moyenne horaire actuelle (exposition à court terme)",
       "24hmean": "moyenne sur 24 heure courante (exposition à court terme)",
       "dmean_forecast_today": "moyenne journalière (aujourd'hui)",
