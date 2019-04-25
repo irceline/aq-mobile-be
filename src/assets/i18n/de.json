@@ -230,7 +230,7 @@
 		"configured-location": "Dein konfigurierter Standort",
 		"current-location": "Dein aktueller Standort",
 		"dataset-selection-hint": "Bitte wählen Sie eine oder mehrere Zeitreihen zur Darstellung aus",
-		"error": "Ein Fehler ist aufgetreten. Es konnten keine Daten zum ausgewählten Schadstoff ermittelt werden.",
+		"error": "Ein Fehler ist aufgetreten. Es konnten keine Daten für den ausgewählten Schadstoff abgerufen werden. Bitte versuchen Sie es später erneut.",
 		"geosearch": {
 			"placeholder": "Suche..."
 		},
