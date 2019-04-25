@@ -171,6 +171,9 @@
     },
     "readMore": "lire plus"
   },
+  "header": {
+    "oldDataWarning": "The last update is older than normal due to a technical issue. We are doing our best to repair the issue."
+  },
   "home": {
     "header": "Accueil",
     "noAlert": "Aucun bulletin de pic de pollution n'a été émis",

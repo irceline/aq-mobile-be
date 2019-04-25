@@ -171,6 +171,9 @@
     },
     "readMore": "read more"
   },
+  "header": {
+    "oldDataWarning": "The last update is older than normal due to a technical issue. We are doing our best to repair the issue."
+  },
   "home": {
     "header": "Home",
     "noAlert": "no official messages concerning periods of increased air pollution",
