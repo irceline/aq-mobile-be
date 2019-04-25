@@ -227,7 +227,7 @@
     "configured-location": "Votre localisation configurée",
     "current-location": "Votre localisation actuelle",
     "dataset-selection-hint": "Veuillez sélectionner un ou plusieurs polluants à afficher",
-    "error": "Une erreur s'est produite. Il n'est pas possible de déterminer les données pour le polluant sélectionné.",
+    "error": "Une erreur s'est produite. Il est impossible de charger les données pour le polluant sélectionné. Veuillez réessayer plus tard.",
     "geosearch": {
       "placeholder": "Recherche la localisation ..."
     },

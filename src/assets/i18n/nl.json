@@ -227,7 +227,7 @@
     "configured-location": "Uw geconfigureerde locatie",
     "current-location": "Uw huidige locatie",
     "dataset-selection-hint": "Selecteer één of meerdere tijdsreeks(en) voor weergave op een diagram",
-    "error": "Er is een fout opgetreden. Het is niet mogelijk om gegevens voor de geselecteerde polluent te bepalen.",
+    "error": "Er is een fout opgetreden. Het is niet mogelijk om gegevens op te halen voor de geselecteerde polluent. Probeer het later opnieuw.",
     "geosearch": {
       "placeholder": "Zoek locatie"
     },
