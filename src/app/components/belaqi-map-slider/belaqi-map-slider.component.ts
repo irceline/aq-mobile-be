@@ -306,7 +306,7 @@ class MapView {
   public showYearlyMean = true;
   public disabled = false;
 
-  public sliderHeader = 'test';
+  public sliderHeader = this.translateSrvc.instant('map.timestepLabels.loading');
   public sliderPosition = 1;
   public sliderLength = 5;
   private mode = 'hmean';
@@ -479,7 +479,7 @@ class MapView {
 
       //hmean-mode
       let transitionTable = [
-        [1, 0, 0, 0, 0, 1], //amean
+        [1, 0, 0, 0, 0, 1], //anmean
         [0, 0, 0, 0, 0, 0], //hmean
         [-1, 1, -1, 1, 0, 0], //24hmean
         [-1, 1, -2, 2, -1, 1], //today
@@ -509,10 +509,10 @@ class MapView {
 
     switch (correctedSliderPos) {
       case 0:
-        // amean
+        // anmean
         this.time = TimeLabel.current;
         this.mean = MeanLabel.yearly;
-        this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.amean');
+        this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.anmean');
         break;
       case 1:
         // hmean
@@ -520,7 +520,7 @@ class MapView {
         this.mean = MeanLabel.hourly;
         if (this.phenomenonLabel === PhenomenonLabel.BelAQI) {
           const label: string = this.translateSrvc.instant('map.timestepLabels.hmean');
-          this.sliderHeader = 'BELAQI ' + label.slice(label.indexOf('('));
+          this.sliderHeader = 'BelAQI ' + label.slice(label.indexOf('('));
         } else {
         this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.hmean');
         }

@@ -259,7 +259,8 @@
       "tomorrow": "Tomorrow"
     },
     "timestepLabels": {
-      "amean": "annual mean (long term exposure)",
+      "loading": "busy loading",
+      "anmean": "annual mean (long term exposure)",
       "hmean": "hourly mean (short term exposure)",
       "24hmean": "running 24-hour mean (short term exposure)",
       "dmean_forecast_today": "forecast daily mean (today)",

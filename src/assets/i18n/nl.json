@@ -259,7 +259,8 @@
       "tomorrow": "morgen"
     },
     "timestepLabels": {
-      "amean": "jaargemiddelde (lange termijn blootstelling)",
+      "loading": "bezig met laden",
+      "anmean": "jaargemiddelde (lange termijn blootstelling)",
       "hmean": "uurgemiddelde (korte termijn blootstelling)",
       "24hmean": "glijdend 24-uurgemiddelde (korte termijn blootstelling)",
       "dmean_forecast_today": "daggemiddelde (vandaag)",
