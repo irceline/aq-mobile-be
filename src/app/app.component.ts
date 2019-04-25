@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 
-import { Platform, IonRouterOutlet } from '@ionic/angular';
+import { Platform, IonRouterOutlet, ModalController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
@@ -19,22 +19,26 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     public router: Router,
-    private pushNotifications: PushNotificationsService
+    private pushNotifications: PushNotificationsService,
+    private modalCtrl: ModalController,
   ) {
     this.initializeApp();
     this.backButtonEvent();
   }
 
-  ngOnInit() { }
-
   backButtonEvent() {
     this.platform.backButton.subscribe(() => {
-        this.routerOutlets.forEach((outlet: IonRouterOutlet) => {
+        this.routerOutlets.forEach(async (outlet: IonRouterOutlet) => {
+          const modal = await this.modalCtrl.getTop();
+          if (modal) {
+            modal.dismiss();
+          } else {
             if (this.router.url === '/tabs/start') {
                 navigator['app'].exitApp();
             } else {
                 window.history.back();
             }
+          }
         });
     });
   }
