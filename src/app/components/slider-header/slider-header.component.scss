@@ -28,13 +28,17 @@
 
   ion-row {
     justify-content: center;
-    height: 3.5em;
+    height: 3.8em;
   }
 
   .rowWithWarning {
-    height: 5em;
+    height: 6.5em;
   }
-  
+
+  .rowWithWarningCurrentLocation {
+    height: 8em;
+  }
+
   .oldDataWarning {
     width: 90%;
     margin: auto;

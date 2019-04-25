@@ -1,5 +1,25 @@
 <ion-list mode="md">
-  <ion-row text-center [ngClass]="{'rowWithWarning': oldDataWarning}">
+  <ion-row *ngIf="!header?.current" text-center [ngClass]="{'rowWithWarning': oldDataWarning}">
+    <ion-label text-wrap *ngIf="header">
+      <ion-text class="location-label">
+        <h2>{{header?.label}}</h2>
+      </ion-text>
+      <p class="date-label">
+        <span *ngIf="header?.current">({{'belaqi-user-location-slider.current-location' | translate}})<br /></span>
+        <span>{{'menu.lastUpdate' | translate}}: </span>
+        <span class="date-label">{{header?.date | date : 'd MMMM y, HH:mm': null: translateSrvc.currentLang}} </span>
+      </p>
+      <p class="oldDataWarning" *ngIf="oldDataWarning">
+        {{'header.oldDataWarning' | translate}}
+      </p>
+    </ion-label>
+    <div class="settingsButton">
+      <ion-button (click)="navigateSettings()">
+        <ion-icon slot="icon-only" name="settings"></ion-icon>
+      </ion-button>
+    </div>
+  </ion-row>
+  <ion-row *ngIf="header?.current" text-center [ngClass]="{'rowWithWarningCurrentLocation': oldDataWarning}">
     <ion-label text-wrap *ngIf="header">
       <ion-text class="location-label">
         <h2>{{header?.label}}</h2>
