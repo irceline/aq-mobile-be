@@ -7,10 +7,15 @@
       </ion-button>
     </div> -->
   </ion-row>
-  <div class="entries">
+  <div class="entries" *ngIf="!error">
     <div *ngFor="let entry of entries">
       <nearest-measuring-station-panel-entry [location]="location" [entry]="entry" (clicked)="select($event)"
-        (ready)="entryReady()"></nearest-measuring-station-panel-entry>
+        (ready)="entryReady($event)"></nearest-measuring-station-panel-entry>
+    </div>
+  </div>
+  <div class="entries" *ngIf="error">
+    <div class="error">
+      {{'nearest-measuring-station-panel.error' | translate}}
     </div>
   </div>
 </ion-grid>

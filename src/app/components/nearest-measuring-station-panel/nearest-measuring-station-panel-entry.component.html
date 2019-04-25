@@ -1,11 +1,8 @@
 <ion-row nowrap>
   <div text-center (click)="select()" class="entry" [ngStyle]="{'border-color': borderColor}">
     <div *ngIf="loadingStationValue" class="spinningborder"></div>
-    <div class="phenomenon-label" [ngClass]="{'location-disabled': !location}">
+    <div *ngIf="!error" class="phenomenon-label" [ngClass]="{'location-disabled': !location}">
       {{entry.label}}<sub>{{entry.subscript}}</sub></div>
-  </div>
-  <div class="errorMessage" *ngIf="error && !loadingStationValue">
-      {{'map.error' | translate}}
   </div>
   <div *ngIf="location" nowrap>
     <div class="station-value" *ngIf="!loadingStationValue && !error">

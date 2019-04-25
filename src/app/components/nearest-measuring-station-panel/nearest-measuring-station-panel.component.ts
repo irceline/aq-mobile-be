@@ -59,6 +59,8 @@ export class NearestMeasuringStationPanelComponent implements OnChanges {
 
   private readyCounter: number;
 
+  private error: boolean;
+
   constructor(
     private popoverCtrl: PopoverController
   ) { }
@@ -80,10 +82,14 @@ export class NearestMeasuringStationPanelComponent implements OnChanges {
     }).then(popover => popover.present());
   }
 
-  public entryReady() {
-    this.readyCounter--;
-    if (this.readyCounter === 0) {
-      this.ready.emit();
+  public entryReady(error) {
+    if (!error) {
+      this.readyCounter--;
+      if (this.readyCounter === 0) {
+        this.ready.emit();
+      }
+    } else {
+      this.error = true;
     }
   }
 
