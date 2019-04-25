@@ -59,7 +59,7 @@ export class NearestMeasuringStationPanelComponent implements OnChanges {
 
   private readyCounter: number;
 
-  private error: boolean;
+  public error: boolean;
 
   constructor(
     private popoverCtrl: PopoverController
