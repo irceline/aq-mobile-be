@@ -172,7 +172,7 @@
     "readMore": "lees meer"
   },
   "header": {
-    "oldDataWarning": "The last update is older than normal due to a technical issue. We are doing our best to repair the issue."
+    "oldDataWarning": "De laatste update is ouder dan normaal vanwege een technisch probleem. We doen ons best om het probleem z.s.m. te verhelpen."
   },
   "home": {
     "header": "Start",
@@ -277,6 +277,7 @@
   },
   "nearest-measuring-station-panel": {
     "header": "Dichtstbijgelegen meetstation",
+    "error": "Er is een fout opgetreden. Het is niet mogelijk om gegevens op te halen voor de dichtstbijgelegene meetstations. Probeer het later opnieuw.",
     "information-popup": {
       "list-bc": "BC of zwarte koolstof",
       "list-no2": "NO2 of stikstofdioxide",

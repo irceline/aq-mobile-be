@@ -172,7 +172,7 @@
 		"readMore": "weiterlesen"
 	},
   "header": {
-    "oldDataWarning": "The last update is older than normal due to a technical issue. We are doing our best to repair the issue."
+    "oldDataWarning": "Das neueste Update ist aufgrund eines technischen Problems älter als normal. Wir tun unser Bestes, um das Problem schnell zu lösen."
   },
 	"home": {
 		"header": "Start",
@@ -277,6 +277,7 @@
 	},
 	"nearest-measuring-station-panel": {
 		"header": "Nächstgelegene Überwachungsstation",
+		"error": "Ein Fehler ist aufgetreten. Es konnten keine Daten für die nächstgelegenen Überwachungsstationen abgerufen werden. Bitte versuchen Sie es später erneut.",
 		"information-popup": {
 			"list-bc": "oder black carbon",
 			"list-no2": "oder Stickstoffdioxid",

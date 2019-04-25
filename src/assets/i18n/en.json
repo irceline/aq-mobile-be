@@ -172,7 +172,7 @@
     "readMore": "read more"
   },
   "header": {
-    "oldDataWarning": "The last update is older than normal due to a technical issue. We are doing our best to repair the issue."
+    "oldDataWarning": "The last update is older than normal due to a technical issue. We are doing our best to repair the issue a.s.a.p.."
   },
   "home": {
     "header": "Home",
@@ -277,6 +277,7 @@
   },
   "nearest-measuring-station-panel": {
     "header": "Nearest measuring station",
+    "error": "An error occurred. It is not possible to fetch data for the nearest measuring stations. Please try again later.",
     "information-popup": {
       "list-bc": "or black carbon",
       "list-no2": "or nitrogen dioxide",
