@@ -4,15 +4,18 @@
     <div class="phenomenon-label" [ngClass]="{'location-disabled': !location}">
       {{entry.label}}<sub>{{entry.subscript}}</sub></div>
   </div>
+  <div class="errorMessage" *ngIf="error && !loadingStationValue">
+      {{'map.error' | translate}}
+  </div>
   <div *ngIf="location" nowrap>
-    <div class="station-value" *ngIf="!loadingStationValue">
+    <div class="station-value" *ngIf="!loadingStationValue && !error">
       {{lastStationaryValue | number:'1.0-1'}}{{uom}}</div>
   </div>
   <ion-col>
-    <div class="station-description" *ngIf="!loadingStationValue && stationDistance">
+    <div class="station-description" *ngIf="!loadingStationValue && stationDistance && !error">
       {{stationDistance | number:'1.0-1'}}km
     </div>
-    <div class="station-description" *ngIf="!loadingStationValue && stationLabel" text-wrap>
+    <div class="station-description" *ngIf="!loadingStationValue && stationLabel && !error" text-wrap>
       {{stationLabel | slice : 9 : 50}}
     </div>
   </ion-col>

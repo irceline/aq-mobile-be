@@ -30,6 +30,7 @@ export class NearestMeasuringStationPanelEntryComponent implements OnChanges {
   public uom: string;
   public borderColor: string;
   public loadingStationValue = true;
+  public error = false;
 
   public series: Timeseries;
 
@@ -101,9 +102,11 @@ export class NearestMeasuringStationPanelEntryComponent implements OnChanges {
           }
         }
         this.loadingStationValue = false;
+        this.error = false;
         this.ready.emit();
       }, (error) => {
         this.loadingStationValue = false;
+        this.error = true;
         this.ready.emit();
       });
   }
