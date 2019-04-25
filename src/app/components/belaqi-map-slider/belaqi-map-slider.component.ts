@@ -307,7 +307,7 @@ class MapView {
   public disabled = false;
 
   public sliderHeader = 'test';
-  public sliderPosition = 0;
+  public sliderPosition = 1;
   public sliderLength = 5;
   private mode = 'hmean';
 
@@ -518,7 +518,12 @@ class MapView {
         // hmean
         this.time = TimeLabel.current;
         this.mean = MeanLabel.hourly;
+        if (this.phenomenonLabel === PhenomenonLabel.BelAQI) {
+          const label: string = this.translateSrvc.instant('map.timestepLabels.hmean');
+          this.sliderHeader = 'BELAQI ' + label.slice(label.indexOf('('));
+        } else {
         this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.hmean');
+        }
         break;
       case 2:
         // 24hmean
