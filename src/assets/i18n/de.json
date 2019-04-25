@@ -172,7 +172,7 @@
 		"readMore": "weiterlesen"
 	},
   "header": {
-    "oldDataWarning": "The last update is older than normal due to a technical issue. We are doing our best to repair the issue."
+    "oldDataWarning": "Das neueste Update ist aufgrund eines technischen Problems älter als normal. Wir tun unser Bestes, um das Problem schnell zu lösen."
   },
 	"home": {
 		"header": "Start",
