@@ -649,7 +649,10 @@ class MapView {
       const location = { lat: this.location.latitude, lng: this.location.longitude } as LatLngLiteral;
       const bounds = latLngBounds(location, location);
       let boundsOptions: FitBoundsOptions = { paddingTopLeft: [0, 0], maxZoom: 12 };
-      this.removePopups();
+      // Sometimes Leaflet failes internally while removing the Popup. To be fixed!
+      try {
+        this.removePopups();
+      } catch (err) {}
       if (selection) {
         if (selection.stationlocation) {
           const station = { lat: selection.stationlocation.latitude, lng: selection.stationlocation.longitude } as LatLngExpression;
