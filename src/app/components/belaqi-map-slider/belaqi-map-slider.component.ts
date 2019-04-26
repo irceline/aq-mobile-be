@@ -649,10 +649,7 @@ class MapView {
       const location = { lat: this.location.latitude, lng: this.location.longitude } as LatLngLiteral;
       const bounds = latLngBounds(location, location);
       let boundsOptions: FitBoundsOptions = { paddingTopLeft: [0, 0], maxZoom: 12 };
-      // Sometimes Leaflet failes internally while removing the Popup. To be fixed!
-      try {
-        this.removePopups();
-      } catch (err) {}
+      this.removePopups();
       if (selection) {
         if (selection.stationlocation) {
           const station = { lat: selection.stationlocation.latitude, lng: selection.stationlocation.longitude } as LatLngExpression;
@@ -664,11 +661,11 @@ class MapView {
           boundsOptions = { paddingTopLeft: [0, 0], maxZoom: 12 };
         }
       }
-      this.userLocationMarker = marker(location, { draggable: false, icon: icondiv });
-      map.addLayer(this.userLocationMarker);
       if (zoom) {
         map.fitBounds(bounds, boundsOptions);
       }
+      this.userLocationMarker = marker(location, { draggable: false, icon: icondiv });
+      map.addLayer(this.userLocationMarker);
     }
   }
 
