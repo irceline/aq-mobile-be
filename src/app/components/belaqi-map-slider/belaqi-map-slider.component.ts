@@ -618,7 +618,7 @@ class MapView {
       const icondiv = divIcon({ className: 'marker', iconAnchor: point(10, 40) });
       const location = { lat: this.location.latitude, lng: this.location.longitude } as LatLngLiteral;
       const bounds = latLngBounds(location, location);
-      let boundsOptions: FitBoundsOptions = {paddingTopLeft: [0, 100], maxZoom: 12 };
+      let boundsOptions: FitBoundsOptions = {paddingTopLeft: [0, 0], maxZoom: 12 };
       this.removePopups();
       if (selection) {
         if (selection.stationlocation) {
@@ -628,7 +628,7 @@ class MapView {
             .setContent(this.translateSrvc.instant('map.nearest-station'));
           map.addLayer(this.nextStationPopup);
           bounds.extend(station);
-          boundsOptions = {paddingTopLeft: [0, 100], maxZoom: 12 };
+          boundsOptions = {paddingTopLeft: [0, 0], maxZoom: 12 };
         }
       }
       this.userLocationMarker = marker(location, { draggable: false, icon: icondiv });
