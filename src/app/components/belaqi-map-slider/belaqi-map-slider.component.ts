@@ -116,6 +116,7 @@ export class BelaqiMapSliderComponent implements OnDestroy {
 
   private loadingLocations = false;
   public currentLocationError: string;
+  private header = 0;
 
   constructor(
     protected settingsSrvc: SettingsService<MobileSettings>,
@@ -158,8 +159,10 @@ export class BelaqiMapSliderComponent implements OnDestroy {
     if (this.mapDataService.selection) {
       const label = this.mapDataService.selection.userlocation.label;
       if (this.belaqiMapviews) {
+        let hasNavigated = false;
         this.belaqiMapviews.some((element, i) => {
           if (element.location.label === label) {
+            hasNavigated = true;
             this.belaqiMapviews[i].selectMap();
             this.slider.slideTo(i);
             this.setHeader(i);
@@ -168,6 +171,7 @@ export class BelaqiMapSliderComponent implements OnDestroy {
             return false;
           }
         });
+        return hasNavigated;
       }
     }
   }
@@ -179,6 +183,7 @@ export class BelaqiMapSliderComponent implements OnDestroy {
       this.ircelineSettings.getSettings(reload).subscribe(
         ircelineSettings => {
           this.belaqiMapviews = [];
+          let hasNavigated = false;
           this.userLocationListService.getVisibleUserLocations().forEach((loc, i) => {
             // Init MapView
             this.belaqiMapviews[i] = new MapView(this.settingsSrvc,
@@ -198,6 +203,12 @@ export class BelaqiMapSliderComponent implements OnDestroy {
             // Set MapView Location
             if (loc.type !== 'current') {
               this.setLocation(loc, i, ircelineSettings);
+              if (this.slider) {
+                this.slider.update();
+                if (!hasNavigated) {
+                  hasNavigated = this.navigatToSelection();
+                }
+              }
             } else {
               this.belaqiMapviews[i].location = {
                 type: 'current'
@@ -205,7 +216,13 @@ export class BelaqiMapSliderComponent implements OnDestroy {
               this.userLocationListService.determineCurrentLocation().subscribe(
                 currentLoc => {
                   this.setLocation(currentLoc, i, ircelineSettings);
-                  this.setHeader(0);
+                  if (this.slider) {
+                    this.slider.update();
+                    if (!hasNavigated) {
+                      hasNavigated = this.navigatToSelection();
+                    }
+                    this.refreshHeader();
+                  }
                 },
                 error => {
                   this.currentLocationError = error || true;
@@ -213,13 +230,10 @@ export class BelaqiMapSliderComponent implements OnDestroy {
               );
             }
           });
-          setTimeout(() => {
-            if (this.slider) {
-              this.slider.update();
-              this.navigatToSelection();
-            }
+          // Navigation not via Panels. Set Header to default first map.
+          if (!this.mapDataService.selection) {
             this.setHeader(0);
-          }, 300);
+          }
           this.loadingLocations = false;
         },
         error => {
@@ -270,6 +284,18 @@ export class BelaqiMapSliderComponent implements OnDestroy {
         label: this.belaqiMapviews[idx].location.label,
         date: this.belaqiMapviews[idx].location.date,
         current: this.belaqiMapviews[idx].location.type === 'current'
+      });
+      this.header = idx;
+    }
+  }
+
+  // Refresh Header as values might have changed due to late fetch (current location)
+  private refreshHeader() {
+    if (this.belaqiMapviews[this.header].location) {
+      this.headerContent.emit({
+        label: this.belaqiMapviews[this.header].location.label,
+        date: this.belaqiMapviews[this.header].location.date,
+        current: this.belaqiMapviews[this.header].location.type === 'current'
       });
     }
   }
@@ -514,12 +540,7 @@ class MapView {
         // hmean
         this.time = TimeLabel.current;
         this.mean = MeanLabel.hourly;
-        if (this.phenomenonLabel === PhenomenonLabel.BelAQI) {
-          const label: string = this.translateSrvc.instant('map.timestepLabels.hmean');
-          this.sliderHeader = 'BelAQI ' + label.slice(label.indexOf('('));
-        } else {
         this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.hmean');
-        }
         break;
       case 2:
         // 24hmean
@@ -530,42 +551,27 @@ class MapView {
       case 3:
         // dmean forecast today
         this.time = TimeLabel.today;
-        if (this.phenomenonLabel === PhenomenonLabel.BelAQI) {
-          const label: string = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_today');
-          this.sliderHeader = 'BelAQI ' + label.slice(label.indexOf('('));
-        } else {
         this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_today');
-        }
         break;
       case 4:
         // dmean forecast tomorrow
         this.time = TimeLabel.tomorrow;
-        if (this.phenomenonLabel === PhenomenonLabel.BelAQI) {
-          const label: string = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_tomorrow');
-          this.sliderHeader = 'BelAQI ' + label.slice(label.indexOf('('));
-        } else {
         this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_tomorrow');
-        }
         break;
       case 5:
         // dmean forecast today+2
         this.time = TimeLabel.today2;
-        if (this.phenomenonLabel === PhenomenonLabel.BelAQI) {
-          const label: string = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_today+2');
-          this.sliderHeader = 'BelAQI ' + label.slice(label.indexOf('('));
-        } else {
         this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_today+2');
-        }
         break;
       case 6:
         // dmean forecast today+3
         this.time = TimeLabel.today3;
-        if (this.phenomenonLabel === PhenomenonLabel.BelAQI) {
-          const label: string = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_today+3');
-          this.sliderHeader = 'BelAQI ' + label.slice(label.indexOf('('));
-        } else {
         this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_today+3');
-        }
+    }
+
+    // Replace text for BelAQI Index
+    if (this.phenomenonLabel === PhenomenonLabel.BelAQI) {
+      this.sliderHeader = 'BelAQI ' + this.sliderHeader.slice(this.sliderHeader.indexOf('('));
     }
 
     // Switch modes when adjusting Slider in Phenomena
@@ -633,12 +639,16 @@ class MapView {
 
   private adjustPopups(zoom: boolean) {
     if (this.mapCache.hasMap(this.mapId)) {
+      // Only adjust if there is a location
+      if (!this.location.latitude || !this.location.longitude) {
+        return;
+      }
       const map = this.mapCache.getMap(this.mapId);
       const selection = this.mapDataService.selection;
       const icondiv = divIcon({ className: 'marker', iconAnchor: point(10, 40) });
       const location = { lat: this.location.latitude, lng: this.location.longitude } as LatLngLiteral;
       const bounds = latLngBounds(location, location);
-      let boundsOptions: FitBoundsOptions = {paddingTopLeft: [0, 0], maxZoom: 12 };
+      let boundsOptions: FitBoundsOptions = { paddingTopLeft: [0, 0], maxZoom: 12 };
       this.removePopups();
       if (selection) {
         if (selection.stationlocation) {
@@ -648,7 +658,7 @@ class MapView {
             .setContent(this.translateSrvc.instant('map.nearest-station'));
           map.addLayer(this.nextStationPopup);
           bounds.extend(station);
-          boundsOptions = {paddingTopLeft: [0, 0], maxZoom: 12 };
+          boundsOptions = { paddingTopLeft: [0, 0], maxZoom: 12 };
         }
       }
       this.userLocationMarker = marker(location, { draggable: false, icon: icondiv });
