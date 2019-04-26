@@ -530,22 +530,42 @@ class MapView {
       case 3:
         // dmean forecast today
         this.time = TimeLabel.today;
+        if (this.phenomenonLabel === PhenomenonLabel.BelAQI) {
+          const label: string = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_today');
+          this.sliderHeader = 'BelAQI ' + label.slice(label.indexOf('('));
+        } else {
         this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_today');
+        }
         break;
       case 4:
         // dmean forecast tomorrow
         this.time = TimeLabel.tomorrow;
+        if (this.phenomenonLabel === PhenomenonLabel.BelAQI) {
+          const label: string = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_tomorrow');
+          this.sliderHeader = 'BelAQI ' + label.slice(label.indexOf('('));
+        } else {
         this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_tomorrow');
+        }
         break;
       case 5:
         // dmean forecast today+2
         this.time = TimeLabel.today2;
+        if (this.phenomenonLabel === PhenomenonLabel.BelAQI) {
+          const label: string = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_today+2');
+          this.sliderHeader = 'BelAQI ' + label.slice(label.indexOf('('));
+        } else {
         this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_today+2');
+        }
         break;
       case 6:
         // dmean forecast today+3
         this.time = TimeLabel.today3;
+        if (this.phenomenonLabel === PhenomenonLabel.BelAQI) {
+          const label: string = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_today+3');
+          this.sliderHeader = 'BelAQI ' + label.slice(label.indexOf('('));
+        } else {
         this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_today+3');
+        }
     }
 
     // Switch modes when adjusting Slider in Phenomena
