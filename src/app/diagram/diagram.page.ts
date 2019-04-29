@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
-import { DrawerState } from '../components/overlay-info-drawer/overlay-info-drawer';
 import { HeaderContent } from '../components/slider-header/slider-header.component';
+import { DrawerState } from '../services/overlay-info-drawer/overlay-info-drawer.service';
 
 @Component({
   selector: 'diagram',
