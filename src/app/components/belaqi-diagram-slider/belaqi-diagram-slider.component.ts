@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnDestroy, Output, ViewChild } from '@angular/core';
-import { DatasetApiInterface, DefinedTimespan, DefinedTimespanService, Timeseries, Timespan } from '@helgoland/core';
+import { DatasetApiInterface, DefinedTimespan, DefinedTimespanService, Timeseries, Timespan, Time } from '@helgoland/core';
 import { IonSlides } from '@ionic/angular';
 import { map } from 'rxjs/operators';
 
@@ -47,6 +47,7 @@ export class BelaqiDiagramSliderComponent implements OnDestroy {
     private networkAlert: NetworkAlertService,
     private api: DatasetApiInterface,
     private defTimespanSrvc: DefinedTimespanService,
+    private time: Time,
     private categorizeValSrvc: CategorizedValueService,
     private belaqiSrvc: BelaqiIndexService
   ) {
@@ -79,6 +80,7 @@ export class BelaqiDiagramSliderComponent implements OnDestroy {
             this.diagramViews[i] = new DiagramView(
               this.nearestStation,
               this.api,
+              this.time,
               this.timespan,
               this.categorizeValSrvc,
               this.belaqiSrvc
@@ -147,33 +149,20 @@ class DiagramView {
 
   public location: UserLocation;
 
-  public loadingNO2: boolean;
-  public dataNO2: DataEntry[];
-  public labelNO2: string;
+  public entries: DiagramEntry[] = [];
 
-  public loadingBC: boolean;
-  public dataBC: DataEntry[];
-  public labelBC: string;
-
-  public loadingO3: boolean;
-  public dataO3: DataEntry[];
-  public labelO3: string;
-
-  public loadingPM25: boolean;
-  public dataPM25: DataEntry[];
-  public labelPM25: string;
-
-  public loadingPM10: boolean;
-  public dataPM10: DataEntry[];
-  public labelPM10: string;
+  public timespan: Timespan;
 
   constructor(
     private nearestTimeseries: NearestTimeseriesService,
     private api: DatasetApiInterface,
-    private timespan: Timespan,
+    private time: Time,
+    timespan: Timespan,
     private categorizeValSrvc: CategorizedValueService,
     private belaqiSrvc: BelaqiIndexService
-  ) { }
+  ) {
+    this.timespan = timespan;
+  }
 
   public init() {
     this.determineNextStationNO2();
@@ -183,59 +172,105 @@ class DiagramView {
     this.determineNextStationPM10();
   }
 
+  public stepBack() {
+    this.timespan = this.time.stepBack(this.timespan);
+    this.adjustTimespan();
+  }
+
+  public stepForward() {
+    this.timespan = this.time.stepForward(this.timespan);
+    this.adjustTimespan();
+  }
+
+  public adjustTimespan() {
+    this.entries.forEach(e => {
+      this.fetchData(e, this.handleError);
+    });
+  }
+
   private determineNextStationPM10() {
+    const pm10Entry: DiagramEntry = {
+      loading: true,
+      label: '',
+      data: [],
+      phenomenon: MainPhenomenon.PM10
+    };
+    this.entries.push(pm10Entry);
     this.determineNextStation(
-      MainPhenomenon.PM10,
-      (series) => this.labelPM10 = this.createLabel(series),
-      (loading) => this.loadingPM10 = loading,
-      (value) => 'grey',
-      (data) => this.dataPM10 = data,
+      pm10Entry,
+      (series) => pm10Entry.label = this.createLabel(series),
       (error) => this.handleError(error)
     );
   }
 
   private determineNextStationPM25() {
+    const pm25Entry: DiagramEntry = {
+      loading: true,
+      label: '',
+      data: [],
+      phenomenon: MainPhenomenon.PM25
+    };
+    this.entries.push(pm25Entry);
     this.determineNextStation(
-      MainPhenomenon.PM25,
-      (series) => this.labelPM25 = this.createLabel(series),
-      (loading) => this.loadingPM25 = loading,
-      (value) => 'grey',
-      (data) => this.dataPM25 = data,
+      pm25Entry,
+      (series) => pm25Entry.label = this.createLabel(series),
       (error) => this.handleError(error)
     );
   }
 
   private determineNextStationO3() {
+    const o3Entry: DiagramEntry = {
+      loading: true,
+      label: '',
+      data: [],
+      phenomenon: MainPhenomenon.O3
+    };
+    this.entries.push(o3Entry);
     this.determineNextStation(
-      MainPhenomenon.O3,
-      (series) => this.labelO3 = this.createLabel(series),
-      (loading) => this.loadingO3 = loading,
-      (value) => this.belaqiSrvc.getColorForIndex(this.categorizeValSrvc.categorize(value, MainPhenomenon.O3)),
-      (data) => this.dataO3 = data,
+      o3Entry,
+      (series) => o3Entry.label = this.createLabel(series),
       (error) => this.handleError(error)
     );
   }
 
   private determineNextStationBC() {
+    const bcEntry: DiagramEntry = {
+      loading: true,
+      label: '',
+      data: [],
+      phenomenon: MainPhenomenon.BC
+    };
+    this.entries.push(bcEntry);
     this.determineNextStation(
-      MainPhenomenon.BC,
-      (series) => this.labelBC = this.createLabel(series),
-      (loading) => this.loadingBC = loading,
-      (value) => 'grey',
-      (data) => this.dataBC = data,
+      bcEntry,
+      (series) => bcEntry.label = this.createLabel(series),
       (error) => this.handleError(error)
     );
   }
 
   private determineNextStationNO2() {
+    const no2Entry: DiagramEntry = {
+      loading: true,
+      label: '',
+      data: [],
+      phenomenon: MainPhenomenon.NO2
+    };
+    this.entries.push(no2Entry);
     this.determineNextStation(
-      MainPhenomenon.NO2,
-      (series) => this.labelNO2 = this.createLabel(series),
-      (loading) => this.loadingNO2 = loading,
-      (value) => this.belaqiSrvc.getColorForIndex(this.categorizeValSrvc.categorize(value, MainPhenomenon.NO2)),
-      (data) => this.dataNO2 = data,
+      no2Entry,
+      (series) => no2Entry.label = this.createLabel(series),
       (error) => this.handleError(error)
     );
+  }
+
+  private setColor(phenomenon: MainPhenomenon, value: number): string {
+    switch (phenomenon) {
+      case MainPhenomenon.NO2:
+      case MainPhenomenon.O3:
+        return this.belaqiSrvc.getColorForIndex(this.categorizeValSrvc.categorize(value, phenomenon));
+      default:
+        return 'grey';
+    }
   }
 
   private handleError(error: any) {
@@ -247,42 +282,54 @@ class DiagramView {
   }
 
   private determineNextStation(
-    phenomenon: MainPhenomenon,
+    entry: DiagramEntry,
     setLabel: (series: Timeseries) => void,
-    setLoading: (loading: boolean) => void,
-    setColor: (value: number) => string,
-    setData: (data: DataEntry[]) => void,
     setError: (error: any) => void
   ) {
-    setLoading(true);
+    entry.loading = true;
     this.nearestTimeseries.determineNextTimeseries(
       this.location.latitude, this.location.longitude,
-      getIDForMainPhenomenon(phenomenon)
+      getIDForMainPhenomenon(entry.phenomenon)
     ).subscribe(nearest => {
+      entry.series = nearest.series;
       setLabel(nearest.series);
-      this.api.getTsData<{
-        timestamp: number;
-        value: number;
-      }>(nearest.series.id, nearest.series.url, this.timespan)
-        .pipe(
-          map(res => this.mapValues(res, setColor))
-        )
-        .subscribe(
-          res => setData(res),
-          error => setError(error),
-          () => setLoading(false)
-        );
+      this.fetchData(entry, setError);
     });
   }
 
-  private mapValues(res, setColor: (value: number) => string): DataEntry[] {
+  private fetchData(
+    entry: DiagramEntry,
+    setError: (error: any) => void
+  ) {
+    this.api.getTsData<{
+      timestamp: number;
+      value: number;
+    }>(entry.series.id, entry.series.url, this.timespan)
+      .pipe(map(res => this.mapValues(res, entry.phenomenon)))
+      .subscribe(
+        res => entry.data = res,
+        error => setError(error),
+        () => entry.loading = false
+      );
+  }
+
+  private mapValues(res, phenomenon: MainPhenomenon): DataEntry[] {
     return res.values.map(e => {
       return {
         timestamp: e.timestamp,
         value: e.value,
-        color: setColor(e.value)
+        color: this.setColor(phenomenon, e.value)
       } as DataEntry;
     });
   }
 }
 
+class DiagramEntry {
+
+  loading: boolean;
+  data: DataEntry[];
+  label: string;
+  series?: Timeseries;
+  phenomenon: MainPhenomenon;
+
+}

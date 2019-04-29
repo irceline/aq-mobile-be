@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { Timespan } from '@helgoland/core';
 import { Chart } from 'chart.js';
 
@@ -34,13 +34,37 @@ export class SingleChartComponent implements OnChanges {
   @Input()
   public location: UserLocation;
 
+  @Output()
+  public back: EventEmitter<void> = new EventEmitter();
+
+  @Output()
+  public forward: EventEmitter<void> = new EventEmitter();
+
+  public canBack: boolean;
+  public canForward: boolean;
+
   private chart: any;
 
   constructor() { }
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (this.label && this.timespan && this.data && this.location) {
-      this.drawChart();
+      if (this.chart) {
+        this.updateChart();
+      } else {
+        this.drawChart();
+      }
+      this.checkButton();
+    }
+  }
+
+  private checkButton() {
+    this.canBack = true;
+    const now = new Date().getTime();
+    if (now > this.timespan.to) {
+      this.canForward = true;
+    } else {
+      this.canForward = false;
     }
   }
 
@@ -52,7 +76,7 @@ export class SingleChartComponent implements OnChanges {
     this.chart = new Chart(ctx, {
       type: 'line',
       plugins: [{
-        resize: c => this.drawData(ctx, c, this.data)
+        resize: c => this.drawData(this.data)
       }],
       options: {
         legend: {
@@ -89,7 +113,7 @@ export class SingleChartComponent implements OnChanges {
               max: new Date(this.timespan.to),
               unit: 'hour',
               displayFormats: {
-                hour: 'HH:mm'
+                hour: 'MMM D HH:mm'
               }
             },
             ticks: {
@@ -141,14 +165,21 @@ export class SingleChartComponent implements OnChanges {
         ]
       }
     });
-    this.drawData(ctx, this.chart, this.data);
+    this.drawData(this.data);
   }
 
-  private drawData(ctx: CanvasRenderingContext2D, chart: Chart, data: DataEntry[]) {
-    const dataset = chart.data.datasets[0];
+  private updateChart() {
+    // adjust new timeframe
+    this.chart.options.scales.xAxes[0].time.min = new Date(this.timespan.from);
+    this.chart.options.scales.xAxes[0].time.max = new Date(this.timespan.to);
+    this.drawData(this.data);
+  }
+
+  private drawData(data: DataEntry[]) {
+    const dataset = this.chart.data.datasets[0];
     dataset.pointBackgroundColor = data.map(e => e.color);
     dataset.data = this.createDataArray(data);
-    chart.update();
+    this.chart.update();
   }
 
   private createDataArray(data: DataEntry[]): number[] | Chart.ChartPoint[] {

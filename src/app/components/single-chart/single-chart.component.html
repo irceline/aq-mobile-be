@@ -4,6 +4,12 @@
     {{'single-chart.loading' | translate}}
   </div>
   <div [hidden]="loading">
+    <ion-button *ngIf="canBack" class="prev-button" fill="clear" (click)="back.emit()">
+      <ion-icon slot="icon-only" name="arrow-dropleft"></ion-icon>
+    </ion-button>
+    <ion-button *ngIf="canForward" class="next-button" fill="clear" (click)="forward.emit()">
+      <ion-icon slot="icon-only" name="arrow-dropright"></ion-icon>
+    </ion-button>
     <canvas #chart></canvas>
   </div>
 </div>
