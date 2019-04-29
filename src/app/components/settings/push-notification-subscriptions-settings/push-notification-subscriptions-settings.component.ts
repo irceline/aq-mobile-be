@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 
-import { PushNotificationTopic } from '../../../services/notification-presenter/notification-presenter.service';
 import {
   PushNotificationsHandlerService,
 } from '../../../services/push-notifications-handler/push-notifications-handler.service';
+import { PushNotificationTopic } from '../../../services/push-notifications/push-notifications.service';
 
 @Component({
   selector: 'push-notification-subscriptions-settings',

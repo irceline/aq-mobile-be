@@ -1,6 +1,6 @@
 {
   "name": "aq-mobile-be",
-  "version": "0.8.6",
+  "version": "0.8.9",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
   "scripts": {
@@ -72,7 +72,7 @@
   },
   "devDependencies": {
     "@angular-devkit/architect": "~0.13.7",
-    "@angular-devkit/build-angular": "~0.13.7",
+    "@angular-devkit/build-angular": "^0.13.8",
     "@angular-devkit/core": "~7.3.7",
     "@angular-devkit/schematics": "~7.3.7",
     "@angular/cli": "~7.3.7",

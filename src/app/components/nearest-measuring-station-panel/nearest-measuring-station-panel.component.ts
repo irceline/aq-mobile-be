@@ -10,7 +10,7 @@ import {
 export interface NearestMeasuringStationPanelEntry {
   label: string;
   subscript: string;
-  id: string;
+  phenomenonId: string;
 }
 
 @Component({
@@ -33,31 +33,33 @@ export class NearestMeasuringStationPanelComponent implements OnChanges {
     {
       label: 'BC',
       subscript: '',
-      id: PhenomenonSeriesID.BC
+      phenomenonId: PhenomenonSeriesID.BC
     },
     {
       label: 'NO',
       subscript: '2',
-      id: PhenomenonSeriesID.NO2
+      phenomenonId: PhenomenonSeriesID.NO2
     },
     {
       label: 'O',
       subscript: '3',
-      id: PhenomenonSeriesID.O3
+      phenomenonId: PhenomenonSeriesID.O3
     },
     {
       label: 'PM',
       subscript: '10',
-      id: PhenomenonSeriesID.PM10
+      phenomenonId: PhenomenonSeriesID.PM10
     },
     {
       label: 'PM',
       subscript: '2.5',
-      id: PhenomenonSeriesID.PM25
+      phenomenonId: PhenomenonSeriesID.PM25
     }
   ];
 
   private readyCounter: number;
+
+  public error: boolean;
 
   constructor(
     private popoverCtrl: PopoverController
@@ -80,10 +82,14 @@ export class NearestMeasuringStationPanelComponent implements OnChanges {
     }).then(popover => popover.present());
   }
 
-  public entryReady() {
-    this.readyCounter--;
-    if (this.readyCounter === 0) {
-      this.ready.emit();
+  public entryReady(error) {
+    if (!error) {
+      this.readyCounter--;
+      if (this.readyCounter === 0) {
+        this.ready.emit();
+      }
+    } else {
+      this.error = true;
     }
   }
 

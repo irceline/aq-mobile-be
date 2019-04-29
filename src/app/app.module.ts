@@ -29,6 +29,7 @@ import { CategorizedValueService } from './services/categorized-value/categorize
 import {
   CustomDatasetApiInterfaceService,
 } from './services/custom-dataset-api-interface/custom-dataset-api-interface.service';
+import { DailyMeanValueService } from './services/daily-mean-value/daily-mean-value.service';
 import { GeoLabelsService } from './services/geo-labels/geo-labels.service';
 import { GeoSearchService } from './services/geo-search/geo-search.service';
 import { IrcelineSettingsService } from './services/irceline-settings/irceline-settings.service';
@@ -40,7 +41,6 @@ import { NearestTimeseriesManagerService } from './services/nearest-timeseries-m
 import { NearestTimeseriesService } from './services/nearest-timeseries/nearest-timeseries.service';
 import { NetworkAlertService } from './services/network-alert/network-alert.service';
 import { NotificationMaintainerService } from './services/notification-maintainer/notification-maintainer.service';
-import { NotificationPresenterService } from './services/notification-presenter/notification-presenter.service';
 import { CachingInterceptor, OngoingHttpCacheService } from './services/ongoing-http-cache/ongoing-http-cache.service';
 import { PushNotificationsHandlerService } from './services/push-notifications-handler/push-notifications-handler.service';
 import { PushNotificationsService } from './services/push-notifications/push-notifications.service';
@@ -48,6 +48,7 @@ import { RefreshHandler } from './services/refresh/refresh.service';
 import { JSSONSettingsService } from './services/settings/settings.service';
 import { StartPageSettingsService } from './services/start-page-settings/start-page-settings.service';
 import { UserLocationListService } from './services/user-location-list/user-location-list.service';
+import { InfoOverlayService } from './services/overlay-info-drawer/overlay-info-drawer.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -93,11 +94,13 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppVersion,
     BelaqiIndexService,
     CategorizedValueService,
+    DailyMeanValueService,
     Diagnostic,
     Firebase,
     GeoLabelsService,
     Geolocation,
     InAppBrowser,
+    InfoOverlayService,
     IrcelineSettingsService,
     Keyboard,
     LanguageHandlerService,
@@ -110,7 +113,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     Network,
     NetworkAlertService,
     NotificationMaintainerService,
-    NotificationPresenterService,
     OngoingHttpCacheService,
     PushNotificationsHandlerService,
     PushNotificationsService,

@@ -2,7 +2,7 @@ import './boundary-canvas';
 
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, Output, ViewChild } from '@angular/core';
-import { DatasetApiInterface, ParameterFilter, Phenomenon, Platform, SettingsService, Station } from '@helgoland/core';
+import { DatasetApiInterface, ParameterFilter, Phenomenon, SettingsService, Station } from '@helgoland/core';
 import { GeoSearchOptions, LayerOptions, MapCache } from '@helgoland/map';
 import { IonSlides, ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
@@ -16,6 +16,7 @@ import {
   geoJSON,
   latLngBounds,
   LatLngExpression,
+  LatLngLiteral,
   Layer,
   marker,
   point,
@@ -27,6 +28,7 @@ import moment from 'moment';
 import { forkJoin } from 'rxjs';
 
 import { getIDForMainPhenomenon, MainPhenomenon } from '../../model/phenomenon';
+import { forecastWmsURL, realtimeWmsURL, rioifdmWmsURL } from '../../model/services';
 import { AnnualMeanService } from '../../services/annual-mean/annual-mean.service';
 import { IrcelineSettings, IrcelineSettingsService } from '../../services/irceline-settings/irceline-settings.service';
 import { LocateService, LocationStatus } from '../../services/locate/locate.service';
@@ -36,9 +38,6 @@ import { RefreshHandler } from '../../services/refresh/refresh.service';
 import { MobileSettings } from '../../services/settings/settings.service';
 import { UserLocation, UserLocationListService } from '../../services/user-location-list/user-location-list.service';
 import { MarkerSelectorGenerator } from '../customized-station-map-selector/customized-station-map-selector.component';
-import { ModalUserLocationCreationComponent } from '../modal-user-location-creation/modal-user-location-creation.component';
-import { DrawerState } from '../overlay-info-drawer/overlay-info-drawer';
-import { ModalSettingsComponent } from '../settings/modal-settings/modal-settings.component';
 import { HeaderContent } from '../slider-header/slider-header.component';
 
 enum PhenomenonLabel {
@@ -109,9 +108,6 @@ export class BelaqiMapSliderComponent implements OnDestroy {
   public sliderOptions = {
     zoom: false
   };
-  dockedHeight = 92;
-  drawerState = DrawerState.Docked;
-  states = DrawerState;
 
   public statusIntervalDuration: number;
   public geoSearchOptions: GeoSearchOptions;
@@ -120,6 +116,7 @@ export class BelaqiMapSliderComponent implements OnDestroy {
 
   private loadingLocations = false;
   public currentLocationError: string;
+  private header = 0;
 
   constructor(
     protected settingsSrvc: SettingsService<MobileSettings>,
@@ -155,11 +152,17 @@ export class BelaqiMapSliderComponent implements OnDestroy {
   }
 
   public changeToMap() {
+    this.navigatToSelection();
+  }
+
+  private navigatToSelection() {
     if (this.mapDataService.selection) {
       const label = this.mapDataService.selection.userlocation.label;
       if (this.belaqiMapviews) {
+        let hasNavigated = false;
         this.belaqiMapviews.some((element, i) => {
           if (element.location.label === label) {
+            hasNavigated = true;
             this.belaqiMapviews[i].selectMap();
             this.slider.slideTo(i);
             this.setHeader(i);
@@ -168,6 +171,7 @@ export class BelaqiMapSliderComponent implements OnDestroy {
             return false;
           }
         });
+        return hasNavigated;
       }
     }
   }
@@ -179,6 +183,7 @@ export class BelaqiMapSliderComponent implements OnDestroy {
       this.ircelineSettings.getSettings(reload).subscribe(
         ircelineSettings => {
           this.belaqiMapviews = [];
+          let hasNavigated = false;
           this.userLocationListService.getVisibleUserLocations().forEach((loc, i) => {
             // Init MapView
             this.belaqiMapviews[i] = new MapView(this.settingsSrvc,
@@ -198,6 +203,12 @@ export class BelaqiMapSliderComponent implements OnDestroy {
             // Set MapView Location
             if (loc.type !== 'current') {
               this.setLocation(loc, i, ircelineSettings);
+              if (this.slider) {
+                this.slider.update();
+                if (!hasNavigated) {
+                  hasNavigated = this.navigatToSelection();
+                }
+              }
             } else {
               this.belaqiMapviews[i].location = {
                 type: 'current'
@@ -205,7 +216,13 @@ export class BelaqiMapSliderComponent implements OnDestroy {
               this.userLocationListService.determineCurrentLocation().subscribe(
                 currentLoc => {
                   this.setLocation(currentLoc, i, ircelineSettings);
-                  this.setHeader(0);
+                  if (this.slider) {
+                    this.slider.update();
+                    if (!hasNavigated) {
+                      hasNavigated = this.navigatToSelection();
+                    }
+                    this.refreshHeader();
+                  }
                 },
                 error => {
                   this.currentLocationError = error || true;
@@ -213,13 +230,10 @@ export class BelaqiMapSliderComponent implements OnDestroy {
               );
             }
           });
-          setTimeout(() => {
-            if (this.slider) {
-              this.slider.update();
-              this.slider.slideTo(0);
-            }
+          // Navigation not via Panels. Set Header to default first map.
+          if (!this.mapDataService.selection) {
             this.setHeader(0);
-          }, 300);
+          }
           this.loadingLocations = false;
         },
         error => {
@@ -271,6 +285,18 @@ export class BelaqiMapSliderComponent implements OnDestroy {
         date: this.belaqiMapviews[idx].location.date,
         current: this.belaqiMapviews[idx].location.type === 'current'
       });
+      this.header = idx;
+    }
+  }
+
+  // Refresh Header as values might have changed due to late fetch (current location)
+  private refreshHeader() {
+    if (this.belaqiMapviews[this.header].location) {
+      this.headerContent.emit({
+        label: this.belaqiMapviews[this.header].location.label,
+        date: this.belaqiMapviews[this.header].location.date,
+        current: this.belaqiMapviews[this.header].location.type === 'current'
+      });
     }
   }
 
@@ -302,8 +328,10 @@ class MapView {
   public showYearlyMean = true;
   public disabled = false;
 
-  public sliderHeader = 'test';
-  public sliderPosition: number;
+  public sliderHeader = this.translateSrvc.instant('map.timestepLabels.loading');
+  public sliderPosition = 1;
+  public sliderLength = 5;
+  private mode = 'hmean';
 
   public legendId: string;
   public langCode: string;
@@ -361,20 +389,24 @@ class MapView {
 
     // Navigate to correct slider position
     if (!this.mapDataService.selection.yearly) {
+      // Navigating to short-term
       switch (this.mapDataService.selection.phenomenonID) {
         case getIDForMainPhenomenon(MainPhenomenon.NO2): {
-          this.sliderPosition++;
+          this.sliderPosition = 1;
           break;
         }
         case getIDForMainPhenomenon(MainPhenomenon.PM10):
         case getIDForMainPhenomenon(MainPhenomenon.PM25): {
-          this.sliderPosition++;
-          this.sliderPosition++;
+          this.sliderPosition = 2;
           break;
         }
       }
+    } else {
+      // Navigating to long-term
+      this.sliderPosition = 0;
     }
     this.adjustSlider();
+    this.adjustPopups(true);
   }
 
   public init() {
@@ -423,10 +455,10 @@ class MapView {
     } else {
       this.clearSelectedPhenomenon();
     }
-    if (this.phenomenonLabel === PhenomenonLabel.BC) {
-      this.time = TimeLabel.current;
-    }
+
+    const oldSliderLen = this.sliderLength;
     this.adjustMeanUI();
+    this.adjustSliderKeepAggregation(oldSliderLen, this.sliderLength, this.sliderPosition);
     this.adjustSlider();
     this.adjustUI();
     this.adjustLegend();
@@ -441,19 +473,68 @@ class MapView {
     this.adjustLegend();
   }
 
+  private adjustSliderKeepAggregation(oldSliderLen, newSliderLen, oldSliderPos: number) {
+    let transitionNumber = 0;
+
+    if (oldSliderLen !== newSliderLen) {
+      // Assign each transition a positive number for easy matrix access
+      switch (oldSliderLen - newSliderLen) {
+        case 1:
+          transitionNumber = 0; // 7 to 6 slider
+          break;
+        case -1:
+          transitionNumber = 1; // 6 to 7 slider
+          break;
+        case 5:
+          transitionNumber = 2; // 7 to 2 slider
+          break;
+        case -5:
+          transitionNumber = 3; // 2 to 7 slider
+          break;
+        case 4:
+          transitionNumber = 4; // 6 to 2 slider
+          break;
+        case -4:
+          transitionNumber = 5; // 2 to 6 slider
+          break;
+      }
+
+      //hmean-mode
+      let transitionTable = [
+        [1, 0, 0, 0, 0, 1], //anmean
+        [0, 0, 0, 0, 0, 0], //hmean
+        [-1, 1, -1, 1, 0, 0], //24hmean
+        [-1, 1, -2, 2, -1, 1], //today
+        [-1, 1, -3, 3, -2, 2], //tomorrow
+        [-1, 1, -4, 4, -3, 3], //today+2
+        [-1, 1, -5, 5, -4, 4]  //today+3
+      ];
+      if (this.mode === 'belaqi') {
+        // belaqi-mode
+        transitionTable[1] = [0, 1, 0, 1, 0, 0];
+      }
+      // Adjust sliderPosition accordingly
+      this.sliderPosition += transitionTable[oldSliderPos][transitionNumber];
+    }
+  }
+
   private adjustSlider() {
     let correctedSliderPos = this.sliderPosition;
 
+    // Sometimes skip 24hmean
     if (!this.show24hourMean && this.sliderPosition > 1) {
       correctedSliderPos++;
     }
 
+    // Set belaqi as default mode;
+    // this.mode = 'belaqi';
+
     switch (correctedSliderPos) {
       case 0:
-        // amean
+        // anmean
         this.time = TimeLabel.current;
         this.mean = MeanLabel.yearly;
-        this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.amean');
+        this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.anmean');
         break;
       case 1:
         // hmean
@@ -487,6 +568,21 @@ class MapView {
         this.time = TimeLabel.today3;
         this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_today+3');
     }
+
+    // Replace text for BelAQI Index
+    if (this.phenomenonLabel === PhenomenonLabel.BelAQI) {
+      this.sliderHeader = 'BelAQI ' + this.sliderHeader.slice(this.sliderHeader.indexOf('('));
+    }
+
+    // Switch modes when adjusting Slider in Phenomena
+    if (this.selectedPhenomenonId === getIDForMainPhenomenon(MainPhenomenon.PM10)
+      || this.selectedPhenomenonId === getIDForMainPhenomenon(MainPhenomenon.PM25)) {
+      if (correctedSliderPos === 2) {
+        this.mode = 'belaqi';
+      } else {
+        this.mode = 'hmean';
+      }
+    }
   }
   /**
    * Sets up showYearly + show24Hour upon selecting a Phenomenon in the Top bar.
@@ -499,22 +595,28 @@ class MapView {
       case getIDForMainPhenomenon(MainPhenomenon.BC):
         showYearly = true;
         disabled = true;
+        this.sliderLength = 1;
         break;
       case getIDForMainPhenomenon(MainPhenomenon.NO2):
         showYearly = true;
         show24hour = false;
+        this.sliderLength = 5;
         break;
       case getIDForMainPhenomenon(MainPhenomenon.O3):
+        this.sliderLength = 5;
         break;
       case getIDForMainPhenomenon(MainPhenomenon.PM10):
         show24hour = true;
         showYearly = true;
+        this.sliderLength = 6;
         break;
       case getIDForMainPhenomenon(MainPhenomenon.PM25):
         show24hour = true;
         showYearly = true;
+        this.sliderLength = 6;
         break;
       default:
+        this.sliderLength = 5;
         break;
     }
     this.show24hourMean = show24hour;
@@ -524,25 +626,6 @@ class MapView {
     if (this.time !== TimeLabel.current) {
       this.mean = null;
     }
-
-    // Reset slider
-    if (!this.showYearlyMean) {
-      this.sliderPosition = 1;
-    } else {
-      this.sliderPosition = 0;
-    }
-  }
-
-  public onStationSelected(platform: Platform) {
-    // const modal = this.modalCtrl.create(StationSelectorComponent,
-    //   {
-    //     platform,
-    //     providerUrl: this.providerUrl,
-    //     phenomenonId: this.selectedPhenomenonId
-    //   }
-    // );
-    // modal.onDidDismiss(data => { if (data) { this.navCtrl.push(DiagramPage) } });
-    // modal.present();
   }
 
   public onMapLoading(loading: boolean) {
@@ -556,16 +639,18 @@ class MapView {
 
   private adjustPopups(zoom: boolean) {
     if (this.mapCache.hasMap(this.mapId)) {
+      // Only adjust if there is a location
+      if (!this.location.latitude || !this.location.longitude) {
+        return;
+      }
       const map = this.mapCache.getMap(this.mapId);
       const selection = this.mapDataService.selection;
       const icondiv = divIcon({ className: 'marker', iconAnchor: point(10, 40) });
-      let location;
-      let bounds;
-      let boundsOptions: FitBoundsOptions = { padding: [200, 200], maxZoom: 12 };
+      const location = { lat: this.location.latitude, lng: this.location.longitude } as LatLngLiteral;
+      const bounds = latLngBounds(location, location);
+      let boundsOptions: FitBoundsOptions = { paddingTopLeft: [-50, -50], maxZoom: 12 };
       this.removePopups();
       if (selection) {
-        location = { lat: selection.userlocation.latitude, lng: selection.userlocation.longitude } as LatLngExpression;
-        bounds = latLngBounds(location, location);
         if (selection.stationlocation) {
           const station = { lat: selection.stationlocation.latitude, lng: selection.stationlocation.longitude } as LatLngExpression;
           this.nextStationPopup = popup({ autoPan: false })
@@ -573,17 +658,14 @@ class MapView {
             .setContent(this.translateSrvc.instant('map.nearest-station'));
           map.addLayer(this.nextStationPopup);
           bounds.extend(station);
-          boundsOptions = { padding: [70, 70], maxZoom: 12 };
+          boundsOptions = { paddingTopLeft: [-50, -50], maxZoom: 12 };
         }
-      } else {
-        location = { lat: this.location.latitude, lng: this.location.longitude } as LatLngExpression;
-        bounds = latLngBounds(location, location);
       }
-      this.userLocationMarker = marker(location, { draggable: false, icon: icondiv });
-      map.addLayer(this.userLocationMarker);
       if (zoom) {
         map.fitBounds(bounds, boundsOptions);
       }
+      this.userLocationMarker = marker(location, { draggable: false, icon: icondiv });
+      map.addLayer(this.userLocationMarker);
     }
   }
 
@@ -655,47 +737,50 @@ class MapView {
     this.cacheService.loadFromObservable('multipolygon', request, null, 60 * 60 * 24).subscribe((geojson: GeoJSON.GeoJsonObject) => {
       this.overlayMaps = new Map<string, LayerOptions>();
       let layerId: string;
-      let wmsUrl: string;
       let timeParam: string;
       if (this.time === TimeLabel.current) {
         forkJoin(
           this.annualProvider.getYear(),
           this.ircelineSettings.getSettings(false)
         ).subscribe(result => {
-          wmsUrl = 'http://geo5.irceline.be/rioifdm/wms';
           const lastUpdate = result[1].lastupdate.toISOString();
           const year = result[0];
           switch (this.phenomenonLabel) {
             case PhenomenonLabel.BelAQI:
-              this.drawLayer(wmsUrl, 'belaqi', geojson, lastUpdate);
+              this.drawLayer(rioifdmWmsURL, 'belaqi', geojson, lastUpdate);
               break;
             case PhenomenonLabel.BC:
-              if (this.mean === MeanLabel.hourly) { this.drawLayer(wmsUrl, 'bc_hmean', geojson, lastUpdate); }
-              if (this.mean === MeanLabel.yearly) { this.drawLayer(wmsUrl, `bc_anmean_${year}_atmostreet`, geojson); }
+              if (this.mean === MeanLabel.hourly) { this.drawLayer(rioifdmWmsURL, 'bc_hmean', geojson, lastUpdate); }
+              if (this.mean === MeanLabel.yearly) { this.drawLayer(rioifdmWmsURL, `bc_anmean_${year}_atmostreet`, geojson); }
               break;
             case PhenomenonLabel.NO2:
-              if (this.mean === MeanLabel.hourly) { this.drawLayer(wmsUrl, 'no2_hmean', geojson, lastUpdate); }
-              if (this.mean === MeanLabel.yearly) { this.drawLayer(wmsUrl, `no2_anmean_${year}_atmostreet`, geojson); }
+              if (this.mean === MeanLabel.hourly) { this.drawLayer(rioifdmWmsURL, 'no2_hmean', geojson, lastUpdate); }
+              if (this.mean === MeanLabel.yearly) { this.drawLayer(rioifdmWmsURL, `no2_anmean_${year}_atmostreet`, geojson); }
               break;
             case PhenomenonLabel.O3:
-              if (this.mean === MeanLabel.hourly) { this.drawLayer(wmsUrl, 'o3_hmean', geojson, lastUpdate); }
+              if (this.mean === MeanLabel.hourly) { this.drawLayer(rioifdmWmsURL, 'o3_hmean', geojson, lastUpdate); }
               break;
             case PhenomenonLabel.PM10:
-              if (this.mean === MeanLabel.hourly) { this.drawLayer(wmsUrl, 'pm10_hmean', geojson, lastUpdate); }
-              if (this.mean === MeanLabel.daily) { this.drawLayer(wmsUrl, 'pm10_24hmean', geojson, lastUpdate); }
-              if (this.mean === MeanLabel.yearly) { this.drawLayer(wmsUrl, `pm10_anmean_${year}_atmostreet`, geojson); }
+              if (this.mean === MeanLabel.hourly) { this.drawLayer(rioifdmWmsURL, 'pm10_hmean', geojson, lastUpdate); }
+              if (this.mean === MeanLabel.daily) {
+                this.drawLayer(rioifdmWmsURL, 'pm10_24hmean', geojson, lastUpdate);
+                this.drawLayer(realtimeWmsURL, 'pm10_24hmean_station', geojson, lastUpdate);
+              }
+              if (this.mean === MeanLabel.yearly) { this.drawLayer(rioifdmWmsURL, `pm10_anmean_${year}_atmostreet`, geojson); }
               break;
             case PhenomenonLabel.PM25:
-              if (this.mean === MeanLabel.hourly) { this.drawLayer(wmsUrl, 'pm25_hmean', geojson, lastUpdate); }
-              if (this.mean === MeanLabel.daily) { this.drawLayer(wmsUrl, 'pm25_24hmean', geojson, lastUpdate); }
-              if (this.mean === MeanLabel.yearly) { this.drawLayer(wmsUrl, `pm25_anmean_${year}_atmostreet`, geojson); }
+              if (this.mean === MeanLabel.hourly) { this.drawLayer(rioifdmWmsURL, 'pm25_hmean', geojson, lastUpdate); }
+              if (this.mean === MeanLabel.daily) {
+                this.drawLayer(rioifdmWmsURL, 'pm25_24hmean', geojson, lastUpdate);
+                this.drawLayer(realtimeWmsURL, 'pm25_24hmean_station', geojson, lastUpdate);
+              }
+              if (this.mean === MeanLabel.yearly) { this.drawLayer(rioifdmWmsURL, `pm25_anmean_${year}_atmostreet`, geojson); }
               break;
             default:
               break;
           }
         });
       } else {
-        wmsUrl = 'http://geo5.irceline.be/forecast/wms';
         switch (this.phenomenonLabel) {
           case PhenomenonLabel.BelAQI:
             layerId = 'belaqi';
@@ -731,8 +816,8 @@ class MapView {
           default:
             break;
         }
+        this.drawLayer(forecastWmsURL, layerId, geojson, timeParam);
       }
-      this.drawLayer(wmsUrl, layerId, geojson, timeParam);
     });
   }
 
@@ -751,7 +836,7 @@ class MapView {
         layerOptions.time = timeParam;
       }
       this.overlayMaps.set(layerId + wmsUrl + timeParam, {
-        label: this.translateSrvc.instant('map.interpolated-map'),
+        label: layerId,
         visible: true,
         layer: tileLayer.boundaryCanvas(wmsUrl, layerOptions)
       });

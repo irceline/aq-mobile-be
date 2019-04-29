@@ -1,19 +1,19 @@
 <ion-row nowrap>
   <div text-center (click)="select()" class="entry" [ngStyle]="{'border-color': borderColor}">
     <div *ngIf="loadingStationValue" class="spinningborder"></div>
-    <div class="phenomenon-label" [ngClass]="{'location-disabled': !location}">
+    <div *ngIf="!error" class="phenomenon-label" [ngClass]="{'location-disabled': !location}">
       {{entry.label}}<sub>{{entry.subscript}}</sub></div>
   </div>
   <div *ngIf="location" nowrap>
-    <div class="station-value" *ngIf="!loadingStationValue">
-      {{lastStationaryValue?.value | number:'1.0-1'}}{{uom}}</div>
+    <div class="station-value" *ngIf="!loadingStationValue && !error">
+      {{lastStationaryValue | number:'1.0-1'}}{{uom}}</div>
   </div>
   <ion-col>
-    <div class="station-description" *ngIf="!loadingStationValue && stationDistance">
+    <div class="station-description" *ngIf="!loadingStationValue && stationDistance && !error">
       {{stationDistance | number:'1.0-1'}}km
     </div>
-    <div class="station-description" *ngIf="!loadingStationValue && stationLabel" text-wrap>
-      {{stationLabel}}
+    <div class="station-description" *ngIf="!loadingStationValue && stationLabel && !error" text-wrap>
+      {{stationLabel | slice : 9 : 50}}
     </div>
   </ion-col>
 </ion-row>

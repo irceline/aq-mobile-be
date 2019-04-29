@@ -171,6 +171,9 @@
     },
     "readMore": "lire plus"
   },
+  "header": {
+    "oldDataWarning": "La dernière mise à jour est antérieure à la normale en raison d'un problème technique. Nous faisons de notre mieux pour résoudre le problème rapidement."
+  },
   "home": {
     "header": "Accueil",
     "noAlert": "Aucun bulletin de pic de pollution n'a été émis",
@@ -227,7 +230,7 @@
     "configured-location": "Votre localisation configurée",
     "current-location": "Votre localisation actuelle",
     "dataset-selection-hint": "Veuillez sélectionner un ou plusieurs polluants à afficher",
-    "error": "Une erreur s'est produite. Il n'est pas possible de déterminer les données pour le polluant sélectionné.",
+    "error": "Une erreur s'est produite. Il est impossible de charger les données pour le polluant sélectionné. Veuillez réessayer plus tard.",
     "geosearch": {
       "placeholder": "Recherche la localisation ..."
     },
@@ -259,7 +262,8 @@
       "tomorrow": "J+1"
     },
     "timestepLabels": {
-      "amean": "moyenne annuelle (exposition à long terme)",
+      "loading": "chargement en cours",
+      "anmean": "moyenne annuelle (exposition à long terme)",
       "hmean": "moyenne horaire actuelle (exposition à court terme)",
       "24hmean": "moyenne sur 24 heure courante (exposition à court terme)",
       "dmean_forecast_today": "moyenne journalière (aujourd'hui)",
@@ -273,6 +277,7 @@
   },
   "nearest-measuring-station-panel": {
     "header": "Station de mesure la plus proche",
+    "error": "Une erreur s'est produite. Il est impossible de charger les données pour les stations de mesure la plus proche. Veuillez réessayer plus tard.",
     "information-popup": {
       "list-bc": "ou black carbon",
       "list-no2": "ou dioxyde d'azote",

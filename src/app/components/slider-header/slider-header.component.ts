@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -15,10 +15,12 @@ export interface HeaderContent {
   templateUrl: './slider-header.component.html',
   styleUrls: ['./slider-header.component.scss'],
 })
-export class SliderHeaderComponent implements OnInit {
+export class SliderHeaderComponent implements OnInit, OnChanges {
 
   @Input()
   public header: HeaderContent;
+
+  public oldDataWarning: boolean;
 
   constructor(
     public translateSrvc: TranslateService,
@@ -37,6 +39,17 @@ export class SliderHeaderComponent implements OnInit {
     const locationHeaderElems = document.querySelectorAll('.location-header');
     for (let i = 0; i < locationHeaderElems.length; i++) {
       (locationHeaderElems[i] as HTMLElement).style.visibility = visibility;
+    }
+  }
+
+  ngOnChanges() {
+    if (this.header && this.header.date) {
+      // Show Warning if Data is older than 2.5h aka 9000000ms
+      if ((new Date().getTime() - this.header.date.getTime()) > 9000000) {
+        this.oldDataWarning = true;
+      } else {
+        this.oldDataWarning = false;
+      }
     }
   }
 

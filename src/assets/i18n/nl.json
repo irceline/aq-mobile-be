@@ -171,6 +171,9 @@
     },
     "readMore": "lees meer"
   },
+  "header": {
+    "oldDataWarning": "De laatste update is ouder dan normaal vanwege een technisch probleem. We doen ons best om het probleem z.s.m. te verhelpen."
+  },
   "home": {
     "header": "Start",
     "noAlert": "Geen officiële waarschuwingen over verhoogde luchtvervuiling",
@@ -227,7 +230,7 @@
     "configured-location": "Uw geconfigureerde locatie",
     "current-location": "Uw huidige locatie",
     "dataset-selection-hint": "Selecteer één of meerdere tijdsreeks(en) voor weergave op een diagram",
-    "error": "Er is een fout opgetreden. Het is niet mogelijk om gegevens voor de geselecteerde polluent te bepalen.",
+    "error": "Er is een fout opgetreden. Het is niet mogelijk om gegevens op te halen voor de geselecteerde polluent. Probeer het later opnieuw.",
     "geosearch": {
       "placeholder": "Zoek locatie"
     },
@@ -259,7 +262,8 @@
       "tomorrow": "morgen"
     },
     "timestepLabels": {
-      "amean": "jaargemiddelde (lange termijn blootstelling)",
+      "loading": "bezig met laden",
+      "anmean": "jaargemiddelde (lange termijn blootstelling)",
       "hmean": "uurgemiddelde (korte termijn blootstelling)",
       "24hmean": "glijdend 24-uurgemiddelde (korte termijn blootstelling)",
       "dmean_forecast_today": "daggemiddelde (vandaag)",
@@ -273,6 +277,7 @@
   },
   "nearest-measuring-station-panel": {
     "header": "Dichtstbijgelegen meetstation",
+    "error": "Er is een fout opgetreden. Het is niet mogelijk om gegevens op te halen voor de dichtstbijgelegene meetstations. Probeer het later opnieuw.",
     "information-popup": {
       "list-bc": "BC of zwarte koolstof",
       "list-no2": "NO2 of stikstofdioxide",

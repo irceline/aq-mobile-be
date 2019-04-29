@@ -1,8 +1,11 @@
 <ion-slides pager #slider (ionSlideDidChange)="slideChanged()" [options]="sliderOptions">
   <ion-slide *ngFor="let loc of belaqiLocations">
     <div *ngIf="loc.latitude" style="width: 100%">
-      <div class="wheel">
-        <belaqi-wheel [latitude]="loc.latitude" [longitude]="loc.longitude"></belaqi-wheel>
+      <div class="first-panel">
+        <notification-panel></notification-panel>
+        <div class="wheel">
+          <belaqi-wheel [latitude]="loc.latitude" [longitude]="loc.longitude"></belaqi-wheel>
+        </div>
       </div>
       <div class="chart">
         <belaqi-chart [location]="loc"></belaqi-chart>

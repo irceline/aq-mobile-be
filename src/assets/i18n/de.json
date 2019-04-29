@@ -171,6 +171,9 @@
 		},
 		"readMore": "weiterlesen"
 	},
+  "header": {
+    "oldDataWarning": "Das neueste Update ist aufgrund eines technischen Problems älter als normal. Wir tun unser Bestes, um das Problem schnell zu lösen."
+  },
 	"home": {
 		"header": "Start",
 		"noAlert": "keine offiziellen Berichte über erhöhter Luftverschmutzung",
@@ -227,7 +230,7 @@
 		"configured-location": "Dein konfigurierter Standort",
 		"current-location": "Dein aktueller Standort",
 		"dataset-selection-hint": "Bitte wählen Sie eine oder mehrere Zeitreihen zur Darstellung aus",
-		"error": "Ein Fehler ist aufgetreten. Es konnten keine Daten zum ausgewählten Schadstoff ermittelt werden.",
+		"error": "Ein Fehler ist aufgetreten. Es konnten keine Daten für den ausgewählten Schadstoff abgerufen werden. Bitte versuchen Sie es später erneut.",
 		"geosearch": {
 			"placeholder": "Suche..."
 		},
@@ -259,7 +262,8 @@
 			"tomorrow": "Morgen"
 		},
     "timestepLabels": {
-      "amean": "Jahresmittelwert (Langzeitbelastung)",
+      "loading": "beschäftigt zu laden",
+      "anmean": "Jahresmittelwert (Langzeitbelastung)",
       "hmean": "Stundenmittelwert (Kurzzeitbelastung)",
       "24hmean": "laufender 24-Stundenmittelwert",
       "dmean_forecast_today": "Tagesmittelwert (heute)",
@@ -273,6 +277,7 @@
 	},
 	"nearest-measuring-station-panel": {
 		"header": "Nächstgelegene Überwachungsstation",
+		"error": "Ein Fehler ist aufgetreten. Es konnten keine Daten für die nächstgelegenen Überwachungsstationen abgerufen werden. Bitte versuchen Sie es später erneut.",
 		"information-popup": {
 			"list-bc": "oder black carbon",
 			"list-no2": "oder Stickstoffdioxid",
@@ -296,6 +301,13 @@
 		"geolocationPartialExplanation": "Um eine optimale Lokalisierung zu gewährleisten, müssen sie die Suchmethode \"Hohe Genauigkeit\" verwenden.",
 		"offline": "Dein Handy ist offline",
 		"online": "Dein Handy ist online"
+	},
+	"notifications-popup": {
+    "header": "Benachrichtigung",
+    "valid-until": "Nachricht gilt bis:",
+		"channels": "Für ihren Beneachrichtigungs-Kanal:",
+		"french-version-below": "(Eine französische Version befindet sich weiter unten)",
+    "dutch-version-below": "(Eine niederländische Version befindet sich weiter unten)"
 	},
 	"no-network-connection": {
 		"body": "Ihr Gerät hat keine Datennetzwerkverbindung. Die BelAir-App hängt stark davon ab, dass frische Daten von unseren Servern abgerufen werden. Aktivieren Sie ein Datennetzwerk (mobile Daten- oder WLAN-Verbindung) und aktualisieren Sie die App oder versuchen Sie es erneut, wenn Sie sich in Reichweite eines Datennetzwerks befinden, auf das Sie Zugriff haben.",

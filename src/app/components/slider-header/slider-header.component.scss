@@ -1,34 +1,47 @@
 :host {
-    .settingsButton {
-        position: relative;
-        margin-left: auto;
+  .settingsButton {
+    position: relative;
+    margin-left: auto;
 
-        ion-button {
-            color: var(--panel-background);
-            --background: none;
-            --box-shadow: none;
-        }
+    ion-button {
+      color: var(--panel-background);
+      --background: none;
+      --box-shadow: none;
     }
+  }
 
-    ion-label,
-    slide-title {
-        text-align: center;
-        font-size: 1.2em;
-        position: absolute;
+  ion-label,
+  slide-title {
+    text-align: center;
+    font-size: 1.2em;
+    position: absolute;
 
-        .location-label {
-            font-size: 1.6em;
+    .location-label {
+      font-size: 1.6em;
 
-            h2 {
-                white-space: normal;
-                overflow: hidden;
-            }
-        }
+      h2 {
+        white-space: normal;
+        overflow: hidden;
+      }
     }
+  }
 
-    ion-row {
-        justify-content: center;
-        height: 3.5em;
-    }
+  ion-row {
+    justify-content: center;
+    height: 3.8em;
+  }
 
+  .rowWithWarning {
+    height: 6.5em;
+  }
+
+  .rowWithWarningCurrentLocation {
+    height: 8em;
+  }
+
+  .oldDataWarning {
+    width: 90%;
+    margin: auto;
+    font-size: 60%;
+  }
 }

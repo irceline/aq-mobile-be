@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      {{'notifications-popup.header' | translate}}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()" id="close-modal">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="notificationMap.size > 0">
+    <div *ngFor="let item of notificationMap | keyvalue">
+
+      <div class="notification">
+        <div class="title">{{item.value[0].title}}</div>
+        <div class="content">
+
+          <div class="info">
+            <div>{{'notifications-popup.valid-until' | translate}}</div>
+            <div>{{item.value[0].expiration | date : 'd MMMM y, HH:mm'}}</div>
+          </div>
+
+          <div class="info">
+            <div>{{'notifications-popup.channels' | translate}}</div>
+            <div>{{('push-notification-subscription.' + trimTopic(item.value[0].topic)) | translate}}</div>
+          </div>
+
+          <div class="info" *ngIf="item.value.length === 2">
+            <div *ngIf="item.value[1].topic.indexOf('fr') > 0">{{'notifications-popup.french-version-below' | translate}}</div>
+            <div *ngIf="item.value[1].topic.indexOf('nl') > 0">{{'notifications-popup.dutch-version-below' | translate}}</div>
+          </div>
+
+          <div>
+            {{item.value[0].body}}
+          </div>
+
+          <div *ngIf="item.value.length === 2" class="additional-language">
+            <div class="additional-title">{{item.value[1].title}}</div>
+            <div>{{item.value[1].body}}</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</ion-content>

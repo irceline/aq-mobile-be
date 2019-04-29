@@ -171,6 +171,9 @@
     },
     "readMore": "read more"
   },
+  "header": {
+    "oldDataWarning": "The last update is older than normal due to a technical issue. We are doing our best to repair the issue a.s.a.p.."
+  },
   "home": {
     "header": "Home",
     "noAlert": "no official messages concerning periods of increased air pollution",
@@ -227,7 +230,7 @@
     "configured-location": "Your configured location",
     "current-location": "Your current location",
     "dataset-selection-hint": "Please select one or more timeseries to display in diagram",
-    "error": "An error occured. It is not possible to determine data for the selected pollutant.",
+    "error": "An error occurred. It is not possible to fetch data for the selected pollutant. Please try again later.",
     "geosearch": {
       "placeholder": "Search location..."
     },
@@ -259,7 +262,8 @@
       "tomorrow": "Tomorrow"
     },
     "timestepLabels": {
-      "amean": "annual mean (long term exposure)",
+      "loading": "busy loading",
+      "anmean": "annual mean (long term exposure)",
       "hmean": "hourly mean (short term exposure)",
       "24hmean": "running 24-hour mean (short term exposure)",
       "dmean_forecast_today": "forecast daily mean (today)",
@@ -273,6 +277,7 @@
   },
   "nearest-measuring-station-panel": {
     "header": "Nearest measuring station",
+    "error": "An error occurred. It is not possible to fetch data for the nearest measuring stations. Please try again later.",
     "information-popup": {
       "list-bc": "or black carbon",
       "list-no2": "or nitrogen dioxide",
@@ -297,6 +302,13 @@
     "offline": "Your device is offline",
     "online": "Your device is online"
   },
+  "notifications-popup": {
+    "header": "Notifications",
+    "valid-until": "Message is valid until:",
+    "channels": "For your notification channel:",
+    "french-version-below": "(There is a french version below)",
+    "dutch-version-below": "(There is a dutch version below)"
+	},
   "no-network-connection": {
     "body": "Your device has no data network connection. The BelAir app heavily depends on fresh data being fetched from our servers. Please activate a data network (mobile data or wifi connection) and refresh the app or try again when you are in range of a data network you have access to.",
     "close": "Close",

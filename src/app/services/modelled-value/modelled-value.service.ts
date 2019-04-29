@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 
 import { createCacheKey } from '../../model/caching';
 import { MainPhenomenon } from '../../model/phenomenon';
+import { rioifdmWmsURL } from '../../model/services';
 import { ValueProvider } from '../value-provider';
 
 enum ModelledPhenomenon {
@@ -28,7 +29,6 @@ export class ModelledValueService extends ValueProvider {
   // TODO add layerType (NO2, ...)
   public getValue(latitude: number, longitude: number, time: Date, phenomenon?: MainPhenomenon): Observable<number> {
     const layerId = this.createLayerId(phenomenon);
-    const url = 'http://geo5.irceline.be/rioifdm/wms';
     const params = {
       service: 'WMS',
       request: 'GetFeatureInfo',
@@ -44,8 +44,8 @@ export class ModelledValueService extends ValueProvider {
       X: '1',
       Y: '1'
     };
-    const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url, { params });
-    return this.cacheService.loadFromObservable(createCacheKey(url, params, time), request).pipe(
+    const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(rioifdmWmsURL, { params });
+    return this.cacheService.loadFromObservable(createCacheKey(rioifdmWmsURL, params, time), request).pipe(
       map(res => {
         if (res && res.features && res.features.length === 1) {
           if (res.features[0].properties['GRAY_INDEX']) {
