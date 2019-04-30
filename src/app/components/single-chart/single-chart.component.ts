@@ -1,4 +1,15 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
+import {
+  Component,
+  DoCheck,
+  EventEmitter,
+  Input,
+  IterableDiffer,
+  IterableDiffers,
+  OnChanges,
+  Output,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { Timespan } from '@helgoland/core';
 import { Chart } from 'chart.js';
 
@@ -15,7 +26,7 @@ export interface DataEntry {
   templateUrl: './single-chart.component.html',
   styleUrls: ['./single-chart.component.scss'],
 })
-export class SingleChartComponent implements OnChanges {
+export class SingleChartComponent implements OnChanges, DoCheck {
 
   @ViewChild('chart') barCanvas;
 
@@ -29,7 +40,7 @@ export class SingleChartComponent implements OnChanges {
   public timespan: Timespan;
 
   @Input()
-  public data: DataEntry[];
+  public data: DataEntry[][];
 
   @Input()
   public location: UserLocation;
@@ -43,18 +54,29 @@ export class SingleChartComponent implements OnChanges {
   public canBack: boolean;
   public canForward: boolean;
 
+  private iterableDiffer: IterableDiffer<{}>;
+
   private chart: any;
 
-  constructor() { }
+  constructor(
+    private iterableDiffers: IterableDiffers
+  ) {
+    this.iterableDiffer = this.iterableDiffers.find([]).create(null);
+  }
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (this.label && this.timespan && this.data && this.location) {
-      if (this.chart) {
-        this.updateChart();
-      } else {
+      if (!this.chart) {
         this.drawChart();
       }
       this.checkButton();
+    }
+  }
+
+  public ngDoCheck(): void {
+    const changes = this.iterableDiffer.diff(this.data);
+    if (changes && this.chart) {
+      this.updateChart();
     }
   }
 
@@ -134,35 +156,11 @@ export class SingleChartComponent implements OnChanges {
           padding: 10
         },
         tooltips: {
-          enabled: true,
-          callbacks: {
-            // label: (tooltip) => {
-            //   return ' ' + this.belaqiIndex.getValueForIndex(parseInt(tooltip.yLabel, 10)) +
-            //     ' - ' + this.belaqiIndex.getLabelForIndex(parseInt(tooltip.yLabel, 10));
-            // },
-            // labelColor: (tooltip) => {
-            //   return {
-            //     borderColor: this.belaqiIndex.getColorForIndex(parseInt(tooltip.yLabel, 10)),
-            //     backgroundColor: this.belaqiIndex.getColorForIndex(parseInt(tooltip.yLabel, 10))
-            //   };
-            // },
-            title: () => ''
-          }
+          enabled: false
         }
       },
       data: {
-        datasets: [
-          {
-            pointBorderWidth: 0,
-            pointHoverRadius: 7,
-            pointHoverBorderWidth: 2,
-            pointRadius: 3,
-            fill: false,
-            cubicInterpolationMode: 'monotone',
-            borderWidth: 2,
-            data: []
-          }
-        ]
+        datasets: []
       }
     });
     this.drawData(this.data);
@@ -175,11 +173,34 @@ export class SingleChartComponent implements OnChanges {
     this.drawData(this.data);
   }
 
-  private drawData(data: DataEntry[]) {
-    const dataset = this.chart.data.datasets[0];
-    dataset.pointBackgroundColor = data.map(e => e.color);
-    dataset.data = this.createDataArray(data);
+  private drawData(data: DataEntry[][]) {
+    // TODO add dataset entries
+    this.adjustDatasets(data.length);
+    data.forEach((v, i) => {
+      const dataset = this.chart.data.datasets[i];
+      dataset.pointBackgroundColor = v.map(e => e.color);
+      dataset.data = this.createDataArray(v);
+    });
     this.chart.update();
+  }
+
+  private adjustDatasets(length: number) {
+    while (this.chart.data.datasets.length > length) {
+      this.chart.data.datasets.pop();
+    }
+
+    while (this.chart.data.datasets.length < length) {
+      this.chart.data.datasets.push({
+        pointBorderWidth: 0,
+        pointHoverRadius: 7,
+        pointHoverBorderWidth: 2,
+        pointRadius: 3,
+        fill: false,
+        cubicInterpolationMode: 'monotone',
+        borderWidth: 2,
+        data: []
+      });
+    }
   }
 
   private createDataArray(data: DataEntry[]): number[] | Chart.ChartPoint[] {

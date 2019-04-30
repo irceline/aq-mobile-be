@@ -1,7 +1,8 @@
 import { Component, EventEmitter, OnDestroy, Output, ViewChild } from '@angular/core';
-import { DatasetApiInterface, DefinedTimespan, DefinedTimespanService, Timeseries, Timespan, Time } from '@helgoland/core';
+import { DatasetApiInterface, DefinedTimespan, DefinedTimespanService, Time, Timeseries, Timespan } from '@helgoland/core';
 import { IonSlides } from '@ionic/angular';
 import { map } from 'rxjs/operators';
+import { isNumber } from 'util';
 
 import { sliceStationLabel } from '../../model/helper';
 import { getIDForMainPhenomenon, MainPhenomenon } from '../../model/phenomenon';
@@ -184,6 +185,8 @@ class DiagramView {
 
   public adjustTimespan() {
     this.entries.forEach(e => {
+      e.data = [];
+      e.loading = true;
       this.fetchData(e, this.handleError);
     });
   }
@@ -301,24 +304,72 @@ class DiagramView {
     entry: DiagramEntry,
     setError: (error: any) => void
   ) {
+    switch (entry.phenomenon) {
+      case MainPhenomenon.PM10:
+      case MainPhenomenon.PM25:
+        this.fetchNormalData(entry, setError);
+        this.fetch24hMeanData(entry, setError);
+        break;
+      default:
+        this.fetchNormalData(entry, setError);
+        break;
+    }
+  }
+
+  private fetchNormalData(
+    entry: DiagramEntry,
+    setError: (error: any) => void
+  ) {
     this.api.getTsData<{
       timestamp: number;
       value: number;
     }>(entry.series.id, entry.series.url, this.timespan)
-      .pipe(map(res => this.mapValues(res, entry.phenomenon)))
+      .pipe(map(res => this.mapValues(res, (value) => this.setColor(entry.phenomenon, value))))
       .subscribe(
-        res => entry.data = res,
+        res => entry.data.push(res),
         error => setError(error),
         () => entry.loading = false
       );
   }
 
-  private mapValues(res, phenomenon: MainPhenomenon): DataEntry[] {
+  private fetch24hMeanData(
+    entry: DiagramEntry,
+    setError: (error: any) => void
+  ) {
+    const extendedTimespan: Timespan = {
+      from: this.timespan.from - 1000 * 60 * 60 * 23,
+      to: this.location.date.getTime()
+    };
+    this.api.getTsData<{ timestamp: number; value: number; }>(
+      entry.series.id, entry.series.url, extendedTimespan
+    ).pipe(map(res => {
+      const values: DataEntry[] = [];
+      for (let i = res.values.length; i > 23; i--) {
+        const range = res.values.slice(i - 24, i).map(e => e.value).filter(e => isNumber(e));
+        if (range.length >= 16) {
+          const sum = range.reduce((pv, cv) => pv + cv, 0);
+          const val = sum / range.length;
+          values.unshift({
+            color: this.belaqiSrvc.getColorForIndex(this.categorizeValSrvc.categorize(val, entry.phenomenon)),
+            timestamp: res.values[i - 1].timestamp,
+            value: val
+          });
+        }
+      }
+      return values;
+    })).subscribe(
+      res => entry.data.push(res),
+      error => setError(error),
+      () => entry.loading = false
+    );
+  }
+
+  private mapValues(res, setColor: (val: number) => string): DataEntry[] {
     return res.values.map(e => {
       return {
         timestamp: e.timestamp,
         value: e.value,
-        color: this.setColor(phenomenon, e.value)
+        color: setColor(e.value)
       } as DataEntry;
     });
   }
@@ -327,7 +378,7 @@ class DiagramView {
 class DiagramEntry {
 
   loading: boolean;
-  data: DataEntry[];
+  data: DataEntry[][];
   label: string;
   series?: Timeseries;
   phenomenon: MainPhenomenon;
