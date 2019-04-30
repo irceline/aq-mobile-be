@@ -166,6 +166,8 @@ export class BelaqiChartComponent implements OnChanges {
             ticks: {
               source: 'data',
               maxRotation: 0,
+              fontSize: 10,
+              padding: 5,
               callback: (val, i, values) => {
                 const hours = this.location.date.getHours() % 6;
                 if (new Date(values[i].value).getHours() % 6 === hours) {
@@ -178,7 +180,12 @@ export class BelaqiChartComponent implements OnChanges {
           }],
         },
         layout: {
-          padding: 10
+          padding: {
+            top: 10,
+            left: 10,
+            right: 10,
+            bottom: 0
+          }
         },
         tooltips: {
           enabled: true,
