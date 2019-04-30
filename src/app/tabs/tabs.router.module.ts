@@ -27,6 +27,15 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'diagram',
+        children: [
+          {
+            path: '',
+            loadChildren: '../diagram/diagram.module#DiagramPageModule'
+          }
+        ]
+      },
+      {
         path: '',
         redirectTo: '/tabs/start',
         pathMatch: 'full'

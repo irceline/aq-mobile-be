@@ -410,6 +410,9 @@
   "show-geometry": {
     "header": "Localisation de la station"
   },
+  "single-chart": {
+		"loading": ""
+	},
   "start": {
     "overlay": {
       "content-p1": "L'impact de la qualité de l'air est résumé sous la forme d'un indice de qualité de l'air. Il s’agit d’un chiffre compris entre 1 et 10, où 10 correspond à très médiocre et 1 à une excellente qualité d’air. Pour le calculer, l'application est basée sur des données provenant des stations de surveillance belges, sur la météo, le trafic et les polluants pertinents.",

@@ -1,0 +1,13 @@
+:host {
+  @import "../../../theme/panels.scss";
+
+  .chart + .chart {
+    padding-top: 10px;
+  }
+
+  .swiper-slide {
+    display: block;
+    padding-bottom: 30px;
+  }
+
+}

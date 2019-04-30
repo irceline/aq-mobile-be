@@ -1,0 +1,15 @@
+<ion-slides pager #slider (ionSlideDidChange)="slideChanged()" [options]="sliderOptions">
+  <ion-slide *ngFor="let view of diagramViews">
+    <div class="container">
+
+      <div class="chart" *ngFor="let entry of view.entries">
+        <single-chart [location]="view.location" [data]="entry.data" [loading]="entry.loading"
+          [timespan]="view.timespan" [label]="entry.label" (back)="view.stepBack()" (forward)="view.stepForward()"></single-chart>
+      </div>
+
+    </div>
+  </ion-slide>
+  <ion-slide *ngIf="!diagramViews?.length">
+    <last-slide></last-slide>
+  </ion-slide>
+</ion-slides>

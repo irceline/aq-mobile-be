@@ -417,6 +417,9 @@
   "show-geometry": {
     "header": "Position of the station"
   },
+  "single-chart": {
+		"loading": "loading..."
+	},
   "start": {
     "overlay": {
       "content-p1": "The impact of air quality is calculated on the basis of the air quality index. That is a figure between 1 and 10, where 10 stands for very poor and 1 for excellent air quality. For this score, the app is based on data from monitoring stations throughout Belgium, weather and traffic and relevant pollutants.",

@@ -11,6 +11,7 @@ import { AnnualMeanPanelInformationPopupComponent } from './annual-mean-panel/an
 import { AnnualMeanPanelComponent } from './annual-mean-panel/annual-mean-panel.component';
 import { BelaqiChartInformationComponent } from './belaqi-chart/belaqi-chart-information.component';
 import { BelaqiChartComponent } from './belaqi-chart/belaqi-chart.component';
+import { BelaqiDiagramSliderComponent } from './belaqi-diagram-slider/belaqi-diagram-slider.component';
 import { BelaqiMapSliderComponent } from './belaqi-map-slider/belaqi-map-slider.component';
 import { BelaqiUserLocationSliderComponent } from './belaqi-user-location-slider/belaqi-user-location-slider.component';
 import { BelaqiWheelInformationComponent } from './belaqi-wheel/belaqi-wheel-information.component';
@@ -47,6 +48,7 @@ import {
 } from './settings/push-notification-subscriptions-settings/push-notification-subscriptions-settings.component';
 import { StartPageSettingsComponent } from './settings/start-page-settings/start-page-settings.component';
 import { UserLocationsSettingsComponent } from './settings/user-locations-settings/user-locations-settings.component';
+import { SingleChartComponent } from './single-chart/single-chart.component';
 import { SliderHeaderComponent } from './slider-header/slider-header.component';
 import { SubIndexPanelEntryComponent } from './sub-index-panel/sub-index-panel-entry.component';
 import { SubIndexPanelInformationPopupComponent } from './sub-index-panel/sub-index-panel-information-popup.component';
@@ -60,6 +62,7 @@ const COMPONENTS = [
   AnnualMeanPanelInformationPopupComponent,
   BelaqiChartComponent,
   BelaqiChartInformationComponent,
+  BelaqiDiagramSliderComponent,
   BelaqiMapSliderComponent,
   BelaqiUserLocationSliderComponent,
   BelaqiWheelComponent,
@@ -84,6 +87,7 @@ const COMPONENTS = [
   NotificationPanelComponent,
   OverlayInfoDrawerComponent,
   PushNotificationSubscriptionsSettingsComponent,
+  SingleChartComponent,
   SliderHeaderComponent,
   StartPageSettingsComponent,
   SubIndexPanelComponent,

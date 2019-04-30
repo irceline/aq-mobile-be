@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from
 import { StatusIntervalResolverService, Timeseries } from '@helgoland/core';
 import { Point } from 'geojson';
 
+import { sliceStationLabel } from '../../model/helper';
 import { getMainPhenomenonForID, MainPhenomenon } from '../../model/phenomenon';
 import { DailyMeanValueService } from '../../services/daily-mean-value/daily-mean-value.service';
 import { IrcelineSettingsService } from '../../services/irceline-settings/irceline-settings.service';
@@ -79,7 +80,7 @@ export class NearestMeasuringStationPanelEntryComponent implements OnChanges {
           this.nearestTimeseriesManager.setNearestTimeseries(this.location, this.entry.phenomenonId, nearestSeries.series.internalId);
           this.series = nearestSeries.series;
           this.stationDistance = nearestSeries.distance;
-          this.stationLabel = nearestSeries.series.station.properties.label;
+          this.stationLabel = sliceStationLabel(nearestSeries.series.station);
           this.uom = nearestSeries.series.uom;
 
           const phenomenon = getMainPhenomenonForID(this.entry.phenomenonId);
