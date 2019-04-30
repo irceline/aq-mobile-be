@@ -105,7 +105,7 @@
 	},
 	"diagram": {
 		"header": "Diagramm",
-		"loading": "Lade",
+		"loading": "Beschäftigt zu laden",
 		"loading-nearest-stations": "Lade nächstgelegene Überwachungsstation",
 		"no-timeseries-selected": "Keine Zeitreihe selektiert!",
 		"select-timeseries": "Bitte wähle eine Zeitreihe"
@@ -262,7 +262,7 @@
 			"tomorrow": "Morgen"
 		},
     "timestepLabels": {
-      "loading": "beschäftigt zu laden",
+      "loading": "Beschäftigt zu laden",
       "anmean": "Jahresmittelwert (Langzeitbelastung)",
       "hmean": "Stundenmittelwert (Kurzzeitbelastung)",
       "24hmean": "laufender 24-Stundenmittelwert",
@@ -418,7 +418,7 @@
 		"header": "Position der Überwachungsstation"
 	},
 	"single-chart": {
-		"loading": "Lädt..."
+		"loading": "Beschäftigt zu laden"
 	},
 	"start": {
     "overlay": {

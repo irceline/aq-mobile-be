@@ -105,7 +105,7 @@
   },
   "diagram": {
     "header": "diagram",
-    "loading": "aan het laden",
+    "loading": "bezig met laden",
     "loading-nearest-stations": "Laad dichtstbijgelegen metingen",
     "no-timeseries-selected": "Geen tijdsreeks geselecteerd!",
     "select-timeseries": "Selecteer aub een tijdsreeks"
@@ -411,7 +411,7 @@
     "header": "locatie van het station"
   },
   "single-chart": {
-		"loading": ""
+		"loading": "bezig met laden"
 	},
   "start": {
     "overlay": {

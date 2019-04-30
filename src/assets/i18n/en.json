@@ -105,7 +105,7 @@
   },
   "diagram": {
     "header": "Diagram",
-    "loading": "loading",
+    "loading": "busy loading",
     "loading-nearest-stations": "Load nearest measurements",
     "no-timeseries-selected": "No timeseries selected!",
     "select-timeseries": "Please select a timeseries"
@@ -418,7 +418,7 @@
     "header": "Position of the station"
   },
   "single-chart": {
-		"loading": "loading..."
+		"loading": "busy loading"
 	},
   "start": {
     "overlay": {

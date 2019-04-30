@@ -105,7 +105,7 @@
   },
   "diagram": {
     "header": "Graphique",
-    "loading": "Chargement",
+    "loading": "chargement en cours",
     "loading-nearest-stations": "Charger les mesures les plus proches",
     "no-timeseries-selected": "Aucun polluant sélectionné",
     "select-timeseries": "Veuillez sélectionner un polluant"
@@ -411,7 +411,7 @@
     "header": "Localisation de la station"
   },
   "single-chart": {
-		"loading": ""
+		"loading": "chargement en cours"
 	},
   "start": {
     "overlay": {
