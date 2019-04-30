@@ -553,8 +553,10 @@ class MapView {
         this.time = TimeLabel.today;
         if (this.phenomenonLabel === PhenomenonLabel.NO2 || this.phenomenonLabel === PhenomenonLabel.O3) {
           this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.maxhmean_forecast_today');
+          this.mean = MeanLabel.hourly;
         } else {
           this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_today');
+          this.mean = MeanLabel.daily;
         }
         break;
       case 4:
@@ -562,8 +564,10 @@ class MapView {
         this.time = TimeLabel.tomorrow;
         if (this.phenomenonLabel === PhenomenonLabel.NO2 || this.phenomenonLabel === PhenomenonLabel.O3) {
           this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.maxhmean_forecast_tomorrow');
+          this.mean = MeanLabel.hourly;
         } else {
           this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_tomorrow');
+          this.mean = MeanLabel.daily;
         }
         break;
       case 5:
@@ -571,8 +575,10 @@ class MapView {
         this.time = TimeLabel.today2;
         if (this.phenomenonLabel === PhenomenonLabel.NO2 || this.phenomenonLabel === PhenomenonLabel.O3) {
           this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.maxhmean_forecast_today+2');
+          this.mean = MeanLabel.hourly;
         } else {
           this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_today+2');
+          this.mean = MeanLabel.daily;
         }
         break;
       case 6:
@@ -580,8 +586,10 @@ class MapView {
         this.time = TimeLabel.today3;
         if (this.phenomenonLabel === PhenomenonLabel.NO2 || this.phenomenonLabel === PhenomenonLabel.O3) {
           this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.maxhmean_forecast_today+3');
+          this.mean = MeanLabel.hourly;
         } else {
           this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_today+3');
+          this.mean = MeanLabel.daily;
         }
     }
 
