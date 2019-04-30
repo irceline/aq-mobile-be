@@ -269,7 +269,11 @@
       "dmean_forecast_today": "moyenne journalière (aujourd'hui)",
       "dmean_forecast_tomorrow": "moyenne journalière (demain)",
       "dmean_forecast_today+2": "moyenne journalière (dans 2 jours)",
-      "dmean_forecast_today+3": "moyenne journalière (dans 3 jours)"
+      "dmean_forecast_today+3": "moyenne journalière (dans 3 jours)",
+      "maxhmean_forecast_today": "prévision moyenne horaire maximum (aujourd'hui)",
+      "maxhmean_forecast_tomorrow": "prévision moyenne horaire maximum (demain)",
+      "maxhmean_forecast_today+2": "prévision moyenne horaire maximum (dans 2 jours)",
+      "maxhmean_forecast_today+3": "prévision moyenne horaire maximum (dans 3 jours)"
     }
   },
   "menu": {

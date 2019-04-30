@@ -266,10 +266,14 @@
       "anmean": "jaargemiddelde (lange termijn blootstelling)",
       "hmean": "uurgemiddelde (korte termijn blootstelling)",
       "24hmean": "glijdend 24-uurgemiddelde (korte termijn blootstelling)",
-      "dmean_forecast_today": "daggemiddelde (vandaag)",
-      "dmean_forecast_tomorrow": "daggemiddelde (morgen)",
-      "dmean_forecast_today+2": "daggemiddelde (binnen 2 dagen)",
-      "dmean_forecast_today+3": "daggemiddelde (binnen 3 dagen)"
+      "dmean_forecast_today": "voorspelling daggemiddelde (vandaag)",
+      "dmean_forecast_tomorrow": "voorspelling daggemiddelde (morgen)",
+      "dmean_forecast_today+2": "voorspelling daggemiddelde (binnen 2 dagen)",
+      "dmean_forecast_today+3": "voorspelling daggemiddelde (binnen 3 dagen)",
+      "maxhmean_forecast_today": "voorspelling maximum uurgemiddelde (vandaag)",
+      "maxhmean_forecast_tomorrow": "voorspelling maximum uurgemiddelde (morgen)",
+      "maxhmean_forecast_today+2": "voorspelling maximum uurgemiddelde (binnen 2 dagen)",
+      "maxhmean_forecast_today+3": "voorspelling maximum uurgemiddelde (binnen 3 dagen)"
     }
   },
   "menu": {

@@ -551,22 +551,38 @@ class MapView {
       case 3:
         // dmean forecast today
         this.time = TimeLabel.today;
-        this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_today');
+        if (this.phenomenonLabel === PhenomenonLabel.NO2 || this.phenomenonLabel === PhenomenonLabel.O3) {
+          this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.maxhmean_forecast_today');
+        } else {
+          this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_today');
+        }
         break;
       case 4:
         // dmean forecast tomorrow
         this.time = TimeLabel.tomorrow;
-        this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_tomorrow');
+        if (this.phenomenonLabel === PhenomenonLabel.NO2 || this.phenomenonLabel === PhenomenonLabel.O3) {
+          this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.maxhmean_forecast_tomorrow');
+        } else {
+          this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_tomorrow');
+        }
         break;
       case 5:
         // dmean forecast today+2
         this.time = TimeLabel.today2;
-        this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_today+2');
+        if (this.phenomenonLabel === PhenomenonLabel.NO2 || this.phenomenonLabel === PhenomenonLabel.O3) {
+          this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.maxhmean_forecast_today+2');
+        } else {
+          this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_today+2');
+        }
         break;
       case 6:
         // dmean forecast today+3
         this.time = TimeLabel.today3;
-        this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_today+3');
+        if (this.phenomenonLabel === PhenomenonLabel.NO2 || this.phenomenonLabel === PhenomenonLabel.O3) {
+          this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.maxhmean_forecast_today+3');
+        } else {
+          this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_today+3');
+        }
     }
 
     // Replace text for BelAQI Index

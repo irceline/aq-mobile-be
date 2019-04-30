@@ -269,7 +269,11 @@
       "dmean_forecast_today": "forecast daily mean (today)",
       "dmean_forecast_tomorrow": "forecast daily mean (tomorrow)",
       "dmean_forecast_today+2": "forecast daily mean (in 2 days)",
-      "dmean_forecast_today+3": "forecast daily mean (in 3 days)"
+      "dmean_forecast_today+3": "forecast daily mean (in 3 days)",
+      "maxhmean_forecast_today": "forecast maximum hourly mean (today)",
+      "maxhmean_forecast_tomorrow": "forecast maximum hourly mean (tomorrow)",
+      "maxhmean_forecast_today+2": "forecast maximum hourly mean (in 2 days)",
+      "maxhmean_forecast_today+3": "forecast maximum hourly mean (in 3 days)"
     }
   },
   "menu": {
