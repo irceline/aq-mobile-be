@@ -108,6 +108,12 @@
     "loading": "busy loading",
     "loading-nearest-stations": "Load nearest measurements",
     "no-timeseries-selected": "No timeseries selected!",
+    "overlay": {
+      "content-p1": "The diagrams give the hourly evolution as measured in the closest official measuring stations to the locations you connfigured. The time series of pollutants which are part of the BelAQI-index are coloured according to this index.",
+      "content-p2": "For particulate matter (both with a diameter of less than 2.5 and 10 micrometres) only running 24-hour mean time series are coloured, since it is the running 24-hour mean which is part of the index, not the hourly mean.",
+      "header": "What do you see on this screen?",
+      "url-svg": "../../assets/svg/belaqi_EN.svg"
+    },
     "select-timeseries": "Please select a timeseries"
   },
   "faq": {

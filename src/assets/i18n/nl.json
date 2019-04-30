@@ -108,6 +108,12 @@
     "loading": "bezig met laden",
     "loading-nearest-stations": "Laad dichtstbijgelegen metingen",
     "no-timeseries-selected": "Geen tijdsreeks geselecteerd!",
+    "overlay": {
+      "content-p1": "De diagrammen geven de evolutie per uur zoals gemeten in de dichtstbijzijnde officiële meetstations naar de locaties die u hebt geconfigureerd. De tijdreeksen van verontreinigende stoffen die deel uitmaken van de BelAQI-index zijn volgens deze index gekleurd.",
+      "content-p2": "Voor deeltjes (beide met een diameter kleiner dan 2,5 en 10 micrometer) zijn alleen de glijdende 24-uurgemiddelde tijdreeksen gekleurd, omdat de 24-uurgemiddelde deel uitmaakt van de index, niet het uurgemiddelden.",
+      "header": "Wat zie je op dit scherm?",
+      "url-svg": "../../assets/svg/belaqi_NL.svg"
+    },
     "select-timeseries": "Selecteer aub een tijdsreeks"
   },
   "faq": {

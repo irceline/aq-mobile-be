@@ -108,6 +108,12 @@
 		"loading": "Beschäftigt zu laden",
 		"loading-nearest-stations": "Lade nächstgelegene Überwachungsstation",
 		"no-timeseries-selected": "Keine Zeitreihe selektiert!",
+		"overlay": {
+      "content-p1": "Die Diagramme geben die stündliche Entwicklung wieder, die in den nächstgelegenen offiziellen Überwachungsstationen von den durch Ihnen konfigurierten Standorten gemessen wurden. Die Zeitreihen der Schadstoffe, die Bestandteil des BelAQI-Index sind, sind entsprechend diesem Index eingefärbt.",
+      "content-p2": "Bei Feinstaub (beide mit einem Durchmesser von weniger als 2,5 und 10 Mikrometern) werden nur die mittleren 24-Stundenmittelwertzeitreihen gefärbt, da der 24-Stundenmittelwert Teil des Index ist und nicht die Stundenmittelwerte.",
+			"header": "Was sehen Sie auf diesem Bildschirm?",
+			"url-svg": "../../assets/svg/belaqi_DE.svg"
+    },
 		"select-timeseries": "Bitte wähle eine Zeitreihe"
 	},
 	"faq": {
