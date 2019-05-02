@@ -83,6 +83,7 @@ export class UserLocationCreationComponent {
     } else {
       this.locationList.addUserLocation(this.locationLabel, this.location);
       toast = await this.toastCtrl.create({ message: this.translate.instant('user-location.creation.message-added'), duration: 3000 });
+      this.modalCtrl.dismiss();
     }
     toast.present();
   }
