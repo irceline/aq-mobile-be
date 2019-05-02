@@ -774,24 +774,30 @@ class MapView {
   }
 
   private adjustPhenomenonColor() {
-    let borderColorIndizes = [];
+    const allPhenomena = [
+      getMainPhenomenonForID(this.getPhenomenonID(PhenomenonLabel.PM10)),
+      getMainPhenomenonForID(this.getPhenomenonID(PhenomenonLabel.PM25)),
+      0,
+      getMainPhenomenonForID(this.getPhenomenonID(PhenomenonLabel.NO2)),
+      getMainPhenomenonForID(this.getPhenomenonID(PhenomenonLabel.O3))
+    ];
+    let borderColorIndizes;
     let phenomenonIds;
     if (this.mean === MeanLabel.hourly && this.time === TimeLabel.current) {
+      if (this.mode !== 'belaqi') {
         borderColorIndizes = [0, 1, 2];
         phenomenonIds = [
           0,
           getMainPhenomenonForID(this.getPhenomenonID(PhenomenonLabel.NO2)),
           getMainPhenomenonForID(this.getPhenomenonID(PhenomenonLabel.O3))];
+      } else {
+        borderColorIndizes = [1, 2, 0, 3, 4];
+        phenomenonIds = allPhenomena;
+      }
     } else if (this.mean === MeanLabel.daily && this.time === TimeLabel.current) {
       if (this.phenomenonLabel === PhenomenonLabel.PM10 || this.phenomenonLabel === PhenomenonLabel.PM25) {
         borderColorIndizes = [1, 2, 0, 3, 4];
-        phenomenonIds = [
-          getMainPhenomenonForID(this.getPhenomenonID(PhenomenonLabel.PM10)),
-          getMainPhenomenonForID(this.getPhenomenonID(PhenomenonLabel.PM25)),
-          0,
-          getMainPhenomenonForID(this.getPhenomenonID(PhenomenonLabel.NO2)),
-          getMainPhenomenonForID(this.getPhenomenonID(PhenomenonLabel.O3))
-        ];
+        phenomenonIds = allPhenomena;
       }
     }
 
