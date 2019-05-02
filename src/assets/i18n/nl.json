@@ -104,7 +104,7 @@
     "hint": "Om deze functionaliteit te gebruiken, moet de app op de achtergrond blijven draaien. Uw locatie wordt slechts één keer bepaald voor het gekozen verificatieinterval als u de luchtkwaliteit op uw huidige locatie wilt controleren. Alle persoonlijk geconfigureerde locaties worden ook gecontroleerd."
   },
   "diagram": {
-    "header": "diagram",
+    "header": "grafiek",
     "loading": "bezig met laden",
     "loading-nearest-stations": "Laad dichtstbijgelegen metingen",
     "no-timeseries-selected": "Geen tijdsreeks geselecteerd!",

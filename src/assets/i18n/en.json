@@ -104,7 +104,7 @@
     "hint": "To use this functionality, the app needs to keep running in the background. Your location is only determined once for the choosen verification interval if you want to have the air quality checked for your current location. All personally configured locations will also be checked."
   },
   "diagram": {
-    "header": "Diagram",
+    "header": "Chart",
     "loading": "busy loading",
     "loading-nearest-stations": "Load nearest measurements",
     "no-timeseries-selected": "No timeseries selected!",
