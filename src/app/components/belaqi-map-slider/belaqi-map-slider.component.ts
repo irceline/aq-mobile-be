@@ -777,21 +777,20 @@ class MapView {
     let borderColorIndizes = [];
     let phenomenonIds;
     if (this.mean === MeanLabel.hourly && this.time === TimeLabel.current) {
-      if (this.phenomenonLabel === PhenomenonLabel.NO2
-        || this.phenomenonLabel === PhenomenonLabel.O3
-        || this.phenomenonLabel === PhenomenonLabel.BelAQI) {
         borderColorIndizes = [0, 1, 2];
         phenomenonIds = [
           0,
           getMainPhenomenonForID(this.getPhenomenonID(PhenomenonLabel.NO2)),
           getMainPhenomenonForID(this.getPhenomenonID(PhenomenonLabel.O3))];
-      }
     } else if (this.mean === MeanLabel.daily && this.time === TimeLabel.current) {
       if (this.phenomenonLabel === PhenomenonLabel.PM10 || this.phenomenonLabel === PhenomenonLabel.PM25) {
-        borderColorIndizes = [3, 4];
+        borderColorIndizes = [1, 2, 0, 3, 4];
         phenomenonIds = [
           getMainPhenomenonForID(this.getPhenomenonID(PhenomenonLabel.PM10)),
-          getMainPhenomenonForID(this.getPhenomenonID(PhenomenonLabel.PM25))
+          getMainPhenomenonForID(this.getPhenomenonID(PhenomenonLabel.PM25)),
+          0,
+          getMainPhenomenonForID(this.getPhenomenonID(PhenomenonLabel.NO2)),
+          getMainPhenomenonForID(this.getPhenomenonID(PhenomenonLabel.O3))
         ];
       }
     }
