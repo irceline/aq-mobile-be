@@ -1,8 +1,8 @@
 {
   "name": "aq-mobile-be",
-  "version": "0.8.9",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "version": "0.9.1",
+  "author": "IRCEL - CELINE",
+  "homepage": "http://www.irceline.be",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
