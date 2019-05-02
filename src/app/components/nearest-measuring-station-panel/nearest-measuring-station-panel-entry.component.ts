@@ -90,8 +90,17 @@ export class NearestMeasuringStationPanelEntryComponent implements OnChanges {
               this.location.date,
               phenomenon
             ).subscribe(res => {
-              this.borderColor = res.color;
-              this.lastStationaryValue = res.value;
+              this.loadingStationValue = false;
+              if (res) {
+                this.borderColor = res.color;
+                this.lastStationaryValue = res.value;
+                this.error = false;
+                this.ready.emit(false);
+              } else {
+                this.borderColor = 'gray';
+                this.error = true;
+                this.ready.emit(true);
+              }
             });
           } else {
             const matchingInterval = this.statusIntervalResolver
@@ -100,11 +109,11 @@ export class NearestMeasuringStationPanelEntryComponent implements OnChanges {
               this.borderColor = matchingInterval.color;
             }
             this.lastStationaryValue = nearestSeries.series.lastValue.value;
+            this.loadingStationValue = false;
+            this.error = false;
+            this.ready.emit(false);
           }
         }
-        this.loadingStationValue = false;
-        this.error = false;
-        this.ready.emit(false);
       }, (error) => {
         this.loadingStationValue = false;
         this.error = true;

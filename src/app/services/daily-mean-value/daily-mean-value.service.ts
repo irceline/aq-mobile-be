@@ -68,7 +68,7 @@ export class DailyMeanValueService {
           const color = this.belaqi.getColorForIndex(index);
           return { color, index, value } as DailyMeanValue;
         } else {
-          throw new Error('No value returned');
+          // throw new Error('No value returned');
         }
       })
     );

@@ -58,6 +58,7 @@ export class NearestMeasuringStationPanelComponent implements OnChanges {
   ];
 
   private readyCounter: number;
+  private errorCounter = 0;
 
   public error: boolean;
 
@@ -68,6 +69,7 @@ export class NearestMeasuringStationPanelComponent implements OnChanges {
   public ngOnChanges(changes: SimpleChanges) {
     if (changes.location) {
       this.readyCounter = this.entries.length;
+      this.errorCounter = this.readyCounter;
     }
   }
 
@@ -83,13 +85,16 @@ export class NearestMeasuringStationPanelComponent implements OnChanges {
   }
 
   public entryReady(error) {
-    if (!error) {
-      this.readyCounter--;
-      if (this.readyCounter === 0) {
-        this.ready.emit();
-      }
-    } else {
+    console.log(error);
+    this.readyCounter--;
+    if (error) {
+      this.errorCounter--;
+    }
+    if (this.errorCounter === 0) {
       this.error = true;
+    }
+    if (this.readyCounter === 0) {
+      this.ready.emit();
     }
   }
 
