@@ -105,9 +105,15 @@
 	},
 	"diagram": {
 		"header": "Diagramm",
-		"loading": "Lade",
+		"loading": "Beschäftigt zu laden",
 		"loading-nearest-stations": "Lade nächstgelegene Überwachungsstation",
 		"no-timeseries-selected": "Keine Zeitreihe selektiert!",
+		"overlay": {
+      "content-p1": "Die Diagramme geben die stündliche Entwicklung wieder, die in den nächstgelegenen offiziellen Überwachungsstationen von den durch Ihnen konfigurierten Standorten gemessen wurden. Die Zeitreihen der Schadstoffe, die Bestandteil des BelAQI-Index sind, sind entsprechend diesem Index eingefärbt.",
+      "content-p2": "Bei Feinstaub (beide mit einem Durchmesser von weniger als 2,5 und 10 Mikrometern) werden nur die mittleren 24-Stundenmittelwertzeitreihen gefärbt, da der 24-Stundenmittelwert Teil des Index ist und nicht die Stundenmittelwerte.",
+			"header": "Was sehen Sie auf diesem Bildschirm?",
+			"url-svg": "../../assets/svg/belaqi_DE.svg"
+    },
 		"select-timeseries": "Bitte wähle eine Zeitreihe"
 	},
 	"faq": {
@@ -262,14 +268,18 @@
 			"tomorrow": "Morgen"
 		},
     "timestepLabels": {
-      "loading": "beschäftigt zu laden",
+      "loading": "Beschäftigt zu laden",
       "anmean": "Jahresmittelwert (Langzeitbelastung)",
       "hmean": "Stundenmittelwert (Kurzzeitbelastung)",
       "24hmean": "laufender 24-Stundenmittelwert",
       "dmean_forecast_today": "Tagesmittelwert (heute)",
       "dmean_forecast_tomorrow": "Tagesmittelwert (morgen)",
       "dmean_forecast_today+2": "Tagesmittelwert (in 2 Tagen)",
-      "dmean_forecast_today+3": "Tagesmittelwert (in 3 Tagen)"
+      "dmean_forecast_today+3": "Tagesmittelwert (in 3 Tagen)",
+      "maxhmean_forecast_today": "Vorhersage höchster Stundenmittelwert (heute)",
+      "maxhmean_forecast_tomorrow": "Vorhersage höchster Stundenmittelwert (morgen)",
+      "maxhmean_forecast_today+2": "Vorhersage höchster Stundenmittelwert (in 2 Tagen)",
+      "maxhmean_forecast_today+3": "Vorhersage höchster Stundenmittelwert (in 3 Tagen)"
     }
 	},
 	"menu": {
@@ -414,7 +424,7 @@
 		"header": "Position der Überwachungsstation"
 	},
 	"single-chart": {
-		"loading": "Lädt..."
+		"loading": "Beschäftigt zu laden"
 	},
 	"start": {
     "overlay": {

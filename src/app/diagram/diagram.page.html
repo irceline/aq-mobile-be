@@ -1,25 +1,22 @@
 <overlay-info-drawer>
   <div class="drawer-content">
     <div>
-      <h2 text-center>{{'start.overlay.header' | translate}}</h2>
+      <h2 text-center>{{'diagram.overlay.header' | translate}}</h2>
     </div>
     <div>
-      <p>{{'start.overlay.content-p1' | translate}}</p>
+      <p>{{'diagram.overlay.content-p1' | translate}}</p>
     </div>
     <div>
-      <p>{{'start.overlay.content-p2' | translate}}</p>
+      <p text-center><img src="{{'diagram.overlay.url-svg' | translate}}"></p>
     </div>
     <div>
-      <p>{{'start.overlay.content-p3' | translate}}</p>
-    </div>
-    <div>
-      <p>{{'start.overlay.content-p4' | translate}}</p>
+      <p>{{'diagram.overlay.content-p2' | translate}}</p>
     </div>
   </div>
 </overlay-info-drawer>
 
 <ion-content>
-  <div style="margin-top: 45px;">
+  <div style="margin-top: 45px; height: calc(100% - 45px)">
     <slider-header [header]="sliderHeader"></slider-header>
     <belaqi-diagram-slider #slider (headerContent)="sliderHeader = $event"></belaqi-diagram-slider>
   </div>

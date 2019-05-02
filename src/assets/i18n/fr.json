@@ -105,9 +105,15 @@
   },
   "diagram": {
     "header": "Graphique",
-    "loading": "Chargement",
+    "loading": "chargement en cours",
     "loading-nearest-stations": "Charger les mesures les plus proches",
     "no-timeseries-selected": "Aucun polluant sélectionné",
+    "overlay": {
+      "content-p1": "Les diagrammes donnent l'évolution horaire mesurée dans les stations de mesure officielles les plus proches des lieux que vous connaissez. Les séries chronologiques des polluants qui font partie de l'indice BelAQI sont colorées en fonction de cet indice.",
+      "content-p2": "Pour les particules (diamètre inférieur à 2,5 et 10 micromètres), seules les séries chronologiques moyennes sur 24 heures sont colorées, car c'est la moyenne mobile sur 24 heures qui fait partie de l'indice, et non la moyenne horaire.",
+      "header": "Que voyez-vous sur cet écran?",
+      "url-svg": "../../assets/svg/belaqi_FR.svg"
+    },
     "select-timeseries": "Veuillez sélectionner un polluant"
   },
   "faq": {
@@ -269,7 +275,11 @@
       "dmean_forecast_today": "moyenne journalière (aujourd'hui)",
       "dmean_forecast_tomorrow": "moyenne journalière (demain)",
       "dmean_forecast_today+2": "moyenne journalière (dans 2 jours)",
-      "dmean_forecast_today+3": "moyenne journalière (dans 3 jours)"
+      "dmean_forecast_today+3": "moyenne journalière (dans 3 jours)",
+      "maxhmean_forecast_today": "prévision moyenne horaire maximum (aujourd'hui)",
+      "maxhmean_forecast_tomorrow": "prévision moyenne horaire maximum (demain)",
+      "maxhmean_forecast_today+2": "prévision moyenne horaire maximum (dans 2 jours)",
+      "maxhmean_forecast_today+3": "prévision moyenne horaire maximum (dans 3 jours)"
     }
   },
   "menu": {
@@ -407,7 +417,7 @@
     "header": "Localisation de la station"
   },
   "single-chart": {
-		"loading": ""
+		"loading": "chargement en cours"
 	},
   "start": {
     "overlay": {

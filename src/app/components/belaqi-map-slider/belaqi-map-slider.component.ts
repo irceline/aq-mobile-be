@@ -551,22 +551,46 @@ class MapView {
       case 3:
         // dmean forecast today
         this.time = TimeLabel.today;
-        this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_today');
+        if (this.phenomenonLabel === PhenomenonLabel.NO2 || this.phenomenonLabel === PhenomenonLabel.O3) {
+          this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.maxhmean_forecast_today');
+          this.mean = MeanLabel.hourly;
+        } else {
+          this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_today');
+          this.mean = MeanLabel.daily;
+        }
         break;
       case 4:
         // dmean forecast tomorrow
         this.time = TimeLabel.tomorrow;
-        this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_tomorrow');
+        if (this.phenomenonLabel === PhenomenonLabel.NO2 || this.phenomenonLabel === PhenomenonLabel.O3) {
+          this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.maxhmean_forecast_tomorrow');
+          this.mean = MeanLabel.hourly;
+        } else {
+          this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_tomorrow');
+          this.mean = MeanLabel.daily;
+        }
         break;
       case 5:
         // dmean forecast today+2
         this.time = TimeLabel.today2;
-        this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_today+2');
+        if (this.phenomenonLabel === PhenomenonLabel.NO2 || this.phenomenonLabel === PhenomenonLabel.O3) {
+          this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.maxhmean_forecast_today+2');
+          this.mean = MeanLabel.hourly;
+        } else {
+          this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_today+2');
+          this.mean = MeanLabel.daily;
+        }
         break;
       case 6:
         // dmean forecast today+3
         this.time = TimeLabel.today3;
-        this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_today+3');
+        if (this.phenomenonLabel === PhenomenonLabel.NO2 || this.phenomenonLabel === PhenomenonLabel.O3) {
+          this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.maxhmean_forecast_today+3');
+          this.mean = MeanLabel.hourly;
+        } else {
+          this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_today+3');
+          this.mean = MeanLabel.daily;
+        }
     }
 
     // Replace text for BelAQI Index
@@ -648,7 +672,7 @@ class MapView {
       const icondiv = divIcon({ className: 'marker', iconAnchor: point(10, 40) });
       const location = { lat: this.location.latitude, lng: this.location.longitude } as LatLngLiteral;
       const bounds = latLngBounds(location, location);
-      let boundsOptions: FitBoundsOptions = { paddingTopLeft: [-50, -50], maxZoom: 12 };
+      let boundsOptions: FitBoundsOptions = { paddingTopLeft: [0, 0], maxZoom: 12 };
       this.removePopups();
       if (selection) {
         if (selection.stationlocation) {
@@ -658,7 +682,7 @@ class MapView {
             .setContent(this.translateSrvc.instant('map.nearest-station'));
           map.addLayer(this.nextStationPopup);
           bounds.extend(station);
-          boundsOptions = { paddingTopLeft: [-50, -50], maxZoom: 12 };
+          boundsOptions = { paddingTopLeft: [0, 0], maxZoom: 12 };
         }
       }
       if (zoom) {

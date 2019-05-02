@@ -30,6 +30,22 @@
         visibility: visible;
     }
 
+    @media screen and (max-width: 500px) {
+    .chart-label {
+        font-size: 0.9em;
+        }
+    }
+    @media screen and (max-width: 400px) {
+    .chart-label {
+        font-size: 0.8em;
+        }
+    }
+    @media screen and (max-width: 300px) {
+    .chart-label {
+        font-size: 0.7em;
+        }
+    }
+
     .chart-wrapper {
         width: 90%;
         left: 5%;

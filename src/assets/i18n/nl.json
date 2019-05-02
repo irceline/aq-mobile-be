@@ -105,9 +105,15 @@
   },
   "diagram": {
     "header": "diagram",
-    "loading": "aan het laden",
+    "loading": "bezig met laden",
     "loading-nearest-stations": "Laad dichtstbijgelegen metingen",
     "no-timeseries-selected": "Geen tijdsreeks geselecteerd!",
+    "overlay": {
+      "content-p1": "De diagrammen geven de evolutie per uur zoals gemeten in de dichtstbijzijnde officiële meetstations naar de locaties die u hebt geconfigureerd. De tijdreeksen van verontreinigende stoffen die deel uitmaken van de BelAQI-index zijn volgens deze index gekleurd.",
+      "content-p2": "Voor deeltjes (beide met een diameter kleiner dan 2,5 en 10 micrometer) zijn alleen de glijdende 24-uurgemiddelde tijdreeksen gekleurd, omdat de 24-uurgemiddelde deel uitmaakt van de index, niet het uurgemiddelden.",
+      "header": "Wat zie je op dit scherm?",
+      "url-svg": "../../assets/svg/belaqi_NL.svg"
+    },
     "select-timeseries": "Selecteer aub een tijdsreeks"
   },
   "faq": {
@@ -266,10 +272,14 @@
       "anmean": "jaargemiddelde (lange termijn blootstelling)",
       "hmean": "uurgemiddelde (korte termijn blootstelling)",
       "24hmean": "glijdend 24-uurgemiddelde (korte termijn blootstelling)",
-      "dmean_forecast_today": "daggemiddelde (vandaag)",
-      "dmean_forecast_tomorrow": "daggemiddelde (morgen)",
-      "dmean_forecast_today+2": "daggemiddelde (binnen 2 dagen)",
-      "dmean_forecast_today+3": "daggemiddelde (binnen 3 dagen)"
+      "dmean_forecast_today": "voorspelling daggemiddelde (vandaag)",
+      "dmean_forecast_tomorrow": "voorspelling daggemiddelde (morgen)",
+      "dmean_forecast_today+2": "voorspelling daggemiddelde (binnen 2 dagen)",
+      "dmean_forecast_today+3": "voorspelling daggemiddelde (binnen 3 dagen)",
+      "maxhmean_forecast_today": "voorspelling maximum uurgemiddelde (vandaag)",
+      "maxhmean_forecast_tomorrow": "voorspelling maximum uurgemiddelde (morgen)",
+      "maxhmean_forecast_today+2": "voorspelling maximum uurgemiddelde (binnen 2 dagen)",
+      "maxhmean_forecast_today+3": "voorspelling maximum uurgemiddelde (binnen 3 dagen)"
     }
   },
   "menu": {
@@ -407,7 +417,7 @@
     "header": "locatie van het station"
   },
   "single-chart": {
-		"loading": ""
+		"loading": "bezig met laden"
 	},
   "start": {
     "overlay": {

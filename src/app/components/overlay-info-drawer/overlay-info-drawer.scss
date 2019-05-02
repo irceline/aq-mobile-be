@@ -12,7 +12,7 @@
   ion-content {
     --background: transparent;
     position: relative;
-    height: 100%;
+    height: calc(100% + 1px);
     color: white;
     --color: white;
 

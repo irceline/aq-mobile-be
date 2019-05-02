@@ -135,12 +135,14 @@ export class SingleChartComponent implements OnChanges, DoCheck {
               max: new Date(this.timespan.to),
               unit: 'hour',
               displayFormats: {
-                hour: 'MMM D HH:mm'
+                hour: 'HH:mm'
               }
             },
             ticks: {
               // source: 'data',
               maxRotation: 0,
+              padding: 5,
+              fontSize: 10
               // callback: (val, i, values) => {
               //   const hours = this.location.date.getHours() % 6;
               //   if (new Date(values[i].value).getHours() % 6 === hours) {

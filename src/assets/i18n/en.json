@@ -105,9 +105,15 @@
   },
   "diagram": {
     "header": "Diagram",
-    "loading": "loading",
+    "loading": "busy loading",
     "loading-nearest-stations": "Load nearest measurements",
     "no-timeseries-selected": "No timeseries selected!",
+    "overlay": {
+      "content-p1": "The diagrams give the hourly evolution as measured in the closest official measuring stations to the locations you connfigured. The time series of pollutants which are part of the BelAQI-index are coloured according to this index.",
+      "content-p2": "For particulate matter (both with a diameter of less than 2.5 and 10 micrometres) only running 24-hour mean time series are coloured, since it is the running 24-hour mean which is part of the index, not the hourly mean.",
+      "header": "What do you see on this screen?",
+      "url-svg": "../../assets/svg/belaqi_EN.svg"
+    },
     "select-timeseries": "Please select a timeseries"
   },
   "faq": {
@@ -269,7 +275,11 @@
       "dmean_forecast_today": "forecast daily mean (today)",
       "dmean_forecast_tomorrow": "forecast daily mean (tomorrow)",
       "dmean_forecast_today+2": "forecast daily mean (in 2 days)",
-      "dmean_forecast_today+3": "forecast daily mean (in 3 days)"
+      "dmean_forecast_today+3": "forecast daily mean (in 3 days)",
+      "maxhmean_forecast_today": "forecast maximum hourly mean (today)",
+      "maxhmean_forecast_tomorrow": "forecast maximum hourly mean (tomorrow)",
+      "maxhmean_forecast_today+2": "forecast maximum hourly mean (in 2 days)",
+      "maxhmean_forecast_today+3": "forecast maximum hourly mean (in 3 days)"
     }
   },
   "menu": {
@@ -414,7 +424,7 @@
     "header": "Position of the station"
   },
   "single-chart": {
-		"loading": "loading..."
+		"loading": "busy loading"
 	},
   "start": {
     "overlay": {
