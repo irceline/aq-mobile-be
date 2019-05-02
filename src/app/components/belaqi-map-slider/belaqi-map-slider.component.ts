@@ -785,11 +785,12 @@ class MapView {
     let phenomenonIds;
     if (this.mean === MeanLabel.hourly && this.time === TimeLabel.current) {
       if (this.mode !== 'belaqi') {
-        borderColorIndizes = [0, 1, 2];
+        borderColorIndizes = [1, 2, 0];
         phenomenonIds = [
-          0,
           getMainPhenomenonForID(this.getPhenomenonID(PhenomenonLabel.NO2)),
-          getMainPhenomenonForID(this.getPhenomenonID(PhenomenonLabel.O3))];
+          getMainPhenomenonForID(this.getPhenomenonID(PhenomenonLabel.O3)),
+          0
+        ];
       } else {
         borderColorIndizes = [1, 2, 0, 3, 4];
         phenomenonIds = allPhenomena;
@@ -799,13 +800,6 @@ class MapView {
         borderColorIndizes = [1, 2, 0, 3, 4];
         phenomenonIds = allPhenomena;
       }
-    }
-
-    // No need to redraw since nothing has changed. Only compares first element as there are no mutual elements.
-    if (this.lastColorChanged.length > 0
-      && borderColorIndizes.length > 0
-      && borderColorIndizes[0] === this.lastColorChanged[0]) {
-      return;
     }
 
     if (borderColorIndizes) {
