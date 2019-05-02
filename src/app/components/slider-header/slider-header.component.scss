@@ -1,7 +1,7 @@
 :host {
   .settingsButton {
-    position: relative;
-    margin-left: auto;
+    position: absolute;
+    right: 0;
 
     ion-button {
       color: var(--panel-background);
@@ -14,7 +14,7 @@
   slide-title {
     text-align: center;
     font-size: 1.2em;
-    position: absolute;
+    // position: absolute;
 
     .location-label {
       font-size: 1.6em;
@@ -28,19 +28,15 @@
 
   ion-row {
     justify-content: center;
-    height: 3.8em;
+    width: 90%;
+    margin-left: 5%;
   }
-
-  .rowWithWarning {
-    height: 6.5em;
-  }
-
+  
   .rowWithWarningCurrentLocation {
     height: 8em;
   }
 
   .oldDataWarning {
-    width: 90%;
     margin: auto;
     font-size: 60%;
   }
