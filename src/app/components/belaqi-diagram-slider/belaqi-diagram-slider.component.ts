@@ -1,7 +1,8 @@
 import { Component, EventEmitter, OnDestroy, Output, ViewChild } from '@angular/core';
-import { DatasetApiInterface, DefinedTimespan, DefinedTimespanService, Timeseries, Timespan, Time } from '@helgoland/core';
+import { DatasetApiInterface, DefinedTimespan, DefinedTimespanService, Time, Timeseries, Timespan } from '@helgoland/core';
 import { IonSlides } from '@ionic/angular';
 import { map } from 'rxjs/operators';
+import { isNumber } from 'util';
 
 import { sliceStationLabel } from '../../model/helper';
 import { getIDForMainPhenomenon, MainPhenomenon } from '../../model/phenomenon';
@@ -184,6 +185,8 @@ class DiagramView {
 
   public adjustTimespan() {
     this.entries.forEach(e => {
+      e.data = [];
+      e.loading = true;
       this.fetchData(e, this.handleError);
     });
   }
@@ -199,7 +202,7 @@ class DiagramView {
     this.determineNextStation(
       pm10Entry,
       (series) => pm10Entry.label = this.createLabel(series),
-      (error) => this.handleError(error)
+      (error) => this.handleError(pm10Entry, error)
     );
   }
 
@@ -214,7 +217,7 @@ class DiagramView {
     this.determineNextStation(
       pm25Entry,
       (series) => pm25Entry.label = this.createLabel(series),
-      (error) => this.handleError(error)
+      (error) => this.handleError(pm25Entry, error)
     );
   }
 
@@ -229,7 +232,7 @@ class DiagramView {
     this.determineNextStation(
       o3Entry,
       (series) => o3Entry.label = this.createLabel(series),
-      (error) => this.handleError(error)
+      (error) => this.handleError(o3Entry, error)
     );
   }
 
@@ -244,7 +247,7 @@ class DiagramView {
     this.determineNextStation(
       bcEntry,
       (series) => bcEntry.label = this.createLabel(series),
-      (error) => this.handleError(error)
+      (error) => this.handleError(bcEntry, error)
     );
   }
 
@@ -259,7 +262,7 @@ class DiagramView {
     this.determineNextStation(
       no2Entry,
       (series) => no2Entry.label = this.createLabel(series),
-      (error) => this.handleError(error)
+      (error) => this.handleError(no2Entry, error)
     );
   }
 
@@ -273,8 +276,9 @@ class DiagramView {
     }
   }
 
-  private handleError(error: any) {
-    // TODO what should happen?
+  private handleError(entry: DiagramEntry, error: any) {
+    entry.error = error;
+    entry.loading = false;
   }
 
   private createLabel(series: Timeseries): string {
@@ -290,35 +294,87 @@ class DiagramView {
     this.nearestTimeseries.determineNextTimeseries(
       this.location.latitude, this.location.longitude,
       getIDForMainPhenomenon(entry.phenomenon)
-    ).subscribe(nearest => {
-      entry.series = nearest.series;
-      setLabel(nearest.series);
-      this.fetchData(entry, setError);
-    });
+    ).subscribe(
+      nearest => {
+        entry.series = nearest.series;
+        setLabel(nearest.series);
+        this.fetchData(entry, setError);
+      },
+      error => this.handleError(entry, error),
+      () => entry.loading = false
+    );
   }
 
   private fetchData(
     entry: DiagramEntry,
-    setError: (error: any) => void
+    setError: (entry: DiagramEntry, error: any) => void
+  ) {
+    switch (entry.phenomenon) {
+      case MainPhenomenon.PM10:
+      case MainPhenomenon.PM25:
+        this.fetchNormalData(entry, setError);
+        this.fetch24hMeanData(entry, setError);
+        break;
+      default:
+        this.fetchNormalData(entry, setError);
+        break;
+    }
+  }
+
+  private fetchNormalData(
+    entry: DiagramEntry,
+    setError: (entry: DiagramEntry, error: any) => void
   ) {
     this.api.getTsData<{
       timestamp: number;
       value: number;
     }>(entry.series.id, entry.series.url, this.timespan)
-      .pipe(map(res => this.mapValues(res, entry.phenomenon)))
+      .pipe(map(res => this.mapValues(res, (value) => this.setColor(entry.phenomenon, value))))
       .subscribe(
-        res => entry.data = res,
-        error => setError(error),
+        res => entry.data.push(res),
+        error => setError(entry, error),
         () => entry.loading = false
       );
   }
 
-  private mapValues(res, phenomenon: MainPhenomenon): DataEntry[] {
+  private fetch24hMeanData(
+    entry: DiagramEntry,
+    setError: (entry: DiagramEntry, error: any) => void
+  ) {
+    const extendedTimespan: Timespan = {
+      from: this.timespan.from - 1000 * 60 * 60 * 23,
+      to: this.location.date.getTime()
+    };
+    this.api.getTsData<{ timestamp: number; value: number; }>(
+      entry.series.id, entry.series.url, extendedTimespan
+    ).pipe(map(res => {
+      const values: DataEntry[] = [];
+      for (let i = res.values.length; i > 23; i--) {
+        const range = res.values.slice(i - 24, i).map(e => e.value).filter(e => isNumber(e));
+        if (range.length >= 16) {
+          const sum = range.reduce((pv, cv) => pv + cv, 0);
+          const val = sum / range.length;
+          values.unshift({
+            color: this.belaqiSrvc.getColorForIndex(this.categorizeValSrvc.categorize(val, entry.phenomenon)),
+            timestamp: res.values[i - 1].timestamp,
+            value: val
+          });
+        }
+      }
+      return values;
+    })).subscribe(
+      res => entry.data.push(res),
+      error => setError(entry, error),
+      () => entry.loading = false
+    );
+  }
+
+  private mapValues(res, setColor: (val: number) => string): DataEntry[] {
     return res.values.map(e => {
       return {
         timestamp: e.timestamp,
         value: e.value,
-        color: this.setColor(phenomenon, e.value)
+        color: setColor(e.value)
       } as DataEntry;
     });
   }
@@ -327,9 +383,10 @@ class DiagramView {
 class DiagramEntry {
 
   loading: boolean;
-  data: DataEntry[];
+  data: DataEntry[][];
   label: string;
   series?: Timeseries;
   phenomenon: MainPhenomenon;
+  error?: string;
 
 }

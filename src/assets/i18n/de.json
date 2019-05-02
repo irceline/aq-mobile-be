@@ -424,7 +424,8 @@
 		"header": "Position der Überwachungsstation"
 	},
 	"single-chart": {
-		"loading": "Beschäftigt zu laden"
+		"loading": "Beschäftigt zu laden",
+		"error": "Bei Laden des Diagrams ist ein Fehler aufgetreten"
 	},
 	"start": {
     "overlay": {

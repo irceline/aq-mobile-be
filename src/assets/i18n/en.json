@@ -424,7 +424,8 @@
     "header": "Position of the station"
   },
   "single-chart": {
-		"loading": "busy loading"
+    "loading": "busy loading",
+    "error": "While loading the diagram an error occurred"
 	},
   "start": {
     "overlay": {
