@@ -27,7 +27,7 @@ import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
 import moment from 'moment';
 import { forkJoin } from 'rxjs';
 
-import { getIDForMainPhenomenon, MainPhenomenon } from '../../model/phenomenon';
+import { getIDForMainPhenomenon, MainPhenomenon, getMainPhenomenonForID, PhenomenonIDMapping } from '../../model/phenomenon';
 import { forecastWmsURL, realtimeWmsURL, rioifdmWmsURL } from '../../model/services';
 import { AnnualMeanService } from '../../services/annual-mean/annual-mean.service';
 import { IrcelineSettings, IrcelineSettingsService } from '../../services/irceline-settings/irceline-settings.service';
@@ -39,6 +39,9 @@ import { MobileSettings } from '../../services/settings/settings.service';
 import { UserLocation, UserLocationListService } from '../../services/user-location-list/user-location-list.service';
 import { MarkerSelectorGenerator } from '../customized-station-map-selector/customized-station-map-selector.component';
 import { HeaderContent } from '../slider-header/slider-header.component';
+import { ModelledValueService } from '../../services/modelled-value/modelled-value.service';
+import { CategorizedValueService } from '../../services/categorized-value/categorized-value.service';
+import { BelaqiIndexService } from '../../services/belaqi/belaqi.service';
 
 enum PhenomenonLabel {
   BelAQI = 'BelAQI',
@@ -133,7 +136,10 @@ export class BelaqiMapSliderComponent implements OnDestroy {
     protected userLocationListService: UserLocationListService,
     protected locate: LocateService,
     protected refreshHandler: RefreshHandler,
-    private networkAlert: NetworkAlertService
+    private networkAlert: NetworkAlertService,
+    protected modelledValueService: ModelledValueService,
+    protected categorizeValue: CategorizedValueService,
+    protected belaqi: BelaqiIndexService
   ) {
     this.locate.getLocationStatusAsObservable().subscribe(locationStatus => {
       if (locationStatus !== LocationStatus.DENIED) {
@@ -199,7 +205,10 @@ export class BelaqiMapSliderComponent implements OnDestroy {
               this.mapDataService,
               this.userLocationListService,
               'map#' + i.toString(),
-              this.slider);
+              this.slider,
+              this.modelledValueService,
+              this.categorizeValue,
+              this.belaqi);
             // Set MapView Location
             if (loc.type !== 'current') {
               this.setLocation(loc, i, ircelineSettings);
@@ -339,6 +348,7 @@ class MapView {
   public loading: boolean;
   public loading_colors: boolean[] = [false, false, false, false, false, false];
   public borderColor: string[] = ['gray', 'gray', 'gray', 'gray', 'gray', 'gray'];
+  private lastColorChanged: number[] = [];
 
   public statusIntervalDuration: number;
   public geoSearchOptions: GeoSearchOptions;
@@ -359,7 +369,10 @@ class MapView {
     protected mapDataService: MapDataService,
     protected userLocationListService: UserLocationListService,
     protected mapId: string,
-    protected slider: IonSlides
+    protected slider: IonSlides,
+    protected modelledValueService: ModelledValueService,
+    protected categorizeValue: CategorizedValueService,
+    protected belaqi: BelaqiIndexService
   ) {
     const settings = this.settingsSrvc.getSettings();
     this.providerUrl = settings.datasetApis[0].url;
@@ -407,6 +420,7 @@ class MapView {
     }
     this.adjustSlider();
     this.adjustPopups(true);
+    this.adjustPhenomenonColor();
   }
 
   public init() {
@@ -462,6 +476,7 @@ class MapView {
     this.adjustSlider();
     this.adjustUI();
     this.adjustLegend();
+    this.adjustPhenomenonColor();
   }
 
   /**
@@ -471,6 +486,7 @@ class MapView {
     this.adjustSlider();
     this.adjustUI();
     this.adjustLegend();
+    this.adjustPhenomenonColor();
   }
 
   private adjustSliderKeepAggregation(oldSliderLen, newSliderLen, oldSliderPos: number) {
@@ -754,6 +770,57 @@ class MapView {
       this.phenomenonFilter = { phenomenon: '' };
     }
     this.adjustLayer();
+  }
+
+  private adjustPhenomenonColor() {
+    let borderColorIndizes;
+    let phenomenonIds;
+    if (this.mean === MeanLabel.hourly && this.time === TimeLabel.current) {
+      if (this.phenomenonLabel === PhenomenonLabel.NO2
+        || this.phenomenonLabel === PhenomenonLabel.O3
+        || this.phenomenonLabel === PhenomenonLabel.BelAQI) {
+        borderColorIndizes = [0, 1, 2];
+        phenomenonIds = [
+          0,
+          getMainPhenomenonForID(this.getPhenomenonID(PhenomenonLabel.NO2)),
+          getMainPhenomenonForID(this.getPhenomenonID(PhenomenonLabel.O3))];
+      }
+    } else if (this.mean === MeanLabel.daily && this.time === TimeLabel.current) {
+      if (this.phenomenonLabel === PhenomenonLabel.PM10 || this.phenomenonLabel === PhenomenonLabel.PM25) {
+        borderColorIndizes = [3, 4];
+        phenomenonIds = [
+          getMainPhenomenonForID(this.getPhenomenonID(PhenomenonLabel.PM10)),
+          getMainPhenomenonForID(this.getPhenomenonID(PhenomenonLabel.PM25))
+        ];
+      }
+    }
+
+    if (borderColorIndizes) {
+      this.lastColorChanged.forEach((elem) => this.borderColor[elem] = 'gray');
+      this.lastColorChanged = borderColorIndizes;
+      this.ircelineSettings.getSettings(false).subscribe(setts => {
+        for (let i = 0; i < borderColorIndizes.length; i++) {
+          // Request BelAQI Index
+          if (borderColorIndizes[i] === 0) {
+            this.belaqi.getValue(this.location.latitude, this.location.longitude, setts.lastupdate).subscribe(
+              val => {
+                this.borderColor[borderColorIndizes[i]] = this.belaqi.getColorForIndex(val);
+              });
+          } else {
+            // Request Phenomenon Index
+            const phenomenon = phenomenonIds[i];
+            this.modelledValueService.getValue(this.location.latitude, this.location.longitude, setts.lastupdate, phenomenon).subscribe(
+              val => {
+                const index = this.categorizeValue.categorize(val, phenomenon);
+                this.borderColor[borderColorIndizes[i]] = this.belaqi.getColorForIndex(index);
+              }
+            );
+          }
+        }
+      });
+    } else {
+      this.lastColorChanged.forEach((elem) => this.borderColor[elem] = 'gray');
+    }
   }
 
   private adjustLayer() {
