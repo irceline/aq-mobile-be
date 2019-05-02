@@ -3,7 +3,7 @@
     <div class="container">
 
       <div class="chart" *ngFor="let entry of view.entries">
-        <single-chart [location]="view.location" [data]="entry.data" [loading]="entry.loading"
+        <single-chart [location]="view.location" [data]="entry.data" [loading]="entry.loading" [error]="entry.error"
           [timespan]="view.timespan" [label]="entry.label" (back)="view.stepBack()" (forward)="view.stepForward()"></single-chart>
       </div>
 

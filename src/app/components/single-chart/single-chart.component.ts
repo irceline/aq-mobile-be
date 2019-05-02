@@ -45,6 +45,9 @@ export class SingleChartComponent implements OnChanges, DoCheck {
   @Input()
   public location: UserLocation;
 
+  @Input()
+  public error: boolean;
+
   @Output()
   public back: EventEmitter<void> = new EventEmitter();
 
@@ -139,18 +142,38 @@ export class SingleChartComponent implements OnChanges, DoCheck {
               }
             },
             ticks: {
-              // source: 'data',
               maxRotation: 0,
               padding: 5,
               fontSize: 10
-              // callback: (val, i, values) => {
-              //   const hours = this.location.date.getHours() % 6;
-              //   if (new Date(values[i].value).getHours() % 6 === hours) {
-              //     return val;
-              //   } else {
-              //     return '';
-              //   }
-              // }
+            }
+          }, {
+            type: 'time',
+            time: {
+              parser: 'MM/DD/YYYY HH:mm',
+              min: new Date(this.timespan.from),
+              max: new Date(this.timespan.to),
+              unit: 'hour',
+              displayFormats: {
+                hour: 'MMM D'
+              }
+            },
+            ticks: {
+              source: 'auto',
+              maxRotation: 0,
+              padding: -5,
+              fontSize: 10,
+              callback: function (val, i, values) {
+                if (values[i] && values[i].value) {
+                  if (new Date(values[i].value).getHours() === 12) {
+                    return val;
+                  }
+                }
+              }
+            },
+            gridLines: {
+              drawTicks: false,
+              drawBorder: false,
+              drawOnChartArea: false
             }
           }],
         },
@@ -162,7 +185,8 @@ export class SingleChartComponent implements OnChanges, DoCheck {
         }
       },
       data: {
-        datasets: []
+        datasets: [],
+        labels: ['test', 'test']
       }
     });
     this.drawData(this.data);
@@ -172,6 +196,8 @@ export class SingleChartComponent implements OnChanges, DoCheck {
     // adjust new timeframe
     this.chart.options.scales.xAxes[0].time.min = new Date(this.timespan.from);
     this.chart.options.scales.xAxes[0].time.max = new Date(this.timespan.to);
+    this.chart.options.scales.xAxes[1].time.min = new Date(this.timespan.from);
+    this.chart.options.scales.xAxes[1].time.max = new Date(this.timespan.to);
     this.drawData(this.data);
   }
 

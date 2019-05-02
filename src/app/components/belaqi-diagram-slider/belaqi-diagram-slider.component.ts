@@ -202,7 +202,7 @@ class DiagramView {
     this.determineNextStation(
       pm10Entry,
       (series) => pm10Entry.label = this.createLabel(series),
-      (error) => this.handleError(error)
+      (error) => this.handleError(pm10Entry, error)
     );
   }
 
@@ -217,7 +217,7 @@ class DiagramView {
     this.determineNextStation(
       pm25Entry,
       (series) => pm25Entry.label = this.createLabel(series),
-      (error) => this.handleError(error)
+      (error) => this.handleError(pm25Entry, error)
     );
   }
 
@@ -232,7 +232,7 @@ class DiagramView {
     this.determineNextStation(
       o3Entry,
       (series) => o3Entry.label = this.createLabel(series),
-      (error) => this.handleError(error)
+      (error) => this.handleError(o3Entry, error)
     );
   }
 
@@ -247,7 +247,7 @@ class DiagramView {
     this.determineNextStation(
       bcEntry,
       (series) => bcEntry.label = this.createLabel(series),
-      (error) => this.handleError(error)
+      (error) => this.handleError(bcEntry, error)
     );
   }
 
@@ -262,7 +262,7 @@ class DiagramView {
     this.determineNextStation(
       no2Entry,
       (series) => no2Entry.label = this.createLabel(series),
-      (error) => this.handleError(error)
+      (error) => this.handleError(no2Entry, error)
     );
   }
 
@@ -276,8 +276,9 @@ class DiagramView {
     }
   }
 
-  private handleError(error: any) {
-    // TODO what should happen?
+  private handleError(entry: DiagramEntry, error: any) {
+    entry.error = error;
+    entry.loading = false;
   }
 
   private createLabel(series: Timeseries): string {
@@ -293,16 +294,20 @@ class DiagramView {
     this.nearestTimeseries.determineNextTimeseries(
       this.location.latitude, this.location.longitude,
       getIDForMainPhenomenon(entry.phenomenon)
-    ).subscribe(nearest => {
-      entry.series = nearest.series;
-      setLabel(nearest.series);
-      this.fetchData(entry, setError);
-    });
+    ).subscribe(
+      nearest => {
+        entry.series = nearest.series;
+        setLabel(nearest.series);
+        this.fetchData(entry, setError);
+      },
+      error => this.handleError(entry, error),
+      () => entry.loading = false
+    );
   }
 
   private fetchData(
     entry: DiagramEntry,
-    setError: (error: any) => void
+    setError: (entry: DiagramEntry, error: any) => void
   ) {
     switch (entry.phenomenon) {
       case MainPhenomenon.PM10:
@@ -318,7 +323,7 @@ class DiagramView {
 
   private fetchNormalData(
     entry: DiagramEntry,
-    setError: (error: any) => void
+    setError: (entry: DiagramEntry, error: any) => void
   ) {
     this.api.getTsData<{
       timestamp: number;
@@ -327,14 +332,14 @@ class DiagramView {
       .pipe(map(res => this.mapValues(res, (value) => this.setColor(entry.phenomenon, value))))
       .subscribe(
         res => entry.data.push(res),
-        error => setError(error),
+        error => setError(entry, error),
         () => entry.loading = false
       );
   }
 
   private fetch24hMeanData(
     entry: DiagramEntry,
-    setError: (error: any) => void
+    setError: (entry: DiagramEntry, error: any) => void
   ) {
     const extendedTimespan: Timespan = {
       from: this.timespan.from - 1000 * 60 * 60 * 23,
@@ -359,7 +364,7 @@ class DiagramView {
       return values;
     })).subscribe(
       res => entry.data.push(res),
-      error => setError(error),
+      error => setError(entry, error),
       () => entry.loading = false
     );
   }
@@ -382,5 +387,6 @@ class DiagramEntry {
   label: string;
   series?: Timeseries;
   phenomenon: MainPhenomenon;
+  error?: string;
 
 }
