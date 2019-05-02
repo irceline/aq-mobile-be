@@ -104,7 +104,7 @@
 		"hint": "Um diese Funktion nutzen zu können, muss die App im Hintergrund laufen bleiben. Ihr Standort wird nur einmal für den ausgewählte Überprüfungsintervall bestimmt, wenn die Luftqualität für Ihren aktuellen Standort überprüft werden soll. Alle persönlich konfigurierten Standorte werden ebenfalls überprüft."
 	},
 	"diagram": {
-		"header": "Diagramm",
+		"header": "Graph",
 		"loading": "Beschäftigt zu laden",
 		"loading-nearest-stations": "Lade nächstgelegene Überwachungsstation",
 		"no-timeseries-selected": "Keine Zeitreihe selektiert!",
