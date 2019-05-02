@@ -429,6 +429,7 @@ class MapView {
     this.adjustSlider();
     this.adjustUI();
     this.adjustLegend();
+    this.adjustPhenomenonColor();
   }
 
   private removePopups() {
@@ -773,7 +774,7 @@ class MapView {
   }
 
   private adjustPhenomenonColor() {
-    let borderColorIndizes;
+    let borderColorIndizes = [];
     let phenomenonIds;
     if (this.mean === MeanLabel.hourly && this.time === TimeLabel.current) {
       if (this.phenomenonLabel === PhenomenonLabel.NO2
@@ -793,6 +794,13 @@ class MapView {
           getMainPhenomenonForID(this.getPhenomenonID(PhenomenonLabel.PM25))
         ];
       }
+    }
+
+    // No need to redraw since nothing has changed. Only compares first element as there are no mutual elements.
+    if (this.lastColorChanged.length > 0
+      && borderColorIndizes.length > 0
+      && borderColorIndizes[0] === this.lastColorChanged[0]) {
+      return;
     }
 
     if (borderColorIndizes) {
