@@ -418,6 +418,7 @@ class MapView {
       // Navigating to long-term
       this.sliderPosition = 0;
     }
+    this.mode = 'belaqi';
     this.adjustSlider();
     this.adjustPopups(true);
     this.adjustPhenomenonColor();
