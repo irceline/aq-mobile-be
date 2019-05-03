@@ -95,11 +95,13 @@ export class CustomizedStationMapSelectorComponent extends MapSelectorComponent<
           this.markerFeatureGroup = featureGroup();
           timeseries.forEach(ts => {
             if ((ts.lastValue.timestamp) > res.lastupdate.getTime() - this.ignoreStatusIntervalIfBeforeDuration) {
-              const phenomenon = getMainPhenomenonForID(ts.parameters.phenomenon.id);
-              const index = this.categorizer.categorize(ts.lastValue.value, phenomenon);
-              const color = this.belaqi.getColorForIndex(index);
               let marker;
-              if (color) { marker = this.createColoredMarker(ts.station, color); }
+              const phenomenon = getMainPhenomenonForID(ts.parameters.phenomenon.id);
+              if (phenomenon) {
+                const index = this.categorizer.categorize(ts.lastValue.value, phenomenon);
+                const color = this.belaqi.getColorForIndex(index);
+                if (color) { marker = this.createColoredMarker(ts.station, color); }
+              }
               if (!marker) { marker = this.createDefaultColoredMarker(ts.station); }
               if (marker) {
                 marker.on('click', () => {
