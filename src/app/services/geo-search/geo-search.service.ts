@@ -38,36 +38,37 @@ export class GeoSearchService extends NominatimGeoSearchService {
     if (options.acceptLanguage) { params = params.set('accept-language', options.acceptLanguage); }
     const url = this.serviceUrl + 'search';
     const request = this.httpClient.get(url, { params });
-    return this.cacheService.loadFromObservable(createCacheKey(url, params), request, null, TTL_GEO_SEARCH).map((resArray: any[]) => {
-      if (resArray.length === 1) {
-        const result = resArray[0];
-        const name = result.display_name;
-        let geometry;
-        if (result.geojson) {
-          geometry = result.geojson;
-        } else {
-          geometry = {
-            type: 'Point',
-            coordinates: [parseFloat(result.lon), parseFloat(result.lat)]
-          };
+    return this.cacheService.loadFromObservable(
+      createCacheKey(url, params.toString()), request, null, TTL_GEO_SEARCH).map((resArray: any[]) => {
+        if (resArray.length === 1) {
+          const result = resArray[0];
+          const name = result.display_name;
+          let geometry;
+          if (result.geojson) {
+            geometry = result.geojson;
+          } else {
+            geometry = {
+              type: 'Point',
+              coordinates: [parseFloat(result.lon), parseFloat(result.lat)]
+            };
+          }
+          const returnResult: GeoSearchResult = { name, geometry };
+          if (result.boundingbox) {
+            returnResult.bounds = [
+              [
+                result.boundingbox[0],
+                result.boundingbox[2]
+              ],
+              [
+                result.boundingbox[1],
+                result.boundingbox[3]
+              ]
+            ];
+          }
+          if (result.address) { returnResult.address = result.address; }
+          return returnResult;
         }
-        const returnResult: GeoSearchResult = { name, geometry };
-        if (result.boundingbox) {
-          returnResult.bounds = [
-            [
-              result.boundingbox[0],
-              result.boundingbox[2]
-            ],
-            [
-              result.boundingbox[1],
-              result.boundingbox[3]
-            ]
-          ];
-        }
-        if (result.address) { returnResult.address = result.address; }
-        return returnResult;
-      }
-    });
+      });
   }
 
   public reverse(point: Point, options: GeoReverseOptions = {}): Observable<GeoReverseResult> {
