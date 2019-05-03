@@ -120,7 +120,7 @@ export class BelaqiChartComponent implements OnChanges {
     this.chart = new Chart(ctx, {
       type: 'line',
       plugins: [{
-        resize: c => this.drawData(ctx, c, belaqiTimeline)
+        resize: c => setTimeout(() => this.drawData(ctx, c, belaqiTimeline), 300)
       }],
       options: {
         legend: {
@@ -191,8 +191,10 @@ export class BelaqiChartComponent implements OnChanges {
           enabled: true,
           callbacks: {
             label: (tooltip) => {
-              return ' ' + this.belaqiIndex.getValueForIndex(parseInt(tooltip.yLabel, 10)) +
-                ' - ' + this.belaqiIndex.getLabelForIndex(parseInt(tooltip.yLabel, 10));
+              if (tooltip.datasetIndex === 0) {
+                return ' ' + this.belaqiIndex.getValueForIndex(parseInt(tooltip.yLabel, 10)) +
+                  ' - ' + this.belaqiIndex.getLabelForIndex(parseInt(tooltip.yLabel, 10));
+              }
             },
             labelColor: (tooltip) => {
               return {
@@ -218,8 +220,8 @@ export class BelaqiChartComponent implements OnChanges {
           },
           {
             pointBorderWidth: 0,
-            pointHoverRadius: 7,
-            pointHoverBorderWidth: 2,
+            pointHoverRadius: 0,
+            pointHoverBorderWidth: 0,
             pointRadius: 0,
             fill: false,
             cubicInterpolationMode: 'monotone',
@@ -228,8 +230,8 @@ export class BelaqiChartComponent implements OnChanges {
           },
           {
             pointBorderWidth: 0,
-            pointHoverRadius: 7,
-            pointHoverBorderWidth: 2,
+            pointHoverRadius: 0,
+            pointHoverBorderWidth: 0,
             pointRadius: 0,
             fill: false,
             cubicInterpolationMode: 'monotone',
