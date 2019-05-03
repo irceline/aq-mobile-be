@@ -775,29 +775,29 @@ class MapView {
 
   private adjustPhenomenonColor() {
     const allPhenomena = [
-      getMainPhenomenonForID(this.getPhenomenonID(PhenomenonLabel.PM10)),
-      getMainPhenomenonForID(this.getPhenomenonID(PhenomenonLabel.PM25)),
       0,
       getMainPhenomenonForID(this.getPhenomenonID(PhenomenonLabel.NO2)),
-      getMainPhenomenonForID(this.getPhenomenonID(PhenomenonLabel.O3))
+      getMainPhenomenonForID(this.getPhenomenonID(PhenomenonLabel.O3)),
+      getMainPhenomenonForID(this.getPhenomenonID(PhenomenonLabel.PM10)),
+      getMainPhenomenonForID(this.getPhenomenonID(PhenomenonLabel.PM25))
     ];
     let borderColorIndizes;
     let phenomenonIds;
     if (this.mean === MeanLabel.hourly && this.time === TimeLabel.current) {
       if (this.mode !== 'belaqi') {
-        borderColorIndizes = [1, 2, 0];
+        borderColorIndizes = [0, 1, 2];
         phenomenonIds = [
           getMainPhenomenonForID(this.getPhenomenonID(PhenomenonLabel.NO2)),
           getMainPhenomenonForID(this.getPhenomenonID(PhenomenonLabel.O3)),
           0
         ];
       } else {
-        borderColorIndizes = [1, 2, 0, 3, 4];
+        borderColorIndizes = [0, 1, 2, 3, 4];
         phenomenonIds = allPhenomena;
       }
     } else if (this.mean === MeanLabel.daily && this.time === TimeLabel.current) {
       if (this.phenomenonLabel === PhenomenonLabel.PM10 || this.phenomenonLabel === PhenomenonLabel.PM25) {
-        borderColorIndizes = [1, 2, 0, 3, 4];
+        borderColorIndizes = [0, 1, 2, 3, 4];
         phenomenonIds = allPhenomena;
       }
     }
