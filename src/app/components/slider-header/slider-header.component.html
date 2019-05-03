@@ -15,7 +15,7 @@
         </p>
       </ion-label>
     </ion-col>
-    <div class="settingsButton">
+    <div class="settingsButton" *ngIf="header?.label">
       <ion-button (click)="navigateSettings()">
         <ion-icon slot="icon-only" name="settings"></ion-icon>
       </ion-button>

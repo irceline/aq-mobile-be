@@ -248,6 +248,8 @@ export class BelaqiMapSliderComponent implements OnDestroy {
         error => {
           this.loadingLocations = false;
         });
+    } else {
+      this.headerContent.emit(null);
     }
   }
 
@@ -295,6 +297,8 @@ export class BelaqiMapSliderComponent implements OnDestroy {
         current: this.belaqiMapviews[idx].location.type === 'current'
       });
       this.header = idx;
+    } else {
+      this.headerContent.emit(null);
     }
   }
 
