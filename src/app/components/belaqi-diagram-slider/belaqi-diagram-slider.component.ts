@@ -166,11 +166,11 @@ class DiagramView {
   }
 
   public init() {
-    this.determineNextStationNO2();
-    this.determineNextStationBC();
+    this.determineNextStationNO2();    
     this.determineNextStationO3();
     this.determineNextStationPM25();
     this.determineNextStationPM10();
+    this.determineNextStationBC();
   }
 
   public stepBack() {
