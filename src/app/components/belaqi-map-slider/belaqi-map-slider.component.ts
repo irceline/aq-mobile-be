@@ -849,18 +849,30 @@ class MapView {
               this.drawLayer(rioifdmWmsURL, 'belaqi', geojson, lastUpdate);
               break;
             case PhenomenonLabel.BC:
-              if (this.mean === MeanLabel.hourly) { this.drawLayer(rioifdmWmsURL, 'bc_hmean', geojson, lastUpdate); }
+              if (this.mean === MeanLabel.hourly) {
+                this.drawLayer(rioifdmWmsURL, 'bc_hmean', geojson, lastUpdate);
+                this.drawLayer(realtimeWmsURL, 'bc_hmean_station', geojson, lastUpdate);
+              }
               if (this.mean === MeanLabel.yearly) { this.drawLayer(rioifdmWmsURL, `bc_anmean_${year}_atmostreet`, geojson); }
               break;
             case PhenomenonLabel.NO2:
-              if (this.mean === MeanLabel.hourly) { this.drawLayer(rioifdmWmsURL, 'no2_hmean', geojson, lastUpdate); }
+              if (this.mean === MeanLabel.hourly) {
+                this.drawLayer(rioifdmWmsURL, 'no2_hmean', geojson, lastUpdate);
+                this.drawLayer(realtimeWmsURL, 'no2_hmean_station', geojson, lastUpdate);
+              }
               if (this.mean === MeanLabel.yearly) { this.drawLayer(rioifdmWmsURL, `no2_anmean_${year}_atmostreet`, geojson); }
               break;
             case PhenomenonLabel.O3:
-              if (this.mean === MeanLabel.hourly) { this.drawLayer(rioifdmWmsURL, 'o3_hmean', geojson, lastUpdate); }
+              if (this.mean === MeanLabel.hourly) {
+                this.drawLayer(rioifdmWmsURL, 'o3_hmean', geojson, lastUpdate);
+                this.drawLayer(realtimeWmsURL, 'o3_hmean_station', geojson, lastUpdate);
+              }
               break;
             case PhenomenonLabel.PM10:
-              if (this.mean === MeanLabel.hourly) { this.drawLayer(rioifdmWmsURL, 'pm10_hmean', geojson, lastUpdate); }
+              if (this.mean === MeanLabel.hourly) {
+                this.drawLayer(rioifdmWmsURL, 'pm10_hmean', geojson, lastUpdate);
+                this.drawLayer(realtimeWmsURL, 'pm10_hmean_station', geojson, lastUpdate);
+              }
               if (this.mean === MeanLabel.daily) {
                 this.drawLayer(rioifdmWmsURL, 'pm10_24hmean', geojson, lastUpdate);
                 this.drawLayer(realtimeWmsURL, 'pm10_24hmean_station', geojson, lastUpdate);
@@ -868,7 +880,10 @@ class MapView {
               if (this.mean === MeanLabel.yearly) { this.drawLayer(rioifdmWmsURL, `pm10_anmean_${year}_atmostreet`, geojson); }
               break;
             case PhenomenonLabel.PM25:
-              if (this.mean === MeanLabel.hourly) { this.drawLayer(rioifdmWmsURL, 'pm25_hmean', geojson, lastUpdate); }
+              if (this.mean === MeanLabel.hourly) {
+                this.drawLayer(rioifdmWmsURL, 'pm25_hmean', geojson, lastUpdate);
+                this.drawLayer(realtimeWmsURL, 'pm25_hmean_station', geojson, lastUpdate);
+              }
               if (this.mean === MeanLabel.daily) {
                 this.drawLayer(rioifdmWmsURL, 'pm25_24hmean', geojson, lastUpdate);
                 this.drawLayer(realtimeWmsURL, 'pm25_24hmean_station', geojson, lastUpdate);
