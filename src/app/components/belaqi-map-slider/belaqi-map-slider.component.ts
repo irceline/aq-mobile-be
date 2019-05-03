@@ -340,7 +340,7 @@ class MapView {
   public sliderHeader = this.translateSrvc.instant('map.timestepLabels.loading');
   public sliderPosition = 1;
   public sliderLength = 5;
-  private mode = 'hmean';
+  private mode = 'belaqi';
 
   public legendId: string;
   public langCode: string;
@@ -414,7 +414,6 @@ class MapView {
           break;
         }
       }
-      this.mode = 'belaqi';
     } else {
       // Navigating to long-term
       this.sliderPosition = 0;
