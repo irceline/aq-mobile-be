@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 
-import { Platform, IonRouterOutlet, ModalController } from '@ionic/angular';
+import { Platform, IonRouterOutlet, ModalController, NavController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { PushNotificationsService } from './services/push-notifications/push-notifications.service';
 import { InfoOverlayService, DrawerState } from './services/overlay-info-drawer/overlay-info-drawer.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,8 @@ export class AppComponent {
 
   @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
 
+  private lastNavigation = ['tabs/start', 'tabs/start'];
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -23,9 +26,11 @@ export class AppComponent {
     private pushNotifications: PushNotificationsService,
     private modalCtrl: ModalController,
     private infoOverlay: InfoOverlayService,
+    private navCtrl: NavController
   ) {
     this.initializeApp();
     this.backButtonEvent();
+    this.storeLastNavigation();
   }
 
   backButtonEvent() {
@@ -37,12 +42,20 @@ export class AppComponent {
         } else if (this.infoOverlay.rawState.value === DrawerState.Open) {
           this.infoOverlay.openClose();
         } else if (this.router.url === '/tabs/start') {
-            navigator['app'].exitApp();
+          navigator['app'].exitApp();
         } else {
-            window.history.back();
+            this.router.navigateByUrl(this.lastNavigation[0]);
         }
       });
     });
+  }
+
+  public storeLastNavigation(): void {
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(({ urlAfterRedirects }: NavigationEnd) => {
+        this.lastNavigation = [this.lastNavigation[1], urlAfterRedirects];
+      });
   }
 
   initializeApp() {

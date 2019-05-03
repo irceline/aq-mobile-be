@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, Output, ViewChild, OnInit } from '@angular/core';
 import { IonSlides, ModalController, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
@@ -35,7 +35,7 @@ export interface BelaqiSelection {
   templateUrl: './belaqi-user-location-slider.component.html',
   styleUrls: ['./belaqi-user-location-slider.component.scss'],
 })
-export class BelaqiUserLocationSliderComponent implements OnDestroy {
+export class BelaqiUserLocationSliderComponent implements OnDestroy, OnInit {
 
   @ViewChild('slider')
   slider: IonSlides;
@@ -68,8 +68,8 @@ export class BelaqiUserLocationSliderComponent implements OnDestroy {
 
   private refresherSubscriber: Subscription;
   private locationStatusSubscriber: Subscription;
-  private locChangedSubscriber: Subscription;
   private networkSubscriber: Subscription;
+  private userLocationSubscriber: Subscription;
 
   private loadingLocations = false;
 
@@ -83,16 +83,18 @@ export class BelaqiUserLocationSliderComponent implements OnDestroy {
     protected modalCtrl: ModalController,
     protected refreshHandler: RefreshHandler,
     private toast: ToastController
-  ) {
-    this.locate.getLocationStatusAsObservable().subscribe(locationStatus => {
+  ) { }
+
+  public ngOnInit() {
+    this.locationStatusSubscriber = this.locate.getLocationStatusAsObservable().subscribe(locationStatus => {
       if (locationStatus !== LocationStatus.DENIED) {
         this.loadBelaqis(false);
       }
     });
 
-    this.refreshHandler.onRefresh.subscribe(() => this.loadBelaqis(true));
-    this.userLocationService.locationsChanged.subscribe(() => this.loadBelaqis(false));
-    this.networkAlert.onConnected.subscribe(() => this.loadBelaqis(false));
+    this.refresherSubscriber = this.refreshHandler.onRefresh.subscribe(() => this.loadBelaqis(true));
+    this.userLocationSubscriber = this.userLocationService.locationsChanged.subscribe(() => this.loadBelaqis(false));
+    this.networkSubscriber = this.networkAlert.onConnected.subscribe(() => this.loadBelaqis(false));
 
     this.showNearestStationsSubscriber = this.startPageSettingsService.getShowNearestStations()
       .subscribe(val => this.showNearestStationsPanel = val);
@@ -111,7 +113,7 @@ export class BelaqiUserLocationSliderComponent implements OnDestroy {
   public ngOnDestroy(): void {
     if (this.refresherSubscriber) { this.refresherSubscriber.unsubscribe(); }
     if (this.locationStatusSubscriber) { this.locationStatusSubscriber.unsubscribe(); }
-    if (this.locChangedSubscriber) { this.locChangedSubscriber.unsubscribe(); }
+    if (this.userLocationSubscriber) { this.userLocationSubscriber.unsubscribe(); }
     if (this.networkSubscriber) { this.networkSubscriber.unsubscribe(); }
     if (this.showNearestStationsSubscriber) { this.showNearestStationsSubscriber.unsubscribe(); }
     if (this.showSubIndexPanelSubscriber) { this.showSubIndexPanelSubscriber.unsubscribe(); }

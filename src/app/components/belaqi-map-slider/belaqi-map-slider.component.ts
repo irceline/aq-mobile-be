@@ -1,7 +1,7 @@
 import './boundary-canvas';
 
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, Output, ViewChild, OnInit } from '@angular/core';
 import { DatasetApiInterface, ParameterFilter, Phenomenon, SettingsService, Station } from '@helgoland/core';
 import { GeoSearchOptions, LayerOptions, MapCache } from '@helgoland/map';
 import { IonSlides, ModalController } from '@ionic/angular';
@@ -25,7 +25,7 @@ import {
 } from 'leaflet';
 import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
 import moment from 'moment';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Subscription } from 'rxjs';
 
 import { getIDForMainPhenomenon, MainPhenomenon, getMainPhenomenonForID, PhenomenonIDMapping } from '../../model/phenomenon';
 import { annualWmsURL, forecastWmsURL, realtimeWmsURL, rioifdmWmsURL } from '../../model/services';
@@ -98,7 +98,7 @@ const phenomenonMapping = [
   templateUrl: './belaqi-map-slider.component.html',
   styleUrls: ['./belaqi-map-slider.component.scss'],
 })
-export class BelaqiMapSliderComponent implements OnDestroy {
+export class BelaqiMapSliderComponent implements OnDestroy, OnInit {
 
   public belaqiMapviews: MapView[];
 
@@ -121,6 +121,10 @@ export class BelaqiMapSliderComponent implements OnDestroy {
   public currentLocationError: string;
   private header = 0;
 
+  private userLocationSubscription: Subscription;
+  private networkAlertSubscription: Subscription;
+  private locationStatusSubscription: Subscription;
+
   constructor(
     protected settingsSrvc: SettingsService<MobileSettings>,
     protected mapCache: MapCache,
@@ -140,21 +144,23 @@ export class BelaqiMapSliderComponent implements OnDestroy {
     protected modelledValueService: ModelledValueService,
     protected categorizeValue: CategorizedValueService,
     protected belaqi: BelaqiIndexService
-  ) {
-    this.locate.getLocationStatusAsObservable().subscribe(locationStatus => {
+  ) { }
+
+  public ngOnInit() {
+    this.locationStatusSubscription = this.locate.getLocationStatusAsObservable().subscribe(locationStatus => {
       if (locationStatus !== LocationStatus.DENIED) {
         this.loadBelaqis(false);
       }
     });
 
-    this.userLocationListService.locationsChanged.subscribe(() => this.loadBelaqis(false));
-    this.networkAlert.onConnected.subscribe(() => this.loadBelaqis(false));
+    this.userLocationSubscription = this.userLocationListService.locationsChanged.subscribe(() => this.loadBelaqis(false));
+    this.networkAlertSubscription = this.networkAlert.onConnected.subscribe(() => this.loadBelaqis(false));
   }
 
   public ngOnDestroy(): void {
-    if (this.refreshHandler) { this.refreshHandler.onRefresh.unsubscribe(); }
-    if (this.userLocationListService) { this.userLocationListService.locationsChanged.unsubscribe(); }
-    if (this.networkAlert) { this.networkAlert.onConnected.unsubscribe(); }
+    if (this.locationStatusSubscription) { this.locationStatusSubscription.unsubscribe(); }
+    if (this.userLocationSubscription) { this.userLocationSubscription.unsubscribe(); }
+    if (this.networkAlertSubscription) { this.networkAlertSubscription.unsubscribe(); }
   }
 
   public changeToMap() {

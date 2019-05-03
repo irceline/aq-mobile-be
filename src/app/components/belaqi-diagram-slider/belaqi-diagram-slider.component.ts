@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, Output, ViewChild, OnInit } from '@angular/core';
 import { DatasetApiInterface, DefinedTimespan, DefinedTimespanService, Time, Timeseries, Timespan } from '@helgoland/core';
 import { IonSlides } from '@ionic/angular';
 import { map } from 'rxjs/operators';
@@ -16,13 +16,14 @@ import { RefreshHandler } from '../../services/refresh/refresh.service';
 import { UserLocation, UserLocationListService } from '../../services/user-location-list/user-location-list.service';
 import { DataEntry } from '../single-chart/single-chart.component';
 import { HeaderContent } from '../slider-header/slider-header.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'belaqi-diagram-slider',
   templateUrl: './belaqi-diagram-slider.component.html',
   styleUrls: ['./belaqi-diagram-slider.component.scss'],
 })
-export class BelaqiDiagramSliderComponent implements OnDestroy {
+export class BelaqiDiagramSliderComponent implements OnDestroy, OnInit {
 
   @ViewChild('slider')
   slider: IonSlides;
@@ -39,34 +40,39 @@ export class BelaqiDiagramSliderComponent implements OnDestroy {
   private loadingLocations = false;
   public currentLocationError: string;
 
+  private networkAlertSubscriber: Subscription;
+  private locationStatusSubscriber: Subscription;
+  private userLocationListSubscriber: Subscription;
+
   constructor(
     private ircelineSettings: IrcelineSettingsService,
     private userLocationListService: UserLocationListService,
     private nearestStation: NearestTimeseriesService,
     private locate: LocateService,
-    private refreshHandler: RefreshHandler,
     private networkAlert: NetworkAlertService,
     private api: DatasetApiInterface,
     private defTimespanSrvc: DefinedTimespanService,
     private time: Time,
     private categorizeValSrvc: CategorizedValueService,
     private belaqiSrvc: BelaqiIndexService
-  ) {
+  ) {}
+
+  public ngOnInit() {
     this.timespan = this.defTimespanSrvc.getInterval(DefinedTimespan.TODAY_YESTERDAY);
-    this.locate.getLocationStatusAsObservable().subscribe(locationStatus => {
+    this.locationStatusSubscriber = this.locate.getLocationStatusAsObservable().subscribe(locationStatus => {
       if (locationStatus !== LocationStatus.DENIED) {
         this.loadBelaqis(false);
       }
     });
 
-    this.userLocationListService.locationsChanged.subscribe(() => this.loadBelaqis(false));
-    this.networkAlert.onConnected.subscribe(() => this.loadBelaqis(false));
+    this.userLocationListSubscriber = this.userLocationListService.locationsChanged.subscribe(() => this.loadBelaqis(false));
+    this.networkAlertSubscriber = this.networkAlert.onConnected.subscribe(() => this.loadBelaqis(false));
   }
 
   public ngOnDestroy(): void {
-    if (this.refreshHandler) { this.refreshHandler.onRefresh.unsubscribe(); }
-    if (this.userLocationListService) { this.userLocationListService.locationsChanged.unsubscribe(); }
-    if (this.networkAlert) { this.networkAlert.onConnected.unsubscribe(); }
+    if (this.userLocationListSubscriber) { this.userLocationListSubscriber.unsubscribe(); }
+    if (this.locationStatusSubscriber) { this.locationStatusSubscriber.unsubscribe(); }
+    if (this.networkAlertSubscriber) { this.networkAlertSubscriber.unsubscribe(); }
   }
 
   private async loadBelaqis(reload: boolean) {
