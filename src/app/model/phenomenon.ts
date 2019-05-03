@@ -39,7 +39,8 @@ export const PhenomenonIDMapping = [
 ];
 
 export const getMainPhenomenonForID = (id: string): MainPhenomenon => {
-    return PhenomenonIDMapping.find(e => e.id === id).phenomenon;
+    const entry = PhenomenonIDMapping.find(e => e.id === id);
+    return entry ? entry.phenomenon : null;
 };
 
 export const getIDForMainPhenomenon = (phenomenon: MainPhenomenon): string => {
