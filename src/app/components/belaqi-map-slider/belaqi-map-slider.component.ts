@@ -406,6 +406,11 @@ class MapView {
       switch (this.mapDataService.selection.phenomenonID) {
         case getIDForMainPhenomenon(MainPhenomenon.NO2): {
           this.sliderPosition = 1;
+          this.mode = 'belaqi';
+          break;
+        }
+        case getIDForMainPhenomenon(MainPhenomenon.O3): {
+          this.mode = 'belaqi';
           break;
         }
         case getIDForMainPhenomenon(MainPhenomenon.PM10):
