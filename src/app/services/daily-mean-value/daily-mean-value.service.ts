@@ -62,7 +62,6 @@ export class DailyMeanValueService {
       map(res => {
         if (res && res.features && res.features.length >= 1) {
           const feature = res.features[0];
-          console.log(feature.properties.ab_name);
           const value = feature.properties.value;
           const index = this.categorizeSrvc.categorize(value, param.phenomenon);
           const color = this.belaqi.getColorForIndex(index);

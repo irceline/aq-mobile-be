@@ -85,7 +85,6 @@ export class NearestMeasuringStationPanelComponent implements OnChanges {
   }
 
   public entryReady(error) {
-    console.log(error);
     this.readyCounter--;
     if (error) {
       this.errorCounter--;

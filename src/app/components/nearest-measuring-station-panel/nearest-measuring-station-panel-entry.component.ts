@@ -86,7 +86,7 @@ export class NearestMeasuringStationPanelEntryComponent implements OnChanges {
           const phenomenon = getMainPhenomenonForID(this.entry.phenomenonId);
           if (phenomenon === MainPhenomenon.PM10 || phenomenon === MainPhenomenon.PM25) {
             this.dailyMeanValueSrvc.get24hValue(
-              this.stationLabel,
+              nearestSeries.series.station.properties.label,
               this.location.date,
               phenomenon
             ).subscribe(res => {
@@ -115,6 +115,7 @@ export class NearestMeasuringStationPanelEntryComponent implements OnChanges {
           }
         }
       }, (error) => {
+        console.error(error);
         this.loadingStationValue = false;
         this.error = true;
         this.ready.emit(true);
