@@ -16,7 +16,8 @@ export class AppComponent {
 
   @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
 
-  private lastNavigation = ['tabs/start', 'tabs/start'];
+  private lastNavigation = ['tabs/start', 'tabs/start', 'tabs/start'];
+  private lastNavigationStep = 1;
 
   constructor(
     private platform: Platform,
@@ -44,7 +45,8 @@ export class AppComponent {
         } else if (this.router.url === '/tabs/start') {
           navigator['app'].exitApp();
         } else {
-            this.router.navigateByUrl(this.lastNavigation[0]);
+          this.router.navigateByUrl(this.lastNavigation[this.lastNavigationStep]);
+          this.lastNavigationStep -= 2;
         }
       });
     });
@@ -54,7 +56,10 @@ export class AppComponent {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(({ urlAfterRedirects }: NavigationEnd) => {
-        this.lastNavigation = [this.lastNavigation[1], urlAfterRedirects];
+        if (this.lastNavigationStep < 1) {
+          this.lastNavigationStep++;
+        }
+        this.lastNavigation = ['tabs/start', this.lastNavigation[2], urlAfterRedirects];
       });
   }
 
