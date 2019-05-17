@@ -1,6 +1,6 @@
 {
   "name": "aq-mobile-be",
-  "version": "0.9.5",
+  "version": "0.9.6",
   "author": "IRCEL - CELINE",
   "homepage": "http://www.irceline.be",
   "scripts": {
@@ -65,9 +65,11 @@
     "invert-color": "^2.0.0",
     "ion-affix": "^2.0.0",
     "ionic-cache": "^4.0.1",
+    "jquery": ">=3.4.0",
     "leaflet-geosearch": "^2.7.0",
     "rxjs": "~6.3.3",
     "rxjs-compat": "^6.5.1",
+    "tar": ">=4.4.2",
     "zone.js": "~0.8.29"
   },
   "devDependencies": {
@@ -88,12 +90,14 @@
     "codelyzer": "~4.5.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
+    "jquery": ">=3.4.0",
     "karma": "^4.1.0",
     "karma-chrome-launcher": "~2.2.0",
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~1.1.2",
     "karma-jasmine-html-reporter": "^0.2.2",
     "protractor": "~5.4.0",
+    "tar": ">=4.4.2",
     "ts-node": "^8.1.0",
     "tslint": "~5.12.0",
     "typescript": "~3.1.6",
