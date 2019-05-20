@@ -460,14 +460,17 @@ class MapView {
       this.mapCache.getMap(mapId).addControl(searchControl);
       // Disable Panning
       map.clearAllEventListeners();
-      map.addEventListener('movestart', ((ev) => {
+      map.addEventListener('movestart', (() => {
         this.slider.lockSwipes(true);
       }));
-      map.addEventListener('moveend', ((ev) => {
+      map.addEventListener('moveend', (() => {
         this.slider.lockSwipes(false);
       }));
-      map.addEventListener('zoomend ', ((ev) => {
+      map.addEventListener('zoomend', (() => {
         this.adjustPopups(false);
+      }));
+      map.addEventListener('layeradd', (() => {
+        map.invalidateSize(true);
       }));
     }
   }
