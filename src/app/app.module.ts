@@ -6,6 +6,7 @@ import { DatasetApiInterface, HelgolandCoreModule, SettingsService } from '@helg
 import { GeoSearch } from '@helgoland/map';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { Diagnostic } from '@ionic-native/diagnostic/ngx';
+import { EncryptionService } from './services/encryption/encryption.service';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
@@ -96,6 +97,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     CategorizedValueService,
     DailyMeanValueService,
     Diagnostic,
+    EncryptionService,
     Firebase,
     GeoLabelsService,
     Geolocation,
