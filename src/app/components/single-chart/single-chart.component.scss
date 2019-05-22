@@ -33,8 +33,8 @@
 
   .chart-label-time {
     position: relative;
-    max-width: 60%;
-    padding: 0 0.6em;
+    max-width: 96%;
+    padding: 0;
     text-align: center;
     flex: none;
     min-height: 1em;
@@ -43,8 +43,8 @@
     background-color: var(--panel-background);
     padding-bottom: 0.2em;
     font-size: 0.7em;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   ion-row {
@@ -61,7 +61,18 @@
 
   .prev-button,
   .next-button {
+    position: absolute;
     z-index: 1;
+    bottom: 0.2em;
+  }
+  .prev-button {
+    left: 0.2em;
+  }
+  .next-button {
+    right: 0.2em;
+  }
+  .prev-next-button {
+    height: 0.5em;
   }
 
   @media screen and (max-width: 500px) {
