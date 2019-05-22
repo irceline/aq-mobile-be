@@ -477,6 +477,12 @@
       "message-exists": "User location already exists"
     }
   },
+  "user-location-notification-toggler": {
+		"backend-registration-error": "Backend Error",
+		"button": "Notification",
+		"default-error": "Default Error",
+		"notification-error": "Notification Error"
+	},
   "welcome": {
 		"button": "Enter your location",
 		"text-p1": "What is the impact of air quality at your location? The BelAir app informs you right away.",

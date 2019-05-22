@@ -477,6 +477,12 @@
 			"message-exists": "Nutzerstandort existiert bereits"
 		}
 	},
+	"user-location-notification-toggler": {
+		"backend-registration-error": "Backend Fehler",
+		"button": "Benachrichtigen",
+		"default-error": "Default Fehler",
+		"notification-error": "Notification Fehler"
+	},
 	"welcome": {
 		"button": "Geben Sie Ihren Standort ein",
 		"text-p1": "Wie wirkt sich die Luftqualität an Ihrem Standort aus? Die BelAir App informiert Sie sofort.",

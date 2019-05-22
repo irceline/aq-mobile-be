@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import CryptoJS from 'crypto-js';
 import { Firebase } from '@ionic-native/firebase/ngx';
+import { Platform } from '@ionic/angular';
+import CryptoJS from 'crypto-js';
 
 @Injectable({
   providedIn: 'root'
@@ -9,11 +10,24 @@ export class EncryptionService {
 
   private key: CryptoJS.WordArray;
 
-  constructor(private firebase: Firebase) {
-    this.firebase.getValue('subscription_key')
-    .then((res: any) => this.key = CryptoJS.enc.Base64.parse(res))
-    //TODO: error handling!
-    .catch((error: any) => console.error(error));
+  constructor(
+    private firebase: Firebase,
+    private platform: Platform
+  ) {
+    this.platform.ready().then(() => {
+      if (this.platform.is('cordova')) {
+        this.firebase.fetch(600)
+          .then(() => {
+            this.firebase.activateFetched().then(() => {
+              this.firebase.getValue('subscription_key', 'belair')
+                .then((res: any) => this.key = CryptoJS.enc.Base64.parse(res))
+                // TODO: error handling!
+                .catch((error: any) => console.error(error));
+            });
+          })
+          .catch();
+      }
+    });
   }
 
   public encrypt(data: string): string {

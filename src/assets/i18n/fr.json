@@ -469,6 +469,12 @@
       "message-exists": "La localisation existe déjà"
     }
   },
+  "user-location-notification-toggler": {
+		"backend-registration-error": "",
+		"button": "",
+		"default-error": "",
+		"notification-error": ""
+	},
   "welcome": {
 		"button": "Entrez votre localisation",
 		"text-p1": "Quel est l'impact de la qualité de l'air à votre emplacement? L'application BelAir vous l'indique de suite.",

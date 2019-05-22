@@ -1,6 +1,9 @@
 <ion-slides pager #slider (ionSlideDidChange)="slideChanged()" [options]="sliderOptions">
   <ion-slide *ngFor="let loc of belaqiLocations">
     <div *ngIf="loc.latitude" style="width: 100%">
+      <div class="toggle" *ngIf="loc.type === 'user'">
+        <user-location-notifications-toggler [location]="loc"></user-location-notifications-toggler>
+      </div>
       <div class="first-panel">
         <notification-panel></notification-panel>
         <div class="wheel">
