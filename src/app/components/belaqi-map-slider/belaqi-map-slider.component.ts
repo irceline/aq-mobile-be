@@ -155,6 +155,8 @@ export class BelaqiMapSliderComponent implements OnDestroy, OnInit {
 
     this.userLocationSubscription = this.userLocationListService.locationsChanged.subscribe(() => this.loadBelaqis(false));
     this.networkAlertSubscription = this.networkAlert.onConnected.subscribe(() => this.loadBelaqis(false));
+
+    this.loadBelaqis(true);
   }
 
   public ngOnDestroy(): void {
