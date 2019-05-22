@@ -114,7 +114,12 @@
       "header": "Que voyez-vous sur cet écran?",
       "url-svg": "../../assets/svg/belaqi_FR.svg"
     },
-    "select-timeseries": "Veuillez sélectionner un polluant"
+    "select-timeseries": "Veuillez sélectionner un polluant",
+    "chart": {
+      "timelabelHmeanBelaqiColors": "Hourly mean (Belaqi-colors)",
+      "timelabelHmeanGrey": "Hourly mean (grey)",
+      "hourlyMeanGreyand24hmeanBelaqiColors": "Hourly mean (grey) and 24-hour mean (BelAQI-colors)"
+    }
   },
   "faq": {
     "accuracy": {

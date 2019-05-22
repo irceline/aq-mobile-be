@@ -17,6 +17,7 @@ import { UserLocation, UserLocationListService } from '../../services/user-locat
 import { DataEntry } from '../single-chart/single-chart.component';
 import { HeaderContent } from '../slider-header/slider-header.component';
 import { Subscription } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'belaqi-diagram-slider',
@@ -54,8 +55,9 @@ export class BelaqiDiagramSliderComponent implements OnDestroy, OnInit {
     private defTimespanSrvc: DefinedTimespanService,
     private time: Time,
     private categorizeValSrvc: CategorizedValueService,
-    private belaqiSrvc: BelaqiIndexService
-  ) {}
+    private belaqiSrvc: BelaqiIndexService,
+    private translateSrvc: TranslateService
+  ) { }
 
   public ngOnInit() {
     this.timespan = this.defTimespanSrvc.getInterval(DefinedTimespan.TODAY_YESTERDAY);
@@ -90,7 +92,8 @@ export class BelaqiDiagramSliderComponent implements OnDestroy, OnInit {
               this.time,
               this.timespan,
               this.categorizeValSrvc,
-              this.belaqiSrvc
+              this.belaqiSrvc,
+              this.translateSrvc
             );
             // Set MapView Location
             if (loc.type !== 'current') {
@@ -166,7 +169,8 @@ class DiagramView {
     private time: Time,
     timespan: Timespan,
     private categorizeValSrvc: CategorizedValueService,
-    private belaqiSrvc: BelaqiIndexService
+    private belaqiSrvc: BelaqiIndexService,
+    private translateSrvc: TranslateService
   ) {
     this.timespan = timespan;
   }
@@ -201,6 +205,7 @@ class DiagramView {
     const pm10Entry: DiagramEntry = {
       loading: true,
       label: '',
+      timelabel: this.translateSrvc.instant('diagram.chart.hourlyMeanGreyand24hmeanBelaqiColors'),
       data: [],
       phenomenon: MainPhenomenon.PM10
     };
@@ -216,6 +221,7 @@ class DiagramView {
     const pm25Entry: DiagramEntry = {
       loading: true,
       label: '',
+      timelabel: this.translateSrvc.instant('diagram.chart.hourlyMeanGreyand24hmeanBelaqiColors'),
       data: [],
       phenomenon: MainPhenomenon.PM25
     };
@@ -231,6 +237,7 @@ class DiagramView {
     const o3Entry: DiagramEntry = {
       loading: true,
       label: '',
+      timelabel: this.translateSrvc.instant('diagram.chart.timelabelHmeanBelaqiColors'),
       data: [],
       phenomenon: MainPhenomenon.O3
     };
@@ -246,6 +253,7 @@ class DiagramView {
     const bcEntry: DiagramEntry = {
       loading: true,
       label: '',
+      timelabel: this.translateSrvc.instant('diagram.chart.timelabelHmeanGrey'),
       data: [],
       phenomenon: MainPhenomenon.BC
     };
@@ -261,6 +269,7 @@ class DiagramView {
     const no2Entry: DiagramEntry = {
       loading: true,
       label: '',
+      timelabel: this.translateSrvc.instant('diagram.chart.timelabelHmeanBelaqiColors'),
       data: [],
       phenomenon: MainPhenomenon.NO2
     };
@@ -391,6 +400,7 @@ class DiagramEntry {
   loading: boolean;
   data: DataEntry[][];
   label: string;
+  timelabel: string;
   series?: Timeseries;
   phenomenon: MainPhenomenon;
   error?: string;

@@ -114,7 +114,12 @@
       "header": "What do you see on this screen?",
       "url-svg": "../../assets/svg/belaqi_EN.svg"
     },
-    "select-timeseries": "Please select a timeseries"
+    "select-timeseries": "Please select a timeseries",
+    "chart": {
+      "timelabelHmeanBelaqiColors": "Hourly mean (Belaqi-colors)",
+      "timelabelHmeanGrey": "Hourly mean (grey)",
+      "hourlyMeanGreyand24hmeanBelaqiColors": "Hourly mean (grey) and 24-hour mean (BelAQI-colors)"
+    }
   },
   "faq": {
     "accuracy": {

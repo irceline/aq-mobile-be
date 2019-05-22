@@ -114,7 +114,12 @@
       "header": "Wat zie je op dit scherm?",
       "url-svg": "../../assets/svg/belaqi_NL.svg"
     },
-    "select-timeseries": "Selecteer aub een tijdsreeks"
+    "select-timeseries": "Selecteer aub een tijdsreeks",
+    "chart": {
+      "timelabelHmeanBelaqiColors": "Hourly mean (Belaqi-colors)",
+      "timelabelHmeanGrey": "Hourly mean (grey)",
+      "hourlyMeanGreyand24hmeanBelaqiColors": "Hourly mean (grey) and 24-hour mean (BelAQI-colors)"
+    }
   },
   "faq": {
     "accuracy": {
