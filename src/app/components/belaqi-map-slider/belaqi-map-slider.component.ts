@@ -348,6 +348,7 @@ class MapView {
   public disabled = false;
 
   public sliderHeader = this.translateSrvc.instant('map.timestepLabels.loading');
+  public sliderFooter;
   public sliderPosition = 1;
   public sliderLength = 5;
   private mode = 'belaqi';
@@ -566,25 +567,35 @@ class MapView {
         this.time = TimeLabel.current;
         this.mean = MeanLabel.yearly;
         this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.anmean');
+        this.sliderFooter = this.translateSrvc.instant('map.timestepLabels.longterm');
         break;
       case 1:
         // hmean
         this.time = TimeLabel.current;
         this.mean = MeanLabel.hourly;
-        this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.hmean');
+        this.sliderFooter = this.translateSrvc.instant('map.timestepLabels.shortterm');
+        if (this.phenomenonLabel === PhenomenonLabel.BelAQI) {
+          this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.belaqi_current');
+        } else {
+          this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.hmean');
+        }
         break;
       case 2:
         // 24hmean
         this.time = TimeLabel.current;
         this.mean = MeanLabel.daily;
         this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.24hmean');
+        this.sliderFooter = this.translateSrvc.instant('map.timestepLabels.shortterm');
         break;
       case 3:
         // dmean forecast today
         this.time = TimeLabel.today;
+        this.sliderFooter = this.translateSrvc.instant('map.timestepLabels.shortterm');
         if (this.phenomenonLabel === PhenomenonLabel.NO2 || this.phenomenonLabel === PhenomenonLabel.O3) {
           this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.maxhmean_forecast_today');
           this.mean = MeanLabel.hourly;
+        } else if (this.phenomenonLabel === PhenomenonLabel.BelAQI) {
+          this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.belaqi_forecast_today');
         } else {
           this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_today');
           this.mean = MeanLabel.daily;
@@ -593,9 +604,12 @@ class MapView {
       case 4:
         // dmean forecast tomorrow
         this.time = TimeLabel.tomorrow;
+        this.sliderFooter = this.translateSrvc.instant('map.timestepLabels.shortterm');
         if (this.phenomenonLabel === PhenomenonLabel.NO2 || this.phenomenonLabel === PhenomenonLabel.O3) {
           this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.maxhmean_forecast_tomorrow');
           this.mean = MeanLabel.hourly;
+        } else if (this.phenomenonLabel === PhenomenonLabel.BelAQI) {
+          this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.belaqi_forecast_tomorrow');
         } else {
           this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_tomorrow');
           this.mean = MeanLabel.daily;
@@ -604,9 +618,12 @@ class MapView {
       case 5:
         // dmean forecast today+2
         this.time = TimeLabel.today2;
+        this.sliderFooter = this.translateSrvc.instant('map.timestepLabels.shortterm');
         if (this.phenomenonLabel === PhenomenonLabel.NO2 || this.phenomenonLabel === PhenomenonLabel.O3) {
           this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.maxhmean_forecast_today+2');
           this.mean = MeanLabel.hourly;
+        } else if (this.phenomenonLabel === PhenomenonLabel.BelAQI) {
+          this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.belaqi_forecast_today+2');
         } else {
           this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_today+2');
           this.mean = MeanLabel.daily;
@@ -615,19 +632,24 @@ class MapView {
       case 6:
         // dmean forecast today+3
         this.time = TimeLabel.today3;
+        this.sliderFooter = this.translateSrvc.instant('map.timestepLabels.shortterm');
         if (this.phenomenonLabel === PhenomenonLabel.NO2 || this.phenomenonLabel === PhenomenonLabel.O3) {
           this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.maxhmean_forecast_today+3');
           this.mean = MeanLabel.hourly;
+        } else if (this.phenomenonLabel === PhenomenonLabel.BelAQI) {
+          this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.belaqi_forecast_today+3');
         } else {
           this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.dmean_forecast_today+3');
           this.mean = MeanLabel.daily;
         }
     }
 
-    // Replace text for BelAQI Index
-    if (this.phenomenonLabel === PhenomenonLabel.BelAQI) {
-      this.sliderHeader = 'BelAQI ' + this.sliderHeader.slice(this.sliderHeader.indexOf('('));
-    }
+    // // Replace text for BelAQI Index
+    // if (this.phenomenonLabel === PhenomenonLabel.BelAQI) {
+    //   // this.sliderHeader = 'BelAQI ' + this.sliderHeader.slice(this.sliderHeader.indexOf('('));
+    //   this.sliderHeader = this.translateSrvc.instant('map.timestepLabels.belaqi_forecast_today');
+    //   this.sliderFooter = this.translateSrvc.instant('map.timestepLabels.shortterm');
+    // }
 
     // Switch modes when adjusting Slider in Phenomena
     if (this.selectedPhenomenonId === getIDForMainPhenomenon(MainPhenomenon.PM10)
