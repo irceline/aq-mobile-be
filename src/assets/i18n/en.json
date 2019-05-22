@@ -116,9 +116,9 @@
     },
     "select-timeseries": "Please select a timeseries",
     "chart": {
-      "timelabelHmeanBelaqiColors": "Hourly mean (Belaqi-colors)",
+      "timelabelHmeanBelaqiColors": "Hourly mean (BelAQI-colours)",
       "timelabelHmeanGrey": "Hourly mean (grey)",
-      "hourlyMeanGreyand24hmeanBelaqiColors": "Hourly mean (grey) and 24-hour mean (BelAQI-colors)"
+      "hourlyMeanGreyand24hmeanBelaqiColors": "Hourly mean (grey) and running 24-hour mean (BelAQI-colours)"
     }
   },
   "faq": {

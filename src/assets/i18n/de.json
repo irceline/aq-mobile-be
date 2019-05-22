@@ -115,10 +115,10 @@
 			"url-svg": "../../assets/svg/belaqi_DE.svg"
     },
 		"select-timeseries": "Bitte wähle eine Zeitreihe",
-    "chart": {
-      "timelabelHmeanBelaqiColors": "Hourly mean (Belaqi-colors)",
-      "timelabelHmeanGrey": "Hourly mean (grey)",
-      "hourlyMeanGreyand24hmeanBelaqiColors": "Hourly mean (grey) and 24-hour mean (BelAQI-colors)"
+		"chart": {
+      "timelabelHmeanBelaqiColors": "Stundenmittelwert (BelAQI-Farben)",
+      "timelabelHmeanGrey": "Stundenmittelwert (grau)",
+      "hourlyMeanGreyand24hmeanBelaqiColors": "Stundenmittelwert (grau) und laufender 24-Stundenmittelwert (BelAQI-Farben)"
     }
 	},
 	"faq": {
