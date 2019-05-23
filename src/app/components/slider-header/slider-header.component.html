@@ -15,10 +15,10 @@
         </p>
       </ion-label>
     </ion-col>
-    <div class="settingsButton" *ngIf="header?.label">
+    <div class="settingsButton" *ngIf="header?.label || header?.current">
       <ion-button (click)="navigateSettings()">
         <ion-icon slot="icon-only" name="settings"></ion-icon>
       </ion-button>
     </div>
   </ion-row>
-</ion-list>
+</ion-list> 

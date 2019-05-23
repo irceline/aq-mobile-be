@@ -1,6 +1,6 @@
 <ion-slides pager #slider (ionSlideDidChange)="slideChanged()" [options]="sliderOptions">
   <ion-slide *ngFor="let view of belaqiMapviews">
-    <div class="container">
+    <div *ngIf="view.location.latitude" class="container">
 
       <div class="full-phenomenon-label">
         <div *ngIf="view.selectedPhenomenonLabel">{{view.selectedPhenomenonLabel}}</div>
@@ -194,6 +194,17 @@
           </ion-row>
         </ion-toolbar>
       </div>
+    </div>
+    <div *ngIf="currentLocationError" style="height: 400px; color: white;">
+      <div text-wrap>
+        <h2 text-wrap>{{'belaqi-user-location-slider.current-location-error-header' | translate}}</h2>
+      </div>
+      <ion-item text-wrap>
+        <p style="margin: auto; text-align:center;">{{currentLocationError}}</p>
+      </ion-item>
+      <ion-item text-wrap>
+        <p style="margin: auto; text-align:center;">{{currentLocationErrorExplanation}}</p>
+      </ion-item>
     </div>
   </ion-slide>
   <ion-slide *ngIf="!belaqiMapviews?.length">

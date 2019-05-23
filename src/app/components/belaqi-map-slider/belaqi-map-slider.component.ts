@@ -119,11 +119,13 @@ export class BelaqiMapSliderComponent implements OnDestroy, OnInit {
 
   private loadingLocations = false;
   public currentLocationError: string;
+  public currentLocationErrorExplanation: string;
   private header = 0;
 
   private userLocationSubscription: Subscription;
   private networkAlertSubscription: Subscription;
   private locationStatusSubscription: Subscription;
+  private refresherSubscription: Subscription;
 
   constructor(
     protected settingsSrvc: SettingsService<MobileSettings>,
@@ -153,6 +155,7 @@ export class BelaqiMapSliderComponent implements OnDestroy, OnInit {
       }
     });
 
+    this.refresherSubscription = this.refreshHandler.onRefresh.subscribe(() => this.loadBelaqis(true));
     this.userLocationSubscription = this.userLocationListService.locationsChanged.subscribe(() => this.loadBelaqis(false));
     this.networkAlertSubscription = this.networkAlert.onConnected.subscribe(() => this.loadBelaqis(false));
 
@@ -163,6 +166,7 @@ export class BelaqiMapSliderComponent implements OnDestroy, OnInit {
     if (this.locationStatusSubscription) { this.locationStatusSubscription.unsubscribe(); }
     if (this.userLocationSubscription) { this.userLocationSubscription.unsubscribe(); }
     if (this.networkAlertSubscription) { this.networkAlertSubscription.unsubscribe(); }
+    if (this.refresherSubscription) { this.refresherSubscription.unsubscribe(); }
   }
 
   public changeToMap() {
@@ -192,7 +196,7 @@ export class BelaqiMapSliderComponent implements OnDestroy, OnInit {
 
   private async loadBelaqis(reload: boolean) {
     if (this.userLocationListService.hasLocations() && !this.loadingLocations) {
-      this.currentLocationError = null;
+      this.currentLocationError = undefined;
       this.loadingLocations = true;
       this.ircelineSettings.getSettings(reload).subscribe(
         ircelineSettings => {
@@ -230,21 +234,35 @@ export class BelaqiMapSliderComponent implements OnDestroy, OnInit {
               this.belaqiMapviews[i].location = {
                 type: 'current'
               };
-              this.userLocationListService.determineCurrentLocation().subscribe(
-                currentLoc => {
-                  this.setLocation(currentLoc, i, ircelineSettings);
-                  if (this.slider) {
-                    this.slider.update();
-                    if (!hasNavigated) {
-                      hasNavigated = this.navigatToSelection();
-                    }
-                    this.refreshHeader();
-                  }
-                },
-                error => {
-                  this.currentLocationError = error || true;
+              switch (this.userLocationListService.getLocationStatus()) {
+                case LocationStatus.OFF:
+                  this.currentLocationError = this.translateSrvc.instant('network.geolocationDisabled');
+                  this.currentLocationErrorExplanation = this.translateSrvc.instant('network.geolocationDisabledExplanation');
+                  break;
+                case LocationStatus.DENIED: {
+                  this.currentLocationError = this.translateSrvc.instant('network.geolocationDenied');
+                  this.currentLocationErrorExplanation = this.translateSrvc.instant('network.geolocationDeniedExplanation');
+                  break;
                 }
-              );
+                default: {
+                  this.userLocationListService.determineCurrentLocation().subscribe(
+                    currentLoc => {
+                      this.setLocation(currentLoc, i, ircelineSettings);
+                      if (this.slider) {
+                        this.slider.update();
+                        if (!hasNavigated) {
+                          hasNavigated = this.navigatToSelection();
+                        }
+                        this.refreshHeader();
+                      }
+                    },
+                    error => {
+                      this.currentLocationError = this.translateSrvc.instant('belaqi-user-location-slider.current-location-error-header');
+                      this.currentLocationErrorExplanation = error;
+                    }
+                  );
+                }
+              }
             }
           });
           // Navigation not via Panels. Set Header to default first map.

@@ -10,4 +10,11 @@
     padding-bottom: 30px;
   }
 
+  ion-item {
+    color: white;
+    --color: white;
+    p {
+      margin: auto;
+    }
+  }
 }

@@ -40,10 +40,12 @@ export class BelaqiDiagramSliderComponent implements OnDestroy, OnInit {
 
   private loadingLocations = false;
   public currentLocationError: string;
+  public currentLocationErrorExplanation: string;
 
   private networkAlertSubscriber: Subscription;
   private locationStatusSubscriber: Subscription;
   private userLocationListSubscriber: Subscription;
+  private refresherSubscription: Subscription;
 
   constructor(
     private ircelineSettings: IrcelineSettingsService,
@@ -56,7 +58,8 @@ export class BelaqiDiagramSliderComponent implements OnDestroy, OnInit {
     private time: Time,
     private categorizeValSrvc: CategorizedValueService,
     private belaqiSrvc: BelaqiIndexService,
-    private translateSrvc: TranslateService
+    private translateSrvc: TranslateService,
+    private refreshHandler: RefreshHandler
   ) { }
 
   public ngOnInit() {
@@ -67,19 +70,22 @@ export class BelaqiDiagramSliderComponent implements OnDestroy, OnInit {
       }
     });
 
+    this.refresherSubscription = this.refreshHandler.onRefresh.subscribe(() => this.loadBelaqis(true));
     this.userLocationListSubscriber = this.userLocationListService.locationsChanged.subscribe(() => this.loadBelaqis(false));
     this.networkAlertSubscriber = this.networkAlert.onConnected.subscribe(() => this.loadBelaqis(false));
+    this.loadBelaqis(true);
   }
 
   public ngOnDestroy(): void {
     if (this.userLocationListSubscriber) { this.userLocationListSubscriber.unsubscribe(); }
     if (this.locationStatusSubscriber) { this.locationStatusSubscriber.unsubscribe(); }
     if (this.networkAlertSubscriber) { this.networkAlertSubscriber.unsubscribe(); }
+    if (this.refresherSubscription) { this.refresherSubscription.unsubscribe(); }
   }
 
   private async loadBelaqis(reload: boolean) {
     if (this.userLocationListService.hasLocations() && !this.loadingLocations) {
-      this.currentLocationError = null;
+      this.currentLocationError = undefined;
       this.loadingLocations = true;
       this.ircelineSettings.getSettings(reload).subscribe(
         ircelineSettings => {
@@ -102,15 +108,29 @@ export class BelaqiDiagramSliderComponent implements OnDestroy, OnInit {
               this.diagramViews[i].location = {
                 type: 'current'
               };
-              this.userLocationListService.determineCurrentLocation().subscribe(
-                currentLoc => {
-                  this.setLocation(currentLoc, i, ircelineSettings);
-                  this.setHeader(0);
-                },
-                error => {
-                  this.currentLocationError = error || true;
+              switch (this.userLocationListService.getLocationStatus()) {
+                case LocationStatus.OFF:
+                  this.currentLocationError = this.translateSrvc.instant('network.geolocationDisabled');
+                  this.currentLocationErrorExplanation = this.translateSrvc.instant('network.geolocationDisabledExplanation');
+                  break;
+                case LocationStatus.DENIED: {
+                  this.currentLocationError = this.translateSrvc.instant('network.geolocationDenied');
+                  this.currentLocationErrorExplanation = this.translateSrvc.instant('network.geolocationDeniedExplanation');
+                  break;
                 }
-              );
+                default: {
+                  this.userLocationListService.determineCurrentLocation().subscribe(
+                    currentLoc => {
+                      this.setLocation(currentLoc, i, ircelineSettings);
+                      this.setHeader(0);
+                    },
+                    error => {
+                      this.currentLocationError = this.translateSrvc.instant('belaqi-user-location-slider.current-location-error-header');
+                      this.currentLocationErrorExplanation = error;
+                    }
+                  );
+                }
+              }
             }
           });
           setTimeout(() => {
@@ -118,7 +138,6 @@ export class BelaqiDiagramSliderComponent implements OnDestroy, OnInit {
               this.slider.update();
               this.slider.slideTo(0);
             }
-            this.setHeader(0);
           }, 300);
           this.loadingLocations = false;
         },
@@ -140,7 +159,7 @@ export class BelaqiDiagramSliderComponent implements OnDestroy, OnInit {
   }
 
   private setHeader(idx: number): any {
-    if (idx <= this.diagramViews.length - 1) {
+    if (idx <= this.diagramViews.length - 1 && this.diagramViews[idx].location.label) {
       this.headerContent.emit({
         label: this.diagramViews[idx].location.label,
         date: this.diagramViews[idx].location.date,
@@ -176,7 +195,7 @@ class DiagramView {
   }
 
   public init() {
-    this.determineNextStationNO2();    
+    this.determineNextStationNO2();
     this.determineNextStationO3();
     this.determineNextStationPM25();
     this.determineNextStationPM10();
