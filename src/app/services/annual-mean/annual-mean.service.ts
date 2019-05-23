@@ -75,7 +75,7 @@ export class AnnualMeanService extends ValueProvider {
       }
     );
 
-    return this.cacheService.loadFromObservable(createCacheKey(url, params, year), request).pipe(
+    return this.cacheService.loadFromObservable(createCacheKey(url, JSON.stringify(params), year), request).pipe(
       map((res) => {
         if (res && res.features && res.features.length === 1) {
           if (res.features[0].properties['GRAY_INDEX']) {

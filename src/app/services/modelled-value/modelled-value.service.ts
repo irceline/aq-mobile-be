@@ -45,7 +45,7 @@ export class ModelledValueService extends ValueProvider {
       Y: '1'
     };
     const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(rioifdmWmsURL, { params });
-    return this.cacheService.loadFromObservable(createCacheKey(rioifdmWmsURL, params, time), request).pipe(
+    return this.cacheService.loadFromObservable(createCacheKey(rioifdmWmsURL, JSON.stringify(params), time), request).pipe(
       map(res => {
         if (res && res.features && res.features.length === 1) {
           if (res.features[0].properties['GRAY_INDEX']) {

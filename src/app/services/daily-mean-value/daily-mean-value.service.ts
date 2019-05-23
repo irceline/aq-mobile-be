@@ -58,7 +58,7 @@ export class DailyMeanValueService {
       cql_filter: `ab_name='${param.stationID}' AND timestamp='${param.time.toISOString()}'`
     };
     const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(param.url, { params: requestParams });
-    return this.cacheService.loadFromObservable(createCacheKey(param.url, requestParams, param.time), request).pipe(
+    return this.cacheService.loadFromObservable(createCacheKey(param.url, JSON.stringify(requestParams), param.time), request).pipe(
       map(res => {
         if (res && res.features && res.features.length >= 1) {
           const feature = res.features[0];

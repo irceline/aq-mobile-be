@@ -1,9 +1,9 @@
 export function createCacheKey(
     url: string,
-    params: any,
+    params: string,
     timestamp?: string | Date
 ) {
     let timestring = '';
     if (timestamp) { timestring = timestamp instanceof Date ? timestamp.toISOString() : timestamp; }
-    return `${url}_${JSON.stringify(params)}${timestring}`;
+    return `${url}_${params}${timestring}`;
 }

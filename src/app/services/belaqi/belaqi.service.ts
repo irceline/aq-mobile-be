@@ -97,7 +97,7 @@ export class BelaqiIndexService extends ValueProvider {
       params: params
     });
     params['time'] = time.toISOString();
-    return this.cacheService.loadFromObservable(createCacheKey(url, params, time), request).pipe(map((res) => {
+    return this.cacheService.loadFromObservable(createCacheKey(url, JSON.stringify(params), time), request).pipe(map((res) => {
       if (res && res.features && res.features.length === 1) {
         if (res.features[0].properties['GRAY_INDEX']) {
           return res.features[0].properties['GRAY_INDEX'];
@@ -336,7 +336,7 @@ export class BelaqiIndexService extends ValueProvider {
     return new Observable((observer: Observer<TrendResult>) => {
       this.ircelineSettings.getSettings().subscribe(settings => {
         const request = this.http.get<TrendResult>(trendUrl);
-        const cacheKey = createCacheKey(trendUrl, null, settings.lastupdate);
+        const cacheKey = createCacheKey(trendUrl, 'null', settings.lastupdate);
         this.cacheService.loadFromObservable(cacheKey, request).subscribe(
           res => {
             // res['latest observations'].o3.forEach(e => e[0] = moment(e[0]).toDate());

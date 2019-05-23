@@ -16,7 +16,7 @@ export const enum LocationStatus {
   DENIED = 'DENIED'
 }
 
-const LOCATE_MAXIMUM_AGE = 1000 * 60 * 5; // 5 minutes
+const LOCATE_MAXIMUM_AGE = 0; // 5 minutes
 const LOCATE_TIMEOUT_HIGH_ACCURACY = 1000 * 30; // 30 seconds
 const LOCATE_TIMEOUT_UNTIL_HIGH_ACC_REQUEST = 1000 * 10; // 10 seconds
 
@@ -37,6 +37,9 @@ export class LocateService {
     private geosearch: GeoSearch,
     private locationAccuracy: LocationAccuracy
   ) {
+  }
+
+  public ngOnInit() {
     this.registerLocationStateChangeHandler();
     this.isGeolocationEnabled();
     this.subscribeToResume();
