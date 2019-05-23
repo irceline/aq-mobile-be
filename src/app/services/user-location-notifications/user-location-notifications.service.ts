@@ -21,7 +21,7 @@ export enum UserLocationSubscriptionError {
   NotificationSubscription
 }
 
-const NOTIFICATION_SUBSCRIPTION_BACKEND_URL = 'http://www.irceline.be/air/test2.php';
+const NOTIFICATION_SUBSCRIPTION_BACKEND_URL = 'https://www.irceline.be/air/belair_channel.php';
 const USER_LOCATION_SUBSCRIPTIONS_PARAM = 'user_location_subscriptions';
 
 @Injectable({
