@@ -106,7 +106,7 @@ export class UserLocationNotificationsService {
               this.publishError(observer, UserLocationSubscriptionError.BackendRegistration);
             }
           },
-          error => this.publishError(observer, UserLocationSubscriptionError.BackendRegistration)
+          () => this.publishError(observer, UserLocationSubscriptionError.BackendRegistration)
         );
       });
     });
@@ -125,25 +125,30 @@ export class UserLocationNotificationsService {
   }
 
   private registerSubscription(subscription: LocationSubscription): Observable<boolean> {
-    const encriptedSubscription = this.encryption.encrypt(JSON.stringify(subscription));
     return new Observable<boolean>((observer: Observer<boolean>) => {
-      this.http.post(NOTIFICATION_SUBSCRIPTION_BACKEND_URL, encriptedSubscription, {
-        observe: 'response',
-        responseType: 'text'
-      }).subscribe(
-        response => {
-          observer.next(response.status === 200);
-          observer.complete();
-        }, () => {
-          observer.next(false);
-          observer.complete();
-        });
+      const encriptedSubscription = this.encryption.encrypt(JSON.stringify(subscription));
+      if (encriptedSubscription) {
+        this.http.post(NOTIFICATION_SUBSCRIPTION_BACKEND_URL, encriptedSubscription, {
+          observe: 'response',
+          responseType: 'text'
+        }).subscribe(
+          response => {
+            observer.next(response.status === 200);
+            observer.complete();
+          }, () => {
+            observer.error(UserLocationSubscriptionError.BackendRegistration);
+            observer.complete();
+          });
+      } else {
+        observer.error(UserLocationSubscriptionError.BackendRegistration);
+        observer.complete();
+      }
     });
   }
 
   private deleteSubscription(subscription: LocationSubscription): Observable<boolean> {
     return new Observable<boolean>((observer: Observer<boolean>) => {
-      this.http.post(NOTIFICATION_SUBSCRIPTION_BACKEND_URL, subscription.key, {
+      this.http.delete(`${NOTIFICATION_SUBSCRIPTION_BACKEND_URL}?key=${subscription.key}`, {
         observe: 'response',
         responseType: 'text'
       }).subscribe(
@@ -151,14 +156,14 @@ export class UserLocationNotificationsService {
           observer.next(response.status === 200);
           observer.complete();
         }, () => {
-          observer.next(false);
+          observer.error(UserLocationSubscriptionError.BackendRegistration);
           observer.complete();
         });
     });
   }
 
   private generateTopic(subscr: LocationSubscription): string {
-    return `${subscr.lat}_${subscr.lng}_${subscr.language}`;
+    return `fcm_${subscr.lat}_${subscr.lng}_${subscr.language}`;
   }
 
   private publishError(observer: Observer<boolean>, error: UserLocationSubscriptionError) {
