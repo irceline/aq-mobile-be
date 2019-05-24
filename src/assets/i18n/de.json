@@ -479,9 +479,9 @@
 	},
 	"user-location-notification-toggler": {
 		"backend-registration-error": "Backend Fehler",
-		"button": "Benachrichtigen",
+		"button": "Benachrichtigungen",
 		"default-error": "Default Fehler",
-		"notification-error": "Notification Fehler"
+		"notification-error": "Benachrichtigungsfehler"
 	},
 	"welcome": {
 		"button": "Geben Sie Ihren Standort ein",

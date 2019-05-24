@@ -470,10 +470,10 @@
     }
   },
   "user-location-notification-toggler": {
-		"backend-registration-error": "",
-		"button": "",
-		"default-error": "",
-		"notification-error": ""
+		"backend-registration-error": "Erreur de backend",
+		"button": "Notifications",
+		"default-error": "Erreur par défaut",
+		"notification-error": "Erreur de notification"
 	},
   "welcome": {
 		"button": "Entrez votre localisation",

@@ -470,10 +470,10 @@
     }
   },
   "user-location-notification-toggler": {
-		"backend-registration-error": "",
-		"button": "",
-		"default-error": "",
-		"notification-error": ""
+		"backend-registration-error": "Backend fout",
+		"button": "Meldingen",
+		"default-error": "Standaardfout",
+		"notification-error": "Meldingfout"
 	},
   "welcome": {
 		"button": "Geef jouw locatie in",
