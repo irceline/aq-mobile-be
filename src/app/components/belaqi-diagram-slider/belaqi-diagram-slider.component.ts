@@ -1,6 +1,8 @@
-import { Component, EventEmitter, OnDestroy, Output, ViewChild, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { DatasetApiInterface, DefinedTimespan, DefinedTimespanService, Time, Timeseries, Timespan } from '@helgoland/core';
 import { IonSlides } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { isNumber } from 'util';
 
@@ -16,8 +18,6 @@ import { RefreshHandler } from '../../services/refresh/refresh.service';
 import { UserLocation, UserLocationListService } from '../../services/user-location-list/user-location-list.service';
 import { DataEntry } from '../single-chart/single-chart.component';
 import { HeaderContent } from '../slider-header/slider-header.component';
-import { Subscription } from 'rxjs';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'belaqi-diagram-slider',
@@ -27,7 +27,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class BelaqiDiagramSliderComponent implements OnDestroy, OnInit {
 
   @ViewChild('slider')
-  slider: IonSlides;
+  public slider: IonSlides;
 
   @Output()
   public headerContent: EventEmitter<HeaderContent> = new EventEmitter();
@@ -346,18 +346,19 @@ class DiagramView {
     switch (entry.phenomenon) {
       case MainPhenomenon.PM10:
       case MainPhenomenon.PM25:
-        this.fetchNormalData(entry, setError);
-        this.fetch24hMeanData(entry, setError);
+        this.fetch24hMeanData(entry, setError, 0);
+        this.fetchNormalData(entry, setError, 1);
         break;
       default:
-        this.fetchNormalData(entry, setError);
+        this.fetchNormalData(entry, setError, 0);
         break;
     }
   }
 
   private fetchNormalData(
     entry: DiagramEntry,
-    setError: (entry: DiagramEntry, error: any) => void
+    setError: (entry: DiagramEntry, error: any) => void,
+    pos: number
   ) {
     this.api.getTsData<{
       timestamp: number;
@@ -365,7 +366,7 @@ class DiagramView {
     }>(entry.series.id, entry.series.url, this.timespan)
       .pipe(map(res => this.mapValues(res, (value) => this.setColor(entry.phenomenon, value))))
       .subscribe(
-        res => entry.data.push(res),
+        res => entry.data[pos] = res,
         error => setError(entry, error),
         () => entry.loading = false
       );
@@ -373,7 +374,8 @@ class DiagramView {
 
   private fetch24hMeanData(
     entry: DiagramEntry,
-    setError: (entry: DiagramEntry, error: any) => void
+    setError: (entry: DiagramEntry, error: any) => void,
+    pos: number
   ) {
     const extendedTimespan: Timespan = {
       from: this.timespan.from - 1000 * 60 * 60 * 23,
@@ -397,7 +399,7 @@ class DiagramView {
       }
       return values;
     })).subscribe(
-      res => entry.data.push(res),
+      res => entry.data[pos] = res,
       error => setError(entry, error),
       () => entry.loading = false
     );
