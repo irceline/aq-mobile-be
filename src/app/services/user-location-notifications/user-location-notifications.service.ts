@@ -2,14 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable, Observer, ReplaySubject } from 'rxjs';
+import { Observable, Observer, of, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { EncryptionService } from '../encryption/encryption.service';
 import { PushNotificationsService } from '../push-notifications/push-notifications.service';
 import { UserLocation } from '../user-location-list/user-location-list.service';
+import { UserLocationTopicGeneratorService } from './user-location-topic-generator.service';
 
-interface LocationSubscription {
+export interface LocationSubscription {
   lat: number;
   lng: number;
   language: string;
@@ -36,7 +37,8 @@ export class UserLocationNotificationsService {
     private encryption: EncryptionService,
     private http: HttpClient,
     private storage: Storage,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private topicGenerator: UserLocationTopicGeneratorService
   ) {
     this.storage.get(USER_LOCATION_SUBSCRIPTIONS_PARAM)
       .then(res => this.registeredSubscriptions.next(res ? res : []))
@@ -67,9 +69,9 @@ export class UserLocationNotificationsService {
         success => {
           if (success) {
             // subscribe to Topic
-            const topic = this.generateTopic(subscription);
+            const topic = this.topicGenerator.generateTopic(subscription);
             this.notifications.subscribeTopic(topic)
-              .then(val => {
+              .then(() => {
                 this.addSubscription(subscription);
                 observer.next(true);
                 observer.complete();
@@ -85,14 +87,13 @@ export class UserLocationNotificationsService {
   }
 
   public unsubscribeLocation(location: UserLocation): Observable<boolean> {
-    const langCode = this.translate.currentLang;
     return new Observable<boolean>((observer: Observer<boolean>) => {
       this.getRegisteredSubscription(location).subscribe(registeredSubscription => {
         // unregister to Backend
         this.deleteSubscription(registeredSubscription).subscribe(
           success => {
             if (success) {
-              const topic = this.generateTopic(registeredSubscription);
+              const topic = this.topicGenerator.generateTopic(registeredSubscription);
               // unsubscribe to Topic
               this.notifications.unsubscribeTopic(topic)
                 .then(val => {
@@ -160,10 +161,6 @@ export class UserLocationNotificationsService {
           observer.complete();
         });
     });
-  }
-
-  private generateTopic(subscr: LocationSubscription): string {
-    return `fcm_${subscr.lat}_${subscr.lng}_${subscr.language}`;
   }
 
   private publishError(observer: Observer<boolean>, error: UserLocationSubscriptionError) {

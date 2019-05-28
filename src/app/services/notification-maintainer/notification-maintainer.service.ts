@@ -9,6 +9,7 @@ import {
   PushNotificationsService,
   PushNotificationTopic,
 } from '../push-notifications/push-notifications.service';
+import { USER_LOCATION_NOTIFICATION_TOPIC_PREFIX } from '../user-location-notifications/user-location-topic-generator.service';
 
 const NOTIFICATION_PARAM = 'notifications';
 
@@ -72,9 +73,7 @@ export class NotificationMaintainerService {
 
   private serializeNotifications(notifications: Map<string, PushNotification[]>): any {
     const serialized = {};
-    notifications.forEach((val, key) => {
-      serialized[key] = val;
-    });
+    notifications.forEach((val, key) => serialized[key] = val);
     return serialized;
   }
 
@@ -93,9 +92,12 @@ export class NotificationMaintainerService {
   }
 
   private generateKey(notification: PushNotification): string {
-    const idx = notification.topic.indexOf('_') === -1 ? notification.topic.length : notification.topic.indexOf('_');
-    const trimmedTopic = notification.topic.substring(0, idx);
-    return `${notification.expiration.getTime()}@${trimmedTopic}`;
+    let topic = notification.topic;
+    if (!notification.topic.startsWith(USER_LOCATION_NOTIFICATION_TOPIC_PREFIX)) {
+      const idx = notification.topic.indexOf('_') === -1 ? notification.topic.length : notification.topic.indexOf('_');
+      topic = notification.topic.substring(0, idx);
+    }
+    return `${notification.expiration.getTime()}@${topic}`;
   }
 
   private filterNotifications() {
