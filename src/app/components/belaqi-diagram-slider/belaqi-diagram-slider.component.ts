@@ -377,31 +377,36 @@ class DiagramView {
     setError: (entry: DiagramEntry, error: any) => void,
     pos: number
   ) {
-    const extendedTimespan: Timespan = {
-      from: this.timespan.from - 1000 * 60 * 60 * 23,
-      to: this.location.date.getTime()
-    };
-    this.api.getTsData<{ timestamp: number; value: number; }>(
-      entry.series.id, entry.series.url, extendedTimespan
-    ).pipe(map(res => {
-      const values: DataEntry[] = [];
-      for (let i = res.values.length; i > 23; i--) {
-        const range = res.values.slice(i - 24, i).map(e => e.value).filter(e => isNumber(e));
-        if (range.length >= 16) {
-          const sum = range.reduce((pv, cv) => pv + cv, 0);
-          const val = sum / range.length;
-          values.unshift({
-            color: this.belaqiSrvc.getColorForIndex(this.categorizeValSrvc.categorize(val, entry.phenomenon)),
-            timestamp: res.values[i - 1].timestamp,
-            value: val
-          });
-        }
-      }
-      return values;
-    })).subscribe(
-      res => entry.data[pos] = res,
-      error => setError(entry, error),
-      () => entry.loading = false
+    this.api.getSingleTimeseries(entry.series.id, entry.series.url).subscribe(
+      ts => {
+        const extendedTimespan: Timespan = {
+          from: this.timespan.from - 1000 * 60 * 60 * 23,
+          to: ts.lastValue.timestamp
+        };
+        this.api.getTsData<{ timestamp: number; value: number; }>(
+          entry.series.id, entry.series.url, extendedTimespan
+        ).pipe(map(res => {
+          const values: DataEntry[] = [];
+          for (let i = res.values.length; i > 23; i--) {
+            const range = res.values.slice(i - 24, i).map(e => e.value).filter(e => isNumber(e));
+            if (range.length >= 16) {
+              const sum = range.reduce((pv, cv) => pv + cv, 0);
+              const val = sum / range.length;
+              values.unshift({
+                color: this.belaqiSrvc.getColorForIndex(this.categorizeValSrvc.categorize(val, entry.phenomenon)),
+                timestamp: res.values[i - 1].timestamp,
+                value: val
+              });
+            }
+          }
+          return values;
+        })).subscribe(
+          res => entry.data[pos] = res,
+          error => setError(entry, error),
+          () => entry.loading = false
+        );
+      },
+      error => setError(entry, error)
     );
   }
 
