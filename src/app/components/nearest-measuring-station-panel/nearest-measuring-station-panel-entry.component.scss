@@ -1,4 +1,4 @@
-:host {    
+:host {
     @import'../../../theme/panels.scss';
 
 
@@ -9,6 +9,7 @@
     .station-description {
         font-size: 0.7em;
         color: var(--ion-color-dark-tint);
+        max-width: 88%;
     }
 
     .station-value {

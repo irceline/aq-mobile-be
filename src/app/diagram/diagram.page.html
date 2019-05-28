@@ -16,7 +16,12 @@
 </overlay-info-drawer>
 
 <ion-content>
-  <div style="margin-top: 45px; height: calc(100% - 45px)">
+  <div style="margin-top: 45px; height: calc(100% - 45px);">
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="{{'refresh.pull-message' | translate}}"
+        refreshingSpinner="circles" refreshingText="">
+      </ion-refresher-content>
+    </ion-refresher>
     <slider-header [header]="sliderHeader"></slider-header>
     <belaqi-diagram-slider #slider (headerContent)="sliderHeader = $event"></belaqi-diagram-slider>
   </div>

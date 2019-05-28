@@ -60,12 +60,15 @@ export class UserLocationListService {
     return new Observable((observer: Observer<UserLocation>) => {
       this.locate.getUserLocation().subscribe(
         (pos: Geoposition) => {
-          const reverseObs = this.geoSearch.reverse(
+          let reverseObs = this.geoSearch.reverse(
             { type: 'Point', coordinates: [pos.coords.latitude, pos.coords.longitude] },
             { acceptLanguage: this.translateSrvc.currentLang }
           );
+
+          console.dir(reverseObs);
           reverseObs.subscribe(
             value => {
+              console.dir(value);
               const locationLabel = this.geolabels.createLabelOfReverseResult(value);
               observer.next({
                 id: 1,
@@ -101,15 +104,15 @@ export class UserLocationListService {
   }
 
   public getVisibleUserLocations(): UserLocation[] {
-    return this.userLocations.filter(e => (e.type === 'current' && e.isCurrentVisible && this.locationModeAllows()) || e.type === 'user');
+    return this.userLocations.filter(e => (e.type === 'current' && e.isCurrentVisible) || e.type === 'user');
   }
 
   public getLocationListLength(): number {
     return this.userLocations.filter(e => e.type === 'user').length;
   }
 
-  private locationModeAllows(): boolean {
-    return this.locate.getLocationStatus() !== LocationStatus.DENIED && this.locate.getLocationStatus() !== LocationStatus.OFF;
+  public getLocationStatus(): LocationStatus {
+    return this.locate.getLocationStatus();
   }
 
   public isCurrentLocationVisible(): boolean {

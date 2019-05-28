@@ -61,7 +61,7 @@ export class CustomDatasetApiInterfaceService extends SplittedDataDatasetApiInte
           params: this.prepareParams(params),
           headers: this.createBasicAuthHeader(options.basicAuthToken)
         });
-        this.cacheService.loadFromObservable(createCacheKey(url, params, settings.lastupdate), request).subscribe(
+        this.cacheService.loadFromObservable(createCacheKey(url, JSON.stringify(params), settings.lastupdate), request).subscribe(
           res => observer.next(res),
           error => observer.error(error),
           () => observer.complete()

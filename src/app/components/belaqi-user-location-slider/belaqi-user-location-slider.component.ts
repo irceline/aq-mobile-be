@@ -56,6 +56,7 @@ export class BelaqiUserLocationSliderComponent implements OnDestroy, OnInit {
   public slidesHeight: string;
 
   public currentLocationError: string;
+  public currentLocationErrorExplanation: string;
 
   public showNearestStationsPanel: boolean;
   private showNearestStationsSubscriber: Subscription;
@@ -193,7 +194,7 @@ export class BelaqiUserLocationSliderComponent implements OnDestroy, OnInit {
 
   private async loadBelaqis(reload: boolean) {
     if (this.userLocationService.hasLocations() && !this.loadingLocations) {
-      this.currentLocationError = null;
+      this.currentLocationError = undefined;
       this.loadingLocations = true;
       this.ircelineSettings.getSettings(reload).subscribe(
         ircelineSettings => {
@@ -205,18 +206,32 @@ export class BelaqiUserLocationSliderComponent implements OnDestroy, OnInit {
               this.belaqiLocations[i] = {
                 type: 'current'
               };
-              // let timeout = window.setTimeout(() => this.presentDelayedLocateHint(), LOCATION_DELAYED_NOTIFICATION_IN_MILLISECONDS);
-              this.userLocationService.determineCurrentLocation().subscribe(
-                currentLoc => {
-                  this.setLocation(currentLoc, i, ircelineSettings);
-                  this.updateLocationSelection(0);
-                  // clearTimeout(timeout);
-                },
-                error => {
-                  // this.presentDelayedLocateHint();
-                  this.currentLocationError = error || true;
+              switch (this.userLocationService.getLocationStatus()) {
+                case LocationStatus.OFF:
+                  this.currentLocationError = this.translateSrvc.instant('network.geolocationDisabled');
+                  this.currentLocationErrorExplanation = this.translateSrvc.instant('network.geolocationDisabledExplanation');
+                  break;
+                case LocationStatus.DENIED: {
+                  this.currentLocationError = this.translateSrvc.instant('network.geolocationDenied');
+                  this.currentLocationErrorExplanation = this.translateSrvc.instant('network.geolocationDeniedExplanation');
+                  break;
                 }
-              );
+                default: {
+                  // let timeout = window.setTimeout(() => this.presentDelayedLocateHint(), LOCATION_DELAYED_NOTIFICATION_IN_MILLISECONDS);
+                  this.userLocationService.determineCurrentLocation().subscribe(
+                    currentLoc => {
+                      this.setLocation(currentLoc, i, ircelineSettings);
+                      this.updateLocationSelection(0);
+                      // clearTimeout(timeout);
+                    },
+                    error => {
+                      // this.presentDelayedLocateHint();
+                      this.currentLocationError = this.translateSrvc.instant('belaqi-user-location-slider.current-location-error-header');
+                      this.currentLocationErrorExplanation = error;
+                    }
+                  );
+                }
+              }
             }
           });
           setTimeout(() => {

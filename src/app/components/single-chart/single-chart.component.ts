@@ -37,6 +37,9 @@ export class SingleChartComponent implements OnChanges, DoCheck {
   public label: string;
 
   @Input()
+  public timeLabel: string;
+
+  @Input()
   public timespan: Timespan;
 
   @Input()

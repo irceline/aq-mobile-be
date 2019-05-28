@@ -1,84 +1,109 @@
 :host {
+  .chart {
+    position: relative;
+  }
 
-    .chart {
-        position: relative;
+  .error {
+    padding: 10px;
+    white-space: normal;
+  }
+
+  .info-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    ion-button {
+      color: black;
     }
+  }
 
-    .error {
-        padding: 10px;
-        white-space: normal;
-    }
+  .chart-label {
+    position: relative;
+    padding: 0 0.6em;
+    text-align: center;
+    flex: none;
+    min-height: 1em;
+    width: 90%;
+    left: 5%;
+    background-color: var(--ion-color-secondary-contrast);
+    border-radius: 1em 1em 0 0;
+    visibility: visible;
+  }
 
-    .info-button {
-        position: absolute;
-        top: 0;
-        right: 0;
+  .chart-label-time {
+    position: relative;
+    max-width: 96%;
+    padding: 0;
+    text-align: center;
+    flex: none;
+    min-height: 1em;
+    border-radius: 0;
+    padding-top: 0.5em;
+    background-color: var(--panel-background);
+    padding-bottom: 0.2em;
+    font-size: 0.7em;
+    margin-left: 0;
+    margin-right: 0;
+  }
 
-        ion-button {
-            color: black;
-        }
-    }
+  ion-row {
+    align-items: center;
+    justify-content: center;
+    background: var(--panel-background);
+    width: 90%;
+    margin-left: 5%;
+  }
 
+  .hidden {
+      visibility: hidden;
+  }
+
+  .prev-button,
+  .next-button {
+    position: absolute;
+    z-index: 1;
+    bottom: 0.2em;
+  }
+  .prev-button {
+    left: 0.2em;
+  }
+  .next-button {
+    right: 0.2em;
+  }
+  .prev-next-button {
+    height: 0.5em;
+  }
+
+  @media screen and (max-width: 500px) {
     .chart-label {
-        position: relative;
-        padding: 0 0.6em;
-        text-align: center;
-        flex: none;
-        min-height: 1em;
-        width: 90%;
-        left: 5%;
-        background-color: var(--ion-color-secondary-contrast);
-        border-radius: 1em 1em 0 0;
-        visibility: visible;
+      font-size: 0.9em;
     }
-
-    @media screen and (max-width: 500px) {
+  }
+  @media screen and (max-width: 400px) {
     .chart-label {
-        font-size: 0.9em;
-        }
+      font-size: 0.8em;
     }
-    @media screen and (max-width: 400px) {
+  }
+  @media screen and (max-width: 300px) {
     .chart-label {
-        font-size: 0.8em;
-        }
+      font-size: 0.7em;
     }
-    @media screen and (max-width: 300px) {
-    .chart-label {
-        font-size: 0.7em;
-        }
+  }
+
+  .chart-wrapper {
+    width: 90%;
+    left: 5%;
+    position: relative;
+    background-color: var(--panel-background);
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+
+    .loading {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
-
-    .chart-wrapper {
-        width: 90%;
-        left: 5%;
-        position: relative;
-        background-color: var(--panel-background);
-        border-bottom-left-radius: 1em;
-        border-bottom-right-radius: 1em;
-
-        .prev-button,
-        .next-button {
-            display: inline;
-            position: absolute;
-            top: 0;
-            z-index: 1;
-            color: black;
-            --background: transparent;
-        }
-
-        .next-button {
-            right: 0;
-        }
-
-        .prev-button {
-            left: 0;
-        }
-
-        .loading {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-    }
+  }
 }

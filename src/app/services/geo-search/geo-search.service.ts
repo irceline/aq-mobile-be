@@ -81,7 +81,7 @@ export class GeoSearchService extends NominatimGeoSearchService {
     if (options && options.zoom !== undefined) { params = params.set('zoom', `${options.zoom}`); }
     const url = this.serviceUrl + 'reverse';
     const request = this.httpClient.get(url, { params });
-    return this.cacheService.loadFromObservable(createCacheKey(url, params), request, null, TTL_GEO_SEARCH).map((res: any) => {
+    return this.cacheService.loadFromObservable(createCacheKey(url, params.toString()), request, null, TTL_GEO_SEARCH).map((res: any) => {
       const result = {
         lat: res.lat,
         lon: res.lon,
