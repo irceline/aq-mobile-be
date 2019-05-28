@@ -205,7 +205,6 @@ export class SingleChartComponent implements OnChanges, DoCheck {
   }
 
   private drawData(data: DataEntry[][]) {
-    // TODO add dataset entries
     this.adjustDatasets(data.length);
     data.forEach((v, i) => {
       const dataset = this.chart.data.datasets[i];
