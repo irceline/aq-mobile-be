@@ -17,7 +17,7 @@
   "annual-mean-panel": {
     "header": "Exposition à long terme",
     "information-popup": {
-      "text": "Le NO2 (dioxyde d'azote), les PM10 (particules d'un diamètre inférieur à 10 micromètres) et les PM2,5 (particules d'un diamètre inférieur à 2,5 micromètres) sont les trois polluants majeurs pour lesquels il existe de nombreuses preuves scientifiques de l'impact de leur exposition à long terme."
+      "text": "Le NO2 (dioxyde d'azote), les PM10 (particules d'un diamètre inférieur à 10 micromètres) et les PM2,5 (particules d'un diamètre inférieur à 2,5 micromètres) sont les trois polluants majeurs pour lesquels il existe de nombreuses preuves scientifiques en ce qui concerne l'impact à long terme sur la santé."
     }
   },
   "annual-phenomenon-buttons": "Indice moyen annuel modélisé pour cette localisation:",
@@ -41,7 +41,7 @@
     "error-occured": "La récupération des données prend trop de temps. Veuillez réessayer plus tard.",
     "loading": "Chargement de l'indice BelAQI ...",
     "modelled-hint": "Indice de qualité de l'air modélisé pour cette localisation",
-    "no-index-ascertained": "Aucun indice BelAQI n'a pu être déterminé. Cela peut être le cas si votre localisation n'est pas en Belgique."
+    "no-index-ascertained": "Aucun indice BelAQI n'a pu être déterminé. Cela peut être le cas avec des problèmes techniques avec nos serveurs ou si votre localisation n'est pas en Belgique."
   },
   "belaqi": {
     "level-split": {
@@ -109,8 +109,10 @@
     "loading-nearest-stations": "Charger les mesures les plus proches",
     "no-timeseries-selected": "Aucun polluant sélectionné",
     "overlay": {
+      "attention": "Attention:",
       "content-p1": "Ces graphiques donnent l'évolution horaire mesurée dans les stations de mesure officielles les plus proches de vos positions configurées. Les séries temporelles des polluants qui constituent l'indice BelAQI sont colorées en fonction de cet indice.",
-      "content-p2": "Pour les particules (diamètre inférieur à 2,5 et 10 micromètres), seules les séries temporelles de la moyenne glissante sur 24 heures sont colorées, car c'est la moyenne glissante sur 24 heures qui est utilisée pour calculer l'indice, et non les moyennes horaires.",
+      "content-p2": "Pour les particules (diamètre inférieur à 2,5 et 10 micromètres), seules les séries temporelles de la moyenne glissante sur 24 heures sont colorées, car c'est la moyenne glissante sur 24 heures qui est utilisée pour calculer l'indice BelAQI, et non les moyennes horaires. La raison en est que les effets sur la santé des particules sont associés à une exposition de 24 heures.",
+      "content-p3": "L'indice fourni ailleurs par l'application pour votre location n'est pas uniquement basé sur les résultats des stations des réseaux de surveillance, car la station la plus proche peut se trouver à plusieurs kilomètres. Ces mesures aux stations sont intégrées dans le modèle, qui prend également en compte les données d'émission (trafic, industrie et navigation) et les conditions météorologiques (direction et vitesse du vent) pour calculer les concentrations en tout endroit du territoire. Les concentrations calculées en dioxyde d'azote, particules et ozone sont alors intégrés dans l'indice BelAQI de la localisation choisie.",
       "header": "Que voyez-vous sur cet écran?",
       "url-svg": "../../assets/svg/belaqi_FR.svg"
     },
@@ -257,7 +259,7 @@
     "no-legend": "Aucune légende disponible",
     "overlay": {
 			"content-p1": "La carte vous donne un aperçu de la qualité de l'air en Belgique. À l'aide d'un code de couleur, vous pouvez comparer la qualité de l'air de votre localisation avec celle d'autres sites. Le rouge indique une très mauvaise qualité de l'air, tandis que le bleu en représente une excellente.",
-			"content-p2": "L'indice de l'emplacement choisi est mis à jour toutes les heures. L'application peut également faire des prédictions basées sur les informations disponibles.",
+			"content-p2": "L'indice de l'emplacement choisi est mis à jour toutes les heures. L'application vous donne également des prédictions de l'indice BelAQI pour les prochaines heures et les prochains jours.",
 			"header": "Que voyez-vous sur cet écran?",
       "url-svg": "../../assets/svg/belaqi_FR.svg"
 		},
@@ -434,7 +436,7 @@
   "start": {
     "overlay": {
       "content-p1": "L'impact de la qualité de l'air est résumé sous la forme d'un indice de qualité de l'air. Il s’agit d’un chiffre compris entre 1 et 10, où 10 correspond à très médiocre et 1 à une excellente qualité d’air. Pour le calculer, l'application est basée sur des données provenant des stations de surveillance belges, sur la météo, le trafic et les polluants pertinents.",
-      "content-p2": "L'indice de l'emplacement choisi est mis à jour toutes les heures. L'application peut également faire des prédictions basées sur les informations disponibles.",
+      "content-p2": "L'indice de l'emplacement choisi est mis à jour toutes les heures. L'application vous donne également des prédictions de l'indice BelAQI pour les prochaines heures et les prochains jours.",
       "content-p3": "L'indice de la qualité de l'air reflète l'impact sur la santé à court terme. Cet impact peut varier d’une heure à l’autre et entraîner des problèmes de santé temporaires. À des concentrations très élevées de polluants atmosphériques, des effets aigus peuvent survenir, tels que l'asthme ou, à l'extrême, une crise cardiaque.",
       "content-p4": "Une exposition prolongée aux polluants atmosphériques peut provoquer des effets chroniques et augmenter le risque de maladies cardiaques et pulmonaires, y compris le cancer du poumon.",
       "header": "Que voyez-vous sur cet écran?"
