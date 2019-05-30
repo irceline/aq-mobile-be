@@ -431,7 +431,8 @@
     "header": "Localisation de la station"
   },
   "single-chart": {
-		"loading": "chargement en cours"
+		"loading": "chargement en cours",
+    "error": "Une erreur s'est produite lors du chargement du diagramme."
 	},
   "start": {
     "overlay": {

@@ -431,7 +431,8 @@
     "header": "locatie van het station"
   },
   "single-chart": {
-		"loading": "bezig met laden"
+		"loading": "bezig met laden",
+    "error": "Er is een fout opgetreden bij het laden van het diagram."
 	},
   "start": {
     "overlay": {
