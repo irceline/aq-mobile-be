@@ -257,6 +257,7 @@
 		},
 		"nearest-station": "Nächstgelegene Überwachungsstation",
 		"no-legend": "Keine Legend verfügbar",
+		"opacity-slider-header": "Transparenz",
 		"overlay": {
 			"content-p1": "Die Karte gibt Ihnen einen Überblick über die Luftqualität in Belgien. Mit einem Farbcode können Sie die Luftqualität an Ihrem Standort mit der anderer Standorte vergleichen. Rot ist sehr schlecht, während Blau für eine hervorragende Luftqualität steht.",
 			"content-p2": "Der Index für den ausgewählten Standort wird stündlich aktualisiert. Die App gibt Ihnen auch Vorhersagen des BelAQI-Index für die nächsten Stunden und Tage.",

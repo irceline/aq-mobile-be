@@ -257,6 +257,7 @@
     },
     "nearest-station": "Nearest station",
     "no-legend": "No legend available",
+    "opacity-slider-header": "Transparency",
     "overlay": {
 			"content-p1": "The map gives you an overview of the air quality in Belgium. Using a colour code, you can compare the air quality at your location with that of other locations. Red is very bad, while blue stands for excellent air quality.",
 			"content-p2": "The index for the chosen location is updated every hour. The app also gives you a forecast of the BelAQI index for the next few hours and days.",

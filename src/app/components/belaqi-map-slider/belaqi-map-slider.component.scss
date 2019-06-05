@@ -1,5 +1,5 @@
+@import "../../../theme/panels.scss";
 :host {
-  @import "../../../theme/panels.scss";
 
   .entry {
     margin: auto;
@@ -129,4 +129,5 @@
   .drawer-content {
     padding: 0 2em;
   }
+
 }
