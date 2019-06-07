@@ -176,26 +176,21 @@ export class BelaqiMapSliderComponent implements OnDestroy, OnInit {
   }
 
   public changeToMap() {
-    this.navigatToSelection();
+    this.presentSelection();
   }
 
-  private navigatToSelection() {
+  private presentSelection() {
     if (this.mapDataService.selection) {
       const label = this.mapDataService.selection.userlocation.label;
       if (this.belaqiMapviews) {
-        let hasNavigated = false;
-        this.belaqiMapviews.some((element, i) => {
-          if (element.location.label === label) {
-            hasNavigated = true;
-            this.belaqiMapviews[i].selectMap();
-            this.slider.slideTo(i);
-            this.setHeader(i);
-            return true;
-          } else {
-            return false;
-          }
-        });
-        return hasNavigated;
+        const navigateToIdx = this.belaqiMapviews.findIndex(e => e.location.label === label);
+        if (navigateToIdx >= 0) {
+          this.belaqiMapviews[navigateToIdx].selectMap();
+          setTimeout(() => {
+            this.slider.slideTo(navigateToIdx);
+          }, 1000);
+          this.setHeader(navigateToIdx);
+        }
       }
     }
   }
@@ -207,7 +202,6 @@ export class BelaqiMapSliderComponent implements OnDestroy, OnInit {
       this.ircelineSettings.getSettings(reload).subscribe(
         ircelineSettings => {
           this.belaqiMapviews = [];
-          let hasNavigated = false;
           this.userLocationListService.getVisibleUserLocations().forEach((loc, i) => {
             // Init MapView
             this.belaqiMapviews[i] = new MapView(this.settingsSrvc,
@@ -232,9 +226,7 @@ export class BelaqiMapSliderComponent implements OnDestroy, OnInit {
               this.setLocation(loc, i, ircelineSettings);
               if (this.slider) {
                 this.slider.update();
-                if (!hasNavigated) {
-                  hasNavigated = this.navigatToSelection();
-                }
+                this.presentSelection();
               }
             } else {
               this.belaqiMapviews[i].location = {
@@ -256,9 +248,7 @@ export class BelaqiMapSliderComponent implements OnDestroy, OnInit {
                       this.setLocation(currentLoc, i, ircelineSettings);
                       if (this.slider) {
                         this.slider.update();
-                        if (!hasNavigated) {
-                          hasNavigated = this.navigatToSelection();
-                        }
+                        this.presentSelection();
                         this.refreshHeader();
                       }
                     },
