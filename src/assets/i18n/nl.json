@@ -17,7 +17,7 @@
   "annual-mean-panel": {
     "header": "Lange termijn blootstelling",
     "information-popup": {
-      "text": "NO2 (Stikstofdioxide), PM10 (fijn stof met een diameter kleiner dan 10 micrometer) en PM2.5 (fijn stof met een diameter kleiner dan 2.5 micrometer) zijn de drie polluenten waar de meeste wetenschappelijke bewijslast bestaat m.b.t. de impact van langetermijn blootstelling."
+      "text": "NO2 (Stikstofdioxide), PM10 (fijn stof met een diameter kleiner dan 10 micrometer) en PM2.5 (fijn stof met een diameter kleiner dan 2.5 micrometer) zijn de drie polluenten waarvoor de meeste wetenschappelijke bewijslast bestaat wat de langetermijnimpact op de gezondheid betreft."
     }
   },
   "annual-phenomenon-buttons": "Gemodelleerde jaargemiddelde waarde voor deze locatie:",
@@ -41,7 +41,7 @@
     "error-occured": "Het duurt langer dan normaal om de gegevens op te halen. Probeer het later opnieuw.",
     "loading": "De BelAQI-index wordt geladen ...",
     "modelled-hint": "Gemodelleerde luchtkwaliteitsindex voor deze locatie",
-    "no-index-ascertained": "Er kon geen BelAQI-index worden berekend. Dit kan het geval zijn wanneer de locatie niet in België ligt."
+    "no-index-ascertained": "Er kon geen BelAQI-index worden berekend. Dit kan het geval zijn bij technische problemen met onze servers of wanneer de locatie niet in België ligt."
   },
   "belaqi": {
     "level-split": {
@@ -109,8 +109,10 @@
     "loading-nearest-stations": "Laad dichtstbijgelegen metingen",
     "no-timeseries-selected": "Geen tijdsreeks geselecteerd!",
     "overlay": {
+      "attention": "Opgepast:",
       "content-p1": "De diagrammen geven de evolutie per uur zoals gemeten in de dichtstbijzijnde officiële meetstations van uw geconfigureerde locaties. De tijdreeksen van verontreinigende stoffen die deel uitmaken van de BelAQI-index zijn volgens deze index gekleurd.",
-      "content-p2": "Voor fijnstofdeeltjes (beide met een diameter kleiner dan 2,5 en 10 micrometer) zijn alleen de glijdende 24-uurgemiddelde tijdreeksen gekleurd, omdat de 24-uurgemiddelde deel uitmaakt van de index, niet de uurgemiddelden.",
+      "content-p2": "Voor fijn stof (zowel met een diameter kleiner dan 2,5 als 10 micrometer) zijn alleen de glijdende 24-uurgemiddelde tijdreeksen gekleurd, omdat het 24-uursgemiddelde deel uitmaakt van de BelAQI index, niet de uurgemiddelden. De reden hiervoor is dat gezondheidseffecten door fijn stof worden geassocieerd met een blootstelling van 24 uur.",
+      "content-p3": "Het indexcijfer dat elders in de app voor uw locatie gegeven wordt is niet enkel gebaseerd op het resultaat van alle meetstations in onze meetnetten, waarbij het dichtstbijgelegen station mogelijk ettelijke kilometers verder ligt. De concentraties gemeten in alle meetstations van de overheid worden toegevoegd aan een computermodel, dat ook rekening houdt met emissiegegevens (verkeer, industrie en scheepvaart) en meteorologische omstandigheden (windrichting en windsnelheid). Dit computermodel berekent dan gedetailleerde luchtkwaliteitskaarten voor het ganse land. De combinatie van het resultaat voor stikstofdioxide, fijn stof en ozon zie je als één indexcijfer in de app.",
       "header": "Wat zie je op dit scherm?",
       "url-svg": "../../assets/svg/belaqi_NL.svg"
     },
@@ -125,8 +127,8 @@
     "accuracy": {
       "link": "http://www.irceline.be/nl/documentatie/modellen/rio-ifdm",
       "moreInfo": "Meer info over RIO-IFDM",
-      "p1": "De modelberekening waarvan de app je het resultaat toont, is een combinatie van twee luchtkwaliteitsmodellen: RIO en IFDM.  Beide modellen zijn grondig uitgetest aan de hand van bijkomende metingen en worden voortdurend gevoed met actuele luchtkwaliteitsdata.",
-      "p2": "Bij elke modelberekening is er een kans op over- of onderschatting van de werkelijke situatie. Deze 2 modellen houden bv. nog geen rekening met obstakels langs wegen (geluidsschermen, gesloten huizenrijen, etc.). Zo kan er een onderschatting getoond worden voor street canyons.",
+      "p1": "De modelberekening waarvan de app je het resultaat toont, is een combinatie van twee luchtkwaliteitsmodellen: RIO en IFDM. Beide modellen zijn grondig gevalideerd met bijkomende metingen en worden voortdurend gevoed met actuele luchtkwaliteitsdata.",
+      "p2": "Bij elke modelberekening is er een kans op over- of onderschatting van de werkelijke situatie. Deze 2 modellen houden bv. nog geen rekening met obstakels langs wegen (geluidsschermen, gesloten huizenrijen, etc.). Zo kan er een onderschatting getoond worden voor street canyons. Street canyons zijn smalle straten omgeven door hoge aaneengesloten bebouwing. Dit zorgt voor slechte ventilatie waardoor de luchtvervuiling moeilijk wordt verspreid",
       "p3": "Er werd ondertussen al een derde model (OSPM) ingebouwd in de modelketen dat de luchtkwaliteit in smalle straten beter inschat. Dat wordt al toegepast op de luchtkwaliteitskaarten die de langetermijnimpact tonen. Maar het OSPM-model vergt heel wat berekeningen en kunnen we voorlopig niet toepassen op de actuele luchtkwaliteitsresultaten. Om ook het OSPM-resultaat aan de app toe te voegen, moeten eerst nog een aantal technische drempels overwonnen worden.",
       "p4": "Er wordt voortdurend verder gewerkt om de kwaliteit van de luchtkwaliteitsmodellen en de resultaten die u in de app ziet te verbeteren.",
       "summary": "Vergelijkingen met meetresultaten tonen aan dat het model de luchtkwaliteit met een voldoende hoge betrouwbaarheid kan inschatten volgens gangbare wetenschappelijke kwaliteitseisen. Een model kan echter nooit helemaal correct de luchtkwaliteit berekenen. Op een aantal plaatsen kan nog een over- of onderschatting getoond worden van de werkelijke luchtkwaliteit.",
@@ -151,7 +153,7 @@
       "moreInfo": "Lees hier hoe de index rekening houdt met de gezondheidseffecten op korte termijn.",
       "p1": "Het indexcijfer dat de app geeft is niet enkel gebaseerd op het resultaat van alle meetstations in onze meetnetten, waarbij het dichtstbijgelegen station mogelijk ettelijke kilometers verder ligt. De concentraties gemeten in alle meetstations van de overheid worden toegevoegd aan een computermodel, dat ook rekening houdt met emissiegegevens (verkeer, industrie en scheepvaart) en meteorologische omstandigheden (windrichting en windsnelheid). Dit computermodel berekent dan gedetailleerde luchtkwaliteitskaarten voor het ganse land. De combinatie van het resultaat voor stikstofdioxide, fijn stof en ozon zie je als één indexcijfer in de app.",
       "p2": "Het indexcijfer dat de app toont, geeft je daarbij ook een inschatting van de gezondheidsimpact op korte termijn.",
-      "p3": "Voor het berekenen van luchtkwaliteitsindex worden de indexen voor elke polluent apart berekend op basis van de schaalindeling in onderstaande tabel. De hoogste (\"slechtste\") subindex bepaalt dan het indexcijfer dat de app voor je locatie toont.",
+      "p3": "Voor het berekenen van luchtkwaliteitsindex worden de indexen voor elke polluent afzonderlijk berekend op basis van de schaalindeling in onderstaande tabel. De hoogste (\"slechtste\") subindex bepaalt dan het indexcijfer dat de app voor je locatie toont.",
       "p4": "De impact van zeer lokale uitstoot (bv. houtkachels, open haarden, niet structurele files, etc.) of accidentele uitstoot (woningbrand, etc.) wordt niet weergegeven door de app.",
       "summary": "De app toont het resultaat van een modelberekening voor je locatie die elk uur wordt vernieuwd. Om de luchtkwaliteit te beoordelen maken we gebruik van een luchtkwaliteitsindex. Die toont één representatief cijfer voor de verschillende relevante verontreinigende stoffen.",
       "title": "Hoe wordt de luchtkwaliteit voor mijn locatie berekend?"
@@ -159,8 +161,8 @@
     "compareCurieuzeneuzen": {
       "link": "https://curieuzeneuzen.be/",
       "moreInfo": "Meer info over CurieuzeNeuzen",
-      "p1": "Je CurieuzeNeuzenresultaat geeft zo een idee van de  luchtkwaliteit op de lange termijn en de chronische gezondheidseffecten.",
-      "p2": "In de app tonen we daarentegen de modelberekening op basis de actuele luchtkwaliteitsresultaten voor verschillende parameters (fijn stof, ozon, stikstofdioxide, etc.). De resultaten kunnen van dag tot dag en zelfs uur tot uur verschillen. De resultaten worden afgetoetst aan de korte termijn doelstellingen voor luchtkwaliteit. Zo schat de app de impact op de gezondheid van luchtvervuiling op korte termijn in (= acute gezondheidseffecten).",
+      "p1": "Je CurieuzeNeuzenresultaat geeft een idee van de  luchtkwaliteit op de lange termijn en de chronische gezondheidseffecten.",
+      "p2": "In de app tonen we daarentegen de modelberekening op basis de actuele luchtkwaliteitsresultaten voor verschillende parameters (fijn stof, ozon, stikstofdioxide, etc.). De resultaten kunnen van dag tot dag en zelfs uur tot uur verschillen. De resultaten worden afgetoetst aan de korte termijn doelstellingen voor luchtkwaliteit. Zo schat de app de impact op de gezondheid van luchtvervuiling op de korte termijn in (= acute gezondheidseffecten).",
       "p3": "Je resultaat van CurieuzeNeuzen en de berekening van de actuele situatie in de app kunnen dus grondig verschillen.",
       "summary": "Dat kan. Bij CurieuzeNeuzen werd namelijk enkel stikstofdioxide een maand lang gemeten. Het resultaat is omgezet naar een jaargemiddelde en afgetoetst aan de lange termijn doelstelling voor stikstofdioxide.",
       "title": "CurieuzeNeuzen gaf een ander resultaat dan de app?"
@@ -255,9 +257,10 @@
     },
     "nearest-station": "Dichtstbijgelegen meetstation",
     "no-legend": "Geen legende beschikbaar",
+    "opacity-slider-header": "",
     "overlay": {
       "content-p1": "De kaart geeft je een overzicht van de luchtkwaliteit in België. Aan de hand van een kleurencode, kan je de luchtkwaliteit op jouw locatie vergelijken met die van andere locaties. Rood is zeer slecht, terwijl blauw staat voor een uitstekende luchtkwaliteit.",
-      "content-p2": "Elk uur wordt het indexcijfer voor de gekozen locatie vernieuwd. De app kan ook voorspellingen doen op basis van de beschikbare informatie.",
+      "content-p2": "Elk uur wordt het indexcijfer voor de gekozen locatie vernieuwd. De app geeft je ook een voorspelling van de BelAQI index de volgende uren en dagen.",
       "header": "Wat zie je op dit scherm?",
       "url-svg": "../../assets/svg/belaqi_NL.svg"
     },
@@ -429,12 +432,13 @@
     "header": "locatie van het station"
   },
   "single-chart": {
-		"loading": "bezig met laden"
+		"loading": "bezig met laden",
+    "error": "Er is een fout opgetreden bij het laden van het diagram."
 	},
   "start": {
     "overlay": {
       "content-p1": "De impact van de luchtkwaliteit wordt berekend aan de hand van de luchtkwaliteitsindex. Dat is een cijfer tussen 1 en 10, waarbij 10 staat voor erg slechte en 1 voor uitstekende luchtkwaliteit. De app baseert zich voor deze score op data van meetstations in heel België, het weer en verkeer en relevante verontreinigende stoffen.",
-      "content-p2": "Elk uur wordt het indexcijfer voor de gekozen locatie vernieuwd. De app kan ook voorspellingen doen op basis van de beschikbare informatie.",
+      "content-p2": "Elk uur wordt het indexcijfer voor de gekozen locatie vernieuwd. De app geeft je ook een voorspelling van de BelAQI index de volgende uren en dagen.",
       "content-p3": "De luchtkwaliteitsindex weerspiegelt de impact op de gezondheid op korte termijn. Die impact kan van uur tot uur verschillen en leiden tot tijdelijke gezondheidsproblemen. Bij hogere concentraties van luchtvervuilende stoffen kunnen acute effecten optreden, zoals een astma- of zelfs een hartaanval.",
       "content-p4": "Langdurige blootstelling aan luchtvervuilende stoffen kan chronische effecten uitlokken en kan voor een hoger risico op hart- en longziekten waaronder longkanker zorgen.",
       "header": "Wat zie je op dit scherm?"

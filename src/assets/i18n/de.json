@@ -17,7 +17,7 @@
 	"annual-mean-panel": {
 		"header": "Langzeitbelastung",
 		"information-popup": {
-			"text": "NO2 (Stickstoffdioxid), PM10 (Partikel mit einem Durchmesser von weniger als 10 Mikrometern) und PM2,5 (Partikel mit einem Durchmesser von weniger als 2,5 Mikrometern) sind die drei Schadstoffe, bei denen die wissenschaftliche Beweislast hinsichtlich der Auswirkungen einer Langzeitbelastung besteht."
+			"text": "NO2 (Stickstoffdioxid), PM10 (Partikel mit einem Durchmesser von weniger als 10 Mikrometern) und PM2,5 (Partikel mit einem Durchmesser von weniger als 2,5 Mikrometern) sind die drei Schadstoffe, für die hinsichtlich der langfristigen Auswirkungen auf die Gesundheit die wissenschaftliche Beweislast am höchsten ist."
 		}
 	},
 	"annual-phenomenon-buttons": "Modellierter Jahresmittelwert für diesen Standort:",
@@ -41,7 +41,7 @@
 		"error-occured": "Es dauert länger als üblich um den BelAQI index zu ermittlen. Bitte versuchen Sie es später erneut.",
 		"loading": "BelAQI-Index wird geladen ...",
 		"modelled-hint": "Modellierter Luftqualitätsindex für diesen Standort",
-		"no-index-ascertained": "Es konnte kein BelAQI index ermittelt werden. Dies könnte damit zusammenhängen, das der Standort nicht innerhalb Belgien's liegt."
+		"no-index-ascertained": "Ein BelAQI-Index konnte nicht berechnet werden. Dies kann bei technischen Problemen mit unseren Servern der Fall sein oder wenn sich der Standort nicht in Belgien befindet."
 	},
 	"belaqi": {
 		"level-split": {
@@ -109,8 +109,10 @@
 		"loading-nearest-stations": "Lade nächstgelegene Überwachungsstation",
 		"no-timeseries-selected": "Keine Zeitreihe selektiert!",
 		"overlay": {
+			"attention": "Vorsicht: ",
       "content-p1": "Die Diagramme geben die stündliche Entwicklung wieder, die in den nächstgelegenen offiziellen Überwachungsstationen von den durch Ihnen konfigurierten Standorten gemessen wurden. Die Zeitreihen der Schadstoffe, die Bestandteil des BelAQI-Index sind, sind entsprechend diesem Index eingefärbt.",
-      "content-p2": "Bei Feinstaub (beide mit einem Durchmesser von weniger als 2,5 und 10 Mikrometern) werden nur die mittleren 24-Stundenmittelwertzeitreihen gefärbt, da der 24-Stundenmittelwert Teil des Index ist und nicht die Stundenmittelwerte.",
+      "content-p2": "Bei Feinstaub (Durchmesser von weniger als 2,5 und 10 Mikrometern) werden nur die laufender 24-Stundenmittelwertzeitreihen gefärbt, da der laufende 24-Stundenmittelwert Teil des BelAQI-index ist und nicht die Stundenmittelwerte. Der Grund dafür ist, dass gesundheitliche Auswirkungen von Partikeln mit einer 24-Stunden-Exposition verbunden sind.",
+			"content-p3": "Der an anderen Stellen von der App angegebene Index für ihren Standort, basiert nicht nur auf den Ergebnissen aller Überwachungsstationen in unseren Überwachungsnetzwerken, bei denen die nächste Station möglicherweise mehrere Kilometer entfernt ist. Die an allen staatlichen Überwachungsstationen gemessenen Konzentrationen werden zu einem Computermodell addiert, das auch Emissionsdaten (Verkehr, Industrie und Versand) und meteorologischen Bedingungen (Windrichtung und Windgeschwindigkeit) berücksichtigt. Dieses Computermodell berechnet dann detaillierte Luftqualitätskarten für das ganse Land. Die Kombination der Ergebnisse für Stickstoffdioxid, Partikel und Ozon wird in der App als ein Index angezeigt.",
 			"header": "Was sehen Sie auf diesem Bildschirm?",
 			"url-svg": "../../assets/svg/belaqi_DE.svg"
     },
@@ -255,9 +257,10 @@
 		},
 		"nearest-station": "Nächstgelegene Überwachungsstation",
 		"no-legend": "Keine Legend verfügbar",
+		"opacity-slider-header": "Transparenz",
 		"overlay": {
 			"content-p1": "Die Karte gibt Ihnen einen Überblick über die Luftqualität in Belgien. Mit einem Farbcode können Sie die Luftqualität an Ihrem Standort mit der anderer Standorte vergleichen. Rot ist sehr schlecht, während Blau für eine hervorragende Luftqualität steht.",
-			"content-p2": "Der Index für den ausgewählten Standort wird stündlich aktualisiert. Die App kann basierend auf den verfügbaren Informationen auch Vorhersagen machen.",
+			"content-p2": "Der Index für den ausgewählten Standort wird stündlich aktualisiert. Die App gibt Ihnen auch Vorhersagen des BelAQI-Index für die nächsten Stunden und Tage.",
 			"header": "Was sehen Sie auf diesem Bildschirm?",
       "url-svg": "../../assets/svg/belaqi_DE.svg"
 		},
@@ -442,7 +445,7 @@
 	"start": {
     "overlay": {
       "content-p1": "Der Einfluss der Luftqualität wird auf der Grundlage des Luftqualitätsindex berechnet. Das ist eine Zahl zwischen 1 und 10, wobei 10 für sehr schlecht und 1 für ausgezeichnete Luftqualität steht. Für diese Bewertung basiert die App auf Daten von Überwachungsstationen in ganz Belgien, Wetter und Verkehr sowie relevanten Schadstoffen.",
-      "content-p2": "Der Index für den ausgewählten Standort wird stündlich aktualisiert. Die App kann basierend auf den verfügbaren Informationen auch Vorhersagen geben.",
+      "content-p2": "Der Index für den ausgewählten Standort wird stündlich aktualisiert. Die App gibt Ihnen auch Vorhersagen des BelAQI-Index für die nächsten Stunden und Tage.",
       "content-p3": "Der Luftqualitätsindex spiegelt die kurzfristigen Auswirkungen auf die Gesundheit wider. Diese Auswirkungen können von Stunde zu Stunde variieren und zu vorübergehenden Gesundheitsproblemen führen. Bei höheren Konzentrationen von Luftschadstoffen können akute Wirkungen wie Asthma oder sogar ein Herzinfarkt auftreten.",
       "content-p4": "Eine längere Exposition gegenüber Luftschadstoffen kann chronische Auswirkungen hervorrufen und zu einem erhöhten Risiko für Herz- und Lungenerkrankungen, einschließlich Lungenkrebs, führen.",
       "header": "Was sehen Sie auf diesem Bildschirm?"

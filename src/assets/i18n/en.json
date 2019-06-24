@@ -17,7 +17,7 @@
   "annual-mean-panel": {
     "header": "Long-term exposure",
     "information-popup": {
-      "text": "NO2 (Nitrogen dioxide), PM10 (particulate matter with a diameter of less than 10 micrometers) and PM2.5 (particulate matter with a diameter of less than 2.5 micrometres) are the three pollutants where the most scientific burden of proof exists with regard to the impact of long-term exposure."
+      "text": "NO2 (Nitrogen dioxide), PM10 (particulate matter with a diameter of less than 10 micrometers) and PM2.5 (particulate matter with a diameter of less than 2.5 micrometres) are the three pollutants for which there is the most scientific burden of proof regarding the long-term impact on health."
     }
   },
   "annual-phenomenon-buttons": "Modelled annual mean value for this location:",
@@ -41,7 +41,7 @@
     "error-occured": "It is taking longer than usual to fetch the data. Please try again later.",
     "loading": "Loading the BelAQI index...",
     "modelled-hint": "Modelled air quality index for this location",
-    "no-index-ascertained": "No BelAQI index could be ascertained. This can be the case that the location is not in Belgium."
+    "no-index-ascertained": "No BelAQI index could be ascertained. This could be due to technical problems on our server or to the location is not being in Belgium."
   },
   "belaqi": {
     "level-split": {
@@ -109,8 +109,10 @@
     "loading-nearest-stations": "Load nearest measurements",
     "no-timeseries-selected": "No timeseries selected!",
     "overlay": {
+      "attention": "Attention:",
       "content-p1": "The diagrams give the hourly evolution as measured in the closest official measuring stations to the locations you configured. The time series of pollutants which are part of the BelAQI-index are coloured according to this index.",
-      "content-p2": "For particulate matter (both of a diameter of less than 2.5 and 10 micrometres) only running 24-hour mean time series are coloured, since it is the running 24-hour mean which is part of the index, not the hourly mean.",
+      "content-p2": "For particulate matter (both of a diameter of less than 2.5 and 10 micrometres) only running 24-hour mean time series are coloured, since it is the running 24-hour mean which is part of the BelAQI index, not the hourly mean. The reason for this is that health effects from particulate matter are associated with 24-hour exposure.",
+      "content-p3": "The index given elsewhere in the app for your location is not only based on the result of all monitoring stations in our monitoring networks, where the nearest station is possibly several kilometers away. The concentrations measured at all government monitoring stations are added to a computer model, which also takes into account emission data (traffic, industry and shipping) and meteorological conditions (wind direction and wind speed). This computer model then calculates detailed air quality maps for the geese country. The combination of the result for nitrogen dioxide, particulate matter and ozone is shown as one index in the app.",
       "header": "What do you see on this screen?",
       "url-svg": "../../assets/svg/belaqi_EN.svg"
     },
@@ -255,9 +257,10 @@
     },
     "nearest-station": "Nearest station",
     "no-legend": "No legend available",
+    "opacity-slider-header": "Transparency",
     "overlay": {
 			"content-p1": "The map gives you an overview of the air quality in Belgium. Using a colour code, you can compare the air quality at your location with that of other locations. Red is very bad, while blue stands for excellent air quality.",
-			"content-p2": "The index for the chosen location is updated every hour. The app can also make predictions based on the available information.",
+			"content-p2": "The index for the chosen location is updated every hour. The app also gives you a forecast of the BelAQI index for the next few hours and days.",
 			"header": "What do you see on this screen?",
       "url-svg": "../../assets/svg/belaqi_EN.svg"
 		},
@@ -442,7 +445,7 @@
   "start": {
     "overlay": {
       "content-p1": "The impact of air quality is calculated on the basis of the air quality index. That is a figure between 1 and 10, where 10 stands for very poor and 1 for excellent air quality. For this score, the app is based on data from monitoring stations throughout Belgium, weather and traffic and relevant pollutants.",
-      "content-p2": "The index for the chosen location is updated every hour. The app can also make predictions based on the available information.",
+      "content-p2": "The index for the chosen location is updated every hour. The app also gives you a forecast of the BelAQI index for the next few hours and days.",
       "content-p3": "The air quality index reflects the impact on health in the short term. This impact can vary from hour to hour and lead to temporary health problems. At higher concentrations of air pollutants, acute effects can occur, such as an asthma or even a heart attack.",
       "content-p4": "Prolonged exposure to air pollutants can provoke chronic effects and can lead to a higher risk of heart and lung diseases including lung cancer.",
       "header": "What do you see on this screen?"

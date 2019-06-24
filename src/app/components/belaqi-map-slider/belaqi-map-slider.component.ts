@@ -1,7 +1,8 @@
 import './boundary-canvas';
+import './control-opacity';
 
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, Output, ViewChild, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { DatasetApiInterface, ParameterFilter, Phenomenon, SettingsService, Station } from '@helgoland/core';
 import { GeoSearchOptions, LayerOptions, MapCache } from '@helgoland/map';
 import { IonSlides, ModalController } from '@ionic/angular';
@@ -11,15 +12,20 @@ import {
   BoundaryCanvasOptions,
   circleMarker,
   CircleMarker,
+  Control,
+  control,
   divIcon,
   FitBoundsOptions,
   geoJSON,
   latLngBounds,
+  LatLngBoundsExpression,
   LatLngExpression,
   LatLngLiteral,
   Layer,
+  Marker,
   marker,
   point,
+  Popup,
   popup,
   tileLayer,
 } from 'leaflet';
@@ -27,21 +33,21 @@ import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
 import moment from 'moment';
 import { forkJoin, Subscription } from 'rxjs';
 
-import { getIDForMainPhenomenon, MainPhenomenon, getMainPhenomenonForID, PhenomenonIDMapping } from '../../model/phenomenon';
+import { getIDForMainPhenomenon, getMainPhenomenonForID, MainPhenomenon } from '../../model/phenomenon';
 import { annualWmsURL, forecastWmsURL, realtimeWmsURL, rioifdmWmsURL } from '../../model/services';
 import { AnnualMeanService } from '../../services/annual-mean/annual-mean.service';
+import { BelaqiIndexService } from '../../services/belaqi/belaqi.service';
+import { CategorizedValueService } from '../../services/categorized-value/categorized-value.service';
 import { IrcelineSettings, IrcelineSettingsService } from '../../services/irceline-settings/irceline-settings.service';
 import { LocateService, LocationStatus } from '../../services/locate/locate.service';
 import { MapDataService } from '../../services/map-data/map-data.service';
+import { ModelledValueService } from '../../services/modelled-value/modelled-value.service';
 import { NetworkAlertService } from '../../services/network-alert/network-alert.service';
 import { RefreshHandler } from '../../services/refresh/refresh.service';
 import { MobileSettings } from '../../services/settings/settings.service';
 import { UserLocation, UserLocationListService } from '../../services/user-location-list/user-location-list.service';
 import { MarkerSelectorGenerator } from '../customized-station-map-selector/customized-station-map-selector.component';
 import { HeaderContent } from '../slider-header/slider-header.component';
-import { ModelledValueService } from '../../services/modelled-value/modelled-value.service';
-import { CategorizedValueService } from '../../services/categorized-value/categorized-value.service';
-import { BelaqiIndexService } from '../../services/belaqi/belaqi.service';
 
 enum PhenomenonLabel {
   BelAQI = 'BelAQI',
@@ -170,26 +176,21 @@ export class BelaqiMapSliderComponent implements OnDestroy, OnInit {
   }
 
   public changeToMap() {
-    this.navigatToSelection();
+    this.presentSelection();
   }
 
-  private navigatToSelection() {
+  private presentSelection() {
     if (this.mapDataService.selection) {
       const label = this.mapDataService.selection.userlocation.label;
       if (this.belaqiMapviews) {
-        let hasNavigated = false;
-        this.belaqiMapviews.some((element, i) => {
-          if (element.location.label === label) {
-            hasNavigated = true;
-            this.belaqiMapviews[i].selectMap();
-            this.slider.slideTo(i);
-            this.setHeader(i);
-            return true;
-          } else {
-            return false;
-          }
-        });
-        return hasNavigated;
+        const navigateToIdx = this.belaqiMapviews.findIndex(e => e.location.label === label);
+        if (navigateToIdx >= 0) {
+          this.belaqiMapviews[navigateToIdx].selectMap();
+          setTimeout(() => {
+            this.slider.slideTo(navigateToIdx);
+          }, 1000);
+          this.setHeader(navigateToIdx);
+        }
       }
     }
   }
@@ -201,7 +202,6 @@ export class BelaqiMapSliderComponent implements OnDestroy, OnInit {
       this.ircelineSettings.getSettings(reload).subscribe(
         ircelineSettings => {
           this.belaqiMapviews = [];
-          let hasNavigated = false;
           this.userLocationListService.getVisibleUserLocations().forEach((loc, i) => {
             // Init MapView
             this.belaqiMapviews[i] = new MapView(this.settingsSrvc,
@@ -226,9 +226,7 @@ export class BelaqiMapSliderComponent implements OnDestroy, OnInit {
               this.setLocation(loc, i, ircelineSettings);
               if (this.slider) {
                 this.slider.update();
-                if (!hasNavigated) {
-                  hasNavigated = this.navigatToSelection();
-                }
+                this.presentSelection();
               }
             } else {
               this.belaqiMapviews[i].location = {
@@ -250,9 +248,7 @@ export class BelaqiMapSliderComponent implements OnDestroy, OnInit {
                       this.setLocation(currentLoc, i, ircelineSettings);
                       if (this.slider) {
                         this.slider.update();
-                        if (!hasNavigated) {
-                          hasNavigated = this.navigatToSelection();
-                        }
+                        this.presentSelection();
                         this.refreshHeader();
                       }
                     },
@@ -349,16 +345,16 @@ class MapView {
   public location: UserLocation;
   public phenomenonFilter: ParameterFilter;
   public avoidZoomToSelection: boolean;
-  public zoomControlOptions: L.Control.ZoomOptions = {};
+  public zoomControlOptions: Control.ZoomOptions = {};
   public overlayMaps: Map<string, LayerOptions> = new Map<string, LayerOptions>();
-  public fitBounds: L.LatLngBoundsExpression;
+  public fitBounds: LatLngBoundsExpression;
 
   public selectedPhenomenonId: string;
   public selectedPhenomenonLabel: string;
 
   public phenomenonLabel: PhenomenonLabel;
-  private nextStationPopup: L.Popup;
-  private userLocationMarker: L.Marker;
+  private nextStationPopup: Popup;
+  private userLocationMarker: Marker;
   public markerSelectorGenerator: MarkerSelectorGenerator;
 
   private time: TimeLabel;
@@ -385,6 +381,7 @@ class MapView {
   public geoSearchOptions: GeoSearchOptions;
   public clusterStations: boolean;
   public providerUrl: string;
+  private opacityControl: Control.Layers;
 
   constructor(
     protected settingsSrvc: SettingsService<MobileSettings>,
@@ -493,6 +490,7 @@ class MapView {
       map.addEventListener('layeradd', (() => {
         map.invalidateSize(true);
       }));
+      this.adjustOpacitySlider();
     }
   }
 
@@ -551,15 +549,15 @@ class MapView {
           break;
       }
 
-      //hmean-mode
-      let transitionTable = [
-        [1, 0, 0, 0, 0, 1], //anmean
-        [0, 0, 0, 0, 0, 0], //hmean
-        [-1, 1, -1, 1, 0, 0], //24hmean
-        [-1, 1, -2, 2, -1, 1], //today
-        [-1, 1, -3, 3, -2, 2], //tomorrow
-        [-1, 1, -4, 4, -3, 3], //today+2
-        [-1, 1, -5, 5, -4, 4]  //today+3
+      // hmean-mode
+      const transitionTable = [
+        [1, 0, 0, 0, 0, 1], // anmean
+        [0, 0, 0, 0, 0, 0], // hmean
+        [-1, 1, -1, 1, 0, 0], // 24hmean
+        [-1, 1, -2, 2, -1, 1], // today
+        [-1, 1, -3, 3, -2, 2], // tomorrow
+        [-1, 1, -4, 4, -3, 3], // today+2
+        [-1, 1, -5, 5, -4, 4]  // today+3
       ];
       if (this.mode === 'belaqi') {
         // belaqi-mode
@@ -961,6 +959,7 @@ class MapView {
             default:
               break;
           }
+          this.adjustOpacitySlider();
         });
       } else {
         switch (this.phenomenonLabel) {
@@ -999,6 +998,7 @@ class MapView {
             break;
         }
         this.drawLayer(forecastWmsURL, layerId, geojson, timeParam);
+        this.adjustOpacitySlider();
       }
     });
   }
@@ -1024,6 +1024,18 @@ class MapView {
       });
     }
   }
+
+  private adjustOpacitySlider() {
+    if (this.mapCache.hasMap(this.mapId)) {
+      if (this.opacityControl) { this.opacityControl.remove(); }
+      const layers = {};
+      this.overlayMaps.forEach(e => layers[e.label] = e.layer);
+      this.opacityControl = control.opacity(layers,
+        { position: 'bottomleft', collapsed: true, label: this.translateSrvc.instant('map.opacity-slider-header') }
+      ).addTo(this.mapCache.getMap(this.mapId));
+    }
+  }
+
 }
 
 
@@ -1037,8 +1049,8 @@ class MarkerSelectorGeneratorImpl implements MarkerSelectorGenerator {
   createFilledMarker(station: Station, color: string): Layer {
     let geometry: Layer;
     if (station.geometry.type === 'Point') {
-      const point = station.geometry as GeoJSON.Point;
-      geometry = circleMarker([point.coordinates[1], point.coordinates[0]], {
+      const p = station.geometry as GeoJSON.Point;
+      geometry = circleMarker([p.coordinates[1], p.coordinates[0]], {
         color: '#000',
         fillColor: color,
         fillOpacity: 0.8,
