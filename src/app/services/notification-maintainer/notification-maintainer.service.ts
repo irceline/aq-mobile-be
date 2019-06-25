@@ -24,13 +24,18 @@ export class NotificationMaintainerService {
     private pushNotificationService: PushNotificationsService
   ) {
     this.storage.get(NOTIFICATION_PARAM)
-      .then(res => res ? this.setNotifications(this.deserializeNotifications(res)) : this.setNotifications(new Map()))
-      .catch(() => this.setNotifications(new Map()));
+      .then(res => this.initNotifications(res))
+      .catch(() => this.setNotifications(null));
     setInterval(() => this.saveNotifications(), 10000);
+  }
 
-    this.pushNotificationService.notificationReceived.subscribe(notification => {
-      this.addNotification(notification);
-    });
+  private initNotifications(res: any) {
+    if (res !== undefined) {
+      this.setNotifications(this.deserializeNotifications(res));
+    } else {
+      this.setNotifications(new Map());
+    }
+    this.pushNotificationService.notificationReceived.subscribe(notification => this.addNotification(notification));
   }
 
   private setNotifications(res: Map<string, PushNotification[]>) {

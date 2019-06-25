@@ -1,6 +1,7 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { Platform } from '@ionic/angular';
+import { ReplaySubject } from 'rxjs';
 
 export interface PushNotification {
   topic: string;
@@ -18,7 +19,7 @@ export enum PushNotificationTopic {
 @Injectable()
 export class PushNotificationsService {
 
-  public notificationReceived: EventEmitter<PushNotification> = new EventEmitter();
+  public notificationReceived: ReplaySubject<PushNotification> = new ReplaySubject(1);
 
   constructor(
     private platform: Platform,
@@ -54,7 +55,7 @@ export class PushNotificationsService {
             };
             console.log(`${JSON.stringify(data)}`);
             console.log(`add Notification: ${data.title}, ${data.body}, ${data.expiration}, ${data.topic}`);
-            this.notificationReceived.emit(notification);
+            this.notificationReceived.next(notification);
           }
         });
 
