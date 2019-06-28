@@ -490,7 +490,7 @@ class MapView {
       map.addEventListener('layeradd', (() => {
         map.invalidateSize(true);
       }));
-      this.adjustOpacitySlider();
+      // this.adjustOpacitySlider();
     }
   }
 
@@ -959,7 +959,7 @@ class MapView {
             default:
               break;
           }
-          this.adjustOpacitySlider();
+          // this.adjustOpacitySlider();
         });
       } else {
         switch (this.phenomenonLabel) {
@@ -998,7 +998,7 @@ class MapView {
             break;
         }
         this.drawLayer(forecastWmsURL, layerId, geojson, timeParam);
-        this.adjustOpacitySlider();
+        // this.adjustOpacitySlider();
       }
     });
   }
@@ -1025,16 +1025,16 @@ class MapView {
     }
   }
 
-  private adjustOpacitySlider() {
-    if (this.mapCache.hasMap(this.mapId)) {
-      if (this.opacityControl) { this.opacityControl.remove(); }
-      const layers = {};
-      this.overlayMaps.forEach(e => layers[e.label] = e.layer);
-      this.opacityControl = control.opacity(layers,
-        { position: 'bottomleft', collapsed: true, label: this.translateSrvc.instant('map.opacity-slider-header') }
-      ).addTo(this.mapCache.getMap(this.mapId));
-    }
-  }
+  // private adjustOpacitySlider() {
+  //   if (this.mapCache.hasMap(this.mapId)) {
+  //     if (this.opacityControl) { this.opacityControl.remove(); }
+  //     const layers = {};
+  //     this.overlayMaps.forEach(e => layers[e.label] = e.layer);
+  //     this.opacityControl = control.opacity(layers,
+  //       { position: 'bottomleft', collapsed: true, label: this.translateSrvc.instant('map.opacity-slider-header') }
+  //     ).addTo(this.mapCache.getMap(this.mapId));
+  //   }
+  // }
 
 }
 
