@@ -82,11 +82,13 @@ L.Control.Opacity = L.Control.extend({
 		}
 	},
 	_addLayer: function (layer, name, overlay) {
-		this._layers.push({
-			layer: layer,
-			name: name,
-			overlay: overlay
-		});
+		if (!layer.options.hideInOpacitySlider) {
+			this._layers.push({
+				layer: layer,
+				name: name,
+				overlay: overlay
+			});
+		}
 	},
 	_update: function () {
 		if (!this._container) { return this; }
@@ -117,7 +119,7 @@ L.Control.Opacity = L.Control.extend({
 			input.className = 'leaflet-control-layers-range';
             input.min = 0;
             input.max = 100;
-            input.value = 100;
+            input.value = obj.layer.options.opacity * 100;
 		} else {
 			input = this._createRadioElement('leaflet-base-layers', checked);
 		}

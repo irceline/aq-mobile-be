@@ -490,7 +490,7 @@ class MapView {
       map.addEventListener('layeradd', (() => {
         map.invalidateSize(true);
       }));
-      // this.adjustOpacitySlider();
+      this.adjustOpacitySlider();
     }
   }
 
@@ -900,66 +900,66 @@ class MapView {
           const year = result[0];
           switch (this.phenomenonLabel) {
             case PhenomenonLabel.BelAQI:
-              this.drawLayer(rioifdmWmsURL, 'belaqi', geojson, lastUpdate);
+              this.drawLayer(rioifdmWmsURL, 'belaqi', geojson, false, lastUpdate);
               break;
             case PhenomenonLabel.BC:
               if (this.mean === MeanLabel.hourly) {
-                this.drawLayer(rioifdmWmsURL, 'bc_hmean', geojson, lastUpdate);
-                this.drawLayer(realtimeWmsURL, 'bc_hmean_station', geojson, lastUpdate);
+                this.drawLayer(rioifdmWmsURL, 'bc_hmean', geojson, false, lastUpdate);
+                this.drawLayer(realtimeWmsURL, 'bc_hmean_station', geojson, true, lastUpdate);
               }
               if (this.mean === MeanLabel.yearly) {
-                this.drawLayer(rioifdmWmsURL, `bc_anmean_${year}_atmostreet`, geojson);
-                this.drawLayer(annualWmsURL, 'bc_anmean_station', geojson, year);
+                this.drawLayer(rioifdmWmsURL, `bc_anmean_${year}_atmostreet`, geojson, false);
+                this.drawLayer(annualWmsURL, 'bc_anmean_station', geojson, true, year);
               }
               break;
             case PhenomenonLabel.NO2:
               if (this.mean === MeanLabel.hourly) {
-                this.drawLayer(rioifdmWmsURL, 'no2_hmean', geojson, lastUpdate);
-                this.drawLayer(realtimeWmsURL, 'no2_hmean_station', geojson, lastUpdate);
+                this.drawLayer(rioifdmWmsURL, 'no2_hmean', geojson, false, lastUpdate);
+                this.drawLayer(realtimeWmsURL, 'no2_hmean_station', geojson, true, lastUpdate);
               }
               if (this.mean === MeanLabel.yearly) {
-                this.drawLayer(rioifdmWmsURL, `no2_anmean_${year}_atmostreet`, geojson);
-                this.drawLayer(annualWmsURL, 'no2_anmean_station', geojson, year);
+                this.drawLayer(rioifdmWmsURL, `no2_anmean_${year}_atmostreet`, geojson, false);
+                this.drawLayer(annualWmsURL, 'no2_anmean_station', geojson, true, year);
               }
               break;
             case PhenomenonLabel.O3:
               if (this.mean === MeanLabel.hourly) {
-                this.drawLayer(rioifdmWmsURL, 'o3_hmean', geojson, lastUpdate);
-                this.drawLayer(realtimeWmsURL, 'o3_hmean_station', geojson, lastUpdate);
+                this.drawLayer(rioifdmWmsURL, 'o3_hmean', geojson, false, lastUpdate);
+                this.drawLayer(realtimeWmsURL, 'o3_hmean_station', geojson, true, lastUpdate);
               }
               break;
             case PhenomenonLabel.PM10:
               if (this.mean === MeanLabel.hourly) {
-                this.drawLayer(rioifdmWmsURL, 'pm10_hmean', geojson, lastUpdate);
-                this.drawLayer(realtimeWmsURL, 'pm10_hmean_station', geojson, lastUpdate);
+                this.drawLayer(rioifdmWmsURL, 'pm10_hmean', geojson, false, lastUpdate);
+                this.drawLayer(realtimeWmsURL, 'pm10_hmean_station', geojson, true, lastUpdate);
               }
               if (this.mean === MeanLabel.daily) {
-                this.drawLayer(rioifdmWmsURL, 'pm10_24hmean', geojson, lastUpdate);
-                this.drawLayer(realtimeWmsURL, 'pm10_24hmean_station', geojson, lastUpdate);
+                this.drawLayer(rioifdmWmsURL, 'pm10_24hmean', geojson, false, lastUpdate);
+                this.drawLayer(realtimeWmsURL, 'pm10_24hmean_station', geojson, true, lastUpdate);
               }
               if (this.mean === MeanLabel.yearly) {
-                this.drawLayer(rioifdmWmsURL, `pm10_anmean_${year}_atmostreet`, geojson);
-                this.drawLayer(annualWmsURL, 'pm10_anmean_station', geojson, year);
+                this.drawLayer(rioifdmWmsURL, `pm10_anmean_${year}_atmostreet`, geojson, false);
+                this.drawLayer(annualWmsURL, 'pm10_anmean_station', geojson, true, year);
               }
               break;
             case PhenomenonLabel.PM25:
               if (this.mean === MeanLabel.hourly) {
-                this.drawLayer(rioifdmWmsURL, 'pm25_hmean', geojson, lastUpdate);
-                this.drawLayer(realtimeWmsURL, 'pm25_hmean_station', geojson, lastUpdate);
+                this.drawLayer(rioifdmWmsURL, 'pm25_hmean', geojson, false, lastUpdate);
+                this.drawLayer(realtimeWmsURL, 'pm25_hmean_station', geojson, true, lastUpdate);
               }
               if (this.mean === MeanLabel.daily) {
-                this.drawLayer(rioifdmWmsURL, 'pm25_24hmean', geojson, lastUpdate);
-                this.drawLayer(realtimeWmsURL, 'pm25_24hmean_station', geojson, lastUpdate);
+                this.drawLayer(rioifdmWmsURL, 'pm25_24hmean', geojson, false, lastUpdate);
+                this.drawLayer(realtimeWmsURL, 'pm25_24hmean_station', geojson, true, lastUpdate);
               }
               if (this.mean === MeanLabel.yearly) {
-                this.drawLayer(rioifdmWmsURL, `pm25_anmean_${year}_atmostreet`, geojson);
-                this.drawLayer(annualWmsURL, 'pm25_anmean_station', geojson, year);
+                this.drawLayer(rioifdmWmsURL, `pm25_anmean_${year}_atmostreet`, geojson, false);
+                this.drawLayer(annualWmsURL, 'pm25_anmean_station', geojson, true, year);
               }
               break;
             default:
               break;
           }
-          // this.adjustOpacitySlider();
+          this.adjustOpacitySlider();
         });
       } else {
         switch (this.phenomenonLabel) {
@@ -997,13 +997,13 @@ class MapView {
           default:
             break;
         }
-        this.drawLayer(forecastWmsURL, layerId, geojson, timeParam);
-        // this.adjustOpacitySlider();
+        this.drawLayer(forecastWmsURL, layerId, geojson, true, timeParam);
+        this.adjustOpacitySlider();
       }
     });
   }
 
-  private drawLayer(wmsUrl: string, layerId: string, geojson: GeoJSON.GeoJsonObject, timeParam?: string) {
+  private drawLayer(wmsUrl: string, layerId: string, geojson: GeoJSON.GeoJsonObject, hideInOpacitySlider: boolean, timeParam?: string) {
     if (layerId) {
       const layerOptions: BoundaryCanvasOptions = {
         layers: layerId,
@@ -1011,6 +1011,7 @@ class MapView {
         format: 'image/png',
         tiled: 'true',
         opacity: 0.7,
+        hideInOpacitySlider: hideInOpacitySlider,
         boundary: geojson,
         useBoundaryGreaterAsZoom: 12
       };
@@ -1025,16 +1026,16 @@ class MapView {
     }
   }
 
-  // private adjustOpacitySlider() {
-  //   if (this.mapCache.hasMap(this.mapId)) {
-  //     if (this.opacityControl) { this.opacityControl.remove(); }
-  //     const layers = {};
-  //     this.overlayMaps.forEach(e => layers[e.label] = e.layer);
-  //     this.opacityControl = control.opacity(layers,
-  //       { position: 'bottomleft', collapsed: true, label: this.translateSrvc.instant('map.opacity-slider-header') }
-  //     ).addTo(this.mapCache.getMap(this.mapId));
-  //   }
-  // }
+  private adjustOpacitySlider() {
+    if (this.mapCache.hasMap(this.mapId)) {
+      if (this.opacityControl) { this.opacityControl.remove(); }
+      const layers = {};
+      this.overlayMaps.forEach(e => layers[e.label] = e.layer);
+      this.opacityControl = control.opacity(layers,
+        { position: 'bottomleft', collapsed: true, label: this.translateSrvc.instant('map.opacity-slider-header') }
+      ).addTo(this.mapCache.getMap(this.mapId));
+    }
+  }
 
 }
 
