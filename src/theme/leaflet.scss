@@ -16,6 +16,24 @@
   }
 }
 
+.leaflet-control-layers {
+  .leaflet-control-layers-label {
+    display: none;
+  }
+  &.leaflet-control-layers-expanded {
+    .leaflet-control-layers-label {
+      display: block;
+    }
+  }
+  .leaflet-control-layers-list {
+    .leaflet-control-layers-overlays {
+      span {
+        display: none;
+      }
+    }
+  }
+}
+
 .leaflet-pane {
   .marker:after {
     content: "";
