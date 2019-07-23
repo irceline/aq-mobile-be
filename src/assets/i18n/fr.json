@@ -327,6 +327,13 @@
     "offline": "Votre appareil est offline",
     "online": "Votre appareil est online"
   },
+  "notifications-popup": {
+    "header": "Notifications",
+    "valid-until": "Le message est valable jusqu'au:",
+    "channels": "Pour votre canal de notification:",
+    "french-version-below": "(Version française ci-dessous)",
+    "dutch-version-below": "(Version néerlandaise ci-dessous)"
+	},
   "no-network-connection": {
     "body": "Votre appareil n'a pas de connexion réseau. L'application BelAir dépend des données extraites de nos serveurs. Veuillez vous connecter aux données mobiles ou à un réseau wifi et actualiser l'application.",
     "close": "Fermer",

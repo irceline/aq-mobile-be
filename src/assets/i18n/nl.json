@@ -327,6 +327,13 @@
     "offline": "Uw toestel is offline",
     "online": "Uw toestel is online"
   },
+  "notifications-popup": {
+    "header": "Meldingen",
+    "valid-until": "Bericht is geldig tot:",
+    "channels": "Voor uw meldingskanaal:",
+    "french-version-below": "(Franse versie hieronder)",
+    "dutch-version-below": "(Nederlandse versie hieronder)"
+	},
   "no-network-connection": {
     "body": "Uw apparaat heeft geen gegevensnetwerkverbinding. De BelAir-app is sterk afhankelijk van het ophalen van nieuwe gegevens van onze servers. Activeer alstublieft een datanetwerk (mobiele data- of wifi-verbinding) en ververs de app of probeer het opnieuw wanneer u binnen bereik bent van een datanetwerk waartoe u toegang hebt.",
     "close": "Sluiten",
