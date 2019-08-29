@@ -28,7 +28,7 @@ export class DailyMeanValueService {
 
   public get24hValue(stationID: string, time: Date, phenomenon: MainPhenomenon): Observable<DailyMeanValue> {
     if (phenomenon === MainPhenomenon.PM10 || phenomenon === MainPhenomenon.PM25) {
-      const layerId = MainPhenomenon.PM10 ? 'pm10_24hmean_station' : 'pm25_24hmean_station';
+      const layerId = phenomenon === MainPhenomenon.PM10 ? 'pm10_24hmean_station' : 'pm25_24hmean_station';
       return this.fetchValue({
         stationID,
         time,
