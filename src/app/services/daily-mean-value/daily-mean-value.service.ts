@@ -48,6 +48,7 @@ export class DailyMeanValueService {
     phenomenon: MainPhenomenon;
     url: string;
   }): Observable<DailyMeanValue> {
+    const stationCode = param.stationID.substr(0, param.stationID.indexOf(' '));
     const requestParams = {
       service: 'WFS',
       version: '2.0',
@@ -55,7 +56,7 @@ export class DailyMeanValueService {
       typeNames: param.layerId,
       srsName: 'EPSG:4326',
       outputFormat: 'application/json',
-      cql_filter: `ab_name='${param.stationID}' AND timestamp='${param.time.toISOString()}'`
+      cql_filter: `ab_name LIKE '${stationCode}%' AND timestamp='${param.time.toISOString()}'`
     };
     const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(param.url, { params: requestParams });
     return this.cacheService.loadFromObservable(createCacheKey(param.url, JSON.stringify(requestParams), param.time), request).pipe(
