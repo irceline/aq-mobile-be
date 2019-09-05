@@ -997,7 +997,7 @@ class MapView {
           default:
             break;
         }
-        this.drawLayer(forecastWmsURL, layerId, geojson, true, timeParam);
+        this.drawLayer(forecastWmsURL, layerId, geojson, false, timeParam);
         this.adjustOpacitySlider();
       }
     });
