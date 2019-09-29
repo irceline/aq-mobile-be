@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { TranslateService } from '@ngx-translate/core';
 import { Observable, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -13,6 +15,11 @@ import { USER_LOCATION_NOTIFICATION_TOPIC_PREFIX } from '../user-location-notifi
 
 const NOTIFICATION_PARAM = 'notifications';
 
+const URL_NOTIFICATION_BRUSSELS_FR = 'https://www.irceline.be/air/belair/channel/brussels_fr.json';
+const URL_NOTIFICATION_BRUSSELS_NL = 'https://www.irceline.be/air/belair/channel/brussels_nl.json';
+const URL_NOTIFICATION_FLANDERS = 'https://www.irceline.be/air/belair/channel/flanders.json';
+const URL_NOTIFICATION_WALLONIA = 'https://www.irceline.be/air/belair/channel/wallonia.json';
+
 @Injectable()
 export class NotificationMaintainerService {
 
@@ -21,22 +28,70 @@ export class NotificationMaintainerService {
 
   constructor(
     private storage: Storage,
+    private httpClient: HttpClient,
+    private translate: TranslateService,
     private pushNotificationHandler: PushNotificationsHandlerService,
     private pushNotificationService: PushNotificationsService
   ) {
     this.storage.get(NOTIFICATION_PARAM)
-      .then(res => res ? this.setNotifications(this.deserializeNotifications(res)) : this.setNotifications(new Map()))
-      .catch(() => this.setNotifications(new Map()));
+      .then(res => this.initNotifications(res))
+      .catch(() => this.setNotifications(null));
     setInterval(() => this.saveNotifications(), 10000);
-
-    this.pushNotificationService.notificationReceived.subscribe(notification => {
-      this.addNotification(notification);
-    });
   }
 
-  private setNotifications(res: Map<string, PushNotification[]>) {
-    this.notifications = res;
+  private initNotifications(res: any) {
+    if (res !== undefined) {
+      this.setNotifications(this.deserializeNotifications(res));
+    } else {
+      this.setNotifications(new Map());
+    }
+    this.pushNotificationService.notificationReceived.subscribe(notification => this.addNotification(notification));
+  }
+
+  private setNotifications(notificationMap: Map<string, PushNotification[]>) {
+    // temporary cleanup for old entries
+    notificationMap.forEach((v, k) => {
+      if (k !== PushNotificationTopic.brussels && k !== PushNotificationTopic.wallonia && k !== PushNotificationTopic.flanders) {
+        notificationMap.delete(k);
+      }
+    });
+
+    if (this.pushNotificationHandler.isTopicActive(PushNotificationTopic.wallonia)
+      && !notificationMap.get(PushNotificationTopic.wallonia)) {
+      this.loadServedNotification(URL_NOTIFICATION_WALLONIA);
+    }
+    if (this.pushNotificationHandler.isTopicActive(PushNotificationTopic.flanders)
+      && !notificationMap.get(PushNotificationTopic.flanders)) {
+      this.loadServedNotification(URL_NOTIFICATION_FLANDERS);
+    }
+    if (this.pushNotificationHandler.isTopicActive(PushNotificationTopic.brussels)
+      && !notificationMap.get(PushNotificationTopic.brussels)) {
+      // request notification based on language
+      switch (this.translate.currentLang) {
+        case 'nl':
+          this.loadServedNotification(URL_NOTIFICATION_BRUSSELS_NL);
+          break;
+        case 'fr':
+          this.loadServedNotification(URL_NOTIFICATION_BRUSSELS_FR);
+          break;
+        case 'de':
+        case 'en':
+          this.loadServedNotification(URL_NOTIFICATION_BRUSSELS_NL);
+          this.loadServedNotification(URL_NOTIFICATION_BRUSSELS_FR);
+          break;
+      }
+    }
+    this.notifications = notificationMap;
     this.saveNotifications();
+  }
+
+  private loadServedNotification(url: string) {
+    this.httpClient.get(url).subscribe((res: any) => {
+      if (res && res.data && res.data.expiration) {
+        res.data.expiration = new Date(res.data.expiration);
+        this.addNotification(res.data);
+      }
+    });
   }
 
   public getNotifications(): Observable<Map<string, PushNotification[]>> {
@@ -92,12 +147,9 @@ export class NotificationMaintainerService {
   }
 
   private generateKey(notification: PushNotification): string {
-    let topic = notification.topic;
-    if (!notification.topic.startsWith(USER_LOCATION_NOTIFICATION_TOPIC_PREFIX)) {
-      const idx = notification.topic.indexOf('_') === -1 ? notification.topic.length : notification.topic.indexOf('_');
-      topic = notification.topic.substring(0, idx);
-    }
-    return `${notification.expiration.getTime()}@${topic}`;
+    const idx = notification.topic.indexOf('_') === -1 ? notification.topic.length : notification.topic.indexOf('_');
+    const trimmedTopic = notification.topic.substring(0, idx);
+    return `${trimmedTopic}`;
   }
 
   private filterNotifications() {

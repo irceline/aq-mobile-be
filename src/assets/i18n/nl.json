@@ -104,7 +104,7 @@
     "hint": "Om deze functionaliteit te gebruiken, moet de app op de achtergrond blijven draaien. Uw locatie wordt slechts één keer bepaald voor het gekozen verificatieinterval als u de luchtkwaliteit op uw huidige locatie wilt controleren. Alle persoonlijk geconfigureerde locaties worden ook gecontroleerd."
   },
   "diagram": {
-    "header": "grafiek",
+    "header": "Grafiek",
     "loading": "bezig met laden",
     "loading-nearest-stations": "Laad dichtstbijgelegen metingen",
     "no-timeseries-selected": "Geen tijdsreeks geselecteerd!",
@@ -257,7 +257,7 @@
     },
     "nearest-station": "Dichtstbijgelegen meetstation",
     "no-legend": "Geen legende beschikbaar",
-    "opacity-slider-header": "",
+    "opacity-slider-header": "Transparantie",
     "overlay": {
       "content-p1": "De kaart geeft je een overzicht van de luchtkwaliteit in België. Aan de hand van een kleurencode, kan je de luchtkwaliteit op jouw locatie vergelijken met die van andere locaties. Rood is zeer slecht, terwijl blauw staat voor een uitstekende luchtkwaliteit.",
       "content-p2": "Elk uur wordt het indexcijfer voor de gekozen locatie vernieuwd. De app geeft je ook een voorspelling van de BelAQI index de volgende uren en dagen.",
@@ -327,6 +327,13 @@
     "offline": "Uw toestel is offline",
     "online": "Uw toestel is online"
   },
+  "notifications-popup": {
+    "header": "Meldingen",
+    "valid-until": "Bericht is geldig tot:",
+    "channels": "Voor uw meldingskanaal:",
+    "french-version-below": "(Franse versie hieronder)",
+    "dutch-version-below": "(Nederlandse versie hieronder)"
+	},
   "no-network-connection": {
     "body": "Uw apparaat heeft geen gegevensnetwerkverbinding. De BelAir-app is sterk afhankelijk van het ophalen van nieuwe gegevens van onze servers. Activeer alstublieft een datanetwerk (mobiele data- of wifi-verbinding) en ververs de app of probeer het opnieuw wanneer u binnen bereik bent van een datanetwerk waartoe u toegang hebt.",
     "close": "Sluiten",
