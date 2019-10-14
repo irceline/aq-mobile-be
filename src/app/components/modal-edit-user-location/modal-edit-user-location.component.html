@@ -10,8 +10,10 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
+  <div class="toggle">
+    <user-location-notifications-toggler [location]="userLocation"></user-location-notifications-toggler>
+  </div>
   <div style="height: 300px;">
     <location-selection mapId="location-gen" [mapOptions]="mapOptions" [location]="point" (locationChanged)="onLocationChanged($event)"></location-selection>
   </div>

@@ -8,6 +8,9 @@ import {
   ModalUserLocationCreationComponent,
 } from '../../modal-user-location-creation/modal-user-location-creation.component';
 import { ModalUserLocationListComponent } from '../../modal-user-location-list/modal-user-location-list.component';
+import {
+  UserLocationNotificationsService,
+} from '../../../services/user-location-notifications/user-location-notifications.service';
 
 @Component({
   selector: 'user-locations-settings',
@@ -24,7 +27,8 @@ export class UserLocationsSettingsComponent implements OnInit {
     protected modalCtrl: ModalController,
     protected userLocationService: UserLocationListService,
     private locate: LocateService,
-    private toast: ToastController
+    private toast: ToastController,
+    private locationNotifications: UserLocationNotificationsService
   ) {
     this.setLocations();
   }
@@ -57,6 +61,10 @@ export class UserLocationsSettingsComponent implements OnInit {
 
     this.userLocationService.setLocationList(this.locations);
     event.detail.complete(true);
+  }
+
+  public async getLocationNotificationStatus(location: UserLocation) {
+    this.locationNotifications.isRegisteredSubscription(location).subscribe(v => {return v});
   }
 
   public async editLocation(location: UserLocation) {

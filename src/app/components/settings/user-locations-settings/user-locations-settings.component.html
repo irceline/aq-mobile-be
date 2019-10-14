@@ -23,6 +23,8 @@
             <ion-reorder></ion-reorder>
             <div class="location-item">
               <ion-label text-left text-wrap class="header">
+                <ion-icon *ngIf="getLocationNotificationStatus(location)" slot="icon-only" name="md-notifications-off" style="position: relative;top: 2px;"></ion-icon>
+                <ion-icon *ngIf="!getLocationNotificationStatus(location)" slot="icon-only" name="md-notifications" style="position: relative;top: 2px;"></ion-icon>
                 {{location.label}}
               </ion-label>
             </div>
