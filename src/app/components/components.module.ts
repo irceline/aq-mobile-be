@@ -53,6 +53,8 @@ import { SliderHeaderComponent } from './slider-header/slider-header.component';
 import { SubIndexPanelEntryComponent } from './sub-index-panel/sub-index-panel-entry.component';
 import { SubIndexPanelInformationPopupComponent } from './sub-index-panel/sub-index-panel-information-popup.component';
 import { SubIndexPanelComponent } from './sub-index-panel/sub-index-panel.component';
+import { SurveyComponent } from './survey/survey-button.component';
+import { SurveyPopupComponent } from './survey/survey-popup.component';
 import { UserLocationCreationComponent } from './user-location-creation/user-location-creation.component';
 
 const COMPONENTS = [
@@ -83,8 +85,8 @@ const COMPONENTS = [
   NearestMeasuringStationPanelComponent,
   NearestMeasuringStationPanelEntryComponent,
   NearestMeasuringStationPanelInformationPopupComponent,
-  NotificationPopupComponent,
   NotificationPanelComponent,
+  NotificationPopupComponent,
   OverlayInfoDrawerComponent,
   PushNotificationSubscriptionsSettingsComponent,
   SingleChartComponent,
@@ -93,6 +95,8 @@ const COMPONENTS = [
   SubIndexPanelComponent,
   SubIndexPanelEntryComponent,
   SubIndexPanelInformationPopupComponent,
+  SurveyComponent,
+  SurveyPopupComponent,
   UserLocationCreationComponent,
   UserLocationsSettingsComponent,
 ];

@@ -12,6 +12,7 @@ export interface IrcelineSettings {
   timestring: string;
   timestring_day: string;
   top_pollutant_today: string;
+  survey?: boolean;
 }
 
 const DEFAULT_TTL_CACHE = 60 * 60 * 24 * 3; // 3 days
@@ -38,7 +39,7 @@ export class IrcelineSettingsService {
           .then(() => {
             this.doRequest(url, observer);
           })
-          .catch(() => this.doRequest(url, observer))
+          .catch(() => this.doRequest(url, observer));
       } else {
         this.doRequest(url, observer);
       }
@@ -52,7 +53,8 @@ export class IrcelineSettingsService {
         lastupdate: moment(result['lastupdate']).toDate(),
         timestring: result['timestring'],
         timestring_day: result['timestring_day'],
-        top_pollutant_today: result['top_pollutant_today']
+        top_pollutant_today: result['top_pollutant_today'],
+        survey: result.survey ? result.survey === '1' : false
       }),
       error => observer.error(error),
       () => observer.complete()

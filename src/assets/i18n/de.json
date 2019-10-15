@@ -471,6 +471,13 @@
 			"text": "Dies sind die berechneten \"Subindizes\" für Ihren Standort. Der globale BelAQI-Index ist der höchste Wert dieser 4 Subindizes. Die Konzentrationsskalen wurden in Abhängigkeit von den kurzfristigen Auswirkungen auf die Gesundheit bestimmt. Die 4 zur Berechnung des BelAQI-Index verwendeten Schadstoffe sind:"
 		}
 	},
+	"survey": {
+		"confirm": "",
+		"header": "",
+		"help-us": "",
+		"notagain": "",
+		"question": ""
+	},
 	"update": {
 		"hint": {
 			"popover": {

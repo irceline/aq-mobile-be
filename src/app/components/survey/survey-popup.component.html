@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      {{'survey.header' | translate}}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()" id="close-modal">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  {{'survey.question' | translate}}
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="deselect()">
+        {{'survey.notagain' | translate}}
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="openSurvey()">
+        {{'survey.confirm' | translate}}
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

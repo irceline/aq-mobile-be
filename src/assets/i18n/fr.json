@@ -471,6 +471,13 @@
       "text": "Ce sont les \"sous-indices\" calculés pour votre localisation. L'indice BelAQI global est la valeur la plus élevée de ces 4 sous-indices. Les échelles de concentration ont été déterminées en fonction de l’impact à court terme sur la santé. Les 4 polluants utilisés pour calculer BelAQI sont:"
     }
   },
+  "survey": {
+		"confirm": "",
+    "header": "",
+    "help-us": "",
+		"notagain": "",
+		"question": ""
+	},
   "update": {
     "hint": {
       "popover": {
