@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 import { LocateService, LocationStatus } from '../../../services/locate/locate.service';
 import { UserLocation, UserLocationListService } from '../../../services/user-location-list/user-location-list.service';
@@ -8,10 +9,13 @@ import {
   ModalUserLocationCreationComponent,
 } from '../../modal-user-location-creation/modal-user-location-creation.component';
 import { ModalUserLocationListComponent } from '../../modal-user-location-list/modal-user-location-list.component';
-import {
-  UserLocationNotificationsService,
-} from '../../../services/user-location-notifications/user-location-notifications.service';
+import { UserLocationNotificationsService } from '../../../services/user-location-notifications/user-location-notifications.service';
+import { UserLocationNotificationsTogglerComponent } from '../../../components/user-location-notifications-toggler/user-location-notifications-toggler.component';
 
+interface UserLocationWithNotification {
+  location: UserLocation;
+  notification: UserLocationNotificationsTogglerComponent;
+}
 @Component({
   selector: 'user-locations-settings',
   templateUrl: './user-locations-settings.component.html',
@@ -19,7 +23,7 @@ import {
 })
 export class UserLocationsSettingsComponent implements OnInit {
 
-  public locations: UserLocation[];
+  public locations: UserLocationWithNotification[];
 
   public showCurrentLocation: boolean;
 
@@ -28,9 +32,13 @@ export class UserLocationsSettingsComponent implements OnInit {
     protected userLocationService: UserLocationListService,
     private locate: LocateService,
     private toast: ToastController,
-    private locationNotifications: UserLocationNotificationsService
+    private translate: TranslateService,
+    private locationNotifications: UserLocationNotificationsService,
   ) {
     this.setLocations();
+    this.userLocationService.locationsChanged.subscribe(() => {
+      this.setLocations();
+    });
   }
 
   public ngOnInit(): void {
@@ -46,7 +54,15 @@ export class UserLocationsSettingsComponent implements OnInit {
   }
 
   private setLocations() {
-    this.locations = this.userLocationService.getUserLocations();
+    let userlocations = this.userLocationService.getUserLocations();
+    this.locations = userlocations.map(loc => {
+      let location = {} as UserLocationWithNotification;
+      location.location = loc;
+      location.notification = new UserLocationNotificationsTogglerComponent(this.locationNotifications, this.toast, this.translate);
+      location.notification.location = loc;
+      location.notification.ngOnInit();
+      return location;
+    })
   }
 
   public removeLocation(location: UserLocation) {
@@ -59,12 +75,8 @@ export class UserLocationsSettingsComponent implements OnInit {
     this.locations.splice(event.detail.from, 1);
     this.locations.splice(event.detail.to, 0, element);
 
-    this.userLocationService.setLocationList(this.locations);
+    this.userLocationService.setLocationList(this.locations.map(loc => loc.location));
     event.detail.complete(true);
-  }
-
-  public async getLocationNotificationStatus(location: UserLocation) {
-    this.locationNotifications.isRegisteredSubscription(location).subscribe(v => {return v});
   }
 
   public async editLocation(location: UserLocation) {
