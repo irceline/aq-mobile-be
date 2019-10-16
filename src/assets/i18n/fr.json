@@ -472,11 +472,12 @@
     }
   },
   "survey": {
-		"confirm": "",
-    "header": "",
-    "help-us": "",
-		"notagain": "",
-		"question": ""
+		"confirm": "À l'enquête >",
+    "header": "Enquête d'utilisateurs",
+    "help-us": "Aidez-nous à améliorer l'application",
+    "link": "https://fr.surveymonkey.com/r/VNBBPD6",
+		"notagain": "Non merci!",
+		"question": "Vos commentaires sont importants, êtes-vous prêt à répondre à quelques questions? Cela ne prend que 2 minutes - OK, promis!"
 	},
   "update": {
     "hint": {

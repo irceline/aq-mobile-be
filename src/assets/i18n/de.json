@@ -472,11 +472,12 @@
 		}
 	},
 	"survey": {
-		"confirm": "",
-		"header": "",
-		"help-us": "",
-		"notagain": "",
-		"question": ""
+		"confirm": "Zur Umfrage >",
+		"header": "Benutzerumfrage",
+		"help-us": "Helfen Sie uns, die App zu verbessern",
+		"link": "https://de.surveymonkey.com/r/VNBBPD6",
+		"notagain": "Nein danke!",
+		"question": "Ihr Feedback ist wichtig. Sind Sie bereit, einige Fragen zu beantworten? Es dauert nur 2 Minuten - Ok, versprochen!"
 	},
 	"update": {
 		"hint": {

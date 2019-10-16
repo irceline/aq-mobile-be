@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { PopoverController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 import { SurveyService } from './../../services/survey/survey.service';
 
@@ -15,6 +16,7 @@ export class SurveyPopupComponent {
     private ctrl: PopoverController,
     private surveySrvc: SurveyService,
     private iab: InAppBrowser,
+    private translate: TranslateService
   ) { }
 
   public deselect() {
@@ -23,7 +25,8 @@ export class SurveyPopupComponent {
   }
 
   public openSurvey() {
-    this.iab.create('https://nl.surveymonkey.com/r/VNBBPD6', '_system', 'hidden=yes');
+    // this.iab.create('https://nl.surveymonkey.com/r/VNBBPD6', '_system', 'hidden=yes');
+    this.iab.create(this.translate.instant('survey.link'), '_system', 'hidden=yes');
     this.deselect();
   }
 

@@ -1,9 +1,9 @@
-<ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="visible">
+<ion-fab class="survey-button" vertical="bottom" horizontal="end" slot="fixed" *ngIf="visible">
   <!-- <ion-fab-button color="primary" (click)="openSurvey()">
     <ion-icon name="megaphone"></ion-icon>
   </ion-fab-button> -->
   <ion-button color="primary" (click)="openSurvey()">
-    <span *ngIf="showText">{{'survey.help-us' | translate}}</span>
+    <span class="survey-button-text" *ngIf="showText" text-wrap>{{'survey.help-us' | translate}}</span>
     <ion-icon name="megaphone"></ion-icon>
   </ion-button>
 </ion-fab>

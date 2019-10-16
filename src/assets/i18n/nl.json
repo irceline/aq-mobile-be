@@ -472,11 +472,12 @@
     }
   },
   "survey": {
-		"confirm": "",
-    "header": "",
-    "help-us": "",
-		"notagain": "",
-		"question": ""
+		"confirm": "Naar de enquête >",
+    "header": "Gebruikersbevraging",
+    "help-us": "Help ons de app verbeteren",
+    "link": "https://nl.surveymonkey.com/r/VNBBPD6",
+		"notagain": "Nee, bedankt!",
+		"question": "Jouw feedback is belangrijk, ben je bereid enkele vragen te beantwoorden? Het duurt slechts 2 min - Ok, zeker!"
 	},
   "update": {
     "hint": {
