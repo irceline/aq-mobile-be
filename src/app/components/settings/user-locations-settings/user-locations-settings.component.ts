@@ -54,13 +54,23 @@ export class UserLocationsSettingsComponent implements OnInit {
   }
 
   private setLocations() {
+    // Cleanup old subscriptions if there are any
+    if (this.locations) {
+      this.locations.forEach(loc => {
+        if (loc.notification) {
+          loc.notification.unregisterSubscription();
+        }
+      })
+    }
     let userlocations = this.userLocationService.getUserLocations();
     this.locations = userlocations.map(loc => {
       let location = {} as UserLocationWithNotification;
       location.location = loc;
-      location.notification = new UserLocationNotificationsTogglerComponent(this.locationNotifications, this.toast, this.translate);
-      location.notification.location = loc;
-      location.notification.ngOnInit();
+      if (loc.type != "current") {
+        location.notification = new UserLocationNotificationsTogglerComponent(this.locationNotifications, this.toast, this.translate);
+        location.notification.location = loc;
+        location.notification.ngOnInit();
+      }
       return location;
     })
   }
