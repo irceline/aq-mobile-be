@@ -1,4 +1,4 @@
-import './boundary-canvas';
+import './custom-canvas';
 import './control-opacity';
 
 import { HttpClient } from '@angular/common/http';
@@ -9,7 +9,7 @@ import { IonSlides, ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from 'ionic-cache';
 import {
-  BoundaryCanvasOptions,
+  CustomCanvasOptions,
   circleMarker,
   CircleMarker,
   Control,
@@ -48,6 +48,7 @@ import { MobileSettings } from '../../services/settings/settings.service';
 import { UserLocation, UserLocationListService } from '../../services/user-location-list/user-location-list.service';
 import { MarkerSelectorGenerator } from '../customized-station-map-selector/customized-station-map-selector.component';
 import { HeaderContent } from '../slider-header/slider-header.component';
+import * as PouchDB from 'pouchdb/dist/pouchdb';
 
 enum PhenomenonLabel {
   BelAQI = 'BelAQI',
@@ -161,6 +162,9 @@ export class BelaqiMapSliderComponent implements OnDestroy, OnInit {
       }
     });
 
+    // Make PouchDB accessible from boundary-canvas-src.js
+    (window as any).PouchDB = PouchDB;
+
     this.refresherSubscription = this.refreshHandler.onRefresh.subscribe(() => this.loadBelaqis(true));
     this.userLocationSubscription = this.userLocationListService.locationsChanged.subscribe(() => this.loadBelaqis(false));
     this.networkAlertSubscription = this.networkAlert.onConnected.subscribe(() => this.loadBelaqis(false));
@@ -195,11 +199,11 @@ export class BelaqiMapSliderComponent implements OnDestroy, OnInit {
     }
   }
 
-  private async loadBelaqis(reload: boolean) {
+  private async loadBelaqis(forceRefresh: boolean) {
     if (this.userLocationListService.hasLocations() && !this.loadingLocations) {
       this.currentLocationError = undefined;
       this.loadingLocations = true;
-      this.ircelineSettings.getSettings(reload).subscribe(
+      this.ircelineSettings.getSettings(forceRefresh).subscribe(
         ircelineSettings => {
           this.belaqiMapviews = [];
           this.userLocationListService.getVisibleUserLocations().forEach((loc, i) => {
@@ -1005,7 +1009,7 @@ class MapView {
 
   private drawLayer(wmsUrl: string, layerId: string, geojson: GeoJSON.GeoJsonObject, hideInOpacitySlider: boolean, timeParam?: string) {
     if (layerId) {
-      const layerOptions: BoundaryCanvasOptions = {
+      const layerOptions: CustomCanvasOptions = {
         layers: layerId,
         transparent: true,
         format: 'image/png',
@@ -1013,7 +1017,9 @@ class MapView {
         opacity: 0.7,
         hideInOpacitySlider: hideInOpacitySlider,
         boundary: geojson,
-        useBoundaryGreaterAsZoom: 12
+        useBoundaryGreaterAsZoom: 12,
+        useCache: true,
+        crossOrigin: true
       };
       if (timeParam) {
         layerOptions.time = timeParam;
@@ -1021,7 +1027,7 @@ class MapView {
       this.overlayMaps.set(layerId + wmsUrl + timeParam, {
         label: layerId,
         visible: true,
-        layer: tileLayer.boundaryCanvas(wmsUrl, layerOptions)
+        layer: tileLayer.customCanvas(wmsUrl, layerOptions)
       });
     }
   }
