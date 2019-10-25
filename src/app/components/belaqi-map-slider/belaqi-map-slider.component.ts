@@ -10,13 +10,14 @@ import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from 'ionic-cache';
 import {
   BoundaryCanvasOptions,
-  circleMarker,
   CircleMarker,
+  circleMarker,
   Control,
   control,
   divIcon,
   FitBoundsOptions,
   geoJSON,
+  GridLayer,
   latLngBounds,
   LatLngBoundsExpression,
   LatLngExpression,
@@ -1027,10 +1028,19 @@ class MapView {
   }
 
   private adjustOpacitySlider() {
+    let prevOpacity: number;
+    if (this.opacityControl && this.opacityControl['_layers'] && this.opacityControl['_layers'].length > 0) {
+      prevOpacity = this.opacityControl['_layers'][0].layer.options.opacity;
+    }
     if (this.mapCache.hasMap(this.mapId)) {
       if (this.opacityControl) { this.opacityControl.remove(); }
       const layers = {};
-      this.overlayMaps.forEach(e => layers[e.label] = e.layer);
+      this.overlayMaps.forEach(e => {
+        layers[e.label] = e.layer;
+        if (prevOpacity) {
+          (e.layer as GridLayer).setOpacity(prevOpacity);
+        }
+      });
       this.opacityControl = control.opacity(layers,
         { position: 'bottomleft', collapsed: true, label: this.translateSrvc.instant('map.opacity-slider-header') }
       ).addTo(this.mapCache.getMap(this.mapId));
