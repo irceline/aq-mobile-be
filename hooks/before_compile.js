@@ -24,5 +24,6 @@ module.exports = function (context) {
 
 };
 
-
-fs.copyFileSync("hooks/build-extras.gradle", "platforms/android/build-extras.gradle");
+if (fs.existsSync("platforms/android")) {
+    fs.copyFileSync("hooks/build-extras.gradle", "platforms/android/build-extras.gradle");
+}

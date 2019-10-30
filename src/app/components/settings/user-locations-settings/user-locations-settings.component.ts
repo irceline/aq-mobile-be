@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalController, ToastController } from '@ionic/angular';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ModalController, ToastController, IonToggle } from '@ionic/angular';
 
 import { LocateService, LocationStatus } from '../../../services/locate/locate.service';
 import { UserLocation, UserLocationListService } from '../../../services/user-location-list/user-location-list.service';
@@ -8,29 +8,43 @@ import {
   ModalUserLocationCreationComponent,
 } from '../../modal-user-location-creation/modal-user-location-creation.component';
 import { ModalUserLocationListComponent } from '../../modal-user-location-list/modal-user-location-list.component';
+import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'user-locations-settings',
   templateUrl: './user-locations-settings.component.html',
   styleUrls: ['./user-locations-settings.component.scss'],
 })
-export class UserLocationsSettingsComponent implements OnInit {
+export class UserLocationsSettingsComponent implements OnInit, OnDestroy {
 
   public locations: UserLocation[];
 
   public showCurrentLocation: boolean;
 
+  private locationUpdateSubscription: Subscription;
+
   constructor(
     protected modalCtrl: ModalController,
     protected userLocationService: UserLocationListService,
     private locate: LocateService,
-    private toast: ToastController
+    private toast: ToastController,
+    private translateSrv: TranslateService
   ) {
     this.setLocations();
   }
 
   public ngOnInit(): void {
     this.showCurrentLocation = this.userLocationService.isCurrentLocationVisible();
+    this.locationUpdateSubscription = this.userLocationService.locationsChanged.subscribe(() => {
+      this.setLocations;
+    })
+  }
+
+  public ngOnDestroy(): void {
+    if (this.locationUpdateSubscription){
+      this.locationUpdateSubscription.unsubscribe();
+    }
   }
 
   public createNewLocation() {
