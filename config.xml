@@ -50,7 +50,13 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
         <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
-            <string>To fetch the data relevant for your location from the servers feeding the BelAir app.</string>
+            <string>The BelAir-app uses your location to fetch the latest relevant hi-resolution air quality data available specifically for your location.</string>
+        </edit-config>
+        <edit-config file="*-Info.plist" mode="merge" target="NSBluetoothAlwaysUsageDescription">
+            <string>The BelAir-app might use bluetooth to improve the location accuracy when establishing your location.</string>
+        </edit-config>
+        <edit-config file="*-Info.plist" mode="merge" target="CFBundleVersion">
+            <string>0.9.9.2</string>
         </edit-config>
         <icon height="57" src="resources/ios/icon/icon.png" width="57" />
         <icon height="114" src="resources/ios/icon/icon@2x.png" width="114" />
