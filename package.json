@@ -2,7 +2,7 @@
   "name": "aq-mobile-be",
   "version": "0.9.9",
   "author": "IRCEL - CELINE",
-  "homepage": "http://www.irceline.be",
+  "homepage": "https://www.irceline.be",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

@@ -11,7 +11,7 @@
     "header": "Carte moyenne annuelle",
     "legend": {
       "link-more": "Afficher plus",
-      "link-more-url": "http://www.irceline.be/fr"
+      "link-more-url": "https://www.irceline.be/fr"
     }
   },
   "annual-mean-panel": {
@@ -125,7 +125,7 @@
   },
   "faq": {
     "accuracy": {
-      "link": "http://www.irceline.be/fr/documentation/modeles/rio-ifdm",
+      "link": "https://www.irceline.be/fr/documentation/modeles/rio-ifdm",
       "moreInfo": "Plus d'infos sur RIO-IFDM",
       "p1": "Le modèle de calcul sous-jacent est une combinaison de deux modèles de qualité de l'air: RIO et IFDM. Les deux modèles ont été testés sur base de campagnes de mesures indépendantes. Ils utilisent en continu les données de qualité de l'air collectées en quasi temps réel.",
       "p2": "Il existe toutefois un risque de surestimation ou de sous-estimation de la situation réelle. Ces 2 modèles, par exemple, ne prennent pas encore en compte les obstacles le long des routes (murs antibruit, rues de type \"canyon\", etc.). Une légère sous-estimation des concentrations est ainsi souvent observée dans les rues de type \"canyon\".",
@@ -149,7 +149,7 @@
       "index7": "Très médiocre",
       "index8": "Mauvais",
       "index9": "Très mauvais",
-      "link": "http://www.irceline.be/fr/belaqi",
+      "link": "https://www.irceline.be/fr/belaqi",
       "moreInfo": "Lisez ici comment l’indice est calculé en prenant en compte les effets à court terme sur la santé.",
       "p1": "L'indice fourni par l'application n'est pas uniquement basé sur les résultats des stations des réseaux de surveillance, car la station la plus proche peut se trouver à plusieurs kilomètres. Ces mesures aux stations sont intégrées dans le modèle, qui prend également en compte les données d'émission (trafic, industrie et navigation) et les conditions météorologiques (direction et vitesse du vent) pour calculer les concentrations en tout endroit du territoire. Les concentrations calculées en dioxyde d'azote, particules et ozone sont alors intégrés dans l'indice BelAQI de la localisation choisie.",
       "p2": "Cet indice vous donne également une estimation de l'impact sur la santé à court terme.",
@@ -198,7 +198,7 @@
     },
     "moreInfo": "Plus d'info",
     "wheel": {
-      "link": "http://www.irceline.be/fr/belaqi",
+      "link": "https://www.irceline.be/fr/belaqi",
       "message": "Cet indicateur est une estimation modélisée pour le quartier correspondant à votre localisation. L'indice de qualité de l'air BelAQI est le plus défavorable des 4 sous-indices calculés pour les différents polluants (PM10, PM2.5, O3 et NO2) selon une échelle pondérée par leur impact santé"
     }
   },
@@ -462,7 +462,7 @@
   "sub-index-panel": {
     "header": "Exposition à court terme",
     "information-popup": {
-      "link": "http://www.irceline.be/fr/belaqi",
+      "link": "https://www.irceline.be/fr/belaqi",
       "moreInfo": "Plus d'info",
       "no2": "NO2 ou dioxyde d'azote (moyenne horaire)",
       "o3": "O3 ou ozone (moyenne horaire)",
@@ -486,7 +486,7 @@
         "content-p2": "BelAir calcule l'exposition à court terme à la pollution atmosphérique pour votre localisation. Cette information est mise à jour toutes les heures. Souhaitez-vous plus d’explications sur l’information fournie, la méthode de calcul ou les raisons pour lesquelles ce calcul diffère d’autres études (comme par exemple CurieuzeNeuzen)?",
         "dont-show": "Ne plus afficher ce message lorsque vous démarrez l'application",
         "link-faq": "Lire plus",
-        "link-faq-url": "http://www.irceline.be/fr/documentation/belair/faq"
+        "link-faq-url": "https://www.irceline.be/fr/documentation/belair/faq"
       }
     }
   },

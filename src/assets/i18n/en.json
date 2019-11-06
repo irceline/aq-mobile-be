@@ -11,7 +11,7 @@
     "header": "Annual mean map",
     "legend": {
       "link-more": "Show more",
-      "link-more-url": "http://www.irceline.be/en"
+      "link-more-url": "https://www.irceline.be/en"
     }
   },
   "annual-mean-panel": {
@@ -125,7 +125,7 @@
   },
   "faq": {
     "accuracy": {
-      "link": "http://www.irceline.be/en/documentation/models/rio-ifdm",
+      "link": "https://www.irceline.be/en/documentation/models/rio-ifdm",
       "moreInfo": "More info about RIO-IFDM",
       "p1": "The model calculation of which the app shows you the result is a combination of two air quality models: RIO and IFDM. Both models have been thoroughly tested on the basis of additional measurements and are constantly fed with up-to-date air quality data.",
       "p2": "With each model calculation there is a chance of over- or underestimation of the actual situation. These 2 models, for example, do not yet take into account obstacles along roads (noise barriers, closed rows of houses, etc.). For example, an underestimation can be shown for street canyons.",
@@ -149,7 +149,7 @@
       "index7": "Very poor",
       "index8": "Bad",
       "index9": "Very bad",
-      "link": "http://www.irceline.be/en/belaqi",
+      "link": "https://www.irceline.be/en/belaqi",
       "moreInfo": "Read here how the index takes short term health effects into account.",
       "p1": "The index given by the app is not only based on the result of all monitoring stations in our monitoring networks, where the nearest station is possibly several kilometers away. The concentrations measured at all government monitoring stations are added to a computer model, which also takes into account emission data (traffic, industry and shipping) and meteorological conditions (wind direction and wind speed). This computer model then calculates detailed air quality maps for the geese country. The combination of the result for nitrogen dioxide, particulate matter and ozone is shown as one index in the app.",
       "p2": "The index that the app shows also gives you an estimate of the health impact in the short term.",
@@ -198,7 +198,7 @@
     },
     "moreInfo": "More info",
     "wheel": {
-      "link": "http://www.irceline.be/en/belaqi",
+      "link": "https://www.irceline.be/en/belaqi",
       "message": "This dial shows the current BelAQI air quality index for your location. This index combines the modelled concentrations of different pollutants depending on their health effects."
     }
   },
@@ -462,7 +462,7 @@
   "sub-index-panel": {
     "header": "Short-term exposure",
     "information-popup": {
-      "link": "http://www.irceline.be/en/belaqi",
+      "link": "https://www.irceline.be/en/belaqi",
       "moreInfo": "More info",
       "no2": "NO2 or nitrogen dioxide (hourly mean)",
       "o3": "O3 or ozone (hourly mean)",
@@ -486,7 +486,7 @@
         "content-p2": "BelAir makes a calculated estimate of exposure to air pollution in the short term. This calculation is updated every hour. Would you like to know more about how exactly this calculation is made, what you will see and why the result may differ from other measurement result (e.g. CurieuzeNeuzen)?",
         "dont-show": "Do not show this message again when you start the app",
         "link-faq": "Read more information here",
-        "link-faq-url": "http://www.irceline.be/en/documentation/belair/faq"
+        "link-faq-url": "https://www.irceline.be/en/documentation/belair/faq"
       }
     }
   },
