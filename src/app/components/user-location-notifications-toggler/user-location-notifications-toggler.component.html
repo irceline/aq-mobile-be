@@ -1,0 +1,9 @@
+<ion-list lines="none">
+  <ion-item (click)="toggleSubscription()">
+    <ion-label>
+      <h2 style="color: white;">{{'user-location-notification-toggler.button' | translate}}</h2>
+    </ion-label>
+    <ion-spinner item-end *ngIf="loading"></ion-spinner>
+    <ion-toggle mode="md" color="success" [checked]="subscribed" (ionChange)="handleToggleChange($event)"></ion-toggle>
+  </ion-item>
+</ion-list>

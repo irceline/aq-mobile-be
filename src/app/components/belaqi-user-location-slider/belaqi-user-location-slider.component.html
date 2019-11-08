@@ -2,7 +2,7 @@
   <ion-slide *ngFor="let loc of belaqiLocations">
     <div *ngIf="loc.latitude" style="width: 100%">
       <div class="first-panel">
-        <notification-panel></notification-panel>
+        <notification-panel [location]="loc"></notification-panel>
         <div class="wheel">
           <belaqi-wheel [latitude]="loc.latitude" [longitude]="loc.longitude"></belaqi-wheel>
         </div>

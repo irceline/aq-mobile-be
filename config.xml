@@ -24,9 +24,6 @@
     <platform name="android">
         <preference name="StatusBarOverlaysWebView" value="false" />
         <preference name="StatusBarStyle" value="lightcontent" />
-        <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application">
-            <activity android:usesCleartextTraffic="true" />
-        </edit-config>
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
         <icon density="mdpi" src="resources/android/icon/drawable-mdpi-icon.png" />

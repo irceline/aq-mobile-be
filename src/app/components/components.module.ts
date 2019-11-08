@@ -54,6 +54,9 @@ import { SubIndexPanelEntryComponent } from './sub-index-panel/sub-index-panel-e
 import { SubIndexPanelInformationPopupComponent } from './sub-index-panel/sub-index-panel-information-popup.component';
 import { SubIndexPanelComponent } from './sub-index-panel/sub-index-panel.component';
 import { UserLocationCreationComponent } from './user-location-creation/user-location-creation.component';
+import {
+  UserLocationNotificationsTogglerComponent,
+} from './user-location-notifications-toggler/user-location-notifications-toggler.component';
 
 const COMPONENTS = [
   AboutSettingsComponent,
@@ -83,8 +86,8 @@ const COMPONENTS = [
   NearestMeasuringStationPanelComponent,
   NearestMeasuringStationPanelEntryComponent,
   NearestMeasuringStationPanelInformationPopupComponent,
-  NotificationPopupComponent,
   NotificationPanelComponent,
+  NotificationPopupComponent,
   OverlayInfoDrawerComponent,
   PushNotificationSubscriptionsSettingsComponent,
   SingleChartComponent,
@@ -94,6 +97,7 @@ const COMPONENTS = [
   SubIndexPanelEntryComponent,
   SubIndexPanelInformationPopupComponent,
   UserLocationCreationComponent,
+  UserLocationNotificationsTogglerComponent,
   UserLocationsSettingsComponent,
 ];
 

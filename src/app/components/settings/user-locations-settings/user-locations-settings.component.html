@@ -5,8 +5,8 @@
 
   <ion-list class="location-list">
     <ion-reorder-group (ionItemReorder)="reorderItems($event)" disabled="false">
-      <ng-container *ngFor="let location of locations; let i = index;">
-        <ion-item *ngIf="location.type === 'current'">
+      <ng-container *ngFor="let userlocation of locations; let i = index;">
+        <ion-item *ngIf="userlocation.location.type === 'current'">
           <ion-row nowrap>
             <ion-reorder></ion-reorder>
             <ion-col>
@@ -18,20 +18,24 @@
             <ion-toggle id="currentLocationToggler" mode="md" color="success" [(ngModel)]="location.isCurrentVisible" (ngModelChange)="changeCurrentLocation($event)"></ion-toggle>
           </ion-row>
         </ion-item>
-        <ion-item *ngIf="location.type === 'user'">
-          <ion-row nowrap>
-            <ion-reorder></ion-reorder>
-            <div class="location-item">
-              <ion-label text-left text-wrap class="header">
-                {{location.label}}
-              </ion-label>
-            </div>
+        <ion-item *ngIf="userlocation.location.type === 'user'">
+          <ion-row nowrap align-items-left>
+              <ion-reorder></ion-reorder>
+              <div class="location-item">
+                <ion-label text-left text-wrap class="header">
+                  {{userlocation.location.label}}
+                </ion-label>
+              </div>
             <div class="right">
-              <ion-button (click)="editLocation(location)">
+                <ion-button size="small" (click)="removeLocation(userlocation.location)">
+                  <ion-icon slot="icon-only" name="trash"></ion-icon>
+                </ion-button>
+              <ion-button size="small" (click)="editLocation(userlocation.location)">
                 <ion-icon slot="icon-only" name="build"></ion-icon>
               </ion-button>
-              <ion-button (click)="removeLocation(location)">
-                <ion-icon slot="icon-only" name="trash"></ion-icon>
+              <ion-button size="small" (click)="userlocation.notification.toggleSubscription();">
+                <ion-icon *ngIf="!userlocation.notification.subscribed" slot="icon-only" name="md-notifications-off"></ion-icon>
+                <ion-icon *ngIf="userlocation.notification.subscribed" slot="icon-only" name="md-notifications"></ion-icon>
               </ion-button>
             </div>
           </ion-row>

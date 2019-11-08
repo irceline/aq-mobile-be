@@ -11,6 +11,7 @@ import { LocateService } from '../../services/locate/locate.service';
 import { MobileSettings } from '../../services/settings/settings.service';
 import { UserLocationListService } from '../../services/user-location-list/user-location-list.service';
 import { ModalUserLocationListComponent } from '../modal-user-location-list/modal-user-location-list.component';
+import { UserLocationNotificationsService } from 'src/app/services/user-location-notifications/user-location-notifications.service';
 
 @Component({
   selector: 'user-location-creation',
@@ -24,6 +25,7 @@ export class UserLocationCreationComponent {
   public locationLabel: string;
   public location: Point;
   public loadCurrentLocation: boolean;
+  public notificationsToggled: boolean;
 
   constructor(
     public locationList: UserLocationListService,
@@ -32,7 +34,8 @@ export class UserLocationCreationComponent {
     private toastCtrl: ToastController,
     private translate: TranslateService,
     private locate: LocateService,
-    private geolabels: GeoLabelsService
+    private geolabels: GeoLabelsService,
+    private locationNotifications: UserLocationNotificationsService
   ) {
     const settings = this.settingsSrvc.getSettings();
     this.geoSearchOptions = {
@@ -82,6 +85,12 @@ export class UserLocationCreationComponent {
       toast = await this.toastCtrl.create({ message: this.translate.instant('user-location.creation.message-exists'), duration: 3000 });
     } else {
       this.locationList.addUserLocation(this.locationLabel, this.location);
+      if (this.notificationsToggled) {
+        let userlocation = this.locationList.getUserLocations().filter(loc => loc.label == this.locationLabel);
+        if (userlocation && userlocation[0]) {
+          this.locationNotifications.subscribeLocation(userlocation[0]);
+        }
+      }
       toast = await this.toastCtrl.create({ message: this.translate.instant('user-location.creation.message-added'), duration: 3000 });
       this.modalCtrl.dismiss();
     }

@@ -104,7 +104,7 @@
     "hint": "Om deze functionaliteit te gebruiken, moet de app op de achtergrond blijven draaien. Uw locatie wordt slechts één keer bepaald voor het gekozen verificatieinterval als u de luchtkwaliteit op uw huidige locatie wilt controleren. Alle persoonlijk geconfigureerde locaties worden ook gecontroleerd."
   },
   "diagram": {
-    "header": "grafiek",
+    "header": "Grafiek",
     "loading": "bezig met laden",
     "loading-nearest-stations": "Laad dichtstbijgelegen metingen",
     "no-timeseries-selected": "Geen tijdsreeks geselecteerd!",
@@ -492,6 +492,12 @@
       "message-exists": "Locatie bestaat al"
     }
   },
+  "user-location-notification-toggler": {
+		"backend-registration-error": "Backend fout",
+		"button": "Meldingen",
+		"default-error": "Standaardfout",
+		"notification-error": "Meldingfout"
+	},
   "welcome": {
 		"button": "Geef jouw locatie in",
 		"text-p1": "Hoe is het gesteld met de impact van de luchtkwaliteit op jouw locatie? Dat weet de BelAir app je meteen te vertellen.",
