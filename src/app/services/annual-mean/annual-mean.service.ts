@@ -8,7 +8,7 @@ import { createCacheKey } from '../../model/caching';
 import { BelaqiIndexService } from '../belaqi/belaqi.service';
 import { ValueProvider } from '../value-provider';
 
-const ANNUAL_MEAN_URL = 'http://www.irceline.be/air/timestring_rioifdm_anmean.php';
+const ANNUAL_MEAN_URL = 'https://www.irceline.be/air/timestring_rioifdm_anmean.php';
 
 export enum AnnualPhenomenonMapping {
   NO2 = 'no2_anmean_',
@@ -47,7 +47,7 @@ export class AnnualMeanService extends ValueProvider {
 
   public getWMSUrl(year: string, phenomenon: AnnualPhenomenonMapping): string {
     const layerId = this.getLayerId(year, phenomenon);
-    return `http://geo.irceline.be/rioifdm/${layerId}/wms`;
+    return `https://geo.irceline.be/rioifdm/${layerId}/wms`;
   }
 
   public getValue(latitude: number, longitude: number, year: string, phenomenon: AnnualPhenomenonMapping): Observable<number> {

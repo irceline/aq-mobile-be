@@ -11,7 +11,7 @@
 		"header": "Jahresmittelwert Karte",
 		"legend": {
 			"link-more": "Zeige mehr",
-			"link-more-url": "http://www.irceline.be/de"
+			"link-more-url": "https://www.irceline.be/de"
 		}
 	},
 	"annual-mean-panel": {
@@ -125,7 +125,7 @@
 	},
 	"faq": {
 		"accuracy": {
-			"link": "http://www.irceline.be/en/documentation/models/rio-ifdm",
+			"link": "https://www.irceline.be/en/documentation/models/rio-ifdm",
 			"moreInfo": "Weitere Informationen zu RIO-IFDM",
 			"p1": "Die Modellberechnung, deren Ergebnis Ihnen die App zeigt, ist eine Kombination aus zwei Luftqualitätsmodellen: RIO und IFDM. Beide Modelle wurden auf Basis zusätzlicher Messungen gründlich getestet und werden ständig mit aktuellen Luftqualitätsdaten gespeist.",
 			"p2": "Bei jeder Modellrechnung besteht die Chance, dass die tatsächliche Situation über- oder unterschätzt wird. Bei diesen beiden Modellen werden beispielsweise Hindernisse an Straßen (Lärmschutzwände, geschlossene Häuserzeilen usw.) noch nicht berücksichtigt. Für Straßenschluchten kann beispielsweise eine Unterschätzung angezeigt werden.",
@@ -149,7 +149,7 @@
 			"index7": "sehr mangelhaft",
 			"index8": "schlecht",
 			"index9": "sehr schlecht",
-			"link": "http://www.irceline.be/en/belaqi",
+			"link": "https://www.irceline.be/en/belaqi",
 			"moreInfo": "Lesen Sie hier, wie der Index die Auswirkungen auf die Gesundheit kurzfristig berücksichtigt.",
 			"p1": "Der von der App angegebene Index basiert nicht nur auf den Ergebnissen aller Überwachungsstationen in unseren Überwachungsnetzwerken, bei denen die nächste Station möglicherweise mehrere Kilometer entfernt ist. Die an allen staatlichen Überwachungsstationen gemessenen Konzentrationen werden zu einem Computermodell addiert, das auch Emissionsdaten (Verkehr, Industrie und Versand) und meteorologischen Bedingungen (Windrichtung und Windgeschwindigkeit) berücksichtigt. Dieses Computermodell berechnet dann detaillierte Luftqualitätskarten für das Gänseland. Die Kombination der Ergebnisse für Stickstoffdioxid, Partikel und Ozon wird in der App als ein Index angezeigt.",
 			"p2": "Der Index, den die App anzeigt, gibt Ihnen auch eine Abschätzung der Auswirkungen auf die Gesundheit auf kurze Sicht.",
@@ -198,7 +198,7 @@
 		},
 		"moreInfo": "Mehr Info",
 		"wheel": {
-			"link": "http://www.irceline.be/en/belaqi",
+			"link": "https://www.irceline.be/en/belaqi",
 			"message": "Dieser Indikator zeigt den aktuellen BelAQI-Luftqualitätsindex für Ihren Standort an. Dieser Index kombiniert die modellierten Konzentrationen der verschiedenen Schadstoffe in Abhängigkeit von ihren Auswirkungen auf die Gesundheit."
 		}
 	},
@@ -462,7 +462,7 @@
 	"sub-index-panel": {
 		"header": "Kurzzeitbelastung",
 		"information-popup": {
-			"link": "http://www.irceline.be/en/belaqi",
+			"link": "https://www.irceline.be/en/belaqi",
 			"moreInfo": "Mehr Info",
 			"no2": "NO2 oder Stickstoffdioxid (Stundenmittelwert)",
 			"o3": "O3 oder Ozon (Stundenmittelwert)",
@@ -478,7 +478,7 @@
 				"content-p2": "BelAir nimmt kurzfristig eine kalkulierte Schätzung der Luftverschmutzung vor. Diese Berechnung wird stündlich aktualisiert. Möchten Sie mehr darüber erfahren, wie genau diese Berechnung durchgeführt wird, was Sie sehen werden und warum das Ergebnis von z.B. Ihrem Messergebnis von CurieuzeNeuzen abweichen kann?",
 				"dont-show": "Diese Meldung beim App-Start nicht mehr anzeigen",
 				"link-faq": "Lesen Sie hier weitere Informationen",
-				"link-faq-url": "http://www.irceline.be/de/documentation/belair/faq"
+				"link-faq-url": "https://www.irceline.be/de/documentation/belair/faq"
 			}
 		}
 	},
