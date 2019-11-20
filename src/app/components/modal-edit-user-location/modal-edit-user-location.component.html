@@ -10,7 +10,6 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
   <div style="height: 300px;">
     <location-selection mapId="location-gen" [mapOptions]="mapOptions" [location]="point" (locationChanged)="onLocationChanged($event)"></location-selection>
@@ -20,6 +19,9 @@
       <ion-label position="stacked">{{'intro.three.locationLabelHint' | translate}}</ion-label>
       <ion-input type="text" [(ngModel)]="label" clearInput placeholder="{{'intro.three.locationLabelPlaceholder' | translate}}"></ion-input>
     </ion-item>
+    <div class="toggle">
+      <user-location-notifications-toggler [location]="userLocation"></user-location-notifications-toggler>
+    </div>
   </ion-list>
 </ion-content>
 <ion-footer>

@@ -56,6 +56,9 @@ import { SubIndexPanelComponent } from './sub-index-panel/sub-index-panel.compon
 import { SurveyComponent } from './survey/survey-button.component';
 import { SurveyPopupComponent } from './survey/survey-popup.component';
 import { UserLocationCreationComponent } from './user-location-creation/user-location-creation.component';
+import {
+  UserLocationNotificationsTogglerComponent,
+} from './user-location-notifications-toggler/user-location-notifications-toggler.component';
 
 const COMPONENTS = [
   AboutSettingsComponent,
@@ -98,6 +101,7 @@ const COMPONENTS = [
   SurveyComponent,
   SurveyPopupComponent,
   UserLocationCreationComponent,
+  UserLocationNotificationsTogglerComponent,
   UserLocationsSettingsComponent,
 ];
 

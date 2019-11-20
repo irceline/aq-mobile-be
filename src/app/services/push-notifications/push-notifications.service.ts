@@ -23,23 +23,22 @@ export class PushNotificationsService {
 
   constructor(
     private platform: Platform,
-    private fcm: Firebase,
+    private firebase: Firebase,
   ) { }
 
   public init() {
     console.log(`PushNotificationsService - init`);
     this.platform.ready().then(() => {
       if (this.platform.is('cordova')) {
-        this.fcm.getToken().then(token => {
+        this.firebase.getToken().then(token => {
           // Your best bet is to here store the token on the user's profile on the
           // Firebase database, so that when you want to send notifications to this
           // specific user you can do it from Cloud Functions.
           this.doSomethingWithToken(token);
         });
+        this.firebase.onTokenRefresh().subscribe(token => this.doSomethingWithToken(token));
 
-        this.fcm.onTokenRefresh().subscribe(token => this.doSomethingWithToken(token));
-
-        this.fcm.onNotificationOpen().subscribe(data => {
+        this.firebase.onNotificationOpen().subscribe(data => {
           console.log(`onNotification: ${data.wasTapped}`);
           if (data.wasTapped) {
             // Notification was received on device tray and tapped by the user.
@@ -58,22 +57,21 @@ export class PushNotificationsService {
             this.notificationReceived.next(notification);
           }
         });
-
       }
     });
   }
 
-  public subscribeTopic(topic: string) {
+  public subscribeTopic(topic: string): Promise<boolean> {
     if (this.platform.is('cordova')) {
       console.log(`subscribe topic: ${topic}`);
-      this.fcm.subscribe(topic);
+      return this.firebase.subscribe(topic);
     }
   }
 
-  public unsubscribeTopic(topic: string) {
+  public unsubscribeTopic(topic: string): Promise<boolean> {
     if (this.platform.is('cordova')) {
       console.log(`unsubscribe topic: ${topic}`);
-      this.fcm.unsubscribe(topic);
+      return this.firebase.unsubscribe(topic);
     }
   }
 

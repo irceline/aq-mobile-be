@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
-import { NotificationMaintainerService } from '../../services/notification-maintainer/notification-maintainer.service';
 import { PushNotification } from '../../services/push-notifications/push-notifications.service';
 
 @Component({
@@ -11,14 +10,12 @@ import { PushNotification } from '../../services/push-notifications/push-notific
 })
 export class NotificationPopupComponent {
 
+  @Input()
   public notificationMap: Map<string, PushNotification[]>;
 
   constructor(
-    private notificationMaintainer: NotificationMaintainerService,
     private modalCtrl: ModalController
-  ) {
-    this.notificationMaintainer.getNotifications().subscribe(e => this.notificationMap = e);
-  }
+  ) { }
 
   public trimTopic(topic: string): string {
     return topic.indexOf('_') === -1 ? topic : topic.substring(0, topic.indexOf('_'));

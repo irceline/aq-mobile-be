@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { GeoReverseResult, GeoSearch } from '@helgoland/map';
 import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { Geolocation, Geoposition, PositionError } from '@ionic-native/geolocation/ngx';
@@ -21,7 +21,7 @@ const LOCATE_TIMEOUT_HIGH_ACCURACY = 1000 * 30; // 30 seconds
 const LOCATE_TIMEOUT_UNTIL_HIGH_ACC_REQUEST = 1000 * 10; // 10 seconds
 
 @Injectable()
-export class LocateService {
+export class LocateService implements OnInit {
 
   private locationStatusReplay: ReplaySubject<LocationStatus> = new ReplaySubject(1);
   private locationStatus: LocationStatus;
@@ -56,7 +56,13 @@ export class LocateService {
    * Return the current state of enabled location.
    */
   public getLocationStatus(): LocationStatus {
-    return this.locationStatus;
+    if (!this.locationStatus) {
+      this.isGeolocationEnabled().then((status) => {
+        return status
+      });
+    } else {
+      return this.locationStatus; 
+    }
   }
 
   public askForPermission(): Promise<boolean> {
@@ -66,14 +72,21 @@ export class LocateService {
           if (auth) {
             resolve(true);
           } else {
-            this.diagnostic.requestLocationAuthorization()
-              .then(res => {
-                if (res === 'DENIED') {
+            this.diagnostic.getLocationAuthorizationStatus()
+              .then(status => {
+                if (status === 'DENIED_ALWAYS') {
                   resolve(false);
                 } else {
-                  resolve(true);
+                  this.diagnostic.requestLocationAuthorization()
+                    .then(res => {
+                      if (res === 'DENIED_ONCE' || res === 'DENIED_ALWAYS' || res === 'DENIED') {
+                        resolve(false);
+                      } else {
+                        resolve(true);
+                      }
+                    })
+                    .catch(error => reject(error));
                 }
-                resolve(res);
               })
               .catch(error => reject(error));
           }
@@ -214,47 +227,60 @@ export class LocateService {
     });
   }
 
-  private isGeolocationEnabled() {
-    if (this.platform.is('cordova')) {
-      this.diagnostic.isLocationEnabled().then((res) => {
-        if (this.platform.is('android')) {
-          this.diagnostic.isLocationAuthorized().then(locAuthorized => {
-            if (locAuthorized) {
-              this.diagnostic.getLocationMode().then(locMode => {
-                switch (locMode) {
-                  case this.diagnostic.locationMode.HIGH_ACCURACY:
-                    this.setLocationMode(LocationStatus.HIGH_ACCURACY);
-                    break;
-                  case this.diagnostic.locationMode.BATTERY_SAVING:
-                    this.setLocationMode(LocationStatus.BATTERY_SAVING);
-                    break;
-                  case this.diagnostic.locationMode.DEVICE_ONLY:
-                    this.setLocationMode(LocationStatus.DEVICE_ONLY);
-                    break;
-                  case this.diagnostic.locationMode.LOCATION_OFF:
-                    this.setLocationMode(LocationStatus.OFF);
-                    break;
-                }
-              }, error => {
-                console.error(`Error occured: ${error.message || error}`);
-                this.setLocationMode(LocationStatus.OFF);
-              });
-            } else {
-              console.log(`Set location status to denied`);
-              this.setLocationMode(LocationStatus.DENIED);
-            }
-          });
-        } else if (this.platform.is('ios')) {
-          console.log(`ios try to get geolocation`);
-          this.setLocationMode(LocationStatus.HIGH_ACCURACY);
-        } else {
-          this.setLocationMode(LocationStatus.OFF);
-        }
-      });
-    } else {
-      // in browser
-      this.setLocationMode(LocationStatus.HIGH_ACCURACY);
-    }
+  private async isGeolocationEnabled(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      if (this.platform.is('cordova')) {
+        this.diagnostic.isLocationEnabled().then((res) => {
+          if (this.platform.is('android')) {
+            this.diagnostic.isLocationAuthorized().then(locAuthorized => {
+              console.log("checked if authorized");
+              if (locAuthorized) {
+                this.diagnostic.getLocationMode().then(locMode => {
+                  console.log("switching on mode");
+                  switch (locMode) {
+                    case this.diagnostic.locationMode.HIGH_ACCURACY:
+                      this.setLocationMode(LocationStatus.HIGH_ACCURACY);
+                      resolve(LocationStatus.HIGH_ACCURACY);
+                      break;
+                    case this.diagnostic.locationMode.BATTERY_SAVING:
+                      this.setLocationMode(LocationStatus.BATTERY_SAVING);
+                      resolve(LocationStatus.BATTERY_SAVING);
+                      break;
+                    case this.diagnostic.locationMode.DEVICE_ONLY:
+                      this.setLocationMode(LocationStatus.DEVICE_ONLY);
+                      resolve(LocationStatus.DEVICE_ONLY);
+                      break;
+                    case this.diagnostic.locationMode.LOCATION_OFF:
+                      this.setLocationMode(LocationStatus.OFF);
+                      resolve(LocationStatus.OFF);
+                      break;
+                  }
+                }, error => {
+                  console.error(`Error occured: ${error.message || error}`);
+                  this.setLocationMode(LocationStatus.OFF);
+                  resolve(LocationStatus.OFF);
+                });
+              } else {
+                console.log(`Set location status to denied`);
+                this.setLocationMode(LocationStatus.DENIED);
+                resolve(LocationStatus.DENIED);
+              }
+            });
+          } else if (this.platform.is('ios')) {
+            console.log(`ios try to get geolocation`);
+            this.setLocationMode(LocationStatus.HIGH_ACCURACY);
+            resolve(LocationStatus.HIGH_ACCURACY);
+          } else {
+            this.setLocationMode(LocationStatus.OFF);
+            resolve(LocationStatus.OFF);
+          }
+        });
+      } else {
+        // in browser
+        this.setLocationMode(LocationStatus.HIGH_ACCURACY);
+        resolve(LocationStatus.HIGH_ACCURACY);
+      }
+    });
   }
 
   private setLocationMode(mode: LocationStatus) {

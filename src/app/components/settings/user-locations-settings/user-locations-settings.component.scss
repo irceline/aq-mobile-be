@@ -18,6 +18,12 @@
 
     .right {
         margin-right: 0;
+        min-width: 10em;
+        margin-left: auto;
+        
+      ion-button {
+        float: right;
+      }
     }
   }
 
@@ -26,6 +32,9 @@
     border-bottom: 1px solid white;
     width: 90%;
     margin-left: 5%;
+
+    --inner-padding-end: 0px;
+    --padding-start:0px;
   }
 
 }

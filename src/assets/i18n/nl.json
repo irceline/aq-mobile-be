@@ -500,6 +500,12 @@
       "message-exists": "Locatie bestaat al"
     }
   },
+  "user-location-notification-toggler": {
+		"backend-registration-error": "Backend fout",
+		"button": "Meldingen",
+		"default-error": "Standaardfout",
+		"notification-error": "Meldingfout"
+	},
   "welcome": {
 		"button": "Geef jouw locatie in",
 		"text-p1": "Hoe is het gesteld met de impact van de luchtkwaliteit op jouw locatie? Dat weet de BelAir app je meteen te vertellen.",

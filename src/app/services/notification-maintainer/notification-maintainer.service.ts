@@ -11,6 +11,7 @@ import {
   PushNotificationsService,
   PushNotificationTopic,
 } from '../push-notifications/push-notifications.service';
+import { USER_LOCATION_NOTIFICATION_TOPIC_PREFIX } from '../user-location-notifications/user-location-topic-generator.service';
 
 const NOTIFICATION_PARAM = 'notifications';
 
@@ -127,9 +128,7 @@ export class NotificationMaintainerService {
 
   private serializeNotifications(notifications: Map<string, PushNotification[]>): any {
     const serialized = {};
-    notifications.forEach((val, key) => {
-      serialized[key] = val;
-    });
+    notifications.forEach((val, key) => serialized[key] = val);
     return serialized;
   }
 
