@@ -326,7 +326,7 @@
     "geolocationPartialExplanation": "Pour obtenir une géolocalisation optimale, activez le méthode de localisation \"haute précision\".",
     "offline": "Votre appareil est offline.",
     "online": "Votre appareil est online",
-    "offlineWarning": "Only cached data is available!" // TODO: translate
+    "offlineWarning": "Seules les données déjà téléchargées sont disponibles!"
   },
   "notifications-popup": {
     "header": "Notifications",
