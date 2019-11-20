@@ -1,5 +1,15 @@
 <ion-list mode="md">
-  <ion-row text-center [ngClass]="{'rowWithWarning': oldDataWarning}">
+  <ion-row *ngIf="offlineModeWarning" class="offlineModeWarning">
+    <ion-col>
+      <ion-icon class="offlineModeWarningIcon" name="alert"></ion-icon>
+    </ion-col>
+    <ion-col class="offlineModeWarningText">
+      {{'network.offline' | translate}}
+      <br>
+      {{'network.offlineWarning' | translate}}
+    </ion-col>
+  </ion-row>
+  <ion-row text-center>
     <ion-col size="12">
       <ion-label text-wrap *ngIf="header">
         <ion-text class="location-label">
@@ -21,4 +31,4 @@
       </ion-button>
     </div>
   </ion-row>
-</ion-list> 
+</ion-list>

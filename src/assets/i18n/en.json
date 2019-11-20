@@ -324,8 +324,9 @@
     "geolocationEnabledExplanation": "The \"current position\" functionalities are available to you.",
     "geolocationPartial": "Geolocation without \"high accuracy\".",
     "geolocationPartialExplanation": "To have an optimal geolocation, please activate the location method \"high accuracy\".",
-    "offline": "Your device is offline",
-    "online": "Your device is online"
+    "offline": "Your device is offline.",
+    "online": "Your device is online",
+    "offlineWarning": "Only already downloaded data is available!"
   },
   "notifications-popup": {
     "header": "Notifications",

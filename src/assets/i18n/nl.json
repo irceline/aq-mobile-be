@@ -324,8 +324,9 @@
     "geolocationEnabledExplanation": "De \"huidige locatie\"-functionaliteiten zijn voor u beschikbaar.",
     "geolocationPartial": "Geolocatie zonder \"hoge precisie\"",
     "geolocationPartialExplanation": "Om een optimale bepaling van uw locatie te hebben, activeer de locatiemethode \"hoge precisie\".",
-    "offline": "Uw toestel is offline",
-    "online": "Uw toestel is online"
+    "offline": "Uw toestel is offline.",
+    "online": "Uw toestel is online",
+    "offlineWarning": "Only cached data is available!" // TODO: translate
   },
   "notifications-popup": {
     "header": "Meldingen",

@@ -324,8 +324,9 @@
     "geolocationEnabledExplanation": "Les fonctionnalités \"position actuelle\" sont à votre disposition.",
     "geolocationPartial": "Géolocalisation sans \"haute précision\".",
     "geolocationPartialExplanation": "Pour obtenir une géolocalisation optimale, activez le méthode de localisation \"haute précision\".",
-    "offline": "Votre appareil est offline",
-    "online": "Votre appareil est online"
+    "offline": "Votre appareil est offline.",
+    "online": "Votre appareil est online",
+    "offlineWarning": "Only cached data is available!" // TODO: translate
   },
   "notifications-popup": {
     "header": "Notifications",

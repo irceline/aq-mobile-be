@@ -3,6 +3,8 @@ import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import { ModalSettingsComponent } from '../settings/modal-settings/modal-settings.component';
+import { Network } from '@ionic-native/network/ngx';
+import { Subscription } from 'rxjs';
 
 export interface HeaderContent {
   label: string;
@@ -21,13 +23,33 @@ export class SliderHeaderComponent implements OnInit, OnChanges {
   public header: HeaderContent;
 
   public oldDataWarning: boolean;
+  public offlineModeWarning: boolean;
+
+  private networkSubscriptionOnline: Subscription;
+  private networkSubscriptionOffline: Subscription;
 
   constructor(
     public translateSrvc: TranslateService,
     private modalCtrl: ModalController,
-  ) { }
+    private network: Network
+  ) {}
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.networkSubscriptionOnline = this.network.onConnect().subscribe(() => {
+      this.offlineModeWarning = false;
+    })
+    this.networkSubscriptionOffline = this.network.onDisconnect().subscribe(() => {
+      this.offlineModeWarning = true;
+    })
+    if (this.network.type === 'none') {
+      this.offlineModeWarning = true;
+    }
+  }
+
+  public ngOnDestroy() {
+    this.networkSubscriptionOffline.unsubscribe();
+    this.networkSubscriptionOnline.unsubscribe();
+  }
 
   public setHeaderContent(headerContent: HeaderContent) {
     let visibility;

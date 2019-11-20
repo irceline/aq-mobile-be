@@ -15,6 +15,9 @@
     text-align: center;
     font-size: 1.2em;
     // position: absolute;
+    p {
+      color: white;
+    }
 
     .location-label {
       font-size: 1.6em;
@@ -33,6 +36,22 @@
     margin-left: 5%;
   }
 
+  .offlineModeWarning {
+    color: white;
+    background: var(--ion-color-danger-shade);
+    border-radius: 1em;
+    text-align: center;
+
+    .offlineModeWarningIcon {
+      width: 100%;
+      height: 100%;
+    }
+  
+    .offlineModeWarningText {
+      min-width: 80%;
+    }
+  }
+
   .rowWithWarningCurrentLocation {
     height: 8em;
   }
@@ -41,4 +60,8 @@
     margin: auto;
     font-size: 60%;
   }
+
+
+
+
 }
