@@ -10,6 +10,8 @@ import {
 import { ModalUserLocationListComponent } from '../../modal-user-location-list/modal-user-location-list.component';
 import { UserLocationNotificationsService } from '../../../services/user-location-notifications/user-location-notifications.service';
 import { UserLocationNotificationsTogglerComponent } from '../../../components/user-location-notifications-toggler/user-location-notifications-toggler.component';
+import { ModalController, ToastController } from '@ionic/angular';
+import { Subscription } from 'rxjs';
 
 interface UserLocationWithNotification {
   location: UserLocation;
@@ -35,17 +37,13 @@ export class UserLocationsSettingsComponent implements OnInit, OnDestroy {
     private toast: ToastController,
     private translate: TranslateService,
     private locationNotifications: UserLocationNotificationsService
-  ) {
-    this.setLocations();
-    this.userLocationService.locationsChanged.subscribe(() => {
-      this.setLocations();
-    });
-  }
+  ) {}
 
   public ngOnInit(): void {
+    this.setLocations();
     this.showCurrentLocation = this.userLocationService.isCurrentLocationVisible();
     this.locationUpdateSubscription = this.userLocationService.locationsChanged.subscribe(() => {
-      this.setLocations;
+      this.setLocations();
     })
   }
 
