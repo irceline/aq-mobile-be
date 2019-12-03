@@ -13,6 +13,24 @@ A local webserver should be launched on port `8100`:
 
 * http://localhost:8100/
 
+## Create Dev environment on `OSX`
+
+Install `gradle` via e.g. `brew` (cf https://brew.sh/index)
+
+```
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew install gradle
+```
+For `iOS` install `XCode`.
+
+For `Android` install `Android Studio` (https://developer.android.com/studio)
+
+Accept SDK licenses:
+```
+cd ~/Library/Android/sdk/tools/bin/
+./sdkmanager --licenses
+```
+
 ## Push-Notifications
 
 ### Configuration
