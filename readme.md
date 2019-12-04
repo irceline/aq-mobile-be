@@ -9,9 +9,9 @@ cd aq-mobile-be
 npm install
 npm start
 ```
-A local webserver should be launched on port `8100`:
+A local webserver should be launched on port `4200`:
 
-* http://localhost:8100/
+* http://localhost:4200/
 
 ## Create Dev environment on `OSX`
 
