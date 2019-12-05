@@ -1,7 +1,7 @@
 <ion-row nowrap>
   <ion-col size="5">
     <ion-row nowrap>
-      <div text-center (click)="select()" class="entry" [ngStyle]="{'border-color': borderColor}">
+      <div class="ion-text-center" (click)="select()" class="entry" [ngStyle]="{'border-color': borderColor}">
         <div *ngIf="loadingStationValue" class="spinningborder"></div>
         <div class="phenomenon-label" [ngClass]="{'location-disabled': !location}">
           {{entry.label}}<sub>{{entry.subscript}}</sub></div>
@@ -20,7 +20,7 @@
     <div class="station-description" *ngIf="!loadingStationValue && stationDistance && !error">
       {{stationDistance | number:'1.0-1'}}km
     </div>
-    <div class="station-description" *ngIf="!loadingStationValue && stationLabel && !error" text-wrap>
+    <div class="station-description ion-text-wrap" *ngIf="!loadingStationValue && stationLabel && !error">
       {{stationLabel}}
     </div>
   </ion-col>

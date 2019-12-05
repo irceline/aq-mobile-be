@@ -11,37 +11,37 @@
         <ion-segment class="phenomenon" [(ngModel)]="view.phenomenonLabel" (ngModelChange)="view.onPhenomenonChange()"
           mode="md">
           <ion-segment-button value="BelAQI" mode="md">
-            <div text-center class="entry" [ngStyle]="{'border-color': view.borderColor[0]}">
+            <div class="entry ion-text-center" [ngStyle]="{'border-color': view.borderColor[0]}">
               <div *ngIf="view.loading_colors[0]" class="spinningborder"></div>
               <div class="phenomenon-label">AQI</div>
             </div>
           </ion-segment-button>
           <ion-segment-button value="NO2" mode="md">
-            <div text-center class="entry" [ngStyle]="{'border-color': view.borderColor[1]}">
+            <div class="entry ion-text-center" [ngStyle]="{'border-color': view.borderColor[1]}">
               <div *ngIf="view.loading_colors[1]" class="spinningborder"></div>
               <div class="phenomenon-label">NO<sub>2</sub></div>
             </div>
           </ion-segment-button>
           <ion-segment-button value="O3" mode="md">
-            <div text-center class="entry" [ngStyle]="{'border-color': view.borderColor[2]}">
+            <div class="entry ion-text-center" [ngStyle]="{'border-color': view.borderColor[2]}">
               <div *ngIf="view.loading_colors[2]" class="spinningborder"></div>
               <div class="phenomenon-label">O<sub>3</sub></div>
             </div>
           </ion-segment-button>
           <ion-segment-button value="PM10" mode="md">
-            <div text-center class="entry" [ngStyle]="{'border-color': view.borderColor[3]}">
+            <div class="entry ion-text-center" [ngStyle]="{'border-color': view.borderColor[3]}">
               <div *ngIf="view.loading_colors[3]" class="spinningborder"></div>
               <div class="phenomenon-label">PM<sub>10</sub></div>
             </div>
           </ion-segment-button>
           <ion-segment-button value="PM25" mode="md">
-            <div text-center class="entry" [ngStyle]="{'border-color': view.borderColor[4]}">
+            <div class="entry ion-text-center" [ngStyle]="{'border-color': view.borderColor[4]}">
               <div *ngIf="view.loading_colors[4]" class="spinningborder"></div>
               <div class="phenomenon-label">PM<sub>2.5</sub></div>
             </div>
           </ion-segment-button>
           <ion-segment-button value="BC" mode="md">
-            <div text-center class="entry" [ngStyle]="{'border-color': view.borderColor[5]}">
+            <div class="entry ion-text-center" [ngStyle]="{'border-color': view.borderColor[5]}">
               <div *ngIf="view.loading_colors[5]" class="spinningborder"></div>
               <div class="phenomenon-label">BC</div>
             </div>
@@ -168,7 +168,7 @@
       <div class="panel">
         <ion-toolbar>
           <ion-row>
-            <ion-col text-center>
+            <ion-col class="ion-text-center">
               <span ng-bind="view.sliderHeader" style="top: -20%;">{{ view.sliderHeader }}</span>
             </ion-col>
           </ion-row>
@@ -188,7 +188,7 @@
             min="1" max="5" step="1" snaps="true" [ngModel]="view.sliderPosition" (ngModelChange)="view.onSliderChange()">
           </ion-range>
           <ion-row style="line-height:0.5em;position:relative;top:-0.2em;">
-            <ion-col text-center>
+            <ion-col class="ion-text-center">
               <span ng-bind="view.sliderFooter>">{{ view.sliderFooter }}</span>
             </ion-col>
           </ion-row>
@@ -196,13 +196,13 @@
       </div>
     </div>
     <div *ngIf="currentLocationError" style="height: 400px; color: white;">
-      <div text-wrap>
-        <h2 text-wrap>{{'belaqi-user-location-slider.current-location-error-header' | translate}}</h2>
+      <div class="ion-text-wrap">
+        <h2 class="ion-text-wrap">{{'belaqi-user-location-slider.current-location-error-header' | translate}}</h2>
       </div>
-      <ion-item text-wrap>
+      <ion-item class="ion-text-wrap">
         <p style="margin: auto; text-align:center;">{{currentLocationError}}</p>
       </ion-item>
-      <ion-item text-wrap>
+      <ion-item class="ion-text-wrap">
         <p style="margin: auto; text-align:center;">{{currentLocationErrorExplanation}}</p>
       </ion-item>
     </div>

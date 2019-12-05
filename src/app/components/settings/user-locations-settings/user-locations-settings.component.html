@@ -12,7 +12,7 @@
             <ion-col>
               <ion-label>
                 {{'belaqi-user-location-slider.current-location' | translate}}
-                <p text-wrap>{{'belaqi-user-location-slider.current-location-description' | translate}}</p>
+                <p class="ion-text-wrap">{{'belaqi-user-location-slider.current-location-description' | translate}}</p>
               </ion-label>
             </ion-col>
             <ion-toggle mode="md" color="success" [(ngModel)]="userlocation.location.isCurrentVisible" (ngModelChange)="changeCurrentLocation($event)"></ion-toggle>
@@ -22,7 +22,7 @@
           <ion-row nowrap align-items-left>
               <ion-reorder></ion-reorder>
               <div class="location-item">
-                <ion-label text-left text-wrap class="header">
+                <ion-label text-left class="header ion-text-wrap">
                   {{userlocation.location.label}}
                 </ion-label>
               </div>
@@ -43,10 +43,10 @@
       </ng-container>
     </ion-reorder-group>
   </ion-list>
-  <div text-center (click)="createNewLocation()">
+  <div class="ion-text-center" (click)="createNewLocation()">
     <ion-button>{{'settings.user-locations.create-new-location' | translate}}</ion-button>
   </div>
-  <!-- <ion-item text-wrap (click)="toggleNearestSeries()">
+  <!-- <ion-item class="ion-text-wrap" (click)="toggleNearestSeries()">
     <ion-label>{{'settings.user-locations.show-nearest-series-by-default' | translate}}</ion-label>
     <ion-toggle mode="md" color="secondary" [(ngModel)]="nearestSeriesByDefault" (ngModelChange)="toggleNearestSeries()"></ion-toggle>
   </ion-item> -->
