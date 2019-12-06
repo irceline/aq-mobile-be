@@ -31,7 +31,7 @@ export class UserLocationNotificationsTogglerComponent implements OnInit {
   ) { }
 
   public ngOnInit() {
-    this.notificationSubscription = this.locationNotifications.isRegisteredSubscription(this.location).subscribe(v => {this.subscribed = v; console.log("isregistered in ngoiniti")});
+    this.notificationSubscription = this.locationNotifications.isRegisteredSubscription(this.location).subscribe(v => {this.subscribed = v;});
   }
 
   public unregisterSubscription() {
@@ -46,6 +46,7 @@ export class UserLocationNotificationsTogglerComponent implements OnInit {
   }
 
   public toggleSubscription() {
+    /*
     this.loading = true;
     if (!this.subscribed) {
       this.locationNotifications.subscribeLocation(this.location)
@@ -72,6 +73,7 @@ export class UserLocationNotificationsTogglerComponent implements OnInit {
           }
         );
     }
+    */
   }
 
   private presentError(error: UserLocationSubscriptionError): void {
