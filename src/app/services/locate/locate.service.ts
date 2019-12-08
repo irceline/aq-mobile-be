@@ -140,40 +140,42 @@ export class LocateService implements OnInit {
       if (this.locationStatus !== LocationStatus.DENIED || askForPermission) {
         if (this.platform.is('cordova')) {
           this.platform.ready().then(() => {
-            console.log(`getUserLocation platform ready`);
             this.diagnostic.isLocationEnabled().then(enabled => {
               if (enabled) {
-                console.log(`Try to get user location`);
                 if (this.platform.is('android')) {
-                  this.diagnostic.getLocationMode().then(locationMode => {
-                    // high accuracy => do locate
-                    if (locationMode === this.diagnostic.locationMode.HIGH_ACCURACY) {
-                      this.getCurrentLocation(observer);
-                    }
-                    // location off
-                    if (locationMode === this.diagnostic.locationMode.LOCATION_OFF) {
-                      this.askForHighAccuracy().then(() => this.getCurrentLocation(observer), error => this.processError(observer, error));
+                  this.askForPermission().then(permissionGranted => {
+                    if(permissionGranted) {
+                      this.diagnostic.getLocationMode().then(locationMode => {
+                        // high accuracy => do locate
+                        if (locationMode === this.diagnostic.locationMode.HIGH_ACCURACY) {
+                          this.getCurrentLocation(observer);
+                        }
+                        // location off
+                        if (locationMode === this.diagnostic.locationMode.LOCATION_OFF) {
+                          this.askForHighAccuracy().then(() => this.getCurrentLocation(observer), error => this.processError(observer, error));
+                        } else {
+                          // device only or battery saving, first try in this mode, after specified timeout, request the user to use high
+                          // accuracy
+                          this.geolocate.getCurrentPosition({ timeout: LOCATE_TIMEOUT_UNTIL_HIGH_ACC_REQUEST, maximumAge: LOCATE_MAXIMUM_AGE })
+                            .then(pos => this.processComplete(observer, pos))
+                            .catch(() => {
+                              this.askForHighAccuracy().then(
+                                () => this.getCurrentLocation(observer),
+                                error => this.processError(observer, error)
+                              );
+                            });
+                        }
+                      });
                     } else {
-                      // device only or battery saving, first try in this mode, after specified timeout, request the user to use high
-                      // accuracy
-                      this.geolocate.getCurrentPosition({ timeout: LOCATE_TIMEOUT_UNTIL_HIGH_ACC_REQUEST, maximumAge: LOCATE_MAXIMUM_AGE })
-                        .then(pos => this.processComplete(observer, pos))
-                        .catch(() => {
-                          this.askForHighAccuracy().then(
-                            () => this.getCurrentLocation(observer),
-                            error => this.processError(observer, error)
-                          );
-                        });
+                      this.processError(observer, {code: 52, message: "Permission denied!"})
                     }
-                  });
+                  })
+
                 } else if (this.platform.is('ios')) {
-                  console.log(`getUserLocation for ios ready`);
                   this.diagnostic.isLocationAuthorized().then(locAuthorized => {
                     if (locAuthorized) {
-                      console.log(`Location authotized ... so get location`);
                       this.getCurrentLocation(observer);
                     } else {
-                      console.log(`Location not authorized ... so request user to get location`);
                       try {
                         this.diagnostic.getLocationAuthorizationStatus().then(status => {
                           switch (status) {
@@ -198,7 +200,6 @@ export class LocateService implements OnInit {
                               })
                               break;
                             case this.diagnostic.permissionStatus.DENIED:
-                              console.log("Permission denied");
                               this.toast.create({ message: this.translate.instant('network.geolocationDenied'), duration: 5000 }).then(toast => toast.present());
                               observer.error("Permission denied");
                               observer.complete();
@@ -233,10 +234,8 @@ export class LocateService implements OnInit {
         this.diagnostic.isLocationEnabled().then((res) => {
           if (this.platform.is('android')) {
             this.diagnostic.isLocationAuthorized().then(locAuthorized => {
-              console.log("checked if authorized");
               if (locAuthorized) {
                 this.diagnostic.getLocationMode().then(locMode => {
-                  console.log("switching on mode");
                   switch (locMode) {
                     case this.diagnostic.locationMode.HIGH_ACCURACY:
                       this.setLocationMode(LocationStatus.HIGH_ACCURACY);
@@ -307,11 +306,12 @@ export class LocateService implements OnInit {
       if (error.code === 2) { }
       // timeout
       if (error.code === 3) { }
-      console.error(`Error while gathering location. Error-Code: ${error.code}, Error-Message ${error.message}`);
-      // this.toast.create({ message: `Code: ${error.code}, Message ${error.message || error}`, duration: 3000 }).present();
+      console.error(`Error while gathering location. Error-Code: ${error.code}, Error-Message: ${error.message}`);
+      this.toast.create({ message: `Code: ${error.code}, Error: ${error.message || error}`, duration: 3000 }).then(toast => toast.present());
       observer.error(error.message);
     } else {
       console.error(`Error while gathering location: ${error}`);
+      this.toast.create({ message: `Error: ${error}`, duration: 3000 }).then(toast => toast.present());
       observer.error(error);
     }
     observer.complete();
@@ -319,6 +319,7 @@ export class LocateService implements OnInit {
 
   private processErrorString(observer: Observer<Geoposition>, error: string) {
     console.error(`Error while gathering location: ${error}`);
+    this.toast.create({ message: `Error: ${error}`, duration: 3000 }).then(toast => toast.present());
     observer.error(error);
     observer.complete();
   }
