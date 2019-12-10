@@ -517,7 +517,8 @@ class MapView {
   /**
    * Translates slider position into time+mean combinations
    */
-  public onSliderChange() {
+  public onSliderChange(val: number) {
+    this.sliderPosition = val;
     this.adjustSlider();
     this.adjustUI();
     this.adjustLegend();
