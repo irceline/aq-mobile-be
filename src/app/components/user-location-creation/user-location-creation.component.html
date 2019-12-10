@@ -18,14 +18,14 @@
         placeholder="{{'intro.three.locationLabelPlaceholder' | translate}}"></ion-input>
     </ion-item>
   </ion-list>
-  <!-- <div class="toggle" [hidden]="!location">
+  <div class="toggle" [hidden]="!location">
     <ion-item>
       <ion-label>
         <h2 style="color: white;">{{'user-location-notification-toggler.button' | translate}}</h2>
       </ion-label>
       <ion-toggle mode="md" color="success" [(ngModel)]="notificationsToggled"></ion-toggle>
     </ion-item>
-  </div> -->
+  </div>
   <div class="ion-text-center" *ngIf="locationLabel">
     <ion-button (click)="addLocationToList()">{{'intro.three.addLocationToList' | translate}}</ion-button>
   </div>
