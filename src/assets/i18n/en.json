@@ -326,7 +326,7 @@
     "geolocationPartialExplanation": "To have an optimal geolocation, please activate the location method \"high accuracy\".",
     "offline": "Your device is offline.",
     "online": "Your device is online",
-    "offlineWarning": "Only already downloaded data is available!"
+    "offlineWarning": "Only previously downloaded data is available!"
   },
   "notifications-popup": {
     "header": "Notifications",

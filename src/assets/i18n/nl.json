@@ -326,7 +326,7 @@
     "geolocationPartialExplanation": "Om een optimale bepaling van uw locatie te hebben, activeer de locatiemethode \"hoge precisie\".",
     "offline": "Uw toestel is offline.",
     "online": "Uw toestel is online",
-    "offlineWarning": "Alleen reeds gedownloade gegevens zijn beschikbaar!"
+    "offlineWarning": "Alleen eerder gedownloade gegevens zijn beschikbaar!"
   },
   "notifications-popup": {
     "header": "Meldingen",

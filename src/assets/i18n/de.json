@@ -326,7 +326,7 @@
 		"geolocationPartialExplanation": "Um eine optimale Lokalisierung zu gewährleisten, müssen sie die Suchmethode \"Hohe Genauigkeit\" verwenden.",
 		"offline": "Dein Handy ist offline.",
 		"online": "Dein Handy ist online",
-		"offlineWarning": "Nur bereits heruntergeladene Daten sind verfügbar!"
+		"offlineWarning": "Nur zuvor heruntergeladene Daten sind verfügbar!"
 	},
 	"notifications-popup": {
     "header": "Benachrichtigungen",
