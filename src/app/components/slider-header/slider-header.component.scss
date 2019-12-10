@@ -50,9 +50,21 @@
       width: 100%;
       height: 100%;
     }
-  
+
     .offlineModeWarningText {
       min-width: 80%;
+    }
+    .offlineModeWarningText h1 {
+      font-size: 1em;
+      margin-top: 5px !important;
+      margin-bottom: 5px !important;
+      line-height: 1em;
+    }
+    .offlineModeWarningText p {
+      font-size: 0.8em;
+      line-height: 1em;
+      margin-top: 5px !important;
+      margin-bottom: 5px !important;
     }
   }
 
