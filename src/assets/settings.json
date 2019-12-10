@@ -1,7 +1,7 @@
 {
   "datasetApis": [{
     "name": "IRCEL - CELINE: timeseries-api (SOS 2.0)",
-    "url": "http://geo.irceline.be/sos/api/v1/"
+    "url": "https://geo.irceline.be/sos/api/v1/"
   }],
   "languages": [{
       "code": "en",
@@ -27,7 +27,7 @@
     "5",
     "6001"
   ],
-  "ircelineSettingsUrl": "http://www.irceline.be/air/time_app_json.php",
+  "ircelineSettingsUrl": "https://www.irceline.be/air/time_app_json.php",
   "ircelineAQIndexUrl": "https://www.irceline.be/tables/forecast/model/belaqi.php",
   "clusterStationsOnMap": false,
   "geoSearchCountryCodes": [
@@ -83,7 +83,7 @@
       "layers": [{
           "label": "Hourly mean PM2.5",
           "visible": true,
-          "baseUrl": "http://geo.irceline.be/rioifdm/wms",
+          "baseUrl": "https://geo.irceline.be/rioifdm/wms",
           "layer": {
             "layers": "pm25_hmean",
             "transparent": true,
@@ -95,7 +95,7 @@
         {
           "label": "Stationary hourly mean PM2.5",
           "visible": true,
-          "baseUrl": "http://geo.irceline.be/realtime/wms",
+          "baseUrl": "https://geo.irceline.be/realtime/wms",
           "stations": true,
           "layer": {
             "layers": "realtime:pm25_24hmean_station",
@@ -112,7 +112,7 @@
       "layers": [{
         "label": "Hourly mean PM10",
         "visible": true,
-        "baseUrl": "http://geo.irceline.be/rioifdm/wms",
+        "baseUrl": "https://geo.irceline.be/rioifdm/wms",
         "layer": {
           "layers": "pm10_hmean",
           "transparent": true,
@@ -127,7 +127,7 @@
       "layers": [{
         "label": "Hourly mean O3",
         "visible": true,
-        "baseUrl": "http://geo.irceline.be/rioifdm/wms",
+        "baseUrl": "https://geo.irceline.be/rioifdm/wms",
         "layer": {
           "layers": "o3_hmean",
           "transparent": true,
@@ -142,7 +142,7 @@
       "layers": [{
         "label": "Hourly mean NO2",
         "visible": true,
-        "baseUrl": "http://geo.irceline.be/rioifdm/wms",
+        "baseUrl": "https://geo.irceline.be/rioifdm/wms",
         "layer": {
           "layers": "no2_hmean",
           "transparent": true,
@@ -157,7 +157,7 @@
       "layers": [{
         "label": "Hourly mean BC",
         "visible": true,
-        "baseUrl": "http://geo.irceline.be/rioifdm/wms",
+        "baseUrl": "https://geo.irceline.be/rioifdm/wms",
         "layer": {
           "layers": "bc_hmean",
           "transparent": true,

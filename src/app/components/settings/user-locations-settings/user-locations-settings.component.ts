@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalController, ToastController } from '@ionic/angular';
 
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { LocateService, LocationStatus } from '../../../services/locate/locate.service';
 import { UserLocation, UserLocationListService } from '../../../services/user-location-list/user-location-list.service';
 import { ModalEditUserLocationComponent } from '../../modal-edit-user-location/modal-edit-user-location.component';
@@ -8,29 +8,49 @@ import {
   ModalUserLocationCreationComponent,
 } from '../../modal-user-location-creation/modal-user-location-creation.component';
 import { ModalUserLocationListComponent } from '../../modal-user-location-list/modal-user-location-list.component';
+import { UserLocationNotificationsService } from '../../../services/user-location-notifications/user-location-notifications.service';
+import { UserLocationNotificationsTogglerComponent } from '../../../components/user-location-notifications-toggler/user-location-notifications-toggler.component';
+import { ModalController, ToastController } from '@ionic/angular';
+import { Subscription } from 'rxjs';
 
+interface UserLocationWithNotification {
+  location: UserLocation;
+  notification: UserLocationNotificationsTogglerComponent;
+}
 @Component({
   selector: 'user-locations-settings',
   templateUrl: './user-locations-settings.component.html',
   styleUrls: ['./user-locations-settings.component.scss'],
 })
-export class UserLocationsSettingsComponent implements OnInit {
+export class UserLocationsSettingsComponent implements OnInit, OnDestroy {
 
-  public locations: UserLocation[];
+  public locations: UserLocationWithNotification[];
 
   public showCurrentLocation: boolean;
+
+  private locationUpdateSubscription: Subscription;
 
   constructor(
     protected modalCtrl: ModalController,
     protected userLocationService: UserLocationListService,
     private locate: LocateService,
-    private toast: ToastController
-  ) {
-    this.setLocations();
-  }
+    private toast: ToastController,
+    private translate: TranslateService,
+    private locationNotifications: UserLocationNotificationsService
+  ) {}
 
   public ngOnInit(): void {
+    this.setLocations();
     this.showCurrentLocation = this.userLocationService.isCurrentLocationVisible();
+    this.locationUpdateSubscription = this.userLocationService.locationsChanged.subscribe(() => {
+      this.setLocations();
+    })
+  }
+
+  public ngOnDestroy(): void {
+    if (this.locationUpdateSubscription){
+      this.locationUpdateSubscription.unsubscribe();
+    }
   }
 
   public createNewLocation() {
@@ -42,7 +62,25 @@ export class UserLocationsSettingsComponent implements OnInit {
   }
 
   private setLocations() {
-    this.locations = this.userLocationService.getUserLocations();
+    // Cleanup old subscriptions if there are any
+    if (this.locations) {
+      this.locations.forEach(loc => {
+        if (loc.notification) {
+          loc.notification.unregisterSubscription();
+        }
+      })
+    }
+    let userlocations = this.userLocationService.getUserLocations();
+    this.locations = userlocations.map(loc => {
+      let location = {} as UserLocationWithNotification;
+      location.location = loc;
+      if (loc.type != "current") {
+        location.notification = new UserLocationNotificationsTogglerComponent(this.locationNotifications, this.toast, this.translate);
+        location.notification.location = loc;
+        location.notification.ngOnInit();
+      }
+      return location;
+    })
   }
 
   public removeLocation(location: UserLocation) {
@@ -55,7 +93,7 @@ export class UserLocationsSettingsComponent implements OnInit {
     this.locations.splice(event.detail.from, 1);
     this.locations.splice(event.detail.to, 0, element);
 
-    this.userLocationService.setLocationList(this.locations);
+    this.userLocationService.setLocationList(this.locations.map(loc => loc.location));
     event.detail.complete(true);
   }
 

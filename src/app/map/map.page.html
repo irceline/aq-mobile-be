@@ -1,13 +1,13 @@
 <overlay-info-drawer>
   <div class="drawer-content">
     <div>
-      <h2 text-center>{{'map.overlay.header' | translate}}</h2>
+      <h2 class="ion-text-center">{{'map.overlay.header' | translate}}</h2>
     </div>
     <div>
       <p>{{'map.overlay.content-p1' | translate}}</p>
     </div>
     <div>
-      <p text-center><img src="{{'map.overlay.url-svg' | translate}}"></p>
+      <p class="ion-text-center"><img src="{{'map.overlay.url-svg' | translate}}"></p>
     </div>
     <div>
       <p>{{'map.overlay.content-p2' | translate}}</p>
@@ -18,7 +18,7 @@
 <ion-content>
   <div style="margin-top: 45px; height: calc(100% - 45px)">
 
-    <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
       <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="{{'refresh.pull-message' | translate}}"
         refreshingSpinner="circles" refreshingText="">
       </ion-refresher-content>

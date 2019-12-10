@@ -11,7 +11,7 @@
     "header": "jaargemiddelde kaart",
     "legend": {
       "link-more": "Meer weergeven",
-      "link-more-url": "http://www.irceline.be/nl/"
+      "link-more-url": "https://www.irceline.be/nl/"
     }
   },
   "annual-mean-panel": {
@@ -125,7 +125,7 @@
   },
   "faq": {
     "accuracy": {
-      "link": "http://www.irceline.be/nl/documentatie/modellen/rio-ifdm",
+      "link": "https://www.irceline.be/nl/documentatie/modellen/rio-ifdm",
       "moreInfo": "Meer info over RIO-IFDM",
       "p1": "De modelberekening waarvan de app je het resultaat toont, is een combinatie van twee luchtkwaliteitsmodellen: RIO en IFDM. Beide modellen zijn grondig gevalideerd met bijkomende metingen en worden voortdurend gevoed met actuele luchtkwaliteitsdata.",
       "p2": "Bij elke modelberekening is er een kans op over- of onderschatting van de werkelijke situatie. Deze 2 modellen houden bv. nog geen rekening met obstakels langs wegen (geluidsschermen, gesloten huizenrijen, etc.). Zo kan er een onderschatting getoond worden voor street canyons. Street canyons zijn smalle straten omgeven door hoge aaneengesloten bebouwing. Dit zorgt voor slechte ventilatie waardoor de luchtvervuiling moeilijk wordt verspreid",
@@ -149,7 +149,7 @@
       "index7": "vrij slecht",
       "index8": "slecht",
       "index9": "zeer slecht",
-      "link": "http://www.irceline.be/nl/belaqi",
+      "link": "https://www.irceline.be/nl/belaqi",
       "moreInfo": "Lees hier hoe de index rekening houdt met de gezondheidseffecten op korte termijn.",
       "p1": "Het indexcijfer dat de app geeft is niet enkel gebaseerd op het resultaat van alle meetstations in onze meetnetten, waarbij het dichtstbijgelegen station mogelijk ettelijke kilometers verder ligt. De concentraties gemeten in alle meetstations van de overheid worden toegevoegd aan een computermodel, dat ook rekening houdt met emissiegegevens (verkeer, industrie en scheepvaart) en meteorologische omstandigheden (windrichting en windsnelheid). Dit computermodel berekent dan gedetailleerde luchtkwaliteitskaarten voor het ganse land. De combinatie van het resultaat voor stikstofdioxide, fijn stof en ozon zie je als één indexcijfer in de app.",
       "p2": "Het indexcijfer dat de app toont, geeft je daarbij ook een inschatting van de gezondheidsimpact op korte termijn.",
@@ -198,7 +198,7 @@
     },
     "moreInfo": "Meer info",
     "wheel": {
-      "link": "http://www.irceline.be/nl/belaqi",
+      "link": "https://www.irceline.be/nl/belaqi",
       "message": "Deze wijzer toont de actuele BelAQI luchtkwaliteitsindex voor uw locatie. Deze index combineert de gemodelleerde concentraties van de verschillende polluenten afhankelijk van hun kortetermijnimpact op de gezondheid."
     }
   },
@@ -463,7 +463,7 @@
   "sub-index-panel": {
     "header": "Korte termijn blootstelling",
     "information-popup": {
-      "link": "http://www.irceline.be/nl/belaqi",
+      "link": "https://www.irceline.be/nl/belaqi",
       "moreInfo": "Meer info",
       "no2": "NO2 of stikstofdioxide (uurgemiddelde)",
       "o3": "O3 of ozon (uurgemiddelde)",
@@ -472,6 +472,14 @@
       "text": "Dit zijn de berekende \"subindexen\" voor uw locatie. De globale BelAQI index is de hoogste waarde van deze 4 subindexen. De concentratieschalen werden bepaald in functie van de kortetermijnimpact op de gezondheid. De 4 polluenten die gebruikt worden om de BelAQI-index te berekenen zijn:"
     }
   },
+  "survey": {
+		"confirm": "Naar de enquête >",
+    "header": "Gebruikersbevraging",
+    "help-us": "Help ons de app verbeteren",
+    "link": "https://nl.surveymonkey.com/r/VNBBPD6",
+		"notagain": "Nee, bedankt!",
+		"question": "Jouw feedback is belangrijk. Ben je bereid enkele vragen te beantwoorden? Het duurt slechts 2 min."
+	},
   "update": {
     "hint": {
       "popover": {

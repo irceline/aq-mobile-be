@@ -11,6 +11,7 @@ import { LocateService } from '../../services/locate/locate.service';
 import { MobileSettings } from '../../services/settings/settings.service';
 import { UserLocationListService } from '../../services/user-location-list/user-location-list.service';
 import { ModalUserLocationListComponent } from '../modal-user-location-list/modal-user-location-list.component';
+import { UserLocationNotificationsService, UserLocationSubscriptionError } from 'src/app/services/user-location-notifications/user-location-notifications.service';
 
 @Component({
   selector: 'user-location-creation',
@@ -24,6 +25,7 @@ export class UserLocationCreationComponent {
   public locationLabel: string;
   public location: Point;
   public loadCurrentLocation: boolean;
+  public notificationsToggled: boolean;
 
   constructor(
     public locationList: UserLocationListService,
@@ -32,7 +34,8 @@ export class UserLocationCreationComponent {
     private toastCtrl: ToastController,
     private translate: TranslateService,
     private locate: LocateService,
-    private geolabels: GeoLabelsService
+    private geolabels: GeoLabelsService,
+    private locationNotifications: UserLocationNotificationsService
   ) {
     const settings = this.settingsSrvc.getSettings();
     this.geoSearchOptions = {
@@ -74,18 +77,40 @@ export class UserLocationCreationComponent {
     this.location = null;
   }
 
-  public async addLocationToList() {
+  public addLocationToList() {
     let toast;
     if (this.locationList.getLocationListLength() >= this.settingsSrvc.getSettings().limitOfAllowedUserLocations) {
-      toast = await this.toastCtrl.create({ message: this.translate.instant('user-location.creation.limit-reached'), duration: 5000 });
+      this.toastCtrl.create({ message: this.translate.instant('user-location.creation.limit-reached'), duration: 3000 })
+        .then(toast => {
+          toast.present();
+        });
     } else if (this.locationList.hasLocation(this.locationLabel, this.location)) {
-      toast = await this.toastCtrl.create({ message: this.translate.instant('user-location.creation.message-exists'), duration: 3000 });
+      toast = this.toastCtrl.create({ message: this.translate.instant('user-location.creation.message-exists'), duration: 3000 })
+        .then(toast => {
+          toast.present();
+        });
     } else {
       this.locationList.addUserLocation(this.locationLabel, this.location);
-      toast = await this.toastCtrl.create({ message: this.translate.instant('user-location.creation.message-added'), duration: 3000 });
-      this.modalCtrl.dismiss();
+      toast = this.toastCtrl.create({ message: this.translate.instant('user-location.creation.message-added'), duration: 3000 })
+        .then(toast => {
+          toast.present();
+        });
+
+      // Handle subscription to notifications
+      if (this.notificationsToggled) {
+        let userlocation = this.locationList.getUserLocations().filter(loc => loc.label == this.locationLabel);
+        if (userlocation && userlocation[0]) {
+          this.locationNotifications.subscribeLocation(userlocation[0]).subscribe(
+            res => { },
+            error => {
+              // wait until old toasts have disappeared
+              setTimeout(() => {this.presentError(error);}, 5000)
+            }
+          );
+        }
+      }
     }
-    toast.present();
+    this.modalCtrl.dismiss();
   }
 
   public onLocationChanged(point: Point) {
@@ -94,6 +119,22 @@ export class UserLocationCreationComponent {
 
   public showLocationList() {
     this.modalCtrl.create({ component: ModalUserLocationListComponent }).then(modal => modal.present());
+  }
+
+  private presentError(error: UserLocationSubscriptionError): void {
+    let message;
+    switch (error) {
+      case UserLocationSubscriptionError.BackendRegistration:
+        message = this.translate.instant('user-location-notification-toggler.backend-registration-error');
+        break;
+      case UserLocationSubscriptionError.NotificationSubscription:
+        message = this.translate.instant('user-location-notification-toggler.notification-error');
+        break;
+      default:
+        message = this.translate.instant('user-location-notification-toggler.default-error');
+        break;
+    }
+    this.toastCtrl.create({ message, duration: 5000 }).then(toast => toast.present());
   }
 
 }

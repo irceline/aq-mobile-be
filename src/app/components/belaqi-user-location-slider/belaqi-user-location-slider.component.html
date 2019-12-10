@@ -1,9 +1,6 @@
 <ion-slides pager #slider (ionSlideDidChange)="slideChanged()" [options]="sliderOptions">
   <ion-slide *ngFor="let loc of belaqiLocations">
     <div *ngIf="loc.latitude" style="width: 100%">
-      <div class="toggle" *ngIf="loc.type === 'user'">
-        <user-location-notifications-toggler [location]="loc"></user-location-notifications-toggler>
-      </div>
       <div class="first-panel">
         <notification-panel [location]="loc"></notification-panel>
         <div class="wheel">
@@ -26,17 +23,17 @@
       </div>
     </div>
     <div *ngIf="!currentLocationError && !loc.latitude" style="height: 300px; color: white;">
-      <div text-wrap>{{'belaqi-user-location-slider.loading-current-location' | translate}}</div>
+      <div class="ion-text-wrap">{{'belaqi-user-location-slider.loading-current-location' | translate}}</div>
       <ion-spinner></ion-spinner>
     </div>
     <div *ngIf="currentLocationError && !loc.latitude" style="height: 400px; color: white;">
-      <div text-wrap>
-        <h2 text-wrap>{{'belaqi-user-location-slider.current-location-error-header' | translate}}</h2>
+      <div class="ion-text-wrap">
+        <h2 class="ion-text-wrap">{{'belaqi-user-location-slider.current-location-error-header' | translate}}</h2>
       </div>
-      <ion-item text-wrap>
+      <ion-item class="ion-text-wrap">
         <p style="margin: auto; text-align:center;">{{currentLocationError}}</p>
       </ion-item>
-      <ion-item text-wrap>
+      <ion-item class="ion-text-wrap">
         <p style="margin: auto; text-align:center;">{{currentLocationErrorExplanation}}</p>
       </ion-item>
     </div>

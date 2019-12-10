@@ -43,7 +43,7 @@
       <ion-item *ngIf="location.type === 'current'">
         <ion-label>
           <h2 style="color: white;">{{'belaqi-user-location-slider.current-location' | translate}}</h2>
-          <p text-wrap style="color: white;">{{'belaqi-user-location-slider.current-location-description' | translate}}</p>
+          <p class="ion-text-wrap" style="color: white;">{{'belaqi-user-location-slider.current-location-description' | translate}}</p>
         </ion-label>
         <ion-toggle mode="md" color="success" [checked]="showCurrentLocation" (ionChange)="toggleShowCurrentLocation($event)"></ion-toggle>
       </ion-item>

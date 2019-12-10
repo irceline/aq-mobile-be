@@ -1,6 +1,6 @@
-export const realtimeWmsURL = 'http://geo.irceline.be/realtime/wms';
-export const rioifdmWmsURL = 'http://geo.irceline.be/rioifdm/wms';
-export const forecastWmsURL = 'http://geo.irceline.be/forecast/wms';
-export const annualWmsURL = 'http://geo.irceline.be/annual/wms';
+export const realtimeWmsURL = 'https://geo.irceline.be/realtime/wms';
+export const rioifdmWmsURL = 'https://geo.irceline.be/rioifdm/wms';
+export const forecastWmsURL = 'https://geo.irceline.be/forecast/wms';
+export const annualWmsURL = 'https://geo.irceline.be/annual/wms';
 
-export const realtimeWfsURL  = 'http://geo.irceline.be/realtime/wfs';
+export const realtimeWfsURL  = 'https://geo.irceline.be/realtime/wfs';

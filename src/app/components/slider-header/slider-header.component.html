@@ -9,9 +9,9 @@
       {{'network.offlineWarning' | translate}}
     </ion-col>
   </ion-row>
-  <ion-row text-center>
+  <ion-row class="ion-text-center" [ngClass]="{'rowWithWarning': oldDataWarning}">
     <ion-col size="12">
-      <ion-label text-wrap *ngIf="header">
+      <ion-label class="ion-text-wrap" *ngIf="header">
         <ion-text class="location-label">
           <h2>{{header?.label}}</h2>
         </ion-text>

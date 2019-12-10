@@ -1,5 +1,5 @@
-import './custom-canvas';
 import './control-opacity';
+import './custom-canvas';
 
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
@@ -9,14 +9,15 @@ import { IonSlides, ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from 'ionic-cache';
 import {
-  CustomCanvasOptions,
-  circleMarker,
   CircleMarker,
+  circleMarker,
   Control,
   control,
+  CustomCanvasOptions,
   divIcon,
   FitBoundsOptions,
   geoJSON,
+  GridLayer,
   latLngBounds,
   LatLngBoundsExpression,
   LatLngExpression,
@@ -31,6 +32,7 @@ import {
 } from 'leaflet';
 import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
 import moment from 'moment';
+import * as PouchDB from 'pouchdb/dist/pouchdb';
 import { forkJoin, Subscription } from 'rxjs';
 
 import { getIDForMainPhenomenon, getMainPhenomenonForID, MainPhenomenon } from '../../model/phenomenon';
@@ -48,7 +50,6 @@ import { MobileSettings } from '../../services/settings/settings.service';
 import { UserLocation, UserLocationListService } from '../../services/user-location-list/user-location-list.service';
 import { MarkerSelectorGenerator } from '../customized-station-map-selector/customized-station-map-selector.component';
 import { HeaderContent } from '../slider-header/slider-header.component';
-import * as PouchDB from 'pouchdb/dist/pouchdb';
 
 enum PhenomenonLabel {
   BelAQI = 'BelAQI',
@@ -1033,10 +1034,19 @@ class MapView {
   }
 
   private adjustOpacitySlider() {
+    let prevOpacity: number;
+    if (this.opacityControl && this.opacityControl['_layers'] && this.opacityControl['_layers'].length > 0) {
+      prevOpacity = this.opacityControl['_layers'][0].layer.options.opacity;
+    }
     if (this.mapCache.hasMap(this.mapId)) {
       if (this.opacityControl) { this.opacityControl.remove(); }
       const layers = {};
-      this.overlayMaps.forEach(e => layers[e.label] = e.layer);
+      this.overlayMaps.forEach(e => {
+        layers[e.label] = e.layer;
+        if (prevOpacity) {
+          (e.layer as GridLayer).setOpacity(prevOpacity);
+        }
+      });
       this.opacityControl = control.opacity(layers,
         { position: 'bottomleft', collapsed: true, label: this.translateSrvc.instant('map.opacity-slider-header') }
       ).addTo(this.mapCache.getMap(this.mapId));

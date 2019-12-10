@@ -7,6 +7,7 @@ import {
   UserLocationNotificationsService,
   UserLocationSubscriptionError,
 } from '../../services/user-location-notifications/user-location-notifications.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'user-location-notifications-toggler',
@@ -21,6 +22,8 @@ export class UserLocationNotificationsTogglerComponent implements OnInit {
   public subscribed: boolean;
   public loading: boolean;
 
+  private notificationSubscription: Subscription;
+
   constructor(
     private locationNotifications: UserLocationNotificationsService,
     private toast: ToastController,
@@ -28,7 +31,11 @@ export class UserLocationNotificationsTogglerComponent implements OnInit {
   ) { }
 
   public ngOnInit() {
-    this.locationNotifications.isRegisteredSubscription(this.location).subscribe(v => this.subscribed = v);
+    this.notificationSubscription = this.locationNotifications.isRegisteredSubscription(this.location).subscribe(v => {this.subscribed = v;});
+  }
+
+  public unregisterSubscription() {
+    this.notificationSubscription.unsubscribe();
   }
 
   public handleToggleChange(evt) {
@@ -39,6 +46,7 @@ export class UserLocationNotificationsTogglerComponent implements OnInit {
   }
 
   public toggleSubscription() {
+    /*
     this.loading = true;
     if (!this.subscribed) {
       this.locationNotifications.subscribeLocation(this.location)
@@ -65,6 +73,7 @@ export class UserLocationNotificationsTogglerComponent implements OnInit {
           }
         );
     }
+    */
   }
 
   private presentError(error: UserLocationSubscriptionError): void {
