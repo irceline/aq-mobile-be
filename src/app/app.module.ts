@@ -1,5 +1,6 @@
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
+import { AutoCompleteModule } from 'ionic4-auto-complete';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { DatasetApiInterface, HelgolandCoreModule, SettingsService } from '@helgoland/core';
@@ -63,6 +64,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
+    AutoCompleteModule,
     HelgolandCoreModule,
     ComponentsModule,
     TranslateModule.forRoot({

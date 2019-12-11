@@ -33,6 +33,11 @@
                 "glob": "**/*.png",
                 "input": "node_modules/leaflet/dist/images",
                 "output": "/"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/ionic4-auto-complete/assets/",
+                "output": "./assets/"
               }
             ],
             "styles": [

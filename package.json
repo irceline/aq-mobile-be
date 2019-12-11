@@ -63,6 +63,7 @@
     "hammerjs": "^2.0.8",
     "invert-color": "^2.0.0",
     "ionic-cache": "^4.1.0",
+    "ionic4-auto-complete": "^2.4.1",
     "leaflet-geosearch": "^2.7.0",
     "rxjs": "~6.3.3",
     "rxjs-compat": "^6.5.3",
