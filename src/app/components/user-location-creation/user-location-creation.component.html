@@ -1,7 +1,7 @@
-<mobile-geosearch-control [options]="geoSearchOptions" (onSearchTriggered)="resetLocation()"
+<mobile-geosearch-control [options]="geoSearchOptions" (focusChangeEmitter)="toggleButtons($event)" (onSearchTriggered)="resetLocation()"
   (onResultChanged)="geoSearchResultChanged($event)"></mobile-geosearch-control>
 <div class="ion-text-center">
-  <ion-button fill="outline" (click)="getCurrentLocation()">
+  <ion-button [disabled]="!buttonsEnabled" fill="outline" (click)="getCurrentLocation()">
     <span>{{'intro.three.baseOnCurrentLocation' | translate}}</span>
     <ion-spinner *ngIf="loadCurrentLocation"></ion-spinner>
   </ion-button>
@@ -31,5 +31,5 @@
   </div>
 </div>
 <div *ngIf="locationList.hasLocations()" class="ion-text-center">
-  <ion-button fill="outline" (click)="showLocationList()">{{'intro.three.showLocationList' | translate}}</ion-button>
+  <ion-button [disabled]="!buttonsEnabled" fill="outline" (click)="showLocationList()">{{'intro.three.showLocationList' | translate}}</ion-button>
 </div>

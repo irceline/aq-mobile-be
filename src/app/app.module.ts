@@ -51,6 +51,7 @@ import { JSSONSettingsService } from './services/settings/settings.service';
 import { StartPageSettingsService } from './services/start-page-settings/start-page-settings.service';
 import { UserLocationListService } from './services/user-location-list/user-location-list.service';
 import { InfoOverlayService } from './services/overlay-info-drawer/overlay-info-drawer.service';
+import { LocationAutocompleteService } from './services/location-autocomplete/location-autocomplete.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -110,6 +111,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     LanguageHandlerService,
     LocateService,
     LocationAccuracy,
+    LocationAutocompleteService,
     MapDataService,
     ModelledValueService,
     NearestTimeseriesManagerService,

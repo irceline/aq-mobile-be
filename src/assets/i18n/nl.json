@@ -497,7 +497,8 @@
     "creation": {
       "limit-reached": "U kunt niet meer dan 5 locaties opslaan. Verwijder eerst een van de bestaande locaties.",
       "message-added": "Locatie toegevoegd",
-      "message-exists": "Locatie bestaat al"
+      "message-exists": "Locatie bestaat al",
+			"geolocation-error": "Standort nicht gefunden" //TODO translate!
     }
   },
   "user-location-notification-toggler": {

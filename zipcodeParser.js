@@ -85,6 +85,7 @@ function getDataNl(list, callback) {
     });
 }
 
+
 function nominatimLookup(list, callback) {
     let lookupList = [];
     let errorcount = 0;
@@ -100,44 +101,21 @@ function nominatimLookup(list, callback) {
                 if (jsonBody.length > 0) {
                     jsonBody = jsonBody[0];
                 }
-                let location = { "lon": jsonBody.lon, "lat": jsonBody.lat };
-                lookupList.push({
-                    "p": elem.replace("+", " "),
-                    "loc": location
-                });
+                lookupList.push(decodeURI(elem.replace("+", " ")));
                 callback();
             } else {
-                // Request only name as postcode might not be registered
-                /*request(nominatim_url + elem.substring(5), {}, (err, res, body) => {
-                    if (err) {
-                        console.log(err);
-                        callback(err);
-                    }
-                    let jsonBody = JSON.parse(body);
-                    // Always take first element from list
-                    if (jsonBody.length > 0) {
-                        jsonBody = jsonBody[0];
-                    }
-                    let location = { "lon": jsonBody.lon, "lat": jsonBody.lat };
-                    lookupList.push({
-                        "p": elem.replace("+", " "),
-                        "loc": location
-                    });
-                    callback();
-                });
-                */
-               callback();
+                callback();
             }
         });
     }, function (err) {
         if (err != null) {
             console.log(err)
         } else {
-            lookupList = lookupList.filter((elem) => (elem.loc.lon !== undefined && elem.loc.lat !== undefined))
-            fs.writeFileSync("zipCodes.js", JSON.stringify(lookupList));
+            fs.writeFileSync("./src/app/services/location-autocomplete/zipCodes.json", JSON.stringify(lookupList));
         }
     })
 }
+
 
 /**
  * Converts textual html entities into decimal form.

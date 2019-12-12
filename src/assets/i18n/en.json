@@ -497,7 +497,8 @@
     "creation": {
       "limit-reached": "You can not create more than 5 locations. Please first remove one of the exiting locations.",
       "message-added": "User location added",
-      "message-exists": "User location already exists"
+      "message-exists": "User location already exists",
+      "geolocation-error": "Location could not be found"
     }
   },
   "user-location-notification-toggler": {
