@@ -14,6 +14,12 @@
       padding: 10px;
     }
   }
+
+  // Force HW-Accellerated Rendering on Control Components
+  // Fix for https://github.com/irceline/aq-mobile-be/issues/194
+  .leaflet-left {
+    transform: translate3d(0,0,0);
+  }
 }
 
 .leaflet-control-layers {
