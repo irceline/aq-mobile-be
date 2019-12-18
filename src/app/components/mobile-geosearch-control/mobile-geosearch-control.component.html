@@ -1,3 +1,3 @@
-<ion-searchbar [(ngModel)]="searchTerm" placeholder="{{'map.geosearch.placeholder' | translate}}" (keyup.enter)="triggerSearch()"
-  (ionClear)="clearSearch()">
+<ion-searchbar [(ngModel)]="searchTerm" placeholder="{{'map.geosearch.placeholder' | translate}}"
+  (keyup.enter)="triggerSearch()" (keyup.shift.enter)="triggerSearch()" (ionClear)="clearSearch()">
 </ion-searchbar>
