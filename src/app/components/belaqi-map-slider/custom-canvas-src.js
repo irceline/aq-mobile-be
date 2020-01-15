@@ -385,10 +385,11 @@ L.TileLayer.addInitHook(function () {
     .then(function (result) {
         // Check if we need to downsize database
         if (result.doc_count > maxDocCount) {
-            // Get oldest 1/3 of records
+            // Get all overflowing docs + 1/3 of docs from the cache
+            // Sorted by age ascending
             db.changes({
                 since: 0,
-                limit: Math.floor(result.doc_count / 3),
+                limit: Math.floor((result.doc_count - maxDocCount) + maxDocCount/ 3),
                 include_docs: true
             })
             .then(changes => {
