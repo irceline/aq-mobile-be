@@ -163,8 +163,12 @@ export class BelaqiMapSliderComponent implements OnDestroy, OnInit {
       }
     });
 
-    // Make PouchDB accessible from boundary-canvas-src.js
-    (window as any).PouchDB = PouchDB;
+    // Make PouchDB accessible
+    (window as any).L.PouchDB = new PouchDB("offline-tiles",
+    {
+        // Enforce revs limit although we should never create more than necessary anyway
+        revs_limit: 1
+    });
 
     this.refresherSubscription = this.refreshHandler.onRefresh.subscribe(() => this.loadBelaqis(true));
     this.userLocationSubscription = this.userLocationListService.locationsChanged.subscribe(() => this.loadBelaqis(false));

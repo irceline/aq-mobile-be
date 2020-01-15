@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, EventEmitter, Input, KeyValueDiffers, Output } from '@angular/core';
 import { CachedMapComponent, MapCache } from '@helgoland/map';
 import { DragEndEvent, LatLng, latLng, marker, divIcon, point } from 'leaflet';
+import * as PouchDB from 'pouchdb/dist/pouchdb';
 
 @Component({
   selector: 'location-selection',
@@ -20,6 +21,12 @@ export class LocationSelectionComponent extends CachedMapComponent implements Af
     differs: KeyValueDiffers
   ) {
     super(mapCache, differs);
+    // Make PouchDB accessible
+    (window as any).L.PouchDB = new PouchDB("offline-tiles",
+    {
+        // Enforce revs limit although we should never create more than necessary anyway
+        revs_limit: 1
+    });
   }
 
   public ngAfterViewInit(): void {
