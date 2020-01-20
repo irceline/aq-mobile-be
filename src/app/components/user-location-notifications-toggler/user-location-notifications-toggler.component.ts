@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ToastController } from '@ionic/angular';
+import { ToastController, PickerController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import { UserLocation } from '../../services/user-location-list/user-location-list.service';
@@ -8,6 +8,7 @@ import {
   UserLocationSubscriptionError,
 } from '../../services/user-location-notifications/user-location-notifications.service';
 import { Subscription } from 'rxjs';
+import { PickerOptions } from '@ionic/core';
 
 @Component({
   selector: 'user-location-notifications-toggler',
@@ -27,7 +28,8 @@ export class UserLocationNotificationsTogglerComponent implements OnInit {
   constructor(
     private locationNotifications: UserLocationNotificationsService,
     private toast: ToastController,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private indexPicker: PickerController
   ) { }
 
   public ngOnInit() {
@@ -49,17 +51,58 @@ export class UserLocationNotificationsTogglerComponent implements OnInit {
   public toggleSubscription() {
     this.loading = true;
     if (!this.subscribed) {
-      this.locationNotifications.subscribeLocation(this.location)
-        .subscribe(
-          res => {
-            this.subscribed = res;
-            this.loading = false;
+      let opts: PickerOptions = {
+        mode: "md",
+        buttons: [
+          {
+            text: this.translate.instant("controls.cancel"),
+            role: 'cancel',
           },
-          error => {
-            this.presentError(error);
-            this.loading = false;
+          {
+            text: "Done",
+            handler: (value: any): void => {
+              let index = value["index"]["value"];
+              if (index > 0) {
+                this.locationNotifications.subscribeLocation(this.location, index)
+                  .subscribe(
+                    res => {
+                      this.subscribed = res;
+                      this.loading = false;
+                    },
+                    error => {
+                      this.presentError(error);
+                      this.loading = false;
+                    }
+                  );
+              }
+            },
+          },
+        ],
+        columns: [
+          {
+            name: "index",
+            prefix: this.translate.instant("customize-personal-alerts.alert-index-level"),
+            options: [
+              { text: '1', value: 1 },
+              { text: '2', value: 2 },
+              { text: '3', value: 3 },
+              { text: '4', value: 4 },
+              { text: '5', value: 5 },
+              { text: '6', value: 6 },
+              { text: '7', value: 7 },
+              { text: '8', value: 8 },
+              { text: '9', value: 9 },
+              { text: '10', value: 10 },
+            ]
           }
-        );
+        ]
+      }
+      this.indexPicker.create(opts).then(p => {
+        p.present();
+      }).catch(error => {
+        this.presentError(error);
+        this.loading = false;
+      })
     } else {
       this.locationNotifications.unsubscribeLocation(this.location)
         .subscribe(

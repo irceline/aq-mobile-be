@@ -14,6 +14,7 @@ export interface LocationSubscription {
   lat: number;
   lng: number;
   language: string;
+  index: number;
   key: string;
 }
 
@@ -53,17 +54,17 @@ export class UserLocationNotificationsService {
             longitude: e.lng
           };
           this.unsubscribeLocation(loc).subscribe(res => {
-            this.subscribeLocation(loc).subscribe();
+            this.subscribeLocation(loc, e.index).subscribe();
           });
         });
       });
     });
   }
 
-  public subscribeLocation(location: UserLocation): Observable<boolean> {
+  public subscribeLocation(location: UserLocation, index: number): Observable<boolean> {
     const langCode = this.translate.currentLang;
     return new Observable<boolean>((observer: Observer<boolean>) => {
-      const subscription = this.generateSubscriptionObject(location.latitude, location.longitude, langCode);
+      const subscription = this.generateSubscriptionObject(location.latitude, location.longitude, index, langCode);
       // register to Backend
       this.registerSubscription(subscription).subscribe(
         success => {
@@ -168,11 +169,12 @@ export class UserLocationNotificationsService {
     observer.complete();
   }
 
-  private generateSubscriptionObject(lat: number, lng: number, language: string): LocationSubscription {
+  private generateSubscriptionObject(lat: number, lng: number, index: number, language: string): LocationSubscription {
     return {
       lat,
       lng,
       language,
+      index,
       key: this.generateKey()
     };
   }

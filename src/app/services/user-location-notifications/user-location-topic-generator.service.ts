@@ -10,7 +10,7 @@ export const USER_LOCATION_NOTIFICATION_TOPIC_PREFIX = 'fcm';
 export class UserLocationTopicGeneratorService {
 
   public generateTopic(subscr: LocationSubscription): string {
-    return `${USER_LOCATION_NOTIFICATION_TOPIC_PREFIX}_${subscr.lat}_${subscr.lng}_${subscr.language}`;
+    return `${USER_LOCATION_NOTIFICATION_TOPIC_PREFIX}_${subscr.key}`;
   }
 
   public isUserLocationTopic(topic: string): boolean {

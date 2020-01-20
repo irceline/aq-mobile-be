@@ -10,7 +10,7 @@ import {
 import { ModalUserLocationListComponent } from '../../modal-user-location-list/modal-user-location-list.component';
 import { UserLocationNotificationsService } from '../../../services/user-location-notifications/user-location-notifications.service';
 import { UserLocationNotificationsTogglerComponent } from '../../../components/user-location-notifications-toggler/user-location-notifications-toggler.component';
-import { ModalController, ToastController } from '@ionic/angular';
+import { ModalController, ToastController, PickerController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
 interface UserLocationWithNotification {
@@ -36,7 +36,8 @@ export class UserLocationsSettingsComponent implements OnInit, OnDestroy {
     private locate: LocateService,
     private toast: ToastController,
     private translate: TranslateService,
-    private locationNotifications: UserLocationNotificationsService
+    private locationNotifications: UserLocationNotificationsService,
+    private indexPicker: PickerController
   ) {}
 
   public ngOnInit(): void {
@@ -75,7 +76,7 @@ export class UserLocationsSettingsComponent implements OnInit, OnDestroy {
       let location = {} as UserLocationWithNotification;
       location.location = loc;
       if (loc.type != "current") {
-        location.notification = new UserLocationNotificationsTogglerComponent(this.locationNotifications, this.toast, this.translate);
+        location.notification = new UserLocationNotificationsTogglerComponent(this.locationNotifications, this.toast, this.translate, this.indexPicker);
         location.notification.location = loc;
         location.notification.ngOnInit();
       }

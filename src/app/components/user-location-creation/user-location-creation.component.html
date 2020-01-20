@@ -23,7 +23,7 @@
       <ion-label>
         <h2 style="color: white;">{{'user-location-notification-toggler.button' | translate}}</h2>
       </ion-label>
-      <ion-toggle mode="md" color="success" [(ngModel)]="notificationsToggled"></ion-toggle>
+      <ion-toggle mode="md" color="success" [(ngModel)]="notificationsToggled" (ngModelChange)="toggledNotifications($event)"></ion-toggle>
     </ion-item>
   </div>
   <div class="ion-text-center" *ngIf="locationLabel">

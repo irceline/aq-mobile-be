@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { SettingsService } from '@helgoland/core';
 import { GeoSearchOptions, GeoSearchResult } from '@helgoland/map';
-import { ModalController, ToastController } from '@ionic/angular';
+import { ModalController, ToastController, PickerController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Point } from 'geojson';
 import { MapOptions } from 'leaflet';
@@ -12,6 +12,7 @@ import { MobileSettings } from '../../services/settings/settings.service';
 import { UserLocationListService } from '../../services/user-location-list/user-location-list.service';
 import { ModalUserLocationListComponent } from '../modal-user-location-list/modal-user-location-list.component';
 import { UserLocationNotificationsService, UserLocationSubscriptionError } from 'src/app/services/user-location-notifications/user-location-notifications.service';
+import { PickerOptions } from '@ionic/core';
 
 @Component({
   selector: 'user-location-creation',
@@ -27,6 +28,8 @@ export class UserLocationCreationComponent {
   public loadCurrentLocation: boolean;
   public notificationsToggled: boolean;
 
+  private index: number;
+
   constructor(
     public locationList: UserLocationListService,
     private modalCtrl: ModalController,
@@ -35,7 +38,8 @@ export class UserLocationCreationComponent {
     private translate: TranslateService,
     private locate: LocateService,
     private geolabels: GeoLabelsService,
-    private locationNotifications: UserLocationNotificationsService
+    private locationNotifications: UserLocationNotificationsService,
+    private indexPicker: PickerController
   ) {
     const settings = this.settingsSrvc.getSettings();
     this.geoSearchOptions = {
@@ -100,11 +104,12 @@ export class UserLocationCreationComponent {
       if (this.notificationsToggled) {
         let userlocation = this.locationList.getUserLocations().filter(loc => loc.label == this.locationLabel);
         if (userlocation && userlocation[0]) {
-          this.locationNotifications.subscribeLocation(userlocation[0]).subscribe(
+          // Index was already set as 
+          this.locationNotifications.subscribeLocation(userlocation[0], this.index).subscribe(
             res => { },
             error => {
               // wait until old toasts have disappeared
-              setTimeout(() => {this.presentError(error);}, 5000)
+              setTimeout(() => { this.presentError(error); }, 5000)
             }
           );
         }
@@ -119,6 +124,52 @@ export class UserLocationCreationComponent {
 
   public showLocationList() {
     this.modalCtrl.create({ component: ModalUserLocationListComponent }).then(modal => modal.present());
+  }
+
+  public toggledNotifications(stateAfterToggle) {
+    if (stateAfterToggle) {
+      let opts: PickerOptions = {
+        mode: "md",
+        buttons: [
+          {
+            text: this.translate.instant("controls.cancel"),
+            role: 'cancel',
+            handler: (value: any): void => {
+              this.notificationsToggled = false;
+            }
+          },
+          {
+            text: "Done",
+            handler: (value: any): void => {
+              this.index = value["index"]["value"];
+            },
+          },
+        ],
+        columns: [
+          {
+            name: "index",
+            prefix: this.translate.instant("customize-personal-alerts.alert-index-level"),
+            options: [
+              { text: '1', value: 1 },
+              { text: '2', value: 2 },
+              { text: '3', value: 3 },
+              { text: '4', value: 4 },
+              { text: '5', value: 5 },
+              { text: '6', value: 6 },
+              { text: '7', value: 7 },
+              { text: '8', value: 8 },
+              { text: '9', value: 9 },
+              { text: '10', value: 10 },
+            ]
+          }
+        ]
+      }
+      this.indexPicker.create(opts).then(p => {
+        p.present();
+      }).catch(error => {
+        this.presentError(error);
+      })
+    }
   }
 
   private presentError(error: UserLocationSubscriptionError): void {

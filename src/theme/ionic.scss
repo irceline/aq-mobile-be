@@ -28,3 +28,10 @@ ion-content {
 ion-toggle {
   width: 2em;
 }
+
+ion-picker {
+  .picker-prefix {
+    white-space: inherit;
+    line-height: initial;
+  }
+}
