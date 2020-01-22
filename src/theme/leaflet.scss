@@ -16,6 +16,10 @@
   }
 }
 
+.leaflet-left {
+  z-index: 998;
+}
+
 .leaflet-control-layers {
   .leaflet-control-layers-label {
     display: none;
