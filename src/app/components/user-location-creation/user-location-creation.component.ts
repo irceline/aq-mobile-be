@@ -27,6 +27,8 @@ export class UserLocationCreationComponent {
   public loadCurrentLocation: boolean;
   public notificationsToggled: boolean;
 
+  public buttonsEnabled = true;
+
   constructor(
     public locationList: UserLocationListService,
     private modalCtrl: ModalController,
@@ -50,11 +52,19 @@ export class UserLocationCreationComponent {
     };
   }
 
+  // Toggle the buttons off while search Bar is in Focus
+  public toggleButtons(value: boolean) {
+    this.buttonsEnabled = !value;
+  }
+
   public geoSearchResultChanged(result: GeoSearchResult) {
     this.resetLocation();
     if (result) {
       this.location = result.geometry as Point;
       this.locationLabel = this.geolabels.createLabelOfSearchResult(result);
+    } else {
+      this.toastCtrl.create({ message: this.translate.instant('user-location.creation.geolocation-error'), duration: 5000 })
+      .then(toast => toast.present());
     }
   }
 

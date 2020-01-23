@@ -59,6 +59,7 @@ import { UserLocationCreationComponent } from './user-location-creation/user-loc
 import {
   UserLocationNotificationsTogglerComponent,
 } from './user-location-notifications-toggler/user-location-notifications-toggler.component';
+import { AutoCompleteModule } from 'ionic4-auto-complete';
 
 const COMPONENTS = [
   AboutSettingsComponent,
@@ -107,6 +108,7 @@ const COMPONENTS = [
 
 @NgModule({
   imports: [
+    AutoCompleteModule,
     CommonModule,
     FormsModule,
     IonicModule,

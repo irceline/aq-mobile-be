@@ -1,3 +1,9 @@
+<!--
 <ion-searchbar [(ngModel)]="searchTerm" placeholder="{{'map.geosearch.placeholder' | translate}}"
-  (keyup.enter)="triggerSearch()" (keyup.shift.enter)="triggerSearch()" (ionClear)="clearSearch()">
+  (keyup.enter)="triggerSearch()" (ionClear)="clearSearch()">
 </ion-searchbar>
+-->
+
+<ion-auto-complete #searchbar [dataProvider]="autocompleteService" [clearInvalidInput]="false" (itemSelected)="onItemSelected($event)"
+  (autoFocus)="focusChangeEmitter.emit(true)" (autoBlur)="focusChangeEmitter.emit(false)">
+</ion-auto-complete>

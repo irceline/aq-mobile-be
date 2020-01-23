@@ -497,7 +497,8 @@
 		"creation": {
 			"limit-reached": "Sie können nicht mehr als 5 Standorte erstellen. Bitte entfernen Sie zunächst einen der vorhandenen Standorte.",
 			"message-added": "Nutzerstandort erstellt",
-			"message-exists": "Nutzerstandort existiert bereits"
+			"message-exists": "Nutzerstandort existiert bereits",
+			"geolocation-error": "Standort nicht gefunden"
 		}
 	},
 	"user-location-notification-toggler": {
