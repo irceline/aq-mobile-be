@@ -17,6 +17,8 @@ export class UserLocationTopicGeneratorService {
     return topic.startsWith(USER_LOCATION_NOTIFICATION_TOPIC_PREFIX);
   }
 
+  // This does not work anymore since topics have been restructured to `fcm_<uuid>`
+  /*
   public generateLatLngOfTopic(topic: string) {
     const topicSplit = topic.split('_');
     if (topicSplit[0] === USER_LOCATION_NOTIFICATION_TOPIC_PREFIX && topicSplit[1] && topicSplit[2]) {
@@ -28,4 +30,5 @@ export class UserLocationTopicGeneratorService {
       };
     }
   }
+  */
 }

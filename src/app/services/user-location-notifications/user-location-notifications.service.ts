@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 import { EncryptionService } from '../encryption/encryption.service';
 import { PushNotificationsService } from '../push-notifications/push-notifications.service';
 import { UserLocation } from '../user-location-list/user-location-list.service';
-import { UserLocationTopicGeneratorService } from './user-location-topic-generator.service';
+import { UserLocationTopicGeneratorService, USER_LOCATION_NOTIFICATION_TOPIC_PREFIX } from './user-location-topic-generator.service';
 
 export interface LocationSubscription {
   lat: number;
@@ -123,6 +123,13 @@ export class UserLocationNotificationsService {
   private getRegisteredSubscription(location: UserLocation): Observable<LocationSubscription> {
     return this.registeredSubscriptions.pipe(
       map(val => val.find(e => e.lat === location.latitude && e.lng === location.longitude))
+    );
+  }
+
+  public getSubscriptionFromTopic(topic: String): Observable<LocationSubscription> {
+    let key = topic.substring(USER_LOCATION_NOTIFICATION_TOPIC_PREFIX.length + 1);
+    return this.registeredSubscriptions.pipe(
+      map(val => val.find(e => e.key === key))
     );
   }
 

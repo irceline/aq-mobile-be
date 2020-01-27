@@ -8,6 +8,7 @@ import {
   UserLocationTopicGeneratorService,
 } from '../../services/user-location-notifications/user-location-topic-generator.service';
 import { NotificationPopupComponent } from './notification-popup.component';
+import { UserLocationNotificationsService } from 'src/app/services/user-location-notifications/user-location-notifications.service';
 
 @Component({
   selector: 'notification-panel',
@@ -25,6 +26,7 @@ export class NotificationPanelComponent implements OnInit {
     private modalCtrl: ModalController,
     private notifications: NotificationMaintainerService,
     private userLocationTopicGenerator: UserLocationTopicGeneratorService,
+    private userLocationNotificationService: UserLocationNotificationsService,
     private zone: NgZone
   ) { }
 
@@ -40,11 +42,15 @@ export class NotificationPanelComponent implements OnInit {
     list.forEach((val, key) => {
       if (val.length > 0) {
         const topic = val[0].topic;
+        // Check if the notification is location-specific and applies to this panel.
         if (this.userLocationTopicGenerator.isUserLocationTopic(topic)) {
-          const topicLoc = this.userLocationTopicGenerator.generateLatLngOfTopic(topic);
-          if (this.location.latitude === topicLoc.lat && this.location.longitude === topicLoc.lng) {
-            filtered.set(key, val);
-          }
+          this.userLocationNotificationService.getSubscriptionFromTopic(topic).subscribe(
+            sub => {
+              if (this.location.latitude === sub.lat && this.location.longitude === sub.lng) {
+                filtered.set(key, val);
+              }
+            }
+          )
         } else {
           filtered.set(key, val);
         }
