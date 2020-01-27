@@ -30,7 +30,7 @@ export class NotificationPanelComponent implements OnInit {
 
   public ngOnInit() {
     this.notifications.getNotifications().subscribe(e => {
-      e.forEach((v, k) => console.log(k));
+      e.forEach((v, k) => console.log(v));
       this.zone.run(() => this.filterNotifications(e));
     });
   }
@@ -38,7 +38,7 @@ export class NotificationPanelComponent implements OnInit {
   private filterNotifications(list: Map<string, PushNotification[]>) {
     const filtered = new Map();
     list.forEach((val, key) => {
-      if (val.length > 0) {
+      if (val && val.length > 0) {
         const topic = val[0].topic;
         if (this.userLocationTopicGenerator.isUserLocationTopic(topic)) {
           const topicLoc = this.userLocationTopicGenerator.generateLatLngOfTopic(topic);
