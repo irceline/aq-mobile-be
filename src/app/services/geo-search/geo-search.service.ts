@@ -11,6 +11,7 @@ import {
 import { Point } from 'geojson';
 import { CacheService } from 'ionic-cache';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { createCacheKey } from '../../model/caching';
 
@@ -39,7 +40,7 @@ export class GeoSearchService extends NominatimGeoSearchService {
     const url = this.serviceUrl + 'search';
     const request = this.httpClient.get(url, { params });
     return this.cacheService.loadFromObservable(
-      createCacheKey(url, params.toString()), request, null, TTL_GEO_SEARCH).map((resArray: any[]) => {
+      createCacheKey(url, params.toString()), request, null, TTL_GEO_SEARCH).pipe(map((resArray: any[]) => {
         if (resArray.length === 1) {
           const result = resArray[0];
           const name = result.display_name;
@@ -68,7 +69,7 @@ export class GeoSearchService extends NominatimGeoSearchService {
           if (result.address) { returnResult.address = result.address; }
           return returnResult;
         }
-      });
+      }));
   }
 
   public reverse(point: Point, options: GeoReverseOptions = {}): Observable<GeoReverseResult> {
@@ -81,31 +82,32 @@ export class GeoSearchService extends NominatimGeoSearchService {
     if (options && options.zoom !== undefined) { params = params.set('zoom', `${options.zoom}`); }
     const url = this.serviceUrl + 'reverse';
     const request = this.httpClient.get(url, { params });
-    return this.cacheService.loadFromObservable(createCacheKey(url, params.toString()), request, null, TTL_GEO_SEARCH).map((res: any) => {
-      const result = {
-        lat: res.lat,
-        lon: res.lon,
-        displayName: res.display_name,
-        boundingbox: res.boundingbox
-      } as GeoReverseResult;
-      if (res.address) {
-        result.address = {
-          city: res.address.city,
-          cityDistrict: res.address.city_district,
-          country: res.address.country,
-          countryCode: res.address.country_code,
-          county: res.address.county,
-          houseNumber: res.address.house_number,
-          neighbourhood: res.address.neighbourhood,
-          postcode: res.address.postcode,
-          road: res.address.road,
-          state: res.address.state,
-          stateDistrict: res.address.state_district,
-          suburb: res.address.suburb
-        };
-      }
-      return result;
-    });
+    return this.cacheService.loadFromObservable(createCacheKey(url, params.toString()), request, null, TTL_GEO_SEARCH)
+      .pipe(map((res: any) => {
+        const result = {
+          lat: res.lat,
+          lon: res.lon,
+          displayName: res.display_name,
+          boundingbox: res.boundingbox
+        } as GeoReverseResult;
+        if (res.address) {
+          result.address = {
+            city: res.address.city,
+            cityDistrict: res.address.city_district,
+            country: res.address.country,
+            countryCode: res.address.country_code,
+            county: res.address.county,
+            houseNumber: res.address.house_number,
+            neighbourhood: res.address.neighbourhood,
+            postcode: res.address.postcode,
+            road: res.address.road,
+            state: res.address.state,
+            stateDistrict: res.address.state_district,
+            suburb: res.address.suburb
+          };
+        }
+        return result;
+      }));
   }
 
 }
