@@ -1,5 +1,6 @@
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
+import { AutoCompleteModule } from 'ionic4-auto-complete';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { DatasetApiInterface, HelgolandCoreModule, SettingsService } from '@helgoland/core';
@@ -50,6 +51,7 @@ import { JSSONSettingsService } from './services/settings/settings.service';
 import { StartPageSettingsService } from './services/start-page-settings/start-page-settings.service';
 import { UserLocationListService } from './services/user-location-list/user-location-list.service';
 import { InfoOverlayService } from './services/overlay-info-drawer/overlay-info-drawer.service';
+import { LocationAutocompleteService } from './services/location-autocomplete/location-autocomplete.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -63,6 +65,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
+    AutoCompleteModule,
     HelgolandCoreModule,
     ComponentsModule,
     TranslateModule.forRoot({
@@ -108,6 +111,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     LanguageHandlerService,
     LocateService,
     LocationAccuracy,
+    LocationAutocompleteService,
     MapDataService,
     ModelledValueService,
     NearestTimeseriesManagerService,

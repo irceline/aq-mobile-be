@@ -140,7 +140,7 @@ ionic cordova build android
   * If you get the following error: `Execution failed for task ':app:processDebugGoogleServices'. > Please fix the version conflict either by updating the version of the google-services plugin (information about the latest version is available at https://bintray.com/android/android-tools/com.google.gms.google-services/) or updating the version of com.google.android.gms to 10.+. `
     * adjust in `platforms/android/project.properties` -> `com.google.android.gms:play-services-location:15.+` to `com.google.android.gms:play-services-location:10.+`
     * adjust in `plugins/cordova-plugin-request-location-accuracy/plugin.xml` -> `com.google.android.gms:play-services-location:15.+` to `com.google.android.gms:play-services-location:10.+`
-  * If you get the following build error: `The library com.google.android.gms:play-services-measurement-base is being requested by various other libraries at [[16.5.0,16.5.0], [16.4.0,16.4.0]], but resolves to 16.5.0. Disable the plugin and check your dependencies tree using ./gradlew :app:dependencies.`, ping the following versions in `platforms/android/project.properties`:
+  * If you get the following build error: `The library com.google.android.gms:play-services-measurement-base is being requested by various other libraries at [[16.5.0,16.5.0], [16.4.0,16.4.0]], but resolves to 16.5.0. Disable the plugin and check your dependencies tree using ./gradlew :app:dependencies.`, pin the following versions in `platforms/android/project.properties`:
 
 ```
 cordova.system.library.6=com.google.firebase:firebase-core:16.0.8+

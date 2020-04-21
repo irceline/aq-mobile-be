@@ -498,7 +498,8 @@
     "creation": {
       "limit-reached": "Vous ne pouvez pas créer plus de 5 localisations. Veuillez d'abord supprimer une des localisations existantes.",
       "message-added": "localisation ajoutée",
-      "message-exists": "La localisation existe déjà"
+      "message-exists": "La localisation existe déjà",
+			"geolocation-error": "localisation non trouvé"
     }
   },
   "user-location-notification-toggler": {
