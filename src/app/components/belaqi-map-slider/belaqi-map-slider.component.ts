@@ -993,22 +993,24 @@ class MapView {
         }
         switch (this.time) {
           case TimeLabel.today:
-            timeParam = moment().format('YYYY-MM-DD');
+            layerId += '_d0';
             break;
           case TimeLabel.tomorrow:
-            timeParam = moment().add(1, 'day').format('YYYY-MM-DD');
+            layerId += '_d1';
             break;
           case TimeLabel.today2:
-            timeParam = moment().add(2, 'day').format('YYYY-MM-DD');
+            layerId += '_d2';
             break;
           case TimeLabel.today3:
-            timeParam = moment().add(3, 'day').format('YYYY-MM-DD');
+            layerId += '_d3';
             break;
           default:
             break;
         }
-        this.drawLayer(forecastWmsURL, layerId, geojson, false, timeParam);
-        this.adjustOpacitySlider();
+        this.ircelineSettings.getLastForecastUpdate().subscribe ( lastUpdate => {
+          this.drawLayer(forecastWmsURL, layerId, geojson, false, lastUpdate.toISOString());
+          this.adjustOpacitySlider();
+        })
       }
     });
   }

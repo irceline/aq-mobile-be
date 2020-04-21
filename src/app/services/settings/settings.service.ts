@@ -5,6 +5,7 @@ import { LatLngBoundsExpression, Layer } from 'leaflet';
 export interface MobileSettings extends Settings {
   visiblePhenomenonIDs: string[];
   ircelineSettingsUrl: string;
+  ircelineLastForecastUpdateUrl: string;
   ircelineAQIndexUrl: string;
   clusterStationsOnMap: boolean;
   phenomenonLayerMapping: PhenomenonLayerMapping[];

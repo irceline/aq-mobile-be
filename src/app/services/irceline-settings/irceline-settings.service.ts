@@ -51,6 +51,13 @@ export class IrcelineSettingsService implements OnInit, OnDestroy {
     this.networkSubscriptionOnline.unsubscribe();
   }
 
+  public getLastForecastUpdate(): Observable<Date> {
+    const url = this.settingsService.getSettings().ircelineLastForecastUpdateUrl;
+    return new Observable<Date>((observer: Observer<Date>) => {
+        this.fetchLastForecastTime(url, observer);
+    });
+  }
+
   public getSettings(reload?: boolean): Observable<IrcelineSettings> {
       // Check if device is connected to network
       // Discard forced refresh if this is not the case to preserve cache
@@ -63,16 +70,16 @@ export class IrcelineSettingsService implements OnInit, OnDestroy {
       if (reload) {
         this.cacheService.removeItem(url)
           .then(() => {
-            this.doRequest(url, observer);
+            this.fetchSettings(url, observer);
           })
-          .catch(() => this.doRequest(url, observer));
+          .catch(() => this.fetchSettings(url, observer));
       } else {
-        this.doRequest(url, observer);
+        this.fetchSettings(url, observer);
       }
     });
   }
 
-  private doRequest(url: string, observer: Observer<IrcelineSettings>) {
+  private fetchSettings(url: string, observer: Observer<IrcelineSettings>) {
     const request = this.http.get(url);
     this.cacheService.loadFromObservable(url, request, null, DEFAULT_TTL_CACHE_LAST_UPDATE_CHECK).subscribe(
       result => observer.next({
@@ -82,6 +89,15 @@ export class IrcelineSettingsService implements OnInit, OnDestroy {
         top_pollutant_today: result['top_pollutant_today'],
         survey: result.survey ? result.survey === '1' : false
       }),
+      error => observer.error(error),
+      () => observer.complete()
+    );
+  }
+
+  private fetchLastForecastTime(url: string, observer: Observer<Date>) {
+    const request = this.http.get(url);
+    this.cacheService.loadFromObservable(url, request, null, DEFAULT_TTL_CACHE_LAST_UPDATE_CHECK).subscribe(
+      result => observer.next(moment(result['lastupdate_forecast']).toDate()),
       error => observer.error(error),
       () => observer.complete()
     );

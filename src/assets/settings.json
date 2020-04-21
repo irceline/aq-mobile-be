@@ -28,6 +28,7 @@
     "6001"
   ],
   "ircelineSettingsUrl": "https://www.irceline.be/air/time_app_json.php",
+  "ircelineLastForecastUpdateUrl": "https://www.irceline.be/air/time_app_forecast_json.php",
   "ircelineAQIndexUrl": "https://www.irceline.be/tables/forecast/model/belaqi.php",
   "clusterStationsOnMap": false,
   "geoSearchCountryCodes": [
