@@ -31,7 +31,6 @@ import {
   tileLayer,
 } from 'leaflet';
 import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
-import moment from 'moment';
 import * as PouchDB from 'pouchdb/dist/pouchdb';
 import { forkJoin, Subscription } from 'rxjs';
 
@@ -134,6 +133,9 @@ export class BelaqiMapSliderComponent implements OnDestroy, OnInit {
   private networkAlertSubscription: Subscription;
   private locationStatusSubscription: Subscription;
   private refresherSubscription: Subscription;
+  private lastForecastTimeSubscription: Subscription;
+
+  private lastForecastTime: Date;
 
   constructor(
     protected settingsSrvc: SettingsService<MobileSettings>,
@@ -165,9 +167,34 @@ export class BelaqiMapSliderComponent implements OnDestroy, OnInit {
 
     // Make PouchDB accessible
     (window as any).L.PouchDB = new PouchDB("offline-tiles",
-    {
+      {
         // Enforce revs limit although we should never create more than necessary anyway
         revs_limit: 1
+      });
+
+    // Invalidate old forecast tiles
+    // No connection check is necessary since forecastupdate only updates when there is an active network connection
+    this.lastForecastTimeSubscription = this.ircelineSettings.getLastForecastUpdate().subscribe(forecastTime => {
+      if (this.lastForecastTime != forecastTime) {
+        this.lastForecastTime = forecastTime;
+        // Invalidate offline PouchDB cache
+        const pouch = (window as any).L.PouchDB;
+        pouch.allDocs({}).then(docs => {
+          for (var i = 0; i < docs.total_rows; i++) {
+            const result = docs.rows[i];
+            if (result.id.includes("_d0") || result.id.includes("_d1") || result.id.includes("_d2") || result.id.includes("_d3")) {
+              pouch.remove(result.key, result.value.rev);
+            }
+          }
+        }).catch(err => {
+          console.log(err);
+        });
+        pouch.compact()
+          .then(() => { })
+          .catch(err => {
+            console.log(err);
+          })
+      }
     });
 
     this.refresherSubscription = this.refreshHandler.onRefresh.subscribe(() => this.loadBelaqis(true));
@@ -182,6 +209,7 @@ export class BelaqiMapSliderComponent implements OnDestroy, OnInit {
     if (this.userLocationSubscription) { this.userLocationSubscription.unsubscribe(); }
     if (this.networkAlertSubscription) { this.networkAlertSubscription.unsubscribe(); }
     if (this.refresherSubscription) { this.refresherSubscription.unsubscribe(); }
+    if (this.lastForecastTimeSubscription) { this.lastForecastTimeSubscription.unsubscribe(); }
   }
 
   public changeToMap() {
@@ -1007,7 +1035,7 @@ class MapView {
           default:
             break;
         }
-        this.ircelineSettings.getLastForecastUpdate().subscribe ( lastUpdate => {
+        this.ircelineSettings.getLastForecastUpdate().subscribe(lastUpdate => {
           this.drawLayer(forecastWmsURL, layerId, geojson, false, lastUpdate.toISOString());
           this.adjustOpacitySlider();
         })

@@ -22,6 +22,33 @@ const isRingBbox = function (ring, bbox) {
     return sumX === 2 * (bbox.min.x + bbox.max.x) && sumY === 2 * (bbox.min.y + bbox.max.y);
 };
 
+// 🍂namespace TileLayer
+// 🍂section PouchDB tile caching options
+// 🍂option useCache: Boolean = false
+// Whether to use a PouchDB cache on this tile layer, or not
+L.TileLayer.prototype.options.useCache = true;
+
+// 🍂option saveToCache: Boolean = true
+// When caching is enabled, whether to save new tiles to the cache or not
+L.TileLayer.prototype.options.saveToCache = true;
+
+// 🍂option useOnlyCache: Boolean = false
+// When caching is enabled, whether to request new tiles from the network or not
+L.TileLayer.prototype.options.useOnlyCache = false;
+
+// 🍂option cacheFormat: String = 'image/png'
+// The image format to be used when saving the tile images in the cache
+L.TileLayer.prototype.options.cacheFormat = "image/png";
+
+// 🍂option cacheMaxAge: Number = 24*3600*1000
+// Maximum age of the cache, in milliseconds
+L.TileLayer.prototype.options.cacheMaxAge = 24 * 3600 * 1000;
+
+// option maxDocCount: numer = 5000
+// If there are more docs in the db try to purge old docs
+// Each Doc has an attachment of roughly 70KB.
+const maxDocCount = 200;
+
 L.TileLayer.CustomCanvas = L.TileLayer.WMS.extend({
     options: {
         boundary: null
@@ -37,15 +64,60 @@ L.TileLayer.CustomCanvas = L.TileLayer.WMS.extend({
             this._attributionRemoved = true;
             this.getAttribution = null;
         }
-    },
 
-    createTile: function (coords, done) {
-        const tile = document.createElement('canvas'),
-            url = this.getTileUrl(coords);
-        tile.width = tile.height = this.options.tileSize;
-        this._drawTileInternal(tile, coords, url, L.Util.bind(done, null, null, tile));
-
-        return tile;
+        if (!this.options.useCache) {
+            this._db = null;
+            return;
+        }
+        this._db = L.PouchDB;
+        var db = L.PouchDB;
+        db.info()
+            .then(function (result) {
+                // Check if we need to downsize database
+                if (result.doc_count > maxDocCount) {
+                    // Get all overflowing docs + 1/3 of docs from the cache
+                    // Sorted by age ascending
+                    db.changes({
+                        since: 0,
+                        limit: Math.floor((result.doc_count - maxDocCount) + maxDocCount / 3),
+                        include_docs: true
+                    })
+                        .then(changes => {
+                            // Remodel results object to enable parsing by bulkDocs functionpng
+                            for (let i = 0; i < changes.results.length; i++) {
+                                changes.results[i] = changes.results[i].doc;
+                                // let change = changes.results[i];
+                                // change = {
+                                //     _id: change.id,
+                                //     _deleted: true,
+                                //     _rev: change.changes[0].rev
+                                // }
+                            };
+                            console.log(changes.results);
+                            db.bulkDocs(changes.results)
+                                .then(() => {
+                                    // Compact database
+                                    // This should finally delete the elements and free up database space.
+                                    db.compact()
+                                        .then(() => {
+                                            console.log("successfully compacted!");
+                                        })
+                                        .catch(err => {
+                                            console.log(err);
+                                        })
+                                })
+                                .catch(err => {
+                                    console.log(err);
+                                })
+                        })
+                        .catch(err => {
+                            console.log(err);
+                        })
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
     },
 
     _pruneTiles: function () {
@@ -339,125 +411,12 @@ L.TileLayer.CustomCanvas = L.TileLayer.WMS.extend({
             this._map.attributionControl[state.isOut ? 'removeAttribution' : 'addAttribution'](attribution);
             this._attributionRemoved = !!state.isOut;
         }
-    }
+    },
 
-});
-
-L.tileLayer.customCanvas = function (url, options) {
-    return new L.TileLayer.CustomCanvas(url, options);
-};
-
-
-// The following section indicated by the line of stars was taken from
-// https://github.com/MazeMap/Leaflet.TileLayer.PouchDBCached/tree/ca83b60dcdd276d7cd7f9c4f24eb1fd1138b2c72  
-// at and is licensed under the MIT License as stated in the readme.md file.
-// ***************************************START-OF-SECTION**********************************************
-
-// HTMLCanvasElement.toBlob() polyfill
-// copy-pasted off https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob
-if (!HTMLCanvasElement.prototype.toBlob) {
-    Object.defineProperty(HTMLCanvasElement.prototype, "toBlob", {
-        value: function (callback, type, quality) {
-            var dataURL = this.toDataURL(type, quality).split(",")[1];
-            setTimeout(function () {
-                var binStr = atob(dataURL),
-                    len = binStr.length,
-                    arr = new Uint8Array(len);
-
-                for (var i = 0; i < len; i++) {
-                    arr[i] = binStr.charCodeAt(i);
-                }
-
-                callback(new Blob([arr], { type: type || "image/png" }));
-            });
-        },
-    });
-}
-
-L.TileLayer.addInitHook(function () {
-    if (!this.options.useCache) {
-        this._db = null;
-        return;
-    }
-    this._db = L.PouchDB;
-    var db = L.PouchDB;
-    db.info()
-    .then(function (result) {
-        // Check if we need to downsize database
-        if (result.doc_count > maxDocCount) {
-            // Get all overflowing docs + 1/3 of docs from the cache
-            // Sorted by age ascending
-            db.changes({
-                since: 0,
-                limit: Math.floor((result.doc_count - maxDocCount) + maxDocCount/ 3),
-                include_docs: true
-            })
-            .then(changes => {
-                // Remodel results object to enable parsing by bulkDocs functionpng
-                for (let i = 0; i < changes.results.length; i++) {
-                    changes.results[i] = changes.results[i].doc;
-                    // let change = changes.results[i];
-                    // change = {
-                    //     _id: change.id,
-                    //     _deleted: true,
-                    //     _rev: change.changes[0].rev
-                    // }
-                };
-                console.log(changes.results);
-                db.bulkDocs(changes.results)
-                .then(() => {
-                    // Compact database
-                    // This should finally delete the elements and free up database space.
-                    db.compact()
-                    .then(() => {
-                        console.log("successfully compacted!");
-                    })
-                    .catch(err => {
-                        console.log(err);
-                    })
-                })
-                .catch(err => {
-                    console.log(err);
-                })
-            })
-            .catch(err => {
-                console.log(err);
-            })
-        }
-    })
-    .catch(err => {
-        console.log(err);
-    })
-});
-
-// 🍂namespace TileLayer
-// 🍂section PouchDB tile caching options
-// 🍂option useCache: Boolean = false
-// Whether to use a PouchDB cache on this tile layer, or not
-L.TileLayer.prototype.options.useCache = true;
-
-// 🍂option saveToCache: Boolean = true
-// When caching is enabled, whether to save new tiles to the cache or not
-L.TileLayer.prototype.options.saveToCache = true;
-
-// 🍂option useOnlyCache: Boolean = false
-// When caching is enabled, whether to request new tiles from the network or not
-L.TileLayer.prototype.options.useOnlyCache = false;
-
-// 🍂option cacheFormat: String = 'image/png'
-// The image format to be used when saving the tile images in the cache
-L.TileLayer.prototype.options.cacheFormat = "image/png";
-
-// 🍂option cacheMaxAge: Number = 24*3600*1000
-// Maximum age of the cache, in milliseconds
-L.TileLayer.prototype.options.cacheMaxAge = 24 * 3600 * 1000;
-
-// option maxDocCount: numer = 5000
-// If there are more docs in the db try to purge old docs
-// Each Doc has an attachment of roughly 70KB.
-const maxDocCount = 200;
-
-L.TileLayer.include({
+    // The following section indicated by the line of stars was taken from
+    // https://github.com/MazeMap/Leaflet.TileLayer.PouchDBCached/tree/ca83b60dcdd276d7cd7f9c4f24eb1fd1138b2c72  
+    // at and is licensed under the MIT License as stated in the readme.md file.
+    // ***************************************START-OF-SECTION**********************************************
     // Overwrites L.TileLayer.prototype.createTile
     createTile: function (coords, done) {
         var tile = document.createElement("img");
@@ -468,10 +427,10 @@ L.TileLayer.include({
             tile.crossOrigin = "";
         }
 
-		/*
-		 Alt tag is *set to empty string to keep screen readers from reading URL and for compliance reasons
-		 http://www.w3.org/TR/WCAG20-TECHS/H67
-		 */
+        /*
+         Alt tag is *set to empty string to keep screen readers from reading URL and for compliance reasons
+         http://www.w3.org/TR/WCAG20-TECHS/H67
+         */
         tile.alt = "";
 
         var tileUrl = this.getTileUrl(coords);
@@ -490,6 +449,20 @@ L.TileLayer.include({
 
         return tile;
     },
+
+    // *************************************************************************************
+    // Old implementation by JanSch
+    // *************************************************************************************
+    /*
+    createTile: function (coords, done) {
+        const tile = document.createElement('canvas'),
+            url = this.getTileUrl(coords);
+        tile.width = tile.height = this.options.tileSize;
+        this._drawTileInternal(tile, coords, url, L.Util.bind(done, null, null, tile));
+
+        return tile;
+    },
+    */
 
     // Returns a callback (closure over tile/key/originalSrc) to be run when the DB
     //   backend is finished with a fetch operation.
@@ -519,8 +492,6 @@ L.TileLayer.include({
                     !this.options.useOnlyCache
                 ) {
                     // Tile is too old, try to refresh it
-                    console.log("Tile is too old: ", tileUrl);
-
                     if (this.options.saveToCache) {
                         tile.onload = L.bind(
                             this._saveTile,
@@ -540,7 +511,6 @@ L.TileLayer.include({
                     };
                 } else {
                     // Serve tile from cached data
-                    console.log('Tile is cached: ', tileUrl, blob);
                     tile.onload = L.bind(this._tileOnLoad, this, done, tile);
                     tile.src = url;
                 }
@@ -562,7 +532,6 @@ L.TileLayer.include({
             tile.src = L.Util.emptyImageUrl;
         } else {
             // Online, not cached, request the tile normally
-            console.log('Requesting tile normally', tileUrl);
             if (this.options.saveToCache) {
                 tile.onload = L.bind(
                     this._saveTile,
@@ -598,6 +567,7 @@ L.TileLayer.include({
 
         canvas.toBlob(
             function (blob) {
+                console.log(tileUrl);
                 this._db
                     .put({
                         _id: tileUrl,
@@ -746,5 +716,30 @@ L.TileLayer.include({
             }.bind(this)
         );
     },
+    // ***************************************END-OF-SECTION************************************************
 });
-// ***************************************END-OF-SECTION************************************************
+
+L.tileLayer.customCanvas = function (url, options) {
+    return new L.TileLayer.CustomCanvas(url, options);
+};
+
+// HTMLCanvasElement.toBlob() polyfill
+// copy-pasted off https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob
+if (!HTMLCanvasElement.prototype.toBlob) {
+    Object.defineProperty(HTMLCanvasElement.prototype, "toBlob", {
+        value: function (callback, type, quality) {
+            var dataURL = this.toDataURL(type, quality).split(",")[1];
+            setTimeout(function () {
+                var binStr = atob(dataURL),
+                    len = binStr.length,
+                    arr = new Uint8Array(len);
+
+                for (var i = 0; i < len; i++) {
+                    arr[i] = binStr.charCodeAt(i);
+                }
+
+                callback(new Blob([arr], { type: type || "image/png" }));
+            });
+        },
+    });
+};
