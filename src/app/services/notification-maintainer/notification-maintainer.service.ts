@@ -35,8 +35,10 @@ export class NotificationMaintainerService {
   ) {
     this.storage.get(NOTIFICATION_PARAM)
       .then(res => this.initNotifications(res))
-      .catch(() => this.setNotifications(null));
-    setInterval(() => this.saveNotifications(), 10000);
+      .catch(() => this.setNotifications(new Map()));
+    // This triggers notificationsReplay to replay all notifications every 10 seconds, cascading via the observable through the whole app
+    // In Theory this should only be needed when new notifications are processed.
+    // setInterval(() => this.saveNotifications(), 10000);
   }
 
   private initNotifications(res: any) {
@@ -154,10 +156,14 @@ export class NotificationMaintainerService {
 
   private filterNotifications() {
     this.notifications.forEach((val, key) => {
-      if (val.length) {
-        if (val[0].expiration.getTime() < new Date().getTime()) {
-          this.notifications.delete(key);
-        }
+      if (val && val.length) {
+        let filtered: PushNotification[] = [];
+        val.forEach((notification) => {
+          if (notification.expiration.getTime() >= new Date().getTime()) {
+            filtered.push(notification);
+          }
+        })
+        this.notifications.set(key, filtered);
       } else {
         this.notifications.delete(key);
       }
