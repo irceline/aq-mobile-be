@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="1010" id="be.irceline.aqmobile" version="1.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-versionCode="1010" id="be.irceline.aqmobile" ios-CFBundleVersion="1.0.1.0" version="1.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>BelAir</name>
     <description>Personalised air quality data throughout Belgium</description>
     <author email="belair@irceline.be" href="https://www.irceline.be/">The BelAir Team</author>
@@ -54,9 +54,6 @@
         </edit-config>
         <edit-config file="*-Info.plist" mode="merge" target="NSBluetoothAlwaysUsageDescription">
             <string>The BelAir-app might use bluetooth to improve the location accuracy when establishing your location.</string>
-        </edit-config>
-        <edit-config file="*-Info.plist" mode="merge" target="CFBundleVersion">
-            <string>1.0.0</string>
         </edit-config>
         <icon height="57" src="resources/ios/icon/icon.png" width="57" />
         <icon height="114" src="resources/ios/icon/icon@2x.png" width="114" />
