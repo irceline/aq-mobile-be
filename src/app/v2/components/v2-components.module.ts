@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import {NgModule} from '@angular/core';
 import {AutoCompleteModule} from 'ionic4-auto-complete';
 import {CommonModule} from '@angular/common';
@@ -20,7 +19,8 @@ const COMPONENTS = [
     LocationSwipeComponent,
     PullTabComponent,
     TimeLineItemComponent,
-    TimeLineListComponent
+    TimeLineListComponent,
+    OnboardingSliderComponent
 ];
 
 @NgModule({
