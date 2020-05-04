@@ -55,6 +55,9 @@
               },
               {
                 "input": "src/global.scss"
+              },
+              {
+                "input": "src/app/v2/theme/global.scss"
               }
             ],
             "scripts": []

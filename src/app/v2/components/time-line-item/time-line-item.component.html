@@ -1,0 +1,5 @@
+<div class="Item">
+  <div [ngClass]="['Header', data.color]"></div>
+  <div class="Status">{{ data.status }}</div>
+  <div [ngClass]="{ 'Day': true, 'selected': data.selected}">{{ data.day }}</div>
+</div>

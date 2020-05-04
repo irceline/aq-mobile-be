@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IntroScreenComponent } from './intro-screen.component';
+import { OnboardingScreenComponent } from './onboarding-screen.component';
 
 describe('IntroScreenComponent', () => {
-  let component: IntroScreenComponent;
-  let fixture: ComponentFixture<IntroScreenComponent>;
+  let component: OnboardingScreenComponent;
+  let fixture: ComponentFixture<OnboardingScreenComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ IntroScreenComponent ],
+      declarations: [ OnboardingScreenComponent ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(IntroScreenComponent);
+    fixture = TestBed.createComponent(OnboardingScreenComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
