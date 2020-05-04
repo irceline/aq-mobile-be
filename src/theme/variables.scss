@@ -9,12 +9,14 @@
   font-weight: 100;
   src: url('../assets/fonts/opensans/OpenSans-Light.ttf');
 }
+
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: normal;
   src: url('../assets/fonts/opensans/OpenSans-Regular.ttf');
 }
+
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
@@ -22,10 +24,26 @@
   src: url('../assets/fonts/opensans/OpenSans-Bold.ttf');
 }
 
+@font-face {
+  font-family: 'Metropolis';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../assets/fonts/metropolis/metropolis.otf');
+}
+
+@font-face {
+  font-family: 'Cookie';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../assets/fonts/cookie/cookie.ttf');
+}
+
 /** Ionic CSS Variables **/
 :root {
   /** default font **/
   --ion-font-family: 'Open Sans';
+  --ion-metro-family: 'Metropolis';
+  --ion-cookie-family: 'Cookie';
 
   /** primary **/
   --ion-color-primary: #389cc7;
