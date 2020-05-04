@@ -4,8 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { V2RouterModule } from './v2.router.module';
-import {V2ComponentsModule} from './components/v2-components.module';
-import {V2ScreensModule} from './screens/v2-screens.module';
+import { V2ComponentsModule } from './components/v2-components.module';
+import { V2ScreensModule } from './screens/v2-screens.module';
 
 @NgModule({
     imports: [
@@ -14,8 +14,7 @@ import {V2ScreensModule} from './screens/v2-screens.module';
         FormsModule,
         V2RouterModule,
         V2ComponentsModule,
-        V2ScreensModule
-    ]
+        V2ScreensModule,
+    ],
 })
-
-export class V2Module { }
+export class V2Module {}

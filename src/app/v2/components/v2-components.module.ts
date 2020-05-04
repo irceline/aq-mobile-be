@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {NgModule} from '@angular/core';
 import {AutoCompleteModule} from 'ionic4-auto-complete';
 import {CommonModule} from '@angular/common';
@@ -10,6 +11,7 @@ import {LocationSwipeComponent} from './location-swipe/location-swipe.component'
 import {PullTabComponent} from './pull-tab/pull-tab.component';
 import {TimeLineItemComponent} from './time-line-item/time-line-item.component';
 import {TimeLineListComponent} from './time-line-list/time-line-list.component';
+import { OnboardingSliderComponent } from './onboarding-slider/onboarding-slider.component';
 
 const COMPONENTS = [
     CircleChartComponent,
@@ -19,17 +21,12 @@ const COMPONENTS = [
     PullTabComponent,
     TimeLineItemComponent,
     TimeLineListComponent
-]
+];
 
 @NgModule({
-    imports: [
-        AutoCompleteModule,
-        CommonModule,
-        FormsModule,
-        IonicModule,
-    ],
+    imports: [AutoCompleteModule, CommonModule, FormsModule, IonicModule],
     declarations: COMPONENTS,
     exports: COMPONENTS,
-    entryComponents: COMPONENTS
+    entryComponents: COMPONENTS,
 })
-export class V2ComponentsModule { }
+export class V2ComponentsModule {}
