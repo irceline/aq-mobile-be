@@ -1,3 +1,3 @@
-<p>
-  location-swipe works!
-</p>
+<ion-slides [options]="sliderOptions" (ionSlideDidChange)="slideChange($event)">
+  <ion-slide *ngFor="let location of locations">{{ location }}</ion-slide>
+</ion-slides>

@@ -16,8 +16,8 @@
 
 <div class="menu" @myInsertRemoveTrigger *ngIf="state">
   <div class="menu--section">
-    <h5>Menu</h5>
-    <ion-item detail lines="none">
+    <h4>Menu</h4>
+    <ion-item detail lines="none" class="menu--link">
       <ion-label>
         Blootstelling op lange termijn
       </ion-label>
@@ -25,7 +25,7 @@
   </div>
 
   <div class="menu--section">
-    <ion-item detail lines="none">
+    <ion-item detail lines="none" class="menu--link">
       <ion-label>
         Informatie over Belair
         <span>(hoe werkt de applicatie)</span>
@@ -33,35 +33,32 @@
     </ion-item>
 
     <!-- Language dropdown -->
-    <app-language-dropdown [language]="language"></app-language-dropdown>
+    <div class="menu--language">
+      <h5>Taal</h5>
+      <app-language-dropdown [language]="language"></app-language-dropdown>
+    </div>
   </div>
 
-  <div class="menu--section">
+  <div class="menu--section locations">
     <h5>Locaties</h5>
 
     <!-- Reorder locations -->
     <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
-      <ion-item>
-        <ion-button fill="clear">
+      <ion-item lines="none" *ngFor="let item of [0,1,2]" class="ion-no-padding">
+        <ion-button fill="clear" class="ion-no-padding">
           <ion-icon slot="icon-only" name="close-circle"></ion-icon>
         </ion-button>
         <ion-label>
-          Item 1
-        </ion-label>
-        <ion-reorder slot="end"></ion-reorder>
-      </ion-item>
-
-      <ion-item>
-        <ion-button fill="clear">
-          <ion-icon slot="icon-only" name="close-circle"></ion-icon>
-        </ion-button>
-        <ion-label>
-          Item 2
+          Koksijde
         </ion-label>
         <ion-reorder slot="end"></ion-reorder>
       </ion-item>
     </ion-reorder-group>
 
     <app-location-input></app-location-input>
+  </div>
+
+  <div class="menu--section">
+    <h5>Meldingen</h5>
   </div>
 </div>

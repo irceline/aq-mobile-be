@@ -5,6 +5,7 @@
     ion-toolbar {
         --border-color: rgba(216, 216, 216, 0.4);
         mix-blend-mode: multiply;
+        --min-height: 63px;
     }
 
     .menu {
@@ -12,8 +13,64 @@
         top: 63px;
         left: 0;
         right: 0;
-        height: 100%;
+        height: calc(100% - 63px);
         background-color: #33CAF1;
         z-index: 9;
+        overflow: auto;
+
+        &--link {
+            --color: white;
+            --min-height: 70px;
+            font-weight: 600;
+            font-size: 16px;
+            --detail-icon-opacity: 1;
+        }
+
+        &--language {
+            margin-top: 70px;
+        }
+
+        &--section {
+            border-bottom: 1px solid rgba(white, 0.45);
+            padding: 0 30px;
+
+            &.locations {
+                margin: 35px 0;
+            }
+
+            h4 {
+                font-size: 24px;
+                font-weight: normal;
+                text-align: center;
+                color: white;
+            }
+
+            h5 {
+                font-size: 16px;
+                font-weight: bold;
+                color: white;
+                // margin: 0 16px;
+            }
+
+            ::ng-deep .language--dropdown {
+                margin-top: 10px;
+                margin-bottom: 40px;
+            }
+
+            ion-item {
+                --color: white;
+                font-size: 16px;
+                --detail-icon-opacity: 1;
+                --inner-padding-bottom: 0;
+                --inner-padding-top: 0;
+
+                ion-label {
+                    span {
+                        display: block;
+                        font-weight: normal;
+                    }
+                }
+            }
+        }
     }
 }
