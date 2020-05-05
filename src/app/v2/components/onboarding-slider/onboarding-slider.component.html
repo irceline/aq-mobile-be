@@ -1,4 +1,5 @@
 <ion-content>
+  <!-- Slides -->
   <ion-slides pager (ionSlideDidChange)="slideChanged()" (ionSlideDrag)="slideMoved()">
     <ion-slide>
       <div class="slide" [@bounce]="state" (@bounce.done)="animationDone($event)">
@@ -6,6 +7,7 @@
           <h1 class="big">Belair</h1>
           <p>Kies je taal:</p>
 
+          <!-- Language dropdown -->
           <ion-item lines="none" type="button" class="language--dropdown">
             <ion-select [(ngModel)]="language" #select>
               <ion-select-option value="e">English</ion-select-option>
@@ -63,6 +65,7 @@
           <p>Snel van start!</p>
           <p>Om je zo goed mogelijk te kunnen helpen, hebben we je locatie nodig.</p>
 
+          <!-- Location input -->
           <div class="location">
             <ion-input class="location--input" placeholder="Kies je locatie">
               <img src="/assets/images/icons/pin.svg" alt="">
@@ -84,6 +87,7 @@
           <h1>Belair</h1>
           <p>Zou je graag meldingen ontvangen over de luchtkwaliteit?</p>
 
+          <!-- Notification radios -->
           <ion-list class="slide--radios">
             <h5>Meldingen</h5>
             <ion-item lines="none" class="ion-no-padding">
@@ -119,12 +123,11 @@
         </div>
       </div>
     </ion-slide>
-
   </ion-slides>
 
+  <!-- Next button -->
   <button type="button" (click)="next()" class="next">
     {{ btnText }}
-
     <img src="/assets/images/icons/arrow-right.svg" alt="">
   </button>
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { NavController, IonSlides, IonSelect } from '@ionic/angular';
+import { NavController, IonSlides } from '@ionic/angular';
 import {
     trigger,
     state,
@@ -79,6 +79,7 @@ export class OnboardingSliderComponent implements OnInit {
     ) {}
 
     ngOnInit() {
+        // Removing the arrow from select, temp solution because Ionic dont have for now property to remove arrow
         setTimeout(() => {
             const ionSelects = document.querySelectorAll('ion-select');
             if (ionSelects.length) {
@@ -90,6 +91,7 @@ export class OnboardingSliderComponent implements OnInit {
         }, 500);
     }
 
+    // Logic for next button
     async next() {
         const isEnd = await this.slides.isEnd();
         if (isEnd) {
@@ -99,6 +101,7 @@ export class OnboardingSliderComponent implements OnInit {
         }
     }
 
+    // Changing the text when reaches the end of slides
     async slideChanged() {
         const isEnd = await this.slides.isEnd();
         if (isEnd) {
@@ -106,6 +109,7 @@ export class OnboardingSliderComponent implements OnInit {
         }
     }
 
+    // Getting active and prev index for animations
     async slideMoved() {
         const activeIndex = await this.slides.getActiveIndex();
         const previousIndex = (await this.slides.getPreviousIndex()) || 0;
@@ -117,10 +121,12 @@ export class OnboardingSliderComponent implements OnInit {
         }
     }
 
+    // Returning the state to x, so we can repeat animation
     animationDone() {
         this.state = 'x';
     }
 
+    // Getting the current location with native ionic plugin
     getCurrentLocation() {
         this.geolocation
             .getCurrentPosition()
