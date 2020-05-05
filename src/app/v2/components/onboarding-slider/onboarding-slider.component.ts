@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavController, IonSlides } from '@ionic/angular';
 import {
     trigger,
@@ -8,7 +8,6 @@ import {
     animate,
     keyframes,
 } from '@angular/animations';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @Component({
     selector: 'app-onboarding-slider',
@@ -67,29 +66,14 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 })
 export class OnboardingSliderComponent implements OnInit {
     @ViewChild(IonSlides) slides: IonSlides;
-    @ViewChild('select') select: ElementRef;
 
     btnText = 'Ga verder';
     state = 'x';
     language = 'e';
 
-    constructor(
-        public navCtrl: NavController,
-        private geolocation: Geolocation
-    ) {}
+    constructor(public navCtrl: NavController) {}
 
-    ngOnInit() {
-        // Removing the arrow from select, temp solution because Ionic dont have for now property to remove arrow
-        setTimeout(() => {
-            const ionSelects = document.querySelectorAll('ion-select');
-            if (ionSelects.length) {
-                ionSelects[0].shadowRoot.children[1].setAttribute(
-                    'style',
-                    'display: none !important'
-                );
-            }
-        }, 500);
-    }
+    ngOnInit() {}
 
     // Logic for next button
     async next() {
@@ -124,19 +108,5 @@ export class OnboardingSliderComponent implements OnInit {
     // Returning the state to x, so we can repeat animation
     animationDone() {
         this.state = 'x';
-    }
-
-    // Getting the current location with native ionic plugin
-    getCurrentLocation() {
-        this.geolocation
-            .getCurrentPosition()
-            .then((resp) => {
-                console.log(resp);
-                // resp.coords.latitude
-                // resp.coords.longitude
-            })
-            .catch((error) => {
-                console.log('Error getting location', error);
-            });
     }
 }

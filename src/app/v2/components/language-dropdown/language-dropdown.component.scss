@@ -1,0 +1,21 @@
+.language--dropdown {
+    background-color: rgba(white, 0.3);
+    border-radius: 30px;
+    margin-top: 40px;
+    height: 61px;
+    display: flex;
+    color: white;
+    font-size: 18px;
+    position: relative;
+
+    &:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 20px;
+        background: url('/assets/images/icons/arrow.svg') no-repeat center center / 18px;
+        width: 18px;
+        height: 22px;
+    }
+}

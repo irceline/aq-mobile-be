@@ -8,12 +8,7 @@
           <p>Kies je taal:</p>
 
           <!-- Language dropdown -->
-          <ion-item lines="none" type="button" class="language--dropdown">
-            <ion-select [(ngModel)]="language" #select>
-              <ion-select-option value="e">English</ion-select-option>
-              <ion-select-option value="d">Dutch</ion-select-option>
-            </ion-select>
-          </ion-item>
+          <app-language-dropdown [language]="language"></app-language-dropdown>
         </div>
 
         <div class="slide--image">
@@ -66,17 +61,7 @@
           <p>Om je zo goed mogelijk te kunnen helpen, hebben we je locatie nodig.</p>
 
           <!-- Location input -->
-          <div class="location">
-            <ion-input class="location--input" placeholder="Kies je locatie">
-              <img src="/assets/images/icons/pin.svg" alt="">
-            </ion-input>
-
-            <ion-button (click)="getCurrentLocation()" expand="block" fill="clear" shape="round"
-              class="location--button">
-              Huidige locatie
-              <img src="/assets/images/icons/navigation.svg" alt="">
-            </ion-button>
-          </div>
+          <app-location-input></app-location-input>
         </div>
       </div>
     </ion-slide>

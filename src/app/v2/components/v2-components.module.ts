@@ -11,6 +11,8 @@ import { PullTabComponent } from './pull-tab/pull-tab.component';
 import { TimeLineItemComponent } from './time-line-item/time-line-item.component';
 import { TimeLineListComponent } from './time-line-list/time-line-list.component';
 import { OnboardingSliderComponent } from './onboarding-slider/onboarding-slider.component';
+import { LanguageDropdownComponent } from './language-dropdown/language-dropdown.component';
+import { LocationInputComponent } from './location-input/location-input.component';
 
 const COMPONENTS = [
     CircleChartComponent,
@@ -21,6 +23,8 @@ const COMPONENTS = [
     TimeLineItemComponent,
     TimeLineListComponent,
     OnboardingSliderComponent,
+    LanguageDropdownComponent,
+    LocationInputComponent,
 ];
 
 @NgModule({

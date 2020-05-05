@@ -13,3 +13,55 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+
+<div class="menu" @myInsertRemoveTrigger *ngIf="state">
+  <div class="menu--section">
+    <h5>Menu</h5>
+    <ion-item detail lines="none">
+      <ion-label>
+        Blootstelling op lange termijn
+      </ion-label>
+    </ion-item>
+  </div>
+
+  <div class="menu--section">
+    <ion-item detail lines="none">
+      <ion-label>
+        Informatie over Belair
+        <span>(hoe werkt de applicatie)</span>
+      </ion-label>
+    </ion-item>
+
+    <!-- Language dropdown -->
+    <app-language-dropdown [language]="language"></app-language-dropdown>
+  </div>
+
+  <div class="menu--section">
+    <h5>Locaties</h5>
+
+    <!-- Reorder locations -->
+    <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
+      <ion-item>
+        <ion-button fill="clear">
+          <ion-icon slot="icon-only" name="close-circle"></ion-icon>
+        </ion-button>
+        <ion-label>
+          Item 1
+        </ion-label>
+        <ion-reorder slot="end"></ion-reorder>
+      </ion-item>
+
+      <ion-item>
+        <ion-button fill="clear">
+          <ion-icon slot="icon-only" name="close-circle"></ion-icon>
+        </ion-button>
+        <ion-label>
+          Item 2
+        </ion-label>
+        <ion-reorder slot="end"></ion-reorder>
+      </ion-item>
+    </ion-reorder-group>
+
+    <app-location-input></app-location-input>
+  </div>
+</div>

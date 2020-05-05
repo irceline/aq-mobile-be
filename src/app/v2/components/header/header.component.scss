@@ -6,4 +6,14 @@
         --border-color: rgba(216, 216, 216, 0.4);
         mix-blend-mode: multiply;
     }
+
+    .menu {
+        position: absolute;
+        top: 63px;
+        left: 0;
+        right: 0;
+        height: 100%;
+        background-color: #33CAF1;
+        z-index: 9;
+    }
 }

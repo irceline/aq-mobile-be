@@ -1,0 +1,46 @@
+.location {
+    display: flex;
+    flex-direction: column;
+
+    &--input {
+        background-color: rgba(white, 0.3);
+        border-radius: 30px;
+        margin-top: 40px;
+        height: 61px;
+        position: relative;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        // min-height: 61px;
+        text-align: left;
+        --padding-start: 30px;
+        --padding-end: 30px;
+        --placeholder-color: white;
+        --padding-top: 18px;
+        --padding-bottom: 18px;
+
+        img {
+            width: 17px;
+            height: 24px;
+            display: block;
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 29px;
+        }
+    }
+
+    &--button {
+        color: white;
+        font-size: 18px;
+        text-transform: initial;
+
+        img {
+            width: 25px;
+            height: 25px;
+            margin: 0 0 0 15px;
+        }
+    }
+}
