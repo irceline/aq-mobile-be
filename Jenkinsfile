@@ -1,8 +1,10 @@
 pipeline {
-   agent any
-      environment {
-         PATH='/usr/local/bin:/usr/bin:/bin'
-      }
+   agent {
+    docker { image 'node:8.12.0' }
+   }
+   environment {
+            HOME = '.'
+   }
    stages {
       stage('NPM Setup') {
       steps {
