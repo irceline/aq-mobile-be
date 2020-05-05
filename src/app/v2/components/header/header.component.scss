@@ -1,0 +1,9 @@
+:host {
+    margin: 0 18px;
+    display: block;
+
+    ion-toolbar {
+        --border-color: rgba(216, 216, 216, 0.4);
+        mix-blend-mode: multiply;
+    }
+}

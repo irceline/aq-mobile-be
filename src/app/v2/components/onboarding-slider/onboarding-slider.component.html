@@ -1,101 +1,131 @@
 <ion-content>
   <ion-slides pager (ionSlideDidChange)="slideChanged()" (ionSlideDrag)="slideMoved()">
     <ion-slide>
-      <div [@bounce]="state" (@bounce.done)="animationDone($event)">
-        <h1>Belair</h1>
-        <p>Kies je taal:</p>
+      <div class="slide" [@bounce]="state" (@bounce.done)="animationDone($event)">
+        <div class="slide--content">
+          <h1 class="big">Belair</h1>
+          <p>Kies je taal:</p>
 
-        <ion-item lines="none" type="button" class="language--dropdown">
-          <ion-select [(ngModel)]="language">
-            <ion-select-option value="e">English</ion-select-option>
-            <ion-select-option value="d">Dutch</ion-select-option>
-          </ion-select>
-        </ion-item>
-      </div>
-    </ion-slide>
+          <ion-item lines="none" type="button" class="language--dropdown">
+            <ion-select [(ngModel)]="language" #select>
+              <ion-select-option value="e">English</ion-select-option>
+              <ion-select-option value="d">Dutch</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </div>
 
-    <ion-slide>
-      <div [@bounce]="state" (@bounce.done)="animationDone($event)">
-        <h1>Belair</h1>
-        <p>Belair berekent de impact van de <strong>luchtkwaliteit</strong> op korte termijn voor jouw locatie en toont
-          je een score van
-          1 tot 10.</p>
-      </div>
-    </ion-slide>
-
-    <ion-slide>
-      <div [@bounce]="state" (@bounce.done)="animationDone($event)">
-        <h1>Belair</h1>
-        <p>Dit cijfer is een berekening op basis van de <strong>meetgegevens</strong> van een luchtmeetstation in jouw
-          buurt.</p>
-        <img src="" alt="">
-      </div>
-    </ion-slide>
-
-    <ion-slide>
-      <div [@bounce]="state" (@bounce.done)="animationDone($event)">
-        <h1>Belair</h1>
-        <p>De app berekent ook wat de impact van de luchtkwaliteit op <strong>lange termijn</strong> is voor jouw
-          locatie.</p>
-      </div>
-    </ion-slide>
-
-    <ion-slide>
-      <div [@bounce]="state" (@bounce.done)="animationDone($event)">
-        <h1>Belair</h1>
-        <p>Snel van start!</p>
-        <p>Om je zo goed mogelijk te kunnen helpen, hebben we je locatie nodig.</p>
-
-        <div class="location">
-          <div class="location--input">
-            <span>Kies je locatie</span>
-            <img src="/assets/images/pin.svg" alt="">
-          </div>
-
-          <ion-button (click)="getCurrentLocation()" expand="block" fill="clear" shape="round" class="location--button">
-            Huidige locatie
-            <img src="/assets/images/location-outline.svg" alt="">
-          </ion-button>
+        <div class="slide--image">
+          <img class="flanders" src="/assets/images/flanders.png" alt="">
         </div>
       </div>
     </ion-slide>
 
     <ion-slide>
-      <div [@bounce]="state" (@bounce.done)="animationDone($event)">
-        <h1>Belair</h1>
-        <p>Zou je graag meldingen ontvangen over de luchtkwaliteit?</p>
+      <div class="slide" [@bounce]="state" (@bounce.done)="animationDone($event)">
+        <div class="slide--content flex-end">
+          <h1>Belair</h1>
+          <p>Belair berekent de impact van de <strong>luchtkwaliteit</strong> op korte termijn voor jouw locatie en
+            toont
+            je een score van
+            1 tot 10.</p>
+        </div>
+        <img src="/assets/images/circle-slider.png" alt="">
+      </div>
+    </ion-slide>
 
-        <ion-list>
-          <ion-item>
-            <ion-label>Sporten</ion-label>
-            <ion-toggle color="success"></ion-toggle>
-          </ion-item>
+    <ion-slide>
+      <div class="slide" [@bounce]="state" (@bounce.done)="animationDone($event)">
+        <div class="slide--content flex-end">
+          <h1>Belair</h1>
+          <p>Dit cijfer is een berekening op basis van de <strong>meetgegevens</strong> van een luchtmeetstation in jouw
+            buurt.</p>
+        </div>
+        <img src="/assets/images/details-card.png" alt="">
+      </div>
+    </ion-slide>
 
-          <ion-item>
-            <ion-label>Allergieën</ion-label>
-            <ion-toggle color="success"></ion-toggle>
-          </ion-item>
+    <ion-slide>
+      <div class="slide" [@bounce]="state" (@bounce.done)="animationDone($event)">
+        <div class="slide--content flex-end">
+          <h1>Belair</h1>
+          <p>De app berekent ook wat de impact van de luchtkwaliteit op <strong>lange termijn</strong> is voor jouw
+            locatie.</p>
+        </div>
 
-          <ion-item>
-            <ion-label>Inspanningen</ion-label>
-            <ion-toggle color="success"></ion-toggle>
-          </ion-item>
+        <img src="/assets/images/stats-card.png" alt="">
+      </div>
+    </ion-slide>
 
-          <ion-item>
-            <ion-label>Verplaatsingen</ion-label>
-            <ion-toggle color="success"></ion-toggle>
-          </ion-item>
+    <ion-slide>
+      <div class="slide" [@bounce]="state" (@bounce.done)="animationDone($event)">
+        <div class="slide--content">
+          <h1>Belair</h1>
+          <p>Snel van start!</p>
+          <p>Om je zo goed mogelijk te kunnen helpen, hebben we je locatie nodig.</p>
 
-          <ion-item>
-            <ion-label>(Te) hoge concentraties</ion-label>
-            <ion-toggle color="success"></ion-toggle>
-          </ion-item>
-        </ion-list>
+          <div class="location">
+            <ion-input class="location--input" placeholder="Kies je locatie">
+              <img src="/assets/images/icons/pin.svg" alt="">
+            </ion-input>
+
+            <ion-button (click)="getCurrentLocation()" expand="block" fill="clear" shape="round"
+              class="location--button">
+              Huidige locatie
+              <img src="/assets/images/icons/navigation.svg" alt="">
+            </ion-button>
+          </div>
+        </div>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <div class="slide" [@bounce]="state" (@bounce.done)="animationDone($event)">
+        <div class="slide--content">
+          <h1>Belair</h1>
+          <p>Zou je graag meldingen ontvangen over de luchtkwaliteit?</p>
+
+          <ion-list class="slide--radios">
+            <h5>Meldingen</h5>
+            <ion-item lines="none" class="ion-no-padding">
+              <ion-label>
+                <img src="/assets/images/icons/sport.svg" alt=""> Sporten</ion-label>
+              <ion-toggle color="success"></ion-toggle>
+            </ion-item>
+
+            <ion-item lines="none" class="ion-no-padding">
+              <ion-label>
+                <img src="/assets/images/icons/allergenen.svg" alt=""> Allergieën</ion-label>
+              <ion-toggle color="success"></ion-toggle>
+            </ion-item>
+
+            <ion-item lines="none" class="ion-no-padding">
+              <ion-label>
+                <img src="/assets/images/icons/inspanning.svg" alt=""> Inspanningen</ion-label>
+              <ion-toggle color="success"></ion-toggle>
+            </ion-item>
+
+            <ion-item lines="none" class="ion-no-padding">
+              <ion-label>
+                <img src="/assets/images/icons/wheel.svg" alt=""> Verplaatsingen</ion-label>
+              <ion-toggle color="success"></ion-toggle>
+            </ion-item>
+
+            <ion-item lines="none" class="ion-no-padding">
+              <ion-label>
+                <img src="/assets/images/icons/concentraties.svg" alt=""> (Te) hoge concentraties</ion-label>
+              <ion-toggle color="success"></ion-toggle>
+            </ion-item>
+          </ion-list>
+        </div>
       </div>
     </ion-slide>
 
   </ion-slides>
 
-  <button type="button" (click)="next()" class="next">{{ btnText }}</button>
+  <button type="button" (click)="next()" class="next">
+    {{ btnText }}
+
+    <img src="/assets/images/icons/arrow-right.svg" alt="">
+  </button>
 
 </ion-content>

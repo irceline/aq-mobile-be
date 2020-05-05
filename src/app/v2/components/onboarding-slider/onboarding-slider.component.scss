@@ -7,90 +7,182 @@
         background: url('/assets/images/back.png') no-repeat top center / cover;
 
         ion-slide {
-            padding: 30px;
             flex-direction: column;
+            justify-content: center;
+            padding-bottom: 75px;
             color: white;
 
-            >div {
+            .slide {
                 width: 100%;
-            }
-
-            h1 {
-                font-family: var(--ion-cookie-family);
-                font-size: 120px;
-                margin: 0;
-            }
-
-            p {
-                font-size: 18px;
-                margin: 0;
-                // font-family: var(--ion-metro-family);
-            }
-
-            .language--dropdown {
-                background-color: rgba(white, 0.3);
-                border-radius: 30px;
-                margin-top: 40px;
-                height: 61px;
-                display: flex;
-                color: white;
-                font-size: 18px;
-                position: relative;
-
-                &:after {
-                    content: '';
-                    position: absolute;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    right: 20px;
-                    background: url('/assets/images/arrow.svg') no-repeat center center / 18px;
-                    width: 18px;
-                    height: 22px;
-                }
-
-                :ng-deep .select-icon {
-                    display: none !important;
-                }
-            }
-
-            .location {
                 display: flex;
                 flex-direction: column;
+                align-items: center;
+                flex: 1;
 
-                &--input {
+                &--content {
+                    padding: 30px;
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    width: 100%;
+
+                    &.flex-end {
+                        justify-content: flex-end;
+                    }
+
+                    h1 {
+                        font-family: var(--ion-cookie-family);
+                        margin: 0;
+                        font-size: 80px;
+
+                        &.big {
+                            font-size: 120px;
+                        }
+                    }
+
+                    p {
+                        font-size: 18px;
+                        margin: 0;
+                        // font-family: var(--ion-metro-family);
+                    }
+                }
+
+                &--image {
+                    align-items: flex-end;
+                    display: flex;
+                    justify-content: center;
+                    height: 50px;
+                    margin-bottom: 37px;
+                }
+
+                ion-input {
+                    text-align: left;
+                    padding: 0 30px !important;
+                    min-height: 61px;
+                    margin-bottom: 10px;
+
+                    img {
+                        position: absolute;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        right: 29px;
+                    }
+                }
+
+                &--radios {
+                    margin-top: 70px;
+
+                    h5 {
+                        text-align: left;
+                        font-weight: bold;
+                        font-size: 16px;
+                        margin-top: 0;
+                    }
+
+                    ion-item {
+                        padding-inline-start: 0;
+                    }
+
+                    ion-label {
+                        color: white;
+                        font-size: 16px;
+                        display: flex;
+                        align-items: center;
+                        margin: 0;
+
+                        img {
+                            display: block;
+                            max-width: 20px;
+                            margin-right: 20px;
+                            margin-bottom: 0;
+                        }
+                    }
+                }
+
+                .language--dropdown {
                     background-color: rgba(white, 0.3);
                     border-radius: 30px;
                     margin-top: 40px;
                     height: 61px;
-                    position: relative;
-                    width: 100%;
                     display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    padding: 0 30px;
-
-                    span {
-                        color: white;
-                        font-size: 18px;
-                    }
-
-                    img {
-                        width: 17px;
-                        height: 24px;
-                        display: block;
-                    }
-                }
-
-                &--button {
                     color: white;
                     font-size: 18px;
+                    position: relative;
 
-                    img {
-                        width: 28px;
-                        height: 28px;
+                    ::ng-deep .select-icon {
+                        visibility: hidden;
+                    }
+
+                    &:after {
+                        content: '';
+                        position: absolute;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        right: 20px;
+                        background: url('/assets/images/icons/arrow.svg') no-repeat center center / 18px;
+                        width: 18px;
+                        height: 22px;
                     }
                 }
+
+                .location {
+                    display: flex;
+                    flex-direction: column;
+
+                    &--input {
+                        background-color: rgba(white, 0.3);
+                        border-radius: 30px;
+                        margin-top: 40px;
+                        height: 61px;
+                        position: relative;
+                        width: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        padding: 0 30px;
+
+                        span {
+                            color: white;
+                            font-size: 18px;
+                        }
+
+                        img {
+                            width: 17px;
+                            height: 24px;
+                            display: block;
+                            margin: 0;
+                        }
+                    }
+
+                    &--button {
+                        color: white;
+                        font-size: 18px;
+                        text-transform: initial;
+
+                        img {
+                            width: 25px;
+                            height: 25px;
+                            margin: 0 0 0 15px;
+                        }
+                    }
+                }
+
+                img {
+                    margin-bottom: 50px;
+
+                    &.medium {
+                        margin-bottom: 75px;
+                    }
+                }
+
+                .flanders {
+                    margin-top: 240px;
+                    margin-bottom: 0;
+                }
             }
+
+
         }
 
         ::ng-deep .swiper-pagination {
@@ -118,7 +210,7 @@
     .next {
         position: absolute;
         bottom: 57px;
-        right: 48px;
+        right: 40px;
         background: none !important;
         text-align: center;
         cursor: pointer;
@@ -127,5 +219,12 @@
         font-size: 16px;
         font-weight: 600;
         padding: 0;
+        display: flex;
+        align-items: center;
+
+        img {
+            width: 13px;
+            margin-left: 20px;
+        }
     }
 }

@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NavController, IonSlides } from '@ionic/angular';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { NavController, IonSlides, IonSelect } from '@ionic/angular';
 import {
     trigger,
     state,
@@ -28,15 +28,15 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
                     '700ms ease-out',
                     keyframes([
                         style({
-                            transform: 'translateX(0) scale(1)',
+                            transform: 'translateX(0)',
                             offset: 0,
                         }),
                         style({
-                            transform: 'translateX(-65px) scale(0.95)',
+                            transform: 'translateX(-65px)',
                             offset: 0.3,
                         }),
                         style({
-                            transform: 'translateX(0) scale(1)',
+                            transform: 'translateX(0)',
                             offset: 1.0,
                         }),
                     ])
@@ -48,15 +48,15 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
                     '700ms ease-out',
                     keyframes([
                         style({
-                            transform: 'translateX(0) scale(1)',
+                            transform: 'translateX(0)',
                             offset: 0,
                         }),
                         style({
-                            transform: 'translateX(65px) scale(0.95)',
+                            transform: 'translateX(65px)',
                             offset: 0.3,
                         }),
                         style({
-                            transform: 'translateX(0) scale(1)',
+                            transform: 'translateX(0)',
                             offset: 1.0,
                         }),
                     ])
@@ -67,6 +67,8 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 })
 export class OnboardingSliderComponent implements OnInit {
     @ViewChild(IonSlides) slides: IonSlides;
+    @ViewChild('select') select: ElementRef;
+
     btnText = 'Ga verder';
     state = 'x';
     language = 'e';
@@ -76,12 +78,22 @@ export class OnboardingSliderComponent implements OnInit {
         private geolocation: Geolocation
     ) {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        setTimeout(() => {
+            const ionSelects = document.querySelectorAll('ion-select');
+            if (ionSelects.length) {
+                ionSelects[0].shadowRoot.children[1].setAttribute(
+                    'style',
+                    'display: none !important'
+                );
+            }
+        }, 500);
+    }
 
     async next() {
         const isEnd = await this.slides.isEnd();
         if (isEnd) {
-            console.log('go to app');
+            this.navCtrl.navigateForward('v2/main');
         } else {
             this.slides.slideNext();
         }

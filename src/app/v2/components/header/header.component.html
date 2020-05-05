@@ -1,3 +1,15 @@
-<p>
-  header works!
-</p>
+<ion-header class="ion-no-border">
+  <ion-toolbar color="transparent" class="ion-no-padding">
+    <ion-buttons slot="start">
+      <ion-button (click)="openMenu()" class="ion-no-padding">
+        <img src="/assets/images/menu.svg" alt="">
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="openNotification()" class="ion-no-padding">
+        <img src="/assets/images/megafoon.svg" alt="">
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
