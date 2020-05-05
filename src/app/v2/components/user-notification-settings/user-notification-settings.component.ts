@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
+import set = Reflect.set;
 
 export interface UserNotificationSetting {
   notificationType: NotificationType;
@@ -7,7 +8,6 @@ export interface UserNotificationSetting {
   label?: string;
   icon?: string;
 }
-
 
 // !important, these enum strings are also used on translation files
 export enum NotificationType {
@@ -45,8 +45,15 @@ export class UserNotificationSettingsComponent implements OnInit {
     }));
   }
 
+  @Output() settingChanged = new EventEmitter<UserNotificationSetting>();
+
   constructor( private translate: TranslateService) { }
 
   ngOnInit() {}
+
+  changeSetting(setting: UserNotificationSetting) {
+    setting.enabled = ! setting.enabled;
+    this.settingChanged.emit( setting );
+  }
 
 }
