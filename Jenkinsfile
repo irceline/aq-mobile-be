@@ -1,12 +1,22 @@
 pipeline {
-   agent {
-    docker { image 'node:8.12.0' }
-   }
-   environment {
-            HOME = '.'
-   }
+  agent {
+      label 'docker'
+    }
+    stage('Docker node test') {
+          agent {
+            docker {
+              label 'docker'
+              image 'node:7-alpine'
+              args '--name docker-node'
+            }
+          }
+          steps {
+            sh 'node --version'
+          }
+        }
+
    stages {
-      stage('NPM Setup') {
+      stage('Build') {
       steps {
          sh 'npm install'
       }
