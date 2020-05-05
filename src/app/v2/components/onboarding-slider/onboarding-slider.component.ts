@@ -1,13 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NavController, IonSlides } from '@ionic/angular';
-import {
-    trigger,
-    state,
-    style,
-    transition,
-    animate,
-    keyframes,
-} from '@angular/animations';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {IonSlides, NavController} from '@ionic/angular';
+import {animate, keyframes, state, style, transition, trigger, } from '@angular/animations';
+
+import {NotificationType, UserNotificationSetting} from '../user-notification-settings/user-notification-settings.component';
 
 @Component({
     selector: 'app-onboarding-slider',
@@ -70,6 +65,29 @@ export class OnboardingSliderComponent implements OnInit {
     btnText = 'Ga verder';
     state = 'x';
     language = 'e';
+
+    userSettings: UserNotificationSetting[] = [
+        {
+            notificationType: NotificationType.highConcentration,
+            enabled: true
+        },
+        {
+            notificationType: NotificationType.transport,
+            enabled: true
+        },
+        {
+            notificationType: NotificationType.activity,
+            enabled: false
+        },
+        {
+            notificationType: NotificationType.allergies,
+            enabled: true
+        },
+        {
+            notificationType: NotificationType.exercise,
+            enabled: false
+        }
+    ];
 
     constructor(public navCtrl: NavController) {}
 

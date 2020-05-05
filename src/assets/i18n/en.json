@@ -513,5 +513,14 @@
 		"text-p2": "The BelAir app is based on data from monitoring stations throughout Belgium. This data is converted into a BelAQI air quality index. You receive a figure between 1 and 10 that immediately assesses the impact of current air quality on your health.",
 		"text-p3": "To calculate this figure, we also look at several relevant, polluting substances at your location such as nitrogen dioxide, ozone and particulate matter.",
 		"title": "Welcome to"
-	}
+	},
+  "v2": {
+    "user-notification-settings": {
+      "exercise": "Sporten",
+      "allergies":  "Allergieën",
+      "activity":  "Inspanningen",
+      "transport":  "Verplaatsingen",
+      "highConcentration": "(Te) hoge concentraties"
+    }
+  }
 }

@@ -72,39 +72,7 @@
           <h1>Belair</h1>
           <p>Zou je graag meldingen ontvangen over de luchtkwaliteit?</p>
 
-          <!-- Notification radios -->
-          <ion-list class="slide--radios">
-            <h5>Meldingen</h5>
-            <ion-item lines="none" class="ion-no-padding">
-              <ion-label>
-                <img src="/assets/images/icons/sport.svg" alt=""> Sporten</ion-label>
-              <ion-toggle color="success"></ion-toggle>
-            </ion-item>
-
-            <ion-item lines="none" class="ion-no-padding">
-              <ion-label>
-                <img src="/assets/images/icons/allergenen.svg" alt=""> Allergieën</ion-label>
-              <ion-toggle color="success"></ion-toggle>
-            </ion-item>
-
-            <ion-item lines="none" class="ion-no-padding">
-              <ion-label>
-                <img src="/assets/images/icons/inspanning.svg" alt=""> Inspanningen</ion-label>
-              <ion-toggle color="success"></ion-toggle>
-            </ion-item>
-
-            <ion-item lines="none" class="ion-no-padding">
-              <ion-label>
-                <img src="/assets/images/icons/wheel.svg" alt=""> Verplaatsingen</ion-label>
-              <ion-toggle color="success"></ion-toggle>
-            </ion-item>
-
-            <ion-item lines="none" class="ion-no-padding">
-              <ion-label>
-                <img src="/assets/images/icons/concentraties.svg" alt=""> (Te) hoge concentraties</ion-label>
-              <ion-toggle color="success"></ion-toggle>
-            </ion-item>
-          </ion-list>
+          <app-user-notification-settings [userSettings]="userSettings"></app-user-notification-settings>
         </div>
       </div>
     </ion-slide>

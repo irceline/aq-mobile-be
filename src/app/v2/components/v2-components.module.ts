@@ -13,6 +13,8 @@ import { TimeLineListComponent } from './time-line-list/time-line-list.component
 import { OnboardingSliderComponent } from './onboarding-slider/onboarding-slider.component';
 import { LanguageDropdownComponent } from './language-dropdown/language-dropdown.component';
 import { LocationInputComponent } from './location-input/location-input.component';
+import {UserNotificationSettingsComponent} from './user-notification-settings/user-notification-settings.component';
+import {TranslateModule} from '@ngx-translate/core';
 
 const COMPONENTS = [
     CircleChartComponent,
@@ -25,10 +27,11 @@ const COMPONENTS = [
     OnboardingSliderComponent,
     LanguageDropdownComponent,
     LocationInputComponent,
+    UserNotificationSettingsComponent
 ];
 
 @NgModule({
-    imports: [AutoCompleteModule, CommonModule, FormsModule, IonicModule],
+    imports: [AutoCompleteModule, CommonModule, FormsModule, IonicModule, TranslateModule],
     declarations: COMPONENTS,
     exports: COMPONENTS,
     entryComponents: COMPONENTS,

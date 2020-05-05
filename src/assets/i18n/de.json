@@ -513,5 +513,14 @@
 		"text-p2": "Die BelAir-App basiert auf Daten von Überwachungsstationen in ganz Belgien. Diese Daten werden in einen BelAQI-Luftqualitätsindex umgewandelt. Sie erhalten eine Zahl zwischen 1 und 10, die sofort die Auswirkungen der aktuellen Luftqualität auf Ihre Gesundheit bewertet.",
 		"text-p3": "Um diese Zahl zu berechnen, betrachten wir auch relevante, umweltbelastende Substanzen wie Stickstoffdioxid, Ozon und Feinstaub an Ihrem Standort.",
 		"title": "Willkommen bei"
+	},
+	"v2": {
+		"user-notification-settings": {
+			"exercise": "Sporten",
+			"allergies":  "Allergieën",
+			"activity":  "Inspanningen",
+			"transport":  "Verplaatsingen",
+			"highConcentration": "(Te) hoge concentraties"
+		}
 	}
 }

@@ -513,5 +513,14 @@
 		"text-p2": "L'application BelAir est basée sur des données provenant des stations de surveillance dans toute la Belgique. Ces données sont converties en un indice de qualité de l’air BelAQI. Vous obtenez un score entre 1 et 10 qui évalue immédiatement l'impact de la qualité de l'air actuelle sur votre santé.",
 		"text-p3": "Pour calculer ce chiffre, nous prenons en compte les polluants majeurs présents chez vous: le dioxyde d'azote, l'ozone et les particules.",
 		"title": "Bienvenue"
-	}
+	},
+  "v2": {
+    "user-notification-settings": {
+      "exercise": "Sporten",
+      "allergies":  "Allergieën",
+      "activity":  "Inspanningen",
+      "transport":  "Verplaatsingen",
+      "highConcentration": "(Te) hoge concentraties"
+    }
+  }
 }
