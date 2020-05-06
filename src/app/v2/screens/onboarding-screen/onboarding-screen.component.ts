@@ -13,6 +13,7 @@ export class OnboardingScreenComponent implements OnInit {
     language = 'e';
     btnText = 'Ga verder';
 
+    // implementation task -> fetch user notification settings
     userSettings: UserNotificationSetting[] = [
         {
             notificationType: NotificationType.highConcentration,
@@ -39,4 +40,9 @@ export class OnboardingScreenComponent implements OnInit {
     constructor() {}
 
     ngOnInit() {}
+
+    updateUserNotificationSettings( updatedSetting: UserNotificationSetting ) {
+        console.log( 'todo: implement update user settings' );
+    }
+
 }

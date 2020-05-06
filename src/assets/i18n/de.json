@@ -515,12 +515,25 @@
 		"title": "Willkommen bei"
 	},
 	"v2": {
-		"user-notification-settings": {
-			"exercise": "Sporten",
-			"allergies":  "Allergieën",
-			"activity":  "Inspanningen",
-			"transport":  "Verplaatsingen",
-			"highConcentration": "(Te) hoge concentraties"
+		"components": {
+			"user-notification-settings": {
+				"exercise": "Sporten",
+				"allergies":  "Allergieën",
+				"activity":  "Inspanningen",
+				"transport":  "Verplaatsingen",
+				"highConcentration": "(Te) hoge concentraties"
+			}
+		},
+		"screens": {
+			"onboarding": {
+				"choose-lang": "Kies je taal:",
+				"calc-aq": "Belair berekent de impact van de <strong>luchtkwaliteit<strong> op korte termijn voor jouw locatie en toont je een score van 1 tot 10.",
+				"aq-info": "Dit cijfer is een berekening op basis van de <strong>meetgegevens</strong> van een luchtmeetstation in jouw buurt.",
+				"aq-long-term": "De app berekent ook wat de impact van de luchtkwaliteit op <strong>lange termijn</strong> is voor jouw locatie.",
+				"start-quickly": "Snel van start!",
+				"ask-location": "Om je zo goed mogelijk te kunnen helpen, hebben we je locatie nodig.",
+				"ask-notifications": "Zou je graag meldingen ontvangen over de luchtkwaliteit?"
+			}
 		}
 	}
 }
