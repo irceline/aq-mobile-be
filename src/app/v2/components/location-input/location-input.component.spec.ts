@@ -1,6 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { GeolocationMock } from '../../testing/geolocation.mock';
 import { LocationInputComponent } from './location-input.component';
 
 describe('LocationInputComponent', () => {
@@ -11,6 +12,9 @@ describe('LocationInputComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ LocationInputComponent ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      providers: [
+        {provide: Geolocation, useClass: GeolocationMock}
+      ]
     })
     .compileComponents();
   }));

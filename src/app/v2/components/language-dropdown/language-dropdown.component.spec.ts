@@ -2,6 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LanguageDropdownComponent } from './language-dropdown.component';
+import {TranslateTestingModule} from '../../testing/TranslateTestingModule';
 
 describe('LanguageDropdownComponent', () => {
   let component: LanguageDropdownComponent;
@@ -10,6 +11,7 @@ describe('LanguageDropdownComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ LanguageDropdownComponent ],
+      imports: [TranslateTestingModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();

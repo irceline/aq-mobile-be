@@ -1,5 +1,7 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import {Component, OnInit, ViewChild, Input, Output, EventEmitter} from '@angular/core';
 import { IonSlides, NavController } from '@ionic/angular';
+import {TranslateService} from '@ngx-translate/core';
+import {UserLocation} from '../../Interfaces';
 
 @Component({
     selector: 'app-onboarding-slider',
@@ -7,10 +9,17 @@ import { IonSlides, NavController } from '@ionic/angular';
     styleUrls: ['./onboarding-slider.component.scss'],
 })
 export class OnboardingSliderComponent implements OnInit {
-    @ViewChild(IonSlides) slides: IonSlides;
-    @Input() btnText: string;
 
-    constructor(public navCtrl: NavController) {}
+    @Output() slideShowComplete = new EventEmitter();
+
+    @ViewChild(IonSlides) slides: IonSlides;
+
+    protected btnText: string;
+
+
+    constructor(private translate: TranslateService) {
+        this.btnText = translate.instant('v2.components.onboarding-slider.btn-text');
+    }
 
     ngOnInit() {}
 
@@ -18,7 +27,7 @@ export class OnboardingSliderComponent implements OnInit {
     async next() {
         const isEnd = await this.slides.isEnd();
         if (isEnd) {
-            this.navCtrl.navigateForward('v2/main');
+            this.slideShowComplete.emit();
         } else {
             this.slides.slideNext();
         }
@@ -28,9 +37,9 @@ export class OnboardingSliderComponent implements OnInit {
     async slideChanged() {
         const isEnd = await this.slides.isEnd();
         if (isEnd) {
-            this.btnText = 'Start de app';
+            this.btnText = this.translate.instant('v2.components.onboarding-slider.start-app');
         } else {
-            this.btnText = 'Ga verder';
+            this.btnText = this.translate.instant('v2.components.onboarding-slider.btn-text');
         }
     }
 }

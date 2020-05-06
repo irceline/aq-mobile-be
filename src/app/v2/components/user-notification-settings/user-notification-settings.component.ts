@@ -40,9 +40,13 @@ export class UserNotificationSettingsComponent implements OnInit {
     this._userSettings = settings.map( s => ({
       // get translations
       ...s,
-      label: this.translate.instant(`v2.user-notification-settings.${s.notificationType}`),
+      label: this.translate.instant(`v2.components.user-notification-settings.${s.notificationType}`),
       icon: this._icons[s.notificationType]
     }));
+  }
+
+  get userSettings() {
+    return this._userSettings;
   }
 
   @Output() settingChanged = new EventEmitter<UserNotificationSetting>();
