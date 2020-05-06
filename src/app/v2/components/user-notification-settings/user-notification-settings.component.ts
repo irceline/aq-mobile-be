@@ -45,6 +45,10 @@ export class UserNotificationSettingsComponent implements OnInit {
     }));
   }
 
+  get userSettings() {
+    return this._userSettings;
+  }
+
   @Output() settingChanged = new EventEmitter<UserNotificationSetting>();
 
   constructor( private translate: TranslateService) { }
