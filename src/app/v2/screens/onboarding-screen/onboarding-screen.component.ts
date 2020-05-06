@@ -3,6 +3,7 @@ import {
     UserNotificationSetting,
     NotificationType,
 } from '../../components/user-notification-settings/user-notification-settings.component';
+import {UserLocation} from '../../Interfaces';
 
 @Component({
     selector: 'app-intro-screen',
@@ -42,7 +43,13 @@ export class OnboardingScreenComponent implements OnInit {
     ngOnInit() {}
 
     updateUserNotificationSettings( updatedSetting: UserNotificationSetting ) {
-        console.log( 'todo: implement update user settings' );
+        // implementation task
+        console.log( 'todo: implement update user notification settings' );
+    }
+
+    updateUserLocationSettings( userLocation: UserLocation ) {
+        // implementation task
+        console.log( 'todo: implement update user location settings' );
     }
 
 }

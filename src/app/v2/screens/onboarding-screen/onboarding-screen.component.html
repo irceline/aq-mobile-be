@@ -50,11 +50,11 @@
         <div class="slide">
             <div class="slide--content">
                 <h1>Belair</h1>
-                <p>{{ 'start-quickly' | translate }}</p>
-                <p>{{ 'ask-location' | translate }}</p>
+                <p>{{ 'v2.screens.onboarding.start-quickly' | translate }}</p>
+                <p>{{ 'v2.screens.onboarding.ask-location' | translate }}</p>
 
                 <!-- Location input -->
-                <app-location-input></app-location-input>
+                <app-location-input (locationSelected)="updateUserLocationSettings($event)"></app-location-input>
             </div>
         </div>
     </ion-slide>
@@ -63,7 +63,7 @@
         <div class="slide">
             <div class="slide--content">
                 <h1>Belair</h1>
-                <p>{{ 'ask-notifications' | translate }}</p>
+                <p>{{ 'v2.screens.onboarding.ask-notifications' | translate }}</p>
 
                 <app-user-notification-settings [userSettings]="userSettings" (settingChanged)="updateUserNotificationSettings($event)"></app-user-notification-settings>
             </div>
