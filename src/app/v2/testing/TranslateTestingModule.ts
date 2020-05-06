@@ -29,6 +29,14 @@ export class TranslateServiceStub {
     public get<T>(key: T): Observable<T> {
         return of(key);
     }
+
+    public instant<T>(key: T): T {
+        return key;
+    }
+
+    public getLangs(): string[] {
+        return ['en', 'nl'];
+    }
 }
 
 @NgModule({
