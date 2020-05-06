@@ -29,9 +29,20 @@ export class MainScreenComponent implements OnInit {
         },
     ];
 
+    locations = ['New York', 'Los Angeles', 'San Francisco', 'Washington'];
+    drawerOptions: any;
+
     constructor() {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.drawerOptions = {
+            handleHeight: 197,
+            gap: 150,
+            thresholdFromBottom: 300,
+            thresholdFromTop: 200,
+            bounceBack: true,
+        };
+    }
 
     onLocationChange(location: string) {
         console.log(location);

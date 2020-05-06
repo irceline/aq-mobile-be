@@ -4,6 +4,7 @@ import {
     ViewChild,
     EventEmitter,
     Output,
+    Input,
 } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
 
@@ -15,14 +16,13 @@ import { IonSlides } from '@ionic/angular';
 export class LocationSwipeComponent implements OnInit {
     @ViewChild(IonSlides) slides: IonSlides;
     @Output() locationChange = new EventEmitter();
+    @Input() locations = [];
 
     sliderOptions = {
-        spaceBetween: 100,
+        spaceBetween: 20,
         centeredSlides: true,
-        slidesPerView: 3,
+        slidesPerView: 2,
     };
-
-    locations = ['Cepin', 'Osijek', 'Zagreb', 'Split', 'Rijeka'];
 
     constructor() {}
 

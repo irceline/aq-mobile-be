@@ -14,8 +14,8 @@
         left: 0;
         right: 0;
         height: calc(100% - 63px);
-        background-color: #33CAF1;
-        z-index: 9;
+        background-color: #31cef6;
+        z-index: 11;
         overflow: auto;
 
         &--link {
@@ -38,6 +38,29 @@
                 margin: 35px 0;
             }
 
+            &.notifications {
+                border-bottom: 0
+            }
+
+            &.logo {
+                text-align: center;
+                color: #ffffff;
+                padding: 35px 0;
+
+                h3 {
+                    font-family: var(--ion-cookie-family);
+                    font-size: 40px;
+                    margin: 0;
+                    line-height: 25px;
+                }
+
+                p {
+                    opacity: 0.7;
+                    font-size: 13px;
+                    margin: 0;
+                }
+            }
+
             h4 {
                 font-size: 24px;
                 font-weight: normal;
@@ -49,12 +72,17 @@
                 font-size: 16px;
                 font-weight: bold;
                 color: white;
+                padding-inline-start: 16px;
                 // margin: 0 16px;
             }
 
             ::ng-deep .language--dropdown {
                 margin-top: 10px;
                 margin-bottom: 40px;
+            }
+
+            ::ng-deep .location {
+                margin-bottom: 20px;
             }
 
             ion-item {
@@ -64,11 +92,31 @@
                 --inner-padding-bottom: 0;
                 --inner-padding-top: 0;
 
+                ion-icon {
+                    color: rgba(white, 0.64);
+                }
+
                 ion-label {
                     span {
                         display: block;
                         font-weight: normal;
                     }
+                }
+            }
+
+            ion-reorder-group {
+                ion-item {
+                    padding-inline-start: 12px;
+
+                    ion-icon {
+                        margin-right: 15px;
+                    }
+                }
+            }
+
+            app-user-notification-settings ::ng-deep {
+                ion-item {
+                    padding-inline-start: 16px;
                 }
             }
         }

@@ -124,5 +124,4 @@
     <plugin name="cordova-plugin-firebase" spec="2.0.5" />
     <engine name="android" spec="7.1.4" />
     <engine name="browser" spec="5.0.4" />
-    <engine name="ios" spec="5.0.0" />
 </widget>

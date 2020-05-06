@@ -1,19 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { trigger, style, transition, animate } from '@angular/animations';
+import { IonReorderGroup, AlertController } from '@ionic/angular';
 import {
-    trigger,
-    state,
-    style,
-    transition,
-    animate,
-} from '@angular/animations';
-import { IonReorderGroup } from '@ionic/angular';
+    UserNotificationSetting,
+    NotificationType,
+} from '../user-notification-settings/user-notification-settings.component';
 
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss'],
     animations: [
-        trigger('myInsertRemoveTrigger', [
+        trigger('menuAnimation', [
             transition(':enter', [
                 style({ opacity: 0 }),
                 animate('100ms', style({ opacity: 1 })),
@@ -25,19 +23,66 @@ import { IonReorderGroup } from '@ionic/angular';
 export class HeaderComponent implements OnInit {
     @ViewChild(IonReorderGroup) reorderGroup: IonReorderGroup;
 
-    state = false;
+    visible = false;
     language = 'e';
+    userSettings: UserNotificationSetting[] = [
+        {
+            notificationType: NotificationType.highConcentration,
+            enabled: true,
+        },
+        {
+            notificationType: NotificationType.transport,
+            enabled: true,
+        },
+        {
+            notificationType: NotificationType.activity,
+            enabled: false,
+        },
+        {
+            notificationType: NotificationType.allergies,
+            enabled: true,
+        },
+        {
+            notificationType: NotificationType.exercise,
+            enabled: false,
+        },
+    ];
 
-    constructor() {}
+    constructor(private alertController: AlertController) {}
 
     ngOnInit() {}
 
     openMenu() {
-        this.state = !this.state;
+        this.visible = !this.visible;
     }
 
     doReorder(ev: any) {
         console.log('Dragged from index', ev.detail.from, 'to', ev.detail.to);
         ev.detail.complete();
+    }
+
+    async deleteLocation() {
+        const alert = await this.alertController.create({
+            header: 'Delete location!',
+            message: 'Are you sure to delete this location?',
+            buttons: [
+                {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    cssClass: 'secondary',
+                    handler: (blah) => {
+                        console.log('Confirm Cancel: blah');
+                    },
+                },
+                {
+                    text: 'Confirm',
+                    handler: () => {
+                        console.log('Confirm Okay');
+                    },
+                },
+            ],
+        });
+
+        await alert.present();
     }
 }

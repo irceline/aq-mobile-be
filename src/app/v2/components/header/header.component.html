@@ -2,19 +2,19 @@
   <ion-toolbar color="transparent" class="ion-no-padding">
     <ion-buttons slot="start">
       <ion-button (click)="openMenu()" class="ion-no-padding">
-        <img src="/assets/images/menu.svg" alt="">
+        <img src="/assets/images/icons/menu.svg" alt="">
       </ion-button>
     </ion-buttons>
 
     <ion-buttons slot="end">
       <ion-button (click)="openNotification()" class="ion-no-padding">
-        <img src="/assets/images/megafoon.svg" alt="">
+        <img src="/assets/images/icons/megafoon.svg" alt="">
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<div class="menu" @myInsertRemoveTrigger *ngIf="state">
+<div class="menu" @menuAnimation *ngIf="visible">
   <div class="menu--section">
     <h4>Menu</h4>
     <ion-item detail lines="none" class="menu--link">
@@ -45,7 +45,7 @@
     <!-- Reorder locations -->
     <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
       <ion-item lines="none" *ngFor="let item of [0,1,2]" class="ion-no-padding">
-        <ion-button fill="clear" class="ion-no-padding">
+        <ion-button fill="clear" class="ion-no-padding" (click)="deleteLocation()">
           <ion-icon slot="icon-only" name="close-circle"></ion-icon>
         </ion-button>
         <ion-label>
@@ -58,7 +58,14 @@
     <app-location-input></app-location-input>
   </div>
 
-  <div class="menu--section">
+  <div class="menu--section notifications">
     <h5>Meldingen</h5>
+
+    <app-user-notification-settings [userSettings]="userSettings"></app-user-notification-settings>
+  </div>
+
+  <div class="menu--section logo">
+    <h3>Belair</h3>
+    <p>versie 1.0.0</p>
   </div>
 </div>

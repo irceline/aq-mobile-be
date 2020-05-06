@@ -1,24 +1,27 @@
 .location {
     display: flex;
     flex-direction: column;
+    position: relative;
 
     &--input {
         background-color: rgba(white, 0.3);
         border-radius: 30px;
-        margin-top: 40px;
         height: 61px;
         position: relative;
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        // min-height: 61px;
         text-align: left;
         --padding-start: 30px;
         --padding-end: 30px;
         --placeholder-color: white;
         --padding-top: 18px;
         --padding-bottom: 18px;
+        --placeholder-color: white;
+        --placeholder-opacity: 1;
+        color: white;
+        font-size: 18px;
 
         img {
             width: 17px;
@@ -29,6 +32,23 @@
             top: 50%;
             transform: translateY(-50%);
             right: 29px;
+        }
+    }
+
+    &--dropdown {
+        position: absolute;
+        top: 70px;
+        background-color: #76DAF3;
+        border-radius: 20px;
+        width: 100%;
+        z-index: 10;
+        padding: 10px 0;
+
+        &-item {
+            padding: 10px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
     }
 

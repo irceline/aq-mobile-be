@@ -129,8 +129,7 @@
     },
     "platforms": [
       "android",
-      "browser",
-      "ios"
+      "browser"
     ]
   }
 }
