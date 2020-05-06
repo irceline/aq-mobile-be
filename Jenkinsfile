@@ -6,6 +6,7 @@ pipeline {
    stage('Build') {
       steps {
          sh 'npm i -f'
+         sh 'npm i -D -E @angular/cli'
       }
    }
 
