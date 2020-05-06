@@ -6,7 +6,7 @@
         height: 100%;
         background: url('/assets/images/back.png') no-repeat top center / cover;
 
-        ion-slide {
+        ::ng-deep ion-slide {
             flex-direction: column;
             justify-content: center;
             padding-bottom: 75px;
@@ -58,7 +58,6 @@
 
                 ion-input {
                     text-align: left;
-                    padding: 0 30px !important;
                     min-height: 61px;
                     margin-bottom: 10px;
 
@@ -69,8 +68,6 @@
                         right: 29px;
                     }
                 }
-
-
 
                 img {
                     margin-bottom: 50px;
@@ -85,8 +82,6 @@
                     margin-bottom: 0;
                 }
             }
-
-
         }
 
         ::ng-deep .swiper-pagination {

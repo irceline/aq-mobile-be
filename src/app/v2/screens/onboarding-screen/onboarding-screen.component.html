@@ -1,1 +1,80 @@
-<app-onboarding-slider></app-onboarding-slider>
+<app-onboarding-slider [btnText]="btnText">
+    <ion-slide>
+        <div class="slide">
+            <div class="slide--content">
+                <h1 class="big">Belair</h1>
+                <p>Kies je taal:</p>
+
+                <!-- Language dropdown -->
+                <app-language-dropdown [language]="language"></app-language-dropdown>
+            </div>
+
+            <div class="slide--image">
+                <img class="flanders" src="/assets/images/flanders.png" alt="">
+            </div>
+        </div>
+    </ion-slide>
+
+    <ion-slide>
+        <div class="slide">
+            <div class="slide--content flex-end">
+                <h1>Belair</h1>
+                <p>Belair berekent de impact van de <strong>luchtkwaliteit</strong> op korte termijn voor jouw locatie
+                    en
+                    toont
+                    je een score van
+                    1 tot 10.</p>
+            </div>
+            <img src="/assets/images/circle-slider.png" alt="">
+        </div>
+    </ion-slide>
+
+    <ion-slide>
+        <div class="slide">
+            <div class="slide--content flex-end">
+                <h1>Belair</h1>
+                <p>Dit cijfer is een berekening op basis van de <strong>meetgegevens</strong> van een luchtmeetstation
+                    in jouw
+                    buurt.</p>
+            </div>
+            <img src="/assets/images/details-card.png" alt="">
+        </div>
+    </ion-slide>
+
+    <ion-slide>
+        <div class="slide">
+            <div class="slide--content flex-end">
+                <h1>Belair</h1>
+                <p>De app berekent ook wat de impact van de luchtkwaliteit op <strong>lange termijn</strong> is voor
+                    jouw
+                    locatie.</p>
+            </div>
+
+            <img src="/assets/images/stats-card.png" alt="">
+        </div>
+    </ion-slide>
+
+    <ion-slide>
+        <div class="slide">
+            <div class="slide--content">
+                <h1>Belair</h1>
+                <p>Snel van start!</p>
+                <p>Om je zo goed mogelijk te kunnen helpen, hebben we je locatie nodig.</p>
+
+                <!-- Location input -->
+                <app-location-input></app-location-input>
+            </div>
+        </div>
+    </ion-slide>
+
+    <ion-slide>
+        <div class="slide">
+            <div class="slide--content">
+                <h1>Belair</h1>
+                <p>Zou je graag meldingen ontvangen over de luchtkwaliteit?</p>
+
+                <app-user-notification-settings [userSettings]="userSettings"></app-user-notification-settings>
+            </div>
+        </div>
+    </ion-slide>
+</app-onboarding-slider>
