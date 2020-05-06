@@ -1,1 +1,72 @@
-<app-onboarding-slider></app-onboarding-slider>
+<app-onboarding-slider (slideShowComplete)="onboardingComplete()">
+    <ion-slide>
+        <div class="slide">
+            <div class="slide--content">
+                <h1 class="big">Belair</h1>
+                <p>{{ 'v2.screens.onboarding.choose-lang' | translate }}</p>
+
+                <!-- Language dropdown -->
+                <app-language-dropdown [language]="language" (languageChanged)="updateUserLanguageSettings($event)"></app-language-dropdown>
+            </div>
+
+            <div class="slide--image">
+                <img class="flanders" src="/assets/images/flanders.png" alt="">
+            </div>
+        </div>
+    </ion-slide>
+
+    <ion-slide>
+        <div class="slide">
+            <div class="slide--content flex-end">
+                <h1>Belair</h1>
+                <p [innerHTML]="'v2.screens.onboarding.aq-info' | translate"></p>
+            </div>
+            <img src="/assets/images/circle-slider.png" alt="">
+        </div>
+    </ion-slide>
+
+    <ion-slide>
+        <div class="slide">
+            <div class="slide--content flex-end">
+                <h1>Belair</h1>
+                <p [innerHTML]="'v2.screens.onboarding.aq-info' | translate"></p>
+            </div>
+            <img src="/assets/images/details-card.png" alt="">
+        </div>
+    </ion-slide>
+
+    <ion-slide>
+        <div class="slide">
+            <div class="slide--content flex-end">
+                <h1>Belair</h1>
+                <p [innerHTML]="'v2.screens.onboarding.aq-long-term' | translate"></p>
+            </div>
+
+            <img src="/assets/images/stats-card.png" alt="">
+        </div>
+    </ion-slide>
+
+    <ion-slide>
+        <div class="slide">
+            <div class="slide--content">
+                <h1>Belair</h1>
+                <p>{{ 'v2.screens.onboarding.start-quickly' | translate }}</p>
+                <p>{{ 'v2.screens.onboarding.ask-location' | translate }}</p>
+
+                <!-- Location input -->
+                <app-location-input (locationSelected)="updateUserLocationSettings($event)"></app-location-input>
+            </div>
+        </div>
+    </ion-slide>
+
+    <ion-slide>
+        <div class="slide">
+            <div class="slide--content">
+                <h1>Belair</h1>
+                <p>{{ 'v2.screens.onboarding.ask-notifications' | translate }}</p>
+
+                <app-user-notification-settings [userSettings]="userSettings" (settingChanged)="updateUserNotificationSettings($event)"></app-user-notification-settings>
+            </div>
+        </div>
+    </ion-slide>
+</app-onboarding-slider>
