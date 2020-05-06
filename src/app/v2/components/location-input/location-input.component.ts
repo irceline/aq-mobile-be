@@ -1,7 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LoadingController } from '@ionic/angular';
-import {UserNotificationSetting} from '../user-notification-settings/user-notification-settings.component';
 import { UserLocation } from '../../Interfaces';
 
 @Component({
@@ -31,7 +30,6 @@ export class LocationInputComponent implements OnInit {
         }
     ]
 
-    // todo : location interface
     @Output() locationSelected = new EventEmitter<UserLocation>();
 
     constructor(

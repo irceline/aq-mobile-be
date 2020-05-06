@@ -516,6 +516,10 @@
 	},
   "v2": {
     "components": {
+      "onboarding-slider": {
+        "btn-text": "Ga verder",
+        "start-app": "Start de app"
+      },
       "user-notification-settings": {
         "exercise": "Sporten",
         "allergies":  "Allergieën",

@@ -4,6 +4,8 @@ import {
     NotificationType,
 } from '../../components/user-notification-settings/user-notification-settings.component';
 import {UserLocation} from '../../Interfaces';
+import {TranslateService} from '@ngx-translate/core';
+import {NavController} from '@ionic/angular';
 
 @Component({
     selector: 'app-intro-screen',
@@ -11,6 +13,9 @@ import {UserLocation} from '../../Interfaces';
     styleUrls: ['./onboarding-screen.component.scss'],
 })
 export class OnboardingScreenComponent implements OnInit {
+
+    // Setting default language to english
+    // implementation task, fetch this from device settings
     language = 'e';
     btnText = 'Ga verder';
 
@@ -38,13 +43,13 @@ export class OnboardingScreenComponent implements OnInit {
         },
     ];
 
-    constructor() {}
+    constructor( private navCtrl: NavController ) {}
 
     ngOnInit() {}
 
-    updateUserNotificationSettings( updatedSetting: UserNotificationSetting ) {
+    updateUserLanguageSettings( language: string ) {
         // implementation task
-        console.log( 'todo: implement update user notification settings' );
+        console.log( 'todo: implement update user language settings' );
     }
 
     updateUserLocationSettings( userLocation: UserLocation ) {
@@ -52,4 +57,15 @@ export class OnboardingScreenComponent implements OnInit {
         console.log( 'todo: implement update user location settings' );
     }
 
+    updateUserNotificationSettings( updatedSetting: UserNotificationSetting ) {
+        // implementation task
+        console.log( 'todo: implement update user notification settings' );
+    }
+
+    onboardingComplete() {
+        // implementation task
+        console.log( 'todo: implement user completed onboarding' );
+
+        this.navCtrl.navigateForward('v2/main');
+    }
 }

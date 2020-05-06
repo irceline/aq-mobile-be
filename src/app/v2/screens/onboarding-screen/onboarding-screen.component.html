@@ -1,4 +1,4 @@
-<app-onboarding-slider [btnText]="btnText">
+<app-onboarding-slider (slideShowComplete)="onboardingComplete()">
     <ion-slide>
         <div class="slide">
             <div class="slide--content">
@@ -6,7 +6,7 @@
                 <p>{{ 'v2.screens.onboarding.choose-lang' | translate }}</p>
 
                 <!-- Language dropdown -->
-                <app-language-dropdown [language]="language"></app-language-dropdown>
+                <app-language-dropdown [language]="language" (languageChanged)="updateUserLanguageSettings($event)"></app-language-dropdown>
             </div>
 
             <div class="slide--image">
