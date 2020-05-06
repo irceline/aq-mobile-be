@@ -3,10 +3,17 @@ pipeline {
 
    stages {
 
+
+   stage('Check config') {
+      steps {
+         sh 'export ANDROID_HOME = /etc/android'
+         sh 'echo $ANDROID_HOME'
+      }
+   }
+
    stage('Build') {
       steps {
          sh 'npm i -f'
-         sh 'npm i -D -E @angular/cli'
       }
    }
 
