@@ -2,7 +2,7 @@ import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {TranslateTestingModule} from '../../testing/TranslateTestingModule';
-import {NotificationType, UserNotificationSetting, UserNotificationSettingsComponent} from './user-notification-settings.component';
+import {NotificationType, UserNotificationSettingsComponent} from './user-notification-settings.component';
 import {By} from '@angular/platform-browser';
 
 const initialSettings = [
