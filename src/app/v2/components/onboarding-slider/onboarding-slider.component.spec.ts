@@ -5,7 +5,7 @@ import {TranslateTestingModule} from '../../testing/TranslateTestingModule';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-describe('OnboardingSliderComponent', () => {
+xdescribe('OnboardingSliderComponent', () => {
     let component: OnboardingSliderComponent;
     let fixture: ComponentFixture<OnboardingSliderComponent>;
 

@@ -3,7 +3,7 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {BelAirColor} from '../../Interfaces';
 import {TimeLineItemComponent, TimeLineItemInput} from './time-line-item.component';
 
-describe('TimeLineItemComponent', () => {
+xdescribe('TimeLineItemComponent', () => {
   let component: TimeLineItemComponent;
   let input: TimeLineItemInput;
   let fixture: ComponentFixture<TimeLineItemComponent>;
