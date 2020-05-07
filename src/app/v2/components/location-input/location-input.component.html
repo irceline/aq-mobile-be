@@ -1,6 +1,6 @@
 <!-- Location input -->
 <div class="location">
-  <ion-input class="location--input" placeholder="Kies je locatie" [(ngModel)]="searchText" (keyup)="filterItems()"
+  <ion-input class="location--input" [placeholder]="'v2.components.location-input.choose-location' | translate" [(ngModel)]="searchText" (keyup)="filterItems()"
     (click)="openDropdown()">
     <img src="/assets/images/icons/pin.svg" alt="">
   </ion-input>
@@ -10,7 +10,7 @@
       <ion-row *ngFor="let item of filteredItems;" (click)="chooseOption(item)" class="ion-align-items-center">
         <ion-col class="location--dropdown-item">
           {{ item.label }}
-          <ng-container *ngIf="item.selected; else notSelect">
+          <ng-container *ngIf="selectedItem && ( item.id === selectedItem.id); else notSelect">
             <ion-icon name="ios-checkmark-circle" color="white"></ion-icon>
           </ng-container>
           <ng-template #notSelect>
@@ -20,14 +20,12 @@
       </ion-row>
     </ng-container>
     <ng-template #elseTemplate>
-      <p>No options to show.</p>
+      <p>{{ 'v2.components.location-input.no-results' | translate }}</p>
     </ng-template>
-
-
   </div>
 </div>
 
 <ion-button (click)="getCurrentLocation()" expand="block" fill="clear" shape="round" class="location--button">
-  Huidige locatie
+  {{ 'v2.components.location-input.current-location' | translate }}
   <img src="/assets/images/icons/navigation.svg" alt="">
 </ion-button>

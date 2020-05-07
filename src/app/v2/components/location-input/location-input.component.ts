@@ -15,13 +15,13 @@ import { UserLocation } from '../../Interfaces';
     styleUrls: ['./location-input.component.scss'],
 })
 export class LocationInputComponent implements OnInit {
-    @Output() optionChange = new EventEmitter();
+
     @ViewChild(IonInput) input: IonInput;
 
     searchText = '';
     visible = false;
-    filteredItems: any[] = [];
-    selectedItem = null;
+    filteredItems: UserLocation[] = [];
+    selectedItem: UserLocation | null = null;
 
     // todo: Discuss with client -> is there a list of location that the user can search in,
     // is this provided by a service, we will just provide dummy data for now
@@ -65,11 +65,10 @@ export class LocationInputComponent implements OnInit {
             .getCurrentPosition()
             .then(async (resp) => {
                 loading.dismiss(null, 'cancel');
-                console.log(resp.coords);
                 // todo --> reverse geocoding to region / label?
                 this.locationSelected.emit({
-                    id: 1,
-                    label: 'Gent',
+                    id: 111,
+                    label: 'TODO: reverse geocoding',
                     type: 'current',
                     latitude: resp.coords.latitude,
                     longitude: resp.coords.longitude,
@@ -87,10 +86,7 @@ export class LocationInputComponent implements OnInit {
         for (let index = 0; index < this.filteredItems.length; index++) {
             const element = this.filteredItems[index];
             if (element.id === item.id) {
-                this.filteredItems[index].selected = true;
                 this.selectedItem = element;
-            } else {
-                this.filteredItems[index].selected = false;
             }
         }
 
@@ -98,7 +94,7 @@ export class LocationInputComponent implements OnInit {
         // set cursor after selected option
         this.input.setFocus();
         // emit selected option
-        this.optionChange.next(this.selectedItem);
+        this.locationSelected.next(this.selectedItem);
         this.closeDropdown();
     }
 
@@ -122,11 +118,11 @@ export class LocationInputComponent implements OnInit {
         if (this.searchText.trim() === '' && !this.visible) {
             for (let index = 0; index < this.filteredItems.length; index++) {
                 const element = this.filteredItems[index];
-                element.selected = false;
+                this.selectedItem = null;
             }
 
             // emit null
-            this.optionChange.next(null);
+            this.locationSelected.next(null);
         }
     }
 

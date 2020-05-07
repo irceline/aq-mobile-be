@@ -1,6 +1,5 @@
 import {Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import {UserNotificationSetting} from '../user-notification-settings/user-notification-settings.component';
 
 @Component({
     selector: 'app-language-dropdown',
@@ -9,7 +8,12 @@ import {UserNotificationSetting} from '../user-notification-settings/user-notifi
 })
 export class LanguageDropdownComponent implements OnInit {
 
-    private _availableLanguages: string[];
+    private _availableLanguages = [
+        { langCode: 'en', label: 'English' },
+        { langCode: 'nl', label: 'Nederlands' },
+        { langCode: 'de', label: 'Deutsch' },
+        { langCode: 'fr', label: 'Français' },
+    ];
 
     @Input() language = '';
 
@@ -18,7 +22,10 @@ export class LanguageDropdownComponent implements OnInit {
     @ViewChild('select') select: ElementRef;
 
     constructor( private translate: TranslateService ) {
-        this._availableLanguages = this.translate.getLangs();
+
+        // this does not do what you would expect
+        // this._availableLanguages = this.translate.getLangs();
+
     }
 
     ngOnInit() {
@@ -36,7 +43,6 @@ export class LanguageDropdownComponent implements OnInit {
 
     selectLanguage(lang) {
         // Todo: test when dropdown is implemented
-        console.log( 'new language', lang );
-        this.languageChanged.emit(lang);
+        this.languageChanged.emit(lang.detail.value);
     }
 }

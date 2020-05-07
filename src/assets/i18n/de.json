@@ -516,6 +516,11 @@
 	},
 	"v2": {
 		"components": {
+			"location-input": {
+				"choose-location": "Kies je locatie",
+				"no-results": "Geen resultaten",
+				"current-location": "Huidige locatie"
+			},
 			"onboarding-slider": {
 				"btn-text": "Ga verder",
 				"start-app": "Start de app"
