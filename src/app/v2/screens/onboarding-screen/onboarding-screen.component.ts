@@ -50,11 +50,13 @@ export class OnboardingScreenComponent implements OnInit {
     updateUserLanguageSettings( language: string ) {
         // implementation task
         console.log( 'todo: implement update user language settings' );
+        console.log( language );
     }
 
     updateUserLocationSettings( userLocation: UserLocation ) {
         // implementation task
         console.log( 'todo: implement update user location settings' );
+        console.log( userLocation );
     }
 
     updateUserNotificationSettings( updatedSetting: UserNotificationSetting ) {
