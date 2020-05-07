@@ -20,20 +20,6 @@ export class LocationInputComponent implements OnInit {
 
     searchText = '';
     visible = false;
-    items: any[] = [
-        {
-            name: 'English',
-            key: 'en',
-        },
-        {
-            name: 'French',
-            key: 'fr',
-        },
-        {
-            name: 'German',
-            key: 'de',
-        },
-    ];
     filteredItems: any[] = [];
     selectedItem = null;
 
@@ -95,10 +81,12 @@ export class LocationInputComponent implements OnInit {
             });
     }
 
+    // Choosing option from dropdown
     chooseOption(item: any) {
+        // set selected on true
         for (let index = 0; index < this.filteredItems.length; index++) {
             const element = this.filteredItems[index];
-            if (element.key == item.key) {
+            if (element.id === item.id) {
                 this.filteredItems[index].selected = true;
                 this.selectedItem = element;
             } else {
@@ -106,23 +94,39 @@ export class LocationInputComponent implements OnInit {
             }
         }
 
-        this.searchText = this.selectedItem.name;
+        this.searchText = this.selectedItem.label;
+        // set cursor after selected option
         this.input.setFocus();
+        // emit selected option
         this.optionChange.next(this.selectedItem);
         this.closeDropdown();
     }
 
+    // filter logic
     filterItems() {
-        this.filteredItems = this.items;
+        this.filteredItems = this._locations;
+
+        // filter items by label
         if (this.searchText.trim() !== '') {
             this.visible = true;
             this.filteredItems = this.filteredItems.filter((item) => {
                 return (
-                    item.name
+                    item.label
                         .toLowerCase()
                         .indexOf(this.searchText.toLowerCase()) > -1
                 );
             });
+        }
+
+        // if we remove the option, remove select and emit null
+        if (this.searchText.trim() === '' && !this.visible) {
+            for (let index = 0; index < this.filteredItems.length; index++) {
+                const element = this.filteredItems[index];
+                element.selected = false;
+            }
+
+            // emit null
+            this.optionChange.next(null);
         }
     }
 

@@ -9,7 +9,7 @@
     <ng-container *ngIf="filteredItems.length; else elseTemplate">
       <ion-row *ngFor="let item of filteredItems;" (click)="chooseOption(item)" class="ion-align-items-center">
         <ion-col class="location--dropdown-item">
-          {{ item.name}}
+          {{ item.label }}
           <ng-container *ngIf="item.selected; else notSelect">
             <ion-icon name="ios-checkmark-circle" color="white"></ion-icon>
           </ng-container>

@@ -43,6 +43,9 @@
         width: 100%;
         z-index: 10;
         padding: 10px 0;
+        box-shadow: 0 10px 20px rgba(black, 0.05);
+        max-height: 152px;
+        overflow: auto;
 
         &-item {
             padding: 10px 30px;
