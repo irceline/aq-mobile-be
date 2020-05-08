@@ -14,7 +14,7 @@ export class OnboardingSliderComponent implements OnInit {
 
     @ViewChild(IonSlides) slides: IonSlides;
 
-    protected btnText: string;
+    public btnText: string;
 
 
     constructor(private translate: TranslateService) {

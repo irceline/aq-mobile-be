@@ -21,7 +21,7 @@ export class LanguageDropdownComponent implements OnInit {
 
     @ViewChild('select') select: ElementRef;
 
-    constructor( private translate: TranslateService ) {
+        constructor( private translate: TranslateService ) {
 
         // this does not do what you would expect
         // this._availableLanguages = this.translate.getLangs();
@@ -29,16 +29,6 @@ export class LanguageDropdownComponent implements OnInit {
     }
 
     ngOnInit() {
-        // Removing the arrow from select, temp solution because Ionic dont have for now property to remove arrow
-        setTimeout(() => {
-            const ionSelects = document.querySelectorAll('ion-select');
-            if (ionSelects.length) {
-                ionSelects[0].shadowRoot.children[1].setAttribute(
-                    'style',
-                    'display: none !important'
-                );
-            }
-        }, 500);
     }
 
     selectLanguage(lang) {
