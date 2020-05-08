@@ -12,7 +12,7 @@ const _availableLanguages = [
     {langCode: 'fr', label: 'Français'},
 ];
 
-xdescribe('LanguageDropdownComponent', () => {
+describe('LanguageDropdownComponent', () => {
     let component: LanguageDropdownComponent;
     let fixture: ComponentFixture<LanguageDropdownComponent>;
 
