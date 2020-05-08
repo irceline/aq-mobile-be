@@ -1,5 +1,7 @@
-<div class="Item">
-  <div [ngClass]="['Header', data.color]"></div>
-  <div class="Status">{{ data.status }}</div>
-  <div [ngClass]="{ 'Day': true, 'selected': data.selected}">{{ data.day }}</div>
+<div class="timeline--item">
+  <div [ngClass]="['timeline--item-header', data.color]"></div>
+  <div class="timeline--item-body">
+    <div class="timeline--item-status">{{ data.status }}</div>
+    <div [ngClass]="{ 'timeline--item-day': true, 'selected': data.selected}">{{ data.day }}</div>
+  </div>
 </div>

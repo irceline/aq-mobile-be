@@ -1,4 +1,4 @@
-<app-onboarding-slider (slideShowComplete)="onboardingComplete()">
+<app-onboarding-slider (slideShowComplete)="onboardingComplete()" [disabled]="sliderDisabled">
     <ion-slide>
         <div class="slide">
             <div class="slide--content">
@@ -68,7 +68,9 @@
 
                 <h5>Meldingen</h5>
                 <app-user-notification-settings [userSettings]="userSettings"
-                    (settingChanged)="updateUserNotificationSettings($event)"></app-user-notification-settings>
+                    (settingChanged)="updateUserNotificationSettings($event)" (getFocus)="getFocus($event)"
+                    (loseFocus)="loseFocus($event)">
+                </app-user-notification-settings>
             </div>
         </div>
     </ion-slide>

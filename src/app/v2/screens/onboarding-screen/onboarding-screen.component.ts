@@ -3,9 +3,9 @@ import {
     UserNotificationSetting,
     NotificationType,
 } from '../../components/user-notification-settings/user-notification-settings.component';
-import {UserLocation} from '../../Interfaces';
-import {TranslateService} from '@ngx-translate/core';
-import {NavController} from '@ionic/angular';
+import { UserLocation } from '../../Interfaces';
+import { TranslateService } from '@ngx-translate/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
     selector: 'app-intro-screen',
@@ -13,11 +13,11 @@ import {NavController} from '@ionic/angular';
     styleUrls: ['./onboarding-screen.component.scss'],
 })
 export class OnboardingScreenComponent implements OnInit {
-
     // Setting default language to english
     // implementation task, fetch this from device settings
     language = 'e';
     btnText = 'Ga verder';
+    sliderDisabled = false;
 
     // implementation task -> fetch user notification settings
     userSettings: UserNotificationSetting[] = [
@@ -43,31 +43,39 @@ export class OnboardingScreenComponent implements OnInit {
         },
     ];
 
-    constructor( private navCtrl: NavController ) {}
+    constructor(private navCtrl: NavController) {}
 
     ngOnInit() {}
 
-    updateUserLanguageSettings( language: string ) {
+    updateUserLanguageSettings(language: string) {
         // implementation task
-        console.log( 'todo: implement update user language settings' );
-        console.log( language );
+        console.log('todo: implement update user language settings');
+        console.log(language);
     }
 
-    updateUserLocationSettings( userLocation: UserLocation ) {
+    updateUserLocationSettings(userLocation: UserLocation) {
         // implementation task
-        console.log( 'todo: implement update user location settings' );
-        console.log( userLocation );
+        console.log('todo: implement update user location settings');
+        console.log(userLocation);
     }
 
-    updateUserNotificationSettings( updatedSetting: UserNotificationSetting ) {
+    updateUserNotificationSettings(updatedSetting: UserNotificationSetting) {
         // implementation task
-        console.log( 'todo: implement update user notification settings' );
+        console.log('todo: implement update user notification settings');
     }
 
     onboardingComplete() {
         // implementation task
-        console.log( 'todo: implement user completed onboarding' );
+        console.log('todo: implement user completed onboarding');
 
         this.navCtrl.navigateForward('v2/main');
+    }
+
+    getFocus(event: boolean) {
+        this.sliderDisabled = event;
+    }
+
+    loseFocus(event: boolean) {
+        this.sliderDisabled = event;
     }
 }

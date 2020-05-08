@@ -15,7 +15,6 @@ import { UserLocation } from '../../Interfaces';
     styleUrls: ['./location-input.component.scss'],
 })
 export class LocationInputComponent implements OnInit {
-
     @ViewChild(IonInput) input: IonInput;
 
     searchText = '';

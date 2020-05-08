@@ -5,6 +5,7 @@ import {
     UserNotificationSetting,
     NotificationType,
 } from '../user-notification-settings/user-notification-settings.component';
+import { UserLocation } from '../../Interfaces';
 
 @Component({
     selector: 'app-header',
@@ -46,6 +47,11 @@ export class HeaderComponent implements OnInit {
             notificationType: NotificationType.exercise,
             enabled: false,
         },
+    ];
+
+    locationList: any[] = [
+        { name: 'Koksijde', id: 'abc', order: 1 },
+        { name: 'Herent', id: 'def', order: 2 },
     ];
 
     constructor(private alertController: AlertController) {}
