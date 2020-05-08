@@ -68,7 +68,7 @@ export class OnboardingScreenComponent implements OnInit {
         // implementation task
         console.log('todo: implement user completed onboarding');
 
-        this.navCtrl.navigateForward('v2/main');
+        this.navCtrl.navigateForward('main');
     }
 
     getFocus(event: boolean) {
