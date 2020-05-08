@@ -1,7 +1,7 @@
 <div class="background">
   <app-header></app-header>
   <app-location-swipe (locationChange)="onLocationChange($event)" [locations]="locations"></app-location-swipe>
-  <app-circle-chart></app-circle-chart>
+  <app-circle-chart [percentage]="40"></app-circle-chart>
   <app-time-line-list [items]="locationItems"></app-time-line-list>
   <app-pull-tab [options]="drawerOptions">
     <div class="details">

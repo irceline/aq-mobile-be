@@ -1,0 +1,18 @@
+<svg width="316px" height="315px" viewBox="0 0 316 315" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Screens" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M176.945134,310 C252.771271,302.506192 312,238.597416 312,160.86727 C312,78.0978625 244.842712,11 162,11 C79.1572875,11 12,78.0978625 12,160.86727 C12,238.593536 71.2228153,302.499811 147.04351,310" id="Oval" stroke="#F0F0F0" stroke-width="15" style="mix-blend-mode: multiply;" stroke-linecap="round" stroke-linejoin="bevel"></path>
+        <path d="M176.945134,310 C252.771271,302.506192 312,238.597416 312,160.86727 C312,78.0978625 244.842712,11 162,11 C79.1572875,11 12,78.0978625 12,160.86727 C12,238.593536 71.2228153,302.499811 147.04351,310" id="Oval" stroke="#FFFFFF" stroke-width="15" stroke-linecap="round" stroke-linejoin="bevel" stroke-dasharray="179,1000" transform="translate(162.000000, 160.500000) scale(-1, 1) translate(-162.000000, -160.500000) "></path>
+        <g id="score" stroke-width="1" fill-rule="evenodd" transform="translate(6.000000, 11.000000)">
+            <path d="M170.945134,299.264809 C246.771271,291.764363 306,227.798987 306,150 C306,67.1572875 238.842712,0 156,0 C73.1572875,0 6,67.1572875 6,150 C6,227.795103 65.2228153,291.757977 141.04351,299.264809" id="Oval" stroke="#E4DBDB" stroke-width="5" style="mix-blend-mode: multiply;" stroke-linejoin="bevel" stroke-dasharray="2,89" transform="translate(156.000000, 149.632404) scale(-1, 1) translate(-156.000000, -149.632404) "></path>
+            <circle id="Oval" fill="#FFFFFF" cx="11" cy="190" r="11"></circle>
+        </g>
+        <text font-family="Helvetica" font-size="60" font-weight="normal" line-spacing="47" fill="#FFFFFF">
+            <tspan x="70.6699219" y="169">Heel </tspan>
+            <tspan x="54" y="216">slecht</tspan>
+        </text>
+        <text id="Gemiddelde-score-op" font-family="Helvetica" font-size="11" font-weight="normal" fill="#FFFFFF">
+            <tspan x="96.8808594" y="232">Gemiddelde score op jouw </tspan>
+            <tspan x="125.310059" y="245">locatie is goed.</tspan>
+        </text>
+    </g>
+</svg>

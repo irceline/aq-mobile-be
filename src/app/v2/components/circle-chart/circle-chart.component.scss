@@ -1,3 +1,22 @@
 :host {
     flex: 1;
+    padding: 20px 0;
+
+    .circle {
+        display: block;
+        margin: 20px auto;
+    }
+
+    .path {
+        offset-path: path('M147.055 310C71.229 302.506 12 238.597 12 160.867 12 78.097 79.157 11 162 11s150 67.098 150 149.867C312 238.594 252.777 302.5 176.956 310');
+    }
+
+    .title {}
+
+    .subtitle {
+        width: 134px;
+        font-size: 11px;
+        text-align: center;
+        color: #ffffff;
+    }
 }

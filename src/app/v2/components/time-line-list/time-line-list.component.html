@@ -1,3 +1,5 @@
-<div>
-  <app-time-line-item *ngFor="let item of items" [data]="item"></app-time-line-item>
-</div>
+<ion-slides [options]="timelineOptions">
+  <ion-slide *ngFor="let item of items">
+    <app-time-line-item [data]="item"></app-time-line-item>
+  </ion-slide>
+</ion-slides>
