@@ -7,7 +7,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {IonSlides} from '@ionic/angular';
 import {By} from '@angular/platform-browser';
 
-xdescribe('OnboardingSliderComponent', () => {
+describe('OnboardingSliderComponent', () => {
     let component: OnboardingSliderComponent;
     let fixture: ComponentFixture<OnboardingSliderComponent>;
     let slidesSpy;
