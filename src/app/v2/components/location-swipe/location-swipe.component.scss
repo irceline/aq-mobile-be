@@ -1,18 +1,21 @@
-ion-slides {
+:host {
     margin: 25px 0;
+    display: block;
 
-    ion-slide {
-        color: white;
-        opacity: 0.4;
-        font-size: 17.3px;
-        display: flex;
-        align-items: center;
-        height: 33px;
-        transition: all .3s ease;
+    ion-slides {
+        ion-slide {
+            color: white;
+            opacity: 0.4;
+            font-size: 17.3px;
+            display: flex;
+            align-items: center;
+            height: 33px;
+            transition: all .3s ease;
 
-        &.swiper-slide-active {
-            opacity: 1;
-            font-size: 24px;
+            &.swiper-slide-active {
+                opacity: 1;
+                font-size: 24px;
+            }
         }
     }
 }

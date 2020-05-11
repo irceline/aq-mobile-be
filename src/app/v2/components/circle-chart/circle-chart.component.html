@@ -1,51 +1,38 @@
-<!-- <svg xmlns="http://www.w3.org/2000/svg" width="307" height="300" viewBox="0 0 307 300" class="circle">
-  <g fill="none" fill-rule="evenodd">
-    <path stroke="#F0F0F0" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="15"
-      d="M164.945 299.265C240.771 291.765 300 227.799 300 150 300 67.157 232.843 0 150 0S0 67.157 0 150c0 77.795 59.223 141.758 135.044 149.265"
-      style="mix-blend-mode:multiply" />
-    <path stroke="#FFF" [style.strokeDasharray]="dashoffset + ' ' + circumference" stroke-linecap="round"
-      stroke-linejoin="bevel" stroke-width="10"
-      d="M135.055 299.265C59.229 291.765 0 227.799 0 150 0 67.157 67.157 0 150 0s150 67.157 150 150c0 77.795-59.223 141.758-135.044 149.265">
-    </path>
-    <path stroke="#E4DBDB" stroke-dasharray="2 89" stroke-linejoin="bevel" stroke-width="5"
-      d="M135.055 299.265C59.229 291.765 0 227.799 0 150 0 67.157 67.157 0 150 0s150 67.157 150 150c0 77.795-59.223 141.758-135.044 149.265"
-      style="mix-blend-mode:multiply" />
-    <circle cx="" cy="" r="8" fill="#FFF" class="path" [style.offsetDistance]="dashoffset + 'px'" />
-    <text fill="#FFF" font-size="40" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" class="title">
-      Heel goed
-    </text>
-    <text fill="#FFF" font-size="11" x="50%" y="65%" dominant-baseline="middle" text-anchor="middle" class="subtitle">
-      Gemiddelde score op jouw locatie is goed.
-    </text>
-  </g>
-</svg>
- -->
-
-
-<svg width="316" height="315" xmlns="http://www.w3.org/2000/svg" class="circle">
-  <g fill="none" fill-rule="evenodd">
-    <path
-      d="M176.945 310C252.771 302.506 312 238.597 312 160.867 312 78.097 244.843 11 162 11S12 78.098 12 160.867C12 238.594 71.223 302.5 147.044 310"
-      stroke="#F0F0F0" stroke-width="15" style="mix-blend-mode:multiply" stroke-linecap="round"
-      stroke-linejoin="bevel" />
-    <path
-      d="M147.055 310C71.229 302.506 12 238.597 12 160.867 12 78.097 79.157 11 162 11s150 67.098 150 149.867C312 238.594 252.777 302.5 176.956 310"
-      stroke="#FFF" stroke-width="15" stroke-linecap="round" stroke-linejoin="bevel"
-      [style.strokeDasharray]="dashoffset + ' ' + circumference" />
-    <g transform="translate(6 11)">
-      <path
-        d="M141.055 299.265C65.229 291.765 6 227.799 6 150 6 67.157 73.157 0 156 0s150 67.157 150 150c0 77.795-59.223 141.758-135.044 149.265"
-        stroke="#E4DBDB" stroke-width="5" style="mix-blend-mode:multiply" stroke-linejoin="bevel"
-        stroke-dasharray="2,89" />
-      <circle fill="#FFF" cx="" cy="" r="11" class="path" [style.offsetDistance]="dashoffset + 'px'" />
+<div class="circle-chart">
+  <svg width="316px" height="325px" viewBox="0 0 316 325" version="1.1" xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink" class="circle">
+    <g id="Screens" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="03---home-copy-2" transform="translate(-49.000000, -181.000000)">
+        <g id="Heel-goed" transform="translate(42.000000, 178.000000)">
+          <g id="Group" transform="translate(15.000000, 15.000000)">
+            <g id="score-8">
+              <path
+                d="M164.945134,299.264809 C240.771271,291.764363 300,227.798987 300,150 C300,67.1572875 232.842712,0 150,0 C67.1572875,0 0,67.1572875 0,150 C0,227.795103 59.2228153,291.757977 135.04351,299.264809"
+                id="Oval" stroke="#F0F0F0" stroke-width="15" style="mix-blend-mode: multiply;" stroke-linecap="round"
+                stroke-linejoin="bevel"></path>
+              <path
+                d="M164.945134,299.264809 C240.771271,291.764363 300,227.798987 300,150 C300,67.1572875 232.842712,0 150,0 C67.1572875,0 0,67.1572875 0,150 C0,227.795103 59.2228153,291.757977 135.04351,299.264809"
+                id="Oval" stroke="#FFFFFF" stroke-width="15" stroke-linecap="round" stroke-linejoin="bevel"
+                [style.strokeDasharray]="dashoffset + ' ' + circumference"
+                transform="translate(150.000000, 149.632404) scale(-1, 1) translate(-150.000000, -149.632404) "></path>
+              <path
+                d="M164.945134,299.264809 C240.771271,291.764363 300,227.798987 300,150 C300,67.1572875 232.842712,0 150,0 C67.1572875,0 0,67.1572875 0,150 C0,227.795103 59.2228153,291.757977 135.04351,299.264809"
+                id="Oval" stroke="#E4DBDB" stroke-width="5" style="mix-blend-mode: multiply;" stroke-linejoin="bevel"
+                stroke-dasharray="2,89"
+                transform="translate(150.000000, 149.632404) scale(-1, 1) translate(-150.000000, -149.632404) "></path>
+              <circle id="Oval" fill="#FFFFFF" cx="0" cy="0" r="11" class="path"
+                [style.offsetDistance]="circleOffset + 'px'">
+              </circle>
+            </g>
+          </g>
+        </g>
+      </g>
     </g>
-    <text font-family="Helvetica" font-size="60" fill="#FFF">
-      <tspan x="70.67" y="169">Heel </tspan>
-      <tspan x="54" y="216">slecht</tspan>
-    </text>
-    <text font-family="Helvetica" font-size="11" fill="#FFF">
-      <tspan x="96.881" y="232">Gemiddelde score op jouw </tspan>
-      <tspan x="125.31" y="245">locatie is goed.</tspan>
-    </text>
-  </g>
-</svg>
+  </svg>
+
+  <div class="circle-chart--text">
+    <h1>{{ title }}</h1>
+    <p>{{ text }}</p>
+  </div>
+
+</div>

@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { trigger, style, transition, animate } from '@angular/animations';
-import { IonReorderGroup, AlertController } from '@ionic/angular';
+import { IonReorderGroup } from '@ionic/angular';
 import {
     UserNotificationSetting,
     NotificationType,
 } from '../user-notification-settings/user-notification-settings.component';
-import { UserLocation } from '../../Interfaces';
 
 @Component({
     selector: 'app-header',
@@ -54,7 +53,7 @@ export class HeaderComponent implements OnInit {
         { name: 'Herent', id: 'def', order: 2 },
     ];
 
-    constructor(private alertController: AlertController) {}
+    constructor() {}
 
     ngOnInit() {}
 
@@ -62,33 +61,11 @@ export class HeaderComponent implements OnInit {
         this.visible = !this.visible;
     }
 
-    doReorder(ev: any) {
-        console.log('Dragged from index', ev.detail.from, 'to', ev.detail.to);
-        ev.detail.complete();
+    updateLocation(event) {
+        console.log(event);
     }
 
-    async deleteLocation() {
-        const alert = await this.alertController.create({
-            header: 'Delete location!',
-            message: 'Are you sure to delete this location?',
-            buttons: [
-                {
-                    text: 'Cancel',
-                    role: 'cancel',
-                    cssClass: 'secondary',
-                    handler: (blah) => {
-                        console.log('Confirm Cancel: blah');
-                    },
-                },
-                {
-                    text: 'Confirm',
-                    handler: () => {
-                        console.log('Confirm Okay');
-                    },
-                },
-            ],
-        });
-
-        await alert.present();
+    deleteLocation(event) {
+        console.log(event);
     }
 }

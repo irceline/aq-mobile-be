@@ -6,19 +6,26 @@ import { Component, OnInit, Input } from '@angular/core';
     styleUrls: ['./circle-chart.component.scss'],
 })
 export class CircleChartComponent implements OnInit {
-    @Input() percentage = 0;
+    // belaqi score index
+    @Input() belaqi = 0;
+    // big circle text
+    @Input() title: string;
+    // small circle text
+    @Input() text: string;
 
     circumference = 1000;
     dashoffset = 0;
-    defaultRange = 90;
+    circleOffset = 910;
+    defaultRange = 92;
 
     constructor() {}
 
     ngOnInit() {
-        this.progress(this.percentage);
+        this._initialize(this.belaqi);
     }
 
-    private progress(value: number) {
-        this.dashoffset = (value / 10) * this.defaultRange;
+    private _initialize(value: number) {
+        this.circleOffset = this.circleOffset - value * this.defaultRange;
+        this.dashoffset = value * this.defaultRange;
     }
 }

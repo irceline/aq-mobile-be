@@ -28,7 +28,28 @@
   font-family: 'Metropolis';
   font-style: normal;
   font-weight: normal;
-  src: url('../assets/fonts/metropolis/metropolis.otf');
+  src: url('../assets/fonts/metropolis/Metropolis-Regular.otf');
+}
+
+@font-face {
+  font-family: 'Metropolis';
+  font-style: normal;
+  font-weight: 500;
+  src: url('../assets/fonts/metropolis/Metropolis-Medium.otf');
+}
+
+@font-face {
+  font-family: 'Metropolis';
+  font-style: normal;
+  font-weight: 600;
+  src: url('../assets/fonts/metropolis/Metropolis-SemiBold.otf');
+}
+
+@font-face {
+  font-family: 'Metropolis';
+  font-style: normal;
+  font-weight: bold;
+  src: url('../assets/fonts/metropolis/Metropolis-Bold.otf');
 }
 
 @font-face {
@@ -41,7 +62,7 @@
 /** Ionic CSS Variables **/
 :root {
   /** default font **/
-  --ion-font-family: 'Open Sans';
+  --ion-font-family: 'Metropolis';
   --ion-metro-family: 'Metropolis';
   --ion-cookie-family: 'Cookie';
 

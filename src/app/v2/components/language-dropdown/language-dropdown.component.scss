@@ -13,12 +13,16 @@
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        right: 20px;
+        right: 10px;
         background: url('/assets/images/icons/arrow.svg') no-repeat center center / 18px;
-        width: 18px;
+        width: 28px;
         height: 22px;
+        padding-right: 10px;
+        background-color: rgb(132, 214, 236);
+        z-index: 2;
     }
 }
+
 ion-select {
-    min-width: 100vw;
+    min-width: 100%;
 }

@@ -1,0 +1,11 @@
+<ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
+  <ion-item lines="none" *ngFor="let location of locations" class="ion-no-padding">
+    <ion-button fill="clear" class="ion-no-padding" (click)="deleteLocation(location)">
+      <ion-icon slot="icon-only" name="close-circle"></ion-icon>
+    </ion-button>
+    <ion-label>
+      {{ location.name }}
+    </ion-label>
+    <ion-reorder slot="end"></ion-reorder>
+  </ion-item>
+</ion-reorder-group>

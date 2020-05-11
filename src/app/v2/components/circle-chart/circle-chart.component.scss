@@ -4,19 +4,53 @@
 
     .circle {
         display: block;
-        margin: 20px auto;
-    }
 
-    .path {
-        offset-path: path('M147.055 310C71.229 302.506 12 238.597 12 160.867 12 78.097 79.157 11 162 11s150 67.098 150 149.867C312 238.594 252.777 302.5 176.956 310');
-    }
+        &-chart {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px auto;
+            width: 100vw;
+            max-width: 316px;
 
-    .title {}
+            &--text {
+                position: absolute;
+                width: 316px;
+                padding: 0 60px;
+                color: #ffffff;
+                text-align: center;
 
-    .subtitle {
-        width: 134px;
-        font-size: 11px;
-        text-align: center;
-        color: #ffffff;
+                h1 {
+                    font-size: 60px;
+                    line-height: 0.78;
+                    margin-bottom: 20px;
+                    margin-top: 0;
+                    height: 101px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                p {
+                    font-size: 11px;
+                    max-width: 134px;
+                    margin: auto;
+                }
+            }
+        }
+
+        .path {
+            offset-path: path('M164.945134,299.264809 C240.771271,291.764363 300,227.798987 300,150 C300,67.1572875 232.842712,0 150,0 C67.1572875,0 0,67.1572875 0,150 C0,227.795103 59.2228153,291.757977 135.04351,299.264809');
+        }
+
+        .title {}
+
+        .subtitle {
+            width: 134px;
+            font-size: 11px;
+            text-align: center;
+            color: #ffffff;
+        }
     }
 }
