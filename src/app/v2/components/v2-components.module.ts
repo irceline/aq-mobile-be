@@ -14,6 +14,7 @@ import { LanguageDropdownComponent } from './language-dropdown/language-dropdown
 import { LocationInputComponent } from './location-input/location-input.component';
 import {UserNotificationSettingsComponent} from './user-notification-settings/user-notification-settings.component';
 import {TranslateModule} from '@ngx-translate/core';
+import {BackgroundComponent} from './background/background.component';
 
 const COMPONENTS = [
     CircleChartComponent,
@@ -25,7 +26,8 @@ const COMPONENTS = [
     OnboardingSliderComponent,
     LanguageDropdownComponent,
     LocationInputComponent,
-    UserNotificationSettingsComponent
+    UserNotificationSettingsComponent,
+    BackgroundComponent
 ];
 
 @NgModule({

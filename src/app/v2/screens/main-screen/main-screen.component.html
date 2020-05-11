@@ -1,4 +1,4 @@
-<div class="background">
+<app-background [belAqi]="belAqi">
   <app-header></app-header>
   <app-location-swipe (locationChange)="onLocationChange($event)" [locations]="locations"></app-location-swipe>
   <app-circle-chart [percentage]="40"></app-circle-chart>
@@ -12,4 +12,5 @@
       </ion-item>
     </div>
   </app-pull-tab>
-</div>
+</app-background>
+
