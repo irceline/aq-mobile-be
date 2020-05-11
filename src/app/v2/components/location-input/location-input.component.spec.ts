@@ -42,6 +42,14 @@ describe('LocationInputComponent', () => {
     component.searchText = 'Ant';
     component.filterItems();
     fixture.detectChanges();
+    expect(component.filteredItems.length).toEqual(10);
+    component.filteredItems.forEach(item => {
+      expect(item.label.toLowerCase()).toContain(component.searchText.toLowerCase());
+    });
+    // expect(component.filteredItems[0].label).toEqual('Antwerpen');
+    component.searchText = 'Antw';
+    component.filterItems();
+    fixture.detectChanges();
     expect(component.filteredItems.length).toEqual(1);
     expect(component.filteredItems[0].label).toEqual('Antwerpen');
   });
@@ -55,8 +63,10 @@ describe('LocationInputComponent', () => {
 
   it('should set location label, emit event and set focus', () => {
     spyOn(component.locationSelected, 'next');
-    component.chooseOption(component.filteredItems[0]);
+    component.searchText = 'Antw';
+    component.filterItems();
     fixture.detectChanges();
+    component.chooseOption(component.filteredItems[0]);
     expect(component.selectedItem).toBeDefined();
     expect(component.selectedItem.label).toEqual('Antwerpen');
     expect(component.searchText).toEqual('Antwerpen');
@@ -78,7 +88,7 @@ describe('LocationInputComponent', () => {
     expect(dropdownAfter).toBeDefined();
 
     const items = dropdownAfter.queryAll(By.css('ion-row'));
-    expect(items.length).toEqual(3);
+    expect(items.length).toEqual(10);
   });
 
   it('should get current location and emit proper data', () => {
