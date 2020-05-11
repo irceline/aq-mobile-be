@@ -8,6 +8,7 @@ import {
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LoadingController, IonInput } from '@ionic/angular';
 import { UserLocation } from '../../Interfaces';
+import locations from '../../../../assets/locations.json';
 
 @Component({
     selector: 'app-location-input',
@@ -22,25 +23,7 @@ export class LocationInputComponent implements OnInit {
     filteredItems: UserLocation[] = [];
     selectedItem: UserLocation | null = null;
 
-    // todo: Discuss with client -> is there a list of location that the user can search in,
-    // is this provided by a service, we will just provide dummy data for now
-    private _locations: UserLocation[] = [
-        {
-            id: 1,
-            label: 'Antwerpen',
-            type: 'user',
-        },
-        {
-            id: 2,
-            label: 'Brussels',
-            type: 'user',
-        },
-        {
-            id: 3,
-            label: 'Chimay',
-            type: 'user',
-        },
-    ];
+    private _locations: UserLocation[] = locations;
 
     @Output() locationSelected = new EventEmitter<UserLocation>();
 
@@ -99,18 +82,18 @@ export class LocationInputComponent implements OnInit {
 
     // filter logic
     filterItems() {
-        this.filteredItems = this._locations;
+        this.filteredItems = this._locations.slice(0, 10);
 
         // filter items by label
         if (this.searchText.trim() !== '') {
             this.visible = true;
-            this.filteredItems = this.filteredItems.filter((item) => {
+            this.filteredItems = this._locations.filter((item) => {
                 return (
                     item.label
                         .toLowerCase()
                         .indexOf(this.searchText.toLowerCase()) > -1
                 );
-            });
+            }).slice(0, 10);
         }
 
         // if we remove the option, remove select and emit null

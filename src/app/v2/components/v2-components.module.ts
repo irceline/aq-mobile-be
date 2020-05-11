@@ -15,6 +15,7 @@ import { LocationInputComponent } from './location-input/location-input.componen
 import { UserNotificationSettingsComponent } from './user-notification-settings/user-notification-settings.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { LocationSortableComponent } from './location-sortable/location-sortable.component';
+import { BackgroundComponent } from './background/background.component';
 
 const COMPONENTS = [
     CircleChartComponent,
@@ -28,6 +29,7 @@ const COMPONENTS = [
     LocationInputComponent,
     UserNotificationSettingsComponent,
     LocationSortableComponent,
+    BackgroundComponent,
 ];
 
 @NgModule({

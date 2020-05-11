@@ -1,4 +1,4 @@
-<div class="background">
+<app-background [belAqi]="belAqi">
   <app-header></app-header>
   <app-location-swipe (locationChange)="onLocationChange($event)" [locations]="locations"></app-location-swipe>
   <app-circle-chart [belaqi]="10" [title]="'Heel goed'" [text]="'Gemiddelde score op jouw locatie is goed.'">
@@ -13,4 +13,5 @@
       </ion-item>
     </div>
   </app-pull-tab>
-</div>
+</app-background>
+

@@ -32,6 +32,8 @@ export class MainScreenComponent implements OnInit {
     locations = ['New York', 'Los Angeles', 'San Francisco', 'Washington'];
     drawerOptions: any;
 
+    protected belAqi = 3;
+
     constructor() {}
 
     ngOnInit() {
