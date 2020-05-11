@@ -1,9 +1,12 @@
-// todo:::
-// we need css transitions when background changes
-// using the gradient background transitions
-// this might be tricky...
-
-.main-background {
+:host {
   height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: top center;
+  transition: background-image 0.5s ease-in-out;
+  transition-delay: 0.4s;
 }
-
