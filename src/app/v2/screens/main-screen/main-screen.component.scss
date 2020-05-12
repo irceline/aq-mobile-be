@@ -1,6 +1,6 @@
 @import '../../theme/variables';
 
-.background {
-  height: 100%;
-  background: url('/assets/images/backgrounds/back.png') no-repeat top center / cover;
+ion-content {
+  --background: transparent;
+  --padding-top: 65px;
 }

@@ -7,7 +7,7 @@
     </ion-buttons>
 
     <ion-buttons slot="end">
-      <ion-button (click)="openNotification()" class="ion-no-padding">
+      <ion-button (click)="openRating()" class="ion-no-padding">
         <img src="/assets/images/icons/megafoon.svg" alt="">
       </ion-button>
     </ion-buttons>
@@ -17,7 +17,7 @@
 <div class="menu" @menuAnimation *ngIf="visible" [ngStyle]="{'background-color': backgroundColor}">
   <div class="menu--section">
     <h4>Menu</h4>
-    <ion-item detail lines="none" class="menu--link">
+    <ion-item detail lines="none" class="menu--link" (click)="openLongTermInfo()">
       <ion-label>
         Blootstelling op lange termijn
       </ion-label>
@@ -25,7 +25,7 @@
   </div>
 
   <div class="menu--section">
-    <ion-item detail lines="none" class="menu--link">
+    <ion-item detail lines="none" class="menu--link" (click)="openAppInfo()">
       <ion-label>
         Informatie over Belair
         <span>(hoe werkt de applicatie)</span>

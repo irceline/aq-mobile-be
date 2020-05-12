@@ -31,7 +31,6 @@
   </svg>
 
   <div class="circle-chart--text">
-    {{ textState }}
     <h1 [@itemAnim]="textState" (@itemAnim.done)="animationDone($event)">{{ title }}</h1>
     <p>{{ text }}</p>
   </div>

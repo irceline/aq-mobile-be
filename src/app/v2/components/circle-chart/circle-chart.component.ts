@@ -48,7 +48,6 @@ export class CircleChartComponent implements OnInit, OnChanges {
     // belaqi score index
     @Input() belAqi = 0;
 
-
     // todo: use BelAqi service to get the text for this index score
     // getLabelForIndex()
     // big circle text
@@ -77,37 +76,30 @@ export class CircleChartComponent implements OnInit, OnChanges {
     }
 
     private _initialize(value: number) {
-        const m = value * this.defaultRange;
-        this.circleOffset = this.defaultOffset - m;
+        const range = value * this.defaultRange;
+        this.circleOffset = this.defaultOffset - range;
         this.dashoffset = value * this.defaultRange;
     }
 
     private _changeTitle(value: number) {
-        console.log(value);
         switch (value) {
             case 1:
                 this.title = 'Goed';
-                this.textState = false;
                 break;
             case 2:
                 this.title = 'Test2';
-                this.textState = false;
                 break;
             case 3:
                 this.title = 'Test3';
-                this.textState = false;
                 break;
             case 4:
                 this.title = 'Test4';
-                this.textState = false;
                 break;
             case 5:
                 this.title = 'Test5';
-                this.textState = false;
                 break;
             case 6:
                 this.title = 'Test6';
-                this.textState = false;
                 break;
             default:
                 break;

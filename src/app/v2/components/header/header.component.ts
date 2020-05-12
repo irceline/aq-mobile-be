@@ -6,7 +6,7 @@ import {
     Input,
 } from '@angular/core';
 import { trigger, style, transition, animate } from '@angular/animations';
-import { IonReorderGroup } from '@ionic/angular';
+import { IonReorderGroup, NavController } from '@ionic/angular';
 import {
     UserNotificationSetting,
     NotificationType,
@@ -93,7 +93,7 @@ export class HeaderComponent implements OnInit {
         }
     }
 
-    constructor() {}
+    constructor(private navCtrl: NavController) {}
 
     ngOnInit() {}
 
@@ -107,5 +107,19 @@ export class HeaderComponent implements OnInit {
 
     removeLocation(event) {
         console.log(event);
+    }
+
+    openAppInfo() {
+        this.navCtrl.navigateForward(['main/app-info']);
+        this.visible = false;
+    }
+
+    openLongTermInfo() {
+        this.navCtrl.navigateForward(['main/longterm-info']);
+        this.visible = false;
+    }
+
+    openRating() {
+        this.navCtrl.navigateForward(['main/rating']);
     }
 }
