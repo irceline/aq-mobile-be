@@ -32,7 +32,7 @@ export class MainScreenComponent implements OnInit {
     locations = ['New York', 'Los Angeles', 'San Francisco', 'Washington'];
     drawerOptions: any;
 
-    protected belAqi = 3;
+    protected belAqi = 10;
 
     constructor() {}
 
@@ -48,5 +48,6 @@ export class MainScreenComponent implements OnInit {
 
     onLocationChange(location: string) {
         console.log(location);
+        this.belAqi = Math.floor(Math.random() * 10) + 1;
     }
 }

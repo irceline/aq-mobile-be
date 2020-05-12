@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    ViewChild,
+    HostBinding,
+    Input,
+} from '@angular/core';
 import { trigger, style, transition, animate } from '@angular/animations';
 import { IonReorderGroup } from '@ionic/angular';
 import {
@@ -22,6 +28,13 @@ import {
 })
 export class HeaderComponent implements OnInit {
     @ViewChild(IonReorderGroup) reorderGroup: IonReorderGroup;
+
+    public backgroundColor;
+
+    @Input()
+    set belAqi(index: number) {
+        this.backgroundColor = HeaderComponent.getBackgroundForIndex(index);
+    }
 
     visible = false;
     language = 'e';
@@ -53,6 +66,33 @@ export class HeaderComponent implements OnInit {
         { name: 'Herent', id: 'def', order: 2 },
     ];
 
+    private static getBackgroundForIndex(index: number) {
+        switch (index) {
+            case 1:
+                return '#822e45';
+            case 2:
+                return '#c72955';
+            case 3:
+                return '#ff4a2e';
+            case 4:
+                return '#ff812e';
+            case 5:
+                return '#ff9609';
+            case 6:
+                return '#f0d426';
+            case 7:
+                return '#2df16b';
+            case 8:
+                return '#30e14d';
+            case 9:
+                return '#29cdf7';
+            case 10:
+                return '#238cff';
+            default:
+                return null;
+        }
+    }
+
     constructor() {}
 
     ngOnInit() {}
@@ -65,7 +105,7 @@ export class HeaderComponent implements OnInit {
         console.log(event);
     }
 
-    deleteLocation(event) {
+    removeLocation(event) {
         console.log(event);
     }
 }

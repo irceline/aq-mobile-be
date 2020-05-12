@@ -14,7 +14,7 @@
   </ion-toolbar>
 </ion-header>
 
-<div class="menu" @menuAnimation *ngIf="visible">
+<div class="menu" @menuAnimation *ngIf="visible" [ngStyle]="{'background-color': backgroundColor}">
   <div class="menu--section">
     <h4>Menu</h4>
     <ion-item detail lines="none" class="menu--link">
