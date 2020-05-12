@@ -47,6 +47,10 @@ import {
 export class CircleChartComponent implements OnInit, OnChanges {
     // belaqi score index
     @Input() belAqi = 0;
+
+
+    // todo: use BelAqi service to get the text for this index score
+    // getLabelForIndex()
     // big circle text
     @Input() title: string;
     // small circle text

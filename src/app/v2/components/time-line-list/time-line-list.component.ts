@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TimeLineItemInput } from '../time-line-item/time-line-item.component';
+import {BelAqiIndexResult} from '../../services/bel-aqi.service';
 
 @Component({
     selector: 'app-time-line-list',
@@ -7,12 +7,14 @@ import { TimeLineItemInput } from '../time-line-item/time-line-item.component';
     styleUrls: ['./time-line-list.component.scss'],
 })
 export class TimeLineListComponent implements OnInit {
-    @Input() items: TimeLineItemInput[];
+    @Input() items: BelAqiIndexResult[];
 
     timelineOptions = {
         slidesPerView: 3,
         spaceBetween: 5,
     };
+
+    // todo:: add events when changing timeline, report back to mainscreen
 
     constructor() {}
 

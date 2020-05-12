@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ColorsService } from './colors.service';
+import { BelAQIService } from './bel-aqi.service';
 
-describe('ColorServiceService', () => {
+describe('BelAQIService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: ColorsService = TestBed.get(ColorsService);
+    const service: BelAQIService = TestBed.get(BelAQIService);
     expect(service).toBeTruthy();
   });
 });

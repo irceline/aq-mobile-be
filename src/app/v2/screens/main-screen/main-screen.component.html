@@ -1,9 +1,9 @@
-<app-background [belAqi]="belAqi">
+<app-background [belAqi]="currentActiveIndex.indexScore">
   <app-header [belAqi]="belAqi"></app-header>
   <app-location-swipe (locationChange)="onLocationChange($event)" [locations]="locations"></app-location-swipe>
-  <app-circle-chart [belAqi]="belAqi" [title]="'Heel goed'" [text]="'Gemiddelde score op jouw locatie is goed.'">
+  <app-circle-chart [belAqi]="currentActiveIndex.indexScore" [title]="'Heel goed'" [text]="'Gemiddelde score op jouw locatie is goed.'">
   </app-circle-chart>
-  <app-time-line-list [items]="locationItems"></app-time-line-list>
+  <app-time-line-list [items]="belAqiForCurrentLocation"></app-time-line-list>
   <app-pull-tab [options]="drawerOptions">
     <div class="details">
       <h5>Bekijk in detail</h5>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { TimeLineItemInput } from '../../components/time-line-item/time-line-item.component';
-import { BelAirColor } from '../../Interfaces';
+import {UserLocation} from '../../Interfaces';
+import {UserLocationsService} from '../../services/user-locations.service';
+import {BelAqiIndexResult, BelAQIService} from '../../services/bel-aqi.service';
+import moment from 'moment';
 
 @Component({
     selector: 'app-main-screen',
@@ -8,33 +10,37 @@ import { BelAirColor } from '../../Interfaces';
     styleUrls: ['./main-screen.component.scss'],
 })
 export class MainScreenComponent implements OnInit {
-    locationItems: TimeLineItemInput[] = [
-        {
-            color: BelAirColor.Blue,
-            day: 'gisteren',
-            status: 'Goed',
-            selected: false,
-        },
-        {
-            color: BelAirColor.Green,
-            day: 'vandaag',
-            status: 'Slecht',
-            selected: true,
-        },
-        {
-            color: BelAirColor.Red,
-            day: 'morgen',
-            status: 'Heel Goed',
-            selected: false,
-        },
-    ];
 
-    locations = ['New York', 'Los Angeles', 'San Francisco', 'Washington'];
+    // location data
+    locations: UserLocation[] = [];
+    currentLocation: UserLocation;
+
+    // belAqi data
+    private belAqiScores: BelAqiIndexResult[] = [];
+    belAqiForCurrentLocation: BelAqiIndexResult[] = [];
+    currentActiveIndex: BelAqiIndexResult;
+
+
     drawerOptions: any;
 
     protected belAqi = 10;
 
-    constructor() {}
+    constructor( private userlocations: UserLocationsService, private belAqiService: BelAQIService ) {
+
+        this.locations = UserLocationsService.getUserSavedLocations();
+        this.belAqiScores = this.belAqiService.getIndexScores( this.locations, 5, 5 );
+
+        // activate first location by default
+        this.updateCurrentLocation( this.locations[0] );
+    }
+
+    private updateCurrentLocation( location: UserLocation ) {
+        this.currentLocation = location;
+        this.belAqiForCurrentLocation = this.belAqiScores.filter( ( iR ) => iR.location.id === location.id );
+        this.currentActiveIndex = this.belAqiForCurrentLocation.find( iR => Math.abs(iR.date.diff( moment(), 'days' ))  === 0 );
+
+        console.log( this.currentActiveIndex );
+    }
 
     ngOnInit() {
         this.drawerOptions = {
@@ -46,8 +52,9 @@ export class MainScreenComponent implements OnInit {
         };
     }
 
-    onLocationChange(location: string) {
+    onLocationChange(location: UserLocation) {
         console.log(location);
         this.belAqi = Math.floor(Math.random() * 10) + 1;
+        this.updateCurrentLocation(location);
     }
 }

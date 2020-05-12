@@ -7,6 +7,7 @@ import {
     Input,
 } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
+import {UserLocation} from '../../Interfaces';
 
 @Component({
     selector: 'app-location-swipe',
@@ -15,8 +16,8 @@ import { IonSlides } from '@ionic/angular';
 })
 export class LocationSwipeComponent implements OnInit {
     @ViewChild(IonSlides) slides: IonSlides;
-    @Output() locationChange = new EventEmitter();
-    @Input() locations = [];
+    @Output() locationChange = new EventEmitter<UserLocation>();
+    @Input() locations: UserLocation[] = [];
 
     sliderOptions = {
         spaceBetween: 20,

@@ -1,7 +1,9 @@
 <div class="timeline--item">
-  <div [ngClass]="['timeline--item-header', data.color]"></div>
+  <!-- todo: fix color -->
+  <div [ngClass]="['timeline--item-header', getColor()]"></div>
   <div class="timeline--item-body">
-    <div class="timeline--item-status">{{ data.status }}</div>
-    <div [ngClass]="{ 'timeline--item-day': true, 'selected': data.selected}">{{ data.day }}</div>
+    <div class="timeline--item-status">{{ getLabel() }}</div>
+    <!-- todo: fix selected -->
+    <div [ngClass]="{ 'timeline--item-day': true}">{{ getDay() }}</div>
   </div>
 </div>

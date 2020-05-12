@@ -1,12 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { BelAirColor } from '../../Interfaces';
-
-export interface TimeLineItemInput {
-  color: BelAirColor;
-  status: string;
-  day: string;
-  selected: boolean;
-}
+import {BelAqiIndexResult, BelAQIService} from '../../services/bel-aqi.service';
 
 @Component({
   selector: 'app-time-line-item',
@@ -15,10 +8,23 @@ export interface TimeLineItemInput {
 })
 export class TimeLineItemComponent implements OnInit {
 
-  @Input() data: TimeLineItemInput;
+  @Input() data: BelAqiIndexResult;
 
-  constructor() { }
+  constructor( private belAqi: BelAQIService ) { }
 
   ngOnInit() {}
+
+  getColor() {
+    return this.belAqi.getLightColorForIndex( this.data.indexScore );
+  }
+
+  getDay() {
+    // todo: better formatting
+    return this.data.date.fromNow();
+  }
+
+  getLabel() {
+    return this.belAqi.getLabelForIndex( this.data.indexScore );
+  }
 
 }
