@@ -35,7 +35,11 @@ export class CircleChartComponent implements OnInit, OnChanges {
     defaultOffset = 910;
     defaultRange = 92;
 
-    constructor(private belaqiService: BelAQIService) {}
+    constructor(private belaqiService: BelAQIService) {
+        belaqiService.$activeIndex.subscribe( ( newIndex ) => {
+            this.belAqi = newIndex.indexScore;
+        });
+    }
 
     ngOnInit() {
         this._initialize(this.belAqi);
@@ -55,5 +59,6 @@ export class CircleChartComponent implements OnInit, OnChanges {
 
     private _changeTitle(value: number) {
         this.title = this.belaqiService.getLabelForIndex(value);
+        this.text = 'Gemiddelde score op jouw locatie is ' + this.title;
     }
 }
