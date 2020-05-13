@@ -26,7 +26,7 @@ export class MainScreenComponent implements OnInit {
 
     constructor( private userlocations: UserLocationsService, private belAqiService: BelAQIService ) {
 
-        this.locations = UserLocationsService.getUserSavedLocations();
+        this.locations = userlocations.getUserSavedLocations();
         this.belAqiScores = this.belAqiService.getIndexScores( this.locations, 5, 5 );
 
         // activate first location by default
