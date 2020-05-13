@@ -22,8 +22,8 @@ export class RatingScreenComponent implements OnInit {
 
     protected belAqi = 10;
 
-    constructor(private userLocationsService: UserLocationsService, private belAqiService: BelAQIService) {
-        this.locations = userLocationsService.getUserSavedLocations();
+    constructor(private belAqiService: BelAQIService) {
+        this.locations = UserLocationsService.getUserSavedLocations();
         this.belAqiScores = this.belAqiService.getIndexScores(
             this.locations,
             5,

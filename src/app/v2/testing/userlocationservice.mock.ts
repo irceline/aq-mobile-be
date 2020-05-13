@@ -1,6 +1,6 @@
 
 export class UserLocationServiceMock {
-    getUserSavedLocations() {
+    static getUserSavedLocations() {
         return [
             {label: 'Laeken', type: 'user', id: 0},
             {label: 'Koekelberg', type: 'user', id: 1},
