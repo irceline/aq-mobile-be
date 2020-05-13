@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import { BelAqiIndexResult } from '../../services/bel-aqi.service';
+import {IonSlides} from '@ionic/angular';
 
 @Component({
     selector: 'app-time-line-list',
@@ -7,7 +8,9 @@ import { BelAqiIndexResult } from '../../services/bel-aqi.service';
     styleUrls: ['./time-line-list.component.scss'],
 })
 export class TimeLineListComponent implements OnInit {
+    @ViewChild(IonSlides) slides: IonSlides;
     @Input() items: BelAqiIndexResult[];
+    @Output() dayChange = new EventEmitter<BelAqiIndexResult>();
 
     timelineOptions = {
         slidesPerView: 3,
@@ -20,4 +23,11 @@ export class TimeLineListComponent implements OnInit {
     constructor() {}
 
     ngOnInit() {}
+
+    // Emit index result change
+    async slideChange() {
+        const index = await this.slides.getActiveIndex();
+        const newIndexResult = this.items[index];
+        this.dayChange.next(newIndexResult);
+    }
 }
