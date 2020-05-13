@@ -22,8 +22,6 @@ export class MainScreenComponent implements OnInit {
 
     drawerOptions: any;
 
-    protected belAqi = 10;
-
     constructor( private userlocations: UserLocationsService, private belAqiService: BelAQIService ) {
 
         this.locations = UserLocationsService.getUserSavedLocations();
@@ -53,8 +51,11 @@ export class MainScreenComponent implements OnInit {
     }
 
     onLocationChange(location: UserLocation) {
-        console.log(location);
-        this.belAqi = Math.floor(Math.random() * 10) + 1;
         this.updateCurrentLocation(location);
+    }
+
+    onDayChange(index: BelAqiIndexResult) {
+        this.currentActiveIndex = index;
+        this.belAqiService.activeIndex = this.currentActiveIndex;
     }
 }
