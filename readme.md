@@ -85,8 +85,12 @@ On any OS:
 - run image: 
     docker run --name belair -p 8100:8100 -it belair-2.0 ash
 - run:
-    ionic serve
+    ionic serve --external
 - app should be available on localhost:8100
+
+- run APK:
+    ionic cordova platform add android
+    ionic cordova build android android
 
 On CentOS:
 ```sh

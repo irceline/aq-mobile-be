@@ -8,7 +8,7 @@ COPY . /app
 ENV GLIB_PACKAGE_BASE_URL https://github.com/sgerrand/alpine-pkg-glibc/releases/download
 ENV GLIB_VERSION 2.25-r0
 
-ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk-amd64
+ENV JAVA_HOME /usr/lib/jvm/java-1.8-openjdk
 
 ENV GRADLE_HOME /usr/local/gradle
 ENV GRADLE_VERSION 4.4
@@ -22,8 +22,7 @@ ENV IONIC_VERSION 4.12.0
 ENV PATH ${GRADLE_HOME}/bin:${JAVA_HOME}/bin:${ANDROID_HOME}/tools:$ANDROID_HOME/platform-tools:$PATH
 
 # INSTALL JAVA
-RUN apk update && \
-  apk add curl openjdk8-jre openjdk8
+RUN apk update && apk add curl openjdk8-jre openjdk8
 RUN export JAVA_HOME
 
 # INSTALL IONIC AND CORDOVA
@@ -64,8 +63,3 @@ RUN mkdir $ANDROID_HOME/licenses && \
 #RUN rm -rf /tmp/* /var/cache/apk/*
 
 RUN npm i -f
-
-COPY . /app
-
-EXPOSE 8100 35729
-#CMD ["ionic", "serve", "--external"]
