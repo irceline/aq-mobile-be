@@ -1,26 +1,15 @@
-pipeline {
-  agent any
+node {
 
-   stages {
+  def dockerImage
 
-
-   stage('Check config') {
-      steps {
-         sh 'export ANDROID_HOME = /etc/android'
-         sh 'echo $ANDROID_HOME'
-      }
-   }
-
-   stage('Build') {
-      steps {
-         sh 'npm i -f'
-      }
-   }
-
-   stage('Android Build') {
-   steps {
-      sh 'ionic cordova build android --release'
-   }
+  stage('Build image') {
+    dockerImage = docker.build("mbursac/belair-2.0")
   }
- }
+
+  stage('Push image') {
+    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+      dockerImage.push()
+    }
+  }
+
 }
