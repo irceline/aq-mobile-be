@@ -1,8 +1,7 @@
 <ion-content>
   <app-location-swipe (locationChange)="onLocationChange($event)" [locations]="locations"></app-location-swipe>
-  <app-circle-chart [belAqi]="currentActiveIndex.indexScore" [text]="'Gemiddelde score op jouw locatie is goed.'">
-  </app-circle-chart>
-  <app-time-line-list [items]="belAqiForCurrentLocation"></app-time-line-list>
+  <app-circle-chart></app-circle-chart>
+  <app-time-line-list (dayChange)="onDayChange($event)" [items]="belAqiForCurrentLocation"></app-time-line-list>
 </ion-content>
 
 <app-pull-tab [options]="drawerOptions">

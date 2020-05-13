@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RatingScreenComponent } from './rating-screen.component';
 
-describe('RatingScreenComponent', () => {
+xdescribe('RatingScreenComponent', () => {
   let component: RatingScreenComponent;
   let fixture: ComponentFixture<RatingScreenComponent>;
 

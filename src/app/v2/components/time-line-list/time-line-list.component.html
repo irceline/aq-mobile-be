@@ -1,4 +1,4 @@
-<ion-slides [options]="timelineOptions">
+<ion-slides [options]="timelineOptions" (ionSlideDidChange)="slideChange()">
   <ion-slide *ngFor="let item of items">
     <app-time-line-item [data]="item"></app-time-line-item>
   </ion-slide>

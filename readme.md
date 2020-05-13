@@ -74,6 +74,20 @@ cd ~/Library/Android/sdk/tools/bin/
 
 ## Build prerequisites
 
+On any OS:
+- install docker
+- clone the repo:
+    git clone https://{username}@bitbucket.org/nebulaeenterprises/belair-2.0.git
+- go to root of the project:
+    cd belair-2.0
+- build image using Dockerfile:
+    docker build -t belair-2.0 .
+- run image: 
+    docker run --name belair -p 8100:8100 -it belair-2.0 ash
+- run:
+    ionic serve
+- app should be available on localhost:8100
+
 On CentOS:
 ```sh
 yum update -y

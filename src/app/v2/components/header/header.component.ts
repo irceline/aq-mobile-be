@@ -17,6 +17,7 @@ import { BelAQIService } from '../../services/bel-aqi.service';
     selector: 'app-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss'],
+    // todo: move animation to screen transitions
     animations: [
         trigger('menuAnimation', [
             transition(':enter', [
@@ -46,69 +47,24 @@ export class HeaderComponent implements OnInit {
         this.backgroundColor = this.getBackgroundForIndex(index);
     }
 
-    visible = false;
-    language = 'e';
-    userSettings: UserNotificationSetting[] = [
-        {
-            notificationType: NotificationType.highConcentration,
-            enabled: true,
-        },
-        {
-            notificationType: NotificationType.transport,
-            enabled: true,
-        },
-        {
-            notificationType: NotificationType.activity,
-            enabled: false,
-        },
-        {
-            notificationType: NotificationType.allergies,
-            enabled: true,
-        },
-        {
-            notificationType: NotificationType.exercise,
-            enabled: false,
-        },
-    ];
-
-    locationList: any[] = [
-        { name: 'Koksijde', id: 'abc', order: 1 },
-        { name: 'Herent', id: 'def', order: 2 },
-    ];
-
     constructor(
         private navCtrl: NavController,
-        private belaqi: BelAQIService
-    ) {}
+        private belAQIService: BelAQIService
+    ) {
+        belAQIService.$activeIndex.subscribe( ( newIndex ) => {
+            this.belAqi = newIndex.indexScore;
+        });
+    }
 
     ngOnInit() {}
 
     getBackgroundForIndex(index: number) {
-        this.belaqi.getLightColorForIndex(index);
+        this.belAQIService.getLightColorForIndex(index);
     }
 
     openMenu() {
-        this.visible = !this.visible;
-    }
-
-    updateLocation(event) {
-        console.log(event);
-    }
-
-    removeLocation(event) {
-        console.log(event);
-    }
-
-    openAppInfo() {
-        this.navCtrl.navigateForward(['main/app-info'], { animated: false });
-        this.visible = false;
-    }
-
-    openLongTermInfo() {
-        this.navCtrl.navigateForward(['main/longterm-info'], {
-            animated: false,
-        });
-        this.visible = false;
+        // todo: fix animation for this
+        this.navCtrl.navigateForward(['main/menu'], { animated: true });
     }
 
     openRating() {
