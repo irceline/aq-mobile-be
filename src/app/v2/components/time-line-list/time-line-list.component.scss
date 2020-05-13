@@ -1,3 +1,9 @@
 :host {
     display: block;
+
+    .swiper-slide-active {
+        ::ng-deep .timeline--item-day {
+            font-weight: bold;
+        }
+    }
 }
