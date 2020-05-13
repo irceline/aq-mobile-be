@@ -30,10 +30,7 @@ export class MainScreenComponent implements OnInit {
 
     protected belAqi = 10;
 
-    constructor(
-        private userlocations: UserLocationsService,
-        private belAqiService: BelAQIService
-    ) {
+    constructor(private belAqiService: BelAQIService) {
         this.locations = UserLocationsService.getUserSavedLocations();
         this.belAqiScores = this.belAqiService.getIndexScores(
             this.locations,
