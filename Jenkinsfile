@@ -1,22 +1,39 @@
 pipeline {
-   agent any
    environment {
-            HOME = '.'
+       registry = "mbursac/belair-2.0"
+       registryCredential = 'docker-hub-credentials'
+       app = ''
    }
+
+   agent any
+
    stages {
       stage('Build docker image') {
-      agent {
-              dockerfile {
-                 filename 'Dockerfile'
-                 args "-t belair-2.0"
+       steps {
+            script {
+                app = docker.build registry + ":$BUILD_NUMBER"
+
+                app.withRun('--name belair -p 8100:8100 -it registry + ":$BUILD_NUMBER" ash') { c ->
+                    sh 'ionic cordova platform add android'
+                    sh 'ionic cordova build android android'
+                }
+            }
+       }
+      }
+      stage('Push image') {
+        steps {
+            script {
+              docker.withRegistry('', registryCredential) {
+                  app.push()
               }
-             }
-     steps {
-          sh 'docker run --name belair -p 8100:8100 -it belair-2.0 ash'
-          sh 'ionic cordova platform add android'
-          sh 'ionic cordova build android android'
-     }
-    }
+            }
+        }
+      }
+      stage('Remove Unused docker image') {
+        steps{
+          sh "docker rmi $registry:$BUILD_NUMBER"
+        }
+      }
    }
 }
 
