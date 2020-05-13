@@ -71,8 +71,8 @@
     "zone.js": "~0.8.29"
   },
   "devDependencies": {
-    "@angular-devkit/architect": "^0.13.10",
-    "@angular-devkit/build-angular": "^0.13.9",
+    "@angular-devkit/architect": "0.13.10",
+    "@angular-devkit/build-angular": "0.13.10",
     "@angular-devkit/core": "^7.3.10",
     "@angular-devkit/schematics": "^7.3.10",
     "@angular/cli": "^7.3.10",
@@ -81,7 +81,7 @@
     "@angular/language-service": "^7.2.16",
     "@biesbjerg/ngx-translate-extract": "^2.3.4",
     "@ionic/angular-toolkit": "~1.4.1",
-    "@ionic/lab": "1.0.24",
+    "@ionic/lab": "^3.1.6",
     "@types/crypto-js": "^3.1.45",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.8",
