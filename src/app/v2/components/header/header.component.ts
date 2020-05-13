@@ -6,106 +6,68 @@ import {
     Input,
 } from '@angular/core';
 import { trigger, style, transition, animate } from '@angular/animations';
-import { IonReorderGroup } from '@ionic/angular';
+import { IonReorderGroup, NavController } from '@ionic/angular';
 import {
     UserNotificationSetting,
     NotificationType,
 } from '../user-notification-settings/user-notification-settings.component';
+import { BelAQIService } from '../../services/bel-aqi.service';
 
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss'],
+    // todo: move animation to screen transitions
     animations: [
         trigger('menuAnimation', [
             transition(':enter', [
-                style({ opacity: 0 }),
-                animate('100ms', style({ opacity: 1 })),
+                style({ opacity: 0, transform: 'translateX(-100%)' }),
+                animate(
+                    '300ms',
+                    style({ opacity: 1, transform: 'translateX(0)' })
+                ),
             ]),
-            transition(':leave', [animate('100ms', style({ opacity: 0 }))]),
+            transition(':leave', [
+                animate(
+                    '300ms',
+                    style({ opacity: 0, transform: 'translateX(-100%)' })
+                ),
+            ]),
         ]),
     ],
 })
 export class HeaderComponent implements OnInit {
     @ViewChild(IonReorderGroup) reorderGroup: IonReorderGroup;
 
+    @HostBinding('style.background-color')
     public backgroundColor;
 
     @Input()
     set belAqi(index: number) {
-        this.backgroundColor = HeaderComponent.getBackgroundForIndex(index);
+        this.backgroundColor = this.getBackgroundForIndex(index);
     }
 
-    visible = false;
-    language = 'e';
-    userSettings: UserNotificationSetting[] = [
-        {
-            notificationType: NotificationType.highConcentration,
-            enabled: true,
-        },
-        {
-            notificationType: NotificationType.transport,
-            enabled: true,
-        },
-        {
-            notificationType: NotificationType.activity,
-            enabled: false,
-        },
-        {
-            notificationType: NotificationType.allergies,
-            enabled: true,
-        },
-        {
-            notificationType: NotificationType.exercise,
-            enabled: false,
-        },
-    ];
-
-    locationList: any[] = [
-        { name: 'Koksijde', id: 'abc', order: 1 },
-        { name: 'Herent', id: 'def', order: 2 },
-    ];
-
-    private static getBackgroundForIndex(index: number) {
-        switch (index) {
-            case 1:
-                return '#822e45';
-            case 2:
-                return '#c72955';
-            case 3:
-                return '#ff4a2e';
-            case 4:
-                return '#ff812e';
-            case 5:
-                return '#ff9609';
-            case 6:
-                return '#f0d426';
-            case 7:
-                return '#2df16b';
-            case 8:
-                return '#30e14d';
-            case 9:
-                return '#29cdf7';
-            case 10:
-                return '#238cff';
-            default:
-                return null;
-        }
+    constructor(
+        private navCtrl: NavController,
+        private belAQIService: BelAQIService
+    ) {
+        belAQIService.$activeIndex.subscribe( ( newIndex ) => {
+            this.belAqi = newIndex.indexScore;
+        });
     }
-
-    constructor() {}
 
     ngOnInit() {}
 
+    getBackgroundForIndex(index: number) {
+        this.belAQIService.getLightColorForIndex(index);
+    }
+
     openMenu() {
-        this.visible = !this.visible;
+        // todo: fix animation for this
+        this.navCtrl.navigateForward(['main/menu'], { animated: true });
     }
 
-    updateLocation(event) {
-        console.log(event);
-    }
-
-    removeLocation(event) {
-        console.log(event);
+    openRating() {
+        this.navCtrl.navigateForward(['main/rating'], { animated: false });
     }
 }

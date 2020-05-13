@@ -20,7 +20,6 @@ export class MainScreenComponent implements OnInit {
     belAqiForCurrentLocation: BelAqiIndexResult[] = [];
     currentActiveIndex: BelAqiIndexResult;
 
-
     drawerOptions: any;
 
     protected belAqi = 10;
@@ -39,7 +38,8 @@ export class MainScreenComponent implements OnInit {
         this.belAqiForCurrentLocation = this.belAqiScores.filter( ( iR ) => iR.location.id === location.id );
         this.currentActiveIndex = this.belAqiForCurrentLocation.find( iR => Math.abs(iR.date.diff( moment(), 'days' ))  === 0 );
 
-        console.log( this.currentActiveIndex );
+        // update active index on service which is used throughout the other screen
+        this.belAqiService.activeIndex = this.currentActiveIndex;
     }
 
     ngOnInit() {

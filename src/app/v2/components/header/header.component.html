@@ -7,56 +7,9 @@
     </ion-buttons>
 
     <ion-buttons slot="end">
-      <ion-button (click)="openNotification()" class="ion-no-padding">
+      <ion-button (click)="openRating()" class="ion-no-padding">
         <img src="/assets/images/icons/megafoon.svg" alt="">
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
-<div class="menu" @menuAnimation *ngIf="visible" [ngStyle]="{'background-color': backgroundColor}">
-  <div class="menu--section">
-    <h4>Menu</h4>
-    <ion-item detail lines="none" class="menu--link">
-      <ion-label>
-        Blootstelling op lange termijn
-      </ion-label>
-    </ion-item>
-  </div>
-
-  <div class="menu--section">
-    <ion-item detail lines="none" class="menu--link">
-      <ion-label>
-        Informatie over Belair
-        <span>(hoe werkt de applicatie)</span>
-      </ion-label>
-    </ion-item>
-
-    <!-- Language dropdown -->
-    <div class="menu--language">
-      <h5>Taal</h5>
-      <app-language-dropdown [language]="language"></app-language-dropdown>
-    </div>
-  </div>
-
-  <div class="menu--section locations">
-    <h5>Locaties</h5>
-
-    <!-- Reorder locations -->
-    <app-location-sortable [locations]="locationList" (locationRemoved)="removeLocation($event)"
-      (locationUpdated)="updateLocation($event)"></app-location-sortable>
-
-    <app-location-input></app-location-input>
-  </div>
-
-  <div class="menu--section notifications">
-    <h5>Meldingen</h5>
-
-    <app-user-notification-settings [userSettings]="userSettings"></app-user-notification-settings>
-  </div>
-
-  <div class="menu--section logo">
-    <h3>Belair</h3>
-    <p>versie 1.0.0</p>
-  </div>
-</div>
