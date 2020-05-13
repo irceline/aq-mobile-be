@@ -1,22 +1,4 @@
-<ion-header class="ion-no-border">
-  <ion-toolbar color="transparent" class="ion-no-padding">
-    <ion-buttons slot="start">
-      <ion-button (click)="openMenu()" class="ion-no-padding">
-        <img src="/assets/images/icons/menu.svg" alt="">
-      </ion-button>
-    </ion-buttons>
-
-    <ion-buttons slot="end">
-      <ion-button (click)="openRating()" class="ion-no-padding">
-        <img src="/assets/images/icons/megafoon.svg" alt="">
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
-<!-- this should be a different menu page.. -->
-
-<div class="menu" @menuAnimation *ngIf="visible" [ngStyle]="{'background-color': backgroundColor}">
+<div class="menu" [ngStyle]="{'background-color': '#822e45'}">
   <div class="menu--section">
     <h4>Menu</h4>
     <ion-item detail lines="none" class="menu--link" (click)="openLongTermInfo()">
@@ -46,7 +28,7 @@
 
     <!-- Reorder locations -->
     <app-location-sortable [locations]="locationList" (locationRemoved)="removeLocation($event)"
-      (locationUpdated)="updateLocation($event)"></app-location-sortable>
+                           (locationUpdated)="updateLocation($event)"></app-location-sortable>
 
     <app-location-input></app-location-input>
   </div>

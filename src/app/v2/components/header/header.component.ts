@@ -38,6 +38,7 @@ export class HeaderComponent implements OnInit {
 
     visible = false;
     language = 'e';
+
     userSettings: UserNotificationSetting[] = [
         {
             notificationType: NotificationType.highConcentration,
