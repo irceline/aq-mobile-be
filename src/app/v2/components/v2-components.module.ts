@@ -16,6 +16,8 @@ import { UserNotificationSettingsComponent } from './user-notification-settings/
 import { TranslateModule } from '@ngx-translate/core';
 import { LocationSortableComponent } from './location-sortable/location-sortable.component';
 import { BackgroundComponent } from './background/background.component';
+import { InformationItemComponent } from './information-item/information-item.component';
+import { HorizontalCardComponent } from './horizontal-card/horizontal-card.component';
 
 const COMPONENTS = [
     CircleChartComponent,
@@ -30,6 +32,8 @@ const COMPONENTS = [
     UserNotificationSettingsComponent,
     LocationSortableComponent,
     BackgroundComponent,
+    InformationItemComponent,
+    HorizontalCardComponent,
 ];
 
 @NgModule({

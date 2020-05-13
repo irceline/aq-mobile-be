@@ -1,68 +1,73 @@
 <ion-content>
-  <ion-button (click)="onClick()">
-    <ion-icon slot="start" name="add"></ion-icon>
-    Hoe werkt dit?
-  </ion-button>
+  <div class="app-info">
+    <ion-button (click)="goBack()">
+      <ion-icon slot="start" src="/assets/images/icons/chevron-back.svg"></ion-icon>
+      Hoe werkt dit?
+    </ion-button>
 
-  <p>We beoordelen de impact van de algemene luchtkwaliteit op korte termijn op basis van een luchtkwaliteitsindex.</p>
+    <p>We beoordelen de impact van de <strong>algemene luchtkwaliteit</strong> op korte termijn op basis van een
+      luchtkwaliteitsindex.
+    </p>
 
-  <p>Die geeft aan de meetwaarden van verschillende verontreinigende stoffen één score (Heel slecht).
-    De index baseert zich voor deze score op data van meetstations in heel België.</p>
+    <p>Die geeft aan de meetwaarden van verschillende verontreinigende stoffen één score (Heel slecht).
+      De index baseert zich voor deze score op data van meetstations in heel België.</p>
 
-  <app-circle-chart [belAqi]="2" [title]="'Heel goed'" [text]="'Gemiddelde score op jouw locatie is goed.'">
-  </app-circle-chart>
+    <app-circle-chart [belAqi]="2" [title]="'Heel goed'" [text]="'Gemiddelde score op jouw locatie is goed.'">
+    </app-circle-chart>
 
-  <p>De stoffen die we momenteel in rekening brengen, zijn:</p>
+    <p>De stoffen die we momenteel in rekening brengen, zijn:</p>
 
-  <ul>
-    <li>
-      <h5>Ozon (O3)</h5>
-      <p>
-        <span></span>
-        78 µg/m3
-      </p>
-    </li>
+    <ul>
+      <li>
+        <h5>Ozon (O3)</h5>
+        <p>
+          <span></span>
+          78 µg/m3
+        </p>
+      </li>
 
-    <li>
-      <h5>Ozon (O3)</h5>
-      <p>
-        <span></span>
-        78 µg/m3
-      </p>
-    </li>
+      <li>
+        <h5>Ozon (O3)</h5>
+        <p>
+          <span></span>
+          78 µg/m3
+        </p>
+      </li>
 
-    <li>
-      <h5>Ozon (O3)</h5>
-      <p>
-        <span></span>
-        78 µg/m3
-      </p>
-    </li>
+      <li>
+        <h5>Ozon (O3)</h5>
+        <p>
+          <span></span>
+          78 µg/m3
+        </p>
+      </li>
 
-    <li>
-      <h5>Ozon (O3)</h5>
-      <p>
-        <span></span>
-        78 µg/m3
-      </p>
-    </li>
-  </ul>
+      <li>
+        <h5>Ozon (O3)</h5>
+        <p>
+          <span></span>
+          78 µg/m3
+        </p>
+      </li>
+    </ul>
 
-  <p>Door op deze data modellen toe te passen, berekenen we of de impact van de luchtkwaliteit op lange termijn beter of
-    slechter wordt.</p>
+    <p>Door op deze data modellen toe te passen, berekenen we of de impact van de luchtkwaliteit op lange termijn beter
+      of
+      slechter wordt.</p>
 
-  <p>Je kan deze inschattingen bekijken in het menu via ‘blootstelling op lange termijn’.</p>
+    <p>Je kan deze inschattingen bekijken in het menu via ‘blootstelling op lange termijn’.</p>
 
-  <ion-item button>
-    <ion-label>Hoe worden deze waarden berekend? </ion-label>
-  </ion-item>
+    <ion-item detail>
+      <ion-label>Hoe worden deze waarden berekend? </ion-label>
+    </ion-item>
 
-  <p>Als de metingen de waarschuwings- waarde overschrijden, sturen we je een melding. Je kan je meldingen beheren via
-    het menu.</p>
+    <p>Als de metingen de waarschuwings- waarde overschrijden, sturen we je een melding. Je kan je meldingen beheren via
+      het menu.</p>
 
-  <img src="" alt="">
+    <img src="" alt="">
 
-  <ion-item detail lines="none">
-    <ion-label>Meer weten over de Vlaamse Milieumaatschappij?</ion-label>
-  </ion-item>
+    <ion-item detail>
+      <ion-label>Meer weten over de Vlaamse Milieumaatschappij?</ion-label>
+    </ion-item>
+  </div>
 </ion-content>

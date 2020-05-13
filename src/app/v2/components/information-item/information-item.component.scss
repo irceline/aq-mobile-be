@@ -1,0 +1,36 @@
+ion-item {
+    display: flex;
+    flex-direction: column;
+    overflow: initial;
+    --padding-start: 10px;
+    --padding-end: 0;
+
+    &:before {
+        width: 100%;
+        height: 4px;
+        background-color: red;
+        content: '';
+        position: absolute;
+        right: calc(100% + 15px);
+        top: 18px;
+    }
+
+    h3 {
+        font-size: 15px;
+        font-weight: bold;
+        color: #747474;
+    }
+
+    span {
+        opacity: 0.91;
+        font-size: 15px;
+        font-weight: bold;
+        color: #29cdf7;
+    }
+
+    p {
+        color: #747474;
+        opacity: 0.63;
+        font-size: 13px;
+    }
+}

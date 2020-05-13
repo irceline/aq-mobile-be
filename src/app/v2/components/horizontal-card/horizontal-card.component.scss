@@ -1,0 +1,32 @@
+:host {
+    box-shadow: 0 1px 2px 0 rgba(164, 164, 164, 0.5);
+    display: block;
+    padding: 20px;
+    border-radius: 5px;
+    flex: 1;
+
+    .card {
+        color: #747474;
+
+        .header {
+            display: flex;
+            align-items: center;
+
+            ion-icon {
+                font-size: 30px;
+            }
+        }
+
+        h5 {
+            font-weight: 600;
+            margin: 0;
+            font-size: 14px;
+        }
+
+        p {
+            font-size: 16px;
+            margin-bottom: 0;
+            text-align: left;
+        }
+    }
+}

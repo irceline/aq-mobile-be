@@ -1,4 +1,39 @@
 ion-content {
     --background: transparent;
     --padding-top: 65px;
+
+    .longterm-info {
+        color: white;
+        // padding: 25px 50px;
+
+        ion-button {
+            --background: transparent;
+            --background-activated: rgba(255, 255, 255, 0.1);
+            display: block;
+            margin: auto;
+            font-size: 24px;
+            color: white;
+
+            ion-icon {
+                font-size: 14px;
+                margin-right: 20px;
+            }
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 18px;
+        }
+
+        strong {
+            font-weight: 600;
+        }
+
+        .card {
+            background-color: white;
+            border-top-right-radius: 10px;
+            border-top-left-radius: 10px;
+            padding: 30px;
+        }
+    }
 }

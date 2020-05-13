@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {UserLocation} from '../../Interfaces';
-import {UserLocationsService} from '../../services/user-locations.service';
-import {BelAqiIndexResult, BelAQIService} from '../../services/bel-aqi.service';
+import { UserLocation } from '../../Interfaces';
+import { UserLocationsService } from '../../services/user-locations.service';
+import {
+    BelAqiIndexResult,
+    BelAQIService,
+} from '../../services/bel-aqi.service';
 import moment from 'moment';
 
 @Component({
@@ -10,7 +13,6 @@ import moment from 'moment';
     styleUrls: ['./main-screen.component.scss'],
 })
 export class MainScreenComponent implements OnInit {
-
     // location data
     locations: UserLocation[] = [];
     currentLocation: UserLocation;
@@ -20,26 +22,39 @@ export class MainScreenComponent implements OnInit {
     belAqiForCurrentLocation: BelAqiIndexResult[] = [];
     currentActiveIndex: BelAqiIndexResult;
 
-
     drawerOptions: any;
+
+    slideOptions = {
+        spaceBetween: 20,
+    };
 
     protected belAqi = 10;
 
-    constructor( private userlocations: UserLocationsService, private belAqiService: BelAQIService ) {
-
+    constructor(
+        private userlocations: UserLocationsService,
+        private belAqiService: BelAQIService
+    ) {
         this.locations = UserLocationsService.getUserSavedLocations();
-        this.belAqiScores = this.belAqiService.getIndexScores( this.locations, 5, 5 );
+        this.belAqiScores = this.belAqiService.getIndexScores(
+            this.locations,
+            5,
+            5
+        );
 
         // activate first location by default
-        this.updateCurrentLocation( this.locations[0] );
+        this.updateCurrentLocation(this.locations[0]);
     }
 
-    private updateCurrentLocation( location: UserLocation ) {
+    private updateCurrentLocation(location: UserLocation) {
         this.currentLocation = location;
-        this.belAqiForCurrentLocation = this.belAqiScores.filter( ( iR ) => iR.location.id === location.id );
-        this.currentActiveIndex = this.belAqiForCurrentLocation.find( iR => Math.abs(iR.date.diff( moment(), 'days' ))  === 0 );
+        this.belAqiForCurrentLocation = this.belAqiScores.filter(
+            (iR) => iR.location.id === location.id
+        );
+        this.currentActiveIndex = this.belAqiForCurrentLocation.find(
+            (iR) => Math.abs(iR.date.diff(moment(), 'days')) === 0
+        );
 
-        console.log( this.currentActiveIndex );
+        console.log(this.currentActiveIndex);
     }
 
     ngOnInit() {

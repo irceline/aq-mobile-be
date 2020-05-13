@@ -1,4 +1,65 @@
 ion-content {
     --background: transparent;
     --padding-top: 65px;
+
+    .app-info {
+        color: white;
+        padding: 25px 50px;
+
+        ion-button {
+            --background: transparent;
+            --background-activated: rgba(255, 255, 255, 0.1);
+            display: block;
+            margin: auto;
+            font-size: 24px;
+            color: white;
+
+            ion-icon {
+                font-size: 14px;
+                margin-right: 20px;
+            }
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 18px;
+        }
+
+        strong {
+            font-weight: 600;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+            display: flex;
+            flex-wrap: wrap;
+
+            li {
+                flex-basis: 50%;
+
+                h5 {
+                    font-size: 15px;
+                    font-weight: bold;
+                    margin: 0;
+                }
+
+                p {
+                    font-size: 13px;
+                    font-weight: 500;
+                    margin: 0;
+                }
+            }
+        }
+
+        ion-item {
+            color: white;
+            --padding-start: 0;
+            --border-color: white;
+            font-size: 16px;
+            line-height: 1.38;
+
+        }
+    }
 }

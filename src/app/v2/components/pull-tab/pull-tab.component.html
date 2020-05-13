@@ -1,5 +1,7 @@
-<ion-content>
-  <div class="content">
-    <ng-content></ng-content>
-  </div>
+<button #trigger type="button" class="trigger">
+  <span></span>
+</button>
+
+<ion-content [ngStyle]="{'pointer-events': isEnabled ? 'auto' : 'none'}">
+  <ng-content></ng-content>
 </ion-content>

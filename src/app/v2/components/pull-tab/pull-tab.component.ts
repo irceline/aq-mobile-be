@@ -5,6 +5,7 @@ import {
     ElementRef,
     Renderer,
     AfterViewInit,
+    ViewChild,
 } from '@angular/core';
 import { DomController, Platform } from '@ionic/angular';
 
@@ -16,11 +17,14 @@ import { DomController, Platform } from '@ionic/angular';
 export class PullTabComponent implements AfterViewInit {
     @Input('options') options: any;
 
+    @ViewChild('trigger') trigger: ElementRef;
+
     handleHeight = 50;
     gap = 100;
     bounceBack = true;
     thresholdTop = 200;
     thresholdBottom = 200;
+    isEnabled = false;
 
     constructor(
         public element: ElementRef,
@@ -55,13 +59,14 @@ export class PullTabComponent implements AfterViewInit {
             'top',
             this.platform.height() - this.handleHeight + 'px'
         );
-        // this.renderer.setElementStyle(
-        //     this.element.nativeElement,
-        //     'padding-top',
-        //     this.handleHeight + 'px'
-        // );
 
-        const hammer = new window['Hammer'](this.element.nativeElement);
+        this.renderer.setElementStyle(
+            this.element.nativeElement,
+            'height',
+            this.platform.height() - this.gap + 'px'
+        );
+
+        const hammer = new window['Hammer'](this.trigger.nativeElement);
         hammer
             .get('pan')
             .set({ direction: window['Hammer'].DIRECTION_VERTICAL });
@@ -103,6 +108,7 @@ export class PullTabComponent implements AfterViewInit {
                     this.gap + 'px' // height from top when its opened
                 );
             });
+            this.isEnabled = true;
         } else if (
             (this.platform.height() - newTop < this.thresholdBottom &&
                 ev.additionalEvent === 'pandown') ||
@@ -120,6 +126,7 @@ export class PullTabComponent implements AfterViewInit {
                     this.platform.height() - this.handleHeight + 'px'
                 );
             });
+            this.isEnabled = false;
         } else {
             this.renderer.setElementStyle(
                 this.element.nativeElement,

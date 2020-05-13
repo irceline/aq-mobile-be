@@ -22,13 +22,12 @@ import { BelAQIService } from '../../services/bel-aqi.service';
     styleUrls: ['./circle-chart.component.scss'],
 })
 export class CircleChartComponent implements OnInit, OnChanges {
-    title: string;
-
     // belaqi score index
     @Input() belAqi = 0;
     // small circle text
     @Input() text: string;
 
+    title: string;
     circumference = 1000;
     dashoffset = 0;
     circleOffset = 910;

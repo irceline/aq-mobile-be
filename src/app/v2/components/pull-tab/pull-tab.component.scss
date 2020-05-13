@@ -4,28 +4,37 @@
     position: absolute;
     z-index: 10 !important;
 
+    .trigger {
+        height: 25px;
+        width: 100%;
+        position: absolute;
+        top: -25px;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: none;
+
+        span {
+            display: inline-block;
+            width: 44px;
+            height: 7px;
+            background-color: rgba(white, 0.5);
+            border-radius: 10px;
+        }
+    }
+
     ion-content {
         background-color: white;
         border-top-right-radius: 30px;
         border-top-left-radius: 30px;
         box-shadow: 0 2px 50px 0 rgba(2, 136, 171, 0.4);
         position: relative;
-
-        &::before {
-            position: absolute;
-            content: '';
-            width: 44px;
-            height: 7px;
-            background-color: rgba(white, 0.5);
-            border-radius: 10px;
-            top: -15px;
-            left: 0;
-            right: 0;
-            margin: auto;
-        }
-
-        .content {
-            padding: 30px;
-        }
+        --padding-start: 30px;
+        --padding-top: 45px;
+        --padding-end: 30px;
+        --padding-bottom: 45px;
+        pointer-events: none;
+        overflow: hidden;
     }
 }
