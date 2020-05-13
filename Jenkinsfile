@@ -1,15 +1,23 @@
-node {
-
-  def dockerImage
-
-  stage('Build image') {
-    dockerImage = docker.build("mbursac/belair-2.0")
-  }
-
-  stage('Push image') {
-    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-      dockerImage.push()
+pipeline {
+   agent any
+   environment {
+            HOME = '.'
+   }
+   stages {
+      stage('Build docker image') {
+      agent {
+              dockerfile {
+                 filename 'Dockerfile'
+                 args "-t belair-2.0"
+              }
+             }
+     steps {
+          sh 'docker run --name belair -p 8100:8100 -it belair-2.0 ash'
+          sh 'ionic cordova platform add android'
+          sh 'ionic cordova build android android'
+     }
     }
-  }
-
+   }
 }
+
+

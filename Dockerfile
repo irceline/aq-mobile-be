@@ -67,8 +67,8 @@ RUN npm i -f
 
 COPY . /app
 
-RUN ionic cordova platform add android
-RUN ionic cordova build android android
+#RUN ionic cordova platform add android
+#RUN ionic cordova build android android
 
-EXPOSE 8100 35729
-CMD ["ionic", "serve", "--external"]
+#EXPOSE 8100 35729
+#CMD ["ionic", "serve", "--external"]
