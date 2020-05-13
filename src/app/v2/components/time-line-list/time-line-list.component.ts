@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {BelAqiIndexResult} from '../../services/bel-aqi.service';
+import { BelAqiIndexResult } from '../../services/bel-aqi.service';
 
 @Component({
     selector: 'app-time-line-list',
@@ -12,6 +12,7 @@ export class TimeLineListComponent implements OnInit {
     timelineOptions = {
         slidesPerView: 3,
         spaceBetween: 5,
+        centeredSlides: true,
     };
 
     // todo:: add events when changing timeline, report back to mainscreen
