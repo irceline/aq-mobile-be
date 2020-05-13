@@ -13,4 +13,5 @@ export interface UserLocation {
     date?: Date;
     longitude?: number;
     latitude?: number;
+    postalCode?: string;
 }

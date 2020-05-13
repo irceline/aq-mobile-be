@@ -23,7 +23,11 @@ export class LocationInputComponent implements OnInit {
     filteredItems: UserLocation[] = [];
     selectedItem: UserLocation | null = null;
 
-    private _locations: UserLocation[] = locations;
+    // @ts-ignore
+    private _locations: UserLocation[] = locations.map( l => ({
+        ...l,
+        type: 'user'
+    }));
 
     @Output() locationSelected = new EventEmitter<UserLocation>();
 
