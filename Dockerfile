@@ -24,7 +24,7 @@ ENV PATH ${GRADLE_HOME}/bin:${JAVA_HOME}/bin:${ANDROID_HOME}/tools:$ANDROID_HOME
 # INSTALL JAVA
 RUN apk update && \
   apk add curl openjdk8-jre openjdk8
-
+RUN export JAVA_HOME
 
 # INSTALL IONIC AND CORDOVA
 RUN npm install -g cordova @ionic/cli
