@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostBinding, Input, OnInit} from '@angular/core';
 import {NotificationType, UserNotificationSetting} from '../../components/user-notification-settings/user-notification-settings.component';
 import {NavController} from '@ionic/angular';
+import {BelAQIService} from '../../services/bel-aqi.service';
 
 @Component({
   selector: 'app-menu-screen',
@@ -9,7 +10,15 @@ import {NavController} from '@ionic/angular';
 })
 export class MenuScreenComponent implements OnInit {
 
-  // get this from language settings
+  @HostBinding('style.background-color')
+  public backgroundColor;
+
+  @Input()
+  set belAqi(index: number) {
+    this.backgroundColor = this.belAQIService.getLightColorForIndex(index);
+  }
+
+  // todo: user settings service get this from language settings
   language = 'e';
 
   userSettings: UserNotificationSetting[] = [
@@ -40,7 +49,11 @@ export class MenuScreenComponent implements OnInit {
     { name: 'Herent', id: 'def', order: 2 },
   ];
 
-  constructor(private navCtrl: NavController) {}
+  constructor(private navCtrl: NavController, private belAQIService: BelAQIService) {
+    belAQIService.$activeIndex.subscribe( ( newIndex ) => {
+      this.belAqi = newIndex.indexScore;
+    });
+  }
 
   ngOnInit() {}
 

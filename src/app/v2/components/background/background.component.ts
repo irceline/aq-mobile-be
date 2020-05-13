@@ -11,6 +11,7 @@ export class BackgroundComponent implements OnInit {
     @HostBinding('style.background-image')
     public backgroundImage;
 
+    // deprecated input.. to remove
     @Input()
     set belAqi(index: number) {
         this.backgroundImage = this._sanitizer.bypassSecurityTrustStyle(
