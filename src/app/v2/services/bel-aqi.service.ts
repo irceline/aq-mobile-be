@@ -3,6 +3,7 @@ import {UserLocation} from '../Interfaces';
 import moment from 'moment';
 import {TranslateService} from '@ngx-translate/core';
 import {Moment} from 'moment';
+import {BehaviorSubject} from 'rxjs';
 
 
 export interface BelAqiIndexResult {
@@ -16,8 +17,17 @@ export interface BelAqiIndexResult {
 })
 export class BelAQIService {
 
+  // default active index
+  // Brussels
+  public $activeIndex = new BehaviorSubject<BelAqiIndexResult>({
+    location: {label: 'Brussel', postalCode: '1000', latitude: 50.8503396, longitude: 4.3517103, id: 2711, type: 'user'},
+    date: moment(),
+    indexScore: Math.ceil(Math.random() * 10)
+  });
+
   constructor(private translate: TranslateService) { }
 
+  // dummy function to get random index data
   getIndexScores( locations: UserLocation[], pastDays: number, nextDays: number ): BelAqiIndexResult[] {
     const indices = [];
 
@@ -32,7 +42,10 @@ export class BelAQIService {
     });
 
     return indices;
+  }
 
+  public set activeIndex( index: BelAqiIndexResult ) {
+    this.$activeIndex.next(index);
   }
 
   // https://app.zeplin.io/project/5ea9b038b472cbbc682ced04/screen/5eb8f28f40d46577a6abe316
