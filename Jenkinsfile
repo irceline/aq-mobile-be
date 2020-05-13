@@ -11,9 +11,9 @@ pipeline {
       stage('Build docker image') {
        steps {
             script {
-                app = docker.build registry + ":$BUILD_NUMBER"
+                app = docker.build registry
 
-                app.withRun('--name belair -p 8100:8100 -it registry + ":$BUILD_NUMBER" ash') { c ->
+                app.withRun('--name belair -p 8100:8100 -it registry ash') { c ->
                     sh 'ionic cordova platform add android'
                     sh 'ionic cordova build android android'
                 }
@@ -31,7 +31,7 @@ pipeline {
       }
       stage('Remove Unused docker image') {
         steps{
-          sh "docker rmi $registry:$BUILD_NUMBER"
+          sh "docker rmi $registry"
         }
       }
    }
