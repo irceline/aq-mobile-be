@@ -35,7 +35,6 @@ export class OnboardingSliderComponent implements OnInit, OnChanges {
     async ngOnInit() {}
 
     ngOnChanges(changes: SimpleChanges): void {
-        console.log(changes);
         if (changes.disabled.currentValue) {
             this.slides.lockSwipes(true);
         } else {

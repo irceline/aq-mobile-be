@@ -67,7 +67,7 @@
                 <p>{{ 'v2.screens.onboarding.ask-notifications' | translate }}</p>
 
                 <h5>Meldingen</h5>
-                <app-user-notification-settings [userSettings]="userSettings"
+                <app-user-notification-settings [userSettings]="userNotificationSettings"
                     (settingChanged)="updateUserNotificationSettings($event)" (getFocus)="getFocus($event)"
                     (loseFocus)="loseFocus($event)">
                 </app-user-notification-settings>

@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LayoutScreenComponent } from './layout-screen.component';
-import {UserLocationsService} from '../../services/user-locations.service';
+import {UserSettingsService} from '../../services/user-settings.service';
 import {UserLocationServiceMock} from '../../testing/userlocationservice.mock';
 
 xdescribe('LayoutScreenComponent', () => {
@@ -14,7 +14,7 @@ xdescribe('LayoutScreenComponent', () => {
       declarations: [ LayoutScreenComponent ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [
-        {provide: UserLocationsService, useClass: UserLocationServiceMock}
+        {provide: UserSettingsService, useClass: UserLocationServiceMock}
       ]
     })
     .compileComponents();

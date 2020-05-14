@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserLocation } from 'src/app/services/user-location-list/user-location-list.service';
-import { UserLocationsService } from '../../services/user-locations.service';
+import { UserSettingsService } from '../../services/user-settings.service';
 import {
     BelAqiIndexResult,
     BelAQIService,
@@ -23,7 +23,7 @@ export class RatingScreenComponent implements OnInit {
     protected belAqi = 10;
 
     constructor(
-        private userLocationsService: UserLocationsService,
+        private userLocationsService: UserSettingsService,
         private belAqiService: BelAQIService
     ) {
         this.locations = userLocationsService.getUserSavedLocations();

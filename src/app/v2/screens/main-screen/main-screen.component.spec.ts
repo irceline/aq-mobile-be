@@ -5,7 +5,7 @@ import { MainScreenComponent } from './main-screen.component';
 import {TranslateTestingModule} from '../../testing/TranslateTestingModule';
 import {UserLocation} from '../../Interfaces';
 import {UserLocationServiceMock} from '../../testing/userlocationservice.mock';
-import {UserLocationsService} from '../../services/user-locations.service';
+import {UserSettingsService} from '../../services/user-settings.service';
 import {BelAQIService} from '../../services/bel-aqi.service';
 
 describe('MainScreenComponent', () => {
@@ -25,7 +25,7 @@ describe('MainScreenComponent', () => {
       declarations: [ MainScreenComponent ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [
-        {provide: UserLocationsService, useClass: UserLocationServiceMock}
+        {provide: UserSettingsService, useClass: UserLocationServiceMock}
       ],
       imports: [TranslateTestingModule]
     })
