@@ -3,7 +3,7 @@ import {
     BelAqiIndexResult,
     BelAQIService,
 } from '../../services/bel-aqi.service';
-import { UserLocationsService } from '../../services/user-locations.service';
+import { UserSettingsService } from '../../services/user-settings.service';
 import { UserLocation } from 'src/app/services/user-location-list/user-location-list.service';
 import moment from 'moment';
 
@@ -25,9 +25,10 @@ export class LayoutScreenComponent implements OnInit {
     currentActiveIndex: BelAqiIndexResult;
 
     constructor(
+        private userLocationsService: UserSettingsService,
         private belAqiService: BelAQIService
     ) {
-        this.locations = UserLocationsService.getUserSavedLocations();
+        this.locations = userLocationsService.getUserSavedLocations();
         this.belAqiScores = this.belAqiService.getIndexScores(
             this.locations,
             5,

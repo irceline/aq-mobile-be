@@ -6,6 +6,7 @@ import {
 import { UserLocation } from '../../Interfaces';
 import { TranslateService } from '@ngx-translate/core';
 import { NavController } from '@ionic/angular';
+import {UserSettingsService} from '../../services/user-settings.service';
 
 @Component({
     selector: 'app-intro-screen',
@@ -19,31 +20,11 @@ export class OnboardingScreenComponent implements OnInit {
     btnText = 'Ga verder';
     sliderDisabled = false;
 
-    // implementation task -> fetch user notification settings
-    userSettings: UserNotificationSetting[] = [
-        {
-            notificationType: NotificationType.highConcentration,
-            enabled: true,
-        },
-        {
-            notificationType: NotificationType.transport,
-            enabled: true,
-        },
-        {
-            notificationType: NotificationType.activity,
-            enabled: false,
-        },
-        {
-            notificationType: NotificationType.allergies,
-            enabled: true,
-        },
-        {
-            notificationType: NotificationType.exercise,
-            enabled: false,
-        },
-    ];
+    userNotificationSettings: UserNotificationSetting[] = [];
 
-    constructor(private navCtrl: NavController) {}
+    constructor(private navCtrl: NavController, private userSettingsService: UserSettingsService) {
+        this.userNotificationSettings = userSettingsService.getUserNotificationSettings();
+    }
 
     ngOnInit() {}
 
@@ -60,8 +41,7 @@ export class OnboardingScreenComponent implements OnInit {
     }
 
     updateUserNotificationSettings(updatedSetting: UserNotificationSetting) {
-        // implementation task
-        console.log('todo: implement update user notification settings');
+        this.userSettingsService.updateUserNotificationSettings( updatedSetting );
     }
 
     onboardingComplete() {

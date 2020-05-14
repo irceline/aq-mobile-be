@@ -20,6 +20,7 @@ import { InformationItemComponent } from './information-item/information-item.co
 import { HorizontalCardComponent } from './horizontal-card/horizontal-card.component';
 import { HorizontalCardsSliderComponent } from './horizontal-cards-slider/horizontal-cards-slider.component';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
+import { MenuScreenComponent } from './menu-screen/menu-screen.component';
 
 const COMPONENTS = [
     CircleChartComponent,
@@ -38,6 +39,7 @@ const COMPONENTS = [
     HorizontalCardComponent,
     HorizontalCardsSliderComponent,
     BarChartComponent,
+    MenuScreenComponent,
 ];
 
 @NgModule({

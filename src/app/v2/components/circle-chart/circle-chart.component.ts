@@ -21,7 +21,7 @@ import { BelAQIService } from '../../services/bel-aqi.service';
     templateUrl: './circle-chart.component.html',
     styleUrls: ['./circle-chart.component.scss'],
 })
-export class CircleChartComponent implements OnInit, OnChanges {
+export class CircleChartComponent implements OnInit {
     // belaqi score index
     @Input() belAqi = 0;
     // small circle text
@@ -37,15 +37,12 @@ export class CircleChartComponent implements OnInit, OnChanges {
     constructor(private belaqiService: BelAQIService) {
         belaqiService.$activeIndex.subscribe( ( newIndex ) => {
             this.belAqi = newIndex.indexScore;
+            this._initialize( this.belAqi );
         });
     }
 
     ngOnInit() {
         this._initialize(this.belAqi);
-    }
-
-    ngOnChanges(changes: SimpleChanges): void {
-        this._initialize(changes.belAqi.currentValue);
     }
 
     private _initialize(value: number) {

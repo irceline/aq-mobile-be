@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserLocation } from '../../Interfaces';
-import { UserLocationsService } from '../../services/user-locations.service';
+import { UserSettingsService } from '../../services/user-settings.service';
 import {
     BelAqiIndexResult,
     BelAQIService,
@@ -76,8 +76,11 @@ export class MainScreenComponent implements OnInit {
 
     protected belAqi = 10;
 
-    constructor(private belAqiService: BelAQIService) {
-        this.locations = UserLocationsService.getUserSavedLocations();
+    constructor(
+        private userLocationsService: UserSettingsService,
+        private belAqiService: BelAQIService
+    ) {
+        this.locations = userLocationsService.getUserSavedLocations();
         this.belAqiScores = this.belAqiService.getIndexScores(
             this.locations,
             5,
@@ -97,7 +100,7 @@ export class MainScreenComponent implements OnInit {
             (iR) => Math.abs(iR.date.diff(moment(), 'days')) === 0
         );
 
-        console.log(this.currentActiveIndex);
+        this.belAqiService.activeIndex = this.currentActiveIndex;
     }
 
     ngOnInit() {
@@ -116,7 +119,8 @@ export class MainScreenComponent implements OnInit {
         this.updateCurrentLocation(location);
     }
 
-    onDayChange(event) {
-        console.log(event);
+    onDayChange(index: BelAqiIndexResult) {
+        this.currentActiveIndex = index;
+        this.belAqiService.activeIndex = index;
     }
 }

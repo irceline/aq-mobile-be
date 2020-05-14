@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import set = Reflect.set;
 
 export interface UserNotificationSetting {
     notificationType: NotificationType;

@@ -5,6 +5,7 @@ import {TimeLineItemComponent} from './time-line-item.component';
 
 xdescribe('TimeLineItemComponent', () => {
   let component: TimeLineItemComponent;
+
   let fixture: ComponentFixture<TimeLineItemComponent>;
 
   beforeEach(async(() => {

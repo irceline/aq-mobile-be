@@ -2,7 +2,7 @@ import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import {
     NotificationType,
     UserNotificationSetting,
-} from '../../components/user-notification-settings/user-notification-settings.component';
+} from '../user-notification-settings/user-notification-settings.component';
 import { NavController } from '@ionic/angular';
 import { BelAQIService } from '../../services/bel-aqi.service';
 
