@@ -8,7 +8,7 @@ import { UserLocation } from '../Interfaces';
 export class UserLocationsService {
     constructor() {}
 
-    static getUserSavedLocations(): UserLocation[] {
+    getUserSavedLocations(): UserLocation[] {
         const startPoint = Math.floor(Math.random() * (locations.length - 5));
 
         // randomly return 5 locations before integration

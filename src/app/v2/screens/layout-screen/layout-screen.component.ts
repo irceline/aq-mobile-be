@@ -25,9 +25,10 @@ export class LayoutScreenComponent implements OnInit {
     currentActiveIndex: BelAqiIndexResult;
 
     constructor(
+        private userLocationsService: UserLocationsService,
         private belAqiService: BelAQIService
     ) {
-        this.locations = UserLocationsService.getUserSavedLocations();
+        this.locations = userLocationsService.getUserSavedLocations();
         this.belAqiScores = this.belAqiService.getIndexScores(
             this.locations,
             5,
