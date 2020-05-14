@@ -12,7 +12,6 @@ import { AppInfoScreenComponent } from './app-info-screen/app-info-screen.compon
 import { LayoutScreenComponent } from './layout-screen/layout-screen.component';
 import { LongtermInfoScreenComponent } from './longterm-info-screen/longterm-info-screen.component';
 import { MainScreenComponent } from './main-screen/main-screen.component';
-import { MenuScreenComponent } from './menu-screen/menu-screen.component';
 import { OnboardingScreenComponent } from './onboarding-screen/onboarding-screen.component';
 import { RatingScreenComponent } from './rating-screen/rating-screen.component';
 
@@ -21,7 +20,6 @@ const SCREENS = [
     LayoutScreenComponent,
     LongtermInfoScreenComponent,
     MainScreenComponent,
-    MenuScreenComponent,
     OnboardingScreenComponent,
     RatingScreenComponent,
 ];

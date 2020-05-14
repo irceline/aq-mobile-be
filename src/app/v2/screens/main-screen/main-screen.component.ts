@@ -51,7 +51,7 @@ export class MainScreenComponent implements OnInit {
             (iR) => Math.abs(iR.date.diff(moment(), 'days')) === 0
         );
 
-        console.log(this.currentActiveIndex);
+        this.belAqiService.activeIndex = this.currentActiveIndex;
     }
 
     ngOnInit() {
@@ -69,4 +69,10 @@ export class MainScreenComponent implements OnInit {
         this.belAqi = Math.floor(Math.random() * 10) + 1;
         this.updateCurrentLocation(location);
     }
+
+    onDayChange( index: BelAqiIndexResult ) {
+        this.currentActiveIndex = index;
+        this.belAqiService.activeIndex = index;
+    }
+
 }

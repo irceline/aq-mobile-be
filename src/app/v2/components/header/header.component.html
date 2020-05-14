@@ -13,3 +13,8 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+
+<div @menuAnimation *ngIf="menuVisible" [ngStyle]="{'background-color': backgroundColor}">
+  <app-menu-screen></app-menu-screen>
+</div>
+

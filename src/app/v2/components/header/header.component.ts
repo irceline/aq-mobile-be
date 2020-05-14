@@ -7,17 +7,13 @@ import {
 } from '@angular/core';
 import { trigger, style, transition, animate } from '@angular/animations';
 import { IonReorderGroup, NavController } from '@ionic/angular';
-import {
-    UserNotificationSetting,
-    NotificationType,
-} from '../user-notification-settings/user-notification-settings.component';
+
 import { BelAQIService } from '../../services/bel-aqi.service';
 
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss'],
-    // todo: move animation to screen transitions
     animations: [
         trigger('menuAnimation', [
             transition(':enter', [
@@ -47,6 +43,8 @@ export class HeaderComponent implements OnInit {
         this.backgroundColor = this.getBackgroundForIndex(index);
     }
 
+    menuVisible = false;
+
     constructor(
         private navCtrl: NavController,
         private belAQIService: BelAQIService
@@ -63,8 +61,7 @@ export class HeaderComponent implements OnInit {
     }
 
     openMenu() {
-        // todo: fix animation for this
-        this.navCtrl.navigateForward(['main/menu'], { animated: true });
+        this.menuVisible = true;
     }
 
     openRating() {
