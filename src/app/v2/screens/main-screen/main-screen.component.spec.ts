@@ -6,10 +6,12 @@ import {TranslateTestingModule} from '../../testing/TranslateTestingModule';
 import {UserLocation} from '../../Interfaces';
 import {UserLocationServiceMock} from '../../testing/userlocationservice.mock';
 import {UserLocationsService} from '../../services/user-locations.service';
+import {BelAQIService} from '../../services/bel-aqi.service';
 
-describe('MainScreenComponent', () => {
+fdescribe('MainScreenComponent', () => {
   let component: MainScreenComponent;
   let fixture: ComponentFixture<MainScreenComponent>;
+  let belAQIService;
 
   const initialLocations: UserLocation[] = [
       {label: 'Laeken', type: 'user', id: 0},
@@ -28,6 +30,8 @@ describe('MainScreenComponent', () => {
       imports: [TranslateTestingModule]
     })
     .compileComponents();
+    belAQIService = TestBed.get(BelAQIService);
+    spyOn(belAQIService.$activeIndex, 'next');
   }));
 
   beforeEach(() => {
@@ -57,5 +61,9 @@ describe('MainScreenComponent', () => {
       expect(belaqi.location.id).toEqual(initialLocations[2].id);
     });
     expect(component.currentActiveIndex).toEqual(component.belAqiForCurrentLocation[5]);
+  });
+
+  it('should trigger event on belAqi $activeIndex', () => {
+    expect(belAQIService.$activeIndex.next).toHaveBeenCalledWith(component.currentActiveIndex);
   });
 });
