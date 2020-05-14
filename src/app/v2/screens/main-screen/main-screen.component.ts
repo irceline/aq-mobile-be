@@ -22,11 +22,57 @@ export class MainScreenComponent implements OnInit {
     belAqiForCurrentLocation: BelAqiIndexResult[] = [];
     currentActiveIndex: BelAqiIndexResult;
 
-    drawerOptions: any;
+    // horizontal slider data
+    slidesData = [
+        {
+            icon: '/assets/images/icons/sport-kleur.svg',
+            title: 'Sporttip',
+            text:
+                '106 µg/m3 berekend op jouw locatie, gemiddeld is dit 78 µg/m3.',
+        },
+        {
+            icon: '/assets/images/icons/sport-kleur.svg',
+            title: 'Sporttip',
+            text:
+                '106 µg/m3 berekend op jouw locatie, gemiddeld is dit 78 µg/m3.',
+        },
+        {
+            icon: '/assets/images/icons/sport-kleur.svg',
+            title: 'Sporttip',
+            text:
+                '106 µg/m3 berekend op jouw locatie, gemiddeld is dit 78 µg/m3.',
+        },
+    ];
 
-    slideOptions = {
-        spaceBetween: 20,
-    };
+    // information data
+    informationData = [
+        {
+            unit: 'O3',
+            unitName: 'Ozon',
+            color: '#ff4a2e',
+            evaluation: 'Heel Slecht',
+            values:
+                '106 µg/m3 berekend op jouw locatie, gemiddeld is dit 78 µg/m3.',
+        },
+        {
+            unit: 'O3',
+            unitName: 'Ozon',
+            color: '#2df16b',
+            evaluation: 'Goed',
+            values:
+                '106 µg/m3 berekend op jouw locatie, gemiddeld is dit 78 µg/m3.',
+        },
+        {
+            unit: 'O3',
+            unitName: 'Ozon',
+            color: '#2df16b',
+            evaluation: 'Goed',
+            values:
+                '106 µg/m3 berekend op jouw locatie, gemiddeld is dit 78 µg/m3.',
+        },
+    ];
+
+    drawerOptions: any;
 
     protected belAqi = 10;
 
@@ -68,5 +114,9 @@ export class MainScreenComponent implements OnInit {
         console.log(location);
         this.belAqi = Math.floor(Math.random() * 10) + 1;
         this.updateCurrentLocation(location);
+    }
+
+    onDayChange(event) {
+        console.log(event);
     }
 }

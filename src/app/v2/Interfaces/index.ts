@@ -1,7 +1,7 @@
 export enum BelAirColor {
     Red = 'red',
     Green = 'green',
-    Blue = 'blue'
+    Blue = 'blue',
 }
 
 // found from user-location-list.service.ts
@@ -14,4 +14,14 @@ export interface UserLocation {
     longitude?: number;
     latitude?: number;
     postalCode?: string;
+}
+
+export interface IBarChartData {
+    data: IBarChartDataItem[];
+    labels: string[];
+}
+
+export interface IBarChartDataItem {
+    value: number;
+    background: string;
 }

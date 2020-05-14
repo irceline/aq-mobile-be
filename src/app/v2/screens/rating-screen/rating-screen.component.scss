@@ -40,6 +40,7 @@ ion-content {
                 font-size: 15px;
                 line-height: 1.4;
                 color: #747474;
+                margin-top: 0;
             }
 
             strong {
@@ -55,8 +56,14 @@ ion-content {
                 line-height: 1.47;
                 color: #747474;
 
+                ion-label {
+                    margin: 0;
+                }
+
                 ion-icon {
                     font-size: 40px;
+                    margin: 0;
+                    margin-right: 10px;
                 }
 
                 &:nth-child(2) {

@@ -45,7 +45,6 @@
     "@types/hammerjs": "^2.0.36",
     "browserslist": "^4.8.2",
     "caniuse-lite": "^1.0.30001015",
-    "chart.js": "2.8.0",
     "chartjs-plugin-annotation": "^0.5.7",
     "cordova-android": "7.1.4",
     "cordova-browser": "5.0.4",

@@ -8,16 +8,15 @@
   <div class="details">
     <h5>Bekijk in detail</h5>
 
-    <app-information-item *ngFor="let item of [0,1,2,3,4,5,6]"></app-information-item>
+    <app-information-item *ngFor="let information of informationData" [unit]="information.unit"
+      [unitName]="information.unitName" [color]="information.color" [evaluation]="information.evaluation"
+      [values]="information.values" [isButton]="true">
+    </app-information-item>
 
     <ion-item detail>
       <ion-label>Berekening van impact op lange termijn</ion-label>
     </ion-item>
   </div>
 
-  <ion-slides class="slider" pager="true" [options]="slideOptions">
-    <ion-slide *ngFor="let item of [0,1,2,3,4,5]">
-      <app-horizontal-card></app-horizontal-card>
-    </ion-slide>
-  </ion-slides>
+  <app-horizontal-cards-slider [data]="slidesData"></app-horizontal-cards-slider>
 </app-pull-tab>

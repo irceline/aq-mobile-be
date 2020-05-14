@@ -1,21 +1,21 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LongtermInfoScreenComponent } from './longterm-info-screen.component';
+import { BarChartComponent } from './bar-chart.component';
 
-xdescribe('LongtermInfoScreenComponent', () => {
-    let component: LongtermInfoScreenComponent;
-    let fixture: ComponentFixture<LongtermInfoScreenComponent>;
+xdescribe('BarChartComponent', () => {
+    let component: BarChartComponent;
+    let fixture: ComponentFixture<BarChartComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [LongtermInfoScreenComponent],
+            declarations: [BarChartComponent],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(LongtermInfoScreenComponent);
+        fixture = TestBed.createComponent(BarChartComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

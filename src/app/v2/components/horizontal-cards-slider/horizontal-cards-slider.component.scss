@@ -1,0 +1,31 @@
+.slider--wrapper {
+    background-color: rgba(#e9e9e9, 0.14);
+    padding: 35px 45px 70px;
+    border-top: solid 1px rgba(#e0e0e0, 0.7);
+
+    .slider {
+        --bullet-background: black;
+        --bullet-background-active: #999;
+        overflow: initial;
+        flex: 1;
+        margin: auto;
+    }
+
+    ::ng-deep .swiper-pagination {
+        bottom: -35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0.5;
+
+        &-bullet {
+            width: 6px;
+            height: 6px;
+
+            &-active {
+                width: 10px;
+                height: 10px;
+            }
+        }
+    }
+}

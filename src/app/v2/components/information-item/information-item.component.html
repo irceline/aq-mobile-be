@@ -1,11 +1,12 @@
-<ion-item button lines="none" class="ion-no-padding">
+<ion-item [button]="isButton" lines="none" class="ion-no-padding">
+  <span class="line" [ngStyle]="{'background-color': color}"></span>
   <ion-label class="ion-text-wrap">
     <ion-text>
-      <h3>Stikstofdioxide (NO2)</h3>
-      <span>Heeel Goed</span>
+      <h3 *ngIf="unitName && unit">{{unitName}} ({{unit}})</h3>
+      <span [ngStyle]="{'color': color}">{{ evaluation }}</span>
     </ion-text>
-    <ion-text>
-      <p>106 µg/m3 berekend op jouw locatie, gemiddeld is dit 78 µg/m3.</p>
+    <ion-text *ngIf="values">
+      <p>{{ values }}</p>
     </ion-text>
   </ion-label>
 </ion-item>

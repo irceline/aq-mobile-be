@@ -1,7 +1,7 @@
 <div class="card ion-no-padding">
   <div class="header">
-    <ion-icon slot="start" src="/assets/images/icons/vuur.svg"></ion-icon>
-    <h5>Sporttip</h5>
+    <ion-icon slot="start" [src]="icon"></ion-icon>
+    <h5>{{ title }}</h5>
   </div>
-  <p>106 µg/m3 berekend op jouw locatie, gemiddeld is dit 78 µg/m3.</p>
+  <p>{{ text }}</p>
 </div>

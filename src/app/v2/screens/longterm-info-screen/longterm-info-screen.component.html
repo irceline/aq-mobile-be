@@ -1,24 +1,38 @@
 <ion-content>
   <div class="longterm-info">
-    <ion-button (click)="onClick()">
+    <ion-button (click)="goBack()">
       <ion-icon slot="start" src="/assets/images/icons/chevron-back.svg"></ion-icon>
       Lange termijn
     </ion-button>
 
-    <p>De data is het resultaat van onze rekenmodellen op lange termijn..</p>
+    <p>De data is het resultaat van onze rekenmodellen op lange termijn.</p>
 
-    <ion-button (click)="onClick()">
-      Van waar kom deze info
-      <ion-icon slot="start" name="add"></ion-icon>
-    </ion-button>
+    <ion-item button (click)="onClick()">
+      <ion-label>
+        Van waar kom deze info
+      </ion-label>
+    </ion-item>
+  </div>
 
-    <div class="card">
+  <div class="card">
+    <div class="card--content">
       <h5>Lange termijn</h5>
-      <hr>
       <p>
-        Langdurige blootstelling aan luchtvervuilende stoffen kan chronische effecten uitlokken en voor een hoger risico
+        Langdurige blootstelling aan luchtvervuilende stoffen kan chronische effecten uitlokken en voor een hoger
+        risico
         op hart- en longziekten zorgen.
       </p>
     </div>
+
+    <ul>
+      <li *ngFor="let information of informationData">
+        <app-information-item [unit]="information.unit" [unitName]="information.unitName" [color]="information.color"
+          [evaluation]="information.evaluation" [values]="information.values">
+        </app-information-item>
+        <app-bar-chart [max]="information.chartData.max" [options]="information.chartData"
+          [euMax]="information.chartData.euMax" [worldMax]="information.chartData.worldMax"></app-bar-chart>
+      </li>
+    </ul>
+
   </div>
 </ion-content>

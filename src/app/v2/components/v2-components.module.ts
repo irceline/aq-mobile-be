@@ -18,6 +18,8 @@ import { LocationSortableComponent } from './location-sortable/location-sortable
 import { BackgroundComponent } from './background/background.component';
 import { InformationItemComponent } from './information-item/information-item.component';
 import { HorizontalCardComponent } from './horizontal-card/horizontal-card.component';
+import { HorizontalCardsSliderComponent } from './horizontal-cards-slider/horizontal-cards-slider.component';
+import { BarChartComponent } from './bar-chart/bar-chart.component';
 
 const COMPONENTS = [
     CircleChartComponent,
@@ -34,6 +36,8 @@ const COMPONENTS = [
     BackgroundComponent,
     InformationItemComponent,
     HorizontalCardComponent,
+    HorizontalCardsSliderComponent,
+    BarChartComponent,
 ];
 
 @NgModule({
