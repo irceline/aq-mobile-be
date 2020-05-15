@@ -67,5 +67,5 @@ RUN npm i -f
 RUN ionic cordova platform add android
 COPY build.gradle /app/platforms/android/build.gradle
 RUN ionic cordova build android android
-COPY /app/platforms/android/app/build/outputs/apk/debug/app-debug.apk /app/builds/app-debug.apk
+RUN cp /app/platforms/android/app/build/outputs/apk/debug/app-debug.apk /app/builds/app-debug.apk
 
