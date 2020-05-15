@@ -12,10 +12,8 @@ pipeline {
        steps {
             script {
                 app = docker.build registry
-
-                app.inside('--name belair --volume "$(pwd)/builds:/app/builds" -it registry') { c ->
-                    sh 'java -version'
-                    sh 'pwd'
+                app.inside('--name belair --volume "$(pwd):/output" -it registry') {
+                    cp /app/platforms/android/app/build/outputs/apk/debug/app-debug.apk /output
                 }
             }
        }
