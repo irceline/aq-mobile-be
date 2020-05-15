@@ -1,4 +1,6 @@
 import {NotificationType} from '../components/user-notification-settings/user-notification-settings.component';
+import moment from 'moment';
+import {BelAqiIndexResult} from '../services/bel-aqi.service';
 
 const defaultStore = {
     'belAir.userNotificationSettings': null,
@@ -49,5 +51,21 @@ export const localStorageMock = {
     },
     clear: () => {
         store = defaultStore;
+    },
+    getIndexScores: ( pastDays: number, nextDays: number ): BelAqiIndexResult[] => {
+        const indices = [];
+
+        const locations = JSON.parse(store['belAir.userLocations']);
+        locations.forEach( location => {
+            for ( let i = -1 * pastDays ; i <= nextDays ; i++ ) {
+                indices.push({
+                    location,
+                    date: moment().add(i, 'days'),
+                    indexScore: Math.ceil(Math.random() * 10)
+                });
+            }
+        });
+
+        return indices;
     }
 };
