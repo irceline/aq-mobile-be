@@ -12,9 +12,10 @@ pipeline {
        steps {
             script {
                 app = docker.build registry
-                app.inside('--name belair --volume "$(pwd):/output" -it registry') {
-                    cp /app/platforms/android/app/build/outputs/apk/debug/app-debug.apk /output
+                app.inside('--name belair $(pwd)/builds:/app/builds -it registry') {
+                    cp /app/platforms/android/app/build/outputs/apk/debug/app-debug.apk /app/builds/app-debug.apk
                 }
+                archiveArtifacts artifacts: '*.apk'
             }
        }
       }
