@@ -14,7 +14,7 @@ pipeline {
                 app = docker.build registry
 
                 app.withRun('--name belair -p 8100:8100 -it registry') { c ->
-                    sh 'java --version'
+                    sh 'java -version'
                 }
             }
        }
