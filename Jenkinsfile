@@ -13,7 +13,7 @@ pipeline {
             script {
                 app = docker.build registry
 
-                app.inside('--name belair --volume "$/jenkins/workspace/belair-2.0:/app/builds" -it registry') { c ->
+                app.inside('--name belair --volume "$(pwd)/builds:/app/builds" -it registry') { c ->
                     sh 'java -version'
                     sh 'pwd'
                 }
