@@ -3,7 +3,7 @@ FROM node:12-alpine
 WORKDIR /app
 COPY . /app
 
-VOLUME /app/builds
+VOLUME /app/platforms/android/app/build/outputs/apk/debug/
 
 #ENVIRONNEMENT
 ENV GLIB_PACKAGE_BASE_URL https://github.com/sgerrand/alpine-pkg-glibc/releases/download
@@ -66,6 +66,5 @@ RUN mkdir $ANDROID_HOME/licenses && \
 RUN npm i -f
 RUN ionic cordova platform add android
 COPY build.gradle /app/platforms/android/build.gradle
-RUN ionic cordova build android android
-RUN cp /app/platforms/android/app/build/outputs/apk/debug/app-debug.apk /app/builds/app-debug.apk
+# RUN ionic cordova build android android
 
