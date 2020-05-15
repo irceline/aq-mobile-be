@@ -3,8 +3,6 @@ FROM node:12-alpine
 WORKDIR /app
 COPY . /app
 
-VOLUME /app/builds
-
 #ENVIRONNEMENT
 ENV GLIB_PACKAGE_BASE_URL https://github.com/sgerrand/alpine-pkg-glibc/releases/download
 ENV GLIB_VERSION 2.25-r0
