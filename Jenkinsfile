@@ -13,12 +13,8 @@ pipeline {
             script {
                 app = docker.build registry
 
-                app.withRun('--name belair -p 8100:8100 -it registry ash') { c ->
-                    sh 'ionic cordova platform add android'
-                    sh 'ls'
-                    sh 'pwd'
-                    sh 'cp build.gradle /app/platforms/android/build.gradle'
-                    sh 'ionic cordova build android android'
+                app.withRun('--name belair -p 8100:8100 -it registry') { c ->
+                    sh 'java --version'
                 }
             }
        }
