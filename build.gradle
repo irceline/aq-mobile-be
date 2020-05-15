@@ -1,0 +1,34 @@
+buildscript {
+    repositories {
+        google()
+        jcenter()
+        maven { url ’https://maven.fabric.io/public' }
+    }
+    dependencies {
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.google.gms:google-services:4.1.0' // google-services dependency from cordova-plugin-firebase
+        classpath 'io.fabric.tools:gradle:1.25.4' // fabric dependency from cordova-plugin-firebase
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        maven { url ‘https://maven.fabric.io/public’ }
+        jcenter()
+    }
+    //This replaces project.properties w.r.t. build settings
+    project.ext {
+      defaultBuildToolsVersion="27.0.1" //String
+      defaultMinSdkVersion=19 //Integer - Minimum requirement is Android 4.4
+      defaultTargetSdkVersion=27 //Integer - We ALWAYS target the latest by default
+      defaultCompileSdkVersion=27 //Integer - We ALWAYS compile with the latest by default
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
