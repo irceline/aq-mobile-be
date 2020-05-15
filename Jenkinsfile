@@ -15,6 +15,7 @@ pipeline {
 
                 app.inside('--name belair --volume "$(pwd)/builds:/app/platforms/android/app/build/outputs/apk/debug/" -it registry') { c ->
                     sh 'java -version'
+                    sh 'pwd'
                 }
             }
        }
