@@ -4,34 +4,13 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {TranslateTestingModule} from '../../testing/TranslateTestingModule';
 import {NotificationType, UserNotificationSettingsComponent} from './user-notification-settings.component';
 import {By} from '@angular/platform-browser';
-
-const initialSettings = [
-  {
-    notificationType: NotificationType.exercise,
-    enabled: false
-  },
-  {
-    notificationType: NotificationType.allergies,
-    enabled: false
-  },
-  {
-    notificationType: NotificationType.activity,
-    enabled: false
-  },
-  {
-    notificationType: NotificationType.transport,
-    enabled: false
-  },
-  {
-    notificationType: NotificationType.highConcentration,
-    enabled: false
-  }
-];
+import { localStorageMock } from '../../testing/localStorage.mock';
 
 describe('NotificationListComponent', () => {
   let component: UserNotificationSettingsComponent;
   let fixture: ComponentFixture<UserNotificationSettingsComponent>;
 
+  const initialSettings = JSON.parse(localStorageMock.getItem('belAir.userNotificationSettings'));
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [UserNotificationSettingsComponent],
@@ -113,7 +92,7 @@ describe('NotificationListComponent', () => {
     const element = fixture.debugElement;
     const toggles = element.queryAll(By.css('ion-toggle'));
 
-    const exerciseToggle = toggles[0];
+    const exerciseToggle = toggles[4];
     expect(exerciseToggle.properties.checked).toEqual(true);
 
     const notificationActivity = component.userSettings.find(x => x.notificationType === NotificationType.activity);
