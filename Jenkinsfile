@@ -13,8 +13,8 @@ pipeline {
             script {
                 app = docker.build registry
 
-                app.withRun('--name belair -p 8100:8100 -it registry') { c ->
-                    sh 'java --version'
+                app.inside('--name belair --volume "$(pwd)/builds:/app/platforms/android/app/build/outputs/apk/debug/" -it registry') { c ->
+                    sh 'java -version'
                 }
             }
        }
