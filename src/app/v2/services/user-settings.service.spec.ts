@@ -1,18 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 import { localStorageMock } from '../testing/localStorage.mock';
 import { UserSettingsService } from './user-settings.service';
+import { specHelper } from '../testing/spec-helper';
 
 describe('UserLocationsService', () => {
   let service: UserSettingsService;
   beforeEach(() => {
-    spyOn(localStorage, 'getItem')
-        .and.callFake(localStorageMock.getItem);
-    spyOn(localStorage, 'setItem')
-        .and.callFake(localStorageMock.setItem);
-    spyOn(localStorage, 'removeItem')
-        .and.callFake(localStorageMock.removeItem);
-    spyOn(localStorage, 'clear')
-        .and.callFake(localStorageMock.clear);
+    specHelper.localStorageSetup();
     TestBed.configureTestingModule({});
     service = TestBed.get(UserSettingsService);
   });

@@ -9,11 +9,11 @@ let store = {
     'belAir.userNotificationSettings': JSON.stringify([
         {
             notificationType: NotificationType.highConcentration,
-            enabled: true,
+            enabled: false,
         },
         {
             notificationType: NotificationType.transport,
-            enabled: true,
+            enabled: false,
         },
         {
             notificationType: NotificationType.activity,
@@ -21,7 +21,7 @@ let store = {
         },
         {
             notificationType: NotificationType.allergies,
-            enabled: true,
+            enabled: false,
         },
         {
             notificationType: NotificationType.exercise,

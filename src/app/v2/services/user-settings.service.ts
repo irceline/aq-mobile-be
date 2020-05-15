@@ -70,7 +70,7 @@ export class UserSettingsService {
     }
 
     public getUserNotificationSettings() {
-        return this._defaultNotificationSettings;
+        return this._currentNotificationSettings;
     }
 
     public updateUserNotificationSettings(updatedSetting: UserNotificationSetting) {
