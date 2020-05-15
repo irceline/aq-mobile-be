@@ -66,5 +66,5 @@ RUN mkdir $ANDROID_HOME/licenses && \
 RUN npm i -f
 RUN ionic cordova platform add android
 COPY build.gradle /app/platforms/android/build.gradle
-# RUN ionic cordova build android android
+RUN ionic cordova build android android
 
