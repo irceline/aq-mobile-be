@@ -29,7 +29,7 @@ export class MobileGeosearchControlComponent extends GeosearchControlComponent i
     protected mapCache: MapCache,
     protected geosearch: GeoSearch,
     protected keyboard: Keyboard,
-    protected autocompleteService: LocationAutocompleteService
+    public autocompleteService: LocationAutocompleteService
   ) {
     super(mapCache, geosearch);
   }

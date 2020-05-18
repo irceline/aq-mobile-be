@@ -11,7 +11,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "i18n-extract": "ngx-translate-extract -i ./src -o ./src/assets/i18n/*.json --clean --sort --format namespaced-json",
-    "ionic:build:before": "rm -rf www/ && rm -rf platforms/android/app/src/main/assets/www"
+    "ionic:build:before": "rm -rf www/ && rm -rf platforms/android/app/src/main/assets/www",
+    "postinstall": "node postinstall.js"
   },
   "private": true,
   "dependencies": {
