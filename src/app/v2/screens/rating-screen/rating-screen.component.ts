@@ -17,41 +17,45 @@ export class RatingScreenComponent implements OnInit {
     currentLocation: UserLocation;
 
     private belAqiScores: BelAqiIndexResult[] = [];
-    belAqiForCurrentLocation: BelAqiIndexResult[] = [];
     currentActiveIndex: BelAqiIndexResult;
 
-    protected belAqi = 10;
     feedbackOpened = false;
 
     constructor(
-        private userLocationsService: UserSettingsService,
+        private userSettingsService: UserSettingsService,
         private belAqiService: BelAQIService
     ) {
-        this.locations = userLocationsService.getUserSavedLocations();
+        this.locations = userSettingsService.getUserSavedLocations();
+
+        // feedback is only for today
         this.belAqiScores = this.belAqiService.getIndexScores(
             this.locations,
-            5,
-            5
+            0,
+            0
         );
+
+        // activate first location by default
+        this.updateCurrentLocation(this.locations[0]);
+
+        userSettingsService.$userLocations.subscribe( locations => {
+            this.locations = locations;
+        });
     }
 
     ngOnInit() {}
 
     private updateCurrentLocation(location: UserLocation) {
         this.currentLocation = location;
-        this.belAqiForCurrentLocation = this.belAqiScores.filter(
+
+        this.currentActiveIndex = this.belAqiScores.find(
             (iR) => iR.location.id === location.id
         );
-        this.currentActiveIndex = this.belAqiForCurrentLocation.find(
-            (iR) => Math.abs(iR.date.diff(moment(), 'days')) === 0
-        );
 
-        console.log(this.currentActiveIndex);
+        this.belAqiService.activeIndex = this.currentActiveIndex;
+
     }
 
     onLocationChange(location: UserLocation) {
-        console.log(location);
-        this.belAqi = Math.floor(Math.random() * 10) + 1;
         this.updateCurrentLocation(location);
     }
 

@@ -1,7 +1,7 @@
 <ion-content>
   <app-location-swipe (locationChange)="onLocationChange($event)" [locations]="locations"></app-location-swipe>
-  <app-circle-chart [belAqi]="1" [title]="'Heel goed'" [text]="'Gemiddelde score op jouw locatie is goed.'">
-  </app-circle-chart>
+
+  <app-circle-chart [belAqi]="currentActiveIndex"></app-circle-chart>
 
   <div class="rating ion-padding">
     <p>{{ 'v2.screens.rating-screen.does-it-match' | translate  }}</p>

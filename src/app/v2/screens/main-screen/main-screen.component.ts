@@ -120,7 +120,6 @@ export class MainScreenComponent implements OnInit {
     }
 
     onLocationChange(location: UserLocation) {
-        this.belAqi = Math.floor(Math.random() * 10) + 1;
         this.updateCurrentLocation(location);
     }
 
