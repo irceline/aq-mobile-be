@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import locations from '../../../assets/locations.json';
 import { UserLocation } from '../Interfaces';
 import { NotificationType, UserNotificationSetting } from '../components/user-notification-settings/user-notification-settings.component';
+import {BehaviorSubject} from 'rxjs';
+
+const userNotificationLSkey = 'belAir.userNotificationSettings';
+const userLocationsLSkey = 'belAir.userLocations';
 
 @Injectable({
     providedIn: 'root',
@@ -33,10 +37,12 @@ export class UserSettingsService {
 
     private _currentNotificationSettings: UserNotificationSetting[] = [];
 
+    public $userLocations: BehaviorSubject<UserLocation[]>;
+
     private _userLocations: UserLocation[] = [];
 
     constructor() {
-        const notificationSettings = localStorage.getItem('belAir.userNotificationSettings');
+        const notificationSettings = localStorage.getItem(userNotificationLSkey);
         if ( notificationSettings ) {
             // todo : some verification that the stored data is not corrupt
             this._currentNotificationSettings = JSON.parse(notificationSettings);
@@ -44,7 +50,7 @@ export class UserSettingsService {
             this._currentNotificationSettings = this._defaultNotificationSettings;
         }
 
-        const userLocations = localStorage.getItem('belAir.userLocations');
+        const userLocations = localStorage.getItem(userLocationsLSkey);
 
         if ( userLocations ) {
             // todo : some verification that the stored data is not corrupt
@@ -55,6 +61,8 @@ export class UserSettingsService {
             // @ts-ignore
             this._userLocations = locations.slice(startPoint, startPoint + 5);
         }
+
+        this.$userLocations = new BehaviorSubject(this._userLocations);
     }
 
     public getUserSavedLocations(): UserLocation[] {
@@ -62,11 +70,24 @@ export class UserSettingsService {
     }
 
     public addUserLocation( location: UserLocation ) {
-
+        this._userLocations.push( location );
+        this.saveLocations();
     }
 
-    public removeUserLocation( location: UserSettingsService ) {
+    public updateUserLocations( newLocations: UserLocation[] ) {
+        this._userLocations = newLocations;
+        this.saveLocations();
+    }
 
+    private saveLocations() {
+        this.$userLocations.next(this._userLocations);
+        // todo: cloud storage?
+        localStorage.setItem(userLocationsLSkey, JSON.stringify(this._userLocations));
+    }
+
+    public removeUserLocation( locationToRemove: UserLocation ) {
+        this._userLocations = this._userLocations.filter( l => l.id !== locationToRemove.id );
+        this.saveLocations();
     }
 
     public getUserNotificationSettings() {
