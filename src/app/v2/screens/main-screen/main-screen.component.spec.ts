@@ -10,6 +10,7 @@ import {By} from '@angular/platform-browser';
 import {LocationSwipeComponent} from '../../components/location-swipe/location-swipe.component';
 import {IonSlide, IonSlides} from '@ionic/angular';
 import {TimeLineListComponent} from '../../components/time-line-list/time-line-list.component';
+import {CircleChartComponent} from '../../components/circle-chart/circle-chart.component';
 
 describe('MainScreenComponent', () => {
     let component: MainScreenComponent;
@@ -26,6 +27,7 @@ describe('MainScreenComponent', () => {
                 MainScreenComponent,
                 LocationSwipeComponent,
                 TimeLineListComponent,
+                CircleChartComponent,
                 IonSlides,
                 IonSlide
             ],
@@ -96,6 +98,43 @@ describe('MainScreenComponent', () => {
         spyOn(component, 'onDayChange');
         timelineInstance.slideChange().then(() => {
             expect(component.onDayChange).toHaveBeenCalledWith(component.belAqiForCurrentLocation[2]);
+        });
+    });
+
+    it('should update circle chart on slide change location', () => {
+        const location = fixture.debugElement.query(By.css('app-location-swipe'));
+        const locationInstance: LocationSwipeComponent = location.componentInstance;
+        const circleChart = fixture.debugElement.query(By.css('app-circle-chart'));
+        const circleChartInstance: CircleChartComponent = circleChart.componentInstance;
+
+        spyOn(locationInstance.slides, 'getActiveIndex').and.callFake(() => Promise.resolve(2));
+        locationInstance.slideChange().then(() => {
+            let belAqiIndex;
+            belAQIService.$activeIndex.subscribe( ( newIndex ) => {
+                belAqiIndex = newIndex.indexScore;
+            });
+            const belAqiText = belAQIService.getLabelForIndex(belAqiIndex);
+            expect(circleChartInstance.belAqi).toEqual(belAqiIndex);
+            expect(circleChartInstance.title).toEqual(belAqiText);
+            expect(circleChartInstance.text).toContain(belAqiText);
+        });
+    });
+
+    it('should update circle chart on slide change time line', () => {
+        const circleChart = fixture.debugElement.query(By.css('app-circle-chart'));
+        const circleChartInstance: CircleChartComponent = circleChart.componentInstance;
+
+        spyOn(timelineInstance.slides, 'getActiveIndex').and.callFake(() => Promise.resolve(2));
+        spyOn(component, 'onLocationChange');
+        timelineInstance.slideChange().then(() => {
+            let belAqiIndex;
+            belAQIService.$activeIndex.subscribe( ( newIndex ) => {
+                belAqiIndex = newIndex.indexScore;
+            });
+            const belAqiText = belAQIService.getLabelForIndex(belAqiIndex);
+            expect(circleChartInstance.belAqi).toEqual(belAqiIndex);
+            expect(circleChartInstance.title).toEqual(belAqiText);
+            expect(circleChartInstance.text).toContain(belAqiText);
         });
     });
 });
