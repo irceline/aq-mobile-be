@@ -2,25 +2,23 @@
   <div class="longterm-info">
     <ion-button (click)="goBack()">
       <ion-icon slot="start" src="/assets/images/icons/chevron-back.svg"></ion-icon>
-      Lange termijn
+      {{ 'v2.screens.long-term-info.long-term' | translate }}
     </ion-button>
 
-    <p>De data is het resultaat van onze rekenmodellen op lange termijn.</p>
+    <p>{{ 'v2.screens.long-term-info.about-data' | translate }}</p>
 
     <ion-item button (click)="onClick()">
       <ion-label>
-        Van waar kom deze info
+        {{ 'v2.screens.long-term-info.from-where' | translate }}
       </ion-label>
     </ion-item>
   </div>
 
   <div class="card">
     <div class="card--content">
-      <h5>Lange termijn</h5>
+      <h5>{{ 'v2.screens.long-term-info.long-term' | translate }}</h5>
       <p>
-        Langdurige blootstelling aan luchtvervuilende stoffen kan chronische effecten uitlokken en voor een hoger
-        risico
-        op hart- en longziekten zorgen.
+        {{ 'v2.screens.long-term-info.lt-effects-diseases' | translate }}
       </p>
     </div>
 

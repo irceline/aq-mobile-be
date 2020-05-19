@@ -4,32 +4,31 @@
   </app-circle-chart>
 
   <div class="rating ion-padding">
-    <p>Strookt deze waarde met jouw gevoel?</p>
+    <p>{{ 'v2.screens.rating-screen.does-it-match' | translate  }}</p>
 
     <app-feedback (feedbackOpened)="isFeedbackOpened()" (feedbackGiven)="feedbackGiven($event)"></app-feedback>
   </div>
 
   <div class="rating--info" *ngIf="!feedbackOpened">
     <p>
-      De app toont een berekende waarde, geen meting op jouw locatie. Plaatselijk kan de luchtkwaliteit dan ook
-      afwijken.
+      {{ 'v2.screens.rating-screen.calculated-value' | translate  }}
     </p>
 
-    <strong> Mogelijke oorzaken van een afwijking zijn:</strong>
+    <strong>{{ 'v2.screens.rating-screen.possible-causes' | translate }}</strong>
 
     <ion-item lines="none">
       <ion-icon src="/assets/images/icons/vuur.svg" slot="start"></ion-icon>
-      <ion-label>Een <strong>haardvuur</strong> met hout verbranding.</ion-label>
+      <ion-label [innerHTML]="'v2.screens.rating-screen.fire' | translate"></ion-label>
     </ion-item>
 
     <ion-item lines="none">
       <ion-icon src="/assets/images/icons/auto.svg" slot="start"></ion-icon>
-      <ion-label><strong>Uitlaatgassen</strong> van verkeer</ion-label>
+      <ion-label [innerHTML]="'v2.screens.rating-screen.exhaust' | translate"></ion-label>
     </ion-item>
 
     <ion-item lines="none">
       <ion-icon src="/assets/images/icons/fabriek.svg" slot="start"></ion-icon>
-      <ion-label><strong>Uitstoot</strong> door industrie of landbouw</ion-label>
+      <ion-label [innerHTML]="'v2.screens.rating-screen.industry' | translate"></ion-label>
     </ion-item>
   </div>
 

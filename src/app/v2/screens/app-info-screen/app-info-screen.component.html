@@ -2,24 +2,21 @@
   <div class="app-info">
     <ion-button (click)="goBack()">
       <ion-icon slot="start" src="/assets/images/icons/chevron-back.svg"></ion-icon>
-      Hoe werkt dit?
+      {{ 'v2.screens.app-info.how-this-works' | translate }}
     </ion-button>
 
-    <p>We beoordelen de impact van de <strong>algemene luchtkwaliteit</strong> op korte termijn op basis van een
-      luchtkwaliteitsindex.
-    </p>
+    <p [innerHTML]="'v2.screens.app-info.aq-index' | translate"></p>
 
-    <p>Die geeft aan de meetwaarden van verschillende verontreinigende stoffen één score (Heel slecht).
-      De index baseert zich voor deze score op data van meetstations in heel België.</p>
+    <p [innerHTML]="'v2.screens.app-info.aq-index-2' | translate"></p>
 
     <app-circle-chart [belAqi]="2" [title]="'Heel goed'" [text]="'Gemiddelde score op jouw locatie is goed.'">
     </app-circle-chart>
 
-    <p>De stoffen die we momenteel in rekening brengen, zijn:</p>
+    <p>{{ 'v2.screens.app-info.current-items' | translate }}</p>
 
     <ul>
       <li>
-        <h5>Ozon (O3)</h5>
+        <h5>{{ 'v2.screens.app-info.ozon' | translate }} (O&#8323;)</h5>
         <p>
           <span></span>
           78 µg/m3
@@ -27,51 +24,48 @@
       </li>
 
       <li>
-        <h5>Ozon (O3)</h5>
+        <h5>{{ 'v2.screens.app-info.nitrogen-dioxide' | translate }} (NO&#8322;)</h5>
         <p>
           <span></span>
-          78 µg/m3
+          46 µg/m3
         </p>
       </li>
     </ul>
 
     <ul class="no-border">
       <li>
-        <h5>Ozon (O3)</h5>
+        <h5>{{ 'v2.screens.app-info.fine-dust' | translate }} (PM 10)</h5>
         <p>
           <span></span>
-          78 µg/m3
+          154 µg/m3
         </p>
       </li>
 
       <li>
-        <h5>Ozon (O3)</h5>
+        <h5>{{ 'v2.screens.app-info.very-fine-dust' | translate }} (PM 2,5)</h5>
         <p>
           <span></span>
-          78 µg/m3
+          82 µg/m3
         </p>
       </li>
     </ul>
 
-    <p>Door op deze data modellen toe te passen, berekenen we of de impact van de luchtkwaliteit op lange termijn beter
-      of
-      slechter wordt.</p>
+    <p>{{ 'v2.screens.app-info.data-models' | translate }}</p>
 
-    <p>Je kan deze inschattingen bekijken in het menu via ‘blootstelling op lange termijn’.</p>
+    <p [innerHTML]="'v2.screens.app-info.check-lt-data' | translate"></p>
 
     <ion-item detail>
-      <ion-label>Hoe worden deze waarden berekend? </ion-label>
+      <ion-label>{{ 'v2.screens.app-info.how-calculated' | translate }}</ion-label>
     </ion-item>
 
     <hr>
 
-    <p>Als de metingen de waarschuwings- waarde overschrijden, sturen we je een melding. Je kan je meldingen beheren via
-      het menu.</p>
+    <p [innerHTML]="'v2.screens.app-info.notifications' | translate "></p>
 
     <img src="/assets/images/gmail.png" alt="">
 
     <ion-item detail class="more">
-      <ion-label class="ion-text-wrap">Meer weten over de Vlaamse Milieumaatschappij?</ion-label>
+      <ion-label class="ion-text-wrap">{{ 'v2.screens.app-info.learn-more' | translate }}</ion-label>
     </ion-item>
   </div>
 </ion-content>

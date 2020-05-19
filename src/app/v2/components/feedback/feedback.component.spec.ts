@@ -2,6 +2,8 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FeedbackComponent } from './feedback.component';
+import { TranslateTestingModule } from '../../testing/TranslateTestingModule';
+
 
 describe('FeedbackComponent', () => {
   let component: FeedbackComponent;
@@ -11,6 +13,7 @@ describe('FeedbackComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ FeedbackComponent ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      imports: [TranslateTestingModule]
     })
     .compileComponents();
   }));

@@ -44,6 +44,7 @@ export class MainScreenComponent implements OnInit {
         },
     ];
 
+    // todo: create service that fetches this data based on day and location
     // information data
     informationData = [
         {

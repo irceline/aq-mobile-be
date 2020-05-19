@@ -3,7 +3,7 @@
     <h4>Menu</h4>
     <ion-item detail lines="none" class="menu--link" (click)="openLongTermInfo()">
       <ion-label>
-        Blootstelling op lange termijn
+        {{ 'v2.screens.menu.long-term-exposure' | translate }}
       </ion-label>
     </ion-item>
   </div>
@@ -11,20 +11,20 @@
   <div class="menu--section">
     <ion-item detail lines="none" class="menu--link" (click)="openAppInfo()">
       <ion-label>
-        Informatie over Belair
-        <span>(hoe werkt de applicatie)</span>
+        {{ 'v2.screens.menu.belair-info' | translate }}
+        <span>{{ 'v2.screens.menu.workings' | translate }}</span>
       </ion-label>
     </ion-item>
 
     <!-- Language dropdown -->
     <div class="menu--language">
-      <h5>Taal</h5>
+      <h5>{{ 'v2.screens.menu.language' | translate }}</h5>
       <app-language-dropdown [language]="language"></app-language-dropdown>
     </div>
   </div>
 
   <div class="menu--section locations">
-    <h5>Locaties</h5>
+    <h5>{{ 'v2.screens.menu.locations' | translate }}</h5>
 
     <!-- Reorder locations -->
     <app-location-sortable [locations]="locationList" (locationRemoved)="removeLocation($event)"
@@ -34,13 +34,13 @@
   </div>
 
   <div class="menu--section notifications">
-    <h5>Meldingen</h5>
+    <h5>{{ 'v2.screens.menu.notifications' | translate }}</h5>
 
     <app-user-notification-settings [userSettings]="userNotificationSettings"></app-user-notification-settings>
   </div>
 
   <div class="menu--section logo">
     <h3>Belair</h3>
-    <p>versie 1.0.0</p>
+    <p>{{ 'v2.screens.menu.version' | translate }} 1.0.0</p>
   </div>
 </div>
