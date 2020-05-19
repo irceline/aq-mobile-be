@@ -6,18 +6,29 @@ import { TranslateTestingModule } from '../../testing/TranslateTestingModule';
 import { BelAQIService } from '../../services/bel-aqi.service';
 import { specHelper } from '../../testing/spec-helper';
 import { localStorageMock } from '../../testing/localStorage.mock';
+import {By} from '@angular/platform-browser';
+import {LocationSwipeComponent} from '../../components/location-swipe/location-swipe.component';
+import {IonSlide, IonSlides} from '@ionic/angular';
+import {TimeLineListComponent} from '../../components/time-line-list/time-line-list.component';
 
 describe('MainScreenComponent', () => {
     let component: MainScreenComponent;
     let fixture: ComponentFixture<MainScreenComponent>;
     let belAQIService;
+    let timelineInstance: TimeLineListComponent;
 
     const initialLocations = JSON.parse(localStorageMock.getItem('belAir.userLocations'));
 
     beforeEach(async(() => {
         specHelper.localStorageSetup();
         TestBed.configureTestingModule({
-            declarations: [MainScreenComponent],
+            declarations: [
+                MainScreenComponent,
+                LocationSwipeComponent,
+                TimeLineListComponent,
+                IonSlides,
+                IonSlide
+            ],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
             imports: [TranslateTestingModule],
         }).compileComponents();
@@ -28,6 +39,9 @@ describe('MainScreenComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(MainScreenComponent);
         component = fixture.componentInstance;
+        const timeline = fixture.debugElement.query(By.css('app-time-line-list'));
+        timelineInstance = timeline.componentInstance;
+        spyOn(timelineInstance.slides, 'update').and.callFake(() => null);
         fixture.detectChanges();
     });
 
@@ -35,7 +49,6 @@ describe('MainScreenComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    // TODO: antonio or monika, commmented this because there is an error and i cant push
     it('should load initial data', () => {
         expect(component.locations).toEqual(initialLocations);
         expect(component.currentLocation).toEqual(initialLocations[0]);
@@ -58,6 +71,31 @@ describe('MainScreenComponent', () => {
     });
 
     it('should trigger event on belAqi $activeIndex', () => {
-      expect(belAQIService.$activeIndex.next).toHaveBeenCalledWith(component.currentActiveIndex);
+        expect(belAQIService.$activeIndex.next).toHaveBeenCalledWith(component.currentActiveIndex);
+    });
+
+    it('should change the day correctly', () => {
+        component.onDayChange(component.belAqiForCurrentLocation[4]);
+        fixture.detectChanges();
+        expect(component.currentActiveIndex).toEqual(component.belAqiForCurrentLocation[4]);
+        expect(belAQIService.$activeIndex.next).toHaveBeenCalledWith(component.belAqiForCurrentLocation[4]);
+    });
+
+    it('should react on slide change location', () => {
+        const location = fixture.debugElement.query(By.css('app-location-swipe'));
+        const locationInstance: LocationSwipeComponent = location.componentInstance;
+        spyOn(locationInstance.slides, 'getActiveIndex').and.callFake(() => Promise.resolve(2));
+        spyOn(component, 'onLocationChange');
+        locationInstance.slideChange().then(() => {
+            expect(component.onLocationChange).toHaveBeenCalledWith(initialLocations[2]);
+        });
+    });
+
+    it('should react on slide change time line', () => {
+        spyOn(timelineInstance.slides, 'getActiveIndex').and.callFake(() => Promise.resolve(2));
+        spyOn(component, 'onDayChange');
+        timelineInstance.slideChange().then(() => {
+            expect(component.onDayChange).toHaveBeenCalledWith(component.belAqiForCurrentLocation[2]);
+        });
     });
 });

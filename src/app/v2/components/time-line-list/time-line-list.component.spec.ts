@@ -5,7 +5,7 @@ import { TimeLineListComponent } from './time-line-list.component';
 import { IonSlides } from '@ionic/angular';
 import { localStorageMock } from '../../testing/localStorage.mock';
 
-fdescribe('TimeLineListComponent', () => {
+describe('TimeLineListComponent', () => {
   let component: TimeLineListComponent;
   let fixture: ComponentFixture<TimeLineListComponent>;
 
