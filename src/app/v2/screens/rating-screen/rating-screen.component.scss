@@ -12,26 +12,6 @@ ion-content {
             margin-top: 0;
         }
 
-        &--buttons {
-            display: flex;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-bottom: 4px;
-
-            ion-button {
-                flex: 1;
-                --border-radius: 0;
-                margin: 0;
-                height: 75px;
-                --background: white;
-                --background-activated: #f0f0f0;
-
-                &:first-child {
-                    border-right: 1px solid #979797;
-                }
-            }
-        }
-
         &--info {
             background-color: white;
             padding: 40px 45px;

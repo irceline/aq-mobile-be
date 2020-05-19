@@ -1,0 +1,28 @@
+<div class="feedback--buttons">
+  <ion-button (click)="openFeedback('like')">
+    <ion-icon slot="icon-only" src="/assets/images/icons/like.svg"></ion-icon>
+  </ion-button>
+  <ion-button (click)="openFeedback('dislike')">
+    <ion-icon slot="icon-only" src="/assets/images/icons/dislike.svg"></ion-icon>
+  </ion-button>
+</div>
+
+<div class="feedback--content" *ngIf="like || dislike" [ngStyle]="{'padding-bottom': dislike ? '60px' : '0px'}">
+  <ng-container *ngIf="like">
+    <app-location-input [currentLocation]="false"></app-location-input>
+  </ng-container>
+  <ng-container *ngIf="dislike">
+    <p>Ken je de oorzaak? (optioneel)</p>
+    <ion-list>
+      <ion-item lines="none" *ngFor="let entry of form">
+        <ion-checkbox slot="start" [(ngModel)]="entry.isChecked"></ion-checkbox>
+        <ion-label>{{entry.val}}</ion-label>
+      </ion-item>
+    </ion-list>
+    <app-location-input [currentLocation]="false"></app-location-input>
+  </ng-container>
+</div>
+
+<ion-button class="feedback--button" (click)="giveFeedback()" expand="block" fill="clear" *ngIf="like || dislike">
+  Verstuur waarneming
+</ion-button>

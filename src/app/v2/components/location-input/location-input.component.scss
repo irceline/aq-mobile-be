@@ -6,7 +6,6 @@
     &--input {
         background-color: rgba(white, 0.3);
         border-radius: 30px;
-        height: 61px;
         position: relative;
         width: 100%;
         display: flex;
@@ -16,8 +15,8 @@
         --padding-start: 30px;
         --padding-end: 30px;
         --placeholder-color: white;
-        --padding-top: 18px;
-        --padding-bottom: 18px;
+        --padding-top: 21px;
+        --padding-bottom: 21px;
         --placeholder-color: white;
         --placeholder-opacity: 1;
         color: white;
@@ -38,7 +37,7 @@
     &--dropdown {
         position: absolute;
         bottom: 90px;
-        background-color: #76DAF3;
+        background-color: white;
         border-radius: 20px;
         width: 100%;
         z-index: 10;
@@ -52,6 +51,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            color: black;
         }
     }
 

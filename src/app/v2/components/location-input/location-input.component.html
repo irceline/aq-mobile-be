@@ -1,7 +1,7 @@
 <!-- Location input -->
 <div class="location">
-  <ion-input class="location--input" [placeholder]="'v2.components.location-input.choose-location' | translate" [(ngModel)]="searchText" (keyup)="filterItems()"
-    (click)="openDropdown()">
+  <ion-input class="location--input" [placeholder]="'v2.components.location-input.choose-location' | translate"
+    [(ngModel)]="searchText" (keyup)="filterItems()" (click)="openDropdown()">
     <img src="/assets/images/icons/pin.svg" alt="">
   </ion-input>
 
@@ -25,7 +25,8 @@
   </div>
 </div>
 
-<ion-button (click)="getCurrentLocation()" expand="block" fill="clear" shape="round" class="location--button">
+<ion-button (click)="getCurrentLocation()" expand="block" fill="clear" shape="round" class="location--button"
+  *ngIf="currentLocation">
   {{ 'v2.components.location-input.current-location' | translate }}
   <img src="/assets/images/icons/navigation.svg" alt="">
 </ion-button>

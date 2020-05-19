@@ -21,6 +21,7 @@ export class RatingScreenComponent implements OnInit {
     currentActiveIndex: BelAqiIndexResult;
 
     protected belAqi = 10;
+    feedbackOpened = false;
 
     constructor(
         private userLocationsService: UserSettingsService,
@@ -52,5 +53,14 @@ export class RatingScreenComponent implements OnInit {
         console.log(location);
         this.belAqi = Math.floor(Math.random() * 10) + 1;
         this.updateCurrentLocation(location);
+    }
+
+    isFeedbackOpened() {
+        this.feedbackOpened = true;
+        console.log('is opened');
+    }
+
+    feedbackGiven(event) {
+        console.log(event);
     }
 }

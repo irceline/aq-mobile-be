@@ -4,6 +4,7 @@ import {
     Output,
     EventEmitter,
     ViewChild,
+    Input,
 } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LoadingController, IonInput } from '@ionic/angular';
@@ -18,15 +19,17 @@ import locations from '../../../../assets/locations.json';
 export class LocationInputComponent implements OnInit {
     @ViewChild(IonInput) input: IonInput;
 
+    @Input() currentLocation = true;
+
     searchText = '';
     visible = false;
     filteredItems: UserLocation[] = [];
     selectedItem: UserLocation | null = null;
 
     // @ts-ignore
-    private _locations: UserLocation[] = locations.map( l => ({
+    private _locations: UserLocation[] = locations.map((l) => ({
         ...l,
-        type: 'user'
+        type: 'user',
     }));
 
     @Output() locationSelected = new EventEmitter<UserLocation>();
@@ -91,13 +94,15 @@ export class LocationInputComponent implements OnInit {
         // filter items by label
         if (this.searchText.trim() !== '') {
             this.visible = true;
-            this.filteredItems = this._locations.filter((item) => {
-                return (
-                    item.label
-                        .toLowerCase()
-                        .indexOf(this.searchText.toLowerCase()) > -1
-                );
-            }).slice(0, 10);
+            this.filteredItems = this._locations
+                .filter((item) => {
+                    return (
+                        item.label
+                            .toLowerCase()
+                            .indexOf(this.searchText.toLowerCase()) > -1
+                    );
+                })
+                .slice(0, 10);
         }
 
         // if we remove the option, remove select and emit null

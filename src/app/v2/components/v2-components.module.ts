@@ -21,6 +21,9 @@ import { HorizontalCardComponent } from './horizontal-card/horizontal-card.compo
 import { HorizontalCardsSliderComponent } from './horizontal-cards-slider/horizontal-cards-slider.component';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
 import { MenuScreenComponent } from './menu-screen/menu-screen.component';
+import { InfoButtonComponent } from './info-button/info-button.component';
+import { FeedbackComponent } from './feedback/feedback.component';
+import { ValueDisplayComponent } from './value-display/value-display.component';
 
 const COMPONENTS = [
     CircleChartComponent,
@@ -40,6 +43,9 @@ const COMPONENTS = [
     HorizontalCardsSliderComponent,
     BarChartComponent,
     MenuScreenComponent,
+    InfoButtonComponent,
+    FeedbackComponent,
+    ValueDisplayComponent,
 ];
 
 @NgModule({

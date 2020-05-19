@@ -1,7 +1,10 @@
 <ion-content>
-  <app-location-swipe (locationChange)="onLocationChange($event)" [locations]="locations"></app-location-swipe>
+  <app-location-swipe (locationChange)="onLocationChange($event)" [locations]="locations">
+  </app-location-swipe>
   <app-circle-chart></app-circle-chart>
-  <app-time-line-list (dayChange)="onDayChange($event)" [items]="belAqiForCurrentLocation"></app-time-line-list>
+  <app-time-line-list (dayChange)="onDayChange($event)" [items]="belAqiForCurrentLocation">
+  </app-time-line-list>
+  <app-info-button></app-info-button>
 </ion-content>
 
 <app-pull-tab [options]="drawerOptions">
