@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+import {UserLocation} from '../../Interfaces';
 
 @Component({
     selector: 'app-location-sortable',
@@ -7,7 +8,7 @@ import { AlertController } from '@ionic/angular';
     styleUrls: ['./location-sortable.component.scss'],
 })
 export class LocationSortableComponent implements OnInit {
-    @Input() locations = [];
+    @Input() locations: UserLocation[] = [];
 
     @Output() locationRemoved = new EventEmitter();
     @Output() locationUpdated = new EventEmitter();
@@ -17,9 +18,8 @@ export class LocationSortableComponent implements OnInit {
     ngOnInit() {}
 
     doReorder(ev: any) {
-        console.log('Dragged from index', ev.detail.from, 'to', ev.detail.to);
-        this.locationUpdated.emit(ev.detail);
-        ev.detail.complete();
+        ev.detail.complete(this.locations);
+        this.locationUpdated.emit(this.locations);
     }
 
     async deleteLocation(location) {
@@ -32,13 +32,12 @@ export class LocationSortableComponent implements OnInit {
                     role: 'cancel',
                     cssClass: 'secondary',
                     handler: () => {
-                        console.log('cancel');
+                        // console.log('cancel');
                     },
                 },
                 {
                     text: 'Confirm',
                     handler: () => {
-                        console.log('Confirm Okay');
                         this.locationRemoved.emit(location);
                     },
                 },

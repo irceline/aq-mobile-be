@@ -77,10 +77,10 @@ export class MainScreenComponent implements OnInit {
     protected belAqi = 10;
 
     constructor(
-        private userLocationsService: UserSettingsService,
+        private userSettingsService: UserSettingsService,
         private belAqiService: BelAQIService
     ) {
-        this.locations = userLocationsService.getUserSavedLocations();
+        this.locations = userSettingsService.getUserSavedLocations();
         this.belAqiScores = this.belAqiService.getIndexScores(
             this.locations,
             5,
@@ -89,6 +89,11 @@ export class MainScreenComponent implements OnInit {
 
         // activate first location by default
         this.updateCurrentLocation(this.locations[0]);
+
+        userSettingsService.$userLocations.subscribe( locations => {
+            this.locations = locations;
+        });
+
     }
 
     private updateCurrentLocation(location: UserLocation) {
@@ -114,7 +119,6 @@ export class MainScreenComponent implements OnInit {
     }
 
     onLocationChange(location: UserLocation) {
-        console.log(location);
         this.belAqi = Math.floor(Math.random() * 10) + 1;
         this.updateCurrentLocation(location);
     }

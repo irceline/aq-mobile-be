@@ -13,6 +13,8 @@ import {
 import { NavController } from '@ionic/angular';
 import { BelAQIService } from '../../services/bel-aqi.service';
 import { trigger, transition, style, animate } from '@angular/animations';
+import {UserLocation} from '../../Interfaces';
+import {UserSettingsService} from '../../services/user-settings.service';
 
 @Component({
     selector: 'app-menu-screen',
@@ -52,51 +54,43 @@ export class MenuScreenComponent implements OnInit {
     // todo: user settings service get this from language settings
     language = 'e';
 
-    userSettings: UserNotificationSetting[] = [
-        {
-            notificationType: NotificationType.highConcentration,
-            enabled: true,
-        },
-        {
-            notificationType: NotificationType.transport,
-            enabled: true,
-        },
-        {
-            notificationType: NotificationType.activity,
-            enabled: false,
-        },
-        {
-            notificationType: NotificationType.allergies,
-            enabled: true,
-        },
-        {
-            notificationType: NotificationType.exercise,
-            enabled: false,
-        },
-    ];
+    userNotificationSettings: UserNotificationSetting[] = [];
 
-    locationList: any[] = [
-        { name: 'Koksijde', id: 'abc', order: 1 },
-        { name: 'Herent', id: 'def', order: 2 },
-    ];
+    locationList: UserLocation[] = [];
 
     constructor(
         private navCtrl: NavController,
-        private belAQIService: BelAQIService
+        private belAQIService: BelAQIService,
+        private userSettingsService: UserSettingsService
     ) {
         belAQIService.$activeIndex.subscribe((newIndex) => {
             this.belAqi = newIndex.indexScore;
+        });
+
+        this.locationList = userSettingsService.getUserSavedLocations();
+
+        this.userNotificationSettings = userSettingsService.getUserNotificationSettings();
+
+        this.userSettingsService.$userLocations.subscribe( userLocations => {
+            this.locationList = userLocations;
         });
     }
 
     ngOnInit() {}
 
-    updateLocation(event) {
-        console.log(event);
+    updateLocation(newLocations: UserLocation[]) {
+        this.userSettingsService.updateUserLocations(newLocations);
     }
 
-    removeLocation(event) {
-        console.log(event);
+    removeLocation(location: UserLocation) {
+        this.userSettingsService.removeUserLocation( location );
+    }
+
+    addLocation(location: UserLocation | null) {
+        if ( location !== null ) {
+            this.userSettingsService.addUserLocation( location );
+            this.locationList = this.userSettingsService.getUserSavedLocations();
+        }
     }
 
     openAppInfo() {
