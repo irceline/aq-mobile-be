@@ -531,6 +531,10 @@
 				"activity":  "Inspanningen",
 				"transport":  "Verplaatsingen",
 				"highConcentration": "(Te) hoge concentraties"
+			},
+			"feedback": {
+				"cause": "Ken je de oorzaak? (optioneel)",
+				"send-observation": "Verstuur waarneming"
 			}
 		},
 		"screens": {
@@ -543,6 +547,44 @@
 				"ask-location": "Om je zo goed mogelijk te kunnen helpen, hebben we je locatie nodig.",
 				"ask-notifications": "Zou je graag meldingen ontvangen over de luchtkwaliteit?",
 				"btn-text": "Ga verder"
+			},
+			"menu": {
+				"long-term-exposure": "Blootstelling op lange termijn",
+				"belair-info": "Informatie over Belair",
+				"workings": "(hoe werkt de applicatie)",
+				"language": "Taal",
+				"locations": "Locaties",
+				"notifications": "Notificaties",
+				"version": "versie"
+			},
+			"app-info": {
+				"how-this-works": "Hoe werkt dit?",
+				"aq-index": "We beoordelen de impact van de <strong>algemene luchtkwaliteit</strong> op korte termijn op basis van een luchtkwaliteitsindex.",
+				"aq-index-2": "Die geeft aan de <strong>meetwaarden van verschillende verontreinigende stoffen</strong> één score (Heel goed). De index baseert zich voor deze score op data van meetstations in heel België.",
+				"current-items": "De stoffen die we momenteel in rekening brengen, zijn:",
+				"ozon": "Ozon",
+				"nitrogen-dioxide": "Stikstofdioxide",
+				"fine-dust": "Fijn stof",
+				"very-fine-dust": "Heel fijn stof",
+				"data-models": "Door op deze data modellen toe te passen, berekenen we of de impact van de luchtkwaliteit op lange termijn beter of slechter wordt.",
+				"check-lt-data": "Je kan deze inschattingen bekijken in het menu via <strong>‘blootstelling op lange termijn’</strong>.",
+				"how-calculated": "Hoe worden deze waarden berekend?",
+				"notifications": "Als de metingen de waarschuwings- waarde overschrijden, sturen we je een melding. Je kan je meldingen beheren via het menu.",
+				"learn-more": "Meer weten over de Vlaamse Milieumaatschappij?"
+			},
+			"long-term-info": {
+				"long-term": "Lange termijn",
+				"about-data": "De data is het resultaat van onze rekenmodellen op lange termijn.",
+				"from-where": "Van waar kom deze info",
+				"lt-effects-diseases": "Langdurige blootstelling aan luchtvervuilende stoffen kan chronische effecten uitlokken en voor een hoger risico op hart- en longziekten zorgen."
+			},
+			"rating-screen": {
+				"does-it-match": "Strookt deze waarde met jouw gevoel?",
+				"calculated-value": "De app toont een berekende waarde, geen meting op jouw locatie. Plaatselijk kan de luchtkwaliteit dan ook afwijken.",
+				"possible-causes": "Mogelijke oorzaken van een afwijking zijn:",
+				"fire": "Een <strong>haardvuur</strong> met hout verbranding.",
+				"exhaust": "<strong>Uitlaatgassen</strong> van verkeer",
+				"industry": "<strong>Uitstoot</strong> door industrie of landbouw"
 			}
 		}
 	}
