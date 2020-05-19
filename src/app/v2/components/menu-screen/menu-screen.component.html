@@ -1,4 +1,4 @@
-<div class="menu" [ngStyle]="{'background-color': backgroundColor}">
+<div class="menu" @menuAnimation *ngIf="menuVisible" [ngStyle]="{'background-color': backgroundColor}">
   <div class="menu--section">
     <h4>Menu</h4>
     <ion-item detail lines="none" class="menu--link" (click)="openLongTermInfo()">
@@ -28,7 +28,7 @@
 
     <!-- Reorder locations -->
     <app-location-sortable [locations]="locationList" (locationRemoved)="removeLocation($event)"
-                           (locationUpdated)="updateLocation($event)"></app-location-sortable>
+      (locationUpdated)="updateLocation($event)"></app-location-sortable>
 
     <app-location-input></app-location-input>
   </div>

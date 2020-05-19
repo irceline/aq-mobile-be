@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border">
   <ion-toolbar color="transparent" class="ion-no-padding">
     <ion-buttons slot="start">
-      <ion-button (click)="openMenu()" class="ion-no-padding">
+      <ion-button (click)="toggleMenu()" class="ion-no-padding">
         <img src="/assets/images/icons/menu.svg" alt="">
       </ion-button>
     </ion-buttons>
@@ -14,7 +14,4 @@
   </ion-toolbar>
 </ion-header>
 
-<div @menuAnimation *ngIf="menuVisible" [ngStyle]="{'background-color': backgroundColor}">
-  <app-menu-screen></app-menu-screen>
-</div>
-
+<app-menu-screen (menuClosed)="closeMenu()" [menuVisible]="menuVisible"></app-menu-screen>

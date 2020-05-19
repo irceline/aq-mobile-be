@@ -3,7 +3,7 @@ FROM node:12-alpine
 WORKDIR /app
 COPY . /app
 
-VOLUME /app/platforms/android/app/build/outputs/apk/debug/
+VOLUME /app/builds
 
 #ENVIRONNEMENT
 ENV GLIB_PACKAGE_BASE_URL https://github.com/sgerrand/alpine-pkg-glibc/releases/download

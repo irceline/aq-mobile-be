@@ -45,12 +45,15 @@ export class CircleChartComponent implements OnInit {
         this._initialize(this.belAqi);
     }
 
-    private _initialize(value: number) {
-        const range = value * this.defaultRange;
-        this.circleOffset = this.defaultOffset - range;
-        this.dashoffset = value * this.defaultRange;
+    private _initialize(belaqi: number) {
 
-        this._changeTitle(value);
+        const inverted = 11 - belaqi;
+
+        const range = inverted * this.defaultRange;
+        this.circleOffset = this.defaultOffset - range;
+        this.dashoffset = inverted * this.defaultRange;
+
+        this._changeTitle(belaqi);
     }
 
     private _changeTitle(value: number) {

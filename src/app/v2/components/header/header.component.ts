@@ -14,23 +14,6 @@ import { BelAQIService } from '../../services/bel-aqi.service';
     selector: 'app-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss'],
-    animations: [
-        trigger('menuAnimation', [
-            transition(':enter', [
-                style({ opacity: 0, transform: 'translateX(-100%)' }),
-                animate(
-                    '300ms',
-                    style({ opacity: 1, transform: 'translateX(0)' })
-                ),
-            ]),
-            transition(':leave', [
-                animate(
-                    '300ms',
-                    style({ opacity: 0, transform: 'translateX(-100%)' })
-                ),
-            ]),
-        ]),
-    ],
 })
 export class HeaderComponent implements OnInit {
     @ViewChild(IonReorderGroup) reorderGroup: IonReorderGroup;
@@ -49,7 +32,7 @@ export class HeaderComponent implements OnInit {
         private navCtrl: NavController,
         private belAQIService: BelAQIService
     ) {
-        belAQIService.$activeIndex.subscribe( ( newIndex ) => {
+        belAQIService.$activeIndex.subscribe((newIndex) => {
             this.belAqi = newIndex.indexScore;
         });
     }
@@ -60,11 +43,16 @@ export class HeaderComponent implements OnInit {
         this.belAQIService.getLightColorForIndex(index);
     }
 
-    openMenu() {
-        this.menuVisible = true;
+    toggleMenu() {
+        this.menuVisible = !this.menuVisible;
+    }
+
+    closeMenu() {
+        this.menuVisible = false;
     }
 
     openRating() {
         this.navCtrl.navigateForward(['main/rating'], { animated: false });
+        this.menuVisible = false;
     }
 }
