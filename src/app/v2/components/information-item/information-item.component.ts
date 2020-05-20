@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import {DetailDataPoint} from '../../services/detail-data.service';
 
 @Component({
     selector: 'app-information-item',
@@ -6,11 +7,9 @@ import { Component, OnInit, Input } from '@angular/core';
     styleUrls: ['./information-item.component.scss'],
 })
 export class InformationItemComponent implements OnInit {
-    @Input() unit: string;
-    @Input() unitName: string;
-    @Input() color: string;
-    @Input() evaluation: string;
-    @Input() values: string;
+
+    @Input() detailedDataPoint: DetailDataPoint;
+
     @Input() isButton = false;
 
     constructor() {}

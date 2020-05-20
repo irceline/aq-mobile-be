@@ -6,6 +6,7 @@ import {
     BelAQIService,
 } from '../../services/bel-aqi.service';
 import moment from 'moment';
+import {DetailDataPoint, DetailDataService} from '../../services/detail-data.service';
 
 @Component({
     selector: 'app-main-screen',
@@ -73,13 +74,19 @@ export class MainScreenComponent implements OnInit {
         },
     ];
 
+    // keep track of loading status
+    detailDataLoadig = false;
+
+    protected detailData: DetailDataPoint[] = [];
+
     drawerOptions: any;
 
     protected belAqi = 10;
 
     constructor(
         private userSettingsService: UserSettingsService,
-        private belAqiService: BelAQIService
+        private belAqiService: BelAQIService,
+        private detailDataService: DetailDataService
     ) {
         this.locations = userSettingsService.getUserSavedLocations();
         this.belAqiScores = this.belAqiService.getIndexScores(
@@ -99,6 +106,7 @@ export class MainScreenComponent implements OnInit {
 
     private updateCurrentLocation(location: UserLocation) {
         this.currentLocation = location;
+
         this.belAqiForCurrentLocation = this.belAqiScores.filter(
             (iR) => iR.location.id === location.id
         );
@@ -107,6 +115,25 @@ export class MainScreenComponent implements OnInit {
         );
 
         this.belAqiService.activeIndex = this.currentActiveIndex;
+
+        this.updateDetailData();
+    }
+
+    private async updateDetailData() {
+        console.log( this.currentActiveIndex );
+        this.detailDataLoadig = true;
+
+        try {
+            this.detailData = await this.detailDataService
+                .getMeasurementsFor( this.currentActiveIndex.location, this.currentActiveIndex.date );
+
+            console.log('new detailed data' );
+            console.log( this.detailData );
+        } catch ( e ) {
+            console.log( 'failed to get detailed data for ', this.currentActiveIndex.location, this.currentActiveIndex.date );
+        }
+
+        this.detailDataLoadig = false;
     }
 
     ngOnInit() {
@@ -126,5 +153,7 @@ export class MainScreenComponent implements OnInit {
     onDayChange(index: BelAqiIndexResult) {
         this.currentActiveIndex = index;
         this.belAqiService.activeIndex = index;
+
+        this.updateDetailData();
     }
 }

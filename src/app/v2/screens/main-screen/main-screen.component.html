@@ -11,9 +11,8 @@
   <div class="details">
     <h5>Bekijk in detail</h5>
 
-    <app-information-item *ngFor="let information of informationData" [unit]="information.unit"
-      [unitName]="information.unitName" [color]="information.color" [evaluation]="information.evaluation"
-      [values]="information.values" [isButton]="true">
+    <app-information-item *ngFor="let detailDataPoint of detailData"
+                          [detailedDataPoint]="detailDataPoint" [isButton]="true">
     </app-information-item>
 
     <ion-item detail>
