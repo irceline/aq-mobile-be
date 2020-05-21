@@ -31,6 +31,8 @@
                     flex-direction: column;
                     justify-content: center;
                     align-items: center;
+                    word-break: break-word;
+                    hyphens: auto;
                 }
 
                 p {
