@@ -94,7 +94,6 @@ export class MainScreenComponent implements OnInit {
     }
 
     private async updateDetailData() {
-        console.log(this.currentActiveIndex);
         this.detailDataLoadig = true;
 
         try {
@@ -102,9 +101,6 @@ export class MainScreenComponent implements OnInit {
                 this.currentActiveIndex.location,
                 this.currentActiveIndex.date
             );
-
-            console.log('new detailed data');
-            console.log(this.detailData);
         } catch (e) {
             console.log(
                 'failed to get detailed data for ',
