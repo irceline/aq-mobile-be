@@ -12,6 +12,6 @@ export class InfoButtonComponent implements OnInit {
     ngOnInit() {}
 
     goTo() {
-        this.navCtrl.navigateForward(['/main/app-info'], { animated: false });
+        this.navCtrl.navigateForward(['/main/app-info']);
     }
 }

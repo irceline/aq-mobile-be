@@ -1,71 +1,73 @@
 <ion-content>
-  <div class="app-info">
-    <ion-button (click)="goBack()">
-      <ion-icon slot="start" src="/assets/images/icons/chevron-back.svg"></ion-icon>
-      {{ 'v2.screens.app-info.how-this-works' | translate }}
-    </ion-button>
+  <app-background>
+    <div class="app-info">
+      <ion-button (click)="goBack()">
+        <ion-icon slot="start" src="/assets/images/icons/chevron-back.svg"></ion-icon>
+        {{ 'v2.screens.app-info.how-this-works' | translate }}
+      </ion-button>
 
-    <p [innerHTML]="'v2.screens.app-info.aq-index' | translate"></p>
+      <p [innerHTML]="'v2.screens.app-info.aq-index' | translate"></p>
 
-    <p [innerHTML]="'v2.screens.app-info.aq-index-2' | translate"></p>
+      <p [innerHTML]="'v2.screens.app-info.aq-index-2' | translate"></p>
 
-    <app-circle-chart [belAqi]="2" [title]="'Heel goed'" [text]="'Gemiddelde score op jouw locatie is goed.'">
-    </app-circle-chart>
+      <app-circle-chart [belAqi]="2" [title]="'Heel goed'" [text]="'Gemiddelde score op jouw locatie is goed.'">
+      </app-circle-chart>
 
-    <p>{{ 'v2.screens.app-info.current-items' | translate }}</p>
+      <p>{{ 'v2.screens.app-info.current-items' | translate }}</p>
 
-    <ul>
-      <li>
-        <h5>{{ 'v2.screens.app-info.ozon' | translate }} <b>(O&#8323;)</b></h5>
-        <p>
-          <span class="green"></span>
-          78 µg/m3
-        </p>
-      </li>
+      <ul>
+        <li>
+          <h5>{{ 'v2.screens.app-info.ozon' | translate }} <b>(O&#8323;)</b></h5>
+          <p>
+            <span class="green"></span>
+            78 µg/m3
+          </p>
+        </li>
 
-      <li>
-        <h5>{{ 'v2.screens.app-info.nitrogen-dioxide' | translate }} <b>(NO&#8322;)</b></h5>
-        <p>
-          <span class="blue"></span>
-          46 µg/m3
-        </p>
-      </li>
-    </ul>
+        <li>
+          <h5>{{ 'v2.screens.app-info.nitrogen-dioxide' | translate }} <b>(NO&#8322;)</b></h5>
+          <p>
+            <span class="blue"></span>
+            46 µg/m3
+          </p>
+        </li>
+      </ul>
 
-    <ul class="no-border">
-      <li>
-        <h5>{{ 'v2.screens.app-info.fine-dust' | translate }} <b>(PM 10)</b></h5>
-        <p>
-          <span class="red"></span>
-          154 µg/m3
-        </p>
-      </li>
+      <ul class="no-border">
+        <li>
+          <h5>{{ 'v2.screens.app-info.fine-dust' | translate }} <b>(PM 10)</b></h5>
+          <p>
+            <span class="red"></span>
+            154 µg/m3
+          </p>
+        </li>
 
-      <li>
-        <h5>{{ 'v2.screens.app-info.very-fine-dust' | translate }} <b>(PM 2,5)</b></h5>
-        <p>
-          <span class="dark-green"></span>
-          82 µg/m3
-        </p>
-      </li>
-    </ul>
+        <li>
+          <h5>{{ 'v2.screens.app-info.very-fine-dust' | translate }} <b>(PM 2,5)</b></h5>
+          <p>
+            <span class="dark-green"></span>
+            82 µg/m3
+          </p>
+        </li>
+      </ul>
 
-    <p>{{ 'v2.screens.app-info.data-models' | translate }}</p>
+      <p>{{ 'v2.screens.app-info.data-models' | translate }}</p>
 
-    <p [innerHTML]="'v2.screens.app-info.check-lt-data' | translate"></p>
+      <p [innerHTML]="'v2.screens.app-info.check-lt-data' | translate"></p>
 
-    <ion-item detail>
-      <ion-label>{{ 'v2.screens.app-info.how-calculated' | translate }}</ion-label>
-    </ion-item>
+      <ion-item detail>
+        <ion-label>{{ 'v2.screens.app-info.how-calculated' | translate }}</ion-label>
+      </ion-item>
 
-    <hr class="line">
+      <hr class="line">
 
-    <p [innerHTML]="'v2.screens.app-info.notifications' | translate "></p>
+      <p [innerHTML]="'v2.screens.app-info.notifications' | translate "></p>
 
-    <img src="/assets/images/gmail.png" alt="">
+      <img src="/assets/images/gmail.png" alt="">
 
-    <ion-item detail class="more">
-      <ion-label class="ion-text-wrap">{{ 'v2.screens.app-info.learn-more' | translate }}</ion-label>
-    </ion-item>
-  </div>
+      <ion-item detail class="more">
+        <ion-label class="ion-text-wrap">{{ 'v2.screens.app-info.learn-more' | translate }}</ion-label>
+      </ion-item>
+    </div>
+  </app-background>
 </ion-content>

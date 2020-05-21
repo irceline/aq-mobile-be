@@ -1,6 +1,6 @@
 ion-content {
     --background: transparent;
-    --padding-top: 65px;
+    // --padding-top: 65px;
 
     .longterm-info {
         color: white;
@@ -14,6 +14,7 @@ ion-content {
             font-size: 24px;
             color: white;
             height: auto;
+            --box-shadow: none;
 
             ion-icon {
                 font-size: 14px;

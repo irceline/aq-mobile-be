@@ -13,8 +13,8 @@ import {
 import { NavController } from '@ionic/angular';
 import { BelAQIService } from '../../services/bel-aqi.service';
 import { trigger, transition, style, animate } from '@angular/animations';
-import {UserLocation} from '../../Interfaces';
-import {UserSettingsService} from '../../services/user-settings.service';
+import { UserLocation } from '../../Interfaces';
+import { UserSettingsService } from '../../services/user-settings.service';
 
 @Component({
     selector: 'app-menu-screen',
@@ -71,7 +71,7 @@ export class MenuScreenComponent implements OnInit {
 
         this.userNotificationSettings = userSettingsService.getUserNotificationSettings();
 
-        this.userSettingsService.$userLocations.subscribe( userLocations => {
+        this.userSettingsService.$userLocations.subscribe((userLocations) => {
             this.locationList = userLocations;
         });
     }
@@ -83,25 +83,23 @@ export class MenuScreenComponent implements OnInit {
     }
 
     removeLocation(location: UserLocation) {
-        this.userSettingsService.removeUserLocation( location );
+        this.userSettingsService.removeUserLocation(location);
     }
 
     addLocation(location: UserLocation | null) {
-        if ( location !== null ) {
-            this.userSettingsService.addUserLocation( location );
+        if (location !== null) {
+            this.userSettingsService.addUserLocation(location);
             this.locationList = this.userSettingsService.getUserSavedLocations();
         }
     }
 
     openAppInfo() {
-        this.navCtrl.navigateForward(['main/app-info'], { animated: false });
+        this.navCtrl.navigateForward(['main/app-info']);
         this.menuClosed.emit();
     }
 
     openLongTermInfo() {
-        this.navCtrl.navigateForward(['main/longterm-info'], {
-            animated: false,
-        });
+        this.navCtrl.navigateForward(['main/longterm-info']);
         this.menuClosed.emit();
     }
 }

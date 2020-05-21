@@ -52,7 +52,7 @@ export class HeaderComponent implements OnInit {
     }
 
     openRating() {
-        this.navCtrl.navigateForward(['main/rating'], { animated: false });
+        this.navCtrl.navigateForward(['main/rating']);
         this.menuVisible = false;
     }
 }

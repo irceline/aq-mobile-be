@@ -27,6 +27,8 @@ export class PullTabComponent implements AfterViewInit {
     thresholdBottom = 200;
     isEnabled = false;
 
+    isClicked = false;
+
     constructor(
         public element: ElementRef,
         public renderer: Renderer,
@@ -80,12 +82,46 @@ export class PullTabComponent implements AfterViewInit {
             this.triggerArrow.nativeElement
         );
         triggerArrow
-            .get('pan')
+            .get('tap')
             .set({ direction: window['Hammer'].DIRECTION_VERTICAL });
 
-        triggerArrow.on('pan', (ev) => {
-            this.handlePan(ev);
+        triggerArrow.on('tap', (ev) => {
+            this.handleTap(ev);
         });
+    }
+
+    handleTap(ev) {
+        if (!this.isClicked) {
+            this.domCtrl.write(() => {
+                this.renderer.setElementStyle(
+                    this.element.nativeElement,
+                    'transition',
+                    'top 0.5s'
+                );
+                this.renderer.setElementStyle(
+                    this.element.nativeElement,
+                    'top',
+                    this.gap + 'px' // height from top when its opened
+                );
+            });
+            this.isEnabled = true;
+            this.isClicked = true;
+        } else {
+            this.domCtrl.write(() => {
+                this.renderer.setElementStyle(
+                    this.element.nativeElement,
+                    'transition',
+                    'top 0.5s'
+                );
+                this.renderer.setElementStyle(
+                    this.element.nativeElement,
+                    'top',
+                    this.platform.height() - this.handleHeight + 'px'
+                );
+            });
+            this.isEnabled = false;
+            this.isClicked = false;
+        }
     }
 
     handlePan(ev) {
@@ -122,8 +158,8 @@ export class PullTabComponent implements AfterViewInit {
             });
             this.isEnabled = true;
         } else if (
-            (this.platform.height() - newTop < this.thresholdBottom &&
-                ev.additionalEvent === 'pandown') ||
+            this.platform.height() - newTop < this.thresholdBottom ||
+            ev.additionalEvent === 'pandown' ||
             bounceToBottom
         ) {
             this.domCtrl.write(() => {
