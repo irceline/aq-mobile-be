@@ -23,13 +23,20 @@
     </div>
 
     <ul>
-      <li *ngFor="let information of informationData">
-<!--        <app-information-item [unit]="information.unit" [unitName]="information.unitName" [color]="information.color"-->
-<!--          [evaluation]="information.evaluation" [values]="information.values">-->
-<!--        </app-information-item>-->
-        <app-bar-chart [max]="information.chartData.max" [options]="information.chartData"
-          [euMax]="information.chartData.euMax" [worldMax]="information.chartData.worldMax"></app-bar-chart>
-        <app-value-display [color]="information.color" score="56" value="µg/m3"></app-value-display>
+      <li *ngFor="let ltd of longTermData">
+
+        <p>TODO: render the following information cfr design:
+          <br>
+          <b>{{ ltd.substance.name }}</b>,
+          <br>
+          {{ ltd.evaluation }} (using color: {{ ltd.color }})
+          <br>
+          Europese drempelwaard = {{ ltd.euBenchMark }}
+        </p>
+
+        <app-bar-chart [max]="ltd.chartData.max" [options]="ltd.chartData"
+          [euMax]="ltd.euBenchMark" [worldMax]="ltd.worldBenchMark"></app-bar-chart>
+        <app-value-display [color]="ltd.color" [score]="ltd.currentValue" [value]="ltd.substance.unit"></app-value-display>
       </li>
     </ul>
 
