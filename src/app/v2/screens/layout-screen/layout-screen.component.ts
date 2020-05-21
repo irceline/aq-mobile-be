@@ -47,8 +47,6 @@ export class LayoutScreenComponent implements OnInit {
         this.currentActiveIndex = this.belAqiForCurrentLocation.find(
             (iR) => Math.abs(iR.date.diff(moment(), 'days')) === 0
         );
-
-        console.log(this.currentActiveIndex);
     }
 
     ngOnInit() {}

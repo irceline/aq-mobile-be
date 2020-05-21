@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserLocation } from '../../Interfaces';
+import {DataPointForDay, UserLocation} from '../../Interfaces';
 import { UserSettingsService } from '../../services/user-settings.service';
 import {
     BelAqiIndexResult,
@@ -7,7 +7,6 @@ import {
 } from '../../services/bel-aqi.service';
 import moment from 'moment';
 import {
-    DetailDataPoint,
     DetailDataService,
 } from '../../services/detail-data.service';
 
@@ -48,39 +47,10 @@ export class MainScreenComponent implements OnInit {
         },
     ];
 
-    // todo: create service that fetches this data based on day and location
-    // information data
-    informationData = [
-        {
-            unit: 'O3',
-            unitName: 'Ozon',
-            color: '#ff4a2e',
-            evaluation: 'Heel Slecht',
-            values:
-                '106 µg/m3 berekend op jouw locatie, gemiddeld is dit 78 µg/m3.',
-        },
-        {
-            unit: 'O3',
-            unitName: 'Ozon',
-            color: '#2df16b',
-            evaluation: 'Goed',
-            values:
-                '106 µg/m3 berekend op jouw locatie, gemiddeld is dit 78 µg/m3.',
-        },
-        {
-            unit: 'O3',
-            unitName: 'Ozon',
-            color: '#2df16b',
-            evaluation: 'Goed',
-            values:
-                '106 µg/m3 berekend op jouw locatie, gemiddeld is dit 78 µg/m3.',
-        },
-    ];
-
     // keep track of loading status
     detailDataLoadig = false;
 
-    protected detailData: DetailDataPoint[] = [];
+    protected detailData: DataPointForDay[] = [];
 
     drawerOptions: any;
 
@@ -124,7 +94,6 @@ export class MainScreenComponent implements OnInit {
     }
 
     private async updateDetailData() {
-        console.log(this.currentActiveIndex);
         this.detailDataLoadig = true;
 
         try {
@@ -132,9 +101,6 @@ export class MainScreenComponent implements OnInit {
                 this.currentActiveIndex.location,
                 this.currentActiveIndex.date
             );
-
-            console.log('new detailed data');
-            console.log(this.detailData);
         } catch (e) {
             console.log(
                 'failed to get detailed data for ',

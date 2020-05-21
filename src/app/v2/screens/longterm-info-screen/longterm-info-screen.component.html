@@ -33,6 +33,24 @@
           <app-value-display [color]="information.color" score="56" value="µg/m3"></app-value-display>
         </li>
       </ul>
+      <ul>
+        <li *ngFor="let ltd of longTermData">
+
+          <p>TODO: render the following information cfr design:
+            <br>
+            <b>{{ ltd.substance.name }}</b>,
+            <br>
+            {{ ltd.evaluation }} (using color: {{ ltd.color }})
+            <br>
+            Europese drempelwaard = {{ ltd.euBenchMark }}
+          </p>
+
+          <app-bar-chart [max]="ltd.chartData.max" [options]="ltd.chartData" [euMax]="ltd.euBenchMark"
+            [worldMax]="ltd.worldBenchMark"></app-bar-chart>
+          <app-value-display [color]="ltd.color" [score]="ltd.currentValue" [value]="ltd.substance.unit">
+          </app-value-display>
+        </li>
+      </ul>
 
     </div>
   </app-background>

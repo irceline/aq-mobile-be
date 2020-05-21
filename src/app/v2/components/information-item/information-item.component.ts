@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { DetailDataPoint } from '../../services/detail-data.service';
+import {DataPointForDay} from '../../Interfaces';
 
 @Component({
     selector: 'app-information-item',
@@ -9,7 +9,7 @@ import { DetailDataPoint } from '../../services/detail-data.service';
 export class InformationItemComponent implements OnInit {
     @Output() backClicked = new EventEmitter();
 
-    @Input() detailedDataPoint: DetailDataPoint;
+    @Input() detailedDataPoint: DataPointForDay;
     @Input() isButton = false;
     @Input() hasBackBtn = false;
 

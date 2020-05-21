@@ -17,6 +17,6 @@ export class BarChartComponent implements OnInit {
     ngOnInit() {}
 
     getLines(value: number) {
-        return new Array(value / 10);
+        return new Array(Math.ceil( value / 10 ));
     }
 }
