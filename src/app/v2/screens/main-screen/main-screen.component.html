@@ -8,17 +8,44 @@
 </ion-content>
 
 <app-pull-tab [options]="drawerOptions">
-  <div class="details">
-    <h5>Bekijk in detail</h5>
+  <ng-container *ngIf="!detailPoint">
+    <div class="details">
+      <h5>Bekijk in detail</h5>
 
-    <app-information-item *ngFor="let detailDataPoint of detailData"
-                          [detailedDataPoint]="detailDataPoint" [isButton]="true">
-    </app-information-item>
+      <app-information-item *ngFor="let detailDataPoint of detailData" [detailedDataPoint]="detailDataPoint"
+        [isButton]="true" (click)="detailPoint = detailDataPoint">
+      </app-information-item>
 
-    <ion-item detail>
-      <ion-label>Berekening van impact op lange termijn</ion-label>
-    </ion-item>
-  </div>
+      <ion-item detail>
+        <ion-label>Berekening van impact op lange termijn</ion-label>
+      </ion-item>
+    </div>
 
-  <app-horizontal-cards-slider [data]="slidesData"></app-horizontal-cards-slider>
+    <app-horizontal-cards-slider [data]="slidesData"></app-horizontal-cards-slider>
+  </ng-container>
+
+
+  <ng-container *ngIf="detailPoint">
+    <div class="details">
+      <h5>Bekijk in detail</h5>
+
+      <app-information-item-details [detailPoint]="detailPoint" (backClicked)="detailPoint = null">
+      </app-information-item-details>
+
+      <app-time-line-list (dayChange)="onDayChange($event)" [items]="belAqiForCurrentLocation">
+      </app-time-line-list>
+
+      <app-value-display [color]="'blue'" score="56" value="µg/m3"></app-value-display>
+
+      <div class="details--info">
+        <div>
+          <ion-icon src="/assets/images/icons/question.svg"></ion-icon>
+          <h4>Wat is Stikstofdioxide?</h4>
+        </div>
+        <p>Een schadelijk gas dat zwaarder
+          is dan lucht en reageert heftig met andere stoffen, zoals metalen.</p>
+      </div>
+    </div>
+  </ng-container>
+
 </app-pull-tab>

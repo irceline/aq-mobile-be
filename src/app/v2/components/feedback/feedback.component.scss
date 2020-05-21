@@ -16,6 +16,14 @@
             &:first-child {
                 border-right: 1px solid #979797;
             }
+
+            &.inactive {
+                opacity: 0.2;
+            }
+
+            &.active {
+                opacity: 1;
+            }
         }
     }
 
@@ -46,12 +54,20 @@
         right: 0;
         left: 0;
         margin: auto;
+        --min-height: 60px;
         height: 60px;
         width: calc(100% - 60px);
         background-color: white;
         border-top-right-radius: 30px;
         border-top-left-radius: 30px;
-        color: #747474;
+        padding: 0 20px;
+
+        ion-label {
+            color: #747474;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+        }
 
         ion-icon {
             color: #747474;

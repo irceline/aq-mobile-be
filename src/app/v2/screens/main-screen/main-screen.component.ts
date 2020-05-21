@@ -6,7 +6,10 @@ import {
     BelAQIService,
 } from '../../services/bel-aqi.service';
 import moment from 'moment';
-import {DetailDataPoint, DetailDataService} from '../../services/detail-data.service';
+import {
+    DetailDataPoint,
+    DetailDataService,
+} from '../../services/detail-data.service';
 
 @Component({
     selector: 'app-main-screen',
@@ -83,6 +86,8 @@ export class MainScreenComponent implements OnInit {
 
     protected belAqi = 10;
 
+    detailPoint = null;
+
     constructor(
         private userSettingsService: UserSettingsService,
         private belAqiService: BelAQIService,
@@ -98,10 +103,9 @@ export class MainScreenComponent implements OnInit {
         // activate first location by default
         this.updateCurrentLocation(this.locations[0]);
 
-        userSettingsService.$userLocations.subscribe( locations => {
+        userSettingsService.$userLocations.subscribe((locations) => {
             this.locations = locations;
         });
-
     }
 
     private updateCurrentLocation(location: UserLocation) {
@@ -120,17 +124,23 @@ export class MainScreenComponent implements OnInit {
     }
 
     private async updateDetailData() {
-        console.log( this.currentActiveIndex );
+        console.log(this.currentActiveIndex);
         this.detailDataLoadig = true;
 
         try {
-            this.detailData = await this.detailDataService
-                .getMeasurementsFor( this.currentActiveIndex.location, this.currentActiveIndex.date );
+            this.detailData = await this.detailDataService.getMeasurementsFor(
+                this.currentActiveIndex.location,
+                this.currentActiveIndex.date
+            );
 
-            console.log('new detailed data' );
-            console.log( this.detailData );
-        } catch ( e ) {
-            console.log( 'failed to get detailed data for ', this.currentActiveIndex.location, this.currentActiveIndex.date );
+            console.log('new detailed data');
+            console.log(this.detailData);
+        } catch (e) {
+            console.log(
+                'failed to get detailed data for ',
+                this.currentActiveIndex.location,
+                this.currentActiveIndex.date
+            );
         }
 
         this.detailDataLoadig = false;

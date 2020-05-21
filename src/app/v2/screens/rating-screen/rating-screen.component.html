@@ -1,15 +1,17 @@
 <ion-content>
   <app-location-swipe (locationChange)="onLocationChange($event)" [locations]="locations"></app-location-swipe>
 
-  <app-circle-chart [belAqi]="currentActiveIndex"></app-circle-chart>
+  <ng-container *ngIf="!isFeedbackGiven">
+    <app-circle-chart [belAqi]="currentActiveIndex"></app-circle-chart>
 
-  <div class="rating ion-padding">
-    <p>{{ 'v2.screens.rating-screen.does-it-match' | translate  }}</p>
+    <div class="rating ion-padding">
+      <p>{{ 'v2.screens.rating-screen.does-it-match' | translate  }}</p>
 
-    <app-feedback (feedbackOpened)="isFeedbackOpened()" (feedbackGiven)="feedbackGiven($event)"></app-feedback>
-  </div>
+      <app-feedback (feedbackOpened)="feedbackOpened()" (feedbackGiven)="feedbackGiven($event)"></app-feedback>
+    </div>
+  </ng-container>
 
-  <div class="rating--info" *ngIf="!feedbackOpened">
+  <div class="rating--info" *ngIf="!isFeedbackOpened && !isFeedbackGiven">
     <p>
       {{ 'v2.screens.rating-screen.calculated-value' | translate  }}
     </p>
@@ -31,6 +33,11 @@
       <ion-label [innerHTML]="'v2.screens.rating-screen.industry' | translate"></ion-label>
     </ion-item>
   </div>
+
+  <ng-container *ngIf="isFeedbackGiven">
+    <app-success-display></app-success-display>
+  </ng-container>
+
 
 
 </ion-content>
