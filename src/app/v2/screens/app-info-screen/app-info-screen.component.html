@@ -16,17 +16,17 @@
 
     <ul>
       <li>
-        <h5>{{ 'v2.screens.app-info.ozon' | translate }} (O&#8323;)</h5>
+        <h5>{{ 'v2.screens.app-info.ozon' | translate }} <b>(O&#8323;)</b></h5>
         <p>
-          <span></span>
+          <span class="green"></span>
           78 µg/m3
         </p>
       </li>
 
       <li>
-        <h5>{{ 'v2.screens.app-info.nitrogen-dioxide' | translate }} (NO&#8322;)</h5>
+        <h5>{{ 'v2.screens.app-info.nitrogen-dioxide' | translate }} <b>(NO&#8322;)</b></h5>
         <p>
-          <span></span>
+          <span class="blue"></span>
           46 µg/m3
         </p>
       </li>
@@ -34,17 +34,17 @@
 
     <ul class="no-border">
       <li>
-        <h5>{{ 'v2.screens.app-info.fine-dust' | translate }} (PM 10)</h5>
+        <h5>{{ 'v2.screens.app-info.fine-dust' | translate }} <b>(PM 10)</b></h5>
         <p>
-          <span></span>
+          <span class="red"></span>
           154 µg/m3
         </p>
       </li>
 
       <li>
-        <h5>{{ 'v2.screens.app-info.very-fine-dust' | translate }} (PM 2,5)</h5>
+        <h5>{{ 'v2.screens.app-info.very-fine-dust' | translate }} <b>(PM 2,5)</b></h5>
         <p>
-          <span></span>
+          <span class="dark-green"></span>
           82 µg/m3
         </p>
       </li>
@@ -58,7 +58,7 @@
       <ion-label>{{ 'v2.screens.app-info.how-calculated' | translate }}</ion-label>
     </ion-item>
 
-    <hr>
+    <hr class="line">
 
     <p [innerHTML]="'v2.screens.app-info.notifications' | translate "></p>
 

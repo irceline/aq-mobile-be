@@ -18,6 +18,7 @@ export class PullTabComponent implements AfterViewInit {
     @Input('options') options: any;
 
     @ViewChild('trigger') trigger: ElementRef;
+    @ViewChild('triggerArrow') triggerArrow: ElementRef;
 
     handleHeight = 50;
     gap = 100;
@@ -66,12 +67,23 @@ export class PullTabComponent implements AfterViewInit {
             this.platform.height() - this.gap + 'px'
         );
 
-        const hammer = new window['Hammer'](this.trigger.nativeElement);
-        hammer
+        const trigger = new window['Hammer'](this.trigger.nativeElement);
+        trigger
             .get('pan')
             .set({ direction: window['Hammer'].DIRECTION_VERTICAL });
 
-        hammer.on('pan', (ev) => {
+        trigger.on('pan', (ev) => {
+            this.handlePan(ev);
+        });
+
+        const triggerArrow = new window['Hammer'](
+            this.triggerArrow.nativeElement
+        );
+        triggerArrow
+            .get('pan')
+            .set({ direction: window['Hammer'].DIRECTION_VERTICAL });
+
+        triggerArrow.on('pan', (ev) => {
             this.handlePan(ev);
         });
     }

@@ -24,16 +24,31 @@
         }
     }
 
+    .trigger-up {
+        position: absolute;
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        background: none;
+        z-index: 10;
+
+        img {
+            width: 20px;
+            height: 31px;
+            transition: transform .3s ease;
+
+            &.rotate {
+                transform: rotate(180deg);
+            }
+        }
+    }
+
     ion-content {
         background-color: white;
         border-top-right-radius: 30px;
         border-top-left-radius: 30px;
         box-shadow: 0 2px 50px 0 rgba(2, 136, 171, 0.4);
         position: relative;
-        // --padding-start: 45px;
-        // --padding-top: 45px;
-        // --padding-end: 30px;
-        // --padding-bottom: 45px;
         pointer-events: none;
         overflow: hidden;
     }
