@@ -516,10 +516,24 @@
 	},
   "v2": {
     "components": {
+      "circle-chart": {
+        "avg-score": "Gemiddelde score op jouw locatie is {{ score }}"
+      },
+      "feedback": {
+        "cause": "Ken je de oorzaak? (optioneel)",
+        "send-observation": "Verstuur waarneming"
+      },
       "location-input": {
         "choose-location": "Kies je locatie",
         "no-results": "Geen resultaten",
-        "current-location": "Huidige locatie"
+        "current-location": "Huidige locatie",
+        "please-wait": "Even geduld"
+      },
+      "location-sortable": {
+        "header": "Locatie verwijderen",
+        "message": "Ben je zeker dat je deze locatie wil verwijderen?",
+        "cancel": "Annuleren",
+        "confirm": "Bevestigen"
       },
       "onboarding-slider": {
         "btn-text": "Ga verder",
@@ -531,10 +545,6 @@
         "activity":  "Inspanningen",
         "transport":  "Verplaatsingen",
         "highConcentration": "(Te) hoge concentraties"
-      },
-      "feedback": {
-        "cause": "Ken je de oorzaak? (optioneel)",
-        "send-observation": "Verstuur waarneming"
       }
     },
     "screens": {
