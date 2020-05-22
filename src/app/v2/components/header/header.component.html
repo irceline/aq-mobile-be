@@ -7,8 +7,8 @@
     </ion-buttons>
 
     <ion-buttons slot="end">
-      <ion-button (click)="openRating()" class="ion-no-padding">
-        <img src="/assets/images/icons/megafoon.svg" alt="">
+      <ion-button (click)="clickRating()" class="ion-no-padding">
+        <img [src]="onRatingScreen ? '/assets/images/icons/megafoon-copy.svg' : '/assets/images/icons/megafoon.svg'" alt="">
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
