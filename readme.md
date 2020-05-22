@@ -76,21 +76,13 @@ cd ~/Library/Android/sdk/tools/bin/
 
 On any OS:
 - install docker
-- clone the repo:
-    git clone https://{username}@bitbucket.org/nebulaeenterprises/belair-2.0.git
-- go to root of the project:
-    cd belair-2.0
-- build image using Dockerfile:
-    docker build -t belair-2.0 .
+- pull image:
+    docker pull nebulaesoftware/belair-2.0
 - run image: 
-    docker run --name belair -p 8100:8100 -it belair-2.0 ash
+    docker run --name belair -p 8100:8100 -it nebulaesoftware/belair-2.0 ash
 - run:
     ionic serve --external
 - app should be available on localhost:8100
-
-- run APK:
-    ionic cordova platform add android
-    ionic cordova build android android
 
 On CentOS:
 ```sh
