@@ -1,5 +1,5 @@
-<ion-content>
-  <app-background>
+<app-background>
+  <ion-content>
     <div class="longterm-info">
       <ion-button (click)="goBack()">
         <ion-icon slot="start" src="/assets/images/icons/chevron-back.svg"></ion-icon>
@@ -8,7 +8,7 @@
 
       <p>{{ 'v2.screens.long-term-info.about-data' | translate }}</p>
 
-      <ion-item button (click)="onClick()">
+      <ion-item button (click)="goToLongTerm()">
         <ion-label>
           {{ 'v2.screens.long-term-info.from-where' | translate }}
         </ion-label>
@@ -43,5 +43,5 @@
       </ul>
 
     </div>
-  </app-background>
-</ion-content>
+  </ion-content>
+</app-background>

@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import {DataPointForDay, UserLocation} from '../../Interfaces';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { DataPointForDay, UserLocation } from '../../Interfaces';
 import { UserSettingsService } from '../../services/user-settings.service';
 import {
     BelAqiIndexResult,
     BelAQIService,
 } from '../../services/bel-aqi.service';
 import moment from 'moment';
-import {
-    DetailDataService,
-} from '../../services/detail-data.service';
+import { DetailDataService } from '../../services/detail-data.service';
+import { Platform } from '@ionic/angular';
 
 @Component({
     selector: 'app-main-screen',
@@ -57,11 +56,13 @@ export class MainScreenComponent implements OnInit {
     protected belAqi = 10;
 
     detailPoint = null;
+    contentHeight = 0;
 
     constructor(
         private userSettingsService: UserSettingsService,
         private belAqiService: BelAQIService,
-        private detailDataService: DetailDataService
+        private detailDataService: DetailDataService,
+        private platform: Platform
     ) {
         this.locations = userSettingsService.getUserSavedLocations();
         this.belAqiScores = this.belAqiService.getIndexScores(
@@ -114,12 +115,15 @@ export class MainScreenComponent implements OnInit {
 
     ngOnInit() {
         this.drawerOptions = {
-            handleHeight: 197,
+            handleHeight: 190,
             gap: 150,
             thresholdFromBottom: 300,
             thresholdFromTop: 200,
             bounceBack: true,
         };
+        this.contentHeight =
+            this.platform.height() - this.drawerOptions.handleHeight - 63;
+        console.log(this.contentHeight);
     }
 
     onLocationChange(location: UserLocation) {

@@ -1,12 +1,12 @@
-<app-background>
-  <ion-content>
+<ion-content [ngStyle]="{'height': contentHeight + 'px'}" [scrollY]="false">
+  <app-background>
     <app-location-swipe (locationChange)="onLocationChange($event)" [locations]="locations">
     </app-location-swipe>
     <app-circle-chart></app-circle-chart>
     <app-time-line-list (dayChange)="onDayChange($event)" [items]="belAqiForCurrentLocation">
     </app-time-line-list>
     <app-info-button></app-info-button>
-  </ion-content>
+  </app-background>
 
   <app-pull-tab [options]="drawerOptions">
     <ng-container *ngIf="!detailPoint">
@@ -50,4 +50,4 @@
     </ng-container>
 
   </app-pull-tab>
-</app-background>
+</ion-content>
