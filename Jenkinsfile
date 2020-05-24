@@ -1,11 +1,11 @@
 pipeline {
    environment {
        registryCredential = 'docker-hub-credentials'
-       appImg = "mbursac/belair-2.0"
+       appImg = "nebulaesoftware/belair-2.0"
        app = ''
-       setupEnvImg = "mbursac/setup-environment"
+       setupEnvImg = "nebulaesoftware/android-build-environment"
        setupEnv = ''
-       buildApkImg = "mbursac/build-apk"
+       buildApkImg = "nebulaesoftware/build-ionic-apk"
        buildApk = ''
    }
 
@@ -38,7 +38,7 @@ pipeline {
 
       stage('Copy apk') {
         steps {
-            sh 'docker run -v /var/lib/jenkins/workspace/Belair-2.0_V2/builds:/app/builds mbursac/build-apk sh -c "cp /app/platforms/android/app/build/outputs/apk/debug/app-debug.apk /app/builds/app-debug-latest.apk"'
+            sh 'docker run -v /var/lib/jenkins/workspace/Belair-2.0_V2/builds:/app/builds nebulaesoftware/build-ionic-apk sh -c "cp /app/platforms/android/app/build/outputs/apk/debug/app-debug.apk /app/builds/app-debug-latest.apk"'
         }
       }
 

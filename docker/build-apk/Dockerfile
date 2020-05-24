@@ -1,4 +1,4 @@
-FROM mbursac/belair-2.0
+FROM nebulaesoftware/belair-2.0
 
 RUN ionic cordova platform add android
 COPY build.gradle /app/platforms/android/build.gradle

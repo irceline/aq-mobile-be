@@ -1,4 +1,4 @@
-FROM mbursac/setup-environment
+FROM nebulaesoftware/android-build-environment
 
 COPY ././. /app
 

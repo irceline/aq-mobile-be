@@ -10,6 +10,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LoadingController, IonInput } from '@ionic/angular';
 import { UserLocation } from '../../Interfaces';
 import locations from '../../../../assets/locations.json';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'app-location-input',
@@ -36,7 +37,8 @@ export class LocationInputComponent implements OnInit {
 
     constructor(
         private geolocation: Geolocation,
-        public loadingController: LoadingController
+        public loadingController: LoadingController,
+        private translate: TranslateService
     ) {}
 
     ngOnInit() {
@@ -46,7 +48,7 @@ export class LocationInputComponent implements OnInit {
     // Getting the current location with native ionic plugin
     async getCurrentLocation() {
         const loading = await this.loadingController.create({
-            message: 'Please wait...',
+            message: this.translate.instant('v2.components.location-input.please-wait'),
         });
         await loading.present();
 

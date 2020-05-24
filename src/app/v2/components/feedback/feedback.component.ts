@@ -12,6 +12,7 @@ export class FeedbackComponent implements OnInit {
     like = false;
     dislike = false;
 
+    // todo : check data structure , simpler values?
     form = [
         { val: 'Verbranding van hout', isChecked: false },
         { val: 'Uitlaatgassen van verkeer', isChecked: false },
