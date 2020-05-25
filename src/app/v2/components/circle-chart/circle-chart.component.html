@@ -30,7 +30,7 @@
     </g>
   </svg>
 
-  <div class="circle-chart--text">
+  <div class="circle-chart--text" [ngClass]="pulsingText" (animationend)="pulsingText.pulsing = false">
     <h1>{{ title | titlecase }}</h1>
     <p>{{ text }}</p>
   </div>
