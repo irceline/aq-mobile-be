@@ -78,10 +78,10 @@ L.TileLayer.CustomCanvas = L.TileLayer.WMS.extend({
                     // Get all overflowing docs + 1/3 of docs from the cache
                     // Sorted by age ascending
                     db.changes({
-                        since: 0,
-                        limit: Math.floor((result.doc_count - maxDocCount) + maxDocCount / 3),
-                        include_docs: true
-                    })
+                            since: 0,
+                            limit: Math.floor((result.doc_count - maxDocCount) + maxDocCount / 3),
+                            include_docs: true
+                        })
                         .then(changes => {
                             // Remodel results object to enable parsing by bulkDocs functionpng
                             for (let i = 0; i < changes.results.length; i++) {
@@ -272,7 +272,9 @@ L.TileLayer.CustomCanvas = L.TileLayer.WMS.extend({
     //   {geometry: <LatLng[][][]>} otherwise
     _getTileGeometry: function (x, y, z, skipIntersectionCheck) {
         if (!skipIntersectionCheck && this.options.useBoundaryGreaterAsZoom && this.options.useBoundaryGreaterAsZoom >= z) {
-            return { isIn: true };
+            return {
+                isIn: true
+            };
         }
 
         if (!this.options.boundary) {
@@ -437,8 +439,9 @@ L.TileLayer.CustomCanvas = L.TileLayer.WMS.extend({
 
         if (this.options.useCache) {
             this._db.get(
-                tileUrl,
-                { revs_info: true },
+                tileUrl, {
+                    revs_info: true
+                },
                 this._onCacheLookup(tile, tileUrl, done)
             )
         } else {
@@ -659,22 +662,14 @@ L.TileLayer.CustomCanvas = L.TileLayer.WMS.extend({
         zoom += this.options.zoomOffset;
         return L.Util.template(
             this._url,
-            L.extend(
-                {
-                    r:
-                        this.options.detectRetina &&
-                            L.Browser.retina &&
-                            this.options.maxZoom > 0
-                            ? "@2x"
-                            : "",
+            L.extend({
+                    r: this.options.detectRetina &&
+                        L.Browser.retina &&
+                        this.options.maxZoom > 0 ? "@2x" : "",
                     s: this._getSubdomain(coords),
                     x: coords.x,
-                    y: this.options.tms
-                        ? this._globalTileRange.max.y - coords.y
-                        : coords.y,
-                    z: this.options.maxNativeZoom
-                        ? Math.min(zoom, this.options.maxNativeZoom)
-                        : zoom,
+                    y: this.options.tms ? this._globalTileRange.max.y - coords.y : coords.y,
+                    z: this.options.maxNativeZoom ? Math.min(zoom, this.options.maxNativeZoom) : zoom,
                 },
                 this.options
             )
@@ -738,7 +733,9 @@ if (!HTMLCanvasElement.prototype.toBlob) {
                     arr[i] = binStr.charCodeAt(i);
                 }
 
-                callback(new Blob([arr], { type: type || "image/png" }));
+                callback(new Blob([arr], {
+                    type: type || "image/png"
+                }));
             });
         },
     });
