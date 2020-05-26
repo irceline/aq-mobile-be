@@ -1,11 +1,8 @@
 FROM node:12-alpine
 
 WORKDIR /app
-COPY . /app
-
 VOLUME /app/builds
 
-#ENVIRONNEMENT
 ENV GLIB_PACKAGE_BASE_URL https://github.com/sgerrand/alpine-pkg-glibc/releases/download
 ENV GLIB_VERSION 2.25-r0
 
@@ -24,7 +21,6 @@ ENV PATH ${GRADLE_HOME}/bin:${JAVA_HOME}/bin:${ANDROID_HOME}/tools:$ANDROID_HOME
 
 # INSTALL JAVA
 RUN apk update && apk add curl openjdk8-jre openjdk8
-RUN export JAVA_HOME
 
 # INSTALL IONIC AND CORDOVA
 RUN npm install -g cordova @ionic/cli
@@ -59,12 +55,4 @@ RUN mkdir $ANDROID_HOME/licenses && \
     echo 24333f8a63b6825ea9c5514f83c2829b004d1fee >> $ANDROID_HOME/licenses/android-sdk-license && \
     echo 84831b9409646a918e30573bab4c9c91346d8abd > $ANDROID_HOME/licenses/android-sdk-preview-license
 
-
-#FILES DELETION
-#RUN rm -rf /tmp/* /var/cache/apk/*
-
-RUN npm i -f
-RUN ionic cordova platform add android
-COPY build.gradle /app/platforms/android/build.gradle
-RUN ionic cordova build android android
 

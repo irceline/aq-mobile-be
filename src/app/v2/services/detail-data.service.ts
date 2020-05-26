@@ -1,27 +1,8 @@
 import { Injectable } from '@angular/core';
 import {Moment} from 'moment';
-import {UserLocation} from '../Interfaces';
+import {DataPointForDay, Substance, UserLocation} from '../Interfaces';
 import {TranslateService} from '@ngx-translate/core';
 import {BelAQIService} from './bel-aqi.service';
-
-export interface Substance {
-  name: string;
-  abbreviation: string;
-  unit: string;
-}
-
-export interface DetailDataPoint {
-  location: UserLocation;
-  day: Moment;
-  substance: Substance;
-  currentValue: number;
-  averageValue: number;
-  // todo -> thresholds , on data point or not?
-  // thresholds set on server side or defined in client?
-  // for now, taking random values
-  evaluation: string;
-  color: string;
-}
 
 
 @Injectable({
@@ -56,9 +37,9 @@ export class DetailDataService {
     ];
   }
 
-  public getMeasurementsFor( location: UserLocation, day: Moment ): Promise<DetailDataPoint[]> {
+  public getMeasurementsFor( location: UserLocation, day: Moment ): Promise<DataPointForDay[]> {
     // todo -> api call for getting measurements on this day.
-    return new Promise<DetailDataPoint[]>( ((resolve, reject) => {
+    return new Promise<DataPointForDay[]>( ((resolve, reject) => {
 
       setTimeout( () => {
         resolve(this._getRandomValuesForSubstance(location, day));
@@ -67,7 +48,10 @@ export class DetailDataService {
     }));
   }
 
-  private _getRandomValuesForSubstance(location: UserLocation, day: Moment): DetailDataPoint[] {
+  // this simulates an API request to fetch detailed data
+  // when integrating with API, all you need to do is refactor this method to fetch the actual data
+  // if the output is structured in the same way, the app will be functional
+  private _getRandomValuesForSubstance(location: UserLocation, day: Moment): DataPointForDay[] {
     return this._substances.map( s => {
 
       // we are using a random belaqi index to get matching correct colors and text

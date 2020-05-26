@@ -1,8 +1,8 @@
 <div class="feedback--buttons">
-  <ion-button (click)="openFeedback('like')">
+  <ion-button (click)="openFeedback('like')" [ngClass]="{'active': like, 'inactive': dislike}">
     <ion-icon slot="icon-only" src="/assets/images/icons/like.svg"></ion-icon>
   </ion-button>
-  <ion-button (click)="openFeedback('dislike')">
+  <ion-button (click)="openFeedback('dislike')" [ngClass]="{'active': dislike, 'inactive': like}">
     <ion-icon slot="icon-only" src="/assets/images/icons/dislike.svg"></ion-icon>
   </ion-button>
 </div>
@@ -23,6 +23,11 @@
   </ng-container>
 </div>
 
-<ion-button class="feedback--button" (click)="giveFeedback()" expand="block" fill="clear" *ngIf="like || dislike">
+<!-- <ion-button class="feedback--button" (click)="giveFeedback()" expand="block" fill="clear" *ngIf="like || dislike">
   {{ 'v2.components.feedback.send-observation' | translate }}
-</ion-button>
+  <ion-icon src="/assets/images/icons/arrow-right.svg"></ion-icon>
+</ion-button> -->
+
+<ion-item detail (click)="giveFeedback()" lines="none" class="feedback--button" *ngIf="like || dislike">
+  <ion-label>{{ 'v2.components.feedback.send-observation' | translate }}</ion-label>
+</ion-item>

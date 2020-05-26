@@ -18,6 +18,7 @@ export class PullTabComponent implements AfterViewInit {
     @Input('options') options: any;
 
     @ViewChild('trigger') trigger: ElementRef;
+    @ViewChild('triggerArrow') triggerArrow: ElementRef;
 
     handleHeight = 50;
     gap = 100;
@@ -25,6 +26,8 @@ export class PullTabComponent implements AfterViewInit {
     thresholdTop = 200;
     thresholdBottom = 200;
     isEnabled = false;
+
+    isClicked = false;
 
     constructor(
         public element: ElementRef,
@@ -66,14 +69,59 @@ export class PullTabComponent implements AfterViewInit {
             this.platform.height() - this.gap + 'px'
         );
 
-        const hammer = new window['Hammer'](this.trigger.nativeElement);
-        hammer
+        const trigger = new window['Hammer'](this.trigger.nativeElement);
+        trigger
             .get('pan')
             .set({ direction: window['Hammer'].DIRECTION_VERTICAL });
 
-        hammer.on('pan', (ev) => {
+        trigger.on('pan', (ev) => {
             this.handlePan(ev);
         });
+
+        const triggerArrow = new window['Hammer'](
+            this.triggerArrow.nativeElement
+        );
+        triggerArrow
+            .get('tap')
+            .set({ direction: window['Hammer'].DIRECTION_VERTICAL });
+
+        triggerArrow.on('tap', (ev) => {
+            this.handleTap(ev);
+        });
+    }
+
+    handleTap(ev) {
+        if (!this.isClicked) {
+            this.domCtrl.write(() => {
+                this.renderer.setElementStyle(
+                    this.element.nativeElement,
+                    'transition',
+                    'top 0.5s'
+                );
+                this.renderer.setElementStyle(
+                    this.element.nativeElement,
+                    'top',
+                    this.gap + 'px' // height from top when its opened
+                );
+            });
+            this.isEnabled = true;
+            this.isClicked = true;
+        } else {
+            this.domCtrl.write(() => {
+                this.renderer.setElementStyle(
+                    this.element.nativeElement,
+                    'transition',
+                    'top 0.5s'
+                );
+                this.renderer.setElementStyle(
+                    this.element.nativeElement,
+                    'top',
+                    this.platform.height() - this.handleHeight + 'px'
+                );
+            });
+            this.isEnabled = false;
+            this.isClicked = false;
+        }
     }
 
     handlePan(ev) {
@@ -110,8 +158,8 @@ export class PullTabComponent implements AfterViewInit {
             });
             this.isEnabled = true;
         } else if (
-            (this.platform.height() - newTop < this.thresholdBottom &&
-                ev.additionalEvent === 'pandown') ||
+            this.platform.height() - newTop < this.thresholdBottom ||
+            ev.additionalEvent === 'pandown' ||
             bounceToBottom
         ) {
             this.domCtrl.write(() => {

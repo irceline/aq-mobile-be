@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
     selector: 'app-info-button',
@@ -6,11 +7,11 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./info-button.component.scss'],
 })
 export class InfoButtonComponent implements OnInit {
-    constructor() {}
+    constructor(private navCtrl: NavController) {}
 
     ngOnInit() {}
 
-    onClick() {
-        alert('go to info');
+    goTo() {
+        this.navCtrl.navigateForward(['/main/app-info']);
     }
 }

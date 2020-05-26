@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import {UserLocation} from '../../Interfaces';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'app-location-sortable',
@@ -13,7 +14,7 @@ export class LocationSortableComponent implements OnInit {
     @Output() locationRemoved = new EventEmitter();
     @Output() locationUpdated = new EventEmitter();
 
-    constructor(private alertController: AlertController) {}
+    constructor(private alertController: AlertController, private translate: TranslateService) {}
 
     ngOnInit() {}
 
@@ -24,11 +25,11 @@ export class LocationSortableComponent implements OnInit {
 
     async deleteLocation(location) {
         const alert = await this.alertController.create({
-            header: 'Delete location!',
-            message: 'Are you sure to delete this location?',
+            header: this.translate.instant('v2.components.location-sortable.header'),
+            message: this.translate.instant('v2.components.location-sortable.message'),
             buttons: [
                 {
-                    text: 'Cancel',
+                    text: this.translate.instant('v2.components.location-sortable.cancel'),
                     role: 'cancel',
                     cssClass: 'secondary',
                     handler: () => {
@@ -36,7 +37,7 @@ export class LocationSortableComponent implements OnInit {
                     },
                 },
                 {
-                    text: 'Confirm',
+                    text: this.translate.instant('v2.components.location-sortable.confirm'),
                     handler: () => {
                         this.locationRemoved.emit(location);
                     },

@@ -12,6 +12,6 @@ export class AppInfoScreenComponent implements OnInit {
     ngOnInit() {}
 
     goBack() {
-        this.navCtrl.navigateBack(['/main'], { animated: false });
+        this.navCtrl.navigateBack(['/main']);
     }
 }

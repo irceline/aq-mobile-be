@@ -1,37 +1,47 @@
-<ion-content>
-  <div class="longterm-info">
-    <ion-button (click)="goBack()">
-      <ion-icon slot="start" src="/assets/images/icons/chevron-back.svg"></ion-icon>
-      {{ 'v2.screens.long-term-info.long-term' | translate }}
-    </ion-button>
+<app-background>
+  <ion-content>
+    <div class="longterm-info">
+      <ion-button (click)="goBack()">
+        <ion-icon slot="start" src="/assets/images/icons/chevron-back.svg"></ion-icon>
+        {{ 'v2.screens.long-term-info.long-term' | translate }}
+      </ion-button>
 
-    <p>{{ 'v2.screens.long-term-info.about-data' | translate }}</p>
+      <p>{{ 'v2.screens.long-term-info.about-data' | translate }}</p>
 
-    <ion-item button (click)="onClick()">
-      <ion-label>
-        {{ 'v2.screens.long-term-info.from-where' | translate }}
-      </ion-label>
-    </ion-item>
-  </div>
-
-  <div class="card">
-    <div class="card--content">
-      <h5>{{ 'v2.screens.long-term-info.long-term' | translate }}</h5>
-      <p>
-        {{ 'v2.screens.long-term-info.lt-effects-diseases' | translate }}
-      </p>
+      <ion-item button (click)="goToLongTerm()">
+        <ion-label>
+          {{ 'v2.screens.long-term-info.from-where' | translate }}
+        </ion-label>
+      </ion-item>
     </div>
 
-    <ul>
-      <li *ngFor="let information of informationData">
-<!--        <app-information-item [unit]="information.unit" [unitName]="information.unitName" [color]="information.color"-->
-<!--          [evaluation]="information.evaluation" [values]="information.values">-->
-<!--        </app-information-item>-->
-        <app-bar-chart [max]="information.chartData.max" [options]="information.chartData"
-          [euMax]="information.chartData.euMax" [worldMax]="information.chartData.worldMax"></app-bar-chart>
-        <app-value-display [color]="information.color" score="56" value="µg/m3"></app-value-display>
-      </li>
-    </ul>
+    <div class="card">
+      <div class="card--content">
+        <h5>{{ 'v2.screens.long-term-info.long-term' | translate }}</h5>
+        <p>
+          {{ 'v2.screens.long-term-info.lt-effects-diseases' | translate }}
+        </p>
+      </div>
 
-  </div>
-</ion-content>
+      <ul>
+        <li *ngFor="let ltd of longTermData">
+
+          <p>TODO: render the following information cfr design:
+            <br>
+            <b>{{ ltd.substance.name }}</b>,
+            <br>
+            {{ ltd.evaluation }} (using color: {{ ltd.color }})
+            <br>
+            Europese drempelwaard = {{ ltd.euBenchMark }}
+          </p>
+
+          <app-bar-chart [max]="ltd.chartData.max" [options]="ltd.chartData" [euMax]="ltd.euBenchMark"
+            [worldMax]="ltd.worldBenchMark"></app-bar-chart>
+          <app-value-display [color]="ltd.color" [score]="ltd.currentValue" [value]="ltd.substance.unit">
+          </app-value-display>
+        </li>
+      </ul>
+
+    </div>
+  </ion-content>
+</app-background>

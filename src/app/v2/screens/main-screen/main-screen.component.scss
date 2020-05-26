@@ -2,7 +2,7 @@
 
 ion-content {
   --background: transparent;
-  --padding-top: 65px;
+  // --padding-top: 65px;
 }
 
 app-pull-tab ::ng-deep {
@@ -37,4 +37,55 @@ ion-item {
   --border-color: #1ebce5;
   --detail-icon-opacity: 1;
   --detail-icon-color: #1ebce5;
+}
+
+app-value-display {
+  margin: 20px 0;
+  position: relative;
+
+  &:before {
+    height: 1px;
+    width: 100%;
+    content: '';
+    position: absolute;
+    left: -100%;
+    background-color: #eee;
+
+  }
+
+  &:after {
+    height: 1px;
+    width: 100%;
+    content: '';
+    position: absolute;
+    right: -100%;
+    background-color: #eee;
+
+  }
+}
+
+.details--info {
+  max-width: 275px;
+  margin: 0 auto;
+
+  div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+
+    h4 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #747474;
+      margin: 0;
+      margin-left: 14px;
+    }
+  }
+
+  p {
+    font-size: 16px;
+    color: #747474;
+  }
+
+
 }

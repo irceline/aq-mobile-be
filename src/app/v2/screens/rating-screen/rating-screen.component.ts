@@ -19,7 +19,8 @@ export class RatingScreenComponent implements OnInit {
     private belAqiScores: BelAqiIndexResult[] = [];
     currentActiveIndex: BelAqiIndexResult;
 
-    feedbackOpened = false;
+    isFeedbackOpened = false;
+    isFeedbackGiven = false;
 
     constructor(
         private userSettingsService: UserSettingsService,
@@ -37,7 +38,7 @@ export class RatingScreenComponent implements OnInit {
         // activate first location by default
         this.updateCurrentLocation(this.locations[0]);
 
-        userSettingsService.$userLocations.subscribe( locations => {
+        userSettingsService.$userLocations.subscribe((locations) => {
             this.locations = locations;
         });
     }
@@ -52,19 +53,18 @@ export class RatingScreenComponent implements OnInit {
         );
 
         this.belAqiService.activeIndex = this.currentActiveIndex;
-
     }
 
     onLocationChange(location: UserLocation) {
         this.updateCurrentLocation(location);
     }
 
-    isFeedbackOpened() {
-        this.feedbackOpened = true;
-        console.log('is opened');
+    feedbackOpened() {
+        this.isFeedbackOpened = true;
     }
 
     feedbackGiven(event) {
         console.log(event);
+        this.isFeedbackGiven = true;
     }
 }

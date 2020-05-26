@@ -1,0 +1,7 @@
+<ng-container *ngIf="detailPoint; else loading">
+  <app-information-item [detailedDataPoint]="detailPoint" (backClicked)="goBack()" [hasBackBtn]="true">
+  </app-information-item>
+</ng-container>
+<ng-template #loading>
+  <ion-spinner name="dots"></ion-spinner>
+</ng-template>

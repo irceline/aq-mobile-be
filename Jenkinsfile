@@ -1,42 +1,75 @@
 pipeline {
    environment {
-       registry = "mbursac/belair-2.0"
        registryCredential = 'docker-hub-credentials'
+       appImg = "nebulaesoftware/belair-2.0"
        app = ''
+       setupEnvImg = "nebulaesoftware/android-build-environment"
+       setupEnv = ''
+       buildApkImg = "nebulaesoftware/build-ionic-apk"
+       buildApk = ''
    }
 
    agent any
 
    stages {
-      stage('Build docker image') {
+      stage('Create app environment') {
        steps {
             script {
-                app = docker.build registry
+                setupEnv = docker.build(setupEnvImg, "-f ./docker/setup-environment/Dockerfile .")
             }
         }
       }
 
-        stage('Copy apk') {
-            steps {
-                sh 'docker run -v /var/lib/jenkins/workspace/Belair-2.0_V2/builds:/app/builds mbursac/belair-2.0 sh -c "cp /app/platforms/android/app/build/outputs/apk/debug/app-debug.apk /app/builds/app-debug-latest.apk"'
+      stage('Create app') {
+        steps {
+            script {
+                app = docker.build(appImg, "-f ./docker/create-app/Dockerfile .")
             }
         }
+      }
 
-          stage('Push image') {
-            steps {
-                script {
-                  docker.withRegistry('', registryCredential) {
+      stage('Build apk') {
+        steps {
+            script {
+               buildApk = docker.build(buildApkImg, "-f ./docker/build-apk/Dockerfile .")
+            }
+        }
+      }
+
+      stage('Copy apk') {
+        steps {
+            sh 'docker run -v /var/lib/jenkins/workspace/Belair-2.0_V2/builds:/app/builds nebulaesoftware/build-ionic-apk sh -c "cp /app/platforms/android/app/build/outputs/apk/debug/app-debug.apk /app/builds/app-debug-latest.apk"'
+        }
+      }
+
+      stage('Push images') {
+        steps {
+            script {
+                docker.withRegistry('', registryCredential) {
+                      setupEnv.push()
                       app.push()
-                  }
+                      buildApk.push()
                 }
             }
-          }
+        }
+      }
 
+      stage('Stop all containers') {
+        steps {
+            sh 'docker stop $(docker ps -aq)'
+        }
+      }
 
+      stage('Remove all containers') {
+        steps {
+            sh 'docker rm $(docker ps -aq)'
+        }
+      }
 
-      stage('Remove Unused docker image') {
-        steps{
-          sh "docker rmi $registry"
+      stage('Send apk link via Slack') {
+        steps {
+            slackSend channel: '#belair',
+            message: "New apk file available at: http://belair.nebulae.be:8080/job/Belair-2.0/job/V2/${env.BUILD_NUMBER}/execution/node/3/ws/builds/"
         }
       }
    }

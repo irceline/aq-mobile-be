@@ -1,20 +1,6 @@
-import {
-    Component,
-    OnInit,
-    Input,
-    OnChanges,
-    SimpleChanges,
-} from '@angular/core';
-import {
-    trigger,
-    state,
-    style,
-    transition,
-    animate,
-    keyframes,
-    group,
-} from '@angular/animations';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { BelAQIService } from '../../services/bel-aqi.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-circle-chart',
@@ -34,10 +20,17 @@ export class CircleChartComponent implements OnInit {
     defaultOffset = 910;
     defaultRange = 92;
 
-    constructor(private belaqiService: BelAQIService) {
-        belaqiService.$activeIndex.subscribe( ( newIndex ) => {
+    pulsingText = {
+        pulsing: false,
+    };
+
+    constructor(
+        private belaqiService: BelAQIService,
+        private translate: TranslateService
+    ) {
+        belaqiService.$activeIndex.subscribe((newIndex) => {
             this.belAqi = newIndex.indexScore;
-            this._initialize( this.belAqi );
+            this._initialize(this.belAqi);
         });
     }
 
@@ -46,7 +39,6 @@ export class CircleChartComponent implements OnInit {
     }
 
     private _initialize(belaqi: number) {
-
         const inverted = 11 - belaqi;
 
         const range = inverted * this.defaultRange;
@@ -57,7 +49,11 @@ export class CircleChartComponent implements OnInit {
     }
 
     private _changeTitle(value: number) {
+        this.pulsingText.pulsing = true;
         this.title = this.belaqiService.getLabelForIndex(value);
-        this.text = 'Gemiddelde score op jouw locatie is ' + this.title;
+        this.text = this.translate.instant(
+            'v2.components.circle-chart.avg-score',
+            { score: this.title }
+        );
     }
 }

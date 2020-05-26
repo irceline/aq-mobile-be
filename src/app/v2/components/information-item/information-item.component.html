@@ -1,5 +1,13 @@
 <ion-item [button]="isButton" lines="none" class="ion-no-padding">
-  <span class="line" [ngStyle]="{'background-color': detailedDataPoint.color}"></span>
+  <ng-container *ngIf="hasBackBtn; else line">
+    <ion-button (click)="goBack()" fill="clear" class="back-btn">
+      <ion-icon slot="icon-only" src="/assets/images/icons/arrow-left.svg"></ion-icon>
+    </ion-button>
+  </ng-container>
+  <ng-template #line>
+    <span class="line" [ngStyle]="{'background-color': detailedDataPoint.color}"></span>
+  </ng-template>
+
   <ion-label class="ion-text-wrap">
     <ion-text>
       <h3 *ngIf="detailedDataPoint.substance.name && detailedDataPoint.substance.abbreviation">

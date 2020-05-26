@@ -24,6 +24,8 @@ import { MenuScreenComponent } from './menu-screen/menu-screen.component';
 import { InfoButtonComponent } from './info-button/info-button.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { ValueDisplayComponent } from './value-display/value-display.component';
+import { SuccessDisplayComponent } from './success-display/success-display.component';
+import { InformationItemDetailsComponent } from './information-item-details/information-item-details.component';
 
 const COMPONENTS = [
     CircleChartComponent,
@@ -46,6 +48,8 @@ const COMPONENTS = [
     InfoButtonComponent,
     FeedbackComponent,
     ValueDisplayComponent,
+    SuccessDisplayComponent,
+    InformationItemDetailsComponent,
 ];
 
 @NgModule({
