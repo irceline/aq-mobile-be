@@ -45,7 +45,7 @@ export class CircleChartComponent implements OnInit {
     }
 
     ngOnInit() {
-        this._initialize(this.belAqi);
+        // this._initialize(this.belAqi);
     }
 
     getChartHeight() {
@@ -63,11 +63,19 @@ export class CircleChartComponent implements OnInit {
     }
 
     private _changeTitle(value: number) {
+        console.log( 'change title called', value );
         this.pulsingText.pulsing = true;
+
         this.title = this.belaqiService.getLabelForIndex(value);
-        this.text = this.translate.instant(
-            'v2.components.circle-chart.avg-score',
-            { score: this.title }
-        );
+        console.log( this.title );
+        try {
+            this.text = this.translate.instant(
+                'v2.components.circle-chart.avg-score',
+                { score: this.title }
+            );
+        } catch (e) {
+            console.log( e );
+        }
+
     }
 }

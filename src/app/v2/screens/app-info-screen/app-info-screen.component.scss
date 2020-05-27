@@ -1,6 +1,6 @@
 ion-content {
     --background: transparent;
-    --padding-top: 44px;
+    --padding-top: 56px;
 
     .app-info {
         color: white;
@@ -14,10 +14,11 @@ ion-content {
             font-size: 24px;
             color: white;
             height: auto;
-            margin-bottom: 45px;
+            margin-bottom: 40px;
             --background-activated: transparent;
             --box-shadow: none;
-            margin-top: 10px;
+            text-transform: initial;
+            font-weight: 400;
 
             ion-icon {
                 font-size: 14px;

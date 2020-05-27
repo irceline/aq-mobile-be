@@ -26,6 +26,7 @@ import { FeedbackComponent } from './feedback/feedback.component';
 import { ValueDisplayComponent } from './value-display/value-display.component';
 import { SuccessDisplayComponent } from './success-display/success-display.component';
 import { InformationItemDetailsComponent } from './information-item-details/information-item-details.component';
+import { MapComponent } from './map-component/map.component';
 
 const COMPONENTS = [
     CircleChartComponent,
@@ -50,6 +51,7 @@ const COMPONENTS = [
     ValueDisplayComponent,
     SuccessDisplayComponent,
     InformationItemDetailsComponent,
+    MapComponent,
 ];
 
 @NgModule({

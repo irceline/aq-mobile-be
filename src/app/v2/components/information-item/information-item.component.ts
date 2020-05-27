@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import {DataPointForDay} from '../../Interfaces';
+import { DataPointForDay } from '../../Interfaces';
 
 @Component({
     selector: 'app-information-item',
