@@ -9,8 +9,8 @@ import { trigger, style, transition, animate } from '@angular/animations';
 import { IonReorderGroup, NavController } from '@ionic/angular';
 
 import { BelAQIService } from '../../services/bel-aqi.service';
-import {NavigationEnd, Router} from '@angular/router';
-import {filter} from 'rxjs/operators';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
     selector: 'app-header',
@@ -40,12 +40,11 @@ export class HeaderComponent implements OnInit {
             this.belAqi = newIndex.indexScore;
         });
 
-        router
-            .events
-            .pipe(filter(event => event instanceof NavigationEnd))
-            .subscribe( (newRoute: NavigationEnd) => {
-                this.onRatingScreen = ( newRoute.url === '/main/rating' );
-                console.log( this.onRatingScreen );
+        router.events
+            .pipe(filter((event) => event instanceof NavigationEnd))
+            .subscribe((newRoute: NavigationEnd) => {
+                this.onRatingScreen = newRoute.url === '/main/rating';
+                console.log(this.onRatingScreen);
             });
     }
 
@@ -53,6 +52,11 @@ export class HeaderComponent implements OnInit {
 
     getBackgroundForIndex(index: number) {
         this.belAQIService.getLightColorForIndex(index);
+    }
+
+    getBackgroundColor() {
+        console.log(this.backgroundColor);
+        return `${this.backgroundColor}`;
     }
 
     toggleMenu() {
@@ -64,7 +68,7 @@ export class HeaderComponent implements OnInit {
     }
 
     clickRating() {
-        if ( this.onRatingScreen ) {
+        if (this.onRatingScreen) {
             this.navCtrl.navigateForward(['main']);
         } else {
             this.navCtrl.navigateForward(['main/rating']);

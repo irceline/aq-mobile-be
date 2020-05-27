@@ -128,7 +128,7 @@ export class MainScreenComponent implements OnInit {
             bounceBack: true,
         };
         this.contentHeight =
-            this.platform.height() - this.drawerOptions.handleHeight - 44;
+            this.platform.height() - this.drawerOptions.handleHeight - 56;
     }
 
     onLocationChange(location: UserLocation) {

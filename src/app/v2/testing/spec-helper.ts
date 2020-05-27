@@ -11,5 +11,12 @@ export const specHelper = {
       .and.callFake(localStorageMock.removeItem);
     spyOn(localStorage, 'clear')
       .and.callFake(localStorageMock.clear);
+  },
+
+  decodeHtmlCharCodes: (value: String) => {
+    return value.replace(/(&#(\d+);)/g, (match, capture, charCode) => {
+          return String.fromCharCode(charCode);
+        }
+    );
   }
 };

@@ -1,5 +1,5 @@
 <app-background>
-  <ion-content [forceOverscroll]="false">
+  <ion-content [scrollY]="false">
     <div class="wrapper" [ngStyle]="{'height': contentHeight + 'px'}">
       <app-location-swipe (locationChange)="onLocationChange($event)" [locations]="locations">
       </app-location-swipe>
@@ -34,7 +34,8 @@
         <app-information-item-details [detailPoint]="detailPoint" (backClicked)="detailPoint = null">
         </app-information-item-details>
 
-        <app-time-line-list (dayChange)="onDayChange($event)" [items]="belAqiForCurrentLocation">
+        <app-time-line-list class="details--timeline" (dayChange)="onDayChange($event)"
+          [items]="belAqiForCurrentLocation">
         </app-time-line-list>
 
         <app-value-display [color]="'blue'" score="56" value="µg/m3"></app-value-display>
@@ -47,6 +48,8 @@
           <p>Een schadelijk gas dat zwaarder
             is dan lucht en reageert heftig met andere stoffen, zoals metalen.</p>
         </div>
+
+        <!-- <map-component [currentLocation]="currentLocation"></map-component> -->
       </div>
     </ng-container>
   </app-pull-tab>
