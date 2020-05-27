@@ -7,7 +7,7 @@
   </ion-button>
 </div>
 
-<div class="feedback--content" *ngIf="like || dislike" [ngStyle]="{'padding-bottom': dislike ? '60px' : '0px'}">
+<div class="feedback--content" *ngIf="like || dislike" [ngStyle]="{'padding-bottom': dislike || like ? '60px' : '0px'}">
   <ng-container *ngIf="like">
     <app-location-input [currentLocation]="false"></app-location-input>
   </ng-container>
@@ -22,11 +22,6 @@
     <app-location-input [currentLocation]="false"></app-location-input>
   </ng-container>
 </div>
-
-<!-- <ion-button class="feedback--button" (click)="giveFeedback()" expand="block" fill="clear" *ngIf="like || dislike">
-  {{ 'v2.components.feedback.send-observation' | translate }}
-  <ion-icon src="/assets/images/icons/arrow-right.svg"></ion-icon>
-</ion-button> -->
 
 <ion-item detail (click)="giveFeedback()" lines="none" class="feedback--button" *ngIf="like || dislike">
   <ion-label>{{ 'v2.components.feedback.send-observation' | translate }}</ion-label>
