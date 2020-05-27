@@ -1,10 +1,14 @@
 :host {
     padding: 0 18px;
-    display: block;
+    display: flex;
 
     ion-toolbar {
-        --border-color: rgba(216, 216, 216, 0.4);
-        mix-blend-mode: multiply;
-        --min-height: 63px;
+        --border-width: 0;
+    }
+
+    ion-header {
+        &.header-md:after {
+            background: none;
+        }
     }
 }

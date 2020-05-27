@@ -1,91 +1,110 @@
 @import '../../theme/variables';
 
 ion-content {
-  --background: transparent;
-  // --padding-top: 65px;
+    --background: transparent;
+    --padding-top: 44px;
 }
 
 app-pull-tab ::ng-deep {
-  .details {
-    padding: 45px 30px 45px 45px;
-    display: block;
+    .details {
+        padding: 45px 30px 45px 45px;
+        display: block;
 
-    h5 {
-      font-size: 18px;
-      font-weight: bold;
-      color: #23b1d6;
-      position: relative;
-      margin-bottom: 55px;
+        h5 {
+            font-size: 18px;
+            font-weight: bold;
+            color: #23b1d6;
+            position: relative;
+            margin-bottom: 55px;
 
-      &:after {
-        content: '';
-        position: absolute;
-        bottom: -10px;
-        left: 0;
-        width: 37px;
-        height: 1px;
-        background: rgba(#e0e0e0, 0.7);
-      }
+            &:after {
+                content: '';
+                position: absolute;
+                bottom: -10px;
+                left: 0;
+                width: 37px;
+                height: 1px;
+                background: rgba(#e0e0e0, 0.7);
+            }
+        }
     }
-  }
 }
 
 ion-item {
-  color: #1ebce5;
-  --padding-start: 0;
-  margin-top: 45px;
-  --border-color: #1ebce5;
-  --detail-icon-opacity: 1;
-  --detail-icon-color: #1ebce5;
+    color: #1ebce5;
+    --padding-start: 0;
+    margin-top: 45px;
+    --border-color: #1ebce5;
+    --detail-icon-opacity: 1;
+    --detail-icon-color: #1ebce5;
 }
 
 app-value-display {
-  margin: 20px 0;
-  position: relative;
+    margin: 20px 0;
+    position: relative;
 
-  &:before {
-    height: 1px;
-    width: 100%;
-    content: '';
-    position: absolute;
-    left: -100%;
-    background-color: #eee;
+    &:before {
+        height: 1px;
+        width: 100%;
+        content: '';
+        position: absolute;
+        left: -100%;
+        background-color: #eee;
+    }
 
-  }
-
-  &:after {
-    height: 1px;
-    width: 100%;
-    content: '';
-    position: absolute;
-    right: -100%;
-    background-color: #eee;
-
-  }
+    &:after {
+        height: 1px;
+        width: 100%;
+        content: '';
+        position: absolute;
+        right: -100%;
+        background-color: #eee;
+    }
 }
 
 .details--info {
-  max-width: 275px;
-  margin: 0 auto;
+    max-width: 275px;
+    margin: 0 auto;
 
-  div {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
+    div {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
 
-    h4 {
-      font-size: 16px;
-      font-weight: 600;
-      color: #747474;
-      margin: 0;
-      margin-left: 14px;
+        h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #747474;
+            margin: 0;
+            margin-left: 14px;
+        }
     }
-  }
 
-  p {
-    font-size: 16px;
-    color: #747474;
-  }
+    p {
+        font-size: 16px;
+        color: #747474;
+    }
+}
 
+.wrapper {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding-bottom: 30px;
 
+    app-location-swipe {
+        // background: green;
+    }
+
+    app-circle-chart {
+        height: calc(100% - 183px);
+        // background-color: red;
+    }
+
+    app-time-line-list {
+        height: 100px;
+        margin-top: 20px;
+        // background-color: yellow;
+    }
 }

@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    Input,
+    OnChanges,
+    ElementRef,
+    AfterViewInit,
+} from '@angular/core';
 import { BelAQIService } from '../../services/bel-aqi.service';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -11,8 +18,10 @@ export class CircleChartComponent implements OnInit {
     // belaqi score index
     @Input() belAqi = 0;
     // small circle text
+
     @Input() text: string;
 
+    height: number;
     title: string;
     circumference = 1000;
     dashoffset = 0;
@@ -26,7 +35,8 @@ export class CircleChartComponent implements OnInit {
 
     constructor(
         private belaqiService: BelAQIService,
-        private translate: TranslateService
+        private translate: TranslateService,
+        public element: ElementRef
     ) {
         belaqiService.$activeIndex.subscribe((newIndex) => {
             this.belAqi = newIndex.indexScore;
@@ -36,6 +46,10 @@ export class CircleChartComponent implements OnInit {
 
     ngOnInit() {
         this._initialize(this.belAqi);
+    }
+
+    getChartHeight() {
+        return this.element.nativeElement.offsetHeight || 315;
     }
 
     private _initialize(belaqi: number) {

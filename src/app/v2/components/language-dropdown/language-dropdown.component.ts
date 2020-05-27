@@ -8,7 +8,7 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class LanguageDropdownComponent implements OnInit {
 
-    private _availableLanguages = [
+    availableLanguages = [
         { langCode: 'en', label: 'English' },
         { langCode: 'nl', label: 'Nederlands' },
         { langCode: 'de', label: 'Deutsch' },

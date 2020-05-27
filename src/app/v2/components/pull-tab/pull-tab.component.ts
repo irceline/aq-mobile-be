@@ -74,7 +74,7 @@ export class PullTabComponent implements AfterViewInit {
             .get('pan')
             .set({ direction: window['Hammer'].DIRECTION_VERTICAL });
 
-        trigger.on('pan', (ev) => {
+        trigger.on('pan panstart panend', (ev) => {
             this.handlePan(ev);
         });
 
