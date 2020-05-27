@@ -12,13 +12,25 @@ import {IonSlide, IonSlides} from '@ionic/angular';
 import {TimeLineListComponent} from '../../components/time-line-list/time-line-list.component';
 import {CircleChartComponent} from '../../components/circle-chart/circle-chart.component';
 import {BackgroundComponent} from '../../components/background/background.component';
-import {backgroundImages} from '../../common/constants';
+import {backgroundImages, indexLabel, lightIndexColor} from '../../common/constants';
+import {DetailDataService} from '../../services/detail-data.service';
+import {dataService} from '../../testing/detail-data.service.mock';
+import {DataPointForDay, UserLocation} from '../../Interfaces';
+import moment from 'moment';
+import {InformationItemComponent} from '../../components/information-item/information-item.component';
+import {PullTabComponent} from '../../components/pull-tab/pull-tab.component';
+import 'hammerjs';
 
 describe('MainScreenComponent', () => {
     let component: MainScreenComponent;
     let fixture: ComponentFixture<MainScreenComponent>;
     let belAQIService;
+    let detailDataService: DetailDataService;
     let timelineInstance: TimeLineListComponent;
+    let locations: UserLocation[];
+    let currentLocation: UserLocation;
+    let defaultBelaqi;
+    let initialMeasurements: DataPointForDay[];
 
     const initialLocations = JSON.parse(localStorageMock.getItem('belAir.userLocations'));
 
@@ -31,6 +43,8 @@ describe('MainScreenComponent', () => {
                 TimeLineListComponent,
                 CircleChartComponent,
                 BackgroundComponent,
+                PullTabComponent,
+                InformationItemComponent,
                 IonSlides,
                 IonSlide
             ],
@@ -38,7 +52,18 @@ describe('MainScreenComponent', () => {
             imports: [TranslateTestingModule],
         }).compileComponents();
         belAQIService = TestBed.get(BelAQIService);
+        locations = JSON.parse(localStorageMock.getItem('belAir.userLocations'));
+        currentLocation = locations[0];
         spyOn(belAQIService.$activeIndex, 'next');
+        detailDataService = TestBed.get(DetailDataService);
+        defaultBelaqi = 7;
+        initialMeasurements = dataService.getMeasurmentsFor(
+            currentLocation,
+            moment(),
+            defaultBelaqi);
+        spyOn(detailDataService, 'getMeasurementsFor').and.callFake(
+            () => Promise.resolve(initialMeasurements)
+        );
     }));
 
     beforeEach(() => {
@@ -142,4 +167,39 @@ describe('MainScreenComponent', () => {
             expect(background.styles['background-image']).toContain(backgroundImages[belAqiIndex]);
         });
     });
+
+    it('should load all substances in pull tab', () => {
+        checkInfoItems(fixture, defaultBelaqi);
+    });
+
+    it('should change all substances in pull tab after location change', () => {
+        const newBelaqi = 3;
+        initialMeasurements = dataService.getMeasurmentsFor(
+            currentLocation,
+            moment(), newBelaqi);
+        const location = fixture.debugElement.query(By.css('app-location-swipe'));
+        const locationInstance: LocationSwipeComponent = location.componentInstance;
+        spyOn(locationInstance.slides, 'getActiveIndex').and.callFake(() => Promise.resolve(2));
+
+        locationInstance.slideChange().then(() => {
+            checkInfoItems(fixture, newBelaqi);
+        });
+    });
+
+    const checkInfoItems = (currentFixture: ComponentFixture<MainScreenComponent>, currentBelaqi: number) => {
+        currentFixture.whenStable().then(() => {
+            fixture.detectChanges();
+            const pullTab = fixture.debugElement.query(By.css('app-pull-tab'));
+            const infoItems = pullTab.queryAll(By.css('app-information-item'));
+
+            infoItems.map((info, index) => {
+                const spans = info.queryAll(By.css('span'));
+                expect(spans[0].styles['background-color']).toEqual(lightIndexColor[currentBelaqi]);
+                expect(spans[1].nativeElement.innerHTML)
+                    .toEqual(specHelper.decodeHtmlCharCodes(initialMeasurements[index].substance.abbreviation));
+                expect(spans[2].styles['color']).toEqual(lightIndexColor[currentBelaqi]);
+                expect(spans[2].nativeElement.innerHTML).toEqual(indexLabel[currentBelaqi]);
+            });
+        });
+    }
 });
