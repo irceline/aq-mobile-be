@@ -1,12 +1,15 @@
 :host {
-    padding: 0 18px;
     display: flex;
+    padding: 0 18px;
 
     ion-toolbar {
         --border-width: 0;
     }
 
     ion-header {
+        transition: background-color 0.5s ease-in-out;
+        transition-delay: 0.4s;
+
         &.header-md:after {
             background: none;
         }

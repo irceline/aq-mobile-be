@@ -1,4 +1,10 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    EventEmitter,
+    Output,
+    HostBinding,
+} from '@angular/core';
 
 @Component({
     selector: 'app-feedback',

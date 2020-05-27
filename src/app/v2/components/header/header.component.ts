@@ -20,7 +20,6 @@ import { filter } from 'rxjs/operators';
 export class HeaderComponent implements OnInit {
     @ViewChild(IonReorderGroup) reorderGroup: IonReorderGroup;
 
-    @HostBinding('style.background-color')
     public backgroundColor;
 
     @Input()
@@ -37,6 +36,7 @@ export class HeaderComponent implements OnInit {
         private router: Router
     ) {
         belAQIService.$activeIndex.subscribe((newIndex) => {
+            console.log(newIndex);
             this.belAqi = newIndex.indexScore;
         });
 
@@ -51,12 +51,7 @@ export class HeaderComponent implements OnInit {
     ngOnInit() {}
 
     getBackgroundForIndex(index: number) {
-        this.belAQIService.getLightColorForIndex(index);
-    }
-
-    getBackgroundColor() {
-        console.log(this.backgroundColor);
-        return `${this.backgroundColor}`;
+        return this.belAQIService.getLightColorForIndex(index);
     }
 
     toggleMenu() {

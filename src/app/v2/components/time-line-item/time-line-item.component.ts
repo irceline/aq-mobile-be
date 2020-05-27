@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {BelAqiIndexResult, BelAQIService} from '../../services/bel-aqi.service';
+import {indexLabel, lightIndexColor} from '../../common/constants';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-time-line-item',
@@ -10,12 +12,12 @@ export class TimeLineItemComponent implements OnInit {
 
   @Input() data: BelAqiIndexResult;
 
-  constructor( private belAqi: BelAQIService ) { }
+  constructor( private translate: TranslateService ) { }
 
   ngOnInit() {}
 
   getColor() {
-    return this.belAqi.getLightColorForIndex( this.data.indexScore );
+    return lightIndexColor[this.data.indexScore] || null;
   }
 
   getDay() {
@@ -24,7 +26,7 @@ export class TimeLineItemComponent implements OnInit {
   }
 
   getLabel() {
-    return this.belAqi.getLabelForIndex( this.data.indexScore );
+    return this.translate.instant(indexLabel[this.data.indexScore]) || null;
   }
 
 }
