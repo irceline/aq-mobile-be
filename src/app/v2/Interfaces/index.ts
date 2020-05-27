@@ -46,6 +46,7 @@ export interface DataPoint {
     // are thresholds set on server side or defined in client?
     // how are the colors determinded for these thresholds?
     // for now, taking random values
+    // https://www.irceline.be/nl/luchtkwaliteit/metingen/belaqi-luchtkwaliteitsindex/informatie
     evaluation: string;
     color: string;
 }
