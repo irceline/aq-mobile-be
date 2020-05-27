@@ -1,20 +1,24 @@
 import { Injectable, NgModule, Pipe, PipeTransform } from '@angular/core';
-import { TranslateLoader, TranslateModule, TranslatePipe, TranslateService } from '@ngx-translate/core';
+import {
+    TranslateLoader,
+    TranslateModule,
+    TranslatePipe,
+    TranslateService,
+} from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
 
 import * as english from '../../../assets/i18n/en.json';
 
-
 const translations: any = english;
 
-class FakeLoader implements TranslateLoader {
+export class FakeLoader implements TranslateLoader {
     getTranslation(lang: string): Observable<any> {
         return of(translations);
     }
 }
 
 @Pipe({
-    name: 'translate'
+    name: 'translate',
 })
 export class TranslatePipeMock implements PipeTransform {
     public name = 'translate';
@@ -40,9 +44,7 @@ export class TranslateServiceStub {
 }
 
 @NgModule({
-    declarations: [
-        TranslatePipeMock
-    ],
+    declarations: [TranslatePipeMock],
     providers: [
         { provide: TranslateService, useClass: TranslateServiceStub },
         { provide: TranslatePipe, useClass: TranslatePipeMock },
@@ -50,13 +52,8 @@ export class TranslateServiceStub {
     imports: [
         TranslateModule.forRoot({
             loader: { provide: TranslateLoader, useClass: FakeLoader },
-        })
+        }),
     ],
-    exports: [
-        TranslatePipeMock,
-        TranslateModule
-    ]
+    exports: [TranslatePipeMock, TranslateModule],
 })
-export class TranslateTestingModule {
-
-}
+export class TranslateTestingModule {}

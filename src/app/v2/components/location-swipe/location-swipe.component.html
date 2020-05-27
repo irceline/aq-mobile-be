@@ -1,3 +1,3 @@
-<ion-slides [options]="sliderOptions" (ionSlideDidChange)="slideChange($event)">
+<ion-slides [options]="sliderOptions" (ionSlideDidChange)="slideChange()">
   <ion-slide *ngFor="let location of locations">{{ location.label }}</ion-slide>
 </ion-slides>

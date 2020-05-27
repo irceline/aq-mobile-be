@@ -1,6 +1,6 @@
 ion-content {
     --background: transparent;
-    // --padding-top: 65px;
+    --padding-top: 44px;
 
     .longterm-info {
         color: white;
@@ -8,7 +8,7 @@ ion-content {
 
         ion-button {
             --background: transparent;
-            --background-activated: rgba(255, 255, 255, 0.1);
+            --background-activated: rgba(255, 255, 255, 0);
             display: block;
             margin: auto;
             font-size: 24px;

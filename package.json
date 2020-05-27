@@ -46,7 +46,7 @@
     "browserslist": "^4.8.2",
     "caniuse-lite": "^1.0.30001015",
     "chartjs-plugin-annotation": "^0.5.7",
-    "cordova-android": "7.1.4",
+    "cordova-android": "^8.1.0",
     "cordova-browser": "5.0.4",
     "cordova-ios": "^5.1.1",
     "cordova-plugin-app-version": "^0.1.9",
@@ -132,8 +132,8 @@
       "cordova-plugin-firebase": {}
     },
     "platforms": [
-      "android",
-      "browser"
+      "browser",
+      "android"
     ]
   }
 }

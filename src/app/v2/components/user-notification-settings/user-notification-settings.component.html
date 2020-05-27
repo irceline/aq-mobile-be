@@ -1,5 +1,5 @@
 <ion-list class="notification-settings">
-  <ion-item *ngFor="let setting of _userSettings" lines="none" class="ion-no-padding">
+  <ion-item *ngFor="let setting of userSettings" lines="none" class="ion-no-padding">
     <ion-label>
       <img [src]="setting.icon" alt=""> {{ setting.label }}</ion-label>
     <ion-toggle [checked]="setting.enabled" color="success" (ionChange)="changeSetting(setting)"

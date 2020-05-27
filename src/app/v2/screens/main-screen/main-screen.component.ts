@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    ViewChild,
+    ElementRef,
+    AfterViewInit,
+} from '@angular/core';
 import { DataPointForDay, UserLocation } from '../../Interfaces';
 import { UserSettingsService } from '../../services/user-settings.service';
 import {
@@ -115,15 +121,14 @@ export class MainScreenComponent implements OnInit {
 
     ngOnInit() {
         this.drawerOptions = {
-            handleHeight: 190,
-            gap: 150,
+            handleHeight: 150,
+            gap: 120,
             thresholdFromBottom: 300,
-            thresholdFromTop: 200,
+            thresholdFromTop: 50,
             bounceBack: true,
         };
         this.contentHeight =
-            this.platform.height() - this.drawerOptions.handleHeight - 63;
-        console.log(this.contentHeight);
+            this.platform.height() - this.drawerOptions.handleHeight - 44;
     }
 
     onLocationChange(location: UserLocation) {
