@@ -11,6 +11,8 @@ import {LocationSwipeComponent} from '../../components/location-swipe/location-s
 import {IonSlide, IonSlides} from '@ionic/angular';
 import {TimeLineListComponent} from '../../components/time-line-list/time-line-list.component';
 import {CircleChartComponent} from '../../components/circle-chart/circle-chart.component';
+import {BackgroundComponent} from '../../components/background/background.component';
+import {backgroundImages} from '../../common/constants';
 
 describe('MainScreenComponent', () => {
     let component: MainScreenComponent;
@@ -28,6 +30,7 @@ describe('MainScreenComponent', () => {
                 LocationSwipeComponent,
                 TimeLineListComponent,
                 CircleChartComponent,
+                BackgroundComponent,
                 IonSlides,
                 IonSlide
             ],
@@ -106,6 +109,7 @@ describe('MainScreenComponent', () => {
         const locationInstance: LocationSwipeComponent = location.componentInstance;
         const circleChart = fixture.debugElement.query(By.css('app-circle-chart'));
         const circleChartInstance: CircleChartComponent = circleChart.componentInstance;
+        const background = fixture.debugElement.query(By.css('app-background'));
 
         spyOn(locationInstance.slides, 'getActiveIndex').and.callFake(() => Promise.resolve(2));
         locationInstance.slideChange().then(() => {
@@ -116,12 +120,14 @@ describe('MainScreenComponent', () => {
             const belAqiText = belAQIService.getLabelForIndex(belAqiIndex);
             expect(circleChartInstance.belAqi).toEqual(belAqiIndex);
             expect(circleChartInstance.title).toEqual(belAqiText);
+            expect(background.styles['background-image']).toContain(backgroundImages[belAqiIndex]);
         });
     });
 
     it('should update circle chart on slide change time line', () => {
         const circleChart = fixture.debugElement.query(By.css('app-circle-chart'));
         const circleChartInstance: CircleChartComponent = circleChart.componentInstance;
+        const background = fixture.debugElement.query(By.css('app-background'));
 
         spyOn(timelineInstance.slides, 'getActiveIndex').and.callFake(() => Promise.resolve(2));
         spyOn(component, 'onLocationChange');
@@ -133,6 +139,7 @@ describe('MainScreenComponent', () => {
             const belAqiText = belAQIService.getLabelForIndex(belAqiIndex);
             expect(circleChartInstance.belAqi).toEqual(belAqiIndex);
             expect(circleChartInstance.title).toEqual(belAqiText);
+            expect(background.styles['background-image']).toContain(backgroundImages[belAqiIndex]);
         });
     });
 });
