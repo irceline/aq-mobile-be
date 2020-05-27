@@ -8,7 +8,7 @@
 
       <p>{{ 'v2.screens.long-term-info.about-data' | translate }}</p>
 
-      <ion-item button (click)="goToLongTerm()">
+      <ion-item detail (click)="goToLongTerm()">
         <ion-label>
           {{ 'v2.screens.long-term-info.from-where' | translate }}
         </ion-label>
@@ -25,16 +25,7 @@
 
       <ul>
         <li *ngFor="let ltd of longTermData">
-
-          <p>TODO: render the following information cfr design:
-            <br>
-            <b>{{ ltd.substance.name }}</b>,
-            <br>
-            {{ ltd.evaluation }} (using color: {{ ltd.color }})
-            <br>
-            Europese drempelwaard = {{ ltd.euBenchMark }}
-          </p>
-
+          <app-information-item [detailedDataPoint]="ltd"></app-information-item>
           <app-bar-chart [max]="ltd.chartData.max" [options]="ltd.chartData" [euMax]="ltd.euBenchMark"
             [worldMax]="ltd.worldBenchMark"></app-bar-chart>
           <app-value-display [color]="ltd.color" [score]="ltd.currentValue" [value]="ltd.substance.unit">

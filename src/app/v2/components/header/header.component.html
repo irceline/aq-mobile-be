@@ -1,5 +1,5 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar color="transparent" class="ion-no-padding">
+  <ion-toolbar color="transparent" class="ion-no-padding" [ngStyle]="{'background-color': backgroundColor}">
     <ion-buttons slot="start">
       <ion-button (click)="toggleMenu()" class="ion-no-padding">
         <img src="/assets/images/icons/menu.svg" alt="">
@@ -8,7 +8,8 @@
 
     <ion-buttons slot="end">
       <ion-button (click)="clickRating()" class="ion-no-padding">
-        <img [src]="onRatingScreen ? '/assets/images/icons/megafoon-copy.svg' : '/assets/images/icons/megafoon.svg'" alt="">
+        <img [src]="onRatingScreen ? '/assets/images/icons/megafoon-copy.svg' : '/assets/images/icons/megafoon.svg'"
+          alt="">
       </ion-button>
     </ion-buttons>
   </ion-toolbar>

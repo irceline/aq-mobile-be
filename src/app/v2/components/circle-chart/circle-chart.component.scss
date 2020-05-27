@@ -2,40 +2,16 @@
     flex: 1;
     width: 100%;
 
-    // // iPhone 5 & 5S in portrait
-    // @media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (orientation: portrait) {
-    //     width: 40vw;
-    // }
-
-    // // iPhone 6, 7, & 8 in portrait
-    // @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
-    //     width: 50vw;
-    // }
-
-    // // iPhone X in portrait
-    // @media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) {
-    //     width: 100vw;
-    // }
-
-    // // iPhone 6, 7, & 8 Plus in portrait
-    // @media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (orientation: portrait) {
-    //     width: 62vw;
-    //     padding: 0;
-    // }
-
     .circle {
         display: block;
         width: 100%;
         margin: auto;
+        max-width: 315px;
 
         &-chart {
             display: flex;
             align-items: center;
             justify-content: center;
-            // height: 100%;
-            // margin: 20px;
-            // width: 100vw;
-            // max-width: 315px;
 
             &--text {
                 position: absolute;
@@ -44,58 +20,15 @@
                 color: #ffffff;
                 text-align: center;
 
-                // // iPhone 5 & 5S in portrait
-                // @media only screen and (min-device-width : 320px) and (max-device-width : 568px) and (orientation : portrait) {
-                //     width: 30vw;
-                //     padding: 0;
-                // }
-
-                // // iPhone 6, 7, & 8 in portrait
-                // @media only screen and (min-device-width : 375px) and (max-device-width : 667px) {
-                //     width: 35vw;
-                //     padding: 0;
-                // }
-
-                // // iPhone X in portrait
-                // @media only screen and (min-device-width : 375px) and (max-device-width : 812px) and (-webkit-device-pixel-ratio : 3) and (orientation : portrait) {
-                //     width: 316px;
-                //     padding: 0 60px;
-                // }
-
                 h1 {
                     font-size: 10vw;
                     line-height: 0.78;
                     margin-bottom: 20px;
                     margin-top: 0;
-                    // height: 101px;
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
                     align-items: center;
-
-                    // // iPhone 5 & 5S in portrait
-                    // @media only screen and (min-device-width : 320px) and (max-device-width : 568px) and (orientation : portrait) {
-                    //     font-size: 20px;
-                    //     margin-bottom: 10px;
-                    // }
-
-                    // // iPhone 6, 7, & 8 in portrait
-                    // @media only screen and (min-device-width : 375px) and (max-device-width : 667px) {
-                    //     font-size: 30px;
-                    //     margin-bottom: 10px;
-                    // }
-
-                    // // iPhone X in portrait
-                    // @media only screen and (min-device-width : 375px) and (max-device-width : 812px) and (-webkit-device-pixel-ratio : 3) and (orientation : portrait) {
-                    //     font-size: 60px;
-                    //     margin-bottom: 20px;
-                    // }
-
-                    // // iPhone 6, 7, & 8 Plus in portrait
-                    // @media only screen and (min-device-width : 414px) and (max-device-width : 736px) and (orientation : portrait) {
-                    //     font-size: 40px;
-                    //     margin-bottom: 10px;
-                    // }
                 }
 
                 p {
