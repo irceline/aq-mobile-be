@@ -1,9 +1,4 @@
-import {
-    Component,
-    OnInit,
-    ViewChild,
-    Input,
-} from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { trigger, style, transition, animate } from '@angular/animations';
 import { IonReorderGroup, NavController } from '@ionic/angular';
 
@@ -61,7 +56,7 @@ export class HeaderComponent implements OnInit {
 
     clickRating() {
         if (this.onRatingScreen) {
-            this.navCtrl.navigateForward(['main']);
+            this.navCtrl.navigateBack(['main']);
         } else {
             this.navCtrl.navigateForward(['main/rating']);
         }

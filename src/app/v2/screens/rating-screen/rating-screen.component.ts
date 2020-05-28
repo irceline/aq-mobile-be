@@ -5,7 +5,6 @@ import {
     BelAqiIndexResult,
     BelAQIService,
 } from '../../services/bel-aqi.service';
-import moment from 'moment';
 
 @Component({
     selector: 'app-rating-screen',
@@ -64,7 +63,6 @@ export class RatingScreenComponent implements OnInit {
     }
 
     feedbackGiven(event) {
-        console.log(event);
         this.isFeedbackGiven = true;
     }
 }
