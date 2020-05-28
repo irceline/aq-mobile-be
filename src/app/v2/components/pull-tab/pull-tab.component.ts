@@ -7,7 +7,7 @@ import {
     AfterViewInit,
     ViewChild,
 } from '@angular/core';
-import { DomController, Platform } from '@ionic/angular';
+import { DomController, Platform, IonContent } from '@ionic/angular';
 
 @Component({
     selector: 'app-pull-tab',
@@ -19,6 +19,7 @@ export class PullTabComponent implements AfterViewInit {
 
     @ViewChild('trigger') trigger: ElementRef;
     @ViewChild('triggerArrow') triggerArrow: ElementRef;
+    @ViewChild(IonContent) content: IonContent;
 
     handleHeight = 50;
     gap = 100;
@@ -74,7 +75,7 @@ export class PullTabComponent implements AfterViewInit {
             .get('pan')
             .set({ direction: window['Hammer'].DIRECTION_VERTICAL });
 
-        trigger.on('pan panstart panend', (ev) => {
+        trigger.on('pan', (ev) => {
             this.handlePan(ev);
         });
 
@@ -121,6 +122,7 @@ export class PullTabComponent implements AfterViewInit {
             });
             this.isEnabled = false;
             this.isClicked = false;
+            this.content.scrollToTop(1000);
         }
     }
 

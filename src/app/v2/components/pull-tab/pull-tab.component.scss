@@ -43,13 +43,12 @@
         }
     }
 
-    ion-content {
+    .content-wrapper {
         background-color: white;
         border-top-right-radius: 30px;
         border-top-left-radius: 30px;
         box-shadow: 0 2px 50px 0 rgba(2, 136, 171, 0.4);
         position: relative;
-        // pointer-events: none;
         overflow: hidden;
     }
 }

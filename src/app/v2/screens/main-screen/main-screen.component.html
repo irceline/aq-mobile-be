@@ -11,24 +11,26 @@
   </ion-content>
 
   <app-pull-tab [options]="drawerOptions">
-    <ng-container *ngIf="!detailPoint">
-      <div class="details">
-        <h5>Bekijk in detail</h5>
+    <div class="details--wrapper" [ngClass]="{'inactive': detailPoint, 'active': !detailPoint}">
+      <ng-container *ngIf="!detailPoint">
+        <div class="details">
+          <h5>Bekijk in detail</h5>
 
-        <app-information-item *ngFor="let detailDataPoint of detailData" [detailedDataPoint]="detailDataPoint"
-          [isButton]="true" (click)="detailPoint = detailDataPoint">
-        </app-information-item>
+          <app-information-item *ngFor="let detailDataPoint of detailData" [detailedDataPoint]="detailDataPoint"
+            [isButton]="true" (click)="detailPoint = detailDataPoint">
+          </app-information-item>
 
-        <ion-item detail>
-          <ion-label>Berekening van impact op lange termijn</ion-label>
-        </ion-item>
-      </div>
+          <ion-item detail>
+            <ion-label>Berekening van impact op lange termijn</ion-label>
+          </ion-item>
+        </div>
 
-      <app-horizontal-cards-slider [data]="slidesData"></app-horizontal-cards-slider>
-    </ng-container>
+        <app-horizontal-cards-slider [data]="slidesData"></app-horizontal-cards-slider>
+      </ng-container>
+    </div>
 
-    <ng-container *ngIf="detailPoint">
-      <div class="details">
+    <div class="details--wrapper" [ngClass]="{'active': detailPoint, 'inactive': !detailPoint}">
+      <div class="details" *ngIf="detailPoint">
         <h5>Bekijk in detail</h5>
 
         <app-information-item-details [detailPoint]="detailPoint" (backClicked)="detailPoint = null">
@@ -51,6 +53,6 @@
 
         <!-- <map-component [currentLocation]="currentLocation"></map-component> -->
       </div>
-    </ng-container>
+    </div>
   </app-pull-tab>
 </app-background>

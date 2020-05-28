@@ -2,7 +2,8 @@
   <span></span>
 </button>
 
-<ion-content [scrollY]="isEnabled" [ngStyle]="{'pointer-events': isEnabled ? 'auto' : 'none'}">
+<ion-content class="content-wrapper" [scrollY]="isEnabled" [ngStyle]="{'pointer-events': isEnabled ? 'auto' : 'none'}"
+  [forceOverscroll]="false">
   <ng-content></ng-content>
 </ion-content>
 

@@ -1,10 +1,4 @@
-import {
-    Component,
-    OnInit,
-    ViewChild,
-    ElementRef,
-    AfterViewInit,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DataPointForDay, UserLocation } from '../../Interfaces';
 import { UserSettingsService } from '../../services/user-settings.service';
 import {
@@ -19,6 +13,7 @@ import { Platform } from '@ionic/angular';
     selector: 'app-main-screen',
     templateUrl: './main-screen.component.html',
     styleUrls: ['./main-screen.component.scss'],
+    animations: [],
 })
 export class MainScreenComponent implements OnInit {
     // location data
