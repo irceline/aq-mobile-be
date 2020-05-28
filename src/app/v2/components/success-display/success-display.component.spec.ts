@@ -2,6 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SuccessDisplayComponent } from './success-display.component';
+import {RouterModule} from '@angular/router';
 
 describe('SuccessDisplayComponent', () => {
   let component: SuccessDisplayComponent;
@@ -11,6 +12,7 @@ describe('SuccessDisplayComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ SuccessDisplayComponent ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      imports: [RouterModule.forRoot([])]
     })
     .compileComponents();
   }));

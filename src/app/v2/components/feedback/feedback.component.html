@@ -9,8 +9,9 @@
 
 <div class="feedback--content" *ngIf="like || dislike" [ngStyle]="{'padding-bottom': dislike || like ? '60px' : '0px'}">
   <ng-container *ngIf="like">
-    <app-location-input [currentLocation]="false"></app-location-input>
-  </ng-container>
+    <!-- per design , there was a location input here, but the location is already determined on the top of this page -->
+    <!--  -->
+    <!-- <app-location-input [currentLocation]="false"></app-location-input>-->  </ng-container>
   <ng-container *ngIf="dislike">
     <p>{{ 'v2.components.feedback.cause' | translate }}</p>
     <ion-list>
@@ -19,7 +20,9 @@
         <ion-label>{{entry.val}}</ion-label>
       </ion-item>
     </ion-list>
-    <app-location-input [currentLocation]="false"></app-location-input>
+    <!-- per design , there was a location input here, but the location is already determined on the top of this page -->
+    <!--  -->
+    <!-- <app-location-input [currentLocation]="false"></app-location-input>-->
   </ng-container>
 </div>
 
