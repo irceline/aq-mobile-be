@@ -2,7 +2,6 @@ import {
     Component,
     OnInit,
     ViewChild,
-    HostBinding,
     Input,
 } from '@angular/core';
 import { trigger, style, transition, animate } from '@angular/animations';
@@ -36,7 +35,6 @@ export class HeaderComponent implements OnInit {
         private router: Router
     ) {
         belAQIService.$activeIndex.subscribe((newIndex) => {
-            console.log(newIndex);
             this.belAqi = newIndex.indexScore;
         });
 
@@ -44,7 +42,6 @@ export class HeaderComponent implements OnInit {
             .pipe(filter((event) => event instanceof NavigationEnd))
             .subscribe((newRoute: NavigationEnd) => {
                 this.onRatingScreen = newRoute.url === '/main/rating';
-                console.log(this.onRatingScreen);
             });
     }
 

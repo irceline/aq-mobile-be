@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {BelAqiIndexResult, BelAQIService} from '../../services/bel-aqi.service';
+import {BelAqiIndexResult} from '../../services/bel-aqi.service';
 import {indexLabel, lightIndexColor} from '../../common/constants';
 import {TranslateService} from '@ngx-translate/core';
 
