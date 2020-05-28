@@ -1,8 +1,10 @@
+:host {
+  display: block;
+  min-height: 300px;
+}
+
 .map-frame {
-  border: 2px solid black;
-  height: 100%;
-  padding-bottom: 300px;
-  z-index: -1;
+  height: 300px;
 }
 
 #mapElement {
