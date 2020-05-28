@@ -14,14 +14,15 @@
     <div class="details--wrapper" [ngClass]="{'inactive': detailPoint, 'active': !detailPoint}">
       <ng-container *ngIf="!detailPoint">
         <div class="details">
-          <h5>Bekijk in detail</h5>
+          <h5>{{ 'v2.screens.main-screen.view-details' | translate }}</h5>
 
           <app-information-item *ngFor="let detailDataPoint of detailData" [detailedDataPoint]="detailDataPoint"
             [isButton]="true" (click)="detailPoint = detailDataPoint">
           </app-information-item>
 
           <ion-item detail>
-            <ion-label>Berekening van impact op lange termijn</ion-label>
+            <ion-label [routerLink]="['/main/longterm-info']">
+              {{ 'v2.screens.main-screen.long-term-calculation' | translate }}</ion-label>
           </ion-item>
         </div>
 
@@ -31,7 +32,7 @@
 
     <div class="details--wrapper" [ngClass]="{'active': detailPoint, 'inactive': !detailPoint}">
       <div class="details" *ngIf="detailPoint">
-        <h5>Bekijk in detail</h5>
+        <h5>{{ 'v2.screens.main-screen.view-details' | translate }}</h5>
 
         <app-information-item-details [detailPoint]="detailPoint" (backClicked)="detailPoint = null">
         </app-information-item-details>
@@ -45,10 +46,9 @@
         <div class="details--info">
           <div>
             <ion-icon src="/assets/images/icons/question.svg"></ion-icon>
-            <h4>Wat is Stikstofdioxide?</h4>
+            <h4>{{ 'v2.screens.main-screen.what-is-no2' | translate }}</h4>
           </div>
-          <p>Een schadelijk gas dat zwaarder
-            is dan lucht en reageert heftig met andere stoffen, zoals metalen.</p>
+          <p>{{ 'v2.screens.main-screen.about-no2' | translate }}</p>
         </div>
 
         <!-- <map-component [currentLocation]="currentLocation"></map-component> -->

@@ -27,6 +27,7 @@ import { ValueDisplayComponent } from './value-display/value-display.component';
 import { SuccessDisplayComponent } from './success-display/success-display.component';
 import { InformationItemDetailsComponent } from './information-item-details/information-item-details.component';
 import { MapComponent } from './map-component/map.component';
+import {RouterModule} from '@angular/router';
 
 const COMPONENTS = [
     CircleChartComponent,
@@ -61,6 +62,7 @@ const COMPONENTS = [
         FormsModule,
         IonicModule,
         TranslateModule,
+        RouterModule,
     ],
     declarations: COMPONENTS,
     exports: COMPONENTS,

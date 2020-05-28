@@ -545,28 +545,14 @@
 				"activity":  "Inspanningen",
 				"transport":  "Verplaatsingen",
 				"highConcentration": "(Te) hoge concentraties"
+			},
+			"success-display": {
+				"thanks": "Bedankt !",
+				"well-received": "We hebben je waarneming goed ontvangen. Dankzij jouw input kunnen we onze toepassing verbeteren.",
+				"back-to-main": "Naar beginscherm"
 			}
 		},
 		"screens": {
-			"onboarding": {
-				"choose-lang": "Kies je taal:",
-				"calc-aq": "Belair berekent de impact van de <strong>luchtkwaliteit<strong> op korte termijn voor jouw locatie en toont je een score van 1 tot 10.",
-				"aq-info": "Dit cijfer is een berekening op basis van de <strong>meetgegevens</strong> van een luchtmeetstation in jouw buurt.",
-				"aq-long-term": "De app berekent ook wat de impact van de luchtkwaliteit op <strong>lange termijn</strong> is voor jouw locatie.",
-				"start-quickly": "Snel van start!",
-				"ask-location": "Om je zo goed mogelijk te kunnen helpen, hebben we je locatie nodig.",
-				"ask-notifications": "Zou je graag meldingen ontvangen over de luchtkwaliteit?",
-				"btn-text": "Ga verder"
-			},
-			"menu": {
-				"long-term-exposure": "Blootstelling op lange termijn",
-				"belair-info": "Informatie over Belair",
-				"workings": "(hoe werkt de applicatie)",
-				"language": "Taal",
-				"locations": "Locaties",
-				"notifications": "Notificaties",
-				"version": "versie"
-			},
 			"app-info": {
 				"how-this-works": "Hoe werkt dit?",
 				"aq-index": "We beoordelen de impact van de <strong>algemene luchtkwaliteit</strong> op korte termijn op basis van een luchtkwaliteitsindex.",
@@ -588,6 +574,22 @@
 				"from-where": "Van waar kom deze info",
 				"lt-effects-diseases": "Langdurige blootstelling aan luchtvervuilende stoffen kan chronische effecten uitlokken en voor een hoger risico op hart- en longziekten zorgen."
 			},
+			"main-screen": {
+				"view-details": "Bekijk in detail",
+				"long-term-calculation": "Berekening van impact op lange termijn",
+				"what-is-no2": "Wat is Stikstofdioxide?",
+				"about-no2": "Een schadelijk gas dat zwaarder is dan lucht en reageert heftig met andere stoffen, zoals metalen."
+			},
+			"onboarding": {
+				"choose-lang": "Kies je taal:",
+				"calc-aq": "Belair berekent de impact van de <strong>luchtkwaliteit<strong> op korte termijn voor jouw locatie en toont je een score van 1 tot 10.",
+				"aq-info": "Dit cijfer is een berekening op basis van de <strong>meetgegevens</strong> van een luchtmeetstation in jouw buurt.",
+				"aq-long-term": "De app berekent ook wat de impact van de luchtkwaliteit op <strong>lange termijn</strong> is voor jouw locatie.",
+				"start-quickly": "Snel van start!",
+				"ask-location": "Om je zo goed mogelijk te kunnen helpen, hebben we je locatie nodig.",
+				"ask-notifications": "Zou je graag meldingen ontvangen over de luchtkwaliteit?",
+				"btn-text": "Ga verder"
+			},
 			"rating-screen": {
 				"does-it-match": "Strookt deze waarde met jouw gevoel?",
 				"calculated-value": "De app toont een berekende waarde, geen meting op jouw locatie. Plaatselijk kan de luchtkwaliteit dan ook afwijken.",
@@ -595,7 +597,20 @@
 				"fire": "Een <strong>haardvuur</strong> met hout verbranding.",
 				"exhaust": "<strong>Uitlaatgassen</strong> van verkeer",
 				"industry": "<strong>Uitstoot</strong> door industrie of landbouw"
+			},
+
+			"menu": {
+				"long-term-exposure": "Blootstelling op lange termijn",
+				"belair-info": "Informatie over Belair",
+				"workings": "(hoe werkt de applicatie)",
+				"language": "Taal",
+				"locations": "Locaties",
+				"notifications": "Notificaties",
+				"version": "versie"
 			}
+
+
+
 		}
-	},
+	}
 }

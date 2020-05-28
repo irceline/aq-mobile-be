@@ -1,8 +1,8 @@
 <div class="success">
-  <h1>Bedankt!</h1>
-  <p>We hebben je waarneming goed ontvangen. Dankzij jouw input kunnen we onze toepassing verbeteren.</p>
+  <h1>{{ 'v2.components.success-display.thanks' | translate }}</h1>
+  <p>{{ 'v2.components.success-display.well-received' | translate }}</p>
 </div>
 
 <ion-item detail lines="none" class="success--button">
-  <ion-label>Naar beginscherm</ion-label>
+  <ion-label><a [routerLink]="['/main']">{{ 'v2.components.success-display.back-to-main' | translate }}</a></ion-label>
 </ion-item>
