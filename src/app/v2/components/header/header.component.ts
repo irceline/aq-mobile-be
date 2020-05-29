@@ -5,6 +5,7 @@ import { IonReorderGroup, NavController } from '@ionic/angular';
 import { BelAQIService } from '../../services/bel-aqi.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import {lightIndexColor} from '../../common/constants';
 
 @Component({
     selector: 'app-header',
@@ -18,7 +19,7 @@ export class HeaderComponent implements OnInit {
 
     @Input()
     set belAqi(index: number) {
-        this.backgroundColor = this.getBackgroundForIndex(index);
+        this.backgroundColor = lightIndexColor[index] || null;
     }
 
     menuVisible = false;
@@ -41,10 +42,6 @@ export class HeaderComponent implements OnInit {
     }
 
     ngOnInit() {}
-
-    getBackgroundForIndex(index: number) {
-        return this.belAQIService.getLightColorForIndex(index);
-    }
 
     toggleMenu() {
         this.menuVisible = !this.menuVisible;
