@@ -32,8 +32,6 @@ describe('MainScreenComponent', () => {
     let defaultBelaqi;
     let initialMeasurements: DataPointForDay[];
 
-    const initialLocations = JSON.parse(localStorageMock.getItem('belAir.userLocations'));
-
     beforeEach(async(() => {
         specHelper.localStorageSetup();
         TestBed.configureTestingModule({
@@ -80,20 +78,20 @@ describe('MainScreenComponent', () => {
     });
 
     it('should load initial data', () => {
-        expect(component.locations).toEqual(initialLocations);
-        expect(component.currentLocation).toEqual(initialLocations[0]);
+        expect(component.locations).toEqual(locations);
+        expect(component.currentLocation).toEqual(locations[0]);
         expect(component.belAqiForCurrentLocation.length).toEqual(11);
         component.belAqiForCurrentLocation.forEach((belaqi) => {
-            expect(belaqi.location.id).toEqual(initialLocations[0].id);
+            expect(belaqi.location.id).toEqual(locations[0].id);
         });
     });
 
     it('should change data on change location', () => {
-        component.onLocationChange(initialLocations[2]);
+        component.onLocationChange(locations[2]);
         fixture.detectChanges();
-        expect(component.currentLocation).toEqual(initialLocations[2]);
+        expect(component.currentLocation).toEqual(locations[2]);
         component.belAqiForCurrentLocation.forEach((belaqi) => {
-            expect(belaqi.location.id).toEqual(initialLocations[2].id);
+            expect(belaqi.location.id).toEqual(locations[2].id);
         });
         expect(component.currentActiveIndex).toEqual(
             component.belAqiForCurrentLocation[5]
@@ -117,7 +115,7 @@ describe('MainScreenComponent', () => {
         spyOn(locationInstance.slides, 'getActiveIndex').and.callFake(() => Promise.resolve(2));
         spyOn(component, 'onLocationChange');
         locationInstance.slideChange().then(() => {
-            expect(component.onLocationChange).toHaveBeenCalledWith(initialLocations[2]);
+            expect(component.onLocationChange).toHaveBeenCalledWith(locations[2]);
         });
     });
 
