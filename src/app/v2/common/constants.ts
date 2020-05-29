@@ -8,20 +8,20 @@ export const backgroundImages = {
     4: '/assets/images/backgrounds/7.png',
     3: '/assets/images/backgrounds/8.png',
     2: '/assets/images/backgrounds/9.png',
-    1: '/assets/images/backgrounds/10.png'
+    1: '/assets/images/backgrounds/10.png',
 };
 
 export const lightIndexColor = {
     1: '#238cff',
     2: '#29cdf7',
-    3: '#30e14d',
+    3: '#34D04D',
     4: '#2df16b',
     5: '#f0d426',
     6: '#ff9609',
     7: '#ff812e',
-    8: '#ff4a2e',
+    8: '#FE3B1E',
     9: '#c72955',
-    10: '#822e45'
+    10: '#822e45',
 };
 
 export const darkIndexColor = {
@@ -34,7 +34,7 @@ export const darkIndexColor = {
     7: '#de5328',
     8: '#de3f28',
     9: '#af234a',
-    10: '#5d141e'
+    10: '#5d141e',
 };
 
 export const indexLabel = {
@@ -47,5 +47,5 @@ export const indexLabel = {
     7: 'belaqi.level.very-poor',
     8: 'belaqi.level.bad',
     9: 'belaqi.level.very-bad',
-    10: 'belaqi.level.horrible'
+    10: 'belaqi.level.horrible',
 };
