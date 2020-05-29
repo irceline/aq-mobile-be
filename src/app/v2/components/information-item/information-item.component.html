@@ -1,4 +1,4 @@
-<ion-item [button]="isButton" lines="none" class="ion-no-padding">
+<ion-item [detail]="isButton" lines="none" class="ion-no-padding">
   <ng-container *ngIf="hasBackBtn; else line">
     <ion-button (click)="goBack()" fill="clear" class="back-btn">
       <ion-icon slot="icon-only" src="/assets/images/icons/arrow-left.svg"></ion-icon>

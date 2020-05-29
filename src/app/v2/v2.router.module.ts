@@ -6,6 +6,7 @@ import { LongtermInfoScreenComponent } from './screens/longterm-info-screen/long
 import { AppInfoScreenComponent } from './screens/app-info-screen/app-info-screen.component';
 import { LayoutScreenComponent } from './screens/layout-screen/layout-screen.component';
 import { RatingScreenComponent } from './screens/rating-screen/rating-screen.component';
+import { MenuScreenComponent } from './components/menu-screen/menu-screen.component';
 
 const routes: Routes = [
     {
@@ -31,7 +32,11 @@ const routes: Routes = [
             {
                 path: 'rating',
                 component: RatingScreenComponent,
-            }
+            },
+            {
+                path: 'menu',
+                component: MenuScreenComponent,
+            },
         ],
     },
 ];

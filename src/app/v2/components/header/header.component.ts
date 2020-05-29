@@ -5,7 +5,7 @@ import { IonReorderGroup, NavController } from '@ionic/angular';
 import { BelAQIService } from '../../services/bel-aqi.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import {lightIndexColor} from '../../common/constants';
+import { lightIndexColor } from '../../common/constants';
 
 @Component({
     selector: 'app-header',
@@ -22,8 +22,9 @@ export class HeaderComponent implements OnInit {
         this.backgroundColor = lightIndexColor[index] || null;
     }
 
-    menuVisible = false;
+    // menuVisible = false;
     onRatingScreen = false;
+    onMenuScreen = false;
 
     constructor(
         private navCtrl: NavController,
@@ -38,18 +39,23 @@ export class HeaderComponent implements OnInit {
             .pipe(filter((event) => event instanceof NavigationEnd))
             .subscribe((newRoute: NavigationEnd) => {
                 this.onRatingScreen = newRoute.url === '/main/rating';
+                this.onMenuScreen = newRoute.url === '/main/menu';
             });
     }
 
     ngOnInit() {}
 
     toggleMenu() {
-        this.menuVisible = !this.menuVisible;
+        if (this.onMenuScreen) {
+            this.navCtrl.navigateBack(['main']);
+        } else {
+            this.navCtrl.navigateForward(['main/menu']);
+        }
     }
 
-    closeMenu() {
-        this.menuVisible = false;
-    }
+    // closeMenu() {
+    //     this.menuVisible = false;
+    // }
 
     clickRating() {
         if (this.onRatingScreen) {
@@ -57,6 +63,6 @@ export class HeaderComponent implements OnInit {
         } else {
             this.navCtrl.navigateForward(['main/rating']);
         }
-        this.menuVisible = false;
+        // this.menuVisible = false;
     }
 }
