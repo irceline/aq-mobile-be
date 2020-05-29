@@ -25,7 +25,11 @@ export class BelAQIService {
     indexScore: Math.ceil(Math.random() * 10)
   });
 
-  constructor(private translate: TranslateService) { }
+  private _BelAqiResults: BelAqiIndexResult[] = [];
+
+  constructor(private translate: TranslateService) {
+
+  }
 
   // dummy function to get random index data
   getIndexScores( locations: UserLocation[], pastDays: number, nextDays: number ): BelAqiIndexResult[] {
