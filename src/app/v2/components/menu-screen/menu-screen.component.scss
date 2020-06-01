@@ -1,13 +1,10 @@
 :host {
+
   .menu {
-    position: absolute;
-    top: 56px;
-    left: 0;
-    right: 0;
-    height: calc(100% - 56px);
-    background-color: #31cef6;
+    padding-top: 56px;
     z-index: 11;
     overflow: auto;
+    position: relative;
 
     &--link {
       --color: white;
