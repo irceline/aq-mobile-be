@@ -419,67 +419,43 @@ L.TileLayer.CustomCanvas = L.TileLayer.WMS.extend({
     // https://github.com/MazeMap/Leaflet.TileLayer.PouchDBCached/tree/ca83b60dcdd276d7cd7f9c4f24eb1fd1138b2c72  
     // at and is licensed under the MIT License as stated in the readme.md file.
     // ***************************************START-OF-SECTION**********************************************
-    // Overwrites L.TileLayer.prototype.createTile
     createTile: function (coords, done) {
-        var tile = document.createElement("img");
-
-        tile.onerror = L.bind(this._tileOnError, this, done, tile);
-
-        if (this.options.crossOrigin) {
-            tile.crossOrigin = "";
-        }
-
-        /*
-         Alt tag is *set to empty string to keep screen readers from reading URL and for compliance reasons
-         http://www.w3.org/TR/WCAG20-TECHS/H67
-         */
-        tile.alt = "";
-
-        var tileUrl = this.getTileUrl(coords);
+        const url = this.getTileUrl(coords);
 
         if (this.options.useCache) {
+            const imgTile = document.createElement('canvas');
+            imgTile.onerror = L.bind(this._tileOnError, this, done, imgTile);
+            if (this.options.crossOrigin) {
+                imgTile.crossOrigin = "";
+            }
             this._db.get(
-                tileUrl, {
-                    revs_info: true
+                url, {
+                    _revs_info: true
                 },
-                this._onCacheLookup(tile, tileUrl, done)
+                this._onCacheLookup(imgTile, url, coords, done)
             )
+            return imgTile;
         } else {
-            // Fall back to standard behaviour
-            tile.onload = L.bind(this._tileOnLoad, this, done, tile);
-            tile.src = tileUrl;
+            const tile = document.createElement('canvas');
+            tile.width = tile.height = this.options.tileSize;
+            this._drawTileInternal(tile, coords, url, L.Util.bind(done, null, null, tile));
+            return tile;
         }
-
-        return tile;
     },
-
-    // *************************************************************************************
-    // Old implementation by JanSch
-    // *************************************************************************************
-    /*
-    createTile: function (coords, done) {
-        const tile = document.createElement('canvas'),
-            url = this.getTileUrl(coords);
-        tile.width = tile.height = this.options.tileSize;
-        this._drawTileInternal(tile, coords, url, L.Util.bind(done, null, null, tile));
-
-        return tile;
-    },
-    */
 
     // Returns a callback (closure over tile/key/originalSrc) to be run when the DB
     //   backend is finished with a fetch operation.
-    _onCacheLookup: function (tile, tileUrl, done) {
+    _onCacheLookup: function (tile, tileUrl, coords, done) {
         return function (err, data) {
             if (data) {
-                return this._onCacheHit(tile, tileUrl, data, done);
+                return this._onCacheHit(tile, tileUrl, data, coords, done);
             } else {
-                return this._onCacheMiss(tile, tileUrl, done);
+                return this._onCacheMiss(tile, tileUrl, coords, done);
             }
         }.bind(this);
     },
 
-    _onCacheHit: function (tile, tileUrl, data, done) {
+    _onCacheHit: function (tile, tileUrl, data, coords, done) {
         this.fire("tilecachehit", {
             tile: tile,
             url: tileUrl,
@@ -489,41 +465,35 @@ L.TileLayer.CustomCanvas = L.TileLayer.WMS.extend({
         this._db.getAttachment(tileUrl, "tile").then(
             function (blob) {
                 var url = URL.createObjectURL(blob);
-
                 if (
                     Date.now() > data.timestamp + this.options.cacheMaxAge &&
                     !this.options.useOnlyCache
                 ) {
                     // Tile is too old, try to refresh it
-                    if (this.options.saveToCache) {
-                        tile.onload = L.bind(
-                            this._saveTile,
-                            this,
-                            tile,
-                            tileUrl,
-                            data._revs_info[0].rev,
-                            done
-                        );
-                    }
-                    tile.crossOrigin = "Anonymous";
-                    tile.src = tileUrl;
-                    tile.onerror = function (ev) {
-                        // If the tile is too old but couldn't be fetched from the network,
-                        //   serve the one still in cache.
-                        this.src = url;
-                    };
+                    this._saveTile(tile, tileUrl, undefined, coords, done);
                 } else {
                     // Serve tile from cached data
-                    tile.onload = L.bind(this._tileOnLoad, this, done, tile);
-                    tile.src = url;
+                    const img = new Image();
+                    img.onload = () => {
+                        tile.width = tile.height = this.options.tileSize;
+                        const ctx = tile.getContext('2d');
+                        pattern = ctx.createPattern(img, 'repeat');
+                        ctx.beginPath();
+                        ctx.rect(0, 0, tile.width, tile.height);
+                        ctx.fillStyle = pattern;
+                        ctx.fill();
+                        tile.complete = true;
+                        this._tileOnLoad(done, tile);
+                    }
+                    img.src = url;
                 }
             }.bind(this)
         ).catch(function (err) {
-            return _onCacheMiss(tile, tileUrl, done);
+            return _onCacheMiss(tile, tileUrl, coords, done);
         });;
     },
 
-    _onCacheMiss: function (tile, tileUrl, done) {
+    _onCacheMiss: function (tile, tileUrl, coords, done) {
         this.fire("tilecachemiss", {
             tile: tile,
             url: tileUrl,
@@ -536,14 +506,7 @@ L.TileLayer.CustomCanvas = L.TileLayer.WMS.extend({
         } else {
             // Online, not cached, request the tile normally
             if (this.options.saveToCache) {
-                tile.onload = L.bind(
-                    this._saveTile,
-                    this,
-                    tile,
-                    tileUrl,
-                    undefined,
-                    done
-                );
+                this._saveTile(tile, tileUrl, undefined, coords, done);
             } else {
                 tile.onload = L.bind(this._tileOnLoad, this, done, tile);
             }
@@ -554,55 +517,107 @@ L.TileLayer.CustomCanvas = L.TileLayer.WMS.extend({
 
     // Async'ly saves the tile as a PouchDB attachment
     // Will run the done() callback (if any) when finished.
-    _saveTile: function (tile, tileUrl, existingRevision, done) {
+    _saveTile: function (tile, tileUrl, existingRevision, coords, done) {
+
         if (!this.options.saveToCache) {
             return;
         }
 
-        var canvas = document.createElement("canvas");
-        canvas.width = tile.naturalWidth || tile.width;
-        canvas.height = tile.naturalHeight || tile.height;
+        tile.width = tile.height = this.options.tileSize;
 
-        var context = canvas.getContext("2d");
-        context.drawImage(tile, 0, 0);
+        const zoom = this._getZoomForUrl(),
+            state = this._getTileGeometry(coords.x, coords.y, zoom);
+
+        if (state.isOut) {
+            return;
+        }
 
         var format = this.options.cacheFormat;
+        var db = this._db;
+        const ts = this.options.tileSize,
+            tileX = ts * coords.x,
+            tileY = ts * coords.y,
+            zCoeff = Math.pow(2, zoom),
+            ctx = tile.getContext('2d'),
+            imageObj = new Image();
 
-        canvas.toBlob(
-            function (blob) {
-                console.log(tileUrl);
-                this._db
-                    .put({
-                        _id: tileUrl,
-                        _rev: existingRevision,
-                        timestamp: Date.now(),
-                    })
-                    .then(
-                        function (status) {
-                            return this._db.putAttachment(
-                                tileUrl,
-                                "tile",
-                                status.rev,
-                                blob,
-                                format
-                            );
-                        }.bind(this)
-                    )
-                    .then(function (resp) {
-                        if (done) {
-                            done();
+        const setPattern = function () {
+            let c, r, p,
+                pattern,
+                geom;
+
+            if (!state.isIn) {
+                geom = state.geometry;
+                ctx.beginPath();
+
+                for (c = 0; c < geom.length; c++) {
+                    for (r = 0; r < geom[c].length; r++) {
+                        if (geom[c][r].length === 0) {
+                            continue;
                         }
-                    })
-                    .catch(function () {
-                        // Saving the tile to the cache might have failed, 
-                        // but the tile itself has been loaded.
-                        if (done) {
-                            done();
+
+                        ctx.moveTo(geom[c][r][0].x * zCoeff - tileX, geom[c][r][0].y * zCoeff - tileY);
+                        for (p = 1; p < geom[c][r].length; p++) {
+                            ctx.lineTo(geom[c][r][p].x * zCoeff - tileX, geom[c][r][p].y * zCoeff - tileY);
                         }
-                    });
-            }.bind(this),
-            format
-        );
+                    }
+                }
+                ctx.clip();
+            }
+
+            pattern = ctx.createPattern(imageObj, 'repeat');
+            ctx.beginPath();
+            ctx.rect(0, 0, tile.width, tile.height);
+            ctx.fillStyle = pattern;
+            ctx.fill();
+
+            tile.toBlob(
+                function (blob) {
+                    done();
+                    db.put({
+                            _id: tileUrl,
+                            _rev: existingRevision,
+                            timestamp: Date.now(),
+                        })
+                        .then(
+                            function (status) {
+                                return db.putAttachment(
+                                    tileUrl,
+                                    "tile",
+                                    status.rev,
+                                    blob,
+                                    format
+                                );
+                            }.bind(this)
+                        )
+                        .then(function (resp) {
+                            if (done) {
+                                done();
+                            }
+                        })
+                        .catch(function () {
+                            // Saving the tile to the cache might have failed, 
+                            // but the tile itself has been loaded.
+                            if (done) {
+                                done();
+                            }
+                        });
+                }.bind(this),
+                format
+            );
+        };
+
+        if (this.options.crossOrigin) {
+            imageObj.crossOrigin = '';
+        }
+
+        imageObj.onload = function () {
+            // TODO: implement correct image loading cancelation
+            tile.complete = true; // HACK: emulate HTMLImageElement property to make happy L.TileLayer
+            setTimeout(setPattern, 0); // IE9 bug - black tiles appear randomly if call setPattern() without timeout
+        };
+
+        imageObj.src = tileUrl;
     },
 
     // 🍂section PouchDB tile caching methods
