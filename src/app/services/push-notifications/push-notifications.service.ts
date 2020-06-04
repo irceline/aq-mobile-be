@@ -30,6 +30,9 @@ export class PushNotificationsService {
     console.log(`PushNotificationsService - init`);
     this.platform.ready().then(() => {
       if (this.platform.is('cordova')) {
+        if (this.platform.is('ios')) {
+          this.firebase.grantPermission();
+        };
         this.firebase.getToken().then(token => {
           // Your best bet is to here store the token on the user's profile on the
           // Firebase database, so that when you want to send notifications to this
