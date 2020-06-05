@@ -13,7 +13,7 @@ import { lightIndexColor } from '../../common/constants';
     styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-    @ViewChild(IonReorderGroup) reorderGroup: IonReorderGroup;
+    @ViewChild(IonReorderGroup, { static: false }) reorderGroup: IonReorderGroup;
 
     public backgroundColor;
 

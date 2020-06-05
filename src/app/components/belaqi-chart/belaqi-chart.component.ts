@@ -30,7 +30,7 @@ const HOUR_STEPS = 11;
 })
 export class BelaqiChartComponent implements OnChanges {
 
-  @ViewChild('chart') barCanvas;
+  @ViewChild('chart', { static: true }) barCanvas;
 
   @Input()
   public location: UserLocation;

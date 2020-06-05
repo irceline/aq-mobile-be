@@ -8,7 +8,7 @@ import {IonSlides} from '@ionic/angular';
     styleUrls: ['./time-line-list.component.scss'],
 })
 export class TimeLineListComponent implements OnInit, OnChanges {
-    @ViewChild(IonSlides) slides: IonSlides;
+    @ViewChild(IonSlides, { static: true }) slides: IonSlides;
     @Input() items: BelAqiIndexResult[];
     @Output() dayChange = new EventEmitter<BelAqiIndexResult>();
 

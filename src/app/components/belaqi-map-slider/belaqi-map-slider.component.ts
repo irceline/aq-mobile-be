@@ -109,7 +109,7 @@ export class BelaqiMapSliderComponent implements OnDestroy, OnInit {
 
   public belaqiMapviews: MapView[];
 
-  @ViewChild('slider')
+  @ViewChild('slider', { static: true })
   slider: IonSlides;
 
   @Output()

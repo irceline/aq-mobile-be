@@ -22,7 +22,7 @@ export class OnboardingSliderComponent implements OnInit, OnChanges {
 
     @Output() slideShowComplete = new EventEmitter();
 
-    @ViewChild(IonSlides) slides: IonSlides;
+    @ViewChild(IonSlides, { static: true }) slides: IonSlides;
 
     public btnText: string;
 

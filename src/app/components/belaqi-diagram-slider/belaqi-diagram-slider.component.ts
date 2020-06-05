@@ -26,7 +26,7 @@ import { HeaderContent } from '../slider-header/slider-header.component';
 })
 export class BelaqiDiagramSliderComponent implements OnDestroy, OnInit {
 
-  @ViewChild('slider')
+  @ViewChild('slider', { static: true })
   public slider: IonSlides;
 
   @Output()

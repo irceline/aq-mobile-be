@@ -39,7 +39,7 @@ export class BelaqiWheelComponent extends LanguageChangNotifier implements After
   @Output()
   public ready: EventEmitter<void> = new EventEmitter();
 
-  @ViewChild('belaqiWheel') belaqiWheelCanvas: ElementRef;
+  @ViewChild('belaqiWheel', { static: true }) belaqiWheelCanvas: ElementRef;
   belaqiWheel: Chart;
 
   public index: number;

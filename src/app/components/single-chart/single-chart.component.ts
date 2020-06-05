@@ -28,7 +28,7 @@ export interface DataEntry {
 })
 export class SingleChartComponent implements OnChanges, DoCheck {
 
-  @ViewChild('chart') barCanvas;
+  @ViewChild('chart', { static: true }) barCanvas;
 
   @Input()
   public loading: boolean;

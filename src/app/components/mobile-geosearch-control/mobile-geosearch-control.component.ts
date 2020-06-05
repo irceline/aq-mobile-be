@@ -26,7 +26,7 @@ export class MobileGeosearchControlComponent extends GeosearchControlComponent
     @Output()
     public focusChangeEmitter: EventEmitter<boolean> = new EventEmitter();
 
-    @ViewChild('searchbar')
+    @ViewChild('searchbar', { static: true })
     searchbar: AutoCompleteComponent;
 
     public labelAttribute: string;

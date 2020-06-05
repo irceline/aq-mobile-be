@@ -14,7 +14,7 @@ import { RefreshHandler } from '../services/refresh/refresh.service';
 })
 export class MapPage {
 
-  @ViewChild('slider')
+  @ViewChild('slider', { static: true })
   private sliderComponent: BelaqiMapSliderComponent;
 
   public sliderHeader: HeaderContent;

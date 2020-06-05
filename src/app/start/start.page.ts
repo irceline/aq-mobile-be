@@ -20,7 +20,7 @@ import { RefreshHandler } from '../services/refresh/refresh.service';
 })
 export class StartPage implements OnInit {
 
-  @ViewChild('slider')
+  @ViewChild('slider', { static: true })
   private sliderComponent: BelaqiUserLocationSliderComponent;
 
   public sliderHeader: HeaderContent;

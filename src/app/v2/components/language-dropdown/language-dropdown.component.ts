@@ -19,7 +19,7 @@ export class LanguageDropdownComponent implements OnInit {
 
     @Output() languageChanged = new EventEmitter<string>();
 
-    @ViewChild('select') select: ElementRef;
+    @ViewChild('select', { static: true }) select: ElementRef;
 
         constructor( private translate: TranslateService ) {
 

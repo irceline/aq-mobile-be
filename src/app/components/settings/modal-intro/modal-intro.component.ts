@@ -10,7 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class ModalIntroComponent implements AfterViewInit {
 
-  @ViewChild(IonSlides) slides: IonSlides;
+  @ViewChild(IonSlides, { static: true }) slides: IonSlides;
 
   public selectedLang: string;
 

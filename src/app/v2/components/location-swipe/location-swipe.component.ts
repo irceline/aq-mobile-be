@@ -15,7 +15,7 @@ import {UserLocation} from '../../Interfaces';
     styleUrls: ['./location-swipe.component.scss'],
 })
 export class LocationSwipeComponent implements OnInit {
-    @ViewChild(IonSlides) slides: IonSlides;
+    @ViewChild(IonSlides, { static: true }) slides: IonSlides;
     @Output() locationChange = new EventEmitter<UserLocation>();
     @Input() locations: UserLocation[] = [];
 

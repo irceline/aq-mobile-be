@@ -37,7 +37,7 @@ export interface BelaqiSelection {
 })
 export class BelaqiUserLocationSliderComponent implements OnDestroy, OnInit {
 
-  @ViewChild('slider')
+  @ViewChild('slider', { static: true })
   slider: IonSlides;
 
   @Output()

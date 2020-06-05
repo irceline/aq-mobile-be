@@ -2,7 +2,7 @@ import {
     Component,
     Input,
     ElementRef,
-    Renderer,
+    Renderer2,
     AfterViewInit,
     ViewChild,
 } from '@angular/core';
@@ -16,9 +16,9 @@ import { DomController, Platform, IonContent } from '@ionic/angular';
 export class PullTabComponent implements AfterViewInit {
     @Input('options') options: any;
 
-    @ViewChild('trigger') trigger: ElementRef;
-    @ViewChild('triggerArrow') triggerArrow: ElementRef;
-    @ViewChild(IonContent) content: IonContent;
+    @ViewChild('trigger', { static: true }) trigger: ElementRef;
+    @ViewChild('triggerArrow', { static: true }) triggerArrow: ElementRef;
+    @ViewChild(IonContent, { static: true }) content: IonContent;
 
     handleHeight = 50;
     gap = 100;
@@ -31,7 +31,7 @@ export class PullTabComponent implements AfterViewInit {
 
     constructor(
         public element: ElementRef,
-        public renderer: Renderer,
+        public renderer: Renderer2,
         public domCtrl: DomController,
         public platform: Platform
     ) {}
@@ -57,13 +57,13 @@ export class PullTabComponent implements AfterViewInit {
             this.thresholdTop = this.options.thresholdFromTop;
         }
 
-        this.renderer.setElementStyle(
+        this.renderer.setStyle(
             this.element.nativeElement,
             'top',
             this.platform.height() - this.handleHeight + 'px'
         );
 
-        this.renderer.setElementStyle(
+        this.renderer.setStyle(
             this.element.nativeElement,
             'height',
             this.platform.height() - this.gap + 'px'
@@ -93,12 +93,12 @@ export class PullTabComponent implements AfterViewInit {
     handleTap(ev) {
         if (!this.isClicked) {
             this.domCtrl.write(() => {
-                this.renderer.setElementStyle(
+                this.renderer.setStyle(
                     this.element.nativeElement,
                     'transition',
                     'top 0.5s'
                 );
-                this.renderer.setElementStyle(
+                this.renderer.setStyle(
                     this.element.nativeElement,
                     'top',
                     this.gap + 'px' // height from top when its opened
@@ -108,12 +108,12 @@ export class PullTabComponent implements AfterViewInit {
             this.isClicked = true;
         } else {
             this.domCtrl.write(() => {
-                this.renderer.setElementStyle(
+                this.renderer.setStyle(
                     this.element.nativeElement,
                     'transition',
                     'top 0.5s'
                 );
-                this.renderer.setElementStyle(
+                this.renderer.setStyle(
                     this.element.nativeElement,
                     'top',
                     this.platform.height() - this.handleHeight + 'px'
@@ -146,12 +146,12 @@ export class PullTabComponent implements AfterViewInit {
             bounceToTop
         ) {
             this.domCtrl.write(() => {
-                this.renderer.setElementStyle(
+                this.renderer.setStyle(
                     this.element.nativeElement,
                     'transition',
                     'top 0.5s'
                 );
-                this.renderer.setElementStyle(
+                this.renderer.setStyle(
                     this.element.nativeElement,
                     'top',
                     this.gap + 'px' // height from top when its opened
@@ -164,12 +164,12 @@ export class PullTabComponent implements AfterViewInit {
             bounceToBottom
         ) {
             this.domCtrl.write(() => {
-                this.renderer.setElementStyle(
+                this.renderer.setStyle(
                     this.element.nativeElement,
                     'transition',
                     'top 0.5s'
                 );
-                this.renderer.setElementStyle(
+                this.renderer.setStyle(
                     this.element.nativeElement,
                     'top',
                     this.platform.height() - this.handleHeight + 'px'
@@ -177,7 +177,7 @@ export class PullTabComponent implements AfterViewInit {
             });
             this.isEnabled = false;
         } else {
-            this.renderer.setElementStyle(
+            this.renderer.setStyle(
                 this.element.nativeElement,
                 'transition',
                 'none'
@@ -192,7 +192,7 @@ export class PullTabComponent implements AfterViewInit {
                     ev.additionalEvent === 'pandown'
                 ) {
                     this.domCtrl.write(() => {
-                        this.renderer.setElementStyle(
+                        this.renderer.setStyle(
                             this.element.nativeElement,
                             'top',
                             newTop + 'px'

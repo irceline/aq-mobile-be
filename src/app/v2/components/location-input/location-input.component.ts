@@ -18,7 +18,7 @@ import {TranslateService} from '@ngx-translate/core';
     styleUrls: ['./location-input.component.scss'],
 })
 export class LocationInputComponent implements OnInit {
-    @ViewChild(IonInput) input: IonInput;
+    @ViewChild(IonInput, { static: true }) input: IonInput;
 
     @Input() currentLocation = true;
 
