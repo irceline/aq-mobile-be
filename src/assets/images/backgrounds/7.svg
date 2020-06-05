@@ -12,8 +12,41 @@
    viewBox="0 0 329.40624 711.20002"
    version="1.1"
    id="bg-belair">
-  <defs
+ <defs
      id="defs2">
+    <linearGradient
+       id="linearGradient963">
+      <stop
+         id="stop959"
+         offset="0"
+         style="stop-color:#ffffff;stop-opacity:0.749" />
+      <stop
+         id="stop961"
+         offset="1"
+         style="stop-color:#ffffff;stop-opacity:0;" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient871">
+      <stop
+         id="stop867"
+         offset="0"
+         style="stop-color:#ffffff;stop-opacity:0.706" />
+      <stop
+         id="stop869"
+         offset="1"
+         style="stop-color:#ffffff;stop-opacity:0;" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient865">
+      <stop
+         id="stop861"
+         offset="0"
+         style="stop-color:#ffffff;stop-opacity:0.696" />
+      <stop
+         id="stop863"
+         offset="1"
+         style="stop-color:#ffffff;stop-opacity:0;" />
+    </linearGradient>
     <linearGradient
        id="linearGradient1556">
       <stop
@@ -26,14 +59,14 @@
          id="stop1554" />
     </linearGradient>
     <linearGradient
-       xlink:href="#linearGradient1556"
+       xlink:href="#linearGradient865"
        id="linearGradient1558"
-       x1="153.52864"
-       y1="131.52344"
-       x2="158.84528"
-       y2="240.12582"
+       x1="143.89874"
+       y1="111.40093"
+       x2="152.9066"
+       y2="230.03076"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(1.9276149,0,0,1.997635,-152.94833,-187.32977)" />
+       gradientTransform="matrix(1.89663,0,0,1.3557107,-164.87201,-81.930298)" />
     <linearGradient
        gradientTransform="matrix(1.1357859,0,0,1.4913907,142.35017,-16.57559)"
        gradientUnits="userSpaceOnUse"
@@ -53,14 +86,23 @@
        id="linearGradient1558-6"
        xlink:href="#linearGradient1556" />
     <linearGradient
-       gradientTransform="matrix(1.3220247,0,0,1.1593605,110.27134,51.964434)"
+       gradientTransform="matrix(1.1122271,0,0,1.012354,124.1634,51.869733)"
        gradientUnits="userSpaceOnUse"
-       y2="233.96724"
-       x2="136.46304"
-       y1="131.39288"
-       x1="113.01612"
+       y2="228.89413"
+       x2="137.58339"
+       y1="107.42567"
+       x1="119.67243"
        id="linearGradient1558-1"
-       xlink:href="#linearGradient1556" />
+       xlink:href="#linearGradient871" />
+    <linearGradient
+       xlink:href="#linearGradient963"
+       id="linearGradient957"
+       gradientUnits="userSpaceOnUse"
+       x1="167.78191"
+       y1="-171.42937"
+       x2="164.13451"
+       y2="703.95453"
+       gradientTransform="matrix(1.0034644,0,0,1.0016428,-1179.2969,1.2178017)" />
   </defs>
   <metadata
      id="metadata5">
