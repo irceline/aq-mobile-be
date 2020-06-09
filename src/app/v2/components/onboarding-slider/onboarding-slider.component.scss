@@ -4,7 +4,7 @@
 
     ion-slides {
         height: 100%;
-        background: url('/assets/images/back.png') no-repeat top center / cover;
+        background: url('/assets/images/bg.svg') no-repeat top center / cover;
 
         ::ng-deep ion-slide {
             flex-direction: column;
