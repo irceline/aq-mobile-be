@@ -1,5 +1,5 @@
-import {Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter} from '@angular/core';
-import {TranslateService} from '@ngx-translate/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-language-dropdown',
@@ -15,24 +15,19 @@ export class LanguageDropdownComponent implements OnInit {
         { langCode: 'fr', label: 'Français' },
     ];
 
-    @Input() language = '';
-
-    @Output() languageChanged = new EventEmitter<string>();
+    public language: string;
 
     @ViewChild('select', { static: true }) select: ElementRef;
 
-        constructor( private translate: TranslateService ) {
-
-        // this does not do what you would expect
-        // this._availableLanguages = this.translate.getLangs();
-
-    }
+    constructor(
+        private translate: TranslateService
+    ) { }
 
     ngOnInit() {
+        this.language = this.translate.currentLang;
     }
 
-    selectLanguage(lang) {
-        // Todo: test when dropdown is implemented
-        this.languageChanged.emit(lang.detail.value);
+    selectLanguage(lang: CustomEvent) {
+        this.translate.use(lang.detail.value);
     }
 }

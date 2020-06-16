@@ -1,21 +1,21 @@
-import {CUSTOM_ELEMENTS_SCHEMA, DebugElement, EventEmitter} from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
-import { OnboardingScreenComponent } from './onboarding-screen.component';
-import {TranslateTestingModule} from '../../testing/TranslateTestingModule';
-import {RouterTestingModule} from '@angular/router/testing';
-import {By} from '@angular/platform-browser';
-import {LanguageDropdownComponent} from '../../components/language-dropdown/language-dropdown.component';
-import {LocationInputComponent} from '../../components/location-input/location-input.component';
+import { LanguageDropdownComponent } from '../../components/language-dropdown/language-dropdown.component';
+import { LocationInputComponent } from '../../components/location-input/location-input.component';
 import {
   NotificationType,
-  UserNotificationSettingsComponent
+  UserNotificationSettingsComponent,
 } from '../../components/user-notification-settings/user-notification-settings.component';
-import {UserLocation} from '../../Interfaces';
-import {Geolocation} from '@ionic-native/geolocation/ngx';
-import {GeolocationMock} from '../../testing/geolocation.mock';
+import { UserLocation } from '../../Interfaces';
+import { GeolocationMock } from '../../testing/geolocation.mock';
+import { TranslateTestingModule } from '../../testing/TranslateTestingModule';
+import { OnboardingScreenComponent } from './onboarding-screen.component';
 
-describe('OnboardingScreenComponent', () => {
+fdescribe('OnboardingScreenComponent', () => {
   let component: OnboardingScreenComponent;
   let fixture: ComponentFixture<OnboardingScreenComponent>;
   let de: DebugElement;
@@ -26,14 +26,14 @@ describe('OnboardingScreenComponent', () => {
         OnboardingScreenComponent,
         LanguageDropdownComponent,
         LocationInputComponent,
-        UserNotificationSettingsComponent ],
+        UserNotificationSettingsComponent],
       providers: [
-        {provide: Geolocation, useClass: GeolocationMock}
+        { provide: Geolocation, useClass: GeolocationMock }
       ],
       imports: [RouterTestingModule, TranslateTestingModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -45,14 +45,6 @@ describe('OnboardingScreenComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should react on LanguageDropdownComponent event', () => {
-    spyOn(component, 'updateUserLanguageSettings');
-    const langDropdown = de.query(By.css('app-language-dropdown'));
-    const langInstance: LanguageDropdownComponent = langDropdown.componentInstance;
-    langInstance.languageChanged.emit('en');
-    expect(component.updateUserLanguageSettings).toHaveBeenCalledWith('en');
   });
 
   it('should react on LocationInputComponent event', () => {

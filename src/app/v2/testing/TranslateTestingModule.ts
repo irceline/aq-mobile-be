@@ -29,7 +29,7 @@ export class TranslatePipeMock implements PipeTransform {
 }
 
 @Injectable()
-export class TranslateServiceStub {
+export class TranslateServiceStub extends TranslateService {
     public get<T>(key: T): Observable<T> {
         return of(key);
     }
