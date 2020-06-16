@@ -9,11 +9,12 @@ import {
 } from '@angular/core';
 import {
   DatasetApiInterface,
-  HasLoadableContent,
-  Mixin,
   ParameterFilter,
   Station,
   StatusIntervalResolverService,
+  HelgolandPlatform,
+  HelgolandServicesConnector,
+  HelgolandTimeseries,
 } from '@helgoland/core';
 import { MapCache, MapSelectorComponent } from '@helgoland/map';
 import { CircleMarker, circleMarker, featureGroup, geoJSON, Layer, markerClusterGroup } from 'leaflet';
@@ -29,8 +30,7 @@ import { IrcelineSettingsService } from '../../services/irceline-settings/irceli
   templateUrl: './customized-station-map-selector.component.html',
   styleUrls: ['./customized-station-map-selector.component.scss'],
 })
-@Mixin([HasLoadableContent])
-export class CustomizedStationMapSelectorComponent extends MapSelectorComponent<Station> implements OnChanges, AfterViewInit {
+export class CustomizedStationMapSelectorComponent extends MapSelectorComponent<HelgolandPlatform> implements OnChanges, AfterViewInit {
 
   @Input()
   public cluster: boolean;
@@ -38,8 +38,8 @@ export class CustomizedStationMapSelectorComponent extends MapSelectorComponent<
   @Input()
   public statusIntervals: boolean;
 
-  @Input()
-  public markerSelectorGenerator: MarkerSelectorGenerator;
+  // @Input()
+  // public markerSelectorGenerator: MarkerSelectorGenerator;
 
   /**
    * Ignores all Statusintervals where the timestamp is before a given duration in milliseconds and draws instead the default marker.
@@ -52,7 +52,7 @@ export class CustomizedStationMapSelectorComponent extends MapSelectorComponent<
 
   constructor(
     protected statusIntervalResolver: StatusIntervalResolverService,
-    protected apiInterface: DatasetApiInterface,
+    protected servicesConnector: HelgolandServicesConnector,
     protected mapCache: MapCache,
     protected differs: KeyValueDiffers,
     protected cd: ChangeDetectorRef,
@@ -76,7 +76,7 @@ export class CustomizedStationMapSelectorComponent extends MapSelectorComponent<
   }
 
   protected drawGeometries() {
-    this.isContentLoading(true);
+    this.onContentLoading.emit(true);
     if (this.ongoingTimeseriesSubscriber) { this.ongoingTimeseriesSubscriber.unsubscribe(); }
     if (this.map && this.markerFeatureGroup) { this.map.removeLayer(this.markerFeatureGroup); }
     if (this.statusIntervals && this.filter && this.filter.phenomenon) {
@@ -90,22 +90,22 @@ export class CustomizedStationMapSelectorComponent extends MapSelectorComponent<
       expanded: true
     };
     this.ircelineSettings.getSettings().subscribe(res => {
-      this.ongoingTimeseriesSubscriber = this.apiInterface.getTimeseries(this.serviceUrl, tempFilter).subscribe(
+      this.ongoingTimeseriesSubscriber = this.servicesConnector.getDatasets(this.serviceUrl, tempFilter).subscribe(
         timeseries => {
           this.markerFeatureGroup = featureGroup();
-          timeseries.forEach(ts => {
+          timeseries.forEach((ts: HelgolandTimeseries) => {
             if ((ts.lastValue.timestamp) > res.lastupdate.getTime() - this.ignoreStatusIntervalIfBeforeDuration) {
               let marker;
               const phenomenon = getMainPhenomenonForID(ts.parameters.phenomenon.id);
               if (phenomenon) {
                 const index = this.categorizer.categorize(ts.lastValue.value, phenomenon);
                 const color = this.belaqi.getColorForIndex(index);
-                if (color) { marker = this.createColoredMarker(ts.station, color); }
+                if (color) { marker = this.createColoredMarker(ts.platform, color); }
               }
-              if (!marker) { marker = this.createDefaultColoredMarker(ts.station); }
+              if (!marker) { marker = this.createDefaultColoredMarker(ts.platform); }
               if (marker) {
                 marker.on('click', () => {
-                  this.onSelected.emit(ts.station);
+                  this.onSelected.emit(ts.platform);
                 });
                 this.markerFeatureGroup.addLayer(marker);
               }
@@ -114,7 +114,7 @@ export class CustomizedStationMapSelectorComponent extends MapSelectorComponent<
           if (!this.avoidZoomToSelection) {
             this.zoomToMarkerBounds(this.markerFeatureGroup.getBounds());
           }
-          this.isContentLoading(false);
+          this.onContentLoading.emit(false);
           if (this.map) { this.markerFeatureGroup.addTo(this.map); }
         },
         error => {
@@ -125,21 +125,21 @@ export class CustomizedStationMapSelectorComponent extends MapSelectorComponent<
     });
   }
 
-  private createColoredMarker(station: Station, color: string): Layer {
+  private createColoredMarker(station: HelgolandPlatform, color: string): Layer {
     if (this.markerSelectorGenerator.createFilledMarker) {
       return this.markerSelectorGenerator.createFilledMarker(station, color);
     }
     return this.createFilledMarker(station, color, 10);
   }
 
-  private createDefaultColoredMarker(station: Station): Layer {
+  private createDefaultColoredMarker(station: HelgolandPlatform): Layer {
     if (this.markerSelectorGenerator.createDefaultFilledMarker) {
       return this.markerSelectorGenerator.createDefaultFilledMarker(station);
     }
     return this.createFilledMarker(station, '#000', 10);
   }
 
-  private createFilledMarker(station: Station, color: string, radius: number): Layer {
+  private createFilledMarker(station: HelgolandPlatform, color: string, radius: number): Layer {
     let geometry: Layer;
     if (station.geometry.type === 'Point') {
       const point = station.geometry as GeoJSON.Point;
@@ -180,7 +180,7 @@ export class CustomizedStationMapSelectorComponent extends MapSelectorComponent<
   }
 
   private createStationGeometries() {
-    this.apiInterface.getStations(this.serviceUrl, this.filter)
+    this.servicesConnector.getPlatforms(this.serviceUrl, this.filter)
       .subscribe((res) => {
         if (this.cluster) {
           this.markerFeatureGroup = markerClusterGroup({ animate: true });
@@ -198,23 +198,23 @@ export class CustomizedStationMapSelectorComponent extends MapSelectorComponent<
           this.onNoResultsFound.emit(true);
         }
         this.map.invalidateSize();
-        this.isContentLoading(false);
+        this.onContentLoading.emit(false);
       });
   }
 
-  private createDefaultGeometry(station: Station) {
-    if (station.geometry) {
-      const geometry = geoJSON(station.geometry);
-      geometry.on('click', () => this.onSelected.emit(station));
+  private createDefaultGeometry(platform: HelgolandPlatform) {
+    if (platform.geometry) {
+      const geometry = geoJSON(platform.geometry);
+      geometry.on('click', () => this.onSelected.emit(platform));
       return geometry;
     } else {
-      console.error(station.id + ' has no geometry');
+      console.error(platform.id + ' has no geometry');
     }
   }
 
 }
 
-export interface MarkerSelectorGenerator {
-  createFilledMarker?(station: Station, color: string): Layer;
-  createDefaultFilledMarker?(station: Station): Layer;
-}
+// export interface MarkerSelectorGenerator {
+//   createFilledMarker?(station: Station, color: string): Layer;
+//   createDefaultFilledMarker?(station: Station): Layer;
+// }

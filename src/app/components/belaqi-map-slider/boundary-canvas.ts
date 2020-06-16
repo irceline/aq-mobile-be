@@ -11,6 +11,9 @@ declare module 'leaflet' {
     export interface BoundaryCanvasOptions extends WMSOptions {
         boundary?: GeoJSON.GeoJsonObject;
         useBoundaryGreaterAsZoom?: number;
+        tiled?: string;
+        hideInOpacitySlider?: boolean;
+        time?: string;
     }
 
     export namespace tileLayer {

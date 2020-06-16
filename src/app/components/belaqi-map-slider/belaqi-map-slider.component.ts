@@ -3,8 +3,8 @@ import './control-opacity';
 
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { DatasetApiInterface, ParameterFilter, Phenomenon, SettingsService, Station } from '@helgoland/core';
-import { GeoSearchOptions, LayerOptions, MapCache } from '@helgoland/map';
+import { DatasetApiInterface, ParameterFilter, Phenomenon, SettingsService, Station, HelgolandPlatform } from '@helgoland/core';
+import { GeoSearchOptions, LayerOptions, MapCache, MarkerSelectorGenerator } from '@helgoland/map';
 import { IonSlides, ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from 'ionic-cache';
@@ -47,7 +47,7 @@ import { NetworkAlertService } from '../../services/network-alert/network-alert.
 import { RefreshHandler } from '../../services/refresh/refresh.service';
 import { MobileSettings } from '../../services/settings/settings.service';
 import { UserLocation, UserLocationListService } from '../../services/user-location-list/user-location-list.service';
-import { MarkerSelectorGenerator } from '../customized-station-map-selector/customized-station-map-selector.component';
+// import { MarkerSelectorGenerator } from '../customized-station-map-selector/customized-station-map-selector.component';
 import { HeaderContent } from '../slider-header/slider-header.component';
 
 enum PhenomenonLabel {
@@ -1058,7 +1058,7 @@ class MarkerSelectorGeneratorImpl implements MarkerSelectorGenerator {
     private mapId: string
   ) { }
 
-  createFilledMarker(station: Station, color: string): Layer {
+  createFilledMarker(station: HelgolandPlatform, color: string): Layer {
     let geometry: Layer;
     if (station.geometry.type === 'Point') {
       const p = station.geometry as GeoJSON.Point;
@@ -1089,7 +1089,7 @@ class MarkerSelectorGeneratorImpl implements MarkerSelectorGenerator {
     return geometry;
   }
 
-  createDefaultFilledMarker(station: Station): Layer {
+  createDefaultFilledMarker(station: HelgolandPlatform): Layer {
     return this.createFilledMarker(station, '#fff');
   }
 
