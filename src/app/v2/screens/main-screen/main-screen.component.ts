@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { DataPointForDay, UserLocation } from '../../Interfaces';
-import { UserSettingsService } from '../../services/user-settings.service';
-import {
-    BelAqiIndexResult,
-    BelAQIService,
-} from '../../services/bel-aqi.service';
-import moment from 'moment';
-import { DetailDataService } from '../../services/detail-data.service';
 import { Platform } from '@ionic/angular';
+import moment from 'moment';
+
+import { DataPointForDay, UserLocation } from '../../Interfaces';
+import { BelAqiIndexResult, BelAQIService } from '../../services/bel-aqi.service';
+import { DetailDataService } from '../../services/detail-data.service';
+import { UserSettingsService } from '../../services/user-settings.service';
 
 @Component({
     selector: 'app-main-screen',
@@ -21,7 +19,6 @@ export class MainScreenComponent implements OnInit {
     currentLocation: UserLocation;
 
     // belAqi data
-    private belAqiScores: BelAqiIndexResult[] = [];
     belAqiForCurrentLocation: BelAqiIndexResult[] = [];
     currentActiveIndex: BelAqiIndexResult;
 
@@ -66,11 +63,6 @@ export class MainScreenComponent implements OnInit {
         private platform: Platform
     ) {
         this.locations = userSettingsService.getUserSavedLocations();
-        this.belAqiScores = this.belAqiService.getIndexScores(
-            this.locations,
-            5,
-            5
-        );
 
         // activate first location by default
         this.updateCurrentLocation(this.locations[0]);
@@ -83,21 +75,20 @@ export class MainScreenComponent implements OnInit {
     private updateCurrentLocation(location: UserLocation) {
         this.currentLocation = location;
 
-        this.belAqiForCurrentLocation = this.belAqiScores.filter(
-            (iR) => iR.location.id === location.id
-        );
+        this.belAqiService.getIndexScoresAsObservable(location).subscribe(res => {
+            this.belAqiForCurrentLocation = res;
+            // keep track of the current day;
+            const dateReference = this.currentActiveIndex ? this.currentActiveIndex.date : moment();
+            console.log(dateReference);
 
-        // keep track of the current day;
-        const dateReference = this.currentActiveIndex ? this.currentActiveIndex.date : moment();
-        console.log( dateReference );
+            this.currentActiveIndex = this.belAqiForCurrentLocation.find(
+                (iR) => Math.abs(iR.date.diff(dateReference, 'hours')) === 0
+            );
 
-        this.currentActiveIndex = this.belAqiForCurrentLocation.find(
-            (iR) => Math.abs(iR.date.diff(dateReference, 'hours')) === 0
-        );
+            this.belAqiService.activeIndex = this.currentActiveIndex;
 
-        this.belAqiService.activeIndex = this.currentActiveIndex;
-
-        this.updateDetailData();
+            this.updateDetailData();
+        });
     }
 
     private async updateDetailData() {

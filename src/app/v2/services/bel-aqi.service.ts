@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import {UserLocation} from '../Interfaces';
-import moment from 'moment';
-import {TranslateService} from '@ngx-translate/core';
-import {Moment} from 'moment';
-import {BehaviorSubject} from 'rxjs';
-import { lightIndexColor, darkIndexColor, indexLabel } from '../common/constants';
+import { TranslateService } from '@ngx-translate/core';
+import moment, { Moment } from 'moment';
+import { BehaviorSubject, Observable } from 'rxjs';
+
+import { darkIndexColor, indexLabel, lightIndexColor } from '../common/constants';
+import { UserLocation } from '../Interfaces';
+import { BelaqiIndexService } from './belaqi-index.service';
 
 export interface BelAqiIndexResult {
   location: UserLocation;
@@ -20,23 +21,25 @@ export class BelAQIService {
   // default active index
   // Brussels
   public $activeIndex = new BehaviorSubject<BelAqiIndexResult>({
-    location: {label: 'Brussel', postalCode: '1000', latitude: 50.8503396, longitude: 4.3517103, id: 2711, type: 'user'},
+    location: { label: 'Brussel', postalCode: '1000', latitude: 50.8503396, longitude: 4.3517103, id: 2711, type: 'user' },
     date: moment(),
-    indexScore: Math.ceil(Math.random() * 10)
+    indexScore: 10
   });
 
   private _BelAqiResults: BelAqiIndexResult[] = [];
 
-  constructor(private translate: TranslateService) {
+  constructor(
+    private translate: TranslateService,
+    private belaqiIndexSrvc: BelaqiIndexService
+  ) { }
 
-  }
-
+  // TODO: remove later
   // dummy function to get random index data
-  getIndexScores( locations: UserLocation[], pastDays: number, nextDays: number ): BelAqiIndexResult[] {
+  getIndexScores(locations: UserLocation[], pastDays: number, nextDays: number): BelAqiIndexResult[] {
     const indices = [];
 
-    locations.forEach( location => {
-      for ( let i = -1 * pastDays ; i <= nextDays ; i++ ) {
+    locations.forEach(location => {
+      for (let i = -1 * pastDays; i <= nextDays; i++) {
         indices.push({
           location,
           date: moment().add(i, 'days'),
@@ -48,7 +51,11 @@ export class BelAQIService {
     return indices;
   }
 
-  public set activeIndex( index: BelAqiIndexResult ) {
+  public getIndexScoresAsObservable(location: UserLocation): Observable<BelAqiIndexResult[]> {
+    return this.belaqiIndexSrvc.getIndexScores(location);
+  }
+
+  public set activeIndex(index: BelAqiIndexResult) {
     this.$activeIndex.next(index);
   }
 
