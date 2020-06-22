@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { DataPointForDay } from '../../Interfaces';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+
+import { DataPoint } from '../../Interfaces';
 
 @Component({
     selector: 'app-information-item',
@@ -9,13 +10,13 @@ import { DataPointForDay } from '../../Interfaces';
 export class InformationItemComponent implements OnInit {
     @Output() backClicked = new EventEmitter();
 
-    @Input() detailedDataPoint: DataPointForDay;
+    @Input() detailedDataPoint: DataPoint;
     @Input() isButton = false;
     @Input() hasBackBtn = false;
 
-    constructor() {}
+    constructor() { }
 
-    ngOnInit() {}
+    ngOnInit() { }
 
     goBack() {
         this.backClicked.emit();

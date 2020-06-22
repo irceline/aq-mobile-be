@@ -51,10 +51,6 @@ export interface DataPoint {
     color: string;
 }
 
-export interface DataPointForDay extends DataPoint {
-    day: Moment;
-}
-
 export interface LongTermDataPoint extends DataPoint {
     euBenchMark: number;
     worldBenchMark: number;

@@ -15,7 +15,7 @@ import {BackgroundComponent} from '../../components/background/background.compon
 import {backgroundImages, indexLabel, lightIndexColor} from '../../common/constants';
 import {DetailDataService} from '../../services/detail-data.service';
 import {dataService} from '../../testing/detail-data.service.mock';
-import {DataPointForDay, UserLocation} from '../../Interfaces';
+import {DataPoint, UserLocation} from '../../Interfaces';
 import moment from 'moment';
 import {InformationItemComponent} from '../../components/information-item/information-item.component';
 import {PullTabComponent} from '../../components/pull-tab/pull-tab.component';
@@ -30,7 +30,7 @@ describe('MainScreenComponent', () => {
     let locations: UserLocation[];
     let currentLocation: UserLocation;
     let defaultBelaqi;
-    let initialMeasurements: DataPointForDay[];
+    let initialMeasurements: DataPoint[];
 
     beforeEach(async(() => {
         specHelper.localStorageSetup();

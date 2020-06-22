@@ -1,20 +1,20 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { IonItem } from '@ionic/angular';
+import moment from 'moment';
 
-import { InformationItemComponent } from './information-item.component';
+import { indexLabel, lightIndexColor } from '../../common/constants';
+import { DataPoint, UserLocation } from '../../Interfaces';
 import { dataService } from '../../testing/detail-data.service.mock';
 import { localStorageMock } from '../../testing/localStorage.mock';
-import moment from 'moment';
-import {DataPointForDay, UserLocation} from '../../Interfaces';
-import {By} from '@angular/platform-browser';
-import {IonItem} from '@ionic/angular';
-import {indexLabel, lightIndexColor} from '../../common/constants';
-import {specHelper} from '../../testing/spec-helper';
+import { specHelper } from '../../testing/spec-helper';
+import { InformationItemComponent } from './information-item.component';
 
 describe('InformationItemComponent', () => {
     let component: InformationItemComponent;
     let fixture: ComponentFixture<InformationItemComponent>;
-    let initialMeasurements: DataPointForDay[];
+    let initialMeasurements: DataPoint[];
     let locations: UserLocation[];
     let currentLocation: UserLocation;
     let belaqi: number;

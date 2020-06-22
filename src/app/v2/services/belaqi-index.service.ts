@@ -71,18 +71,13 @@ export class BelaqiIndexService extends ValueProvider {
           this.cacheService.loadFromObservable(createCacheKey(url, JSON.stringify(params), date.toISOString()), request)
             .subscribe(
               res => {
-                if (res && res.features && res.features.length === 1) {
-                  if (res.features[0].properties['GRAY_INDEX']) {
-                    const idx = res.features[0].properties['GRAY_INDEX'];
-                    if (!isNaN(idx)) {
-                      observer.next({
-                        indexScore: Math.round(idx),
-                        date: day,
-                        location: location
-                      });
-                      observer.complete();
-                    }
-                  }
+                const idx = this.getValueOfResponse(res);
+                if (idx) {
+                  observer.next({
+                    indexScore: Math.round(idx),
+                    date: day,
+                    location: location
+                  });
                 }
                 observer.complete();
               },

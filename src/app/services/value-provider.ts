@@ -21,4 +21,17 @@ export abstract class ValueProvider {
         return minLongitude + ',' + minLatitude + ',' + maxLongitude + ',' + maxLatitude;
     }
 
+    protected getValueOfResponse(res: any): number {
+        let idx;
+        if (res && res.features && res.features.length === 1) {
+            if (res.features[0].properties['GRAY_INDEX']) {
+                const index = res.features[0].properties['GRAY_INDEX'];
+                if (!isNaN(index)) {
+                    idx = index;
+                }
+            }
+        }
+        return idx;
+    }
+
 }

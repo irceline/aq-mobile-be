@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import moment from 'moment';
+import { forkJoin } from 'rxjs';
 
-import { DataPointForDay, UserLocation } from '../../Interfaces';
+import { DataPoint, UserLocation } from '../../Interfaces';
 import { BelAqiIndexResult, BelAQIService } from '../../services/bel-aqi.service';
-import { DetailDataService } from '../../services/detail-data.service';
+import { ModelledValueService } from '../../services/modelled-value.service';
 import { UserSettingsService } from '../../services/user-settings.service';
+import { MainPhenomenon } from './../../../model/phenomenon';
+import { AnnualMeanValueService } from './../../services/annual-mean-value.service';
 
 @Component({
     selector: 'app-main-screen',
@@ -21,6 +25,33 @@ export class MainScreenComponent implements OnInit {
     // belAqi data
     belAqiForCurrentLocation: BelAqiIndexResult[] = [];
     currentActiveIndex: BelAqiIndexResult;
+
+    detailedPhenomenona = [
+        {
+            name: this.translateService.instant('v2.screens.app-info.ozon'),
+            abbreviation: 'O&#8323;',
+            unit: 'µg/m3',
+            phenomenon: MainPhenomenon.O3
+        },
+        {
+            name: this.translateService.instant('v2.screens.app-info.nitrogen-dioxide'),
+            abbreviation: 'NO&#8322;',
+            unit: 'µg/m3',
+            phenomenon: MainPhenomenon.NO2
+        },
+        {
+            name: this.translateService.instant('v2.screens.app-info.fine-dust'),
+            abbreviation: 'PM 10',
+            unit: 'µg/m3',
+            phenomenon: MainPhenomenon.PM10
+        },
+        {
+            name: this.translateService.instant('v2.screens.app-info.very-fine-dust'),
+            abbreviation: 'PM 2,5',
+            unit: 'µg/m3',
+            phenomenon: MainPhenomenon.PM25
+        },
+    ];
 
     // horizontal slider data
     slidesData = [
@@ -47,7 +78,7 @@ export class MainScreenComponent implements OnInit {
     // keep track of loading status
     detailDataLoadig = false;
 
-    protected detailData: DataPointForDay[] = [];
+    protected detailData: DataPoint[] = [];
 
     drawerOptions: any;
 
@@ -58,18 +89,18 @@ export class MainScreenComponent implements OnInit {
 
     constructor(
         private userSettingsService: UserSettingsService,
+        private translateService: TranslateService,
         private belAqiService: BelAQIService,
-        private detailDataService: DetailDataService,
+        private modelledValueService: ModelledValueService,
+        private annulMeanValueService: AnnualMeanValueService,
         private platform: Platform
     ) {
-        this.locations = userSettingsService.getUserSavedLocations();
+        this.locations = this.userSettingsService.getUserSavedLocations();
 
         // activate first location by default
         this.updateCurrentLocation(this.locations[0]);
 
-        userSettingsService.$userLocations.subscribe((locations) => {
-            this.locations = locations;
-        });
+        this.userSettingsService.$userLocations.subscribe((locations) => this.locations = locations);
     }
 
     private updateCurrentLocation(location: UserLocation) {
@@ -92,22 +123,29 @@ export class MainScreenComponent implements OnInit {
     }
 
     private async updateDetailData() {
+        this.detailData = [];
         this.detailDataLoadig = true;
 
-        try {
-            this.detailData = await this.detailDataService.getMeasurementsFor(
-                this.currentActiveIndex.location,
-                this.currentActiveIndex.date
-            );
-        } catch (e) {
-            console.log(
-                'failed to get detailed data for ',
-                this.currentActiveIndex.location,
-                this.currentActiveIndex.date
-            );
-        }
-
-        this.detailDataLoadig = false;
+        this.detailedPhenomenona.forEach(dph => {
+            forkJoin([
+                this.modelledValueService.getValue(this.currentLocation, dph.phenomenon),
+                this.annulMeanValueService.getLastValue(this.currentLocation, dph.phenomenon)
+            ]).subscribe(
+                res => {
+                    this.detailData.push({
+                        location: this.currentLocation,
+                        currentValue: Math.round(res[0].value),
+                        averageValue: res[1] ? Math.round(res[1].value) : null,
+                        substance: dph,
+                        evaluation: this.belAqiService.getLabelForIndex(res[0].index),
+                        color: this.belAqiService.getLightColorForIndex(res[0].index)
+                    });
+                    this.detailDataLoadig = false;
+                },
+                error => {
+                    console.error(error);
+                });
+        });
     }
 
     ngOnInit() {
@@ -130,6 +168,6 @@ export class MainScreenComponent implements OnInit {
         this.currentActiveIndex = index;
         this.belAqiService.activeIndex = index;
 
-        this.updateDetailData();
+        // this.updateDetailData();
     }
 }
