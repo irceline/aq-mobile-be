@@ -82,7 +82,9 @@ export class BelaqiIndexService extends ValueProvider {
                 observer.complete();
               },
               error => {
-                observer.error(error);
+                console.error(error);
+                console.error(`Couldn't get belaqi index for '${day.fromNow()}'`);
+                observer.next(null);
                 observer.complete();
               });
         }

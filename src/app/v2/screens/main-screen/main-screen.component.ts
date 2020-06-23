@@ -106,20 +106,23 @@ export class MainScreenComponent implements OnInit {
     private updateCurrentLocation(location: UserLocation) {
         this.currentLocation = location;
 
-        this.belAqiService.getIndexScoresAsObservable(location).subscribe(res => {
-            this.belAqiForCurrentLocation = res;
-            // keep track of the current day;
-            const dateReference = this.currentActiveIndex ? this.currentActiveIndex.date : moment();
-            console.log(dateReference);
+        this.belAqiService.getIndexScoresAsObservable(location).subscribe(
+            res => {
+                this.belAqiForCurrentLocation = res.filter(e => e !== null);
+                // keep track of the current day;
+                const dateReference = this.currentActiveIndex ? this.currentActiveIndex.date : moment();
+                console.log(dateReference);
 
-            this.currentActiveIndex = this.belAqiForCurrentLocation.find(
-                (iR) => Math.abs(iR.date.diff(dateReference, 'hours')) === 0
-            );
+                this.currentActiveIndex = this.belAqiForCurrentLocation.find(
+                    (iR) => Math.abs(iR.date.diff(dateReference, 'hours')) === 0
+                );
 
-            this.belAqiService.activeIndex = this.currentActiveIndex;
+                this.belAqiService.activeIndex = this.currentActiveIndex;
 
-            this.updateDetailData();
-        });
+                this.updateDetailData();
+            }, error => {
+                console.error('Error occured while fetching the bel aqi indicies');
+            });
     }
 
     private async updateDetailData() {
