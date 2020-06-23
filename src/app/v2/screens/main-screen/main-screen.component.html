@@ -52,7 +52,7 @@
         <p>{{ 'v2.screens.main-screen.about-no2' | translate }}</p>
       </div>
 
-      <map-component [currentLocation]="currentLocation"></map-component>
+      <map-component [currentLocation]="currentLocation" [phenomenon]="detailPoint.substance.phenomenon"></map-component>
     </div>
   </div>
 </app-pull-tab>

@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import moment from 'moment';
 import { forkJoin } from 'rxjs';
 
-import { DataPoint, UserLocation } from '../../Interfaces';
+import { DataPoint, Substance, UserLocation } from '../../Interfaces';
 import { BelAqiIndexResult, BelAQIService } from '../../services/bel-aqi.service';
 import { ModelledValueService } from '../../services/modelled-value.service';
 import { UserSettingsService } from '../../services/user-settings.service';
@@ -26,7 +26,7 @@ export class MainScreenComponent implements OnInit {
     belAqiForCurrentLocation: BelAqiIndexResult[] = [];
     currentActiveIndex: BelAqiIndexResult;
 
-    detailedPhenomenona = [
+    detailedPhenomenona: Substance[] = [
         {
             name: this.translateService.instant('v2.screens.app-info.ozon'),
             abbreviation: 'O&#8323;',
@@ -84,7 +84,7 @@ export class MainScreenComponent implements OnInit {
 
     protected belAqi = 10;
 
-    detailPoint = null;
+    detailPoint: DataPoint = null;
     contentHeight = 0;
 
     constructor(

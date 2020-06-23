@@ -1,12 +1,13 @@
-import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
-
-import { Platform, IonRouterOutlet, ModalController, NavController } from '@ionic/angular';
+import { Component, QueryList, ViewChildren } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Router, NavigationEnd } from '@angular/router';
-import { PushNotificationsService } from './services/push-notifications/push-notifications.service';
-import { InfoOverlayService, DrawerState } from './services/overlay-info-drawer/overlay-info-drawer.service';
+import { IonRouterOutlet, ModalController, NavController, Platform } from '@ionic/angular';
 import { filter } from 'rxjs/operators';
+
+import { DrawerState, InfoOverlayService } from './services/overlay-info-drawer/overlay-info-drawer.service';
+import { PushNotificationsService } from './services/push-notifications/push-notifications.service';
+import { PouchDBInitializerService } from './v2/services/pouch-db-initializer/pouch-db-initializer.service';
 
 @Component({
   selector: 'app-root',
@@ -27,6 +28,7 @@ export class AppComponent {
     private pushNotifications: PushNotificationsService,
     private modalCtrl: ModalController,
     private infoOverlay: InfoOverlayService,
+    private pouchDbInit: PouchDBInitializerService,
     private navCtrl: NavController
   ) {
     this.initializeApp();
@@ -69,6 +71,7 @@ export class AppComponent {
       this.statusBar.show();
       this.splashScreen.hide();
       this.pushNotifications.init();
+      this.pouchDbInit.init();
     });
   }
 }

@@ -1,4 +1,4 @@
-import {Moment} from 'moment';
+import { MainPhenomenon } from './../../model/phenomenon';
 
 export enum BelAirColor {
     Red = 'red',
@@ -29,11 +29,11 @@ export interface IBarChartDataItem {
     background: string;
 }
 
-
 export interface Substance {
     name: string;
     abbreviation: string;
     unit: string;
+    phenomenon: MainPhenomenon;
 }
 
 export interface DataPoint {
@@ -68,8 +68,8 @@ export interface ChartData {
 }
 
 export interface HistoricalValue {
-   value: number;
-   year:  number;
-   evaluationColor: string;
+    value: number;
+    year: number;
+    evaluationColor: string;
 }
 
