@@ -52,13 +52,13 @@ export class LocationInputComponent implements OnInit {
             .getCurrentPosition()
             .then(async (resp) => {
                 loading.dismiss(null, 'cancel');
-                const label = this.geocoder.getLocationLabel(resp.coords.latitude, resp.coords.longitude);
+                const location = this.geocoder.getLocationLabel(resp.coords.latitude, resp.coords.longitude);
                 this.locationSelected.emit({
                     id: 111,
-                    label: label,
+                    label: location.label,
                     type: 'current',
-                    latitude: resp.coords.latitude,
-                    longitude: resp.coords.longitude,
+                    latitude: location.latitude,
+                    longitude: location.longitude,
                 });
             })
             .catch((error) => {

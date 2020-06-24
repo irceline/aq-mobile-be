@@ -17,7 +17,7 @@ export class GeocoderService {
 
   constructor() { }
 
-  public getLocationLabel(latitude: number, longitude: number): string {
+  public getLocationLabel(latitude: number, longitude: number): Location {
     let distance = Infinity;
     let entry: Location = null;
     this._locations.forEach(e => {
@@ -27,8 +27,7 @@ export class GeocoderService {
         entry = e;
       }
     });
-    console.log(`Nearest location is ${entry.label} with distance ${distance}`);
-    return entry.label;
+    return entry;
   }
 
   private distanceInKmBetweenEarthCoordinates(lat1: number, lon1: number, lat2: number, lon2: number) {
