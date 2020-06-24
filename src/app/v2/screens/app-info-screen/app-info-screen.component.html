@@ -15,37 +15,37 @@
       <p>{{ 'v2.screens.app-info.current-items' | translate }}</p>
 
       <ul>
-        <li>
+        <li *ngIf="o3">
           <h5>{{ 'v2.screens.app-info.ozon' | translate }} <b>(O&#8323;)</b></h5>
           <p>
-            <span class="green"></span>
-            78 µg/m3
+            <span [ngStyle]="{'background-color': o3.color}"></span>
+            {{o3.value}} µg/m3
           </p>
         </li>
 
-        <li>
+        <li *ngIf="no2">
           <h5>{{ 'v2.screens.app-info.nitrogen-dioxide' | translate }} <b>(NO&#8322;)</b></h5>
           <p>
-            <span class="blue"></span>
-            46 µg/m3
+            <span [ngStyle]="{'background-color': no2.color}"></span>
+            {{no2.value}} µg/m3
           </p>
         </li>
       </ul>
 
       <ul class="no-border">
-        <li>
+        <li *ngIf="pm10">
           <h5>{{ 'v2.screens.app-info.fine-dust' | translate }} <b>(PM 10)</b></h5>
           <p>
-            <span class="red"></span>
-            154 µg/m3
+            <span [ngStyle]="{'background-color': pm10.color}"></span>
+            {{pm10.value}} µg/m3
           </p>
         </li>
 
-        <li>
+        <li *ngIf="pm25">
           <h5>{{ 'v2.screens.app-info.very-fine-dust' | translate }} <b>(PM 2,5)</b></h5>
           <p>
-            <span class="dark-green"></span>
-            82 µg/m3
+            <span [ngStyle]="{'background-color': pm25.color}"></span>
+            {{pm25.value}} µg/m3
           </p>
         </li>
       </ul>

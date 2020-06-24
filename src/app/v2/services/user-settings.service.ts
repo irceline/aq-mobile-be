@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+
 import locations from '../../../assets/locations.json';
+import {
+    NotificationType,
+    UserNotificationSetting,
+} from '../components/user-notification-settings/user-notification-settings.component';
 import { UserLocation } from '../Interfaces';
-import { NotificationType, UserNotificationSetting } from '../components/user-notification-settings/user-notification-settings.component';
-import {BehaviorSubject} from 'rxjs';
 
 const userNotificationLSkey = 'belAir.userNotificationSettings';
 const userLocationsLSkey = 'belAir.userLocations';
@@ -39,11 +43,20 @@ export class UserSettingsService {
 
     public $userLocations: BehaviorSubject<UserLocation[]>;
 
+    private _selectedUserLocation: UserLocation;
+    public get selectedUserLocation(): UserLocation {
+        return this._selectedUserLocation ? this._selectedUserLocation : this._userLocations[0];
+    }
+
+    public set selectedUserLocation(ul: UserLocation) {
+        this._selectedUserLocation = ul;
+    }
+
     private _userLocations: UserLocation[] = [];
 
     constructor() {
         const notificationSettings = localStorage.getItem(userNotificationLSkey);
-        if ( notificationSettings ) {
+        if (notificationSettings) {
             // todo : some verification that the stored data is not corrupt
             this._currentNotificationSettings = JSON.parse(notificationSettings);
         } else {
@@ -52,7 +65,7 @@ export class UserSettingsService {
 
         const userLocations = localStorage.getItem(userLocationsLSkey);
 
-        if ( userLocations ) {
+        if (userLocations) {
             // todo : some verification that the stored data is not corrupt
             this._userLocations = JSON.parse(userLocations);
         } else {
@@ -69,12 +82,12 @@ export class UserSettingsService {
         return this._userLocations;
     }
 
-    public addUserLocation( location: UserLocation ) {
-        this._userLocations.push( location );
+    public addUserLocation(location: UserLocation) {
+        this._userLocations.push(location);
         this.saveLocations();
     }
 
-    public updateUserLocations( newLocations: UserLocation[] ) {
+    public updateUserLocations(newLocations: UserLocation[]) {
         this._userLocations = newLocations;
         this.saveLocations();
     }
@@ -85,8 +98,8 @@ export class UserSettingsService {
         localStorage.setItem(userLocationsLSkey, JSON.stringify(this._userLocations));
     }
 
-    public removeUserLocation( locationToRemove: UserLocation ) {
-        this._userLocations = this._userLocations.filter( l => l.id !== locationToRemove.id );
+    public removeUserLocation(locationToRemove: UserLocation) {
+        this._userLocations = this._userLocations.filter(l => l.id !== locationToRemove.id);
         this.saveLocations();
     }
 

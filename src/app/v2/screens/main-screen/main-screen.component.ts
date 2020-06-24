@@ -6,10 +6,10 @@ import { forkJoin } from 'rxjs';
 
 import { DataPoint, Substance, UserLocation } from '../../Interfaces';
 import { BelAqiIndexResult, BelAQIService } from '../../services/bel-aqi.service';
-import { ModelledValueService } from '../../services/modelled-value.service';
+import { ModelledValueService } from '../../services/value-provider/modelled-value.service';
 import { UserSettingsService } from '../../services/user-settings.service';
 import { MainPhenomenon } from './../../../model/phenomenon';
-import { AnnualMeanValueService } from './../../services/annual-mean-value.service';
+import { AnnualMeanValueService } from '../../services/value-provider/annual-mean-value.service';
 
 @Component({
     selector: 'app-main-screen',
@@ -20,7 +20,6 @@ import { AnnualMeanValueService } from './../../services/annual-mean-value.servi
 export class MainScreenComponent implements OnInit {
     // location data
     locations: UserLocation[] = [];
-    currentLocation: UserLocation;
 
     // belAqi data
     belAqiForCurrentLocation: BelAqiIndexResult[] = [];
@@ -93,20 +92,17 @@ export class MainScreenComponent implements OnInit {
         private belAqiService: BelAQIService,
         private modelledValueService: ModelledValueService,
         private annulMeanValueService: AnnualMeanValueService,
-        private platform: Platform
+        private platform: Platform,
     ) {
         this.locations = this.userSettingsService.getUserSavedLocations();
 
-        // activate first location by default
-        this.updateCurrentLocation(this.locations[0]);
+        this.updateCurrentLocation();
 
         this.userSettingsService.$userLocations.subscribe((locations) => this.locations = locations);
     }
 
-    private updateCurrentLocation(location: UserLocation) {
-        this.currentLocation = location;
-
-        this.belAqiService.getIndexScoresAsObservable(location).subscribe(
+    private updateCurrentLocation() {
+        this.belAqiService.getIndexScoresAsObservable(this.userSettingsService.selectedUserLocation).subscribe(
             res => {
                 this.belAqiForCurrentLocation = res.filter(e => e !== null);
                 // keep track of the current day;
@@ -131,12 +127,12 @@ export class MainScreenComponent implements OnInit {
 
         this.detailedPhenomenona.forEach(dph => {
             forkJoin([
-                this.modelledValueService.getValue(this.currentLocation, dph.phenomenon),
-                this.annulMeanValueService.getLastValue(this.currentLocation, dph.phenomenon)
+                this.modelledValueService.getValue(this.userSettingsService.selectedUserLocation, dph.phenomenon),
+                this.annulMeanValueService.getLastValue(this.userSettingsService.selectedUserLocation, dph.phenomenon)
             ]).subscribe(
                 res => {
                     this.detailData.push({
-                        location: this.currentLocation,
+                        location: this.userSettingsService.selectedUserLocation,
                         currentValue: Math.round(res[0].value),
                         averageValue: res[1] ? Math.round(res[1].value) : null,
                         substance: dph,
@@ -164,7 +160,8 @@ export class MainScreenComponent implements OnInit {
     }
 
     onLocationChange(location: UserLocation) {
-        this.updateCurrentLocation(location);
+        this.userSettingsService.selectedUserLocation = location;
+        this.updateCurrentLocation();
     }
 
     onDayChange(index: BelAqiIndexResult) {

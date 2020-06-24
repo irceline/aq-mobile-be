@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 import { darkIndexColor, indexLabel, lightIndexColor } from '../common/constants';
 import { UserLocation } from '../Interfaces';
-import { BelaqiIndexService } from './belaqi-index.service';
+import { BelaqiIndexService } from './value-provider/belaqi-index.service';
 
 export interface BelAqiIndexResult {
   location: UserLocation;

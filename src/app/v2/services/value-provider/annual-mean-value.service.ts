@@ -5,10 +5,10 @@ import { CacheService } from 'ionic-cache';
 import { Observable, Observer } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { createCacheKey } from '../../model/caching';
-import { ValueProvider } from '../../services/value-provider';
-import { UserLocation } from '../Interfaces';
-import { MainPhenomenon } from './../../model/phenomenon';
+import { createCacheKey } from '../../../model/caching';
+import { ValueProvider } from '../../../services/value-provider';
+import { UserLocation } from '../../Interfaces';
+import { MainPhenomenon } from '../../../model/phenomenon';
 
 const TTL_ANNUAL_YEAR_REQUEST = 60 * 60 * 24; // one day
 const ANNUAL_MEAN_URL = 'https://www.irceline.be/air/timestring_rioifdm_anmean.php';
