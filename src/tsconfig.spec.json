@@ -6,8 +6,6 @@
       "jasmine",
       "node"
     ],
-    "resolveJsonModule": true,
-    "esModuleInterop": true
   },
   "files": [
     "test.ts",
