@@ -1,16 +1,11 @@
-import {
-    Component,
-    OnInit,
-    Output,
-    EventEmitter,
-    ViewChild,
-    Input,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { LoadingController, IonInput } from '@ionic/angular';
-import { UserLocation } from '../../Interfaces';
+import { IonInput, LoadingController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+
 import locations from '../../../../assets/locations.json';
-import {TranslateService} from '@ngx-translate/core';
+import { UserLocation } from '../../Interfaces';
+import { GeocoderService } from './../../services/geocoder/geocoder.service';
 
 @Component({
     selector: 'app-location-input',
@@ -38,8 +33,9 @@ export class LocationInputComponent implements OnInit {
     constructor(
         private geolocation: Geolocation,
         public loadingController: LoadingController,
-        private translate: TranslateService
-    ) {}
+        private translate: TranslateService,
+        private geocoder: GeocoderService
+    ) { }
 
     ngOnInit() {
         this.filterItems();
@@ -56,10 +52,10 @@ export class LocationInputComponent implements OnInit {
             .getCurrentPosition()
             .then(async (resp) => {
                 loading.dismiss(null, 'cancel');
-                // todo --> reverse geocoding to region / label?
+                const label = this.geocoder.getLocationLabel(resp.coords.latitude, resp.coords.longitude);
                 this.locationSelected.emit({
                     id: 111,
-                    label: 'TODO: reverse geocoding',
+                    label: label,
                     type: 'current',
                     latitude: resp.coords.latitude,
                     longitude: resp.coords.longitude,
