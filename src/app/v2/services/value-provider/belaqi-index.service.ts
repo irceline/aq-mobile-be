@@ -5,7 +5,7 @@ import moment from 'moment';
 import { forkJoin, Observable, Observer } from 'rxjs';
 
 import { createCacheKey } from '../../../model/caching';
-import { forecastWmsURL } from '../../../model/services';
+import { forecastWmsURL, rioifdmWmsURL } from '../../../model/services';
 import { UserLocation } from '../../../services/user-location-list/user-location-list.service';
 import { ValueProvider } from '../../../services/value-provider';
 import { BelAqiIndexResult } from '../bel-aqi.service';
@@ -35,13 +35,59 @@ export class BelaqiIndexService extends ValueProvider {
     const indices: BelAqiIndexResult[] = [];
 
     const requests = [
-      // TODO: add past values
+      this.createPast(location, moment().subtract(3, 'day')),
+      this.createPast(location, moment().subtract(2, 'day')),
+      this.createPast(location, moment().subtract(1, 'day')),
       this.createForecast(location, BelaqiIndexForecastLayer.TODAY, moment()),
       this.createForecast(location, BelaqiIndexForecastLayer.TOMORROW, moment().add(1, 'day')),
       this.createForecast(location, BelaqiIndexForecastLayer.TWO_DAYS, moment().add(2, 'day')),
       this.createForecast(location, BelaqiIndexForecastLayer.THREE_DAYS, moment().add(3, 'day'))
     ];
     return forkJoin(requests);
+  }
+
+  private createPast(location: UserLocation, day: moment.Moment): Observable<BelAqiIndexResult> {
+    return new Observable<BelAqiIndexResult>((observer: Observer<BelAqiIndexResult>) => {
+      const url = rioifdmWmsURL;
+      const params = {
+        request: 'GetFeatureInfo',
+        bbox: this.calculateRequestBbox(location.latitude, location.longitude),
+        service: 'WMS',
+        info_format: 'application/json',
+        query_layers: 'rioifdm:belaqi_dmean',
+        layers: 'rioifdm:belaqi_dmean',
+        width: '1',
+        height: '1',
+        srs: 'EPSG:4326',
+        version: '1.1.1',
+        X: '1',
+        Y: '1'
+      };
+      params['time'] = day.format('YYYY-MM-DD');
+      const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url, {
+        responseType: 'json',
+        params: params
+      });
+      this.cacheService.loadFromObservable(createCacheKey(url, JSON.stringify(params), day.format('YYYY-MM-DD')), request)
+        .subscribe(
+          res => {
+            const idx = this.getValueOfResponse(res);
+            if (idx) {
+              observer.next({
+                indexScore: Math.round(idx),
+                date: day,
+                location: location
+              });
+            }
+            observer.complete();
+          },
+          error => {
+            console.error(error);
+            console.error(`Couldn't get belaqi index for '${day.fromNow()}'`);
+            observer.next(null);
+            observer.complete();
+          });
+    });
   }
 
   private createForecast(location: UserLocation, layer: BelaqiIndexForecastLayer, day: moment.Moment): Observable<BelAqiIndexResult> {
