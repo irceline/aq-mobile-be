@@ -302,6 +302,13 @@
 				"back-to-main": "Zum Startbildschirm gehen",
 				"thanks": "Vielen Dank !",
 				"well-received": "Wir haben Ihre Beobachtung gut aufgenommen. Dank Ihrer Eingabe können wir unsere Anwendung verbessern."
+			},
+			"user-notification-settings": {
+				"highConcentration": "(Zu) hohe Konzentrationen",
+				"transport": "Unterwegs",
+				"activity": "Anstrengungen",
+				"allergies": "Allergien",
+				"exercise": "Training"
 			}
 		},
 		"screens": {
