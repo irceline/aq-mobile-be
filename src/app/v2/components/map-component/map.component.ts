@@ -59,13 +59,15 @@ export class MapComponent {
     }
 
     private addMarker() {
-        const location = { lat: this._currentLocation.latitude, lng: this._currentLocation.longitude } as L.LatLngLiteral;
-        const icondiv = L.divIcon({ className: 'marker', iconAnchor: L.point(10, 40) });
-        L.marker(location, { draggable: false, icon: icondiv }).addTo(this.map);
+        if (this.map) {
+            const location = { lat: this._currentLocation.latitude, lng: this._currentLocation.longitude } as L.LatLngLiteral;
+            const icondiv = L.divIcon({ className: 'marker', iconAnchor: L.point(10, 40) });
+            L.marker(location, { draggable: false, icon: icondiv }).addTo(this.map);
+        }
     }
 
     private addPhenomenonLayer() {
-        if (isDefined(this._phenomenon)) {
+        if (this.map && isDefined(this._phenomenon)) {
             this.ircelineSettings.getSettings().subscribe(settings => {
                 const request = this.http.get('./assets/multipolygon.json');
                 this.cacheService.loadFromObservable('multipolygon', request, null, 60 * 60 * 24)

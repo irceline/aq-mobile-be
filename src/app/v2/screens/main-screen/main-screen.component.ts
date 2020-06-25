@@ -87,7 +87,7 @@ export class MainScreenComponent implements OnInit {
     contentHeight = 0;
 
     constructor(
-        private userSettingsService: UserSettingsService,
+        protected userSettingsService: UserSettingsService,
         private translateService: TranslateService,
         private belAqiService: BelAQIService,
         private modelledValueService: ModelledValueService,
