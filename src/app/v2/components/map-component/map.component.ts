@@ -6,9 +6,9 @@ import { Component, Input } from '@angular/core';
 import { CacheService } from 'ionic-cache';
 import * as L from 'leaflet';
 
+import { MainPhenomenon } from '../../common/phenomenon';
 import { UserLocation } from '../../Interfaces';
-import { MainPhenomenon } from './../../../model/phenomenon';
-import { IrcelineSettingsService } from './../../../services/irceline-settings/irceline-settings.service';
+import { IrcelineSettingsService } from '../../services/irceline-settings/irceline-settings.service';
 
 @Component({
     selector: 'map-component',

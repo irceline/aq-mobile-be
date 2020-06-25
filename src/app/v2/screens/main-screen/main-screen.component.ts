@@ -8,7 +8,7 @@ import { DataPoint, Substance, UserLocation } from '../../Interfaces';
 import { BelAqiIndexResult, BelAQIService } from '../../services/bel-aqi.service';
 import { ModelledValueService } from '../../services/value-provider/modelled-value.service';
 import { UserSettingsService } from '../../services/user-settings.service';
-import { MainPhenomenon } from './../../../model/phenomenon';
+import { MainPhenomenon } from '../../common/phenomenon';
 import { AnnualMeanValueService } from '../../services/value-provider/annual-mean-value.service';
 
 @Component({

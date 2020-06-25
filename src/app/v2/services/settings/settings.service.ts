@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Settings, SettingsService } from '@helgoland/core';
-import { LatLngBoundsExpression, Layer } from 'leaflet';
+import { Layer } from 'leaflet';
+
+import settingsJson from '../../../../assets/settings.json';
 
 export interface MobileSettings extends Settings {
   visiblePhenomenonIDs: string[];
   ircelineSettingsUrl: string;
   ircelineAQIndexUrl: string;
   clusterStationsOnMap: boolean;
-  phenomenonLayerMapping: PhenomenonLayerMapping[];
   regions: string[];
   geoSearchCountryCodes: string[];
-  defaultBbox: LatLngBoundsExpression;
   personalAlert: PersonalAlert[];
   colorizedMarkerForLastMilliseconds: number;
   nearestStationTimeBufferInMillseconds: number;
@@ -39,7 +39,7 @@ export class JSSONSettingsService extends SettingsService<MobileSettings> {
 
   constructor() {
     super();
-    const settings: MobileSettings = require('../../../assets/settings.json');
+    const settings: MobileSettings = settingsJson;
     if (settings.clusterStationsOnMap === undefined) { settings.clusterStationsOnMap = true; }
     if (settings.limitOfAllowedUserLocations === undefined) { settings.limitOfAllowedUserLocations = 5; }
     this.setSettings(settings);

@@ -1,4 +1,4 @@
-import { MainPhenomenon } from './../../model/phenomenon';
+import { MainPhenomenon } from '../common/phenomenon';
 
 export enum BelAirColor {
     Red = 'red',
@@ -71,5 +71,15 @@ export interface HistoricalValue {
     value: number;
     year: number;
     evaluationColor: string;
+}
+
+export interface UserLocation {
+    id?: number;
+    label?: string;
+    type: 'user' | 'current';
+    isCurrentVisible?: boolean;
+    date?: Date;
+    longitude?: number;
+    latitude?: number;
 }
 

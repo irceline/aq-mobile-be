@@ -1,6 +1,0 @@
-<div class="notification" *ngIf="notificationMap.size > 0" (click)="openPopup()">
-  <div *ngFor="let item of notificationMap | keyvalue">
-    <ion-icon name="warning"></ion-icon>
-    <span>{{item.value[0]?.title}}</span>
-  </div>
-</div>

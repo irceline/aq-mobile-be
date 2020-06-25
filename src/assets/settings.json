@@ -3,23 +3,6 @@
     "name": "IRCEL - CELINE: timeseries-api (SOS 2.0)",
     "url": "https://geo.irceline.be/sos/api/v1/"
   }],
-  "languages": [{
-      "code": "en",
-      "label": "English"
-    },
-    {
-      "code": "de",
-      "label": "Deutsch"
-    },
-    {
-      "code": "nl",
-      "label": "Nederlands"
-    },
-    {
-      "code": "fr",
-      "label": "Français"
-    }
-  ],
   "visiblePhenomenonIDs": [
     "391",
     "8",
@@ -67,106 +50,6 @@
     "Ostende",
     "Hasselt",
     "Namur"
-  ],
-  "defaultBbox": [
-    [
-      49.53,
-      3.27
-    ],
-    [
-      51.53,
-      5.67
-    ]
-  ],
-  "phenomenonLayerMapping": [{
-      "id": "6001",
-      "layers": [{
-          "label": "Hourly mean PM2.5",
-          "visible": true,
-          "baseUrl": "https://geo.irceline.be/rioifdm/wms",
-          "layer": {
-            "layers": "pm25_hmean",
-            "transparent": true,
-            "tiled": true,
-            "format": "image/png",
-            "opacity": 0.7
-          }
-        },
-        {
-          "label": "Stationary hourly mean PM2.5",
-          "visible": true,
-          "baseUrl": "https://geo.irceline.be/realtime/wms",
-          "stations": true,
-          "layer": {
-            "layers": "realtime:pm25_24hmean_station",
-            "transparent": true,
-            "tiled": true,
-            "format": "image/png",
-            "opacity": 0.7
-          }
-        }
-      ]
-    },
-    {
-      "id": "5",
-      "layers": [{
-        "label": "Hourly mean PM10",
-        "visible": true,
-        "baseUrl": "https://geo.irceline.be/rioifdm/wms",
-        "layer": {
-          "layers": "pm10_hmean",
-          "transparent": true,
-          "tiled": true,
-          "format": "image/png",
-          "opacity": 0.7
-        }
-      }]
-    },
-    {
-      "id": "7",
-      "layers": [{
-        "label": "Hourly mean O3",
-        "visible": true,
-        "baseUrl": "https://geo.irceline.be/rioifdm/wms",
-        "layer": {
-          "layers": "o3_hmean",
-          "transparent": true,
-          "tiled": true,
-          "format": "image/png",
-          "opacity": 0.7
-        }
-      }]
-    },
-    {
-      "id": "8",
-      "layers": [{
-        "label": "Hourly mean NO2",
-        "visible": true,
-        "baseUrl": "https://geo.irceline.be/rioifdm/wms",
-        "layer": {
-          "layers": "no2_hmean",
-          "transparent": true,
-          "tiled": true,
-          "format": "image/png",
-          "opacity": 0.7
-        }
-      }]
-    },
-    {
-      "id": "391",
-      "layers": [{
-        "label": "Hourly mean BC",
-        "visible": true,
-        "baseUrl": "https://geo.irceline.be/rioifdm/wms",
-        "layer": {
-          "layers": "bc_hmean",
-          "transparent": true,
-          "tiled": true,
-          "format": "image/png",
-          "opacity": 0.7
-        }
-      }]
-    }
   ],
   "limitOfAllowedUserLocations": 5
 }

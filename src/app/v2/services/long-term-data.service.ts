@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
-import { MainPhenomenon } from '../../model/phenomenon';
+import { MainPhenomenon } from '../common/phenomenon';
 import { LongTermDataPoint, Substance, UserLocation } from '../Interfaces';
 import { BelAQIService } from './bel-aqi.service';
 

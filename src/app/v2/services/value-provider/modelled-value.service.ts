@@ -4,12 +4,12 @@ import { Injectable } from '@angular/core';
 import { CacheService } from 'ionic-cache';
 import { Observable, Observer } from 'rxjs';
 
-import { createCacheKey } from '../../../model/caching';
-import { MainPhenomenon } from '../../../model/phenomenon';
-import { rioifdmWmsURL } from '../../../model/services';
-import { UserLocation } from '../../../services/user-location-list/user-location-list.service';
-import { ValueProvider } from '../../../services/value-provider';
-import { IrcelineSettingsService } from '../../../services/irceline-settings/irceline-settings.service';
+import { createCacheKey } from '../../common/caching';
+import { MainPhenomenon } from '../../common/phenomenon';
+import { rioifdmWmsURL } from '../../common/services';
+import { UserLocation } from '../../Interfaces';
+import { IrcelineSettingsService } from '../irceline-settings/irceline-settings.service';
+import { ValueProvider } from './value-provider';
 
 enum ModelledPhenomenon {
   no2 = 'rioifdm:no2_hmean',

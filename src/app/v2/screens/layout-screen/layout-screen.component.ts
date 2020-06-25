@@ -4,8 +4,8 @@ import {
     BelAQIService,
 } from '../../services/bel-aqi.service';
 import { UserSettingsService } from '../../services/user-settings.service';
-import { UserLocation } from 'src/app/services/user-location-list/user-location-list.service';
 import moment from 'moment';
+import { UserLocation } from '../../Interfaces';
 
 @Component({
     selector: 'app-layout-screen',

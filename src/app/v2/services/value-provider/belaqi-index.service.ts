@@ -4,12 +4,12 @@ import { CacheService } from 'ionic-cache';
 import moment from 'moment';
 import { forkJoin, Observable, Observer } from 'rxjs';
 
-import { createCacheKey } from '../../../model/caching';
-import { forecastWmsURL, rioifdmWmsURL } from '../../../model/services';
-import { UserLocation } from '../../../services/user-location-list/user-location-list.service';
-import { ValueProvider } from '../../../services/value-provider';
+import { createCacheKey } from '../../common/caching';
+import { forecastWmsURL, rioifdmWmsURL } from '../../common/services';
+import { UserLocation } from '../../Interfaces';
 import { BelAqiIndexResult } from '../bel-aqi.service';
 import { ForecastDateService } from '../forecast-date.service';
+import { ValueProvider } from './value-provider';
 
 const enum BelaqiIndexForecastLayer {
   TODAY = 'forecast:belaqi_d0',

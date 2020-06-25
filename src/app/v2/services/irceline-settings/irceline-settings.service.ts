@@ -18,7 +18,9 @@ export interface IrcelineSettings {
 const DEFAULT_TTL_CACHE = 60 * 60 * 24 * 3; // 3 days
 const DEFAULT_TTL_CACHE_LAST_UPDATE_CHECK = 60; // 1 minute
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class IrcelineSettingsService {
 
   constructor(

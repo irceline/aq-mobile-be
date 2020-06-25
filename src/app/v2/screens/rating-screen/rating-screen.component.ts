@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { UserLocation } from 'src/app/services/user-location-list/user-location-list.service';
 import { UserSettingsService } from '../../services/user-settings.service';
 import {
     BelAqiIndexResult,
     BelAQIService,
 } from '../../services/bel-aqi.service';
+import { UserLocation } from '../../Interfaces';
 
 @Component({
     selector: 'app-rating-screen',
