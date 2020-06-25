@@ -7,6 +7,7 @@ import { filter } from 'rxjs/operators';
 
 import { DrawerState, InfoOverlayService } from './services/overlay-info-drawer/overlay-info-drawer.service';
 import { PushNotificationsService } from './services/push-notifications/push-notifications.service';
+import { ErrorLoggingService } from './v2/services/error-logging.service';
 import { PouchDBInitializerService } from './v2/services/pouch-db-initializer/pouch-db-initializer.service';
 
 @Component({
@@ -29,6 +30,7 @@ export class AppComponent {
     private modalCtrl: ModalController,
     private infoOverlay: InfoOverlayService,
     private pouchDbInit: PouchDBInitializerService,
+    private errorLoggingSrvc: ErrorLoggingService,
     private navCtrl: NavController
   ) {
     this.initializeApp();
@@ -68,6 +70,7 @@ export class AppComponent {
   initializeApp() {
     this.platform.ready().then(() => {
       // this.statusBar.styleDefault();
+      // this.errorLoggingSrvc.init();
       this.statusBar.show();
       this.splashScreen.hide();
       this.pushNotifications.init();
