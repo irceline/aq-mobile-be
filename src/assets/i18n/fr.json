@@ -302,6 +302,13 @@
 				"back-to-main": "Naar beginscherm",
 				"thanks": "Bedankt !",
 				"well-received": "We hebben je waarneming goed ontvangen. Dankzij jouw input kunnen we onze toepassing verbeteren."
+			},
+			"user-notification-settings": {
+				"highConcentration": "Concentrations (trop) élevées",
+				"transport": "Déplacements",
+				"activity": "Efforts physiques",
+				"allergies": "Les allergies",
+				"exercise": "Faire des exercices"
 			}
 		},
 		"screens": {
