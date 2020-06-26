@@ -78,6 +78,8 @@ export class BelaqiIndexService extends ValueProvider {
                 date: day,
                 location: location
               });
+            } else {
+              observer.next(null);
             }
             observer.complete();
           },
@@ -124,6 +126,8 @@ export class BelaqiIndexService extends ValueProvider {
                     date: day,
                     location: location
                   });
+                } else {
+                  observer.next(null);
                 }
                 observer.complete();
               },
