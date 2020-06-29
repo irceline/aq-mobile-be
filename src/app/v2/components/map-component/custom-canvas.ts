@@ -9,6 +9,7 @@ declare module 'leaflet' {
     }
 
     export interface CustomCanvasOptions extends WMSOptions {
+        tiled?: boolean;
         boundary?: GeoJSON.GeoJsonObject;
         useBoundaryGreaterAsZoom?: number;
         useCache?: boolean;
