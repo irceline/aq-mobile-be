@@ -74,9 +74,11 @@ export class MapComponent {
                     .subscribe((geojson: GeoJSON.GeoJsonObject) => {
                         const layerOptions: L.CustomCanvasOptions = {
                             layers: this.createLayerId(),
+                            styles: this.createStyleId(),
                             transparent: true,
                             format: 'image/png',
                             opacity: 0.7,
+                            tiled: true,
                             boundary: geojson,
                             useBoundaryGreaterAsZoom: 12,
                             useCache: true,
@@ -102,6 +104,21 @@ export class MapComponent {
                 return 'pm25_24hmean';
             case MainPhenomenon.BC:
                 return 'bc_hmean';
+        }
+    }
+
+    private createStyleId(): string {
+        switch (this._phenomenon) {
+            case MainPhenomenon.NO2:
+                return 'no2_hmean_raster_discrete_belair';
+            case MainPhenomenon.O3:
+                return 'o3_hmean_raster_discrete_belair';
+            case MainPhenomenon.PM10:
+                return 'pm10_hmean_raster_discrete_belair';
+            case MainPhenomenon.PM25:
+                return 'pm25_hmean_raster_discrete_belair';
+            case MainPhenomenon.BC:
+                return 'bc_hmean_raster_discrete_belair';
         }
     }
 }
