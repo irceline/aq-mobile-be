@@ -11,6 +11,7 @@ export interface IrcelineSettings {
   lastupdate: Date;
   timestring: string;
   timestring_day: string;
+  lastupdate_day: string;
   top_pollutant_today: string;
   survey?: boolean;
 }
@@ -51,15 +52,21 @@ export class IrcelineSettingsService {
   private doRequest(url: string, observer: Observer<IrcelineSettings>) {
     const request = this.http.get(url);
     this.cacheService.loadFromObservable(url, request, null, DEFAULT_TTL_CACHE_LAST_UPDATE_CHECK).subscribe(
-      result => observer.next({
-        lastupdate: moment(result['lastupdate']).toDate(),
-        timestring: result['timestring'],
-        timestring_day: result['timestring_day'],
-        top_pollutant_today: result['top_pollutant_today'],
-        survey: result.survey ? result.survey === '1' : false
-      }),
-      error => observer.error(error),
-      () => observer.complete()
+      result => {
+        observer.next({
+          lastupdate: moment(result['lastupdate']).toDate(),
+          lastupdate_day: result.lastupdate_day,
+          timestring: result['timestring'],
+          timestring_day: result['timestring_day'],
+          top_pollutant_today: result['top_pollutant_today'],
+          survey: result.survey ? result.survey === '1' : false
+        });
+        observer.complete();
+      },
+      error => {
+        observer.error(error);
+        observer.complete();
+      },
     );
   }
 

@@ -59,27 +59,8 @@ export class AnnualMeanValueService extends ValueProvider {
       this.getYear().subscribe(year => {
         const layerId = this.createLayerId(year, phenomenon);
         const url = this.createWmsUrl(layerId);
-        const params = {
-          request: 'GetFeatureInfo',
-          bbox: this.calculateRequestBbox(userLocation.latitude, userLocation.longitude),
-          service: 'WMS',
-          info_format: 'application/json',
-          query_layers: layerId,
-          layers: layerId,
-          width: '1',
-          height: '1',
-          srs: 'EPSG:4326',
-          version: '1.1.1',
-          X: '1',
-          Y: '1'
-        };
-
-        const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url,
-          {
-            responseType: 'json',
-            params: params
-          }
-        );
+        const params = this.createFeatureInfoRequestParams(layerId, userLocation);
+        const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url, { responseType: 'json', params: params });
         return this.cacheService.loadFromObservable(createCacheKey(url, JSON.stringify(params), `${year}`), request).subscribe(
           res => {
             const value = this.getValueOfResponse(res);

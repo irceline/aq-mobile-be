@@ -18,7 +18,7 @@
         <h5>{{ 'v2.screens.main-screen.view-details' | translate }}</h5>
 
         <app-information-item *ngFor="let detailDataPoint of detailData" [detailedDataPoint]="detailDataPoint"
-          [isButton]="true" (click)="detailPoint = detailDataPoint">
+          [isButton]="true" (click)="openDetails(detailDataPoint)">
         </app-information-item>
 
         <ion-item detail>
@@ -38,11 +38,11 @@
       <app-information-item-details [detailPoint]="detailPoint" (backClicked)="detailPoint = null">
       </app-information-item-details>
 
-      <app-time-line-list class="details--timeline" (dayChange)="onDayChange($event)"
-        [items]="belAqiForCurrentLocation">
+      <app-time-line-list class="details--timeline" (dayChange)="onDetailsDayChange($event)"
+        [items]="valueTimeline">
       </app-time-line-list>
 
-      <app-value-display [color]="'blue'" score="56" value="µg/m3"></app-value-display>
+      <app-value-display [color]="detailsValueColor" [score]="detailsValue" value="µg/m3"></app-value-display>
 
       <div class="details--info">
         <div>
@@ -52,7 +52,8 @@
         <p>{{ 'v2.screens.main-screen.about-no2' | translate }}</p>
       </div>
 
-      <map-component [currentLocation]="userSettingsService.selectedUserLocation" [phenomenon]="detailPoint.substance.phenomenon"></map-component>
+      <map-component [currentLocation]="userSettingsService.selectedUserLocation"
+        [phenomenon]="detailPoint.substance.phenomenon" [valueDate]="detailsValueDate"></map-component>
     </div>
   </div>
 </app-pull-tab>

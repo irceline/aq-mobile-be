@@ -4,12 +4,18 @@ import { TranslateService } from '@ngx-translate/core';
 import moment from 'moment';
 import { forkJoin } from 'rxjs';
 
+import { MainPhenomenon } from '../../common/phenomenon';
 import { DataPoint, Substance, UserLocation } from '../../Interfaces';
 import { BelAqiIndexResult, BelAQIService } from '../../services/bel-aqi.service';
-import { ModelledValueService } from '../../services/value-provider/modelled-value.service';
 import { UserSettingsService } from '../../services/user-settings.service';
-import { MainPhenomenon } from '../../common/phenomenon';
 import { AnnualMeanValueService } from '../../services/value-provider/annual-mean-value.service';
+import { ModelledValueService, ValueDate } from '../../services/value-provider/modelled-value.service';
+import { lightIndexColor } from './../../common/constants';
+
+interface IndexValueResult extends BelAqiIndexResult {
+    value: number;
+    valueDate: ValueDate;
+}
 
 @Component({
     selector: 'app-main-screen',
@@ -24,6 +30,10 @@ export class MainScreenComponent implements OnInit {
     // belAqi data
     belAqiForCurrentLocation: BelAqiIndexResult[] = [];
     currentActiveIndex: BelAqiIndexResult;
+
+    valueTimeline: IndexValueResult[] = [];
+    detailsValueColor: string;
+    detailsValue: number;
 
     detailedPhenomenona: Substance[] = [
         {
@@ -86,6 +96,8 @@ export class MainScreenComponent implements OnInit {
     detailPoint: DataPoint = null;
     contentHeight = 0;
 
+    detailsValueDate: ValueDate;
+
     constructor(
         protected userSettingsService: UserSettingsService,
         private translateService: TranslateService,
@@ -127,7 +139,7 @@ export class MainScreenComponent implements OnInit {
 
         this.detailedPhenomenona.forEach(dph => {
             forkJoin([
-                this.modelledValueService.getValue(this.userSettingsService.selectedUserLocation, dph.phenomenon),
+                this.modelledValueService.getCurrentValue(this.userSettingsService.selectedUserLocation, dph.phenomenon),
                 this.annulMeanValueService.getLastValue(this.userSettingsService.selectedUserLocation, dph.phenomenon)
             ]).subscribe(
                 res => {
@@ -169,5 +181,29 @@ export class MainScreenComponent implements OnInit {
         this.belAqiService.activeIndex = index;
 
         // this.updateDetailData();
+    }
+
+    openDetails(selectedDataPoint: DataPoint) {
+        this.detailPoint = selectedDataPoint;
+        this.modelledValueService.getValueTimeline(
+            this.userSettingsService.selectedUserLocation,
+            selectedDataPoint.substance.phenomenon
+        ).subscribe(res => {
+            this.valueTimeline = res
+                .filter(e => e !== null)
+                .map(e => ({
+                    date: e.date,
+                    indexScore: e.index,
+                    value: e.value,
+                    valueDate: e.valueDate,
+                    location: this.userSettingsService.selectedUserLocation,
+                }));
+        });
+    }
+
+    onDetailsDayChange(index: IndexValueResult) {
+        this.detailsValueDate = index.valueDate;
+        this.detailsValueColor = lightIndexColor[index.indexScore];
+        this.detailsValue = Math.round(index.value);
     }
 }

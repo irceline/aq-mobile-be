@@ -6,9 +6,11 @@ import { Component, Input } from '@angular/core';
 import { CacheService } from 'ionic-cache';
 import * as L from 'leaflet';
 
+import boundary from '../../../../assets/multipolygon.json';
 import { MainPhenomenon } from '../../common/phenomenon';
 import { UserLocation } from '../../Interfaces';
 import { IrcelineSettingsService } from '../../services/irceline-settings/irceline-settings.service';
+import { ModelledValueService, ValueDate } from '../../services/value-provider/modelled-value.service';
 
 @Component({
     selector: 'map-component',
@@ -17,12 +19,15 @@ import { IrcelineSettingsService } from '../../services/irceline-settings/irceli
 })
 export class MapComponent {
 
-    private map;
+    private map: L.Map;
     private _currentLocation: UserLocation;
     private _phenomenon: MainPhenomenon;
+    private _valueDate: ValueDate;
+    private _phenomenonLayer: L.TileLayer.CustomCanvas;
 
     constructor(
         private ircelineSettings: IrcelineSettingsService,
+        private modelledValueSrvc: ModelledValueService,
         private http: HttpClient,
         private cacheService: CacheService
     ) { }
@@ -36,6 +41,12 @@ export class MapComponent {
     @Input()
     set phenomenon(phen: MainPhenomenon) {
         this._phenomenon = phen;
+        this.addPhenomenonLayer();
+    }
+
+    @Input()
+    set valueDate(valueDate: ValueDate) {
+        this._valueDate = valueDate;
         this.addPhenomenonLayer();
     }
 
@@ -67,43 +78,32 @@ export class MapComponent {
     }
 
     private addPhenomenonLayer() {
-        if (this.map && isDefined(this._phenomenon)) {
-            this.ircelineSettings.getSettings().subscribe(settings => {
-                const request = this.http.get('./assets/multipolygon.json');
-                this.cacheService.loadFromObservable('multipolygon', request, null, 60 * 60 * 24)
-                    .subscribe((geojson: GeoJSON.GeoJsonObject) => {
-                        const layerOptions: L.CustomCanvasOptions = {
-                            layers: this.createLayerId(),
-                            styles: this.createStyleId(),
-                            transparent: true,
-                            format: 'image/png',
-                            opacity: 0.7,
-                            tiled: true,
-                            boundary: geojson,
-                            useBoundaryGreaterAsZoom: 12,
-                            useCache: true,
-                            crossOrigin: true,
-                        };
-                        layerOptions['time'] = settings.lastupdate.toISOString();
+        if (this.map && isDefined(this._phenomenon) && isDefined(this._valueDate)) {
+            if (this._phenomenonLayer) {
+                this._phenomenonLayer.remove();
+            }
+            this.modelledValueSrvc.getTimeParam(this._phenomenon, this._valueDate).subscribe(time => {
+                const layerOptions: L.CustomCanvasOptions = {
+                    layers: this.modelledValueSrvc.getLayersId(this._phenomenon, this._valueDate),
+                    styles: this.createStyleId(),
+                    transparent: true,
+                    format: 'image/png',
+                    opacity: 0.7,
+                    tiled: true,
+                    boundary: boundary as GeoJSON.GeoJsonObject,
+                    useBoundaryGreaterAsZoom: 12,
+                    useCache: true,
+                    crossOrigin: true,
+                };
+                if (time) {
+                    layerOptions['time'] = time;
+                }
 
-                        L.tileLayer.customCanvas('https://geo.irceline.be/rioifdm/wms', layerOptions).addTo(this.map);
-                    });
+                this._phenomenonLayer = L.tileLayer.customCanvas(
+                    this.modelledValueSrvc.getWmsUrl(this._phenomenon, this._valueDate),
+                    layerOptions
+                ).addTo(this.map);
             });
-        }
-    }
-
-    private createLayerId(): string {
-        switch (this._phenomenon) {
-            case MainPhenomenon.NO2:
-                return 'no2_hmean';
-            case MainPhenomenon.O3:
-                return 'o3_hmean';
-            case MainPhenomenon.PM10:
-                return 'pm10_24hmean';
-            case MainPhenomenon.PM25:
-                return 'pm25_24hmean';
-            case MainPhenomenon.BC:
-                return 'bc_hmean';
         }
     }
 

@@ -2,25 +2,75 @@ import { HttpClient } from '@angular/common/http';
 import { isDefined } from '@angular/compiler/src/util';
 import { Injectable } from '@angular/core';
 import { CacheService } from 'ionic-cache';
-import { Observable, Observer } from 'rxjs';
+import moment from 'moment';
+import { forkJoin, Observable, Observer, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { createCacheKey } from '../../common/caching';
 import { MainPhenomenon } from '../../common/phenomenon';
-import { rioifdmWmsURL } from '../../common/services';
+import { forecastWmsURL, rioifdmWmsURL } from '../../common/services';
 import { UserLocation } from '../../Interfaces';
 import { IrcelineSettingsService } from '../irceline-settings/irceline-settings.service';
 import { ValueProvider } from './value-provider';
 
-enum ModelledPhenomenon {
+export enum ValueDate {
+  BEFORE_THREE_DAYS,
+  BEFORE_TWO_DAYS,
+  YESTERDAY,
+  CURRENT,
+  TODAY,
+  TOMORROW,
+  IN_TWO_DAYS,
+  IN_THREE_DAYS,
+}
+
+export interface ModelledValue {
+  value: number;
+  index: number;
+  date: moment.Moment;
+  valueDate: ValueDate;
+}
+
+enum CurrentModelledPhenomenonLayer {
   no2 = 'rioifdm:no2_hmean',
   o3 = 'rioifdm:o3_hmean',
   pm10 = 'rioifdm:pm10_24hmean',
   pm25 = 'rioifdm:pm25_24hmean'
 }
 
-export interface ModelledValue {
-  value: number;
-  index: number;
+const No2ForcastLayerMapping = [
+  { date: ValueDate.TODAY, layerId: 'forecast:no2_maxhmean_d0' },
+  { date: ValueDate.TOMORROW, layerId: 'forecast:no2_maxhmean_d1' },
+  { date: ValueDate.IN_TWO_DAYS, layerId: 'forecast:no2_maxhmean_d2' },
+  { date: ValueDate.IN_THREE_DAYS, layerId: 'forecast:no2_maxhmean_d3' }
+];
+
+const O3ForcastLayerMapping = [
+  { date: ValueDate.TODAY, layerId: 'forecast:o3_maxhmean_d0' },
+  { date: ValueDate.TOMORROW, layerId: 'forecast:o3_maxhmean_d1' },
+  { date: ValueDate.IN_TWO_DAYS, layerId: 'forecast:o3_maxhmean_d2' },
+  { date: ValueDate.IN_THREE_DAYS, layerId: 'forecast:o3_maxhmean_d3' }
+];
+
+const PM10ForcastLayerMapping = [
+  { date: ValueDate.TODAY, layerId: 'forecast:pm10_dmean_d0' },
+  { date: ValueDate.TOMORROW, layerId: 'forecast:pm10_dmean_d1' },
+  { date: ValueDate.IN_TWO_DAYS, layerId: 'forecast:pm10_dmean_d2' },
+  { date: ValueDate.IN_THREE_DAYS, layerId: 'forecast:pm10_dmean_d3' }
+];
+
+const PM25ForcastLayerMapping = [
+  { date: ValueDate.TODAY, layerId: 'forecast:pm25_dmean_d0' },
+  { date: ValueDate.TOMORROW, layerId: 'forecast:pm25_dmean_d1' },
+  { date: ValueDate.IN_TWO_DAYS, layerId: 'forecast:pm25_dmean_d2' },
+  { date: ValueDate.IN_THREE_DAYS, layerId: 'forecast:pm25_dmean_d3' }
+];
+
+enum PastModelledPhenomenonLayer {
+  no2 = 'no2_maxhmean',
+  o3 = 'o3_maxhmean',
+  pm10 = 'pm10_24hmean',
+  pm25 = 'pm25_24hmean'
 }
 
 @Injectable({
@@ -36,58 +86,249 @@ export class ModelledValueService extends ValueProvider {
     super(http);
   }
 
-  public getValue(userLocation: UserLocation, phenomenon: MainPhenomenon): Observable<ModelledValue> {
+  public getValueTimeline(userLocation: UserLocation, phenomenon: MainPhenomenon): Observable<ModelledValue[]> {
+    return forkJoin([
+      this.getPastValue(userLocation, phenomenon, ValueDate.BEFORE_THREE_DAYS),
+      this.getPastValue(userLocation, phenomenon, ValueDate.BEFORE_TWO_DAYS),
+      this.getPastValue(userLocation, phenomenon, ValueDate.YESTERDAY),
+      this.getCurrentValue(userLocation, phenomenon),
+      this.getForecastValue(userLocation, phenomenon, ValueDate.TODAY),
+      this.getForecastValue(userLocation, phenomenon, ValueDate.TOMORROW),
+      this.getForecastValue(userLocation, phenomenon, ValueDate.IN_TWO_DAYS),
+      this.getForecastValue(userLocation, phenomenon, ValueDate.IN_THREE_DAYS)
+    ]);
+  }
+
+  public getCurrentValue(userLocation: UserLocation, phenomenon: MainPhenomenon): Observable<ModelledValue> {
+    return new Observable<ModelledValue>((observer: Observer<ModelledValue>) => {
+      this.getTimeParam(phenomenon, ValueDate.CURRENT).subscribe(timeparam => {
+        const layerId = this.getLayersId(phenomenon, ValueDate.CURRENT);
+        const url = this.getWmsUrl(phenomenon, ValueDate.CURRENT);
+        const params = this.createFeatureInfoRequestParams(layerId, userLocation, timeparam);
+        const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url, { params });
+        this.cacheService.loadFromObservable(createCacheKey(url, JSON.stringify(params), timeparam), request)
+          .subscribe(
+            res => {
+              const value = this.getValueOfResponse(res);
+              if (isDefined(value)) {
+                observer.next({
+                  value,
+                  index: this.categorize(value, phenomenon),
+                  date: moment(timeparam),
+                  valueDate: ValueDate.CURRENT
+                });
+              } else {
+                throw new Error('No value returned');
+              }
+              observer.complete();
+            },
+            error => {
+              console.error(error);
+              observer.next(null);
+              observer.complete();
+            }
+          );
+      });
+    });
+  }
+
+  public getWmsUrl(phenomenon: MainPhenomenon, valueDate: ValueDate): string {
+    switch (valueDate) {
+      case ValueDate.BEFORE_THREE_DAYS:
+      case ValueDate.BEFORE_TWO_DAYS:
+      case ValueDate.YESTERDAY:
+        return rioifdmWmsURL;
+      case ValueDate.CURRENT:
+        return rioifdmWmsURL;
+      case ValueDate.TODAY:
+      case ValueDate.TOMORROW:
+      case ValueDate.IN_TWO_DAYS:
+      case ValueDate.IN_THREE_DAYS:
+        return forecastWmsURL;
+    }
+  }
+
+  public getTimeParam(phenomenon: MainPhenomenon, valueDate: ValueDate): Observable<string> {
+    switch (valueDate) {
+      case ValueDate.BEFORE_THREE_DAYS:
+      case ValueDate.BEFORE_TWO_DAYS:
+      case ValueDate.YESTERDAY:
+        return this.createPastTimeStamp(valueDate);
+      case ValueDate.CURRENT:
+        return this.ircelineSettings.getSettings().pipe(map(e => e.lastupdate.toISOString()));
+      case ValueDate.TODAY:
+      case ValueDate.TOMORROW:
+      case ValueDate.IN_TWO_DAYS:
+      case ValueDate.IN_THREE_DAYS:
+        return of(null);
+    }
+  }
+
+  public getLayersId(phenomenon: MainPhenomenon, valueDate: ValueDate): string {
+    switch (valueDate) {
+      case ValueDate.BEFORE_THREE_DAYS:
+      case ValueDate.BEFORE_TWO_DAYS:
+      case ValueDate.YESTERDAY:
+        return this.createPastLayerId(phenomenon);
+      case ValueDate.CURRENT:
+        return this.createCurrentLayerId(phenomenon);
+      case ValueDate.TODAY:
+      case ValueDate.TOMORROW:
+      case ValueDate.IN_TWO_DAYS:
+      case ValueDate.IN_THREE_DAYS:
+        return this.createForecastLayerId(phenomenon, valueDate);
+    }
+  }
+
+  private getForecastValue(userLocation: UserLocation, phenomenon: MainPhenomenon, date: ValueDate): Observable<ModelledValue> {
     return new Observable<ModelledValue>((observer: Observer<ModelledValue>) => {
       this.ircelineSettings.getSettings().subscribe(
         settings => {
-
-          const layerId = this.createLayerId(phenomenon);
-          const params = {
-            service: 'WMS',
-            request: 'GetFeatureInfo',
-            version: '1.1.1',
-            layers: layerId,
-            info_format: 'application/json',
-            time: settings.lastupdate.toISOString(),
-            width: '1',
-            height: '1',
-            srs: 'EPSG:4326',
-            bbox: this.calculateRequestBbox(userLocation.latitude, userLocation.longitude),
-            query_layers: layerId,
-            X: '1',
-            Y: '1'
-          };
-          const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(rioifdmWmsURL, { params });
-          this.cacheService.loadFromObservable(createCacheKey(rioifdmWmsURL, JSON.stringify(params), settings.lastupdate), request)
+          const url = this.getWmsUrl(phenomenon, date);
+          const layerId = this.getLayersId(phenomenon, date);
+          const params = this.createFeatureInfoRequestParams(layerId, userLocation);
+          const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url, {
+            responseType: 'json',
+            params: params
+          });
+          this.cacheService.loadFromObservable(createCacheKey(url, JSON.stringify(params), settings.lastupdate), request)
             .subscribe(
-              (res => {
+              res => {
                 const value = this.getValueOfResponse(res);
                 if (isDefined(value)) {
                   observer.next({
                     value,
-                    index: this.categorize(value, phenomenon)
+                    index: this.categorize(value, phenomenon),
+                    date: this.createDate(date),
+                    valueDate: date
                   });
                 } else {
-                  throw new Error('No value returned');
+                  observer.next(null);
                 }
                 observer.complete();
-              })
+              },
+              error => {
+                console.error(error);
+                observer.next(null);
+                observer.complete();
+              }
             );
         }
       );
     });
   }
 
-  private createLayerId(phenomenon: MainPhenomenon) {
+  private getPastValue(userLocation: UserLocation, phenomenon: MainPhenomenon, date: ValueDate): Observable<ModelledValue> {
+    return new Observable<ModelledValue>((observer: Observer<ModelledValue>) => {
+      this.createPastTimeStamp(date).subscribe(timeparam => {
+        const url = this.getWmsUrl(phenomenon, date);
+        const layerId = this.getLayersId(phenomenon, date);
+        const params = this.createFeatureInfoRequestParams(layerId, userLocation, timeparam);
+        const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url, {
+          responseType: 'json',
+          params: params
+        });
+        this.cacheService.loadFromObservable(createCacheKey(url, JSON.stringify(params), timeparam), request)
+          .subscribe(
+            res => {
+              const value = this.getValueOfResponse(res);
+              if (isDefined(value)) {
+                observer.next({
+                  value,
+                  index: this.categorize(value, phenomenon),
+                  date: this.createDate(date),
+                  valueDate: date
+                });
+              } else {
+                observer.next(null);
+              }
+              observer.complete();
+            },
+            error => {
+              console.error(error);
+              observer.next(null);
+              observer.complete();
+            }
+          );
+      });
+    });
+  }
+
+  private createPastTimeStamp(date: ValueDate): Observable<string> {
+    return new Observable((observer: Observer<string>) => {
+      this.ircelineSettings.getSettings().subscribe(
+        settings => {
+          switch (date) {
+            case ValueDate.BEFORE_THREE_DAYS:
+              observer.next(moment(settings.lastupdate_day).utc().startOf('days').subtract(2, 'days').toISOString());
+              break;
+            case ValueDate.BEFORE_TWO_DAYS:
+              observer.next(moment(settings.lastupdate_day).utc().startOf('days').subtract(1, 'days').toISOString());
+              break;
+            case ValueDate.YESTERDAY:
+              observer.next(moment(settings.lastupdate_day).utc().startOf('days').toISOString());
+          }
+          observer.complete();
+        }
+      );
+    });
+  }
+
+  private createPastLayerId(phenomenon: MainPhenomenon): string {
     switch (phenomenon) {
       case MainPhenomenon.NO2:
-        return ModelledPhenomenon.no2.toString();
+        return PastModelledPhenomenonLayer.no2;
       case MainPhenomenon.O3:
-        return ModelledPhenomenon.o3.toString();
+        return PastModelledPhenomenonLayer.o3;
       case MainPhenomenon.PM10:
-        return ModelledPhenomenon.pm10.toString();
+        return PastModelledPhenomenonLayer.pm10;
       case MainPhenomenon.PM25:
-        return ModelledPhenomenon.pm25.toString();
+        return PastModelledPhenomenonLayer.pm25;
+    }
+  }
+
+  private createDate(date: ValueDate): moment.Moment {
+    switch (date) {
+      case ValueDate.BEFORE_THREE_DAYS:
+        return moment().subtract(3, 'days');
+      case ValueDate.BEFORE_TWO_DAYS:
+        return moment().subtract(2, 'days');
+      case ValueDate.YESTERDAY:
+        return moment().subtract(1, 'days');
+      case ValueDate.TODAY:
+        return moment();
+      case ValueDate.TOMORROW:
+        return moment().add(1, 'days');
+      case ValueDate.IN_TWO_DAYS:
+        return moment().add(2, 'days');
+      case ValueDate.IN_THREE_DAYS:
+        return moment().add(3, 'days');
+    }
+  }
+
+  private createForecastLayerId(phenomenon: MainPhenomenon, date: ValueDate): string {
+    switch (phenomenon) {
+      case MainPhenomenon.NO2:
+        return No2ForcastLayerMapping.find(e => e.date === date).layerId;
+      case MainPhenomenon.O3:
+        return O3ForcastLayerMapping.find(e => e.date === date).layerId;
+      case MainPhenomenon.PM10:
+        return PM10ForcastLayerMapping.find(e => e.date === date).layerId;
+      case MainPhenomenon.PM25:
+        return PM25ForcastLayerMapping.find(e => e.date === date).layerId;
+    }
+  }
+
+  private createCurrentLayerId(phenomenon: MainPhenomenon) {
+    switch (phenomenon) {
+      case MainPhenomenon.NO2:
+        return CurrentModelledPhenomenonLayer.no2.toString();
+      case MainPhenomenon.O3:
+        return CurrentModelledPhenomenonLayer.o3.toString();
+      case MainPhenomenon.PM10:
+        return CurrentModelledPhenomenonLayer.pm10.toString();
+      case MainPhenomenon.PM25:
+        return CurrentModelledPhenomenonLayer.pm25.toString();
     }
   }
 

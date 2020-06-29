@@ -93,7 +93,6 @@ L.TileLayer.CustomCanvas = L.TileLayer.WMS.extend({
                                 //     _rev: change.changes[0].rev
                                 // }
                             };
-                            console.log(changes.results);
                             db.bulkDocs(changes.results)
                                 .then(() => {
                                     // Compact database

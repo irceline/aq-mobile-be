@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 
+import { UserLocation } from '../../Interfaces';
+
 export abstract class ValueProvider {
 
     constructor(
@@ -32,6 +34,27 @@ export abstract class ValueProvider {
             }
         }
         return idx;
+    }
+
+    protected createFeatureInfoRequestParams(layerId: string, userLocation: UserLocation, timeParam?: string) {
+        const params: any = {
+            service: 'WMS',
+            request: 'GetFeatureInfo',
+            version: '1.1.1',
+            layers: layerId,
+            info_format: 'application/json',
+            width: '1',
+            height: '1',
+            srs: 'EPSG:4326',
+            bbox: this.calculateRequestBbox(userLocation.latitude, userLocation.longitude),
+            query_layers: layerId,
+            X: '1',
+            Y: '1',
+        };
+        if (timeParam) {
+            params.time = timeParam;
+        }
+        return params;
     }
 
 }

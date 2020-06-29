@@ -31,28 +31,28 @@ export class AppInfoScreenComponent implements OnInit {
 
     ngOnInit() {
         const location = this.userSettingsSrvc.selectedUserLocation;
-        this.modelledValueSrvc.getValue(location, MainPhenomenon.O3).subscribe(
+        this.modelledValueSrvc.getCurrentValue(location, MainPhenomenon.O3).subscribe(
             res => this.o3 = {
                 value: Math.round(res.value),
                 color: lightIndexColor[res.index]
             }
         );
 
-        this.modelledValueSrvc.getValue(location, MainPhenomenon.NO2).subscribe(
+        this.modelledValueSrvc.getCurrentValue(location, MainPhenomenon.NO2).subscribe(
             res => this.no2 = {
                 value: Math.round(res.value),
                 color: lightIndexColor[res.index]
             }
         );
 
-        this.modelledValueSrvc.getValue(location, MainPhenomenon.PM10).subscribe(
+        this.modelledValueSrvc.getCurrentValue(location, MainPhenomenon.PM10).subscribe(
             res => this.pm10 = {
                 value: Math.round(res.value),
                 color: lightIndexColor[res.index]
             }
         );
 
-        this.modelledValueSrvc.getValue(location, MainPhenomenon.PM25).subscribe(
+        this.modelledValueSrvc.getCurrentValue(location, MainPhenomenon.PM25).subscribe(
             res => this.pm25 = {
                 value: Math.round(res.value),
                 color: lightIndexColor[res.index]
