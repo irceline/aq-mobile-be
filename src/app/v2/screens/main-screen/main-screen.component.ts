@@ -87,7 +87,7 @@ export class MainScreenComponent implements OnInit {
     // keep track of loading status
     detailDataLoadig = false;
 
-    protected detailData: DataPoint[] = [];
+    detailData: DataPoint[] = [];
 
     drawerOptions: any;
 
@@ -99,7 +99,7 @@ export class MainScreenComponent implements OnInit {
     detailsValueDate: ValueDate;
 
     constructor(
-        protected userSettingsService: UserSettingsService,
+        public userSettingsService: UserSettingsService,
         private translateService: TranslateService,
         private belAqiService: BelAQIService,
         private modelledValueService: ModelledValueService,

@@ -3,7 +3,7 @@
     <ion-label>
       <img [src]="setting.icon" alt=""> {{ setting.label }}</ion-label>
     <ion-toggle [checked]="setting.enabled" color="success" (ionChange)="changeSetting(setting)"
-      (ionFocus)="hasFocus($event)" (ionBlur)="blurFocus($event)"></ion-toggle>
+      (ionFocus)="hasFocus()" (ionBlur)="blurFocus()"></ion-toggle>
   </ion-item>
 
 </ion-list>
