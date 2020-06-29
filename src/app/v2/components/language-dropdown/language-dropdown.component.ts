@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Settings, SettingsService } from '@helgoland/core';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -8,23 +9,20 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class LanguageDropdownComponent implements OnInit {
 
-    availableLanguages = [
-        { langCode: 'en', label: 'English' },
-        { langCode: 'nl', label: 'Nederlands' },
-        { langCode: 'de', label: 'Deutsch' },
-        { langCode: 'fr', label: 'Français' },
-    ];
+    availableLanguages = [];
 
     public language: string;
 
     @ViewChild('select', { static: true }) select: ElementRef;
 
     constructor(
-        private translate: TranslateService
+        private translate: TranslateService,
+        private settingsSrvc: SettingsService<Settings>
     ) { }
 
     ngOnInit() {
         this.language = this.translate.currentLang;
+        this.availableLanguages = this.settingsSrvc.getSettings().languages;
     }
 
     selectLanguage(lang: CustomEvent) {

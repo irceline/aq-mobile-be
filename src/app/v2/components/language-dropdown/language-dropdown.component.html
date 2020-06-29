@@ -1,7 +1,7 @@
 <!-- Language dropdown -->
 <ion-item lines="none" type="button" class="language--dropdown">
   <ion-select [(ngModel)]="language" #select (ionChange)="selectLanguage($event)" placeholder="Select language">
-    <ion-select-option *ngFor="let language of availableLanguages" [value]="language.langCode">
+    <ion-select-option *ngFor="let language of availableLanguages" [value]="language.code">
       {{ language.label }}
     </ion-select-option>
   </ion-select>

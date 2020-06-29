@@ -39,7 +39,7 @@ export class JSSONSettingsService extends SettingsService<MobileSettings> {
 
   constructor() {
     super();
-    const settings: MobileSettings = settingsJson;
+    const settings: MobileSettings = settingsJson as any;
     if (settings.clusterStationsOnMap === undefined) { settings.clusterStationsOnMap = true; }
     if (settings.limitOfAllowedUserLocations === undefined) { settings.limitOfAllowedUserLocations = 5; }
     this.setSettings(settings);
