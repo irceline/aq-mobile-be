@@ -18,6 +18,8 @@ export class OnboardingScreenComponent implements OnInit {
 
     userNotificationSettings: UserNotificationSetting[] = [];
 
+    selectedLocation: UserLocation;
+
     constructor(
         private navCtrl: NavController,
         private userSettingsService: UserSettingsService
@@ -27,10 +29,10 @@ export class OnboardingScreenComponent implements OnInit {
 
     ngOnInit() { }
 
-    updateUserLocationSettings(userLocation: UserLocation) {
-        // implementation task
-        console.log('todo: implement update user location settings');
-        console.log(userLocation);
+    confirmLocation() {
+        if (this.selectedLocation !== null) {
+            this.userSettingsService.addUserLocation(this.selectedLocation);
+        }
     }
 
     updateUserNotificationSettings(updatedSetting: UserNotificationSetting) {

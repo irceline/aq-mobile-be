@@ -60,6 +60,7 @@ export class LocationInputComponent implements OnInit {
                     latitude: location.latitude,
                     longitude: location.longitude,
                 });
+                this.searchText = location.label;
             })
             .catch((error) => {
                 loading.dismiss(null, 'cancel');
