@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { IonInput, LoadingController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import locations from '../../../../assets/locations.json';
 import { UserLocation } from '../../Interfaces';
 import { GeocoderService } from './../../services/geocoder/geocoder.service';
+import { LocateService } from './../../services/locate/locate.service';
 
 @Component({
     selector: 'app-location-input',
@@ -31,10 +31,10 @@ export class LocationInputComponent implements OnInit {
     @Output() locationSelected = new EventEmitter<UserLocation>();
 
     constructor(
-        private geolocation: Geolocation,
         public loadingController: LoadingController,
         private translate: TranslateService,
-        private geocoder: GeocoderService
+        private geocoder: GeocoderService,
+        private locateSrvc: LocateService
     ) { }
 
     ngOnInit() {
@@ -48,9 +48,8 @@ export class LocationInputComponent implements OnInit {
         });
         await loading.present();
 
-        this.geolocation
-            .getCurrentPosition()
-            .then(async (resp) => {
+        this.locateSrvc.getUserLocation().subscribe(
+            resp => {
                 loading.dismiss(null, 'cancel');
                 const location = this.geocoder.getLocationLabel(resp.coords.latitude, resp.coords.longitude);
                 this.locationSelected.emit({
@@ -61,11 +60,12 @@ export class LocationInputComponent implements OnInit {
                     longitude: location.longitude,
                 });
                 this.searchText = location.label;
-            })
-            .catch((error) => {
+            },
+            error => {
                 loading.dismiss(null, 'cancel');
                 console.log('Error getting location', error);
-            });
+            }
+        );
     }
 
     // Choosing option from dropdown
