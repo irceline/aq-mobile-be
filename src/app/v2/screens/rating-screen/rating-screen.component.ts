@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { UserSettingsService } from '../../services/user-settings.service';
-import {
-    BelAqiIndexResult,
-    BelAQIService,
-} from '../../services/bel-aqi.service';
+
 import { UserLocation } from '../../Interfaces';
+import { BelAqiIndexResult, BelAQIService } from '../../services/bel-aqi.service';
+import { UserSettingsService } from '../../services/user-settings.service';
+import { BelaqiIndexService } from '../../services/value-provider/belaqi-index.service';
 
 @Component({
     selector: 'app-rating-screen',
@@ -15,7 +14,6 @@ export class RatingScreenComponent implements OnInit {
     locations: UserLocation[] = [];
     currentLocation: UserLocation;
 
-    private belAqiScores: BelAqiIndexResult[] = [];
     currentActiveIndex: BelAqiIndexResult;
 
     isFeedbackOpened = false;
@@ -23,35 +21,29 @@ export class RatingScreenComponent implements OnInit {
 
     constructor(
         private userSettingsService: UserSettingsService,
-        private belAqiService: BelAQIService
-    ) {
-        this.locations = userSettingsService.getUserSavedLocations();
+        private belAqiService: BelAQIService,
+        private belaqiIndexSrvc: BelaqiIndexService
+    ) { }
 
-        // feedback is only for today
-        this.belAqiScores = this.belAqiService.getIndexScores(
-            this.locations,
-            0,
-            0
-        );
+    ngOnInit() {
+        this.locations = this.userSettingsService.getUserSavedLocations();
 
         // activate first location by default
         this.updateCurrentLocation(this.locations[0]);
 
-        userSettingsService.$userLocations.subscribe((locations) => {
+        this.userSettingsService.$userLocations.subscribe((locations) => {
             this.locations = locations;
         });
     }
 
-    ngOnInit() {}
-
     private updateCurrentLocation(location: UserLocation) {
-        this.currentLocation = location;
-
-        this.currentActiveIndex = this.belAqiScores.find(
-            (iR) => iR.location.id === location.id
+        this.belaqiIndexSrvc.getTodaysIndex(location).subscribe(
+            res => {
+                this.currentLocation = location;
+                this.currentActiveIndex = res;
+                this.belAqiService.activeIndex = this.currentActiveIndex;
+            }
         );
-
-        this.belAqiService.activeIndex = this.currentActiveIndex;
     }
 
     onLocationChange(location: UserLocation) {

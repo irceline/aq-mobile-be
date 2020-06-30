@@ -46,6 +46,10 @@ export class BelaqiIndexService extends ValueProvider {
     ]);
   }
 
+  public getTodaysIndex(location: UserLocation): Observable<BelAqiIndexResult> {
+    return this.createForecast(location, BelaqiIndexForecastLayer.TODAY, moment());
+  }
+
   private createPast(location: UserLocation, day: moment.Moment): Observable<BelAqiIndexResult> {
     return new Observable<BelAqiIndexResult>((observer: Observer<BelAqiIndexResult>) => {
       const params = this.createFeatureInfoRequestParams('rioifdm:belaqi_dmean', location, day.format('YYYY-MM-DD'));

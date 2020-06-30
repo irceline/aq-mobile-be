@@ -169,6 +169,12 @@ export class MainScreenComponent implements OnInit {
             this.platform.height() - this.drawerOptions.handleHeight - 56;
     }
 
+    ionViewWillEnter() {
+        if (this.currentActiveIndex) {
+            this.belAqiService.activeIndex = this.currentActiveIndex;
+        }
+    }
+
     onLocationChange(location: UserLocation) {
         this.userSettingsService.selectedUserLocation = location;
         this.updateCurrentLocation();
