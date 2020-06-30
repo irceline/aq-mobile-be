@@ -125,8 +125,6 @@ export class MainScreenComponent implements OnInit {
                     (iR) => Math.abs(iR.date.diff(dateReference, 'hours')) === 0
                 );
 
-                this.belAqiService.activeIndex = this.currentActiveIndex;
-
                 this.updateDetailData();
             }, error => {
                 console.error('Error occured while fetching the bel aqi indicies');
@@ -179,8 +177,6 @@ export class MainScreenComponent implements OnInit {
     onDayChange(index: BelAqiIndexResult) {
         this.currentActiveIndex = index;
         this.belAqiService.activeIndex = index;
-
-        // this.updateDetailData();
     }
 
     openDetails(selectedDataPoint: DataPoint) {

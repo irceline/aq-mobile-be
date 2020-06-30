@@ -1,13 +1,15 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { IonSlides } from '@ionic/angular';
+import moment from 'moment';
+
 import { BelAqiIndexResult } from '../../services/bel-aqi.service';
-import {IonSlides} from '@ionic/angular';
 
 @Component({
     selector: 'app-time-line-list',
     templateUrl: './time-line-list.component.html',
     styleUrls: ['./time-line-list.component.scss'],
 })
-export class TimeLineListComponent implements OnInit, OnChanges {
+export class TimeLineListComponent implements OnChanges {
     @ViewChild(IonSlides, { static: true }) slides: IonSlides;
     @Input() items: BelAqiIndexResult[];
     @Output() dayChange = new EventEmitter<BelAqiIndexResult>();
@@ -18,14 +20,22 @@ export class TimeLineListComponent implements OnInit, OnChanges {
         centeredSlides: true
     };
 
-    constructor() {}
-
     ngOnChanges(changes: SimpleChanges): void {
-        this.timelineOptions.initialSlide = changes.items.currentValue.length / 2;
-        this.slides.update();
+        if (changes.items && this.items && this.items.length > 0) {
+            let nearestItem = null;
+            let dist = Infinity;
+            const now = moment();
+            this.items.forEach((e, i) => {
+                const diff = Math.abs(now.diff(e.date));
+                if (dist > diff) {
+                    dist = diff;
+                    nearestItem = i;
+                }
+            });
+            this.slides.slideTo(nearestItem);
+            this.slides.update();
+        }
     }
-
-    ngOnInit() {}
 
     // Emit index result change
     async slideChange() {
