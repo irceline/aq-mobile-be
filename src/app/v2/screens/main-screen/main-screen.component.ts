@@ -119,7 +119,6 @@ export class MainScreenComponent implements OnInit {
                 this.belAqiForCurrentLocation = res.filter(e => e !== null);
                 // keep track of the current day;
                 const dateReference = this.currentActiveIndex ? this.currentActiveIndex.date : moment();
-                console.log(dateReference);
 
                 this.currentActiveIndex = this.belAqiForCurrentLocation.find(
                     (iR) => Math.abs(iR.date.diff(dateReference, 'hours')) === 0

@@ -195,16 +195,16 @@ export class ModelledValueService extends ValueProvider {
             .subscribe(
               res => {
                 const value = this.getValueOfResponse(res);
-                if (isDefined(value)) {
+                if (isDefined(value) && value !== -9999) {
                   observer.next({
                     value,
                     index: this.categorize(value, phenomenon),
                     date: this.createDate(date),
                     valueDate: date
                   });
-                } else {
-                  observer.next(null);
+                  observer.complete();
                 }
+                observer.next(null);
                 observer.complete();
               },
               error => {

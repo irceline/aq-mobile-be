@@ -62,16 +62,28 @@ export class BelAQIService {
   // https://app.zeplin.io/project/5ea9b038b472cbbc682ced04/screen/5eb8f28f40d46577a6abe316
   // light versions
   public getLightColorForIndex(index: number) {
-    return lightIndexColor[index] || null;
+    if (index >= 1 && index <= 10) {
+      return lightIndexColor[index];
+    } else {
+      return null;
+    }
   }
 
   // dark versions
   public getDarkColorForIndex(index: number) {
-    return darkIndexColor[index] || null;
+    if (index >= 1 && index <= 10) {
+      return darkIndexColor[index];
+    } else {
+      return null;
+    }
   }
 
   public getLabelForIndex(index: number) {
-    return this.translate.instant(indexLabel[index]) || null;
+    if (index >= 1 && index <= 10) {
+      return this.translate.instant(indexLabel[index]);
+    } else {
+      return null;
+    }
   }
 
 }

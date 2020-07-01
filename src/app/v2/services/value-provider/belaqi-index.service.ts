@@ -99,16 +99,19 @@ export class BelaqiIndexService extends ValueProvider {
   }
 
   private handleResponse(res: any, observer: Observer<BelAqiIndexResult>, date: moment.Moment, location: UserLocation) {
-    const idx = this.getValueOfResponse(res);
-    if (idx) {
-      observer.next({
-        indexScore: Math.round(idx),
-        date,
-        location: location
-      });
-    } else {
-      observer.next(null);
+    let idx = this.getValueOfResponse(res);
+    if (idx && !isNaN(idx)) {
+      idx = Math.round(idx);
+      if (idx >= 1 && idx <= 10) {
+        observer.next({
+          indexScore: Math.round(idx),
+          date,
+          location: location
+        });
+        observer.complete();
+      }
     }
+    observer.next(null);
     observer.complete();
   }
 
