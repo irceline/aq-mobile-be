@@ -289,10 +289,11 @@ export class BelaqiIndexService extends ValueProvider {
         const timelineEntries: BelaqiTimelineEntry[] = [];
         const hour = time.getUTCHours();
         const trend = this.no2Trends[hour];
+        const start = moment(time);
         for (let day = 0; day < NO2_TREND_DAYS_CALCULATION; day++) {
           trend.forEach((e, i) => {
             timelineEntries.push({
-              timestamp: moment(time).add(i + 1, 'hours').toDate(),
+              timestamp: start.add(1, 'hours').toDate(),
               index: this.categorizeValueToIndex.categorize(currentValue * e, phenomenon)
             });
           });
