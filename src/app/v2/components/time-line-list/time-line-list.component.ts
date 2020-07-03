@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
-import moment from 'moment';
 
+import { ValueDate } from '../../common/enums';
 import { BelAqiIndexResult } from '../../services/bel-aqi.service';
 
 @Component({
@@ -22,17 +22,8 @@ export class TimeLineListComponent implements OnChanges {
 
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.items && this.items && this.items.length > 0) {
-            let nearestItem = null;
-            let dist = Infinity;
-            const now = moment();
-            this.items.forEach((e, i) => {
-                const diff = Math.abs(now.diff(e.date));
-                if (dist > diff) {
-                    dist = diff;
-                    nearestItem = i;
-                }
-            });
-            this.slides.slideTo(nearestItem);
+            const idx = this.items.findIndex(e => e.valueDate === ValueDate.TODAY);
+            this.slides.slideTo(idx);
             this.slides.update();
         }
     }

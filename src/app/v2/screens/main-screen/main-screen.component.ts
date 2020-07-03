@@ -4,17 +4,17 @@ import { TranslateService } from '@ngx-translate/core';
 import moment from 'moment';
 import { forkJoin } from 'rxjs';
 
+import { ValueDate } from '../../common/enums';
 import { MainPhenomenon } from '../../common/phenomenon';
 import { DataPoint, Substance, UserLocation } from '../../Interfaces';
 import { BelAqiIndexResult, BelAQIService } from '../../services/bel-aqi.service';
 import { UserSettingsService } from '../../services/user-settings.service';
 import { AnnualMeanValueService } from '../../services/value-provider/annual-mean-value.service';
-import { ModelledValueService, ValueDate } from '../../services/value-provider/modelled-value.service';
+import { ModelledValueService } from '../../services/value-provider/modelled-value.service';
 import { lightIndexColor } from './../../common/constants';
 
 interface IndexValueResult extends BelAqiIndexResult {
     value: number;
-    valueDate: ValueDate;
 }
 
 @Component({
@@ -117,13 +117,6 @@ export class MainScreenComponent implements OnInit {
         this.belAqiService.getIndexScoresAsObservable(this.userSettingsService.selectedUserLocation).subscribe(
             res => {
                 this.belAqiForCurrentLocation = res.filter(e => e !== null);
-                // keep track of the current day;
-                const dateReference = this.currentActiveIndex ? this.currentActiveIndex.date : moment();
-
-                this.currentActiveIndex = this.belAqiForCurrentLocation.find(
-                    (iR) => Math.abs(iR.date.diff(dateReference, 'hours')) === 0
-                );
-
                 this.updateDetailData();
             }, error => {
                 console.error('Error occured while fetching the bel aqi indicies');

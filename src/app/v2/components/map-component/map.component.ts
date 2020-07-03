@@ -7,10 +7,11 @@ import { CacheService } from 'ionic-cache';
 import * as L from 'leaflet';
 
 import boundary from '../../../../assets/multipolygon.json';
+import { ValueDate } from '../../common/enums';
 import { MainPhenomenon } from '../../common/phenomenon';
 import { UserLocation } from '../../Interfaces';
 import { IrcelineSettingsService } from '../../services/irceline-settings/irceline-settings.service';
-import { ModelledValueService, ValueDate } from '../../services/value-provider/modelled-value.service';
+import { ModelledValueService } from '../../services/value-provider/modelled-value.service';
 
 @Component({
     selector: 'map-component',

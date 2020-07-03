@@ -21,6 +21,16 @@
 		"no-index-ascertained": "Aucun indice BelAQI n'a pu être déterminé. Cela peut être le cas avec des problèmes techniques avec nos serveurs ou si votre localisation n'est pas en Belgique."
 	},
 	"belaqi": {
+		"date": {
+			"before-three-days": "",
+			"before-two-days": "",
+			"current": "",
+			"in-three-days": "",
+			"in-two-days": "",
+			"today": "",
+			"tomorrow": "",
+			"yesterday": ""
+		},
 		"level-split": {
 			"bad": "Mauvais",
 			"excellent": "Excellent",
@@ -304,11 +314,11 @@
 				"well-received": "We hebben je waarneming goed ontvangen. Dankzij jouw input kunnen we onze toepassing verbeteren."
 			},
 			"user-notification-settings": {
-				"highConcentration": "Concentrations (trop) élevées",
-				"transport": "Déplacements",
 				"activity": "Efforts physiques",
 				"allergies": "Les allergies",
-				"exercise": "Faire des exercices"
+				"exercise": "Faire des exercices",
+				"highConcentration": "Concentrations (trop) élevées",
+				"transport": "Déplacements"
 			}
 		},
 		"screens": {

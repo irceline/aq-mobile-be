@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import moment, { Moment } from 'moment';
+import moment from 'moment';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { darkIndexColor, indexLabel, lightIndexColor } from '../common/constants';
+import { ValueDate } from '../common/enums';
 import { UserLocation } from '../Interfaces';
 import { BelaqiIndexService } from './value-provider/belaqi-index.service';
 
 export interface BelAqiIndexResult {
   location: UserLocation;
-  date: Moment;
+  valueDate: ValueDate;
   indexScore: number;
 }
 
@@ -22,7 +23,7 @@ export class BelAQIService {
   // Brussels
   public $activeIndex = new BehaviorSubject<BelAqiIndexResult>({
     location: { label: 'Brussel', postalCode: '1000', latitude: 50.8503396, longitude: 4.3517103, id: 2711, type: 'user' },
-    date: moment(),
+    valueDate: ValueDate.CURRENT,
     indexScore: 10
   });
 

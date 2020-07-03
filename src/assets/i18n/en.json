@@ -21,6 +21,16 @@
 		"no-index-ascertained": "No BelAQI index could be ascertained. This could be due to technical problems on our server or to the location is not being in Belgium."
 	},
 	"belaqi": {
+		"date": {
+			"before-three-days": "Before 3 days",
+			"before-two-days": "Before 2 days",
+			"current": "Currently",
+			"in-three-days": "In 3 days",
+			"in-two-days": "In 2 days",
+			"today": "Today",
+			"tomorrow": "Tomorrow",
+			"yesterday": "Yesterday"
+		},
 		"level-split": {
 			"bad": "Bad",
 			"excellent": "Excellent",
@@ -304,11 +314,11 @@
 				"well-received": "We hebben je waarneming goed ontvangen. Dankzij jouw input kunnen we onze toepassing verbeteren."
 			},
 			"user-notification-settings": {
-				"highConcentration": "(Too) high concentrations",
-				"transport": "Getting around",
 				"activity": "Physical efforts",
 				"allergies": "Allergies",
-				"exercise": "Workout"
+				"exercise": "Workout",
+				"highConcentration": "(Too) high concentrations",
+				"transport": "Getting around"
 			}
 		},
 		"screens": {
