@@ -21,10 +21,7 @@ describe('InformationItemComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [
-                InformationItemComponent,
-                IonItem,
-            ],
+            declarations: [InformationItemComponent, IonItem],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
         }).compileComponents();
     }));
@@ -32,10 +29,17 @@ describe('InformationItemComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(InformationItemComponent);
         component = fixture.componentInstance;
-        locations = JSON.parse(localStorageMock.getItem('belAir.userLocations'));
+        locations = JSON.parse(
+            localStorageMock.getItem('belAir.userLocations')
+        );
         currentLocation = locations[0];
         belaqi = 5;
-        initialMeasurements = dataService.getMeasurmentsFor(currentLocation, moment(), belaqi);
+        // @ts-ignore
+        initialMeasurements = dataService.getMeasurmentsFor(
+            currentLocation,
+            moment(),
+            belaqi
+        );
         component.detailedDataPoint = initialMeasurements[0];
         fixture.detectChanges();
     });
@@ -47,23 +51,38 @@ describe('InformationItemComponent', () => {
     it('should display proper labels and colors', () => {
         const de = fixture.debugElement;
         const spans = de.queryAll(By.css('span'));
-        expect(spans[0].styles['background-color']).toEqual(lightIndexColor[belaqi]);
-        expect(spans[1].nativeElement.innerHTML)
-            .toEqual(specHelper.decodeHtmlCharCodes(initialMeasurements[0].substance.abbreviation));
+        expect(spans[0].styles['background-color']).toEqual(
+            lightIndexColor[belaqi]
+        );
+        expect(spans[1].nativeElement.innerHTML).toEqual(
+            specHelper.decodeHtmlCharCodes(
+                initialMeasurements[0].substance.abbreviation
+            )
+        );
         expect(spans[2].styles['color']).toEqual(lightIndexColor[belaqi]);
         expect(spans[2].nativeElement.innerHTML).toEqual(indexLabel[belaqi]);
     });
 
     it('should change labels and colors', () => {
         const newBelaqi = 7;
-        const newMeasurements = dataService.getMeasurmentsFor(currentLocation, moment(), newBelaqi);
+        const newMeasurements = dataService.getMeasurmentsFor(
+            currentLocation,
+            moment(),
+            newBelaqi
+        );
+        // @ts-ignore
         component.detailedDataPoint = newMeasurements[2];
         fixture.detectChanges();
         const de = fixture.debugElement;
         const spans = de.queryAll(By.css('span'));
-        expect(spans[0].styles['background-color']).toEqual(lightIndexColor[newBelaqi]);
-        expect(spans[1].nativeElement.innerHTML)
-            .toEqual(specHelper.decodeHtmlCharCodes(newMeasurements[2].substance.abbreviation));
+        expect(spans[0].styles['background-color']).toEqual(
+            lightIndexColor[newBelaqi]
+        );
+        expect(spans[1].nativeElement.innerHTML).toEqual(
+            specHelper.decodeHtmlCharCodes(
+                newMeasurements[2].substance.abbreviation
+            )
+        );
         expect(spans[2].styles['color']).toEqual(lightIndexColor[newBelaqi]);
         expect(spans[2].nativeElement.innerHTML).toEqual(indexLabel[newBelaqi]);
     });

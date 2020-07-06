@@ -49,7 +49,7 @@ export class CircleChartComponent implements OnInit {
     }
 
     getChartHeight() {
-        return this.element.nativeElement.offsetHeight || 315;
+        return this.element.nativeElement.offsetHeight + 'px' || '315px';
     }
 
     private _initialize(belaqi: number) {
@@ -73,8 +73,7 @@ export class CircleChartComponent implements OnInit {
                 { score: this.title }
             );
         } catch (e) {
-            console.log( e );
+            console.log(e);
         }
-
     }
 }
