@@ -14,7 +14,7 @@
         "ionic:build:before": "rm -rf www/ && rm -rf platforms/android/app/src/main/assets/www"
     },
     "precommit": [
-        "test"
+//        "test"
     ],
     "private": true,
     "dependencies": {
