@@ -286,32 +286,32 @@
 	"v2": {
 		"components": {
 			"circle-chart": {
-				"avg-score": "Gemiddelde score op jouw locatie is {{ score }}"
+				"avg-score": "Le score moyen de votre localisation est de {{ score }}"
 			},
 			"feedback": {
-				"cause": "Ken je de oorzaak? (optioneel)",
-				"send-observation": "Verstuur waarneming"
+				"cause": "Connaissez-vous la cause? (optionnel)",
+				"send-observation": "Envoyer l'observation"
 			},
 			"location-input": {
-				"choose-location": "Kies je locatie",
-				"current-location": "Huidige locatie",
-				"no-results": "Geen resultaten",
-				"please-wait": "Even geduld"
+				"choose-location": "Choisissez votre localisation",
+				"current-location": "Localisation actuelle",
+				"no-results": "Aucun résultat",
+				"please-wait": "Patientez"
 			},
 			"location-sortable": {
-				"cancel": "Annuleren",
-				"confirm": "Bevestigen",
-				"header": "Locatie verwijderen",
-				"message": "Ben je zeker dat je deze locatie wil verwijderen?"
+				"cancel": "Annuler",
+				"confirm": "Confirmer",
+				"header": "Supprimer la localisation",
+				"message": "Êtes-vous sûr de vouloir supprimer cet localisation?"
 			},
 			"onboarding-slider": {
-				"btn-text": "Ga verder",
-				"start-app": "Start de app"
+				"btn-text": "Continuer",
+				"start-app": "Lancez l'appli"
 			},
 			"success-display": {
-				"back-to-main": "Naar beginscherm",
-				"thanks": "Bedankt !",
-				"well-received": "We hebben je waarneming goed ontvangen. Dankzij jouw input kunnen we onze toepassing verbeteren."
+				"back-to-main": "Accéder à l'écran d'accueil",
+				"thanks": "Merci !",
+				"well-received": "Nous avons bien reçu votre observation. Grâce à votre contribution, nous pouvons améliorer notre application."
 			},
 			"user-notification-settings": {
 				"activity": "Efforts physiques",
@@ -323,56 +323,56 @@
 		},
 		"screens": {
 			"app-info": {
-				"aq-index": "We beoordelen de impact van de <strong>algemene luchtkwaliteit</strong> op korte termijn op basis van een luchtkwaliteitsindex.",
-				"aq-index-2": "Die geeft aan de <strong>meetwaarden van verschillende verontreinigende stoffen</strong> één score (Heel goed). De index baseert zich voor deze score op data van meetstations in heel België.",
-				"check-lt-data": "Je kan deze inschattingen bekijken in het menu via <strong>‘blootstelling op lange termijn’</strong>.",
-				"current-items": "De stoffen die we momenteel in rekening brengen, zijn:",
-				"data-models": "Door op deze data modellen toe te passen, berekenen we of de impact van de luchtkwaliteit op lange termijn beter of slechter wordt.",
-				"fine-dust": "Fijn stof",
-				"how-calculated": "Hoe worden deze waarden berekend?",
-				"how-this-works": "Hoe werkt dit?",
-				"learn-more": "Meer weten over de Vlaamse Milieumaatschappij?",
-				"nitrogen-dioxide": "Stikstofdioxide",
-				"notifications": "Als de metingen de waarschuwings- waarde overschrijden, sturen we je een melding. Je kan je meldingen beheren via het menu.",
-				"ozon": "Ozon",
-				"very-fine-dust": "Heel fijn stof"
+				"aq-index": "Nous évaluons l'impact à court terme de la <strong>qualité générale de l'air</strong> sur la base d'un indice de qualité de l'air.",
+				"aq-index-2": "Cela donne aux <strong>mesures de divers polluants</strong> une note (très bonne). L'indice est basé sur les données des stations de surveillance à travers la Belgique pour ce score.",
+				"check-lt-data": "Vous pouvez consulter ces estimations dans le menu via <strong>'exposition à long terme'.</strong>.",
+				"current-items": "Les polluants que nous utilisons actuellement dans le calcul sont:",
+				"data-models": "En appliquant des modèles à ces données, nous calculons si l'impact de la qualité de l'air s'améliorera ou se détériorera à long terme.",
+				"fine-dust": "Particules fines (PM10) ",
+				"how-calculated": "Comment ces valeurs sont-elles calculées?",
+				"how-this-works": "Comment cela marche-t-il?",
+				"learn-more": "Vous souhaitez en savoir plus sur l'Agence flamande de l'environnement?",
+				"nitrogen-dioxide": "Dioxyde d'azote",
+				"notifications": "Si les mesures dépassent la valeur d'avertissement, nous vous enverrons une notification. Vous pouvez gérer vos notifications via le menu.",
+				"ozon": "Ozone",
+				"very-fine-dust": "Particules fines (PM2.5) "
 			},
 			"long-term-info": {
-				"about-data": "De data is het resultaat van onze rekenmodellen op lange termijn.",
-				"from-where": "Van waar kom deze info",
-				"long-term": "Lange termijn",
-				"lt-effects-diseases": "Langdurige blootstelling aan luchtvervuilende stoffen kan chronische effecten uitlokken en voor een hoger risico op hart- en longziekten zorgen."
+				"about-data": "Les données sont le résultat de nos modèles de calcul à long terme.",
+				"from-where": "D'où viennent ces informations?",
+				"long-term": "Long terme",
+				"lt-effects-diseases": "Une exposition prolongée aux polluants atmosphériques peut produire des effets chroniques et augmenter le risque de maladies cardiaques et pulmonaires."
 			},
 			"main-screen": {
-				"about-no2": "Een schadelijk gas dat zwaarder is dan lucht en reageert heftig met andere stoffen, zoals metalen.",
-				"long-term-calculation": "Berekening van impact op lange termijn",
-				"view-details": "Bekijk in detail",
-				"what-is-no2": "Wat is Stikstofdioxide?"
+				"about-no2": "Un gaz nocif qui est plus lourd que l'air et réagit violemment avec d'autres substances, comme les métaux.",
+				"long-term-calculation": "Calcul de l'impact à long terme",
+				"view-details": "Voir en détail",
+				"what-is-no2": "Qu'est-ce que le dioxyde d'azote?"
 			},
 			"menu": {
-				"belair-info": "Informatie over Belair",
-				"language": "Taal",
-				"locations": "Locaties",
-				"long-term-exposure": "Blootstelling op lange termijn",
-				"notifications": "Notificaties",
-				"version": "versie",
-				"workings": "(hoe werkt de applicatie)"
+				"belair-info": "Information sur Belair",
+				"language": "Langue",
+				"locations": "Localisation",
+				"long-term-exposure": "Exposition à long terme",
+				"notifications": "Notifications",
+				"version": "version",
+				"workings": "(comment fonctionne l'application)"
 			},
 			"onboarding": {
-				"aq-info": "Dit cijfer is een berekening op basis van de <strong>meetgegevens</strong> van een luchtmeetstation in jouw buurt.",
-				"aq-long-term": "De app berekent ook wat de impact van de luchtkwaliteit op <strong>lange termijn</strong> is voor jouw locatie.",
-				"ask-location": "Om je zo goed mogelijk te kunnen helpen, hebben we je locatie nodig.",
-				"ask-notifications": "Zou je graag meldingen ontvangen over de luchtkwaliteit?",
-				"choose-lang": "Kies je taal:",
-				"start-quickly": "Snel van start!"
+				"aq-info": "Ce chiffre est un calcul basé sur les <strong>données de mesure</strong> d'une station de mesure de l'air dans votre région.",
+				"aq-long-term": "L'application calcule également l'impact de la qualité de l'air sur le <strong>long terme</strong> pour votre localisation.",
+				"ask-location": "Nous avons besoin de votre emplacement pour vous aider autant que possible.",
+				"ask-notifications": "Souhaitez-vous recevoir des notifications sur la qualité de l'air?",
+				"choose-lang": "Choisissez votre langue:",
+				"start-quickly": "Démarrage rapide!"
 			},
 			"rating-screen": {
-				"calculated-value": "De app toont een berekende waarde, geen meting op jouw locatie. Plaatselijk kan de luchtkwaliteit dan ook afwijken.",
-				"does-it-match": "Strookt deze waarde met jouw gevoel?",
-				"exhaust": "<strong>Uitlaatgassen</strong> van verkeer",
-				"fire": "Een <strong>haardvuur</strong> met hout verbranding.",
-				"industry": "<strong>Uitstoot</strong> door industrie of landbouw",
-				"possible-causes": "Mogelijke oorzaken van een afwijking zijn:"
+				"calculated-value": "L'application affiche une valeur calculée, pas une mesure à votre emplacement. La qualité de l'air peut donc différer localement.",
+				"does-it-match": "Cette valeur correspond-elle à vos sentiments?",
+				"exhaust": "<strong>Échappement des fumées</strong> de la circulation.",
+				"fire": "Un <strong> feu </strong> avec du bois.",
+				"industry": "<strong>Émissions</strong> provenant de l'industrie ou de l'agriculture.",
+				"possible-causes": "Les causes possibles d'un écart sont:"
 			}
 		}
 	},
