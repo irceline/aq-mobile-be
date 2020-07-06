@@ -22,14 +22,14 @@
 	},
 	"belaqi": {
 		"date": {
-			"before-three-days": "",
-			"before-two-days": "",
-			"current": "",
-			"in-three-days": "",
-			"in-two-days": "",
-			"today": "",
-			"tomorrow": "",
-			"yesterday": ""
+			"before-three-days": "Il y a 3 jours",
+			"before-two-days": "Avant hier",
+			"current": "Actuellement",
+			"in-three-days": "Dans 3 jours",
+			"in-two-days": "Dans 2 jours",
+			"today": "Aujourd'hui",
+			"tomorrow": "Demain",
+			"yesterday": "Hier"
 		},
 		"level-split": {
 			"bad": "Mauvais",

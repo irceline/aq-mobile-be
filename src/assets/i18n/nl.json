@@ -22,14 +22,14 @@
 	},
 	"belaqi": {
 		"date": {
-			"before-three-days": "",
-			"before-two-days": "",
-			"current": "",
-			"in-three-days": "",
-			"in-two-days": "",
-			"today": "",
-			"tomorrow": "",
-			"yesterday": ""
+			"before-three-days": "3 dagen geleden",
+			"before-two-days": "Eergisteren",
+			"current": "Momenteel",
+			"in-three-days": "Binnen 3 dagen",
+			"in-two-days": "Binnen 2 dagen",
+			"today": "Vandaag",
+			"tomorrow": "Morgen",
+			"yesterday": "Gisteren"
 		},
 		"level-split": {
 			"bad": "slecht",

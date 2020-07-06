@@ -22,8 +22,8 @@
 	},
 	"belaqi": {
 		"date": {
-			"before-three-days": "Before 3 days",
-			"before-two-days": "Before 2 days",
+			"before-three-days": "3 days ago",
+			"before-two-days": "2 days ago",
 			"current": "Currently",
 			"in-three-days": "In 3 days",
 			"in-two-days": "In 2 days",
