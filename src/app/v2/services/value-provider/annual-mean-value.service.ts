@@ -2,16 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { isDefined } from '@angular/compiler/src/util';
 import { Injectable } from '@angular/core';
 import { CacheService } from 'ionic-cache';
-import { Observable, Observer } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { forkJoin, Observable, of } from 'rxjs';
+import { catchError, map, mergeMap } from 'rxjs/operators';
 
 import { createCacheKey } from '../../common/caching';
 import { MainPhenomenon } from '../../common/phenomenon';
 import { UserLocation } from '../../Interfaces';
+import { IrcelineSettingsService } from './../irceline-settings/irceline-settings.service';
 import { ValueProvider } from './value-provider';
-
-const TTL_ANNUAL_YEAR_REQUEST = 60 * 60 * 24; // one day
-const ANNUAL_MEAN_URL = 'https://www.irceline.be/air/timestring_rioifdm_anmean.php';
 
 const phenomenonMapping = [
   {
@@ -49,54 +47,54 @@ export class AnnualMeanValueService extends ValueProvider {
 
   constructor(
     public http: HttpClient,
+    private ircelineSettingsSrvc: IrcelineSettingsService,
     private cacheService: CacheService
   ) {
     super(http);
   }
 
   public getLastValue(userLocation: UserLocation, phenomenon: MainPhenomenon): Observable<AnnualMeanValue> {
-    return new Observable<AnnualMeanValue>((observer: Observer<AnnualMeanValue>) => {
-      this.getYear().subscribe(year => {
-        const layerId = this.createLayerId(year, phenomenon);
-        const url = this.createWmsUrl(layerId);
-        const params = this.createFeatureInfoRequestParams(layerId, userLocation);
-        const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url, { responseType: 'json', params: params });
-        return this.cacheService.loadFromObservable(createCacheKey(url, JSON.stringify(params), `${year}`), request).subscribe(
-          res => {
-            const value = this.getValueOfResponse(res);
-            if (isDefined(value)) {
-              observer.next({
-                value,
-                year: year,
-                index: this.categorize(phenomenon, value)
-              });
-            } else {
-              throw new Error('No value returned');
-            }
-            observer.complete();
-          },
-          error => {
-            console.error(error);
-            observer.next(null);
-            observer.complete();
-          }
-        );
-      });
-    });
+    return this.getYear().pipe(mergeMap(year => this.getValueForYear(userLocation, phenomenon, year)));
+  }
+
+  public getAnnualValueList(userLocation: UserLocation, phenomenon: MainPhenomenon): Observable<AnnualMeanValue[]> {
+    return this.getYear().pipe(mergeMap(year => {
+      const req: Observable<AnnualMeanValue>[] = [];
+      for (let index = 0; index < 5; index++) {
+        req.push(this.getValueForYear(userLocation, phenomenon, year - index));
+      }
+      return forkJoin(req);
+    }));
+  }
+
+  private getValueForYear(userLocation: UserLocation, phenomenon: MainPhenomenon, year: number): Observable<AnnualMeanValue> {
+    const layerId = this.createLayerId(year, phenomenon);
+    const url = this.createWmsUrl(layerId);
+    const params = this.createFeatureInfoRequestParams(layerId, userLocation);
+    const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url, { responseType: 'json', params: params });
+    return this.cacheService.loadFromObservable(createCacheKey(url, JSON.stringify(params), `${year}`), request).pipe(
+      catchError(_ => of({})),
+      map(res => {
+        const value = this.getValueOfResponse(res);
+        if (isDefined(value)) {
+          return {
+            value,
+            year: year,
+            index: this.categorize(phenomenon, value)
+          };
+        } else {
+          return null;
+        }
+      })
+    );
   }
 
   private getYear(): Observable<number> {
-    const request = this.http.get(ANNUAL_MEAN_URL, { responseType: 'text' });
-    return this.cacheService.loadFromObservable(ANNUAL_MEAN_URL, request, null, TTL_ANNUAL_YEAR_REQUEST).pipe(
-      map(res => {
-        const framechar = '\'';
-        const first = res.indexOf(framechar) + 1;
-        return Number.parseInt(res.substring(first, res.indexOf(framechar, first)), 10);
-      }));
+    return this.ircelineSettingsSrvc.getSettings().pipe(map(res => res.lastupdate_year));
   }
 
   private createLayerId(year: number, phenomenon: MainPhenomenon): string {
-    return `${phenomenonMapping.find(e => e.phenonenon === phenomenon).layerPrefix}${year}_atmostreet`;
+    return `${phenomenonMapping.find(e => e.phenonenon === phenomenon).layerPrefix}${year}`;
   }
 
   private createWmsUrl(layerId: string): string {

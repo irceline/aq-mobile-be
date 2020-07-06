@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { forkJoin, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { MainPhenomenon } from '../common/phenomenon';
 import { LongTermDataPoint, Substance, UserLocation } from '../Interfaces';
 import { BelAQIService } from './bel-aqi.service';
+import { AnnualMeanValueService } from './value-provider/annual-mean-value.service';
+import { ModelledValueService } from './value-provider/modelled-value.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +16,12 @@ export class LongTermDataService {
 
   private _substances: Substance[] = [];
 
-  private _years = [2015, 2016, 2017, 2018, 2019, 2020];
-
-  constructor(translateService: TranslateService, private belaqiService: BelAQIService) {
+  constructor(
+    translateService: TranslateService,
+    private belaqiService: BelAQIService,
+    private annualMeanValueSrvc: AnnualMeanValueService,
+    private modelledValueSrvc: ModelledValueService
+  ) {
     this._substances = [
       {
         name: translateService.instant('v2.screens.app-info.ozon'),
@@ -43,45 +50,57 @@ export class LongTermDataService {
     ];
   }
 
-  // this simulates an API request to fetch historical data
-  // when integrating with API, all you need to do is refactor this method to fetch the actual data
-  // if the output is structured in the same way (check interfaces), the app will be functional
   getLongTermDataFor(location: UserLocation): Promise<LongTermDataPoint[]> {
-    // todo implementation task --> fetch long term data for this location
-    return new Promise<LongTermDataPoint[]>((resolve, reject) => {
-      setTimeout(() => {
-
-        const data = this._substances.map(substance => {
-
-          const belaqi_current = Math.ceil(Math.random() * 10);
-          const currentValue = 20 + Math.ceil(Math.random() * 150);
-
-          return {
-            substance,
-            location: location,
-            currentValue: currentValue,
-            averageValue: 40 + Math.ceil(Math.random() * 80),
-            euBenchMark: 60 + Math.ceil(Math.random() * 60),
-            worldBenchMark: 85 + Math.ceil(Math.random() * 50),
-            evaluation: this.belaqiService.getLabelForIndex(belaqi_current),
-            color: this.belaqiService.getLightColorForIndex(belaqi_current),
-            historicalValues: this._years.map(year => {
-              const belaqi_yearly = Math.ceil(Math.random() * 10);
-              return {
-                year,
-                value: (year === 2020) ? currentValue : 20 + Math.ceil(Math.random() * 150),
-                evaluationColor: (year === 2020) ?
-                  this.belaqiService.getLightColorForIndex(belaqi_current)
-                  : this.belaqiService.getLightColorForIndex(belaqi_yearly)
-              };
-            })
-          };
-        });
-
-        resolve(data);
-      }, 1000);
-    });
-
+    return forkJoin(this._substances.map(substance => this.getLongTermDataForSubstance(substance, location))).toPromise();
   }
 
+  private getLongTermDataForSubstance(substance: Substance, location: UserLocation): Observable<LongTermDataPoint> {
+    return forkJoin([
+      this.modelledValueSrvc.getCurrentValue(location, substance.phenomenon),
+      this.annualMeanValueSrvc.getAnnualValueList(location, substance.phenomenon)
+    ]).pipe(map(res => {
+      const currentIndex = res[0].index;
+      const currentValue = Math.round(res[0].value);
+      const historicalValues = res[1].reverse().map(e => {
+        return {
+          year: e.year,
+          value: Math.round(e.value),
+          evaluationColor: this.belaqiService.getLightColorForIndex(e.index)
+        };
+      });
+      return {
+        substance,
+        location: location,
+        currentValue: currentValue,
+        averageValue: null,
+        euBenchMark: this.getEuBenchMark(substance.phenomenon),
+        worldBenchMark: this.getWorldBenchMark(substance.phenomenon),
+        evaluation: this.belaqiService.getLabelForIndex(currentIndex),
+        color: this.belaqiService.getLightColorForIndex(currentIndex),
+        historicalValues
+      };
+    }));
+  }
+
+  private getWorldBenchMark(phenomenon: MainPhenomenon): number {
+    switch (phenomenon) {
+      case MainPhenomenon.NO2:
+        return 40;
+      case MainPhenomenon.PM25:
+        return 25;
+      default:
+        return null;
+    }
+  }
+
+  private getEuBenchMark(phenomenon: MainPhenomenon): number {
+    switch (phenomenon) {
+      case MainPhenomenon.NO2:
+        return 40;
+      case MainPhenomenon.PM25:
+        return 10;
+      default:
+        return null;
+    }
+  }
 }
