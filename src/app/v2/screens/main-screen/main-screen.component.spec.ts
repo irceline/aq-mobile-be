@@ -6,26 +6,31 @@ import { TranslateTestingModule } from '../../testing/TranslateTestingModule';
 import { BelAQIService } from '../../services/bel-aqi.service';
 import { specHelper } from '../../testing/spec-helper';
 import { localStorageMock } from '../../testing/localStorage.mock';
-import {By} from '@angular/platform-browser';
-import {LocationSwipeComponent} from '../../components/location-swipe/location-swipe.component';
-import {IonSlide, IonSlides} from '@ionic/angular';
-import {TimeLineListComponent} from '../../components/time-line-list/time-line-list.component';
-import {CircleChartComponent} from '../../components/circle-chart/circle-chart.component';
-import {BackgroundComponent} from '../../components/background/background.component';
-import {backgroundImages, indexLabel, lightIndexColor} from '../../common/constants';
-import {DetailDataService} from '../../services/detail-data.service';
-import {dataService} from '../../testing/detail-data.service.mock';
-import {DataPoint, UserLocation} from '../../Interfaces';
+import { By } from '@angular/platform-browser';
+import { LocationSwipeComponent } from '../../components/location-swipe/location-swipe.component';
+import { IonSlide, IonSlides } from '@ionic/angular';
+import { TimeLineListComponent } from '../../components/time-line-list/time-line-list.component';
+import { CircleChartComponent } from '../../components/circle-chart/circle-chart.component';
+import { BackgroundComponent } from '../../components/background/background.component';
+import {
+    backgroundImages,
+    indexLabel,
+    lightIndexColor,
+} from '../../common/constants';
+// @ts-ignore - this doesnt exists here, and i will comment out
+import { DetailDataService } from '../../services/detail-data.service';
+import { dataService } from '../../testing/detail-data.service.mock';
+import { DataPoint, UserLocation } from '../../Interfaces';
 import moment from 'moment';
-import {InformationItemComponent} from '../../components/information-item/information-item.component';
-import {PullTabComponent} from '../../components/pull-tab/pull-tab.component';
+import { InformationItemComponent } from '../../components/information-item/information-item.component';
+import { PullTabComponent } from '../../components/pull-tab/pull-tab.component';
 import 'hammerjs';
 
 describe('MainScreenComponent', () => {
     let component: MainScreenComponent;
     let fixture: ComponentFixture<MainScreenComponent>;
     let belAQIService;
-    let detailDataService: DetailDataService;
+    // let detailDataService: DetailDataService; TODO: doesnt exists
     let timelineInstance: TimeLineListComponent;
     let locations: UserLocation[];
     let currentLocation: UserLocation;
@@ -44,30 +49,36 @@ describe('MainScreenComponent', () => {
                 PullTabComponent,
                 InformationItemComponent,
                 IonSlides,
-                IonSlide
+                IonSlide,
             ],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
             imports: [TranslateTestingModule],
         }).compileComponents();
         belAQIService = TestBed.get(BelAQIService);
-        locations = JSON.parse(localStorageMock.getItem('belAir.userLocations'));
+        locations = JSON.parse(
+            localStorageMock.getItem('belAir.userLocations')
+        );
         currentLocation = locations[0];
         spyOn(belAQIService.$activeIndex, 'next');
-        detailDataService = TestBed.get(DetailDataService);
+        //detailDataService = TestBed.get(DetailDataService);
         defaultBelaqi = 7;
+        // @ts-ignore
         initialMeasurements = dataService.getMeasurmentsFor(
             currentLocation,
             moment(),
-            defaultBelaqi);
-        spyOn(detailDataService, 'getMeasurementsFor').and.callFake(
-            () => Promise.resolve(initialMeasurements)
+            defaultBelaqi
         );
+        // spyOn(detailDataService, 'getMeasurementsFor').and.callFake(() =>
+        //     Promise.resolve(initialMeasurements)
+        // );
     }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(MainScreenComponent);
         component = fixture.componentInstance;
-        const timeline = fixture.debugElement.query(By.css('app-time-line-list'));
+        const timeline = fixture.debugElement.query(
+            By.css('app-time-line-list')
+        );
         timelineInstance = timeline.componentInstance;
         spyOn(timelineInstance.slides, 'update').and.callFake(() => null);
         fixture.detectChanges();
@@ -78,7 +89,9 @@ describe('MainScreenComponent', () => {
     });
 
     it('should load initial data', () => {
+        // @ts-ignore
         expect(component.locations).toEqual(locations);
+        // @ts-ignore
         expect(component.currentLocation).toEqual(locations[0]);
         expect(component.belAqiForCurrentLocation.length).toEqual(11);
         component.belAqiForCurrentLocation.forEach((belaqi) => {
@@ -89,6 +102,7 @@ describe('MainScreenComponent', () => {
     it('should change data on change location', () => {
         component.onLocationChange(locations[2]);
         fixture.detectChanges();
+        // @ts-ignore
         expect(component.currentLocation).toEqual(locations[2]);
         component.belAqiForCurrentLocation.forEach((belaqi) => {
             expect(belaqi.location.id).toEqual(locations[2].id);
@@ -99,70 +113,104 @@ describe('MainScreenComponent', () => {
     });
 
     it('should trigger event on belAqi $activeIndex', () => {
-        expect(belAQIService.$activeIndex.next).toHaveBeenCalledWith(component.currentActiveIndex);
+        expect(belAQIService.$activeIndex.next).toHaveBeenCalledWith(
+            component.currentActiveIndex
+        );
     });
 
     it('should change the day correctly', () => {
         component.onDayChange(component.belAqiForCurrentLocation[4]);
         fixture.detectChanges();
-        expect(component.currentActiveIndex).toEqual(component.belAqiForCurrentLocation[4]);
-        expect(belAQIService.$activeIndex.next).toHaveBeenCalledWith(component.belAqiForCurrentLocation[4]);
+        expect(component.currentActiveIndex).toEqual(
+            component.belAqiForCurrentLocation[4]
+        );
+        expect(belAQIService.$activeIndex.next).toHaveBeenCalledWith(
+            component.belAqiForCurrentLocation[4]
+        );
     });
 
     it('should react on slide change location', () => {
-        const location = fixture.debugElement.query(By.css('app-location-swipe'));
-        const locationInstance: LocationSwipeComponent = location.componentInstance;
-        spyOn(locationInstance.slides, 'getActiveIndex').and.callFake(() => Promise.resolve(2));
+        const location = fixture.debugElement.query(
+            By.css('app-location-swipe')
+        );
+        const locationInstance: LocationSwipeComponent =
+            location.componentInstance;
+        spyOn(locationInstance.slides, 'getActiveIndex').and.callFake(() =>
+            Promise.resolve(2)
+        );
         spyOn(component, 'onLocationChange');
         locationInstance.slideChange().then(() => {
-            expect(component.onLocationChange).toHaveBeenCalledWith(locations[2]);
+            expect(component.onLocationChange).toHaveBeenCalledWith(
+                locations[2]
+            );
         });
     });
 
     it('should react on slide change time line', () => {
-        spyOn(timelineInstance.slides, 'getActiveIndex').and.callFake(() => Promise.resolve(2));
+        spyOn(timelineInstance.slides, 'getActiveIndex').and.callFake(() =>
+            Promise.resolve(2)
+        );
         spyOn(component, 'onDayChange');
         timelineInstance.slideChange().then(() => {
-            expect(component.onDayChange).toHaveBeenCalledWith(component.belAqiForCurrentLocation[2]);
+            expect(component.onDayChange).toHaveBeenCalledWith(
+                component.belAqiForCurrentLocation[2]
+            );
         });
     });
 
     it('should update circle chart on slide change location', () => {
-        const location = fixture.debugElement.query(By.css('app-location-swipe'));
-        const locationInstance: LocationSwipeComponent = location.componentInstance;
-        const circleChart = fixture.debugElement.query(By.css('app-circle-chart'));
-        const circleChartInstance: CircleChartComponent = circleChart.componentInstance;
+        const location = fixture.debugElement.query(
+            By.css('app-location-swipe')
+        );
+        const locationInstance: LocationSwipeComponent =
+            location.componentInstance;
+        const circleChart = fixture.debugElement.query(
+            By.css('app-circle-chart')
+        );
+        const circleChartInstance: CircleChartComponent =
+            circleChart.componentInstance;
         const background = fixture.debugElement.query(By.css('app-background'));
 
-        spyOn(locationInstance.slides, 'getActiveIndex').and.callFake(() => Promise.resolve(2));
+        spyOn(locationInstance.slides, 'getActiveIndex').and.callFake(() =>
+            Promise.resolve(2)
+        );
         locationInstance.slideChange().then(() => {
             let belAqiIndex;
-            belAQIService.$activeIndex.subscribe( ( newIndex ) => {
+            belAQIService.$activeIndex.subscribe((newIndex) => {
                 belAqiIndex = newIndex.indexScore;
             });
             const belAqiText = belAQIService.getLabelForIndex(belAqiIndex);
             expect(circleChartInstance.belAqi).toEqual(belAqiIndex);
             expect(circleChartInstance.title).toEqual(belAqiText);
-            expect(background.styles['background-image']).toContain(backgroundImages[belAqiIndex]);
+            expect(background.styles['background-image']).toContain(
+                backgroundImages[belAqiIndex]
+            );
         });
     });
 
     it('should update circle chart on slide change time line', () => {
-        const circleChart = fixture.debugElement.query(By.css('app-circle-chart'));
-        const circleChartInstance: CircleChartComponent = circleChart.componentInstance;
+        const circleChart = fixture.debugElement.query(
+            By.css('app-circle-chart')
+        );
+        const circleChartInstance: CircleChartComponent =
+            circleChart.componentInstance;
         const background = fixture.debugElement.query(By.css('app-background'));
 
-        spyOn(timelineInstance.slides, 'getActiveIndex').and.callFake(() => Promise.resolve(2));
+        spyOn(timelineInstance.slides, 'getActiveIndex').and.callFake(() =>
+            Promise.resolve(2)
+        );
         spyOn(component, 'onLocationChange');
         timelineInstance.slideChange().then(() => {
             let belAqiIndex;
-            belAQIService.$activeIndex.subscribe( ( newIndex ) => {
+            belAQIService.$activeIndex.subscribe((newIndex) => {
                 belAqiIndex = newIndex.indexScore;
             });
             const belAqiText = belAQIService.getLabelForIndex(belAqiIndex);
             expect(circleChartInstance.belAqi).toEqual(belAqiIndex);
             expect(circleChartInstance.title).toEqual(belAqiText);
-            expect(background.styles['background-image']).toContain(backgroundImages[belAqiIndex]);
+            expect(background.styles['background-image']).toContain(
+                backgroundImages[belAqiIndex]
+            );
         });
     });
 
@@ -172,19 +220,30 @@ describe('MainScreenComponent', () => {
 
     it('should change all substances in pull tab after location change', () => {
         const newBelaqi = 3;
+        // @ts-ignore
         initialMeasurements = dataService.getMeasurmentsFor(
             currentLocation,
-            moment(), newBelaqi);
-        const location = fixture.debugElement.query(By.css('app-location-swipe'));
-        const locationInstance: LocationSwipeComponent = location.componentInstance;
-        spyOn(locationInstance.slides, 'getActiveIndex').and.callFake(() => Promise.resolve(2));
+            moment(),
+            newBelaqi
+        );
+        const location = fixture.debugElement.query(
+            By.css('app-location-swipe')
+        );
+        const locationInstance: LocationSwipeComponent =
+            location.componentInstance;
+        spyOn(locationInstance.slides, 'getActiveIndex').and.callFake(() =>
+            Promise.resolve(2)
+        );
 
         locationInstance.slideChange().then(() => {
             checkInfoItems(fixture, newBelaqi);
         });
     });
 
-    const checkInfoItems = (currentFixture: ComponentFixture<MainScreenComponent>, currentBelaqi: number) => {
+    const checkInfoItems = (
+        currentFixture: ComponentFixture<MainScreenComponent>,
+        currentBelaqi: number
+    ) => {
         currentFixture.whenStable().then(() => {
             fixture.detectChanges();
             const pullTab = fixture.debugElement.query(By.css('app-pull-tab'));
@@ -192,12 +251,21 @@ describe('MainScreenComponent', () => {
 
             infoItems.map((info, index) => {
                 const spans = info.queryAll(By.css('span'));
-                expect(spans[0].styles['background-color']).toEqual(lightIndexColor[currentBelaqi]);
-                expect(spans[1].nativeElement.innerHTML)
-                    .toEqual(specHelper.decodeHtmlCharCodes(initialMeasurements[index].substance.abbreviation));
-                expect(spans[2].styles['color']).toEqual(lightIndexColor[currentBelaqi]);
-                expect(spans[2].nativeElement.innerHTML).toEqual(indexLabel[currentBelaqi]);
+                expect(spans[0].styles['background-color']).toEqual(
+                    lightIndexColor[currentBelaqi]
+                );
+                expect(spans[1].nativeElement.innerHTML).toEqual(
+                    specHelper.decodeHtmlCharCodes(
+                        initialMeasurements[index].substance.abbreviation
+                    )
+                );
+                expect(spans[2].styles['color']).toEqual(
+                    lightIndexColor[currentBelaqi]
+                );
+                expect(spans[2].nativeElement.innerHTML).toEqual(
+                    indexLabel[currentBelaqi]
+                );
             });
         });
-    }
+    };
 });

@@ -3,7 +3,7 @@
     <name>BelAir</name>
     <description>Personalised air quality data throughout Belgium</description>
     <author email="belair@irceline.be" href="https://www.irceline.be/">The BelAir Team</author>
-    <content original-src="index.html" src="http://localhost:8101" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -20,6 +20,7 @@
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
+    <preference name="orientation" value="portrait" />
     <hook src="hooks/before_compile.js" type="before_compile" />
     <platform name="android">
         <preference name="StatusBarOverlaysWebView" value="false" />
