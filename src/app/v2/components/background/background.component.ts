@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, HostBinding } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import {BelAQIService} from '../../services/bel-aqi.service';
+import { BelAQIService } from '../../services/bel-aqi.service';
 import { backgroundImages } from '../../common/constants';
 
 @Component({
@@ -9,19 +9,22 @@ import { backgroundImages } from '../../common/constants';
     styleUrls: ['./background.component.scss'],
 })
 export class BackgroundComponent implements OnInit {
-    @HostBinding('style.background-image')
+    // @HostBinding('style.background-image')
     public backgroundImage;
 
     // deprecated input.. to remove
     @Input()
     set belAqi(index: number) {
-        this.backgroundImage = this._sanitizer.bypassSecurityTrustStyle(
-            `url(${backgroundImages[index]})`
+        this.backgroundImage = this._sanitizer.bypassSecurityTrustUrl(
+            `${backgroundImages[index]}`
         );
     }
 
-    constructor(private _sanitizer: DomSanitizer, private belAQIService: BelAQIService) {
-        belAQIService.$activeIndex.subscribe( ( newIndex ) => {
+    constructor(
+        private _sanitizer: DomSanitizer,
+        private belAQIService: BelAQIService
+    ) {
+        belAQIService.$activeIndex.subscribe((newIndex) => {
             this.belAqi = newIndex.indexScore;
         });
     }
