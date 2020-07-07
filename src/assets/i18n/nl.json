@@ -23,8 +23,8 @@
 	"belaqi": {
 		"date": {
 			"before-three-days": "3 dagen geleden",
-			"before-two-days": "Eergisteren",
-			"current": "Momenteel",
+			"before-two-days": "2 dagen geleden",
+			"current": "Nu",
 			"in-three-days": "Binnen 3 dagen",
 			"in-two-days": "Binnen 2 dagen",
 			"today": "Vandaag",
