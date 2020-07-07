@@ -49,7 +49,7 @@ export class CircleChartComponent implements OnInit {
     }
 
     getChartHeight() {
-        return this.element.nativeElement.offsetHeight + 'px' || '315px';
+        return this.element.nativeElement.offsetHeight || 315;
     }
 
     private _initialize(belaqi: number) {

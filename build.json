@@ -1,0 +1,16 @@
+{
+    "ios": {
+        "debug": {
+            "buildFlag": [
+                "-UseModernBuildSystem=0"
+            ],
+            "developmentTeam": "W52AJSRX5C"
+        },
+        "release": {
+            "buildFlag": [
+                "-UseModernBuildSystem=0"
+            ],
+            "developmentTeam": "W52AJSRX5C"
+        }
+    }
+}
