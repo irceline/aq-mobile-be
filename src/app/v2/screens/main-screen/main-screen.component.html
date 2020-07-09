@@ -1,4 +1,7 @@
 <ion-content [scrollY]="false">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <app-background>
     <div class="wrapper" [ngStyle]="{'height': contentHeight + 'px'}">
       <app-location-swipe (locationChange)="onLocationChange($event)" [locations]="locations">
@@ -38,8 +41,7 @@
       <app-information-item-details [detailPoint]="detailPoint" (backClicked)="detailPoint = null">
       </app-information-item-details>
 
-      <app-time-line-list class="details--timeline" (dayChange)="onDetailsDayChange($event)"
-        [items]="valueTimeline">
+      <app-time-line-list class="details--timeline" (dayChange)="onDetailsDayChange($event)" [items]="valueTimeline">
       </app-time-line-list>
 
       <app-value-display [color]="detailsValueColor" [score]="detailsValue" value="µg/m3"></app-value-display>

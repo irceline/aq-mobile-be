@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import moment from 'moment';
 import { forkJoin } from 'rxjs';
 
 import { ValueDate } from '../../common/enums';
@@ -113,17 +112,18 @@ export class MainScreenComponent implements OnInit {
         this.userSettingsService.$userLocations.subscribe((locations) => this.locations = locations);
     }
 
-    private updateCurrentLocation() {
-        this.belAqiService.getIndexScoresAsObservable(this.userSettingsService.selectedUserLocation).subscribe(
+    private updateCurrentLocation(loadFinishedCb?: () => any) {
+        return this.belAqiService.getIndexScoresAsObservable(this.userSettingsService.selectedUserLocation).subscribe(
             res => {
                 this.belAqiForCurrentLocation = res.filter(e => e !== null);
-                this.updateDetailData();
+                this.updateDetailData(loadFinishedCb);
             }, error => {
                 console.error('Error occured while fetching the bel aqi indicies');
+                if (loadFinishedCb) { loadFinishedCb(); }
             });
     }
 
-    private async updateDetailData() {
+    private async updateDetailData(loadFinishedCb?: () => any) {
         this.detailData = [];
         this.detailDataLoadig = true;
 
@@ -142,9 +142,11 @@ export class MainScreenComponent implements OnInit {
                         color: this.belAqiService.getLightColorForIndex(res[0].index)
                     });
                     this.detailDataLoadig = false;
+                    if (loadFinishedCb) { loadFinishedCb(); }
                 },
                 error => {
                     console.error(error);
+                    if (loadFinishedCb) { loadFinishedCb(); }
                 });
         });
     }
@@ -165,6 +167,10 @@ export class MainScreenComponent implements OnInit {
         if (this.currentActiveIndex) {
             this.belAqiService.activeIndex = this.currentActiveIndex;
         }
+    }
+
+    doRefresh(event) {
+        this.updateCurrentLocation(() => event.target.complete());
     }
 
     onLocationChange(location: UserLocation) {
