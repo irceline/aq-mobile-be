@@ -15,7 +15,6 @@ const userLocationsLSkey = 'belAir.userLocations';
     providedIn: 'root',
 })
 export class UserSettingsService {
-
     private _defaultNotificationSettings: UserNotificationSetting[] = [
         {
             notificationType: NotificationType.highConcentration,
@@ -45,7 +44,9 @@ export class UserSettingsService {
 
     private _selectedUserLocation: UserLocation;
     public get selectedUserLocation(): UserLocation {
-        return this._selectedUserLocation ? this._selectedUserLocation : this._userLocations[0];
+        return this._selectedUserLocation
+            ? this._selectedUserLocation
+            : this._userLocations[0];
     }
 
     public set selectedUserLocation(ul: UserLocation) {
@@ -55,10 +56,14 @@ export class UserSettingsService {
     private _userLocations: UserLocation[] = [];
 
     constructor() {
-        const notificationSettings = localStorage.getItem(userNotificationLSkey);
+        const notificationSettings = localStorage.getItem(
+            userNotificationLSkey
+        );
         if (notificationSettings) {
             // todo : some verification that the stored data is not corrupt
-            this._currentNotificationSettings = JSON.parse(notificationSettings);
+            this._currentNotificationSettings = JSON.parse(
+                notificationSettings
+            );
         } else {
             this._currentNotificationSettings = this._defaultNotificationSettings;
         }
@@ -67,9 +72,11 @@ export class UserSettingsService {
 
         if (userLocations) {
             // todo : some verification that the stored data is not corrupt
-            this._userLocations = JSON.parse(userLocations);
+            this._userLocations = JSON.parse(userLocations).slice(0, 5);
         } else {
-            const startPoint = Math.floor(Math.random() * (locations.length - 5));
+            const startPoint = Math.floor(
+                Math.random() * (locations.length - 5)
+            );
             // randomly return 5 locations before integration
             // @ts-ignore
             this._userLocations = locations.slice(startPoint, startPoint + 5);
@@ -83,7 +90,7 @@ export class UserSettingsService {
     }
 
     public addUserLocation(location: UserLocation) {
-        this._userLocations.push(location);
+        this._userLocations.unshift(location);
         this.saveLocations();
     }
 
@@ -95,11 +102,16 @@ export class UserSettingsService {
     private saveLocations() {
         this.$userLocations.next(this._userLocations);
         // todo: cloud storage?
-        localStorage.setItem(userLocationsLSkey, JSON.stringify(this._userLocations));
+        localStorage.setItem(
+            userLocationsLSkey,
+            JSON.stringify(this._userLocations)
+        );
     }
 
     public removeUserLocation(locationToRemove: UserLocation) {
-        this._userLocations = this._userLocations.filter(l => l.id !== locationToRemove.id);
+        this._userLocations = this._userLocations.filter(
+            (l) => l.id !== locationToRemove.id
+        );
         this.saveLocations();
     }
 
@@ -107,7 +119,9 @@ export class UserSettingsService {
         return this._currentNotificationSettings;
     }
 
-    public updateUserNotificationSettings(updatedSetting: UserNotificationSetting) {
+    public updateUserNotificationSettings(
+        updatedSetting: UserNotificationSetting
+    ) {
         // todo...
     }
 }

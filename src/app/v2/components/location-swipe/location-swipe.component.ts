@@ -7,7 +7,7 @@ import {
     Input,
 } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
-import {UserLocation} from '../../Interfaces';
+import { UserLocation } from '../../Interfaces';
 
 @Component({
     selector: 'app-location-swipe',
