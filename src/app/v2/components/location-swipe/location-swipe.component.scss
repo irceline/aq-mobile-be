@@ -4,6 +4,10 @@
     margin: 10px 0;
     justify-content: center;
 
+    .swiper-container-initialized {
+        width: 100%;
+    }
+
     ion-slides {
         ion-slide {
             color: white;
