@@ -79,7 +79,7 @@ export class UserSettingsService {
             );
             // randomly return 5 locations before integration
             // @ts-ignore
-            this._userLocations = locations.slice(startPoint, startPoint + 5);
+            this._userLocations = locations.slice(startPoint, startPoint + 2);
         }
 
         this.$userLocations = new BehaviorSubject(this._userLocations);
