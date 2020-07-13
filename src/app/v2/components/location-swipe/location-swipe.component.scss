@@ -4,18 +4,16 @@
     margin: 10px 0;
 
     ion-slides {
-        overflow: initial;
-
         ion-slide {
             color: white;
             opacity: 0.4;
             font-size: 17px;
             display: flex;
             align-items: center;
+            justify-content: center;
             height: 33px;
             transition: all 0.3s ease;
             transform: scale(1);
-            text-align: center;
 
             &.swiper-slide-active {
                 opacity: 1;

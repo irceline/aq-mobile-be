@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    Input,
+    OnInit,
+    Output,
+    ViewChild,
+} from '@angular/core';
 import { IonInput, LoadingController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -35,7 +42,7 @@ export class LocationInputComponent implements OnInit {
         private translate: TranslateService,
         private geocoder: GeocoderService,
         private locateSrvc: LocateService
-    ) { }
+    ) {}
 
     ngOnInit() {
         this.filterItems();
@@ -44,14 +51,19 @@ export class LocationInputComponent implements OnInit {
     // Getting the current location with native ionic plugin
     async getCurrentLocation() {
         const loading = await this.loadingController.create({
-            message: this.translate.instant('v2.components.location-input.please-wait'),
+            message: this.translate.instant(
+                'v2.components.location-input.please-wait'
+            ),
         });
         await loading.present();
 
         this.locateSrvc.getUserLocation().subscribe(
-            resp => {
+            (resp) => {
                 loading.dismiss(null, 'cancel');
-                const location = this.geocoder.getLocationLabel(resp.coords.latitude, resp.coords.longitude);
+                const location = this.geocoder.getLocationLabel(
+                    resp.coords.latitude,
+                    resp.coords.longitude
+                );
                 this.locationSelected.emit({
                     id: 111,
                     label: location.label,
@@ -61,7 +73,7 @@ export class LocationInputComponent implements OnInit {
                 });
                 this.searchText = location.label;
             },
-            error => {
+            (error) => {
                 loading.dismiss(null, 'cancel');
                 console.log('Error getting location', error);
             }
@@ -88,7 +100,7 @@ export class LocationInputComponent implements OnInit {
 
     // filter logic
     filterItems() {
-        this.filteredItems = this._locations.slice(0, 10);
+        this.filteredItems = this._locations.slice(0, 5);
 
         // filter items by label
         if (this.searchText.trim() !== '') {
