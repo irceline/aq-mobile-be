@@ -5,15 +5,16 @@
     z-index: 10 !important;
 
     .trigger {
-        height: 25px;
+        height: 40px;
         width: 100%;
         position: absolute;
-        top: -25px;
+        top: -40px;
         left: 0;
         display: flex;
         justify-content: center;
         align-items: center;
         background: none;
+        outline: none;
 
         span {
             display: inline-block;
@@ -21,6 +22,7 @@
             height: 7px;
             background-color: rgba(white, 0.5);
             border-radius: 10px;
+            margin-top: 10px;
         }
     }
 
