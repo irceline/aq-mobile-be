@@ -5,10 +5,10 @@
     z-index: 10 !important;
 
     .trigger {
-        height: 40px;
+        height: 50px;
         width: 100%;
         position: absolute;
-        top: -40px;
+        top: -30px;
         left: 0;
         display: flex;
         justify-content: center;
@@ -22,7 +22,7 @@
             height: 7px;
             background-color: rgba(white, 0.5);
             border-radius: 10px;
-            margin-top: 10px;
+            margin-top: -10px;
         }
     }
 
