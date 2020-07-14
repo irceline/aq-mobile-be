@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
+import { ValueDate } from '../../common/enums';
 import { BelAqiIndexResult, BelAQIService } from '../../services/bel-aqi.service';
 
 @Component({
@@ -12,7 +14,8 @@ export class TimeLineItemComponent implements OnInit {
   @Input() data: BelAqiIndexResult;
 
   constructor(
-    private belaqiSrvc: BelAQIService
+    private belaqiSrvc: BelAQIService,
+    private translate: TranslateService
   ) { }
 
   ngOnInit() { }
@@ -22,8 +25,24 @@ export class TimeLineItemComponent implements OnInit {
   }
 
   getDay() {
-    // todo: better formatting
-    return this.data.date.fromNow();
+    switch (this.data.valueDate) {
+      case ValueDate.BEFORE_THREE_DAYS:
+        return this.translate.instant('belaqi.date.before-three-days');
+      case ValueDate.BEFORE_TWO_DAYS:
+        return this.translate.instant('belaqi.date.before-two-days');
+      case ValueDate.YESTERDAY:
+        return this.translate.instant('belaqi.date.yesterday');
+      case ValueDate.CURRENT:
+        return this.translate.instant('belaqi.date.current');
+      case ValueDate.TODAY:
+        return this.translate.instant('belaqi.date.today');
+      case ValueDate.TOMORROW:
+        return this.translate.instant('belaqi.date.tomorrow');
+      case ValueDate.IN_TWO_DAYS:
+        return this.translate.instant('belaqi.date.in-two-days');
+      case ValueDate.IN_THREE_DAYS:
+        return this.translate.instant('belaqi.date.in-three-days');
+    }
   }
 
   getLabel() {

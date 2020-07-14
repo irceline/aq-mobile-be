@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {
-    BelAqiIndexResult,
-    BelAQIService,
-} from '../../services/bel-aqi.service';
-import { UserSettingsService } from '../../services/user-settings.service';
-import moment from 'moment';
+
+import { ValueDate } from '../../common/enums';
 import { UserLocation } from '../../Interfaces';
+import { BelAqiIndexResult, BelAQIService } from '../../services/bel-aqi.service';
+import { UserSettingsService } from '../../services/user-settings.service';
 
 @Component({
     selector: 'app-layout-screen',
@@ -45,9 +43,9 @@ export class LayoutScreenComponent implements OnInit {
             (iR) => iR.location.id === location.id
         );
         this.currentActiveIndex = this.belAqiForCurrentLocation.find(
-            (iR) => Math.abs(iR.date.diff(moment(), 'days')) === 0
+            (iR) => iR.valueDate === ValueDate.TODAY
         );
     }
 
-    ngOnInit() {}
+    ngOnInit() { }
 }

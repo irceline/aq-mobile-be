@@ -1,20 +1,12 @@
-import {
-    Component,
-    HostBinding,
-    Input,
-    OnInit,
-    Output,
-    EventEmitter,
-} from '@angular/core';
-import {
-    NotificationType,
-    UserNotificationSetting,
-} from '../user-notification-settings/user-notification-settings.component';
-import { NavController } from '@ionic/angular';
-import { BelAQIService } from '../../services/bel-aqi.service';
-import { trigger, transition, style, animate } from '@angular/animations';
+import { animate, style, transition, trigger } from '@angular/animations';
+import { Component, EventEmitter, HostBinding, Input, OnInit, Output } from '@angular/core';
+import { AppVersion } from '@ionic-native/app-version/ngx';
+import { NavController, Platform } from '@ionic/angular';
+
 import { UserLocation } from '../../Interfaces';
+import { BelAQIService } from '../../services/bel-aqi.service';
 import { UserSettingsService } from '../../services/user-settings.service';
+import { UserNotificationSetting } from '../user-notification-settings/user-notification-settings.component';
 
 @Component({
     selector: 'app-menu-screen',
@@ -58,25 +50,33 @@ export class MenuScreenComponent implements OnInit {
 
     locationList: UserLocation[] = [];
 
+    version = 'desktop';
+
     constructor(
         private navCtrl: NavController,
         private belAQIService: BelAQIService,
-        private userSettingsService: UserSettingsService
-    ) {
-        belAQIService.$activeIndex.subscribe((newIndex) => {
+        private userSettingsService: UserSettingsService,
+        private appVersion: AppVersion,
+        private platform: Platform
+    ) { }
+
+    ngOnInit() {
+        this.belAQIService.$activeIndex.subscribe((newIndex) => {
             this.belAqi = newIndex.indexScore;
         });
 
-        this.locationList = userSettingsService.getUserSavedLocations();
+        this.locationList = this.userSettingsService.getUserSavedLocations();
 
-        this.userNotificationSettings = userSettingsService.getUserNotificationSettings();
+        this.userNotificationSettings = this.userSettingsService.getUserNotificationSettings();
 
         this.userSettingsService.$userLocations.subscribe((userLocations) => {
             this.locationList = userLocations;
         });
-    }
 
-    ngOnInit() {}
+        if (this.platform.is('cordova')) {
+            this.appVersion.getVersionNumber().then(res => this.version = res);
+        }
+    }
 
     updateLocation(newLocations: UserLocation[]) {
         this.userSettingsService.updateUserLocations(newLocations);

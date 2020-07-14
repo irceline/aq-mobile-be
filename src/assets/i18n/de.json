@@ -21,6 +21,16 @@
 		"no-index-ascertained": "Ein BelAQI-Index konnte nicht berechnet werden. Dies kann bei technischen Problemen mit unseren Servern der Fall sein oder wenn sich der Standort nicht in Belgien befindet."
 	},
 	"belaqi": {
+		"date": {
+			"before-three-days": "Vor 3 Tagen",
+			"before-two-days": "Vorgestern",
+			"current": "Jetzt",
+			"in-three-days": "In 3 Tagen",
+			"in-two-days": "Übermorgen",
+			"today": "Heute",
+			"tomorrow": "Morgen",
+			"yesterday": "Gestern"
+		},
 		"level-split": {
 			"bad": "Schlecht",
 			"excellent": "Ausge- zeichnet",
@@ -48,7 +58,7 @@
 	},
 	"controls": {
 		"cancel": "Abbrechen",
-		"ok": "Ok"
+		"ok": "Standort speichern"
 	},
 	"diagram": {
 		"chart": {
@@ -304,11 +314,11 @@
 				"well-received": "Wir haben Ihre Beobachtung gut aufgenommen. Dank Ihrer Eingabe können wir unsere Anwendung verbessern."
 			},
 			"user-notification-settings": {
-				"highConcentration": "(Zu) hohe Konzentrationen",
-				"transport": "Unterwegs",
 				"activity": "Anstrengungen",
 				"allergies": "Allergien",
-				"exercise": "Training"
+				"exercise": "Training",
+				"highConcentration": "(Zu) hohe Konzentrationen",
+				"transport": "Unterwegs"
 			}
 		},
 		"screens": {

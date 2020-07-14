@@ -7,22 +7,12 @@ import { forkJoin, Observable, Observer, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { createCacheKey } from '../../common/caching';
+import { ValueDate } from '../../common/enums';
 import { MainPhenomenon } from '../../common/phenomenon';
 import { forecastWmsURL, rioifdmWmsURL } from '../../common/services';
 import { UserLocation } from '../../Interfaces';
 import { IrcelineSettingsService } from '../irceline-settings/irceline-settings.service';
 import { ValueProvider } from './value-provider';
-
-export enum ValueDate {
-  BEFORE_THREE_DAYS,
-  BEFORE_TWO_DAYS,
-  YESTERDAY,
-  CURRENT,
-  TODAY,
-  TOMORROW,
-  IN_TWO_DAYS,
-  IN_THREE_DAYS,
-}
 
 export interface ModelledValue {
   value: number;

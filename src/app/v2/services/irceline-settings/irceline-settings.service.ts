@@ -12,6 +12,7 @@ export interface IrcelineSettings {
   timestring: string;
   timestring_day: string;
   lastupdate_day: string;
+  lastupdate_year: number;
   top_pollutant_today: string;
   survey?: boolean;
 }
@@ -56,6 +57,7 @@ export class IrcelineSettingsService {
         observer.next({
           lastupdate: moment(result['lastupdate']).toDate(),
           lastupdate_day: result.lastupdate_day,
+          lastupdate_year: parseInt(result.lastupdate_year, 10),
           timestring: result['timestring'],
           timestring_day: result['timestring_day'],
           top_pollutant_today: result['top_pollutant_today'],
