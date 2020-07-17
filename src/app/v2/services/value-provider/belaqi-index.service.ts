@@ -48,7 +48,7 @@ export class BelaqiIndexService extends ValueProvider {
   }
 
   public getCurrentIndex(location: UserLocation): Observable<BelAqiIndexResult> {
-    return this.createCurrent(location, ValueDate.CURRENT);
+    return this.createCurrent(location);
   }
   public getTodaysIndex(location: UserLocation): Observable<BelAqiIndexResult> {
     return this.createForecast(location, BelaqiIndexForecastLayer.TODAY, ValueDate.TODAY);
