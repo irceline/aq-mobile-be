@@ -43,7 +43,7 @@ export class LongTermDataService {
       },
       {
         name: translateService.instant('v2.screens.app-info.very-fine-dust'),
-        abbreviation: 'PM 2,5',
+        abbreviation: 'PM 2.5',
         unit: 'µg/m3',
         phenomenon: MainPhenomenon.PM25
       },
@@ -87,7 +87,7 @@ export class LongTermDataService {
       case MainPhenomenon.NO2:
         return 40;
       case MainPhenomenon.PM25:
-        return 25;
+        return 10;
       default:
         return null;
     }
@@ -98,7 +98,7 @@ export class LongTermDataService {
       case MainPhenomenon.NO2:
         return 40;
       case MainPhenomenon.PM25:
-        return 10;
+        return 25;
       default:
         return null;
     }
