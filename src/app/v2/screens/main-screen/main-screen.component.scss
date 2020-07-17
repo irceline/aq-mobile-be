@@ -144,6 +144,12 @@ app-value-display {
     }
 }
 
+map-component {
+  width: 100%;
+  position: absolute;
+  left: 0;
+}
+
 .wrapper {
     overflow: hidden;
     display: flex;
