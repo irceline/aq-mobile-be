@@ -43,7 +43,7 @@ export class LayoutScreenComponent implements OnInit {
             (iR) => iR.location.id === location.id
         );
         this.currentActiveIndex = this.belAqiForCurrentLocation.find(
-            (iR) => iR.valueDate === ValueDate.TODAY
+            (iR) => iR.valueDate === ValueDate.CURRENT
         );
     }
 

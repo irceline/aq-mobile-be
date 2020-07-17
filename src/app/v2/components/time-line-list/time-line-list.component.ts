@@ -22,7 +22,7 @@ export class TimeLineListComponent implements OnChanges {
 
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.items && this.items && this.items.length > 0) {
-            const idx = this.items.findIndex(e => e.valueDate === ValueDate.TODAY);
+            const idx = this.items.findIndex(e => e.valueDate === ValueDate.CURRENT);
             this.slides.slideTo(idx);
             this.slides.update();
         }

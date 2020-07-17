@@ -37,7 +37,7 @@ export class RatingScreenComponent implements OnInit {
     }
 
     private updateCurrentLocation(location: UserLocation) {
-        this.belaqiIndexSrvc.getTodaysIndex(location).subscribe(
+        this.belaqiIndexSrvc.getCurrentIndex(location).subscribe(
             res => {
                 this.currentLocation = location;
                 this.currentActiveIndex = res;
