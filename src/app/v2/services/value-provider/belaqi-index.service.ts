@@ -57,9 +57,12 @@ export class BelaqiIndexService extends ValueProvider {
       const params = this.createFeatureInfoRequestParams('rioifdm:belaqi_dmean', location, day.format('YYYY-MM-DD'));
       const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(
         rioifdmWmsURL, { responseType: 'json', params: params });
-      this.cacheService.loadFromObservable(createCacheKey(rioifdmWmsURL, JSON.stringify(params), day.format('YYYY-MM-DD')), request)
+      const cacheKey = createCacheKey(rioifdmWmsURL, JSON.stringify(params), day.format('YYYY-MM-DD'));
+      this.cacheService.loadFromObservable(cacheKey, request)
         .subscribe(
-          res => this.handleResponse(res, observer, valueDate, location),
+          res => {
+            return this.handleResponse(res, observer, valueDate, location, cacheKey);
+          },
           error => this.handleError(error, observer)
         );
     });
@@ -72,11 +75,9 @@ export class BelaqiIndexService extends ValueProvider {
           const params = this.createFeatureInfoRequestParams('rioifdm:belaqi', location, settings.lastupdate.toISOString());
           const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(
             rioifdmBelaqiWmsURL, { responseType: 'json', params: params });
-          this.cacheService.loadFromObservable(createCacheKey(rioifdmBelaqiWmsURL,
-            JSON.stringify(params),
-            settings.lastupdate.toISOString()
-          ), request).subscribe(
-            res => this.handleResponse(res, observer, ValueDate.CURRENT, location),
+          const cacheKey = createCacheKey(rioifdmBelaqiWmsURL, JSON.stringify(params), settings.lastupdate.toISOString());
+          this.cacheService.loadFromObservable(cacheKey, request).subscribe(
+            res => this.handleResponse(res, observer, ValueDate.CURRENT, location, cacheKey),
             error => this.handleError(error, observer)
           );
         });
@@ -89,16 +90,22 @@ export class BelaqiIndexService extends ValueProvider {
     valueDate: ValueDate
   ): Observable<BelAqiIndexResult> {
     return new Observable<BelAqiIndexResult>((observer: Observer<BelAqiIndexResult>) => {
-      this.forecastDateSrvc.getForecastDate().subscribe(
+      this.forecastDateSrvc.forecastDate.subscribe(
         date => {
-          const url = forecastWmsURL;
-          const params = this.createFeatureInfoRequestParams(layer.toString(), location, date.toISOString());
-          const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url, { responseType: 'json', params: params });
-          this.cacheService.loadFromObservable(createCacheKey(url, JSON.stringify(params), date.toISOString()), request)
-            .subscribe(
-              res => this.handleResponse(res, observer, valueDate, location),
-              error => this.handleError(error, observer)
-            );
+          if (date) {
+            const url = forecastWmsURL;
+            const params = this.createFeatureInfoRequestParams(layer.toString(), location, date.toISOString());
+            const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url, { responseType: 'json', params: params });
+            const cacheKey = createCacheKey(url, JSON.stringify(params), date.toISOString());
+            this.cacheService.loadFromObservable(cacheKey, request)
+              .subscribe(
+                res => this.handleResponse(res, observer, valueDate, location, cacheKey),
+                error => this.handleError(error, observer)
+              );
+          }
+        },
+        error => {
+          return this.handleError(error, observer);
         }
       );
     });
@@ -108,7 +115,8 @@ export class BelaqiIndexService extends ValueProvider {
     res: any,
     observer: Observer<BelAqiIndexResult>,
     valueDate: ValueDate,
-    location: UserLocation
+    location: UserLocation,
+    cacheKey: string
   ) {
     let idx = this.getValueOfResponse(res);
     if (idx && !isNaN(idx)) {
@@ -120,10 +128,14 @@ export class BelaqiIndexService extends ValueProvider {
           location: location
         });
         observer.complete();
+        return;
       }
     }
     observer.next(null);
     observer.complete();
+    setTimeout(() => {
+      this.cacheService.removeItem(cacheKey);
+    }, 100);
   }
 
   private createMoment(valueDate: ValueDate): moment.Moment {

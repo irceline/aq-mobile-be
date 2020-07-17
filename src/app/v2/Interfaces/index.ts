@@ -73,13 +73,4 @@ export interface HistoricalValue {
     evaluationColor: string;
 }
 
-export interface UserLocation {
-    id?: number;
-    label?: string;
-    type: 'user' | 'current';
-    isCurrentVisible?: boolean;
-    date?: Date;
-    longitude?: number;
-    latitude?: number;
-}
 

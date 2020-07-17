@@ -13,6 +13,7 @@ import { LongTermDataService } from '../../services/long-term-data.service';
 export class LongtermInfoScreenComponent implements OnInit {
 
     longTermData: LongTermDataPoint[] = [];
+    loading: boolean;
 
     constructor(
         private navCtrl: NavController,
@@ -21,12 +22,14 @@ export class LongtermInfoScreenComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.loading = true;
         this.belaqiSrvc.$activeIndex.subscribe(res => {
             if (res) {
                 this.longTermDataService
                     .getLongTermDataFor(res.location)
                     .then((longTermData) => {
                         // some transformations for charts
+                        this.loading = false;
                         this.longTermData = longTermData.map((ltd) => ({
                             ...ltd,
                             chartData: {

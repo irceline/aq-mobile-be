@@ -24,7 +24,7 @@ export class PouchDBInitializerService {
 
     // Invalidate old forecast tiles
     // No connection check is necessary since forecastupdate only updates when there is an active network connection
-    this.forecastDateSrvc.getForecastDate().subscribe(forecastTime => {
+    this.forecastDateSrvc.forecastDate.subscribe(forecastTime => {
       if (this.lastForecastTime !== forecastTime) {
         this.lastForecastTime = forecastTime;
         // Invalidate offline PouchDB cache
