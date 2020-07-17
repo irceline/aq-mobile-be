@@ -80,9 +80,6 @@ export class MapComponent {
 
     private addPhenomenonLayer() {
         if (this.map && isDefined(this._phenomenon) && isDefined(this._valueDate)) {
-            if (this._phenomenonLayer) {
-                this._phenomenonLayer.remove();
-            }
             this.modelledValueSrvc.getTimeParam(this._phenomenon, this._valueDate).subscribe(time => {
                 const layerOptions: L.CustomCanvasOptions = {
                     layers: this.modelledValueSrvc.getLayersId(this._phenomenon, this._valueDate),
@@ -100,6 +97,9 @@ export class MapComponent {
                     layerOptions['time'] = time;
                 }
 
+                if (this._phenomenonLayer) {
+                    this._phenomenonLayer.remove();
+                }
                 this._phenomenonLayer = L.tileLayer.customCanvas(
                     this.modelledValueSrvc.getWmsUrl(this._phenomenon, this._valueDate),
                     layerOptions
