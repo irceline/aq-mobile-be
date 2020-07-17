@@ -339,7 +339,7 @@
 			},
 			"long-term-info": {
 				"about-data": "De data is het resultaat van onze rekenmodellen op lange termijn.",
-				"data-loading": "",
+				"data-loading": "De gegevens voor de langetermijnweergave worden geladen.",
 				"from-where": "Van waar kom deze info",
 				"long-term": "Lange termijn",
 				"lt-effects-diseases": "Langdurige blootstelling aan luchtvervuilende stoffen kan chronische effecten uitlokken en voor een hoger risico op hart- en longziekten zorgen."

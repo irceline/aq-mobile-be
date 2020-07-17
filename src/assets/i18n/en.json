@@ -339,7 +339,7 @@
 			},
 			"long-term-info": {
 				"about-data": "The data is the result of our long-term calculation models.",
-				"data-loading": "",
+				"data-loading": "The data for long-term display are being loaded.",
 				"from-where": "Where does this info come from?",
 				"long-term": "Long-term",
 				"lt-effects-diseases": "Prolonged exposure to air pollutants can produce chronic effects and increase the risk of heart and lung disease."
