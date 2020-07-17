@@ -86,6 +86,8 @@ export class LongTermDataService {
     switch (phenomenon) {
       case MainPhenomenon.NO2:
         return 40;
+      case MainPhenomenon.PM10:
+        return 20;
       case MainPhenomenon.PM25:
         return 10;
       default:
@@ -98,7 +100,7 @@ export class LongTermDataService {
       case MainPhenomenon.NO2:
         return 40;
       case MainPhenomenon.PM25:
-        return 25;
+        return 20;
       default:
         return null;
     }
