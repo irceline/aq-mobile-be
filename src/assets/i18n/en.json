@@ -328,14 +328,14 @@
 				"check-lt-data": "You can view these estimates in the menu via <strong>'long-term exposure'</strong>.",
 				"current-items": "The pollutants which are included in this calculation, are:",
 				"data-models": "By applying models to these data, we calculate whether the impact of air quality will improve or deteriorate in the long term.",
-				"fine-dust": "Particulate matter (PM10)",
+				"fine-dust": "Particulate matter",
 				"how-calculated": "How are these values calculated?",
 				"how-this-works": "How does this work?",
 				"learn-more": "Would you like to know more about the Flemish Environment Agency?",
 				"nitrogen-dioxide": "Nitrogen dioxide",
 				"notifications": "If the measurements exceed the threshold value, we will send you a notification. You can manage your notifications via the menu.",
 				"ozon": "Ozone",
-				"very-fine-dust": "Particulate matter (PM2.5)"
+				"very-fine-dust": "Particulate matter"
 			},
 			"long-term-info": {
 				"about-data": "The data is the result of our long-term calculation models.",

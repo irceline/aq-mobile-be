@@ -328,14 +328,14 @@
 				"check-lt-data": "Vous pouvez consulter ces estimations dans le menu via <strong>'exposition à long terme'.</strong>.",
 				"current-items": "Les polluants que nous utilisons actuellement dans le calcul sont:",
 				"data-models": "En appliquant des modèles à ces données, nous calculons si l'impact de la qualité de l'air s'améliorera ou se détériorera à long terme.",
-				"fine-dust": "Particules fines (PM10) ",
+				"fine-dust": "Particules fines",
 				"how-calculated": "Comment ces valeurs sont-elles calculées?",
 				"how-this-works": "Comment cela marche-t-il?",
 				"learn-more": "Vous souhaitez en savoir plus sur l'Agence flamande de l'environnement?",
 				"nitrogen-dioxide": "Dioxyde d'azote",
 				"notifications": "Si les mesures dépassent la valeur d'avertissement, nous vous enverrons une notification. Vous pouvez gérer vos notifications via le menu.",
 				"ozon": "Ozone",
-				"very-fine-dust": "Particules fines (PM2.5) "
+				"very-fine-dust": "Particules fines"
 			},
 			"long-term-info": {
 				"about-data": "Les données sont le résultat de nos modèles de calcul à long terme.",
