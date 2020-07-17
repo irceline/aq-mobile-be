@@ -14,7 +14,7 @@ export const enum LocationStatus {
   DENIED = 'DENIED'
 }
 
-const LOCATE_MAXIMUM_AGE = 0; // 5 minutes
+const LOCATE_MAXIMUM_AGE = 1000 * 20; // default value was 5 minutes (1000 * 60 * 5)
 const LOCATE_TIMEOUT_HIGH_ACCURACY = 1000 * 30; // 30 seconds
 const LOCATE_TIMEOUT_UNTIL_HIGH_ACC_REQUEST = 1000 * 10; // 10 seconds
 
