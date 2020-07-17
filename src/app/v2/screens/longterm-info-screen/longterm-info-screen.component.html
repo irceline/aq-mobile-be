@@ -23,6 +23,15 @@
         </p>
       </div>
 
+      <div *ngIf="loading" class="card--content" style="text-align: center;">
+        <div>
+          <ion-spinner></ion-spinner>
+        </div>
+        <p>
+          {{ 'v2.screens.long-term-info.data-loading' | translate }}
+        </p>
+      </div>
+
       <ul>
         <li *ngFor="let ltd of longTermData">
           <app-information-item [detailedDataPoint]="ltd"></app-information-item>

@@ -339,6 +339,7 @@
 			},
 			"long-term-info": {
 				"about-data": "Les données sont le résultat de nos modèles de calcul à long terme.",
+				"data-loading": "",
 				"from-where": "D'où viennent ces informations?",
 				"long-term": "Long terme",
 				"lt-effects-diseases": "Une exposition prolongée aux polluants atmosphériques peut produire des effets chroniques et augmenter le risque de maladies cardiaques et pulmonaires."
