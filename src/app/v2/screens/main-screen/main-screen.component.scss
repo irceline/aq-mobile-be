@@ -59,6 +59,10 @@ ion-item {
     --detail-icon-color: #1ebce5;
 }
 
+ion-label {
+    outline: none;
+}
+
 app-value-display {
     margin: 20px 0;
     position: relative;
