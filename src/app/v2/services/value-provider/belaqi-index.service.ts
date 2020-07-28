@@ -99,7 +99,7 @@ export class BelaqiIndexService extends ValueProvider {
             const url = forecastWmsURL;
             const params = this.createFeatureInfoRequestParams(layer.toString(), location, date.toISOString());
             const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url, { responseType: 'json', params: params });
-            const cacheKey = createCacheKey(url, JSON.stringify(params), date.toISOString());
+            const cacheKey = createCacheKey(url, JSON.stringify(params), this.createMoment(valueDate).format("YYYY-MM-DD"));
             this.cacheService.loadFromObservable(cacheKey, request)
               .subscribe(
                 res => this.handleResponse(res, observer, valueDate, location, cacheKey),
