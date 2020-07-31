@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, from } from 'rxjs';
 import { map, share, tap } from 'rxjs/operators';
 import { CacheService } from 'ionic-cache';
 import { Network } from '@ionic-native/network/ngx';
@@ -33,7 +33,7 @@ export class ForecastDateService {
       res => {
         this.lastRequest = new Date().getTime();
         this.lastValue = res;
-        this.cache.saveItem(FORECAST_TIMESTRING_URL, this.lastValue);
+        this.cache.saveItem(FORECAST_TIMESTRING_URL, res);
       }
     )
   );
@@ -44,9 +44,7 @@ export class ForecastDateService {
       // lastRequest ist older than 10minutes OR we have not yet fetched the lastValue
       // Use cached value if device is offline
       if (this.network.type === 'none') {
-        const cached = this.cache.getItem<Date>(FORECAST_TIMESTRING_URL).then(v => {
-            return of(v)
-        });
+        return from(this.cache.getItem<Date>(FORECAST_TIMESTRING_URL).then(v => new Date(v)).catch(v => new Date(0)));
       } else {
         return this.$forecastDate;
       }

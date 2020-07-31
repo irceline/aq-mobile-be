@@ -133,14 +133,16 @@ export class MainScreenComponent implements OnInit {
                 this.annulMeanValueService.getLastValue(this.userSettingsService.selectedUserLocation, dph.phenomenon)
             ]).subscribe(
                 res => {
-                    this.detailData.push({
-                        location: this.userSettingsService.selectedUserLocation,
-                        currentValue: Math.round(res[0].value),
-                        averageValue: res[1] ? Math.round(res[1].value) : null,
-                        substance: dph,
-                        evaluation: this.belAqiService.getLabelForIndex(res[0].index),
-                        color: this.belAqiService.getLightColorForIndex(res[0].index)
-                    });
+                    if (res[0] != null) {
+                        this.detailData.push({
+                            location: this.userSettingsService.selectedUserLocation,
+                            currentValue: Math.round(res[0].value),
+                            averageValue: res[1] ? Math.round(res[1].value) : null,
+                            substance: dph,
+                            evaluation: this.belAqiService.getLabelForIndex(res[0].index),
+                            color: this.belAqiService.getLightColorForIndex(res[0].index)
+                        });
+                    }
                     this.detailDataLoadig = false;
                     if (loadFinishedCb) { loadFinishedCb(); }
                 },
