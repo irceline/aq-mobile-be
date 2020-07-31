@@ -11,6 +11,7 @@ import {
 
 import { ErrorLoggingService } from './v2/services/error-logging.service';
 import { PouchDBInitializerService } from './v2/services/pouch-db-initializer/pouch-db-initializer.service';
+import { SplashScreenComponent } from './v2/screens/splash-screen/splash-screen.component';
 
 @Component({
     selector: 'app-root',
@@ -24,18 +25,24 @@ export class AppComponent {
         private splashScreen: SplashScreen,
         private statusBar: StatusBar,
         public router: Router,
-        private pouchDbInit: PouchDBInitializerService
+        private pouchDbInit: PouchDBInitializerService,
+        private modalCtrl: ModalController
     ) {
         this.initializeApp();
     }
 
     initializeApp() {
-        this.platform.ready().then(() => {
+        this.platform.ready().then(async () => {
             // this.statusBar.styleDefault();
             // this.errorLoggingSrvc.init();
             this.statusBar.show();
             this.splashScreen.hide();
             this.pouchDbInit.init();
+
+            const splash = await this.modalCtrl.create({
+                component: SplashScreenComponent,
+            });
+            splash.present();
         });
     }
 }
