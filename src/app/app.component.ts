@@ -36,7 +36,7 @@ export class AppComponent {
             // this.statusBar.styleDefault();
             // this.errorLoggingSrvc.init();
             this.statusBar.show();
-            this.splashScreen.hide();
+            // this.splashScreen.hide();
             this.pouchDbInit.init();
 
             const splash = await this.modalCtrl.create({
