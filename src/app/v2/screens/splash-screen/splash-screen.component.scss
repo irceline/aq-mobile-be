@@ -1,0 +1,57 @@
+:host {
+    ion-content {
+        height: 100%;
+        --background: url('/assets/images/bg.svg') no-repeat top center / cover;
+
+
+        .wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            flex: 1;
+            height: 100%;
+        }
+
+        .content {
+            padding: 30px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+            color: white;
+            text-align: center;
+
+            h1 {
+                font-family: var(--ion-cookie-family);
+                margin: 0;
+                font-size: 80px;
+            }
+
+            p {
+                font-size: 18px;
+                margin: 0 auto;
+                max-width: 250px;
+            }
+
+            img {
+                margin: 40px auto 20px;
+                width: 212px;
+                height: 81px;
+            }
+
+            span {
+                opacity: 0.45;
+            }
+        }
+
+        .image {
+            align-items: flex-end;
+            display: flex;
+            justify-content: center;
+            height: 50px;
+            margin-bottom: 37px;
+        }
+    }
+}
