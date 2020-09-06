@@ -292,6 +292,10 @@
 				"cause": "Ken je de oorzaak? (optioneel)",
 				"send-observation": "Verstuur waarneming"
 			},
+			"information-item": {
+				"personal-calculation": "berekend op jouw locatie",
+				"average": "gemiddeld is dit"
+			},
 			"location-input": {
 				"choose-location": "Kies je locatie",
 				"current-location": "Huidige locatie",

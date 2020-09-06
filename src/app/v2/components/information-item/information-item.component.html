@@ -20,10 +20,10 @@
     <ion-text>
       <p>
         <span>
-          {{ detailedDataPoint.currentValue }} {{ detailedDataPoint.substance.unit }} berekend op jouw locatie
+          {{ detailedDataPoint.currentValue }} {{ detailedDataPoint.substance.unit }} {{ 'v2.components.information-item.personal-calculation' | translate }}
         </span>
         <span *ngIf="detailedDataPoint.averageValue">
-          gemiddeld is dit {{ detailedDataPoint.averageValue }} {{ detailedDataPoint.substance.unit }}
+          {{ 'v2.components.information-item.average' | translate }} {{ detailedDataPoint.averageValue }} {{ detailedDataPoint.substance.unit }}
         </span>
       </p>
     </ion-text>

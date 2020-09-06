@@ -292,6 +292,10 @@
 				"cause": "Kennst du die Ursache? (Optional)",
 				"send-observation": "Sichtungen senden"
 			},
+			"information-item": {
+				"personal-calculation": "berechnet für Ihren Standort",
+				"average": "Im Durchschnitt ist das"
+			},
 			"location-input": {
 				"choose-location": "Wähle deinen Standort",
 				"current-location": "Aktueller Standort",

@@ -292,6 +292,10 @@
 	      "cause": "Do you know the cause? (optional)",
 	      "send-observation": "Send observation"
 	    },
+			"information-item": {
+				"personal-calculation": "calculated at your location",
+				"average": "On average this is"
+			},
 	    "location-input": {
 	      "choose-location": "Choose your location",
 	      "current-location": "Current location",
