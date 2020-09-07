@@ -1,0 +1,17 @@
+:host {
+  .images {
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    position: absolute;
+    bottom: 5em;
+    width: 90%;
+    height: 5.5em;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+  }
+  img {
+    margin: 0 !important;
+  }
+}
