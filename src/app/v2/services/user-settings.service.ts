@@ -90,6 +90,12 @@ export class UserSettingsService {
     }
 
     public addUserLocation(location: UserLocation) {
+        // Check if the location is duplicate
+        if (this._userLocations
+            .filter(loc => loc.type == 'user')
+            .find(loc => loc.label == location.label) != undefined) {
+                return;
+        };
         this._userLocations.unshift(location);
         this.saveLocations();
     }
