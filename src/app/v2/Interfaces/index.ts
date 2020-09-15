@@ -10,7 +10,7 @@ export enum BelAirColor {
 export interface UserLocation {
     id?: number;
     label?: string;
-    type: 'user' | 'current';
+    type: 'user';
     isCurrentVisible?: boolean;
     date?: Date;
     longitude?: number;

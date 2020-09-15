@@ -67,7 +67,7 @@ export class LocationInputComponent implements OnInit {
                 this.locationSelected.emit({
                     id: 111,
                     label: location.label,
-                    type: 'current',
+                    type: 'user',
                     latitude: location.latitude,
                     longitude: location.longitude,
                 });
