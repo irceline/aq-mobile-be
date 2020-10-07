@@ -24,7 +24,7 @@ export class BelAQIService {
   public $activeIndex = new BehaviorSubject<BelAqiIndexResult>({
     location: { label: 'Brussel', postalCode: '1000', latitude: 50.8503396, longitude: 4.3517103, id: 2711, type: 'user' },
     valueDate: ValueDate.CURRENT,
-    indexScore: 1
+    indexScore: 2
   });
 
   private _BelAqiResults: BelAqiIndexResult[] = [];
