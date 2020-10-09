@@ -293,7 +293,7 @@
 	      "send-observation": "Send observation"
 	    },
 			"information-item": {
-				"personal-calculation": "calculated at your location",
+				"personal-calculation": "calculated at your location.",
 				"average": "On average this is"
 			},
 	    "location-input": {
@@ -328,7 +328,7 @@
 		"screens": {
 			"app-info": {
 				"aq-index": "We assess the short-term impact of <strong>general air quality</strong> based on an air quality index.",
-				"aq-index-2": "This combines the <strong>measurements of various pollutants</strong> into one score (e.g. very good). This index is based on data from monitoring stations across Belgium.",
+				"aq-index-2": "This gives one score to each of the <strong>calculated concentrations of different pollutants</strong> (e.g. very good). The worst score determines the general air quality.",
 				"check-lt-data": "You can view these estimates in the menu via <strong>'long-term exposure'</strong>.",
 				"current-items": "The pollutants which are included in this calculation, are:",
 				"data-models": "By applying models to these data, we calculate whether the impact of air quality will improve or deteriorate in the long term.",
@@ -364,8 +364,8 @@
 				"workings": "(how does the application work)"
 			},
 			"onboarding": {
-				"aq-info": "This figure is a calculation based on the <strong>measurement data</strong> of an air measuring station in your area.",
-				"aq-long-term": "The app also calculates the impact of air quality on the <strong>long term</strong> for your location.",
+				"aq-info": "This score is a <strong>calculation</strong> of the air quality in the short term, based on measurement data, weather conditions and emissions from traffic and industry in your area.",
+				"aq-long-term": "The app also calculates the <strong>long-term</strong> air quality for your location.",
 				"ask-location": "We need your location to be able to help you as much as possible.",
 				"ask-notifications": "Would you like to receive notifications about air quality?",
 				"choose-lang": "Choose your language:",

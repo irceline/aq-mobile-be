@@ -293,7 +293,7 @@
 				"send-observation": "Sichtungen senden"
 			},
 			"information-item": {
-				"personal-calculation": "berechnet für Ihren Standort",
+				"personal-calculation": "berechnet für Ihren Standort.",
 				"average": "Im Durchschnitt ist das"
 			},
 			"location-input": {
@@ -328,9 +328,9 @@
 		"screens": {
 			"app-info": {
 				"aq-index": "Wir bewerten die Auswirkungen der <strong>allgemeinen Luftqualität</strong> kurzfristig anhand eines Luftqualitätsindex.",
-				"aq-index-2": "Dies gibt den <strong>Messungen verschiedener Schadstoffe</strong> eine Punktzahl (sehr gut). Der Index basiert auf Daten von Überwachungsstationen in ganz Belgien für diese Punktzahl.",
+				"aq-index-2": "Dies ergibt eine Bewertung für jede der <strong>berechneten Konzentrationen verschiedener Schadstoffe</strong> (z.B. sehr gut). Die schlechteste Bewertung bestimmt die allgemeine Luftqualität.",
 				"check-lt-data": "Sie können diese Schätzungen im Menü über <strong>‘Langzeitexposition’</strong> finden.",
-				"current-items": "Die Schadstoffe die wie zur Zeit beziehen in die Berechnung sind:",
+				"current-items": "Die Schadstoffe die wir beziehen in die Berechnung sind:",
 				"data-models": "Durch die Anwendung von Modellen berechnen wir, ob sich die Auswirkungen der Luftqualität langfristig verbessert oder verschlechtert.",
 				"fine-dust": "Feinstaub",
 				"how-calculated": "Wie werden diese Werte berechnet?",
@@ -339,7 +339,7 @@
 				"nitrogen-dioxide": "Stickstoffdioxid",
 				"notifications": "Wenn die Messungen den Warnwert überschreiten, senden wir Ihnen eine Benachrichtigung. Sie können Ihre Benachrichtigungen über das Menü verwalten.",
 				"ozon": "Ozon",
-				"very-fine-dust": "Sehr feiner Staub"
+				"very-fine-dust": "Feinstaub"
 			},
 			"long-term-info": {
 				"about-data": "Die Daten sind das Ergebnis unserer Langzeitberechnungsmodelle.",
@@ -364,8 +364,8 @@
 				"workings": "(Wie funktioniert die App)"
 			},
 			"onboarding": {
-				"aq-info": "Diese Zahl ist eine Berechnung basiert auf den <strong>Messdaten</strong> einer Luftmessstation in Ihrer Nähe.",
-				"aq-long-term": "Die App berechnet auch die <strong>langfristigen</strong> Auswirkungen der Luftqualität auf Ihren Standort.",
+				"aq-info": "Diese Bewertung ist eine <strong>Berechnung</strong> von der kurzfristigen Luftqualität auf der Grundlage von Messdaten, Wetterbedingungen und Emissionen aus Verkehr und Industrie in Ihrer Gegend.",
+				"aq-long-term": "Die App berechnet auch die <strong>langfristige</strong> Luftqualität auf Ihrem Standort.",
 				"ask-location": "Wir brauchen Ihren Standort, um Ihnen so gut wie möglich zu helfen.",
 				"ask-notifications": "Möchten Sie Benachrichtigungen über die Luftqualität erhalten?",
 				"choose-lang": "Wähle deine Sprache:",
