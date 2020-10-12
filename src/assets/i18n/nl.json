@@ -44,16 +44,16 @@
 			"very-poor": "vrij slecht"
 		},
 		"level": {
-			"bad": "slecht",
-			"excellent": "uitstekend",
-			"fairly-good": "vrij goed",
-			"good": "goed",
+			"bad": "Slecht",
+			"excellent": "Uitstekend",
+			"fairly-good": "Vrij goed",
+			"good": "Goed",
 			"horrible": "uitermate slecht",
-			"moderate": "middelmatig",
-			"poor": "ondermaats",
-			"very-bad": "zeer slecht",
-			"very-good": "zeer goed",
-			"very-poor": "vrij slecht"
+			"moderate": "Middelmatig",
+			"poor": "Ondermaats",
+			"very-bad": "Zeer slecht",
+			"very-good": "Zeer goed",
+			"very-poor": "Vrij slecht"
 		}
 	},
 	"controls": {
