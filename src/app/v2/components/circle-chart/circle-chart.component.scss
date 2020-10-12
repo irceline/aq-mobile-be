@@ -4,25 +4,28 @@
 
     .circle {
         display: block;
-        width: 100%;
+        width: 96%;
         margin: auto;
-        max-width: 315px;
+        max-width: 400px;
         transition: all .2s ease;
 
         &-chart {
             display: flex;
             align-items: center;
             justify-content: center;
+            margin: 0 4%;
 
             &--text {
                 position: absolute;
-                width: 316px;
+                width: 86%;
+                max-width: 380px;
                 padding: 0 60px;
                 color: #ffffff;
                 text-align: center;
 
                 h1 {
-                    font-size: 5vh;
+                    font-size: 48px;
+                    font-weight: 400;
                     line-height: 0.78;
                     margin-bottom: 20px;
                     margin-top: 0;
@@ -31,8 +34,8 @@
                     justify-content: center;
                     align-items: center;
 
-                    @media screen and (max-device-width: 374px) {
-                        font-size: 4.5vh;
+                    @media screen and (max-device-width: 400px) {
+                        font-size: 12vw;
                     }
                 }
 
