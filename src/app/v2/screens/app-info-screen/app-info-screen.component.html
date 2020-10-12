@@ -52,11 +52,16 @@
 
       <p>{{ 'v2.screens.app-info.data-models' | translate }}</p>
 
-      <p [innerHTML]="'v2.screens.app-info.check-lt-data' | translate"></p>
+      <!-- <p [innerHTML]="'v2.screens.app-info.check-lt-data' | translate"></p> -->
 
       <ion-item detail>
-        <ion-label text-wrap>{{ 'v2.screens.app-info.how-calculated' | translate }}</ion-label>
+        <ion-label [routerLink]="['/main/longterm-info']" text-wrap>
+          {{ 'v2.screens.main-screen.long-term-calculation' | translate }}</ion-label>
       </ion-item>
+
+      <!-- <ion-item detail>
+        <ion-label text-wrap>{{ 'v2.screens.app-info.how-calculated' | translate }}</ion-label>
+      </ion-item> -->
 
       <hr class="line">
 
@@ -64,9 +69,9 @@
 
       <img src="/assets/images/gmail@3x.png" alt="">
 
-      <ion-item detail class="more">
+      <!-- <ion-item detail class="more">
         <ion-label class="ion-text-wrap">{{ 'v2.screens.app-info.learn-more' | translate }}</ion-label>
-      </ion-item>
+      </ion-item> -->
     </div>
   </app-background>
 </ion-content>
