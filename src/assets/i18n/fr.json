@@ -328,9 +328,9 @@
 		"screens": {
 			"app-info": {
 				"aq-index": "Nous évaluons l'impact à court terme de la <strong>qualité générale de l'air</strong> sur la base d'un indice de qualité de l'air.",
-				"aq-index-2": "Cela donne un score à chacune des <strong>concentrations calculées de différents polluants</strong> (ex. très bonne). Le pire score détermine la qualité générale de l'air.",
+				"aq-index-2": "Chacune des <strong>concentrations calculées pour les différents polluants</strong> donne un score (ex. très bon). Le score le plus mauvais détermine l'indice global de qualité de l'air.",
 				"check-lt-data": "Vous pouvez consulter ces estimations dans le menu via <strong>'exposition à long terme'.</strong>.",
-				"current-items": "Les polluants que nous utilisons dans le calcul sont:",
+				"current-items": "Les polluants utilisés dans le calcul sont:",
 				"data-models": "En appliquant des modèles à ces données, nous calculons si l'impact de la qualité de l'air s'améliorera ou se détériorera à long terme.",
 				"fine-dust": "Particules fines",
 				"how-calculated": "Comment ces valeurs sont-elles calculées?",
@@ -364,8 +364,8 @@
 				"workings": "(comment fonctionne l'application)"
 			},
 			"onboarding": {
-				"aq-info": "Ce score est un <strong>calcul</strong> de la qualité de l'air à court terme, basé sur les données de mesure, les conditions météorologiques et les émissions du trafic et de l'industrie dans votre région.",
-				"aq-long-term": "L'application calcule également la qualité de l'air sur le <strong>long terme</strong> pour votre localisation.",
+				"aq-info": "Cet indice est le résultat d'un <strong>calcul</strong> de la qualité de l'air à court terme, basé sur les données de mesure, les conditions météorologiques, les émissions du trafic et de l'industrie dans votre région.",
+				"aq-long-term": "L'app calcule également la qualité de l'air sur le <strong>long terme</strong> pour votre localisation.",
 				"ask-location": "Nous avons besoin de votre emplacement pour vous aider autant que possible.",
 				"ask-notifications": "Souhaitez-vous recevoir des notifications sur la qualité de l'air?",
 				"choose-lang": "Choisissez votre langue:",
