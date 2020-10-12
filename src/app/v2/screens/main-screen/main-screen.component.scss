@@ -87,8 +87,17 @@ app-value-display {
 }
 
 .details--info {
-    max-width: 275px;
     margin: 0 auto;
+    text-align: center;
+
+    button {
+      background-color: white;
+      outline:none;
+      ion-icon {
+        margin-bottom: -3px;
+        padding-right: 0.5em;
+      }
+    }
 
     div {
         display: flex;
@@ -101,6 +110,10 @@ app-value-display {
             color: #747474;
             margin: 0;
             margin-left: 14px;
+            ion-icon {
+              vertical-align: middle;
+              padding-bottom: 3px;
+            }
         }
     }
 
