@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { forkJoin } from 'rxjs';
+import { IonSlides } from '@ionic/angular';
 
 import { ValueDate } from '../../common/enums';
 import { MainPhenomenon } from '../../common/phenomenon';
@@ -33,6 +34,11 @@ export class MainScreenComponent implements OnInit {
     valueTimeline: IndexValueResult[] = [];
     detailsValueColor: string;
     detailsValue: number;
+
+    chooseTypeClicked: boolean;
+    showHideButtons(): void {
+        this.chooseTypeClicked = !this.chooseTypeClicked;
+    }
 
     detailedPhenomenona: Substance[] = [
         {
