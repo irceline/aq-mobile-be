@@ -18,6 +18,6 @@ export class SplashScreenComponent {
 
         setTimeout(() => {
             this.modalCtrl.dismiss();
-        }, 2000);
+        }, 1500);
     }
 }
