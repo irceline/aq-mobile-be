@@ -188,6 +188,8 @@ map-component {
 
     app-circle-chart {
         height: calc(100% - 183px);
+        vertical-align: middle;
+        display: inline-grid;
         // background-color: red;
     }
 
