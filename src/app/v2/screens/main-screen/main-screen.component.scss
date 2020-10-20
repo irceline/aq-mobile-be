@@ -161,6 +161,16 @@ map-component {
   width: 100%;
   position: absolute;
   left: 0;
+  padding-bottom: 60px;
+}
+.longterm {
+  position: fixed;
+  bottom: -310px;
+  ion-item {
+    width: 100%;
+    text-align: center;
+    font-size: 1em;
+  }
 }
 
 .wrapper {
