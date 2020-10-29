@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 import { DataPoint } from '../../Interfaces';
 
@@ -14,7 +15,9 @@ export class InformationItemComponent implements OnInit {
     @Input() isButton = false;
     @Input() hasBackBtn = false;
 
-    constructor() { }
+    constructor(
+      private translate: TranslateService
+    ) { }
 
     ngOnInit() { }
 

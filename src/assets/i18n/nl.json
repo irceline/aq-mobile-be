@@ -44,16 +44,16 @@
 			"very-poor": "vrij slecht"
 		},
 		"level": {
-			"bad": "slecht",
-			"excellent": "uitstekend",
-			"fairly-good": "vrij goed",
-			"good": "goed",
+			"bad": "Slecht",
+			"excellent": "Uitstekend",
+			"fairly-good": "Vrij goed",
+			"good": "Goed",
 			"horrible": "uitermate slecht",
-			"moderate": "middelmatig",
-			"poor": "ondermaats",
-			"very-bad": "zeer slecht",
-			"very-good": "zeer goed",
-			"very-poor": "vrij slecht"
+			"moderate": "Middelmatig",
+			"poor": "Ondermaats",
+			"very-bad": "Zeer slecht",
+			"very-good": "Zeer goed",
+			"very-poor": "Vrij slecht"
 		}
 	},
 	"controls": {
@@ -292,6 +292,10 @@
 				"cause": "Ken je de oorzaak? (optioneel)",
 				"send-observation": "Verstuur waarneming"
 			},
+			"information-item": {
+				"personal-calculation": "berekend op jouw locatie,",
+				"average": "gemiddeld is dit"
+			},
 			"location-input": {
 				"choose-location": "Kies je locatie",
 				"current-location": "Huidige locatie",
@@ -324,9 +328,9 @@
 		"screens": {
 			"app-info": {
 				"aq-index": "We beoordelen de impact van de <strong>algemene luchtkwaliteit</strong> op korte termijn op basis van een luchtkwaliteitsindex.",
-				"aq-index-2": "Die geeft aan de <strong>meetwaarden van verschillende verontreinigende stoffen</strong> één score (Heel goed). De index baseert zich voor deze score op data van meetstations in heel België.",
+				"aq-index-2": "Die geeft aan elk van de <strong>berekende concentraties van verschillende verontreinigende stoffen</strong> één score (b.v. heel goed). De slechtste score bepaalt de algemene luchtkwaliteit.",
 				"check-lt-data": "Je kan deze inschattingen bekijken in het menu via <strong>‘blootstelling op lange termijn’</strong>.",
-				"current-items": "De stoffen die we momenteel in rekening brengen, zijn:",
+				"current-items": "De stoffen die we in rekening brengen, zijn:",
 				"data-models": "Door op deze data modellen toe te passen, berekenen we of de impact van de luchtkwaliteit op lange termijn beter of slechter wordt.",
 				"fine-dust": "Fijn stof",
 				"how-calculated": "Hoe worden deze waarden berekend?",
@@ -335,7 +339,7 @@
 				"nitrogen-dioxide": "Stikstofdioxide",
 				"notifications": "Als de metingen de waarschuwings- waarde overschrijden, sturen we je een melding. Je kan je meldingen beheren via het menu.",
 				"ozon": "Ozon",
-				"very-fine-dust": "Heel fijn stof"
+				"very-fine-dust": "Fijn stof"
 			},
 			"long-term-info": {
 				"about-data": "De data is het resultaat van onze rekenmodellen op lange termijn.",
@@ -346,7 +350,7 @@
 			},
 			"main-screen": {
 				"about-no2": "Een schadelijk gas dat zwaarder is dan lucht en reageert heftig met andere stoffen, zoals metalen.",
-				"long-term-calculation": "Berekening van impact op lange termijn",
+				"long-term-calculation": "Bekijk onze berekening op lange termijn",
 				"view-details": "Bekijk in detail",
 				"what-is-no2": "Wat is Stikstofdioxide?"
 			},
@@ -360,8 +364,8 @@
 				"workings": "(hoe werkt de applicatie)"
 			},
 			"onboarding": {
-				"aq-info": "Dit cijfer is een berekening op basis van de <strong>meetgegevens</strong> van een luchtmeetstation in jouw buurt.",
-				"aq-long-term": "De app berekent ook wat de impact van de luchtkwaliteit op <strong>lange termijn</strong> is voor jouw locatie.",
+				"aq-info": "Deze score is een <strong>berekening</strong> van de luchtkwaliteit op korte termijn, op basis van meetgegevens, weersomstandigheden en uitstoot van verkeer en industrie in jouw buurt.",
+				"aq-long-term": "De app berekent ook de luchtkwaliteit op <strong>lange termijn</strong> voor jouw locatie.",
 				"ask-location": "Om je zo goed mogelijk te kunnen helpen, hebben we je locatie nodig.",
 				"ask-notifications": "Zou je graag meldingen ontvangen over de luchtkwaliteit?",
 				"choose-lang": "Kies je taal:",

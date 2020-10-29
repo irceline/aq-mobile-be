@@ -7,7 +7,7 @@ ion-content {
 
 app-pull-tab ::ng-deep {
     .details {
-        padding: 45px 30px 45px 45px;
+        padding: 45px;
         display: block;
 
         h5 {
@@ -87,8 +87,17 @@ app-value-display {
 }
 
 .details--info {
-    max-width: 275px;
     margin: 0 auto;
+    text-align: center;
+
+    button {
+      background-color: white;
+      outline:none;
+      ion-icon {
+        margin-bottom: -3px;
+        padding-right: 0.5em;
+      }
+    }
 
     div {
         display: flex;
@@ -100,7 +109,10 @@ app-value-display {
             font-weight: 600;
             color: #747474;
             margin: 0;
-            margin-left: 14px;
+            ion-icon {
+              vertical-align: middle;
+              padding-bottom: 3px;
+            }
         }
     }
 
@@ -111,7 +123,10 @@ app-value-display {
 }
 
 .details--timeline ::ng-deep {
-    margin: 10px 0 20px;
+    margin: 10px auto 20px -20%;
+    min-width: 384px;
+    max-width: 424px;
+    height: 100px;
 
     .swiper-container {
         overflow: initial;
@@ -148,6 +163,16 @@ map-component {
   width: 100%;
   position: absolute;
   left: 0;
+  padding-bottom: 60px;
+}
+.longterm {
+  position: fixed;
+  bottom: -310px;
+  ion-item {
+    width: 100%;
+    text-align: center;
+    font-size: 1em;
+  }
 }
 
 .wrapper {
@@ -163,12 +188,15 @@ map-component {
 
     app-circle-chart {
         height: calc(100% - 183px);
+        vertical-align: middle;
+        display: inline-grid;
         // background-color: red;
     }
 
     app-time-line-list {
         height: 100px;
-        margin-top: 20px;
+        margin: 25px 0 15px;
+        max-height: 14vh;
         // background-color: yellow;
     }
 }

@@ -15,7 +15,7 @@ export class TimeLineListComponent implements OnChanges {
     @Output() dayChange = new EventEmitter<BelAqiIndexResult>();
 
     timelineOptions: any = {
-        slidesPerView: 3,
+        slidesPerView: 3.5,
         spaceBetween: 5,
         centeredSlides: true
     };

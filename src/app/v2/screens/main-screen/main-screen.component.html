@@ -24,13 +24,9 @@
           [isButton]="true" (click)="openDetails(detailDataPoint)">
         </app-information-item>
 
-        <ion-item detail>
-          <ion-label [routerLink]="['/main/longterm-info']" text-wrap>
-            {{ 'v2.screens.main-screen.long-term-calculation' | translate }}</ion-label>
-        </ion-item>
       </div>
 
-      <app-horizontal-cards-slider [data]="slidesData"></app-horizontal-cards-slider>
+      <!-- <app-horizontal-cards-slider [data]="slidesData"></app-horizontal-cards-slider> -->
     </ng-container>
   </div>
 
@@ -47,15 +43,22 @@
       <app-value-display [color]="detailsValueColor" [score]="detailsValue" value="µg/m3"></app-value-display>
 
       <div class="details--info">
-        <div>
-          <ion-icon src="/assets/images/icons/question.svg"></ion-icon>
-          <h4>{{ 'v2.screens.main-screen.what-is-no2' | translate }}</h4>
+        <button ion-button (click)="showHideButtons()">
+          <h4><ion-icon src="/assets/images/icons/question.svg"></ion-icon> {{ 'v2.screens.main-screen.what-is-no2' | translate }}</h4>
+        </button>
+        <div *ngIf="chooseTypeClicked">
+          <p>{{ 'v2.screens.main-screen.about-no2' | translate }}</p>
         </div>
-        <p>{{ 'v2.screens.main-screen.about-no2' | translate }}</p>
       </div>
 
       <map-component [currentLocation]="userSettingsService.selectedUserLocation"
         [phenomenon]="detailPoint.substance.phenomenon" [valueDate]="detailsValueDate"></map-component>
+      <div class="longterm">
+        <ion-item>
+            <ion-label [routerLink]="['/main/longterm-info']" text-wrap>
+              {{ 'v2.screens.main-screen.long-term-calculation' | translate }} ></ion-label>
+        </ion-item>
+      </div>
     </div>
   </div>
 </app-pull-tab>

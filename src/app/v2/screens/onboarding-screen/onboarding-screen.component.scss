@@ -1,0 +1,28 @@
+:host {
+  .images {
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    position: absolute;
+    bottom: 5em;
+    left: 0.4em;
+    max-height: 5.5em;
+    max-width: 98%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+  }
+  .image {
+    max-width: 29%;
+  }
+  .image-2 {
+    max-width: 40%;
+  }
+  img {
+    margin: 0 !important;
+  }
+  .index-wheel {
+    max-width: 60%;
+    padding: 1em 0 2em;
+  }
+}

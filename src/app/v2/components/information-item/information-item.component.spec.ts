@@ -1,5 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {TranslateTestingModule} from '../../testing/TranslateTestingModule';
 import { By } from '@angular/platform-browser';
 import { IonItem } from '@ionic/angular';
 import moment from 'moment';
@@ -23,6 +24,7 @@ describe('InformationItemComponent', () => {
         TestBed.configureTestingModule({
             declarations: [InformationItemComponent, IonItem],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
+            imports: [TranslateTestingModule]
         }).compileComponents();
     }));
 
