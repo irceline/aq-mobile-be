@@ -20,12 +20,12 @@ export class OnboardingScreenGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     return this.userSettingsService.$userLocations.pipe(map(userLocations => {
-      const current = userLocations.find(e => e.type === 'current');
-      if (current) {
+      if (userLocations.length > 0) {
         this.router.navigateByUrl('/main');
         return false;
+      } else {
+        return true;
       }
-      return true;
     }));
   }
 

@@ -98,7 +98,7 @@ describe('LocationInputComponent', () => {
       expect(component.locationSelected.emit).toHaveBeenCalledWith({
         id: 111,
         label: 'TODO: reverse geocoding',
-        type: 'current',
+        type: 'user',
         latitude: 1,
         longitude: 1,
       });
