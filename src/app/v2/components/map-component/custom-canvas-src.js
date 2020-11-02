@@ -572,7 +572,6 @@ L.TileLayer.CustomCanvas = L.TileLayer.WMS.extend({
 
             tile.toBlob(
                 function (blob) {
-                    done();
                     db.put({
                             _id: tileUrl,
                             _rev: existingRevision,

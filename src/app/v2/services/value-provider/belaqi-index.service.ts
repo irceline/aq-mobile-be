@@ -100,7 +100,6 @@ export class BelaqiIndexService extends ValueProvider {
       transparent: true,
       format: 'image/png',
     };
-    debugger;
     if (valueDate === ValueDate.BEFORE_THREE_DAYS || valueDate === ValueDate.BEFORE_TWO_DAYS || valueDate === ValueDate.YESTERDAY) {
       options.time = this.createMoment(valueDate).format('YYYY-MM-DD');
     }
