@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { forkJoin } from 'rxjs';
-import { IonSlides } from '@ionic/angular';
 
 import { ValueDate } from '../../common/enums';
 import { MainPhenomenon } from '../../common/phenomenon';
@@ -31,14 +30,11 @@ export class MainScreenComponent implements OnInit {
     belAqiForCurrentLocation: BelAqiIndexResult[] = [];
     currentActiveIndex: BelAqiIndexResult;
 
-    valueTimeline: IndexValueResult[] = [];
+    valueTimeline: BelAqiIndexResult[] = [];
     detailsValueColor: string;
     detailsValue: number;
 
     chooseTypeClicked: boolean;
-    showHideButtons(): void {
-        this.chooseTypeClicked = !this.chooseTypeClicked;
-    }
 
     detailedPhenomenona: Substance[] = [
         {
@@ -64,6 +60,12 @@ export class MainScreenComponent implements OnInit {
             abbreviation: 'PM 2,5',
             unit: 'µg/m3',
             phenomenon: MainPhenomenon.PM25
+        },
+        {
+            name: this.translateService.instant('v2.screens.app-info.black-carbon'),
+            abbreviation: 'Black Carbon',
+            unit: 'µg/m3',
+            phenomenon: MainPhenomenon.BC
         },
     ];
 
@@ -94,6 +96,8 @@ export class MainScreenComponent implements OnInit {
 
     detailData: DataPoint[] = [];
 
+    belaqiDetailData: DataPoint;
+
     drawerOptions: any;
 
     protected belAqi = 10;
@@ -118,6 +122,10 @@ export class MainScreenComponent implements OnInit {
         this.userSettingsService.$userLocations.subscribe((locations) => this.locations = locations);
     }
 
+    public showHideButtons(): void {
+        this.chooseTypeClicked = !this.chooseTypeClicked;
+    }
+
     private updateCurrentLocation(loadFinishedCb?: () => any) {
         return this.belAqiService.getIndexScoresAsObservable(this.userSettingsService.selectedUserLocation).subscribe(
             res => {
@@ -132,6 +140,18 @@ export class MainScreenComponent implements OnInit {
     private async updateDetailData(loadFinishedCb?: () => any) {
         this.detailData = [];
         this.detailDataLoadig = true;
+
+        const currentBelAqi = this.belAqiForCurrentLocation.find(e => e.valueDate === ValueDate.CURRENT);
+        this.belaqiDetailData = {
+            color: this.belAqiService.getLightColorForIndex(currentBelAqi.indexScore),
+            evaluation: this.belAqiService.getLabelForIndex(currentBelAqi.indexScore),
+            location: this.userSettingsService.selectedUserLocation,
+            substance: {
+                name: 'Allgemein',
+                abbreviation: 'BelAQI',
+                phenomenon: MainPhenomenon.BELAQI
+            }
+        };
 
         this.detailedPhenomenona.forEach(dph => {
             forkJoin([
@@ -207,6 +227,11 @@ export class MainScreenComponent implements OnInit {
                     location: this.userSettingsService.selectedUserLocation,
                 }));
         });
+    }
+
+    openBelaqiDetails() {
+        this.detailPoint = this.belaqiDetailData;
+        this.valueTimeline = this.belAqiForCurrentLocation;
     }
 
     onDetailsDayChange(index: IndexValueResult) {

@@ -14,6 +14,7 @@ declare module 'leaflet' {
         useBoundaryGreaterAsZoom?: number;
         useCache?: boolean;
         crossOrigin?: boolean;
+        time?: string;
     }
 
     export namespace tileLayer {

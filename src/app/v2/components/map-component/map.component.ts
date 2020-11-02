@@ -11,6 +11,7 @@ import { ValueDate } from '../../common/enums';
 import { MainPhenomenon } from '../../common/phenomenon';
 import { UserLocation } from '../../Interfaces';
 import { IrcelineSettingsService } from '../../services/irceline-settings/irceline-settings.service';
+import { BelaqiIndexService } from '../../services/value-provider/belaqi-index.service';
 import { ModelledValueService } from '../../services/value-provider/modelled-value.service';
 
 @Component({
@@ -29,6 +30,7 @@ export class MapComponent {
     constructor(
         private ircelineSettings: IrcelineSettingsService,
         private modelledValueSrvc: ModelledValueService,
+        private belaqiIndexSrvc: BelaqiIndexService,
         private http: HttpClient,
         private cacheService: CacheService
     ) { }
@@ -81,27 +83,43 @@ export class MapComponent {
     private addPhenomenonLayer() {
         if (this.map && isDefined(this._phenomenon) && isDefined(this._valueDate)) {
             this.modelledValueSrvc.getTimeParam(this._phenomenon, this._valueDate).subscribe(time => {
-                const layerOptions: L.CustomCanvasOptions = {
-                    layers: this.modelledValueSrvc.getLayersId(this._phenomenon, this._valueDate),
-                    styles: this.createStyleId(),
-                    transparent: true,
-                    format: 'image/png',
-                    opacity: 0.7,
-                    tiled: true,
-                    boundary: boundary as GeoJSON.GeoJsonObject,
-                    useBoundaryGreaterAsZoom: 12,
-                    useCache: true,
-                    crossOrigin: true,
-                };
-                if (time) {
-                    layerOptions['time'] = time;
+                let layerOptions: L.CustomCanvasOptions;
+                let wmsurl: string;
+                if (this._phenomenon === MainPhenomenon.BELAQI) {
+                    layerOptions = this.belaqiIndexSrvc.getLayerOptions(this._valueDate);
+                    layerOptions.opacity = 0.7;
+                    layerOptions.tiled = true;
+                    layerOptions.boundary = boundary as GeoJSON.GeoJsonObject;
+                    layerOptions.useBoundaryGreaterAsZoom = 12;
+                    layerOptions.useCache = true;
+                    layerOptions.crossOrigin = true;
+                    wmsurl = this.belaqiIndexSrvc.getWmsUrl(this._valueDate);
+                } else {
+                    layerOptions = {
+                        layers: this.modelledValueSrvc.getLayersId(this._phenomenon, this._valueDate),
+                        styles: this.createStyleId(),
+                        transparent: true,
+                        format: 'image/png',
+                        opacity: 0.7,
+                        tiled: true,
+                        boundary: boundary as GeoJSON.GeoJsonObject,
+                        useBoundaryGreaterAsZoom: 12,
+                        useCache: true,
+                        crossOrigin: true,
+                    };
+                    wmsurl = this.modelledValueSrvc.getWmsUrl(this._phenomenon, this._valueDate);
+                }
+
+                if (time && !layerOptions.time) {
+                    layerOptions.time = time;
                 }
 
                 if (this._phenomenonLayer) {
                     this._phenomenonLayer.remove();
                 }
+
                 this._phenomenonLayer = L.tileLayer.customCanvas(
-                    this.modelledValueSrvc.getWmsUrl(this._phenomenon, this._valueDate),
+                    wmsurl,
                     layerOptions
                 ).addTo(this.map);
             });

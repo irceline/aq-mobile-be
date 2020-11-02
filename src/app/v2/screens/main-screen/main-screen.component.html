@@ -20,6 +20,10 @@
       <div class="details">
         <h5>{{ 'v2.screens.main-screen.view-details' | translate }}</h5>
 
+        <app-information-item *ngIf="belaqiDetailData" [detailedDataPoint]="belaqiDetailData"
+          [isButton]="true" (click)="openBelaqiDetails()">
+        </app-information-item>
+
         <app-information-item *ngFor="let detailDataPoint of detailData" [detailedDataPoint]="detailDataPoint"
           [isButton]="true" (click)="openDetails(detailDataPoint)">
         </app-information-item>
@@ -40,7 +44,7 @@
       <app-time-line-list class="details--timeline" (dayChange)="onDetailsDayChange($event)" [items]="valueTimeline">
       </app-time-line-list>
 
-      <app-value-display [color]="detailsValueColor" [score]="detailsValue" value="µg/m3"></app-value-display>
+      <app-value-display *ngIf="detailsValue" [color]="detailsValueColor" [score]="detailsValue" value="µg/m3"></app-value-display>
 
       <div class="details--info">
         <button ion-button (click)="showHideButtons()">

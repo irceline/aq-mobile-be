@@ -32,15 +32,15 @@ export interface IBarChartDataItem {
 export interface Substance {
     name: string;
     abbreviation: string;
-    unit: string;
+    unit?: string;
     phenomenon: MainPhenomenon;
 }
 
 export interface DataPoint {
     location: UserLocation;
     substance: Substance;
-    currentValue: number;
-    averageValue: number;
+    currentValue?: number;
+    averageValue?: number;
 
     // todo -> thresholds
     // are thresholds set on server side or defined in client?

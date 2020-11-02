@@ -25,7 +25,8 @@ enum CurrentModelledPhenomenonLayer {
   no2 = 'rioifdm:no2_hmean',
   o3 = 'rioifdm:o3_hmean',
   pm10 = 'rioifdm:pm10_24hmean',
-  pm25 = 'rioifdm:pm25_24hmean'
+  pm25 = 'rioifdm:pm25_24hmean',
+  bc = 'rioifdm:bc_hmean'
 }
 
 const No2ForcastLayerMapping = [
@@ -319,6 +320,8 @@ export class ModelledValueService extends ValueProvider {
         return CurrentModelledPhenomenonLayer.pm10.toString();
       case MainPhenomenon.PM25:
         return CurrentModelledPhenomenonLayer.pm25.toString();
+      case MainPhenomenon.BC:
+        return CurrentModelledPhenomenonLayer.bc.toString();
     }
   }
 

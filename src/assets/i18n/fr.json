@@ -329,6 +329,7 @@
 			"app-info": {
 				"aq-index": "Nous évaluons l'impact à court terme de la <strong>qualité générale de l'air</strong> sur la base d'un indice de qualité de l'air.",
 				"aq-index-2": "Chacune des <strong>concentrations calculées pour les différents polluants</strong> donne un score (ex. très bon). Le score le plus mauvais détermine l'indice global de qualité de l'air.",
+				"black-carbon": "Black Carbon",
 				"check-lt-data": "Vous pouvez consulter ces estimations dans le menu via <strong>'exposition à long terme'.</strong>.",
 				"current-items": "Les polluants utilisés dans le calcul sont:",
 				"data-models": "En appliquant des modèles à ces données, nous calculons si l'impact de la qualité de l'air s'améliorera ou se détériorera à long terme.",

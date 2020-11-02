@@ -19,7 +19,7 @@
     </ion-text>
     <ion-text>
       <p>
-        <span>
+        <span *ngIf="detailedDataPoint.currentValue">
           {{ detailedDataPoint.currentValue }} {{ detailedDataPoint.substance.unit }} {{ 'v2.components.information-item.personal-calculation' | translate }}
         </span>
         <span *ngIf="detailedDataPoint.averageValue">

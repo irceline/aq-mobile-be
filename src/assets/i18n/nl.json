@@ -329,6 +329,7 @@
 			"app-info": {
 				"aq-index": "We beoordelen de impact van de <strong>algemene luchtkwaliteit</strong> op korte termijn op basis van een luchtkwaliteitsindex.",
 				"aq-index-2": "Die geeft aan elk van de <strong>berekende concentraties van verschillende verontreinigende stoffen</strong> één score (b.v. heel goed). De slechtste score bepaalt de algemene luchtkwaliteit.",
+				"black-carbon": "Black Carbon",
 				"check-lt-data": "Je kan deze inschattingen bekijken in het menu via <strong>‘blootstelling op lange termijn’</strong>.",
 				"current-items": "De stoffen die we in rekening brengen, zijn:",
 				"data-models": "Door op deze data modellen toe te passen, berekenen we of de impact van de luchtkwaliteit op lange termijn beter of slechter wordt.",

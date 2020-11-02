@@ -329,6 +329,7 @@
 			"app-info": {
 				"aq-index": "We assess the short-term impact of <strong>general air quality</strong> based on an air quality index.",
 				"aq-index-2": "This gives one score to each of the <strong>calculated concentrations of different pollutants</strong> (e.g. very good). The worst score determines the general air quality.",
+				"black-carbon": "Black Carbon",
 				"check-lt-data": "You can view these estimates in the menu via <strong>'long-term exposure'</strong>.",
 				"current-items": "The pollutants which are included in this calculation, are:",
 				"data-models": "By applying models to these data, we calculate whether the impact of air quality will improve or deteriorate in the long term.",

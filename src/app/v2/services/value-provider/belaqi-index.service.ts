@@ -1,6 +1,9 @@
+import '../../components/map-component/custom-canvas';
+
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CacheService } from 'ionic-cache';
+import * as L from 'leaflet';
 import moment from 'moment';
 import { forkJoin, Observable, Observer } from 'rxjs';
 
@@ -19,6 +22,8 @@ enum BelaqiIndexForecastLayer {
   TWO_DAYS = 'forecast:belaqi_d2',
   THREE_DAYS = 'forecast:belaqi_d3',
 }
+const BelaqiCurrentLayerId = 'rioifdm:belaqi';
+const BelaqiPastLayerId = 'rioifdm:belaqi_dmean';
 
 @Injectable({
   providedIn: 'root'
@@ -40,10 +45,10 @@ export class BelaqiIndexService extends ValueProvider {
       this.createPast(location, ValueDate.BEFORE_TWO_DAYS),
       this.createPast(location, ValueDate.YESTERDAY),
       this.createCurrent(location),
-      this.createForecast(location, BelaqiIndexForecastLayer.TODAY, ValueDate.TODAY),
-      this.createForecast(location, BelaqiIndexForecastLayer.TOMORROW, ValueDate.TOMORROW),
-      this.createForecast(location, BelaqiIndexForecastLayer.TWO_DAYS, ValueDate.IN_TWO_DAYS),
-      this.createForecast(location, BelaqiIndexForecastLayer.THREE_DAYS, ValueDate.IN_THREE_DAYS)
+      this.createForecast(location, ValueDate.TODAY),
+      this.createForecast(location, ValueDate.TOMORROW),
+      this.createForecast(location, ValueDate.IN_TWO_DAYS),
+      this.createForecast(location, ValueDate.IN_THREE_DAYS)
     ]);
   }
 
@@ -51,13 +56,61 @@ export class BelaqiIndexService extends ValueProvider {
     return this.createCurrent(location);
   }
   public getTodaysIndex(location: UserLocation): Observable<BelAqiIndexResult> {
-    return this.createForecast(location, BelaqiIndexForecastLayer.TODAY, ValueDate.TODAY);
+    return this.createForecast(location, ValueDate.TODAY);
+  }
+
+  public getWmsUrl(valueDate: ValueDate): string {
+    switch (valueDate) {
+      case ValueDate.BEFORE_THREE_DAYS:
+      case ValueDate.BEFORE_TWO_DAYS:
+      case ValueDate.YESTERDAY:
+        return rioifdmWmsURL;
+      case ValueDate.CURRENT:
+        return rioifdmBelaqiWmsURL;
+      case ValueDate.TODAY:
+      case ValueDate.TOMORROW:
+      case ValueDate.IN_TWO_DAYS:
+      case ValueDate.IN_THREE_DAYS:
+        return forecastWmsURL;
+    }
+  }
+
+  public getLayersId(valueDate: ValueDate): string {
+    switch (valueDate) {
+      case ValueDate.BEFORE_THREE_DAYS:
+      case ValueDate.BEFORE_TWO_DAYS:
+      case ValueDate.YESTERDAY:
+        return BelaqiPastLayerId;
+      case ValueDate.CURRENT:
+        return BelaqiCurrentLayerId;
+      case ValueDate.TODAY:
+        return BelaqiIndexForecastLayer.TODAY.toString();
+      case ValueDate.TOMORROW:
+        return BelaqiIndexForecastLayer.TOMORROW.toString();
+      case ValueDate.IN_TWO_DAYS:
+        return BelaqiIndexForecastLayer.TWO_DAYS.toString();
+      case ValueDate.IN_THREE_DAYS:
+        return BelaqiIndexForecastLayer.THREE_DAYS.toString();
+    }
+  }
+
+  public getLayerOptions(valueDate: ValueDate): L.CustomCanvasOptions {
+    const options: L.CustomCanvasOptions = {
+      layers: this.getLayersId(valueDate),
+      transparent: true,
+      format: 'image/png',
+    };
+    debugger;
+    if (valueDate === ValueDate.BEFORE_THREE_DAYS || valueDate === ValueDate.BEFORE_TWO_DAYS || valueDate === ValueDate.YESTERDAY) {
+      options.time = this.createMoment(valueDate).format('YYYY-MM-DD');
+    }
+    return options;
   }
 
   private createPast(location: UserLocation, valueDate: ValueDate): Observable<BelAqiIndexResult> {
     return new Observable<BelAqiIndexResult>((observer: Observer<BelAqiIndexResult>) => {
       const day = this.createMoment(valueDate);
-      const params = this.createFeatureInfoRequestParams('rioifdm:belaqi_dmean', location, day.format('YYYY-MM-DD'));
+      const params = this.createFeatureInfoRequestParams(this.getLayersId(valueDate), location, day.format('YYYY-MM-DD'));
       const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(
         rioifdmWmsURL, { responseType: 'json', params: params });
       const cacheKey = createCacheKey(rioifdmWmsURL, JSON.stringify(params), day.format('YYYY-MM-DD'));
@@ -75,7 +128,8 @@ export class BelaqiIndexService extends ValueProvider {
     return new Observable<BelAqiIndexResult>((observer: Observer<BelAqiIndexResult>) => {
       this.ircelineSettings.getSettings().subscribe(
         settings => {
-          const params = this.createFeatureInfoRequestParams('rioifdm:belaqi', location, settings.lastupdate.toISOString());
+          const params = this.createFeatureInfoRequestParams(this.getLayersId(ValueDate.CURRENT),
+            location, settings.lastupdate.toISOString());
           const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(
             rioifdmBelaqiWmsURL, { responseType: 'json', params: params });
           const cacheKey = createCacheKey(rioifdmBelaqiWmsURL, JSON.stringify(params), settings.lastupdate.toISOString());
@@ -89,7 +143,6 @@ export class BelaqiIndexService extends ValueProvider {
 
   private createForecast(
     location: UserLocation,
-    layer: BelaqiIndexForecastLayer,
     valueDate: ValueDate
   ): Observable<BelAqiIndexResult> {
     return new Observable<BelAqiIndexResult>((observer: Observer<BelAqiIndexResult>) => {
@@ -97,7 +150,7 @@ export class BelaqiIndexService extends ValueProvider {
         date => {
           if (date) {
             const url = forecastWmsURL;
-            const params = this.createFeatureInfoRequestParams(layer.toString(), location, date.toISOString());
+            const params = this.createFeatureInfoRequestParams(this.getLayersId(valueDate), location, date.toISOString());
             const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url, { responseType: 'json', params: params });
             const cacheKey = createCacheKey(url, JSON.stringify(params), this.createMoment(valueDate).format("YYYY-MM-DD"));
             this.cacheService.loadFromObservable(cacheKey, request)
