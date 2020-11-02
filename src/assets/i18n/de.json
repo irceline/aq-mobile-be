@@ -329,7 +329,7 @@
 			"app-info": {
 				"aq-index": "Wir bewerten die Auswirkungen der <strong>allgemeinen Luftqualität</strong> kurzfristig anhand eines Luftqualitätsindex.",
 				"aq-index-2": "Dies ergibt eine Bewertung für jede der <strong>berechneten Konzentrationen verschiedener Schadstoffe</strong> (z.B. sehr gut). Die schlechteste Bewertung bestimmt die allgemeine Luftqualität.",
-				"black-carbon": "Black Carbon",
+				"belaqi-title": "Allgemein",
 				"check-lt-data": "Sie können diese Schätzungen im Menü über <strong>‘Langzeitexposition’</strong> finden.",
 				"current-items": "Die Schadstoffe die wir beziehen in die Berechnung sind:",
 				"data-models": "Durch die Anwendung von Modellen berechnen wir, ob sich die Auswirkungen der Luftqualität langfristig verbessert oder verschlechtert.",

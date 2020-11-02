@@ -61,12 +61,6 @@ export class MainScreenComponent implements OnInit {
             unit: 'µg/m3',
             phenomenon: MainPhenomenon.PM25
         },
-        {
-            name: this.translateService.instant('v2.screens.app-info.black-carbon'),
-            abbreviation: 'Black Carbon',
-            unit: 'µg/m3',
-            phenomenon: MainPhenomenon.BC
-        },
     ];
 
     // horizontal slider data
@@ -147,7 +141,7 @@ export class MainScreenComponent implements OnInit {
             evaluation: this.belAqiService.getLabelForIndex(currentBelAqi.indexScore),
             location: this.userSettingsService.selectedUserLocation,
             substance: {
-                name: 'Allgemein',
+                name: this.translateService.instant('v2.screens.app-info.belaqi-title'),
                 abbreviation: 'BelAQI',
                 phenomenon: MainPhenomenon.BELAQI
             }
