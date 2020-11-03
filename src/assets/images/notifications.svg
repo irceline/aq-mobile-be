@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   id="svg8"
+   version="1.1"
+   viewBox="0 0 14.2875 14.2875"
+   height="54"
+   width="54">
+  <defs
+     id="defs2" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1">
+    <circle
+       r="7.1437502"
+       cy="7.1437502"
+       cx="7.1437502"
+       id="path833"
+       style="fill:#4d4d4d;fill-opacity:1;stroke-width:0;stroke:#4d4d4d;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none" />
+    <text
+       id="text839"
+       y="10.991048"
+       x="5.0611963"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.5833px;line-height:1.25;font-family:'Apple Braille';-inkscape-font-specification:'Apple Braille';fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       xml:space="preserve" />
+    <ellipse
+       ry="1.0334357"
+       rx="1.2541696"
+       cy="11.668793"
+       cx="7.1437502"
+       id="path877"
+       style="fill:#ffffff;fill-opacity:1;stroke-width:0.891491" />
+    <path
+       id="path894"
+       d="m 7.1151958,9.7234249 c 0,0 0.036875,-5.1625222 -0.9886797,-6.9133635 C 5.1009615,1.0592201 9.168402,1.1783915 8.227461,2.87291 7.28652,4.5674285 7.1151958,9.7234249 7.1151958,9.7234249 Z"
+       style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0.300035px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  </g>
+</svg>
