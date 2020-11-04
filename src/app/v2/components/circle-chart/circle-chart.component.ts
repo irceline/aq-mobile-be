@@ -1,13 +1,11 @@
-import {
-    Component,
-    OnInit,
-    Input,
-    OnChanges,
-    ElementRef,
-    AfterViewInit,
-} from '@angular/core';
-import { BelAQIService } from '../../services/bel-aqi.service';
+import { Component, ElementRef, Input, NgZone, OnInit } from '@angular/core';
+import { PopoverController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
+
+import { BelAQIService } from '../../services/bel-aqi.service';
+import { GeneralNotificationService } from '../../services/push-notifications/general-notification.service';
+import { PushNotification } from './../../services/push-notifications/push-notifications.service';
+import { NotificationPopoverComponent } from './../notification-popover/notification-popover.component';
 
 @Component({
     selector: 'app-circle-chart',
@@ -33,10 +31,15 @@ export class CircleChartComponent implements OnInit {
         pulsing: false,
     };
 
+    public notification: PushNotification;
+
     constructor(
         private belaqiService: BelAQIService,
         private translate: TranslateService,
-        public element: ElementRef
+        public element: ElementRef,
+        private zone: NgZone,
+        private generalNotification: GeneralNotificationService,
+        public popoverController: PopoverController
     ) {
         belaqiService.$activeIndex.subscribe((newIndex) => {
             this.belAqi = newIndex.indexScore;
@@ -46,10 +49,19 @@ export class CircleChartComponent implements OnInit {
 
     ngOnInit() {
         // this._initialize(this.belAqi);
+        this.generalNotification.getNotifications().subscribe(notif => this.zone.run(() => this.notification = notif));
     }
 
     getChartHeight() {
         return this.element.nativeElement.offsetHeight || 315;
+    }
+
+    public openNotification(ev: Event) {
+        this.popoverController.create({
+            component: NotificationPopoverComponent,
+            event: ev,
+            componentProps: this.notification
+        }).then(popover => popover.present());
     }
 
     private _initialize(belaqi: number) {

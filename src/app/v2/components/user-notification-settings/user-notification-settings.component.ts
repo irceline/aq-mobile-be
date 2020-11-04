@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
+import { GeneralNotificationService } from '../../services/push-notifications/general-notification.service';
+
 export interface UserNotificationSetting {
     notificationType: NotificationType;
     enabled: boolean;
@@ -54,9 +56,33 @@ export class UserNotificationSettingsComponent implements OnInit {
     @Output() getFocus = new EventEmitter<boolean>();
     @Output() loseFocus = new EventEmitter<boolean>();
 
-    constructor(private translate: TranslateService) {}
+    public generalNotification: boolean;
 
-    ngOnInit() {}
+    constructor(
+        private translate: TranslateService,
+        private generalNotificationSrvc: GeneralNotificationService
+    ) { }
+
+    ngOnInit() {
+        this.generalNotificationSrvc.isActive().subscribe(res => {
+            return this.generalNotification = res;
+        });
+    }
+
+    toggleGeneralNotification(event: MouseEvent) {
+        event.stopImmediatePropagation();
+        event.stopPropagation();
+        event.preventDefault();
+        if (!this.generalNotification) {
+            this.generalNotificationSrvc.subscribeNotification().subscribe(res => {
+                return this.generalNotification = res;
+            });
+        } else {
+            this.generalNotificationSrvc.unsubscribeNotification().subscribe(res => {
+                return this.generalNotification = !res;
+            });
+        }
+    }
 
     changeSetting(setting: UserNotificationSetting) {
         setting.enabled = !setting.enabled;
