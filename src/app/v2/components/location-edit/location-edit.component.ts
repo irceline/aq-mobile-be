@@ -69,7 +69,7 @@ export class LocationEditComponent implements OnInit, AfterViewInit {
           res => {
             this.userLocation.latitude = latLng.lat;
             this.userLocation.longitude = latLng.lng;
-            this.userLocation.label = this.createLabelOfReverseResult(res);
+            this.userLocation.label = res.label;
             this.loadingLabel = false;
           }, err => {
             marker.setLatLng({ lat: this.userLocation.latitude, lng: this.userLocation.longitude });
@@ -79,19 +79,6 @@ export class LocationEditComponent implements OnInit, AfterViewInit {
         );
       }));
     }
-  }
-
-  private createLabelOfReverseResult(reverse: any): string {
-    const labels = [];
-    if (reverse && reverse.address) {
-      if (reverse.address.road) {
-        labels.push(`${reverse.address.road}${reverse.address.houseNumber ? ' ' + reverse.address.houseNumber : ''}`);
-      }
-      if (reverse.address.city || reverse.address.cityDistrict || reverse.address.town) {
-        labels.push(reverse.address.city || reverse.address.cityDistrict || reverse.address.town);
-      }
-    }
-    return labels.join(', ');
   }
 
   confirm() {

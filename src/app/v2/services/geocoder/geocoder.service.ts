@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CacheService } from 'ionic-cache';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import locations from '../../../../assets/locations.json';
 import { createCacheKey } from '../../common/caching';
@@ -59,7 +60,7 @@ export class GeocoderService {
     return degrees * Math.PI / 180;
   }
 
-  public reverse(lat: number, lng: number, options: any = {}): Observable<any> {
+  public reverse(lat: number, lng: number, options: any = {}): Observable<Location> {
     let params = new HttpParams();
     params = params.set('lat', lat.toString());
     params = params.set('lon', lng.toString());
@@ -69,7 +70,25 @@ export class GeocoderService {
     if (options && options.zoom !== undefined) { params = params.set('zoom', `${options.zoom}`); }
     const url = NOMINATIM_URL + 'reverse';
     const request = this.httpClient.get(url, { params });
-    return this.cacheService.loadFromObservable(createCacheKey(url, params.toString()), request, null, TTL_GEO_SEARCH);
+    return this.cacheService.loadFromObservable(createCacheKey(url, params.toString()), request, null, TTL_GEO_SEARCH)
+      .pipe(map(res => ({
+        label: this.createLabelOfReverseResult(res),
+        longitude: lng,
+        latitude: lat
+      })));
+  }
+
+  private createLabelOfReverseResult(reverse: any): string {
+    const labels = [];
+    if (reverse && reverse.address) {
+      if (reverse.address.road) {
+        labels.push(`${reverse.address.road}${reverse.address.houseNumber ? ' ' + reverse.address.houseNumber : ''}`);
+      }
+      if (reverse.address.city || reverse.address.town || reverse.address.city_district) {
+        labels.push(reverse.address.city || reverse.address.town || reverse.address.city_district);
+      }
+    }
+    return labels.join(', ');
   }
 
 }

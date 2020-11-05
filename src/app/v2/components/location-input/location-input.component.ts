@@ -1,11 +1,4 @@
-import {
-    Component,
-    EventEmitter,
-    Input,
-    OnInit,
-    Output,
-    ViewChild,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { IonInput, LoadingController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -39,10 +32,10 @@ export class LocationInputComponent implements OnInit {
 
     constructor(
         public loadingController: LoadingController,
-        private translate: TranslateService,
+        private translateSrvc: TranslateService,
         private geocoder: GeocoderService,
         private locateSrvc: LocateService
-    ) {}
+    ) { }
 
     ngOnInit() {
         this.filterItems();
@@ -51,7 +44,7 @@ export class LocationInputComponent implements OnInit {
     // Getting the current location with native ionic plugin
     async getCurrentLocation() {
         const loading = await this.loadingController.create({
-            message: this.translate.instant(
+            message: this.translateSrvc.instant(
                 'v2.components.location-input.please-wait'
             ),
         });
@@ -59,25 +52,41 @@ export class LocationInputComponent implements OnInit {
 
         this.locateSrvc.getUserLocation().subscribe(
             (resp) => {
-                loading.dismiss(null, 'cancel');
-                const location = this.geocoder.getLocationLabel(
-                    resp.coords.latitude,
-                    resp.coords.longitude
-                );
-                this.locationSelected.emit({
-                    id: 111,
-                    label: location.label,
-                    type: 'user',
-                    latitude: location.latitude,
-                    longitude: location.longitude,
-                });
-                this.searchText = location.label;
+                this.geocoder.reverse(resp.coords.latitude, resp.coords.longitude, { acceptLanguage: this.translateSrvc.currentLang })
+                    .subscribe(
+                        loc => {
+                            this.addLocation({
+                                id: new Date().getTime(),
+                                label: loc.label,
+                                type: 'user',
+                                latitude: loc.latitude,
+                                longitude: loc.longitude,
+                            }, loading);
+                        },
+                        error => {
+                            const l = this.geocoder.getLocationLabel(resp.coords.latitude, resp.coords.longitude);
+                            const userLocation: UserLocation = {
+                                id: new Date().getTime(),
+                                label: l.label,
+                                type: 'user',
+                                latitude: l.latitude,
+                                longitude: l.longitude,
+                            };
+                            this.addLocation(userLocation, loading);
+                        }
+                    );
             },
             (error) => {
                 loading.dismiss(null, 'cancel');
                 console.log('Error getting location', error);
             }
         );
+    }
+
+    private addLocation(location: UserLocation, loading: HTMLIonLoadingElement) {
+        this.locationSelected.emit(location);
+        this.searchText = location.label;
+        loading.dismiss(null, 'cancel');
     }
 
     // Choosing option from dropdown
