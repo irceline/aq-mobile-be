@@ -25,12 +25,12 @@ export class GeneralNotificationService {
   ) {
 
     // sample notification for one minute:
-    this.setNotification({
-      body: 'Door de vorming van secundair anorganisch fijn stof: fysico-chemische reacties in de atmosfeer via ammoniak (landbouw) en stikstofoxiden (verkeer, industrie en verwarming), lopen de fijnstofconcentraties hoog op. De informatiedrempel voor PM10 van 50 µg/m³ als 24-uursgemiddelde werd overschreden in Vlaanderen. De informatiefase is geactiveerd in Vlaanderen. In Brussel en Wallonië wordt de drempel op dit moment (nog) niet overschreden.',
-      expiration: new Date(new Date().getTime() + 1000 * 60 * 1),
-      title: 'Infomatiebericht fijn stof',
-      topic: NOTIFICATION_PREFIX
-    });
+    // this.setNotification({
+    //   body: 'Door de vorming van secundair anorganisch fijn stof: fysico-chemische reacties in de atmosfeer via ammoniak (landbouw) en stikstofoxiden (verkeer, industrie en verwarming), lopen de fijnstofconcentraties hoog op. De informatiedrempel voor PM10 van 50 µg/m³ als 24-uursgemiddelde werd overschreden in Vlaanderen. De informatiefase is geactiveerd in Vlaanderen. In Brussel en Wallonië wordt de drempel op dit moment (nog) niet overschreden.',
+    //   expiration: new Date(new Date().getTime() + 1000 * 60 * 1),
+    //   title: 'Infomatiebericht fijn stof',
+    //   topic: NOTIFICATION_PREFIX
+    // });
 
     this.storage.get(GENERAL_NOTIFICATION_STORAGE_KEY).then((notif: PushNotification) => {
       if (notif) {
