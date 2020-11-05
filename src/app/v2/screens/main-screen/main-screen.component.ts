@@ -113,7 +113,10 @@ export class MainScreenComponent implements OnInit {
 
         this.updateCurrentLocation();
 
-        this.userSettingsService.$userLocations.subscribe((locations) => this.locations = locations);
+        this.userSettingsService.$userLocations.subscribe((locations) => {
+            this.updateCurrentLocation();
+            return this.locations = locations;
+        });
     }
 
     public showHideButtons(): void {

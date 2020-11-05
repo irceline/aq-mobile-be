@@ -17,6 +17,7 @@ import { InfoButtonComponent } from './info-button/info-button.component';
 import { InformationItemDetailsComponent } from './information-item-details/information-item-details.component';
 import { InformationItemComponent } from './information-item/information-item.component';
 import { LanguageDropdownComponent } from './language-dropdown/language-dropdown.component';
+import { LocationEditComponent } from './location-edit/location-edit.component';
 import { LocationInputComponent } from './location-input/location-input.component';
 import { LocationSortableComponent } from './location-sortable/location-sortable.component';
 import { LocationSwipeComponent } from './location-swipe/location-swipe.component';
@@ -48,6 +49,7 @@ const COMPONENTS = [
     HorizontalCardComponent,
     HorizontalCardsSliderComponent,
     NotificationPopoverComponent,
+    LocationEditComponent,
     BarChartComponent,
     MenuScreenComponent,
     InfoButtonComponent,

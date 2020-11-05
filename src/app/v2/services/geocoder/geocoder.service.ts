@@ -1,12 +1,19 @@
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { CacheService } from 'ionic-cache';
+import { Observable } from 'rxjs';
 
 import locations from '../../../../assets/locations.json';
+import { createCacheKey } from '../../common/caching';
 
 interface Location {
   label: string;
   longitude: number;
   latitude: number;
 }
+
+const NOMINATIM_URL = 'https://nominatim.openstreetmap.org/';
+const TTL_GEO_SEARCH = 60 * 60 * 24; // one day
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +22,10 @@ export class GeocoderService {
 
   private _locations: Location[] = locations;
 
-  constructor() { }
+  constructor(
+    private httpClient: HttpClient,
+    private cacheService: CacheService
+  ) { }
 
   public getLocationLabel(latitude: number, longitude: number): Location {
     let distance = Infinity;
@@ -47,6 +57,19 @@ export class GeocoderService {
 
   private degreesToRadians(degrees: number) {
     return degrees * Math.PI / 180;
+  }
+
+  public reverse(lat: number, lng: number, options: any = {}): Observable<any> {
+    let params = new HttpParams();
+    params = params.set('lat', lat.toString());
+    params = params.set('lon', lng.toString());
+    params = params.set('format', 'json');
+    if (options && options.addressdetails !== undefined) { params = params.set('addressdetails', options.addressdetails ? '1' : '0'); }
+    if (options.acceptLanguage !== null) { params = params.set('accept-language', options.acceptLanguage); }
+    if (options && options.zoom !== undefined) { params = params.set('zoom', `${options.zoom}`); }
+    const url = NOMINATIM_URL + 'reverse';
+    const request = this.httpClient.get(url, { params });
+    return this.cacheService.loadFromObservable(createCacheKey(url, params.toString()), request, null, TTL_GEO_SEARCH);
   }
 
 }

@@ -1,7 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { AlertController } from '@ionic/angular';
-import {UserLocation} from '../../Interfaces';
-import {TranslateService} from '@ngx-translate/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AlertController, ModalController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+
+import { UserLocation } from '../../Interfaces';
+import { LocationEditComponent } from './../location-edit/location-edit.component';
 
 @Component({
     selector: 'app-location-sortable',
@@ -14,9 +16,13 @@ export class LocationSortableComponent implements OnInit {
     @Output() locationRemoved = new EventEmitter();
     @Output() locationUpdated = new EventEmitter();
 
-    constructor(private alertController: AlertController, private translate: TranslateService) {}
+    constructor(
+        private alertController: AlertController,
+        private translate: TranslateService,
+        private modalController: ModalController
+    ) { }
 
-    ngOnInit() {}
+    ngOnInit() { }
 
     doReorder(ev: any) {
         ev.detail.complete(this.locations);
@@ -46,5 +52,17 @@ export class LocationSortableComponent implements OnInit {
         });
 
         await alert.present();
+    }
+
+    async editLocation(location: UserLocation) {
+        const modal = await this.modalController.create({
+            component: LocationEditComponent,
+            componentProps: {
+                userLocation: location
+            }
+        });
+        await modal.present();
+        const { data } = await modal.onWillDismiss();
+        this.locationUpdated.emit(this.locations);
     }
 }

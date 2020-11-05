@@ -1,0 +1,29 @@
+:host {
+
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+        .map {
+            background-color: white;
+            flex: 1;
+            height: 300px;
+        }
+
+        .label {
+            padding: 10px;
+            text-align: center;
+            color: white;
+        }
+
+        .controls {
+            display: flex;
+
+            .button {
+                color: white;
+            }
+        }
+    }
+
+}
