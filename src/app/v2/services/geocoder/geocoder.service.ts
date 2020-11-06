@@ -4,6 +4,7 @@ import { CacheService } from 'ionic-cache';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+import belgium from '../../../../assets/belgium.json';
 import locations from '../../../../assets/locations.json';
 import { createCacheKey } from '../../common/caching';
 
@@ -89,6 +90,35 @@ export class GeocoderService {
       }
     }
     return labels.join(', ');
+  }
+
+  public insideBelgium(lat: number, lng: number): boolean {
+    let inside = false;
+    const belgiumBounds = belgium as GeoJSON.FeatureCollection;
+    belgiumBounds.features.forEach(e => {
+      const multipolygon = e.geometry as GeoJSON.MultiPolygon;
+      const polygons = multipolygon.coordinates;
+      polygons.forEach(pol => {
+        inside = this.isPointInPolygon(lat, lng, pol[0]);
+      });
+    });
+    return inside;
+  }
+
+  private isPointInPolygon(lat: number, lng: number, poly: GeoJSON.Position[]) {
+    const x = lat, y = lng;
+
+    let inside = false;
+    for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+      const xi = poly[i][1], yi = poly[i][0];
+      const xj = poly[j][1], yj = poly[j][0];
+
+      const intersect = ((yi > y) !== (yj > y))
+        && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+      if (intersect) { inside = !inside; }
+    }
+
+    return inside;
   }
 
 }

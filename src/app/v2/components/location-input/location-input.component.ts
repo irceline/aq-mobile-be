@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { IonInput, LoadingController } from '@ionic/angular';
+import { IonInput, LoadingController, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import locations from '../../../../assets/locations.json';
@@ -31,7 +31,8 @@ export class LocationInputComponent implements OnInit {
     @Output() locationSelected = new EventEmitter<UserLocation>();
 
     constructor(
-        public loadingController: LoadingController,
+        private loadingController: LoadingController,
+        private toastController: ToastController,
         private translateSrvc: TranslateService,
         private geocoder: GeocoderService,
         private locateSrvc: LocateService
@@ -55,13 +56,19 @@ export class LocationInputComponent implements OnInit {
                 this.geocoder.reverse(resp.coords.latitude, resp.coords.longitude, { acceptLanguage: this.translateSrvc.currentLang })
                     .subscribe(
                         loc => {
-                            this.addLocation({
-                                id: new Date().getTime(),
-                                label: loc.label,
-                                type: 'user',
-                                latitude: loc.latitude,
-                                longitude: loc.longitude,
-                            }, loading);
+                            if (this.geocoder.insideBelgium(loc.latitude, loc.longitude)) {
+                                this.addLocation({
+                                    id: new Date().getTime(),
+                                    label: loc.label,
+                                    type: 'user',
+                                    latitude: loc.latitude,
+                                    longitude: loc.longitude,
+                                }, loading);
+                            } else {
+                                this.toastController.create({ message: 'Your currently location is outside of belgium, therefore no entry is created', duration: 2000 })
+                                    .then(toast => toast.present());
+                                loading.dismiss(null, 'cancel');
+                            }
                         },
                         error => {
                             const l = this.geocoder.getLocationLabel(resp.coords.latitude, resp.coords.longitude);

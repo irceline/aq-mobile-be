@@ -67,9 +67,15 @@ export class LocationEditComponent implements OnInit, AfterViewInit {
         const latLng = evt.target.getLatLng() as L.LatLng;
         this.geocoder.reverse(latLng.lat, latLng.lng, { acceptLanguage: this.translateSrvc.currentLang }).subscribe(
           res => {
-            this.userLocation.latitude = latLng.lat;
-            this.userLocation.longitude = latLng.lng;
-            this.userLocation.label = res.label;
+            if (this.geocoder.insideBelgium(latLng.lat, latLng.lng)) {
+              this.userLocation.latitude = latLng.lat;
+              this.userLocation.longitude = latLng.lng;
+              this.userLocation.label = res.label;
+            } else {
+              marker.setLatLng({ lat: this.userLocation.latitude, lng: this.userLocation.longitude });
+              this.toastController.create({ message: 'Selected location is outside of belgium', duration: 2000 })
+                .then(toast => toast.present());
+            }
             this.loadingLabel = false;
           }, err => {
             marker.setLatLng({ lat: this.userLocation.latitude, lng: this.userLocation.longitude });
