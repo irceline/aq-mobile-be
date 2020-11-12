@@ -88,6 +88,7 @@ export class MapComponent {
                 if (this._phenomenon === MainPhenomenon.BELAQI) {
                     layerOptions = this.belaqiIndexSrvc.getLayerOptions(this._valueDate);
                     layerOptions.opacity = 0.7;
+                    layerOptions.styles = this.createStyleId();
                     layerOptions.tiled = true;
                     layerOptions.boundary = boundary as GeoJSON.GeoJsonObject;
                     layerOptions.useBoundaryGreaterAsZoom = 12;
@@ -136,6 +137,8 @@ export class MapComponent {
                 return 'pm10_hmean_raster_discrete_belair';
             case MainPhenomenon.PM25:
                 return 'pm25_hmean_raster_discrete_belair';
+            case MainPhenomenon.BELAQI:
+                return 'belaqi_raster_discrete_belair';
             case MainPhenomenon.BC:
                 return 'bc_hmean_raster_discrete_belair';
         }
