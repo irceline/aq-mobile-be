@@ -2,6 +2,12 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 import { GeneralNotificationService } from '../../services/push-notifications/general-notification.service';
+import { marker } from '@biesbjerg/ngx-translate-extract-marker';
+marker('v2.components.user-notification-settings.exercise');
+marker('v2.components.user-notification-settings.allergies');
+marker('v2.components.user-notification-settings.activity');
+marker('v2.components.user-notification-settings.transport');
+marker('v2.components.user-notification-settings.highConcentration');
 
 export interface UserNotificationSetting {
     notificationType: NotificationType;

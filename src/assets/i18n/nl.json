@@ -1,25 +1,4 @@
 {
-	"annual-mean-panel": {
-		"header": "Lange termijn blootstelling",
-		"information-popup": {
-			"text": "NO2 (Stikstofdioxide), PM10 (fijn stof met een diameter kleiner dan 10 micrometer) en PM2.5 (fijn stof met een diameter kleiner dan 2.5 micrometer) zijn de drie polluenten waarvoor de meeste wetenschappelijke bewijslast bestaat wat de langetermijnimpact op de gezondheid betreft."
-		}
-	},
-	"belaqi-chart": {
-		"error": "Helaas is er een fout opgetreden bij het maken van de grafiek."
-	},
-	"belaqi-user-location-slider": {
-		"create-new-location": "Maak een nieuwe locatie aan",
-		"current-location": "Huidige locatie",
-		"current-location-description": "Activeer deze optie om luchtkwaliteitsgegevens voor uw huidige locatie weer te geven.",
-		"current-location-error-header": "Uw apparaat heeft uw huidige locatie niet kunnen vaststellen.",
-		"loading-current-location": "Uw apparaat bepaalt uw huidige locatie"
-	},
-	"belaqi-wheel": {
-		"error-occured": "Het duurt langer dan normaal om de gegevens op te halen. Probeer het later opnieuw.",
-		"loading": "De BelAQI-index wordt geladen ...",
-		"no-index-ascertained": "Er kon geen BelAQI-index worden berekend. Dit kan het geval zijn bij technische problemen met onze servers of wanneer de locatie niet in België ligt."
-	},
 	"belaqi": {
 		"date": {
 			"before-three-days": "3 dagen geleden",
@@ -30,18 +9,6 @@
 			"today": "Vandaag",
 			"tomorrow": "Morgen",
 			"yesterday": "Gisteren"
-		},
-		"level-split": {
-			"bad": "slecht",
-			"excellent": "uit- stekend",
-			"fairly-good": "vrij goed",
-			"good": "goed",
-			"horrible": "uitermate slecht",
-			"moderate": "middel- matig",
-			"poor": "onder- maats",
-			"very-bad": "zeer slecht",
-			"very-good": "zeer goed",
-			"very-poor": "vrij slecht"
 		},
 		"level": {
 			"bad": "Slecht",
@@ -60,228 +27,9 @@
 		"cancel": "annuleer",
 		"ok": "Bewaar locatie"
 	},
-	"diagram": {
-		"chart": {
-			"hourlyMeanGreyand24hmeanBelaqiColors": "Uurgemiddelde (grijs) en 24-uursgemiddelde (BelAQI-kleuren)",
-			"timelabelHmeanBelaqiColors": "Uurgemiddelde (BelAQI-kleuren)",
-			"timelabelHmeanGrey": "Uurgemiddelde (grijs)"
-		},
-		"header": "Grafiek",
-		"overlay": {
-			"attention": "Opgepast:",
-			"content-p1": "De diagrammen geven de evolutie per uur zoals gemeten in de dichtstbijzijnde officiële meetstations van uw geconfigureerde locaties. De tijdreeksen van verontreinigende stoffen die deel uitmaken van de BelAQI-index zijn volgens deze index gekleurd.",
-			"content-p2": "Voor fijn stof (zowel met een diameter kleiner dan 2,5 als 10 micrometer) zijn alleen de glijdende 24-uurgemiddelde tijdreeksen gekleurd, omdat het 24-uursgemiddelde deel uitmaakt van de BelAQI index, niet de uurgemiddelden. De reden hiervoor is dat gezondheidseffecten door fijn stof worden geassocieerd met een blootstelling van 24 uur.",
-			"content-p3": "Het indexcijfer dat elders in de app voor uw locatie gegeven wordt is niet enkel gebaseerd op het resultaat van alle meetstations in onze meetnetten, waarbij het dichtstbijgelegen station mogelijk ettelijke kilometers verder ligt. De concentraties gemeten in alle meetstations van de overheid worden toegevoegd aan een computermodel, dat ook rekening houdt met emissiegegevens (verkeer, industrie en scheepvaart) en meteorologische omstandigheden (windrichting en windsnelheid). Dit computermodel berekent dan gedetailleerde luchtkwaliteitskaarten voor het ganse land. De combinatie van het resultaat voor stikstofdioxide, fijn stof en ozon zie je als één indexcijfer in de app.",
-			"header": "Wat zie je op dit scherm?",
-			"url-svg": "../../assets/svg/belaqi_NL.svg"
-		}
-	},
-	"header": {
-		"oldDataWarning": "De laatste update is ouder dan normaal vanwege een technisch probleem. We doen ons best om het probleem z.s.m. te verhelpen."
-	},
-	"home": {
-		"header": "Start"
-	},
-	"info": {
-		"chart": {
-			"message": "Deze grafiek toont de evolutie van de BelAQI luchtkwaliteitsindex. De verticale blauwe lijn geeft het huidige tijdstip weer."
-		},
-		"moreInfo": "Meer info",
-		"wheel": {
-			"link": "https://www.irceline.be/nl/belaqi",
-			"message": "Deze wijzer toont de actuele BelAQI luchtkwaliteitsindex voor uw locatie. Deze index combineert de gemodelleerde concentraties van de verschillende polluenten afhankelijk van hun kortetermijnimpact op de gezondheid."
-		}
-	},
-	"intro": {
-		"close-introduction": "Sluiten",
-		"four": {
-			"header": "Gepersonaliseerde meldingen"
-		},
-		"header": "Introductie",
-		"next-step": "Volgende",
-		"one": {
-			"header": "Kies een taal",
-			"option": {
-				"dutch": "Nederlands",
-				"english": "English",
-				"french": "Français",
-				"german": "Deutsch"
-			}
-		},
-		"prev-step": "Vorige",
-		"three": {
-			"addLocationToList": "Toevoegen aan de lijst van locaties",
-			"baseOnCurrentLocation": "Gebruik de huidige locatie",
-			"header": "Kies de locaties waarvoor je gepersonaliseerde meldingen wil ontvangen",
-			"locationLabelHint": "Verander de beschrijving van de locatie",
-			"locationLabelPlaceholder": "bv. \"Thuis\", \"Werk\", \"School\"",
-			"showLocationList": "Toon huidige locaties"
-		},
-		"two": {
-			"header": "Voor welke regio wil je officiële waarschuwingen ontvangen?"
-		}
-	},
-	"map": {
-		"error": "Er is een fout opgetreden. Het is niet mogelijk om gegevens op te halen voor de geselecteerde polluent. Probeer het later opnieuw.",
-		"geosearch": {
-			"placeholder": "Zoek locatie"
-		},
-		"header": "Kaart",
-		"index": "BelAQI index",
-		"nearest-station": "Dichtstbijgelegen meetstation",
-		"opacity-slider-header": "Transparantie",
-		"overlay": {
-			"content-p1": "De kaart geeft je een overzicht van de luchtkwaliteit in België. Aan de hand van een kleurencode, kan je de luchtkwaliteit op jouw locatie vergelijken met die van andere locaties. Rood is zeer slecht, terwijl blauw staat voor een uitstekende luchtkwaliteit.",
-			"content-p2": "Elk uur wordt het indexcijfer voor de gekozen locatie vernieuwd. De app geeft je ook een voorspelling van de BelAQI index de volgende uren en dagen.",
-			"header": "Wat zie je op dit scherm?",
-			"url-svg": "../../assets/svg/belaqi_NL.svg"
-		},
-		"timestepLabels": {
-			"24hmean": "glijdend 24-uurgemiddelde",
-			"anmean": "jaargemiddelde",
-			"belaqi_current": "BelAQI huidig",
-			"belaqi_forecast_today": "voorspelling BelAQI vandaag",
-			"belaqi_forecast_today+2": "voorspelling BelAQI binnen 2 dagen",
-			"belaqi_forecast_today+3": "voorspelling BelAQI binnen 3 dagen",
-			"belaqi_forecast_tomorrow": "voorspelling BelAQI morgen",
-			"dmean_forecast_today": "voorspelling daggemiddelde vandaag",
-			"dmean_forecast_today+2": "voorspelling daggemiddelde binnen 2 dagen",
-			"dmean_forecast_today+3": "voorspelling daggemiddelde binnen 3 dagen",
-			"dmean_forecast_tomorrow": "voorspelling daggemiddelde morgen",
-			"hmean": "uurgemiddelde",
-			"loading": "bezig met laden",
-			"longterm": "lange termijn blootstelling",
-			"maxhmean_forecast_today": "voorspelling maximum uurgemiddelde vandaag",
-			"maxhmean_forecast_today+2": "voorspelling maximum uurgemiddelde binnen 2 dagen",
-			"maxhmean_forecast_today+3": "voorspelling maximum uurgemiddelde binnen 3 dagen",
-			"maxhmean_forecast_tomorrow": "voorspelling maximum uurgemiddelde morgen",
-			"shortterm": "korte termijn blootstelling"
-		}
-	},
-	"menu": {
-		"lastUpdate": "Laatste actualisatie"
-	},
-	"nearest-measuring-station-panel": {
-		"error": "Er is een fout opgetreden. Het is niet mogelijk om gegevens op te halen voor de dichtstbijgelegene meetstations. Probeer het later opnieuw.",
-		"header": "Dichtstbijgelegen meetstation",
-		"information-popup": {
-			"list-bc": "BC of zwarte koolstof",
-			"list-no2": "NO2 of stikstofdioxide",
-			"list-o3": "O3 of ozon",
-			"list-pm10": "PM10 of fijn stof met een diameter kleiner dan 10 micrometer",
-			"list-pm25": "PM2.5 of fijn stof met een diameter kleiner dan 2,5 micrometer",
-			"text": "Hier ziet u de actuele gemeten concentraties voor de dichtstbijgelegen meetstations. De verschillende polluenten zijn:"
-		}
-	},
 	"network": {
 		"geolocationDenied": "U hebt het gebruik van uw locatie niet toegestaan de app.",
-		"geolocationDeniedExplanation": "Als u de \"huidige locatie\"-functionaliteiten wilt gebruiken, kunt u hier de locatieservice van uw apparaat activeren.",
-		"geolocationDisabled": "Geolocatie is uitgeschakeld",
-		"geolocationDisabledExplanation": "Als u de \"huidige locatie\"-functionaliteiten wilt gebruiken, schakel dan de locatiedienst van uw apparaat in."
-	},
-	"no-network-connection": {
-		"body": "Uw apparaat heeft geen gegevensnetwerkverbinding. De BelAir-app is sterk afhankelijk van het ophalen van nieuwe gegevens van onze servers. Activeer alstublieft een datanetwerk (mobiele data- of wifi-verbinding) en ververs de app of probeer het opnieuw wanneer u binnen bereik bent van een datanetwerk waartoe u toegang hebt.",
-		"close": "Sluiten",
-		"header": "Geen dataverbinding"
-	},
-	"notifications-popup": {
-		"channels": "Voor uw meldingskanaal:",
-		"dutch-version-below": "(Nederlandse versie hieronder)",
-		"french-version-below": "(Franse versie hieronder)",
-		"header": "Meldingen",
-		"valid-until": "Bericht is geldig tot:"
-	},
-	"overlay-info-drawer": {
-		"button": "Wat zie je op dit scherm?",
-		"button-close": "Sluiten"
-	},
-	"push-notification-subscription": {
-		"brussels": "Brussel - Leefmilieu Brussel - NL/FR",
-		"flanders": "Vlaanderen - Vlaamse Milieumaatschappij (VMM) - NL",
-		"header": "Meldingen",
-		"wallonia": "Wallonië - Agence wallonne de l'air et du climat (AwAC) - FR"
-	},
-	"refresh-button": {
-		"message": "Vernieuw alles"
-	},
-	"refresh": {
-		"pull-message": "Trek naar beneden om te vernieuwen"
-	},
-	"settings": {
-		"about": {
-			"header": "Over de app",
-			"version": "Versie"
-		},
-		"clear-cache": {
-			"button": "Cache wissen",
-			"confirm": "Cache is gewist."
-		},
-		"common": "Algemeen",
-		"header": "Instellingen",
-		"select-language": "Kies een taal",
-		"show-introduction": "Toon introductie",
-		"start-page": {
-			"header": "Instellingen startpagina",
-			"show-annual-mean-panel": "Toon de langetermijnimpact op de startpagina",
-			"show-nearest-stations": "Toon dichtstbijgelegen meetstations op de startpagina",
-			"show-sub-index-panel": "Toon de kortetermijnimpact op de startpagina"
-		},
-		"user-locations": {
-			"create-new-location": "Maak een nieuwe locatie aan",
-			"edit-location": "Bewerk locatie",
-			"header": "Gebruikerslocaties",
-			"show-nearest-series-by-default": "Toon de dichtstbijgelegen metingen in het diagram"
-		}
-	},
-	"single-chart": {
-		"error": "Er is een fout opgetreden bij het laden van het diagram.",
-		"loading": "bezig met laden"
-	},
-	"start": {
-		"overlay": {
-			"content-p1": "De impact van de luchtkwaliteit wordt berekend aan de hand van de luchtkwaliteitsindex. Dat is een cijfer tussen 1 en 10, waarbij 10 staat voor erg slechte en 1 voor uitstekende luchtkwaliteit. De app baseert zich voor deze score op data van meetstations in heel België, het weer en verkeer en relevante verontreinigende stoffen.",
-			"content-p2": "Elk uur wordt het indexcijfer voor de gekozen locatie vernieuwd. De app geeft je ook een voorspelling van de BelAQI index de volgende uren en dagen.",
-			"content-p3": "De luchtkwaliteitsindex weerspiegelt de impact op de gezondheid op korte termijn. Die impact kan van uur tot uur verschillen en leiden tot tijdelijke gezondheidsproblemen. Bij hogere concentraties van luchtvervuilende stoffen kunnen acute effecten optreden, zoals een astma- of zelfs een hartaanval.",
-			"content-p4": "Langdurige blootstelling aan luchtvervuilende stoffen kan chronische effecten uitlokken en kan voor een hoger risico op hart- en longziekten waaronder longkanker zorgen.",
-			"header": "Wat zie je op dit scherm?"
-		}
-	},
-	"sub-index-panel": {
-		"header": "Korte termijn blootstelling",
-		"information-popup": {
-			"link": "https://www.irceline.be/nl/belaqi",
-			"moreInfo": "Meer info",
-			"no2": "NO2 of stikstofdioxide (uurgemiddelde)",
-			"o3": "O3 of ozon (uurgemiddelde)",
-			"pm10": "PM10 of fijn stof met een diameter kleiner dan 10 micrometer (glijdend 24-uurgemiddelde)",
-			"pm25": "PM2.5 of fijn stof met een diameter kleiner dan 2,5 micrometer (glijdend 24-uurgemiddelde)",
-			"text": "Dit zijn de berekende \"subindexen\" voor uw locatie. De globale BelAQI index is de hoogste waarde van deze 4 subindexen. De concentratieschalen werden bepaald in functie van de kortetermijnimpact op de gezondheid. De 4 polluenten die gebruikt worden om de BelAQI-index te berekenen zijn:"
-		}
-	},
-	"survey": {
-		"confirm": "Naar de enquête >",
-		"header": "Gebruikersbevraging",
-		"help-us": "Help ons de app verbeteren",
-		"link": "https://nl.surveymonkey.com/r/VNBBPD6",
-		"notagain": "Nee, bedankt!",
-		"question": "Jouw feedback is belangrijk. Ben je bereid enkele vragen te beantwoorden? Het duurt slechts 2 min."
-	},
-	"user-location-list": {
-		"header": "Lijst van de locaties"
-	},
-	"user-location-notification-toggler": {
-		"backend-registration-error": "Backend fout",
-		"button": "Meldingen",
-		"default-error": "Standaardfout",
-		"notification-error": "Meldingfout"
-	},
-	"user-location": {
-		"creation": {
-			"geolocation-error": "Locatie niet gevonden",
-			"limit-reached": "U kunt niet meer dan 5 locaties opslaan. Verwijder eerst een van de bestaande locaties.",
-			"message-added": "Locatie toegevoegd",
-			"message-exists": "Locatie bestaat al"
-		}
+		"geolocationDisabled": "Geolocatie is uitgeschakeld"
 	},
 	"v2": {
 		"components": {
@@ -293,8 +41,8 @@
 				"send-observation": "Verstuur waarneming"
 			},
 			"information-item": {
-				"personal-calculation": "berekend op jouw locatie,",
-				"average": "gemiddeld is dit"
+				"average": "gemiddeld is dit",
+				"personal-calculation": "berekend op jouw locatie,"
 			},
 			"location-input": {
 				"choose-location": "Kies je locatie",
@@ -331,13 +79,10 @@
 				"aq-index": "We beoordelen de impact van de <strong>algemene luchtkwaliteit</strong> op korte termijn op basis van een luchtkwaliteitsindex.",
 				"aq-index-2": "Die geeft aan elk van de <strong>berekende concentraties van verschillende verontreinigende stoffen</strong> één score (b.v. heel goed). De slechtste score bepaalt de algemene luchtkwaliteit.",
 				"belaqi-title": "",
-				"check-lt-data": "Je kan deze inschattingen bekijken in het menu via <strong>‘blootstelling op lange termijn’</strong>.",
 				"current-items": "De stoffen die we in rekening brengen, zijn:",
 				"data-models": "Door op deze data modellen toe te passen, berekenen we of de impact van de luchtkwaliteit op lange termijn beter of slechter wordt.",
 				"fine-dust": "Fijn stof",
-				"how-calculated": "Hoe worden deze waarden berekend?",
 				"how-this-works": "Hoe werkt dit?",
-				"learn-more": "Meer weten over de Vlaamse Milieumaatschappij?",
 				"nitrogen-dioxide": "Stikstofdioxide",
 				"notifications": "Als de metingen de waarschuwings- waarde overschrijden, sturen we je een melding. Je kan je meldingen beheren via het menu.",
 				"ozon": "Ozon",
@@ -346,7 +91,6 @@
 			"long-term-info": {
 				"about-data": "De data is het resultaat van onze rekenmodellen op lange termijn.",
 				"data-loading": "De gegevens voor de langetermijnweergave worden geladen.",
-				"from-where": "Van waar kom deze info",
 				"long-term": "Lange termijn",
 				"lt-effects-diseases": "Langdurige blootstelling aan luchtvervuilende stoffen kan chronische effecten uitlokken en voor een hoger risico op hart- en longziekten zorgen."
 			},
@@ -360,7 +104,6 @@
 				"belair-info": "Informatie over Belair",
 				"language": "Taal",
 				"locations": "Locaties",
-				"long-term-exposure": "Blootstelling op lange termijn",
 				"notifications": "Notificaties",
 				"version": "versie",
 				"workings": "(hoe werkt de applicatie)"
@@ -382,12 +125,5 @@
 				"possible-causes": "Mogelijke oorzaken van een afwijking zijn:"
 			}
 		}
-	},
-	"welcome": {
-		"button": "Geef jouw locatie in",
-		"text-p1": "Hoe is het gesteld met de impact van de luchtkwaliteit op jouw locatie? Dat weet de BelAir app je meteen te vertellen.",
-		"text-p2": "De BelAir app baseert zich op data van meetstations, verspreid doorheen heel België. Die data worden omgezet in een BelAQI-luchtkwaliteitsindex. Je krijgt een cijfer tussen 1 en 10 dat meteen de impact inschat van de actuele luchtkwaliteit op jouw gezondheid.",
-		"text-p3": "Om dat cijfer te berekenen, wordt er gekeken naar meerdere relevante, vervuilende stoffen op jouw locatie zoals stikstofdioxide, ozon en fijn stof.",
-		"title": "Welkom bij"
 	}
 }

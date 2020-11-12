@@ -1,25 +1,4 @@
 {
-	"annual-mean-panel": {
-		"header": "Exposition à long terme",
-		"information-popup": {
-			"text": "Le NO2 (dioxyde d'azote), les PM10 (particules d'un diamètre inférieur à 10 micromètres) et les PM2,5 (particules d'un diamètre inférieur à 2,5 micromètres) sont les trois polluants majeurs pour lesquels il existe de nombreuses preuves scientifiques en ce qui concerne l'impact à long terme sur la santé."
-		}
-	},
-	"belaqi-chart": {
-		"error": "Malheureusement, une erreur est survenue lors du chargement du graphique."
-	},
-	"belaqi-user-location-slider": {
-		"create-new-location": "Ajouter une nouvelle localisation",
-		"current-location": "Localisation actuelle",
-		"current-location-description": "Activez cette option pour afficher les données de qualité de l’air pour votre localisation actuelle.",
-		"current-location-error-header": "Votre appareil n'a pas pu établir votre localisation actuelle.",
-		"loading-current-location": "Votre appareil cherche actuellement votre localisation"
-	},
-	"belaqi-wheel": {
-		"error-occured": "La récupération des données prend trop de temps. Veuillez réessayer plus tard.",
-		"loading": "Chargement de l'indice BelAQI ...",
-		"no-index-ascertained": "Aucun indice BelAQI n'a pu être déterminé. Cela peut être le cas avec des problèmes techniques avec nos serveurs ou si votre localisation n'est pas en Belgique."
-	},
 	"belaqi": {
 		"date": {
 			"before-three-days": "Il y a 3 jours",
@@ -30,18 +9,6 @@
 			"today": "Aujourd 'hui",
 			"tomorrow": "Demain",
 			"yesterday": "Hier"
-		},
-		"level-split": {
-			"bad": "Mauvais",
-			"excellent": "Excellent",
-			"fairly-good": "Assez bon",
-			"good": "Bon",
-			"horrible": "Exécrable",
-			"moderate": "Moyen",
-			"poor": "Médiocre",
-			"very-bad": "Très mauvais",
-			"very-good": "Très bon",
-			"very-poor": "Très médiocre"
 		},
 		"level": {
 			"bad": "Mauvais",
@@ -60,228 +27,9 @@
 		"cancel": "Annuler",
 		"ok": "Enregistrer la location"
 	},
-	"diagram": {
-		"chart": {
-			"hourlyMeanGreyand24hmeanBelaqiColors": "Moyenne horaire (gris) et moyenne sur 24 heures (couleurs BelAQI)",
-			"timelabelHmeanBelaqiColors": "Moyenne horaire (couleurs BelAQI)",
-			"timelabelHmeanGrey": "Moyenne horaire (gris)"
-		},
-		"header": "Graphique",
-		"overlay": {
-			"attention": "Attention:",
-			"content-p1": "Ces graphiques donnent l'évolution horaire mesurée dans les stations de mesure officielles les plus proches de vos positions configurées. Les séries temporelles des polluants qui constituent l'indice BelAQI sont colorées en fonction de cet indice.",
-			"content-p2": "Pour les particules (diamètre inférieur à 2,5 et 10 micromètres), seules les séries temporelles de la moyenne glissante sur 24 heures sont colorées, car c'est la moyenne glissante sur 24 heures qui est utilisée pour calculer l'indice BelAQI, et non les moyennes horaires. La raison en est que les effets sur la santé des particules sont associés à une exposition de 24 heures.",
-			"content-p3": "L'indice fourni ailleurs par l'application pour votre location n'est pas uniquement basé sur les résultats des stations des réseaux de surveillance, car la station la plus proche peut se trouver à plusieurs kilomètres. Ces mesures aux stations sont intégrées dans le modèle, qui prend également en compte les données d'émission (trafic, industrie et navigation) et les conditions météorologiques (direction et vitesse du vent) pour calculer les concentrations en tout endroit du territoire. Les concentrations calculées en dioxyde d'azote, particules et ozone sont alors intégrés dans l'indice BelAQI de la localisation choisie.",
-			"header": "Que voyez-vous sur cet écran?",
-			"url-svg": "../../assets/svg/belaqi_FR.svg"
-		}
-	},
-	"header": {
-		"oldDataWarning": "La dernière mise à jour est antérieure à la normale en raison d'un problème technique. Nous faisons de notre mieux pour résoudre le problème rapidement."
-	},
-	"home": {
-		"header": "Accueil"
-	},
-	"info": {
-		"chart": {
-			"message": "Ce graphique montre l'évolution de l'indice de qualité de l'air BelAQI. La ligne bleue verticale indique la valeur horaire actuelle."
-		},
-		"moreInfo": "Plus d'info",
-		"wheel": {
-			"link": "https://www.irceline.be/fr/belaqi",
-			"message": "Cet indicateur est une estimation modélisée pour le quartier correspondant à votre localisation. L'indice de qualité de l'air BelAQI est le plus défavorable des 4 sous-indices calculés pour les différents polluants (PM10, PM2.5, O3 et NO2) selon une échelle pondérée par leur impact santé"
-		}
-	},
-	"intro": {
-		"close-introduction": "Fermer",
-		"four": {
-			"header": "Notifications personnalisées"
-		},
-		"header": "Introduction",
-		"next-step": "Suivant",
-		"one": {
-			"header": "Choisissez une langue",
-			"option": {
-				"dutch": "Nederlands",
-				"english": "English",
-				"french": "Français",
-				"german": "Deutsch"
-			}
-		},
-		"prev-step": "Précédent",
-		"three": {
-			"addLocationToList": "Ajouter à la liste de localisations",
-			"baseOnCurrentLocation": "Utiliser la localisation actuelle",
-			"header": "Choisissez les localisations pour lesquelles vous souhaitez recevoir des notifications personnalisées",
-			"locationLabelHint": "Renommer la localisation",
-			"locationLabelPlaceholder": "p.e. \"À la maison\", \"Travail\", \"École\"",
-			"showLocationList": "Voir les localisations actuelles"
-		},
-		"two": {
-			"header": "Pour quelle région souhaitez-vous recevoir des notifications officielles?"
-		}
-	},
-	"map": {
-		"error": "Une erreur s'est produite. Il est impossible de charger les données pour le polluant sélectionné. Veuillez réessayer plus tard.",
-		"geosearch": {
-			"placeholder": "Recherche la localisation ..."
-		},
-		"header": "Carte",
-		"index": "Indice BelAQI",
-		"nearest-station": "Station de mesure la plus proche",
-		"opacity-slider-header": "Transparence",
-		"overlay": {
-			"content-p1": "La carte vous donne un aperçu de la qualité de l'air en Belgique. À l'aide d'un code de couleur, vous pouvez comparer la qualité de l'air de votre localisation avec celle d'autres sites. Le rouge indique une très mauvaise qualité de l'air, tandis que le bleu en représente une excellente.",
-			"content-p2": "L'indice de l'emplacement choisi est mis à jour toutes les heures. L'application vous donne également des prédictions de l'indice BelAQI pour les prochaines heures et les prochains jours.",
-			"header": "Que voyez-vous sur cet écran?",
-			"url-svg": "../../assets/svg/belaqi_FR.svg"
-		},
-		"timestepLabels": {
-			"24hmean": "moyenne sur 24 heure courante",
-			"anmean": "moyenne annuelle",
-			"belaqi_current": "BelAQI actuel",
-			"belaqi_forecast_today": "prévision BelAQI aujourd'hui",
-			"belaqi_forecast_today+2": "prévision BelAQI dans 2 jours",
-			"belaqi_forecast_today+3": "prévision BelAQI dans 3 jours",
-			"belaqi_forecast_tomorrow": "prévision BelAQI demain",
-			"dmean_forecast_today": "prévision moyenne journalière aujourd'hui",
-			"dmean_forecast_today+2": "prévision moyenne journalière dans 2 jours",
-			"dmean_forecast_today+3": "prévision moyenne journalière dans 3 jours",
-			"dmean_forecast_tomorrow": "prévision moyenne journalière demain",
-			"hmean": "moyenne horaire actuelle",
-			"loading": "chargement en cours",
-			"longterm": "exposition à long terme",
-			"maxhmean_forecast_today": "prévision moyenne horaire maximum aujourd'hui",
-			"maxhmean_forecast_today+2": "prévision moyenne horaire maximum dans 2 jours",
-			"maxhmean_forecast_today+3": "prévision moyenne horaire maximum dans 3 jours",
-			"maxhmean_forecast_tomorrow": "prévision moyenne horaire maximum demain",
-			"shortterm": "exposition à court terme"
-		}
-	},
-	"menu": {
-		"lastUpdate": "Dernière mise à jour"
-	},
-	"nearest-measuring-station-panel": {
-		"error": "Une erreur s'est produite. Il est impossible de charger les données pour les stations de mesure la plus proche. Veuillez réessayer plus tard.",
-		"header": "Station de mesure la plus proche",
-		"information-popup": {
-			"list-bc": "ou black carbon",
-			"list-no2": "ou dioxyde d'azote",
-			"list-o3": "ou ozone",
-			"list-pm10": "ou particules d'un diamètre inférieur à 10 micromètres",
-			"list-pm25": "ou particules d'un diamètre inférieur à 2,5 micromètres",
-			"text": "Les concentrations mesurées par les stations les plus proches sont données ici. Les différents polluants sont:"
-		}
-	},
 	"network": {
 		"geolocationDenied": "Vous n'avez pas autorisé l'utilisation de votre géolocalisation dans l'application.",
-		"geolocationDeniedExplanation": "Si vous souhaitez utiliser les fonctionnalités \"position actuelle\", vous pouvez activer le service de localisation de votre appareil ici.",
-		"geolocationDisabled": "La géolocalisation est désactivée",
-		"geolocationDisabledExplanation": "Si vous souhaitez utiliser les fonctionnalités \"position actuelle\", activez le service de localisation de votre appareil."
-	},
-	"no-network-connection": {
-		"body": "Votre appareil n'a pas de connexion réseau. L'application BelAir dépend des données extraites de nos serveurs. Veuillez vous connecter aux données mobiles ou à un réseau wifi et actualiser l'application.",
-		"close": "Fermer",
-		"header": "Pas de connexion de données"
-	},
-	"notifications-popup": {
-		"channels": "Pour votre canal de notification:",
-		"dutch-version-below": "(Version néerlandaise ci-dessous)",
-		"french-version-below": "(Version française ci-dessous)",
-		"header": "Notifications",
-		"valid-until": "Le message est valable jusqu'au:"
-	},
-	"overlay-info-drawer": {
-		"button": "Que voyez-vous sur cet écran?",
-		"button-close": "Fermer"
-	},
-	"push-notification-subscription": {
-		"brussels": "Bruxelles - Brussels Environment - NL/FR",
-		"flanders": "Flandre - Vlaamse Milieumaatschappij (VMM) - NL",
-		"header": "Notifications",
-		"wallonia": "Wallonie - Agence wallonne de l’air et du climat (AwAC) - FR"
-	},
-	"refresh-button": {
-		"message": "Actualiser"
-	},
-	"refresh": {
-		"pull-message": "Glissez l'écran vers le bas pour actualiser"
-	},
-	"settings": {
-		"about": {
-			"header": "A propos de l'application",
-			"version": "Version"
-		},
-		"clear-cache": {
-			"button": "Vider le cache",
-			"confirm": "Le cache est effacé."
-		},
-		"common": "Paramètres généraux",
-		"header": "Paramètres",
-		"select-language": "Sélectionnez une langue",
-		"show-introduction": "Voir l'introduction",
-		"start-page": {
-			"header": "Paramètres page d'accueil",
-			"show-annual-mean-panel": "Afficher les moyennes annuelles sur la page d'accueil",
-			"show-nearest-stations": "Afficher les stations de mesure les plus proches sur la page d'accueil",
-			"show-sub-index-panel": "Afficher les sous-indices BelAQI sur la page d'accueil"
-		},
-		"user-locations": {
-			"create-new-location": "Ajouter une nouvelle localisation",
-			"edit-location": "Modifier la localisation",
-			"header": "Localisations",
-			"show-nearest-series-by-default": "Montrer les mesures les plus proches dans le graphique"
-		}
-	},
-	"single-chart": {
-		"error": "Une erreur s'est produite lors du chargement du diagramme.",
-		"loading": "chargement en cours"
-	},
-	"start": {
-		"overlay": {
-			"content-p1": "L'impact de la qualité de l'air est résumé sous la forme d'un indice de qualité de l'air. Il s’agit d’un chiffre compris entre 1 et 10, où 10 correspond à très médiocre et 1 à une excellente qualité d’air. Pour le calculer, l'application est basée sur des données provenant des stations de surveillance belges, sur la météo, le trafic et les polluants pertinents.",
-			"content-p2": "L'indice de l'emplacement choisi est mis à jour toutes les heures. L'application vous donne également des prédictions de l'indice BelAQI pour les prochaines heures et les prochains jours.",
-			"content-p3": "L'indice de la qualité de l'air reflète l'impact sur la santé à court terme. Cet impact peut varier d’une heure à l’autre et entraîner des problèmes de santé temporaires. À des concentrations très élevées de polluants atmosphériques, des effets aigus peuvent survenir, tels que l'asthme ou, à l'extrême, une crise cardiaque.",
-			"content-p4": "Une exposition prolongée aux polluants atmosphériques peut provoquer des effets chroniques et augmenter le risque de maladies cardiaques et pulmonaires, y compris le cancer du poumon.",
-			"header": "Que voyez-vous sur cet écran?"
-		}
-	},
-	"sub-index-panel": {
-		"header": "Exposition à court terme",
-		"information-popup": {
-			"link": "https://www.irceline.be/fr/belaqi",
-			"moreInfo": "Plus d'info",
-			"no2": "NO2 ou dioxyde d'azote (moyenne horaire)",
-			"o3": "O3 ou ozone (moyenne horaire)",
-			"pm10": "PM10 ou particules d'un diamètre inférieur à 10 micromètres (moyenne glissant sur 24 heures)",
-			"pm25": "PM2.5 ou particules d'un diamètre inférieur à 2.5 micromètres (moyenne glissant sur 24 heures)",
-			"text": "Ce sont les \"sous-indices\" calculés pour votre localisation. L'indice BelAQI global est la valeur la plus élevée de ces 4 sous-indices. Les échelles de concentration ont été déterminées en fonction de l’impact à court terme sur la santé. Les 4 polluants utilisés pour calculer BelAQI sont:"
-		}
-	},
-	"survey": {
-		"confirm": "À l'enquête >",
-		"header": "Enquête d'utilisateurs",
-		"help-us": "Aidez-nous à améliorer l'application",
-		"link": "https://fr.surveymonkey.com/r/GJ7SGQX",
-		"notagain": "Non merci!",
-		"question": "Vos commentaires sont importants. Êtes-vous prêt à répondre à quelques questions? Cela ne prend que 2 minutes."
-	},
-	"user-location-list": {
-		"header": "Liste des localisations"
-	},
-	"user-location-notification-toggler": {
-		"backend-registration-error": "Erreur de backend",
-		"button": "Notifications",
-		"default-error": "Erreur par défaut",
-		"notification-error": "Erreur de notification"
-	},
-	"user-location": {
-		"creation": {
-			"geolocation-error": "localisation non trouvé",
-			"limit-reached": "Vous ne pouvez pas créer plus de 5 localisations. Veuillez d'abord supprimer une des localisations existantes.",
-			"message-added": "localisation ajoutée",
-			"message-exists": "La localisation existe déjà"
-		}
+		"geolocationDisabled": "La géolocalisation est désactivée"
 	},
 	"v2": {
 		"components": {
@@ -293,8 +41,8 @@
 				"send-observation": "Envoyer l'observation"
 			},
 			"information-item": {
-				"personal-calculation": "calculé pour votre localisation.",
-				"average": "En moyenne, c'est"
+				"average": "En moyenne, c'est",
+				"personal-calculation": "calculé pour votre localisation."
 			},
 			"location-input": {
 				"choose-location": "Choisissez votre localisation",
@@ -331,13 +79,10 @@
 				"aq-index": "Nous évaluons l'impact à court terme de la <strong>qualité générale de l'air</strong> sur la base d'un indice de qualité de l'air.",
 				"aq-index-2": "Chacune des <strong>concentrations calculées pour les différents polluants</strong> donne un score (ex. très bon). Le score le plus mauvais détermine l'indice global de qualité de l'air.",
 				"belaqi-title": "",
-				"check-lt-data": "Vous pouvez consulter ces estimations dans le menu via <strong>'exposition à long terme'.</strong>.",
 				"current-items": "Les polluants utilisés dans le calcul sont:",
 				"data-models": "En appliquant des modèles à ces données, nous calculons si l'impact de la qualité de l'air s'améliorera ou se détériorera à long terme.",
 				"fine-dust": "Particules fines",
-				"how-calculated": "Comment ces valeurs sont-elles calculées?",
 				"how-this-works": "Comment cela marche-t-il?",
-				"learn-more": "Vous souhaitez en savoir plus sur l'Agence flamande de l'environnement?",
 				"nitrogen-dioxide": "Dioxyde d'azote",
 				"notifications": "Si les mesures dépassent la valeur d'avertissement, nous vous enverrons une notification. Vous pouvez gérer vos notifications via le menu.",
 				"ozon": "Ozone",
@@ -346,7 +91,6 @@
 			"long-term-info": {
 				"about-data": "Les données sont le résultat de nos modèles de calcul à long terme.",
 				"data-loading": "Les données de l'affichage à long terme sont en cours de chargement.",
-				"from-where": "D'où viennent ces informations?",
 				"long-term": "Long terme",
 				"lt-effects-diseases": "Une exposition prolongée aux polluants atmosphériques peut produire des effets chroniques et augmenter le risque de maladies cardiaques et pulmonaires."
 			},
@@ -360,7 +104,6 @@
 				"belair-info": "Information sur Belair",
 				"language": "Langue",
 				"locations": "Localisation",
-				"long-term-exposure": "Exposition à long terme",
 				"notifications": "Notifications",
 				"version": "version",
 				"workings": "(comment fonctionne l'application)"
@@ -382,12 +125,5 @@
 				"possible-causes": "Les causes possibles d'un écart sont:"
 			}
 		}
-	},
-	"welcome": {
-		"button": "Entrez votre localisation",
-		"text-p1": "Quel est l'impact de la qualité de l'air à votre emplacement? L'application BelAir vous l'indique de suite.",
-		"text-p2": "L'application BelAir est basée sur des données provenant des stations de surveillance dans toute la Belgique. Ces données sont converties en un indice de qualité de l’air BelAQI. Vous obtenez un score entre 1 et 10 qui évalue immédiatement l'impact de la qualité de l'air actuelle sur votre santé.",
-		"text-p3": "Pour calculer ce chiffre, nous prenons en compte les polluants majeurs présents chez vous: le dioxyde d'azote, l'ozone et les particules.",
-		"title": "Bienvenue"
 	}
 }
