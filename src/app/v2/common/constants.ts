@@ -1,3 +1,15 @@
+import { marker } from '@biesbjerg/ngx-translate-extract-marker';
+marker('belaqi.level.excellent');
+marker('belaqi.level.very-good');
+marker('belaqi.level.good');
+marker('belaqi.level.fairly-good');
+marker('belaqi.level.moderate');
+marker('belaqi.level.poor');
+marker('belaqi.level.very-poor');
+marker('belaqi.level.bad');
+marker('belaqi.level.very-bad');
+marker('belaqi.level.horrible');
+
 export const backgroundImages = {
     10: '/assets/images/backgrounds/1.svg',
     9: '/assets/images/backgrounds/2.svg',

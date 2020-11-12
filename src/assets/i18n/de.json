@@ -1,25 +1,4 @@
 {
-	"annual-mean-panel": {
-		"header": "Langzeitbelastung",
-		"information-popup": {
-			"text": "NO2 (Stickstoffdioxid), PM10 (Partikel mit einem Durchmesser von weniger als 10 Mikrometern) und PM2,5 (Partikel mit einem Durchmesser von weniger als 2,5 Mikrometern) sind die drei Schadstoffe, für die hinsichtlich der langfristigen Auswirkungen auf die Gesundheit die wissenschaftliche Beweislast am höchsten ist."
-		}
-	},
-	"belaqi-chart": {
-		"error": "Bei der Ermittlung des Graphen ist leider ein Fehler aufgetreten."
-	},
-	"belaqi-user-location-slider": {
-		"create-new-location": "Erstelle einen neuen Standort",
-		"current-location": "Aktuelle Position",
-		"current-location-description": "Aktivieren Sie diese Option, um Luftqualitätsdaten für Ihren aktuellen Standort anzuzeigen.",
-		"current-location-error-header": "Ihr Gerät konnte Ihren aktuellen Standort nicht ermitteln.",
-		"loading-current-location": "Ihr Gerät ermittelt Ihren aktuelle Standort"
-	},
-	"belaqi-wheel": {
-		"error-occured": "Es dauert länger als üblich um den BelAQI index zu ermittlen. Bitte versuchen Sie es später erneut.",
-		"loading": "BelAQI-Index wird geladen ...",
-		"no-index-ascertained": "Ein BelAQI-Index konnte nicht berechnet werden. Dies kann bei technischen Problemen mit unseren Servern der Fall sein oder wenn sich der Standort nicht in Belgien befindet."
-	},
 	"belaqi": {
 		"date": {
 			"before-three-days": "Vor 3 Tagen",
@@ -30,18 +9,6 @@
 			"today": "Heute",
 			"tomorrow": "Morgen",
 			"yesterday": "Gestern"
-		},
-		"level-split": {
-			"bad": "Schlecht",
-			"excellent": "Ausge- zeichnet",
-			"fairly-good": "Relativ gut",
-			"good": "Gut",
-			"horrible": "Extrem schlecht",
-			"moderate": "Mittel- mäßig",
-			"poor": "Unge- nügend",
-			"very-bad": "Sehr schlecht",
-			"very-good": "Sehr gut",
-			"very-poor": "Relativ schlecht"
 		},
 		"level": {
 			"bad": "Schlecht",
@@ -61,236 +28,17 @@
 		"close": "Schließen",
 		"ok": "Ok"
 	},
-	"show-feedback-stats-button": "Zeige Feedback Statistiken",
 	"feedback-reason": {
-		"woodburn": "Verbranding van hout",
-		"traffic": "Uitlaatgassen van verkeer",
-		"agriculture": "Uitstoot door landbouw",
-		"industry": "Uitstoot door industrie"
-	},
-	"diagram": {
-		"chart": {
-			"hourlyMeanGreyand24hmeanBelaqiColors": "Stundenmittelwert (grau) und laufender 24-Stundenmittelwert (BelAQI-Farben)",
-			"timelabelHmeanBelaqiColors": "Stundenmittelwert (BelAQI-Farben)",
-			"timelabelHmeanGrey": "Stundenmittelwert (grau)"
-		},
-		"header": "Graph",
-		"overlay": {
-			"attention": "Vorsicht: ",
-			"content-p1": "Die Diagramme geben die stündliche Entwicklung wieder, die in den nächstgelegenen offiziellen Überwachungsstationen von den durch Ihnen konfigurierten Standorten gemessen wurden. Die Zeitreihen der Schadstoffe, die Bestandteil des BelAQI-Index sind, sind entsprechend diesem Index eingefärbt.",
-			"content-p2": "Bei Feinstaub (Durchmesser von weniger als 2,5 und 10 Mikrometern) werden nur die laufender 24-Stundenmittelwertzeitreihen gefärbt, da der laufende 24-Stundenmittelwert Teil des BelAQI-index ist und nicht die Stundenmittelwerte. Der Grund dafür ist, dass gesundheitliche Auswirkungen von Partikeln mit einer 24-Stunden-Exposition verbunden sind.",
-			"content-p3": "Der an anderen Stellen von der App angegebene Index für ihren Standort, basiert nicht nur auf den Ergebnissen aller Überwachungsstationen in unseren Überwachungsnetzwerken, bei denen die nächste Station möglicherweise mehrere Kilometer entfernt ist. Die an allen staatlichen Überwachungsstationen gemessenen Konzentrationen werden zu einem Computermodell addiert, das auch Emissionsdaten (Verkehr, Industrie und Versand) und meteorologischen Bedingungen (Windrichtung und Windgeschwindigkeit) berücksichtigt. Dieses Computermodell berechnet dann detaillierte Luftqualitätskarten für das ganse Land. Die Kombination der Ergebnisse für Stickstoffdioxid, Partikel und Ozon wird in der App als ein Index angezeigt.",
-			"header": "Was sehen Sie auf diesem Bildschirm?",
-			"url-svg": "../../assets/svg/belaqi_DE.svg"
-		}
-	},
-	"header": {
-		"oldDataWarning": "Das neueste Update ist aufgrund eines technischen Problems älter als normal. Wir tun unser Bestes, um das Problem schnell zu lösen."
-	},
-	"home": {
-		"header": "Start"
-	},
-	"info": {
-		"chart": {
-			"message": "Diese Grafik zeigt die Entwicklung des BelAQI Luftqualitätsindex. Die vertikale blaue Linie repräsentiert den aktuellen Wert."
-		},
-		"moreInfo": "Mehr Info",
-		"wheel": {
-			"link": "https://www.irceline.be/en/belaqi",
-			"message": "Dieser Indikator zeigt den aktuellen BelAQI-Luftqualitätsindex für Ihren Standort an. Dieser Index kombiniert die modellierten Konzentrationen der verschiedenen Schadstoffe in Abhängigkeit von ihren Auswirkungen auf die Gesundheit."
-		}
-	},
-	"intro": {
-		"close-introduction": "",
-		"four": {
-			"header": "Personalisierte Benachrichtigungen"
-		},
-		"header": "Einführung",
-		"next-step": "Nächste",
-		"one": {
-			"header": "Wählen Sie eine Sprache",
-			"option": {
-				"dutch": "Nederlands",
-				"english": "English",
-				"french": "Français",
-				"german": "Deutsch"
-			}
-		},
-		"prev-step": "Zurück",
-		"three": {
-			"addLocationToList": "Füge zur Liste der Standorte",
-			"baseOnCurrentLocation": "Nutze aktuellen Standort",
-			"header": "Wählen Sie die Standorte aus, für die Sie personalisierte Benachrichtigungen erhalten möchten",
-			"locationLabelHint": "Änder die Standortbezeichnung",
-			"locationLabelPlaceholder": "z.B. \"Zuhause\", \"Arbeit\", \"Schule\"",
-			"showLocationList": "Zeige vorhandene Standorte"
-		},
-		"two": {
-			"header": "Für welche Region möchten Sie offizielle Benachrichtigungen erhalten?"
-		}
-	},
-	"map": {
-		"error": "Ein Fehler ist aufgetreten. Es konnten keine Daten für den ausgewählten Schadstoff abgerufen werden. Bitte versuchen Sie es später erneut.",
-		"geosearch": {
-			"placeholder": "Suche..."
-		},
-		"header": "Karte",
-		"index": "BelAQI-Index",
-		"nearest-station": "Nächstgelegene Überwachungsstation",
-		"opacity-slider-header": "Transparenz",
-		"overlay": {
-			"content-p1": "Die Karte gibt Ihnen einen Überblick über die Luftqualität in Belgien. Mit einem Farbcode können Sie die Luftqualität an Ihrem Standort mit der anderer Standorte vergleichen. Rot ist sehr schlecht, während Blau für eine hervorragende Luftqualität steht.",
-			"content-p2": "Der Index für den ausgewählten Standort wird stündlich aktualisiert. Die App gibt Ihnen auch Vorhersagen des BelAQI-Index für die nächsten Stunden und Tage.",
-			"header": "Was sehen Sie auf diesem Bildschirm?",
-			"url-svg": "../../assets/svg/belaqi_DE.svg"
-		},
-		"timestepLabels": {
-			"24hmean": "laufender 24-Stundenmittelwert",
-			"anmean": "Jahresmittelwert",
-			"belaqi_current": "BelAQI aktuell",
-			"belaqi_forecast_today": "Vorhersage BelAQI heute",
-			"belaqi_forecast_today+2": "Vorhersage BelAQI in 2 Tagen",
-			"belaqi_forecast_today+3": "Vorhersage BelAQI in 3 Tagen",
-			"belaqi_forecast_tomorrow": "Vorhersage BelAQI morgen",
-			"dmean_forecast_today": "Vorhersage Tagesmittelwert heute",
-			"dmean_forecast_today+2": "Vorhersage Tagesmittelwert in 2 Tagen",
-			"dmean_forecast_today+3": "Vorhersage Tagesmittelwert in 3 Tagen",
-			"dmean_forecast_tomorrow": "Vorhersage Tagesmittelwert morgen",
-			"hmean": "Stundenmittelwert",
-			"loading": "Beschäftigt zu laden",
-			"longterm": "Langzeitbelastung",
-			"maxhmean_forecast_today": "Vorhersage höchster Stundenmittelwert heute",
-			"maxhmean_forecast_today+2": "Vorhersage höchster Stundenmittelwert in 2 Tagen",
-			"maxhmean_forecast_today+3": "Vorhersage höchster Stundenmittelwert in 3 Tagen",
-			"maxhmean_forecast_tomorrow": "Vorhersage höchster Stundenmittelwert morgen",
-			"shortterm": "Kurzzeitbelastung"
-		}
-	},
-	"menu": {
-		"lastUpdate": "Letztes Update"
-	},
-	"nearest-measuring-station-panel": {
-		"error": "Ein Fehler ist aufgetreten. Es konnten keine Daten für die nächstgelegenen Überwachungsstationen abgerufen werden. Bitte versuchen Sie es später erneut.",
-		"header": "Nächstgelegene Überwachungsstation",
-		"information-popup": {
-			"list-bc": "oder black carbon",
-			"list-no2": "oder Stickstoffdioxid",
-			"list-o3": "oder Ozon",
-			"list-pm10": "oder Partikel mit einem Durchmesser kleiner als 10 Mikrometer",
-			"list-pm25": "oder Partikel mit einem Durchmesser kleiner als 2,5 Mikrometer",
-			"text": "Die tatsächlich gemessenen Konzentrationen der nächstgelegenen Überwachungsstationen werden hier angegeben. Die verschiedenen Schadstoffe sind:"
-		}
+		"agriculture": "Emissionen aus der Landwirtschaft",
+		"industry": "Emissionen aus der Industrie",
+		"traffic": "Abgase aus dem Verkehr",
+		"woodburn": "Verbrennen von Holz"
 	},
 	"network": {
 		"geolocationDenied": "Sie haben der App die Standortermittlung nicht erlaubt.",
-		"geolocationDeniedExplanation": "Falls sie die \"Aktuelle Position\"-funktionalitäten nutzen wollen, können Sie hier den Standortdienst Ihres Geräts aktivieren.",
-		"geolocationDisabled": "Die Standortermittlung ist deaktiviert",
-		"geolocationDisabledExplanation": "Falls sie die \"Aktuelle Position\"-funktionalitäten nutzen wollen, aktivieren sie bitte den Standortdienst Ihres Geräts."
+		"geolocationDisabled": "Die Standortermittlung ist deaktiviert"
 	},
-	"no-network-connection": {
-		"body": "Ihr Gerät hat keine Datennetzwerkverbindung. Die BelAir-App hängt stark davon ab, dass frische Daten von unseren Servern abgerufen werden. Aktivieren Sie ein Datennetzwerk (mobile Daten- oder WLAN-Verbindung) und aktualisieren Sie die App oder versuchen Sie es erneut, wenn Sie sich in Reichweite eines Datennetzwerks befinden, auf das Sie Zugriff haben.",
-		"close": "Schließen",
-		"header": "Keine Datenverbindung"
-	},
-	"notifications-popup": {
-		"channels": "Für Ihren Benachrichtigungskanal:",
-		"dutch-version-below": "(Niederländische Version unten)",
-		"french-version-below": "(Französische Version unten)",
-		"header": "Benachrichtigungen",
-		"valid-until": "Nachricht gilt bis:"
-	},
-	"overlay-info-drawer": {
-		"button": "Was sehen Sie auf diesem Bildschirm?",
-		"button-close": "Schließen"
-	},
-	"push-notification-subscription": {
-		"brussels": "Brüssel - Brussels Environment - NL/FR",
-		"flanders": "Flandern - Vlaamse Milieumaatschappij (VMM) - NL",
-		"header": "Benachrichtigungen",
-		"wallonia": "Wallonien - Agence wallonne de l’air et du climat (AwAC) - FR"
-	},
-	"refresh-button": {
-		"message": "Aktualisiert"
-	},
-	"refresh": {
-		"pull-message": "Ziehen um zu Aktualisieren"
-	},
-	"settings": {
-		"about": {
-			"header": "Über die App",
-			"version": "Version"
-		},
-		"clear-cache": {
-			"button": "Lösche den Cache",
-			"confirm": "Der Cache ist gelöscht."
-		},
-		"common": "Allgemein",
-		"header": "Einstellungen",
-		"select-language": "Wähle eine Sprache",
-		"show-introduction": "Öffne Einführung",
-		"start-page": {
-			"header": "Einstellungen Startseite",
-			"show-annual-mean-panel": "Zeige jährliche Mittelwerte auf der Startseite",
-			"show-nearest-stations": "Zeige die nächstgelegene Überwachungsstationen auf der Startseite",
-			"show-sub-index-panel": "Zeige BelAQI Subindizes auf der Startseite"
-		},
-		"user-locations": {
-			"create-new-location": "Erstelle neuen Standort",
-			"edit-location": "Editiere Standort",
-			"header": "Nutzer Standorte",
-			"show-nearest-series-by-default": "Zeige nächstgelegene Messungen im Diagram"
-		}
-	},
-	"single-chart": {
-		"error": "Bei Laden des Diagrams ist ein Fehler aufgetreten",
-		"loading": "Beschäftigt zu laden"
-	},
-	"start": {
-		"overlay": {
-			"content-p1": "Der Einfluss der Luftqualität wird auf der Grundlage des Luftqualitätsindex berechnet. Das ist eine Zahl zwischen 1 und 10, wobei 10 für sehr schlecht und 1 für ausgezeichnete Luftqualität steht. Für diese Bewertung basiert die App auf Daten von Überwachungsstationen in ganz Belgien, Wetter und Verkehr sowie relevanten Schadstoffen.",
-			"content-p2": "Der Index für den ausgewählten Standort wird stündlich aktualisiert. Die App gibt Ihnen auch Vorhersagen des BelAQI-Index für die nächsten Stunden und Tage.",
-			"content-p3": "Der Luftqualitätsindex spiegelt die kurzfristigen Auswirkungen auf die Gesundheit wider. Diese Auswirkungen können von Stunde zu Stunde variieren und zu vorübergehenden Gesundheitsproblemen führen. Bei höheren Konzentrationen von Luftschadstoffen können akute Wirkungen wie Asthma oder sogar ein Herzinfarkt auftreten.",
-			"content-p4": "Eine längere Exposition gegenüber Luftschadstoffen kann chronische Auswirkungen hervorrufen und zu einem erhöhten Risiko für Herz- und Lungenerkrankungen, einschließlich Lungenkrebs, führen.",
-			"header": "Was sehen Sie auf diesem Bildschirm?"
-		}
-	},
-	"sub-index-panel": {
-		"header": "Kurzzeitbelastung",
-		"information-popup": {
-			"link": "https://www.irceline.be/en/belaqi",
-			"moreInfo": "Mehr Info",
-			"no2": "NO2 oder Stickstoffdioxid (Stundenmittelwert)",
-			"o3": "O3 oder Ozon (Stundenmittelwert)",
-			"pm10": "PM10 oder Partikel mit einem Durchmesser kleiner als 10 Mikrometer (laufender 24 Stundenmittelwert)",
-			"pm25": "PM2.5 oder Partikel mit einem Durchmesser kleiner als 2,5 Mikrometer (laufender 24 Stundenmittelwert)",
-			"text": "Dies sind die berechneten \"Subindizes\" für Ihren Standort. Der globale BelAQI-Index ist der höchste Wert dieser 4 Subindizes. Die Konzentrationsskalen wurden in Abhängigkeit von den kurzfristigen Auswirkungen auf die Gesundheit bestimmt. Die 4 zur Berechnung des BelAQI-Index verwendeten Schadstoffe sind:"
-		}
-	},
-	"survey": {
-		"confirm": "Zur Umfrage >",
-		"header": "Benutzerumfrage",
-		"help-us": "Helfen Sie uns, die App zu verbessern",
-		"link": "https://de.surveymonkey.com/r/GR3W922",
-		"notagain": "Nein danke!",
-		"question": "Ihr Feedback ist wichtig. Sind Sie bereit, ein paar Fragen zu beantworten? Es dauert nur 2 Minuten."
-	},
-	"user-location-list": {
-		"header": "Standortliste"
-	},
-	"user-location-notification-toggler": {
-		"backend-registration-error": "Backend Fehler",
-		"button": "Benachrichtigungen",
-		"default-error": "Default Fehler",
-		"notification-error": "Benachrichtigungsfehler"
-	},
-	"user-location": {
-		"creation": {
-			"geolocation-error": "Standort nicht gefunden",
-			"limit-reached": "Sie können nicht mehr als 5 Standorte erstellen. Bitte entfernen Sie zunächst einen der vorhandenen Standorte.",
-			"message-added": "Nutzerstandort erstellt",
-			"message-exists": "Nutzerstandort existiert bereits"
-		}
-	},
+	"show-feedback-stats-button": "Zeige Feedback Statistiken",
 	"v2": {
 		"components": {
 			"circle-chart": {
@@ -301,8 +49,8 @@
 				"send-observation": "Sichtungen senden"
 			},
 			"information-item": {
-				"personal-calculation": "berechnet für Ihren Standort.",
-				"average": "Im Durchschnitt ist das"
+				"average": "Im Durchschnitt ist das",
+				"personal-calculation": "berechnet für Ihren Standort."
 			},
 			"location-input": {
 				"choose-location": "Wähle deinen Standort",
@@ -339,13 +87,10 @@
 				"aq-index": "Wir bewerten die Auswirkungen der <strong>allgemeinen Luftqualität</strong> kurzfristig anhand eines Luftqualitätsindex.",
 				"aq-index-2": "Dies ergibt eine Bewertung für jede der <strong>berechneten Konzentrationen verschiedener Schadstoffe</strong> (z.B. sehr gut). Die schlechteste Bewertung bestimmt die allgemeine Luftqualität.",
 				"belaqi-title": "Allgemein",
-				"check-lt-data": "Sie können diese Schätzungen im Menü über <strong>‘Langzeitexposition’</strong> finden.",
 				"current-items": "Die Schadstoffe die wir beziehen in die Berechnung sind:",
 				"data-models": "Durch die Anwendung von Modellen berechnen wir, ob sich die Auswirkungen der Luftqualität langfristig verbessert oder verschlechtert.",
 				"fine-dust": "Feinstaub",
-				"how-calculated": "Wie werden diese Werte berechnet?",
 				"how-this-works": "Wie funktioniert das?",
-				"learn-more": "Möchten Sie mehr über die flämische Umweltbehörde erfahren?",
 				"nitrogen-dioxide": "Stickstoffdioxid",
 				"notifications": "Wenn die Messungen den Warnwert überschreiten, senden wir Ihnen eine Benachrichtigung. Sie können Ihre Benachrichtigungen über das Menü verwalten.",
 				"ozon": "Ozon",
@@ -354,7 +99,6 @@
 			"long-term-info": {
 				"about-data": "Die Daten sind das Ergebnis unserer Langzeitberechnungsmodelle.",
 				"data-loading": "Die Daten für die Langzeitdarstellung werden geladen",
-				"from-where": "Woher kommen diese Informationen?",
 				"long-term": "Langfristig",
 				"lt-effects-diseases": "Eine längere Exposition gegenüber Luftschadstoffen kann chronische Auswirkungen haben und das Risiko für Herz- und Lungenerkrankungen erhöhen."
 			},
@@ -368,7 +112,6 @@
 				"belair-info": "Informationen zu Belair",
 				"language": "Sprache",
 				"locations": "Standorte",
-				"long-term-exposure": "Langzeitexposition",
 				"notifications": "Benachrichtigungen",
 				"version": "Version",
 				"workings": "(Wie funktioniert die App)"
@@ -390,12 +133,5 @@
 				"possible-causes": "Mogelijke oorzaken van een afwijking zijn:"
 			}
 		}
-	},
-	"welcome": {
-		"button": "Geben Sie Ihren Standort ein",
-		"text-p1": "Wie wirkt sich die Luftqualität an Ihrem Standort aus? Die BelAir App informiert Sie sofort.",
-		"text-p2": "Die BelAir-App basiert auf Daten von Überwachungsstationen in ganz Belgien. Diese Daten werden in einen BelAQI-Luftqualitätsindex umgewandelt. Sie erhalten eine Zahl zwischen 1 und 10, die sofort die Auswirkungen der aktuellen Luftqualität auf Ihre Gesundheit bewertet.",
-		"text-p3": "Um diese Zahl zu berechnen, betrachten wir auch relevante, umweltbelastende Substanzen wie Stickstoffdioxid, Ozon und Feinstaub an Ihrem Standort.",
-		"title": "Willkommen bei"
 	}
 }

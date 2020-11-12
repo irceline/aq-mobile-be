@@ -1,25 +1,4 @@
 {
-	"annual-mean-panel": {
-		"header": "Long-term exposure",
-		"information-popup": {
-			"text": "NO2 (Nitrogen dioxide), PM10 (particulate matter with a diameter of less than 10 micrometers) and PM2.5 (particulate matter with a diameter of less than 2.5 micrometres) are the three pollutants for which there is the most scientific burden of proof regarding the long-term impact on health."
-		}
-	},
-	"belaqi-chart": {
-		"error": "Unfortunately, an error occurred while determining the graph."
-	},
-	"belaqi-user-location-slider": {
-		"create-new-location": "Create new location",
-		"current-location": "Current location",
-		"current-location-description": "Activate this option to display air quality data for your current location.",
-		"current-location-error-header": "Your device was not able to establish your current location.",
-		"loading-current-location": "Your device is determining your current location"
-	},
-	"belaqi-wheel": {
-		"error-occured": "It is taking longer than usual to fetch the data. Please try again later.",
-		"loading": "Loading the BelAQI index...",
-		"no-index-ascertained": "No BelAQI index could be ascertained. This could be due to technical problems on our server or to the location is not being in Belgium."
-	},
 	"belaqi": {
 		"date": {
 			"before-three-days": "3 days ago",
@@ -30,18 +9,6 @@
 			"today": "Today",
 			"tomorrow": "Tomorrow",
 			"yesterday": "Yesterday"
-		},
-		"level-split": {
-			"bad": "Bad",
-			"excellent": "Excellent",
-			"fairly-good": "Fairly good",
-			"good": "Good",
-			"horrible": "Horrible",
-			"moderate": "Moderate",
-			"poor": "Poor",
-			"very-bad": "Very bad",
-			"very-good": "Very good",
-			"very-poor": "Very poor"
 		},
 		"level": {
 			"bad": "Bad",
@@ -61,264 +28,51 @@
 		"close": "Close",
 		"ok": "Ok"
 	},
-	"show-feedback-stats-button": "Show feedback statistics",
-	"diagram": {
-		"chart": {
-			"hourlyMeanGreyand24hmeanBelaqiColors": "Hourly mean (grey) and running 24-hour mean (BelAQI-colours)",
-			"timelabelHmeanBelaqiColors": "Hourly mean (BelAQI-colours)",
-			"timelabelHmeanGrey": "Hourly mean (grey)"
-		},
-		"header": "Chart",
-		"overlay": {
-			"attention": "Attention:",
-			"content-p1": "The diagrams give the hourly evolution as measured in the closest official measuring stations to the locations you configured. The time series of pollutants which are part of the BelAQI-index are coloured according to this index.",
-			"content-p2": "For particulate matter (both of a diameter of less than 2.5 and 10 micrometres) only running 24-hour mean time series are coloured, since it is the running 24-hour mean which is part of the BelAQI index, not the hourly mean. The reason for this is that health effects from particulate matter are associated with 24-hour exposure.",
-			"content-p3": "The index given elsewhere in the app for your location is not only based on the result of all monitoring stations in our monitoring networks, where the nearest station is possibly several kilometers away. The concentrations measured at all government monitoring stations are added to a computer model, which also takes into account emission data (traffic, industry and shipping) and meteorological conditions (wind direction and wind speed). This computer model then calculates detailed air quality maps for the geese country. The combination of the result for nitrogen dioxide, particulate matter and ozone is shown as one index in the app.",
-			"header": "What do you see on this screen?",
-			"url-svg": "../../assets/svg/belaqi_EN.svg"
-		}
-	},
-	"header": {
-		"oldDataWarning": "The last update is older than normal due to a technical issue. We are doing our best to repair the issue a.s.a.p.."
-	},
-	"home": {
-		"header": "Home"
-	},
-	"info": {
-		"chart": {
-			"message": "This chart shows the evolution of the BelAQI air quality index. The vertical blue line indicates the current value."
-		},
-		"moreInfo": "More info",
-		"wheel": {
-			"link": "https://www.irceline.be/en/belaqi",
-			"message": "This dial shows the current BelAQI air quality index for your location. This index combines the modelled concentrations of different pollutants depending on their health effects."
-		}
-	},
-	"intro": {
-		"close-introduction": "Close",
-		"four": {
-			"header": "Personalised notifications"
-		},
-		"header": "Introduction",
-		"next-step": "Next",
-		"one": {
-			"header": "Choose a language",
-			"option": {
-				"dutch": "Nederlands",
-				"english": "English",
-				"french": "Français",
-				"german": "Deutsch"
-			}
-		},
-		"prev-step": "Previous",
-		"three": {
-			"addLocationToList": "Add to the list of locations",
-			"baseOnCurrentLocation": "Use current location",
-			"header": "Choose the locations for which you want to receive personalised notifications",
-			"locationLabelHint": "Change the location label",
-			"locationLabelPlaceholder": "e.g. \"Home\", \"Work\", \"School\"",
-			"showLocationList": "Show current locations"
-		},
-		"two": {
-			"header": "For which region would you like to receive official notifications?"
-		}
-	},
-	"map": {
-		"error": "An error occurred. It is not possible to fetch data for the selected pollutant. Please try again later.",
-		"geosearch": {
-			"placeholder": "Search location..."
-		},
-		"header": "Map",
-		"index": "BelAQI index",
-		"nearest-station": "Nearest station",
-		"opacity-slider-header": "Transparency",
-		"overlay": {
-			"content-p1": "The map gives you an overview of the air quality in Belgium. Using a colour code, you can compare the air quality at your location with that of other locations. Red is very bad, while blue stands for excellent air quality.",
-			"content-p2": "The index for the chosen location is updated every hour. The app also gives you a forecast of the BelAQI index for the next few hours and days.",
-			"header": "What do you see on this screen?",
-			"url-svg": "../../assets/svg/belaqi_EN.svg"
-		},
-		"timestepLabels": {
-			"24hmean": "running 24-hour mean",
-			"anmean": "annual mean",
-			"belaqi_current": "BelAQI current",
-			"belaqi_forecast_today": "BelAQI forecast for today",
-			"belaqi_forecast_today+2": "BelAQI forecast for in 2 days",
-			"belaqi_forecast_today+3": "BelAQI forecast for in 3 days",
-			"belaqi_forecast_tomorrow": "BelAQI forecast for tomorrow",
-			"dmean_forecast_today": "forecast daily mean today",
-			"dmean_forecast_today+2": "forecast daily mean in 2 days",
-			"dmean_forecast_today+3": "forecast daily mean in 3 days",
-			"dmean_forecast_tomorrow": "forecast daily mean tomorrow",
-			"hmean": "hourly mean",
-			"loading": "busy loading",
-			"longterm": "long term exposure",
-			"maxhmean_forecast_today": "forecast maximum hourly mean today",
-			"maxhmean_forecast_today+2": "forecast maximum hourly mean in 2 days",
-			"maxhmean_forecast_today+3": "forecast maximum hourly mean in 3 days",
-			"maxhmean_forecast_tomorrow": "forecast maximum hourly mean tomorrow",
-			"shortterm": "short term exposure"
-		}
-	},
-	"menu": {
-		"lastUpdate": "Last update"
-	},
-	"nearest-measuring-station-panel": {
-		"error": "An error occurred. It is not possible to fetch data for the nearest measuring stations. Please try again later.",
-		"header": "Nearest measuring station",
-		"information-popup": {
-			"list-bc": "or black carbon",
-			"list-no2": "or nitrogen dioxide",
-			"list-o3": "or ozone",
-			"list-pm10": "or particulate matter with a diameter below 10 micrometer",
-			"list-pm25": "or particulate matter with a diameter below 2,5 micrometer",
-			"text": "The actual measured concentrations of the nearest monitoring stations are given here. The different pollutants are:"
-		}
+	"feedback-reason": {
+		"agriculture": "",
+		"industry": "",
+		"traffic": "",
+		"woodburn": ""
 	},
 	"network": {
 		"geolocationDenied": "You have not allowed the use of your location to the app.",
-		"geolocationDeniedExplanation": "If you want to make use of the \"current position\" functionalities, you can activate the location service of your device here.",
-		"geolocationDisabled": "Geolocation is disabled",
-		"geolocationDisabledExplanation": "If you want to make use of the \"current position\" functionalities, please enable the location service of your device."
+		"geolocationDisabled": "Geolocation is disabled"
 	},
-	"no-network-connection": {
-		"body": "Your device has no data network connection. The BelAir app heavily depends on fresh data being fetched from our servers. Please activate a data network (mobile data or wifi connection) and refresh the app or try again when you are in range of a data network you have access to.",
-		"close": "Close",
-		"header": "No data connection"
-	},
-	"notifications-popup": {
-		"channels": "For your notification channel:",
-		"dutch-version-below": "(Dutch version below)",
-		"french-version-below": "(French version below)",
-		"header": "Notifications",
-		"valid-until": "Message is valid until:"
-	},
-	"overlay-info-drawer": {
-		"button": "What do you see on this screen?",
-		"button-close": "Close"
-	},
-	"push-notification-subscription": {
-		"brussels": "Brussels - Brussels Environment - NL/FR",
-		"flanders": "Flanders - Vlaamse Milieumaatschappij (VMM) - NL",
-		"header": "Notifications",
-		"wallonia": "Wallonia - Agence wallonne de l’air et du climat (AwAC) - FR"
-	},
-	"refresh-button": {
-		"message": "Refresh all"
-	},
-	"refresh": {
-		"pull-message": "Pull to refresh"
-	},
-	"settings": {
-		"about": {
-			"header": "About the app",
-			"version": "Version"
-		},
-		"clear-cache": {
-			"button": "Clear cache",
-			"confirm": "Cache is cleared."
-		},
-		"common": "Common",
-		"header": "Settings",
-		"select-language": "Select a language",
-		"show-introduction": "Show introduction",
-		"start-page": {
-			"header": "Settings start page",
-			"show-annual-mean-panel": "Show annual mean on start page",
-			"show-nearest-stations": "Show nearest measuring stations on start page",
-			"show-sub-index-panel": "Show BelAQI subindicies on start page"
-		},
-		"user-locations": {
-			"create-new-location": "Create new location",
-			"edit-location": "Edit location",
-			"header": "User locations",
-			"show-nearest-series-by-default": "Show nearest measurements in diagram"
-		}
-	},
-	"single-chart": {
-		"error": "While loading the diagram an error occurred",
-		"loading": "busy loading"
-	},
-	"start": {
-		"overlay": {
-			"content-p1": "The impact of air quality is calculated on the basis of the air quality index. That is a figure between 1 and 10, where 10 stands for very poor and 1 for excellent air quality. For this score, the app is based on data from monitoring stations throughout Belgium, weather and traffic and relevant pollutants.",
-			"content-p2": "The index for the chosen location is updated every hour. The app also gives you a forecast of the BelAQI index for the next few hours and days.",
-			"content-p3": "The air quality index reflects the impact on health in the short term. This impact can vary from hour to hour and lead to temporary health problems. At higher concentrations of air pollutants, acute effects can occur, such as an asthma or even a heart attack.",
-			"content-p4": "Prolonged exposure to air pollutants can provoke chronic effects and can lead to a higher risk of heart and lung diseases including lung cancer.",
-			"header": "What do you see on this screen?"
-		}
-	},
-	"sub-index-panel": {
-		"header": "Short-term exposure",
-		"information-popup": {
-			"link": "https://www.irceline.be/en/belaqi",
-			"moreInfo": "More info",
-			"no2": "NO2 or nitrogen dioxide (hourly mean)",
-			"o3": "O3 or ozone (hourly mean)",
-			"pm10": "PM10 or particulate matter with a diameter below 10 micrometer (running 24 hour mean)",
-			"pm25": "PM2.5 or particulate matter with a diameter below 2,5 micrometer (running 24 hour mean)",
-			"text": "These are calculated \"subindices\" for your location. The global BelAQI index is the highest value of these 4 subindices. The concentration scales were determined in function of their short-term health effects. The 4 pollutants used to calculate the BelAQI index are:"
-		}
-	},
-	"survey": {
-		"confirm": "To the survey >",
-		"header": "User Survey",
-		"help-us": "Help us to improve the app",
-		"link": "https://nl.surveymonkey.com/r/GDXWHP8",
-		"notagain": "No thanks!",
-		"question": "Your comments are important. Are you willing to answer a couple of questions? It only takes 2 minutes."
-	},
-	"user-location-list": {
-		"header": "Location list"
-	},
-	"user-location-notification-toggler": {
-		"backend-registration-error": "Backend Error",
-		"button": "Notifications",
-		"default-error": "Default Error",
-		"notification-error": "Notification Error"
-	},
-	"user-location": {
-		"creation": {
-			"geolocation-error": "Location could not be found",
-			"limit-reached": "You can not create more than 5 locations. Please first remove one of the exiting locations.",
-			"message-added": "User location added",
-			"message-exists": "User location already exists"
-		}
-	},
+	"show-feedback-stats-button": "Show feedback statistics",
 	"v2": {
-	  "components": {
-	    "circle-chart": {
-	      "avg-score": "Average score at your location is {{score}}"
-	    },
-	    "feedback": {
-	      "cause": "Do you know the cause? (optional)",
-	      "send-observation": "Send observation"
-	    },
-			"information-item": {
-				"personal-calculation": "calculated at your location.",
-				"average": "On average this is"
+		"components": {
+			"circle-chart": {
+				"avg-score": "Average score at your location is {{score}}"
 			},
-	    "location-input": {
-	      "choose-location": "Choose your location",
-	      "current-location": "Current location",
-	      "no-results": "No results",
-	      "please-wait": "Patience"
-	    },
-	    "location-sortable": {
-	      "cancel": "Cancel",
-	      "confirm": "Confirm",
-	      "header": "Remove location",
-	      "message": "Are you sure you want to delete this location?"
-	    },
-	    "onboarding-slider": {
-	      "btn-text": "Continue",
-	      "start-app": "Launch the app"
-	    },
-	    "success-display": {
-	      "back-to-main": "Go to home screen",
-	      "thanks": "Thanks !",
-	      "well-received": "We have received your observation. Thanks to your input we can improve our application."
-	    },
+			"feedback": {
+				"cause": "Do you know the cause? (optional)",
+				"send-observation": "Send observation"
+			},
+			"information-item": {
+				"average": "On average this is",
+				"personal-calculation": "calculated at your location."
+			},
+			"location-input": {
+				"choose-location": "Choose your location",
+				"current-location": "Current location",
+				"no-results": "No results",
+				"please-wait": "Patience"
+			},
+			"location-sortable": {
+				"cancel": "Cancel",
+				"confirm": "Confirm",
+				"header": "Remove location",
+				"message": "Are you sure you want to delete this location?"
+			},
+			"onboarding-slider": {
+				"btn-text": "Continue",
+				"start-app": "Launch the app"
+			},
+			"success-display": {
+				"back-to-main": "Go to home screen",
+				"thanks": "Thanks !",
+				"well-received": "We have received your observation. Thanks to your input we can improve our application."
+			},
 			"user-notification-settings": {
 				"activity": "Physical efforts",
 				"allergies": "Allergies",
@@ -333,13 +87,10 @@
 				"aq-index": "We assess the short-term impact of <strong>general air quality</strong> based on an air quality index.",
 				"aq-index-2": "This gives one score to each of the <strong>calculated concentrations of different pollutants</strong> (e.g. very good). The worst score determines the general air quality.",
 				"belaqi-title": "Generally",
-				"check-lt-data": "You can view these estimates in the menu via <strong>'long-term exposure'</strong>.",
 				"current-items": "The pollutants which are included in this calculation, are:",
 				"data-models": "By applying models to these data, we calculate whether the impact of air quality will improve or deteriorate in the long term.",
 				"fine-dust": "Particulate matter",
-				"how-calculated": "How are these values calculated?",
 				"how-this-works": "How does this work?",
-				"learn-more": "Would you like to know more about the Flemish Environment Agency?",
 				"nitrogen-dioxide": "Nitrogen dioxide",
 				"notifications": "If the measurements exceed the threshold value, we will send you a notification. You can manage your notifications via the menu.",
 				"ozon": "Ozone",
@@ -348,7 +99,6 @@
 			"long-term-info": {
 				"about-data": "The data is the result of our long-term calculation models.",
 				"data-loading": "The data for long-term display are being loaded.",
-				"from-where": "Where does this info come from?",
 				"long-term": "Long-term",
 				"lt-effects-diseases": "Prolonged exposure to air pollutants can produce chronic effects and increase the risk of heart and lung disease."
 			},
@@ -362,7 +112,6 @@
 				"belair-info": "Information about Belair",
 				"language": "Language",
 				"locations": "Locations",
-				"long-term-exposure": "Long term exposure",
 				"notifications": "Notifications",
 				"version": "version",
 				"workings": "(how does the application work)"
@@ -384,12 +133,5 @@
 				"possible-causes": "Possible causes of a deviation are:"
 			}
 		}
-	},
-	"welcome": {
-		"button": "Enter your location",
-		"text-p1": "What is the impact of air quality at your location? The BelAir app informs you right away.",
-		"text-p2": "The BelAir app is based on data from monitoring stations throughout Belgium. This data is converted into a BelAQI air quality index. You receive a figure between 1 and 10 that immediately assesses the impact of current air quality on your health.",
-		"text-p3": "To calculate this figure, we also look at several relevant, polluting substances at your location such as nitrogen dioxide, ozone and particulate matter.",
-		"title": "Welcome to"
 	}
 }
