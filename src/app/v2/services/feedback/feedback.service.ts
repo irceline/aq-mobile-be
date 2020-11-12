@@ -65,9 +65,8 @@ export class FeedbackService {
 
   public sendFeedback(feedback: Feedback): Observable<FeedbackStats> {
     feedback.uuid = this.key;
-    console.log(`Send feedback ${JSON.stringify(feedback)}`);
-    // const encriptedFeedback = this.encryption.encrypt(JSON.stringify(feedback));
-    return this.httpSrvc.client().post<FeedbackStats>(FEEDBACK_SERVICE_URL, feedback, {
+    const encriptedFeedback = this.encryption.encrypt(JSON.stringify(feedback));
+    return this.httpSrvc.client().post<FeedbackStats>(FEEDBACK_SERVICE_URL, encriptedFeedback, {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
       }

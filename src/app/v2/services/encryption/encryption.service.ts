@@ -20,7 +20,7 @@ export class EncryptionService {
           .then(() => {
             this.firebase.activateFetched().then(() => {
               this.firebase.getValue('subscription_key', 'belair')
-                .then((res: any) => this.key = CryptoJS.enc.Base64.parse(res))
+                .then(key => this.key = CryptoJS.enc.Base64.parse(key))
                 // TODO: error handling!
                 .catch((error: any) => console.error(error));
             });
