@@ -58,6 +58,7 @@
 	},
 	"controls": {
 		"cancel": "Annuler",
+		"close": "",
 		"ok": "Enregistrer la location"
 	},
 	"diagram": {

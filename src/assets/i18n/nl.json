@@ -58,6 +58,7 @@
 	},
 	"controls": {
 		"cancel": "annuleer",
+		"close": "",
 		"ok": "Bewaar locatie"
 	},
 	"diagram": {

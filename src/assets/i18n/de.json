@@ -58,7 +58,15 @@
 	},
 	"controls": {
 		"cancel": "Abbrechen",
-		"ok": "Standort speichern"
+		"close": "Schließen",
+		"ok": "Ok"
+	},
+	"show-feedback-stats-button": "Zeige Feedback Statistiken",
+	"feedback-reason": {
+		"woodburn": "Verbranding van hout",
+		"traffic": "Uitlaatgassen van verkeer",
+		"agriculture": "Uitstoot door landbouw",
+		"industry": "Uitstoot door industrie"
 	},
 	"diagram": {
 		"chart": {

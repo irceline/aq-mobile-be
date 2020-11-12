@@ -1,0 +1,11 @@
+<div class="wrapper" [ngStyle]="{'background-color': backgroundColor}">
+    <div class="stats">
+        <pre>{{feedbackStats | json}}</pre>
+    </div>
+    <div class="controls">
+        <div style="flex: 1;"></div>
+        <ion-button fill="clear" (click)="close()">
+            {{ 'controls.close' | translate }}
+        </ion-button>
+    </div>
+</div>

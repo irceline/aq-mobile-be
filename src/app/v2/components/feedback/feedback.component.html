@@ -7,6 +7,12 @@
   </ion-button>
 </div>
 
+<div style="text-align: center;">
+  <ion-button fill="clear" (click)="openFeedbackStats()" style="color: white;">
+    {{ 'show-feedback-stats-button' | translate }}
+  </ion-button>
+</div>
+
 <div class="feedback--content" *ngIf="like || dislike" [ngStyle]="{'padding-bottom': dislike || like ? '60px' : '0px'}">
   <ng-container *ngIf="like">
     <!-- per design , there was a location input here, but the location is already determined on the top of this page -->

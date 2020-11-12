@@ -9,6 +9,7 @@ import { AutoCompleteModule } from 'ionic4-auto-complete';
 import { BackgroundComponent } from './background/background.component';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
 import { CircleChartComponent } from './circle-chart/circle-chart.component';
+import { FeedbackStatsComponent } from './feedback-stats/feedback-stats.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { HeaderComponent } from './header/header.component';
 import { HorizontalCardComponent } from './horizontal-card/horizontal-card.component';
@@ -54,6 +55,7 @@ const COMPONENTS = [
     MenuScreenComponent,
     InfoButtonComponent,
     FeedbackComponent,
+    FeedbackStatsComponent,
     ValueDisplayComponent,
     SuccessDisplayComponent,
     InformationItemDetailsComponent,

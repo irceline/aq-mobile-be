@@ -58,8 +58,10 @@
 	},
 	"controls": {
 		"cancel": "Cancel",
-		"ok": "Save location"
+		"close": "Close",
+		"ok": "Ok"
 	},
+	"show-feedback-stats-button": "Show feedback statistics",
 	"diagram": {
 		"chart": {
 			"hourlyMeanGreyand24hmeanBelaqiColors": "Hourly mean (grey) and running 24-hour mean (BelAQI-colours)",

@@ -36,7 +36,7 @@
     </div>
 
     <ng-container *ngIf="isFeedbackGiven">
-      <app-success-display></app-success-display>
+      <app-success-display [feedbackStats]="feedbackStats"></app-success-display>
     </ng-container>
   </app-background>
 </ion-content>

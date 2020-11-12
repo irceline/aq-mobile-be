@@ -1,0 +1,19 @@
+:host {
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+        .stats {
+            flex: 1;
+        }
+
+        .controls {
+            display: flex;
+
+            .button {
+                color: white;
+            }
+        }
+    }
+}
