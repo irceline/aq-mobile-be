@@ -67,27 +67,11 @@ export class FeedbackService {
     feedback.uuid = this.key;
     console.log(`Send feedback ${JSON.stringify(feedback)}`);
     // const encriptedFeedback = this.encryption.encrypt(JSON.stringify(feedback));
-    return this.httpSrvc.client().post<FeedbackStats>(FEEDBACK_SERVICE_URL, feedback, { observe: 'response' }).pipe(
-      map(response => {
-        debugger;
-        return response.body;
-      })
-    );
-    // TODO: send feedback
-    // return of({
-    //   'submissions_day': '332',
-    //   'submissions_total': '5789',
-    //   'inline_day': '132',
-    //   'inline_total': '1324',
-    //   'woodburn_day': '65',
-    //   'woodburn_total': '665',
-    //   'traffic_day': '23',
-    //   'traffic_total': '453',
-    //   'agriculture_day': '3',
-    //   'agriculture_total': '135',
-    //   'industry_day': '6',
-    //   'industry_total': '153'
-    // }).pipe(delay(1000));
+    return this.httpSrvc.client().post<FeedbackStats>(FEEDBACK_SERVICE_URL, feedback, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+      }
+    });
   }
 
   public getFeedbackStats(): Observable<FeedbackStats> {
