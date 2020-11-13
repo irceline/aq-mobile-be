@@ -3,6 +3,8 @@ import { Firebase } from '@ionic-native/firebase/ngx';
 import { Platform } from '@ionic/angular';
 import CryptoJS from 'crypto-js';
 
+const FIREBASE_REMOTE_CONFIG_KEY = 'subscription_key';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -19,7 +21,7 @@ export class EncryptionService {
         this.firebase.fetch(600)
           .then(() => {
             this.firebase.activateFetched().then(() => {
-              this.firebase.getValue('subscription_key', 'belair')
+              this.firebase.getValue(FIREBASE_REMOTE_CONFIG_KEY, '')
                 .then(key => this.key = CryptoJS.enc.Base64.parse(key))
                 // TODO: error handling!
                 .catch((error: any) => console.error(error));
