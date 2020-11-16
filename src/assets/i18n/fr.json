@@ -34,6 +34,10 @@
 		"traffic": "",
 		"woodburn": ""
 	},
+	"feedback-stats-map": {
+		"day": "",
+		"total": ""
+	},
 	"network": {
 		"geolocationDenied": "Vous n'avez pas autorisé l'utilisation de votre géolocalisation dans l'application.",
 		"geolocationDisabled": "La géolocalisation est désactivée"
