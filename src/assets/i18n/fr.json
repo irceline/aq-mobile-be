@@ -25,20 +25,20 @@
 	},
 	"controls": {
 		"cancel": "Annuler",
-		"close": "",
+		"close": "Fermer",
 		"ok": "Enregistrer la location"
 	},
 	"feedback-reason": {
-		"agriculture": "",
-		"industry": "",
-		"traffic": "",
-		"woodburn": ""
+		"agriculture": "Émissions de l'agriculture",
+		"industry": "Émissions de l'industrie",
+		"traffic": "Fumées d'échappement de la circulation",
+		"woodburn": "Combustion de bois"
 	},
 	"network": {
 		"geolocationDenied": "Vous n'avez pas autorisé l'utilisation de votre géolocalisation dans l'application.",
 		"geolocationDisabled": "La géolocalisation est désactivée"
 	},
-	"show-feedback-stats-button": "",
+	"show-feedback-stats-button": "Afficher les statistiques de commentaires",
 	"v2": {
 		"components": {
 			"circle-chart": {
@@ -77,7 +77,7 @@
 				"activity": "Efforts physiques",
 				"allergies": "Les allergies",
 				"exercise": "Faire des exercices",
-				"generally": "",
+				"generally": "Général",
 				"highConcentration": "Concentrations (trop) élevées",
 				"transport": "Déplacements"
 			}
@@ -86,7 +86,7 @@
 			"app-info": {
 				"aq-index": "Nous évaluons l'impact à court terme de la <strong>qualité générale de l'air</strong> sur la base d'un indice de qualité de l'air.",
 				"aq-index-2": "Chacune des <strong>concentrations calculées pour les différents polluants</strong> donne un score (ex. très bon). Le score le plus mauvais détermine l'indice global de qualité de l'air.",
-				"belaqi-title": "",
+				"belaqi-title": "Général",
 				"current-items": "Les polluants utilisés dans le calcul sont:",
 				"data-models": "En appliquant des modèles à ces données, nous calculons si l'impact de la qualité de l'air s'améliorera ou se détériorera à long terme.",
 				"fine-dust": "Particules fines",

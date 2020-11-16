@@ -25,7 +25,7 @@
 	},
 	"controls": {
 		"cancel": "annuleer",
-		"close": "",
+		"close": "sluiten",
 		"ok": "Bewaar locatie"
 	},
 	"feedback-reason": {
@@ -38,7 +38,7 @@
 		"geolocationDenied": "U hebt het gebruik van uw locatie niet toegestaan de app.",
 		"geolocationDisabled": "Geolocatie is uitgeschakeld"
 	},
-	"show-feedback-stats-button": "",
+	"show-feedback-stats-button": "Geef feedbackstatistieken weer",
 	"v2": {
 		"components": {
 			"circle-chart": {
@@ -77,7 +77,7 @@
 				"activity": "Inspanningen",
 				"allergies": "Allergieën",
 				"exercise": "Sporten",
-				"generally": "",
+				"generally": "Algemeen",
 				"highConcentration": "(Te) hoge concentraties",
 				"transport": "Verplaatsingen"
 			}
@@ -86,7 +86,7 @@
 			"app-info": {
 				"aq-index": "We beoordelen de impact van de <strong>algemene luchtkwaliteit</strong> op korte termijn op basis van een luchtkwaliteitsindex.",
 				"aq-index-2": "Die geeft aan elk van de <strong>berekende concentraties van verschillende verontreinigende stoffen</strong> één score (b.v. heel goed). De slechtste score bepaalt de algemene luchtkwaliteit.",
-				"belaqi-title": "",
+				"belaqi-title": "Algemeen",
 				"current-items": "De stoffen die we in rekening brengen, zijn:",
 				"data-models": "Door op deze data modellen toe te passen, berekenen we of de impact van de luchtkwaliteit op lange termijn beter of slechter wordt.",
 				"fine-dust": "Fijn stof",

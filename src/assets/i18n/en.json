@@ -29,10 +29,10 @@
 		"ok": "Ok"
 	},
 	"feedback-reason": {
-		"agriculture": "",
-		"industry": "",
-		"traffic": "",
-		"woodburn": ""
+		"agriculture": "Emissions from agriculture",
+		"industry": "Emissions from industry",
+		"traffic": "Exhaust fumes from traffic",
+		"woodburn": "Combustion of wood"
 	},
 	"network": {
 		"geolocationDenied": "You have not allowed the use of your location to the app.",
@@ -77,7 +77,7 @@
 				"activity": "Physical efforts",
 				"allergies": "Allergies",
 				"exercise": "Workout",
-				"generally": "Generally",
+				"generally": "General",
 				"highConcentration": "(Too) high concentrations",
 				"transport": "Getting around"
 			}
@@ -86,7 +86,7 @@
 			"app-info": {
 				"aq-index": "We assess the short-term impact of <strong>general air quality</strong> based on an air quality index.",
 				"aq-index-2": "This gives one score to each of the <strong>calculated concentrations of different pollutants</strong> (e.g. very good). The worst score determines the general air quality.",
-				"belaqi-title": "Generally",
+				"belaqi-title": "General",
 				"current-items": "The pollutants which are included in this calculation, are:",
 				"data-models": "By applying models to these data, we calculate whether the impact of air quality will improve or deteriorate in the long term.",
 				"fine-dust": "Particulate matter",
