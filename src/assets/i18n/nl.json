@@ -35,8 +35,8 @@
 		"woodburn": "Verbranding van hout"
 	},
 	"feedback-stats-map": {
-		"day": "",
-		"total": ""
+		"day": "Vandaag",
+		"total": "Totaal"
 	},
 	"network": {
 		"geolocationDenied": "U hebt het gebruik van uw locatie niet toegestaan de app.",

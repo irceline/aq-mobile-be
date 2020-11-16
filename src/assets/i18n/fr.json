@@ -35,8 +35,8 @@
 		"woodburn": "Combustion de bois"
 	},
 	"feedback-stats-map": {
-		"day": "",
-		"total": ""
+		"day": "Aujourd'hui",
+		"total": "Total"
 	},
 	"network": {
 		"geolocationDenied": "Vous n'avez pas autorisé l'utilisation de votre géolocalisation dans l'application.",
