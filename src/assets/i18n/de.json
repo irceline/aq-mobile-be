@@ -34,6 +34,10 @@
 		"traffic": "Abgase aus dem Verkehr",
 		"woodburn": "Verbrennen von Holz"
 	},
+	"feedback-stats-map": {
+		"day": "Heute",
+		"total": "Total"
+	},
 	"network": {
 		"geolocationDenied": "Sie haben der App die Standortermittlung nicht erlaubt.",
 		"geolocationDisabled": "Die Standortermittlung ist deaktiviert"

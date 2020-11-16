@@ -1,6 +1,9 @@
 <div class="wrapper" [ngStyle]="{'background-color': backgroundColor}">
     <div class="stats">
         <pre>{{feedbackStats | json}}</pre>
+        <div>
+            <app-feedback-stats-map></app-feedback-stats-map>
+        </div>
     </div>
     <div class="controls">
         <div style="flex: 1;"></div>

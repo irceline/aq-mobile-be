@@ -34,6 +34,10 @@
 		"traffic": "Exhaust fumes from traffic",
 		"woodburn": "Combustion of wood"
 	},
+	"feedback-stats-map": {
+		"day": "Today",
+		"total": "Total"
+	},
 	"network": {
 		"geolocationDenied": "You have not allowed the use of your location to the app.",
 		"geolocationDisabled": "Geolocation is disabled"
