@@ -3,7 +3,7 @@ import { Firebase } from '@ionic-native/firebase/ngx';
 import { Platform } from '@ionic/angular';
 import CryptoJS from 'crypto-js';
 
-const FIREBASE_REMOTE_CONFIG_KEY = 'subscription_key';
+const FIREBASE_REMOTE_CONFIG_KEY = 'feedback_key';
 
 @Injectable({
   providedIn: 'root'
