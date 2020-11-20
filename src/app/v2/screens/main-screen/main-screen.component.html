@@ -46,7 +46,7 @@
         <button ion-button (click)="showHideButtons()">
           <h4><ion-icon src="/assets/images/icons/question.svg"></ion-icon> {{ 'v2.screens.main-screen.what-is-no2' | translate }}</h4>
         </button>
-        <div *ngIf="chooseTypeClicked">
+        <div class="details--info-text" *ngIf="chooseTypeClicked">
           <p>{{ 'v2.screens.main-screen.about-no2' | translate }}</p>
         </div>
       </div>
