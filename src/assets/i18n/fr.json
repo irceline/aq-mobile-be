@@ -2,7 +2,7 @@
 	"annual-mean-panel": {
 		"header": "Exposition à long terme",
 		"information-popup": {
-			"text": "Le NO2 (dioxyde d'azote), les PM10 (particules d'un diamètre inférieur à 10 micromètres) et les PM2,5 (particules d'un diamètre inférieur à 2,5 micromètres) sont les trois polluants majeurs pour lesquels il existe de nombreuses preuves scientifiques en ce qui concerne l'impact à long terme sur la santé."
+			"text": "Le NO2 (dioxyde d'azote), les PM10 (particules d'un diamètre inférieur à 10 micromètres) et les PM2.5 (particules d'un diamètre inférieur à 2,5 micromètres) sont les trois polluants majeurs pour lesquels il existe de nombreuses preuves scientifiques en ce qui concerne l'impact à long terme sur la santé."
 		}
 	},
 	"belaqi-chart": {
@@ -254,7 +254,7 @@
 			"no2": "NO2 ou dioxyde d'azote (moyenne horaire)",
 			"o3": "O3 ou ozone (moyenne horaire)",
 			"pm10": "PM10 ou particules d'un diamètre inférieur à 10 micromètres (moyenne glissant sur 24 heures)",
-			"pm25": "PM2.5 ou particules d'un diamètre inférieur à 2.5 micromètres (moyenne glissant sur 24 heures)",
+			"pm25": "PM2.5 ou particules d'un diamètre inférieur à 2,5 micromètres (moyenne glissant sur 24 heures)",
 			"text": "Ce sont les \"sous-indices\" calculés pour votre localisation. L'indice BelAQI global est la valeur la plus élevée de ces 4 sous-indices. Les échelles de concentration ont été déterminées en fonction de l’impact à court terme sur la santé. Les 4 polluants utilisés pour calculer BelAQI sont:"
 		}
 	},
@@ -349,10 +349,18 @@
 				"lt-effects-diseases": "Une exposition prolongée aux polluants atmosphériques peut produire des effets chroniques et augmenter le risque de maladies cardiaques et pulmonaires."
 			},
 			"main-screen": {
-				"about-no2": "Un gaz nocif qui est plus lourd que l'air et réagit violemment avec d'autres substances, comme les métaux.",
+				"about-belaqi": "Le BelAQI est un indice de qualité de l'air. Les quatre principaux polluants atmosphériques (NO2, O3, PM10 et PM2.5) sont évalués en fonction de leur impact à court terme sur la santé. Le score le plus élevé détermine le BelAQI.",
+				"about-no2": "Le dioxyde d'azote (NO2) est un gaz qui peut irriter les yeux, le nez et la gorge. Lorsqu'il est inhalé, le NO2 peut également provoquer une irritation des poumons et une diminution de la fonction pulmonaire avec un risque accru de crises d'asthme et une augmentation du nombre d'hospitalisations en raison de problèmes respiratoires dans les endroits où les concentrations sont plus élevées. Le NO2 est principalement émis lors de la combustion à haute température (moteur diesel, divers procédés industriels, etc.).",
+				"about-o3": "L'ozone (O3) se forme les jours chauds par effet de la lumière du soleil (UV) sur l'air pollué par des oxydes d'azote et des composants organiques volatils. Lorsqu'il est inhalé, l'O3 peut provoquer une irritation des poumons et une réduction de la fonction pulmonaire, avec un risque plus élevé de crises d'asthme et une augmentation du nombre d'hospitalisations dues à des troubles respiratoires dans les endroits où les concentrations sont plus élevées. Les concentrations à l'intérieur ne sont généralement que la moitié de celles à l'extérieur.",
+				"about-pm10": "Les particules (PM10) sont constituées de très petites matières en suspension de taille, d'origine et de composition chimique différentes. Lorsqu'elles sont inhalées, ces petites particules provoquent des réactions inflammatoires dans les voies respiratoires qui entravent l'absorption d'oxygène et chez les personnes souffrant de maladies respiratoires et cardiovasculaires, l'exposition aux poussières fines exacerbe leurs symptômes. Les poussières fines peuvent également être porteuses de particules cancérigènes. Les PM10 sont toutes des particules inférieures à 10 micromètres. La différence avec la plus petite fraction de PM2.5 réside principalement dans les particules plus grossières de la poussière soufflée par le vent (par exemple, les particules de sable, la poussière soufflée de la surface de la route par les voitures qui passent, etc.)",
+				"about-pm25": "Les poussières fines (PM2.5) sont constituées de très petites matières en suspension de taille, d'origine et de composition chimique différentes. Lorsqu'elles sont inhalées, ces petites particules provoquent des réactions inflammatoires dans les voies respiratoires qui entravent l'absorption d'oxygène et chez les personnes souffrant de maladies respiratoires et cardiovasculaires, l'exposition aux poussières fines exacerbe leurs symptômes. Les poussières fines peuvent également être porteuses de particules cancérigènes. Les PM2.5 sont toutes des particules inférieures à 2,5 micromètres. Les PM2.5 font donc partie de la fraction plus importante des PM10. Les PM2.5 se forment en grande partie dans l'atmosphère à partir d'autres polluants (dioxyde d'azote, ammoniac, dioxyde de soufre, etc.) mais sont également constituées de particules libérées lors des processus de combustion (combustion de bois, suie de diesel, etc.).",
 				"long-term-calculation": "Consultez notre calcul à long terme",
 				"view-details": "Voir en détail",
-				"what-is-no2": "Qu'est-ce que le dioxyde d'azote?"
+				"what-is-belaqi": "Qu'est-ce que le BelAQI?",
+				"what-is-no2": "Qu'est-ce que le dioxyde d'azote?",
+				"what-is-o3": "Qu'est-ce que l'ozone?",
+				"what-is-pm10": "Qu'est-ce que les particules fines (PM10)?",
+				"what-is-pm25": "Qu'est-ce que les particules fines (PM2.5)?"
 			},
 			"menu": {
 				"belair-info": "Information sur Belair",

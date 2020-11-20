@@ -2,7 +2,7 @@
 	"annual-mean-panel": {
 		"header": "Long-term exposure",
 		"information-popup": {
-			"text": "NO2 (Nitrogen dioxide), PM10 (particulate matter with a diameter of less than 10 micrometers) and PM2.5 (particulate matter with a diameter of less than 2.5 micrometres) are the three pollutants for which there is the most scientific burden of proof regarding the long-term impact on health."
+			"text": "NO2 (Nitrogen dioxide), PM10 (particulate matter with a diameter of less than 10 micrometers) and PM2.5 (particulate matter with a diameter of less than 2,5 micrometres) are the three pollutants for which there is the most scientific burden of proof regarding the long-term impact on health."
 		}
 	},
 	"belaqi-chart": {
@@ -70,7 +70,7 @@
 		"overlay": {
 			"attention": "Attention:",
 			"content-p1": "The diagrams give the hourly evolution as measured in the closest official measuring stations to the locations you configured. The time series of pollutants which are part of the BelAQI-index are coloured according to this index.",
-			"content-p2": "For particulate matter (both of a diameter of less than 2.5 and 10 micrometres) only running 24-hour mean time series are coloured, since it is the running 24-hour mean which is part of the BelAQI index, not the hourly mean. The reason for this is that health effects from particulate matter are associated with 24-hour exposure.",
+			"content-p2": "For particulate matter (both of a diameter of less than 2,5 and 10 micrometres) only running 24-hour mean time series are coloured, since it is the running 24-hour mean which is part of the BelAQI index, not the hourly mean. The reason for this is that health effects from particulate matter are associated with 24-hour exposure.",
 			"content-p3": "The index given elsewhere in the app for your location is not only based on the result of all monitoring stations in our monitoring networks, where the nearest station is possibly several kilometers away. The concentrations measured at all government monitoring stations are added to a computer model, which also takes into account emission data (traffic, industry and shipping) and meteorological conditions (wind direction and wind speed). This computer model then calculates detailed air quality maps for the geese country. The combination of the result for nitrogen dioxide, particulate matter and ozone is shown as one index in the app.",
 			"header": "What do you see on this screen?",
 			"url-svg": "../../assets/svg/belaqi_EN.svg"
@@ -349,10 +349,18 @@
 				"lt-effects-diseases": "Prolonged exposure to air pollutants can produce chronic effects and increase the risk of heart and lung disease."
 			},
 			"main-screen": {
-				"about-no2": "A harmful gas that is heavier than air and reacts violently with other substances, such as metals.",
+				"about-belaqi": "The BelAQI is an air quality index. The four main air pollutants (NO2, O3, PM10 and PM2.5) are scored based on their short-term impact on health. The highest score determines the BelAQI.",
+				"about-no2": "Nitrogen dioxide (NO2) is a gas that can irritate the eyes, nose and throat. When inhaled, NO2 can also cause lung irritation and decreased lung function with an increased risk of asthma attacks and an increase in the number of hospital admissions due to respiratory complaints as a result in places where the concentrations are higher. NO2 is mainly emitted during combustion at high temperatures (diesel engine, various industrial processes, etc.).",
+				"about-o3": "Ozone (O3) is formed on warm days by the effect of sunlight (UV) on air polluted with nitrogen oxides and volatile organic compounds. When inhaled, O3 can cause lung irritation and reduced lung function with a higher risk of asthma attacks and an increase in hospital admissions due to respiratory complaints in places where concentrations are higher. Indoor concentrations are usually only half as high as outdoors.",
+				"about-pm10": "Particulate matter (PM10) consists of very small suspended matter of different size, origin and chemical composition. When inhaled, these small particles cause inflammatory reactions in the respiratory tract that hinder oxygen uptake and in people with respiratory and cardiovascular diseases, exposure to fine dust exacerbates their symptoms. Fine dust can also be the carrier of carcinogenic particles. PM10 are all particles smaller than 10 micrometres. The difference with the smaller PM2.5 fraction is mainly coarser particles in windblown dust (e.g. sand particles, dust blown up from the road surface by passing cars, etc.).",
+				"about-pm25": "Fine dust (PM2.5) consists of very small suspended matter of different size, origin and chemical composition. When inhaled, these small particles cause inflammatory reactions in the respiratory tract that hinder oxygen uptake and in people with respiratory and cardiovascular diseases, exposure to fine dust exacerbates their symptoms. Fine dust can also be the carrier of carcinogenic particles. PM2.5 are all particles smaller than 2,5 micrometres. PM2.5 is therefore part of the larger PM10 fraction. PM2.5 is largely formed in the atmosphere from other pollutants (nitrogen dioxide, ammonia, sulphur dioxide, etc.) but also consists of particles released during combustion processes (wood combustion, diesel soot, etc.).",
 				"long-term-calculation": "View our long-term calculation",
 				"view-details": "View in detail",
-				"what-is-no2": "What is Nitrogen Dioxide?"
+				"what-is-belaqi": "What is the BelAQI?",
+				"what-is-no2": "What is Nitrogen Dioxide?",
+				"what-is-o3": "What is Ozone?",
+				"what-is-pm10": "What is particulate matter (PM10)?",
+				"what-is-pm25": "What is particulate matter (PM2.5)?"
 			},
 			"menu": {
 				"belair-info": "Information about Belair",
