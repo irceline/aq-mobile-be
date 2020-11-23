@@ -11,6 +11,7 @@ import { lightIndexColor } from '../../common/constants';
 })
 export class ValueDisplayComponent implements OnInit {
 
+    @Input() color;
     @Input() index;
     @Input() score;
     @Input() value: string;
@@ -21,7 +22,10 @@ export class ValueDisplayComponent implements OnInit {
 
     ngOnInit() { }
 
-    public get color(): string {
+    public get labelColor(): string {
+        if (this.color) {
+            return this.color;
+        }
         return lightIndexColor[this.index];
     }
 
