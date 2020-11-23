@@ -10,7 +10,6 @@ import { BelAqiIndexResult, BelAQIService } from '../../services/bel-aqi.service
 import { UserSettingsService } from '../../services/user-settings.service';
 import { AnnualMeanValueService } from '../../services/value-provider/annual-mean-value.service';
 import { ModelledValueService } from '../../services/value-provider/modelled-value.service';
-import { lightIndexColor } from './../../common/constants';
 
 interface IndexValueResult extends BelAqiIndexResult {
     value: number;
@@ -32,8 +31,6 @@ export class MainScreenComponent implements OnInit {
 
     valueTimeline: BelAqiIndexResult[] = [];
     selectedResult: IndexValueResult;
-
-    chooseTypeClicked: boolean;
 
     detailedPhenomenona: Substance[] = [
         {
@@ -112,10 +109,6 @@ export class MainScreenComponent implements OnInit {
             this.updateCurrentLocation();
             return this.locations = locations;
         });
-    }
-
-    public showHideButtons(): void {
-        this.chooseTypeClicked = !this.chooseTypeClicked;
     }
 
     private updateCurrentLocation(loadFinishedCb?: () => any) {

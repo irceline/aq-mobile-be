@@ -6,6 +6,9 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { AutoCompleteModule } from 'ionic4-auto-complete';
 
+import {
+    ParameterInformationComponent,
+} from './parameter-information/parameter-information.component';
 import { BackgroundComponent } from './background/background.component';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
 import { CircleChartComponent } from './circle-chart/circle-chart.component';
@@ -33,6 +36,7 @@ import { UserNotificationSettingsComponent } from './user-notification-settings/
 import { ValueDisplayComponent } from './value-display/value-display.component';
 
 const COMPONENTS = [
+    ParameterInformationComponent,
     CircleChartComponent,
     HeaderComponent,
     LocationSwipeComponent,
