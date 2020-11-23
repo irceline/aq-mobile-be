@@ -44,7 +44,7 @@
       <app-time-line-list class="details--timeline" (dayChange)="onDetailsDayChange($event)" [items]="valueTimeline">
       </app-time-line-list>
 
-      <app-value-display *ngIf="detailsValue" [color]="detailsValueColor" [score]="detailsValue" value="µg/m3"></app-value-display>
+      <app-value-display [index]="selectedResult?.indexScore" [score]="selectedResult?.value" [value]="detailPoint.substance.unit"></app-value-display>
 
       <div class="details--info">
         <button ion-button (click)="showHideButtons()">
@@ -56,7 +56,7 @@
       </div>
 
       <map-component [currentLocation]="userSettingsService.selectedUserLocation"
-        [phenomenon]="detailPoint.substance.phenomenon" [valueDate]="detailsValueDate"></map-component>
+        [phenomenon]="detailPoint.substance.phenomenon" [valueDate]="selectedResult?.valueDate"></map-component>
       <div class="longterm">
         <ion-item>
             <ion-label [routerLink]="['/main/longterm-info']" text-wrap>

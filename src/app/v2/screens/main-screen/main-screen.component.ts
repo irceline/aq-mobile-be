@@ -31,8 +31,7 @@ export class MainScreenComponent implements OnInit {
     currentActiveIndex: BelAqiIndexResult;
 
     valueTimeline: BelAqiIndexResult[] = [];
-    detailsValueColor: string;
-    detailsValue: number;
+    selectedResult: IndexValueResult;
 
     chooseTypeClicked: boolean;
 
@@ -99,8 +98,6 @@ export class MainScreenComponent implements OnInit {
     detailPoint: DataPoint = null;
     contentHeight = 0;
 
-    detailsValueDate: ValueDate;
-
     constructor(
         public userSettingsService: UserSettingsService,
         private translateService: TranslateService,
@@ -110,8 +107,6 @@ export class MainScreenComponent implements OnInit {
         private platform: Platform,
     ) {
         this.locations = this.userSettingsService.getUserSavedLocations();
-
-        this.updateCurrentLocation();
 
         this.userSettingsService.$userLocations.subscribe((locations) => {
             this.updateCurrentLocation();
@@ -232,8 +227,6 @@ export class MainScreenComponent implements OnInit {
     }
 
     onDetailsDayChange(index: IndexValueResult) {
-        this.detailsValueDate = index.valueDate;
-        this.detailsValueColor = lightIndexColor[index.indexScore];
-        this.detailsValue = Math.round(index.value);
+        this.selectedResult = index;
     }
 }
