@@ -116,9 +116,18 @@ app-value-display {
         }
     }
 
-    p {
-        font-size: 16px;
-        color: #747474;
+
+    .details--info-text {
+      div {
+        width: 100%;
+      }
+
+      p {
+          font-size: 13px;
+          color: #747474;
+          width: 100%;
+          text-align: justify;
+      }
     }
 }
 
