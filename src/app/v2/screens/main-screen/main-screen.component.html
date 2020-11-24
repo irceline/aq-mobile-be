@@ -44,7 +44,7 @@
       <app-time-line-list class="details--timeline" (dayChange)="onDetailsDayChange($event)" [items]="valueTimeline">
       </app-time-line-list>
 
-      <app-value-display [index]="selectedResult?.indexScore" [score]="selectedResult?.value" [value]="detailPoint.substance.unit"></app-value-display>
+      <app-value-display *ngIf="selectedResult" [index]="selectedResult.indexScore" [score]="selectedResult.value" [value]="detailPoint.substance.unit"></app-value-display>
 
       <app-parameter-information [parameter]="detailPoint.substance.phenomenon"></app-parameter-information>
 
