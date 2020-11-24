@@ -1,7 +1,19 @@
 import { Component, Input } from '@angular/core';
+import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 import { TranslateService } from '@ngx-translate/core';
 
 import { MainPhenomenon } from '../../common/phenomenon';
+
+marker('v2.screens.main-screen.what-is-no2');
+marker('v2.screens.main-screen.about-no2');
+marker('v2.screens.main-screen.what-is-belaqi');
+marker('v2.screens.main-screen.about-belaqi');
+marker('v2.screens.main-screen.what-is-o3');
+marker('v2.screens.main-screen.about-o3');
+marker('v2.screens.main-screen.what-is-pm10');
+marker('v2.screens.main-screen.about-pm10');
+marker('v2.screens.main-screen.what-is-pm25');
+marker('v2.screens.main-screen.about-pm25');
 
 @Component({
   selector: 'app-parameter-information',
@@ -17,28 +29,28 @@ export class ParameterInformationComponent {
   parameterHints = [
     {
       parameter: MainPhenomenon.NO2,
-      title: this.translateSrvc.instant('v2.screens.main-screen.what-is-no2'),
-      about: this.translateSrvc.instant('v2.screens.main-screen.about-no2')
+      title: 'v2.screens.main-screen.what-is-no2',
+      about: 'v2.screens.main-screen.about-no2'
     },
     {
       parameter: MainPhenomenon.BELAQI,
-      title: this.translateSrvc.instant('v2.screens.main-screen.what-is-belaqi'),
-      about: this.translateSrvc.instant('v2.screens.main-screen.about-belaqi')
+      title: 'v2.screens.main-screen.what-is-belaqi',
+      about: 'v2.screens.main-screen.about-belaqi'
     },
     {
       parameter: MainPhenomenon.O3,
-      title: this.translateSrvc.instant('v2.screens.main-screen.what-is-o3'),
-      about: this.translateSrvc.instant('v2.screens.main-screen.about-o3')
+      title: 'v2.screens.main-screen.what-is-o3',
+      about: 'v2.screens.main-screen.about-o3'
     },
     {
       parameter: MainPhenomenon.PM10,
-      title: this.translateSrvc.instant('v2.screens.main-screen.what-is-pm10'),
-      about: this.translateSrvc.instant('v2.screens.main-screen.about-pm10')
+      title: 'v2.screens.main-screen.what-is-pm10',
+      about: 'v2.screens.main-screen.about-pm10'
     },
     {
       parameter: MainPhenomenon.PM25,
-      title: this.translateSrvc.instant('v2.screens.main-screen.what-is-pm25'),
-      about: this.translateSrvc.instant('v2.screens.main-screen.about-pm25')
+      title: 'v2.screens.main-screen.what-is-pm25',
+      about: 'v2.screens.main-screen.about-pm25'
     }
   ];
 

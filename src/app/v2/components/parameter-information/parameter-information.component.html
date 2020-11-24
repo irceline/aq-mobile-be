@@ -2,10 +2,10 @@
   <button ion-button (click)="expandHint = !expandHint;">
     <h4>
       <ion-icon src="/assets/images/icons/question.svg"></ion-icon>
-      <span>{{ title }}</span>
+      <span>{{ title | translate }}</span>
     </h4>
   </button>
   <div class="details--info-text" *ngIf="expandHint">
-    <p>{{ about }}</p>
+    <p>{{ about | translate }}</p>
   </div>
 </div>

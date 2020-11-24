@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 import { Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { forkJoin } from 'rxjs';
@@ -14,6 +15,12 @@ import { ModelledValueService } from '../../services/value-provider/modelled-val
 interface IndexValueResult extends BelAqiIndexResult {
     value: number;
 }
+
+marker('v2.screens.app-info.ozon');
+marker('v2.screens.app-info.nitrogen-dioxide');
+marker('v2.screens.app-info.fine-dust');
+marker('v2.screens.app-info.very-fine-dust');
+marker('v2.screens.app-info.belaqi-title');
 
 @Component({
     selector: 'app-main-screen',
@@ -34,25 +41,25 @@ export class MainScreenComponent implements OnInit {
 
     detailedPhenomenona: Substance[] = [
         {
-            name: this.translateService.instant('v2.screens.app-info.ozon'),
+            name: 'v2.screens.app-info.ozon',
             abbreviation: 'O&#8323;',
             unit: 'µg/m3',
             phenomenon: MainPhenomenon.O3
         },
         {
-            name: this.translateService.instant('v2.screens.app-info.nitrogen-dioxide'),
+            name: 'v2.screens.app-info.nitrogen-dioxide',
             abbreviation: 'NO&#8322;',
             unit: 'µg/m3',
             phenomenon: MainPhenomenon.NO2
         },
         {
-            name: this.translateService.instant('v2.screens.app-info.fine-dust'),
+            name: 'v2.screens.app-info.fine-dust',
             abbreviation: 'PM 10',
             unit: 'µg/m3',
             phenomenon: MainPhenomenon.PM10
         },
         {
-            name: this.translateService.instant('v2.screens.app-info.very-fine-dust'),
+            name: 'v2.screens.app-info.very-fine-dust',
             abbreviation: 'PM 2,5',
             unit: 'µg/m3',
             phenomenon: MainPhenomenon.PM25
@@ -132,7 +139,7 @@ export class MainScreenComponent implements OnInit {
             evaluation: this.belAqiService.getLabelForIndex(currentBelAqi.indexScore),
             location: this.userSettingsService.selectedUserLocation,
             substance: {
-                name: this.translateService.instant('v2.screens.app-info.belaqi-title'),
+                name: 'v2.screens.app-info.belaqi-title',
                 abbreviation: 'BelAQI',
                 phenomenon: MainPhenomenon.BELAQI
             }

@@ -11,11 +11,11 @@
   <ion-label class="ion-text-wrap">
     <ion-text>
       <h3 *ngIf="detailedDataPoint.substance.name && detailedDataPoint.substance.abbreviation">
-        {{detailedDataPoint.substance.name}} (
+        {{detailedDataPoint.substance.name | translate}} (
         <span [innerHTML]="detailedDataPoint.substance.abbreviation"></span>
         )
       </h3>
-      <span [ngStyle]="{'color': detailedDataPoint.color}">{{ detailedDataPoint.evaluation }}</span>
+      <span [ngStyle]="{'color': detailedDataPoint.color}">{{ detailedDataPoint.evaluation | translate }}</span>
     </ion-text>
     <ion-text>
       <p>

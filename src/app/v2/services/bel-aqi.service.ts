@@ -81,7 +81,7 @@ export class BelAQIService {
 
   public getLabelForIndex(index: number) {
     if (index >= 1 && index <= 10) {
-      return this.translate.instant(indexLabel[index]);
+      return indexLabel[index];
     } else {
       return null;
     }
