@@ -43,7 +43,7 @@ export class FeedbackStatsMapComponent implements AfterViewInit {
       {
         layers: 'feedback_day',
         format: 'image/png',
-        useCache: true,
+        useCache: false,
         transparent: true,
         crossOrigin: true
       }
@@ -57,7 +57,7 @@ export class FeedbackStatsMapComponent implements AfterViewInit {
       {
         layers: 'feedback_total',
         format: 'image/png',
-        useCache: true,
+        useCache: false,
         transparent: true,
         crossOrigin: true
       }
