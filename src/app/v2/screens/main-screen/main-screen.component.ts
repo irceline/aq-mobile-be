@@ -134,6 +134,8 @@ export class MainScreenComponent implements OnInit {
         this.detailDataLoadig = true;
 
         const currentBelAqi = this.belAqiForCurrentLocation.find(e => e.valueDate === ValueDate.CURRENT);
+        this.belAqiService.activeIndex = currentBelAqi;
+
         this.belaqiDetailData = {
             color: this.belAqiService.getLightColorForIndex(currentBelAqi.indexScore),
             evaluation: this.belAqiService.getLabelForIndex(currentBelAqi.indexScore),
