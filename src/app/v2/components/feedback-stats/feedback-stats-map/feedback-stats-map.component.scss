@@ -1,4 +1,8 @@
 :host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
     ion-segment {
         padding-bottom: 1px;
 
@@ -10,7 +14,7 @@
     }
 
     .map {
-        height: 300px;
+        flex: 1;
         padding-top: 5px;
     }
 }

@@ -38,6 +38,13 @@
 		"day": "Aujourd'hui",
 		"total": "Total"
 	},
+	"feedback": {
+		"stats": {
+			"submission": "",
+			"submission-today": "",
+			"submission-total": ""
+		}
+	},
 	"network": {
 		"geolocationDenied": "Vous n'avez pas autorisé l'utilisation de votre géolocalisation dans l'application.",
 		"geolocationDisabled": "La géolocalisation est désactivée"

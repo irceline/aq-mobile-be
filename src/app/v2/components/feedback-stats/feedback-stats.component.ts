@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 
 import { BelAQIService } from '../../services/bel-aqi.service';
 import { FeedbackService, FeedbackStats } from '../../services/feedback/feedback.service';
+import { UserLocation } from './../../Interfaces';
 
 @Component({
   selector: 'app-feedback-stats',
@@ -12,6 +13,8 @@ import { FeedbackService, FeedbackStats } from '../../services/feedback/feedback
 export class FeedbackStatsComponent implements OnInit {
 
   @Input() public feedbackStats: FeedbackStats;
+
+  @Input() public location: UserLocation;
 
   public backgroundColor: string;
 

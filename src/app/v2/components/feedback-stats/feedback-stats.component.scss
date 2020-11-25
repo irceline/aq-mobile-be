@@ -6,7 +6,22 @@
 
         .stats {
             flex: 1;
-            overflow: auto;
+            display: flex;
+            padding-top: 20px;
+            flex-direction: column;
+
+            .title,
+            .today,
+            .total {
+                font-size: 18px;
+                text-align: center;
+                color: #ffffff;
+                padding: 5px;
+            }
+
+            .map {
+                flex: 1;
+            }
         }
 
         .controls {

@@ -38,6 +38,13 @@
 		"day": "Heute",
 		"total": "Total"
 	},
+	"feedback": {
+		"stats": {
+			"submission": "Eingereichtes Feedback",
+			"submission-today": "Heute",
+			"submission-total": "Komplett"
+		}
+	},
 	"network": {
 		"geolocationDenied": "Sie haben der App die Standortermittlung nicht erlaubt.",
 		"geolocationDisabled": "Die Standortermittlung ist deaktiviert"

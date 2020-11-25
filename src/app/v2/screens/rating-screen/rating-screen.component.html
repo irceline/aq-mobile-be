@@ -8,7 +8,7 @@
       <div class="rating ion-padding">
         <p>{{ 'v2.screens.rating-screen.does-it-match' | translate  }}</p>
 
-        <app-feedback (feedbackOpened)="feedbackOpened()" (feedbackGiven)="feedbackGiven($event)"></app-feedback>
+        <app-feedback [location]="currentActiveIndex?.location" (feedbackOpened)="feedbackOpened()" (feedbackGiven)="feedbackGiven($event)"></app-feedback>
       </div>
     </ng-container>
 
@@ -36,7 +36,7 @@
     </div>
 
     <ng-container *ngIf="isFeedbackGiven">
-      <app-success-display [feedbackStats]="feedbackStats"></app-success-display>
+      <app-success-display [feedbackStats]="feedbackStats" [location]="currentActiveIndex?.location"></app-success-display>
     </ng-container>
   </app-background>
 </ion-content>

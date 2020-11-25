@@ -38,6 +38,13 @@
 		"day": "Vandaag",
 		"total": "Totaal"
 	},
+	"feedback": {
+		"stats": {
+			"submission": "",
+			"submission-today": "",
+			"submission-total": ""
+		}
+	},
 	"network": {
 		"geolocationDenied": "U hebt het gebruik van uw locatie niet toegestaan de app.",
 		"geolocationDisabled": "Geolocatie is uitgeschakeld"

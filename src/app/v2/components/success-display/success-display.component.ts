@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
+import { UserLocation } from './../../Interfaces';
 import { FeedbackStats } from './../../services/feedback/feedback.service';
 import { FeedbackStatsComponent } from './../feedback-stats/feedback-stats.component';
 
@@ -11,6 +12,7 @@ import { FeedbackStatsComponent } from './../feedback-stats/feedback-stats.compo
 })
 export class SuccessDisplayComponent implements OnInit {
 
+  @Input() location: UserLocation;
   @Input() feedbackStats: FeedbackStats;
 
   constructor(
@@ -23,7 +25,8 @@ export class SuccessDisplayComponent implements OnInit {
     this.modalController.create({
       component: FeedbackStatsComponent,
       componentProps: {
-        feedbackStats: this.feedbackStats
+        feedbackStats: this.feedbackStats,
+        location: this.location
       }
     }).then(modal => modal.present());
   }

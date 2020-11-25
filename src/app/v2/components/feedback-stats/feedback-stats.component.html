@@ -1,8 +1,10 @@
 <div class="wrapper" [ngStyle]="{'background-color': backgroundColor}">
     <div class="stats">
-        <pre>{{feedbackStats | json}}</pre>
-        <div>
-            <app-feedback-stats-map></app-feedback-stats-map>
+        <div class="title">{{ 'feedback.stats.submission' | translate }}</div>
+        <div class="today">{{ 'feedback.stats.submission-today' | translate }}: {{feedbackStats?.submissions_day}}</div>
+        <div class="total">{{ 'feedback.stats.submission-total' | translate }}: {{feedbackStats?.submissions_total}}</div>
+        <div class="map">
+            <app-feedback-stats-map [location]="location"></app-feedback-stats-map>
         </div>
     </div>
     <div class="controls">

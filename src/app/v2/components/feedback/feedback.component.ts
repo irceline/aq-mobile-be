@@ -1,9 +1,10 @@
-import { TranslateService } from '@ngx-translate/core';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 import { FeedbackCode } from '../../services/feedback/feedback.service';
 import { FeedbackStatsComponent } from '../feedback-stats/feedback-stats.component';
+import { UserLocation } from './../../Interfaces';
 
 @Component({
     selector: 'app-feedback',
@@ -11,6 +12,9 @@ import { FeedbackStatsComponent } from '../feedback-stats/feedback-stats.compone
     styleUrls: ['./feedback.component.scss'],
 })
 export class FeedbackComponent implements OnInit {
+
+    @Input() location: UserLocation;
+
     @Output() feedbackOpened = new EventEmitter();
     @Output() feedbackGiven = new EventEmitter<FeedbackCode[]>();
 
@@ -44,7 +48,12 @@ export class FeedbackComponent implements OnInit {
     }
 
     openFeedbackStats() {
-        this.modalController.create({ component: FeedbackStatsComponent }).then(modal => modal.present());
+        this.modalController.create({
+            component: FeedbackStatsComponent,
+            componentProps: {
+                location: this.location
+            }
+        }).then(modal => modal.present());
     }
 
     giveFeedback() {

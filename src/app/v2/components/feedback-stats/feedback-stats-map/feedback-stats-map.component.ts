@@ -1,5 +1,7 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, Input } from '@angular/core';
 import L from 'leaflet';
+
+import { UserLocation } from '../../../Interfaces';
 
 @Component({
   selector: 'app-feedback-stats-map',
@@ -7,6 +9,8 @@ import L from 'leaflet';
   styleUrls: ['./feedback-stats-map.component.scss']
 })
 export class FeedbackStatsMapComponent implements AfterViewInit {
+
+  @Input() location: UserLocation;
 
   public fitBounds: L.LatLngBoundsExpression = [[49.5294835476, 2.51357303225], [51.4750237087, 6.15665815596]];
   public map: L.Map;
@@ -22,7 +26,11 @@ export class FeedbackStatsMapComponent implements AfterViewInit {
     });
     tiles.addTo(this.map);
     setTimeout(() => {
-      this.map.fitBounds(this.fitBounds);
+      if (this.location) {
+        this.map.setView(new L.LatLng(this.location.latitude, this.location.longitude), 12);
+      } else {
+        this.map.fitBounds(this.fitBounds);
+      }
       this.showDayLayer();
       this.map.invalidateSize();
     }, 200);
