@@ -1,6 +1,6 @@
 <ion-content>
   <app-background>
-    <app-location-swipe (locationChange)="onLocationChange($event)" [locations]="locations"></app-location-swipe>
+    <app-location-swipe (locationChange)="onLocationChange($event)" [activeIndex]="activeIndex" [locations]="locations"></app-location-swipe>
 
     <ng-container *ngIf="!isFeedbackGiven">
       <app-circle-chart [belAqi]="currentActiveIndex"></app-circle-chart>

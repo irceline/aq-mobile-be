@@ -22,6 +22,7 @@ export class RatingScreenComponent implements OnInit {
     isFeedbackOpened = false;
     isFeedbackGiven = false;
     feedbackStats: FeedbackStats;
+    activeIndex: number;
 
     constructor(
         private userSettingsService: UserSettingsService,
@@ -34,7 +35,8 @@ export class RatingScreenComponent implements OnInit {
         this.locations = this.userSettingsService.getUserSavedLocations();
 
         // activate first location by default
-        this.updateCurrentLocation(this.locations[0]);
+        this.activeIndex = this.locations.findIndex(e => this.userSettingsService.selectedUserLocation.id === e.id);
+        this.updateCurrentLocation(this.locations[this.activeIndex]);
 
         this.userSettingsService.$userLocations.subscribe((locations) => {
             this.locations = locations;
