@@ -6,6 +6,9 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { AutoCompleteModule } from 'ionic4-auto-complete';
 
+import {
+    ParameterInformationComponent,
+} from './parameter-information/parameter-information.component';
 import { BackgroundComponent } from './background/background.component';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
 import { CircleChartComponent } from './circle-chart/circle-chart.component';
@@ -37,6 +40,7 @@ import { ValueDisplayComponent } from './value-display/value-display.component';
 import { HelgolandMapViewModule } from '@helgoland/map';
 
 const COMPONENTS = [
+    ParameterInformationComponent,
     CircleChartComponent,
     HeaderComponent,
     LocationSwipeComponent,

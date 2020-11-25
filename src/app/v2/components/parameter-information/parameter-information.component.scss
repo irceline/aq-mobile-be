@@ -1,0 +1,46 @@
+.details--info {
+    margin: 0 auto;
+    text-align: center;
+
+    button {
+        background-color: white;
+        outline: none;
+
+        ion-icon {
+            margin-bottom: -3px;
+            padding-right: 0.5em;
+        }
+    }
+
+    div {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+
+        h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #747474;
+            margin: 0;
+
+            ion-icon {
+                vertical-align: middle;
+                padding-bottom: 3px;
+            }
+        }
+    }
+
+
+    .details--info-text {
+        div {
+            width: 100%;
+        }
+
+        p {
+            font-size: 13px;
+            color: #747474;
+            width: 100%;
+            text-align: justify;
+        }
+    }
+}

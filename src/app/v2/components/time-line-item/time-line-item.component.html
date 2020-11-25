@@ -1,7 +1,7 @@
 <div class="timeline--item">
   <div [ngClass]="['timeline--item-header']" [ngStyle]="{'background-color': getColor()}"></div>
   <div class="timeline--item-body">
-    <div class="timeline--item-status">{{ getLabel() }}</div>
+    <div class="timeline--item-status">{{ getLabel() | translate }}</div>
     <div [ngClass]="{ 'timeline--item-day': true}">{{ getDay() }}</div>
   </div>
 </div>

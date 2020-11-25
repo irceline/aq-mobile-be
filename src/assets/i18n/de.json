@@ -114,10 +114,18 @@
 				"lt-effects-diseases": "Eine längere Exposition gegenüber Luftschadstoffen kann chronische Auswirkungen haben und das Risiko für Herz- und Lungenerkrankungen erhöhen."
 			},
 			"main-screen": {
-				"about-no2": "Ein schädliches Gas, das schwerer als Luft ist und heftig mit anderen Substanzen wie Metallen reagiert.",
+				"about-belaqi": "Der BelAQI ist ein Luftqualitätsindex. Die vier Hauptluftschadstoffe (NO2, O3, PM10 und PM2.5) werden anhand ihrer kurzfristigen Auswirkungen auf die Gesundheit bewertet. Die höchste Bewertung bestimmt den BelAQI.",
+				"about-no2": "Stickstoffdioxid (NO2) ist ein Gas, das Augen, Nase und Rachen reizen kann. Beim Einatmen kann NO2 auch Lungenreizungen und eine verminderte Lungenfunktion mit einem erhöhten Risiko für Asthmaanfälle und einer Zunahme der Anzahl von Krankenhauseinweisungen aufgrund von Atemwegsbeschwerden infolge höherer Konzentrationen verursachen. NO2 wird hauptsächlich bei der Verbrennung bei hohen Temperaturen (Dieselmotor, verschiedene industrielle Prozesse, usw.) freigesetzt.",
+				"about-o3": "Ozon (O3) entsteht an warmen Tagen durch Einwirkung von Sonnenlicht (UV) auf Luft, die mit Stickoxiden und flüchtigen organischen Verbindungen kontaminiert ist. Beim Einatmen kann O3 Lungenreizungen und eine verminderte Lungenfunktion mit einem erhöhten Risiko für Asthmaanfälle und einer Zunahme der Anzahl von Krankenhauseinweisungen aufgrund von Atemwegsbeschwerden infolge an Stellen mit höheren Konzentrationen verursachen. Innen-Konzentrationen sind in der Regel nur halb so hoch wie im Freien.",
+				"about-pm10": "Feinstaub (PM10) besteht aus sehr kleinen Schwebstoffen unterschiedlicher Größe, Herkunft und chemischer Zusammensetzung. Beim Einatmen verursachen diese kleinen Partikel Entzündungsreaktionen in den Atemwegen, die die Sauerstoffaufnahme behindern, und bei Menschen mit Atemwegs- und Herz-Kreislauf-Erkrankungen verschlimmert die Exposition gegenüber Feinstaub deren Symptome. Feinstaub kann auch Träger krebserregender Partikel sein. PM10 sind alle Partikel, die kleiner als 10 Mikrometer sind. Der Unterschied zur kleineren PM2.5-Fraktion besteht hauptsächlich in gröberen Partikeln des windgeblasenen Staubes (z.B. Sandpartikel, Staub, der durch vorbeifahrende Autos von der Fahrbahnoberfläche aufgewirbelt wird, usw.).",
+				"about-pm25": "Feinstaub (PM2.5) besteht aus sehr kleinen Schwebstoffen unterschiedlicher Größe, Herkunft und chemischer Zusammensetzung. Beim Einatmen verursachen diese kleinen Partikel Entzündungsreaktionen in den Atemwegen, die die Sauerstoffaufnahme behindern, und bei Menschen mit Atemwegs- und Herz-Kreislauf-Erkrankungen verschlimmert die Exposition gegenüber Feinstaub deren Symptome. Feinstaub kann auch Träger krebserregender Partikel sein. PM2.5 sind alle Partikel, die kleiner als 2,5 Mikrometer sind. PM2.5 ist daher Teil der größeren PM10-Fraktion. PM2.5 wird in der Atmosphäre weitgehend geformt durch andere Schadstoffe (Stickstoffdioxid, Ammoniak, Schwefeldioxid usw.), besteht aber auch aus Partikeln, die bei Verbrennungsprozessen (Holzverbrennung, Dieselruß usw.) freigesetzt werden.",
 				"long-term-calculation": "Sehen Sie sich unsere Langzeitberechnung an",
 				"view-details": "Detailansicht",
-				"what-is-no2": "Was ist Stickstoffdioxid?"
+				"what-is-belaqi": "Was ist der BelAQI?",
+				"what-is-no2": "Was ist Stickstoffdioxid?",
+				"what-is-o3": "Was ist Ozon?",
+				"what-is-pm10": "Was ist Feinstaub (PM10)?",
+				"what-is-pm25": "Was ist Feinstaub (PM2.5)?"
 			},
 			"menu": {
 				"belair-info": "Informationen zu Belair",

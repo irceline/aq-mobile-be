@@ -1,5 +1,5 @@
-<p [ngStyle]="{'color': color}">
-  {{ score }}
+<p [ngStyle]="{'color': labelColor}">
+  {{ label }}
 </p>
 
-<span>{{ value }}</span>
+<span *ngIf="value">{{ value }}</span>

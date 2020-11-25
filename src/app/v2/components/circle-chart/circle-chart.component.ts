@@ -82,7 +82,7 @@ export class CircleChartComponent implements OnInit {
         try {
             this.text = this.translate.instant(
                 'v2.components.circle-chart.avg-score',
-                { score: this.title }
+                { score: this.translate.instant(this.title) }
             );
         } catch (e) {
             console.log(e);

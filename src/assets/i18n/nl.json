@@ -114,10 +114,18 @@
 				"lt-effects-diseases": "Langdurige blootstelling aan luchtvervuilende stoffen kan chronische effecten uitlokken en voor een hoger risico op hart- en longziekten zorgen."
 			},
 			"main-screen": {
-				"about-no2": "Een schadelijk gas dat zwaarder is dan lucht en reageert heftig met andere stoffen, zoals metalen.",
+				"about-belaqi": "De BelAQI is een luchtkwaliteitsindex. Aan de vier belangrijkste luchtverontreinigende stoffen (NO2, O3, PM10 en PM2.5) wordt een score gegeven op basis van hun impact op de gezondheid op korte termijn. De hoogste  score bepaald de BelAQI.",
+				"about-no2": "Stikstofdioxide (NO2) is een gas dat voor irritatie kan zorgen aan ogen, neus en keel. Bij inademing kan NO2 ook voor longirritatie en een verminderde longfunctie zorgen met een grotere kans op astma-aanvallen en een verhoging van het aantal ziekenhuisopname door klachten aan de luchtwegen als gevolg op plaatsen waar de concentraties hoger zijn. NO2 wordt voornamelijk uitgestoten tijdens de verbranding bij hoge temperaturen (dieselmotor, diverse industriële processen, etc.).",
+				"about-o3": "Ozon (O3) ontstaat op warme dagen door de inwerking van zonlicht (UV) op lucht verontreinigd met stikstofoxiden en vluchtige organische stoffen. Bij inademing kan O3 voor longirritatie en een verminderde longfunctie zorgen met een grotere kans op astma-aanvallen en een verhoging van het aantal ziekenhuisopname door klachten aan de luchtwegen als gevolg op plaatsen waar de concentraties hoger zijn. Binnenhuisconcentraties zijn doorgaans maar half zo hoog als buiten.",
+				"about-pm10": "Fijn stof (PM10) bestaat uit zeer kleine zwevende deeltjes van verschillende grootte, herkomst en chemische samenstelling. Bij inademing veroorzaken deze kleine deeltjes ontstekingsreacties in de luchtwegen die de zuurstofopname bemoeilijken en bij mensen met luchtwegaandoeningen en hart- en vaatziekten verergert blootstelling aan fijn stof hun symptomen. Fijnstof kan ook de drager zijn van kankerverwekkende deeltjes. PM10 zijn alle deeltjes kleiner dan 10 micrometer. Het verschil met de kleinere PM2.5 fractie zijn voornamelijk grovere deeltjes in opwaaiend stof (b.v. zand deeltjes, stof opgewaaid van het wegdek door passerende auto's, etc.).",
+				"about-pm25": "Fijn stof (PM2.5) bestaat uit zeer kleine zwevende deeltjes van verschillende grootte, herkomst en chemische samenstelling. Bij inademing veroorzaken deze kleine deeltjes ontstekingsreacties in de luchtwegen die de zuurstofopname bemoeilijken en bij mensen met luchtwegaandoeningen en hart- en vaatziekten verergert blootstelling aan fijn stof hun symptomen. Fijnstof kan ook de drager zijn van kankerverwekkende deeltjes. PM2.5 zijn alle deeltjes kleiner dan 2,5 micrometer. PM2.5 maakt dus deel uit van de grotere PM10 fractie. PM2.5 wordt grotendeels gevormd in de atmosfeer uit andere vervuiling (stikstofdioxide, ammoniak, zwaveldioxide, etc.) maar bestaat ook uit deeltjes die tijdens verbrandingsprocessen vrij komen (houtverbranding, dieselroet, etc.). ",
 				"long-term-calculation": "Bekijk onze berekening op lange termijn",
 				"view-details": "Bekijk in detail",
-				"what-is-no2": "Wat is Stikstofdioxide?"
+				"what-is-belaqi": "Wat is de BelAQI?",
+				"what-is-no2": "Wat is stikstofdioxide?",
+				"what-is-o3": "Wat is ozon?",
+				"what-is-pm10": "Wat is fijn stof (PM10)?",
+				"what-is-pm25": "Wat is fijn stof (PM2.5)?"
 			},
 			"menu": {
 				"belair-info": "Informatie over Belair",
