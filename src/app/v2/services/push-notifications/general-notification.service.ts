@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 import { from, Observable, ReplaySubject, Subscription, timer } from 'rxjs';
-import { map, mergeMap, tap } from 'rxjs/operators';
+import { first, mergeMap, tap } from 'rxjs/operators';
 
 import { PushNotification, PushNotificationsService } from './push-notifications.service';
 
@@ -17,6 +17,8 @@ export class GeneralNotificationService {
 
   public notificationReceived: ReplaySubject<PushNotification> = new ReplaySubject(1);
   private expirationTimer: Subscription;
+
+  public $active = new ReplaySubject<boolean>(1);
 
   constructor(
     private translate: TranslateService,
@@ -45,18 +47,17 @@ export class GeneralNotificationService {
       }
     });
 
+    from(this.storage.get(GENERAL_NOTIFICATION_TOPIC_STORAGE_KEY))
+      .subscribe(res => this.$active.next(res ? true : false));
+
     this.translate.onLangChange.subscribe(lang => {
-      this.isActive().subscribe(active => {
+      this.$active.pipe(first()).subscribe(active => {
         if (active) {
           this.unsubscribeNotification().subscribe();
           this.subscribeNotification().subscribe();
         }
       });
     });
-  }
-
-  public isActive(): Observable<boolean> {
-    return from(this.storage.get(GENERAL_NOTIFICATION_TOPIC_STORAGE_KEY)).pipe(map(e => e ? true : false));
   }
 
   public getNotifications(): Observable<PushNotification> {
@@ -69,6 +70,7 @@ export class GeneralNotificationService {
       tap(res => {
         if (res) {
           this.storage.set(GENERAL_NOTIFICATION_TOPIC_STORAGE_KEY, topic);
+          this.$active.next(true);
         }
       })
     );
@@ -81,6 +83,7 @@ export class GeneralNotificationService {
           tap(res => {
             if (res) {
               this.storage.remove(GENERAL_NOTIFICATION_TOPIC_STORAGE_KEY);
+              this.$active.next(false);
             }
           })
         );
