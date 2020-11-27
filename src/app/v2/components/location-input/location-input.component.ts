@@ -71,7 +71,7 @@ export class LocationInputComponent implements OnInit {
                                     longitude: loc.longitude,
                                 }, loading);
                             } else {
-                                this.toastController.create({ message: 'Your currently location is outside of belgium, therefore no entry is created', duration: 2000 })
+                                this.toastController.create({ message: 'Your current location is outside of Belgium, therefore no entry is created', duration: 2000 })
                                     .then(toast => toast.present());
                                 loading.dismiss(null, 'cancel');
                             }
