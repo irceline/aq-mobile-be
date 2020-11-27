@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { IonInput, LoadingController, ToastController } from '@ionic/angular';
+import { IonInput, LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import locations from '../../../../assets/locations.json';
 import { UserLocation } from '../../Interfaces';
+import { LocationEditComponent } from '../location-edit/location-edit.component';
 import { GeocoderService } from './../../services/geocoder/geocoder.service';
 import { LocateService } from './../../services/locate/locate.service';
 
@@ -17,10 +18,14 @@ export class LocationInputComponent implements OnInit {
 
     @Input() currentLocation = true;
 
+    @Input() editable = false;
+
     searchText = '';
     visible = false;
     filteredItems: UserLocation[] = [];
     selectedItem: UserLocation | null = null;
+
+    editableLocation: UserLocation;
 
     // @ts-ignore
     private _locations: UserLocation[] = locations.map((l) => ({
@@ -35,7 +40,8 @@ export class LocationInputComponent implements OnInit {
         private toastController: ToastController,
         private translateSrvc: TranslateService,
         private geocoder: GeocoderService,
-        private locateSrvc: LocateService
+        private locateSrvc: LocateService,
+        private modalController: ModalController
     ) { }
 
     ngOnInit() {
@@ -90,10 +96,16 @@ export class LocationInputComponent implements OnInit {
         );
     }
 
-    private addLocation(location: UserLocation, loading: HTMLIonLoadingElement) {
-        this.locationSelected.emit(location);
+    private addLocation(location: UserLocation, loading?: HTMLIonLoadingElement) {
         this.searchText = location.label;
-        loading.dismiss(null, 'cancel');
+        if (loading) {
+            loading.dismiss(null, 'cancel');
+        }
+        if (this.editable) {
+            this.editableLocation = location;
+        } else {
+            this.locationSelected.emit(location);
+        }
     }
 
     // Choosing option from dropdown
@@ -110,7 +122,7 @@ export class LocationInputComponent implements OnInit {
         // set cursor after selected option
         this.input.setFocus();
         // emit selected option
-        this.locationSelected.next(this.selectedItem);
+        this.addLocation(this.selectedItem);
         this.closeDropdown();
     }
 
@@ -150,5 +162,21 @@ export class LocationInputComponent implements OnInit {
 
     closeDropdown() {
         this.visible = false;
+    }
+
+    async editLocation() {
+        const modal = await this.modalController.create({
+            component: LocationEditComponent,
+            componentProps: {
+                userLocation: this.editableLocation
+            }
+        });
+        await modal.present();
+        const loc = await (await modal.onWillDismiss()).data as UserLocation;
+        this.addLocation(loc);
+    }
+
+    confirmLocation() {
+        this.locationSelected.emit(this.editableLocation);
     }
 }

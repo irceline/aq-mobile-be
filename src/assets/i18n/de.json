@@ -31,6 +31,11 @@
 		"geolocationDenied": "Sie haben der App die Standortermittlung nicht erlaubt.",
 		"geolocationDisabled": "Die Standortermittlung ist deaktiviert"
 	},
+	"no-location-hint": "Die App benötigt einen Standort für die Anzeige von Daten.",
+	"no-location": {
+		"confirm": "Standort speichern",
+		"edit": "Editiere diesen Standort"
+	},
 	"v2": {
 		"components": {
 			"circle-chart": {
