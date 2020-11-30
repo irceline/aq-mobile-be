@@ -49,7 +49,11 @@
 		"geolocationDenied": "Vous n'avez pas autorisé l'utilisation de votre géolocalisation dans l'application.",
 		"geolocationDisabled": "La géolocalisation est désactivée"
 	},
-	"show-feedback-stats-button": "Afficher les statistiques de commentaires",
+	"no-location-hint": "",
+	"no-location": {
+		"confirm": "",
+		"edit": ""
+	},
 	"v2": {
 		"components": {
 			"circle-chart": {

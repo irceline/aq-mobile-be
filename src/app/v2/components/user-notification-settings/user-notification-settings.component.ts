@@ -1,8 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 import { TranslateService } from '@ngx-translate/core';
+import { first } from 'rxjs/operators';
 
 import { GeneralNotificationService } from '../../services/push-notifications/general-notification.service';
-import { marker } from '@biesbjerg/ngx-translate-extract-marker';
+
 marker('v2.components.user-notification-settings.exercise');
 marker('v2.components.user-notification-settings.allergies');
 marker('v2.components.user-notification-settings.activity');
@@ -70,9 +72,7 @@ export class UserNotificationSettingsComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.generalNotificationSrvc.isActive().subscribe(res => {
-            return this.generalNotification = res;
-        });
+        this.generalNotificationSrvc.$active.pipe(first()).subscribe(res => this.generalNotification = res);
     }
 
     toggleGeneralNotification(event: MouseEvent) {

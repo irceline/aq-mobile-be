@@ -61,12 +61,8 @@
                 <p>{{ 'v2.screens.onboarding.ask-location' | translate }}</p>
 
                 <!-- Location input -->
-                <app-location-input (locationSelected)="selectedLocation = $event"></app-location-input>
+                <app-location-input (locationSelected)="confirmLocation($event)" [editable]="true"></app-location-input>
 
-                <ion-button *ngIf="selectedLocation" (click)="confirmLocation()" fill="clear" shape="round"
-                    style="color: white; font-size: 18px; text-transform: initial;">
-                    {{ 'controls.ok' | translate }}
-                </ion-button>
             </div>
         </div>
     </ion-slide>

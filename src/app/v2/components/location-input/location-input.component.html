@@ -30,3 +30,12 @@
   {{ 'v2.components.location-input.current-location' | translate }}
   <img src="/assets/images/icons/navigation.svg" alt="">
 </ion-button>
+
+<div *ngIf="editableLocation" style="padding-top: 20px;">
+  <ion-button expand="block" fill="clear" shape="round" class="location--button" (click)="editLocation()">
+    {{ 'no-location.edit' | translate }}
+  </ion-button>
+  <ion-button expand="block" fill="clear" shape="round" class="location--button" (click)="confirmLocation()">
+    {{ 'no-location.confirm' | translate }}
+  </ion-button>
+</div>

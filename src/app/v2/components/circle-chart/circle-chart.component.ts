@@ -32,6 +32,7 @@ export class CircleChartComponent implements OnInit {
     };
 
     public notification: PushNotification;
+    public notificationActive: boolean;
 
     constructor(
         private belaqiService: BelAQIService,
@@ -48,8 +49,8 @@ export class CircleChartComponent implements OnInit {
     }
 
     ngOnInit() {
-        // this._initialize(this.belAqi);
         this.generalNotification.getNotifications().subscribe(notif => this.zone.run(() => this.notification = notif));
+        this.generalNotification.$active.subscribe(active => this.notificationActive = active);
     }
 
     getChartHeight() {

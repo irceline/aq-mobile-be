@@ -1,9 +1,9 @@
 <ion-content [scrollY]="false">
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" *ngIf="locations.length">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <app-background>
-    <div class="wrapper" [ngStyle]="{'height': contentHeight + 'px'}">
+    <div class="wrapper" [ngStyle]="{'height': contentHeight + 'px'}" *ngIf="locations.length">
       <app-location-swipe (locationChange)="onLocationChange($event)" [locations]="locations">
       </app-location-swipe>
       <app-circle-chart #chart></app-circle-chart>
@@ -11,17 +11,24 @@
       </app-time-line-list>
       <app-info-button></app-info-button>
     </div>
+
+    <div class="no-locations" *ngIf="!locations.length">
+      <div class="no-locations-hint">
+        {{ 'no-location-hint' | translate }}
+      </div>
+      <app-location-input (locationSelected)="useLocation($event)" [editable]="true"></app-location-input>
+    </div>
   </app-background>
 </ion-content>
 
-<app-pull-tab [options]="drawerOptions">
+<app-pull-tab [options]="drawerOptions" *ngIf="locations.length">
   <div class="details--wrapper" [ngClass]="{'inactive': detailPoint, 'active': !detailPoint}">
     <ng-container *ngIf="!detailPoint">
       <div class="details">
         <h5>{{ 'v2.screens.main-screen.view-details' | translate }}</h5>
 
-        <app-information-item *ngIf="belaqiDetailData" [detailedDataPoint]="belaqiDetailData"
-          [isButton]="true" (click)="openBelaqiDetails()">
+        <app-information-item *ngIf="belaqiDetailData" [detailedDataPoint]="belaqiDetailData" [isButton]="true"
+          (click)="openBelaqiDetails()">
         </app-information-item>
 
         <app-information-item *ngFor="let detailDataPoint of detailData" [detailedDataPoint]="detailDataPoint"
@@ -44,7 +51,8 @@
       <app-time-line-list class="details--timeline" (dayChange)="onDetailsDayChange($event)" [items]="valueTimeline">
       </app-time-line-list>
 
-      <app-value-display *ngIf="selectedResult" [index]="selectedResult.indexScore" [score]="selectedResult.value" [value]="detailPoint.substance.unit"></app-value-display>
+      <app-value-display *ngIf="selectedResult" [index]="selectedResult.indexScore" [score]="selectedResult.value"
+        [value]="detailPoint.substance.unit"></app-value-display>
 
       <app-parameter-information [parameter]="detailPoint.substance.phenomenon"></app-parameter-information>
 
@@ -52,8 +60,8 @@
         [phenomenon]="detailPoint.substance.phenomenon" [valueDate]="selectedResult?.valueDate"></map-component>
       <div class="longterm">
         <ion-item>
-            <ion-label [routerLink]="['/main/longterm-info']" text-wrap>
-              {{ 'v2.screens.main-screen.long-term-calculation' | translate }} ></ion-label>
+          <ion-label [routerLink]="['/main/longterm-info']" text-wrap>
+            {{ 'v2.screens.main-screen.long-term-calculation' | translate }} ></ion-label>
         </ion-item>
       </div>
     </div>

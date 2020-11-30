@@ -49,7 +49,11 @@
 		"geolocationDenied": "U hebt het gebruik van uw locatie niet toegestaan de app.",
 		"geolocationDisabled": "Geolocatie is uitgeschakeld"
 	},
-	"show-feedback-stats-button": "Geef feedbackstatistieken weer",
+	"no-location-hint": "",
+	"no-location": {
+		"confirm": "",
+		"edit": ""
+	},
 	"v2": {
 		"components": {
 			"circle-chart": {

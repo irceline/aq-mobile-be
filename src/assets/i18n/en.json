@@ -49,7 +49,11 @@
 		"geolocationDenied": "You have not allowed the use of your location to the app.",
 		"geolocationDisabled": "Geolocation is disabled"
 	},
-	"show-feedback-stats-button": "Show feedback statistics",
+	"no-location-hint": "The app needs you to select a location to function properly.",
+	"no-location": {
+		"confirm": "Save location",
+		"edit": "Edit this location"
+	},
 	"v2": {
 		"components": {
 			"circle-chart": {

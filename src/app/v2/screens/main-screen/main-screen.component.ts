@@ -102,6 +102,8 @@ export class MainScreenComponent implements OnInit {
     detailPoint: DataPoint = null;
     contentHeight = 0;
 
+    location: UserLocation;
+
     constructor(
         public userSettingsService: UserSettingsService,
         private translateService: TranslateService,
@@ -119,14 +121,16 @@ export class MainScreenComponent implements OnInit {
     }
 
     private updateCurrentLocation(loadFinishedCb?: () => any) {
-        return this.belAqiService.getIndexScoresAsObservable(this.userSettingsService.selectedUserLocation).subscribe(
-            res => {
-                this.belAqiForCurrentLocation = res.filter(e => e !== null);
-                this.updateDetailData(loadFinishedCb);
-            }, error => {
-                console.error('Error occured while fetching the bel aqi indicies');
-                if (loadFinishedCb) { loadFinishedCb(); }
-            });
+        if (this.userSettingsService.selectedUserLocation) {
+            return this.belAqiService.getIndexScoresAsObservable(this.userSettingsService.selectedUserLocation).subscribe(
+                res => {
+                    this.belAqiForCurrentLocation = res.filter(e => e !== null);
+                    this.updateDetailData(loadFinishedCb);
+                }, error => {
+                    console.error('Error occured while fetching the bel aqi indicies');
+                    if (loadFinishedCb) { loadFinishedCb(); }
+                });
+        }
     }
 
     private async updateDetailData(loadFinishedCb?: () => any) {
@@ -230,5 +234,11 @@ export class MainScreenComponent implements OnInit {
 
     onDetailsDayChange(index: IndexValueResult) {
         this.selectedResult = index;
+    }
+
+    useLocation(location: UserLocation) {
+        if (location) {
+            this.userSettingsService.addUserLocation(location);
+        }
     }
 }
