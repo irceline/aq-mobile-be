@@ -42,8 +42,9 @@
 		"stats": {
 			"submission": "Eingereichtes Feedback",
 			"submission-today": "Heute",
-			"submission-total": "Komplett"
-		}
+			"submission-total": "Insgesamt"
+		},
+		"show-feedback-button": "Feedback anzeigen"
 	},
 	"network": {
 		"geolocationDenied": "Sie haben der App die Standortermittlung nicht erlaubt.",

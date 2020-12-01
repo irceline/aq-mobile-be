@@ -40,10 +40,11 @@
 	},
 	"feedback": {
 		"stats": {
-			"submission": "",
-			"submission-today": "",
-			"submission-total": ""
-		}
+			"submission": "Commentaires soumis",
+			"submission-today": "Aujourd'hui",
+			"submission-total": "Au total"
+		},
+		"show-feedback-button": "Afficher les commentaires"
 	},
 	"network": {
 		"geolocationDenied": "Vous n'avez pas autorisé l'utilisation de votre géolocalisation dans l'application.",

@@ -40,10 +40,11 @@
 	},
 	"feedback": {
 		"stats": {
-			"submission": "",
-			"submission-today": "",
-			"submission-total": ""
-		}
+			"submission": "Ingezonden feedback",
+			"submission-today": "Vandaag",
+			"submission-total": "In totaal"
+		},
+		"show-feedback-button": "Feedback weergeven"
 	},
 	"network": {
 		"geolocationDenied": "U hebt het gebruik van uw locatie niet toegestaan de app.",
