@@ -50,10 +50,10 @@
 		"geolocationDenied": "Vous n'avez pas autorisé l'utilisation de votre géolocalisation dans l'application.",
 		"geolocationDisabled": "La géolocalisation est désactivée"
 	},
-	"no-location-hint": "",
+	"no-location-hint": "L'application nécessite une localisation pour afficher les données.",
 	"no-location": {
-		"confirm": "",
-		"edit": ""
+		"confirm": "Sauvegarder la localisation",
+		"edit": "Modifier cette localisation"
 	},
 	"v2": {
 		"components": {

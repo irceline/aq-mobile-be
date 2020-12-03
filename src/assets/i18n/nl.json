@@ -50,10 +50,10 @@
 		"geolocationDenied": "U hebt het gebruik van uw locatie niet toegestaan de app.",
 		"geolocationDisabled": "Geolocatie is uitgeschakeld"
 	},
-	"no-location-hint": "",
+	"no-location-hint": "De app vereist een locatie om gegevens weer te geven.",
 	"no-location": {
-		"confirm": "",
-		"edit": ""
+		"confirm": "Locatie opslaan",
+		"edit": "Locatie bewerken"
 	},
 	"v2": {
 		"components": {
