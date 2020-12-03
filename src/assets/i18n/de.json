@@ -93,7 +93,8 @@
 				"activity": "Anstrengungen",
 				"allergies": "Allergien",
 				"exercise": "Training",
-				"generally": "Allgemein",
+				"automated": "Automatisierte Warnmeldungen auf der Grundlage modellierter Werte für die von Ihnen gewählten Standorte.",
+				"official": "Offizielle Warnmeldungen basierend auf einer gründlichen Analyse der Situation",
 				"highConcentration": "(Zu) hohe Konzentrationen",
 				"transport": "Unterwegs"
 			}

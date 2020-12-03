@@ -93,7 +93,8 @@
 				"activity": "Inspanningen",
 				"allergies": "Allergieën",
 				"exercise": "Sporten",
-				"generally": "Algemeen",
+				"automated": "Geautomatiseerde waarschuwingen op basis van gemodelleerde waarden voor de door u gekozen locatie(s).",
+				"official": "Officiële waarschuwingen op basis van een grondige analyse van de situatie",
 				"highConcentration": "(Te) hoge concentraties",
 				"transport": "Verplaatsingen"
 			}

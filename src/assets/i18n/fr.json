@@ -93,7 +93,8 @@
 				"activity": "Efforts physiques",
 				"allergies": "Les allergies",
 				"exercise": "Faire des exercices",
-				"generally": "Général",
+				"automated": "Alertes automatisées basées sur des valeurs modélisées pour le(s) lieu(x) que vous avez choisi(s).",
+				"official": "Alertes officielles basées sur une analyse approfondie de la situation",
 				"highConcentration": "Concentrations (trop) élevées",
 				"transport": "Déplacements"
 			}
