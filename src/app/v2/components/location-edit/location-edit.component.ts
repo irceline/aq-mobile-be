@@ -34,7 +34,7 @@ export class LocationEditComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    setTimeout(() => this.drawMap(), 10);
+    setTimeout(() => this.drawMap(), 200);
   }
 
   drawMap() {
