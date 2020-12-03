@@ -23,7 +23,7 @@
     <ion-list>
       <ion-item lines="none" *ngFor="let entry of form">
         <ion-checkbox slot="start" [(ngModel)]="entry.isChecked"></ion-checkbox>
-        <ion-label>{{entry.val}}</ion-label>
+        <ion-label text-wrap>{{entry.val}}</ion-label>
       </ion-item>
     </ion-list>
     <!-- per design , there was a location input here, but the location is already determined on the top of this page -->
