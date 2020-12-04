@@ -50,6 +50,7 @@
 		"geolocationDenied": "You have not allowed the use of your location to the app.",
 		"geolocationDisabled": "Geolocation is disabled"
 	},
+	"edit-location-hint": "You can move the location icon on the map to any desired location",
 	"no-location-hint": "The app needs you to select a location to function properly.",
 	"no-location": {
 		"confirm": "Save location",

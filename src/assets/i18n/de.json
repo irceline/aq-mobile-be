@@ -50,6 +50,7 @@
 		"geolocationDenied": "Sie haben der App die Standortermittlung nicht erlaubt.",
 		"geolocationDisabled": "Die Standortermittlung ist deaktiviert"
 	},
+	"edit-location-hint": "Sie können das Standortsymbol auf der Karte an jeden gewünschten Ort verschieben.",
 	"no-location-hint": "Die App benötigt einen Standort für die Anzeige von Daten.",
 	"no-location": {
 		"confirm": "Standort speichern",

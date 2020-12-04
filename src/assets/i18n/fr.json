@@ -50,6 +50,7 @@
 		"geolocationDenied": "Vous n'avez pas autorisé l'utilisation de votre géolocalisation dans l'application.",
 		"geolocationDisabled": "La géolocalisation est désactivée"
 	},
+	"edit-location-hint": "Vous pouvez déplacer l'icône de localisation sur la carte à n'importe quel endroit souhaité.",
 	"no-location-hint": "L'application nécessite une localisation pour afficher les données.",
 	"no-location": {
 		"confirm": "Sauvegarder la localisation",
