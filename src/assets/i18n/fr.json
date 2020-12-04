@@ -53,8 +53,8 @@
 	"edit-location-hint": "Vous pouvez déplacer l'icône de localisation sur la carte à n'importe quel endroit souhaité.",
 	"no-location-hint": "L'application nécessite une localisation pour afficher les données.",
 	"no-location": {
-		"confirm": "Sauvegarder la localisation",
-		"edit": "Modifier cette localisation"
+		"confirm": "Sauvegarder",
+		"edit": "Modifier"
 	},
 	"v2": {
 		"components": {

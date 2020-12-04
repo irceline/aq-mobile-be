@@ -53,8 +53,8 @@
 	"edit-location-hint": "U kunt het locatie icoon op de kaart naar elke gewenste locatie verplaatsen.",
 	"no-location-hint": "De app vereist een locatie om gegevens weer te geven.",
 	"no-location": {
-		"confirm": "Locatie opslaan",
-		"edit": "Locatie bewerken"
+		"confirm": "Opslaan",
+		"edit": "Bewerken"
 	},
 	"v2": {
 		"components": {

@@ -53,8 +53,8 @@
 	"edit-location-hint": "Sie können das Standortsymbol auf der Karte an jeden gewünschten Ort verschieben.",
 	"no-location-hint": "Die App benötigt einen Standort für die Anzeige von Daten.",
 	"no-location": {
-		"confirm": "Standort speichern",
-		"edit": "Editiere diesen Standort"
+		"confirm": "Speichern",
+		"edit": "Bearbeiten"
 	},
 	"v2": {
 		"components": {

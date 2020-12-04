@@ -53,8 +53,8 @@
 	"edit-location-hint": "You can move the location icon on the map to any desired location",
 	"no-location-hint": "The app needs you to select a location to function properly.",
 	"no-location": {
-		"confirm": "Save location",
-		"edit": "Edit this location"
+		"confirm": "Save",
+		"edit": "Edit"
 	},
 	"v2": {
 		"components": {
