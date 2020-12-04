@@ -155,7 +155,8 @@
 				"does-it-match": "Entspricht dieser Wert Ihren Gefühlen?",
 				"exhaust": "<strong>Abgase</strong> aus dem Verkehr",
 				"fire": "Ein <strong>Kamin</strong> mit Holzverbrennung.",
-				"industry": "<strong>Emissionen</strong> aus Industrie oder Landwirtschaft",
+				"industry": "<strong>Emissionen</strong> aus Industrie",
+				"agriculture": "<strong>Emissionen</strong> aus Landwirtschaft",
 				"possible-causes": "Mogelijke oorzaken van een afwijking zijn:"
 			}
 		}

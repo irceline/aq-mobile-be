@@ -154,8 +154,9 @@
 				"calculated-value": "The app shows a calculated value, not a measurement at your location. The air quality may therefore differ locally.",
 				"does-it-match": "Is this value in line with your feelings?",
 				"exhaust": "<strong>Exhaust fumes</strong> from traffic",
-				"fire": "<strong>Wood burn</strong>.",
-				"industry": "<strong>Emissions</strong> from industry or agriculture",
+				"fire": "<strong>Wood burn</strong>",
+				"industry": "<strong>Emissions</strong> from industry",
+				"agriculture": "<strong>Emissions</strong> from agriculture",
 				"possible-causes": "Possible causes of a deviation are:"
 			}
 		}

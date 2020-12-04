@@ -155,7 +155,8 @@
 				"does-it-match": "Cette valeur correspond-elle à vos sentiments?",
 				"exhaust": "<strong>Échappement des fumées</strong> de la circulation.",
 				"fire": "Un <strong> feu </strong> avec du bois.",
-				"industry": "<strong>Émissions</strong> provenant de l'industrie ou de l'agriculture.",
+				"industry": "<strong>Émissions</strong> provenant de l'industrie.",
+				"agriculture": "<strong>Émissions</strong> provenant de l'agriculture.",
 				"possible-causes": "Les causes possibles d'un écart sont:"
 			}
 		}
