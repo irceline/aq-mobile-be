@@ -35,8 +35,17 @@
                     justify-content: center;
                     align-items: center;
 
-                    @media screen and (max-device-width: 400px) {
-                        font-size: 12vw;
+                    @media screen and (max-device-width: 430px) {
+                        font-size: 47px;
+                    }
+                    @media screen and (max-device-width: 427px) {
+                        font-size: 46px;
+                    }
+                    @media screen and (max-device-width: 425px) {
+                        font-size: 45px;
+                    }
+                    @media screen and (max-device-width: 410px) {
+                        font-size: 44px;
                     }
                 }
 
