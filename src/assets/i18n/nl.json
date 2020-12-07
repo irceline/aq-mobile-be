@@ -25,16 +25,36 @@
 	},
 	"controls": {
 		"cancel": "annuleer",
+		"close": "sluiten",
 		"ok": "Bewaar locatie"
+	},
+	"feedback-reason": {
+		"agriculture": "Uitstoot door landbouw",
+		"industry": "Uitstoot door industrie",
+		"traffic": "Uitlaatgassen van verkeer",
+		"woodburn": "Verbranding van hout"
+	},
+	"feedback-stats-map": {
+		"day": "Vandaag",
+		"total": "Totaal"
+	},
+	"feedback": {
+		"stats": {
+			"submission": "Ingezonden feedback",
+			"submission-today": "Vandaag",
+			"submission-total": "In totaal"
+		},
+		"show-feedback-button": "Feedback weergeven"
 	},
 	"network": {
 		"geolocationDenied": "U hebt het gebruik van uw locatie niet toegestaan de app.",
 		"geolocationDisabled": "Geolocatie is uitgeschakeld"
 	},
-	"no-location-hint": "",
+	"edit-location-hint": "U kunt het locatie icoon op de kaart naar elke gewenste locatie verplaatsen.",
+	"no-location-hint": "De app vereist een locatie om gegevens weer te geven.",
 	"no-location": {
-		"confirm": "",
-		"edit": ""
+		"confirm": "Opslaan",
+		"edit": "Bewerken"
 	},
 	"v2": {
 		"components": {
@@ -74,7 +94,8 @@
 				"activity": "Inspanningen",
 				"allergies": "Allergieën",
 				"exercise": "Sporten",
-				"generally": "",
+				"automated": "Geautomatiseerde waarschuwingen op basis van gemodelleerde waarden voor de door u gekozen locatie(s).",
+				"official": "Officiële waarschuwingen op basis van een grondige analyse van de situatie",
 				"highConcentration": "(Te) hoge concentraties",
 				"transport": "Verplaatsingen"
 			}
@@ -83,7 +104,7 @@
 			"app-info": {
 				"aq-index": "We beoordelen de impact van de <strong>algemene luchtkwaliteit</strong> op korte termijn op basis van een luchtkwaliteitsindex.",
 				"aq-index-2": "Die geeft aan elk van de <strong>berekende concentraties van verschillende verontreinigende stoffen</strong> één score (b.v. heel goed). De slechtste score bepaalt de algemene luchtkwaliteit.",
-				"belaqi-title": "",
+				"belaqi-title": "Algemeen",
 				"current-items": "De stoffen die we in rekening brengen, zijn:",
 				"data-models": "Door op deze data modellen toe te passen, berekenen we of de impact van de luchtkwaliteit op lange termijn beter of slechter wordt.",
 				"fine-dust": "Fijn stof",
@@ -100,11 +121,11 @@
 				"lt-effects-diseases": "Langdurige blootstelling aan luchtvervuilende stoffen kan chronische effecten uitlokken en voor een hoger risico op hart- en longziekten zorgen."
 			},
 			"main-screen": {
-				"about-belaqi": "De BelAQI is een luchtkwaliteitsindex. Aan de vier belangrijkste luchtverontreinigende stoffen (NO2, O3, PM10 en PM2.5) wordt een score gegeven op basis van hun impact op de gezondheid op korte termijn. De hoogste  score bepaald de BelAQI.",
-				"about-no2": "Stikstofdioxide (NO2) is een gas dat voor irritatie kan zorgen aan ogen, neus en keel. Bij inademing kan NO2 ook voor longirritatie en een verminderde longfunctie zorgen met een grotere kans op astma-aanvallen en een verhoging van het aantal ziekenhuisopname door klachten aan de luchtwegen als gevolg op plaatsen waar de concentraties hoger zijn. NO2 wordt voornamelijk uitgestoten tijdens de verbranding bij hoge temperaturen (dieselmotor, diverse industriële processen, etc.).",
-				"about-o3": "Ozon (O3) ontstaat op warme dagen door de inwerking van zonlicht (UV) op lucht verontreinigd met stikstofoxiden en vluchtige organische stoffen. Bij inademing kan O3 voor longirritatie en een verminderde longfunctie zorgen met een grotere kans op astma-aanvallen en een verhoging van het aantal ziekenhuisopname door klachten aan de luchtwegen als gevolg op plaatsen waar de concentraties hoger zijn. Binnenhuisconcentraties zijn doorgaans maar half zo hoog als buiten.",
-				"about-pm10": "Fijn stof (PM10) bestaat uit zeer kleine zwevende deeltjes van verschillende grootte, herkomst en chemische samenstelling. Bij inademing veroorzaken deze kleine deeltjes ontstekingsreacties in de luchtwegen die de zuurstofopname bemoeilijken en bij mensen met luchtwegaandoeningen en hart- en vaatziekten verergert blootstelling aan fijn stof hun symptomen. Fijnstof kan ook de drager zijn van kankerverwekkende deeltjes. PM10 zijn alle deeltjes kleiner dan 10 micrometer. Het verschil met de kleinere PM2.5 fractie zijn voornamelijk grovere deeltjes in opwaaiend stof (b.v. zand deeltjes, stof opgewaaid van het wegdek door passerende auto's, etc.).",
-				"about-pm25": "Fijn stof (PM2.5) bestaat uit zeer kleine zwevende deeltjes van verschillende grootte, herkomst en chemische samenstelling. Bij inademing veroorzaken deze kleine deeltjes ontstekingsreacties in de luchtwegen die de zuurstofopname bemoeilijken en bij mensen met luchtwegaandoeningen en hart- en vaatziekten verergert blootstelling aan fijn stof hun symptomen. Fijnstof kan ook de drager zijn van kankerverwekkende deeltjes. PM2.5 zijn alle deeltjes kleiner dan 2,5 micrometer. PM2.5 maakt dus deel uit van de grotere PM10 fractie. PM2.5 wordt grotendeels gevormd in de atmosfeer uit andere vervuiling (stikstofdioxide, ammoniak, zwaveldioxide, etc.) maar bestaat ook uit deeltjes die tijdens verbrandingsprocessen vrij komen (houtverbranding, dieselroet, etc.). ",
+				"about-belaqi": "De BelAQI is een luchtkwaliteitsindex. Aan de vier belangrijkste luchtverontreinigende stoffen (NO2, O3, PM10 en PM2.5) wordt een score gegeven op basis van hun impact op de gezondheid op korte termijn. De hoogste  score bepaalt de BelAQI.",
+				"about-no2": "Stikstofdioxide (NO2) is een gas dat voor irritatie kan zorgen aan ogen, neus en keel. Bij inademing kan NO2 ook voor longirritatie en een verminderde longfunctie zorgen. Op plaatsen met meer NO2 is er een grotere kans op astma-aanvallen en neemt het aantal ziekenhuisopnames door klachten aan de luchtwegen toe. NO2 wordt voornamelijk uitgestoten tijdens verbrandingsprocessen  bij hoge temperaturen. De belangrijkste bron zijn dieselwagens.",
+				"about-o3": "Ozon (O3) ontstaat op warme dagen door de inwerking van zonlicht (UV) op lucht verontreinigd met stikstofoxiden en vluchtige organische stoffen. Bij inademing kan O3 voor longirritatie en een verminderde longfunctie zorgen.  Op plaatsen met meer O3 is er een grotere kans op astma-aanvallen en neemt het aantal ziekenhuisopnames door klachten aan de luchtwegen toe. Binnenhuis zijn de ozonconcentraties doorgaans maar half zo hoog als buiten.",
+				"about-pm10": "Fijn stof (PM10) bestaat uit zeer kleine zwevende deeltjes van verschillende grootte, herkomst en chemische samenstelling. Bij inademing veroorzaken deze kleine deeltjes ontstekingsreacties in de luchtwegen die de zuurstofopname bemoeilijken. Mensen met luchtwegaandoeningen en/of hart- en vaatziekten zijn hiervoor bijzonder gevoelig. Fijn stof kan ook drager zijn van kankerverwekkende deeltjes. PM10 zijn alle deeltjes kleiner dan 10 micrometer. Het verschil met de kleinere PM2.5 fractie zijn voornamelijk grovere deeltjes in opwaaiend stof (b.v. zand, stof opgewaaid van het wegdek door passerende auto's, etc.).",
+				"about-pm25": "Fijn stof (PM2.5) bestaat uit zeer kleine zwevende deeltjes van verschillende grootte, herkomst en chemische samenstelling. Bij inademing veroorzaken deze kleine deeltjes ontstekingsreacties in de luchtwegen die de zuurstofopname bemoeilijken. Mensen met luchtwegaandoeningen en/of hart- en vaatziekten zijn hiervoor bijzonder gevoelig. Fijnstof kan ook drager zijn van kankerverwekkende deeltjes. PM2.5 zijn alle deeltjes kleiner dan 2,5 micrometer. PM2.5 maakt dus deel uit van de grotere PM10 fractie. PM2.5 wordt grotendeels gevormd in de atmosfeer uit andere vervuiling (stikstofoxides, ammoniak, zwaveldioxide, etc.) maar bestaat ook uit deeltjes die tijdens verbrandingsprocessen vrij komen (roet afkomstig van de verbranding van diesel of hout, etc.).",
 				"long-term-calculation": "Bekijk onze berekening op lange termijn",
 				"view-details": "Bekijk in detail",
 				"what-is-belaqi": "Wat is de BelAQI?",
@@ -134,7 +155,8 @@
 				"does-it-match": "Strookt deze waarde met jouw gevoel?",
 				"exhaust": "<strong>Uitlaatgassen</strong> van verkeer",
 				"fire": "Een <strong>haardvuur</strong> met hout verbranding.",
-				"industry": "<strong>Uitstoot</strong> door industrie of landbouw",
+				"industry": "<strong>Uitstoot</strong> door industrie",
+				"agriculture": "<strong>Uitstoot</strong> door landbouw",
 				"possible-causes": "Mogelijke oorzaken van een afwijking zijn:"
 			}
 		}

@@ -1,12 +1,6 @@
-import {
-    Component,
-    OnInit,
-    ViewChild,
-    EventEmitter,
-    Output,
-    Input,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
+
 import { UserLocation } from '../../Interfaces';
 
 @Component({
@@ -18,6 +12,7 @@ export class LocationSwipeComponent implements OnInit {
     @ViewChild(IonSlides, { static: true }) slides: IonSlides;
     @Output() locationChange = new EventEmitter<UserLocation>();
     @Input() locations: UserLocation[] = [];
+    @Input() activeIndex: number;
 
     sliderOptions = {
         spaceBetween: 20,
@@ -25,9 +20,14 @@ export class LocationSwipeComponent implements OnInit {
         slidesPerView: 2,
     };
 
-    constructor() {}
+    constructor() { }
 
-    ngOnInit() {}
+    ngOnInit() {
+        if (!isNaN(this.activeIndex)) {
+            this.slides.slideTo(this.activeIndex);
+            this.slides.update();
+        }
+    }
 
     // Emit location change
     async slideChange() {

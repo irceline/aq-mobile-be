@@ -1,10 +1,10 @@
-import {
-    Component,
-    OnInit,
-    EventEmitter,
-    Output,
-    HostBinding,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+
+import { FeedbackCode } from '../../services/feedback/feedback.service';
+import { FeedbackStatsComponent } from '../feedback-stats/feedback-stats.component';
+import { UserLocation } from './../../Interfaces';
 
 @Component({
     selector: 'app-feedback',
@@ -12,22 +12,28 @@ import {
     styleUrls: ['./feedback.component.scss'],
 })
 export class FeedbackComponent implements OnInit {
+
+    @Input() location: UserLocation;
+
     @Output() feedbackOpened = new EventEmitter();
-    @Output() feedbackGiven = new EventEmitter();
+    @Output() feedbackGiven = new EventEmitter<FeedbackCode[]>();
 
     like = false;
     dislike = false;
 
-    // todo : check data structure , simpler values?
     form = [
-        { val: 'Verbranding van hout', isChecked: false },
-        { val: 'Uitlaatgassen van verkeer', isChecked: false },
-        { val: 'Uitstoot door industrie of landbouw', isChecked: false },
+        { val: this.translateSrvc.instant('feedback-reason.woodburn'), isChecked: false, code: FeedbackCode.WOODBURN },
+        { val: this.translateSrvc.instant('feedback-reason.traffic'), isChecked: false, code: FeedbackCode.TRAFFIC },
+        { val: this.translateSrvc.instant('feedback-reason.agriculture'), isChecked: false, code: FeedbackCode.AGRICULTURE },
+        { val: this.translateSrvc.instant('feedback-reason.industry'), isChecked: false, code: FeedbackCode.INDUSTRY }
     ];
 
-    constructor() {}
+    constructor(
+        private modalController: ModalController,
+        private translateSrvc: TranslateService
+    ) { }
 
-    ngOnInit() {}
+    ngOnInit() { }
 
     openFeedback(type: string) {
         if (type === 'like') {
@@ -41,10 +47,25 @@ export class FeedbackComponent implements OnInit {
         }
     }
 
+    openFeedbackStats() {
+        this.modalController.create({
+            component: FeedbackStatsComponent,
+            componentProps: {
+                location: this.location
+            }
+        }).then(modal => modal.present());
+    }
+
     giveFeedback() {
-        this.feedbackGiven.emit({
-            location: null,
-            reason: '',
-        });
+        if (this.like) {
+            this.feedbackGiven.emit([FeedbackCode.INLINE]);
+        } else {
+            const fbs = this.form.filter(e => e.isChecked).map(e => e.code);
+            if (fbs.length > 0) {
+                this.feedbackGiven.emit(fbs);
+            } else {
+                this.feedbackGiven.emit([FeedbackCode.NOT_INLINE_WITHOUT_INFO]);
+            }
+        }
     }
 }

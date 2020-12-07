@@ -4,5 +4,9 @@
 </div>
 
 <ion-item detail lines="none" class="success--button">
-  <ion-label><a [routerLink]="['/main']">{{ 'v2.components.success-display.back-to-main' | translate }}</a></ion-label>
+  <ion-label (click)="openStats()" text-wrap>{{ 'feedback.show-feedback-button' | translate }}</ion-label>
+</ion-item>
+
+<ion-item detail lines="none" class="success--button">
+  <ion-label text-wrap><a [routerLink]="['/main']">{{ 'v2.components.success-display.back-to-main' | translate }}</a></ion-label>
 </ion-item>

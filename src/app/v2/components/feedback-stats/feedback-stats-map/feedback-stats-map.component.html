@@ -1,0 +1,9 @@
+<ion-segment (ionChange)="toggleMapLayer($event)" value="day">
+    <ion-segment-button value="day">
+        <ion-label>{{'feedback-stats-map.day' | translate}}</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="total">
+        <ion-label>{{'feedback-stats-map.total' | translate}}</ion-label>
+    </ion-segment-button>
+</ion-segment>
+<div class="map" id="feedbackMap"></div>

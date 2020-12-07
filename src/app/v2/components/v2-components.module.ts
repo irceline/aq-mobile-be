@@ -12,6 +12,8 @@ import {
 import { BackgroundComponent } from './background/background.component';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
 import { CircleChartComponent } from './circle-chart/circle-chart.component';
+import { FeedbackStatsMapComponent } from './feedback-stats/feedback-stats-map/feedback-stats-map.component';
+import { FeedbackStatsComponent } from './feedback-stats/feedback-stats.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { HeaderComponent } from './header/header.component';
 import { HorizontalCardComponent } from './horizontal-card/horizontal-card.component';
@@ -34,6 +36,8 @@ import { TimeLineItemComponent } from './time-line-item/time-line-item.component
 import { TimeLineListComponent } from './time-line-list/time-line-list.component';
 import { UserNotificationSettingsComponent } from './user-notification-settings/user-notification-settings.component';
 import { ValueDisplayComponent } from './value-display/value-display.component';
+
+import { HelgolandMapViewModule } from '@helgoland/map';
 
 const COMPONENTS = [
     ParameterInformationComponent,
@@ -58,6 +62,8 @@ const COMPONENTS = [
     MenuScreenComponent,
     InfoButtonComponent,
     FeedbackComponent,
+    FeedbackStatsComponent,
+    FeedbackStatsMapComponent,
     ValueDisplayComponent,
     SuccessDisplayComponent,
     InformationItemDetailsComponent,
@@ -72,6 +78,7 @@ const COMPONENTS = [
         IonicModule,
         TranslateModule,
         RouterModule,
+        HelgolandMapViewModule
     ],
     declarations: COMPONENTS,
     exports: COMPONENTS,

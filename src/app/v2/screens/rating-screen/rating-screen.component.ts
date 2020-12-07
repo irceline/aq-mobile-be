@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { forkJoin } from 'rxjs';
 
 import { UserLocation } from '../../Interfaces';
 import { BelAqiIndexResult, BelAQIService } from '../../services/bel-aqi.service';
+import { FeedbackCode, FeedbackService } from '../../services/feedback/feedback.service';
 import { UserSettingsService } from '../../services/user-settings.service';
 import { BelaqiIndexService } from '../../services/value-provider/belaqi-index.service';
+import { FeedbackStats } from './../../services/feedback/feedback.service';
 
 @Component({
     selector: 'app-rating-screen',
@@ -18,18 +21,22 @@ export class RatingScreenComponent implements OnInit {
 
     isFeedbackOpened = false;
     isFeedbackGiven = false;
+    feedbackStats: FeedbackStats;
+    activeIndex: number;
 
     constructor(
         private userSettingsService: UserSettingsService,
         private belAqiService: BelAQIService,
-        private belaqiIndexSrvc: BelaqiIndexService
+        private belaqiIndexSrvc: BelaqiIndexService,
+        private feedbackSrvc: FeedbackService
     ) { }
 
     ngOnInit() {
         this.locations = this.userSettingsService.getUserSavedLocations();
 
         // activate first location by default
-        this.updateCurrentLocation(this.locations[0]);
+        this.activeIndex = this.locations.findIndex(e => this.userSettingsService.selectedUserLocation.id === e.id);
+        this.updateCurrentLocation(this.locations[this.activeIndex]);
 
         this.userSettingsService.$userLocations.subscribe((locations) => {
             this.locations = locations;
@@ -54,7 +61,20 @@ export class RatingScreenComponent implements OnInit {
         this.isFeedbackOpened = true;
     }
 
-    feedbackGiven(event) {
-        this.isFeedbackGiven = true;
+    feedbackGiven(feedbackCodes: FeedbackCode[]) {
+        const feedbackSubmits = feedbackCodes.map(fbcode =>
+            this.feedbackSrvc.sendFeedback({
+                lat: this.currentLocation.latitude,
+                lng: this.currentLocation.longitude,
+                feedback_code: fbcode
+            })
+        );
+        forkJoin(feedbackSubmits).subscribe(stats => {
+            if (stats.length >= 1) {
+                this.feedbackStats = stats[0];
+                console.log(this.feedbackStats);
+            }
+            this.isFeedbackGiven = true;
+        });
     }
 }

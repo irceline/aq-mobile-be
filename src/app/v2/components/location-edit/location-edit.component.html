@@ -3,11 +3,14 @@
   </div>
   <div class="label">
     <ng-container *ngIf="!loadingLabel; else elseTemplate">
-      <div>{{userLocation.label}}</div>  
+      <div>{{userLocation.label}}</div>
     </ng-container>
     <ng-template #elseTemplate>
       <ion-spinner ngif name="dots"></ion-spinner>
     </ng-template>
+  </div>
+  <div class="edit-location-hint">
+    {{ 'edit-location-hint' | translate }}
   </div>
   <div class="controls">
     <ion-button fill="clear" (click)="cancel()">

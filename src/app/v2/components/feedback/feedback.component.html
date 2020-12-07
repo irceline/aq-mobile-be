@@ -7,6 +7,12 @@
   </ion-button>
 </div>
 
+<div style="text-align: center;">
+  <ion-button fill="clear" (click)="openFeedbackStats()" style="color: white;">
+    {{ 'feedback.show-feedback-button' | translate }}
+  </ion-button>
+</div>
+
 <div class="feedback--content" *ngIf="like || dislike" [ngStyle]="{'padding-bottom': dislike || like ? '60px' : '0px'}">
   <ng-container *ngIf="like">
     <!-- per design , there was a location input here, but the location is already determined on the top of this page -->
@@ -17,7 +23,7 @@
     <ion-list>
       <ion-item lines="none" *ngFor="let entry of form">
         <ion-checkbox slot="start" [(ngModel)]="entry.isChecked"></ion-checkbox>
-        <ion-label>{{entry.val}}</ion-label>
+        <ion-label text-wrap>{{entry.val}}</ion-label>
       </ion-item>
     </ion-list>
     <!-- per design , there was a location input here, but the location is already determined on the top of this page -->
