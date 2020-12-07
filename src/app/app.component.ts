@@ -2,16 +2,10 @@ import { Component, QueryList, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import {
-    IonRouterOutlet,
-    ModalController,
-    NavController,
-    Platform,
-} from '@ionic/angular';
+import { IonRouterOutlet, ModalController, Platform } from '@ionic/angular';
 
-import { ErrorLoggingService } from './v2/services/error-logging.service';
-import { PouchDBInitializerService } from './v2/services/pouch-db-initializer/pouch-db-initializer.service';
 import { SplashScreenComponent } from './v2/screens/splash-screen/splash-screen.component';
+import { PouchDBInitializerService } from './v2/services/pouch-db-initializer/pouch-db-initializer.service';
 
 @Component({
     selector: 'app-root',
@@ -29,6 +23,17 @@ export class AppComponent {
         private modalCtrl: ModalController
     ) {
         this.initializeApp();
+        this.registerBackButtonEvent();
+    }
+
+    registerBackButtonEvent() {
+        this.platform.backButton.subscribe(() => {
+            this.routerOutlets.forEach(async (outlet: IonRouterOutlet) => {
+                if (this.router.url === '/main') {
+                    navigator['app'].exitApp();
+                }
+            });
+        });
     }
 
     initializeApp() {
