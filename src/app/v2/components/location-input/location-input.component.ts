@@ -1,9 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { SettingsService } from '@helgoland/core';
 import { IonInput, LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import locations from '../../../../assets/locations.json';
 import { UserLocation } from '../../Interfaces';
+import { MobileSettings } from '../../services/settings/settings.service';
 import { LocationEditComponent } from '../location-edit/location-edit.component';
 import { GeocoderService } from './../../services/geocoder/geocoder.service';
 import { LocateService } from './../../services/locate/locate.service';
@@ -41,7 +43,8 @@ export class LocationInputComponent implements OnInit {
         private translateSrvc: TranslateService,
         private geocoder: GeocoderService,
         private locateSrvc: LocateService,
-        private modalController: ModalController
+        private modalController: ModalController,
+        private settingsSrvc: SettingsService<MobileSettings>
     ) { }
 
     ngOnInit() {
@@ -128,7 +131,13 @@ export class LocationInputComponent implements OnInit {
 
     // filter logic
     filterItems() {
-        this.filteredItems = this._locations.slice(0, 5);
+        const defaultLocations = this.settingsSrvc.getSettings().defaultSelectableLocations;
+
+        // search in defined locations
+        this.filteredItems = this._locations.filter(l => defaultLocations.findIndex(e => e === l.label) >= 0);
+
+        // sort locations
+        this.filteredItems = defaultLocations.map(e => this.filteredItems.find(fi => fi.label === e));
 
         // filter items by label
         if (this.searchText.trim() !== '') {
