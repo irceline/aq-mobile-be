@@ -68,5 +68,12 @@
     "Hasselt",
     "Namur"
   ],
+  "defaultSelectableLocations": [
+    "Bruxelles", 
+    "Antwerpen", 
+    "Liège", 
+    "Gent", 
+    "Charleroi"
+  ],
   "limitOfAllowedUserLocations": 5
 }
