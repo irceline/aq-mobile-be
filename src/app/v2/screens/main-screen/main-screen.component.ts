@@ -130,6 +130,8 @@ export class MainScreenComponent implements OnInit {
                     console.error('Error occured while fetching the bel aqi indicies');
                     if (loadFinishedCb) { loadFinishedCb(); }
                 });
+        } else {
+            this.belAqiService.activeIndex = null;
         }
     }
 
@@ -190,9 +192,7 @@ export class MainScreenComponent implements OnInit {
     }
 
     ionViewWillEnter() {
-        if (this.currentActiveIndex) {
-            this.belAqiService.activeIndex = this.currentActiveIndex;
-        }
+        this.updateCurrentLocation();
     }
 
     doRefresh(event) {

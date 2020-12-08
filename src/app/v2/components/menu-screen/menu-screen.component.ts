@@ -62,7 +62,12 @@ export class MenuScreenComponent implements OnInit {
 
     ngOnInit() {
         this.belAQIService.$activeIndex.subscribe((newIndex) => {
-            this.belAqi = newIndex.indexScore;
+            if (newIndex) {
+                this.belAqi = newIndex.indexScore;
+            } else {
+                // set default color
+                this.backgroundColor = '#29cdf7';
+            }
         });
 
         this.locationList = this.userSettingsService.getUserSavedLocations();

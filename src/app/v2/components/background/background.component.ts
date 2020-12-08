@@ -1,33 +1,39 @@
-import { Component, Input, OnInit, HostBinding } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { BelAQIService } from '../../services/bel-aqi.service';
+import { Subscription } from 'rxjs';
+
 import { backgroundImages } from '../../common/constants';
+import { valueDateToString } from '../../common/enums';
+import { BelAQIService } from '../../services/bel-aqi.service';
 
 @Component({
     selector: 'app-background',
     templateUrl: './background.component.html',
     styleUrls: ['./background.component.scss'],
 })
-export class BackgroundComponent implements OnInit {
+export class BackgroundComponent implements OnDestroy {
     // @HostBinding('style.background-image')
     public backgroundImage;
 
-    // deprecated input.. to remove
-    @Input()
-    set belAqi(index: number) {
-        this.backgroundImage = this._sanitizer.bypassSecurityTrustUrl(
-            `${backgroundImages[index]}`
-        );
-    }
+    private indexSubscription: Subscription;
 
     constructor(
         private _sanitizer: DomSanitizer,
         private belAQIService: BelAQIService
     ) {
-        belAQIService.$activeIndex.subscribe((newIndex) => {
-            this.belAqi = newIndex.indexScore;
+        this.indexSubscription = this.belAQIService.$activeIndex.subscribe((entry) => {
+            if (entry) {
+                this.backgroundImage = this._sanitizer.bypassSecurityTrustUrl(`${backgroundImages[entry.indexScore]}`);
+            } else {
+                this.backgroundImage = this._sanitizer.bypassSecurityTrustUrl(`/assets/images/bg.svg`);
+            }
         });
     }
 
-    ngOnInit() {}
+    ngOnDestroy(): void {
+        if (this.indexSubscription) {
+            this.indexSubscription.unsubscribe();
+        }
+    }
+
 }

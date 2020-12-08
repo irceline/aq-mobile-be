@@ -32,7 +32,9 @@ export class HeaderComponent implements OnInit {
         private router: Router
     ) {
         belAQIService.$activeIndex.subscribe((newIndex) => {
-            this.belAqi = newIndex.indexScore;
+            if (newIndex) {
+                this.belAqi = newIndex.indexScore;
+            }
         });
 
         router.events
