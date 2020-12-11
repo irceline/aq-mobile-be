@@ -3,7 +3,6 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 
 import { backgroundImages } from '../../common/constants';
-import { valueDateToString } from '../../common/enums';
 import { BelAQIService } from '../../services/bel-aqi.service';
 
 @Component({
