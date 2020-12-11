@@ -28,6 +28,10 @@
 		"close": "Schließen",
 		"ok": "Ok"
 	},
+	"edit-location-hint": "Sie können das Standortsymbol auf der Karte an jeden gewünschten Ort verschieben.",
+	"edit-location-label": {
+		"title": "Ändern des Standortnamens"
+	},
 	"feedback-reason": {
 		"agriculture": "Emissionen aus der Landwirtschaft",
 		"industry": "Emissionen aus der Industrie",
@@ -39,18 +43,17 @@
 		"total": "Total"
 	},
 	"feedback": {
+		"show-feedback-button": "Feedback anzeigen",
 		"stats": {
 			"submission": "Eingereichtes Feedback",
 			"submission-today": "Heute",
 			"submission-total": "Insgesamt"
-		},
-		"show-feedback-button": "Feedback anzeigen"
+		}
 	},
 	"network": {
 		"geolocationDenied": "Sie haben der App die Standortermittlung nicht erlaubt.",
 		"geolocationDisabled": "Die Standortermittlung ist deaktiviert"
 	},
-	"edit-location-hint": "Sie können das Standortsymbol auf der Karte an jeden gewünschten Ort verschieben.",
 	"no-location-hint": "Die App benötigt einen Standort für die Anzeige von Daten.",
 	"no-location": {
 		"confirm": "Speichern",
@@ -93,10 +96,10 @@
 			"user-notification-settings": {
 				"activity": "Anstrengungen",
 				"allergies": "Allergien",
-				"exercise": "Training",
 				"automated": "Automatisierte Warnmeldungen auf der Grundlage modellierter Werte für die von Ihnen gewählten Standorte.",
-				"official": "Offizielle Warnmeldungen basierend auf einer gründlichen Analyse der Situation",
+				"exercise": "Training",
 				"highConcentration": "(Zu) hohe Konzentrationen",
+				"official": "Offizielle Warnmeldungen basierend auf einer gründlichen Analyse der Situation",
 				"transport": "Unterwegs"
 			}
 		},
@@ -151,12 +154,12 @@
 				"start-quickly": "Schnellstart!"
 			},
 			"rating-screen": {
+				"agriculture": "<strong>Emissionen</strong> aus Landwirtschaft",
 				"calculated-value": "Die App zeigt einen berechneten Wert, keine Messung an Ihrem Standort. Die Luftqualität kann daher lokal unterschiedlich sein.",
 				"does-it-match": "Entspricht dieser Wert Ihren Gefühlen?",
 				"exhaust": "<strong>Abgase</strong> aus dem Verkehr",
 				"fire": "Ein <strong>Kamin</strong> mit Holzverbrennung.",
 				"industry": "<strong>Emissionen</strong> aus Industrie",
-				"agriculture": "<strong>Emissionen</strong> aus Landwirtschaft",
 				"possible-causes": "Mogelijke oorzaken van een afwijking zijn:"
 			}
 		}

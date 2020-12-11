@@ -17,6 +17,7 @@ export interface UserLocation {
     latitude?: number;
     postalCode?: string;
     order?: number;
+    wasEdited?: boolean;
 }
 
 export interface IBarChartData {

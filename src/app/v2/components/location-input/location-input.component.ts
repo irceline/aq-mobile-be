@@ -182,7 +182,9 @@ export class LocationInputComponent implements OnInit {
         });
         await modal.present();
         const loc = await (await modal.onWillDismiss()).data as UserLocation;
-        this.addLocation(loc);
+        if (loc) {
+            this.addLocation(loc);
+        }
     }
 
     confirmLocation() {
