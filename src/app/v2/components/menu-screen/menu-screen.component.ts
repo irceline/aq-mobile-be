@@ -17,7 +17,7 @@ import { UserNotificationSetting } from '../user-notification-settings/user-noti
             transition(':enter', [
                 style({ opacity: 0, transform: 'translateX(-100%)' }),
                 animate(
-                    '300ms',
+                    '0ms',
                     style({ opacity: 1, transform: 'translateX(0)' })
                 ),
             ]),
