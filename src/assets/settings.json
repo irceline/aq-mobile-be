@@ -68,12 +68,35 @@
     "Hasselt",
     "Namur"
   ],
-  "defaultSelectableLocations": [
-    "Bruxelles", 
-    "Antwerpen", 
-    "Liège", 
-    "Gent", 
-    "Charleroi"
-  ],
+  "defaultSelectableLocations": {
+    "de": [
+      "Brüssel", 
+      "Antwerpen", 
+      "Lüttich", 
+      "Gent", 
+      "Charleroi"
+    ],
+    "en": [
+      "Brussels", 
+      "Antwerp", 
+      "Grivegnée", 
+      "Gent", 
+      "Charleroi"
+    ],
+    "fr": [
+      "Bruxelles", 
+      "Anvers", 
+      "Liège", 
+      "Gand", 
+      "Charleroi"
+    ],
+    "nl": [
+      "Brussel", 
+      "Antwerpen", 
+      "Luik", 
+      "Gent", 
+      "Charleroi"
+    ]
+  },
   "limitOfAllowedUserLocations": 5
 }

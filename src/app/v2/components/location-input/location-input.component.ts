@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { SettingsService } from '@helgoland/core';
 import { IonInput, LoadingController, ModalController, ToastController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 
 import locations from '../../../../assets/locations.json';
 import { UserLocation } from '../../Interfaces';
@@ -15,7 +16,7 @@ import { LocateService } from './../../services/locate/locate.service';
     templateUrl: './location-input.component.html',
     styleUrls: ['./location-input.component.scss'],
 })
-export class LocationInputComponent implements OnInit {
+export class LocationInputComponent implements OnInit, OnDestroy {
     @ViewChild(IonInput, { static: true }) input: IonInput;
 
     @Input() currentLocation = true;
@@ -29,13 +30,10 @@ export class LocationInputComponent implements OnInit {
 
     editableLocation: UserLocation;
 
-    // @ts-ignore
-    private _locations: UserLocation[] = locations.map((l) => ({
-        ...l,
-        type: 'user',
-    }));
+    private _locations: UserLocation[];
 
     @Output() locationSelected = new EventEmitter<UserLocation>();
+    private langSubscription: Subscription;
 
     constructor(
         private loadingController: LoadingController,
@@ -47,8 +45,26 @@ export class LocationInputComponent implements OnInit {
         private settingsSrvc: SettingsService<MobileSettings>
     ) { }
 
+    ngOnDestroy(): void {
+        if (this.langSubscription) { this.langSubscription.unsubscribe() }
+    }
+
     ngOnInit() {
-        this.filterItems();
+        this.langSubscription = this.translateSrvc.onLangChange.subscribe((code: LangChangeEvent) => this.updateSelectableLocations(code.lang));
+        this.updateSelectableLocations(this.translateSrvc.currentLang);
+    }
+
+    private updateSelectableLocations(code: string) {
+        this._locations = locations.map(e => {
+            return {
+                id: e.id,
+                label: e.label[code],
+                type: 'user',
+                longitude: e.longitude,
+                latitude: e.latitude
+            };
+        });
+        this.filterItems(code);
     }
 
     // Getting the current location with native ionic plugin
@@ -130,18 +146,17 @@ export class LocationInputComponent implements OnInit {
     }
 
     // filter logic
-    filterItems() {
-        const defaultLocations = this.settingsSrvc.getSettings().defaultSelectableLocations;
+    private filterItems(code: string) {
+        const defaultLocations = this.settingsSrvc.getSettings().defaultSelectableLocations[code];
 
         // search in defined locations
         this.filteredItems = this._locations.filter(l => defaultLocations.findIndex(e => e === l.label) >= 0);
 
         // sort locations
-        this.filteredItems = defaultLocations.map(e => this.filteredItems.find(fi => fi.label === e));
+        this.filteredItems = defaultLocations.map(e => this.filteredItems.find(fi => fi.label === e)).filter(e => e !== undefined);
 
         // filter items by label
         if (this.searchText.trim() !== '') {
-            this.visible = true;
             this.filteredItems = this._locations
                 .filter((item) => {
                     return (
