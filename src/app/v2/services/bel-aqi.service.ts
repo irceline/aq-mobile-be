@@ -67,7 +67,8 @@ export class BelAQIService {
     if (index >= 1 && index <= 10) {
       return lightIndexColor[index];
     } else {
-      return null;
+      // use default color (e.g. for background color)
+      return '#29cdf7';
     }
   }
 

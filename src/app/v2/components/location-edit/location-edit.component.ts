@@ -34,7 +34,7 @@ export class LocationEditComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit() {
-    this.belAQIService.$activeIndex.subscribe(idx => this.backgroundColor = this.belAQIService.getLightColorForIndex(idx.indexScore));
+    this.belAQIService.$activeIndex.subscribe(idx => this.backgroundColor = this.belAQIService.getLightColorForIndex(idx?.indexScore));
   }
 
   ngAfterViewInit(): void {
