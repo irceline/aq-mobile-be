@@ -1,6 +1,5 @@
 import { Component, QueryList, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { IonRouterOutlet, ModalController, Platform } from '@ionic/angular';
 
@@ -16,7 +15,6 @@ export class AppComponent {
 
     constructor(
         private platform: Platform,
-        private splashScreen: SplashScreen,
         private statusBar: StatusBar,
         public router: Router,
         private pouchDbInit: PouchDBInitializerService,
@@ -43,11 +41,13 @@ export class AppComponent {
             this.statusBar.show();
             // this.splashScreen.hide();
             this.pouchDbInit.init();
-
-            const splash = await this.modalCtrl.create({
-                component: SplashScreenComponent,
-            });
-            splash.present();
+            await this.presentSplashScreen();
         });
+    }
+
+    private async presentSplashScreen() {
+        const splash = await this.modalCtrl.create({ component: SplashScreenComponent });
+        splash.present();
+        setTimeout(() => splash.dismiss(), 1500);
     }
 }
