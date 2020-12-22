@@ -64,7 +64,7 @@ export class LocationInputComponent implements OnInit, OnDestroy {
                 latitude: e.latitude
             };
         });
-        this.filterItems(code);
+        this.filterItems();
     }
 
     // Getting the current location with native ionic plugin
@@ -146,7 +146,8 @@ export class LocationInputComponent implements OnInit, OnDestroy {
     }
 
     // filter logic
-    private filterItems(code: string) {
+    private filterItems() {
+        const code = this.translateSrvc.currentLang;
         const defaultLocations = this.settingsSrvc.getSettings().defaultSelectableLocations[code];
 
         // search in defined locations
