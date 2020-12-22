@@ -30,12 +30,12 @@
 	},
 	"edit-location-hint": "U kunt het locatie icoon op de kaart naar elke gewenste locatie verplaatsen.",
 	"edit-location-label": {
-		"title": ""
+		"title": "Wijzig de locatienaam"
 	},
 	"error-modal": {
-		"no-network-connection": "",
-		"no_irceline_settings": "",
-		"title": ""
+		"no-network-connection": "U bent waarschijnlijk offline. Gegevens die eerder zijn geladen voor uw opgeslagen locaties zijn nog steeds beschikbaar, maar de bruikbaarheid van de app is aanzienlijk beperkt.",
+		"no_irceline_settings": "Er kunnen geen nieuwe gegevens worden geladen. De app toont de laatst geladen gegevens.",
+		"title": "Fout opgetreden"
 	},
 	"feedback-reason": {
 		"agriculture": "Uitstoot door landbouw",

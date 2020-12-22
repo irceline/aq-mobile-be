@@ -33,8 +33,8 @@
 		"title": "Ändern des Standortnamens"
 	},
 	"error-modal": {
-		"no-network-connection": "Es scheint, als wären Sie offline. Ihre Standorte sind gespeichert, aber die App ist nur sehr eingeschränkt nutzbar.",
-		"no_irceline_settings": "Es konnten keine Daten ermittelt werden. Die App zeigt die zuletzt geladenen Daten.",
+		"no-network-connection": "Sie sind wahrscheinlich offline. Zuvor geladene Daten für Ihre gespeicherten Standorte sind zwar noch verfügbar, aber die Nutzbarkeit der App ist deutlich eingeschränkt.",
+		"no_irceline_settings": "Es konnten keine neuen Daten ermittelt werden. Die App zeigt die zuletzt geladenen Daten.",
 		"title": "Fehler aufgetreten"
 	},
 	"feedback-reason": {
