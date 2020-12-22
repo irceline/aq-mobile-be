@@ -32,6 +32,11 @@
 	"edit-location-label": {
 		"title": ""
 	},
+	"error-modal": {
+		"no-network-connection": "",
+		"no_irceline_settings": "",
+		"title": ""
+	},
 	"feedback-reason": {
 		"agriculture": "Uitstoot door landbouw",
 		"industry": "Uitstoot door industrie",

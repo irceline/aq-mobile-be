@@ -4,6 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { IonRouterOutlet, ModalController, Platform } from '@ionic/angular';
 
 import { SplashScreenComponent } from './v2/screens/splash-screen/splash-screen.component';
+import { NetworkAlertService } from './v2/services/network-alert/network-alert.service';
 import { PouchDBInitializerService } from './v2/services/pouch-db-initializer/pouch-db-initializer.service';
 
 @Component({
@@ -18,7 +19,8 @@ export class AppComponent {
         private statusBar: StatusBar,
         public router: Router,
         private pouchDbInit: PouchDBInitializerService,
-        private modalCtrl: ModalController
+        private modalCtrl: ModalController,
+        private networkAlertSrvc: NetworkAlertService
     ) {
         this.initializeApp();
         this.registerBackButtonEvent();
@@ -43,6 +45,8 @@ export class AppComponent {
             this.pouchDbInit.init();
             await this.presentSplashScreen();
         });
+
+        this.networkAlertSrvc.isConnected.subscribe(connected => console.log(`Device has network connection: ${connected}`))
     }
 
     private async presentSplashScreen() {

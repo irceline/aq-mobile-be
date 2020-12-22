@@ -1,0 +1,21 @@
+<div class="wrapper">
+  <div class="content">
+    <h1>{{'error-modal.title' | translate}}</h1>
+    <span [ngSwitch]="errorType">
+      <p *ngSwitchCase="'NO_NETWORK'">
+        {{'error-modal.no-network-connection' | translate}}
+      </p>
+      <p *ngSwitchCase="'NO_IRCELINE_SETTINGS'">
+        {{'error-modal.no_irceline_settings' | translate}}
+      </p>
+      <p *ngSwitchDefault>
+
+      </p>
+    </span>
+  </div>
+  <div class="controls">
+    <ion-button fill="clear" (click)="close()">
+      {{ 'controls.ok' | translate }}
+    </ion-button>
+  </div>
+</div>

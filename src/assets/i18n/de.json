@@ -32,6 +32,11 @@
 	"edit-location-label": {
 		"title": "Ändern des Standortnamens"
 	},
+	"error-modal": {
+		"no-network-connection": "Es scheint, als wären Sie offline. Ihre Standorte sind gespeichert, aber die App ist nur sehr eingeschränkt nutzbar.",
+		"no_irceline_settings": "Es konnten keine Daten ermittelt werden. Die App zeigt die zuletzt geladenen Daten.",
+		"title": "Fehler aufgetreten"
+	},
 	"feedback-reason": {
 		"agriculture": "Emissionen aus der Landwirtschaft",
 		"industry": "Emissionen aus der Industrie",

@@ -32,6 +32,11 @@
 	"edit-location-label": {
 		"title": "Change location name"
 	},
+	"error-modal": {
+		"no-network-connection": "It seems that you are offline. Your locations are saved, but the app could only be used limited.",
+		"no_irceline_settings": "No data could be fetched. The app shows the last loaded data",
+		"title": "Error occured"
+	},
 	"feedback-reason": {
 		"agriculture": "Emissions from agriculture",
 		"industry": "Emissions from industry",

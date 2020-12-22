@@ -139,7 +139,11 @@ export class MainScreenComponent implements OnInit {
         this.detailData = [];
         this.detailDataLoadig = true;
 
-        const currentBelAqi = this.belAqiForCurrentLocation.find(e => e.valueDate === ValueDate.CURRENT);
+        let currentBelAqi = this.belAqiForCurrentLocation.find(e => e.valueDate === ValueDate.CURRENT);
+        // if current is not available
+        if (currentBelAqi === undefined && this.belAqiForCurrentLocation.length > 0) {
+            currentBelAqi = this.belAqiForCurrentLocation[0];
+        }
         this.belAqiService.activeIndex = currentBelAqi;
 
         this.belaqiDetailData = {
