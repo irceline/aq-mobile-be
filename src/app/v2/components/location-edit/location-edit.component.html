@@ -3,7 +3,12 @@
   </div>
   <div class="label">
     <ng-container *ngIf="!loadingLabel; else elseTemplate">
-      <div>{{userLocation.label}}</div>
+      <div>{{editedUserLocation?.label}}</div>
+      <div style="flex: 1;"></div>
+      <ion-button fill="clear" class="ion-no-padding" (click)="editLabel()" style="color: white;">
+        <!-- <ion-icon slot="icon-only" name="create"></ion-icon> -->
+        <ion-icon src="/assets/images/icons/edit.svg" slot="icon-only"></ion-icon>
+      </ion-button>
     </ng-container>
     <ng-template #elseTemplate>
       <ion-spinner ngif name="dots"></ion-spinner>

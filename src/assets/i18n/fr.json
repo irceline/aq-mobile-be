@@ -28,6 +28,15 @@
 		"close": "Fermer",
 		"ok": "Enregistrer la location"
 	},
+	"edit-location-hint": "Vous pouvez déplacer l'icône de localisation sur la carte à n'importe quel endroit souhaité.",
+	"edit-location-label": {
+		"title": "Changer le nom de la localisation"
+	},
+	"error-modal": {
+		"no-network-connection": "Vous êtes probablement hors ligne. Les données précédemment chargées pour vos emplacements sauvegardés sont toujours disponibles, mais la utilisabilité de l'application est considérablement limitée.",
+		"no_irceline_settings": "Aucune nouvelle donnée ne peut être chargée. L'application affiche les dernières données chargées.",
+		"title": "Erreur est survenue"
+	},
 	"feedback-reason": {
 		"agriculture": "Émissions de l'agriculture",
 		"industry": "Émissions de l'industrie",
@@ -39,18 +48,17 @@
 		"total": "Total"
 	},
 	"feedback": {
+		"show-feedback-button": "Afficher les commentaires",
 		"stats": {
 			"submission": "Commentaires soumis",
 			"submission-today": "Aujourd'hui",
 			"submission-total": "Au total"
-		},
-		"show-feedback-button": "Afficher les commentaires"
+		}
 	},
 	"network": {
 		"geolocationDenied": "Vous n'avez pas autorisé l'utilisation de votre géolocalisation dans l'application.",
 		"geolocationDisabled": "La géolocalisation est désactivée"
 	},
-	"edit-location-hint": "Vous pouvez déplacer l'icône de localisation sur la carte à n'importe quel endroit souhaité.",
 	"no-location-hint": "L'application nécessite une localisation pour afficher les données.",
 	"no-location": {
 		"confirm": "Sauvegarder",
@@ -93,10 +101,10 @@
 			"user-notification-settings": {
 				"activity": "Efforts physiques",
 				"allergies": "Les allergies",
-				"exercise": "Faire des exercices",
 				"automated": "Alertes automatisées basées sur des valeurs modélisées pour le(s) lieu(x) que vous avez choisi(s).",
-				"official": "Alertes officielles basées sur une analyse approfondie de la situation",
+				"exercise": "Faire des exercices",
 				"highConcentration": "Concentrations (trop) élevées",
+				"official": "Alertes officielles basées sur une analyse approfondie de la situation",
 				"transport": "Déplacements"
 			}
 		},
@@ -151,12 +159,12 @@
 				"start-quickly": "Démarrage rapide!"
 			},
 			"rating-screen": {
+				"agriculture": "<strong>Émissions</strong> provenant de l'agriculture.",
 				"calculated-value": "L'application affiche une valeur calculée, pas une mesure à votre emplacement. La qualité de l'air peut donc différer localement.",
 				"does-it-match": "Cette valeur correspond-elle à vos sentiments?",
 				"exhaust": "<strong>Échappement des fumées</strong> de la circulation.",
 				"fire": "Un <strong> feu </strong> avec du bois.",
 				"industry": "<strong>Émissions</strong> provenant de l'industrie.",
-				"agriculture": "<strong>Émissions</strong> provenant de l'agriculture.",
 				"possible-causes": "Les causes possibles d'un écart sont:"
 			}
 		}

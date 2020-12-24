@@ -9,15 +9,10 @@ import { ModalController } from '@ionic/angular';
 })
 export class SplashScreenComponent {
     constructor(
-        public splashScreen: SplashScreen,
-        private modalCtrl: ModalController
+        public splashScreen: SplashScreen
     ) {}
 
     ionViewDidEnter() {
         this.splashScreen.hide();
-
-        setTimeout(() => {
-            this.modalCtrl.dismiss();
-        }, 1500);
     }
 }

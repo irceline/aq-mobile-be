@@ -115,9 +115,7 @@ export class BelaqiIndexService extends ValueProvider {
       const cacheKey = createCacheKey(rioifdmWmsURL, JSON.stringify(params), day.format('YYYY-MM-DD'));
       this.cacheService.loadFromObservable(cacheKey, request)
         .subscribe(
-          res => {
-            return this.handleResponse(res, observer, valueDate, location, cacheKey);
-          },
+          res => this.handleResponse(res, observer, valueDate, location, cacheKey),
           error => this.handleError(error, observer)
         );
     });
@@ -136,7 +134,9 @@ export class BelaqiIndexService extends ValueProvider {
             res => this.handleResponse(res, observer, ValueDate.CURRENT, location, cacheKey),
             error => this.handleError(error, observer)
           );
-        });
+        },
+        error => this.handleError(error, observer)
+      );
     });
   }
 

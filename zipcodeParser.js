@@ -4,11 +4,11 @@ const fs = require('fs');
 
 // Scrape Website of Belgium Post for Zipcodes
 const nl_url = "http://www.bpost2.be/zipcodes/files/zipcodes_num_nl_new.html";
-const fr_url = "http://www.bpost2.be/zipcodes/files/zipcodes_num_fr_new.html";
 
 // Nominatim rever lookup server.
 // NEVER POINT THIS AT THE OFFICIAL openstreetmap.nominatim.org SERVER! THIS WOULD VIOLATE THE TOS.
-const nominatim_url = "http://localhost:7070/search?format=json&limit=5&q="
+const nominatim_search_url = "http://localhost:7070/search?format=json&limit=5&q=";
+const nominatim_details_url = "http://localhost:7070/details?format=json&place_id=";
 
 // Pattern for extracting zipcode<->name pairs from belgium post website
 // Selects only pairs that have Teilgemeinde as other postcodes are only administrative (and hard to lookup in nominatim)
@@ -17,9 +17,8 @@ const pattern = "(?:<td class=\"column0 style8 n\">)([0-9]{4})(?:<\/td>)(?:<td c
 // Run Program in waterfall mode
 async.waterfall([
     init,
-    getDataFr,
-    getDataNl,
-    nominatimLookup,
+    getLocations,
+    nominatimLookup
 ], function (err, result) {
     console.log(err);
     console.log(result);
@@ -28,38 +27,10 @@ async.waterfall([
 // Initialize Variables
 function init(callback) {
     let list = [];
-    console.log(init);
     callback(null, list);
 };
 
-// Get French Data
-function getDataFr(list, callback) {
-    request(fr_url, {}, (err, res, body) => {
-        if (err) {
-            callback(err);
-        }
-        // Selectively remove whitespace
-        data = body.replace(/>\s+</g, '><');
-        let split = data.split("</tr>");
-        split.forEach((elem) => {
-            let result = elem.match(pattern);
-            if (result != undefined) {
-                let name = unescape(result[2]);
-                if (name.includes("&")) {
-                    callback("Error: Failed to unescape():" + name);
-                } else {
-                    list.push(
-                        result[1] + " " + name
-                    );
-                }
-            };
-        });
-        console.log("getDataFr finished");
-        callback(null, list);
-    });
-}
-
-function getDataNl(list, callback) {
+function getLocations(list, callback) {
     request(nl_url, {}, (err, res, body) => {
         if (err) {
             callback(err);
@@ -80,29 +51,53 @@ function getDataNl(list, callback) {
                 }
             };
         });
-        console.log("getDataNl finished");
+        console.log("Get locations");
         callback(null, list);
     });
 }
 
-
 function nominatimLookup(list, callback) {
+    console.log("Create locations list");
     let lookupList = [];
     let errorcount = 0;
+    let idCounter = 0;
     async.eachLimit(list, 25, (elem, callback) => {
         // Request by postcode + name
-        request(nominatim_url + elem, {}, (err, res, body) => {
+        request(nominatim_search_url + elem, {}, (err, res, body) => {
             if (err) {
                 console.log(err);
                 callback(err);
             }
-            if (body != "[]") {
-                let jsonBody = JSON.parse(body);
-                if (jsonBody.length > 0) {
-                    jsonBody = jsonBody[0];
-                }
-                lookupList.push(decodeURI(elem.replace("+", " ")));
-                callback();
+            const resJson = JSON.parse(body);
+            if (resJson instanceof Array && resJson.length > 0) {
+                request(nominatim_details_url + resJson[0].place_id, {}, (err, details, detailsBody) => {
+                    if (err) {
+                        console.log(err);
+                        callback(err);
+                    }
+                    const detailsJson = JSON.parse(detailsBody);
+                    const defaultLabel = decodeURI(elem.split(' ')[1]);
+                    const labelNl = decodeURI(detailsJson.names['name:nl'] || defaultLabel);
+                    const labelFr = decodeURI(detailsJson.names['name:fr'] || defaultLabel);
+                    const labelEn = decodeURI(detailsJson.names['name:en'] || defaultLabel);
+                    const labelDe = decodeURI(detailsJson.names['name:de'] || defaultLabel);
+                    const id = idCounter++;
+                    lookupList.push({
+                        label: {
+                            fr: labelFr,
+                            nl: labelNl,
+                            en: labelEn,
+                            de: labelDe
+                        },
+                        latitude: parseFloat(resJson[0].lat),
+                        longitude: parseFloat(resJson[0].lon),
+                        id: idCounter
+                    })
+                    if ((idCounter % 100) === 0) {
+                        console.log(`Created ${idCounter} of ${list.length}`);
+                    }
+                    callback();
+                })
             } else {
                 callback();
             }
@@ -111,11 +106,10 @@ function nominatimLookup(list, callback) {
         if (err != null) {
             console.log(err)
         } else {
-            fs.writeFileSync("./src/app/services/location-autocomplete/zipCodes.json", JSON.stringify(lookupList));
+            fs.writeFileSync("./src/assets/locations.json", JSON.stringify(lookupList));
         }
     })
 }
-
 
 /**
  * Converts textual html entities into decimal form.
@@ -144,3 +138,4 @@ function unescape(string) {
         .replace(/&acirc;/g, "%C3%A2")
         .replace(/&Acirc;/g, "%C3%82");
 }
+

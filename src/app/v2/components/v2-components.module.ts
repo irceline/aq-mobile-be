@@ -2,16 +2,15 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { HelgolandMapViewModule } from '@helgoland/map';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { AutoCompleteModule } from 'ionic4-auto-complete';
 
-import {
-    ParameterInformationComponent,
-} from './parameter-information/parameter-information.component';
 import { BackgroundComponent } from './background/background.component';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
 import { CircleChartComponent } from './circle-chart/circle-chart.component';
+import { ErrorModalComponent } from './error-modal/error-modal.component';
 import { FeedbackStatsMapComponent } from './feedback-stats/feedback-stats-map/feedback-stats-map.component';
 import { FeedbackStatsComponent } from './feedback-stats/feedback-stats.component';
 import { FeedbackComponent } from './feedback/feedback.component';
@@ -30,14 +29,13 @@ import { MapComponent } from './map-component/map.component';
 import { MenuScreenComponent } from './menu-screen/menu-screen.component';
 import { NotificationPopoverComponent } from './notification-popover/notification-popover.component';
 import { OnboardingSliderComponent } from './onboarding-slider/onboarding-slider.component';
+import { ParameterInformationComponent } from './parameter-information/parameter-information.component';
 import { PullTabComponent } from './pull-tab/pull-tab.component';
 import { SuccessDisplayComponent } from './success-display/success-display.component';
 import { TimeLineItemComponent } from './time-line-item/time-line-item.component';
 import { TimeLineListComponent } from './time-line-list/time-line-list.component';
 import { UserNotificationSettingsComponent } from './user-notification-settings/user-notification-settings.component';
 import { ValueDisplayComponent } from './value-display/value-display.component';
-
-import { HelgolandMapViewModule } from '@helgoland/map';
 
 const COMPONENTS = [
     ParameterInformationComponent,
@@ -68,6 +66,7 @@ const COMPONENTS = [
     SuccessDisplayComponent,
     InformationItemDetailsComponent,
     MapComponent,
+    ErrorModalComponent
 ];
 
 @NgModule({

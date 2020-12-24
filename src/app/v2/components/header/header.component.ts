@@ -1,26 +1,23 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { trigger, style, transition, animate } from '@angular/animations';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { IonReorderGroup, NavController } from '@ionic/angular';
+import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 import { BelAQIService } from '../../services/bel-aqi.service';
-import { NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs/operators';
-import { lightIndexColor } from '../../common/constants';
 
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
+
     @ViewChild(IonReorderGroup, { static: false }) reorderGroup: IonReorderGroup;
 
-    public backgroundColor;
+    private indexSubscription: Subscription;
 
-    @Input()
-    set belAqi(index: number) {
-        this.backgroundColor = lightIndexColor[index] || null;
-    }
+    public locationsAvailable: boolean;
 
     // menuVisible = false;
     onRatingScreen = false;
@@ -31,10 +28,6 @@ export class HeaderComponent implements OnInit {
         private belAQIService: BelAQIService,
         private router: Router
     ) {
-        belAQIService.$activeIndex.subscribe((newIndex) => {
-            this.belAqi = newIndex.indexScore;
-        });
-
         router.events
             .pipe(filter((event) => event instanceof NavigationEnd))
             .subscribe((newRoute: NavigationEnd) => {
@@ -43,7 +36,14 @@ export class HeaderComponent implements OnInit {
             });
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.indexSubscription = this.belAQIService.$activeIndex
+            .subscribe((newIndex) => this.locationsAvailable = !!newIndex);
+    }
+
+    ngOnDestroy(): void {
+        if (this.indexSubscription) { this.indexSubscription.unsubscribe(); }
+    }
 
     toggleMenu() {
         if (this.onMenuScreen) {

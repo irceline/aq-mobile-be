@@ -15,7 +15,12 @@ export interface MobileSettings extends Settings {
   colorizedMarkerForLastMilliseconds: number;
   nearestStationTimeBufferInMillseconds: number;
   limitOfAllowedUserLocations: number;
-  defaultSelectableLocations: string[];
+  defaultSelectableLocations: {
+    de: string[];
+    en: string[];
+    fr: string[];
+    nl: string[];
+  };
 }
 
 export interface PersonalAlert {

@@ -28,6 +28,15 @@
 		"close": "Close",
 		"ok": "Ok"
 	},
+	"edit-location-hint": "You can move the location icon on the map to any desired location",
+	"edit-location-label": {
+		"title": "Change location name"
+	},
+	"error-modal": {
+		"no-network-connection": "You are probably offline. Data previously loaded for your saved locations is still available, but the usability of the app is significantly limited.",
+		"no_irceline_settings": "No new data could be fetched. The app shows the last loaded data",
+		"title": "Error occured"
+	},
 	"feedback-reason": {
 		"agriculture": "Emissions from agriculture",
 		"industry": "Emissions from industry",
@@ -39,18 +48,17 @@
 		"total": "Total"
 	},
 	"feedback": {
+		"show-feedback-button": "Display feedback",
 		"stats": {
 			"submission": "Submitted feedback",
 			"submission-today": "Today",
 			"submission-total": "In total"
-		},
-		"show-feedback-button": "Display feedback"
+		}
 	},
 	"network": {
 		"geolocationDenied": "You have not allowed the use of your location to the app.",
 		"geolocationDisabled": "Geolocation is disabled"
 	},
-	"edit-location-hint": "You can move the location icon on the map to any desired location",
 	"no-location-hint": "The app needs you to select a location to function properly.",
 	"no-location": {
 		"confirm": "Save",
@@ -93,10 +101,10 @@
 			"user-notification-settings": {
 				"activity": "Physical efforts",
 				"allergies": "Allergies",
-				"exercise": "Workout",
 				"automated": "Automated alerts based on modelled values for your chosen location(s).",
-				"official": "Official alerts based on a thorough analysis of the situation",
+				"exercise": "Workout",
 				"highConcentration": "(Too) high concentrations",
+				"official": "Official alerts based on a thorough analysis of the situation",
 				"transport": "Getting around"
 			}
 		},
@@ -151,12 +159,12 @@
 				"start-quickly": "Quick start!"
 			},
 			"rating-screen": {
+				"agriculture": "<strong>Emissions</strong> from agriculture",
 				"calculated-value": "The app shows a calculated value, not a measurement at your location. The air quality may therefore differ locally.",
 				"does-it-match": "Is this value in line with your feelings?",
 				"exhaust": "<strong>Exhaust fumes</strong> from traffic",
 				"fire": "<strong>Wood burn</strong>",
 				"industry": "<strong>Emissions</strong> from industry",
-				"agriculture": "<strong>Emissions</strong> from agriculture",
 				"possible-causes": "Possible causes of a deviation are:"
 			}
 		}

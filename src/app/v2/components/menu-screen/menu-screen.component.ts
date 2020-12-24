@@ -61,9 +61,7 @@ export class MenuScreenComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.belAQIService.$activeIndex.subscribe((newIndex) => {
-            this.belAqi = newIndex.indexScore;
-        });
+        this.belAQIService.$activeIndex.subscribe((newIndex) => this.belAqi = newIndex?.indexScore);
 
         this.locationList = this.userSettingsService.getUserSavedLocations();
 

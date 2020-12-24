@@ -28,6 +28,15 @@
 		"close": "sluiten",
 		"ok": "Bewaar locatie"
 	},
+	"edit-location-hint": "U kunt het locatie icoon op de kaart naar elke gewenste locatie verplaatsen.",
+	"edit-location-label": {
+		"title": "Wijzig de locatienaam"
+	},
+	"error-modal": {
+		"no-network-connection": "U bent waarschijnlijk offline. Gegevens die eerder zijn geladen voor uw opgeslagen locaties zijn nog steeds beschikbaar, maar de bruikbaarheid van de app is aanzienlijk beperkt.",
+		"no_irceline_settings": "Er kunnen geen nieuwe gegevens worden geladen. De app toont de laatst geladen gegevens.",
+		"title": "Fout opgetreden"
+	},
 	"feedback-reason": {
 		"agriculture": "Uitstoot door landbouw",
 		"industry": "Uitstoot door industrie",
@@ -39,18 +48,17 @@
 		"total": "Totaal"
 	},
 	"feedback": {
+		"show-feedback-button": "Feedback weergeven",
 		"stats": {
 			"submission": "Ingezonden feedback",
 			"submission-today": "Vandaag",
 			"submission-total": "In totaal"
-		},
-		"show-feedback-button": "Feedback weergeven"
+		}
 	},
 	"network": {
 		"geolocationDenied": "U hebt het gebruik van uw locatie niet toegestaan de app.",
 		"geolocationDisabled": "Geolocatie is uitgeschakeld"
 	},
-	"edit-location-hint": "U kunt het locatie icoon op de kaart naar elke gewenste locatie verplaatsen.",
 	"no-location-hint": "De app vereist een locatie om gegevens weer te geven.",
 	"no-location": {
 		"confirm": "Opslaan",
@@ -93,10 +101,10 @@
 			"user-notification-settings": {
 				"activity": "Inspanningen",
 				"allergies": "Allergieën",
-				"exercise": "Sporten",
 				"automated": "Geautomatiseerde waarschuwingen op basis van gemodelleerde waarden voor de door u gekozen locatie(s).",
-				"official": "Officiële waarschuwingen op basis van een grondige analyse van de situatie",
+				"exercise": "Sporten",
 				"highConcentration": "(Te) hoge concentraties",
+				"official": "Officiële waarschuwingen op basis van een grondige analyse van de situatie",
 				"transport": "Verplaatsingen"
 			}
 		},
@@ -151,12 +159,12 @@
 				"start-quickly": "Snel van start!"
 			},
 			"rating-screen": {
+				"agriculture": "<strong>Uitstoot</strong> door landbouw",
 				"calculated-value": "De app toont een berekende waarde, geen meting op jouw locatie. Plaatselijk kan de luchtkwaliteit dan ook afwijken.",
 				"does-it-match": "Strookt deze waarde met jouw gevoel?",
 				"exhaust": "<strong>Uitlaatgassen</strong> van verkeer",
 				"fire": "Een <strong>haardvuur</strong> met hout verbranding.",
 				"industry": "<strong>Uitstoot</strong> door industrie",
-				"agriculture": "<strong>Uitstoot</strong> door landbouw",
 				"possible-causes": "Mogelijke oorzaken van een afwijking zijn:"
 			}
 		}

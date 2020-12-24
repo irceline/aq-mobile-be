@@ -6,6 +6,7 @@ import moment from 'moment';
 import { Observable, Observer } from 'rxjs';
 
 import { MobileSettings } from '../settings/settings.service';
+import { ErrorModalService, ErrorType } from './../../components/error-modal/error-modal.service';
 
 export interface IrcelineSettings {
   lastupdate: Date;
@@ -28,7 +29,8 @@ export class IrcelineSettingsService {
   constructor(
     private http: HttpClient,
     private settingsService: SettingsService<MobileSettings>,
-    private cacheService: CacheService
+    private cacheService: CacheService,
+    private errorSrvc: ErrorModalService
   ) {
     this.cacheService.setDefaultTTL(DEFAULT_TTL_CACHE);
     this.cacheService.clearExpired()
@@ -66,6 +68,7 @@ export class IrcelineSettingsService {
         observer.complete();
       },
       error => {
+        this.errorSrvc.openErrorModal(ErrorType.NO_IRCELINE_SETTINGS);
         observer.error(error);
         observer.complete();
       },

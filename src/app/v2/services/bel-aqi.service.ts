@@ -19,13 +19,7 @@ export interface BelAqiIndexResult {
 })
 export class BelAQIService {
 
-  // default active index
-  // Brussels
-  public $activeIndex = new BehaviorSubject<BelAqiIndexResult>({
-    location: { label: 'Brussel', postalCode: '1000', latitude: 50.8503396, longitude: 4.3517103, id: 2711, type: 'user' },
-    valueDate: ValueDate.CURRENT,
-    indexScore: 2
-  });
+  public $activeIndex = new BehaviorSubject<BelAqiIndexResult>(null);
 
   private _BelAqiResults: BelAqiIndexResult[] = [];
 
@@ -57,7 +51,14 @@ export class BelAQIService {
   }
 
   public set activeIndex(index: BelAqiIndexResult) {
-    this.$activeIndex.next(index);
+    const cur = this.$activeIndex.value;
+    if (!index && cur) {
+      this.$activeIndex.next(null);
+      return;
+    }
+    if (!cur || (cur.location.id !== index.location.id || cur.valueDate !== index.valueDate || cur.indexScore !== index.indexScore)) {
+      this.$activeIndex.next(index);
+    }
   }
 
   // https://app.zeplin.io/project/5ea9b038b472cbbc682ced04/screen/5eb8f28f40d46577a6abe316
@@ -66,7 +67,8 @@ export class BelAQIService {
     if (index >= 1 && index <= 10) {
       return lightIndexColor[index];
     } else {
-      return null;
+      // use default color (e.g. for background color)
+      return '#29cdf7';
     }
   }
 

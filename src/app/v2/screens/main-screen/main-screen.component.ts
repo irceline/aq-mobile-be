@@ -42,13 +42,13 @@ export class MainScreenComponent implements OnInit {
     detailedPhenomenona: Substance[] = [
         {
             name: 'v2.screens.app-info.ozon',
-            abbreviation: 'O&#8323;',
+            abbreviation: 'O₃',
             unit: 'µg/m3',
             phenomenon: MainPhenomenon.O3
         },
         {
             name: 'v2.screens.app-info.nitrogen-dioxide',
-            abbreviation: 'NO&#8322;',
+            abbreviation: 'NO₂',
             unit: 'µg/m3',
             phenomenon: MainPhenomenon.NO2
         },
@@ -60,7 +60,7 @@ export class MainScreenComponent implements OnInit {
         },
         {
             name: 'v2.screens.app-info.very-fine-dust',
-            abbreviation: 'PM 2,5',
+            abbreviation: 'PM 2.5',
             unit: 'µg/m3',
             phenomenon: MainPhenomenon.PM25
         },
@@ -130,6 +130,8 @@ export class MainScreenComponent implements OnInit {
                     console.error('Error occured while fetching the bel aqi indicies');
                     if (loadFinishedCb) { loadFinishedCb(); }
                 });
+        } else {
+            this.belAqiService.activeIndex = null;
         }
     }
 
@@ -137,7 +139,11 @@ export class MainScreenComponent implements OnInit {
         this.detailData = [];
         this.detailDataLoadig = true;
 
-        const currentBelAqi = this.belAqiForCurrentLocation.find(e => e.valueDate === ValueDate.CURRENT);
+        let currentBelAqi = this.belAqiForCurrentLocation.find(e => e.valueDate === ValueDate.CURRENT);
+        // if current is not available
+        if (currentBelAqi === undefined && this.belAqiForCurrentLocation.length > 0) {
+            currentBelAqi = this.belAqiForCurrentLocation[0];
+        }
         this.belAqiService.activeIndex = currentBelAqi;
 
         this.belaqiDetailData = {
@@ -190,9 +196,7 @@ export class MainScreenComponent implements OnInit {
     }
 
     ionViewWillEnter() {
-        if (this.currentActiveIndex) {
-            this.belAqiService.activeIndex = this.currentActiveIndex;
-        }
+        this.updateCurrentLocation();
     }
 
     doRefresh(event) {

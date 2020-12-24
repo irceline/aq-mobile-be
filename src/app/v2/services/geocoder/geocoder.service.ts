@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from 'ionic-cache';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -22,21 +23,27 @@ const TTL_GEO_SEARCH = 60 * 60 * 24; // one day
 })
 export class GeocoderService {
 
-  private _locations: Location[] = locations;
+  private _locations = locations;
 
   constructor(
     private httpClient: HttpClient,
-    private cacheService: CacheService
+    private cacheService: CacheService,
+    private translate: TranslateService
   ) { }
 
   public getLocationLabel(latitude: number, longitude: number): Location {
     let distance = Infinity;
     let entry: Location = null;
+    const langCode = this.translate.currentLang;
     this._locations.forEach(e => {
       const dist = this.distanceInKmBetweenEarthCoordinates(latitude, longitude, e.latitude, e.longitude);
       if (dist < distance) {
         distance = dist;
-        entry = e;
+        entry = {
+          label: e.label[langCode],
+          latitude: e.latitude,
+          longitude: e.longitude
+        };
       }
     });
     return entry;
