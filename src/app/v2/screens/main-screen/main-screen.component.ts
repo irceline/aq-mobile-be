@@ -42,13 +42,13 @@ export class MainScreenComponent implements OnInit {
     detailedPhenomenona: Substance[] = [
         {
             name: 'v2.screens.app-info.ozon',
-            abbreviation: 'O&#8323;',
+            abbreviation: 'O₃',
             unit: 'µg/m3',
             phenomenon: MainPhenomenon.O3
         },
         {
             name: 'v2.screens.app-info.nitrogen-dioxide',
-            abbreviation: 'NO&#8322;',
+            abbreviation: 'NO₂',
             unit: 'µg/m3',
             phenomenon: MainPhenomenon.NO2
         },
@@ -60,7 +60,7 @@ export class MainScreenComponent implements OnInit {
         },
         {
             name: 'v2.screens.app-info.very-fine-dust',
-            abbreviation: 'PM 2,5',
+            abbreviation: 'PM 2.5',
             unit: 'µg/m3',
             phenomenon: MainPhenomenon.PM25
         },
