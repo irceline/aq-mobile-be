@@ -3,8 +3,8 @@
         "label": {
             "fr": "Berchem-Sainte-Agathe",
             "nl": "Sint-Agatha-Berchem",
-            "en": "Sint-Agatha-Berchem",
-            "de": "Sint-Agatha-Berchem"
+            "en": "Berchem-Sainte-Agathe",
+            "de": "Berchem-Sainte-Agathe"
         },
         "latitude": 50.8649231,
         "longitude": 4.2946734,
@@ -47,7 +47,7 @@
         "label": {
             "fr": "Ixelles",
             "nl": "Elsene",
-            "en": "Elsene",
+            "en": "Ixelles",
             "de": "Elsene"
         },
         "latitude": 50.8331141,
@@ -69,8 +69,8 @@
         "label": {
             "fr": "Saint-Gilles",
             "nl": "Sint-Gillis",
-            "en": "Sint-Gillis",
-            "de": "Sint-Gillis"
+            "en": "Saint-Gilles",
+            "de": "Saint-Gilles"
         },
         "latitude": 50.8249958,
         "longitude": 4.3454841,
@@ -80,8 +80,8 @@
         "label": {
             "fr": "Laeken",
             "nl": "Laken",
-            "en": "Laken",
-            "de": "Laken"
+            "en": "Laeken",
+            "de": "Laeken"
         },
         "latitude": 50.883392,
         "longitude": 4.3487134,
@@ -91,8 +91,8 @@
         "label": {
             "fr": "Molenbeek-Saint-Jean",
             "nl": "Sint-Jans-Molenbeek",
-            "en": "Sint-Jans-Molenbeek",
-            "de": "Sint-Jans-Molenbeek"
+            "en": "Molenbeek-Saint-Jean",
+            "de": "Molenbeek-Saint-Jean"
         },
         "latitude": 50.8545959,
         "longitude": 4.338636,
@@ -113,8 +113,8 @@
         "label": {
             "fr": "Schaerbeek",
             "nl": "Schaarbeek",
-            "en": "Schaarbeek",
-            "de": "Schaarbeek"
+            "en": "Schaerbeek",
+            "de": "Schaerbeek"
         },
         "latitude": 50.8676041,
         "longitude": 4.3737121,
@@ -124,8 +124,8 @@
         "label": {
             "fr": "Woluwe-Saint-Pierre",
             "nl": "Sint-Pieters-Woluwe",
-            "en": "Sint-Pieters-Woluwe",
-            "de": "Sint-Pieters-Woluwe"
+            "en": "Woluwe-Saint-Pierre",
+            "de": "Woluwe-Saint-Pierre"
         },
         "latitude": 50.8370253,
         "longitude": 4.4274636,
@@ -135,8 +135,8 @@
         "label": {
             "fr": "Auderghem",
             "nl": "Oudergem",
-            "en": "Oudergem",
-            "de": "Oudergem"
+            "en": "Auderghem",
+            "de": "Auderghem"
         },
         "latitude": 50.8172355,
         "longitude": 4.4268982,
@@ -168,8 +168,8 @@
         "label": {
             "fr": "Woluwe-Saint-Lambert",
             "nl": "Sint-Lambrechts-Woluwe",
-            "en": "Sint-Lambrechts-Woluwe",
-            "de": "Sint-Lambrechts-Woluwe"
+            "en": "Woluwe-Saint-Lambert",
+            "de": "Woluwe-Saint-Lambert"
         },
         "latitude": 50.8430448,
         "longitude": 4.4256732,
@@ -190,8 +190,8 @@
         "label": {
             "fr": "Watermael-Boitsfort",
             "nl": "Watermaal-Bosvoorde",
-            "en": "Watermaal-Bosvoorde",
-            "de": "Watermaal-Bosvoorde"
+            "en": "Watermael-Boitsfort",
+            "de": "Watermael-Boitsfort"
         },
         "latitude": 50.7981063,
         "longitude": 4.4176441,
@@ -201,8 +201,8 @@
         "label": {
             "fr": "Forest",
             "nl": "Vorst",
-            "en": "Vorst",
-            "de": "Vorst"
+            "en": "Forest",
+            "de": "Forest"
         },
         "latitude": 50.811795,
         "longitude": 4.3181187,
@@ -223,8 +223,8 @@
         "label": {
             "fr": "Saint-Josse-ten-Noode",
             "nl": "Sint-Joost-ten-Node",
-            "en": "Sint-Joost-ten-Node",
-            "de": "Sint-Joost-ten-Node"
+            "en": "Saint-Josse-ten-Noode",
+            "de": "Saint-Josse-ten-Noode"
         },
         "latitude": 50.8508197,
         "longitude": 4.3691634,
@@ -237,8 +237,8 @@
             "en": "Bierges",
             "de": "Bierges"
         },
-        "latitude": 50.717399150000006,
-        "longitude": 4.573884421883609,
+        "latitude": 50.7111796,
+        "longitude": 4.5894025,
         "id": 22
     },
     {
@@ -248,16 +248,16 @@
             "en": "Wavre",
             "de": "Wavre"
         },
-        "latitude": 50.72325745,
-        "longitude": 4.615391448548039,
+        "latitude": 50.7162425,
+        "longitude": 4.60845,
         "id": 23
     },
     {
         "label": {
             "fr": "Uccle",
             "nl": "Ukkel",
-            "en": "Ukkel",
-            "de": "Ukkel"
+            "en": "Uccle",
+            "de": "Uccle"
         },
         "latitude": 50.8035441,
         "longitude": 4.3338445,
@@ -278,8 +278,8 @@
         "label": {
             "fr": "La Hulpe",
             "nl": "Terhulpen",
-            "en": "La",
-            "de": "La"
+            "en": "La Hulpe",
+            "de": "La Hulpe"
         },
         "latitude": 50.7313729,
         "longitude": 4.4893987,
@@ -347,8 +347,8 @@
             "en": "L'Ecluse",
             "de": "L'Ecluse"
         },
-        "latitude": 50.76475605,
-        "longitude": 4.8148506251637535,
+        "latitude": 50.7717493,
+        "longitude": 4.8320079,
         "id": 32
     },
     {
@@ -409,8 +409,8 @@
     {
         "label": {
             "fr": "Tourinnes-la-Grosse",
-            "nl": "Deurne",
-            "en": "Tourinnes-La-Grosse",
+            "nl": "Tourinnes-la-Grosse",
+            "en": "Tourinnes-la-Grosse",
             "de": "Tourinnes-La-Grosse"
         },
         "latitude": 50.7777654,
@@ -457,8 +457,8 @@
             "en": "Céroux-Mousty",
             "de": "Céroux-Mousty"
         },
-        "latitude": 50.6625825,
-        "longitude": 4.5291598615635715,
+        "latitude": 50.6607536,
+        "longitude": 4.5343881,
         "id": 42
     },
     {
@@ -479,8 +479,8 @@
             "en": "Rixensart",
             "de": "Rixensart"
         },
-        "latitude": 50.713354800000005,
-        "longitude": 4.5272896887008045,
+        "latitude": 50.7122504,
+        "longitude": 4.5216455,
         "id": 44
     },
     {
@@ -4384,8 +4384,8 @@
             "en": "Leuven",
             "de": "Leuven"
         },
-        "latitude": 50.8812533,
-        "longitude": 4.692990321518882,
+        "latitude": 50.879202,
+        "longitude": 4.7011675,
         "id": 399
     },
     {
@@ -4937,17 +4937,6 @@
         "latitude": 51.0014178,
         "longitude": 4.9856978,
         "id": 449
-    },
-    {
-        "label": {
-            "fr": "Deurne",
-            "nl": "Deurne",
-            "en": "Deurne",
-            "de": "Deurne"
-        },
-        "latitude": 51.0392379,
-        "longitude": 5.0964572,
-        "id": 450
     },
     {
         "label": {
@@ -5935,8 +5924,8 @@
             "en": "Hasselt",
             "de": "Hasselt"
         },
-        "latitude": 50.9212662,
-        "longitude": 5.3052324936252635,
+        "latitude": 50.93106 ,
+        "longitude": 5.33781,
         "id": 540
     },
     {
@@ -7206,17 +7195,6 @@
     },
     {
         "label": {
-            "fr": "Aalst",
-            "nl": "Aalst",
-            "en": "Aalst",
-            "de": "Aalst"
-        },
-        "latitude": 50.7813901,
-        "longitude": 5.2127604,
-        "id": 656
-    },
-    {
-        "label": {
             "fr": "Gelinden",
             "nl": "Gelinden",
             "en": "Gelinden",
@@ -8141,10 +8119,10 @@
     },
     {
         "label": {
-            "fr": "Liège",
-            "nl": "Luik",
+            "fr": "Grivegnée",
+            "nl": "Grivegnée",
             "en": "Grivegnée",
-            "de": "Lüttich"
+            "de": "Grivegnée"
         },
         "latitude": 50.621845,
         "longitude": 5.599573,
@@ -8226,17 +8204,6 @@
         "latitude": 50.6904632,
         "longitude": 5.5929155,
         "id": 748
-    },
-    {
-        "label": {
-            "fr": "Liège",
-            "nl": "Luik",
-            "en": "Liège",
-            "de": "Lüttich"
-        },
-        "latitude": 50.60381545,
-        "longitude": 5.543119803161028,
-        "id": 749
     },
     {
         "label": {
@@ -26095,11 +26062,11 @@
         "label": {
             "fr": "Ypres",
             "nl": "Ieper",
-            "en": "Ieper",
+            "en": "Ypres",
             "de": "Ypern"
         },
-        "latitude": 50.832867050000004,
-        "longitude": 2.8655533554924233,
+        "latitude": 50.85169675,
+        "longitude": 2.891473683275896,
         "id": 2373
     },
     {
@@ -26403,11 +26370,11 @@
         "label": {
             "fr": "Gand",
             "nl": "Gent",
-            "en": "Gent",
+            "en": "Ghent",
             "de": "Gent"
         },
-        "latitude": 51.0600321,
-        "longitude": 3.644079554856256,
+        "latitude": 51.0538286,
+        "longitude": 3.7250121,
         "id": 2401
     },
     {
