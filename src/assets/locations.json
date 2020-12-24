@@ -2586,50 +2586,6 @@
     },
     {
         "label": {
-            "fr": "Anvers",
-            "nl": "Antwerpen",
-            "en": "Antwerp",
-            "de": "Antwerpen"
-        },
-        "latitude": 51.2211097,
-        "longitude": 4.3997081,
-        "id": 236
-    },
-    {
-        "label": {
-            "fr": "Antwerpen",
-            "nl": "Antwerpen",
-            "en": "Antwerpen",
-            "de": "Antwerpen"
-        },
-        "latitude": 51.3571532,
-        "longitude": 4.312232278930543,
-        "id": 237
-    },
-    {
-        "label": {
-            "fr": "Anvers",
-            "nl": "Antwerpen",
-            "en": "Antwerp",
-            "de": "Antwerpen"
-        },
-        "latitude": 51.2211097,
-        "longitude": 4.3997081,
-        "id": 238
-    },
-    {
-        "label": {
-            "fr": "Anvers",
-            "nl": "Antwerpen",
-            "en": "Antwerp",
-            "de": "Antwerpen"
-        },
-        "latitude": 51.2211097,
-        "longitude": 4.3997081,
-        "id": 239
-    },
-    {
-        "label": {
             "fr": "Weerde",
             "nl": "Weerde",
             "en": "Weerde",
@@ -2649,17 +2605,6 @@
         "latitude": 51.3455396,
         "longitude": 4.319401,
         "id": 241
-    },
-    {
-        "label": {
-            "fr": "Anvers",
-            "nl": "Antwerpen",
-            "en": "Antwerp",
-            "de": "Antwerpen"
-        },
-        "latitude": 51.2211097,
-        "longitude": 4.3997081,
-        "id": 242
     },
     {
         "label": {
@@ -2748,17 +2693,6 @@
         "latitude": 51.20849,
         "longitude": 4.4719297,
         "id": 250
-    },
-    {
-        "label": {
-            "fr": "Anvers",
-            "nl": "Antwerpen",
-            "en": "Antwerp",
-            "de": "Antwerpen"
-        },
-        "latitude": 51.2211097,
-        "longitude": 4.3997081,
-        "id": 251
     },
     {
         "label": {
@@ -12348,8 +12282,8 @@
             "en": "Namur",
             "de": "Namen"
         },
-        "latitude": 50.45724185,
-        "longitude": 4.849782469386653,
+        "latitude": 50.4665284,
+        "longitude": 4.8661892,
         "id": 1126
     },
     {
@@ -16132,8 +16066,8 @@
             "en": "Charleroi",
             "de": "Charleroi"
         },
-        "latitude": 50.44000175,
-        "longitude": 4.4232140770444,
+        "latitude": 50.4120332,
+        "longitude": 4.4436244,
         "id": 1470
     },
     {

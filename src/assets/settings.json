@@ -70,32 +70,36 @@
   ],
   "defaultSelectableLocations": {
     "de": [
-      "Brüssel", 
-      "Antwerpen", 
-      "Lüttich", 
-      "Gent", 
-      "Charleroi"
+      "Brüssel",
+      "Antwerpen",
+      "Lüttich",
+      "Gent",
+      "Charleroi",
+      "Ostende"
     ],
     "en": [
-      "Brussels", 
-      "Antwerp", 
-      "Grivegnée", 
-      "Gent", 
-      "Charleroi"
+      "Brussels",
+      "Antwerp",
+      "Liège",
+      "Ghent",
+      "Charleroi",
+      "Ostend"
     ],
     "fr": [
-      "Bruxelles", 
-      "Anvers", 
-      "Liège", 
-      "Gand", 
-      "Charleroi"
+      "Bruxelles",
+      "Liège",
+      "Charleroi",
+      "Namur",
+      "Anvers",
+      "Gand"
     ],
     "nl": [
-      "Brussel", 
-      "Antwerpen", 
-      "Luik", 
-      "Gent", 
-      "Charleroi"
+      "Brussel",
+      "Antwerpen",
+      "Gent",
+      "Hasselt",
+      "Leuven",
+      "Luik"
     ]
   },
   "limitOfAllowedUserLocations": 5
