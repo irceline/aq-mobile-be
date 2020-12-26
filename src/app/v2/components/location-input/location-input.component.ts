@@ -146,7 +146,7 @@ export class LocationInputComponent implements OnInit, OnDestroy {
     }
 
     // filter logic
-    private filterItems() {
+    filterItems() {
         const code = this.translateSrvc.currentLang;
         const defaultLocations = this.settingsSrvc.getSettings().defaultSelectableLocations[code];
 
