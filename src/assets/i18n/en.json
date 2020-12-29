@@ -35,7 +35,8 @@
 	"error-modal": {
 		"no-network-connection": "You are probably offline. Data previously loaded for your saved locations is still available, but the usability of the app is significantly limited.",
 		"no_irceline_settings": "No new data could be fetched. The app shows the last loaded data",
-		"title": "Error occured"
+		"title": "Connection error",
+		"back-to-app": "Back to the app"
 	},
 	"feedback-reason": {
 		"agriculture": "Emissions from agriculture",
