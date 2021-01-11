@@ -136,7 +136,6 @@ export class MainScreenComponent implements OnInit {
     }
 
     private async updateDetailData(loadFinishedCb?: () => any) {
-        this.detailData = [];
         this.detailDataLoadig = true;
 
         let currentBelAqi = this.belAqiForCurrentLocation.find(e => e.valueDate === ValueDate.CURRENT);
@@ -164,14 +163,20 @@ export class MainScreenComponent implements OnInit {
             ]).subscribe(
                 res => {
                     if (res[0] != null) {
-                        this.detailData.push({
+                        const entry = {
                             location: this.userSettingsService.selectedUserLocation,
                             currentValue: Math.round(res[0].value),
                             averageValue: res[1] ? Math.round(res[1].value) : null,
                             substance: dph,
                             evaluation: this.belAqiService.getLabelForIndex(res[0].index),
                             color: this.belAqiService.getLightColorForIndex(res[0].index)
-                        });
+                        };
+                        const idx = this.detailData.findIndex(e => e.substance === dph);
+                        if (idx > -1) {
+                            this.detailData[idx] = entry;
+                        } else {
+                            this.detailData.push(entry);
+                        }
                     }
                     this.detailDataLoadig = false;
                     if (loadFinishedCb) { loadFinishedCb(); }
