@@ -35,7 +35,8 @@
 	"error-modal": {
 		"no-network-connection": "Sie sind wahrscheinlich offline. Zuvor geladene Daten für Ihre gespeicherten Standorte sind zwar noch verfügbar, aber die Nutzbarkeit der App ist deutlich eingeschränkt.",
 		"no_irceline_settings": "Es konnten keine neuen Daten ermittelt werden. Die App zeigt die zuletzt geladenen Daten.",
-		"title": "Fehler aufgetreten"
+		"title": "Verbindungsstörung",
+		"back-to-app": "Zurück zur App"
 	},
 	"feedback-reason": {
 		"agriculture": "Emissionen aus der Landwirtschaft",

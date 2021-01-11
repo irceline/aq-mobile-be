@@ -35,7 +35,8 @@
 	"error-modal": {
 		"no-network-connection": "Vous êtes probablement hors ligne. Les données précédemment chargées pour vos emplacements sauvegardés sont toujours disponibles, mais la utilisabilité de l'application est considérablement limitée.",
 		"no_irceline_settings": "Aucune nouvelle donnée ne peut être chargée. L'application affiche les dernières données chargées.",
-		"title": "Erreur est survenue"
+		"title": "Erreur de connexion",
+		"back-to-app": "Retour à l'application"
 	},
 	"feedback-reason": {
 		"agriculture": "Émissions de l'agriculture",
