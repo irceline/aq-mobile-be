@@ -33,10 +33,10 @@
 		"title": "Ändern des Standortnamens"
 	},
 	"error-modal": {
+		"back-to-app": "Zurück zur App",
 		"no-network-connection": "Sie sind wahrscheinlich offline. Zuvor geladene Daten für Ihre gespeicherten Standorte sind zwar noch verfügbar, aber die Nutzbarkeit der App ist deutlich eingeschränkt.",
 		"no_irceline_settings": "Es konnten keine neuen Daten ermittelt werden. Die App zeigt die zuletzt geladenen Daten.",
-		"title": "Verbindungsstörung",
-		"back-to-app": "Zurück zur App"
+		"title": "Verbindungsstörung"
 	},
 	"feedback-reason": {
 		"agriculture": "Emissionen aus der Landwirtschaft",
@@ -49,6 +49,7 @@
 		"total": "Total"
 	},
 	"feedback": {
+		"ajdust-location-for-feedback-button": "Feedback-Standort anpassen",
 		"show-feedback-button": "Feedback anzeigen",
 		"stats": {
 			"submission": "Eingereichtes Feedback",

@@ -3,8 +3,15 @@ import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import { FeedbackCode } from '../../services/feedback/feedback.service';
+import { FeedbackLocationEditComponent } from '../feedback-location-edit/feedback-location-edit.component';
 import { FeedbackStatsComponent } from '../feedback-stats/feedback-stats.component';
 import { UserLocation } from './../../Interfaces';
+
+export interface Feedback {
+    codes: FeedbackCode[];
+    latitude: number;
+    longitude: number;
+}
 
 @Component({
     selector: 'app-feedback',
@@ -16,7 +23,9 @@ export class FeedbackComponent implements OnInit {
     @Input() location: UserLocation;
 
     @Output() feedbackOpened = new EventEmitter();
-    @Output() feedbackGiven = new EventEmitter<FeedbackCode[]>();
+    @Output() feedbackGiven = new EventEmitter<Feedback>();
+
+    private feedback: Feedback;
 
     like = false;
     dislike = false;
@@ -45,6 +54,11 @@ export class FeedbackComponent implements OnInit {
             this.dislike = true;
             this.feedbackOpened.emit(true);
         }
+        this.feedback = {
+            latitude: this.location.latitude,
+            longitude: this.location.longitude,
+            codes: []
+        }
     }
 
     openFeedbackStats() {
@@ -56,16 +70,37 @@ export class FeedbackComponent implements OnInit {
         }).then(modal => modal.present());
     }
 
+    adjustLocation() {
+        this.modalController.create({
+            component: FeedbackLocationEditComponent,
+            componentProps: {
+                location: {
+                    longitude: this.location.longitude,
+                    latitude: this.location.latitude
+                }
+            }
+        }).then(modal => {
+            modal.present();
+            modal.onDidDismiss().then(dismissed => {
+                if (dismissed && dismissed.data && dismissed.data.latitude && dismissed.data.longitude) {
+                    this.location.latitude = dismissed.data.latitude
+                    this.location.longitude = dismissed.data.longitude
+                }
+            })
+        });
+    }
+
     giveFeedback() {
         if (this.like) {
-            this.feedbackGiven.emit([FeedbackCode.INLINE]);
+            this.feedback.codes = [FeedbackCode.INLINE];
         } else {
             const fbs = this.form.filter(e => e.isChecked).map(e => e.code);
             if (fbs.length > 0) {
-                this.feedbackGiven.emit(fbs);
+                this.feedback.codes = fbs
             } else {
-                this.feedbackGiven.emit([FeedbackCode.NOT_INLINE_WITHOUT_INFO]);
+                this.feedback.codes = [FeedbackCode.NOT_INLINE_WITHOUT_INFO]
             }
         }
+        this.feedbackGiven.emit(this.feedback);
     }
 }

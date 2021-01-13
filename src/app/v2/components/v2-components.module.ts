@@ -11,6 +11,7 @@ import { BackgroundComponent } from './background/background.component';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
 import { CircleChartComponent } from './circle-chart/circle-chart.component';
 import { ErrorModalComponent } from './error-modal/error-modal.component';
+import { FeedbackLocationEditComponent } from './feedback-location-edit/feedback-location-edit.component';
 import { FeedbackStatsMapComponent } from './feedback-stats/feedback-stats-map/feedback-stats-map.component';
 import { FeedbackStatsComponent } from './feedback-stats/feedback-stats.component';
 import { FeedbackComponent } from './feedback/feedback.component';
@@ -66,7 +67,8 @@ const COMPONENTS = [
     SuccessDisplayComponent,
     InformationItemDetailsComponent,
     MapComponent,
-    ErrorModalComponent
+    ErrorModalComponent,
+    FeedbackLocationEditComponent
 ];
 
 @NgModule({

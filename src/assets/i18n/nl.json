@@ -33,10 +33,10 @@
 		"title": "Wijzig de locatienaam"
 	},
 	"error-modal": {
+		"back-to-app": "Terug naar de app",
 		"no-network-connection": "U bent waarschijnlijk offline. Gegevens die eerder zijn geladen voor uw opgeslagen locaties zijn nog steeds beschikbaar, maar de bruikbaarheid van de app is aanzienlijk beperkt.",
 		"no_irceline_settings": "Er kunnen geen nieuwe gegevens worden geladen. De app toont de laatst geladen gegevens.",
-		"title": "Connectie problemen",
-		"back-to-app": "Terug naar de app"
+		"title": "Connectie problemen"
 	},
 	"feedback-reason": {
 		"agriculture": "Uitstoot door landbouw",
@@ -49,6 +49,7 @@
 		"total": "Totaal"
 	},
 	"feedback": {
+		"ajdust-location-for-feedback-button": "",
 		"show-feedback-button": "Feedback weergeven",
 		"stats": {
 			"submission": "Ingezonden feedback",

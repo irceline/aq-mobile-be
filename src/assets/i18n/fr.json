@@ -33,10 +33,10 @@
 		"title": "Changer le nom de la localisation"
 	},
 	"error-modal": {
+		"back-to-app": "Retour à l'application",
 		"no-network-connection": "Vous êtes probablement hors ligne. Les données précédemment chargées pour vos emplacements sauvegardés sont toujours disponibles, mais la utilisabilité de l'application est considérablement limitée.",
 		"no_irceline_settings": "Aucune nouvelle donnée ne peut être chargée. L'application affiche les dernières données chargées.",
-		"title": "Erreur de connexion",
-		"back-to-app": "Retour à l'application"
+		"title": "Erreur de connexion"
 	},
 	"feedback-reason": {
 		"agriculture": "Émissions de l'agriculture",
@@ -49,6 +49,7 @@
 		"total": "Total"
 	},
 	"feedback": {
+		"ajdust-location-for-feedback-button": "",
 		"show-feedback-button": "Afficher les commentaires",
 		"stats": {
 			"submission": "Commentaires soumis",
