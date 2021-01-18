@@ -6,7 +6,6 @@ import { NavController, Platform } from '@ionic/angular';
 import { UserLocation } from '../../Interfaces';
 import { BelAQIService } from '../../services/bel-aqi.service';
 import { UserSettingsService } from '../../services/user-settings.service';
-import { UserNotificationSetting } from '../user-notification-settings/user-notification-settings.component';
 
 @Component({
     selector: 'app-menu-screen',
@@ -46,8 +45,6 @@ export class MenuScreenComponent implements OnInit {
     // todo: user settings service get this from language settings
     language = 'e';
 
-    userNotificationSettings: UserNotificationSetting[] = [];
-
     locationList: UserLocation[] = [];
 
     version = 'desktop';
@@ -64,8 +61,6 @@ export class MenuScreenComponent implements OnInit {
         this.belAQIService.$activeIndex.subscribe((newIndex) => this.belAqi = newIndex?.indexScore);
 
         this.locationList = this.userSettingsService.getUserSavedLocations();
-
-        this.userNotificationSettings = this.userSettingsService.getUserNotificationSettings();
 
         this.userSettingsService.$userLocations.subscribe((userLocations) => {
             this.locationList = userLocations;

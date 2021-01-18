@@ -1,4 +1,5 @@
 import { MainPhenomenon } from '../common/phenomenon';
+import { PushNotification } from './../services/push-notifications/push-notifications.service';
 
 export enum BelAirColor {
     Red = 'red',
@@ -18,6 +19,11 @@ export interface UserLocation {
     postalCode?: string;
     order?: number;
     wasEdited?: boolean;
+    subscription?: {
+        language: string;
+        key: string;
+    };
+    notification?: PushNotification;
 }
 
 export interface IBarChartData {

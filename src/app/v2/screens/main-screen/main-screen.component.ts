@@ -102,8 +102,6 @@ export class MainScreenComponent implements OnInit {
     detailPoint: DataPoint = null;
     contentHeight = 0;
 
-    location: UserLocation;
-
     constructor(
         public userSettingsService: UserSettingsService,
         private translateService: TranslateService,

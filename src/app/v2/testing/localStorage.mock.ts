@@ -1,4 +1,3 @@
-import {NotificationType} from '../components/user-notification-settings/user-notification-settings.component';
 import moment from 'moment';
 import {BelAqiIndexResult} from '../services/bel-aqi.service';
 
@@ -8,28 +7,6 @@ const defaultStore = {
 };
 
 let store = {
-    'belAir.userNotificationSettings': JSON.stringify([
-        {
-            notificationType: NotificationType.highConcentration,
-            enabled: false,
-        },
-        {
-            notificationType: NotificationType.transport,
-            enabled: false,
-        },
-        {
-            notificationType: NotificationType.activity,
-            enabled: false,
-        },
-        {
-            notificationType: NotificationType.allergies,
-            enabled: false,
-        },
-        {
-            notificationType: NotificationType.exercise,
-            enabled: false,
-        },
-    ]),
     'belAir.userLocations': JSON.stringify([
         {label: 'Laeken', type: 'user', id: 0},
         {label: 'Koekelberg', type: 'user', id: 1},

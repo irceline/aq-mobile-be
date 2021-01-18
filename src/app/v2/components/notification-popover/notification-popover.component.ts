@@ -11,7 +11,7 @@ import { PushNotification } from './../../services/push-notifications/push-notif
 })
 export class NotificationPopoverComponent implements OnInit {
 
-  public notification: PushNotification;
+  public notifications: PushNotification[];
 
   constructor(
     public navParams: NavParams,
@@ -19,7 +19,9 @@ export class NotificationPopoverComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.notification = this.navParams.data as PushNotification;
+    if (this.navParams?.data?.notifications) {
+      this.notifications = this.navParams.data.notifications as PushNotification[];
+    }
   }
 
 }

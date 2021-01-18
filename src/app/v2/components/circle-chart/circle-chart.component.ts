@@ -2,6 +2,7 @@ import { Component, ElementRef, Input, NgZone, OnInit } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
+import { UserLocation } from '../../Interfaces';
 import { BelAQIService } from '../../services/bel-aqi.service';
 import { GeneralNotificationService } from '../../services/push-notifications/general-notification.service';
 import { PushNotification } from './../../services/push-notifications/push-notifications.service';
@@ -31,6 +32,8 @@ export class CircleChartComponent implements OnInit {
         pulsing: false,
     };
 
+    public activeUserLocation: UserLocation;
+
     public notification: PushNotification;
     public notificationActive: boolean;
 
@@ -45,6 +48,7 @@ export class CircleChartComponent implements OnInit {
         belaqiService.$activeIndex.subscribe((newIndex) => {
             if (newIndex) {
                 this.belAqi = newIndex.indexScore;
+                this.activeUserLocation = newIndex.location;
                 this._initialize(this.belAqi);
             }
         });
@@ -60,10 +64,17 @@ export class CircleChartComponent implements OnInit {
     }
 
     public openNotification(ev: Event) {
+        const notifications = [];
+        if (this.notification) {
+            notifications.push(this.notification);
+        }
+        if (this.activeUserLocation.notification) {
+            notifications.push(this.activeUserLocation.notification);
+        }
         this.popoverController.create({
             component: NotificationPopoverComponent,
             event: ev,
-            componentProps: this.notification
+            componentProps: { notifications }
         }).then(popover => popover.present());
     }
 
