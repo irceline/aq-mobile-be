@@ -26,7 +26,7 @@
 	"controls": {
 		"cancel": "Cancel",
 		"close": "Close",
-		"ok": "Ok"
+		"ok": "OK"
 	},
 	"edit-location-hint": "You can move the location icon on the map to any desired location",
 	"edit-location-label": {
@@ -49,7 +49,7 @@
 		"total": "Total"
 	},
 	"feedback": {
-		"ajdust-location-for-feedback-button": "Adjust feedback location",
+		"ajdust-location-for-feedback-button": "Move feedback location",
 		"show-feedback-button": "Display feedback",
 		"stats": {
 			"submission": "Submitted feedback",
