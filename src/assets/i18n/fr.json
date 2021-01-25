@@ -26,7 +26,7 @@
 	"controls": {
 		"cancel": "Annuler",
 		"close": "Fermer",
-		"ok": "Enregistrer la location"
+		"ok": "OK"
 	},
 	"edit-location-hint": "Vous pouvez déplacer l'icône de localisation sur la carte à n'importe quel endroit souhaité.",
 	"edit-location-label": {
@@ -49,7 +49,7 @@
 		"total": "Total"
 	},
 	"feedback": {
-		"ajdust-location-for-feedback-button": "",
+		"ajdust-location-for-feedback-button": "Déplacer la localisation",
 		"show-feedback-button": "Afficher les commentaires",
 		"stats": {
 			"submission": "Commentaires soumis",

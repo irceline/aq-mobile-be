@@ -26,7 +26,7 @@
 	"controls": {
 		"cancel": "annuleer",
 		"close": "sluiten",
-		"ok": "Bewaar locatie"
+		"ok": "OK"
 	},
 	"edit-location-hint": "U kunt het locatie icoon op de kaart naar elke gewenste locatie verplaatsen.",
 	"edit-location-label": {
@@ -49,7 +49,7 @@
 		"total": "Totaal"
 	},
 	"feedback": {
-		"ajdust-location-for-feedback-button": "",
+		"ajdust-location-for-feedback-button": "Feedback locatie verplaatsen",
 		"show-feedback-button": "Feedback weergeven",
 		"stats": {
 			"submission": "Ingezonden feedback",
