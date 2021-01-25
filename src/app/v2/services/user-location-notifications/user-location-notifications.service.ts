@@ -69,7 +69,6 @@ export class UserLocationNotificationsService {
             const topic = this.topicGenerator.generateTopic(location.latitude, location.longitude, langCode);
             this.notifications.subscribeTopic(topic).subscribe(
               () => {
-                // this.addSubscription(subscription);
                 location.subscription = { key: subscription.key, language: subscription.language }
                 observer.next(true);
                 observer.complete();
@@ -88,12 +87,17 @@ export class UserLocationNotificationsService {
   public unsubscribeLocation(location: UserLocation): Observable<boolean> {
     return new Observable<boolean>((observer: Observer<boolean>) => {
       if (location.subscription) {
-        const subscription = this.generateSubscriptionObject(location.latitude, location.longitude, this.translate.currentLang);
+        const subscription: LocationSubscription = {
+          key: location.subscription.key,
+          language: location.subscription.language,
+          lat: location.latitude,
+          lng: location.longitude
+        }
         // unregister to Backend
         this.deleteSubscription(subscription).subscribe(
           success => {
             if (success) {
-              const topic = this.topicGenerator.generateTopic(location.latitude, location.longitude, this.translate.currentLang);
+              const topic = this.topicGenerator.generateTopic(subscription.lat, subscription.lng, subscription.language);
               // unsubscribe to Topic
               this.notifications.unsubscribeTopic(topic).subscribe(
                 () => {
@@ -110,7 +114,8 @@ export class UserLocationNotificationsService {
           () => this.publishError(observer, UserLocationSubscriptionError.BackendRegistration)
         );
       } else {
-        this.publishError(observer, UserLocationSubscriptionError.BackendRegistration);
+        observer.next(true);
+        observer.complete();
       }
     });
   }

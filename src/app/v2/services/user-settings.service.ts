@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, forkJoin, Observable, of, Subscription, timer } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
@@ -35,9 +36,10 @@ export class UserSettingsService {
     private notificationExpirationTimer: Map<number, Subscription> = new Map();
 
     constructor(
-        private userLocationNotificationSrvc: UserLocationNotificationsService
+        private userLocationNotificationSrvc: UserLocationNotificationsService,
+        private translate: TranslateService
     ) {
-        this.$userLocationNotificationsActive = new BehaviorSubject(localStorage.getItem(userLocationNotificationsLSkey) ? true : false);
+        this.$userLocationNotificationsActive = new BehaviorSubject(localStorage.getItem(userLocationNotificationsLSkey) === 'true');
 
         const userLocations = localStorage.getItem(userLocationsLSkey);
 
@@ -62,21 +64,11 @@ export class UserSettingsService {
 
         this.registerNotificationHandling();
 
-        // TODO: language dependent notifications
-        // this.translate.onLangChange.subscribe(() => {
-        //   this.registeredSubscriptions.subscribe(subs => {
-        //     subs.forEach(e => {
-        //       const loc: UserLocation = {
-        //         type: 'user',
-        //         latitude: e.lat,
-        //         longitude: e.lng
-        //       };
-        //       this.unsubscribeLocation(loc).subscribe(res => {
-        //         this.subscribeLocation(loc).subscribe();
-        //       });
-        //     });
-        //   });
-        // });
+        this.translate.onLangChange.subscribe(() => {
+            if (this.$userLocationNotificationsActive.getValue()) {
+                this.unsubscribeNotification().subscribe(() => this.subscribeNotification().subscribe());
+            }
+        });
     }
 
     public getUserSavedLocations(): UserLocation[] {
@@ -131,7 +123,10 @@ export class UserSettingsService {
                 return of(false);
             }),
             map(() => true),
-            tap(r => this.setUserLocationsNotificationsActive(r)),
+            tap(r => {
+                this.saveLocations();
+                return this.setUserLocationsNotificationsActive(r);
+            }),
         );
     }
 
@@ -143,7 +138,10 @@ export class UserSettingsService {
                 return of(false);
             }),
             map(() => false),
-            tap(res => this.setUserLocationsNotificationsActive(res))
+            tap(res => {
+                this.saveLocations();
+                return this.setUserLocationsNotificationsActive(res);
+            })
         )
     }
 
@@ -184,7 +182,6 @@ export class UserSettingsService {
         });
 
         this._userLocations.forEach(e => {
-            console.log(`Check userLocation: ${e.label} - ${e.notification?.topic}`);
             if (e.notification?.expiration.getTime() > new Date().getTime()) {
                 if (e.notification) {
                     this.notificationExpirationTimer.set(e.id, timer(e.notification.expiration).subscribe(() => this.clearNotification(e)));
