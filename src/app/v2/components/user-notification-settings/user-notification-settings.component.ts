@@ -32,9 +32,9 @@ export class UserNotificationSettingsComponent implements OnInit {
         event.stopPropagation();
         event.preventDefault();
         if (!this.generalNotification) {
-            this.generalNotificationSrvc.subscribeNotification().subscribe(res => this.generalNotification = res);
+            this.generalNotificationSrvc.subscribeNotification(true).subscribe(res => this.generalNotification = res);
         } else {
-            this.generalNotificationSrvc.unsubscribeNotification().subscribe(res => this.generalNotification = !res);
+            this.generalNotificationSrvc.unsubscribeNotification(true).subscribe(res => this.generalNotification = !res);
         }
     }
 

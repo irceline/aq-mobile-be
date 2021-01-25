@@ -53,8 +53,7 @@ export class GeneralNotificationService {
     this.translate.onLangChange.subscribe(lang => {
       this.$active.pipe(first()).subscribe(active => {
         if (active) {
-          this.unsubscribeNotification().subscribe();
-          this.subscribeNotification().subscribe();
+          this.unsubscribeNotification(false).subscribe(() => this.subscribeNotification(false).subscribe());
         }
       });
     });
@@ -64,25 +63,25 @@ export class GeneralNotificationService {
     return this.notificationReceived.asObservable();
   }
 
-  public subscribeNotification(): Observable<boolean> {
+  public subscribeNotification(setActivation: boolean): Observable<boolean> {
     const topic = NOTIFICATION_PREFIX + this.translate.currentLang;
     return this.pushNotification.subscribeTopic(topic).pipe(
       tap(res => {
-        if (res) {
-          this.storage.set(GENERAL_NOTIFICATION_TOPIC_STORAGE_KEY, topic);
+        this.storage.set(GENERAL_NOTIFICATION_TOPIC_STORAGE_KEY, topic);
+        if (res && setActivation) {
           this.$active.next(true);
         }
       })
     );
   }
 
-  public unsubscribeNotification(): Observable<boolean> {
+  public unsubscribeNotification(setDeactivation: boolean): Observable<boolean> {
     return from(this.storage.get(GENERAL_NOTIFICATION_TOPIC_STORAGE_KEY))
       .pipe(mergeMap(topic => {
         return this.pushNotification.unsubscribeTopic(topic).pipe(
           tap(res => {
-            if (res) {
-              this.storage.remove(GENERAL_NOTIFICATION_TOPIC_STORAGE_KEY);
+            this.storage.remove(GENERAL_NOTIFICATION_TOPIC_STORAGE_KEY);
+            if (res && setDeactivation) {
               this.$active.next(false);
             }
           })
