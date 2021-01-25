@@ -15,6 +15,7 @@ export class LocationSortableComponent implements OnInit {
 
     @Output() locationRemoved = new EventEmitter();
     @Output() locationUpdated = new EventEmitter();
+    @Output() locationCoordinateChanged = new EventEmitter<UserLocation>();
 
     constructor(
         private alertController: AlertController,
@@ -64,11 +65,7 @@ export class LocationSortableComponent implements OnInit {
         await modal.present();
         const editedLocation = (await modal.onWillDismiss()).data as UserLocation;
         if (editedLocation) {
-            const idx = this.locations.findIndex(e => e.id === editedLocation.id);
-            if (idx > -1) {
-                this.locations[idx] = editedLocation;
-                this.locationUpdated.emit(this.locations);
-            }
+            this.locationCoordinateChanged.emit(editedLocation);
         }
     }
 }

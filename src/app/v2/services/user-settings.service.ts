@@ -90,16 +90,22 @@ export class UserSettingsService {
         }
     }
 
-    public updateUserLocations(newLocations: UserLocation[]) {
+    public updateUserLocationsOrder(newLocations: UserLocation[]) {
         this._userLocations = newLocations;
         this.saveLocations();
     }
 
-    public updateUserLocationCoordinates() {
+    public updateUserLocationCoordinates(userLocation: UserLocation) {
+        const matchedLocation = this._userLocations.find(e => e.id === userLocation.id);
+        matchedLocation.label = userLocation.label;
+        matchedLocation.latitude = userLocation.latitude;
+        matchedLocation.longitude = userLocation.longitude;
         if (this.$userLocationNotificationsActive.getValue()) {
-            // this.userLocationNotificationSrvc.unsubscribe(); // TODO: old one
-            // this.userLocationNotificationSrvc.subscribe(); // TODO: new one
+            this.userLocationNotificationSrvc.unsubscribeLocation(matchedLocation).subscribe(() => {
+                this.userLocationNotificationSrvc.subscribeLocation(matchedLocation).subscribe();
+            })
         }
+        this.saveLocations();
     }
 
     public removeUserLocation(locationToRemove: UserLocation) {

@@ -19,11 +19,15 @@ export interface UserLocation {
     postalCode?: string;
     order?: number;
     wasEdited?: boolean;
-    subscription?: {
-        language: string;
-        key: string;
-    };
+    subscription?: LocationSubscription;
     notification?: PushNotification;
+}
+
+export interface LocationSubscription {
+    lat: number;
+    lng: number;
+    language: string;
+    key: string;
 }
 
 export interface IBarChartData {

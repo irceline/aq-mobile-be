@@ -72,7 +72,11 @@ export class MenuScreenComponent implements OnInit {
     }
 
     updateLocation(newLocations: UserLocation[]) {
-        this.userSettingsService.updateUserLocations(newLocations);
+        this.userSettingsService.updateUserLocationsOrder(newLocations);
+    }
+
+    updateLocationCoordinate(userLocation: UserLocation) {
+        this.userSettingsService.updateUserLocationCoordinates(userLocation);
     }
 
     removeLocation(location: UserLocation) {

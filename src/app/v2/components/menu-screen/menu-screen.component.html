@@ -29,7 +29,8 @@
 
       <!-- Reorder locations -->
       <app-location-sortable [locations]="locationList" (locationRemoved)="removeLocation($event)"
-        (locationUpdated)="updateLocation($event)"></app-location-sortable>
+        (locationUpdated)="updateLocation($event)" (locationCoordinateChanged)="updateLocationCoordinate($event)">
+      </app-location-sortable>
 
       <app-location-input (locationSelected)="addLocation($event)"></app-location-input>
     </div>

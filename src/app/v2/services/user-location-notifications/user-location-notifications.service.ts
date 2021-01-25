@@ -3,18 +3,11 @@ import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, Observer, Subject } from 'rxjs';
 
-import { UserLocation } from '../../Interfaces';
+import { LocationSubscription, UserLocation } from '../../Interfaces';
 import { EncryptionService } from '../encryption/encryption.service';
 import { PushNotificationsService } from '../push-notifications/push-notifications.service';
 import { PushNotification } from './../push-notifications/push-notifications.service';
 import { UserLocationTopicGeneratorService } from './user-location-topic-generator.service';
-
-interface LocationSubscription {
-  lat: number;
-  lng: number;
-  language: string;
-  key: string;
-}
 
 export enum UserLocationSubscriptionError {
   BackendRegistration,
@@ -69,7 +62,7 @@ export class UserLocationNotificationsService {
             const topic = this.topicGenerator.generateTopic(location.latitude, location.longitude, langCode);
             this.notifications.subscribeTopic(topic).subscribe(
               () => {
-                location.subscription = { key: subscription.key, language: subscription.language }
+                location.subscription = subscription;
                 observer.next(true);
                 observer.complete();
               },
@@ -87,12 +80,7 @@ export class UserLocationNotificationsService {
   public unsubscribeLocation(location: UserLocation): Observable<boolean> {
     return new Observable<boolean>((observer: Observer<boolean>) => {
       if (location.subscription) {
-        const subscription: LocationSubscription = {
-          key: location.subscription.key,
-          language: location.subscription.language,
-          lat: location.latitude,
-          lng: location.longitude
-        }
+        const subscription: LocationSubscription = location.subscription;
         // unregister to Backend
         this.deleteSubscription(subscription).subscribe(
           success => {
