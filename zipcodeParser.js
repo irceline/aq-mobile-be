@@ -46,7 +46,7 @@ function getLocations(list, callback) {
                     callback("Error: Failed to unescape(): " + name);
                 } else {
                     list.push(
-                        result[1] + " " + name
+                        result[1] + "__" + name
                     );
                 }
             };
@@ -56,48 +56,34 @@ function getLocations(list, callback) {
     });
 }
 
-function nominatimLookup(list, callback) {
-    console.log("Create locations list");
+function nominatimLookup(list) {
     let lookupList = [];
-    let errorcount = 0;
     let idCounter = 0;
-    async.eachLimit(list, 25, (elem, callback) => {
-        // Request by postcode + name
-        request(nominatim_search_url + elem, {}, (err, res, body) => {
+    async.eachLimit(list, 1, (elem, callback) => {
+        const city = elem.split('__')[1];
+        const postalcode = elem.split('__')[0];
+        const url = `http://localhost:7070/search?city=${city}&postalcode=${postalcode}&addressdetails=1&namedetails=1`;
+        request(url, {}, (err, res, body) => {
             if (err) {
                 console.log(err);
                 callback(err);
             }
             const resJson = JSON.parse(body);
             if (resJson instanceof Array && resJson.length > 0) {
-                request(nominatim_details_url + resJson[0].place_id, {}, (err, details, detailsBody) => {
-                    if (err) {
-                        console.log(err);
-                        callback(err);
-                    }
-                    const detailsJson = JSON.parse(detailsBody);
-                    const defaultLabel = decodeURI(elem.split(' ')[1]);
-                    const labelNl = decodeURI(detailsJson.names['name:nl'] || defaultLabel);
-                    const labelFr = decodeURI(detailsJson.names['name:fr'] || defaultLabel);
-                    const labelEn = decodeURI(detailsJson.names['name:en'] || defaultLabel);
-                    const labelDe = decodeURI(detailsJson.names['name:de'] || defaultLabel);
-                    const id = idCounter++;
-                    lookupList.push({
-                        label: {
-                            fr: labelFr,
-                            nl: labelNl,
-                            en: labelEn,
-                            de: labelDe
-                        },
-                        latitude: parseFloat(resJson[0].lat),
-                        longitude: parseFloat(resJson[0].lon),
-                        id: idCounter
-                    })
-                    if ((idCounter % 100) === 0) {
-                        console.log(`Created ${idCounter} of ${list.length}`);
-                    }
-                    callback();
-                })
+                let citymatch;
+                citymatch = resJson.find(e => e.place_rank === 16);
+                if (!citymatch) {
+                    citymatch = resJson[0]
+                }
+                const result = parseSearchResult(citymatch, city, postalcode, url);
+                if (result) {
+                    result.id = idCounter++;
+                    lookupList.push(result);
+                }
+                if ((idCounter % 100) === 0) {
+                    console.log(`Created ${idCounter} of ${list.length}`);
+                }
+                callback();
             } else {
                 callback();
             }
@@ -106,7 +92,7 @@ function nominatimLookup(list, callback) {
         if (err != null) {
             console.log(err)
         } else {
-            fs.writeFileSync("./src/assets/locations.json", JSON.stringify(lookupList));
+            fs.writeFileSync("./src/assets/locations.json", JSON.stringify(lookupList, null, 4));
         }
     })
 }
@@ -130,7 +116,6 @@ function unescape(string) {
         .replace(/&Agrave;/g, "%C3%80")
 
         .replace(/&ocirc;/g, "%C3%B4")
-        .replace(/&Ocirc;/g, "%C3%94")
         .replace(/&ecirc;/g, "%C3%AA")
         .replace(/&Ecirc;/g, "%C3%8A")
         .replace(/&ucirc;/g, "%C3%BB")
@@ -139,3 +124,27 @@ function unescape(string) {
         .replace(/&Acirc;/g, "%C3%82");
 }
 
+function parseSearchResult(e, city, postalcode, url) {
+    try {
+        const labelNl = decodeURI(e.namedetails['name:nl'] || city);
+        const labelFr = decodeURI(e.namedetails['name:fr'] || city);
+        const labelEn = decodeURI(e.namedetails['name:en'] || city);
+        const labelDe = decodeURI(e.namedetails['name:de'] || city);
+        return {
+            label: {
+                fr: labelFr,
+                nl: labelNl,
+                en: labelEn,
+                de: labelDe
+            },
+            postalcode: postalcode,
+            latitude: parseFloat(e.lat),
+            longitude: parseFloat(e.lon),
+            // url: `https://nominatim.openstreetmap.org/ui/details.html?osmtype=R&osmid=${e.osm_id}`,
+            // place_rank: e.place_rank
+        };
+    } catch (error) {
+        console.error(`Error while parsing: ${city} with ${url}`);
+        return;
+    }
+}

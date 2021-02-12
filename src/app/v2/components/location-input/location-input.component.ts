@@ -58,8 +58,9 @@ export class LocationInputComponent implements OnInit, OnDestroy {
         this._locations = locations.map(e => {
             return {
                 id: e.id,
-                label: e.label[code],
+                label: `${e.label[code]}`,
                 type: 'user',
+                postalCode: e.postalcode,
                 longitude: e.longitude,
                 latitude: e.latitude
             };
@@ -161,9 +162,8 @@ export class LocationInputComponent implements OnInit, OnDestroy {
             this.filteredItems = this._locations
                 .filter((item) => {
                     return (
-                        item.label
-                            .toLowerCase()
-                            .indexOf(this.searchText.toLowerCase()) > -1
+                        item.label.toLowerCase().indexOf(this.searchText.toLowerCase()) > -1 ||
+                        item.postalCode.startsWith(this.searchText)
                     );
                 })
                 .slice(0, 10);
