@@ -35,7 +35,7 @@
   <ion-button expand="block" fill="clear" shape="round" class="location--button" (click)="editLocation()">
     {{ 'no-location.edit' | translate }}
   </ion-button>
-  <ion-button expand="block" fill="clear" shape="round" class="location--button" (click)="confirmLocation()">
+  <ion-button expand="block" [fill]="btnStateConfirmLocation" shape="round" class="location--button" (click)="confirmLocation()">
     {{ 'no-location.confirm' | translate }}
   </ion-button>
 </div>

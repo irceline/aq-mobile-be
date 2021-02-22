@@ -200,10 +200,12 @@ export class LocationInputComponent implements OnInit, OnDestroy {
         const loc = await (await modal.onWillDismiss()).data as UserLocation;
         if (loc) {
             this.addLocation(loc);
+            this.btnStateConfirmLocation = 'solid';
         }
     }
-
+    btnStateConfirmLocation: string = 'solid';
     confirmLocation() {
         this.locationSelected.emit(this.editableLocation);
+        this.btnStateConfirmLocation = 'clear';
     }
 }
