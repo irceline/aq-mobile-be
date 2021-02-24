@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { forkJoin } from 'rxjs';
+import { UserCreatedFeedback } from '../../components/feedback/feedback.component';
 
 import { UserLocation } from '../../Interfaces';
 import { BelAqiIndexResult, BelAQIService } from '../../services/bel-aqi.service';
-import { FeedbackCode, FeedbackService } from '../../services/feedback/feedback.service';
+import { Feedback, FeedbackCode, FeedbackService } from '../../services/feedback/feedback.service';
 import { UserSettingsService } from '../../services/user-settings.service';
 import { BelaqiIndexService } from '../../services/value-provider/belaqi-index.service';
 import { FeedbackStats } from './../../services/feedback/feedback.service';
@@ -61,11 +62,11 @@ export class RatingScreenComponent implements OnInit {
         this.isFeedbackOpened = true;
     }
 
-    feedbackGiven(feedbackCodes: FeedbackCode[]) {
-        const feedbackSubmits = feedbackCodes.map(fbcode =>
+    feedbackGiven(feedback: UserCreatedFeedback) {
+        const feedbackSubmits = feedback.codes.map(fbcode =>
             this.feedbackSrvc.sendFeedback({
-                lat: this.currentLocation.latitude,
-                lng: this.currentLocation.longitude,
+                lat: feedback.latitude,
+                lng: feedback.longitude,
                 feedback_code: fbcode
             })
         );

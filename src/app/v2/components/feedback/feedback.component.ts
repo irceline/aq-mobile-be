@@ -7,7 +7,7 @@ import { FeedbackLocationEditComponent } from '../feedback-location-edit/feedbac
 import { FeedbackStatsComponent } from '../feedback-stats/feedback-stats.component';
 import { UserLocation } from './../../Interfaces';
 
-export interface Feedback {
+export interface UserCreatedFeedback {
     codes: FeedbackCode[];
     latitude: number;
     longitude: number;
@@ -23,9 +23,9 @@ export class FeedbackComponent implements OnInit {
     @Input() location: UserLocation;
 
     @Output() feedbackOpened = new EventEmitter();
-    @Output() feedbackGiven = new EventEmitter<Feedback>();
+    @Output() feedbackGiven = new EventEmitter<UserCreatedFeedback>();
 
-    private feedback: Feedback;
+    private feedback: UserCreatedFeedback;
 
     like = false;
     dislike = false;
