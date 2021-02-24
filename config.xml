@@ -39,9 +39,8 @@
     <platform name="ios">
         <preference name="StatusBarOverlaysWebView" value="false" />
         <preference name="StatusBarStyle" value="default" />
-        <preference name="webviewbounce" value="false" />
-        <preference name="UIWebViewBounce" value="false" />
         <preference name="DisallowOverscroll" value="true" />
+        <preference name="WKWebViewOnly" value="true" />
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
         <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
@@ -85,13 +84,11 @@
     <plugin name="cordova-plugin-whitelist" spec="1.3.3" />
     <plugin name="cordova-plugin-statusbar" spec="2.4.2" />
     <plugin name="cordova-plugin-splashscreen" spec="5.0.2" />
-    <plugin name="cordova-plugin-ionic-webview" spec="^4.0.0" />
     <plugin name="cordova-sqlite-storage" spec="3.1.0" />
     <plugin name="cordova-plugin-geolocation" spec="4.0.1" />
     <plugin name="cordova.plugins.diagnostic" spec="5.0.1" />
     <plugin name="cordova-plugin-request-location-accuracy" spec="2.2.3" />
     <plugin name="cordova-plugin-network-information" spec="2.0.1" />
-    <plugin name="cordova-plugin-inappbrowser" spec="3.0.0" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="~2.1.3" />
     <plugin name="cordova-plugin-app-version" spec="0.1.9" />
     <plugin name="cordova-plugin-firebase" spec="2.0.5" />
