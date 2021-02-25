@@ -83,8 +83,8 @@ export class FeedbackComponent implements OnInit {
             modal.present();
             modal.onDidDismiss().then(dismissed => {
                 if (dismissed && dismissed.data && dismissed.data.latitude && dismissed.data.longitude) {
-                    this.location.latitude = dismissed.data.latitude
-                    this.location.longitude = dismissed.data.longitude
+                    this.feedback.latitude = dismissed.data.latitude;
+                    this.feedback.longitude = dismissed.data.longitude
                 }
             })
         });
