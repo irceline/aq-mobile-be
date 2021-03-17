@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import L from 'leaflet';
 import { forkJoin } from 'rxjs';
-import { UserCreatedFeedback } from '../../components/feedback/feedback.component';
 
+import { UserCreatedFeedback } from '../../components/feedback/feedback.component';
 import { UserLocation } from '../../Interfaces';
 import { BelAqiIndexResult, BelAQIService } from '../../services/bel-aqi.service';
-import { Feedback, FeedbackCode, FeedbackService } from '../../services/feedback/feedback.service';
+import { FeedbackService } from '../../services/feedback/feedback.service';
 import { UserSettingsService } from '../../services/user-settings.service';
 import { BelaqiIndexService } from '../../services/value-provider/belaqi-index.service';
 import { FeedbackStats } from './../../services/feedback/feedback.service';
@@ -21,9 +22,9 @@ export class RatingScreenComponent implements OnInit {
     currentActiveIndex: BelAqiIndexResult;
 
     isFeedbackOpened = false;
-    isFeedbackGiven = false;
     feedbackStats: FeedbackStats;
     activeIndex: number;
+    feedbackLocation: L.LatLng;
 
     constructor(
         private userSettingsService: UserSettingsService,
@@ -63,6 +64,7 @@ export class RatingScreenComponent implements OnInit {
     }
 
     feedbackGiven(feedback: UserCreatedFeedback) {
+        this.randomizeFeedbackLocation(feedback);
         const feedbackSubmits = feedback.codes.map(fbcode =>
             this.feedbackSrvc.sendFeedback({
                 lat: feedback.latitude,
@@ -75,7 +77,20 @@ export class RatingScreenComponent implements OnInit {
                 this.feedbackStats = stats[0];
                 console.log(this.feedbackStats);
             }
-            this.isFeedbackGiven = true;
+            this.feedbackLocation = new L.LatLng(feedback.latitude, feedback.longitude);
         });
     }
+
+    private randomizeFeedbackLocation(feedback: UserCreatedFeedback): UserCreatedFeedback {
+        const randomize = function (n: number, dec: number) {
+            const shift = Math.pow(10, dec - 1);
+            n = Math.round(n * shift) / shift;
+            n = Math.random() / shift + n;
+            return n;
+        }
+        feedback.latitude = randomize(feedback.latitude, 3);
+        feedback.longitude = randomize(feedback.longitude, 3);
+        return feedback;
+    }
+
 }

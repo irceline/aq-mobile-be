@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
+import L from 'leaflet';
 
 import { FeedbackCode } from '../../services/feedback/feedback.service';
 import { FeedbackLocationEditComponent } from '../feedback-location-edit/feedback-location-edit.component';
@@ -65,7 +66,7 @@ export class FeedbackComponent implements OnInit {
         this.modalController.create({
             component: FeedbackStatsComponent,
             componentProps: {
-                location: this.location
+                location: new L.LatLng(this.location.latitude, this.location.longitude)
             }
         }).then(modal => modal.present());
     }

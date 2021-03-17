@@ -6,4 +6,10 @@
         <ion-label>{{'feedback-stats-map.total' | translate}}</ion-label>
     </ion-segment-button>
 </ion-segment>
-<div class="map" id="feedbackMap"></div>
+
+<div class="map">
+    <div class="loading" *ngIf="loading" [ngStyle]="{'background-color': backgroundColor}">
+        <ion-spinner name="dots"></ion-spinner>
+    </div>
+    <div id="feedbackMap"></div>
+</div>
