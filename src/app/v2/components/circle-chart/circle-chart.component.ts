@@ -43,8 +43,10 @@ export class CircleChartComponent implements OnInit {
         public popoverController: PopoverController
     ) {
         belaqiService.$activeIndex.subscribe((newIndex) => {
-            this.belAqi = newIndex.indexScore;
-            this._initialize(this.belAqi);
+            if (newIndex) {
+                this.belAqi = newIndex.indexScore;
+                this._initialize(this.belAqi);
+            }
         });
     }
 

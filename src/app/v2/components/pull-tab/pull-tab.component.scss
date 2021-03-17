@@ -5,7 +5,7 @@
     z-index: 10 !important;
 
     .trigger {
-        height: 50px;
+        height: 130px;
         width: 100%;
         position: absolute;
         top: -30px;
@@ -15,6 +15,7 @@
         align-items: center;
         background: none;
         outline: none;
+        z-index: 9;
 
         span {
             display: inline-block;
@@ -22,7 +23,8 @@
             height: 7px;
             background-color: rgba(white, 0.5);
             border-radius: 10px;
-            margin-top: -10px;
+            position: absolute;
+            top: 10px;
         }
     }
 
@@ -30,10 +32,13 @@
         position: absolute;
         position: absolute;
         top: 30px;
-        right: 30px;
+        right: 20px;
         background: none;
         z-index: 10;
         outline: none;
+        width: 50px;
+        text-align: center;
+        padding: 0px;
 
         img {
             width: 20px;

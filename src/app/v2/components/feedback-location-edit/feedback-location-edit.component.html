@@ -1,0 +1,16 @@
+<div class="wrapper" [ngStyle]="{'background-color': backgroundColor}">
+  <div class="map" id="mapEditLocation">
+  </div>
+  <div class="edit-location-hint" text-wrap>
+    {{ 'edit-location-hint' | translate }}
+  </div>
+  <div class="controls">
+    <ion-button fill="clear" (click)="cancel()">
+      {{ 'controls.cancel' | translate }}
+    </ion-button>
+    <div style="flex: 1;"></div>
+    <ion-button fill="clear" (click)="confirm()">
+      {{ 'controls.ok' | translate }}
+    </ion-button>
+  </div>
+</div>

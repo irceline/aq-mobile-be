@@ -26,7 +26,17 @@
 	"controls": {
 		"cancel": "Annuler",
 		"close": "Fermer",
-		"ok": "Enregistrer la location"
+		"ok": "OK"
+	},
+	"edit-location-hint": "Vous pouvez déplacer l'icône de localisation sur la carte à n'importe quel endroit souhaité.",
+	"edit-location-label": {
+		"title": "Changer le nom de la localisation"
+	},
+	"error-modal": {
+		"back-to-app": "Retour à l'application",
+		"no-network-connection": "Vous êtes probablement hors ligne. Les données précédemment chargées pour vos emplacements sauvegardés sont toujours disponibles, mais la utilisabilité de l'application est considérablement limitée.",
+		"no_irceline_settings": "Aucune nouvelle donnée ne peut être chargée. L'application affiche les dernières données chargées.",
+		"title": "Erreur de connexion"
 	},
 	"feedback-reason": {
 		"agriculture": "Émissions de l'agriculture",
@@ -39,21 +49,22 @@
 		"total": "Total"
 	},
 	"feedback": {
+		"ajdust-location-for-feedback-button": "Déplacer la localisation",
+		"show-feedback-button": "Afficher les commentaires",
 		"stats": {
 			"submission": "Commentaires soumis",
 			"submission-today": "Aujourd'hui",
 			"submission-total": "Au total"
-		},
-		"show-feedback-button": "Afficher les commentaires"
+		}
 	},
 	"network": {
 		"geolocationDenied": "Vous n'avez pas autorisé l'utilisation de votre géolocalisation dans l'application.",
 		"geolocationDisabled": "La géolocalisation est désactivée"
 	},
-	"no-location-hint": "",
+	"no-location-hint": "L'application nécessite une localisation pour afficher les données.",
 	"no-location": {
-		"confirm": "",
-		"edit": ""
+		"confirm": "Sauvegarder",
+		"edit": "Modifier"
 	},
 	"v2": {
 		"components": {
@@ -92,9 +103,10 @@
 			"user-notification-settings": {
 				"activity": "Efforts physiques",
 				"allergies": "Les allergies",
+				"automated": "Alertes automatisées basées sur des valeurs modélisées pour le(s) lieu(x) que vous avez choisi(s).",
 				"exercise": "Faire des exercices",
-				"generally": "Général",
 				"highConcentration": "Concentrations (trop) élevées",
+				"official": "Alertes officielles basées sur une analyse approfondie de la situation",
 				"transport": "Déplacements"
 			}
 		},
@@ -119,11 +131,11 @@
 				"lt-effects-diseases": "Une exposition prolongée aux polluants atmosphériques peut produire des effets chroniques et augmenter le risque de maladies cardiaques et pulmonaires."
 			},
 			"main-screen": {
-				"about-belaqi": "Le BelAQI est un indice de qualité de l'air. Les quatre principaux polluants atmosphériques (NO2, O3, PM10 et PM2.5) sont évalués en fonction de leur impact à court terme sur la santé. Le score le plus élevé détermine le BelAQI.",
-				"about-no2": "Le dioxyde d'azote (NO2) est un gaz qui peut irriter les yeux, le nez et la gorge. Lorsqu'il est inhalé, le NO2 peut également provoquer une irritation des poumons et une diminution de la fonction pulmonaire avec un risque accru de crises d'asthme et une augmentation du nombre d'hospitalisations en raison de problèmes respiratoires dans les endroits où les concentrations sont plus élevées. Le NO2 est principalement émis lors de la combustion à haute température (moteur diesel, divers procédés industriels, etc.).",
-				"about-o3": "L'ozone (O3) se forme les jours chauds par effet de la lumière du soleil (UV) sur l'air pollué par des oxydes d'azote et des composants organiques volatils. Lorsqu'il est inhalé, l'O3 peut provoquer une irritation des poumons et une réduction de la fonction pulmonaire, avec un risque plus élevé de crises d'asthme et une augmentation du nombre d'hospitalisations dues à des troubles respiratoires dans les endroits où les concentrations sont plus élevées. Les concentrations à l'intérieur ne sont généralement que la moitié de celles à l'extérieur.",
-				"about-pm10": "Les particules (PM10) sont constituées de très petites matières en suspension de taille, d'origine et de composition chimique différentes. Lorsqu'elles sont inhalées, ces petites particules provoquent des réactions inflammatoires dans les voies respiratoires qui entravent l'absorption d'oxygène et chez les personnes souffrant de maladies respiratoires et cardiovasculaires, l'exposition aux poussières fines exacerbe leurs symptômes. Les poussières fines peuvent également être porteuses de particules cancérigènes. Les PM10 sont toutes des particules inférieures à 10 micromètres. La différence avec la plus petite fraction de PM2.5 réside principalement dans les particules plus grossières de la poussière soufflée par le vent (par exemple, les particules de sable, la poussière soufflée de la surface de la route par les voitures qui passent, etc.)",
-				"about-pm25": "Les poussières fines (PM2.5) sont constituées de très petites matières en suspension de taille, d'origine et de composition chimique différentes. Lorsqu'elles sont inhalées, ces petites particules provoquent des réactions inflammatoires dans les voies respiratoires qui entravent l'absorption d'oxygène et chez les personnes souffrant de maladies respiratoires et cardiovasculaires, l'exposition aux poussières fines exacerbe leurs symptômes. Les poussières fines peuvent également être porteuses de particules cancérigènes. Les PM2.5 sont toutes des particules inférieures à 2,5 micromètres. Les PM2.5 font donc partie de la fraction plus importante des PM10. Les PM2.5 se forment en grande partie dans l'atmosphère à partir d'autres polluants (dioxyde d'azote, ammoniac, dioxyde de soufre, etc.) mais sont également constituées de particules libérées lors des processus de combustion (combustion de bois, suie de diesel, etc.).",
+				"about-belaqi": "Le BelAQI est un indice de la qualité de l'air. Les quatre polluants atmosphériques les plus importants (NO2, O3, PM10 et PM2,5) sont classés en fonction de leur impact sur la santé à court terme. Le score le plus élevé détermine le BelAQI.",
+				"about-no2": "Le dioxyde d'azote (NO2) est un gaz qui peut provoquer une irritation des yeux, du nez et de la gorge. Lorsqu'il est inhalé, le NO2 peut également provoquer une irritation des poumons et une réduction de la fonction pulmonaire. Dans les endroits où il y a plus de NO2, le risque de crises d'asthme est plus élevé et le nombre d'admissions à l'hôpital pour des problèmes respiratoires augmente. Le NO2 est principalement émis lors des processus de combustion à haute température. Les voitures diesel en sont la principale source.",
+				"about-o3": "L'ozone (O3) se forme les jours chauds par l'action de la lumière du soleil (UV) sur l'air pollué par des oxydes d'azote et des composés organiques volatils. Lorsqu'il est inhalé, l'O3 peut provoquer une irritation des poumons et une réduction de la fonction pulmonaire.  Dans les endroits où il y a plus d'O3, le risque de crises d'asthme est plus élevé et le nombre d'admissions à l'hôpital pour des problèmes respiratoires augmente. À l'intérieur, les concentrations d'ozone sont généralement deux fois moins élevées qu'à l'extérieur.",
+				"about-pm10": "Les particules (PM10) sont constituées de très petites matières en suspension de taille, d'origine et de composition chimique différentes. Lorsqu'elles sont inhalées, ces petites particules provoquent des réactions inflammatoires dans les voies respiratoires qui entravent l'absorption d'oxygène. Les personnes souffrant de maladies respiratoires et/ou cardiovasculaires y sont particulièrement sensibles. Les poussières fines peuvent également transporter des particules cancérigènes. Les PM10 sont toutes des particules inférieures à 10 micromètres. La différence avec la plus petite fraction de PM2.5 réside principalement dans les particules plus grossières de la poussière soufflée par le vent (par exemple, le sable, la poussière soufflée par les voitures qui passent, etc.).",
+				"about-pm25": "Les poussières fines (PM2.5) sont constituées de très petites matières en suspension de taille, d'origine et de composition chimique différentes. Lorsqu'elles sont inhalées, ces petites particules provoquent des réactions inflammatoires dans les voies respiratoires qui entravent l'absorption d'oxygène. Les personnes souffrant de maladies respiratoires et/ou cardiovasculaires y sont particulièrement sensibles. Les poussières fines peuvent également transporter des particules cancérigènes. Les PM2.5 sont toutes des particules inférieures à 2,5 micromètres. Les PM2.5 font donc partie de la fraction plus importante des PM10. Les PM2.5 se forment en grande partie dans l'atmosphère à partir d'autres polluants (oxydes d'azote, ammoniac, dioxyde de soufre, etc.) mais sont également constituées de particules libérées lors des processus de combustion (suie provenant de la combustion du diesel ou du bois, etc.).",
 				"long-term-calculation": "Consultez notre calcul à long terme",
 				"view-details": "Voir en détail",
 				"what-is-belaqi": "Qu'est-ce que le BelAQI?",
@@ -149,11 +161,12 @@
 				"start-quickly": "Démarrage rapide!"
 			},
 			"rating-screen": {
+				"agriculture": "<strong>Émissions</strong> provenant de l'agriculture.",
 				"calculated-value": "L'application affiche une valeur calculée, pas une mesure à votre emplacement. La qualité de l'air peut donc différer localement.",
 				"does-it-match": "Cette valeur correspond-elle à vos sentiments?",
 				"exhaust": "<strong>Échappement des fumées</strong> de la circulation.",
 				"fire": "Un <strong> feu </strong> avec du bois.",
-				"industry": "<strong>Émissions</strong> provenant de l'industrie ou de l'agriculture.",
+				"industry": "<strong>Émissions</strong> provenant de l'industrie.",
 				"possible-causes": "Les causes possibles d'un écart sont:"
 			}
 		}

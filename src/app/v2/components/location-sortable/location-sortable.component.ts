@@ -62,7 +62,13 @@ export class LocationSortableComponent implements OnInit {
             }
         });
         await modal.present();
-        const { data } = await modal.onWillDismiss();
-        this.locationUpdated.emit(this.locations);
+        const editedLocation = (await modal.onWillDismiss()).data as UserLocation;
+        if (editedLocation) {
+            const idx = this.locations.findIndex(e => e.id === editedLocation.id);
+            if (idx > -1) {
+                this.locations[idx] = editedLocation;
+                this.locationUpdated.emit(this.locations);
+            }
+        }
     }
 }

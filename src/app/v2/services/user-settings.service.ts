@@ -90,13 +90,14 @@ export class UserSettingsService {
     }
 
     public addUserLocation(location: UserLocation) {
-        // Check if the location is duplicate
-        if (this._userLocations
-            .find(loc => loc.label == location.label) != undefined) {
+        if (location != null) {
+            // Check if the location is duplicate
+            if (this._userLocations.find(loc => loc.latitude === location.latitude && loc.longitude === location.longitude) != undefined) {
                 return;
-        };
-        this._userLocations.unshift(location);
-        this.saveLocations();
+            };
+            this._userLocations.unshift(location);
+            this.saveLocations();
+        }
     }
 
     public updateUserLocations(newLocations: UserLocation[]) {

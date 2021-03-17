@@ -4,11 +4,21 @@
 
     .circle {
         display: block;
-        width: 96%;
+        width: 84%;
         margin: auto;
-        max-width: 400px;
-        max-height: 40vh;
+        max-width: 440px;
+        min-height: 320px;
         transition: all .2s ease;
+
+        @media screen and (max-height: 750px) {
+            min-height: 300px;
+        }
+        @media screen and (max-height: 700px) {
+            min-height: 280px;
+        }
+        @media screen and (max-height: 650px) {
+            min-height: 260px;
+        }
 
         &-chart {
             display: flex;
@@ -35,8 +45,47 @@
                     justify-content: center;
                     align-items: center;
 
-                    @media screen and (max-device-width: 400px) {
-                        font-size: 12vw;
+                    @media screen and (max-height: 780px) {
+                        font-size: 44px;
+                    }
+                    @media screen and (max-height: 750px) {
+                        font-size: 42px;
+                    }
+                    @media screen and (max-height: 700px) {
+                        font-size: 40px;
+                    }
+                    @media screen and (max-height: 650px) {
+                        font-size: 38px;
+                    }
+                    @media screen and (max-width: 450px) {
+                        font-size: 46px;
+                    }
+                    @media screen and (max-width: 430px) {
+                        font-size: 45px;
+                    }
+                    @media screen and (max-width: 427px) {
+                        font-size: 44px;
+                    }
+                    @media screen and (max-width: 425px) {
+                        font-size: 43px;
+                    }
+                    @media screen and (max-width: 410px) {
+                        font-size: 42px;
+                    }
+                    @media screen and (max-width: 405px) {
+                        font-size: 41px;
+                    }
+                    @media screen and (max-width: 400px) {
+                        font-size: 40px;
+                    }
+                    @media screen and (max-width: 360px) {
+                        font-size: 38px;
+                    }
+                    @media screen and (max-width: 350px) {
+                        font-size: 37px;
+                    }
+                    @media screen and (max-width: 335px) {
+                        font-size: 36px;
                     }
                 }
 

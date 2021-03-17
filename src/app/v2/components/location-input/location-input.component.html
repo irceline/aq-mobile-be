@@ -9,7 +9,7 @@
     <ng-container *ngIf="filteredItems.length; else elseTemplate">
       <ion-row *ngFor="let item of filteredItems;" (click)="chooseOption(item)" class="ion-align-items-center">
         <ion-col class="location--dropdown-item">
-          {{ item.label }}
+          {{ item.label }} ({{item.postalCode}})
           <ng-container *ngIf="selectedItem && ( item.id === selectedItem.id); else notSelect">
             <ion-icon name="ios-checkmark-circle" color="white"></ion-icon>
           </ng-container>
@@ -31,11 +31,11 @@
   <img src="/assets/images/icons/navigation.svg" alt="">
 </ion-button>
 
-<div *ngIf="editableLocation" style="padding-top: 20px;">
+<div *ngIf="editableLocation" style="padding-top: 1em;">
   <ion-button expand="block" fill="clear" shape="round" class="location--button" (click)="editLocation()">
     {{ 'no-location.edit' | translate }}
   </ion-button>
-  <ion-button expand="block" fill="clear" shape="round" class="location--button" (click)="confirmLocation()">
+  <ion-button expand="block" [fill]="btnStateConfirmLocation" shape="round" class="location--button" (click)="confirmLocation()">
     {{ 'no-location.confirm' | translate }}
   </ion-button>
 </div>

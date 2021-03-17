@@ -1,17 +1,11 @@
 import { Component, QueryList, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import {
-    IonRouterOutlet,
-    ModalController,
-    NavController,
-    Platform,
-} from '@ionic/angular';
+import { IonRouterOutlet, ModalController, Platform } from '@ionic/angular';
 
-import { ErrorLoggingService } from './v2/services/error-logging.service';
-import { PouchDBInitializerService } from './v2/services/pouch-db-initializer/pouch-db-initializer.service';
 import { SplashScreenComponent } from './v2/screens/splash-screen/splash-screen.component';
+import { NetworkAlertService } from './v2/services/network-alert/network-alert.service';
+import { PouchDBInitializerService } from './v2/services/pouch-db-initializer/pouch-db-initializer.service';
 
 @Component({
     selector: 'app-root',
@@ -22,13 +16,24 @@ export class AppComponent {
 
     constructor(
         private platform: Platform,
-        private splashScreen: SplashScreen,
         private statusBar: StatusBar,
         public router: Router,
         private pouchDbInit: PouchDBInitializerService,
-        private modalCtrl: ModalController
+        private modalCtrl: ModalController,
+        private networkAlertSrvc: NetworkAlertService
     ) {
         this.initializeApp();
+        this.registerBackButtonEvent();
+    }
+
+    registerBackButtonEvent() {
+        this.platform.backButton.subscribe(() => {
+            this.routerOutlets.forEach(async (outlet: IonRouterOutlet) => {
+                if (this.router.url === '/main') {
+                    navigator['app'].exitApp();
+                }
+            });
+        });
     }
 
     initializeApp() {
@@ -38,11 +43,15 @@ export class AppComponent {
             this.statusBar.show();
             // this.splashScreen.hide();
             this.pouchDbInit.init();
-
-            const splash = await this.modalCtrl.create({
-                component: SplashScreenComponent,
-            });
-            splash.present();
+            await this.presentSplashScreen();
         });
+
+        this.networkAlertSrvc.isConnected.subscribe(connected => console.log(`Device has network connection: ${connected}`))
+    }
+
+    private async presentSplashScreen() {
+        const splash = await this.modalCtrl.create({ component: SplashScreenComponent });
+        splash.present();
+        setTimeout(() => splash.dismiss(), 1500);
     }
 }

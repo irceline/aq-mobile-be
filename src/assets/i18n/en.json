@@ -26,7 +26,17 @@
 	"controls": {
 		"cancel": "Cancel",
 		"close": "Close",
-		"ok": "Ok"
+		"ok": "OK"
+	},
+	"edit-location-hint": "You can move the location icon on the map to any desired location",
+	"edit-location-label": {
+		"title": "Change location name"
+	},
+	"error-modal": {
+		"back-to-app": "Back to the app",
+		"no-network-connection": "You are probably offline. Data previously loaded for your saved locations is still available, but the usability of the app is significantly limited.",
+		"no_irceline_settings": "No new data could be fetched. The app shows the last loaded data",
+		"title": "Connection error"
 	},
 	"feedback-reason": {
 		"agriculture": "Emissions from agriculture",
@@ -39,12 +49,13 @@
 		"total": "Total"
 	},
 	"feedback": {
+		"ajdust-location-for-feedback-button": "Move feedback location",
+		"show-feedback-button": "Display feedback",
 		"stats": {
 			"submission": "Submitted feedback",
 			"submission-today": "Today",
 			"submission-total": "In total"
-		},
-		"show-feedback-button": "Display feedback"
+		}
 	},
 	"network": {
 		"geolocationDenied": "You have not allowed the use of your location to the app.",
@@ -52,8 +63,8 @@
 	},
 	"no-location-hint": "The app needs you to select a location to function properly.",
 	"no-location": {
-		"confirm": "Save location",
-		"edit": "Edit this location"
+		"confirm": "Save",
+		"edit": "Edit"
 	},
 	"v2": {
 		"components": {
@@ -92,9 +103,10 @@
 			"user-notification-settings": {
 				"activity": "Physical efforts",
 				"allergies": "Allergies",
+				"automated": "Automated alerts based on modelled values for your chosen location(s).",
 				"exercise": "Workout",
-				"generally": "General",
 				"highConcentration": "(Too) high concentrations",
+				"official": "Official alerts based on a thorough analysis of the situation",
 				"transport": "Getting around"
 			}
 		},
@@ -120,10 +132,10 @@
 			},
 			"main-screen": {
 				"about-belaqi": "The BelAQI is an air quality index. The four main air pollutants (NO2, O3, PM10 and PM2.5) are scored based on their short-term impact on health. The highest score determines the BelAQI.",
-				"about-no2": "Nitrogen dioxide (NO2) is a gas that can irritate the eyes, nose and throat. When inhaled, NO2 can also cause lung irritation and decreased lung function with an increased risk of asthma attacks and an increase in the number of hospital admissions due to respiratory complaints as a result in places where the concentrations are higher. NO2 is mainly emitted during combustion at high temperatures (diesel engine, various industrial processes, etc.).",
-				"about-o3": "Ozone (O3) is formed on warm days by the effect of sunlight (UV) on air polluted with nitrogen oxides and volatile organic compounds. When inhaled, O3 can cause lung irritation and reduced lung function with a higher risk of asthma attacks and an increase in hospital admissions due to respiratory complaints in places where concentrations are higher. Indoor concentrations are usually only half as high as outdoors.",
-				"about-pm10": "Particulate matter (PM10) consists of very small suspended matter of different size, origin and chemical composition. When inhaled, these small particles cause inflammatory reactions in the respiratory tract that hinder oxygen uptake and in people with respiratory and cardiovascular diseases, exposure to fine dust exacerbates their symptoms. Fine dust can also be the carrier of carcinogenic particles. PM10 are all particles smaller than 10 micrometres. The difference with the smaller PM2.5 fraction is mainly coarser particles in windblown dust (e.g. sand particles, dust blown up from the road surface by passing cars, etc.).",
-				"about-pm25": "Fine dust (PM2.5) consists of very small suspended matter of different size, origin and chemical composition. When inhaled, these small particles cause inflammatory reactions in the respiratory tract that hinder oxygen uptake and in people with respiratory and cardiovascular diseases, exposure to fine dust exacerbates their symptoms. Fine dust can also be the carrier of carcinogenic particles. PM2.5 are all particles smaller than 2,5 micrometres. PM2.5 is therefore part of the larger PM10 fraction. PM2.5 is largely formed in the atmosphere from other pollutants (nitrogen dioxide, ammonia, sulphur dioxide, etc.) but also consists of particles released during combustion processes (wood combustion, diesel soot, etc.).",
+				"about-no2": "Nitrogen dioxide (NO2) is a gas that can cause irritation to the eyes, nose and throat. When inhaled, NO2 can also cause lung irritation and impaired lung function. In places with more NO2, there is a greater risk of asthma attacks and the number of hospital admissions due to respiratory complaints increases. NO2 is mainly emitted during combustion processes at high temperatures. The most important source are diesel cars.",
+				"about-o3": "Ozone (O3) is formed on warm days by the action of sunlight (UV) on air polluted with nitrogen oxides and volatile organic compounds. When inhaled, O3 can cause lung irritation and impaired lung function.  In places with more O3, there is a greater risk of asthma attacks and the number of hospital admissions due to respiratory complaints increases. Indoors, ozone concentrations are generally only half as high as outdoors.",
+				"about-pm10": "Particulate matter (PM10) consists of very small suspended matter of different size, origin and chemical composition. When inhaled, these small particles cause inflammatory reactions in the respiratory tract that hinder oxygen uptake. People with respiratory diseases and/or cardiovascular diseases are particularly sensitive to this. Fine dust can also carry carcinogenic particles. PM10 are all particles smaller than 10 micrometres. The difference with the smaller PM2.5 fraction is mainly coarser particles in windblown dust (e.g. sand, dust blown up from the road surface by passing cars, etc.).",
+				"about-pm25": "Fine dust (PM2.5) consists of very small suspended matter of different size, origin and chemical composition. When inhaled, these small particles cause inflammatory reactions in the respiratory tract that hinder oxygen uptake. People with respiratory diseases and/or cardiovascular diseases are particularly sensitive to this. Fine dust can also carry carcinogenic particles. PM2.5 are all particles smaller than 2.5 micrometres. PM2.5 is therefore part of the larger PM10 fraction. PM2.5 is largely formed in the atmosphere from other pollutants (nitrogen oxides, ammonia, sulphur dioxide, etc.) but also consists of particles released during combustion processes (soot from the combustion of diesel or wood, etc.).",
 				"long-term-calculation": "View our long-term calculation",
 				"view-details": "View in detail",
 				"what-is-belaqi": "What is the BelAQI?",
@@ -149,11 +161,12 @@
 				"start-quickly": "Quick start!"
 			},
 			"rating-screen": {
+				"agriculture": "<strong>Emissions</strong> from agriculture",
 				"calculated-value": "The app shows a calculated value, not a measurement at your location. The air quality may therefore differ locally.",
 				"does-it-match": "Is this value in line with your feelings?",
 				"exhaust": "<strong>Exhaust fumes</strong> from traffic",
-				"fire": "<strong>Wood burn</strong>.",
-				"industry": "<strong>Emissions</strong> from industry or agriculture",
+				"fire": "<strong>Wood burn</strong>",
+				"industry": "<strong>Emissions</strong> from industry",
 				"possible-causes": "Possible causes of a deviation are:"
 			}
 		}

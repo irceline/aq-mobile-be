@@ -1,6 +1,7 @@
 <ion-content>
   <app-background>
-    <app-location-swipe (locationChange)="onLocationChange($event)" [activeIndex]="activeIndex" [locations]="locations"></app-location-swipe>
+    <app-location-swipe (locationChange)="onLocationChange($event)" [activeIndex]="activeIndex" [locations]="locations">
+    </app-location-swipe>
 
     <ng-container *ngIf="!isFeedbackGiven">
       <app-circle-chart [belAqi]="currentActiveIndex"></app-circle-chart>
@@ -8,7 +9,8 @@
       <div class="rating ion-padding">
         <p>{{ 'v2.screens.rating-screen.does-it-match' | translate  }}</p>
 
-        <app-feedback [location]="currentActiveIndex?.location" (feedbackOpened)="feedbackOpened()" (feedbackGiven)="feedbackGiven($event)"></app-feedback>
+        <app-feedback [location]="currentActiveIndex?.location" (feedbackOpened)="feedbackOpened()"
+          (feedbackGiven)="feedbackGiven($event)"></app-feedback>
       </div>
     </ng-container>
 
@@ -33,10 +35,16 @@
         <ion-icon src="/assets/images/icons/fabriek.svg" slot="start"></ion-icon>
         <ion-label class="ion-text-wrap" [innerHTML]="'v2.screens.rating-screen.industry' | translate"></ion-label>
       </ion-item>
+
+      <ion-item lines="none">
+        <ion-icon src="/assets/images/icons/agriculture.svg" slot="start"></ion-icon>
+        <ion-label class="ion-text-wrap" [innerHTML]="'v2.screens.rating-screen.agriculture' | translate"></ion-label>
+      </ion-item>
     </div>
 
     <ng-container *ngIf="isFeedbackGiven">
-      <app-success-display [feedbackStats]="feedbackStats" [location]="currentActiveIndex?.location"></app-success-display>
+      <app-success-display [feedbackStats]="feedbackStats" [location]="currentActiveIndex?.location">
+      </app-success-display>
     </ng-container>
   </app-background>
 </ion-content>

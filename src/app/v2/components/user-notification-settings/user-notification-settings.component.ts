@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { first } from 'rxjs/operators';
 
 import { GeneralNotificationService } from '../../services/push-notifications/general-notification.service';
+import { AutomatedNotificationService } from '../../services/push-notifications/automated-notification.service';
 
 marker('v2.components.user-notification-settings.exercise');
 marker('v2.components.user-notification-settings.allergies');
@@ -65,14 +66,17 @@ export class UserNotificationSettingsComponent implements OnInit {
     @Output() loseFocus = new EventEmitter<boolean>();
 
     public generalNotification: boolean;
+    public automatedNotification: boolean;
 
     constructor(
         private translate: TranslateService,
-        private generalNotificationSrvc: GeneralNotificationService
+        private generalNotificationSrvc: GeneralNotificationService,
+        private automatedNotificationSrvc: AutomatedNotificationService
     ) { }
 
     ngOnInit() {
         this.generalNotificationSrvc.$active.pipe(first()).subscribe(res => this.generalNotification = res);
+        this.automatedNotificationSrvc.$active.pipe(first()).subscribe(res => this.automatedNotification = res);
     }
 
     toggleGeneralNotification(event: MouseEvent) {
@@ -86,6 +90,21 @@ export class UserNotificationSettingsComponent implements OnInit {
         } else {
             this.generalNotificationSrvc.unsubscribeNotification().subscribe(res => {
                 return this.generalNotification = !res;
+            });
+        }
+    }
+
+    toggleAutomatedNotification(event: MouseEvent) {
+        event.stopImmediatePropagation();
+        event.stopPropagation();
+        event.preventDefault();
+        if (!this.automatedNotification) {
+            this.automatedNotificationSrvc.subscribeNotification().subscribe(res => {
+                return this.automatedNotification = res;
+            });
+        } else {
+            this.automatedNotificationSrvc.unsubscribeNotification().subscribe(res => {
+                return this.automatedNotification = !res;
             });
         }
     }

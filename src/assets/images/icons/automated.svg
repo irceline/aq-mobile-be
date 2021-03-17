@@ -1,0 +1,11 @@
+<svg width="40" height="40" aria-label="Android" role="img" version="1.1" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+ <g transform="matrix(.099085 0 0 .1003 -5.4154 -4.9057)" style="stroke-width:35.315;stroke:#fff">
+  <path d="m107 212v106m299-106v106m-105.19 56.076v56m-85-56v56" stroke-width="58" style="fill:none;stroke-linecap:round;stroke-width:35.315;stroke:#fff"/>
+  <path d="m203 98.527-17-32m123 32 18-32" stroke-width="8" style="stroke-linecap:round;stroke-width:35.315;stroke:#fff"/>
+ </g>
+ <path d="m20.045 6.0195c-6.8995 0-10.44 5.447-10.44 9.5319h20.79c0-4.2668-3.8129-9.4412-10.349-9.5319zm-10.44 14.44v8.8887c0 1.4525 1.1802 2.6327 2.5419 2.6327h15.615c1.4525 0 2.6327-1.1802 2.6327-2.6327v-8.8887z" style="fill:none;stroke-width:3.6639;stroke:#fff"/>
+ <g transform="matrix(.099108 0 0 .099108 -5.4212 -2.0788)" style="stroke-width:19.6;stroke:#fff">
+  <circle cx="224.18" cy="130" r="9" style="stroke-width:19.6;stroke:#fff"/>
+  <circle cx="288.82" cy="130" r="9" style="stroke-width:19.6;stroke:#fff"/>
+ </g>
+</svg>

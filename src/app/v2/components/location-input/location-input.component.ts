@@ -1,9 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { SettingsService } from '@helgoland/core';
 import { IonInput, LoadingController, ModalController, ToastController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 
 import locations from '../../../../assets/locations.json';
 import { UserLocation } from '../../Interfaces';
+import { MobileSettings } from '../../services/settings/settings.service';
 import { LocationEditComponent } from '../location-edit/location-edit.component';
 import { GeocoderService } from './../../services/geocoder/geocoder.service';
 import { LocateService } from './../../services/locate/locate.service';
@@ -13,7 +16,7 @@ import { LocateService } from './../../services/locate/locate.service';
     templateUrl: './location-input.component.html',
     styleUrls: ['./location-input.component.scss'],
 })
-export class LocationInputComponent implements OnInit {
+export class LocationInputComponent implements OnInit, OnDestroy {
     @ViewChild(IonInput, { static: true }) input: IonInput;
 
     @Input() currentLocation = true;
@@ -27,13 +30,10 @@ export class LocationInputComponent implements OnInit {
 
     editableLocation: UserLocation;
 
-    // @ts-ignore
-    private _locations: UserLocation[] = locations.map((l) => ({
-        ...l,
-        type: 'user',
-    }));
+    private _locations: UserLocation[];
 
     @Output() locationSelected = new EventEmitter<UserLocation>();
+    private langSubscription: Subscription;
 
     constructor(
         private loadingController: LoadingController,
@@ -41,10 +41,30 @@ export class LocationInputComponent implements OnInit {
         private translateSrvc: TranslateService,
         private geocoder: GeocoderService,
         private locateSrvc: LocateService,
-        private modalController: ModalController
+        private modalController: ModalController,
+        private settingsSrvc: SettingsService<MobileSettings>
     ) { }
 
+    ngOnDestroy(): void {
+        if (this.langSubscription) { this.langSubscription.unsubscribe() }
+    }
+
     ngOnInit() {
+        this.langSubscription = this.translateSrvc.onLangChange.subscribe((code: LangChangeEvent) => this.updateSelectableLocations(code.lang));
+        this.updateSelectableLocations(this.translateSrvc.currentLang);
+    }
+
+    private updateSelectableLocations(code: string) {
+        this._locations = locations.map(e => {
+            return {
+                id: e.id,
+                label: `${e.label[code]}`,
+                type: 'user',
+                postalCode: e.postalcode,
+                longitude: e.longitude,
+                latitude: e.latitude
+            };
+        });
         this.filterItems();
     }
 
@@ -128,17 +148,22 @@ export class LocationInputComponent implements OnInit {
 
     // filter logic
     filterItems() {
-        this.filteredItems = this._locations.slice(0, 5);
+        const code = this.translateSrvc.currentLang;
+        const defaultLocations = this.settingsSrvc.getSettings().defaultSelectableLocations[code];
+
+        // search in defined locations
+        this.filteredItems = this._locations.filter(l => defaultLocations.findIndex(e => e === l.label) >= 0);
+
+        // sort locations
+        this.filteredItems = defaultLocations.map(e => this.filteredItems.find(fi => fi.label === e)).filter(e => e !== undefined);
 
         // filter items by label
         if (this.searchText.trim() !== '') {
-            this.visible = true;
             this.filteredItems = this._locations
                 .filter((item) => {
                     return (
-                        item.label
-                            .toLowerCase()
-                            .indexOf(this.searchText.toLowerCase()) > -1
+                        item.label.toLowerCase().indexOf(this.searchText.toLowerCase()) > -1 ||
+                        item.postalCode.startsWith(this.searchText)
                     );
                 })
                 .slice(0, 10);
@@ -173,10 +198,14 @@ export class LocationInputComponent implements OnInit {
         });
         await modal.present();
         const loc = await (await modal.onWillDismiss()).data as UserLocation;
-        this.addLocation(loc);
+        if (loc) {
+            this.addLocation(loc);
+            this.btnStateConfirmLocation = 'solid';
+        }
     }
-
+    btnStateConfirmLocation: string = 'solid';
     confirmLocation() {
         this.locationSelected.emit(this.editableLocation);
+        this.btnStateConfirmLocation = 'clear';
     }
 }
