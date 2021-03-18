@@ -1,5 +1,3 @@
-import 'leaflet-wfst';
-
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import L from 'leaflet';
