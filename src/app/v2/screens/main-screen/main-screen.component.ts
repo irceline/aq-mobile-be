@@ -43,25 +43,25 @@ export class MainScreenComponent implements OnInit {
         {
             name: 'v2.screens.app-info.ozon',
             abbreviation: 'O₃',
-            unit: 'µg/m3',
+            unit: 'µg/m³',
             phenomenon: MainPhenomenon.O3
         },
         {
             name: 'v2.screens.app-info.nitrogen-dioxide',
             abbreviation: 'NO₂',
-            unit: 'µg/m3',
+            unit: 'µg/m³',
             phenomenon: MainPhenomenon.NO2
         },
         {
             name: 'v2.screens.app-info.fine-dust',
             abbreviation: 'PM 10',
-            unit: 'µg/m3',
+            unit: 'µg/m³',
             phenomenon: MainPhenomenon.PM10
         },
         {
             name: 'v2.screens.app-info.very-fine-dust',
             abbreviation: 'PM 2.5',
-            unit: 'µg/m3',
+            unit: 'µg/m³',
             phenomenon: MainPhenomenon.PM25
         },
     ];
@@ -72,19 +72,19 @@ export class MainScreenComponent implements OnInit {
             icon: '/assets/images/icons/sport-kleur.svg',
             title: 'Sporttip',
             text:
-                '106 µg/m3 berekend op jouw locatie, gemiddeld is dit 78 µg/m3.',
+                '106 µg/m³ berekend op jouw locatie, gemiddeld is dit 78 µg/m³.',
         },
         {
             icon: '/assets/images/icons/sport-kleur.svg',
             title: 'Sporttip',
             text:
-                '106 µg/m3 berekend op jouw locatie, gemiddeld is dit 78 µg/m3.',
+                '106 µg/m³ berekend op jouw locatie, gemiddeld is dit 78 µg/m³.',
         },
         {
             icon: '/assets/images/icons/sport-kleur.svg',
             title: 'Sporttip',
             text:
-                '106 µg/m3 berekend op jouw locatie, gemiddeld is dit 78 µg/m3.',
+                '106 µg/m³ berekend op jouw locatie, gemiddeld is dit 78 µg/m³.',
         },
     ];
 
