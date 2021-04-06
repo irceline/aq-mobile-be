@@ -12,7 +12,7 @@
     <ion-label text-wrap>
       {{ 'v2.components.user-notification-settings.automated' |translate }}
     </ion-label>
-    <ion-toggle [ngModel]="automatedNotification" color="success" (click)="toggleAutomatedNotification($event)"
+    <ion-toggle [ngModel]="userLocationNotifications" color="success" (click)="toggleUserLocationNotifications($event)"
       (ionFocus)="hasFocus()" (ionBlur)="blurFocus()"></ion-toggle>
   </ion-item>
 

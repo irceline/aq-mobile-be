@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 
-import { UserNotificationSetting } from '../../components/user-notification-settings/user-notification-settings.component';
 import { UserLocation } from '../../Interfaces';
 import { UserSettingsService } from '../../services/user-settings.service';
 
@@ -16,14 +15,10 @@ export class OnboardingScreenComponent implements OnInit {
     btnText = 'Ga verder';
     sliderDisabled = false;
 
-    userNotificationSettings: UserNotificationSetting[] = [];
-
     constructor(
         private navCtrl: NavController,
         private userSettingsService: UserSettingsService
-    ) {
-        this.userNotificationSettings = userSettingsService.getUserNotificationSettings();
-    }
+    ) { }
 
     ngOnInit() { }
 
@@ -31,10 +26,6 @@ export class OnboardingScreenComponent implements OnInit {
         if (location !== null) {
             this.userSettingsService.addUserLocation(location);
         }
-    }
-
-    updateUserNotificationSettings(updatedSetting: UserNotificationSetting) {
-        this.userSettingsService.updateUserNotificationSettings(updatedSetting);
     }
 
     onboardingComplete() {

@@ -1,9 +1,11 @@
-<p class="title">
-  {{notification.title}}
-</p>
-<div class="body">
-  {{notification.body}}
-</div>
-<div class="expiration">
-  {{notification.expiration | date: 'short': null: translate.currentLang}}
+<div *ngFor="let notification of notifications">
+  <p class="title">
+    {{notification.title}}
+  </p>
+  <div class="body">
+    {{notification.body}}
+  </div>
+  <div class="expiration">
+    {{notification.expiration | date: 'short': null: translate.currentLang}}
+  </div>
 </div>
