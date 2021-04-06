@@ -5,23 +5,23 @@ import {indexLabel, lightIndexColor} from '../common/constants';
 const substances = [
     {
         name: 'ozon',
-        abbreviation: 'O&#8323;',
-        unit: 'µg/m3'
+        abbreviation: 'O₃',
+        unit: 'µg/m³'
     },
     {
         name: 'nitrogen-dioxide',
-        abbreviation: 'NO&#8322;',
-        unit: 'µg/m3'
+        abbreviation: 'NO₂',
+        unit: 'µg/m³'
     },
     {
         name: 'fine-dust',
         abbreviation: 'PM 10',
-        unit: 'µg/m3'
+        unit: 'µg/m³'
     },
     {
         name: 'very-fine-dust',
         abbreviation: 'PM 2,5',
-        unit: 'µg/m3'
+        unit: 'µg/m³'
     },
 ];
 export const dataService = {
