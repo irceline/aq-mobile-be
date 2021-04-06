@@ -25,26 +25,26 @@ export class LongTermDataService {
     this._substances = [
       {
         name: translateService.instant('v2.screens.app-info.ozon'),
-        abbreviation: 'O&#8323;',
-        unit: 'µg/m3',
+        abbreviation: 'O₃',
+        unit: 'µg/m³',
         phenomenon: MainPhenomenon.O3
       },
       {
         name: translateService.instant('v2.screens.app-info.nitrogen-dioxide'),
-        abbreviation: 'NO&#8322;',
-        unit: 'µg/m3',
+        abbreviation: 'NO₂',
+        unit: 'µg/m³',
         phenomenon: MainPhenomenon.NO2
       },
       {
         name: translateService.instant('v2.screens.app-info.fine-dust'),
         abbreviation: 'PM 10',
-        unit: 'µg/m3',
+        unit: 'µg/m³',
         phenomenon: MainPhenomenon.PM10
       },
       {
         name: translateService.instant('v2.screens.app-info.very-fine-dust'),
         abbreviation: 'PM 2.5',
-        unit: 'µg/m3',
+        unit: 'µg/m³',
         phenomenon: MainPhenomenon.PM25
       },
     ];
