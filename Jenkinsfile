@@ -36,42 +36,49 @@ pipeline {
         }
       }
 
-      stage('Copy apk') {
-        steps {
-            sh 'docker run -v /var/lib/jenkins/workspace/Belair-2.0_V2/builds:/app/builds nebulaesoftware/build-ionic-apk sh -c "cp /app/platforms/android/app/build/outputs/apk/debug/app-debug.apk /app/builds/app-debug-latest.apk"'
-        }
-      }
+      // stage('Copy apk') {
+      //   steps {
+      //       sh 'docker run -v /var/lib/jenkins/workspace/Belair-2.0_V2/builds:/app/builds nebulaesoftware/build-ionic-apk sh -c "cp /app/platforms/android/app/build/outputs/apk/debug/app-debug.apk /app/builds/app-debug-latest.apk"'
+      //   }
+      // }
 
-      stage('Push images') {
-        steps {
-            script {
-                docker.withRegistry('', registryCredential) {
-                      setupEnv.push()
-                      app.push()
-                      buildApk.push()
-                }
-            }
-        }
-      }
+      // stage('Send apk link via Slack') {
+      //   steps {
+      //       slackSend channel: '#belair',
+      //       message: "New apk file available at: http://belair.nebulae.be:8080/job/Belair-2.0/job/V2/${env.BUILD_NUMBER}/execution/node/3/ws/builds/"
+      //   }
+      // }
 
-      stage('Stop all containers') {
-        steps {
-            sh 'docker stop $(docker ps -aq)'
-        }
-      }
+      // stage('Push images') {
+      //   steps {
+      //       script {
+      //           docker.withRegistry('', registryCredential) {
+      //                 setupEnv.push()
+      //                 app.push()
+      //                 buildApk.push()
+      //           }
+      //       }
+      //   }
+      // }
 
-      stage('Remove all containers') {
-        steps {
-            sh 'docker rm $(docker ps -aq)'
-        }
-      }
+      // stage('Stop all containers') {
+      //   steps {
+      //       sh 'docker stop $(docker ps -aq)'
+      //   }
+      // }
 
-      stage('Send apk link via Slack') {
-        steps {
-            slackSend channel: '#belair',
-            message: "New apk file available at: http://belair.nebulae.be:8080/job/Belair-2.0/job/V2/${env.BUILD_NUMBER}/execution/node/3/ws/builds/"
-        }
-      }
+      // stage('Remove all containers') {
+      //   steps {
+      //       sh 'docker rm $(docker ps -aq)'
+      //   }
+      // }
+
+      // stage('Send apk link via Slack') {
+      //   steps {
+      //       slackSend channel: '#belair',
+      //       message: "New apk file available at: http://belair.nebulae.be:8080/job/Belair-2.0/job/V2/${env.BUILD_NUMBER}/execution/node/3/ws/builds/"
+      //   }
+      // }
    }
 }
 
