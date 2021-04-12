@@ -26,7 +26,7 @@ pipeline {
                 // Replace package name
                 def text = readFile file: "config.xml"
                 text = text.replaceAll("be.irceline.aqmobile_v2", "be.irceline.aqmobile")
-                writeFile file: "config.txt", text: text
+                writeFile file: "config.xml", text: text
                 
                 app = docker.build(appImg, "-f ./docker/create-app/Dockerfile .")
             }
