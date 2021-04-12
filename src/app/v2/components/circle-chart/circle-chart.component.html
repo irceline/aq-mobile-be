@@ -31,6 +31,13 @@
     </g>
   </svg>
 
+  <div class="circle-chart--text" [hidden]="!loading">
+    <div class="loader">
+      <img src="/assets/wind.svg" alt="">
+    </div>
+    <span class="loader-text">Ventilators verzamelen</span>
+  </div>
+  
   <div class="circle-chart--text" [ngClass]="pulsingText" (animationend)="pulsingText.pulsing = false">
     <h1>{{ title | translate | titlecase }}</h1>
     <p>{{ text }}</p>
