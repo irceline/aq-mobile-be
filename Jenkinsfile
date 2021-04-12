@@ -7,6 +7,9 @@ pipeline {
         setupEnv = ''
         buildApkImg = "nebulaesoftware/build-ionic-apk"
         buildApk = ''
+        S3_BUCKET = 'belair-builds-test'
+        S3_REGION = 'ap-southeast-1'
+        SLACK_CHANNEL = '@U5VJ0N3MJ'
     }
 
    agent any
@@ -56,52 +59,53 @@ pipeline {
 
         stage('Copy apk') {
             steps {
-                sh 'docker run -v \$WORKSPACE/builds:/app/builds nebulaesoftware/build-ionic-apk sh -c "cp /app/platforms/android/app/build/outputs/apk/debug/app-debug.apk /app/builds/app-debug-latest.apk"'
+                script {
+                    buildApk.inside { 
+                        sh 'cp /app/platforms/android/app/build/outputs/apk/debug/app-debug.apk \$WORKSPACE/app-debug-latest.apk'
+                    }
+                }
             }
         }
 
-      // stage('Send apk link via Slack') {
-      //   steps {
-      //       slackSend channel: '#belair',
-      //       message: "New apk file available at: http://belair.nebulae.be:8080/job/Belair-2.0/job/V2/${env.BUILD_NUMBER}/execution/node/3/ws/builds/"
-      //   }
-      // }
 
-      // stage('Push images') {
-      //   steps {
-      //       script {
-      //           docker.withRegistry('', registryCredential) {
-      //                 setupEnv.push()
-      //                 app.push()
-      //                 buildApk.push()
-      //           }
-      //       }
-      //   }
-      // }
 
-      // stage('Stop all containers') {
-      //   steps {
-      //       sh 'docker stop $(docker ps -aq)'
-      //   }
-      // }
+        stage('Stop all containers') {
+            steps {
+                sh 'docker container prune'
+            }
+        }
 
-      // stage('Remove all containers') {
-      //   steps {
-      //       sh 'docker rm $(docker ps -aq)'
-      //   }
-      // }
+        stage('Remove all containers') {
+            steps {
+                sh 'docker image prune'
+            }
+        }
 
-      // stage('Send apk link via Slack') {
-      //   steps {
-      //       slackSend channel: '#belair',
-      //       message: "New apk file available at: http://belair.nebulae.be:8080/job/Belair-2.0/job/V2/${env.BUILD_NUMBER}/execution/node/3/ws/builds/"
-      //   }
-      // }
+        stage('Archive artifact to s3') {
+            steps {
+                archiveArtifacts artifacts: 'app-debug-latest.apk', fingerprint: true
+            }
+        }
     }
 
     post {
+        success {
+            slackSend(
+                color: "good",
+                channel: "${SLACK_CHANNEL}", 
+                message: "New apk file available at: https://${S3_BUCKET}.s3.${S3_REGION}.amazonaws.com/belair-v2/${BRANCH_NAME}/${BUILD_ID}/artifacts/app-debug-latest.apk"
+            )
+        }
+
+        failure {
+            slackSend(
+                color: "danger",
+                channel: "${SLACK_CHANNEL}", 
+                message: "Pipeline for ${BRANCH_NAME}#${BUILD_ID} failure"
+            )
+        }
+
         always {
-            archiveArtifacts artifacts: 'builds/app-debug-latest.apk', fingerprint: true
             cleanWs()
         }
     }
