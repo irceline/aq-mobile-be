@@ -41,11 +41,11 @@ pipeline {
         }
       }
 
-      // stage('Copy apk') {
-      //   steps {
-      //       sh 'docker run -v /var/lib/jenkins/workspace/Belair-2.0_V2/builds:/app/builds nebulaesoftware/build-ionic-apk sh -c "cp /app/platforms/android/app/build/outputs/apk/debug/app-debug.apk /app/builds/app-debug-latest.apk"'
-      //   }
-      // }
+      stage('Copy apk') {
+        steps {
+            sh 'docker run -v /var/lib/jenkins/workspace/Belair-2.0_V2/builds:/app/builds nebulaesoftware/build-ionic-apk sh -c "cp /app/platforms/android/app/build/outputs/apk/debug/app-debug.apk /app/builds/app-debug-latest.apk"'
+        }
+      }
 
       // stage('Send apk link via Slack') {
       //   steps {
