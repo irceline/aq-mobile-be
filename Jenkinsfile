@@ -12,11 +12,6 @@ pipeline {
    agent any
 
     stages {
-        stage('Prepare workspace') {
-            steps {
-                cleanWs()
-            }
-        }
         stage('Create app environment') {
             steps {
                 script {
@@ -107,6 +102,7 @@ pipeline {
     post {
         always {
             archiveArtifacts artifacts: 'builds/app-debug-latest.apk', fingerprint: true
+            cleanWs()
         }
     }
 }
