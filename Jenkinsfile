@@ -26,6 +26,7 @@ pipeline {
                     file(credentialsId: 'google-services.json', variable: 'GSERVICE_JSON'),
                 ]) {
                     sh "cp \$GSERVICE_JSON google-services.json"
+                    sh "chmod 600 google-services.json"
                 }
 
                 script {
