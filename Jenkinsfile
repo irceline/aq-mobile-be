@@ -56,7 +56,7 @@ pipeline {
 
         stage('Copy apk') {
             steps {
-                sh 'docker run -v \$WORKSPACE/builds:app/builds nebulaesoftware/build-ionic-apk sh -c "cp /app/platforms/android/app/build/outputs/apk/debug/app-debug.apk /app/builds/app-debug-latest.apk"'
+                sh 'docker run -v \$WORKSPACE/builds:/app/builds nebulaesoftware/build-ionic-apk sh -c "cp /app/platforms/android/app/build/outputs/apk/debug/app-debug.apk /app/builds/app-debug-latest.apk"'
             }
         }
 
