@@ -11,6 +11,10 @@
     margin: auto;
     display: flex;
     flex-direction: row;
+
+    .dark {
+      display: none;
+    }
   }
   .image {
     max-width: 29%;

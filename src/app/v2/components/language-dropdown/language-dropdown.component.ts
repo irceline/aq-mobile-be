@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
     selector: 'app-language-dropdown',
     templateUrl: './language-dropdown.component.html',
-    styleUrls: ['./language-dropdown.component.scss'],
+    styleUrls: ['./language-dropdown.component.scss', './language-dropdown.component.hc.scss'],
 })
 export class LanguageDropdownComponent implements OnInit {
 
