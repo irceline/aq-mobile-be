@@ -2,11 +2,11 @@
 	"belaqi": {
 		"date": {
 			"before-three-days": "Il y a 3 jours",
-			"before-two-days": "Avant hier",
-			"current": "Actuelle",
+			"before-two-days": "Avant-hier",
+			"current": "Actuellement",
 			"in-three-days": "Dans 3 jours",
 			"in-two-days": "Dans 2 jours",
-			"today": "Aujourd 'hui",
+			"today": "Aujourd'hui",
 			"tomorrow": "Demain",
 			"yesterday": "Hier"
 		},
@@ -28,21 +28,21 @@
 		"close": "Fermer",
 		"ok": "OK"
 	},
-	"edit-location-hint": "Vous pouvez déplacer l'icône de localisation sur la carte à n'importe quel endroit souhaité.",
+	"edit-location-hint": "Vous pouvez déplacer le curseur de localisation à l'endroit souhaité.",
 	"edit-location-label": {
 		"title": "Changer le nom de la localisation"
 	},
 	"error-modal": {
 		"back-to-app": "Retour à l'application",
-		"no-network-connection": "Vous êtes probablement hors ligne. Les données précédemment chargées pour vos emplacements sauvegardés sont toujours disponibles, mais la utilisabilité de l'application est considérablement limitée.",
-		"no_irceline_settings": "Aucune nouvelle donnée ne peut être chargée. L'application affiche les dernières données chargées.",
+		"no-network-connection": "Vous êtes probablement hors ligne. Les données de vos localisations sont toujours disponibles, mais les fonctionnalités de l'application sont limitées.",
+		"no_irceline_settings": "Aucune mise à jour ne peut être effectuée. L'application affiche les dernières données chargées.",
 		"title": "Erreur de connexion"
 	},
 	"feedback-reason": {
 		"agriculture": "Émissions de l'agriculture",
-		"industry": "Émissions de l'industrie",
-		"traffic": "Fumées d'échappement de la circulation",
-		"woodburn": "Combustion de bois"
+		"industry": "Émissions industrielles",
+		"traffic": "Emissions du trafic routier",
+		"woodburn": "Chauffage au bois"
 	},
 	"feedback-stats-map": {
 		"day": "Aujourd'hui",
@@ -58,7 +58,7 @@
 		}
 	},
 	"network": {
-		"geolocationDenied": "Vous n'avez pas autorisé l'utilisation de votre géolocalisation dans l'application.",
+		"geolocationDenied": "La géolocalisation n'a pas été autorisée.",
 		"geolocationDisabled": "La géolocalisation est désactivée"
 	},
 	"no-location-hint": "L'application nécessite une localisation pour afficher les données.",
@@ -69,74 +69,74 @@
 	"v2": {
 		"components": {
 			"circle-chart": {
-				"avg-score": "Le score moyen de votre localisation est de {{ score }}"
+				"avg-score": "L'indice moyen de votre localisation est de {{ score }}"
 			},
 			"feedback": {
 				"cause": "Connaissez-vous la cause? (optionnel)",
 				"send-observation": "Envoyer l'observation"
 			},
 			"information-item": {
-				"average": "En moyenne, c'est",
+				"average": "La moyenne est de",
 				"personal-calculation": "calculé pour votre localisation."
 			},
 			"location-input": {
 				"choose-location": "Choisissez votre localisation",
 				"current-location": "Localisation actuelle",
 				"no-results": "Aucun résultat",
-				"please-wait": "Patientez"
+				"please-wait": "Patience"
 			},
 			"location-sortable": {
 				"cancel": "Annuler",
 				"confirm": "Confirmer",
 				"header": "Supprimer la localisation",
-				"message": "Êtes-vous sûr de vouloir supprimer cet localisation?"
+				"message": "Êtes-vous sûr de vouloir supprimer cette localisation?"
 			},
 			"onboarding-slider": {
 				"btn-text": "Continuer",
-				"start-app": "Lancez l'appli"
+				"start-app": "Lancez l'app"
 			},
 			"success-display": {
-				"back-to-main": "Accéder à l'écran d'accueil",
+				"back-to-main": "Accéder au menu principal",
 				"thanks": "Merci !",
-				"well-received": "Nous avons bien reçu votre observation. Grâce à votre contribution, nous pouvons améliorer notre application."
+				"well-received": "Nous avons bien reçu votre observation. Grâce à votre contribution, nous ferons notre possible pour améliorer l'application."
 			},
 			"user-notification-settings": {
 				"activity": "Efforts physiques",
 				"allergies": "Les allergies",
-				"automated": "Alertes automatisées basées sur des valeurs modélisées pour le(s) lieu(x) que vous avez choisi(s).",
+				"automated": "Alertes automatiques basées sur les valeurs modélisées aux endroits que vous avez choisis.",
 				"exercise": "Faire des exercices",
 				"highConcentration": "Concentrations (trop) élevées",
-				"official": "Alertes officielles basées sur une analyse approfondie de la situation",
+				"official": "Alertes officielles basées sur une étude approfondie de la situation",
 				"transport": "Déplacements"
 			}
 		},
 		"screens": {
 			"app-info": {
-				"aq-index": "Nous évaluons l'impact à court terme de la <strong>qualité générale de l'air</strong> sur la base d'un indice de qualité de l'air.",
-				"aq-index-2": "Chacune des <strong>concentrations calculées pour les différents polluants</strong> donne un score (ex. très bon). Le score le plus mauvais détermine l'indice global de qualité de l'air.",
+				"aq-index": "L'évaluation de la <strong>qualité de l'air</strong> est présentée à court terme grâce à un indice de qualité de l'air.",
+				"aq-index-2": "Chacune des <strong>concentrations calculées pour les différents polluants</strong> correspond à un indice (ex. très bon). L'indice le plus mauvais détermine l'indice global de qualité de l'air.",
 				"belaqi-title": "Général",
 				"current-items": "Les polluants utilisés dans le calcul sont:",
 				"data-models": "En appliquant des modèles à ces données, nous calculons si l'impact de la qualité de l'air s'améliorera ou se détériorera à long terme.",
 				"fine-dust": "Particules fines",
 				"how-this-works": "Comment cela marche-t-il?",
 				"nitrogen-dioxide": "Dioxyde d'azote",
-				"notifications": "Si les mesures dépassent la valeur d'avertissement, nous vous enverrons une notification. Vous pouvez gérer vos notifications via le menu.",
+				"notifications": "Si les mesures dépassent le seuil d'information et d'alerte, une notification vous sera envoyée. Vous pouvez gérer vos notifications via le menu.",
 				"ozon": "Ozone",
 				"very-fine-dust": "Particules fines"
 			},
 			"long-term-info": {
-				"about-data": "Les données sont le résultat de nos modèles de calcul à long terme.",
-				"data-loading": "Les données de l'affichage à long terme sont en cours de chargement.",
+				"about-data": "Les données sont le résultat de nos modélisations à long terme.",
+				"data-loading": "Les données calculées sur le long terme sont en cours de chargement.",
 				"long-term": "Long terme",
-				"lt-effects-diseases": "Une exposition prolongée aux polluants atmosphériques peut produire des effets chroniques et augmenter le risque de maladies cardiaques et pulmonaires."
+				"lt-effects-diseases": "Une exposition prolongée à la pollution peut produire des effets chroniques sur la santé et augmenter le risque de maladies cardiaques et pulmonaires."
 			},
 			"main-screen": {
-				"about-belaqi": "Le BelAQI est un indice de la qualité de l'air. Les quatre polluants atmosphériques les plus importants (NO2, O3, PM10 et PM2,5) sont classés en fonction de leur impact sur la santé à court terme. Le score le plus élevé détermine le BelAQI.",
-				"about-no2": "Le dioxyde d'azote (NO2) est un gaz qui peut provoquer une irritation des yeux, du nez et de la gorge. Lorsqu'il est inhalé, le NO2 peut également provoquer une irritation des poumons et une réduction de la fonction pulmonaire. Dans les endroits où il y a plus de NO2, le risque de crises d'asthme est plus élevé et le nombre d'admissions à l'hôpital pour des problèmes respiratoires augmente. Le NO2 est principalement émis lors des processus de combustion à haute température. Les voitures diesel en sont la principale source.",
-				"about-o3": "L'ozone (O3) se forme les jours chauds par l'action de la lumière du soleil (UV) sur l'air pollué par des oxydes d'azote et des composés organiques volatils. Lorsqu'il est inhalé, l'O3 peut provoquer une irritation des poumons et une réduction de la fonction pulmonaire.  Dans les endroits où il y a plus d'O3, le risque de crises d'asthme est plus élevé et le nombre d'admissions à l'hôpital pour des problèmes respiratoires augmente. À l'intérieur, les concentrations d'ozone sont généralement deux fois moins élevées qu'à l'extérieur.",
-				"about-pm10": "Les particules (PM10) sont constituées de très petites matières en suspension de taille, d'origine et de composition chimique différentes. Lorsqu'elles sont inhalées, ces petites particules provoquent des réactions inflammatoires dans les voies respiratoires qui entravent l'absorption d'oxygène. Les personnes souffrant de maladies respiratoires et/ou cardiovasculaires y sont particulièrement sensibles. Les poussières fines peuvent également transporter des particules cancérigènes. Les PM10 sont toutes des particules inférieures à 10 micromètres. La différence avec la plus petite fraction de PM2.5 réside principalement dans les particules plus grossières de la poussière soufflée par le vent (par exemple, le sable, la poussière soufflée par les voitures qui passent, etc.).",
-				"about-pm25": "Les poussières fines (PM2.5) sont constituées de très petites matières en suspension de taille, d'origine et de composition chimique différentes. Lorsqu'elles sont inhalées, ces petites particules provoquent des réactions inflammatoires dans les voies respiratoires qui entravent l'absorption d'oxygène. Les personnes souffrant de maladies respiratoires et/ou cardiovasculaires y sont particulièrement sensibles. Les poussières fines peuvent également transporter des particules cancérigènes. Les PM2.5 sont toutes des particules inférieures à 2,5 micromètres. Les PM2.5 font donc partie de la fraction plus importante des PM10. Les PM2.5 se forment en grande partie dans l'atmosphère à partir d'autres polluants (oxydes d'azote, ammoniac, dioxyde de soufre, etc.) mais sont également constituées de particules libérées lors des processus de combustion (suie provenant de la combustion du diesel ou du bois, etc.).",
-				"long-term-calculation": "Consultez notre calcul à long terme",
+				"about-belaqi": "Le BelAQI est un indice de la qualité de l'air. Les quatre polluants atmosphériques les plus importants (NO2, O3, PM10 et PM2,5) sont classés en fonction de leur impact sur la santé à court terme. Le score le plus mauvais détermine le BelAQI.",
+				"about-no2": "Le dioxyde d'azote (NO2) est un gaz qui peut provoquer une irritation des yeux, du nez et de la gorge. Lorsqu'il est inhalé, le NO2 peut également provoquer une irritation des poumons et une réduction des fonctions pulmonaires. Dans les endroits où il y a plus de NO2, le risque de crises d'asthme est plus élevé et le nombre d'admissions à l'hôpital pour des problèmes respiratoires augmente. Le NO2 est principalement émis lors des processus de combustion à haute température. Les voitures diesel en sont la principale source.",
+				"about-o3": "L'ozone (O3) se forme lors de journées chaudes et ensoleillées par l'action de la lumière du soleil (UV) sur l'air pollué par des oxydes d'azote et des composés organiques volatils. Lorsqu'il est inhalé, l'O3 peut provoquer une irritation des poumons et une réduction des fonctions pulmonaires.  Dans les endroits où l'O3 est élevé, le risque de crises d'asthme est plus élevé et le nombre d'admissions à l'hôpital pour des problèmes respiratoires augmente. À l'intérieur, les concentrations d'ozone sont généralement deux fois moins élevées qu'à l'extérieur.",
+				"about-pm10": "Les particules (PM10) sont constituées de très petites matières en suspension de taille, d'origine et de composition chimique différentes. Lorsqu'elles sont inhalées, ces petites particules provoquent des réactions inflammatoires dans les voies respiratoires qui entravent l'absorption d'oxygène. Les personnes souffrant de maladies respiratoires et/ou cardiovasculaires y sont particulièrement sensibles. Les poussières fines peuvent également transporter des particules cancérigènes. Les PM10 sont les particules dont le diamètre est inférieur à 10 micromètres. La différence avec la fraction de particules plus fines (PM2.5) est constituée de particules de poussières plus grossières emportées par le vent (par exemple, le sable, les poussières remises en suspension par la circulation, etc.).",
+				"about-pm25": "Les poussières fines (PM2.5) sont constituées de très petites matières en suspension de taille, d'origine et de composition chimique différentes. Lorsqu'elles sont inhalées, ces petites particules provoquent des réactions inflammatoires dans les voies respiratoires qui entravent l'absorption d'oxygène. Les personnes souffrant de maladies respiratoires et/ou cardiovasculaires y sont particulièrement sensibles. Les poussières fines peuvent également transporter des particules cancérigènes. Les PM2.5 sont les particules dont le diamètre est inférieur à 2,5 micromètres. Les PM2.5 font donc partie de la fraction plus importante des PM10. Les PM2.5 se forment en grande partie dans l'atmosphère à partir d'autres polluants (oxydes d'azote, ammoniac, dioxyde de soufre, etc.) mais sont également constituées de particules libérées lors des processus de combustion (provenant de la combustion du diesel ou du bois, etc.).",
+				"long-term-calculation": "Qualité de l'air à long terme",
 				"view-details": "Voir en détail",
 				"what-is-belaqi": "Qu'est-ce que le BelAQI?",
 				"what-is-no2": "Qu'est-ce que le dioxyde d'azote?",
@@ -149,24 +149,24 @@
 				"language": "Langue",
 				"locations": "Localisation",
 				"notifications": "Notifications",
-				"version": "version",
-				"workings": "(comment fonctionne l'application)"
+				"version": "Version",
+				"workings": "(Comment fonctionne l'application)"
 			},
 			"onboarding": {
 				"aq-info": "Cet indice est le résultat d'un <strong>calcul</strong> de la qualité de l'air à court terme, basé sur les données de mesure, les conditions météorologiques, les émissions du trafic et de l'industrie dans votre région.",
-				"aq-long-term": "L'app calcule également la qualité de l'air sur le <strong>long terme</strong> pour votre localisation.",
-				"ask-location": "Nous avons besoin de votre emplacement pour vous aider autant que possible.",
+				"aq-long-term": "La qualité de l'air sur le <strong>long terme</strong> est également calculée pour votre localisation.",
+				"ask-location": "Votre emplacement est nécessaire pour le bon fonctionnement de l'app.",
 				"ask-notifications": "Souhaitez-vous recevoir des notifications sur la qualité de l'air?",
 				"choose-lang": "Choisissez votre langue:",
-				"start-quickly": "Démarrage rapide!"
+				"start-quickly": "Démarrage rapide"
 			},
 			"rating-screen": {
 				"agriculture": "<strong>Émissions</strong> provenant de l'agriculture.",
-				"calculated-value": "L'application affiche une valeur calculée, pas une mesure à votre emplacement. La qualité de l'air peut donc différer localement.",
-				"does-it-match": "Cette valeur correspond-elle à vos sentiments?",
-				"exhaust": "<strong>Échappement des fumées</strong> de la circulation.",
-				"fire": "Un <strong> feu </strong> avec du bois.",
-				"industry": "<strong>Émissions</strong> provenant de l'industrie.",
+				"calculated-value": "L'application affiche une valeur calculée par nos modèle, et non pas une mesure à votre emplacement. La qualité de l'air peut donc différer localement.",
+				"does-it-match": "Cette valeur correspond-elle à votre ressenti?",
+				"exhaust": "<strong>Émissions</strong> du trafic routier.",
+				"fire": "Un <strong> feu </strong> de bois.",
+				"industry": "<strong>Émissions</strong> industrielles.",
 				"possible-causes": "Les causes possibles d'un écart sont:"
 			}
 		}
