@@ -17,6 +17,16 @@
           }
         }
       }
+
+      .images {
+        .image, .image-2 {
+          display: none;
+
+          &.dark {
+            display: block;
+          }
+        }
+      }
     }
   }
 }
