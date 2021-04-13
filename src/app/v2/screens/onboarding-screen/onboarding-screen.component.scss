@@ -25,4 +25,14 @@
     max-width: 60%;
     padding: 1em 0 2em;
   }
+  .onboarding-content {
+    position: relative;
+
+    .button-wrapper {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      z-index: 10;
+    }
+  }
 }

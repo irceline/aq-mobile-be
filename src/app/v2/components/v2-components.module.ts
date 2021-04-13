@@ -35,6 +35,7 @@ import { PullTabComponent } from './pull-tab/pull-tab.component';
 import { SuccessDisplayComponent } from './success-display/success-display.component';
 import { TimeLineItemComponent } from './time-line-item/time-line-item.component';
 import { TimeLineListComponent } from './time-line-list/time-line-list.component';
+import { ThemeButtonComponent } from './theme-button/theme-button.component';
 import { UserNotificationSettingsComponent } from './user-notification-settings/user-notification-settings.component';
 import { ValueDisplayComponent } from './value-display/value-display.component';
 
@@ -68,7 +69,8 @@ const COMPONENTS = [
     InformationItemDetailsComponent,
     MapComponent,
     ErrorModalComponent,
-    FeedbackLocationEditComponent
+    FeedbackLocationEditComponent,
+    ThemeButtonComponent
 ];
 
 @NgModule({

@@ -1,0 +1,12 @@
+
+@import '../../theme/variables';
+
+.high-contrast{
+  :host {
+    .theme-button {
+      background: $black;
+      color: white;
+      width: 220px;
+    }
+  }
+}

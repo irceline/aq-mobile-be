@@ -1,0 +1,22 @@
+@import '../../theme/variables';
+
+.high-contrast{
+  :host {
+    .onboarding-content {
+      app-onboarding-slider {
+        ::ng-deep  {
+          ion-slides {
+            background: white;
+          }
+
+          .slide--content {
+            .big, .choose {
+              color: $black;
+            }
+            
+          }
+        }
+      }
+    }
+  }
+}

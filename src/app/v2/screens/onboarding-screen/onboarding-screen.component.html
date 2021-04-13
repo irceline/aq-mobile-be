@@ -1,82 +1,88 @@
-<app-onboarding-slider (slideShowComplete)="onboardingComplete()" [disabled]="sliderDisabled">
-    <ion-slide>
-        <div class="slide">
-            <div class="slide--content">
-                <h1 class="big">Belair</h1>
-                <p>{{ 'v2.screens.onboarding.choose-lang' | translate }}</p>
+<ion-content class="onboarding-content">
+    <div class="button-wrapper">
+        <app-theme-button></app-theme-button>
+    </div>
 
-                <!-- Language dropdown -->
-                <app-language-dropdown> </app-language-dropdown>
-                <div class="images">
-                    <div class="image">
-                        <img class="brussels" src="/assets/images/ibge-bim.svg" alt="">
-                    </div>
-                    <div class="image-2">
-                        <img class="flanders" src="/assets/images/vmm.svg" alt="">
-                    </div>
-                    <div class="image">
-                        <img class="wallonia" src="/assets/images/awac.svg" alt="">
+    <app-onboarding-slider (slideShowComplete)="onboardingComplete()" [disabled]="sliderDisabled">
+        <ion-slide>
+            <div class="slide">
+                <div class="slide--content">
+                    <h1 class="big">Belair</h1>
+                    <p class="choose">{{ 'v2.screens.onboarding.choose-lang' | translate }}</p>
+
+                    <!-- Language dropdown -->
+                    <app-language-dropdown> </app-language-dropdown>
+                    <div class="images">
+                        <div class="image">
+                            <img class="brussels" src="/assets/images/ibge-bim.svg" alt="">
+                        </div>
+                        <div class="image-2">
+                            <img class="flanders" src="/assets/images/vmm.svg" alt="">
+                        </div>
+                        <div class="image">
+                            <img class="wallonia" src="/assets/images/awac.svg" alt="">
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </ion-slide>
+        </ion-slide>
 
-    <ion-slide>
-        <div class="slide">
-            <div class="slide--content flex-end">
-                <h1>Belair</h1>
-                <p [innerHTML]="'v2.screens.onboarding.aq-info' | translate"></p>
+        <ion-slide>
+            <div class="slide">
+                <div class="slide--content flex-end">
+                    <h1>Belair</h1>
+                    <p [innerHTML]="'v2.screens.onboarding.aq-info' | translate"></p>
+                </div>
+                <img class="index-wheel" src="/assets/images/circle-slider@3x.png" alt="">
             </div>
-            <img class="index-wheel" src="/assets/images/circle-slider@3x.png" alt="">
-        </div>
-    </ion-slide>
+        </ion-slide>
 
-    <ion-slide>
-        <div class="slide">
-            <div class="slide--content flex-end">
-                <h1>Belair</h1>
-                <p [innerHTML]="'v2.screens.onboarding.aq-info' | translate"></p>
+        <ion-slide>
+            <div class="slide">
+                <div class="slide--content flex-end">
+                    <h1>Belair</h1>
+                    <p [innerHTML]="'v2.screens.onboarding.aq-info' | translate"></p>
+                </div>
+                <img src="/assets/images/details-card@3x.png" alt="">
             </div>
-            <img src="/assets/images/details-card@3x.png" alt="">
-        </div>
-    </ion-slide>
+        </ion-slide>
 
-    <ion-slide>
-        <div class="slide">
-            <div class="slide--content flex-end">
-                <h1>Belair</h1>
-                <p [innerHTML]="'v2.screens.onboarding.aq-long-term' | translate"></p>
+        <ion-slide>
+            <div class="slide">
+                <div class="slide--content flex-end">
+                    <h1>Belair</h1>
+                    <p [innerHTML]="'v2.screens.onboarding.aq-long-term' | translate"></p>
+                </div>
+
+                <img src="/assets/images/stats-card@3x.png" alt="">
             </div>
+        </ion-slide>
 
-            <img src="/assets/images/stats-card@3x.png" alt="">
-        </div>
-    </ion-slide>
+        <ion-slide>
+            <div class="slide">
+                <div class="slide--content">
+                    <h1>Belair</h1>
+                    <p>{{ 'v2.screens.onboarding.start-quickly' | translate }}</p>
+                    <p>{{ 'v2.screens.onboarding.ask-location' | translate }}</p>
 
-    <ion-slide>
-        <div class="slide">
-            <div class="slide--content">
-                <h1>Belair</h1>
-                <p>{{ 'v2.screens.onboarding.start-quickly' | translate }}</p>
-                <p>{{ 'v2.screens.onboarding.ask-location' | translate }}</p>
+                    <!-- Location input -->
+                    <app-location-input (locationSelected)="confirmLocation($event)" [editable]="true"></app-location-input>
 
-                <!-- Location input -->
-                <app-location-input (locationSelected)="confirmLocation($event)" [editable]="true"></app-location-input>
-
+                </div>
             </div>
-        </div>
-    </ion-slide>
+        </ion-slide>
 
-    <ion-slide>
-        <div class="slide">
-            <div class="slide--content">
-                <h1>Belair</h1>
-                <p>{{ 'v2.screens.onboarding.ask-notifications' | translate }}</p>
+        <ion-slide>
+            <div class="slide">
+                <div class="slide--content">
+                    <h1>Belair</h1>
+                    <p>{{ 'v2.screens.onboarding.ask-notifications' | translate }}</p>
 
-                <h5>Meldingen</h5>
-                <app-user-notification-settings (getFocus)="getFocus($event)" (loseFocus)="loseFocus($event)">
-                </app-user-notification-settings>
+                    <h5>Meldingen</h5>
+                    <app-user-notification-settings (getFocus)="getFocus($event)" (loseFocus)="loseFocus($event)">
+                    </app-user-notification-settings>
+                </div>
             </div>
-        </div>
-    </ion-slide>
-</app-onboarding-slider>
+        </ion-slide>
+    </app-onboarding-slider>
+</ion-content>
