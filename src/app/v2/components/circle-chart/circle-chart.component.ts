@@ -27,7 +27,7 @@ export class CircleChartComponent implements OnInit {
     circleOffset = 910;
     defaultOffset = 910;
     defaultRange = 92;
-
+    loading = true;
     pulsingText = {
         pulsing: false,
     };
@@ -89,10 +89,11 @@ export class CircleChartComponent implements OnInit {
     }
 
     private _changeTitle(value: number) {
+        this.loading = true
         this.pulsingText.pulsing = true;
 
         this.title = this.belaqiService.getLabelForIndex(value);
-
+        this.loading = false
         try {
             this.text = this.translate.instant(
                 'v2.components.circle-chart.avg-score',
