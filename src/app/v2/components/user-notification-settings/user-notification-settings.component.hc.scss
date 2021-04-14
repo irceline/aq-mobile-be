@@ -1,0 +1,22 @@
+@import '../../theme/variables.scss';
+.high-contrast {
+  :host {
+    .icon-standard {
+      display: none;
+    }
+    .icon-dark {
+      display: block;
+    }
+    ion-label {
+      color: $black;
+    }
+    ion-toggle {
+      --background: white;
+      border: solid 2px rgba(0, 0, 0, 0.1);
+      border-radius: 25.5px;
+      &.toggle-checked {
+        border: none;
+      }
+    }
+  }
+}

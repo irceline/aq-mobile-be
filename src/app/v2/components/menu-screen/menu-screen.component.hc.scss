@@ -1,0 +1,36 @@
+@import '../../theme/variables.scss';
+
+.high-contrast {
+  :host {
+    .menu {
+      background-color: white !important;
+      &--section {
+        border-bottom-color: rgba($black, 0.15);
+        h4,
+        h5,
+        ion-item {
+          color: $black;
+        }
+        .icon-dark,
+        .text-dark {
+          display: block;
+        }
+        .icon-standard,
+        .text-standard {
+          display: none;
+        }
+        &.logo {
+          color: $black;
+        }
+        &.info {
+          ion-item {
+            --detail-icon-color: rgba(18, 35, 52, 0.6);
+            ion-icon {
+              color: rgba($black, 0.64);
+            }
+          }
+        }
+      }
+    }
+  }
+}

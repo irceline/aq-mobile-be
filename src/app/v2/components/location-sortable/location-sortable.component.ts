@@ -8,7 +8,7 @@ import { LocationEditComponent } from './../location-edit/location-edit.componen
 @Component({
     selector: 'app-location-sortable',
     templateUrl: './location-sortable.component.html',
-    styleUrls: ['./location-sortable.component.scss'],
+    styleUrls: ['./location-sortable.component.scss','./location-sortable.component.hc.scss'],
 })
 export class LocationSortableComponent implements OnInit {
     @Input() locations: UserLocation[] = [];

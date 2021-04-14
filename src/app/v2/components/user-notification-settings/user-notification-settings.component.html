@@ -1,14 +1,16 @@
 <ion-list class="notification-settings">
   <ion-item lines="none" class="ion-no-padding">
-    <ion-icon src="/assets/images/icons/official.svg" slot="start"></ion-icon>
+    <ion-icon class="icon-standard" src="/assets/images/icons/official.svg" slot="start"></ion-icon>
+    <ion-icon class="icon-dark" src="/assets/images/icons/official-dark.svg" slot="start"></ion-icon>
     <ion-label text-wrap>
       {{ 'v2.components.user-notification-settings.official' |translate }}
     </ion-label>
-    <ion-toggle [ngModel]="generalNotification" ng-checked="true" color="success" (click)="toggleGeneralNotification($event)"
-      (ionFocus)="hasFocus()" (ionBlur)="blurFocus()"></ion-toggle>
+    <ion-toggle [ngModel]="generalNotification" ng-checked="true" color="success"
+      (click)="toggleGeneralNotification($event)" (ionFocus)="hasFocus()" (ionBlur)="blurFocus()"></ion-toggle>
   </ion-item>
   <ion-item lines="none" class="ion-no-padding">
-    <ion-icon src="/assets/images/icons/automated.svg" slot="start"></ion-icon>
+    <ion-icon class="icon-standard" src="/assets/images/icons/automated.svg" slot="start"></ion-icon>
+    <ion-icon class="icon-dark" src="/assets/images/icons/automated-dark.svg" slot="start"></ion-icon>
     <ion-label text-wrap>
       {{ 'v2.components.user-notification-settings.automated' |translate }}
     </ion-label>

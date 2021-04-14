@@ -7,7 +7,7 @@ import { UserSettingsService } from './../../services/user-settings.service';
 @Component({
     selector: 'app-user-notification-settings',
     templateUrl: './user-notification-settings.component.html',
-    styleUrls: ['./user-notification-settings.component.scss'],
+    styleUrls: ['./user-notification-settings.component.scss', './user-notification-settings.component.hc.scss'],
 })
 export class UserNotificationSettingsComponent implements OnInit {
 
