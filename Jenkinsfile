@@ -71,13 +71,19 @@ pipeline {
 
         stage('Stop all containers') {
             steps {
-                sh 'docker container prune'
+                sh 'docker stop $(docker ps -q)'
             }
         }
 
         stage('Remove all containers') {
             steps {
-                sh 'docker image prune'
+                sh 'docker rm $(docker ps -a -q)'
+            }
+        }
+
+        stage('Remove all dangling images') {
+            steps {
+                sh 'docker rmi $(docker images -q -f dangling=true)'
             }
         }
 
