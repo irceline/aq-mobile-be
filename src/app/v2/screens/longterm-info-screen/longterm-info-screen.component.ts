@@ -8,7 +8,7 @@ import { LongTermDataService } from '../../services/long-term-data.service';
 @Component({
     selector: 'app-longterm-info-screen',
     templateUrl: './longterm-info-screen.component.html',
-    styleUrls: ['./longterm-info-screen.component.scss'],
+    styleUrls: ['./longterm-info-screen.component.scss', './longterm-info-screen.component.hc.scss'],
 })
 export class LongtermInfoScreenComponent implements OnInit {
 

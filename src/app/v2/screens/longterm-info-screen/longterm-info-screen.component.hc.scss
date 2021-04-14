@@ -1,0 +1,37 @@
+@import '../../theme/variables.scss';
+.high-contrast {
+    :host {
+        .icon-standard {
+            display: none !important;
+        }
+        .icon-dark {
+            display: block !important;
+        }
+        .longterm-info {
+            ion-button,
+            p {
+                color: $black;
+                margin: 20px 0px 33px 0px;
+            }
+            ion-button {
+                ion-icon {
+                    opacity: 0.8;
+                }
+            }
+        }
+        .card {
+            box-shadow: 0 2px 50px 0 rgba($black, 0.3);
+            &--content {
+                p,
+                h5 {
+                    color: $black !important;
+                }
+                h5 {
+                    &:after {
+                        background: rgba($black, 0.3) !important;
+                    }
+                }
+            }
+        }
+    }
+}

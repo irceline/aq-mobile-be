@@ -1,5 +1,7 @@
-<p [ngStyle]="{'color': labelColor}">
-  {{ label }}
-</p>
+<div [ngStyle]="{'border-color': labelColor}">
+  <p [ngStyle]="{'color': labelColor}">
+    {{ label }}
+  </p>
 
-<span *ngIf="value">{{ value }}</span>
+  <span *ngIf="value">{{ value }}</span>
+</div>
