@@ -17,6 +17,7 @@
     display: flex;
     align-items: center;
     margin: 0;
+    padding-right: 10px;
 
     img {
       display: block;
@@ -24,6 +25,14 @@
       margin-right: 20px;
       margin-bottom: 0;
     }
+  }
+
+  .icon-standard {
+    display: block;
+  }
+
+  .icon-dark {
+    display: none;
   }
 
   .ion-no-padding {

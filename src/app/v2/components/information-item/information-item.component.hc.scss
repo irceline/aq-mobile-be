@@ -1,0 +1,27 @@
+@import '../../theme/variables.scss';
+.high-contrast {
+    :host {
+        ion-item {
+            span {
+                color: $black !important;
+                font-weight: 700;
+            }
+            h3 {
+                color: $black;
+                span {
+                    opacity: 1;
+                    font-weight: 500;
+                }
+            }
+            p {
+                color: $black !important;
+                span {
+                    font-weight: normal;
+                    &.value {
+                        font-weight: 700;
+                    }
+                }
+            }
+        }
+    }
+}

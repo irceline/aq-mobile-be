@@ -150,7 +150,11 @@
 				"locations": "Standorte",
 				"notifications": "Benachrichtigungen",
 				"version": "Version",
-				"workings": "(Wie funktioniert die App)"
+				"workings": "(Wie funktioniert die App)",
+				"switch-to-standard": "Wechseln sie zur standardversion",
+				"turn-off-high-contrast": "(hohen Kontrast ausschalten)",
+				"switch-to-high-contrast": "Wechseln sie zur kontrastreichen version",
+				"turn-off-standard-version": "(standardversion deaktivieren)"
 			},
 			"onboarding": {
 				"aq-info": "Diese Bewertung ist eine <strong>Berechnung</strong> von der kurzfristigen Luftqualität auf der Grundlage von Messdaten, Wetterbedingungen und Emissionen aus Verkehr und Industrie in Ihrer Gegend.",

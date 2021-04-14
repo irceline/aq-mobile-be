@@ -6,11 +6,12 @@ import { NavController, Platform } from '@ionic/angular';
 import { UserLocation } from '../../Interfaces';
 import { BelAQIService } from '../../services/bel-aqi.service';
 import { UserSettingsService } from '../../services/user-settings.service';
+import { ThemeHandlerService } from '../../services/theme-handler/theme-handler.service';
 
 @Component({
     selector: 'app-menu-screen',
     templateUrl: './menu-screen.component.html',
-    styleUrls: ['./menu-screen.component.scss'],
+    styleUrls: ['./menu-screen.component.scss', './menu-screen.component.hc.scss'],
     animations: [
         trigger('menuAnimation', [
             transition(':enter', [
@@ -54,7 +55,8 @@ export class MenuScreenComponent implements OnInit {
         private belAQIService: BelAQIService,
         private userSettingsService: UserSettingsService,
         private appVersion: AppVersion,
-        private platform: Platform
+        private platform: Platform,
+        public themeService: ThemeHandlerService
     ) { }
 
     ngOnInit() {
@@ -98,5 +100,11 @@ export class MenuScreenComponent implements OnInit {
     openLongTermInfo() {
         this.navCtrl.navigateForward(['main/longterm-info']);
         this.menuClosed.emit();
+    }
+
+    async toggleTheme() {
+        let currentTheme = await this.themeService.getActiveTheme()
+        currentTheme = currentTheme === this.themeService.CONTRAST_MODE ? this.themeService.STANDARD_MODE : this.themeService.CONTRAST_MODE
+        this.themeService.setActiveTheme(currentTheme)
     }
 }

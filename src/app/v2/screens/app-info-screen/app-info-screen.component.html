@@ -2,7 +2,8 @@
   <app-background>
     <div class="app-info">
       <ion-button (click)="goBack()">
-        <ion-icon slot="start" src="/assets/images/icons/chevron-back.svg"></ion-icon>
+        <ion-icon class="icon-standard" slot="start" src="/assets/images/icons/chevron-back.svg"></ion-icon>
+        <ion-icon class="icon-dark" slot="start" src="/assets/images/icons/chevron-back-dark.svg"></ion-icon>
         {{ 'v2.screens.app-info.how-this-works' | translate }}
       </ion-button>
 
@@ -10,7 +11,7 @@
 
       <p [innerHTML]="'v2.screens.app-info.aq-index-2' | translate"></p>
     </div>
-      <app-circle-chart></app-circle-chart>
+    <app-circle-chart></app-circle-chart>
     <div class="app-info">
       <p>{{ 'v2.screens.app-info.current-items' | translate }}</p>
 
@@ -54,7 +55,7 @@
 
       <!-- <p [innerHTML]="'v2.screens.app-info.check-lt-data' | translate"></p> -->
 
-      <ion-item detail>
+      <ion-item class="long-term" detail>
         <ion-label [routerLink]="['/main/longterm-info']" text-wrap>
           {{ 'v2.screens.main-screen.long-term-calculation' | translate }}</ion-label>
       </ion-item>
@@ -65,13 +66,15 @@
 
       <hr class="line">
 
-      <p [innerHTML]="'v2.screens.app-info.notifications' | translate "></p>
+      <p class="notification" [innerHTML]="'v2.screens.app-info.notifications' | translate "></p>
 
-      <img src="/assets/images/gmail@3x.png" alt="">
+      <img class="img-standard img-notification" src="/assets/images/gmail@3x.png" alt="">
 
       <!-- <ion-item detail class="more">
         <ion-label class="ion-text-wrap">{{ 'v2.screens.app-info.learn-more' | translate }}</ion-label>
       </ion-item> -->
     </div>
+    <img class="img-dark img-notification" src="/assets/images/group-9@3x.png" alt="">
+
   </app-background>
 </ion-content>

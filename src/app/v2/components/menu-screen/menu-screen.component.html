@@ -1,22 +1,22 @@
 <ion-content>
   <div class="menu" [ngStyle]="{'background-color': backgroundColor}">
-    <div class="menu--section">
+    <div class="menu--section info">
       <h4>Menu</h4>
       <!-- <ion-item detail lines="none" class="menu--link" (click)="openLongTermInfo()">
         <ion-label>
           {{ 'v2.screens.menu.long-term-exposure' | translate }}
         </ion-label>
       </ion-item> -->
-    </div>
 
-    <div class="menu--section">
       <ion-item detail lines="none" class="menu--link" (click)="openAppInfo()">
         <ion-label text-wrap>
           {{ 'v2.screens.menu.belair-info' | translate }}
           <span>{{ 'v2.screens.menu.workings' | translate }}</span>
         </ion-label>
       </ion-item>
+    </div>
 
+    <div class="menu--section">
       <!-- Language dropdown -->
       <div class="menu--language">
         <h5>{{ 'v2.screens.menu.language' | translate }}</h5>
@@ -33,6 +33,19 @@
       </app-location-sortable>
 
       <app-location-input (locationSelected)="addLocation($event)"></app-location-input>
+    </div>
+
+    <div class="menu--section style">
+      <ion-item lines="none" class="menu--link" (click)="toggleTheme()">
+        <ion-icon class="icon-standard" src="/assets/images/icons/brightness.svg" slot="start"></ion-icon>
+        <ion-icon class="icon-dark" src="/assets/images/icons/brightness-dark.svg" slot="start"></ion-icon>
+        <ion-label class="text-standard" text-wrap>{{ 'v2.screens.menu.switch-to-high-contrast' | translate }}
+          <span>{{ 'v2.screens.menu.turn-off-standard-version' | translate }}</span>
+        </ion-label>
+        <ion-label class="text-dark" text-wrap>{{ 'v2.screens.menu.switch-to-standard' | translate }}
+          <span>{{ 'v2.screens.menu.turn-off-high-contrast' | translate }}</span>
+        </ion-label>
+      </ion-item>
     </div>
 
     <div class="menu--section notifications">

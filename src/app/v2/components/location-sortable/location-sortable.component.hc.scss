@@ -1,0 +1,12 @@
+@import '../../theme/variables.scss';
+
+.high-contrast {
+    :host {
+        ion-item {
+            color: $black;
+            ion-icon {
+                color: rgba($black, 0.64);
+            }
+        }
+    }
+}
