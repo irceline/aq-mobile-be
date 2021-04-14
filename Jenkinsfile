@@ -7,9 +7,10 @@ pipeline {
         setupEnv = ''
         buildApkImg = "nebulaesoftware/build-ionic-apk"
         buildApk = ''
-        S3_BUCKET = 'belair-builds-test'
-        S3_REGION = 'ap-southeast-1'
+        S3_BUCKET = 'belair-builds'
+        S3_REGION = 'eu-central-1'
         SLACK_CHANNEL = '#belair'
+
     }
 
    agent any
@@ -67,23 +68,15 @@ pipeline {
             }
         }
 
-
-
-        stage('Stop all containers') {
-            steps {
-                sh 'docker stop $(docker ps -q)'
-            }
-        }
-
         stage('Remove all containers') {
             steps {
-                sh 'docker rm $(docker ps -a -q)'
+                sh 'docker container prune'
             }
         }
 
         stage('Remove all dangling images') {
             steps {
-                sh 'docker rmi $(docker images -q -f dangling=true)'
+                sh 'docker image prune -f'
             }
         }
 
