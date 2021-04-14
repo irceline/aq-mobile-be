@@ -8,7 +8,7 @@ import { BelAQIService } from '../../services/bel-aqi.service';
 @Component({
     selector: 'app-background',
     templateUrl: './background.component.html',
-    styleUrls: ['./background.component.scss'],
+    styleUrls: ['./background.component.scss', './background.component.hc.scss'],
 })
 export class BackgroundComponent implements OnDestroy {
     // @HostBinding('style.background-image')

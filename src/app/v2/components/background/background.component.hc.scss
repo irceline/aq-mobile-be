@@ -1,0 +1,10 @@
+.high-contrast {
+    :host {
+        img {
+            display: none;
+        }
+        ion-content {
+            --background: white;
+        }
+    }
+}

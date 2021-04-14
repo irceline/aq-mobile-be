@@ -1,7 +1,14 @@
 ion-content {
     --background: transparent;
     --padding-top: 56px;
-
+    .icon-standard,
+    .img-standard {
+        display: block !important;
+    }
+    .icon-dark,
+    .img-dark {
+        display: none !important;
+    }
     .app-info {
         color: white;
         padding: 25px 10vw;
@@ -22,8 +29,8 @@ ion-content {
             font-weight: 400;
 
             ion-icon {
-                font-size: 14px;
-                margin-right: 20px;
+                font-size: 18px;
+                margin-right: 16px;
             }
         }
 
@@ -141,16 +148,25 @@ ion-content {
 
         .line {
             display: block;
-            height: 1px;
+            height: 2px;
             width: 100%;
             background-color: white;
             margin: 35px 0;
-            opacity: 0.3;
+            opacity: 0.1;
         }
 
         app-circle-chart {
             margin-bottom: 20px;
             display: block;
+        }
+
+        .long-term {
+            --detail-icon-opacity: 1;
+            --detail-icon-font-size: 16px;
+            ion-label {
+                font-size: 14px;
+                line-height: 22px;
+            }
         }
     }
 }
