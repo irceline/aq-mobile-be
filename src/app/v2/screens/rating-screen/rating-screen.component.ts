@@ -88,8 +88,8 @@ export class RatingScreenComponent implements OnInit {
             n = Math.random() / shift + n;
             return n;
         }
-        feedback.latitude = randomize(feedback.latitude, 3);
-        feedback.longitude = randomize(feedback.longitude, 3);
+        feedback.latitude = randomize(feedback.latitude, 4);
+        feedback.longitude = randomize(feedback.longitude, 4);
         return feedback;
     }
 
