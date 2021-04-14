@@ -9,7 +9,7 @@ pipeline {
         buildApk = ''
         S3_BUCKET = 'belair-builds-test'
         S3_REGION = 'ap-southeast-1'
-        SLACK_CHANNEL = '@U5VJ0N3MJ'
+        SLACK_CHANNEL = '#belair'
     }
 
    agent any
