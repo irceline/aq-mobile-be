@@ -51,10 +51,12 @@
 	"feedback": {
 		"ajdust-location-for-feedback-button": "Déplacer la localisation",
 		"show-feedback-button": "Afficher les commentaires",
+		"edit-location-anonymise": "L'localisation que vous définissez ici sera déplacé de manière aléatoire avant d'être soumis afin de protéger votre vie privée.",
 		"stats": {
 			"submission": "Commentaires soumis",
 			"submission-today": "Aujourd'hui",
-			"submission-total": "Au total"
+			"submission-total": "Au total",
+			"anonymisation": "Les lieux affichés ici ont été déplacés au hasard avant la soumission afin de protéger la vie privée de l'auteur."
 		}
 	},
 	"network": {

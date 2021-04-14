@@ -51,10 +51,12 @@
 	"feedback": {
 		"ajdust-location-for-feedback-button": "Rückmeldeort verschieben",
 		"show-feedback-button": "Feedback anzeigen",
+		"edit-location-anonymise": "Der hier festgelegte Ort wird vor der Übermittlung nach dem Zufallsprinzip verschoben, um Ihre Privatsphäre zu schützen.",
 		"stats": {
 			"submission": "Eingereichtes Feedback",
 			"submission-today": "Heute",
-			"submission-total": "Insgesamt"
+			"submission-total": "Insgesamt",
+			"anonymisation": "Die hier angezeigten Standorte wurden vor der Einreichung nach dem Zufallsprinzip verschoben, um die Privatsphäre des Einreichers zu schützen."
 		}
 	},
 	"network": {
