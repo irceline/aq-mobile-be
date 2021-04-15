@@ -1,3 +1,4 @@
+$animationColor: white;
 :host {
     flex: 1;
     width: 100%;
@@ -8,7 +9,7 @@
         margin: auto;
         max-width: 440px;
         min-height: 320px;
-        transition: all .2s ease;
+        transition: all 0.2s ease;
 
         @media screen and (max-height: 750px) {
             min-height: 300px;
@@ -25,7 +26,6 @@
             align-items: center;
             justify-content: center;
             margin: 0 4%;
-
             &--text {
                 position: absolute;
                 width: 86%;
@@ -33,7 +33,27 @@
                 padding: 0 60px;
                 color: #ffffff;
                 text-align: center;
-
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                .loader {
+                    background: transparent;
+                    border-radius: 50%;
+                    box-shadow: 0 0 0 0 rgba($animationColor, 1);
+                    padding: 10px;
+                    margin-bottom: 20px;
+                    height: 120px;
+                    width: 120px;
+                    transform: scale(1);
+                    animation: pulseanim 1s infinite;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    &-text {
+                        font-size: 11px;
+                    }
+                }
                 h1 {
                     font-size: 48px;
                     font-weight: 400;
@@ -102,8 +122,9 @@
         }
 
         .path {
-            offset-path: path('M164.945134,299.264809 C240.771271,291.764363 300,227.798987 300,150 C300,67.1572875 232.842712,0 150,0 C67.1572875,0 0,67.1572875 0,150 C0,227.795103 59.2228153,291.757977 135.04351,299.264809'
-                );
+            offset-path: path(
+                'M164.945134,299.264809 C240.771271,291.764363 300,227.798987 300,150 C300,67.1572875 232.842712,0 150,0 C67.1572875,0 0,67.1572875 0,150 C0,227.795103 59.2228153,291.757977 135.04351,299.264809'
+            );
             transition: all 0.8s ease-in-out;
         }
     }
@@ -115,6 +136,7 @@
     animation-direction: alternate;
 }
 
+// this is not pulsing
 @keyframes pulse {
     0% {
         opacity: 1;
@@ -129,5 +151,22 @@
     100% {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@keyframes pulseanim {
+    0% {
+        transform: scale(0.85);
+        box-shadow: 0 0 0 0 rgba($animationColor, 0.7);
+    }
+
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 20px rgba($animationColor, 0);
+    }
+
+    100% {
+        transform: scale(0.85);
+        box-shadow: 0 0 0 0 rgba($animationColor, 0);
     }
 }

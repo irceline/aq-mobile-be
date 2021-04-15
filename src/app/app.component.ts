@@ -40,7 +40,7 @@ export class AppComponent {
         this.platform.ready().then(async () => {
             // this.statusBar.styleDefault();
             // this.errorLoggingSrvc.init();
-            this.statusBar.show();
+            this.statusBar.overlaysWebView(true);
             // this.splashScreen.hide();
             this.pouchDbInit.init();
             await this.presentSplashScreen();
