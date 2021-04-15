@@ -15,7 +15,7 @@ import { UserLocation } from '../../Interfaces';
 @Component({
     selector: 'app-onboarding-slider',
     templateUrl: './onboarding-slider.component.html',
-    styleUrls: ['./onboarding-slider.component.scss'],
+    styleUrls: ['./onboarding-slider.component.scss', './onboarding-slider.component.hc.scss'],
 })
 export class OnboardingSliderComponent implements OnInit, OnChanges {
     @Input() disabled: boolean;

@@ -17,7 +17,6 @@
         --placeholder-color: white;
         --padding-top: 21px;
         --padding-bottom: 21px;
-        --placeholder-color: white;
         --placeholder-opacity: 1;
         color: white;
         font-size: 18px;
@@ -31,6 +30,10 @@
             top: 50%;
             transform: translateY(-50%);
             right: 29px;
+
+            &.dark {
+                display: none;
+            }
         }
     }
 
@@ -65,6 +68,10 @@
             width: 25px;
             height: 25px;
             margin: 0 0 0 15px !important;
+
+            &.dark {
+                display: none;
+            }
         }
     }
 }

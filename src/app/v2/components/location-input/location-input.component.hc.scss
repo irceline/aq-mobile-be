@@ -1,0 +1,33 @@
+@import '../../theme/variables';
+
+.high-contrast{
+  :host {
+    .location {
+        &--input {
+            background-color: rgba($black, 0.05);
+            color: $black;
+            --placeholder-color: $black;
+
+            img {
+                display: none;
+
+                &.dark {
+                    display: block;
+                }
+            }
+        }
+
+        &--button {
+            color: $black;
+
+            img {
+                display: none;
+
+                &.dark {
+                    display: block;
+                }
+            }
+        }
+    }
+  }
+}
