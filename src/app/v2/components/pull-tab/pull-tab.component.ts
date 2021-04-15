@@ -63,12 +63,6 @@ export class PullTabComponent implements AfterViewInit {
             this.platform.height() - this.handleHeight + 'px'
         );
 
-        this.renderer.setStyle(
-            this.element.nativeElement,
-            'height',
-            this.platform.height() - this.gap + 'px'
-        );
-
         const trigger = new window['Hammer'](this.trigger.nativeElement);
         trigger
             .get('pan')
