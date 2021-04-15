@@ -3,7 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { backgroundImages, lightIndexColor, contrastModeColor } from '../../common/constants';
+import { backgroundImages, lightIndexColor, contrastModeColor, defaultColor } from '../../common/constants';
 import { BelAQIService } from '../../services/bel-aqi.service';
 import { ThemeHandlerService } from '../../services/theme-handler/theme-handler.service';
 
@@ -23,21 +23,30 @@ export class BackgroundComponent implements OnDestroy {
         private belAQIService: BelAQIService,
         private statusBar: StatusBar,
         private themeService: ThemeHandlerService
-    ) {
+    ) { }
+
+    ngOnInit(): void {
+        this.statusBar.styleLightContent();
         this.indexSubscription = this.belAQIService.$activeIndex.subscribe(async (entry) => {
-            const mode = await this.themeService.getActiveTheme()
             if (entry) {
                 this.backgroundImage = this._sanitizer.bypassSecurityTrustUrl(`${backgroundImages[entry.indexScore]}`);
-                if (mode != this.themeService.CONTRAST_MODE) {
-                    this.statusBar.backgroundColorByHexString(lightIndexColor[entry.indexScore])
-                }
-                else {
-                    this.statusBar.backgroundColorByHexString(contrastModeColor)
-                }
+                this.statusBarSet(lightIndexColor[entry.indexScore])
             } else {
                 this.backgroundImage = this._sanitizer.bypassSecurityTrustUrl(`/assets/images/bg.svg`);
+                this.statusBarSet(defaultColor)
             }
         });
+    }
+
+    statusBarSet(color: string): void {
+        this.themeService.getActiveTheme().then((theme) => {
+            if (theme === this.themeService.CONTRAST_MODE) {
+                this.statusBar.backgroundColorByHexString(contrastModeColor)
+            }
+            else {
+                this.statusBar.backgroundColorByHexString(color)
+            }
+        })
     }
 
     ngOnDestroy(): void {

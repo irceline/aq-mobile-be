@@ -6,3 +6,12 @@
     }
   }
 }
+.md {
+  .high-contrast {
+    :host {
+      ion-header {
+        max-height: 50px;
+      }
+    }
+  }
+}

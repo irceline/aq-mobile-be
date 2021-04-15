@@ -72,7 +72,6 @@ export class AppComponent {
         const splash = await this.modalCtrl.create({ component: SplashScreenComponent });
         splash.present();
         setTimeout(() => {
-            this.statusBar.styleLightContent()
             this.statusBar.show();
             splash.dismiss()
         }, 1500);

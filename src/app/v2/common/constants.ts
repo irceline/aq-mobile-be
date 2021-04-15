@@ -23,6 +23,7 @@ export const backgroundImages = {
     1: '/assets/images/backgrounds/10.svg',
 };
 
+export const defaultColor = '#29cdf7';
 export const contrastModeColor = '#122334';
 
 export const lightIndexColor = {
