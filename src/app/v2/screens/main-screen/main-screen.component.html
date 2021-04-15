@@ -21,7 +21,7 @@
   </app-background>
 </ion-content>
 
-<app-pull-tab [options]="drawerOptions" *ngIf="locations.length">
+<app-pull-tab [screenHeight]="screenHeight" [options]="drawerOptions" *ngIf="locations.length">
   <div class="details--wrapper" [ngClass]="{'inactive': detailPoint, 'active': !detailPoint}">
     <ng-container *ngIf="!detailPoint">
       <div class="details">

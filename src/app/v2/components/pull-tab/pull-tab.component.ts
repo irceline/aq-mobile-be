@@ -15,6 +15,7 @@ import { DomController, Platform, IonContent } from '@ionic/angular';
 })
 export class PullTabComponent implements AfterViewInit {
     @Input('options') options: any;
+    @Input('screenHeight') screenHeight: number;
 
     @ViewChild('trigger', { static: true }) trigger: ElementRef;
     @ViewChild('triggerArrow', { static: true }) triggerArrow: ElementRef;
@@ -60,7 +61,13 @@ export class PullTabComponent implements AfterViewInit {
         this.renderer.setStyle(
             this.element.nativeElement,
             'top',
-            this.platform.height() - this.handleHeight + 'px'
+            this.screenHeight - this.handleHeight + 'px'
+        );
+
+        this.renderer.setStyle(
+            this.element.nativeElement,
+            'height',
+            this.screenHeight - this.gap + 'px'
         );
 
         const trigger = new window['Hammer'](this.trigger.nativeElement);
@@ -110,7 +117,7 @@ export class PullTabComponent implements AfterViewInit {
                 this.renderer.setStyle(
                     this.element.nativeElement,
                     'top',
-                    this.platform.height() - this.handleHeight + 'px'
+                    this.screenHeight - this.handleHeight + 'px'
                 );
             });
             this.isEnabled = false;
@@ -128,7 +135,7 @@ export class PullTabComponent implements AfterViewInit {
         if (this.bounceBack && ev.isFinal) {
             const topDiff = newTop - this.thresholdTop;
             const bottomDiff =
-                this.platform.height() - this.thresholdBottom - newTop;
+                this.screenHeight - this.thresholdBottom - newTop;
 
             topDiff >= bottomDiff
                 ? (bounceToBottom = true)
@@ -153,7 +160,7 @@ export class PullTabComponent implements AfterViewInit {
             });
             this.isEnabled = true;
         } else if (
-            this.platform.height() - newTop < this.thresholdBottom ||
+            this.screenHeight - newTop < this.thresholdBottom ||
             ev.additionalEvent === 'pandown' ||
             bounceToBottom
         ) {
@@ -166,7 +173,7 @@ export class PullTabComponent implements AfterViewInit {
                 this.renderer.setStyle(
                     this.element.nativeElement,
                     'top',
-                    this.platform.height() - this.handleHeight + 'px'
+                    this.screenHeight - this.handleHeight + 'px'
                 );
             });
             this.isEnabled = false;
@@ -179,7 +186,7 @@ export class PullTabComponent implements AfterViewInit {
 
             if (
                 newTop > 0 &&
-                newTop < this.platform.height() - this.handleHeight
+                newTop < this.screenHeight - this.handleHeight
             ) {
                 if (
                     ev.additionalEvent === 'panup' ||

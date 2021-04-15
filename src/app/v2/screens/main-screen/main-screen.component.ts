@@ -25,7 +25,7 @@ marker('v2.screens.app-info.belaqi-title');
 @Component({
     selector: 'app-main-screen',
     templateUrl: './main-screen.component.html',
-    styleUrls: ['./main-screen.component.scss'],
+    styleUrls: ['./main-screen.component.scss', './main-screen.component.hc.scss'],
     animations: [],
 })
 export class MainScreenComponent implements OnInit {
@@ -101,6 +101,7 @@ export class MainScreenComponent implements OnInit {
 
     detailPoint: DataPoint = null;
     contentHeight = 0;
+    screenHeight = 0;
 
     constructor(
         public userSettingsService: UserSettingsService,
@@ -196,6 +197,7 @@ export class MainScreenComponent implements OnInit {
         };
         this.contentHeight =
             this.platform.height() - this.drawerOptions.handleHeight - 56;
+        this.screenHeight = this.platform.height();
     }
 
     ionViewWillEnter() {

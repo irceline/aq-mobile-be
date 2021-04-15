@@ -7,6 +7,9 @@
   <ng-content></ng-content>
 </ion-content>
 
-<button #triggerArrow type="button" class="trigger-up">
+<button #triggerArrow type="button" class="trigger-up img-standard">
   <img src="/assets/images/icons/arrow-up.svg" alt="" [ngClass]="{'rotate': isEnabled}">
+</button>
+<button #triggerArrow type="button" class="trigger-up img-dark">
+  <img src="/assets/images/icons/arrow-up-dark.svg" alt="" [ngClass]="{'rotate': isEnabled}">
 </button>

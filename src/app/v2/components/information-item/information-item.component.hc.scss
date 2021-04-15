@@ -2,6 +2,24 @@
 .high-contrast {
     :host {
         ion-item {
+            --detail-icon-color: rgba(18, 35, 52, 0.6);
+            --detail-icon-opacity: 1;
+            .icon-standard {
+                display: none;
+            }
+            .icon-dark {
+                display: block;
+            }
+            .arrow-back {
+                width: 14px;
+                height: 14px;
+                border-right: 0px;
+                border-top: 0px;
+                border-left: 2px;
+                border-bottom: 2px;
+                border-style: solid;
+                transform: rotate(45deg);
+            }
             span {
                 color: $black !important;
                 font-weight: 700;

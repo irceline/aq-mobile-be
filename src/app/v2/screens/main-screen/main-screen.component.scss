@@ -8,6 +8,7 @@ ion-content {
 app-pull-tab ::ng-deep {
     .details {
         padding: 45px;
+        padding-right: 5px;
         display: block;
 
         h5 {
@@ -30,7 +31,7 @@ app-pull-tab ::ng-deep {
         }
 
         &--wrapper {
-            transition: all .3s ease;
+            transition: all 0.3s ease;
             position: absolute;
             width: 100%;
             top: 0;
@@ -122,21 +123,29 @@ app-value-display {
 }
 
 map-component {
-  width: 100%;
-  position: absolute;
-  left: 0;
-  padding-bottom: 60px;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    padding-bottom: 60px;
 }
 .longterm {
-  position: fixed;
-  bottom: -310px;
-  right: 0px;
-  padding-left: 5px;
-  ion-item {
-    width: 100%;
-    text-align: center;
-    font-size: 1em;
-  }
+    position: fixed;
+    bottom: -310px;
+    left: 0;
+    right: 0;
+    padding-left: 5px;
+    display: flex;
+    justify-content: center;
+    ion-item {
+        text-align: center;
+        font-size: 1em;
+        --border-color: transparent;
+        ion-label {
+            line-height: 1;
+            margin: 0px;
+            border-bottom: 1px solid #1ebce5;
+        }
+    }
 }
 
 .wrapper {
@@ -166,7 +175,6 @@ map-component {
 }
 
 .no-locations {
-
     padding: 20px;
 
     .no-locations-hint {
