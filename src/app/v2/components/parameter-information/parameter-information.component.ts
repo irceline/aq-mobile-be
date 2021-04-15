@@ -18,7 +18,7 @@ marker('v2.screens.main-screen.about-pm25');
 @Component({
   selector: 'app-parameter-information',
   templateUrl: './parameter-information.component.html',
-  styleUrls: ['./parameter-information.component.scss'],
+  styleUrls: ['./parameter-information.component.scss', './parameter-information.component.hc.scss'],
 })
 export class ParameterInformationComponent {
 

@@ -1,0 +1,23 @@
+@import '../../theme/variables.scss';
+.high-contrast {
+    :host {
+        .details--info {
+            .icon-standard {
+                display: none;
+            }
+            .icon-dark {
+                display: inline-block;
+            }
+            div {
+                h4 {
+                    color: $black;
+                }
+            }
+            &-text {
+                p {
+                    color: $black;
+                }
+            }
+        }
+    }
+}

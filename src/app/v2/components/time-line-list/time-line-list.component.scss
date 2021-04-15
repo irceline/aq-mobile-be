@@ -6,4 +6,9 @@
             font-weight: bold;
         }
     }
+    ion-slide {
+        &::before {
+            top: 92% !important;
+        }
+    }
 }

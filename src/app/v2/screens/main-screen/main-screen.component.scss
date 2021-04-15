@@ -10,7 +10,6 @@ app-pull-tab ::ng-deep {
         padding: 45px;
         padding-right: 5px;
         display: block;
-
         h5 {
             font-size: 18px;
             font-weight: bold;
@@ -36,6 +35,12 @@ app-pull-tab ::ng-deep {
             width: 100%;
             top: 0;
 
+            &.children {
+                .details {
+                    padding-right: 45px !important;
+                }
+            }
+            
             &.inactive {
                 opacity: 0;
                 transition-delay: 0.3s;
@@ -88,7 +93,7 @@ app-value-display {
 }
 
 .details--timeline ::ng-deep {
-    margin: 10px -45px 20px -45px;
+    margin: 10px -45px 30px -45px;
     height: 100px;
 
     .swiper-container {

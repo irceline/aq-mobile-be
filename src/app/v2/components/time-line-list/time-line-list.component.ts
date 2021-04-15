@@ -7,7 +7,7 @@ import { BelAqiIndexResult } from '../../services/bel-aqi.service';
 @Component({
     selector: 'app-time-line-list',
     templateUrl: './time-line-list.component.html',
-    styleUrls: ['./time-line-list.component.scss'],
+    styleUrls: ['./time-line-list.component.scss', './time-line-list.component.hc.scss'],
 })
 export class TimeLineListComponent implements OnChanges {
     @ViewChild(IonSlides, { static: true }) slides: IonSlides;
