@@ -49,7 +49,7 @@ export class AppComponent {
             }
         })
 
-        this.themeHandlerService.$theme.subscribe((item : any) => {
+        this.themeHandlerService.$theme.subscribe((item: any) => {
             if (item === this.themeHandlerService.CONTRAST_MODE) this.highContrastMode = true;
             else this.highContrastMode = false;
         })
@@ -59,8 +59,8 @@ export class AppComponent {
         this.platform.ready().then(async () => {
             // this.statusBar.styleDefault();
             // this.errorLoggingSrvc.init();
-            this.statusBar.overlaysWebView(true);
             // this.splashScreen.hide();
+            this.statusBar.hide();
             this.pouchDbInit.init();
             await this.presentSplashScreen();
         });
@@ -71,6 +71,10 @@ export class AppComponent {
     private async presentSplashScreen() {
         const splash = await this.modalCtrl.create({ component: SplashScreenComponent });
         splash.present();
-        setTimeout(() => splash.dismiss(), 1500);
+        setTimeout(() => {
+            this.statusBar.styleLightContent()
+            this.statusBar.show();
+            splash.dismiss()
+        }, 1500);
     }
 }

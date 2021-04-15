@@ -1,0 +1,8 @@
+@import '../../theme/variables.scss';
+.high-contrast {
+  :host {
+    ion-header {
+      background-color: $black;
+    }
+  }
+}

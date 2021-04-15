@@ -3,6 +3,8 @@ import { Component, EventEmitter, HostBinding, Input, OnInit, Output } from '@an
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { NavController, Platform } from '@ionic/angular';
 
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { contrastModeColor } from '../../common/constants'
 import { UserLocation } from '../../Interfaces';
 import { BelAQIService } from '../../services/bel-aqi.service';
 import { UserSettingsService } from '../../services/user-settings.service';
@@ -56,7 +58,8 @@ export class MenuScreenComponent implements OnInit {
         private userSettingsService: UserSettingsService,
         private appVersion: AppVersion,
         private platform: Platform,
-        public themeService: ThemeHandlerService
+        private themeService: ThemeHandlerService,
+        private statusBar: StatusBar
     ) { }
 
     ngOnInit() {
@@ -104,7 +107,15 @@ export class MenuScreenComponent implements OnInit {
 
     async toggleTheme() {
         let currentTheme = await this.themeService.getActiveTheme()
-        currentTheme = currentTheme === this.themeService.CONTRAST_MODE ? this.themeService.STANDARD_MODE : this.themeService.CONTRAST_MODE
+        let statusBarColor = ''
+        if (currentTheme === this.themeService.CONTRAST_MODE) {
+            currentTheme = this.themeService.STANDARD_MODE
+            statusBarColor = this.backgroundColor
+        } else {
+            currentTheme = this.themeService.CONTRAST_MODE
+            statusBarColor = contrastModeColor
+        }
+        this.statusBar.backgroundColorByHexString(statusBarColor)
         this.themeService.setActiveTheme(currentTheme)
     }
 }

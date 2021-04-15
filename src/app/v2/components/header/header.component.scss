@@ -1,24 +1,17 @@
 :host {
     // display: flex;
     // align-items: center;
-    padding: 0 18px;
 
     ion-toolbar {
         --border-width: 0;
     }
 
     ion-header {
-        transition: background-color 0.5s ease-in-out;
-        transition-delay: 0.4s;
+        padding: 2px 18px;
+        // transition: background-color 0.5s ease-in-out;
 
         &.header-md:after {
             background: none;
         }
-    }
-}
-
-.md {
-    :host {
-        padding-top: 18px;
     }
 }
