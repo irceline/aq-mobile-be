@@ -1,0 +1,15 @@
+@import '../../theme/variables';
+
+.high-contrast {
+    :host {
+        .info-button {
+            img {
+                display: none;
+
+                &.dark {
+                    display: block;
+                }
+            }
+        }
+    }
+}

@@ -4,14 +4,16 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { UserLocation } from '../../Interfaces';
 import { BelAQIService } from '../../services/bel-aqi.service';
+import { ThemeHandlerService } from '../..//services/theme-handler/theme-handler.service';
 import { GeneralNotificationService } from '../../services/push-notifications/general-notification.service';
 import { PushNotification } from './../../services/push-notifications/push-notifications.service';
 import { NotificationPopoverComponent } from './../notification-popover/notification-popover.component';
+import { runInThisContext } from 'vm';
 
 @Component({
     selector: 'app-circle-chart',
     templateUrl: './circle-chart.component.html',
-    styleUrls: ['./circle-chart.component.scss'],
+    styleUrls: ['./circle-chart.component.scss', './circle-chart.component.hc.scss'],
 })
 export class CircleChartComponent implements OnInit {
     // belaqi score index
@@ -31,6 +33,7 @@ export class CircleChartComponent implements OnInit {
     pulsingText = {
         pulsing: false,
     };
+    chartColor = '#FFFFFF';
 
     public activeUserLocation: UserLocation;
 
@@ -43,7 +46,8 @@ export class CircleChartComponent implements OnInit {
         public element: ElementRef,
         private zone: NgZone,
         private generalNotification: GeneralNotificationService,
-        public popoverController: PopoverController
+        public popoverController: PopoverController,
+        private themeHandlerService: ThemeHandlerService
     ) {
         belaqiService.$activeIndex.subscribe((newIndex) => {
             if (newIndex) {
@@ -52,6 +56,14 @@ export class CircleChartComponent implements OnInit {
                 this._initialize(this.belAqi);
             }
         });
+
+        themeHandlerService.$theme.subscribe((item : any) => {
+            if (item === this.themeHandlerService.CONTRAST_MODE) {
+                this.chartColor = this.belaqiService.getLightColorForIndex(this.belAqi);
+            } else {
+                this.chartColor = '#FFFFFF'
+            }
+        })
     }
 
     ngOnInit() {
@@ -84,6 +96,14 @@ export class CircleChartComponent implements OnInit {
         const range = inverted * this.defaultRange;
         this.circleOffset = this.defaultOffset - range;
         this.dashoffset = inverted * this.defaultRange;
+
+        this.themeHandlerService.getActiveTheme().then(theme => {
+            if (theme !== this.themeHandlerService.CONTRAST_MODE || !theme) {
+                this.chartColor = '#FFFFFF';
+            } else {
+                this.chartColor = this.belaqiService.getLightColorForIndex(belaqi);
+            }
+        })
 
         this._changeTitle(belaqi);
     }

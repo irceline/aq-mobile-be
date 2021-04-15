@@ -1,5 +1,6 @@
 
 <ion-button shape="round" class="theme-button" fill="clear" (click)="handleTheme()">
-  {{contrastText}}
+  <ion-label class="text-standard">{{'v2.screens.menu.switch-to-high-contrast' | translate}}</ion-label>
+  <ion-label class="text-dark">{{'v2.screens.menu.switch-to-standard' | translate}}</ion-label>
   <img [src]="contrastIcon" alt="contrast-icon" class="contrast-icon">
 </ion-button>

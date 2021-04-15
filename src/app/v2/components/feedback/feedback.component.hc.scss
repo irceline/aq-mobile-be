@@ -1,0 +1,89 @@
+@import '../../theme/variables';
+
+.high-contrast {
+    :host {
+        .feedback {
+            &--buttons {
+                display: flex;
+                border-radius: 10px;
+                overflow: hidden;
+                margin-bottom: 4px;
+
+                ion-button {
+                    flex: 1;
+                    --border-radius: 0;
+                    margin: 0;
+                    height: 75px;
+                    --background: white;
+                    --background-activated: #f0f0f0;
+
+                    &:first-child {
+                        border-right: 1px solid #979797;
+                    }
+
+                    &.inactive {
+                        opacity: 0.2;
+                    }
+
+                    &.active {
+                        opacity: 1;
+                    }
+                }
+            }
+
+            &--display {
+                .display-button {
+                    color: $black !important;
+                }
+            }
+
+            &--content {
+                padding: 20px;
+
+                p {
+                    margin: 0;
+                    color: $black;
+                    margin-bottom: 10px;
+                }
+
+                ion-list {
+                    margin-bottom: 30px;
+
+                    ion-item {
+                        --color: $black;
+                        font-size: 16px;
+                        --inner-padding-start: 0;
+                        --background-activated: rgba(255, 255, 255, 0.1)
+                    }
+                }
+            }
+
+            &--button {
+                position: fixed;
+                bottom: 0;
+                right: 0;
+                left: 0;
+                margin: auto;
+                --min-height: 60px;
+                height: 60px;
+                width: calc(100% - 60px);
+                background-color: white;
+                border-top-right-radius: 30px;
+                border-top-left-radius: 30px;
+                padding: 0 20px;
+                z-index: 9999;
+
+                ion-label {
+                    color: #747474;
+                    text-align: center;
+                    font-size: 16px;
+                    font-weight: 600;
+                }
+
+                ion-icon {
+                    color: #747474;
+                }
+            }
+        }
+    }
+}

@@ -15,10 +15,14 @@
     text-align: right;
     white-space: normal;
 
+    .text-dark {
+      display: none;
+    }
+
     .contrast-icon {
-        margin-left: 5px;
-        position: relative;
-        right: -10px;
+      margin-left: 5px;
+      position: relative;
+      right: -10px;
     }
   }
 }

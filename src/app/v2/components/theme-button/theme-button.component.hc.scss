@@ -7,6 +7,14 @@
       background: $black;
       color: white;
       width: 220px;
+
+      .text-standard {
+        display: none;
+      }
+
+      .text-dark {
+        display: block;
+      }
     }
   }
 }
