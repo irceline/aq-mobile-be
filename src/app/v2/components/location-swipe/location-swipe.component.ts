@@ -6,7 +6,7 @@ import { UserLocation } from '../../Interfaces';
 @Component({
     selector: 'app-location-swipe',
     templateUrl: './location-swipe.component.html',
-    styleUrls: ['./location-swipe.component.scss'],
+    styleUrls: ['./location-swipe.component.scss', './location-swipe.component.hc.scss'],
 })
 export class LocationSwipeComponent implements OnInit {
     @ViewChild(IonSlides, { static: true }) slides: IonSlides;

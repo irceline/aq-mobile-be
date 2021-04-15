@@ -1,0 +1,57 @@
+@import '../../theme/variables';
+
+.high-contrast {
+    :host {
+        ion-content {
+            .rating {
+                p {
+                    color: $black;
+                }
+
+                &--info {
+                    background-color: white;
+                    padding: 40px 45px;
+
+                    p {
+                        font-size: 15px;
+                        line-height: 1.4;
+                        color: #747474;
+                        margin-top: 0;
+                    }
+
+                    strong {
+                        font-weight: 600;
+                        margin-bottom: 10px;
+                        color: #747474;
+                        display: block;
+                    }
+
+                    ion-item {
+                        --padding-start: 0;
+                        font-size: 15px;
+                        line-height: 1.47;
+                        color: #747474;
+
+                        ion-label {
+                            margin: 0;
+                        }
+
+                        ion-icon {
+                            font-size: 40px;
+                            margin: 0;
+                            margin-right: 10px;
+                        }
+
+                        &:nth-child(2) {
+                            ion-icon {
+                                font-size: 35px;
+                            }
+                        }
+                    }
+                }
+            }
+
+
+        }
+    }
+}

@@ -9,92 +9,12 @@
             color: $black;
 
             .slide {
-                width: 100%;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                flex: 1;
-
-                &--content {
-                    padding: 30px;
-                    flex: 1;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    width: 100%;
-
-                    &.flex-end {
-                        justify-content: flex-end;
-                    }
-
-                    h1 {
-                        font-family: var(--ion-cookie-family);
-                        margin: 0;
-                        font-size: 80px;
-
-                        &.big {
-                            font-size: 120px;
-                        }
-                    }
-
-                    p {
-                        font-size: 18px;
-                        margin: 0;
-                        // font-family: var(--ion-metro-family);
-                    }
-                }
-
                 .index-wheel {
                     display: none;
 
                     &.dark {
                         display: block;
                     }
-                }
-
-                &--image {
-                    align-items: flex-end;
-                    display: flex;
-                    justify-content: center;
-                    height: 50px;
-                    margin-bottom: 37px;
-                }
-
-                ion-input {
-                    text-align: left;
-                    min-height: 61px;
-                    margin-bottom: 10px;
-
-                    img {
-                        position: absolute;
-                        top: 50%;
-                        transform: translateY(-50%);
-                        right: 29px;
-                    }
-                }
-
-                img {
-                    margin-bottom: 50px;
-
-                    &.medium {
-                        margin-bottom: 75px;
-                    }
-                }
-
-                .location {
-                    margin-top: 40px;
-                }
-
-                .flanders {
-                    margin-top: 240px;
-                    margin-bottom: 0;
-                }
-
-                h5 {
-                    text-align: left;
-                    font-weight: bold;
-                    font-size: 16px;
-                    margin-top: 70px;
                 }
             }
         }

@@ -1,0 +1,13 @@
+@import '../../theme/variables';
+
+.high-contrast {
+    :host {
+        .circle {
+            &-chart {
+                &--text {
+                    color: $black;
+                }
+            }
+        }
+    }
+}

@@ -11,7 +11,7 @@ import { DomController, Platform, IonContent } from '@ionic/angular';
 @Component({
     selector: 'app-pull-tab',
     templateUrl: './pull-tab.component.html',
-    styleUrls: ['./pull-tab.component.scss'],
+    styleUrls: ['./pull-tab.component.scss', './pull-tab.component.hc.scss'],
 })
 export class PullTabComponent implements AfterViewInit {
     @Input('options') options: any;

@@ -1,0 +1,18 @@
+@import '../../theme/variables';
+
+.high-contrast{
+  :host {
+    .timeline--item {
+      background-color: white;
+      box-shadow: 0 0 10px rgba(#000, 0.2);
+
+      &-status {
+        color: $black;
+      }
+    
+      &-day {
+        color: $black;
+      }
+    }
+  }
+}

@@ -7,7 +7,7 @@ import { BelAqiIndexResult, BelAQIService } from '../../services/bel-aqi.service
 @Component({
   selector: 'app-time-line-item',
   templateUrl: './time-line-item.component.html',
-  styleUrls: ['./time-line-item.component.scss'],
+  styleUrls: ['./time-line-item.component.scss', './time-line-item.component.hc.scss'],
 })
 export class TimeLineItemComponent implements OnInit {
 
