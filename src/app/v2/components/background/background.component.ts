@@ -2,8 +2,10 @@ import { Component, OnDestroy } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 
-import { backgroundImages } from '../../common/constants';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { backgroundImages, lightIndexColor, contrastModeColor, defaultColor } from '../../common/constants';
 import { BelAQIService } from '../../services/bel-aqi.service';
+import { ThemeHandlerService } from '../../services/theme-handler/theme-handler.service';
 
 @Component({
     selector: 'app-background',
@@ -18,15 +20,33 @@ export class BackgroundComponent implements OnDestroy {
 
     constructor(
         private _sanitizer: DomSanitizer,
-        private belAQIService: BelAQIService
-    ) {
-        this.indexSubscription = this.belAQIService.$activeIndex.subscribe((entry) => {
+        private belAQIService: BelAQIService,
+        private statusBar: StatusBar,
+        private themeService: ThemeHandlerService
+    ) { }
+
+    ngOnInit(): void {
+        this.statusBar.styleLightContent();
+        this.indexSubscription = this.belAQIService.$activeIndex.subscribe(async (entry) => {
             if (entry) {
                 this.backgroundImage = this._sanitizer.bypassSecurityTrustUrl(`${backgroundImages[entry.indexScore]}`);
+                this.statusBarSet(lightIndexColor[entry.indexScore])
             } else {
                 this.backgroundImage = this._sanitizer.bypassSecurityTrustUrl(`/assets/images/bg.svg`);
+                this.statusBarSet(defaultColor)
             }
         });
+    }
+
+    statusBarSet(color: string): void {
+        this.themeService.getActiveTheme().then((theme) => {
+            if (theme === this.themeService.CONTRAST_MODE) {
+                this.statusBar.backgroundColorByHexString(contrastModeColor)
+            }
+            else {
+                this.statusBar.backgroundColorByHexString(color)
+            }
+        })
     }
 
     ngOnDestroy(): void {
