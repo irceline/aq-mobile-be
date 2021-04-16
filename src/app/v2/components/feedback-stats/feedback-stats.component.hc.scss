@@ -1,0 +1,23 @@
+@import '../../theme/variables';
+
+.high-contrast {
+    :host {
+        .wrapper {
+            background-color: white !important;
+
+            .stats {
+                .title,
+                .today,
+                .total {
+                    color: $black;
+                }
+            }
+
+            .controls {
+                .button {
+                    color: $black;
+                }
+            }
+        }
+    }
+}

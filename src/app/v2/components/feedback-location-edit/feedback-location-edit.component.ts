@@ -8,7 +8,7 @@ import { GeocoderService } from '../../services/geocoder/geocoder.service';
 @Component({
   selector: 'app-feedback-location-edit',
   templateUrl: './feedback-location-edit.component.html',
-  styleUrls: ['./feedback-location-edit.component.scss'],
+  styleUrls: ['./feedback-location-edit.component.scss', './feedback-location-edit.component.hc.scss'],
 })
 export class FeedbackLocationEditComponent implements OnInit {
 

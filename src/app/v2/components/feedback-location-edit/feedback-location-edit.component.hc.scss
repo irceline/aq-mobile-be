@@ -1,0 +1,21 @@
+@import '../../theme/variables';
+
+.high-contrast {
+    :host {
+        .wrapper {
+            background: white !important;
+
+
+            .controls {
+                display: flex;
+
+                .button {
+                    color: $black;
+                }
+            }
+            .edit-location-hint {
+                color: $black;
+            }
+        }
+    }
+}

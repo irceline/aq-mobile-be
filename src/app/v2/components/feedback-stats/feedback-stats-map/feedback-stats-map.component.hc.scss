@@ -1,0 +1,19 @@
+@import '../../../theme/variables';
+
+.high-contrast {
+    :host {
+        ion-segment {
+            ion-segment-button {
+                --color-checked: #122334;
+                --indicator-color: #122334;
+                --color: rgba(0, 0, 0, 0.3);
+            }
+        }
+
+        .map {
+            .loading {
+                background: white !important;
+            }
+        }
+    }
+}

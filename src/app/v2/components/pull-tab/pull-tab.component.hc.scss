@@ -1,5 +1,13 @@
+@import '../../theme/variables';
+
 .high-contrast {
     :host {
+        .trigger {
+            span {
+                background-color: rgba($black, 0.6);
+            }
+        }
+
         .content-wrapper {
             box-shadow: 0 2px 50px 0 rgba(0, 0, 0, 0.2);
         }
