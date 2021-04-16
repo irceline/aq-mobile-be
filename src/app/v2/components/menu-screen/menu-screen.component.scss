@@ -45,6 +45,9 @@
       &.locations {
         margin-top: 35px;
         padding-bottom: 25px;
+        h5 {
+          margin-bottom: 20px;
+        }
       }
 
       &.notifications {
@@ -91,7 +94,7 @@
         font-weight: bold;
         color: white;
         padding-inline-start: 16px;
-        // margin: 0 16px;
+        margin-bottom: 7px;
       }
 
       ::ng-deep .language--dropdown {

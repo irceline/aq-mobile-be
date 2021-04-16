@@ -1,13 +1,12 @@
 @import '../../theme/variables.scss';
 .high-contrast {
     :host {
-        .icon-standard {
-            display: none !important;
-        }
-        .icon-dark {
-            display: block !important;
-        }
         .longterm-info {
+            .arrow-back {
+                width: 14px;
+                height: 14px;
+                border-color: rgba($black, 0.64);
+            }
             ion-button,
             p {
                 color: $black;

@@ -2,15 +2,19 @@
 
 .high-contrast {
     :host {
-        .icon-standard,
         .img-standard {
             display: none !important;
         }
-        .icon-dark,
         .img-dark {
             display: block !important;
         }
         .app-info {
+            .arrow-back {
+                width: 14px;
+                height: 14px;
+                border-color: rgba($black, 0.64);
+            }
+
             color: $black;
             padding-bottom: 0px;
             ion-button {

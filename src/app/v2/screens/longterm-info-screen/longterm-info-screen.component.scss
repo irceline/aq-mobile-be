@@ -1,16 +1,22 @@
 ion-content {
     --background: transparent;
     --padding-top: 56px;
-    .icon-standard {
-        display: block !important;
-    }
-    .icon-dark {
-        display: none !important;
-    }
     .longterm-info {
         color: white;
-        padding-top: 25px;
         margin: 0 50px;
+
+        .arrow-back {
+            width: 10px;
+            height: 10px;
+            border-right: 0px;
+            border-top: 0px;
+            border-left: 2px;
+            border-bottom: 2px;
+            border-style: solid;
+            transform: rotate(45deg);
+            margin-right: 18px;
+            border-color: white;
+        }
 
         ion-button {
             --background: transparent;

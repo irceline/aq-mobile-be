@@ -1,11 +1,9 @@
 ion-content {
     --background: transparent;
     --padding-top: 56px;
-    .icon-standard,
     .img-standard {
         display: block !important;
     }
-    .icon-dark,
     .img-dark {
         display: none !important;
     }
@@ -15,6 +13,19 @@ ion-content {
     .app-info {
         color: white;
         padding: 25px 10vw;
+
+        .arrow-back {
+            width: 10px;
+            height: 10px;
+            border-right: 0px;
+            border-top: 0px;
+            border-left: 2px;
+            border-bottom: 2px;
+            border-style: solid;
+            transform: rotate(45deg);
+            margin-right: 18px;
+            border-color: white;
+        }
 
         ion-button {
             --background: transparent;

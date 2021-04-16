@@ -2,6 +2,12 @@
 
 .high-contrast {
     :host {
+        .icon-standard {
+            display: none;
+        }
+        .icon-dark {
+            display: inline-block;
+        }
         ion-item {
             color: $black;
             ion-icon {
