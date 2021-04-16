@@ -51,10 +51,12 @@
 	"feedback": {
 		"ajdust-location-for-feedback-button": "Feedback locatie verplaatsen",
 		"show-feedback-button": "Feedback weergeven",
+		"edit-location-anonymise": "De locatie die u hier instelt, wordt willekeurig verplaatst voordat deze wordt verzonden om uw privacy te beschermen.",
 		"stats": {
 			"submission": "Ingezonden feedback",
 			"submission-today": "Vandaag",
-			"submission-total": "In totaal"
+			"submission-total": "In totaal",
+			"anonymisation": "The locations displayed here were displaced at random before submission to protect the privacy of the submitter."
 		}
 	},
 	"network": {
