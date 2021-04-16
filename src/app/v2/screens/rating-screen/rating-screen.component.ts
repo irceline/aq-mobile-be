@@ -13,7 +13,7 @@ import { FeedbackStats } from './../../services/feedback/feedback.service';
 @Component({
     selector: 'app-rating-screen',
     templateUrl: './rating-screen.component.html',
-    styleUrls: ['./rating-screen.component.scss'],
+    styleUrls: ['./rating-screen.component.scss', './rating-screen.component.hc.scss'],
 })
 export class RatingScreenComponent implements OnInit {
     locations: UserLocation[] = [];

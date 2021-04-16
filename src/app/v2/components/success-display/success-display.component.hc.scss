@@ -1,0 +1,20 @@
+@import '../../theme/variables';
+
+.high-contrast {
+    :host {
+        .success {
+            h1,
+            p {
+                color: $black;
+            }
+
+            &--button{
+                color: $black;
+
+                a {
+                    color: $black;
+                }
+            }
+        }
+    }
+}

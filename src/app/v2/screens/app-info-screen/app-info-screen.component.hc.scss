@@ -1,0 +1,50 @@
+@import '../../theme/variables.scss';
+
+.high-contrast {
+    :host {
+        .img-standard {
+            display: none !important;
+        }
+        .img-dark {
+            display: block !important;
+        }
+        .app-info {
+            .arrow-back {
+                width: 14px;
+                height: 14px;
+                border-color: rgba($black, 0.64);
+            }
+
+            color: $black;
+            padding-bottom: 0px;
+            ion-button {
+                color: $black;
+                ion-icon {
+                    opacity: 0.8;
+                }
+            }
+
+            ul {
+                border-bottom: 1px solid rgba($black, 0.2);
+                li {
+                    &:nth-child(odd) {
+                        border-right: 1px solid rgba($black, 0.2);
+                    }
+                }
+            }
+            .long-term {
+                --detail-icon-color: rgba(18, 35, 52, 0.6);
+                --detail-icon-opacity: 1;
+
+                color: $black;
+                border-bottom: 1px solid rgba($black, 0.8);
+            }
+            hr {
+                background-color: $black;
+            }
+            .notification {
+                margin-bottom: 0px;
+            }
+        }
+    }
+}

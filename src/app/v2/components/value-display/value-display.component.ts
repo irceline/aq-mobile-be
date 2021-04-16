@@ -7,7 +7,7 @@ import { lightIndexColor } from '../../common/constants';
 @Component({
     selector: 'app-value-display',
     templateUrl: './value-display.component.html',
-    styleUrls: ['./value-display.component.scss'],
+    styleUrls: ['./value-display.component.scss', './value-display.component.hc.scss'],
 })
 export class ValueDisplayComponent implements OnInit {
 

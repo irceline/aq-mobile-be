@@ -5,7 +5,7 @@ import { ModalController } from '@ionic/angular';
 @Component({
     selector: 'app-splash-screen',
     templateUrl: './splash-screen.component.html',
-    styleUrls: ['./splash-screen.component.scss'],
+    styleUrls: ['./splash-screen.component.scss', './splash-screen.component.hc.scss'],
 })
 export class SplashScreenComponent {
     constructor(

@@ -1,0 +1,7 @@
+.high-contrast {
+    :host {
+        ion-content {
+            --background: white;
+        }
+    }
+}

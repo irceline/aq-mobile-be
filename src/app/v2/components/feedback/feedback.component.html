@@ -1,21 +1,23 @@
 <div class="feedback--buttons">
-  <ion-button (click)="openFeedback('like')" [ngClass]="{'active': like, 'inactive': dislike}">
+  <ion-button (click)="openFeedback('like')" class="feedback--rating-button" fill="clear" [ngClass]="{'active': like, 'inactive': dislike}">
     <ion-icon slot="icon-only" src="/assets/images/icons/like.svg"></ion-icon>
+    <ion-icon slot="icon-only" class="dark" src="/assets/images/icons/like-white.svg"></ion-icon>
   </ion-button>
-  <ion-button (click)="openFeedback('dislike')" [ngClass]="{'active': dislike, 'inactive': like}">
+  <ion-button (click)="openFeedback('dislike')" class="feedback--rating-button" fill="clear" [ngClass]="{'active': dislike, 'inactive': like}">
     <ion-icon slot="icon-only" src="/assets/images/icons/dislike.svg"></ion-icon>
+    <ion-icon slot="icon-only" class="dark" src="/assets/images/icons/dislike-white.svg"></ion-icon>
   </ion-button>
 </div>
 
-<div style="text-align: center;">
-  <ion-button fill="clear" (click)="openFeedbackStats()" style="color: white;">
+<div class="feedback--display" style="text-align: center;">
+  <ion-button fill="clear" (click)="openFeedbackStats()" class="display-button">
     {{ 'feedback.show-feedback-button' | translate }}
   </ion-button>
 </div>
 
 <div class="feedback--content" *ngIf="like || dislike" [ngStyle]="{'padding-bottom': dislike || like ? '60px' : '0px'}">
   <div style="text-align: center;">
-    <ion-button fill="clear" (click)="adjustLocation()" style="color: white;">
+    <ion-button fill="clear" (click)="adjustLocation()" class="display-button">
       {{ 'feedback.ajdust-location-for-feedback-button' | translate }}
     </ion-button>
   </div>
@@ -39,4 +41,5 @@
 
 <ion-item detail (click)="giveFeedback()" lines="none" class="feedback--button" *ngIf="like || dislike">
   <ion-label>{{ 'v2.components.feedback.send-observation' | translate }}</ion-label>
+  <img class="dark" src="/assets/images/icons/arrow-right.svg" alt="">
 </ion-item>

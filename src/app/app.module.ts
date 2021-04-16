@@ -75,7 +75,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         LocationAccuracy,
         Network,
         SplashScreen,
-        StatusBar,
+        StatusBar
     ],
     bootstrap: [AppComponent],
 })

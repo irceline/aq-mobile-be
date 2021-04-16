@@ -1,0 +1,12 @@
+@import '../../theme/variables';
+
+.high-contrast{
+    :host {
+        ion-slides {
+            ion-slide {
+                color: $black;
+            }
+        }
+    
+    }
+}

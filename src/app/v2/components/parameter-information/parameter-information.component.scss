@@ -2,6 +2,13 @@
     margin: 0 auto;
     text-align: center;
 
+    .icon-standard {
+        display: inline-block;
+    }
+    .icon-dark {
+        display: none;
+    }
+
     button {
         background-color: white;
         outline: none;
@@ -30,14 +37,14 @@
         }
     }
 
-
     .details--info-text {
         div {
             width: 100%;
         }
 
         p {
-            font-size: 13px;
+            margin-top: 0px;
+            font-size: 16px;
             color: #747474;
             width: 100%;
             text-align: justify;

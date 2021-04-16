@@ -1,0 +1,11 @@
+@import '../../theme/variables.scss';
+.high-contrast {
+    :host {
+        ion-slide {
+            &::before {
+                width: 2px;
+                background: rgba($black, 0.15);
+            }
+        }
+    }
+}

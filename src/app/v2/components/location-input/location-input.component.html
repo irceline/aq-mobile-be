@@ -3,6 +3,7 @@
   <ion-input class="location--input" [placeholder]="'v2.components.location-input.choose-location' | translate"
     [(ngModel)]="searchText" (keyup)="filterItems()" (click)="openDropdown()">
     <img src="/assets/images/icons/pin.svg" alt="">
+    <img class="dark" src="/assets/images/icons/pin-dark.svg" alt="">
   </ion-input>
 
   <div class="location--dropdown" *ngIf="visible">
@@ -29,6 +30,7 @@
   *ngIf="currentLocation">
   {{ 'v2.components.location-input.current-location' | translate }}
   <img src="/assets/images/icons/navigation.svg" alt="">
+  <img class="dark" src="/assets/images/icons/navigation-dark.svg" alt="">
 </ion-button>
 
 <div *ngIf="editableLocation" style="padding-top: 1em;">

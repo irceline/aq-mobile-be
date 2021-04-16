@@ -1,0 +1,29 @@
+@import '../../theme/variables';
+
+.high-contrast{
+    :host {
+        ion-content {
+            --background: white;
+
+            .content {
+                color: $black;
+
+                img {
+                    display: none;
+                    
+                    &.dark {
+                        display: block;
+                    }
+                }
+            }
+
+            .images {
+                display: none;
+                
+                &.dark {
+                    display: block;
+                }
+            }
+        }
+    }
+}

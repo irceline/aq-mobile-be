@@ -5,14 +5,20 @@ ion-item {
     --padding-start: 0;
     --padding-end: 0;
     --background-activated: #eee;
-
+    --detail-icon-font-size: 27px;
+    .icon-standard {
+        display: block;
+    }
+    .icon-dark {
+        display: none;
+    }
     span.line {
         width: 100%;
         height: 4px;
         background-color: red;
         content: '';
         position: absolute;
-        right: calc(100% + 20px);
+        right: calc(100% + 15px);
         top: 22px;
     }
 
@@ -28,7 +34,6 @@ ion-item {
             color: #747474;
         }
     }
-
 
     p {
         color: #747474;

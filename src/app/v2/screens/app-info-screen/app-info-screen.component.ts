@@ -14,7 +14,7 @@ interface ValColorPair {
 @Component({
     selector: 'app-app-info-screen',
     templateUrl: './app-info-screen.component.html',
-    styleUrls: ['./app-info-screen.component.scss'],
+    styleUrls: ['./app-info-screen.component.scss', './app-info-screen.component.hc.scss'],
 })
 export class AppInfoScreenComponent implements OnInit {
 

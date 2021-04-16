@@ -1,10 +1,20 @@
 :host {
   padding-top: 56px;
-
   .menu {
+    transition: background-color 0.5s ease-in-out;
     z-index: 11;
     overflow: auto;
     position: relative;
+
+    .icon-standard,
+    .text-standrad {
+      display: block;
+    }
+
+    .icon-dark,
+    .text-dark {
+      display: none;
+    }
 
     &--link {
       --color: white;
@@ -15,19 +25,37 @@
     }
 
     &--language {
-      margin-top: 70px;
+      margin-top: 42px;
     }
 
     &--section {
       border-bottom: 1px solid rgba(white, 0.45);
       padding: 0 30px;
 
+      &.info {
+        h4 {
+          margin-bottom: 0px;
+        }
+        ion-item {
+          --detail-icon-font-size: 27px;
+          padding: 15px 0px;
+        }
+      }
+
       &.locations {
-        margin: 35px 0;
+        margin-top: 35px;
+        padding-bottom: 25px;
+        h5 {
+          margin-bottom: 20px;
+        }
       }
 
       &.notifications {
-        border-bottom: 0
+        border-bottom: 0;
+        padding-top: 26px;
+        h5 {
+          margin-bottom: 0px;
+        }
       }
 
       &.logo {
@@ -49,6 +77,10 @@
         }
       }
 
+      &.style {
+        padding: 20px;
+      }
+
       h4 {
         font-size: 24px;
         font-weight: normal;
@@ -62,7 +94,7 @@
         font-weight: bold;
         color: white;
         padding-inline-start: 16px;
-        // margin: 0 16px;
+        margin-bottom: 7px;
       }
 
       ::ng-deep .language--dropdown {

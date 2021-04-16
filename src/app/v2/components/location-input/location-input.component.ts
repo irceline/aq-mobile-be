@@ -14,7 +14,7 @@ import { LocateService } from './../../services/locate/locate.service';
 @Component({
     selector: 'app-location-input',
     templateUrl: './location-input.component.html',
-    styleUrls: ['./location-input.component.scss'],
+    styleUrls: ['./location-input.component.scss', './location-input.component.hc.scss'],
 })
 export class LocationInputComponent implements OnInit, OnDestroy {
     @ViewChild(IonInput, { static: true }) input: IonInput;

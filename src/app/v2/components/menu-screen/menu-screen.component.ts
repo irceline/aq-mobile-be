@@ -3,14 +3,17 @@ import { Component, EventEmitter, HostBinding, Input, OnInit, Output } from '@an
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { NavController, Platform } from '@ionic/angular';
 
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { contrastModeColor } from '../../common/constants'
 import { UserLocation } from '../../Interfaces';
 import { BelAQIService } from '../../services/bel-aqi.service';
 import { UserSettingsService } from '../../services/user-settings.service';
+import { ThemeHandlerService } from '../../services/theme-handler/theme-handler.service';
 
 @Component({
     selector: 'app-menu-screen',
     templateUrl: './menu-screen.component.html',
-    styleUrls: ['./menu-screen.component.scss'],
+    styleUrls: ['./menu-screen.component.scss', './menu-screen.component.hc.scss'],
     animations: [
         trigger('menuAnimation', [
             transition(':enter', [
@@ -54,7 +57,9 @@ export class MenuScreenComponent implements OnInit {
         private belAQIService: BelAQIService,
         private userSettingsService: UserSettingsService,
         private appVersion: AppVersion,
-        private platform: Platform
+        private platform: Platform,
+        private themeService: ThemeHandlerService,
+        private statusBar: StatusBar
     ) { }
 
     ngOnInit() {
@@ -98,5 +103,19 @@ export class MenuScreenComponent implements OnInit {
     openLongTermInfo() {
         this.navCtrl.navigateForward(['main/longterm-info']);
         this.menuClosed.emit();
+    }
+
+    async toggleTheme() {
+        let currentTheme = await this.themeService.getActiveTheme()
+        let statusBarColor = ''
+        if (currentTheme === this.themeService.CONTRAST_MODE) {
+            currentTheme = this.themeService.STANDARD_MODE
+            statusBarColor = this.backgroundColor
+        } else {
+            currentTheme = this.themeService.CONTRAST_MODE
+            statusBarColor = contrastModeColor
+        }
+        this.statusBar.backgroundColorByHexString(statusBarColor)
+        this.themeService.setActiveTheme(currentTheme)
     }
 }

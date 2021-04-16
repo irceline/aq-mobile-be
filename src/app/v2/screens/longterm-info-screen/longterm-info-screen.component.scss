@@ -1,11 +1,22 @@
 ion-content {
     --background: transparent;
     --padding-top: 56px;
-
     .longterm-info {
         color: white;
-        padding-top: 25px;
         margin: 0 50px;
+
+        .arrow-back {
+            width: 10px;
+            height: 10px;
+            border-right: 0px;
+            border-top: 0px;
+            border-left: 2px;
+            border-bottom: 2px;
+            border-style: solid;
+            transform: rotate(45deg);
+            margin-right: 18px;
+            border-color: white;
+        }
 
         ion-button {
             --background: transparent;
@@ -20,7 +31,7 @@ ion-content {
             font-weight: 400;
 
             ion-icon {
-                font-size: 14px;
+                font-size: 18px;
                 margin-right: 20px;
             }
         }
@@ -50,7 +61,7 @@ ion-content {
         border-top-left-radius: 30px;
 
         .card--content {
-            padding: 30px 50px;
+            padding: 30px 50px 0px 50px;
 
             h5 {
                 font-size: 18px;
@@ -65,7 +76,7 @@ ion-content {
                     bottom: -10px;
                     left: 0;
                     width: 37px;
-                    height: 1px;
+                    height: 2px;
                     background: rgba(#e0e0e0, 0.7);
                 }
             }
@@ -85,7 +96,7 @@ ion-content {
 
             li {
                 box-shadow: inset 0 -10px 20px rgba(#eee, 0.34);
-                padding: 30px 50px 50px 40px;
+                padding: 30px 50px 50px 50px;
 
                 app-bar-chart {
                     margin-top: 20px;

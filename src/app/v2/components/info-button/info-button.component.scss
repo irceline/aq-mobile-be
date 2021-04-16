@@ -9,4 +9,8 @@ ion-button {
     --padding-end: 0;
     margin: 0;
     height: auto;
+
+    .dark {
+        display: none;
+    }
 }

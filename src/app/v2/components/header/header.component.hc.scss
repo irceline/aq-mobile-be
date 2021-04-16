@@ -1,0 +1,17 @@
+@import '../../theme/variables.scss';
+.high-contrast {
+  :host {
+    ion-header {
+      background-color: $black;
+    }
+  }
+}
+.md {
+  .high-contrast {
+    :host {
+      ion-header {
+        max-height: 50px;
+      }
+    }
+  }
+}

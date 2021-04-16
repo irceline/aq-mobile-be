@@ -150,7 +150,11 @@
 				"locations": "Locations",
 				"notifications": "Notifications",
 				"version": "version",
-				"workings": "(how does the application work)"
+				"workings": "(how does the application work)",
+				"switch-to-standard": "Switch to standard version",
+				"turn-off-high-contrast": "(turn off high contrast)",
+				"switch-to-high-contrast": "Switch to high contrast",
+				"turn-off-standard-version": "(turn off standard version)"
 			},
 			"onboarding": {
 				"aq-info": "This score is a <strong>calculation</strong> of the air quality in the short term, based on measurement data, weather conditions and emissions from traffic and industry in your area.",

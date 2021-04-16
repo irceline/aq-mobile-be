@@ -7,10 +7,9 @@ import { UserSettingsService } from '../../services/user-settings.service';
 @Component({
     selector: 'app-intro-screen',
     templateUrl: './onboarding-screen.component.html',
-    styleUrls: ['./onboarding-screen.component.scss'],
+    styleUrls: ['./onboarding-screen.component.scss', './onboarding-screen.component.hc.scss'],
 })
 export class OnboardingScreenComponent implements OnInit {
-
     // implementation task, fetch this from device settings
     btnText = 'Ga verder';
     sliderDisabled = false;

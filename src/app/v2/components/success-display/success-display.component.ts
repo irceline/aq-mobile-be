@@ -7,7 +7,7 @@ import { FeedbackStatsComponent } from './../feedback-stats/feedback-stats.compo
 @Component({
   selector: 'app-success-display',
   templateUrl: './success-display.component.html',
-  styleUrls: ['./success-display.component.scss'],
+  styleUrls: ['./success-display.component.scss', './success-display.component.hc.scss'],
 })
 export class SuccessDisplayComponent implements OnInit {
 

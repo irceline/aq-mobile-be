@@ -1,0 +1,20 @@
+@import '../../theme/variables';
+
+.high-contrast {
+    :host {
+        .img-standard {
+            display: none;
+        }
+        .img-dark {
+            display: block;
+        }
+        .content-wrapper {
+            box-shadow: 0 2px 50px 0 rgba(0, 0, 0, 0.2);
+        }
+        .trigger {
+            span {
+                background-color: rgba($black, 0.6);
+            }
+        }
+    }
+}

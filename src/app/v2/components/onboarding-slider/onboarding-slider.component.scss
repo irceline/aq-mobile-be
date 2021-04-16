@@ -48,6 +48,18 @@
                     }
                 }
 
+                .index-wheel {
+                    &.dark {
+                        display: none;
+                    }
+                }
+
+                .onboarding-screenshot {
+                    border-top-left-radius: 30px;
+                    border-top-right-radius: 30px;
+                    box-shadow: 0 -10px 15px 0 rgba(18, 35, 52, 0.15);
+                }
+
                 &--image {
                     align-items: flex-end;
                     display: flex;
@@ -90,7 +102,7 @@
                     text-align: left;
                     font-weight: bold;
                     font-size: 16px;
-                    margin-top: 70px;
+                    margin-top: 30px;
                 }
             }
         }
@@ -136,6 +148,10 @@
         img {
             width: 13px;
             margin-left: 20px;
+
+            &.dark {
+                display: none;
+            }
         }
     }
 }

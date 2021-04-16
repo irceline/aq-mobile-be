@@ -7,7 +7,7 @@ import { FeedbackService, FeedbackStats } from '../../services/feedback/feedback
 @Component({
   selector: 'app-feedback-stats',
   templateUrl: './feedback-stats.component.html',
-  styleUrls: ['./feedback-stats.component.scss'],
+  styleUrls: ['./feedback-stats.component.scss', './feedback-stats.component.hc.scss'],
 })
 export class FeedbackStatsComponent implements OnInit {
 

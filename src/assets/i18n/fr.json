@@ -150,7 +150,11 @@
 				"locations": "Localisation",
 				"notifications": "Notifications",
 				"version": "version",
-				"workings": "(comment fonctionne l'application)"
+				"workings": "(comment fonctionne l'application)",
+				"switch-to-standard": "Passer à la version standard",
+				"turn-off-high-contrast": "(désactiver le contraste élevé)",
+				"switch-to-high-contrast": "Passer à la version à contraste élevé",
+				"turn-off-standard-version": "(désactiver la version standard)"
 			},
 			"onboarding": {
 				"aq-info": "Cet indice est le résultat d'un <strong>calcul</strong> de la qualité de l'air à court terme, basé sur les données de mesure, les conditions météorologiques, les émissions du trafic et de l'industrie dans votre région.",

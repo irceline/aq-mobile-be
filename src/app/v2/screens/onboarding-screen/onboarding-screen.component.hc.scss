@@ -1,0 +1,27 @@
+@import '../../theme/variables';
+
+.high-contrast{
+  :host {
+    .onboarding-content {
+      app-onboarding-slider {
+        ::ng-deep  {
+          .slide--content {
+            .big, .choose {
+              color: $black;
+            }
+          }
+        }
+      }
+
+      .images {
+        .image, .image-2 {
+          display: none;
+
+          &.dark {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+}

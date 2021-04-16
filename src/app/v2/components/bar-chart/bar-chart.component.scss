@@ -1,3 +1,5 @@
+@import '../../theme/variables.scss';
+
 :host {
     display: block;
 }
@@ -25,7 +27,7 @@
                 margin-bottom: 0;
 
                 img {
-                    margin-left: -40px;
+                    margin-left: -35px;
                     position: relative;
                     z-index: 2;
                 }
@@ -33,10 +35,11 @@
                 &:after {
                     content: '';
                     position: absolute;
-                    opacity: 0.53;
-                    border: dashed 1px #004fb7;
-                    width: 110%;
+                    width: 105%;
                     right: 0;
+                    height: 1px;
+                    background: linear-gradient(to right, transparent 50%, rgba(#004FB7, 0.7) 50%);
+                    background-size: 15px 1px;
                 }
             }
         }
@@ -94,6 +97,12 @@
                 font-size: 13px;
                 text-align: center;
                 color: #747474;
+            }
+            &:last-child {
+                h5 {
+                    font-weight: 800;
+                    color: $black;
+                }
             }
         }
     }

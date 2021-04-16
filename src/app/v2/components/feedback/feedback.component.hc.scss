@@ -1,0 +1,73 @@
+@import '../../theme/variables';
+
+.high-contrast {
+    :host {
+        .feedback {
+            &--buttons {
+                box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.20);
+                border: 1px solid $borderColor;
+
+                ion-button {
+                    &:first-child {
+                        border-right: 1px solid $borderColor;
+                    }
+
+                    &.inactive {
+                        opacity: 0.6;
+                    }
+
+                    &.active {
+                        opacity: 1;
+                        background: $black;
+
+                        ion-icon {
+                            display: none;
+
+                            &.dark {
+                                display: block;
+                            }
+                        }
+                    }
+                }
+            }
+
+            &--display {
+                .display-button {
+                    color: $black;
+                }
+            }
+
+            &--content {
+                p {
+                    color: $black;
+                }
+
+                ion-list {
+                    ion-item {
+                        --color: $black;
+                        font-size: 16px;
+                    }
+                }
+
+                .display-button {
+                    color: $black;
+                }
+            }
+
+            &--button {
+                background-color: $black;
+
+                ion-label {
+                    color: white;
+                }
+
+                .dark {
+                    display: block;
+                    width: 14px;
+                    position: absolute;
+                    right: 20px;
+                }
+            }
+        }
+    }
+}

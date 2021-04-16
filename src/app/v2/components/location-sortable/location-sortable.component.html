@@ -1,7 +1,8 @@
 <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
   <ion-item lines="none" *ngFor="let location of locations" class="ion-no-padding">
     <ion-button fill="clear" class="ion-no-padding" (click)="deleteLocation(location)">
-      <ion-icon slot="icon-only" name="close-circle"></ion-icon>
+      <ion-icon class="icon-standard" slot="icon-only" name="close-circle"></ion-icon>
+      <ion-icon class="icon-dark" src="/assets/images/icons/icon-close-dark.svg"></ion-icon>
     </ion-button>
     <ion-button fill="clear" class="ion-no-padding" (click)="editLocation(location)">
       <ion-icon slot="icon-only" name="map"></ion-icon>
@@ -9,6 +10,9 @@
     <ion-label text-wrap>
       {{ location.label }}
     </ion-label>
-    <ion-reorder slot="end"></ion-reorder>
+    <ion-reorder slot="end">
+      <ion-icon class="icon-standard" src="/assets/images/icons/cell-gripper.svg"></ion-icon>
+      <ion-icon class="icon-dark" src="/assets/images/icons/cell-gripper-dark-original.svg"></ion-icon>
+    </ion-reorder>
   </ion-item>
 </ion-reorder-group>

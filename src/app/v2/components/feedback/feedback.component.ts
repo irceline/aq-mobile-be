@@ -17,7 +17,7 @@ export interface UserCreatedFeedback {
 @Component({
     selector: 'app-feedback',
     templateUrl: './feedback.component.html',
-    styleUrls: ['./feedback.component.scss'],
+    styleUrls: ['./feedback.component.scss', './feedback.component.hc.scss'],
 })
 export class FeedbackComponent implements OnInit {
 
