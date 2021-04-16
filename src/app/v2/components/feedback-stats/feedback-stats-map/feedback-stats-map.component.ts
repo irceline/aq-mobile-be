@@ -44,7 +44,7 @@ var industrieIcon = L.icon({
 @Component({
   selector: 'app-feedback-stats-map',
   templateUrl: './feedback-stats-map.component.html',
-  styleUrls: ['./feedback-stats-map.component.scss']
+  styleUrls: ['./feedback-stats-map.component.scss', './feedback-stats-map.component.hc.scss']
 })
 export class FeedbackStatsMapComponent implements AfterViewInit, OnInit {
 
