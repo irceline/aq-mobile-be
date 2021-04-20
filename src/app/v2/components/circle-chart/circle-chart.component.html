@@ -20,7 +20,7 @@
                 id="Oval" stroke="rgba(0,0,0,0.2)" stroke-width="5" style="mix-blend-mode: multiply;"
                 stroke-linejoin="bevel" stroke-dasharray="2,89"
                 transform="translate(150.000000, 149.632404) scale(-1, 1) translate(-150.000000, -149.632404) "></path>
-              <circle id="Oval"  [attr.fill]="chartColor" r="11" class="path" [class.active]="circleActive" [style.offsetDistance]="circleOffset + 'px'"></circle>
+              <circle id="Oval"  [attr.fill]="chartColor" *ngIf="!isIos" r="11" class="path" [class.active]="circleActive" [style.offsetDistance]="circleOffset + 'px'"></circle>
               <image xlink:href="/assets/images/icons/alert.svg" x="5%" y="5%" *ngIf="(notificationActive && notification) || activeUserLocation?.notification"
                 (click)="openNotification($event)" />
             </g>
@@ -38,7 +38,7 @@
   </div>
   
   <div class="circle-chart--text" [ngClass]="pulsingText" (animationend)="pulsingText.pulsing = false">
-    <h1>{{ title | translate | titlecase }}</h1>
+    <h1 [class.small]="smallTitle">{{ title | translate | titlecase }}</h1>
     <p>{{ text }}</p>
   </div>
 
