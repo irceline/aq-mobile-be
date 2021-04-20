@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input, NgZone, OnInit } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
+import { PopoverController, Platform } from '@ionic/angular';
+import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
+import { Settings, SettingsService } from '@helgoland/core';
 
 import { UserLocation } from '../../Interfaces';
 import { BelAQIService } from '../../services/bel-aqi.service';
@@ -35,6 +36,8 @@ export class CircleChartComponent implements OnInit {
     };
     chartColor = '#FFFFFF';
     circleActive = false;
+    isIos = false;
+    smallTitle = false;
 
     public activeUserLocation: UserLocation;
 
@@ -48,7 +51,9 @@ export class CircleChartComponent implements OnInit {
         private zone: NgZone,
         private generalNotification: GeneralNotificationService,
         public popoverController: PopoverController,
-        private themeHandlerService: ThemeHandlerService
+        private themeHandlerService: ThemeHandlerService,
+        private platform: Platform,
+        private settingsSrvc: SettingsService<Settings>
     ) {
         belaqiService.$activeIndex.subscribe((newIndex) => {
             if (newIndex) {
@@ -65,11 +70,16 @@ export class CircleChartComponent implements OnInit {
                 this.chartColor = '#FFFFFF'
             }
         })
+
+        translate.onLangChange.subscribe((event: LangChangeEvent)  => {
+            this._initialize(this.belAqi);
+        })
     }
 
     ngOnInit() {
         this.generalNotification.getNotifications().subscribe(notif => this.zone.run(() => this.notification = notif));
         this.generalNotification.$active.subscribe(active => this.notificationActive = active);
+        this.isIos = this.platform.is('ios');
     }
 
     getChartHeight() {
@@ -113,10 +123,18 @@ export class CircleChartComponent implements OnInit {
     }
 
     private _changeTitle(value: number) {
+        const lang = this.translate.currentLang;
         this.loading = true
         this.pulsingText.pulsing = true;
 
         this.title = this.belaqiService.getLabelForIndex(value);
+
+        // Handle dynamic size
+        if (this.title === 'belaqi.level.moderate' && lang === 'nl' || lang === 'de') {
+            this.smallTitle = true;
+        } else {
+            this.smallTitle = false;
+        }
         this.loading = false
         try {
             this.text = this.translate.instant(

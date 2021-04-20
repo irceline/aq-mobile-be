@@ -65,6 +65,10 @@ $animationColor: white;
                     justify-content: center;
                     align-items: center;
 
+                    &.small {
+                        font-size: 37px;
+                    }
+
                     @media screen and (max-height: 780px) {
                         font-size: 44px;
                     }
