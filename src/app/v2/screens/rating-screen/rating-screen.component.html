@@ -1,6 +1,6 @@
 <ion-content>
   <app-background>
-    <app-location-swipe (locationChange)="onLocationChange($event)" [activeIndex]="activeIndex" [locations]="locations">
+    <app-location-swipe *ngIf="!feedbackLocation" (locationChange)="onLocationChange($event)" [activeIndex]="activeIndex" [locations]="locations">
     </app-location-swipe>
 
     <ng-container *ngIf="!feedbackLocation">

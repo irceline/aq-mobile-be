@@ -34,6 +34,7 @@ export class CircleChartComponent implements OnInit {
         pulsing: false,
     };
     chartColor = '#FFFFFF';
+    circleActive = false;
 
     public activeUserLocation: UserLocation;
 
@@ -106,6 +107,9 @@ export class CircleChartComponent implements OnInit {
         })
 
         this._changeTitle(belaqi);
+        setTimeout(() => {
+            this.circleActive = true;
+        }, 2000)
     }
 
     private _changeTitle(value: number) {
