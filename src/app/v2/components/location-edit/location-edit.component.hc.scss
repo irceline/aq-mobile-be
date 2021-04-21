@@ -1,0 +1,34 @@
+@import '../../theme/variables';
+
+.high-contrast {
+    :host {
+        .wrapper {
+            background-color: white !important;
+
+            .label {
+                color: $black;
+
+                ion-button {
+                    ion-icon {
+                        display: none;
+
+                        &.dark {
+                            display: block;
+                        }
+                    }
+                }
+            }
+
+            .controls {
+                .button {
+                    color: $black;
+                }
+            }
+
+            .edit-location-hint {
+                color: $black;
+            }
+        }
+
+    }
+}
