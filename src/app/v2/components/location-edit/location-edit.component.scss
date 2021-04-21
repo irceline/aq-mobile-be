@@ -17,6 +17,14 @@
             color: white;
             display: flex;
             align-items: center;
+
+            ion-button {
+                ion-icon {
+                    &.dark {
+                        display: none;
+                    }
+                }
+            }
         }
 
         .controls {

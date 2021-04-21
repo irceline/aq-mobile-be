@@ -10,7 +10,7 @@ import { GeocoderService } from './../../services/geocoder/geocoder.service';
 @Component({
   selector: 'app-location-edit',
   templateUrl: './location-edit.component.html',
-  styleUrls: ['./location-edit.component.scss'],
+  styleUrls: ['./location-edit.component.scss', './location-edit.component.hc.scss'],
 })
 export class LocationEditComponent implements OnInit, AfterViewInit {
 
