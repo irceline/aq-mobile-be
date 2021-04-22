@@ -101,7 +101,17 @@ pipeline {
                     eventCount: '',
                     eventThrottle: '',
                     seed: '',
-                    username: ''
+                    username: '',
+                    password: '',
+                    appiumJavaJUnitTest: '',
+                    appiumJavaTestNGTest: '',
+                    appiumPythonTest: '',
+                    appiumRubyTest: '',
+                    appiumNodeTest: '',
+                    calabashFeatures: '',
+                    calabashTags: '',
+                    calabashProfile: '',
+                    junitArtifact: '',
                 )
             }
         }
