@@ -95,7 +95,7 @@ pipeline {
                     testSpecName: '',
                     environmentToRun: '',
                     runName: 'Test Run',
-                    testToRun: 'BUILTIN_FUZZ ',
+                    testToRun: 'BUILTIN_FUZZ',
                     storeResults: '',
                     isRunUnmetered: '',
                     eventCount: '',
