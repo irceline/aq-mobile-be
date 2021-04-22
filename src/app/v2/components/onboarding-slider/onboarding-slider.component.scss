@@ -128,7 +128,6 @@
             }
         }
     }
-
     .next {
         position: absolute;
         bottom: 40px;
@@ -152,6 +151,25 @@
             &.dark {
                 display: none;
             }
+        }
+    }
+}
+
+.keyboard-shown {
+    :host {
+        ion-slides {
+            ::ng-deep ion-slide {
+                padding-bottom: 50px;
+                .slide {
+                    overflow: auto;
+                }
+            }
+            ::ng-deep .swiper-pagination {
+                bottom: 20px;
+            }
+        }
+        .next {
+            bottom: 0px;
         }
     }
 }
