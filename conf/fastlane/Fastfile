@@ -24,6 +24,7 @@ platform :ios do
   output_name = 'BelAir_v2.ipa'
   profile_adhoc_name = 'BelAir Adhoc'
   profile_adhoc_uuid = 'ddee3d3d-408a-48bd-b42b-07d297e21901'
+  apple_id = '1553254464'
 
   lane :install_profile do
     install_provisioning_profile(path: "../../BelAir_Adhoc.mobileprovision")
@@ -72,6 +73,7 @@ platform :ios do
 
     upload_to_testflight(
       skip_waiting_for_build_processing: true,
+      apple_id: apple_id
     )
   end
 end
