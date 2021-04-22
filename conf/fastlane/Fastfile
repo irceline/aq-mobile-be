@@ -17,6 +17,17 @@ default_platform(:ios)
 
 platform :ios do
   team_id = CredentialsManager::AppfileConfig.try_fetch_value(:team_id)
+  app_identifier = CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
+  xcodeproj_name = 'BelAir_v2.xcodeproj'
+  workspace_name = 'BelAir_v2.xcworkspace'
+  project_name = 'BelAir_v2'
+  output_name = 'BelAir_v2.ipa'
+  profile_adhoc_name = 'BelAir Adhoc'
+  profile_adhoc_uuid = '04e628f2-f5ef-4494-96ef-23e6863811ea'
+
+  lane :install_profile do
+    install_provisioning_profile(path: "../../BelAir_Adhoc.mobileprovision")
+  end
 
   desc "Description of what the lane does"
   lane :adhoc do
@@ -27,20 +38,28 @@ platform :ios do
     disable_automatic_code_signing
 
     update_project_provisioning(
-      xcodeproj: "BelAir_v2.xcodeproj",
+      xcodeproj: xcodeproj_name,
       profile: "../../BelAir_Adhoc.mobileprovision",
       build_configuration: "Release",
       code_signing_identity: "iPhone Distribution"
     )
 
     update_project_team(
-      path: "BelAir_v2.xcodeproj",
+      path: xcodeproj_name,
       teamid: team_id
     )
 
+    update_code_signing_settings(
+      use_automatic_signing: false,
+      path: xcodeproj_name,
+      code_sign_identity: 'iPhone Distribution',
+      profile_name: profile_adhoc_name,
+      profile_uuid: profile_adhoc_uuid
+    )
+
     build_app(
-      scheme: "BelAir_v2",
-      workspace: "BelAir_v2.xcworkspace",
+      scheme: project_name,
+      workspace: workspace_name,
       include_bitcode: false,
       export_options: {
         method: "ad-hoc",
@@ -48,7 +67,7 @@ platform :ios do
           "be.irceline.aqmobile" => "BelAir Adhoc",
         }
       },
-      output_name: "BelAir_v2.ipa"
+      output_name: output_name
     )
   end
 end
