@@ -1,0 +1,75 @@
+pipeline {
+    environment {
+      S3_BUCKET = 'belair-builds'
+      S3_REGION = 'eu-central-1'
+      SLACK_CHANNEL = '#belair'
+    }
+
+   agent any
+
+    stages {
+        stage('Create app environment') {
+            steps {
+                script {
+                    sh 'npm i'
+                    sh 'ionic cordova add platform ios@5.1.1'
+                }
+            }
+        }
+
+        stage('Configure environment') {
+            steps {
+                withCredentials([
+                    file(credentialsId: 'belair_adhoc', variable: 'PROVISIONING'),
+                ]) {
+                    sh "cp \$PROVISIONING BelAir_Adhoc.mobileprovision"
+                }
+
+                script {
+                    // Replace package name
+                    def text = readFile file: 'config.xml'
+                    text = text.replaceAll('be.irceline.aqmobile_v2', 'be.irceline.aqmobile')
+                    writeFile file: 'config.xml', text: text
+                }
+            }
+        }
+
+        stage('Build ipa') {
+            steps {
+                script {
+                    sh 'cd platforms/ios && fastlane adhoc'
+                }
+            }
+        }
+
+        stage('Archive artifact to s3') {
+            steps {
+                archiveArtifacts artifacts: 'platforms/ios/BelAir_v2.ipa', fingerprint: true
+            }
+        }
+    }
+
+    post {
+        // success {
+        //     slackSend(
+        //         color: "good",
+        //         channel: "${SLACK_CHANNEL}", 
+        //         message: "New apk file available at: https://${S3_BUCKET}.s3.${S3_REGION}.amazonaws.com/belair-v2/${BRANCH_NAME}/${BUILD_ID}/artifacts/app-debug-latest.apk"
+        //     )
+        // }
+
+        // failure {
+        //     slackSend(
+        //         color: "danger",
+        //         channel: "${SLACK_CHANNEL}", 
+        //         message: "Pipeline for ${BRANCH_NAME}#${BUILD_ID} failure"
+        //     )
+        // }
+
+        always {
+            cleanWs()
+        }
+    }
+}
+
+
