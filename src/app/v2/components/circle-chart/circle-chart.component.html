@@ -37,7 +37,7 @@
     <span class="loader-text">Ventilators verzamelen</span>
   </div>
   
-  <div class="circle-chart--text" [ngClass]="pulsingText" (animationend)="pulsingText.pulsing = false">
+  <div class="circle-chart--text" [ngClass]="pulsingText" (animationend)="pulsingText.pulsing = false" #titleWrapperRef>
     <h1 [ngStyle]="{'font-size': titleSize + 'px'}" #titleRef>{{ title | translate | titlecase }}</h1>
     <p>{{ text }}</p>
   </div>

@@ -18,6 +18,7 @@ import { runInThisContext } from 'vm';
 })
 export class CircleChartComponent implements OnInit {
     @ViewChild('titleRef') titleRef: ElementRef;
+    @ViewChild('titleWrapperRef') titleWrapperRef: ElementRef;
     // belaqi score index
     @Input() belAqi = 0;
     // small circle text
@@ -149,10 +150,10 @@ export class CircleChartComponent implements OnInit {
     }
 
     handleTitleSize(width) {
-        if (width > 205) {
-            this.titleSize = 36;
-        } else {
-            this.titleSize = 40;
-        }
+        const wrapper = this.titleWrapperRef.nativeElement.offsetWidth;
+        const size = wrapper * 0.1;
+
+        if (width > 205) this.titleSize = size;
+        else this.titleSize = 40;
     } 
 }
