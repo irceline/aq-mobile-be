@@ -32,7 +32,7 @@ platform :ios do
 
   desc "Description of what the lane does"
   lane :adhoc do
-    install_profile
+    # install_profile
 
     Dir.chdir "../../../" do
       sh("ionic", "build")
