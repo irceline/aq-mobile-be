@@ -11,6 +11,10 @@ pipeline {
         stage('Create app environment') {
             steps {
                 script {
+                    def text = readFile file: 'config.xml'
+                    text = text.replaceAll('be.irceline.aqmobile_v2', 'be.irceline.aqmobile.v2')
+                    writeFile file: 'config.xml', text: text
+
                     sh 'npm i'
                     sh 'ionic cordova platform add ios@5.1.1'
                 }
@@ -32,11 +36,10 @@ pipeline {
         stage('Build ipa') {
             steps {
                 withCredentials([
-                    file(credentialsId: 'belair_adhoc', variable: 'APPLEID_SPECIFIC_PASSWORD'),
+                    file(credentialsId: 'testflight_specific_password', variable: 'APPLEID_SPECIFIC_PASSWORD'),
                 ]) {
-                    sh 'export CI=true'
-                    sh 'export FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=\$APPLEID_SPECIFIC_PASSWORD'
-                    sh 'cd platforms/ios && fastlane adhoc'
+                    sh 'cd platforms/ios'
+                    sh 'CI=true FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=\$APPLEID_SPECIFIC_PASSWORD fastlane adhoc'
                 }
             }
         }
