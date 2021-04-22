@@ -89,9 +89,9 @@ pipeline {
         stage('Run Device Farm Test') {
             steps {
                 devicefarm (
-                    projectName: '',
-                    devicePoolName: ${params.ANDROID_DEVICE}
-                    appArtifact : '$WORKSPACE/app-debug-latest.apk'
+                    projectName: 'AcopicTest',
+                    devicePoolName: 'Top 10 devices',
+                    appArtifact:'$WORKSPACE/app-debug-latest.apk'
                 )
             }
         }
