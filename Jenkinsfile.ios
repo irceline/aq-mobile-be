@@ -38,8 +38,7 @@ pipeline {
                 withCredentials([
                     string(credentialsId: 'FASTLANE_SESSION', variable: 'FASTLANE_SESSION'),
                 ]) {
-                    sh 'cd platforms/ios'
-                    sh 'CI=true FASTLANE_SESSION=\$FASTLANE_SESSION fastlane adhoc'
+                    sh 'cd platforms/ios && CI=true FASTLANE_SESSION=\$FASTLANE_SESSION fastlane adhoc'
                 }
             }
         }
