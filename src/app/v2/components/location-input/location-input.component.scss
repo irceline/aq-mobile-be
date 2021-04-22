@@ -74,4 +74,16 @@
             }
         }
     }
+    &--actions {
+        padding-top: 1em;
+    }
+}
+.keyboard-shown {
+    :host {
+        .location {
+            &--actions {
+                padding-top: 0;
+            }
+        }
+    }
 }
