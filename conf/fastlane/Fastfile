@@ -69,5 +69,9 @@ platform :ios do
       },
       output_name: output_name
     )
+
+    upload_to_testflight(
+      skip_waiting_for_build_processing: true,
+    )
   end
 end

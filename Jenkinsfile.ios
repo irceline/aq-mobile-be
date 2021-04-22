@@ -12,7 +12,7 @@ pipeline {
             steps {
                 script {
                     sh 'npm i'
-                    sh 'ionic cordova add platform ios@5.1.1'
+                    sh 'ionic cordova platform add ios@5.1.1'
                 }
             }
         }
@@ -24,6 +24,8 @@ pipeline {
                 ]) {
                     sh "cp \$PROVISIONING BelAir_Adhoc.mobileprovision"
                 }
+
+                sh 'cp -R conf/fastlane platforms/ios/'
 
                 script {
                     // Replace package name
@@ -37,7 +39,7 @@ pipeline {
         stage('Build ipa') {
             steps {
                 script {
-                    sh 'cd platforms/ios && fastlane adhoc'
+                    sh 'cd platforms/ios && CI=true fastlane adhoc'
                 }
             }
         }
@@ -58,13 +60,13 @@ pipeline {
         //     )
         // }
 
-        // failure {
-        //     slackSend(
-        //         color: "danger",
-        //         channel: "${SLACK_CHANNEL}", 
-        //         message: "Pipeline for ${BRANCH_NAME}#${BUILD_ID} failure"
-        //     )
-        // }
+        failure {
+            slackSend(
+                color: 'danger',
+                channel: "${SLACK_CHANNEL}", 
+                message: "iOS Pipeline for ${BRANCH_NAME}#${BUILD_ID} failure"
+            )
+        }
 
         always {
             cleanWs()
