@@ -85,6 +85,16 @@ pipeline {
                 archiveArtifacts artifacts: 'app-debug-latest.apk', fingerprint: true
             }
         }
+
+        stage('Run Device Farm Test') {
+            steps {
+                devicefarm (
+                    projectName: '',
+                    devicePoolName: ${params.ANDROID_DEVICE}
+                    appArtifact : '$WORKSPACE/app-debug-latest.apk'
+                )
+            }
+        }
     }
 
     post {
