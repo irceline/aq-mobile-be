@@ -64,6 +64,7 @@ $animationColor: white;
                     flex-direction: column;
                     justify-content: center;
                     align-items: center;
+                    transition: all 0.3s ease-in-out;
 
                     &.small {
                         font-size: 37px;
