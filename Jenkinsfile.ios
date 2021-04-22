@@ -36,10 +36,10 @@ pipeline {
         stage('Build ipa') {
             steps {
                 withCredentials([
-                    string(credentialsId: 'testflight_specific_password', variable: 'APPLEID_SPECIFIC_PASSWORD'),
+                    string(credentialsId: 'FASTLANE_SESSION', variable: 'FASTLANE_SESSION'),
                 ]) {
                     sh 'cd platforms/ios'
-                    sh 'CI=true FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=\$APPLEID_SPECIFIC_PASSWORD fastlane adhoc'
+                    sh 'CI=true FASTLANE_SESSION=\$FASTLANE_SESSION fastlane adhoc'
                 }
             }
         }
