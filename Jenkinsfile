@@ -86,64 +86,64 @@ pipeline {
             }
         }
 
-        stage('Run Device Farm Test') {
-            steps {
-                devicefarm (
-                    projectName: 'AcopicTest',
-                    devicePoolName: 'Top 10 devices',
-                    appArtifact:'$WORKSPACE/app-debug-latest.apk',
-                    testSpecName: '',
-                    environmentToRun: '',
-                    runName: 'Test Run',
-                    testToRun: '',
-                    storeResults: '',
-                    isRunUnmetered: '',
-                    eventCount: '',
-                    eventThrottle: '',
-                    seed: '',
-                    username: '',
-                    password: '',
-                    appiumJavaJUnitTest: '',
-                    appiumJavaTestNGTest: '',
-                    appiumPythonTest: '',
-                    appiumRubyTest: '',
-                    appiumNodeTest: '',
-                    calabashFeatures: '',
-                    calabashTags: '',
-                    calabashProfile: '',
-                    junitArtifact: '',
-                    junitFilter: '',
-                    uiautomatorArtifact: '',
-                    uiautomatorFilter: '',
-                    uiautomationArtifact: '',
-                    xctestArtifact: '',
-                    xctestFilter: '',
-                    xctestUiArtifact: '',
-                    xctestUiFilter: '',
-                    appiumVersionJunit: '',
-                    appiumVersionPython: '',
-                    appiumVersionTestng: '',
-                    ifWebApp: false,
-                    extraData: false,
-                    extraDataArtifact: '',
-                    deviceLocation: false,
-                    deviceLatitude: 0,
-                    deviceLongitude: 0,
-                    radioDetails: false,
-                    ifBluetooth: false,
-                    ifWifi: false,
-                    ifGPS: false,
-                    ifNfc: false,
-                    jobTimeoutMinutes: 10,
-                    ifVideoRecording: false,
-                    ifAppPerformanceMonitoring: false,
-                    ignoreRunError: false,
-                    ifVpce: false,
-                    ifSkipAppResigning: false,
-                    vpceServiceName: '',
-                )
-            }
-        }
+        // stage('Run Device Farm Test') {
+        //     steps {
+        //         devicefarm (
+        //             projectName: 'AcopicTest',
+        //             devicePoolName: 'Top 10 devices',
+        //             appArtifact:'\$WORKSPACE/app-debug-latest.apk',
+        //             testSpecName: '',
+        //             environmentToRun: '',
+        //             runName: 'Test Run',
+        //             testToRun: 'BUILTIN_FUZZ ',
+        //             storeResults: '',
+        //             isRunUnmetered: '',
+        //             eventCount: '',
+        //             eventThrottle: '',
+        //             seed: '',
+        //             username: '',
+        //             password: '',
+        //             appiumJavaJUnitTest: '',
+        //             appiumJavaTestNGTest: '',
+        //             appiumPythonTest: '',
+        //             appiumRubyTest: '',
+        //             appiumNodeTest: '',
+        //             calabashFeatures: '',
+        //             calabashTags: '',
+        //             calabashProfile: '',
+        //             junitArtifact: '',
+        //             junitFilter: '',
+        //             uiautomatorArtifact: '',
+        //             uiautomatorFilter: '',
+        //             uiautomationArtifact: '',
+        //             xctestArtifact: '',
+        //             xctestFilter: '',
+        //             xctestUiArtifact: '',
+        //             xctestUiFilter: '',
+        //             appiumVersionJunit: '',
+        //             appiumVersionPython: '',
+        //             appiumVersionTestng: '',
+        //             ifWebApp: false,
+        //             extraData: false,
+        //             extraDataArtifact: '',
+        //             deviceLocation: false,
+        //             deviceLatitude: 0,
+        //             deviceLongitude: 0,
+        //             radioDetails: false,
+        //             ifBluetooth: false,
+        //             ifWifi: false,
+        //             ifGPS: false,
+        //             ifNfc: false,
+        //             jobTimeoutMinutes: 10,
+        //             ifVideoRecording: false,
+        //             ifAppPerformanceMonitoring: false,
+        //             ignoreRunError: false,
+        //             ifVpce: false,
+        //             ifSkipAppResigning: false,
+        //             vpceServiceName: '',
+        //         )
+        //     }
+        // }
     }
 
     post {
@@ -163,9 +163,9 @@ pipeline {
             )
         }
 
-        always {
-            cleanWs()
-        }
+        // always {
+        //     cleanWs()
+        // }
     }
 }
 
