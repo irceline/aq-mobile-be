@@ -23,7 +23,7 @@ platform :ios do
   project_name = 'BelAir_v2'
   output_name = 'BelAir_v2.ipa'
   profile_adhoc_name = 'BelAir Adhoc'
-  profile_adhoc_uuid = '04e628f2-f5ef-4494-96ef-23e6863811ea'
+  profile_adhoc_uuid = 'ddee3d3d-408a-48bd-b42b-07d297e21901'
 
   lane :install_profile do
     install_provisioning_profile(path: "../../BelAir_Adhoc.mobileprovision")
@@ -31,11 +31,11 @@ platform :ios do
 
   desc "Description of what the lane does"
   lane :adhoc do
+    install_profile
+
     Dir.chdir "../../../" do
       sh("ionic", "build")
     end
-
-    disable_automatic_code_signing
 
     update_project_provisioning(
       xcodeproj: xcodeproj_name,
