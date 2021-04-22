@@ -26,20 +26,17 @@ pipeline {
                 }
 
                 sh 'cp -R conf/fastlane platforms/ios/'
-
-                script {
-                    // Replace package name
-                    def text = readFile file: 'config.xml'
-                    text = text.replaceAll('be.irceline.aqmobile_v2', 'be.irceline.aqmobile')
-                    writeFile file: 'config.xml', text: text
-                }
             }
         }
 
         stage('Build ipa') {
             steps {
-                script {
-                    sh 'cd platforms/ios && CI=true fastlane adhoc'
+                withCredentials([
+                    file(credentialsId: 'belair_adhoc', variable: 'APPLEID_SPECIFIC_PASSWORD'),
+                ]) {
+                    sh 'export CI=true'
+                    sh 'export FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=\$APPLEID_SPECIFIC_PASSWORD'
+                    sh 'cd platforms/ios && fastlane adhoc'
                 }
             }
         }

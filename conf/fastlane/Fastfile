@@ -64,7 +64,7 @@ platform :ios do
       export_options: {
         method: "ad-hoc",
         provisioningProfiles: { 
-          "be.irceline.aqmobile" => "BelAir Adhoc",
+          app_identifier => "BelAir Adhoc",
         }
       },
       output_name: output_name
