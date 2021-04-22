@@ -146,27 +146,27 @@ pipeline {
         }
     }
 
-    post {
-        // success {
-        //     slackSend(
-        //         color: "good",
-        //         channel: "${SLACK_CHANNEL}", 
-        //         message: "New apk file available at: https://${S3_BUCKET}.s3.${S3_REGION}.amazonaws.com/belair-v2/${BRANCH_NAME}/${BUILD_ID}/artifacts/app-debug-latest.apk"
-        //     )
-        // }
+    // post {
+    //     success {
+    //         slackSend(
+    //             color: "good",
+    //             channel: "${SLACK_CHANNEL}", 
+    //             message: "New apk file available at: https://${S3_BUCKET}.s3.${S3_REGION}.amazonaws.com/belair-v2/${BRANCH_NAME}/${BUILD_ID}/artifacts/app-debug-latest.apk"
+    //         )
+    //     }
 
-        // failure {
-        //     slackSend(
-        //         color: "danger",
-        //         channel: "${SLACK_CHANNEL}", 
-        //         message: "Pipeline for ${BRANCH_NAME}#${BUILD_ID} failure"
-        //     )
-        // }
+    //     failure {
+    //         slackSend(
+    //             color: "danger",
+    //             channel: "${SLACK_CHANNEL}", 
+    //             message: "Pipeline for ${BRANCH_NAME}#${BUILD_ID} failure"
+    //         )
+    //     }
 
-        // always {
-        //     cleanWs()
-        // }
-    }
+    //     always {
+    //         cleanWs()
+    //     }
+    // }
 }
 
 
