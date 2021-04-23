@@ -26,13 +26,21 @@ platform :ios do
   profile_adhoc_uuid = '82ade11d-8fdc-47ea-aef8-e65bbc4ad52c'
   apple_id = '1441924418'
 
+  lane :fix_missing_compliance do
+    set_info_plist_value(
+      path: "BelAir_v2/BelAir_v2-Info.plist",
+      key: "ITSAppUsesNonExemptEncryption", 
+      value: false
+    )
+  end
+
   lane :install_profile do
     install_provisioning_profile(path: "../../BelAir_App_Store.mobileprovision")
   end
 
   desc "Description of what the lane does"
   lane :adhoc do
-    # install_profile
+    fix_missing_compliance
 
     Dir.chdir "../../../" do
       sh("ionic", "prepare", "ios")
@@ -58,6 +66,8 @@ platform :ios do
       profile_name: profile_adhoc_name,
       profile_uuid: profile_adhoc_uuid
     )
+
+    fix_missing_compliance
 
     build_app(
       scheme: project_name,
