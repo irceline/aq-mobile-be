@@ -16,7 +16,7 @@ pipeline {
                     writeFile file: 'config.xml', text: text
 
                     sh 'npm i'
-                    sh 'ionic cordova platform add ios@5.1.1'
+                    sh 'ionic cordova platform add ios@6.2.0'
                 }
             }
         }
