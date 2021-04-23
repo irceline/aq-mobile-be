@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { IonSlides } from '@ionic/angular';
+import { IonSlides, Platform } from '@ionic/angular';
 
 import { ValueDate } from '../../common/enums';
 import { BelAqiIndexResult } from '../../services/bel-aqi.service';
@@ -20,7 +20,15 @@ export class TimeLineListComponent implements OnChanges {
         centeredSlides: true
     };
 
+    constructor(
+        private platform: Platform
+    ) {
+    }
+
     ngOnChanges(changes: SimpleChanges): void {
+        if (this.platform.is('ipad') || this.platform.is('tablet')) {
+            this.timelineOptions.slidesPerView = 5;
+        }
         if (changes.items && this.items && this.items.length > 0) {
             const idx = this.items.findIndex(e => e.valueDate === ValueDate.CURRENT);
             this.slides.slideTo(idx);

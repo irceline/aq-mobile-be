@@ -155,5 +155,7 @@ export class CircleChartComponent implements OnInit {
 
         if (width > 205) this.titleSize = size;
         else this.titleSize = 40;
+
+        if (this.platform.is('ipad') || this.platform.is('tablet')) this.titleSize = 52;
     } 
 }
