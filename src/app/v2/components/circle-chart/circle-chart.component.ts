@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, NgZone, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
 import { PopoverController, Platform } from '@ionic/angular';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Settings, SettingsService } from '@helgoland/core';
@@ -17,6 +17,8 @@ import { runInThisContext } from 'vm';
     styleUrls: ['./circle-chart.component.scss', './circle-chart.component.hc.scss'],
 })
 export class CircleChartComponent implements OnInit {
+    @ViewChild('titleRef') titleRef: ElementRef;
+    @ViewChild('titleWrapperRef') titleWrapperRef: ElementRef;
     // belaqi score index
     @Input() belAqi = 0;
     // small circle text
@@ -37,7 +39,7 @@ export class CircleChartComponent implements OnInit {
     chartColor = '#FFFFFF';
     circleActive = false;
     isIos = false;
-    smallTitle = false;
+    titleSize = 40;
 
     public activeUserLocation: UserLocation;
 
@@ -130,11 +132,12 @@ export class CircleChartComponent implements OnInit {
         this.title = this.belaqiService.getLabelForIndex(value);
 
         // Handle dynamic size
-        if (this.title === 'belaqi.level.moderate' && lang === 'nl' || lang === 'de') {
-            this.smallTitle = true;
-        } else {
-            this.smallTitle = false;
-        }
+        this.titleSize = 40;
+        setTimeout(() => {
+            const width = this.titleRef.nativeElement.offsetWidth;
+            this.handleTitleSize(width);
+        }, 400)
+        
         this.loading = false
         try {
             this.text = this.translate.instant(
@@ -145,4 +148,12 @@ export class CircleChartComponent implements OnInit {
             console.log(e);
         }
     }
+
+    handleTitleSize(width) {
+        const wrapper = this.titleWrapperRef.nativeElement.offsetWidth;
+        const size = wrapper * 0.1;
+
+        if (width > 205) this.titleSize = size;
+        else this.titleSize = 40;
+    } 
 }
