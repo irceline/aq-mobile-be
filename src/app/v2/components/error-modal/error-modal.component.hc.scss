@@ -1,0 +1,21 @@
+@import '../../theme/variables';
+
+.high-contrast {
+    :host {
+        .wrapper {
+            background: white;
+
+            .content {
+                color: $black;
+            }
+
+            .controls {
+                color: $black;
+
+                .button {
+                    color: $black;
+                }
+            }
+        }
+    }
+}

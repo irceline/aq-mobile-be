@@ -1,5 +1,5 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, EventEmitter, HostBinding, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { NavController, Platform } from '@ionic/angular';
 
@@ -35,7 +35,6 @@ import { ThemeHandlerService } from '../../services/theme-handler/theme-handler.
 export class MenuScreenComponent implements OnInit {
     @Output() menuClosed = new EventEmitter();
 
-    @HostBinding('style.background-color')
     public backgroundColor;
 
     @Input()

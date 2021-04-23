@@ -7,7 +7,7 @@ $animationColor: white;
         display: block;
         width: 84%;
         margin: auto;
-        max-width: 440px;
+        max-width: 480px;
         min-height: 320px;
         transition: all 0.2s ease;
 
@@ -15,10 +15,10 @@ $animationColor: white;
             min-height: 300px;
         }
         @media screen and (max-height: 700px) {
-            min-height: 280px;
+            min-height: 260px;
         }
         @media screen and (max-height: 650px) {
-            min-height: 260px;
+            min-height: 250px;
         }
 
         &-chart {
@@ -37,6 +37,11 @@ $animationColor: white;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
+
+                @media screen and (min-width: 640px) {
+                    max-width: 400px;
+                }
+
                 .loader {
                     background: transparent;
                     border-radius: 50%;
@@ -118,6 +123,12 @@ $animationColor: white;
                     font-size: 11px;
                     max-width: 134px;
                     margin: auto;
+
+                    @media screen and (min-width: 640px) {
+                        font-size: 16px;
+                        line-height: 1.5;
+                        max-width: 190px;
+                    }
                 }
             }
         }
