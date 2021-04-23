@@ -5,11 +5,17 @@
         .wrapper {
             background-color: white !important;
 
-            .stats {
-                .title,
-                .today,
-                .total {
-                    color: $black;
+            .label {
+                color: $black;
+
+                ion-button {
+                    ion-icon {
+                        display: none;
+
+                        &.dark {
+                            display: block;
+                        }
+                    }
                 }
             }
 
@@ -18,13 +24,11 @@
                     color: $black;
                 }
             }
-            .anonymisation {
+
+            .edit-location-hint {
                 color: $black;
-                padding: 10px 20px;
-                text-align: center;
-                width: 100%;
-                font-size: 0.9em;
             }
         }
+
     }
 }

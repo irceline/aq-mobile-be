@@ -9,17 +9,17 @@
   </ion-button>
 </div>
 
-<div class="feedback--display" style="text-align: center;">
-  <ion-button fill="clear" (click)="openFeedbackStats()" class="display-button">
+<div style="text-align: center; padding: 1em 0;">
+  <ion-button fill="clear" (click)="openFeedbackStats()" class="feedback--interact">
     {{ 'feedback.show-feedback-button' | translate }}
+  </ion-button>
+  <ion-button fill="clear" (click)="adjustLocation()" class="feedback--interact">
+    {{ 'feedback.ajdust-location-for-feedback-button' | translate }}
   </ion-button>
 </div>
 
 <div class="feedback--content" *ngIf="like || dislike" [ngStyle]="{'padding-bottom': dislike || like ? '60px' : '0px'}">
   <div style="text-align: center;">
-    <ion-button fill="clear" (click)="adjustLocation()" class="display-button">
-      {{ 'feedback.ajdust-location-for-feedback-button' | translate }}
-    </ion-button>
   </div>
   <ng-container *ngIf="like">
     <!-- per design , there was a location input here, but the location is already determined on the top of this page -->
