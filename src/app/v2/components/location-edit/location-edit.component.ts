@@ -50,9 +50,9 @@ export class LocationEditComponent implements OnInit, AfterViewInit {
       center: [this.editedUserLocation.latitude, this.editedUserLocation.longitude],
       zoom: 14
     });
-    const tiles = L.tileLayer('https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}.png', {
+    const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     });
     tiles.addTo(this.map);
 
@@ -93,7 +93,7 @@ export class LocationEditComponent implements OnInit, AfterViewInit {
         if (label) { this.editedUserLocation.label = label; }
       } else {
         marker.setLatLng({ lat: this.editedUserLocation.latitude, lng: this.editedUserLocation.longitude });
-        this.toastController.create({ message: 'Selected location is outside of belgium', duration: 2000 })
+        this.toastController.create({ message: 'Selected location is outside of Belgium', duration: 2000 })
           .then(toast => toast.present());
       }
       this.loadingLabel = false;

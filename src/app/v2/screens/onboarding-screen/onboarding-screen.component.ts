@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { Component, NgZone, OnInit } from '@angular/core';
+import { Keyboard } from '@ionic-native/keyboard/ngx';
+import { NavController, Platform } from '@ionic/angular';
 
 import { UserLocation } from '../../Interfaces';
 import { UserSettingsService } from '../../services/user-settings.service';
@@ -13,11 +14,21 @@ export class OnboardingScreenComponent implements OnInit {
     // implementation task, fetch this from device settings
     btnText = 'Ga verder';
     sliderDisabled = false;
+    public keyboardShown = false;
 
     constructor(
         private navCtrl: NavController,
-        private userSettingsService: UserSettingsService
-    ) { }
+        private userSettingsService: UserSettingsService,
+        private zone: NgZone,
+        public keyboard: Keyboard
+    ) {
+        this.keyboard.onKeyboardShow().subscribe((e) => {
+            this.zone.run(() => this.keyboardShown = true)
+        })
+        this.keyboard.onKeyboardHide().subscribe((e) => {
+            this.zone.run(() => this.keyboardShown = false)
+        })
+    }
 
     ngOnInit() { }
 

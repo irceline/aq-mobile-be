@@ -1,6 +1,6 @@
 {
     "name": "aq-mobile-be",
-    "version": "1.7.6",
+    "version": "1.7.8",
     "author": "IRCEL - CELINE",
     "homepage": "https://www.irceline.be",
     "scripts": {
@@ -44,17 +44,12 @@
         "browserslist": "^4.16.1",
         "caniuse-lite": "^1.0.30001174",
         "chartjs-plugin-annotation": "^0.5.7",
-        "cordova-android": "^8.1.0",
         "cordova-browser": "5.0.4",
         "cordova-plugin-app-version": "^0.1.12",
-        "cordova-plugin-firebase": "^2.0.5",
         "cordova-plugin-geolocation": "^4.1.0",
-        "cordova-plugin-inappbrowser": "^3.1.0",
         "cordova-plugin-ionic-keyboard": "^2.2.0",
-        "cordova-plugin-ionic-webview": "^4.1.3",
         "cordova-plugin-network-information": "^2.0.2",
         "cordova-plugin-request-location-accuracy": "^2.3.0",
-        "cordova-plugin-splashscreen": "^5.0.3",
         "cordova-plugin-statusbar": "^2.4.3",
         "cordova-plugin-whitelist": "^1.3.4",
         "cordova-sqlite-storage": "^3.4.1",
@@ -92,7 +87,12 @@
         "@types/node": "^12.19.12",
         "@types/pouchdb": "^6.4.0",
         "codelyzer": "^5.1.2",
+        "cordova-android": "^8.1.0",
         "cordova-ios": "^6.2.0",
+        "cordova-plugin-firebase": "git+https://github.com/igez/cordova-plugin-firebase.git#v2.0.6",
+        "cordova-plugin-inappbrowser": "^5.0.0",
+        "cordova-plugin-ionic-webview": "^5.0.0",
+        "cordova-plugin-splashscreen": "^6.0.0",
         "cordova-res": "^0.15.3",
         "jasmine-core": "~3.5.0",
         "jasmine-spec-reporter": "~4.2.1",
@@ -108,7 +108,8 @@
         "ts-node": "~8.3.0",
         "tslint": "^6.1.3",
         "typescript": "~3.8.3",
-        "xcode": "^2.0.0"
+        "xcode": "^2.0.0",
+        "xml2js": "^0.4.23"
     },
     "description": "An Ionic project",
     "cordova": {
@@ -122,16 +123,14 @@
                 "PLAY_SERVICES_LOCATION_VERSION": "16.+"
             },
             "cordova-plugin-network-information": {},
-            "cordova-plugin-inappbrowser": {},
             "cordova-plugin-ionic-keyboard": {},
             "cordova-plugin-app-version": {},
             "cordova-plugin-whitelist": {},
             "cordova-plugin-statusbar": {},
-            "cordova-plugin-splashscreen": {},
-            "cordova-plugin-ionic-webview": {
-                "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
-            },
-            "cordova-plugin-firebase": {}
+            "cordova-plugin-firebase": {},
+            "cordova-plugin-ionic-webview": {},
+            "cordova-plugin-inappbrowser": {},
+            "cordova-plugin-splashscreen": {}
         },
         "platforms": [
             "browser",

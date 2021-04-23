@@ -51,10 +51,12 @@
 	"feedback": {
 		"ajdust-location-for-feedback-button": "Move feedback location",
 		"show-feedback-button": "Display feedback",
+		"edit-location-anonymise": "The location you set here will be displaced at random before submission to protect your privacy.",
 		"stats": {
 			"submission": "Submitted feedback",
 			"submission-today": "Today",
-			"submission-total": "In total"
+			"submission-total": "In total",
+			"anonymisation": "The locations displayed here were displaced at random before submission to protect the privacy of the submitter."
 		}
 	},
 	"network": {
