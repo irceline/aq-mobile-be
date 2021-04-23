@@ -1,0 +1,66 @@
+pipeline {
+    environment {
+      S3_BUCKET = 'belair-builds'
+      S3_REGION = 'eu-central-1'
+      SLACK_CHANNEL = '#belair'
+    }
+
+   agent any
+
+    stages {
+        stage('Create app environment') {
+            steps {
+                script {
+                    sh 'npm i'
+                    sh 'node tools/bump_version.js \$BUILD_NUMBER'
+                    sh 'ionic cordova platform add ios@6.2.0'
+                }
+            }
+        }
+
+        stage('Configure environment') {
+            steps {
+                withCredentials([
+                    file(credentialsId: 'belair_appstore', variable: 'PROVISIONING'),
+                ]) {
+                    sh "cp \$PROVISIONING BelAir_App_Store.mobileprovision"
+                }
+
+                sh 'cp -R conf/fastlane platforms/ios/'
+            }
+        }
+
+        stage('Build ipa') {
+            steps {
+                withCredentials([
+                    string(credentialsId: 'FASTLANE_SESSION', variable: 'session'),
+                    string(credentialsId: 'testflight_specific_password', variable: 'pass')
+                ]) {
+                    sh 'cd platforms/ios && CI=true FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=\$pass FASTLANE_SESSION=\$session fastlane adhoc'
+                }
+            }
+        }
+
+        stage('Archive artifact to s3') {
+            steps {
+                archiveArtifacts artifacts: 'platforms/ios/BelAir_v2.ipa', fingerprint: true
+            }
+        }
+    }
+
+    post {
+        failure {
+            slackSend(
+                color: 'danger',
+                channel: "${SLACK_CHANNEL}", 
+                message: "iOS Pipeline for ${BRANCH_NAME}#${BUILD_ID} failure"
+            )
+        }
+
+        always {
+            cleanWs()
+        }
+    }
+}
+
+

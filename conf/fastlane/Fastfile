@@ -1,0 +1,81 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  team_id = CredentialsManager::AppfileConfig.try_fetch_value(:team_id)
+  app_identifier = CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
+  xcodeproj_name = 'BelAir_v2.xcodeproj'
+  workspace_name = 'BelAir_v2.xcworkspace'
+  project_name = 'BelAir_v2'
+  output_name = 'BelAir_v2.ipa'
+  profile_adhoc_name = 'BelAir App Store'
+  profile_adhoc_uuid = '82ade11d-8fdc-47ea-aef8-e65bbc4ad52c'
+  apple_id = '1441924418'
+
+  lane :install_profile do
+    install_provisioning_profile(path: "../../BelAir_App_Store.mobileprovision")
+  end
+
+  desc "Description of what the lane does"
+  lane :adhoc do
+    # install_profile
+
+    Dir.chdir "../../../" do
+      sh("ionic", "prepare", "ios")
+      sh("ionic", "build")
+    end
+
+    update_project_provisioning(
+      xcodeproj: xcodeproj_name,
+      profile: "../../BelAir_App_Store.mobileprovision",
+      build_configuration: "Release",
+      code_signing_identity: "iPhone Distribution"
+    )
+
+    update_project_team(
+      path: xcodeproj_name,
+      teamid: team_id
+    )
+
+    update_code_signing_settings(
+      use_automatic_signing: false,
+      path: xcodeproj_name,
+      code_sign_identity: 'iPhone Distribution',
+      profile_name: profile_adhoc_name,
+      profile_uuid: profile_adhoc_uuid
+    )
+
+    build_app(
+      scheme: project_name,
+      workspace: workspace_name,
+      include_bitcode: false,
+      export_options: {
+        method: "app-store",
+        provisioningProfiles: { 
+          app_identifier => "BelAir App Store",
+        }
+      },
+      output_name: output_name
+    )
+
+    upload_to_testflight(
+      skip_waiting_for_build_processing: true,
+      apple_id: apple_id,
+      uses_non_exempt_encryption: true
+    )
+  end
+end
