@@ -33,7 +33,7 @@
   <img class="dark" src="/assets/images/icons/navigation-dark.svg" alt="">
 </ion-button>
 
-<div *ngIf="editableLocation" style="padding-top: 1em;">
+<div *ngIf="editableLocation" class="location--actions">
   <ion-button expand="block" fill="clear" shape="round" class="location--button" (click)="editLocation()">
     {{ 'no-location.edit' | translate }}
   </ion-button>

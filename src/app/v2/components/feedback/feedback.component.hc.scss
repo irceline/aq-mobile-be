@@ -37,6 +37,11 @@
                 }
             }
 
+            &--interact {
+              line-height: 3.5em;
+              color: $black;
+            }
+
             &--content {
                 p {
                     color: $black;
