@@ -44,7 +44,6 @@
         "browserslist": "^4.16.1",
         "caniuse-lite": "^1.0.30001174",
         "chartjs-plugin-annotation": "^0.5.7",
-        "cordova-android": "^8.1.0",
         "cordova-browser": "5.0.4",
         "cordova-plugin-app-version": "^0.1.12",
         "cordova-plugin-geolocation": "^4.1.0",
@@ -89,6 +88,7 @@
         "@types/node": "^12.19.12",
         "@types/pouchdb": "^6.4.0",
         "codelyzer": "^5.1.2",
+        "cordova-android": "^8.1.0",
         "cordova-ios": "^6.2.0",
         "cordova-plugin-firebase": "git+https://github.com/igez/cordova-plugin-firebase.git#v2.0.6",
         "cordova-plugin-inappbrowser": "^5.0.0",
@@ -133,8 +133,8 @@
         },
         "platforms": [
             "browser",
-            "android",
-            "ios"
+            "ios",
+            "android"
         ]
     }
 }
