@@ -12,6 +12,7 @@ import { By } from '@angular/platform-browser';
 import { lightIndexColor } from '../../common/constants';
 import { BelAQIService } from '../../services/bel-aqi.service';
 import { localStorageMock } from '../../testing/localStorage.mock';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('HeaderComponent', () => {
     let component: HeaderComponent;
@@ -29,6 +30,7 @@ describe('HeaderComponent', () => {
                 TranslateTestingModule,
                 RouterTestingModule,
                 BrowserAnimationsModule,
+                HttpClientTestingModule,
             ],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
         }).compileComponents();
@@ -37,7 +39,7 @@ describe('HeaderComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(HeaderComponent);
         navCtrl = TestBed.get(NavController);
-        belAqiService = TestBed.get(BelAQIService);
+        // belAqiService = TestBed.get(BelAQIService);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
@@ -78,19 +80,20 @@ describe('HeaderComponent', () => {
     //   expect(menuDiv).toBeDefined();
     // });
 
-    it('should display proper background color', () => {
-        component.belAqi = 7;
-        fixture.detectChanges();
-        expect(component.backgroundColor).toEqual(lightIndexColor[7]);
-    });
+    // Comment this test because the background change is on app-background compoenent
+    // it('should display proper background color', () => {
+    //     component.belAqi = 7;
+    //     fixture.detectChanges();
+    //     expect(component.backgroundColor).toEqual(lightIndexColor[7]);
+    // });
 
-    it('should change background color when index changes', () => {
-        const indexes = localStorageMock.getIndexScores(5, 5);
-        const tempIndex = indexes[3];
-        belAqiService.$activeIndex.next(tempIndex);
-        fixture.detectChanges();
-        expect(component.backgroundColor).toEqual(
-            lightIndexColor[tempIndex.indexScore]
-        );
-    });
+    // it('should change background color when index changes', () => {
+    //     const indexes = localStorageMock.getIndexScores(5, 5);
+    //     const tempIndex = indexes[3];
+    //     belAqiService.$activeIndex.next(tempIndex);
+    //     fixture.detectChanges();
+    //     expect(component.backgroundColor).toEqual(
+    //         lightIndexColor[tempIndex.indexScore]
+    //     );
+    // });
 });

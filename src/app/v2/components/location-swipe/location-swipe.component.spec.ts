@@ -5,7 +5,7 @@ import { LocationSwipeComponent } from './location-swipe.component';
 import { IonSlides } from '@ionic/angular';
 import { localStorageMock } from '../../testing/localStorage.mock';
 
-describe('LocationSwipeComponent', () => {
+fdescribe('LocationSwipeComponent', () => {
   let component: LocationSwipeComponent;
   let fixture: ComponentFixture<LocationSwipeComponent>;
 

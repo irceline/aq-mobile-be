@@ -5,7 +5,7 @@ import { InfoButtonComponent } from './info-button.component';
 import {NavController} from '@ionic/angular';
 import {NavControllerMock} from '../../testing/nav-controller.mock';
 
-describe('InfoButtonComponent', () => {
+fdescribe('InfoButtonComponent', () => {
     let component: InfoButtonComponent;
     let fixture: ComponentFixture<InfoButtonComponent>;
     let navController: NavController;

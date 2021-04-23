@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PullTabComponent } from './pull-tab.component';
 
-xdescribe('PullTabComponent', () => {
+describe('PullTabComponent', () => {
   let component: PullTabComponent;
   let fixture: ComponentFixture<PullTabComponent>;
 

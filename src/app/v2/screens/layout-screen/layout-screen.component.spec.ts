@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LayoutScreenComponent } from './layout-screen.component';
 
-xdescribe('LayoutScreenComponent', () => {
+describe('LayoutScreenComponent', () => {
   let component: LayoutScreenComponent;
   let fixture: ComponentFixture<LayoutScreenComponent>;
 

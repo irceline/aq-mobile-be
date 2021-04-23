@@ -4,7 +4,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppInfoScreenComponent } from './app-info-screen.component';
 import { RouterTestingModule } from '@angular/router/testing';
 
-xdescribe('AppInfoScreenComponent', () => {
+describe('AppInfoScreenComponent', () => {
     let component: AppInfoScreenComponent;
     let fixture: ComponentFixture<AppInfoScreenComponent>;
 

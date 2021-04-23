@@ -5,6 +5,7 @@ import { CircleChartComponent } from './circle-chart.component';
 import {BelAQIService} from '../../services/bel-aqi.service';
 import {TranslateTestingModule} from '../../testing/TranslateTestingModule';
 import {localStorageMock} from '../../testing/localStorage.mock';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('CircleChartComponent', () => {
   let component: CircleChartComponent;
@@ -15,7 +16,8 @@ describe('CircleChartComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ CircleChartComponent ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      imports: [TranslateTestingModule]
+      imports: [TranslateTestingModule, HttpClientTestingModule],
+      providers: [BelAQIService]
     })
     .compileComponents();
     belAQIService = TestBed.get(BelAQIService);

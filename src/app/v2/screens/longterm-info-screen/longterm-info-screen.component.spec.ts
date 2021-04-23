@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LongtermInfoScreenComponent } from './longterm-info-screen.component';
 
-xdescribe('LongtermInfoScreenComponent', () => {
+describe('LongtermInfoScreenComponent', () => {
     let component: LongtermInfoScreenComponent;
     let fixture: ComponentFixture<LongtermInfoScreenComponent>;
 

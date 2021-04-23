@@ -5,6 +5,8 @@ import { BackgroundComponent } from './background.component';
 import {TranslateTestingModule} from '../../testing/TranslateTestingModule';
 import {BelAqiIndexResult, BelAQIService} from '../../services/bel-aqi.service';
 import { backgroundImages } from '../../common/constants';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CacheService } from 'ionic-cache';
 
 describe('BackgroundComponent', () => {
   let component: BackgroundComponent;
@@ -14,8 +16,9 @@ describe('BackgroundComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ BackgroundComponent ],
-      imports: [TranslateTestingModule],
+      imports: [TranslateTestingModule, HttpClientTestingModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      providers: [ CacheService ],
     })
     .compileComponents();
     belAQIService = TestBed.get(BelAQIService);
