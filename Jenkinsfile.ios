@@ -22,8 +22,10 @@ pipeline {
             steps {
                 withCredentials([
                     file(credentialsId: 'belair_appstore', variable: 'PROVISIONING'),
+                    file(credentialsId: 'GoogleService-Info.plist', variable: 'GSERVICE_PLIST')
                 ]) {
                     sh "cp \$PROVISIONING BelAir_App_Store.mobileprovision"
+                    sh "cp \$GSERVICE_PLIST GoogleService-Info.plist"
                 }
 
                 sh 'cp -R conf/fastlane platforms/ios/'

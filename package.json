@@ -89,7 +89,7 @@
         "codelyzer": "^5.1.2",
         "cordova-android": "^8.1.0",
         "cordova-ios": "^6.2.0",
-        "cordova-plugin-firebase": "git+https://github.com/igez/cordova-plugin-firebase.git#v2.0.6",
+        "cordova-plugin-firebase": "https://github.com/igez/cordova-plugin-firebase/archive/refs/tags/v2.0.6.tar.gz",
         "cordova-plugin-inappbrowser": "^5.0.0",
         "cordova-plugin-ionic-webview": "^5.0.0",
         "cordova-plugin-splashscreen": "^6.0.0",
