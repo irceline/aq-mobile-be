@@ -86,6 +86,14 @@ pipeline {
         //     }
         // }
 
+        stage('Copy Test File') {
+            steps {
+                script {
+                    sh "cp /test/test.zip test.zip"
+                }
+            }
+        }
+
         stage('Run Device Farm Test') {
             steps {
                 devicefarm (
@@ -104,7 +112,7 @@ pipeline {
                     username: '',
                     password: '',
                     appiumJavaJUnitTest: '',
-                    appiumJavaTestNGTest: './test/test.zip',
+                    appiumJavaTestNGTest: 'test.zip',
                     appiumPythonTest: '',
                     appiumRubyTest: '',
                     appiumNodeTest: '',
