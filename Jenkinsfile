@@ -89,7 +89,7 @@ pipeline {
         stage('Copy Test File') {
             steps {
                 script {
-                    sh "cp ./test/test.zip \$WORKSPACE\test.zip"
+                    sh "cp ./test/test.zip \$WORKSPACE/test.zip"
                 }
             }
         }
