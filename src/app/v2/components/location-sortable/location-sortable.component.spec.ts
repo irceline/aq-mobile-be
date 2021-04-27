@@ -1,4 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LocationSortableComponent } from './location-sortable.component';
@@ -27,7 +28,7 @@ describe('LocationSortableComponent', () => {
         {provide: AlertController, useValue: alertSpy}
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      imports: [TranslateTestingModule]
+      imports: [TranslateTestingModule, IonicModule]
     })
     .compileComponents();
     locations = JSON.parse(localStorageMock.getItem('belAir.userLocations'));

@@ -3,7 +3,7 @@
     <h4>
       <ion-icon class="icon-standard" src="/assets/images/icons/question.svg"></ion-icon>
       <ion-icon class="icon-dark" src="/assets/images/icons/question-dark.svg"></ion-icon>
-      <span>{{ title | translate }}</span>
+      <span *ngIf="title">{{ title | translate }}</span>
     </h4>
   </button>
   <div class="details--info-text" *ngIf="expandHint">

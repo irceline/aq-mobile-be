@@ -36,7 +36,7 @@ export class RatingScreenComponent implements OnInit {
     ngOnInit() {
         this.locations = this.userSettingsService.getUserSavedLocations();
 
-        // activate first location by default
+        // // activate first location by default
         this.activeIndex = this.locations.findIndex(e => this.userSettingsService.selectedUserLocation.id === e.id);
         this.updateCurrentLocation(this.locations[this.activeIndex]);
 

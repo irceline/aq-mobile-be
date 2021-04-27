@@ -32,12 +32,11 @@ describe('LocationSwipeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should emit proper events on slide change', () => {
+  it('should emit proper events on slide change', async () => {
     spyOn(component.slides, 'getActiveIndex').and.callFake(() => Promise.resolve(2));
     spyOn(component.locationChange, 'next');
-    component.slideChange().then(() => {
-      expect(component.slides.getActiveIndex).toHaveBeenCalled();
-      expect(component.locationChange.next).toHaveBeenCalledWith(component.locations[2]);
-    });
+    await component.slideChange();
+    expect(component.slides.getActiveIndex).toHaveBeenCalled();
+    expect(component.locationChange.next).toHaveBeenCalledWith(component.locations[2]);
   });
 });

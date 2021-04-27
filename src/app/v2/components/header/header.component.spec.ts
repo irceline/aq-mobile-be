@@ -12,6 +12,12 @@ import { By } from '@angular/platform-browser';
 import { lightIndexColor } from '../../common/constants';
 import { BelAQIService } from '../../services/bel-aqi.service';
 import { localStorageMock } from '../../testing/localStorage.mock';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CacheModule } from "ionic-cache";
+import { SettingsService } from '@helgoland/core';
+import { IonicModule } from '@ionic/angular';
+import { Firebase } from '@ionic-native/firebase/ngx';
+import { Network } from '@ionic-native/network/ngx';
 
 describe('HeaderComponent', () => {
     let component: HeaderComponent;
@@ -24,11 +30,15 @@ describe('HeaderComponent', () => {
             declarations: [HeaderComponent, MenuScreenComponent],
             providers: [
                 { provide: NavController, useClass: NavControllerMock },
+                BelAQIService, Network, SettingsService, Firebase
             ],
             imports: [
                 TranslateTestingModule,
                 RouterTestingModule,
                 BrowserAnimationsModule,
+                HttpClientTestingModule,
+                CacheModule.forRoot(),
+                IonicModule
             ],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
         }).compileComponents();
@@ -78,19 +88,20 @@ describe('HeaderComponent', () => {
     //   expect(menuDiv).toBeDefined();
     // });
 
-    it('should display proper background color', () => {
-        component.belAqi = 7;
-        fixture.detectChanges();
-        expect(component.backgroundColor).toEqual(lightIndexColor[7]);
-    });
+    // Comment this test because the background change is on app-background compoenent
+    // it('should display proper background color', () => {
+    //     component.belAqi = 7;
+    //     fixture.detectChanges();
+    //     expect(component.backgroundColor).toEqual(lightIndexColor[7]);
+    // });
 
-    it('should change background color when index changes', () => {
-        const indexes = localStorageMock.getIndexScores(5, 5);
-        const tempIndex = indexes[3];
-        belAqiService.$activeIndex.next(tempIndex);
-        fixture.detectChanges();
-        expect(component.backgroundColor).toEqual(
-            lightIndexColor[tempIndex.indexScore]
-        );
-    });
+    // it('should change background color when index changes', () => {
+    //     const indexes = localStorageMock.getIndexScores(5, 5);
+    //     const tempIndex = indexes[3];
+    //     belAqiService.$activeIndex.next(tempIndex);
+    //     fixture.detectChanges();
+    //     expect(component.backgroundColor).toEqual(
+    //         lightIndexColor[tempIndex.indexScore]
+    //     );
+    // });
 });

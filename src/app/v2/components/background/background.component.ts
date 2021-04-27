@@ -18,12 +18,18 @@ export class BackgroundComponent implements OnDestroy {
 
     private indexSubscription: Subscription;
 
+    background: string;
+
     constructor(
         private _sanitizer: DomSanitizer,
         private belAQIService: BelAQIService,
         private statusBar: StatusBar,
         private themeService: ThemeHandlerService
-    ) { }
+    ) {
+        belAQIService.$activeIndex.subscribe((newIndex) => {
+            if (newIndex) this.background = this.belAQIService.getBackgroundForIndex(newIndex.indexScore);
+        });
+    }
 
     ngOnInit(): void {
         this.statusBar.styleLightContent();

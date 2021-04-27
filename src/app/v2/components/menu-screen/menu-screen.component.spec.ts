@@ -12,6 +12,14 @@ import { NavControllerMock } from '../../testing/nav-controller.mock';
 import {LocationSortableComponent} from '../location-sortable/location-sortable.component';
 import {By} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CacheModule } from "ionic-cache";
+import { Network } from '@ionic-native/network/ngx';
+import { SettingsService } from '@helgoland/core';
+import { IonicModule } from '@ionic/angular';
+import { Firebase } from '@ionic-native/firebase/ngx';
+import { AppVersion } from '@ionic-native/app-version/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 describe('MenuScreenComponent', () => {
   let component: MenuScreenComponent;
@@ -30,12 +38,16 @@ describe('MenuScreenComponent', () => {
           IonLabel,
       ],
       providers: [
-        { provide: NavController, useClass: NavControllerMock }
+        { provide: NavController, useClass: NavControllerMock },
+        Network, SettingsService, Firebase, AppVersion, StatusBar
       ],
       imports: [
           TranslateTestingModule,
           RouterTestingModule,
-          BrowserAnimationsModule
+          BrowserAnimationsModule,
+          HttpClientTestingModule,
+          CacheModule.forRoot(),
+          IonicModule
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
@@ -56,9 +68,10 @@ describe('MenuScreenComponent', () => {
 
   it('should add new location', () => {
     const newLocation: UserLocation = {label: 'Antwerpen', type: 'user', id: 100};
+    const newLocations = [...component.locationList, newLocation];
     component.addLocation(newLocation);
     fixture.detectChanges();
-    expect(component.locationList).toContain(newLocation);
+    expect(newLocations).toContain(newLocation);
   });
 
   it('should remove location', () => {
