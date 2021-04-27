@@ -94,13 +94,21 @@ pipeline {
             }
         }
 
+        stage('Copy Test Spec') {
+            steps {
+                script {
+                    sh "cp ./test/test-spec.yaml \$WORKSPACE/test.yaml"
+                }
+            }
+        }
+
         stage('Run Device Farm Test') {
             steps {
                 devicefarm (
                     projectName: 'AcopicTest',
                     devicePoolName: 'Top Devices',
                     appArtifact:'app-debug-latest.apk',
-                    testSpecName: '',
+                    testSpecName: 'test.yaml',
                     environmentToRun: '',
                     runName: "Belair-build-${BUILD_ID}",
                     testToRun: 'APPIUM_JAVA_TESTNG',
@@ -137,13 +145,13 @@ pipeline {
                     deviceLocation: false,
                     deviceLatitude: 0,
                     deviceLongitude: 0,
-                    radioDetails: false,
-                    ifBluetooth: false,
-                    ifWifi: false,
-                    ifGPS: false,
+                    radioDetails: true,
+                    ifBluetooth: true,
+                    ifWifi: true,
+                    ifGPS: true,
                     ifNfc: false,
                     jobTimeoutMinutes: 10,
-                    ifVideoRecording: false,
+                    ifVideoRecording: true,
                     ifAppPerformanceMonitoring: false,
                     ignoreRunError: false,
                     ifVpce: false,

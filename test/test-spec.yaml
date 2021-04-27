@@ -1,0 +1,89 @@
+version: 0.1
+
+# Phases are collection of commands that get executed on Device Farm.
+phases:
+  # The install phase includes commands that install dependencies that your tests use.
+  # Default dependencies for testing frameworks supported on Device Farm are already installed.
+  install:
+    commands:
+      # This test execution environment uses Appium version 1.9.1 by default, however we enable you to change it using the Appium version manager (avm). An
+      # example "avm" command below changes the version to 1.14.2.
+      # For your convenience, we have preinstalled the following versions: 1.9.1, 1.10.1, 1.11.1, 1.12.1, 1.13.0, 1.14.1, 1.14.2, 1.15.1 or 1.16.0.
+      # To use one of these Appium versions, change the version number in the "avm" command below to your desired version:
+      - export APPIUM_VERSION=1.14.2
+      - avm $APPIUM_VERSION
+      - ln -s /usr/local/avm/versions/$APPIUM_VERSION/node_modules/.bin/appium  /usr/local/avm/versions/$APPIUM_VERSION/node_modules/appium/bin/appium.js
+
+  # The pre-test phase includes commands that setup your test environment.
+  pre_test:
+    commands:
+      # Setup environment variables for java
+      - export CLASSPATH=$CLASSPATH:$DEVICEFARM_TESTNG_JAR
+      - export CLASSPATH=$CLASSPATH:$DEVICEFARM_TEST_PACKAGE_PATH/*
+      - export CLASSPATH=$CLASSPATH:$DEVICEFARM_TEST_PACKAGE_PATH/dependency-jars/*
+      # We recommend starting appium server process in the background using the command below.
+      # Appium server log will go to $DEVICEFARM_LOG_DIR directory.
+      # The environment variables below will be auto-populated during run time.
+      - echo "Start appium server"
+      - >-
+        appium --log-timestamp
+        --default-capabilities "{\"deviceName\": \"$DEVICEFARM_DEVICE_NAME\", \"platformName\":\"$DEVICEFARM_DEVICE_PLATFORM_NAME\",
+        \"app\":\"$DEVICEFARM_APP_PATH\", \"udid\":\"$DEVICEFARM_DEVICE_UDID\", \"platformVersion\":\"$DEVICEFARM_DEVICE_OS_VERSION\",
+        \"chromedriverExecutable\":\"$DEVICEFARM_CHROMEDRIVER_EXECUTABLE\"}"
+        >> $DEVICEFARM_LOG_DIR/appiumlog.txt 2>&1 &
+
+      - >-
+        start_appium_timeout=0;
+        while [ true ];
+        do
+            if [ $start_appium_timeout -gt 60 ];
+            then
+                echo "appium server never started in 60 seconds. Exiting";
+                exit 1;
+            fi;
+            grep -i "Appium REST http interface listener started on 0.0.0.0:4723" $DEVICEFARM_LOG_DIR/appiumlog.txt >> /dev/null 2>&1;
+            if [ $? -eq 0 ];
+            then
+                echo "Appium REST http interface listener started on 0.0.0.0:4723";
+                break;
+            else
+                echo "Waiting for appium server to start. Sleeping for 1 second";
+                sleep 1;
+                start_appium_timeout=$((start_appium_timeout+1));
+            fi;
+        done;
+
+  # The test phase includes commands that start your test suite execution.
+  test:
+    commands:
+      # Your test package is downloaded in $DEVICEFARM_TEST_PACKAGE_PATH so we first change directory to that path.
+      - echo "Navigate to test package directory"
+      - cd $DEVICEFARM_TEST_PACKAGE_PATH
+
+      # By default, the following command is used by Device Farm to run your Appium TestNG test.
+      # The goal is to run to your tests jar file with all the dependencies jars in the CLASSPATH.
+      # Alternatively, You may specify your customized command.
+      # Note: For most use cases, the default command works fine.
+      # Please refer "http://testng.org/doc/documentation-main.html#running-testng" for more options on running TestNG tests from the command line.
+      - echo "Start Appium TestNG test"
+      - java -Dappium.screenshots.dir=$DEVICEFARM_SCREENSHOT_PATH org.testng.TestNG -testjar *-tests.jar -d $DEVICEFARM_LOG_DIR/test-output -verbose 10
+
+      # To run your tests with testng.xml file, use the following sequence:
+      # Note: you don't have to unzip your test jar unless you have xml file with custom name
+      # 1. Your testng.xml is inside the test jar after packaging step. Unzip it using commands:
+      # - echo "Unzipping TestNG tests jar"
+      # - unzip *-tests.jar
+      # 2. Run your TestSuite by specifying the unzipped testng.xml using commands:
+      # - echo "Start Appium TestNG test"
+      # - java org.testng.TestNG -d $DEVICEFARM_LOG_DIR/test-output testng.xml
+
+  # The post test phase includes are commands that are run after your tests are executed.
+  post_test:
+    commands:
+
+# The artifacts phase lets you specify the location where your tests logs, device logs will be stored.
+# And also let you specify the location of your test logs and artifacts which you want to be collected by Device Farm.
+# These logs and artifacts will be available through ListArtifacts API in Device Farm.
+artifacts:
+  # By default, Device Farm will collect your artifacts from following directories
+  - $DEVICEFARM_LOG_DIR
