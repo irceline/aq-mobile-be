@@ -94,7 +94,7 @@ pipeline {
                     appArtifact:'app-debug-latest.apk',
                     testSpecName: '',
                     environmentToRun: '',
-                    runName: 'Test Run',
+                    runName: "Belair-${BRANCH_NAME}-${BUILD_ID}",
                     testToRun: 'BUILTIN_FUZZ',
                     storeResults: '',
                     isRunUnmetered: '',
