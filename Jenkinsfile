@@ -42,108 +42,108 @@ pipeline {
             }
         }
 
-        // stage('Create app') {
-        //     steps {
-        //         script {
-        //             app = docker.build(appImg, "-f ./docker/create-app/Dockerfile .")
-        //         }
-        //     }
-        // }
-
-        // stage('Build apk') {
-        //     steps {
-        //         script {
-        //             buildApk = docker.build(buildApkImg, "-f ./docker/build-apk/Dockerfile .")
-        //         }
-        //     }
-        // }
-
-        // stage('Copy apk') {
-        //     steps {
-        //         script {
-        //             buildApk.inside { 
-        //                 sh 'cp /app/platforms/android/app/build/outputs/apk/debug/app-debug.apk \$WORKSPACE/app-debug-latest.apk'
-        //             }
-        //         }
-        //     }
-        // }
-
-        // stage('Remove all containers') {
-        //     steps {
-        //         sh 'docker container prune'
-        //     }
-        // }
-
-        // stage('Remove all dangling images') {
-        //     steps {
-        //         sh 'docker image prune -f'
-        //     }
-        // }
-
-        // stage('Archive artifact to s3') {
-        //     steps {
-        //         archiveArtifacts artifacts: 'app-debug-latest.apk', fingerprint: true
-        //     }
-        // }
-
-        stage('Run Device Farm Test') {
+        stage('Create app') {
             steps {
-                devicefarm (
-                    projectName: 'AcopicTest',
-                    devicePoolName: 'Top Devices',
-                    appArtifact:'\$WORKSPACE/app-debug-latest.apk',
-                    testSpecName: '',
-                    environmentToRun: '',
-                    runName: 'Test Run',
-                    testToRun: 'BUILTIN_FUZZ',
-                    storeResults: '',
-                    isRunUnmetered: '',
-                    eventCount: '',
-                    eventThrottle: '',
-                    seed: '',
-                    username: '',
-                    password: '',
-                    appiumJavaJUnitTest: '',
-                    appiumJavaTestNGTest: '',
-                    appiumPythonTest: '',
-                    appiumRubyTest: '',
-                    appiumNodeTest: '',
-                    calabashFeatures: '',
-                    calabashTags: '',
-                    calabashProfile: '',
-                    junitArtifact: '',
-                    junitFilter: '',
-                    uiautomatorArtifact: '',
-                    uiautomatorFilter: '',
-                    uiautomationArtifact: '',
-                    xctestArtifact: '',
-                    xctestFilter: '',
-                    xctestUiArtifact: '',
-                    xctestUiFilter: '',
-                    appiumVersionJunit: '',
-                    appiumVersionPython: '',
-                    appiumVersionTestng: '',
-                    ifWebApp: false,
-                    extraData: false,
-                    extraDataArtifact: '',
-                    deviceLocation: false,
-                    deviceLatitude: 0,
-                    deviceLongitude: 0,
-                    radioDetails: false,
-                    ifBluetooth: false,
-                    ifWifi: false,
-                    ifGPS: false,
-                    ifNfc: false,
-                    jobTimeoutMinutes: 10,
-                    ifVideoRecording: false,
-                    ifAppPerformanceMonitoring: false,
-                    ignoreRunError: false,
-                    ifVpce: false,
-                    ifSkipAppResigning: false,
-                    vpceServiceName: '',
-                )
+                script {
+                    app = docker.build(appImg, "-f ./docker/create-app/Dockerfile .")
+                }
             }
         }
+
+        stage('Build apk') {
+            steps {
+                script {
+                    buildApk = docker.build(buildApkImg, "-f ./docker/build-apk/Dockerfile .")
+                }
+            }
+        }
+
+        stage('Copy apk') {
+            steps {
+                script {
+                    buildApk.inside { 
+                        sh 'cp /app/platforms/android/app/build/outputs/apk/debug/app-debug.apk \$WORKSPACE/app-debug-latest.apk'
+                    }
+                }
+            }
+        }
+
+        stage('Remove all containers') {
+            steps {
+                sh 'docker container prune'
+            }
+        }
+
+        stage('Remove all dangling images') {
+            steps {
+                sh 'docker image prune -f'
+            }
+        }
+
+        stage('Archive artifact to s3') {
+            steps {
+                archiveArtifacts artifacts: 'app-debug-latest.apk', fingerprint: true
+            }
+        }
+
+        // stage('Run Device Farm Test') {
+        //     steps {
+        //         devicefarm (
+        //             projectName: 'AcopicTest',
+        //             devicePoolName: 'Top Devices',
+        //             appArtifact:'\$WORKSPACE/app-debug-latest.apk',
+        //             testSpecName: '',
+        //             environmentToRun: '',
+        //             runName: 'Test Run',
+        //             testToRun: 'BUILTIN_FUZZ',
+        //             storeResults: '',
+        //             isRunUnmetered: '',
+        //             eventCount: '',
+        //             eventThrottle: '',
+        //             seed: '',
+        //             username: '',
+        //             password: '',
+        //             appiumJavaJUnitTest: '',
+        //             appiumJavaTestNGTest: '',
+        //             appiumPythonTest: '',
+        //             appiumRubyTest: '',
+        //             appiumNodeTest: '',
+        //             calabashFeatures: '',
+        //             calabashTags: '',
+        //             calabashProfile: '',
+        //             junitArtifact: '',
+        //             junitFilter: '',
+        //             uiautomatorArtifact: '',
+        //             uiautomatorFilter: '',
+        //             uiautomationArtifact: '',
+        //             xctestArtifact: '',
+        //             xctestFilter: '',
+        //             xctestUiArtifact: '',
+        //             xctestUiFilter: '',
+        //             appiumVersionJunit: '',
+        //             appiumVersionPython: '',
+        //             appiumVersionTestng: '',
+        //             ifWebApp: false,
+        //             extraData: false,
+        //             extraDataArtifact: '',
+        //             deviceLocation: false,
+        //             deviceLatitude: 0,
+        //             deviceLongitude: 0,
+        //             radioDetails: false,
+        //             ifBluetooth: false,
+        //             ifWifi: false,
+        //             ifGPS: false,
+        //             ifNfc: false,
+        //             jobTimeoutMinutes: 10,
+        //             ifVideoRecording: false,
+        //             ifAppPerformanceMonitoring: false,
+        //             ignoreRunError: false,
+        //             ifVpce: false,
+        //             ifSkipAppResigning: false,
+        //             vpceServiceName: '',
+        //         )
+        //     }
+        // }
     }
 
     // post {
