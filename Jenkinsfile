@@ -99,7 +99,7 @@ pipeline {
                 devicefarm (
                     projectName: 'AcopicTest',
                     devicePoolName: 'Top Devices',
-                    testSpecName: 'buds.yml',
+                    testSpecName: 'nebulae.yml',
                     environmentToRun: 'CustomEnvironment',
                     appArtifact:'app-debug-latest.apk',
                     runName: "Belair-build-${BUILD_ID}",
@@ -130,7 +130,7 @@ pipeline {
                     xctestUiFilter: '',
                     appiumVersionJunit: '',
                     appiumVersionPython: '',
-                    appiumVersionTestng: '1.14.2',
+                    appiumVersionTestng: '',
                     ifWebApp: false,
                     extraData: false,
                     extraDataArtifact: '',
