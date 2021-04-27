@@ -63,7 +63,11 @@ export class FeedbackStatsMapComponent implements AfterViewInit, OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.belAQIService.$activeIndex.subscribe(idx => this.backgroundColor = this.belAQIService.getLightColorForIndex(idx.indexScore));
+    this.belAQIService.$activeIndex.subscribe(idx => {
+      if (idx && idx.indexScore) {
+        this.backgroundColor = this.belAQIService.getLightColorForIndex(idx.indexScore)
+      }
+    });
   }
 
   ngAfterViewInit(): void {

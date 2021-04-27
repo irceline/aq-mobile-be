@@ -53,15 +53,15 @@ describe('InformationItemComponent', () => {
     it('should display proper labels and colors', () => {
         const de = fixture.debugElement;
         const spans = de.queryAll(By.css('span'));
-        expect(spans[0].styles['background-color']).toEqual(
+        expect(specHelper.rgb2hex(spans[0].styles['background-color'])).toEqual(
             lightIndexColor[belaqi]
         );
         expect(spans[1].nativeElement.innerHTML).toEqual(
             specHelper.decodeHtmlCharCodes(
-                initialMeasurements[0].substance.abbreviation
+                `(${initialMeasurements[0].substance.abbreviation})`
             )
         );
-        expect(spans[2].styles['color']).toEqual(lightIndexColor[belaqi]);
+        expect(specHelper.rgb2hex(spans[2].styles['color'])).toEqual(lightIndexColor[belaqi]);
         expect(spans[2].nativeElement.innerHTML).toEqual(indexLabel[belaqi]);
     });
 
@@ -77,15 +77,15 @@ describe('InformationItemComponent', () => {
         fixture.detectChanges();
         const de = fixture.debugElement;
         const spans = de.queryAll(By.css('span'));
-        expect(spans[0].styles['background-color']).toEqual(
+        expect(specHelper.rgb2hex(spans[0].styles['background-color'])).toEqual(
             lightIndexColor[newBelaqi]
         );
         expect(spans[1].nativeElement.innerHTML).toEqual(
             specHelper.decodeHtmlCharCodes(
-                newMeasurements[2].substance.abbreviation
+                `(${newMeasurements[2].substance.abbreviation})`
             )
         );
-        expect(spans[2].styles['color']).toEqual(lightIndexColor[newBelaqi]);
+        expect(specHelper.rgb2hex(spans[2].styles['color'])).toEqual(lightIndexColor[newBelaqi]);
         expect(spans[2].nativeElement.innerHTML).toEqual(indexLabel[newBelaqi]);
     });
 });

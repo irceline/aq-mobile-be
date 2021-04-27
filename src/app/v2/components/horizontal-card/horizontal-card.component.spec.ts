@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HorizontalCardComponent } from './horizontal-card.component';
 
-fdescribe('HorizontalCardComponent', () => {
+describe('HorizontalCardComponent', () => {
   let component: HorizontalCardComponent;
   let fixture: ComponentFixture<HorizontalCardComponent>;
 

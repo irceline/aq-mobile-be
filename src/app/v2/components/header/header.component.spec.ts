@@ -13,6 +13,11 @@ import { lightIndexColor } from '../../common/constants';
 import { BelAQIService } from '../../services/bel-aqi.service';
 import { localStorageMock } from '../../testing/localStorage.mock';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CacheModule } from "ionic-cache";
+import { SettingsService } from '@helgoland/core';
+import { IonicModule } from '@ionic/angular';
+import { Firebase } from '@ionic-native/firebase/ngx';
+import { Network } from '@ionic-native/network/ngx';
 
 describe('HeaderComponent', () => {
     let component: HeaderComponent;
@@ -25,12 +30,15 @@ describe('HeaderComponent', () => {
             declarations: [HeaderComponent, MenuScreenComponent],
             providers: [
                 { provide: NavController, useClass: NavControllerMock },
+                BelAQIService, Network, SettingsService, Firebase
             ],
             imports: [
                 TranslateTestingModule,
                 RouterTestingModule,
                 BrowserAnimationsModule,
                 HttpClientTestingModule,
+                CacheModule.forRoot(),
+                IonicModule
             ],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
         }).compileComponents();
@@ -39,7 +47,7 @@ describe('HeaderComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(HeaderComponent);
         navCtrl = TestBed.get(NavController);
-        // belAqiService = TestBed.get(BelAQIService);
+        belAqiService = TestBed.get(BelAQIService);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

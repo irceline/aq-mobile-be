@@ -7,6 +7,9 @@ import {By} from '@angular/platform-browser';
 import { localStorageMock } from '../../testing/localStorage.mock';
 import { GeneralNotificationService } from '../../services/push-notifications/general-notification.service';
 import { UserSettingsService } from './../../services/user-settings.service';
+import { Firebase } from '@ionic-native/firebase/ngx';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { IonicStorageModule } from '@ionic/storage';
 
 describe('NotificationListComponent', () => {
   let component: UserNotificationSettingsComponent;
@@ -18,7 +21,8 @@ describe('NotificationListComponent', () => {
     TestBed.configureTestingModule({
       declarations: [UserNotificationSettingsComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      imports: [TranslateTestingModule]
+      imports: [TranslateTestingModule, HttpClientTestingModule, IonicStorageModule.forRoot()],
+      providers: [Firebase]
     })
     .compileComponents();
     userSettingsService = TestBed.get(UserSettingsService);

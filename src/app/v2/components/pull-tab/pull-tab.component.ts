@@ -38,23 +38,23 @@ export class PullTabComponent implements AfterViewInit {
     ) {}
 
     ngAfterViewInit() {
-        if (this.options.handleHeight) {
+        if (this.options && this.options.handleHeight) {
             this.handleHeight = this.options.handleHeight;
         }
 
-        if (this.options.gap) {
+        if (this.options && this.options.gap) {
             this.gap = this.options.gap;
         }
 
-        if (this.options.bounceBack) {
+        if (this.options && this.options.bounceBack) {
             this.bounceBack = this.options.bounceBack;
         }
 
-        if (this.options.thresholdFromBottom) {
+        if (this.options && this.options.thresholdFromBottom) {
             this.thresholdBottom = this.options.thresholdFromBottom;
         }
 
-        if (this.options.thresholdFromTop) {
+        if (this.options && this.options.thresholdFromTop) {
             this.thresholdTop = this.options.thresholdFromTop;
         }
 

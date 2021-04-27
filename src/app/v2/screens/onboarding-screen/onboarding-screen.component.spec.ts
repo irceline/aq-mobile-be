@@ -12,7 +12,7 @@ import { GeolocationMock } from '../../testing/geolocation.mock';
 import { TranslateTestingModule } from '../../testing/TranslateTestingModule';
 import { OnboardingScreenComponent } from './onboarding-screen.component';
 
-fdescribe('OnboardingScreenComponent', () => {
+describe('OnboardingScreenComponent', () => {
     let component: OnboardingScreenComponent;
     let fixture: ComponentFixture<OnboardingScreenComponent>;
     let de: DebugElement;

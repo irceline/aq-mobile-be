@@ -8,6 +8,13 @@ import {TimeLineItemComponent} from '../time-line-item/time-line-item.component'
 import {By} from '@angular/platform-browser';
 import {TranslateTestingModule} from '../../testing/TranslateTestingModule';
 import {indexLabel, lightIndexColor} from '../../common/constants';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CacheModule } from "ionic-cache";
+import { Network } from '@ionic-native/network/ngx';
+import { SettingsService } from '@helgoland/core';
+import { IonicModule } from '@ionic/angular';
+import { Firebase } from '@ionic-native/firebase/ngx';
+import { specHelper } from '../../testing/spec-helper';
 
 describe('TimeLineListComponent', () => {
   let component: TimeLineListComponent;
@@ -19,8 +26,9 @@ describe('TimeLineListComponent', () => {
           TimeLineListComponent,
           TimeLineItemComponent,
           IonSlides],
-      imports: [TranslateTestingModule],
+      imports: [TranslateTestingModule, HttpClientTestingModule, CacheModule.forRoot(), IonicModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      providers: [Network, SettingsService, Firebase]
     })
     .compileComponents();
   }));
@@ -37,13 +45,12 @@ describe('TimeLineListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should emit proper events on slide change', () => {
+  it('should emit proper events on slide change', async () => {
     spyOn(component.slides, 'getActiveIndex').and.callFake(() => Promise.resolve(2));
     spyOn(component.dayChange, 'next');
-    component.slideChange().then(() => {
-      expect(component.slides.getActiveIndex).toHaveBeenCalled();
-      expect(component.dayChange.next).toHaveBeenCalled();
-    });
+    await component.slideChange();
+    expect(component.slides.getActiveIndex).toHaveBeenCalled();
+    expect(component.dayChange.next).toHaveBeenCalled();
   });
 
   it('should render all items properly', () => {
@@ -58,7 +65,7 @@ describe('TimeLineListComponent', () => {
 
       const header = item.query(By.css('.timeline--item-header'));
       const status = item.query(By.css('.timeline--item-status')).nativeElement;
-      expect(header.styles['background-color']).toEqual(lightIndexColor[component.items[index].indexScore]);
+      expect(specHelper.rgb2hex(header.styles['background-color'])).toEqual(lightIndexColor[component.items[index].indexScore].toLowerCase());
       expect(status.innerHTML).toContain(indexLabel[component.items[index].indexScore]);
     });
   });

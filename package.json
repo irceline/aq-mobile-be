@@ -7,7 +7,7 @@
         "ng": "ng",
         "start": "ng serve",
         "build": "ng build",
-        "test": "ng test --watch=false",
+        "test": "ng test --watch=true",
         "lint": "ng lint",
         "e2e": "ng e2e",
         "i18n-extract": "ngx-translate-extract -i ./src -o ./src/assets/i18n/??.json --clean --sort --format namespaced-json",

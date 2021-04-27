@@ -34,33 +34,30 @@ describe('OnboardingSliderComponent', () => {
 
     it('should call next on click', () => {
         spyOn(component, 'next');
-        const button: HTMLHtmlElement = fixture.debugElement.query(By.css('ion-content > button')).nativeElement;
+        const button: HTMLHtmlElement = fixture.debugElement.query(By.css('.next')).nativeElement;
         button.click();
         fixture.detectChanges();
-        fixture.whenStable().then(() => {
-            expect(component.next).toHaveBeenCalled();
-        });
+        fixture.whenStable();
+        expect(component.next).toHaveBeenCalled();
     });
 
-    it('should change slide on click', () => {
+    it('should change slide on click', async () => {
         slidesSpy.isEnd.and.callFake(() => Promise.resolve(false));
         spyOn(component.slideShowComplete, 'emit');
-        component.next().then(() => {
-            fixture.detectChanges();
-            expect(component.slides.slideNext).toHaveBeenCalledTimes(1);
-            expect(component.slideShowComplete.emit).toHaveBeenCalledTimes(0);
-        });
+        await component.next();
+        fixture.detectChanges();
+        expect(component.slides.slideNext).toHaveBeenCalledTimes(1);
+        expect(component.slideShowComplete.emit).toHaveBeenCalledTimes(0);
     });
 
 
-    it('should complete slide show', () => {
+    it('should complete slide show', async () => {
         slidesSpy.isEnd.and.callFake(() => Promise.resolve(true));
         spyOn(component.slideShowComplete, 'emit');
-        component.next().then(() => {
-            fixture.detectChanges();
-            expect(component.slides.slideNext).toHaveBeenCalledTimes(0);
-            expect(component.slideShowComplete.emit).toHaveBeenCalledTimes(1);
-        });
+        await component.next()
+        fixture.detectChanges();
+        expect(component.slides.slideNext).toHaveBeenCalledTimes(0);
+        expect(component.slideShowComplete.emit).toHaveBeenCalledTimes(1);
     });
 
     it('should have initial button text', () => {
