@@ -107,9 +107,9 @@ pipeline {
                 devicefarm (
                     projectName: 'AcopicTest',
                     devicePoolName: 'Top Devices',
-                    appArtifact:'app-debug-latest.apk',
                     testSpecName: 'test.yaml',
-                    environmentToRun: '',
+                    environmentToRun: 'custom',
+                    appArtifact:'app-debug-latest.apk',
                     runName: "Belair-build-${BUILD_ID}",
                     testToRun: 'APPIUM_JAVA_TESTNG',
                     storeResults: '',
