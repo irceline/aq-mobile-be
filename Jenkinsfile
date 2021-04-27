@@ -99,8 +99,8 @@ pipeline {
                 devicefarm (
                     projectName: 'AcopicTest',
                     devicePoolName: 'Top Devices',
-                    testSpecName: 'Default TestSpec for Android Appium Java TestNG v2.0 (adds support for Appium 1.14+)',
-                    environmentToRun: '',
+                    testSpecName: 'buds.yml',
+                    environmentToRun: 'CustomEnvironment',
                     appArtifact:'app-debug-latest.apk',
                     runName: "Belair-build-${BUILD_ID}",
                     testToRun: 'APPIUM_JAVA_TESTNG',
