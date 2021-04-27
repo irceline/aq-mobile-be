@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
-import L from 'leaflet';
+import * as L from 'leaflet';
+import 'leaflet.markercluster';
 import { Observable } from 'rxjs';
 
 import { BelAQIService } from '../../../services/bel-aqi.service';
@@ -62,7 +63,11 @@ export class FeedbackStatsMapComponent implements AfterViewInit, OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.belAQIService.$activeIndex.subscribe(idx => this.backgroundColor = this.belAQIService.getLightColorForIndex(idx.indexScore));
+    this.belAQIService.$activeIndex.subscribe(idx => {
+      if (idx && idx.indexScore) {
+        this.backgroundColor = this.belAQIService.getLightColorForIndex(idx.indexScore)
+      }
+    });
   }
 
   ngAfterViewInit(): void {
