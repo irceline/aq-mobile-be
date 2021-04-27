@@ -97,7 +97,7 @@ pipeline {
         stage('Copy Test Spec') {
             steps {
                 script {
-                    sh "cp ./test/test-spec.yaml \$WORKSPACE/test.yaml"
+                    sh "cp ./test/test-spec.yml \$WORKSPACE/test.yml"
                 }
             }
         }
@@ -107,8 +107,8 @@ pipeline {
                 devicefarm (
                     projectName: 'AcopicTest',
                     devicePoolName: 'Top Devices',
-                    testSpecName: 'test.yaml',
-                    environmentToRun: 'custom',
+                    testSpecName: 'Default TestSpec for Android Appium Java TestNG v2.0 (adds support for Appium 1.14+)',
+                    environmentToRun: '',
                     appArtifact:'app-debug-latest.apk',
                     runName: "Belair-build-${BUILD_ID}",
                     testToRun: 'APPIUM_JAVA_TESTNG',
@@ -138,7 +138,7 @@ pipeline {
                     xctestUiFilter: '',
                     appiumVersionJunit: '',
                     appiumVersionPython: '',
-                    appiumVersionTestng: '',
+                    appiumVersionTestng: '1.14.2',
                     ifWebApp: false,
                     extraData: false,
                     extraDataArtifact: '',
