@@ -60,6 +60,7 @@ export class ParameterInformationComponent {
 
 
   public get title(): string {
+    if (!this.parameter) return null;
     return this.parameterHints.find(e => e.parameter === this.parameter).title;
   }
 

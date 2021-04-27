@@ -24,7 +24,9 @@ export class FeedbackStatsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.belAQIService.$activeIndex.subscribe(idx => this.backgroundColor = this.belAQIService.getLightColorForIndex(idx.indexScore));
+    this.belAQIService.$activeIndex.subscribe(idx =>  {
+      if (idx) this.backgroundColor = this.belAQIService.getLightColorForIndex(idx.indexScore)
+    });
 
     if (!this.feedbackStats) {
       this.feedbackSrvc.getFeedbackStats().subscribe(

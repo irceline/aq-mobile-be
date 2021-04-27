@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 import { darkIndexColor, indexLabel, lightIndexColor } from '../common/constants';
 import { ValueDate } from '../common/enums';
+import { backgroundImages } from '../common/constants';
 import { UserLocation } from '../Interfaces';
 import { BelaqiIndexService } from './value-provider/belaqi-index.service';
 
@@ -89,4 +90,11 @@ export class BelAQIService {
     }
   }
 
+  public getBackgroundForIndex(index: number) {
+    if (index >= 1 && index <= 10) {
+      return backgroundImages[index];
+    } else {
+      return null;
+    }
+  }
 }

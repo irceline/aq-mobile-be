@@ -2,6 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ValueDisplayComponent } from './value-display.component';
+import {TranslateTestingModule} from '../../testing/TranslateTestingModule';
 
 describe('ValueDisplayComponent', () => {
   let component: ValueDisplayComponent;
@@ -11,6 +12,7 @@ describe('ValueDisplayComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ ValueDisplayComponent ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      imports: [TranslateTestingModule]
     })
     .compileComponents();
   }));

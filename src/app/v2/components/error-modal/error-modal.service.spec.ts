@@ -1,12 +1,15 @@
 import { TestBed } from '@angular/core/testing';
-
+import { IonicModule } from '@ionic/angular';
 import { ErrorModalService } from './error-modal.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('ErrorModalService', () => {
   let service: ErrorModalService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule, IonicModule],
+    });
     service = TestBed.inject(ErrorModalService);
   });
 

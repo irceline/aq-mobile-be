@@ -1,4 +1,4 @@
-<ion-content class="onboarding-content">
+<ion-content class="onboarding-content" [class.keyboard-shown]="keyboardShown">
     <div class="button-wrapper">
         <app-theme-button></app-theme-button>
     </div>
@@ -70,13 +70,14 @@
 
         <ion-slide>
             <div class="slide">
-                <div class="slide--content">
+                <div class="slide--content location-input">
                     <h1>Belair</h1>
                     <p>{{ 'v2.screens.onboarding.start-quickly' | translate }}</p>
                     <p>{{ 'v2.screens.onboarding.ask-location' | translate }}</p>
 
                     <!-- Location input -->
-                    <app-location-input (locationSelected)="confirmLocation($event)" [editable]="true"></app-location-input>
+                    <app-location-input (locationSelected)="confirmLocation($event)" [editable]="true">
+                    </app-location-input>
 
                 </div>
             </div>

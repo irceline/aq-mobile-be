@@ -50,7 +50,9 @@ export class LocationInputComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.langSubscription = this.translateSrvc.onLangChange.subscribe((code: LangChangeEvent) => this.updateSelectableLocations(code.lang));
+        this.langSubscription = this.translateSrvc.onLangChange.subscribe((code: LangChangeEvent) => {
+            if (code && code.lang) this.updateSelectableLocations(code.lang)
+        });
         this.updateSelectableLocations(this.translateSrvc.currentLang);
     }
 
@@ -149,35 +151,37 @@ export class LocationInputComponent implements OnInit, OnDestroy {
     // filter logic
     filterItems() {
         const code = this.translateSrvc.currentLang;
-        const defaultLocations = this.settingsSrvc.getSettings().defaultSelectableLocations[code];
+        const defaultLocations = code ? this.settingsSrvc.getSettings().defaultSelectableLocations[code] : null;
 
-        // search in defined locations
-        this.filteredItems = this._locations.filter(l => defaultLocations.findIndex(e => e === l.label) >= 0);
+        if (defaultLocations) {
+            // search in defined locations
+            this.filteredItems = this._locations.filter(l => defaultLocations.findIndex(e => e === l.label) >= 0);
 
-        // sort locations
-        this.filteredItems = defaultLocations.map(e => this.filteredItems.find(fi => fi.label === e)).filter(e => e !== undefined);
+            // sort locations
+            this.filteredItems = defaultLocations.map(e => this.filteredItems.find(fi => fi.label === e)).filter(e => e !== undefined);
 
-        // filter items by label
-        if (this.searchText.trim() !== '') {
-            this.filteredItems = this._locations
-                .filter((item) => {
-                    return (
-                        item.label.toLowerCase().indexOf(this.searchText.toLowerCase()) > -1 ||
-                        item.postalCode.startsWith(this.searchText)
-                    );
-                })
-                .slice(0, 10);
-        }
-
-        // if we remove the option, remove select and emit null
-        if (this.searchText.trim() === '' && !this.visible) {
-            for (let index = 0; index < this.filteredItems.length; index++) {
-                const element = this.filteredItems[index];
-                this.selectedItem = null;
+            // filter items by label
+            if (this.searchText.trim() !== '') {
+                this.filteredItems = this._locations
+                    .filter((item) => {
+                        return (
+                            item.label.toLowerCase().indexOf(this.searchText.toLowerCase()) > -1 ||
+                            item.postalCode.startsWith(this.searchText)
+                        );
+                    })
+                    .slice(0, 10);
             }
 
-            // emit null
-            this.locationSelected.next(null);
+            // if we remove the option, remove select and emit null
+            if (this.searchText.trim() === '' && !this.visible) {
+                for (let index = 0; index < this.filteredItems.length; index++) {
+                    const element = this.filteredItems[index];
+                    this.selectedItem = null;
+                }
+
+                // emit null
+                this.locationSelected.next(null);
+            }
         }
     }
 

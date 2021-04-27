@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { TranslateTestingModule } from '../../testing/TranslateTestingModule';
 import { LanguageDropdownComponent } from './language-dropdown.component';
+import { SettingsService } from '@helgoland/core';
 
 const _availableLanguages = [
     { langCode: 'en', label: 'English' },
@@ -23,6 +24,7 @@ describe('LanguageDropdownComponent', () => {
             declarations: [LanguageDropdownComponent],
             imports: [TranslateTestingModule],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
+            providers: [SettingsService]
         }).compileComponents();
         translateSrvc = TestBed.inject(TranslateService);
     }));

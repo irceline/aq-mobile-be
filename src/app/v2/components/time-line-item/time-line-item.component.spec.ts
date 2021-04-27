@@ -5,6 +5,13 @@ import {TimeLineItemComponent} from './time-line-item.component';
 import {TranslateTestingModule} from '../../testing/TranslateTestingModule';
 import {indexLabel, lightIndexColor} from '../../common/constants';
 import {By} from '@angular/platform-browser';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CacheModule } from "ionic-cache";
+import { Network } from '@ionic-native/network/ngx';
+import { SettingsService } from '@helgoland/core';
+import { IonicModule } from '@ionic/angular';
+import { Firebase } from '@ionic-native/firebase/ngx';
+import { specHelper } from '../../testing/spec-helper';
 
 describe('TimeLineItemComponent', () => {
   let component: TimeLineItemComponent;
@@ -15,8 +22,9 @@ describe('TimeLineItemComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ TimeLineItemComponent ],
-      imports: [TranslateTestingModule],
+      imports: [TranslateTestingModule, HttpClientTestingModule, CacheModule.forRoot(), IonicModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      providers: [Network, SettingsService, Firebase]
     })
     .compileComponents();
   }));
@@ -47,7 +55,7 @@ describe('TimeLineItemComponent', () => {
     const de = fixture.debugElement;
     const header = de.query(By.css('.timeline--item-header'));
     const status = de.query(By.css('.timeline--item-status')).nativeElement;
-    expect(header.styles['background-color']).toEqual(lightIndexColor[newBelaqiResult.indexScore]);
+    expect(specHelper.rgb2hex(header.styles['background-color'])).toEqual(lightIndexColor[newBelaqiResult.indexScore].toLowerCase());
     expect(status.innerHTML).toContain(indexLabel[newBelaqiResult.indexScore]);
   });
 });

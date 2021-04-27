@@ -19,6 +19,10 @@
   flex: 1;
   margin: 10px auto;
 
+  @media screen and (min-width: 640px) {
+    max-width: 115px;
+  }
+
   &-header {
     height: 20px;
     margin: 4px 4px 0;

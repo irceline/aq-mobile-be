@@ -1,6 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FeedbackStatsMapComponent } from './feedback-stats-map.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TranslateTestingModule } from '../../../testing/TranslateTestingModule';
+import { CacheModule } from "ionic-cache";
+import { Network } from '@ionic-native/network/ngx';
+import { SettingsService } from '@helgoland/core';
+import { IonicModule } from '@ionic/angular';
 
 describe('FeedbackStatsMapComponent', () => {
   let component: FeedbackStatsMapComponent;
@@ -8,7 +14,9 @@ describe('FeedbackStatsMapComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FeedbackStatsMapComponent ]
+      declarations: [ FeedbackStatsMapComponent ],
+      imports: [HttpClientTestingModule, TranslateTestingModule, CacheModule.forRoot(), IonicModule],
+      providers: [Network, SettingsService]
     })
     .compileComponents();
   }));

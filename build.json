@@ -1,0 +1,14 @@
+{
+  "ios": {
+      "release": {
+          "codeSignIdentity": "iPhone Distribution",
+          "developmentTeam": "8F2QBE3TN2",
+          "packageType": "app-store",
+          "provisioningProfile": "82ade11d-8fdc-47ea-aef8-e65bbc4ad52c",
+          "buildFlag": [
+              "EMBEDDED_CONTENT_CONTAINS_SWIFT = YES",
+              "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES=NO"
+          ]
+      }
+  }
+}
