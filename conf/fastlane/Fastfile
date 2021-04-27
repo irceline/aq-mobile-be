@@ -40,11 +40,8 @@ platform :ios do
 
   desc "Description of what the lane does"
   lane :adhoc do
-    fix_missing_compliance
-
     Dir.chdir "../../../" do
       sh("ionic", "prepare", "ios")
-      sh("ionic", "build")
     end
 
     update_project_provisioning(
@@ -69,20 +66,12 @@ platform :ios do
 
     fix_missing_compliance
 
-    build_app(
-      scheme: project_name,
-      workspace: workspace_name,
-      include_bitcode: false,
-      export_options: {
-        method: "app-store",
-        provisioningProfiles: { 
-          app_identifier => "BelAir App Store",
-        }
-      },
-      output_name: output_name
-    )
+    Dir.chdir "../../../" do
+      sh("ionic", "cordova", "build", "ios", "--prod", "--release", "--device", "--codeSignIdentity='iPhone Developer'", "--developmentTeam='8F2QBE3TN2'")
+    end
 
     upload_to_testflight(
+      ipa: 'build/device/BelAir_v2.ipa',
       skip_waiting_for_build_processing: true,
       apple_id: apple_id,
       uses_non_exempt_encryption: true
