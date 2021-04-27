@@ -22,8 +22,7 @@ export class TimeLineListComponent implements OnChanges {
 
     constructor(
         private platform: Platform
-    ) {
-    }
+    ) { }
 
     ngOnChanges(changes: SimpleChanges): void {
         if (this.platform.is('ipad') || this.platform.is('tablet')) {
@@ -31,6 +30,7 @@ export class TimeLineListComponent implements OnChanges {
         }
         if (changes.items && this.items && this.items.length > 0) {
             const idx = this.items.findIndex(e => e.valueDate === ValueDate.CURRENT);
+            this.dayChange.next(this.items[idx]);
             this.slides.slideTo(idx);
             this.slides.update();
         }
