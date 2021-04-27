@@ -7,6 +7,9 @@
             <app-feedback-stats-map [location]="location"></app-feedback-stats-map>
         </div>
     </div>
+    <div class="anonymisation" text-wrap>
+      {{ 'feedback.stats.anonymisation' | translate }}
+    </div>
     <div class="controls">
         <div style="flex: 1;"></div>
         <ion-button fill="clear" (click)="close()">

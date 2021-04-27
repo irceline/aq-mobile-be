@@ -5,6 +5,7 @@ import {
     Renderer2,
     AfterViewInit,
     ViewChild,
+    NgZone
 } from '@angular/core';
 import { DomController, Platform, IonContent } from '@ionic/angular';
 
@@ -18,7 +19,6 @@ export class PullTabComponent implements AfterViewInit {
     @Input('screenHeight') screenHeight: number;
 
     @ViewChild('trigger', { static: true }) trigger: ElementRef;
-    @ViewChild('triggerArrow', { static: true }) triggerArrow: ElementRef;
     @ViewChild(IonContent, { static: true }) content: IonContent;
 
     handleHeight = 50;
@@ -34,8 +34,9 @@ export class PullTabComponent implements AfterViewInit {
         public element: ElementRef,
         public renderer: Renderer2,
         public domCtrl: DomController,
-        public platform: Platform
-    ) {}
+        public platform: Platform,
+        public zone: NgZone
+    ) { }
 
     ngAfterViewInit() {
         if (this.options && this.options.handleHeight) {
@@ -78,20 +79,9 @@ export class PullTabComponent implements AfterViewInit {
         trigger.on('pan', (ev) => {
             this.handlePan(ev);
         });
-
-        const triggerArrow = new window['Hammer'](
-            this.triggerArrow.nativeElement
-        );
-        triggerArrow
-            .get('tap')
-            .set({ direction: window['Hammer'].DIRECTION_VERTICAL });
-
-        triggerArrow.on('tap', (ev) => {
-            this.handleTap(ev);
-        });
     }
 
-    handleTap(ev) {
+    handleTap() {
         if (!this.isClicked) {
             this.domCtrl.write(() => {
                 this.renderer.setStyle(
@@ -158,7 +148,7 @@ export class PullTabComponent implements AfterViewInit {
                     this.gap + 'px' // height from top when its opened
                 );
             });
-            this.isEnabled = true;
+            this.zone.run(() => { this.isEnabled = true })
         } else if (
             this.screenHeight - newTop < this.thresholdBottom ||
             ev.additionalEvent === 'pandown' ||
@@ -176,7 +166,7 @@ export class PullTabComponent implements AfterViewInit {
                     this.screenHeight - this.handleHeight + 'px'
                 );
             });
-            this.isEnabled = false;
+            this.zone.run(() => { this.isEnabled = false })
         } else {
             this.renderer.setStyle(
                 this.element.nativeElement,

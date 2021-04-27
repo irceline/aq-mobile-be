@@ -38,5 +38,11 @@
       right: 20px;
       z-index: 10;
     }
+
+    &.keyboard-shown {
+      .button-wrapper {
+        display: none;
+      }
+    }
   }
 }
