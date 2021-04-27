@@ -91,7 +91,7 @@ pipeline {
                 devicefarm (
                     projectName: 'AcopicTest',
                     devicePoolName: 'Top Devices',
-                    appArtifact:'\$WORKSPACE/app-debug-latest.apk',
+                    appArtifact:'$WORKSPACE/app-debug-latest.apk',
                     testSpecName: '',
                     environmentToRun: '',
                     runName: 'Test Run',
