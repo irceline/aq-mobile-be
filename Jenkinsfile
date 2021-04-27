@@ -94,14 +94,6 @@ pipeline {
             }
         }
 
-        stage('Copy Test Spec') {
-            steps {
-                script {
-                    sh "cp ./test/test-spec.yml \$WORKSPACE/test.yml"
-                }
-            }
-        }
-
         stage('Run Device Farm Test') {
             steps {
                 devicefarm (
