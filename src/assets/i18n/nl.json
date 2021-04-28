@@ -85,7 +85,8 @@
 				"choose-location": "Kies je locatie",
 				"current-location": "Huidige locatie",
 				"no-results": "Geen resultaten",
-				"please-wait": "Even geduld"
+				"please-wait": "Even geduld",
+				"success-add-location": "Uw huidige locatie is succesvol geselecteerd."
 			},
 			"location-sortable": {
 				"cancel": "Annuleren",

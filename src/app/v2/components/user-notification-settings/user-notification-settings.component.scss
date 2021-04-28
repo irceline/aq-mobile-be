@@ -5,9 +5,12 @@
   align-items: flex-start;
   flex: 1;
   justify-content: space-between;
+  background: rgba(white, 0.3);
+  margin-top: 20px;
+  border-radius: 20px;
 
   ion-item {
-    padding-inline-start: 0;
+    padding-inline-start: 16px;
     width: 100%;
   }
 
@@ -27,6 +30,11 @@
     }
   }
 
+  ion-toggle {
+    border: solid 1.2px rgba(white, 0.4);
+    border-radius: 25.5px;
+  }
+
   .icon-standard {
     display: block;
   }
@@ -37,5 +45,6 @@
 
   .ion-no-padding {
     padding: 1em 0;
+    padding-inline-start: 16px;
   }
 }

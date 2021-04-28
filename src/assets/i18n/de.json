@@ -85,7 +85,8 @@
 				"choose-location": "Wähle deinen Standort",
 				"current-location": "Aktueller Standort",
 				"no-results": "Keine Ergebnisse",
-				"please-wait": "Kurz Geduld"
+				"please-wait": "Kurz Geduld",
+				"success-add-location": "Ihr aktueller Standort wurde erfolgreich ausgewählt."
 			},
 			"location-sortable": {
 				"cancel": "Abbrechen",

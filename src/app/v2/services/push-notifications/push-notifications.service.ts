@@ -51,7 +51,7 @@ export class PushNotificationsService {
   }
 
   public subscribeTopic(topic: string): Observable<boolean> {
-    if (this.platform.is('cordova')) {
+    if (this.platform.is('cordova') || this.platform.is('ios') || this.platform.is('android')) {
       console.log(`subscribe topic: ${topic}`);
       return from(this.firebase.subscribe(topic));
     } else {
@@ -61,7 +61,7 @@ export class PushNotificationsService {
   }
 
   public unsubscribeTopic(topic: string): Observable<boolean> {
-    if (this.platform.is('cordova')) {
+    if (this.platform.is('cordova') || this.platform.is('ios') || this.platform.is('android')) {
       console.log(`unsubscribe topic: ${topic}`);
       return from(this.firebase.unsubscribe(topic));
     } else {

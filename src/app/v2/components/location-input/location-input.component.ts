@@ -92,6 +92,8 @@ export class LocationInputComponent implements OnInit, OnDestroy {
                                     latitude: loc.latitude,
                                     longitude: loc.longitude,
                                 }, loading);
+                                this.toastController.create({ message: this.translateSrvc.instant('v2.components.location-input.success-add-location'), duration: 2000 })
+                                    .then(toast => toast.present());
                             } else {
                                 this.toastController.create({ message: 'Your current location is outside of Belgium, therefore no entry is created', duration: 2000 })
                                     .then(toast => toast.present());
@@ -207,6 +209,7 @@ export class LocationInputComponent implements OnInit, OnDestroy {
             this.btnStateConfirmLocation = 'solid';
         }
     }
+
     btnStateConfirmLocation: string = 'solid';
     confirmLocation() {
         this.locationSelected.emit(this.editableLocation);
