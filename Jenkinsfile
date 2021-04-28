@@ -50,13 +50,25 @@ pipeline {
             }
         }
 
-        stage('Build apk') {
-            steps {
-                script {
-                    buildApk = docker.build(buildApkImg, "-f ./docker/build-apk/Dockerfile .")
+        stage('Parallel Test & create app') {
+            parallel {
+                stage('Build apk') {
+                    steps {
+                        script {
+                            buildApk = docker.build(buildApkImg, "-f ./docker/build-apk/Dockerfile .")
+                        }
+                    }
+                }
+                stage('Test app') {
+                    steps {
+                        app.inside {
+                            sh 'cp /app && ng test --code-coverage'
+                        }
+                    }
                 }
             }
         }
+        
 
         stage('Copy apk') {
             steps {
@@ -68,18 +80,6 @@ pipeline {
             }
         }
 
-        stage('Remove all containers') {
-            steps {
-                sh 'docker container prune'
-            }
-        }
-
-        stage('Remove all dangling images') {
-            steps {
-                sh 'docker image prune -f'
-            }
-        }
-
         stage('Archive artifact to s3') {
             steps {
                 archiveArtifacts artifacts: 'app-debug-latest.apk', fingerprint: true
@@ -88,23 +88,26 @@ pipeline {
     }
 
     post {
-        success {
-            slackSend(
-                color: "good",
-                channel: "${SLACK_CHANNEL}", 
-                message: "New apk file available at: https://${S3_BUCKET}.s3.${S3_REGION}.amazonaws.com/belair-v2/${BRANCH_NAME}/${BUILD_ID}/artifacts/app-debug-latest.apk"
-            )
-        }
+        // success {
+        //     slackSend(
+        //         color: "good",
+        //         channel: "${SLACK_CHANNEL}", 
+        //         message: "New apk file available at: https://${S3_BUCKET}.s3.${S3_REGION}.amazonaws.com/belair-v2/${BRANCH_NAME}/${BUILD_ID}/artifacts/app-debug-latest.apk"
+        //     )
+        // }
 
-        failure {
-            slackSend(
-                color: "danger",
-                channel: "${SLACK_CHANNEL}", 
-                message: "Pipeline for ${BRANCH_NAME}#${BUILD_ID} failure"
-            )
-        }
+        // failure {
+        //     slackSend(
+        //         color: "danger",
+        //         channel: "${SLACK_CHANNEL}", 
+        //         message: "Pipeline for ${BRANCH_NAME}#${BUILD_ID} failure"
+        //     )
+        // }
 
         always {
+            sh 'docker container prune -f'
+            sh 'docker image prune -f'
+            sh 'docker volume prune -f'
             cleanWs()
         }
     }
