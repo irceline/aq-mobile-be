@@ -63,7 +63,7 @@ pipeline {
                     steps {
                         script {
                             app.inside {
-                                sh 'cp /app && ng test --code-coverage'
+                                sh 'cd /app && ng test --code-coverage'
                             }
                         }
                     }
