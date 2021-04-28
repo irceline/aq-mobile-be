@@ -32,10 +32,11 @@ export class UserNotificationSettingsComponent implements OnInit {
         event.stopPropagation();
         event.preventDefault();
         if (!this.generalNotification) {
-            this.generalNotificationSrvc.subscribeNotification(true).subscribe(res => this.generalNotification = res);
+            this.generalNotificationSrvc.subscribeNotification(true);
         } else {
-            this.generalNotificationSrvc.unsubscribeNotification(true).subscribe(res => this.generalNotification = !res);
+            this.generalNotificationSrvc.unsubscribeNotification(true);
         }
+        this.generalNotification = !this.generalNotification;
     }
 
     toggleUserLocationNotifications(event: MouseEvent) {
@@ -43,10 +44,11 @@ export class UserNotificationSettingsComponent implements OnInit {
         event.stopPropagation();
         event.preventDefault();
         if (!this.userLocationNotifications) {
-            this.userSettingsSrvc.subscribeNotification().subscribe(res => this.userLocationNotifications = res);
+            this.userSettingsSrvc.subscribeNotification();
         } else {
-            this.userSettingsSrvc.unsubscribeNotification().subscribe(res => this.userLocationNotifications = res);
+            this.userSettingsSrvc.unsubscribeNotification();
         }
+        this.userLocationNotifications = !this.userLocationNotifications;
     }
 
     hasFocus() {
