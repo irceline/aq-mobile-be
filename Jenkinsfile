@@ -61,8 +61,10 @@ pipeline {
                 }
                 stage('Test app') {
                     steps {
-                        app.inside {
-                            sh 'cp /app && ng test --code-coverage'
+                        script {
+                            app.inside {
+                                sh 'cp /app && ng test --code-coverage'
+                            }
                         }
                     }
                 }
