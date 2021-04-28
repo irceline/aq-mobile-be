@@ -86,7 +86,8 @@
 				"current-location": "Localisation actuelle",
 				"no-results": "Aucun résultat",
 				"please-wait": "Patience",
-				"success-add-location": "Votre position actuelle a été sélectionnée avec succès."
+				"success-add-location": "Votre position actuelle a été sélectionnée avec succès.",
+				"success-choose-location": "Emplacement ajouté avec succès."
 			},
 			"location-sortable": {
 				"cancel": "Annuler",
