@@ -2,7 +2,7 @@ import { Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angula
 import { PopoverController, Platform } from '@ionic/angular';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Settings, SettingsService } from '@helgoland/core';
-import * as d3 from 'd3';
+import { select, scaleLinear, path, arc, interpolate } from 'd3';
 import { Subscription } from 'rxjs';
 
 import { UserLocation } from '../../Interfaces';
@@ -108,11 +108,6 @@ export class CircleChartComponent implements OnInit {
         })
     }
 
-    // ngOnDestroy() {
-    //     console.log('Destroyed')
-    //     this.belAqiSubs.unsubscribe()
-    // }
-
     ngOnInit() {
         this.generalNotification.getNotifications().subscribe(notif => this.zone.run(() => this.notification = notif));
         this.generalNotification.$active.subscribe(active => this.notificationActive = active);
@@ -146,15 +141,15 @@ export class CircleChartComponent implements OnInit {
             return;
         }
 
-        const svg = d3.select(this.chartRef.nativeElement)
+        const svg = select(this.chartRef.nativeElement)
 
         if (svg.select('#chart-stage').attr('data-loaded') != null) {
             cb();
             return
         }
 
-        this.belAqiScale = d3.scaleLinear().range([Math.PI * -0.98, Math.PI * 0.98]).domain([11, 0])
-        this.radScale = d3.scaleLinear().range([0, 360]).domain([Math.PI * -0.98, Math.PI * 0.98])
+        this.belAqiScale = scaleLinear().range([Math.PI * -0.98, Math.PI * 0.98]).domain([11, 0])
+        this.radScale = scaleLinear().range([0, 360]).domain([Math.PI * -0.98, Math.PI * 0.98])
 
         const svgWidth = Math.min(window.innerWidth, 480)
         const svgHeight = (svgWidth * 0.8) + (this.dotRadius * 2)
@@ -167,19 +162,19 @@ export class CircleChartComponent implements OnInit {
         const center = svgWidth / 2;
         this.radius = (svgWidth * 0.8) / 2;
 
-        const p = d3.path();
+        const p = path();
         p.arc(0, 0, this.radius - (this.strokeSize / 2), Math.PI * 0.55, 3.14 * 2.45)
 
         const g = svg.select('#chart-stage')
             .attr('transform', `translate(${center}, ${svgHeight / 2})`)
             .attr('data-loaded', true)
 
-        this.wheelArc = d3.arc()
+        this.wheelArc = arc()
             .innerRadius(this.radius - this.strokeSize)
             .outerRadius(this.radius)
             .cornerRadius(this.cornerRadius);
 
-        const railArc = d3.path();
+        const railArc = path();
         railArc.arc(0, 0, this.radius - (this.strokeSize / 2), Math.PI * 0.55, 3.14 * 2.45)
         
         // base wheel
@@ -224,7 +219,8 @@ export class CircleChartComponent implements OnInit {
             .transition()
             .duration(1000)
             .attrTween('d', (d) => {
-                const interpolate = d3.interpolate(d.endAngle, this.belAqiScale(this.belAqi));
+                const interpolator = interpolate(d.endAngle, this.belAqiScale(this.belAqi));
+
                 const start = {
                     startAngle: d.endAngle, endAngle: d.endAngle,
                 };
@@ -232,13 +228,13 @@ export class CircleChartComponent implements OnInit {
                     startAngle: this.belAqiScale(this.belAqi), endAngle: this.belAqiScale(this.belAqi)
                 }
 
-                const circleInterpolator = d3.interpolate(start, end);
+                const circleInterpolator = interpolate(start, end);
 
                 return t => {
                     const cent = this.wheelArc.centroid(circleInterpolator(t));
                     this.circleMarker.attr('cx', cent[0]).attr('cy', cent[1])
 
-                    d.endAngle = interpolate(t);
+                    d.endAngle = interpolator(t);
                     return this.wheelArc(d);
                 }
             })      
