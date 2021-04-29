@@ -40,7 +40,7 @@
           <app-information-item [detailedDataPoint]="ltd"></app-information-item>
           <app-bar-chart [max]="ltd.chartData.max" [options]="ltd.chartData" [euMax]="ltd.euBenchMark"
             [worldMax]="ltd.worldBenchMark"></app-bar-chart>
-          <app-value-display [color]="ltd.color" [score]="ltd.lastYearValue" [value]="ltd.substance.unit">
+          <app-value-display [color]="ltd.color" [score]="ltd.currentValue" [value]="ltd.substance.unit">
           </app-value-display>
         </li>
       </ul>
