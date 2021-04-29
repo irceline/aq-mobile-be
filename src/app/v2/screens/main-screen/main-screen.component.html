@@ -58,7 +58,7 @@
 
       <map-component [currentLocation]="userSettingsService.selectedUserLocation"
         [phenomenon]="detailPoint.substance.phenomenon" [valueDate]="selectedResult?.valueDate"></map-component>
-      <div class="longterm">
+      <div class="longterm" [ngStyle]="{'padding-bottom': iosPadding + 'px'}">
         <ion-item>
           <ion-label [routerLink]="['/main/longterm-info']" text-wrap>
             {{ 'v2.screens.main-screen.long-term-calculation' | translate }} ></ion-label>
