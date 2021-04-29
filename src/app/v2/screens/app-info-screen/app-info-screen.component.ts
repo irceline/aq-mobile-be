@@ -38,26 +38,26 @@ export class AppInfoScreenComponent implements OnInit {
             }
         );
 
-        // this.modelledValueSrvc.getCurrentValue(location, MainPhenomenon.NO2).subscribe(
-        //     res => this.no2 = {
-        //         value: Math.round(res.value),
-        //         color: lightIndexColor[res.index]
-        //     }
-        // );
+        this.modelledValueSrvc.getCurrentValue(location, MainPhenomenon.NO2).subscribe(
+            res => this.no2 = {
+                value: Math.round(res.value),
+                color: lightIndexColor[res.index]
+            }
+        );
 
-        // this.modelledValueSrvc.getCurrentValue(location, MainPhenomenon.PM10).subscribe(
-        //     res => this.pm10 = {
-        //         value: Math.round(res.value),
-        //         color: lightIndexColor[res.index]
-        //     }
-        // );
+        this.modelledValueSrvc.getCurrentValue(location, MainPhenomenon.PM10).subscribe(
+            res => this.pm10 = {
+                value: Math.round(res.value),
+                color: lightIndexColor[res.index]
+            }
+        );
 
-        // this.modelledValueSrvc.getCurrentValue(location, MainPhenomenon.PM25).subscribe(
-        //     res => this.pm25 = {
-        //         value: Math.round(res.value),
-        //         color: lightIndexColor[res.index]
-        //     }
-        // );
+        this.modelledValueSrvc.getCurrentValue(location, MainPhenomenon.PM25).subscribe(
+            res => this.pm25 = {
+                value: Math.round(res.value),
+                color: lightIndexColor[res.index]
+            }
+        );
     }
 
     goBack() {

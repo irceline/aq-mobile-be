@@ -32,6 +32,9 @@ export class LongtermInfoScreenComponent implements OnInit {
                         this.loading = false;
                         this.longTermData = longTermData.map((ltd) => ({
                             ...ltd,
+                            lastYearValue: ltd.historicalValues
+                                ? ltd.historicalValues[ltd.historicalValues.length - 1].value
+                                : 0,
                             chartData: {
                                 labels: ltd.historicalValues.map((hv) =>
                                     hv.year.toString(10)
