@@ -1,30 +1,39 @@
 <div class="circle-chart">
-  <svg viewBox="0 0 316 325" [ngStyle]="{'height': getChartHeight() + 'px'}" version="1.1"
-    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="circle">
-    <g id="Screens" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+  <svg id="main-svg" viewBox="0 0 400 400" version="1.1" [ngStyle]="{'height': getChartHeight() + 'px'}"   xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="circle" #chartRef>
+    <g id="chart-stage"></g>
+    <!-- <g id="Screens" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       <g id="03---home-copy-2" transform="translate(-49.000000, -181.000000)">
         <g id="Heel-goed" transform="translate(42.000000, 178.000000)">
           <g id="Group" transform="translate(15.000000, 15.000000)">
-            <g id="score-8">
+            <g id="score-8" id="chart-stage">
               <path
                 d="M164.945134,299.264809 C240.771271,291.764363 300,227.798987 300,150 C300,67.1572875 232.842712,0 150,0 C67.1572875,0 0,67.1572875 0,150 C0,227.795103 59.2228153,291.757977 135.04351,299.264809"
                 id="Oval" stroke="rgba(0,0,0,0.1)" stroke-width="15" style="mix-blend-mode: multiply;"
                 stroke-linecap="round" stroke-linejoin="bevel"></path>
               <path
                 d="M164.945134,299.264809 C240.771271,291.764363 300,227.798987 300,150 C300,67.1572875 232.842712,0 150,0 C67.1572875,0 0,67.1572875 0,150 C0,227.795103 59.2228153,291.757977 135.04351,299.264809"
-                id="Oval" [attr.stroke]="chartColor" stroke-width="15" stroke-linecap="round" stroke-linejoin="bevel"
+                id="progress-oval" [attr.stroke]="chartColor" stroke-width="15" stroke-linecap="round" stroke-linejoin="bevel"
                 [style.strokeDasharray]="dashoffset + ' ' + circumference" class="line"
-                transform="translate(150.000000, 149.632404) scale(-1, 1) translate(-150.000000, -149.632404) "></path>
+                transform="translate(150.000000, 149.632404) scale(-1, 1) translate(-150.000000, -149.632404) " >
+              </path>
               <path
                 d="M164.945134,299.264809 C240.771271,291.764363 300,227.798987 300,150 C300,67.1572875 232.842712,0 150,0 C67.1572875,0 0,67.1572875 0,150 C0,227.795103 59.2228153,291.757977 135.04351,299.264809"
                 id="Oval" stroke="rgba(0,0,0,0.2)" stroke-width="5" style="mix-blend-mode: multiply;"
                 stroke-linejoin="bevel" stroke-dasharray="2,89"
-                transform="translate(150.000000, 149.632404) scale(-1, 1) translate(-150.000000, -149.632404) "></path>
-              <circle id="Oval"  [attr.fill]="chartColor" *ngIf="!isIos" r="11" class="path" [class.active]="circleActive" [style.offsetDistance]="circleOffset + 'px'"></circle>
+                transform="translate(150.000000, 149.632404) scale(-1, 1) translate(-150.000000, -149.632404) " ></path>
+              <circle id="chart-dot"  [attr.fill]="chartColor" *ngIf="!isIos" r="11" [class.active]="circleActive"></circle>
               <image xlink:href="/assets/images/icons/alert.svg" x="5%" y="5%" *ngIf="(notificationActive && notification) || activeUserLocation?.notification"
                 (click)="openNotification($event)" />
             </g>
           </g>
+        </g>
+      </g>
+    </g> -->
+    <g id="03---home-copy-2" transform="translate(-49.000000, -181.000000)">
+      <g id="Heel-goed" transform="translate(42.000000, 178.000000)">
+        <g id="Group" transform="translate(15.000000, 15.000000)">
+    <image xlink:href="/assets/images/icons/alert.svg" x="10%" y="10%" *ngIf="(notificationActive && notification) || activeUserLocation?.notification" (click)="openNotification($event)" />
+
         </g>
       </g>
     </g>
