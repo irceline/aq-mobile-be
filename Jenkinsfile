@@ -85,6 +85,76 @@ pipeline {
                 archiveArtifacts artifacts: 'app-debug-latest.apk', fingerprint: true
             }
         }
+
+        // stage('Copy Test File') {
+        //     steps {
+        //         script {
+        //             sh "cp ./test/zip-with-dependencies.zip \$WORKSPACE/test.zip"
+        //         }
+        //     }
+        // }
+
+        stage('Run Device Farm Test') {
+            steps {
+                devicefarm (
+                    projectName: 'AcopicTest',
+                    devicePoolName: 'Top Devices',
+                    // testSpecName: 'nebulae.yml',
+                    testSpecName: '',
+                    // environmentToRun: 'CustomEnvironment',
+                    environmentToRun: '',
+                    appArtifact:'app-debug-latest.apk',
+                    runName: "Belair-build-${BUILD_ID}",
+                    // testToRun: 'APPIUM_JAVA_TESTNG',
+                    testToRun: 'BUILTIN_FUZZ',
+                    storeResults: '',
+                    isRunUnmetered: '',
+                    eventCount: '',
+                    eventThrottle: '',
+                    seed: '',
+                    username: '',
+                    password: '',
+                    appiumJavaJUnitTest: '',
+                    appiumJavaTestNGTest: 'test.zip',
+                    appiumPythonTest: '',
+                    appiumRubyTest: '',
+                    appiumNodeTest: '',
+                    calabashFeatures: '',
+                    calabashTags: '',
+                    calabashProfile: '',
+                    junitArtifact: '',
+                    junitFilter: '',
+                    uiautomatorArtifact: '',
+                    uiautomatorFilter: '',
+                    uiautomationArtifact: '',
+                    xctestArtifact: '',
+                    xctestFilter: '',
+                    xctestUiArtifact: '',
+                    xctestUiFilter: '',
+                    appiumVersionJunit: '',
+                    appiumVersionPython: '',
+                    appiumVersionTestng: '',
+                    ifWebApp: false,
+                    extraData: false,
+                    extraDataArtifact: '',
+                    deviceLocation: false,
+                    deviceLatitude: 0,
+                    deviceLongitude: 0,
+                    radioDetails: true,
+                    ifBluetooth: true,
+                    ifWifi: true,
+                    ifGPS: true,
+                    ifNfc: false,
+                    jobTimeoutMinutes: 10,
+                    ifVideoRecording: true,
+                    ifAppPerformanceMonitoring: false,
+                    ignoreRunError: false,
+                    ifVpce: false,
+                    ifSkipAppResigning: false,
+                    vpceServiceName: '',
+                )
+            }
+        }
     }
 
     post {
