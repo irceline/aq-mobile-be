@@ -5,7 +5,7 @@ import { specHelper } from '../testing/spec-helper';
 import {UserLocation} from '../Interfaces';
 import { TranslateTestingModule } from '../testing/TranslateTestingModule';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { Firebase } from '@ionic-native/firebase/ngx';
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 
 describe('UserLocationsService', () => {
   let service: UserSettingsService;
@@ -13,7 +13,7 @@ describe('UserLocationsService', () => {
     specHelper.localStorageSetup();
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, TranslateTestingModule],
-      providers: [Firebase]
+      providers: [FirebaseX]
     });
     service = TestBed.get(UserSettingsService);
   });

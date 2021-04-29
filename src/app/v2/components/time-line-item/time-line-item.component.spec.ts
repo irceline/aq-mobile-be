@@ -10,7 +10,7 @@ import { CacheModule } from "ionic-cache";
 import { Network } from '@ionic-native/network/ngx';
 import { SettingsService } from '@helgoland/core';
 import { IonicModule } from '@ionic/angular';
-import { Firebase } from '@ionic-native/firebase/ngx';
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 import { specHelper } from '../../testing/spec-helper';
 
 describe('TimeLineItemComponent', () => {
@@ -24,7 +24,7 @@ describe('TimeLineItemComponent', () => {
       declarations: [ TimeLineItemComponent ],
       imports: [TranslateTestingModule, HttpClientTestingModule, CacheModule.forRoot(), IonicModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      providers: [Network, SettingsService, Firebase]
+      providers: [Network, SettingsService, FirebaseX]
     })
     .compileComponents();
   }));

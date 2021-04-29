@@ -6,7 +6,7 @@ import { RouteReuseStrategy } from '@angular/router';
 import { HelgolandCoreModule, SettingsService } from '@helgoland/core';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { Diagnostic } from '@ionic-native/diagnostic/ngx';
-import { Firebase } from '@ionic-native/firebase/ngx';
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
@@ -67,7 +67,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         },
         AppVersion,
         Diagnostic,
-        Firebase,
+        FirebaseX,
         Geolocation,
         InAppBrowser,
         Keyboard,

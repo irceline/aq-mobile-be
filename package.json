@@ -28,7 +28,7 @@
         "@ionic-native/app-version": "^5.30.0",
         "@ionic-native/core": "^5.30.0",
         "@ionic-native/diagnostic": "^5.30.0",
-        "@ionic-native/firebase": "^5.30.0",
+        "@ionic-native/firebase-x": "^5.30.0",
         "@ionic-native/geolocation": "^5.30.0",
         "@ionic-native/in-app-browser": "^5.30.0",
         "@ionic-native/keyboard": "^5.30.0",
@@ -45,8 +45,10 @@
         "browserslist": "^4.16.1",
         "caniuse-lite": "^1.0.30001174",
         "chartjs-plugin-annotation": "^0.5.7",
+        "cordova-android": "^9.1.0",
         "cordova-browser": "5.0.4",
         "cordova-plugin-app-version": "^0.1.12",
+        "cordova-plugin-firebasex": "^12.1.0",
         "cordova-plugin-geolocation": "^4.1.0",
         "cordova-plugin-ionic-keyboard": "^2.2.0",
         "cordova-plugin-network-information": "^2.0.2",
@@ -89,9 +91,7 @@
         "@types/node": "^12.19.12",
         "@types/pouchdb": "^6.4.0",
         "codelyzer": "^5.1.2",
-        "cordova-android": "^8.1.0",
         "cordova-ios": "^6.2.0",
-        "cordova-plugin-firebase": "https://github.com/igez/cordova-plugin-firebase/archive/refs/tags/v2.0.6.tar.gz",
         "cordova-plugin-inappbrowser": "^5.0.0",
         "cordova-plugin-ionic-webview": "^5.0.0",
         "cordova-plugin-splashscreen": "^6.0.0",
@@ -117,7 +117,9 @@
     "cordova": {
         "plugins": {
             "cordova-sqlite-storage": {},
-            "cordova-plugin-geolocation": {},
+            "cordova-plugin-geolocation": {
+                "GPS_REQUIRED": "true"
+            },
             "cordova.plugins.diagnostic": {
                 "ANDROID_SUPPORT_VERSION": "26.+"
             },
@@ -129,15 +131,15 @@
             "cordova-plugin-app-version": {},
             "cordova-plugin-whitelist": {},
             "cordova-plugin-statusbar": {},
-            "cordova-plugin-firebase": {},
             "cordova-plugin-ionic-webview": {},
             "cordova-plugin-inappbrowser": {},
-            "cordova-plugin-splashscreen": {}
+            "cordova-plugin-splashscreen": {},
+            "cordova-plugin-firebasex": {}
         },
         "platforms": [
             "browser",
-            "android",
-            "ios"
+            "ios",
+            "android"
         ]
     }
 }

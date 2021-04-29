@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AppInfoScreenComponent } from './app-info-screen.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Firebase } from '@ionic-native/firebase/ngx';
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import {TranslateTestingModule} from '../../testing/TranslateTestingModule';
 import { CacheModule } from "ionic-cache";
@@ -26,7 +26,7 @@ xdescribe('AppInfoScreenComponent', () => {
                 CacheModule.forRoot(),
                 IonicModule
             ],
-            providers: [Firebase, Network, SettingsService]
+            providers: [FirebaseX, Network, SettingsService]
         }).compileComponents();
     }));
 

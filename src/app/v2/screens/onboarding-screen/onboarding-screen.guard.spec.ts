@@ -7,7 +7,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CacheModule } from "ionic-cache";
 import { Network } from '@ionic-native/network/ngx';
 import { SettingsService } from '@helgoland/core';
-import { Firebase } from '@ionic-native/firebase/ngx';
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 
 describe('OnboardingScreenGuard', () => {
   let guard: OnboardingScreenGuard;
@@ -15,7 +15,7 @@ describe('OnboardingScreenGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule, HttpClientTestingModule, CacheModule.forRoot(), TranslateTestingModule],
-      providers: [Firebase, Network, SettingsService]
+      providers: [FirebaseX, Network, SettingsService]
     });
     guard = TestBed.inject(OnboardingScreenGuard);
   });

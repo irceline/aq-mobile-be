@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firebase } from '@ionic-native/firebase/ngx';
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 import { Platform } from '@ionic/angular';
 import { from, Observable, of, ReplaySubject } from 'rxjs';
 
@@ -19,7 +19,7 @@ export class PushNotificationsService {
 
   constructor(
     private platform: Platform,
-    private firebase: Firebase
+    private firebase: FirebaseX
   ) {
     this.platform.ready().then(() => {
       if (this.platform.is('cordova')) {
@@ -29,7 +29,7 @@ export class PushNotificationsService {
         this.firebase.getToken().then(token => console.log(`Got token ${token}`));
         this.firebase.onTokenRefresh().subscribe(token => console.log(`Refresh token ${token}`));
 
-        this.firebase.onNotificationOpen().subscribe(data => {
+        this.firebase.onMessageReceived().subscribe(data => {
           if (data.wasTapped) {
             // Notification was received on device tray and tapped by the user.
           } else {

@@ -9,7 +9,7 @@ import { CacheModule } from "ionic-cache";
 import { Network } from '@ionic-native/network/ngx';
 import { SettingsService } from '@helgoland/core';
 import { IonicModule } from '@ionic/angular';
-import { Firebase } from '@ionic-native/firebase/ngx';
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import {localStorageMock} from '../../testing/localStorage.mock';
 
@@ -23,7 +23,7 @@ describe('BackgroundComponent', () => {
       declarations: [ BackgroundComponent ],
       imports: [TranslateTestingModule, HttpClientTestingModule, CacheModule.forRoot(), IonicModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      providers: [ BelAQIService, Network, SettingsService, Firebase, StatusBar ],
+      providers: [ BelAQIService, Network, SettingsService, FirebaseX, StatusBar ],
     })
     .compileComponents();
     belAQIService = TestBed.get(BelAQIService);

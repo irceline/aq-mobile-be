@@ -10,7 +10,7 @@ import { CacheModule } from "ionic-cache";
 import { Network } from '@ionic-native/network/ngx';
 import { SettingsService } from '@helgoland/core';
 import { IonicModule } from '@ionic/angular';
-import { Firebase } from '@ionic-native/firebase/ngx';
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 
 describe('CircleChartComponent', () => {
   let component: CircleChartComponent;
@@ -21,7 +21,7 @@ describe('CircleChartComponent', () => {
       declarations: [ CircleChartComponent ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       imports: [TranslateTestingModule, HttpClientTestingModule, CacheModule.forRoot(), IonicModule],
-      providers: [BelAQIService, Network, SettingsService, Firebase]
+      providers: [BelAQIService, Network, SettingsService, FirebaseX]
     })
     .compileComponents();
     belAQIService = TestBed.get(BelAQIService);

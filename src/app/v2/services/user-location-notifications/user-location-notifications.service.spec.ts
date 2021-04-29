@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { UserLocationNotificationsService } from './user-location-notifications.service';
 import { TranslateTestingModule } from '../../testing/TranslateTestingModule';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { Firebase } from '@ionic-native/firebase/ngx';
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 
 describe('UserLocationNotificationsService', () => {
   let service: UserLocationNotificationsService;
@@ -11,7 +11,7 @@ describe('UserLocationNotificationsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, TranslateTestingModule],
-      providers: [Firebase]
+      providers: [FirebaseX]
     });
     service = TestBed.inject(UserLocationNotificationsService);
   });

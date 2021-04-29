@@ -7,7 +7,7 @@ import {TranslateTestingModule} from '../../testing/TranslateTestingModule';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Network } from '@ionic-native/network/ngx';
 import { SettingsService } from '@helgoland/core';
-import { Firebase } from '@ionic-native/firebase/ngx';
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 
 describe('FeedbackLocationEditComponent', () => {
   let component: FeedbackLocationEditComponent;
@@ -17,7 +17,7 @@ describe('FeedbackLocationEditComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ FeedbackLocationEditComponent ],
       imports: [IonicModule.forRoot(), TranslateTestingModule, HttpClientTestingModule, CacheModule.forRoot()],
-      providers: [Network, SettingsService, Firebase]
+      providers: [Network, SettingsService, FirebaseX]
     }).compileComponents();
   }));
 

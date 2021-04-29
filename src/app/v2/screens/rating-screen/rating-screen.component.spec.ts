@@ -8,7 +8,7 @@ import { CacheModule } from "ionic-cache";
 import { Network } from '@ionic-native/network/ngx';
 import { SettingsService, HttpService } from '@helgoland/core';
 import { IonicModule } from '@ionic/angular';
-import { Firebase } from '@ionic-native/firebase/ngx';
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 
 xdescribe('RatingScreenComponent', () => {
   let component: RatingScreenComponent;
@@ -19,7 +19,7 @@ xdescribe('RatingScreenComponent', () => {
       declarations: [ RatingScreenComponent ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       imports: [HttpClientTestingModule, CacheModule.forRoot(), TranslateTestingModule, IonicModule],
-      providers: [Firebase, Network, SettingsService, HttpService]
+      providers: [FirebaseX, Network, SettingsService, HttpService]
     })
     .compileComponents();
   }));
