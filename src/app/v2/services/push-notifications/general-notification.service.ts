@@ -76,17 +76,15 @@ export class GeneralNotificationService {
   }
 
   public unsubscribeNotification(setDeactivation: boolean): Observable<boolean> {
-    return from(this.storage.get(GENERAL_NOTIFICATION_TOPIC_STORAGE_KEY))
-      .pipe(mergeMap(topic => {
-        return this.pushNotification.unsubscribeTopic(topic).pipe(
-          tap(res => {
-            this.storage.remove(GENERAL_NOTIFICATION_TOPIC_STORAGE_KEY);
-            if (res && setDeactivation) {
-              this.$active.next(false);
-            }
-          })
-        );
-      }));
+    const topic = NOTIFICATION_PREFIX + this.translate.currentLang;
+    return this.pushNotification.unsubscribeTopic(topic).pipe(
+      tap(res => {
+        this.storage.remove(GENERAL_NOTIFICATION_TOPIC_STORAGE_KEY);
+        if (res && setDeactivation) {
+          this.$active.next(false);
+        }
+      })
+    );
   }
 
   private setNotification(notif: PushNotification) {
