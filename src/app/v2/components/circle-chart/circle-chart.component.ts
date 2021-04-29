@@ -176,7 +176,9 @@ export class CircleChartComponent implements OnInit {
 
         const railArc = path();
         railArc.arc(0, 0, this.radius - (this.strokeSize / 2), Math.PI * 0.55, 3.14 * 2.45)
-        
+
+        const k = ((Math.PI * 0.9625) * 2) * this.radius;
+
         // base wheel
         g.append("path")
             .attr('fill', 'rgba(0,0,0,0.1)')
@@ -192,13 +194,12 @@ export class CircleChartComponent implements OnInit {
             .datum({startAngle: this.belAqiScale(11), endAngle: this.belAqiScale(11)})
             .attr("d", this.wheelArc)
 
-
         g.append('path')
             .attr('fill', 'none')
             .attr('stroke', 'rgba(0,0,0,0.2)')
             .attr('stroke-width', '5')
             .attr('stroke-linejoin', 'bevel')
-            .attr('stroke-dasharray', '2, 82.8')
+            .attr('stroke-dasharray', `2, ${k/11}`)
             .style('mix-blend-mode', 'multiply')
             .attr('d', railArc)
 
