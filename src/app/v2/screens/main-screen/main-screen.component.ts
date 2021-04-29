@@ -102,6 +102,8 @@ export class MainScreenComponent implements OnInit {
     detailPoint: DataPoint = null;
     contentHeight = 0;
     screenHeight = 0;
+    
+    iosPadding = 0;
 
     constructor(
         public userSettingsService: UserSettingsService,
@@ -198,6 +200,8 @@ export class MainScreenComponent implements OnInit {
         this.contentHeight =
             this.platform.height() - this.drawerOptions.handleHeight - 56;
         this.screenHeight = this.platform.height();
+
+        if(this.platform.is('ios')) this.iosPadding = 50;
     }
 
     ionViewWillEnter() {
