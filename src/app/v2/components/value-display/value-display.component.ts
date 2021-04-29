@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 import { lightIndexColor } from '../../common/constants';
@@ -9,7 +9,7 @@ import { indexLabel } from './../../common/constants';
     templateUrl: './value-display.component.html',
     styleUrls: ['./value-display.component.scss', './value-display.component.hc.scss'],
 })
-export class ValueDisplayComponent implements OnChanges {
+export class ValueDisplayComponent implements OnChanges, OnInit {
 
     @Input() color;
     @Input() index;
@@ -23,6 +23,12 @@ export class ValueDisplayComponent implements OnChanges {
     constructor(
         private translateSrvc: TranslateService
     ) { }
+
+    ngOnInit() {
+        if (this.color) {
+            this.labelColor = this.color;
+        }
+    }
 
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.score || changes.index) {
