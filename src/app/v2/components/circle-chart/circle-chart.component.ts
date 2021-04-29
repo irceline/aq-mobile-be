@@ -1,17 +1,18 @@
 import { Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
-import { PopoverController, Platform } from '@ionic/angular';
-import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Settings, SettingsService } from '@helgoland/core';
+import { Platform, PopoverController } from '@ionic/angular';
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 import { select, scaleLinear, path, arc, interpolate } from 'd3';
 import { Subscription } from 'rxjs';
 
+import { ThemeHandlerService } from '../..//services/theme-handler/theme-handler.service';
+import { MainPhenomenon } from '../../common/phenomenon';
 import { UserLocation } from '../../Interfaces';
 import { BelAQIService } from '../../services/bel-aqi.service';
-import { ThemeHandlerService } from '../..//services/theme-handler/theme-handler.service';
 import { GeneralNotificationService } from '../../services/push-notifications/general-notification.service';
 import { PushNotification } from './../../services/push-notifications/push-notifications.service';
+import { AnnualMeanValueService } from './../../services/value-provider/annual-mean-value.service';
 import { NotificationPopoverComponent } from './../notification-popover/notification-popover.component';
-
 
 @Component({
     selector: 'app-circle-chart',
@@ -25,8 +26,6 @@ export class CircleChartComponent implements OnInit {
     // belaqi score index
     belAqi = 0;
     // small circle text
-
-    @Input() text: string;
 
     height: number;
     title: string;
@@ -43,6 +42,7 @@ export class CircleChartComponent implements OnInit {
     circleActive = false;
     isIos = false;
     titleSize = 40;
+    text: string;
 
     belAqiSubs: Subscription;
     belAqiScale;
@@ -69,6 +69,7 @@ export class CircleChartComponent implements OnInit {
         public popoverController: PopoverController,
         private themeHandlerService: ThemeHandlerService,
         private platform: Platform,
+        private annualMeanValueSrvc: AnnualMeanValueService,
         private settingsSrvc: SettingsService<Settings>
     ) {
         this.belaqiService.$activeIndex.subscribe((newIndex) => {
@@ -76,13 +77,14 @@ export class CircleChartComponent implements OnInit {
                 this.belAqi = newIndex.indexScore;
                 this.activeUserLocation = newIndex.location;
 
+                this.loadAnnualValue(this.activeUserLocation);
                 this._initializeChart(() => {
                     this._initialize();
                 })
             }
         });
 
-        themeHandlerService.$theme.subscribe((item : any) => {
+        themeHandlerService.$theme.subscribe((item: any) => {
             if (item === this.themeHandlerService.CONTRAST_MODE) {
                 this.chartColor = this.belaqiService.getLightColorForIndex(this.belAqi);
             } else {
@@ -274,15 +276,23 @@ export class CircleChartComponent implements OnInit {
             const width = this.titleRef.nativeElement.offsetWidth;
             this.handleTitleSize(width);
         }, 400)
-        
+
         this.loading = false
-        try {
-            this.text = this.translate.instant(
-                'v2.components.circle-chart.avg-score',
-                { score: this.translate.instant(this.title) }
-            );
-        } catch (e) {
-            console.log(e);
+    }
+
+    private loadAnnualValue(loc: UserLocation) {
+        this.annualMeanValueSrvc.getLastValue(loc, MainPhenomenon.BELAQI).subscribe(res => this.setSubtitle(res.index))
+    }
+
+    private setSubtitle(annualValue): void {
+        if (annualValue !== undefined) {
+            const annualLabel = this.belaqiService.getLabelForIndex(annualValue);
+            if (annualLabel) {
+                this.text = this.translate.instant(
+                    'v2.components.circle-chart.avg-score',
+                    { score: this.translate.instant(annualLabel) }
+                );
+            }
         }
     }
 

@@ -13,24 +13,28 @@ import { ValueProvider } from './value-provider';
 
 const phenomenonMapping = [
   {
-    phenonenon: MainPhenomenon.NO2,
+    phenomenon: MainPhenomenon.NO2,
     layerPrefix: 'no2_anmean_'
   },
   {
-    phenonenon: MainPhenomenon.O3,
+    phenomenon: MainPhenomenon.O3,
     layerPrefix: 'o3_anmean_'
   },
   {
-    phenonenon: MainPhenomenon.PM10,
+    phenomenon: MainPhenomenon.PM10,
     layerPrefix: 'pm10_anmean_',
   },
   {
-    phenonenon: MainPhenomenon.PM25,
+    phenomenon: MainPhenomenon.PM25,
     layerPrefix: 'pm25_anmean_'
   },
   {
-    phenonenon: MainPhenomenon.BC,
+    phenomenon: MainPhenomenon.BC,
     layerPrefix: 'bc_anmean_'
+  },
+  {
+    phenomenon: MainPhenomenon.BELAQI,
+    layerPrefix: 'belaqi_anmean_'
   }
 ];
 
@@ -94,7 +98,7 @@ export class AnnualMeanValueService extends ValueProvider {
   }
 
   private createLayerId(year: number, phenomenon: MainPhenomenon): string {
-    return `${phenomenonMapping.find(e => e.phenonenon === phenomenon).layerPrefix}${year}`;
+    return `${phenomenonMapping.find(e => e.phenomenon === phenomenon).layerPrefix}${year}`;
   }
 
   private createWmsUrl(layerId: string): string {
@@ -109,6 +113,7 @@ export class AnnualMeanValueService extends ValueProvider {
       case MainPhenomenon.PM10: return this.categorizePM10(value);
       case MainPhenomenon.PM25: return this.categorizePM25(value);
       case MainPhenomenon.BC: return this.categorizeBC(value);
+      case MainPhenomenon.BELAQI: return value;
     }
   }
 
