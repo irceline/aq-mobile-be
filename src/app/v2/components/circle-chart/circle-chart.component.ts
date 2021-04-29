@@ -2,6 +2,8 @@ import { Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angula
 import { PopoverController, Platform } from '@ionic/angular';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Settings, SettingsService } from '@helgoland/core';
+import * as d3 from 'd3';
+import { Subscription } from 'rxjs';
 
 import { UserLocation } from '../../Interfaces';
 import { BelAQIService } from '../../services/bel-aqi.service';
@@ -9,9 +11,7 @@ import { ThemeHandlerService } from '../..//services/theme-handler/theme-handler
 import { GeneralNotificationService } from '../../services/push-notifications/general-notification.service';
 import { PushNotification } from './../../services/push-notifications/push-notifications.service';
 import { NotificationPopoverComponent } from './../notification-popover/notification-popover.component';
-import { runInThisContext } from 'vm';
-import * as d3 from 'd3';
-import { Subscription } from 'rxjs';
+
 
 @Component({
     selector: 'app-circle-chart',
@@ -73,7 +73,6 @@ export class CircleChartComponent implements OnInit {
     ) {
         this.belaqiService.$activeIndex.subscribe((newIndex) => {
             if (newIndex) {
-                console.log('newIndex set', newIndex)
                 this.belAqi = newIndex.indexScore;
                 this.activeUserLocation = newIndex.location;
 
@@ -88,6 +87,11 @@ export class CircleChartComponent implements OnInit {
                 this.chartColor = this.belaqiService.getLightColorForIndex(this.belAqi);
             } else {
                 this.chartColor = '#FFFFFF'
+            }
+
+            if (this.wheel && this.circleMarker) {
+                this.circleMarker.attr('fill', this.chartColor)
+                this.wheel.attr('fill', this.chartColor)
             }
         })
 
@@ -187,7 +191,7 @@ export class CircleChartComponent implements OnInit {
             .attr("d", this.wheelArc)
 
         this.wheel = g.append("path")
-            .attr('fill', 'white')
+            .attr('fill', this.chartColor)
             .attr("stroke-width", 1)
             .attr("stroke", "white")
             .datum({startAngle: this.belAqiScale(11), endAngle: this.belAqiScale(11)})
@@ -198,16 +202,14 @@ export class CircleChartComponent implements OnInit {
             .attr('fill', 'none')
             .attr('stroke', 'rgba(0,0,0,0.2)')
             .attr('stroke-width', '5')
-            .attr('d', railArc)
             .attr('stroke-linejoin', 'bevel')
-            .attr('stroke-dasharray', '2, 82.5')
-            // .attr("d", railsArc({startAngle: this.belAqiScale(10.9), endAngle: this.belAqiScale(0.1)}))
+            .attr('stroke-dasharray', '2, 82.8')
             .style('mix-blend-mode', 'multiply')
-
+            .attr('d', railArc)
 
         this.circleMarker = g
             .append('circle')
-            .attr('fill', 'white')
+            .attr('fill', this.chartColor)
             .attr('r', this.dotRadius)
             .attr('cx', this.wheelArc.centroid({startAngle: Math.PI * -0.975, endAngle: Math.PI * 0.975})[0])
             .attr('cy', this.wheelArc.centroid({startAngle: Math.PI * -0.975, endAngle: Math.PI * 0.975})[1])
@@ -217,8 +219,6 @@ export class CircleChartComponent implements OnInit {
 
     private _initialize() {
         const inverted = 11 - this.belAqi;
-
-        console.log(this.belAqi)
 
         this.wheel
             .transition()
@@ -253,6 +253,9 @@ export class CircleChartComponent implements OnInit {
             } else {
                 this.chartColor = this.belaqiService.getLightColorForIndex(this.belAqi);
             }
+
+            this.circleMarker.attr('fill', this.chartColor)
+            this.wheel.attr('fill', this.chartColor)
         })
 
         this._changeTitle(this.belAqi);
