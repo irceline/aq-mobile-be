@@ -14,7 +14,6 @@ ENV GRADLE_VERSION 4.4
 ENV ANDROID_SDK_ROOT /usr/local/android-sdk-linux
 ENV ANDROID_HOME /usr/local/android-sdk-linux
 ENV ANDROID_API_LEVELS android-29
-ENV ANDROID_BUILD_TOOLS_VERSION_REV r29.0.3
 ENV ANDROID_BUILD_TOOLS_VERSION 29.0.3
 ENV IONIC_VERSION 4.12.0
 
@@ -39,7 +38,7 @@ RUN mkdir -p ${GRADLE_HOME} && \
 
 # INSTALL ANDROID
 RUN mkdir -p ${ANDROID_HOME} && \
-  curl -L https://dl.google.com/android/repository/tools_${ANDROID_BUILD_TOOLS_VERSION_REV}-linux.zip > /tmp/tools.zip && \
+  curl -L https://dl.google.com/android/repository//build-tools_r${ANDROID_BUILD_TOOLS_VERSION}-linux.zip > /tmp/tools.zip && \
   unzip /tmp/tools.zip -d ${ANDROID_HOME}
 
 # INSTALL GLIBC
