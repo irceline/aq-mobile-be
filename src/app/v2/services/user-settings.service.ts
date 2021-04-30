@@ -32,17 +32,20 @@ export class UserSettingsService {
     }
 
     private _userLocations: UserLocation[] = [];
+    private _storage: Storage;
 
     private notificationExpirationTimer: Map<number, Subscription> = new Map();
 
     constructor(
         private userLocationNotificationSrvc: UserLocationNotificationsService,
-        private translate: TranslateService
+        private translate: TranslateService,
+        private storage: Storage
     ) {
-        this.$userLocationNotificationsActive = new BehaviorSubject(localStorage.getItem(userLocationNotificationsLSkey) === 'true');
+        this.$userLocationNotificationsActive = new BehaviorSubject(storage.getItem(userLocationNotificationsLSkey) === 'true');
 
-        const userLocations = localStorage.getItem(userLocationsLSkey);
-
+        const userLocations = storage.getItem(userLocationsLSkey);
+        this.storage = storage;
+        
         if (userLocations) {
             // todo : some verification that the stored data is not corrupt
             this._userLocations = JSON.parse(userLocations).slice(0, 5);
@@ -130,6 +133,7 @@ export class UserSettingsService {
             }),
             map(() => true),
             tap(r => {
+                console.log("tapping this shit");
                 this.saveLocations();
                 return this.setUserLocationsNotificationsActive(r);
             }),
@@ -152,14 +156,14 @@ export class UserSettingsService {
     }
 
     private setUserLocationsNotificationsActive(active: boolean) {
-        localStorage.setItem(userLocationNotificationsLSkey, active + '');
+        storage.setItem(userLocationNotificationsLSkey, active + '');
         this.$userLocationNotificationsActive.next(active);
     }
 
     private saveLocations() {
         this.$userLocations.next(this._userLocations);
         // todo: cloud storage?
-        localStorage.setItem(
+        storage.setItem(
             userLocationsLSkey,
             JSON.stringify(this._userLocations)
         );
