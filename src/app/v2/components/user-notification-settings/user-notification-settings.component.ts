@@ -32,11 +32,18 @@ export class UserNotificationSettingsComponent implements OnInit {
         event.stopPropagation();
         event.preventDefault();
         if (!this.generalNotification) {
-            this.generalNotificationSrvc.subscribeNotification(true);
+            this.generalNotificationSrvc.subscribeNotification(true).subscribe(success => {
+                if (success) {
+                    this.generalNotification = !this.generalNotification;
+                }
+            });
         } else {
-            this.generalNotificationSrvc.unsubscribeNotification(true);
+            this.generalNotificationSrvc.unsubscribeNotification(true).subscribe(success => {
+                if (success) {
+                    this.generalNotification = !this.generalNotification;
+                }
+            });
         }
-        this.generalNotification = !this.generalNotification;
     }
 
     toggleUserLocationNotifications(event: MouseEvent) {
@@ -44,9 +51,9 @@ export class UserNotificationSettingsComponent implements OnInit {
         event.stopPropagation();
         event.preventDefault();
         if (!this.userLocationNotifications) {
-            this.userSettingsSrvc.subscribeNotification();
+            this.userSettingsSrvc.subscribeNotification().subscribe();
         } else {
-            this.userSettingsSrvc.unsubscribeNotification();
+            this.userSettingsSrvc.unsubscribeNotification().subscribe();
         }
         this.userLocationNotifications = !this.userLocationNotifications;
     }
