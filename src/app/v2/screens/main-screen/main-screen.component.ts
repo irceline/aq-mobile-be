@@ -151,6 +151,10 @@ export class MainScreenComponent implements OnInit {
             evaluation: this.belAqiService.getLabelForIndex(currentBelAqi.indexScore),
             location: this.userSettingsService.selectedUserLocation,
             mainTab: true,
+            showValues: false,
+            showThreshold: false,
+            euBenchMark: null,
+            worldBenchMark: null,
             substance: {
                 name: 'v2.screens.app-info.belaqi-title',
                 abbreviation: 'BelAQI',
@@ -171,6 +175,10 @@ export class MainScreenComponent implements OnInit {
                             averageValue: res[1] ? Math.round(res[1].value) : null,
                             substance: dph,
                             mainTab: true,
+                            showValues: false,
+                            showThreshold: false,
+                            euBenchMark: null,
+                            worldBenchMark: null,
                             evaluation: this.belAqiService.getLabelForIndex(res[0].index),
                             color: this.belAqiService.getLightColorForIndex(res[0].index)
                         };
