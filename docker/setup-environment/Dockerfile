@@ -11,6 +11,7 @@ ENV JAVA_HOME /usr/lib/jvm/java-1.8-openjdk
 ENV GRADLE_HOME /usr/local/gradle
 ENV GRADLE_VERSION 4.4
 
+ENV ANDROID_SDK_ROOT /usr/local/android-sdk-linux
 ENV ANDROID_HOME /usr/local/android-sdk-linux
 ENV ANDRDOID_TOOLS_VERSION r25.2.5
 ENV ANDROID_API_LEVELS android-26
