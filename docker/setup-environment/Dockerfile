@@ -27,6 +27,8 @@ RUN npm install -g cordova @ionic/cli
 #RUN ionic cordova plugin add cordova-plugin-fcm
 RUN npm install -g @angular/cli
 
+RUN npm install -g jetifier
+
 #INSTALL Graddle
 RUN mkdir -p ${GRADLE_HOME} && \
   curl -L https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip > /tmp/gradle.zip && \
