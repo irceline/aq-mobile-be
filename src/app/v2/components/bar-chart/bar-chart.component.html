@@ -15,7 +15,7 @@
   <div class="bar--items" *ngIf="options">
     <div class="bar--items-item" *ngFor="let item of options.data"
       [ngStyle]="{'height': item.value + 'px', 'background': item.background}">
-      <span [ngStyle]="{'color': item.value < 20 ? '#000' : '#fff'}">{{ item.value }}</span>
+      <span *ngIf="showValues" [ngStyle]="{'color': item.value < 20 ? '#000' : '#fff'}">{{ item.value }}</span>
     </div>
   </div>
 </div>

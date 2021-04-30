@@ -102,7 +102,7 @@ export class AnnualMeanValueService extends ValueProvider {
   }
 
   private createWmsUrl(layerId: string): string {
-    return `https://geo.irceline.be/rioifdm/${layerId}/wms`;
+    return `https://geo.irceline.be/rioifdm/wms`;
   }
 
 

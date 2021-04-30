@@ -51,6 +51,7 @@ export interface DataPoint {
     location: UserLocation;
     substance: Substance;
     currentValue?: number;
+    currentIndex?: number;
     averageValue?: number;
 
     // todo -> thresholds
@@ -66,6 +67,7 @@ export interface LongTermDataPoint extends DataPoint {
     euBenchMark: number;
     worldBenchMark: number;
     historicalValues: HistoricalValue[];
+    showValues: boolean;
     chartData?: ChartData;
 }
 
