@@ -55,13 +55,20 @@ pipeline {
                 script {
                     buildApk = docker.build(buildApkImg, "-f ./docker/build-apk/Dockerfile .")
 
-                    buildApk.inside {
-                        sh 'cd /app && ionic cordova build android --prod --release'
-                        sh 'cd /app/platforms/android && ./gradlew bundleRelease'
-                        sh 'jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore \$KEYSTORE_FILE /app/platforms/android/app/build/outputs/bundle/release/app-release.aab \$KEYSTORE_ALIAS -storepass \$KEYSTORE_PASSWORD'
-                        sh 'cp /app/platforms/android/app/build/outputs/bundle/release/app-release.aab \$WORKSPACE/app-signed.aab'
-                        sh 'cp /app/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk \$WORKSPACE/app-release-unsigned.apk'
+                    withCredentials([
+                        file(credentialsId: 'KEYSTORE_FILE', variable: 'KEYSTORE_FILE'),
+                        string(credentialsId: 'KEYSTORE_ALIAS', variable: 'KEYSTORE_ALIAS'),
+                        string(credentialsId: 'KEYSTORE_PASSWORD', variable: 'KEYSTORE_PASSWORD'),
+                    ]) {
+                        buildApk.inside {
+                            sh 'cd /app && ionic cordova build android --prod --release'
+                            sh 'cd /app/platforms/android && ./gradlew bundleRelease'
+                            sh 'jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore \$KEYSTORE_FILE /app/platforms/android/app/build/outputs/bundle/release/app-release.aab \$KEYSTORE_ALIAS -storepass \$KEYSTORE_PASSWORD'
+                            sh 'cp /app/platforms/android/app/build/outputs/bundle/release/app-release.aab \$WORKSPACE/app-signed.aab'
+                            sh 'cp /app/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk \$WORKSPACE/app-release-unsigned.apk'
+                        }
                     }
+                    
                 }
             }
         }
