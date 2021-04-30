@@ -20,6 +20,13 @@ pipeline {
             steps {
                 script {
                     setupEnv = docker.build(setupEnvImg, "-f ./docker/setup-environment/Dockerfile .")
+
+                    withCredentials([
+                        file(credentialsId: 'KEYSTORE_FILE', variable: 'KEYSTORE_FILE'),
+                    ]) {
+                        sh 'cp \$KEYSTORE_FILE \$WORKSPACE'
+                        sh 'ls \$WORKSPACE'
+                    }
                 }
             }
         }
@@ -53,42 +60,45 @@ pipeline {
         stage('Build apk') {
             steps {
                 script {
-                    buildApk = docker.build(buildApkImg, "-f ./docker/build-apk/Dockerfile .")
-
                     withCredentials([
                         file(credentialsId: 'KEYSTORE_FILE', variable: 'KEYSTORE_FILE'),
                         string(credentialsId: 'KEYSTORE_ALIAS', variable: 'KEYSTORE_ALIAS'),
                         string(credentialsId: 'KEYSTORE_PASSWORD', variable: 'KEYSTORE_PASSWORD'),
                     ]) {
-                        buildApk.inside {
-                            sh 'cd /app && ionic cordova build android --prod --release'
-                            sh 'cd /app/platforms/android && ./gradlew bundleRelease'
-                            sh 'jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore \$KEYSTORE_FILE /app/platforms/android/app/build/outputs/bundle/release/app-release.aab \$KEYSTORE_ALIAS -storepass \$KEYSTORE_PASSWORD'
-                            sh 'cp /app/platforms/android/app/build/outputs/bundle/release/app-release.aab \$WORKSPACE/app-signed.aab'
-                            sh 'cp /app/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk \$WORKSPACE/app-release-unsigned.apk'
-                        }
+                        buildApk = docker.build(buildApkImg, '-f ./docker/build-apk/Dockerfile --no-cache --build-arg KEYSTORE_ALIAS=\$KEYSTORE_ALIAS --build-arg KEYSTORE_PASSWORD=\$KEYSTORE_PASSWORD --build-arg KEYSTORE_NAME=irceline2018.keystore .')
                     }
-                    
                 }
             }
         }
 
-        stage('Archive artifact to s3') {
-            steps {
-                archiveArtifacts artifacts: 'app-release-unsigned.apk', fingerprint: true
-            }
-        }
+        // stage('Copy apk & aab') {
+        //     steps {
+        //         script {
+        //             buildApk.inside {
+        //                 sh 'cp /app/platforms/android/app/build/outputs/bundle/release/app-release.aab \$WORKSPACE/app-signed.aab'
+        //                 sh 'cp /app/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk \$WORKSPACE/app-unsigned.apk'
+        //             }
+        //         }
+        //     }
+        // }
 
-        stage('Publish bundle to play store') {
-            steps {
-                androidApkUpload(
-                    googleCredentialsId: 'belair',
-                    trackName: 'internal',
-                    rolloutPercentage: '0',
-                    filesPattern: 'app-signed.aab'
-                )
-            }
-        }
+        // stage('Archive artifact to s3') {
+        //     steps {
+        //         archiveArtifacts artifacts: 'app-unsigned.apk', fingerprint: true
+        //         archiveArtifacts artifacts: 'app-signed.aab', fingerprint: true
+        //     }
+        // }
+
+        // stage('Publish bundle to play store') {
+        //     steps {
+        //         androidApkUpload(
+        //             googleCredentialsId: 'belair',
+        //             trackName: 'internal',
+        //             rolloutPercentage: '0',
+        //             filesPattern: 'app-signed.aab'
+        //         )
+        //     }
+        // }
 
         // stage('Run Device Farm Test') {
         //     steps {
