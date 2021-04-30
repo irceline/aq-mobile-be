@@ -16,16 +16,20 @@
         <!-- <span>(<span [innerHTML]="detailedDataPoint.substance.abbreviation"></span>)</span> -->
         <span>({{detailedDataPoint.substance.abbreviation | translate}})</span>
       </h3>
+      <span [ngStyle]="{'color': detailedDataPoint.color}" *ngIf="detailedDataPoint.mainTab">{{ detailedDataPoint.evaluation | translate }}</span>
       <span [ngStyle]="{'color': detailedDataPoint.color}" *ngIf="detailedDataPoint.showThreshold">{{ detailedDataPoint.evaluation | translate }}</span>
     </ion-text>
     <ion-text>
       <p>
+        <span *ngIf="detailedDataPoint.mainTab">
+          {{ detailedDataPoint.currentValue }} {{ detailedDataPoint.substance.unit }} {{ 'v2.components.information-item.personal-calculation' | translate }}
+        </span>
         <span *ngIf="detailedDataPoint.currentValue && detailedDataPoint.showThreshold">
           {{ 'v2.components.information-item.eu-threshold' | translate }}:
         </span>
         <span class="value" *ngIf="detailedDataPoint.currentValue && detailedDataPoint.showThreshold">
           {{detailedDataPoint.euBenchMark}} {{ detailedDataPoint.substance.unit }}
-        </span>
+        </span><br />
         <span *ngIf="detailedDataPoint.currentValue && detailedDataPoint.showThreshold">
           {{ 'v2.components.information-item.who-threshold' | translate }}:
         </span>
