@@ -156,14 +156,14 @@ export class UserSettingsService {
     }
 
     private setUserLocationsNotificationsActive(active: boolean) {
-        storage.setItem(userLocationNotificationsLSkey, active + '');
+        this.storage.setItem(userLocationNotificationsLSkey, active + '');
         this.$userLocationNotificationsActive.next(active);
     }
 
     private saveLocations() {
         this.$userLocations.next(this._userLocations);
         // todo: cloud storage?
-        storage.setItem(
+        this.storage.setItem(
             userLocationsLSkey,
             JSON.stringify(this._userLocations)
         );
