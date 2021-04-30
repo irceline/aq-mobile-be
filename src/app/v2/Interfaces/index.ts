@@ -44,6 +44,7 @@ export interface Substance {
     name: string;
     abbreviation: string;
     unit?: string;
+    threshold: number;
     phenomenon: MainPhenomenon;
 }
 
@@ -85,5 +86,3 @@ export interface HistoricalValue {
     year: number;
     evaluationColor: string;
 }
-
-

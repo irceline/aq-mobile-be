@@ -79,7 +79,9 @@
 			},
 			"information-item": {
 				"average": "La moyenne est de",
-				"personal-calculation": "calculé pour votre localisation."
+				"personal-calculation": "calculé pour votre localisation.",
+				"eu-threshold": "Valeur limite européenne annuelle",
+				"who-threshold": "Valeur guide annuelle de l'OMS"
 			},
 			"location-input": {
 				"choose-location": "Choisissez votre localisation",

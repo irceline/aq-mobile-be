@@ -68,7 +68,7 @@ export class LongTermDataService {
         this.annualMeanValueSrvc.getAnnualValueList(location, substance.phenomenon)
       ]).pipe(map(res => {
         // const currentIndex = res[0].indexScore;
-        // select last index instead of 
+        // select last index instead of
         const currentIndex = res[1][0].index;
         const historicalValues = res[1].reverse().filter(e => e != null).map(e => {
           return {
@@ -88,6 +88,36 @@ export class LongTermDataService {
           worldBenchMark: this.getWorldBenchMark(substance.phenomenon),
           evaluation: this.belaqiService.getLabelForIndex(currentIndex),
           color: this.belaqiService.getLightColorForIndex(currentIndex),
+          historicalValues
+        };
+      }));
+    } else if (substance.phenomenon === MainPhenomenon.O3) {
+      return forkJoin([
+        this.modelledValueSrvc.getCurrentValue(location, substance.phenomenon),
+        this.annualMeanValueSrvc.getAnnualValueList(location, substance.phenomenon)
+      ]).pipe(map(res => {
+        // const currentIndex = res[0].index;
+        // const currentValue = Math.round(res[0].value);
+        const lastEntry = res[1][0];
+        const currentIndex = lastEntry.index;
+        const currentValue = lastEntry.value;
+        const historicalValues = res[1].reverse().map(e => {
+          return {
+            year: e.year,
+            value: Math.round(e.value),
+            evaluationColor: this.getEvaluationColor(e, substance.phenomenon)
+          };
+        });
+        return {
+          substance,
+          location: location,
+          currentValue: currentValue,
+          averageValue: null,
+          showValues: true,
+          euBenchMark: this.getEuBenchMark(substance.phenomenon),
+          worldBenchMark: this.getWorldBenchMark(substance.phenomenon),
+          evaluation: this.belaqiService.getLabelForIndex(currentIndex),
+          color: 'grey',
           historicalValues
         };
       }));
@@ -114,6 +144,7 @@ export class LongTermDataService {
           currentValue: currentValue,
           averageValue: null,
           showValues: true,
+          showThreshold: true,
           euBenchMark: this.getEuBenchMark(substance.phenomenon),
           worldBenchMark: this.getWorldBenchMark(substance.phenomenon),
           evaluation: this.belaqiService.getLabelForIndex(currentIndex),
@@ -150,8 +181,10 @@ export class LongTermDataService {
     switch (phenomenon) {
       case MainPhenomenon.NO2:
         return 40;
+      case MainPhenomenon.PM10:
+        return 40;
       case MainPhenomenon.PM25:
-        return 20;
+        return 25;
       default:
         return null;
     }
