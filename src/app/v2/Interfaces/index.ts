@@ -53,6 +53,7 @@ export interface DataPoint {
     currentValue?: number;
     currentIndex?: number;
     averageValue?: number;
+    mainTab: boolean;
 
     // todo -> thresholds
     // are thresholds set on server side or defined in client?
