@@ -97,6 +97,7 @@
         "cordova-plugin-ionic-webview": "^5.0.0",
         "cordova-plugin-splashscreen": "^6.0.0",
         "cordova-res": "^0.15.3",
+        "cordova.plugins.diagnostic": "^6.0.3",
         "jasmine-core": "~3.5.0",
         "jasmine-spec-reporter": "~4.2.1",
         "jetifier": "^1.6.6",

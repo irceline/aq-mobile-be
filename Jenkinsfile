@@ -54,127 +54,118 @@ pipeline {
             steps {
                 script {
                     buildApk = docker.build(buildApkImg, "-f ./docker/build-apk/Dockerfile .")
-                }
-            }
-        }
 
-        stage('Copy apk') {
-            steps {
-                script {
-                    buildApk.inside { 
-                        sh 'cp /app/platforms/android/app/build/outputs/apk/debug/app-debug.apk \$WORKSPACE/app-debug-latest.apk'
+                    buildApk.inside {
+                        sh 'cd /app && ionic cordova build android --prod --release'
+                        sh 'cd /app/platforms/android && ./gradlew bundleRelease'
+                        sh 'jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore \$KEYSTORE_FILE /app/platforms/android/app/build/outputs/bundle/release/app-release.aab \$KEYSTORE_ALIAS -storepass \$KEYSTORE_PASSWORD'
+                        sh 'cp /app/platforms/android/app/build/outputs/bundle/release/app-release.aab \$WORKSPACE/app-signed.aab'
+                        sh 'cp /app/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk \$WORKSPACE/app-release-unsigned.apk'
                     }
                 }
             }
         }
 
-        stage('Remove all containers') {
-            steps {
-                sh 'docker container prune'
-            }
-        }
-
-        stage('Remove all dangling images') {
-            steps {
-                sh 'docker image prune -f'
-            }
-        }
-
         stage('Archive artifact to s3') {
             steps {
-                archiveArtifacts artifacts: 'app-debug-latest.apk', fingerprint: true
+                archiveArtifacts artifacts: 'app-release-unsigned.apk', fingerprint: true
             }
         }
 
-        // stage('Copy Test File') {
-        //     steps {
-        //         script {
-        //             sh "cp ./test/zip-with-dependencies.zip \$WORKSPACE/test.zip"
-        //         }
-        //     }
-        // }
-
-        stage('Run Device Farm Test') {
+        stage('Publish bundle to play store') {
             steps {
-                devicefarm (
-                    projectName: 'AcopicTest',
-                    devicePoolName: 'Top Devices',
-                    // testSpecName: 'nebulae.yml',
-                    testSpecName: '',
-                    // environmentToRun: 'CustomEnvironment',
-                    environmentToRun: '',
-                    appArtifact:'app-debug-latest.apk',
-                    runName: "Belair-build-${BUILD_ID}",
-                    // testToRun: 'APPIUM_JAVA_TESTNG',
-                    testToRun: 'BUILTIN_FUZZ',
-                    storeResults: '',
-                    isRunUnmetered: '',
-                    eventCount: '',
-                    eventThrottle: '',
-                    seed: '',
-                    username: '',
-                    password: '',
-                    appiumJavaJUnitTest: '',
-                    appiumJavaTestNGTest: 'test.zip',
-                    appiumPythonTest: '',
-                    appiumRubyTest: '',
-                    appiumNodeTest: '',
-                    calabashFeatures: '',
-                    calabashTags: '',
-                    calabashProfile: '',
-                    junitArtifact: '',
-                    junitFilter: '',
-                    uiautomatorArtifact: '',
-                    uiautomatorFilter: '',
-                    uiautomationArtifact: '',
-                    xctestArtifact: '',
-                    xctestFilter: '',
-                    xctestUiArtifact: '',
-                    xctestUiFilter: '',
-                    appiumVersionJunit: '',
-                    appiumVersionPython: '',
-                    appiumVersionTestng: '',
-                    ifWebApp: false,
-                    extraData: false,
-                    extraDataArtifact: '',
-                    deviceLocation: false,
-                    deviceLatitude: 0,
-                    deviceLongitude: 0,
-                    radioDetails: true,
-                    ifBluetooth: true,
-                    ifWifi: true,
-                    ifGPS: true,
-                    ifNfc: false,
-                    jobTimeoutMinutes: 10,
-                    ifVideoRecording: true,
-                    ifAppPerformanceMonitoring: false,
-                    ignoreRunError: false,
-                    ifVpce: false,
-                    ifSkipAppResigning: false,
-                    vpceServiceName: '',
+                androidApkUpload(
+                    googleCredentialsId: 'belair',
+                    trackName: 'internal',
+                    rolloutPercentage: '0',
+                    filesPattern: 'app-signed.aab'
                 )
             }
         }
+
+        // stage('Run Device Farm Test') {
+        //     steps {
+        //         devicefarm (
+        //             projectName: 'AcopicTest',
+        //             devicePoolName: 'Top Devices',
+        //             // testSpecName: 'nebulae.yml',
+        //             testSpecName: '',
+        //             // environmentToRun: 'CustomEnvironment',
+        //             environmentToRun: '',
+        //             appArtifact:'app-debug-latest.apk',
+        //             runName: "Belair-build-${BUILD_ID}",
+        //             // testToRun: 'APPIUM_JAVA_TESTNG',
+        //             testToRun: 'BUILTIN_FUZZ',
+        //             storeResults: '',
+        //             isRunUnmetered: '',
+        //             eventCount: '',
+        //             eventThrottle: '',
+        //             seed: '',
+        //             username: '',
+        //             password: '',
+        //             appiumJavaJUnitTest: '',
+        //             appiumJavaTestNGTest: 'test.zip',
+        //             appiumPythonTest: '',
+        //             appiumRubyTest: '',
+        //             appiumNodeTest: '',
+        //             calabashFeatures: '',
+        //             calabashTags: '',
+        //             calabashProfile: '',
+        //             junitArtifact: '',
+        //             junitFilter: '',
+        //             uiautomatorArtifact: '',
+        //             uiautomatorFilter: '',
+        //             uiautomationArtifact: '',
+        //             xctestArtifact: '',
+        //             xctestFilter: '',
+        //             xctestUiArtifact: '',
+        //             xctestUiFilter: '',
+        //             appiumVersionJunit: '',
+        //             appiumVersionPython: '',
+        //             appiumVersionTestng: '',
+        //             ifWebApp: false,
+        //             extraData: false,
+        //             extraDataArtifact: '',
+        //             deviceLocation: false,
+        //             deviceLatitude: 0,
+        //             deviceLongitude: 0,
+        //             radioDetails: true,
+        //             ifBluetooth: true,
+        //             ifWifi: true,
+        //             ifGPS: true,
+        //             ifNfc: false,
+        //             jobTimeoutMinutes: 10,
+        //             ifVideoRecording: true,
+        //             ifAppPerformanceMonitoring: false,
+        //             ignoreRunError: false,
+        //             ifVpce: false,
+        //             ifSkipAppResigning: false,
+        //             vpceServiceName: '',
+        //         )
+        //     }
+        // }
     }
 
     post {
-        success {
-            slackSend(
-                color: "good",
-                channel: "${SLACK_CHANNEL}", 
-                message: "New apk file available at: https://${S3_BUCKET}.s3.${S3_REGION}.amazonaws.com/belair-v2/${BRANCH_NAME}/${BUILD_ID}/artifacts/app-debug-latest.apk"
-            )
-        }
+        // success {
+        //     slackSend(
+        //         color: "good",
+        //         channel: "${SLACK_CHANNEL}", 
+        //         message: "New apk file available at: https://${S3_BUCKET}.s3.${S3_REGION}.amazonaws.com/belair-v2/${BRANCH_NAME}/${BUILD_ID}/artifacts/app-debug-latest.apk"
+        //     )
+        // }
 
-        failure {
-            slackSend(
-                color: "danger",
-                channel: "${SLACK_CHANNEL}", 
-                message: "Pipeline for ${BRANCH_NAME}#${BUILD_ID} failure"
-            )
-        }
+        // failure {
+        //     slackSend(
+        //         color: "danger",
+        //         channel: "${SLACK_CHANNEL}", 
+        //         message: "Pipeline for ${BRANCH_NAME}#${BUILD_ID} failure"
+        //     )
+        // }
 
         always {
+            sh 'docker container prune -f'
+            sh 'docker image prune -f'
             cleanWs()
         }
     }
