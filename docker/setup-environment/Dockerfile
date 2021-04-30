@@ -38,7 +38,7 @@ RUN mkdir -p ${GRADLE_HOME} && \
 
 # INSTALL ANDROID
 RUN mkdir -p ${ANDROID_HOME} && \
-  curl -L https://dl.google.com/android/repository/tools_${ANDRDOID_TOOLS_VERSION}-linux.zip > /tmp/tools.zip && \
+  curl -L https://dl.google.com/android/repository/tools_${ANDROID_BUILD_TOOLS_VERSION}-linux.zip > /tmp/tools.zip && \
   unzip /tmp/tools.zip -d ${ANDROID_HOME}
 
 # INSTALL GLIBC
