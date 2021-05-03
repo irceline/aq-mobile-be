@@ -6,9 +6,7 @@ import { map } from 'rxjs/operators';
 import { MainPhenomenon } from '../common/phenomenon';
 import { LongTermDataPoint, Substance, UserLocation } from '../Interfaces';
 import { BelAQIService } from './bel-aqi.service';
-import { AnnualMeanValue, AnnualMeanValueService } from './value-provider/annual-mean-value.service';
-import { BelaqiIndexService } from './value-provider/belaqi-index.service';
-import { ModelledValueService } from './value-provider/modelled-value.service';
+import { AnnualMeanValueService } from './value-provider/annual-mean-value.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,9 +18,7 @@ export class LongTermDataService {
   constructor(
     translateService: TranslateService,
     private belaqiService: BelAQIService,
-    private belaqiIndexSrvc: BelaqiIndexService,
-    private annualMeanValueSrvc: AnnualMeanValueService,
-    private modelledValueSrvc: ModelledValueService
+    private annualMeanValueSrvc: AnnualMeanValueService
   ) {
     this._substances = [
       {
@@ -63,109 +59,78 @@ export class LongTermDataService {
 
   private getLongTermDataForSubstance(substance: Substance, location: UserLocation): Observable<LongTermDataPoint> {
     if (substance.phenomenon === MainPhenomenon.BELAQI) {
-      return forkJoin([
-        this.belaqiIndexSrvc.getCurrentIndex(location),
-        this.annualMeanValueSrvc.getAnnualValueList(location, substance.phenomenon)
-      ]).pipe(map(res => {
-        // const currentIndex = res[0].indexScore;
-        // select last index instead of
-        const currentIndex = res[1][0].index;
-        const historicalValues = res[1].reverse().filter(e => e != null).map(e => {
+      return this.annualMeanValueSrvc.getAnnualValueList(location, substance.phenomenon)
+        .pipe(map(res => {
+          const currentIndex = res[0].index;
+          const historicalValues = res.reverse().filter(e => e != null).map(e => {
+            return {
+              year: e.year,
+              value: Math.round(e.value) * 5,
+              evaluationColor: this.getEvaluationColor(e.index, substance.phenomenon)
+            };
+          });
           return {
-            year: e.year,
-            value: Math.round(e.value) * 5,
-            evaluationColor: this.getEvaluationColor(e, substance.phenomenon)
+            substance,
+            location: location,
+            currentIndex: currentIndex,
+            averageValue: null,
+            showValues: false,
+            mainTab: false,
+            showThreshold: this.showThreshold(substance.phenomenon),
+            euBenchMark: this.getEuBenchMark(substance.phenomenon),
+            worldBenchMark: this.getWorldBenchMark(substance.phenomenon),
+            evaluation: this.belaqiService.getLabelForIndex(currentIndex),
+            color: this.belaqiService.getLightColorForIndex(currentIndex),
+            historicalValues
           };
-        });
-        return {
-          substance,
-          location: location,
-          // currentValue: this.belaqiService.getLabelForIndex(currentIndex),
-          currentIndex: currentIndex,
-          averageValue: null,
-          showValues: false,
-          mainTab: false,
-          showThreshold: false,
-          euBenchMark: this.getEuBenchMark(substance.phenomenon),
-          worldBenchMark: this.getWorldBenchMark(substance.phenomenon),
-          evaluation: this.belaqiService.getLabelForIndex(currentIndex),
-          color: this.belaqiService.getLightColorForIndex(currentIndex),
-          historicalValues
-        };
-      }));
-    } else if (substance.phenomenon === MainPhenomenon.O3) {
-      return forkJoin([
-        this.modelledValueSrvc.getCurrentValue(location, substance.phenomenon),
-        this.annualMeanValueSrvc.getAnnualValueList(location, substance.phenomenon)
-      ]).pipe(map(res => {
-        // const currentIndex = res[0].index;
-        // const currentValue = Math.round(res[0].value);
-        const lastEntry = res[1][0];
-        const currentIndex = lastEntry.index;
-        const currentValue = lastEntry.value;
-        const historicalValues = res[1].reverse().map(e => {
-          return {
-            year: e.year,
-            value: Math.round(e.value),
-            evaluationColor: this.getEvaluationColor(e, substance.phenomenon)
-          };
-        });
-        return {
-          substance,
-          location: location,
-          currentValue: currentValue,
-          averageValue: null,
-          showValues: true,
-          mainTab: false,
-          showThreshold: false,
-          euBenchMark: this.getEuBenchMark(substance.phenomenon),
-          worldBenchMark: this.getWorldBenchMark(substance.phenomenon),
-          evaluation: this.belaqiService.getLabelForIndex(currentIndex),
-          color: 'grey',
-          historicalValues
-        };
-      }));
+        }));
     } else {
-      return forkJoin([
-        this.modelledValueSrvc.getCurrentValue(location, substance.phenomenon),
-        this.annualMeanValueSrvc.getAnnualValueList(location, substance.phenomenon)
-      ]).pipe(map(res => {
-        // const currentIndex = res[0].index;
-        // const currentValue = Math.round(res[0].value);
-        const lastEntry = res[1][0];
-        const currentIndex = lastEntry.index;
-        const currentValue = lastEntry.value;
-        const historicalValues = res[1].reverse().map(e => {
+      return this.annualMeanValueSrvc.getAnnualValueList(location, substance.phenomenon)
+        .pipe(map(res => {
+          const lastEntry = res[0];
+          const currentIndex = lastEntry.index;
+          const currentValue = lastEntry.value;
+          const historicalValues = res.reverse().map(e => {
+            return {
+              year: e.year,
+              value: Math.round(e.value),
+              evaluationColor: this.getEvaluationColor(e.index, substance.phenomenon)
+            };
+          });
           return {
-            year: e.year,
-            value: Math.round(e.value),
-            evaluationColor: this.getEvaluationColor(e, substance.phenomenon)
+            substance,
+            location: location,
+            currentValue: currentValue,
+            averageValue: null,
+            showValues: true,
+            mainTab: false,
+            showThreshold: this.showThreshold(substance.phenomenon),
+            euBenchMark: this.getEuBenchMark(substance.phenomenon),
+            worldBenchMark: this.getWorldBenchMark(substance.phenomenon),
+            evaluation: this.belaqiService.getLabelForIndex(currentIndex),
+            color: this.getEvaluationColor(currentIndex, substance.phenomenon),
+            historicalValues
           };
-        });
-        return {
-          substance,
-          location: location,
-          currentValue: currentValue,
-          averageValue: null,
-          showValues: true,
-          mainTab: false,
-          showThreshold: true,
-          euBenchMark: this.getEuBenchMark(substance.phenomenon),
-          worldBenchMark: this.getWorldBenchMark(substance.phenomenon),
-          evaluation: this.belaqiService.getLabelForIndex(currentIndex),
-          color: this.belaqiService.getLightColorForIndex(currentIndex),
-          historicalValues
-        };
-      }));
+        }));
     }
   }
 
-  private getEvaluationColor(e: AnnualMeanValue, phenomenon: MainPhenomenon): string {
-    switch ((phenomenon)) {
+  private showThreshold(phenomenon: MainPhenomenon): any {
+    switch (phenomenon) {
+      case MainPhenomenon.O3:
+      case MainPhenomenon.BELAQI:
+        return false;
+      default:
+        return true;
+    }
+  }
+
+  private getEvaluationColor(index: number, phenomenon: MainPhenomenon): string {
+    switch (phenomenon) {
       case MainPhenomenon.O3:
         return 'grey';
       default:
-        return this.belaqiService.getLightColorForIndex(e.index);
+        return this.belaqiService.getLightColorForIndex(index);
     }
   }
 
