@@ -162,6 +162,14 @@ export class MainScreenComponent implements OnInit {
             }
         };
 
+        this.annulMeanValueService.getLastValue(this.userSettingsService.selectedUserLocation, MainPhenomenon.BELAQI).subscribe(
+            value => {
+                this.belaqiDetailData.lastAnnualIndex = {
+                    color: this.belAqiService.getLightColorForIndex(value.index),
+                    label: this.belAqiService.getLabelForIndex(value.index)
+                };
+            })
+
         this.detailedPhenomenona.forEach(dph => {
             forkJoin([
                 this.modelledValueService.getCurrentValue(this.userSettingsService.selectedUserLocation, dph.phenomenon),
@@ -211,7 +219,7 @@ export class MainScreenComponent implements OnInit {
             this.platform.height() - this.drawerOptions.handleHeight - 56;
         this.screenHeight = this.platform.height();
 
-        if(this.platform.is('ios')) this.iosPadding = 50;
+        if (this.platform.is('ios')) this.iosPadding = 50;
     }
 
     ionViewWillEnter() {

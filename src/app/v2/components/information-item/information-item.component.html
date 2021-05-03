@@ -16,13 +16,16 @@
         <!-- <span>(<span [innerHTML]="detailedDataPoint.substance.abbreviation"></span>)</span> -->
         <span>({{detailedDataPoint.substance.abbreviation | translate}})</span>
       </h3>
-      <span [ngStyle]="{'color': detailedDataPoint.color}" *ngIf="detailedDataPoint.mainTab">{{ detailedDataPoint.evaluation | translate }}</span>
-      <span [ngStyle]="{'color': detailedDataPoint.color}" *ngIf="detailedDataPoint.showThreshold">{{ detailedDataPoint.evaluation | translate }}</span>
+      <span [ngStyle]="{'color': detailedDataPoint.color}"
+        *ngIf="detailedDataPoint.mainTab">{{ detailedDataPoint.evaluation | translate }}</span>
+      <span [ngStyle]="{'color': detailedDataPoint.color}"
+        *ngIf="detailedDataPoint.showThreshold">{{ detailedDataPoint.evaluation | translate }}</span>
     </ion-text>
     <ion-text>
       <p>
         <span *ngIf="detailedDataPoint.mainTab">
-          {{ detailedDataPoint.currentValue }} {{ detailedDataPoint.substance.unit }} {{ 'v2.components.information-item.personal-calculation' | translate }}
+          {{ detailedDataPoint.currentValue }} {{ detailedDataPoint.substance.unit }}
+          {{ 'v2.components.information-item.personal-calculation' | translate }}
         </span>
         <span *ngIf="detailedDataPoint.currentValue && detailedDataPoint.showThreshold">
           {{ 'v2.components.information-item.eu-threshold' | translate }}:
@@ -39,6 +42,11 @@
         <span *ngIf="detailedDataPoint.averageValue">
           {{ 'v2.components.information-item.average' | translate }} {{ detailedDataPoint.averageValue }} {{
           detailedDataPoint.substance.unit }}
+        </span>
+        <span *ngIf="detailedDataPoint.lastAnnualIndex">
+          <span> {{ 'v2.components.information-item.average' | translate }} </span>
+          <span
+            [ngStyle]="{'color': detailedDataPoint.lastAnnualIndex.color}">{{ detailedDataPoint.lastAnnualIndex.label | translate}}</span>
         </span>
       </p>
     </ion-text>

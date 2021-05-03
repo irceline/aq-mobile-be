@@ -53,6 +53,10 @@ export interface DataPoint {
     currentValue?: number;
     currentIndex?: number;
     averageValue?: number;
+    lastAnnualIndex?: {
+        color: string;
+        label: string;
+    };
     showValues: boolean;
     showThreshold: boolean;
     mainTab: boolean;
