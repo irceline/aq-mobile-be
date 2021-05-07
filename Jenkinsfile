@@ -50,7 +50,7 @@ pipeline {
 
                             // Copy out release.apk
                             sh 'cp /tmp/app-release.aab \$WORKSPACE/app-release.aab'
-                            sh '/app/platforms/android/app/build/outputs/apk/debug/app-debug.apk \$WORKSPACE/app-debug-latest.apk'
+                            sh 'cp /app/platforms/android/app/build/outputs/apk/debug/app-debug.apk \$WORKSPACE/app-debug-latest.apk'
                             
                         }
                     }
