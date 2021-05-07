@@ -79,7 +79,9 @@
 			},
 			"information-item": {
 				"average": "On average this is",
-				"personal-calculation": "calculated at your location."
+				"personal-calculation": "calculated at your location.",
+				"eu-threshold": "European annual limit value",
+				"who-threshold": "WHO annual guideline value"
 			},
 			"location-input": {
 				"choose-location": "Choose your location",

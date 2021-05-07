@@ -3,11 +3,11 @@
   <div class="bar--lines">
     <div class="bar--lines-line" *ngFor="let line of getLines(max)"></div>
 
-    <div class="bar--lines-line liner" [ngStyle]="{'bottom': worldMax + 'px'}" *ngIf="worldMax">
+    <div class="bar--lines-line liner" [ngStyle]="{'bottom': worldMax - 5 + 'px'}" *ngIf="worldMax">
       <img src="/assets/images/icons/globe.svg" alt="">
     </div>
 
-    <div class="bar--lines-line liner" [ngStyle]="{'bottom': euMax + 'px'}" *ngIf="euMax">
+    <div class="bar--lines-line liner" [ngStyle]="{'bottom': euMax - 5 + 'px'}" *ngIf="euMax">
       <img src="/assets/images/icons/euroflag.svg" alt="">
     </div>
   </div>
@@ -15,7 +15,7 @@
   <div class="bar--items" *ngIf="options">
     <div class="bar--items-item" *ngFor="let item of options.data"
       [ngStyle]="{'height': item.value + 'px', 'background': item.background}">
-      <span [ngStyle]="{'color': item.value < 20 ? '#000' : '#fff'}">{{ item.value }}</span>
+      <span *ngIf="showValues" [ngStyle]="{'color': item.value < 20 ? '#000' : '#fff'}">{{ item.value }}</span>
     </div>
   </div>
 </div>

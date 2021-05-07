@@ -51,7 +51,17 @@ export interface DataPoint {
     location: UserLocation;
     substance: Substance;
     currentValue?: number;
+    currentIndex?: number;
     averageValue?: number;
+    lastAnnualIndex?: {
+        color: string;
+        label: string;
+    };
+    showValues: boolean;
+    showThreshold: boolean;
+    mainTab: boolean;
+    euBenchMark: number;
+    worldBenchMark: number;
 
     // todo -> thresholds
     // are thresholds set on server side or defined in client?
@@ -63,8 +73,6 @@ export interface DataPoint {
 }
 
 export interface LongTermDataPoint extends DataPoint {
-    euBenchMark: number;
-    worldBenchMark: number;
     historicalValues: HistoricalValue[];
     chartData?: ChartData;
 }
@@ -83,5 +91,3 @@ export interface HistoricalValue {
     year: number;
     evaluationColor: string;
 }
-
-

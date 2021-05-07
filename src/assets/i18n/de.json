@@ -79,7 +79,9 @@
 			},
 			"information-item": {
 				"average": "Im Durchschnitt ist das",
-				"personal-calculation": "berechnet für Ihren Standort."
+				"personal-calculation": "berechnet für Ihren Standort.",
+				"eu-threshold": "EU Jahresgrenzwert",
+				"who-threshold": "WHO Jahresrichtwert"
 			},
 			"location-input": {
 				"choose-location": "Wähle deinen Standort",

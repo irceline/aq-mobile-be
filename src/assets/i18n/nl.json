@@ -79,7 +79,9 @@
 			},
 			"information-item": {
 				"average": "gemiddeld is dit",
-				"personal-calculation": "berekend op jouw locatie,"
+				"personal-calculation": "berekend op jouw locatie,",
+				"eu-threshold": "EU jaargrenswaarde",
+				"who-threshold": "WGO jaarrichtwaarde"
 			},
 			"location-input": {
 				"choose-location": "Kies je locatie",

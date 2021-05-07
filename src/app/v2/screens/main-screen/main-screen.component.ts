@@ -41,12 +41,6 @@ export class MainScreenComponent implements OnInit {
 
     detailedPhenomenona: Substance[] = [
         {
-            name: 'v2.screens.app-info.ozon',
-            abbreviation: 'O₃',
-            unit: 'µg/m³',
-            phenomenon: MainPhenomenon.O3
-        },
-        {
             name: 'v2.screens.app-info.nitrogen-dioxide',
             abbreviation: 'NO₂',
             unit: 'µg/m³',
@@ -63,6 +57,12 @@ export class MainScreenComponent implements OnInit {
             abbreviation: 'PM 2.5',
             unit: 'µg/m³',
             phenomenon: MainPhenomenon.PM25
+        },
+        {
+            name: 'v2.screens.app-info.ozon',
+            abbreviation: 'O₃',
+            unit: 'µg/m³',
+            phenomenon: MainPhenomenon.O3
         },
     ];
 
@@ -102,7 +102,7 @@ export class MainScreenComponent implements OnInit {
     detailPoint: DataPoint = null;
     contentHeight = 0;
     screenHeight = 0;
-    
+
     iosPadding = 0;
 
     constructor(
@@ -150,12 +150,25 @@ export class MainScreenComponent implements OnInit {
             color: this.belAqiService.getLightColorForIndex(currentBelAqi.indexScore),
             evaluation: this.belAqiService.getLabelForIndex(currentBelAqi.indexScore),
             location: this.userSettingsService.selectedUserLocation,
+            mainTab: true,
+            showValues: false,
+            showThreshold: false,
+            euBenchMark: null,
+            worldBenchMark: null,
             substance: {
                 name: 'v2.screens.app-info.belaqi-title',
                 abbreviation: 'BelAQI',
                 phenomenon: MainPhenomenon.BELAQI
             }
         };
+
+        this.annulMeanValueService.getLastValue(this.userSettingsService.selectedUserLocation, MainPhenomenon.BELAQI).subscribe(
+            value => {
+                this.belaqiDetailData.lastAnnualIndex = {
+                    color: this.belAqiService.getLightColorForIndex(value.index),
+                    label: this.belAqiService.getLabelForIndex(value.index)
+                };
+            })
 
         this.detailedPhenomenona.forEach(dph => {
             forkJoin([
@@ -169,6 +182,11 @@ export class MainScreenComponent implements OnInit {
                             currentValue: Math.round(res[0].value),
                             averageValue: res[1] ? Math.round(res[1].value) : null,
                             substance: dph,
+                            mainTab: true,
+                            showValues: false,
+                            showThreshold: false,
+                            euBenchMark: null,
+                            worldBenchMark: null,
                             evaluation: this.belAqiService.getLabelForIndex(res[0].index),
                             color: this.belAqiService.getLightColorForIndex(res[0].index)
                         };
@@ -201,7 +219,7 @@ export class MainScreenComponent implements OnInit {
             this.platform.height() - this.drawerOptions.handleHeight - 56;
         this.screenHeight = this.platform.height();
 
-        if(this.platform.is('ios')) this.iosPadding = 50;
+        if (this.platform.is('ios')) this.iosPadding = 50;
     }
 
     ionViewWillEnter() {

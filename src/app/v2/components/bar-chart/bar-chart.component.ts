@@ -10,6 +10,7 @@ export class BarChartComponent implements OnInit {
     @Input() max = 0;
     @Input() worldMax = 0;
     @Input() euMax = 0;
+    @Input() showValues = true;
     @Input() options: IBarChartData;
 
     constructor() {}

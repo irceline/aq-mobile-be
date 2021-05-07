@@ -176,6 +176,9 @@ export class LocationInputComponent implements OnInit, OnDestroy {
                         );
                     })
                     .slice(0, 10);
+                
+                // Show the dropdown when typing
+                this.visible = true;
             }
 
             // if we remove the option, remove select and emit null
@@ -192,7 +195,7 @@ export class LocationInputComponent implements OnInit, OnDestroy {
     }
 
     openDropdown() {
-        this.visible = true;
+        this.visible = !this.visible;
     }
 
     closeDropdown() {
