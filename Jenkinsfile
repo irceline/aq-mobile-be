@@ -7,9 +7,11 @@ pipeline {
         S3_REGION = 'eu-central-1'
         SLACK_CHANNEL = '#belair'
         KEYSTORE_NAME = 'irceline2018.keystore'
+        HOME = "${WORKSPACE}"
+        NPM_CONFIG_CACHE = "${WORKSPACE}/.npm"
     }
-
-   agent any
+    
+    agent any
 
     stages {
         stage('Configure environment') {
@@ -22,66 +24,60 @@ pipeline {
                     sh "chmod 600 google-services.json"
                     sh "cp \$KEYSTORE_FILE ."
                 }
-
-                script {
-                    // Replace package name
-                    def text = readFile file: "config.xml"
-                    text = text.replaceAll("be.irceline.aqmobile_v2", "be.irceline.aqmobile")
-                    writeFile file: "config.xml", text: text
-                }
             }
         }
 
-        stage('Prepare app') {
+        stage('Build app bundle') {
             steps {
                 script {
-                    app = docker.build(appImg, "-f ./docker/release-android/Dockerfile .")
+                    app = docker.build(appImg, "-f ./docker/release-android/Dockerfile . --build-arg VERSION_CODE=\$BUILD_NUMBER")
                 }
             }
         }
 
-        stage('Copy apk') {
-            steps {
-                script {
-                    app.inside { 
-                        sh 'cp /app/platforms/android/app/build/outputs/apk/debug/app-debug.apk \$WORKSPACE/app-debug-latest.apk'
-                    }
-                }
-            }
-        }
-
-        stage('Play Store release') {
+        stage('Sign app bundle') {
             steps {
                 withCredentials([
                     string(credentialsId: 'KEYSTORE_ALIAS', variable: 'KEYSTORE_ALIAS'),
                     string(credentialsId: 'KEYSTORE_PASSWORD', variable: 'KEYSTORE_PASSWORD')
                 ]) {
                     script {
-                        app.inside { 
-                            sh 'jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore \$KEYSTORE_NAME platforms/android/app/build/outputs/bundle/release/app-release.aab \$KEYSTORE_ALIAS -storepass \$KEYSTORE_PASSWORD'
-                            sh 'cp /app/platforms/android/app/build/outputs/bundle/release/app-release.aab \$WORKSPACE/app-release.aab'
+                        app.inside() {
+                            sh 'cp /app/platforms/android/app/build/outputs/bundle/release/app-release.aab /tmp/app-release.aab'
+                            
+                            // Sign the apk
+                            sh 'jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore \$KEYSTORE_NAME /tmp/app-release.aab \$KEYSTORE_ALIAS -storepass \$KEYSTORE_PASSWORD'
+
+                            // Copy out release.apk
+                            sh 'cp /tmp/app-release.aab \$WORKSPACE/app-release.aab'
+                            sh '/app/platforms/android/app/build/outputs/apk/debug/app-debug.apk \$WORKSPACE/app-debug-latest.apk'
+                            
                         }
                     }
                 }
             }
         }
 
-        stage('Remove all containers') {
-            steps {
-                sh 'docker container prune'
-            }
-        }
-
-        stage('Remove all dangling images') {
-            steps {
-                sh 'docker image prune -f'
-            }
-        }
-
         stage('Archive artifact to s3') {
             steps {
-                archiveArtifacts artifacts: 'app-debug-latest.apk', fingerprint: true
                 archiveArtifacts artifacts: 'app-release.aab', fingerprint: true
+                archiveArtifacts artifacts: 'app-debug-latest.apk', fingerprint: true
+            }
+        }
+
+
+
+        stage('Publish to playstore') {
+            steps {
+                script {
+                    androidApkUpload(
+                        googleCredentialsId: 'belair_svc_account',
+                        filesPattern: 'app-release.aab',
+                        rolloutPercentage: '100',
+                        trackName: 'internal',
+                        releaseName: "build $BUILD_NUMBER",
+                    )
+                }
             }
         }
 
@@ -166,6 +162,8 @@ pipeline {
         // }
 
         always {
+            sh 'docker container prune -f'
+            sh 'docker image prune -a -f'
             cleanWs()
         }
     }
