@@ -3,34 +3,24 @@ pipeline {
         registryCredential = 'docker-hub-credentials'
         appImg = "nebulaesoftware/belair-2.0"
         app = ''
-        setupEnvImg = "nebulaesoftware/android-build-environment"
-        setupEnv = ''
-        buildApkImg = "nebulaesoftware/build-ionic-apk"
-        buildApk = ''
         S3_BUCKET = 'belair-builds'
         S3_REGION = 'eu-central-1'
         SLACK_CHANNEL = '#belair'
-
+        KEYSTORE_NAME = 'irceline2018.keystore'
     }
 
    agent any
 
     stages {
-        stage('Create app environment') {
-            steps {
-                script {
-                    setupEnv = docker.build(setupEnvImg, "-f ./docker/setup-environment/Dockerfile .")
-                }
-            }
-        }
-
         stage('Configure environment') {
             steps {
                 withCredentials([
                     file(credentialsId: 'google-services.json', variable: 'GSERVICE_JSON'),
+                    file(credentialsId: 'KEYSTORE_FILE', variable: 'KEYSTORE_FILE')
                 ]) {
                     sh "cp \$GSERVICE_JSON google-services.json"
                     sh "chmod 600 google-services.json"
+                    sh "cp \$KEYSTORE_FILE ."
                 }
 
                 script {
@@ -42,18 +32,10 @@ pipeline {
             }
         }
 
-        stage('Create app') {
+        stage('Prepare app') {
             steps {
                 script {
-                    app = docker.build(appImg, "-f ./docker/create-app/Dockerfile .")
-                }
-            }
-        }
-
-        stage('Build apk') {
-            steps {
-                script {
-                    buildApk = docker.build(buildApkImg, "-f ./docker/build-apk/Dockerfile .")
+                    app = docker.build(appImg, "-f ./docker/release-android/Dockerfile .")
                 }
             }
         }
@@ -61,8 +43,23 @@ pipeline {
         stage('Copy apk') {
             steps {
                 script {
-                    buildApk.inside { 
+                    app.inside { 
                         sh 'cp /app/platforms/android/app/build/outputs/apk/debug/app-debug.apk \$WORKSPACE/app-debug-latest.apk'
+                    }
+                }
+            }
+        }
+
+        stage('Play Store release') {
+            steps {
+                withCredentials([
+                    file(credentialsId: 'KEYSTORE_ALIAS', variable: 'KEYSTORE_ALIAS'),
+                    file(credentialsId: 'KEYSTORE_PASSWORD', variable: 'KEYSTORE_PASSWORD')
+                ]) {
+                script {
+                    app.inside { 
+                        sh 'jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore \$KEYSTORE_NAME platforms/android/app/build/outputs/bundle/release/app-release.aab \$KEYSTORE_ALIAS -storepass \$KEYSTORE_PASSWORD'
+                        sh 'cp /app/platforms/android/app/build/outputs/bundle/release/app-release.aab \$WORKSPACE/app-release.aab'
                     }
                 }
             }
@@ -83,16 +80,9 @@ pipeline {
         stage('Archive artifact to s3') {
             steps {
                 archiveArtifacts artifacts: 'app-debug-latest.apk', fingerprint: true
+                archiveArtifacts artifacts: 'app-release.aab', fingerprint: true
             }
         }
-
-        // stage('Copy Test File') {
-        //     steps {
-        //         script {
-        //             sh "cp ./test/zip-with-dependencies.zip \$WORKSPACE/test.zip"
-        //         }
-        //     }
-        // }
 
         stage('Run Device Farm Test') {
             steps {
@@ -158,21 +148,21 @@ pipeline {
     }
 
     post {
-        success {
-            slackSend(
-                color: "good",
-                channel: "${SLACK_CHANNEL}", 
-                message: "New apk file available at: https://${S3_BUCKET}.s3.${S3_REGION}.amazonaws.com/belair-v2/${BRANCH_NAME}/${BUILD_ID}/artifacts/app-debug-latest.apk"
-            )
-        }
+        // success {
+        //     slackSend(
+        //         color: "good",
+        //         channel: "${SLACK_CHANNEL}", 
+        //         message: "New apk file available at: https://${S3_BUCKET}.s3.${S3_REGION}.amazonaws.com/belair-v2/${BRANCH_NAME}/${BUILD_ID}/artifacts/app-debug-latest.apk"
+        //     )
+        // }
 
-        failure {
-            slackSend(
-                color: "danger",
-                channel: "${SLACK_CHANNEL}", 
-                message: "Pipeline for ${BRANCH_NAME}#${BUILD_ID} failure"
-            )
-        }
+        // failure {
+        //     slackSend(
+        //         color: "danger",
+        //         channel: "${SLACK_CHANNEL}", 
+        //         message: "Pipeline for ${BRANCH_NAME}#${BUILD_ID} failure"
+        //     )
+        // }
 
         always {
             cleanWs()
