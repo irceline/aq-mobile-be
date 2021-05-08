@@ -17,7 +17,7 @@ import { CacheModule } from "ionic-cache";
 import { Network } from '@ionic-native/network/ngx';
 import { SettingsService } from '@helgoland/core';
 import { IonicModule } from '@ionic/angular';
-import { Firebase } from '@ionic-native/firebase/ngx';
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
@@ -39,7 +39,7 @@ describe('MenuScreenComponent', () => {
       ],
       providers: [
         { provide: NavController, useClass: NavControllerMock },
-        Network, SettingsService, Firebase, AppVersion, StatusBar
+        Network, SettingsService, FirebaseX, AppVersion, StatusBar
       ],
       imports: [
           TranslateTestingModule,

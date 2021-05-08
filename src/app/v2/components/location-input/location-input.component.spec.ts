@@ -9,7 +9,7 @@ import { ModalController, AngularDelegate } from '@ionic/angular';
 import { CacheModule } from "ionic-cache";
 import { Network } from '@ionic-native/network/ngx';
 import { SettingsService } from '@helgoland/core';
-import { Firebase } from '@ionic-native/firebase/ngx';
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 import { TranslateService } from '@ngx-translate/core';
@@ -28,7 +28,7 @@ describe('LocationInputComponent', () => {
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [
         {provide: Geolocation, useClass: GeolocationMock},
-        Network, SettingsService, Firebase, Diagnostic, LocationAccuracy, ModalController, AngularDelegate
+        Network, SettingsService, FirebaseX, Diagnostic, LocationAccuracy, ModalController, AngularDelegate
       ],
       imports: [TranslateTestingModule, HttpClientTestingModule, CacheModule.forRoot()],
     })

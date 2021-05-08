@@ -15,7 +15,7 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <preference name="ScrollEnabled" value="false" />
-    <preference name="android-minSdkVersion" value="19" />
+    <preference name="android-minSdkVersion" value="22" />
     <preference name="android-targetSdkVersion" value="29" />
     <preference name="BackupWebStorage" value="none" />
     <preference name="ShowSplashScreen" value="false" />
@@ -26,6 +26,7 @@
     <preference name="orientation" value="portrait" />
     <hook src="hooks/before_compile.js" type="before_compile" />
     <platform name="android">
+        <preference name="AndroidXEnabled" value="true" />
         <preference name="StatusBarOverlaysWebView" value="false" />
         <preference name="StatusBarStyle" value="lightcontent" />
         <allow-intent href="market:*" />
@@ -116,7 +117,8 @@
     <plugin name="cordova-plugin-statusbar" spec="2.4.2" />
     <plugin name="cordova-sqlite-storage" spec="3.1.0" />
     <plugin name="cordova-plugin-geolocation" spec="4.0.1" />
-    <plugin name="cordova.plugins.diagnostic" spec="5.0.1" />
+    <plugin name="cordova.plugins.diagnostic" spec="6.0.3" />
+    <plugin name="cordova-plugin-firebasex" spec="12.1.0" />
     <plugin name="cordova-plugin-request-location-accuracy" spec="2.2.3" />
     <plugin name="cordova-plugin-network-information" spec="2.0.1" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="~2.1.3" />

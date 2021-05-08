@@ -8,7 +8,7 @@ import { CacheModule } from "ionic-cache";
 import { Network } from '@ionic-native/network/ngx';
 import { SettingsService } from '@helgoland/core';
 import { IonicModule } from '@ionic/angular';
-import { Firebase } from '@ionic-native/firebase/ngx';
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 import { RouterTestingModule } from '@angular/router/testing';
 
 describe('LayoutScreenComponent', () => {
@@ -20,7 +20,7 @@ describe('LayoutScreenComponent', () => {
       declarations: [ LayoutScreenComponent ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       imports: [HttpClientTestingModule, TranslateTestingModule, CacheModule.forRoot(), IonicModule, RouterTestingModule],
-      providers: [Firebase, Network, SettingsService]
+      providers: [FirebaseX, Network, SettingsService]
     })
     .compileComponents();
   }));

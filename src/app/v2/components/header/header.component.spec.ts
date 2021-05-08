@@ -16,7 +16,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CacheModule } from "ionic-cache";
 import { SettingsService } from '@helgoland/core';
 import { IonicModule } from '@ionic/angular';
-import { Firebase } from '@ionic-native/firebase/ngx';
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 import { Network } from '@ionic-native/network/ngx';
 
 describe('HeaderComponent', () => {
@@ -30,7 +30,7 @@ describe('HeaderComponent', () => {
             declarations: [HeaderComponent, MenuScreenComponent],
             providers: [
                 { provide: NavController, useClass: NavControllerMock },
-                BelAQIService, Network, SettingsService, Firebase
+                BelAQIService, Network, SettingsService, FirebaseX
             ],
             imports: [
                 TranslateTestingModule,

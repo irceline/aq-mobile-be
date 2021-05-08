@@ -3,96 +3,83 @@ pipeline {
         registryCredential = 'docker-hub-credentials'
         appImg = "nebulaesoftware/belair-2.0"
         app = ''
-        setupEnvImg = "nebulaesoftware/android-build-environment"
-        setupEnv = ''
-        buildApkImg = "nebulaesoftware/build-ionic-apk"
-        buildApk = ''
         S3_BUCKET = 'belair-builds'
         S3_REGION = 'eu-central-1'
         SLACK_CHANNEL = '#belair'
-
+        KEYSTORE_NAME = 'irceline2018.keystore'
+        HOME = "${WORKSPACE}"
+        NPM_CONFIG_CACHE = "${WORKSPACE}/.npm"
     }
-
-   agent any
+    
+    agent any
 
     stages {
-        stage('Create app environment') {
-            steps {
-                script {
-                    setupEnv = docker.build(setupEnvImg, "-f ./docker/setup-environment/Dockerfile .")
-                }
-            }
-        }
-
         stage('Configure environment') {
             steps {
                 withCredentials([
                     file(credentialsId: 'google-services.json', variable: 'GSERVICE_JSON'),
+                    file(credentialsId: 'KEYSTORE_FILE', variable: 'KEYSTORE_FILE')
                 ]) {
                     sh "cp \$GSERVICE_JSON google-services.json"
                     sh "chmod 600 google-services.json"
-                }
-
-                script {
-                    // Replace package name
-                    def text = readFile file: "config.xml"
-                    text = text.replaceAll("be.irceline.aqmobile_v2", "be.irceline.aqmobile")
-                    writeFile file: "config.xml", text: text
+                    sh "cp \$KEYSTORE_FILE ."
                 }
             }
         }
 
-        stage('Create app') {
+        stage('Build app bundle') {
             steps {
                 script {
-                    app = docker.build(appImg, "-f ./docker/create-app/Dockerfile .")
+                    app = docker.build(appImg, "-f ./docker/release-android/Dockerfile . --build-arg VERSION_CODE=\$BUILD_NUMBER")
                 }
             }
         }
 
-        stage('Build apk') {
+        stage('Sign app bundle') {
             steps {
-                script {
-                    buildApk = docker.build(buildApkImg, "-f ./docker/build-apk/Dockerfile .")
-                }
-            }
-        }
+                withCredentials([
+                    string(credentialsId: 'KEYSTORE_ALIAS', variable: 'KEYSTORE_ALIAS'),
+                    string(credentialsId: 'KEYSTORE_PASSWORD', variable: 'KEYSTORE_PASSWORD')
+                ]) {
+                    script {
+                        app.inside() {
+                            sh 'cp /app/platforms/android/app/build/outputs/bundle/release/app-release.aab /tmp/app-release.aab'
+                            
+                            // Sign the apk
+                            sh 'jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore \$KEYSTORE_NAME /tmp/app-release.aab \$KEYSTORE_ALIAS -storepass \$KEYSTORE_PASSWORD'
 
-        stage('Copy apk') {
-            steps {
-                script {
-                    buildApk.inside { 
-                        sh 'cp /app/platforms/android/app/build/outputs/apk/debug/app-debug.apk \$WORKSPACE/app-debug-latest.apk'
+                            // Copy out release.apk
+                            sh 'cp /tmp/app-release.aab \$WORKSPACE/app-release.aab'
+                            sh 'cp /app/platforms/android/app/build/outputs/apk/debug/app-debug.apk \$WORKSPACE/app-debug-latest.apk'
+                            
+                        }
                     }
                 }
             }
         }
 
-        stage('Remove all containers') {
-            steps {
-                sh 'docker container prune'
-            }
-        }
-
-        stage('Remove all dangling images') {
-            steps {
-                sh 'docker image prune -f'
-            }
-        }
-
         stage('Archive artifact to s3') {
             steps {
+                archiveArtifacts artifacts: 'app-release.aab', fingerprint: true
                 archiveArtifacts artifacts: 'app-debug-latest.apk', fingerprint: true
             }
         }
 
-        // stage('Copy Test File') {
-        //     steps {
-        //         script {
-        //             sh "cp ./test/zip-with-dependencies.zip \$WORKSPACE/test.zip"
-        //         }
-        //     }
-        // }
+
+
+        stage('Publish to playstore') {
+            steps {
+                script {
+                    androidApkUpload(
+                        googleCredentialsId: 'belair_svc_account',
+                        filesPattern: 'app-release.aab',
+                        rolloutPercentage: '100',
+                        trackName: 'internal',
+                        releaseName: "build $BUILD_NUMBER",
+                    )
+                }
+            }
+        }
 
         stage('Run Device Farm Test') {
             steps {
@@ -175,6 +162,8 @@ pipeline {
         }
 
         always {
+            sh 'docker container prune -f'
+            sh 'docker image prune -a -f'
             cleanWs()
         }
     }

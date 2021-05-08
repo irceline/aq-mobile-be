@@ -7,7 +7,7 @@ import { LocationEditComponent } from './location-edit.component';
 import { CacheModule } from "ionic-cache";
 import { Network } from '@ionic-native/network/ngx';
 import { SettingsService } from '@helgoland/core';
-import { Firebase } from '@ionic-native/firebase/ngx';
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 
 describe('LocationEditComponent', () => {
   let component: LocationEditComponent;
@@ -17,7 +17,7 @@ describe('LocationEditComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ LocationEditComponent ],
       imports: [IonicModule.forRoot(), TranslateTestingModule, HttpClientTestingModule, CacheModule.forRoot()],
-      providers: [Network, SettingsService, Firebase]
+      providers: [Network, SettingsService, FirebaseX]
     }).compileComponents();
   }));
   

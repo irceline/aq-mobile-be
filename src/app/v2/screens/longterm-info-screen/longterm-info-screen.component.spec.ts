@@ -9,7 +9,7 @@ import { CacheModule } from "ionic-cache";
 import { Network } from '@ionic-native/network/ngx';
 import { SettingsService } from '@helgoland/core';
 import { IonicModule } from '@ionic/angular';
-import { Firebase } from '@ionic-native/firebase/ngx';
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 
 describe('LongtermInfoScreenComponent', () => {
     let component: LongtermInfoScreenComponent;
@@ -20,7 +20,7 @@ describe('LongtermInfoScreenComponent', () => {
             declarations: [LongtermInfoScreenComponent],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
             imports: [RouterTestingModule, TranslateTestingModule, HttpClientTestingModule, CacheModule.forRoot(), IonicModule],
-            providers: [Network, SettingsService, Firebase]
+            providers: [Network, SettingsService, FirebaseX]
         }).compileComponents();
     }));
 

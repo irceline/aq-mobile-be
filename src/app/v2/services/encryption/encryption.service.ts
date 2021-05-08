@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Firebase } from '@ionic-native/firebase/ngx';
 import { Platform } from '@ionic/angular';
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 import CryptoJS from 'crypto-js';
 
 const FIREBASE_REMOTE_CONFIG_KEY = 'feedback_key';
@@ -13,7 +13,7 @@ export class EncryptionService {
   private key: CryptoJS.WordArray;
 
   constructor(
-    private firebase: Firebase,
+    private firebase: FirebaseX,
     private platform: Platform
   ) {
     this.platform.ready().then(() => {
@@ -21,7 +21,7 @@ export class EncryptionService {
         this.firebase.fetch(600)
           .then(() => {
             this.firebase.activateFetched().then(() => {
-              this.firebase.getValue(FIREBASE_REMOTE_CONFIG_KEY, '')
+              this.firebase.getValue(FIREBASE_REMOTE_CONFIG_KEY)
                 .then(key => {
                   console.log(`Fetched key from firebase: '${key}'`);
                   return this.key = CryptoJS.enc.Base64.parse(key);

@@ -7,7 +7,7 @@ import {TranslateTestingModule} from '../../testing/TranslateTestingModule';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Network } from '@ionic-native/network/ngx';
 import { SettingsService, HttpService } from '@helgoland/core';
-import { Firebase } from '@ionic-native/firebase/ngx';
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 
 describe('FeedbackStatsComponent', () => {
   let component: FeedbackStatsComponent;
@@ -17,7 +17,7 @@ describe('FeedbackStatsComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ FeedbackStatsComponent ],
       imports: [IonicModule.forRoot(), TranslateTestingModule, HttpClientTestingModule, CacheModule.forRoot()],
-      providers: [Network, SettingsService, Firebase, HttpService]
+      providers: [Network, SettingsService, FirebaseX, HttpService]
     }).compileComponents();
   }));
   

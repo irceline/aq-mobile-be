@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firebase } from '@ionic-native/firebase/ngx';
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 import { Platform } from '@ionic/angular';
 import { from, Observable, of, ReplaySubject } from 'rxjs';
 
@@ -19,7 +19,7 @@ export class PushNotificationsService {
 
   constructor(
     private platform: Platform,
-    private firebase: Firebase
+    private firebase: FirebaseX
   ) {
     this.platform.ready().then(() => {
       if (this.platform.is('cordova')) {
@@ -29,7 +29,7 @@ export class PushNotificationsService {
         this.firebase.getToken().then(token => console.log(`Got token ${token}`));
         this.firebase.onTokenRefresh().subscribe(token => console.log(`Refresh token ${token}`));
 
-        this.firebase.onNotificationOpen().subscribe(data => {
+        this.firebase.onMessageReceived().subscribe(data => {
           if (data.wasTapped) {
             // Notification was received on device tray and tapped by the user.
           } else {
@@ -52,8 +52,10 @@ export class PushNotificationsService {
 
   public subscribeTopic(topic: string): Observable<boolean> {
     if (this.platform.is('cordova') || this.platform.is('ios') || this.platform.is('android')) {
-      console.log(`subscribe topic: ${topic}`);
-      return from(this.firebase.subscribe(topic));
+      this.firebase.subscribe(topic).then((response) => {
+        console.log(`subscribing to topic: ${topic} gave status: ${response}`);
+      })
+      return of(true);
     } else {
       console.error(`Push notifications are not supported`);
       return of(false);
@@ -62,8 +64,10 @@ export class PushNotificationsService {
 
   public unsubscribeTopic(topic: string): Observable<boolean> {
     if (this.platform.is('cordova') || this.platform.is('ios') || this.platform.is('android')) {
-      console.log(`unsubscribe topic: ${topic}`);
-      return from(this.firebase.unsubscribe(topic));
+      this.firebase.unsubscribe(topic).then((response) => {
+        console.log(`unsubscribe from topic: ${topic} gave status: ${response}`);
+      });
+      return of(true);
     } else {
       console.error(`Push notifications are not supported`);
       return of(false);

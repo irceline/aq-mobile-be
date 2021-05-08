@@ -1,14 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 
 import { EncryptionService } from './encryption.service';
-import { Firebase } from '@ionic-native/firebase/ngx';
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 
 describe('EncryptionService', () => {
   let service: EncryptionService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [Firebase]
+      providers: [FirebaseX]
     });
     service = TestBed.inject(EncryptionService);
   });

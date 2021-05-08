@@ -38,10 +38,18 @@ platform :ios do
     install_provisioning_profile(path: "../../BelAir_App_Store.mobileprovision")
   end
 
+  lane :fix_firebasex_cli do
+    Dir.chdir "../../../" do
+      sh("ionic", "cordova", "plugin", "rm", "cordova-plugin-firebasex")
+      sh("ionic", "cordova", "plugin", "add", "cordova-plugin-firebasex@12.1.0-cli")
+      sh("npm", "i")
+    end
+  end
+
   desc "Description of what the lane does"
   lane :adhoc do
     Dir.chdir "../../../" do
-      sh("ionic", "prepare", "ios")
+      sh("ionic", "prepare", "ios", "--confirm", "--no-build")
     end
 
     update_project_provisioning(

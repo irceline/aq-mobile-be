@@ -14,6 +14,8 @@ pipeline {
                     sh 'npm i'
                     sh 'node tools/bump_version.js \$BUILD_NUMBER'
                     sh 'ionic cordova platform add ios@6.2.0'
+                    sh 'ionic cordova plugin rm cordova-plugin-firebasex'
+                    sh 'ionic cordova plugin add cordova-plugin-firebasex@12.1.0-cli'
                 }
             }
         }
