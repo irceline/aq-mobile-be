@@ -40,7 +40,7 @@
     "@ionic/storage": "^2.2.0",
     "@ngx-translate/http-loader": "^4.0.0",
     "@types/hammerjs": "^2.0.36",
-    "browserslist": "^4.12.2",
+    "browserslist": "^4.16.5",
     "caniuse-lite": "^1.0.30001093",
     "chart.js": "2.8.0",
     "chartjs-plugin-annotation": "^0.5.7",
