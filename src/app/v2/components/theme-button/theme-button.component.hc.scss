@@ -7,7 +7,9 @@
       background: $black;
       box-shadow: 0 2px 30px 0 rgba(0, 0, 0, 0.22);
       color: white;
+      min-width: 100%;
       width: 220px;
+      max-width: 270px;
 
       .text-standard {
         display: none;

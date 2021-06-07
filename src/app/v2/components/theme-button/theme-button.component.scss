@@ -7,7 +7,9 @@
     border-radius: 30px;
     height: 60px;
     color: $black;
-    width: 200px;
+    min-width: 100%;
+    width: 225px;
+    max-width: 270px;
     text-transform: inherit;
     letter-spacing: 0;
     font-weight: 600;
