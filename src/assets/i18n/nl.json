@@ -56,7 +56,7 @@
 			"submission": "Ingezonden feedback",
 			"submission-today": "Vandaag",
 			"submission-total": "In totaal",
-			"anonymisation": "The locations displayed here were displaced at random before submission to protect the privacy of the submitter."
+			"anonymisation": "De locaties die hier getoond worden, werden willekeurig verplaatst de privacy van de verzender te beschermen."
 		}
 	},
 	"network": {
@@ -78,10 +78,10 @@
 				"send-observation": "Verstuur waarneming"
 			},
 			"information-item": {
-				"average": "gemiddeld is dit",
+				"average": "gemiddeld in een jaar is dit",
 				"personal-calculation": "berekend op jouw locatie,",
 				"eu-threshold": "EU jaargrenswaarde",
-				"who-threshold": "WGO jaarrichtwaarde"
+				"who-threshold": "WGO jaaradvieswaarde"
 			},
 			"location-input": {
 				"choose-location": "Kies je locatie",
@@ -104,7 +104,7 @@
 			"success-display": {
 				"back-to-main": "Naar beginscherm",
 				"thanks": "Bedankt !",
-				"well-received": "We hebben je waarneming goed ontvangen. Dankzij jouw input kunnen we onze toepassing verbeteren."
+				"well-received": "We hebben je opmerking goed ontvangen. Dankzij jouw input kunnen we onze toepassing verbeteren."
 			},
 			"user-notification-settings": {
 				"activity": "Inspanningen",
@@ -122,11 +122,11 @@
 				"aq-index-2": "Die geeft aan elk van de <strong>berekende concentraties van verschillende verontreinigende stoffen</strong> één score (b.v. heel goed). De slechtste score bepaalt de algemene luchtkwaliteit.",
 				"belaqi-title": "Algemeen",
 				"current-items": "De stoffen die we in rekening brengen, zijn:",
-				"data-models": "Door op deze data modellen toe te passen, berekenen we of de impact van de luchtkwaliteit op lange termijn beter of slechter wordt.",
+				"data-models": "We berekenen voor uw locatie ook de luchtkwaliteit op de lange termijn en toetsen die aan de Europese grenswaarden en de advieswaarden van de Wereldgezondheidsorganisatie.",
 				"fine-dust": "Fijn stof",
 				"how-this-works": "Hoe werkt dit?",
 				"nitrogen-dioxide": "Stikstofdioxide",
-				"notifications": "Als de metingen de waarschuwings- waarde overschrijden, sturen we je een melding. Je kan je meldingen beheren via het menu.",
+				"notifications": "Als de metingen informatie- of alarmdrempels overschrijden, sturen we je een melding. Je kan je meldingen beheren via het menu.",
 				"ozon": "Ozon",
 				"very-fine-dust": "Fijn stof"
 			},
@@ -163,7 +163,7 @@
 				"turn-off-standard-version": "(schakel standard versie uit)"
 			},
 			"onboarding": {
-				"aq-info": "Deze score is een <strong>berekening</strong> van de luchtkwaliteit op korte termijn, op basis van meetgegevens, weersomstandigheden en uitstoot van verkeer en industrie in jouw buurt.",
+				"aq-info": "De Belair app geeft een score aan de luchtkwaliteit op de korte termijn. Deze score wordt <strong>berekend</strong> op basis van meetgegevens, weersomstandigheden en uitstoot van verkeer en industrie in jouw buurt.",
 				"aq-long-term": "De app berekent ook de luchtkwaliteit op <strong>lange termijn</strong> voor jouw locatie.",
 				"ask-location": "Om je zo goed mogelijk te kunnen helpen, hebben we je locatie nodig.",
 				"ask-notifications": "Zou je graag meldingen ontvangen over de luchtkwaliteit?",
