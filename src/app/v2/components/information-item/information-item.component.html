@@ -43,7 +43,7 @@
           {{ 'v2.components.information-item.average' | translate }} {{ detailedDataPoint.averageValue }} {{
           detailedDataPoint.substance.unit }}
         </span>
-        <span *ngIf="detailedDataPoint.lastAnnualIndex">
+        <span *ngIf="detailedDataPoint.lastAnnualIndex" style="text-transform:lowercase;">
           <span> {{ 'v2.components.information-item.average' | translate }} </span>
           <span
             [ngStyle]="{'color': detailedDataPoint.lastAnnualIndex.color}">{{ detailedDataPoint.lastAnnualIndex.label | translate}}</span>
