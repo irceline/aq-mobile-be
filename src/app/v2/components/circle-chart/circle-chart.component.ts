@@ -22,7 +22,7 @@ import { NotificationPopoverComponent } from './../notification-popover/notifica
 export class CircleChartComponent implements OnInit {
     @ViewChild('titleRef') titleRef: ElementRef;
     @ViewChild('titleWrapperRef') titleWrapperRef: ElementRef;
-    @ViewChild('chartRef') chartRef: ElementRef; 
+    @ViewChild('chartRef') chartRef: ElementRef;
     // belaqi score index
     belAqi = 0;
     // small circle text
@@ -115,7 +115,7 @@ export class CircleChartComponent implements OnInit {
         this.generalNotification.$active.subscribe(active => this.notificationActive = active);
         this.isIos = this.platform.is('ios');
 
-        
+
     }
 
     getChartHeight() {
@@ -240,7 +240,7 @@ export class CircleChartComponent implements OnInit {
                     d.endAngle = interpolator(t);
                     return this.wheelArc(d);
                 }
-            })      
+            })
 
         const range = inverted * this.defaultRange;
         this.circleOffset = this.defaultOffset - range;
@@ -290,7 +290,7 @@ export class CircleChartComponent implements OnInit {
             if (annualLabel) {
                 this.text = this.translate.instant(
                     'v2.components.circle-chart.avg-score',
-                    { score: this.translate.instant(annualLabel) }
+                    { score: this.translate.instant(annualLabel).toLowerCase() }
                 );
             }
         }
@@ -306,4 +306,3 @@ export class CircleChartComponent implements OnInit {
         if (this.platform.is('ipad') || this.platform.is('tablet')) this.titleSize = 52;
     }
 }
-
