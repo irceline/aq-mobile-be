@@ -22,6 +22,14 @@
           }
         }
       }
+      img {
+        &.dark {
+          display: block;
+        }
+        &.default {
+          display: none;
+        }
+      }
     }
   }
 }

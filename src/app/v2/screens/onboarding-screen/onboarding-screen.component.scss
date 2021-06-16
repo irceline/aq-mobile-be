@@ -24,6 +24,9 @@
   }
   img {
     margin: 0 !important;
+    &.dark {
+      display: none;
+    }
   }
   .index-wheel {
     max-width: 60%;
