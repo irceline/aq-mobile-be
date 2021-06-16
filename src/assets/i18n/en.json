@@ -168,6 +168,12 @@
 				"ask-location": "We need your location to be able to help you as much as possible.",
 				"ask-notifications": "Would you like to receive notifications about air quality?",
 				"choose-lang": "Choose your language:",
+				"circle-slider-uri": "/assets/images/circle-slider-en@3x.png",
+				"circle-slider-uri-hc": "/assets/images/circle-slider-en@3x-hc.png",
+				"details-card-uri": "/assets/images/details-card-en@3x.png",
+				"details-card-uri-hc": "/assets/images/details-card-en@3x-hc.png",
+				"stats-card-uri": "/assets/images/stats-card-en@3x.png",
+				"stats-card-uri-hc": "/assets/images/stats-card-en@3x-hc.png",
 				"start-quickly": "Quick start!"
 			},
 			"rating-screen": {

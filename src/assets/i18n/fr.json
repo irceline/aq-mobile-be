@@ -168,6 +168,12 @@
 				"ask-location": "Votre emplacement est nécessaire pour le bon fonctionnement de l'app.",
 				"ask-notifications": "Souhaitez-vous recevoir des notifications sur la qualité de l'air?",
 				"choose-lang": "Choisissez votre langue:",
+				"circle-slider-uri": "/assets/images/circle-slider-fr@3x.png",
+				"circle-slider-uri-hc": "/assets/images/circle-slider-fr@3x-hc.png",
+				"details-card-uri": "/assets/images/details-card-fr@3x.png",
+				"details-card-uri-hc": "/assets/images/details-card-fr@3x-hc.png",
+				"stats-card-uri": "/assets/images/stats-card-fr@3x.png",
+				"stats-card-uri-hc": "/assets/images/stats-card-fr@3x-hc.png",
 				"start-quickly": "Démarrage rapide"
 			},
 			"rating-screen": {

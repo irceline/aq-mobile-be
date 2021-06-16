@@ -168,6 +168,12 @@
 				"ask-location": "Om je zo goed mogelijk te kunnen helpen, hebben we je locatie nodig.",
 				"ask-notifications": "Zou je graag meldingen ontvangen over de luchtkwaliteit?",
 				"choose-lang": "Kies je taal:",
+				"circle-slider-uri": "/assets/images/circle-slider-nl@3x.png",
+				"circle-slider-uri-hc": "/assets/images/circle-slider-nl@3x-hc.png",
+				"details-card-uri": "/assets/images/details-card-nl@3x.png",
+				"details-card-uri-hc": "/assets/images/details-card-nl@3x-hc.png",
+				"stats-card-uri": "/assets/images/stats-card-nl@3x.png",
+				"stats-card-uri-hc": "/assets/images/stats-card-nl@3x-hc.png",
 				"start-quickly": "Snel van start!"
 			},
 			"rating-screen": {
