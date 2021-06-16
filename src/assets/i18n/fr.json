@@ -59,6 +59,10 @@
 			"anonymisation": "Les localisations affichées ici ont été déplacées de manière aléatoire avant leur soumission afin de protéger la vie privée de l'auteur."
 		}
 	},
+	"loader": {
+		"text": "Les données concernant votre localisation sont en cours de récupération.",
+		"subtitle": "Recueillir des échantillons d'air"
+	},
 	"network": {
 		"geolocationDenied": "La géolocalisation n'a pas été autorisée dans l'application.",
 		"geolocationDisabled": "La géolocalisation est désactivée"

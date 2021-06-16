@@ -59,6 +59,10 @@
 			"anonymisation": "The locations displayed here were displaced at random before submission to protect the privacy of the submitter."
 		}
 	},
+	"loader": {
+		"text": "Data for your location is being retrieved.",
+		"subtitle": "Collecting air samples"
+	},
 	"network": {
 		"geolocationDenied": "You have not allowed the use of your location to the app.",
 		"geolocationDisabled": "Geolocation is disabled"

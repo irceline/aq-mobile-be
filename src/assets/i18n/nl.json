@@ -59,6 +59,10 @@
 			"anonymisation": "De locaties die hier getoond worden, werden willekeurig verplaatst de privacy van de verzender te beschermen."
 		}
 	},
+	"loader": {
+		"text": "Gegevens voor je locatie worden opgehaald.",
+		"subtitle": "Luchtstalen verzamelen"
+	},
 	"network": {
 		"geolocationDenied": "U hebt het gebruik van uw locatie niet toegestaan de app.",
 		"geolocationDisabled": "Geolocatie is uitgeschakeld"

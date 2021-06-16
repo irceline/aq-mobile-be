@@ -43,9 +43,9 @@
     <div class="loader">
       <img src="/assets/wind.svg" alt="">
     </div>
-    <span class="loader-text">Ventilators verzamelen</span>
+    <span class="loader-text">{{ 'loader.subtitle' | translate }}</span>
   </div>
-  
+
   <div class="circle-chart--text" [ngClass]="pulsingText" (animationend)="pulsingText.pulsing = false" #titleWrapperRef>
     <h1 [ngStyle]="{'font-size': titleSize + 'px'}" #titleRef>{{ title | translate | titlecase }}</h1>
     <p>{{ text }}</p>

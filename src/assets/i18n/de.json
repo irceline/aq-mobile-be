@@ -59,6 +59,10 @@
 			"anonymisation": "Die hier angezeigten Standorte wurden vor der Einreichung nach dem Zufallsprinzip verschoben, um die Privatsphäre des Einreichers zu schützen."
 		}
 	},
+	"loader": {
+		"text": "Die Daten für Ihren Standort werden gerade abgerufen.",
+		"subtitle": "Luftproben sammeln"
+	},
 	"network": {
 		"geolocationDenied": "Sie haben der App die Standortermittlung nicht erlaubt.",
 		"geolocationDisabled": "Die Standortermittlung ist deaktiviert"
