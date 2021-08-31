@@ -22,8 +22,8 @@
 </ion-content>
 
 <app-pull-tab [screenHeight]="screenHeight" [options]="drawerOptions" *ngIf="locations.length">
-  <div class="details--wrapper" [ngClass]="{'inactive': detailPoint, 'active': !detailPoint}">
-    <ng-container *ngIf="!detailPoint">
+  <div class="details--wrapper" [ngClass]="{'inactive': detailActive, 'active': !detailActive}">
+    <ng-container *ngIf="!detailActive">
       <div class="details">
         <h5>{{ 'v2.screens.main-screen.view-details' | translate }}</h5>
 
@@ -41,11 +41,12 @@
     </ng-container>
   </div>
 
-  <div class="details--wrapper children" [ngClass]="{'active': detailPoint, 'inactive': !detailPoint}">
-    <div class="details" *ngIf="detailPoint">
+  <div class="details--wrapper children" [ngClass]="{'active': detailActive, 'inactive': !detailActive}">
+    <div class="details" *ngIf="detailActive">
       <h5>{{ 'v2.screens.main-screen.view-details' | translate }}</h5>
+      <div #backButton (click)="backDetailAction()"></div>
 
-      <app-information-item-details [detailPoint]="detailPoint" (backClicked)="detailPoint = null">
+      <app-information-item-details [detailPoint]="detailPoint" (backClicked)="backDetailAction()">
       </app-information-item-details>
 
       <app-time-line-list class="details--timeline" (dayChange)="onDetailsDayChange($event)" [items]="valueTimeline">
