@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 import { Platform } from '@ionic/angular';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { forkJoin } from 'rxjs';
 
@@ -29,6 +30,8 @@ marker('v2.screens.app-info.belaqi-title');
     animations: [],
 })
 export class MainScreenComponent implements OnInit {
+    @ViewChild('backButton') backButton: ElementRef<HTMLElement>;
+
     // location data
     locations: UserLocation[] = [];
 
@@ -100,6 +103,7 @@ export class MainScreenComponent implements OnInit {
     protected belAqi = 10;
 
     detailPoint: DataPoint = null;
+    detailActive = false;
     contentHeight = 0;
     screenHeight = 0;
 
@@ -112,13 +116,33 @@ export class MainScreenComponent implements OnInit {
         private modelledValueService: ModelledValueService,
         private annulMeanValueService: AnnualMeanValueService,
         private platform: Platform,
+        public router: Router,
     ) {
+        this.registerBackButtonEvent();
+
         this.locations = this.userSettingsService.getUserSavedLocations();
 
         this.userSettingsService.$userLocations.subscribe((locations) => {
             this.updateCurrentLocation();
             return this.locations = locations;
         });
+    }
+
+    registerBackButtonEvent() {
+        this.platform.backButton.subscribe(() => {
+            if (this.router.url === '/main') {
+                if (this.detailActive) {
+                    let el: HTMLElement = this.backButton.nativeElement;
+                    el.click();
+                }
+                else navigator['app'].exitApp();
+            }
+        });
+    }
+
+    backDetailAction() {
+        this.detailActive = false;
+        this.detailPoint = null;
     }
 
     private updateCurrentLocation(loadFinishedCb?: () => any) {
@@ -241,6 +265,7 @@ export class MainScreenComponent implements OnInit {
     }
 
     openDetails(selectedDataPoint: DataPoint) {
+        this.detailActive = true;
         this.detailPoint = selectedDataPoint;
         this.modelledValueService.getValueTimeline(
             this.userSettingsService.selectedUserLocation,
@@ -259,6 +284,7 @@ export class MainScreenComponent implements OnInit {
     }
 
     openBelaqiDetails() {
+        this.detailActive = true;
         this.detailPoint = this.belaqiDetailData;
         this.valueTimeline = this.belAqiForCurrentLocation;
     }

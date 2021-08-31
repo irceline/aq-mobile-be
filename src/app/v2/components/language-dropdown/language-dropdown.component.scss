@@ -17,7 +17,8 @@
         background: url('/assets/images/icons/arrow.svg') no-repeat center center / 18px;
         width: 28px;
         height: 22px;
-        z-index: 2;
+        z-index: 1;
+        pointer-events: none;
     }
 }
 
