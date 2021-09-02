@@ -54,6 +54,7 @@
         <preference name="StatusBarStyle" value="default" />
         <preference name="DisallowOverscroll" value="true" />
         <preference name="WKWebViewOnly" value="true" />
+        <preference name="deployment-target" value="9.0" />
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
         <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
