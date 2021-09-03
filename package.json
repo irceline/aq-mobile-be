@@ -48,7 +48,6 @@
         "cordova-android": "9.1.0",
         "cordova-browser": "5.0.4",
         "cordova-plugin-app-version": "^0.1.12",
-        "cordova-plugin-firebasex": "^12.1.0",
         "cordova-plugin-geolocation": "^4.1.0",
         "cordova-plugin-ionic-keyboard": "^2.2.0",
         "cordova-plugin-network-information": "^2.0.2",
@@ -92,6 +91,7 @@
         "@types/pouchdb": "^6.4.0",
         "codelyzer": "^5.1.2",
         "cordova-ios": "^6.2.0",
+        "cordova-plugin-firebasex": "^12.1.0-cli",
         "cordova-plugin-inappbrowser": "^5.0.0",
         "cordova-plugin-ionic-webview": "^5.0.0",
         "cordova-plugin-splashscreen": "^6.0.0",
@@ -134,12 +134,16 @@
             "cordova-plugin-ionic-webview": {},
             "cordova-plugin-inappbrowser": {},
             "cordova-plugin-splashscreen": {},
-            "cordova-plugin-firebasex": {}
+            "cordova-plugin-firebasex": {
+                "FIREBASE_ANALYTICS_COLLECTION_ENABLED": "true",
+                "FIREBASE_PERFORMANCE_COLLECTION_ENABLED": "true",
+                "FIREBASE_CRASHLYTICS_COLLECTION_ENABLED": "true"
+            }
         },
         "platforms": [
             "browser",
-            "ios",
-            "android"
+            "android",
+            "ios"
         ]
     }
 }

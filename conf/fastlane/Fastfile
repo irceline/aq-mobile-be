@@ -40,8 +40,8 @@ platform :ios do
 
   lane :fix_firebasex_cli do
     Dir.chdir "../../../" do
-      sh("ionic", "cordova", "plugin", "rm", "cordova-plugin-firebasex")
-      sh("ionic", "cordova", "plugin", "add", "cordova-plugin-firebasex@12.1.0-cli")
+      sh("ionic cordova plugin rm cordova-plugin-firebasex")
+      sh("ionic cordova plugin add cordova-plugin-firebasex@12.1.0-cli")
       sh("npm", "i")
     end
   end
@@ -49,8 +49,10 @@ platform :ios do
   desc "Description of what the lane does"
   lane :adhoc do
     Dir.chdir "../../../" do
-      sh("ionic", "prepare", "ios", "--confirm", "--no-build")
+      sh("ionic cordova prepare ios --confirm --no-build")
     end
+    fix_firebasex_cli
+    install_profile
 
     update_project_provisioning(
       xcodeproj: xcodeproj_name,
@@ -75,7 +77,7 @@ platform :ios do
     fix_missing_compliance
 
     Dir.chdir "../../../" do
-      sh("ionic", "cordova", "build", "ios", "--prod", "--release", "--device", "--codeSignIdentity='iPhone Developer'", "--developmentTeam='8F2QBE3TN2'")
+      sh("ionic cordova build ios --prod --release --device --codeSignIdentity='iPhone Developer' --developmentTeam='8F2QBE3TN2'")
     end
 
     upload_to_testflight(
