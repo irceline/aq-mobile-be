@@ -91,7 +91,7 @@
         "@types/pouchdb": "^6.4.0",
         "codelyzer": "^5.1.2",
         "cordova-ios": "^6.2.0",
-        "cordova-plugin-firebasex": "^12.1.0-cli",
+        "cordova-plugin-firebasex": "^12.1.0",
         "cordova-plugin-inappbrowser": "^5.0.0",
         "cordova-plugin-ionic-webview": "^5.0.0",
         "cordova-plugin-splashscreen": "^6.0.0",
