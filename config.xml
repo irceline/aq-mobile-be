@@ -18,11 +18,15 @@
     <preference name="android-minSdkVersion" value="22" />
     <preference name="android-targetSdkVersion" value="29" />
     <preference name="BackupWebStorage" value="none" />
-    <preference name="ShowSplashScreen" value="false" />
-    <preference name="FadeSplashScreen" value="false" />
     <preference name="AutoHideSplashScreen" value="false" />
-    <preference name="SplashScreenDelay" value="0" />
-    <preference name="SplashScreen" value="none" />
+    <preference name="SplashScreenDelay" value="10000" />
+    <preference name="FadeSplashScreenDuration" value="1000" />
+    <preference name="SplashScreen" value="screen" />
+    <preference name="ShowSplashScreen" value="true" />
+    <preference name="ShowSplashScreenSpinner" value="false" />
+    <preference name="SplashMaintainAspectRatio" value="true" />
+    <preference name="SplashShowOnlyFirstTime" value="false" />
+    <preference name="FadeSplashScreen" value="true" />
     <preference name="orientation" value="portrait" />
     <hook src="hooks/before_compile.js" type="before_compile" />
     <platform name="android">
