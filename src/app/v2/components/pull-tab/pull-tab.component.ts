@@ -5,9 +5,12 @@ import {
     Renderer2,
     AfterViewInit,
     ViewChild,
-    NgZone
+    NgZone,
+    Output,
+    EventEmitter
 } from '@angular/core';
 import { DomController, Platform, IonContent } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-pull-tab',
@@ -17,6 +20,7 @@ import { DomController, Platform, IonContent } from '@ionic/angular';
 export class PullTabComponent implements AfterViewInit {
     @Input('options') options: any;
     @Input('screenHeight') screenHeight: number;
+    @Output() updateClicked: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     @ViewChild('trigger', { static: true }) trigger: ElementRef;
     @ViewChild(IonContent, { static: true }) content: IonContent;
@@ -35,7 +39,8 @@ export class PullTabComponent implements AfterViewInit {
         public renderer: Renderer2,
         public domCtrl: DomController,
         public platform: Platform,
-        public zone: NgZone
+        public zone: NgZone,
+        public router: Router
     ) { }
 
     ngAfterViewInit() {
@@ -97,6 +102,7 @@ export class PullTabComponent implements AfterViewInit {
             });
             this.isEnabled = true;
             this.isClicked = true;
+            this.updateClicked.emit(true);
         } else {
             this.domCtrl.write(() => {
                 this.renderer.setStyle(
@@ -112,6 +118,7 @@ export class PullTabComponent implements AfterViewInit {
             });
             this.isEnabled = false;
             this.isClicked = false;
+            this.updateClicked.emit(false);
             this.content.scrollToTop(1000);
         }
     }
@@ -148,7 +155,10 @@ export class PullTabComponent implements AfterViewInit {
                     this.gap + 'px' // height from top when its opened
                 );
             });
-            this.zone.run(() => { this.isEnabled = true })
+            this.zone.run(() => {
+                this.isEnabled = true;
+                this.updateClicked.emit(true);
+            })
         } else if (
             this.screenHeight - newTop < this.thresholdBottom ||
             ev.additionalEvent === 'pandown' ||
@@ -166,7 +176,10 @@ export class PullTabComponent implements AfterViewInit {
                     this.screenHeight - this.handleHeight + 'px'
                 );
             });
-            this.zone.run(() => { this.isEnabled = false })
+            this.zone.run(() => { 
+                this.isEnabled = false;
+                this.updateClicked.emit(false);
+            })
         } else {
             this.renderer.setStyle(
                 this.element.nativeElement,

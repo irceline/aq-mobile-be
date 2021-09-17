@@ -7,6 +7,7 @@ import { forkJoin } from 'rxjs';
 
 import { ValueDate } from '../../common/enums';
 import { MainPhenomenon } from '../../common/phenomenon';
+import { PullTabComponent } from '../../components/pull-tab/pull-tab.component';
 import { DataPoint, Substance, UserLocation } from '../../Interfaces';
 import { BelAqiIndexResult, BelAQIService } from '../../services/bel-aqi.service';
 import { UserSettingsService } from '../../services/user-settings.service';
@@ -27,10 +28,11 @@ marker('v2.screens.app-info.belaqi-title');
     selector: 'app-main-screen',
     templateUrl: './main-screen.component.html',
     styleUrls: ['./main-screen.component.scss', './main-screen.component.hc.scss'],
-    animations: [],
+    animations: []
 })
 export class MainScreenComponent implements OnInit {
     @ViewChild('backButton') backButton: ElementRef<HTMLElement>;
+    @ViewChild(PullTabComponent) pullTab;
 
     // location data
     locations: UserLocation[] = [];
@@ -108,6 +110,7 @@ export class MainScreenComponent implements OnInit {
     screenHeight = 0;
 
     iosPadding = 0;
+    pullTabOpen = false;
 
     constructor(
         public userSettingsService: UserSettingsService,
@@ -134,8 +137,10 @@ export class MainScreenComponent implements OnInit {
                 if (this.detailActive) {
                     let el: HTMLElement = this.backButton.nativeElement;
                     el.click();
+                } else {
+                    if (this.pullTabOpen) this.closeTabAction();
+                    else navigator['app'].exitApp();
                 }
-                else navigator['app'].exitApp();
             }
         });
     }
@@ -143,6 +148,10 @@ export class MainScreenComponent implements OnInit {
     backDetailAction() {
         this.detailActive = false;
         this.detailPoint = null;
+    }
+
+    closeTabAction() {
+        this.pullTab.handlePan({ additionalEvent: 'pandown', center: { y: 0 } })
     }
 
     private updateCurrentLocation(loadFinishedCb?: () => any) {
@@ -297,5 +306,9 @@ export class MainScreenComponent implements OnInit {
         if (location) {
             this.userSettingsService.addUserLocation(location);
         }
+    }
+
+    updateClicked(value: boolean) {
+        this.pullTabOpen = value
     }
 }

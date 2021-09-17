@@ -21,7 +21,7 @@
   </app-background>
 </ion-content>
 
-<app-pull-tab [screenHeight]="screenHeight" [options]="drawerOptions" *ngIf="locations.length">
+<app-pull-tab [screenHeight]="screenHeight" [options]="drawerOptions" *ngIf="locations.length" (updateClicked)="updateClicked($event)">
   <div class="details--wrapper" [ngClass]="{'inactive': detailActive, 'active': !detailActive}">
     <ng-container *ngIf="!detailActive">
       <div class="details">
