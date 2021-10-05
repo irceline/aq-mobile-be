@@ -9,6 +9,7 @@ marker('belaqi.level.very-poor');
 marker('belaqi.level.bad');
 marker('belaqi.level.very-bad');
 marker('belaqi.level.horrible');
+marker('belaqi.level.no-data');
 
 export const backgroundImages = {
     10: '/assets/images/backgrounds/1.svg',
@@ -21,12 +22,14 @@ export const backgroundImages = {
     3: '/assets/images/backgrounds/8.svg',
     2: '/assets/images/backgrounds/9.svg',
     1: '/assets/images/backgrounds/10.svg',
+    0: '/assets/images/backgrounds/0.svg',
 };
 
 export const defaultColor = '#29cdf7';
 export const contrastModeColor = '#122334';
 
 export const lightIndexColor = {
+    0: '#CCCCCC',
     1: '#238cff',
     2: '#29cdf7',
     3: '#34D04D',
@@ -40,6 +43,7 @@ export const lightIndexColor = {
 };
 
 export const darkIndexColor = {
+    0: '#CCCCCC',
     1: '#1e7ae0',
     2: '#54bad3',
     3: '#29c442',
@@ -53,6 +57,7 @@ export const darkIndexColor = {
 };
 
 export const indexLabel = {
+    0: 'belaqi.level.no-data',
     1: 'belaqi.level.excellent',
     2: 'belaqi.level.very-good',
     3: 'belaqi.level.good',

@@ -65,7 +65,7 @@ export class BelAQIService {
   // https://app.zeplin.io/project/5ea9b038b472cbbc682ced04/screen/5eb8f28f40d46577a6abe316
   // light versions
   public getLightColorForIndex(index: number) {
-    if (index >= 1 && index <= 10) {
+    if (index >= 0 && index <= 10) {
       return lightIndexColor[index];
     } else {
       // use default color (e.g. for background color)
@@ -75,7 +75,7 @@ export class BelAQIService {
 
   // dark versions
   public getDarkColorForIndex(index: number) {
-    if (index >= 1 && index <= 10) {
+    if (index >= 0 && index <= 10) {
       return darkIndexColor[index];
     } else {
       return null;
@@ -83,7 +83,7 @@ export class BelAQIService {
   }
 
   public getLabelForIndex(index: number) {
-    if (index >= 1 && index <= 10) {
+    if (index >= 0 && index <= 10) {
       return indexLabel[index];
     } else {
       return null;
@@ -91,7 +91,7 @@ export class BelAQIService {
   }
 
   public getBackgroundForIndex(index: number) {
-    if (index >= 1 && index <= 10) {
+    if (index >= 0 && index <= 10) {
       return backgroundImages[index];
     } else {
       return null;
