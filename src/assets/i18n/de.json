@@ -13,15 +13,17 @@
 		"level": {
 			"bad": "Schlecht",
 			"excellent": "Vortrefflich",
-			"fairly-good": "Relativ gut",
+			"fairly-good": "Relativ Gut",
 			"good": "Gut",
-			"horrible": "Extrem schlecht",
+			"horrible": "Extrem Schlecht",
 			"moderate": "Mittelmäßig",
 			"poor": "Ungenügend",
-			"very-bad": "Sehr schlecht",
-			"very-good": "Sehr gut",
-			"very-poor": "Relativ schlecht"
-		}
+			"very-bad": "Sehr Schlecht",
+			"very-good": "Sehr Gut",
+			"very-poor": "Relativ Schlecht",
+			"no-data": "N/V"
+		},
+		"no-data-available": "An diesem Tag sind keine Daten verfügbar"
 	},
 	"controls": {
 		"cancel": "Abbrechen",

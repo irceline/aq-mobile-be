@@ -13,15 +13,17 @@
 		"level": {
 			"bad": "Bad",
 			"excellent": "Excellent",
-			"fairly-good": "Fairly good",
+			"fairly-good": "Fairly Good",
 			"good": "Good",
 			"horrible": "Horrible",
 			"moderate": "Moderate",
 			"poor": "Poor",
-			"very-bad": "Very bad",
-			"very-good": "Very good",
-			"very-poor": "Very poor"
-		}
+			"very-bad": "Very Bad",
+			"very-good": "Very Good",
+			"very-poor": "Very Poor",
+			"no-data": "N/A"
+		},
+		"no-data-available": "There is no data available for this day"
 	},
 	"controls": {
 		"cancel": "Cancel",

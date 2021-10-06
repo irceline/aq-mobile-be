@@ -13,15 +13,17 @@
 		"level": {
 			"bad": "Slecht",
 			"excellent": "Uitstekend",
-			"fairly-good": "Vrij goed",
+			"fairly-good": "Vrij Goed",
 			"good": "Goed",
-			"horrible": "uitermate slecht",
+			"horrible": "Uitermate Slecht",
 			"moderate": "Middelmatig",
 			"poor": "Ondermaats",
-			"very-bad": "Zeer slecht",
-			"very-good": "Zeer goed",
-			"very-poor": "Vrij slecht"
-		}
+			"very-bad": "Zeer Slecht",
+			"very-good": "Zeer Goed",
+			"very-poor": "Vrij Slecht",
+			"no-data": "N/B"
+		},
+		"no-data-available": "Er is geen data beschikbaar op deze dag"
 	},
 	"controls": {
 		"cancel": "annuleer",

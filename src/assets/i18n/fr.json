@@ -13,15 +13,17 @@
 		"level": {
 			"bad": "Mauvais",
 			"excellent": "Excellent",
-			"fairly-good": "Assez bon",
+			"fairly-good": "Assez Bon",
 			"good": "Bon",
 			"horrible": "Exécrable",
 			"moderate": "Moyen",
 			"poor": "Médiocre",
-			"very-bad": "Très mauvais",
-			"very-good": "Très bon",
-			"very-poor": "Très médiocre"
-		}
+			"very-bad": "Très Mauvais",
+			"very-good": "Très Bon",
+			"very-poor": "Très Médiocre",
+			"no-data": "P/D"
+		},
+		"no-data-available": "Il n’y a pas de données disponibles à ce jour"
 	},
 	"controls": {
 		"cancel": "Annuler",

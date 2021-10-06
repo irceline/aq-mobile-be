@@ -13,6 +13,7 @@ import { BelAqiIndexResult, BelAQIService } from '../../services/bel-aqi.service
 import { UserSettingsService } from '../../services/user-settings.service';
 import { AnnualMeanValueService } from '../../services/value-provider/annual-mean-value.service';
 import { ModelledValueService } from '../../services/value-provider/modelled-value.service';
+import moment from 'moment';
 
 interface IndexValueResult extends BelAqiIndexResult {
     value: number;
@@ -158,7 +159,14 @@ export class MainScreenComponent implements OnInit {
         if (this.userSettingsService.selectedUserLocation) {
             return this.belAqiService.getIndexScoresAsObservable(this.userSettingsService.selectedUserLocation).subscribe(
                 res => {
-                    this.belAqiForCurrentLocation = res.filter(e => e !== null);
+                    // Handling if there is null data main timeline
+                    const data = res.filter(e => e !== null);
+                    const belAqiData = [...res];
+                    belAqiData.forEach((item, index) => {
+                        if (!item) belAqiData[index] = {indexScore: 0, location: data[0].location, valueDate: index }
+                    })
+
+                    this.belAqiForCurrentLocation = belAqiData;
                     this.updateDetailData(loadFinishedCb);
                 }, error => {
                     console.error('Error occured while fetching the bel aqi indicies');
@@ -280,7 +288,12 @@ export class MainScreenComponent implements OnInit {
             this.userSettingsService.selectedUserLocation,
             selectedDataPoint.substance.phenomenon
         ).subscribe(res => {
-            this.valueTimeline = res
+            // Handling if there is null data in details
+            const belAqiData = [...res];
+            belAqiData.forEach((item, index) => {
+                if (!item) belAqiData[index] = {index: 0, value: 0, valueDate: index, date: moment() }
+            })
+            this.valueTimeline = belAqiData
                 .filter(e => e !== null)
                 .map(e => ({
                     date: e.date,
