@@ -1,5 +1,5 @@
 <button #trigger type="button" class="trigger">
-  <span></span>
+  <span *ngIf="!isEnabled"></span>
 </button>
 
 <ion-content class="content-wrapper" [scrollY]="isEnabled" [ngStyle]="{'pointer-events': isEnabled ? 'auto' : 'none'}"
