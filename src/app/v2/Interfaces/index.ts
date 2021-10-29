@@ -28,6 +28,7 @@ export interface LocationSubscription {
     lng: number;
     language: string;
     key: string;
+    version: string;
 }
 
 export interface IBarChartData {
