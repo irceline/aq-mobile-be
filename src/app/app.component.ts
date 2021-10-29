@@ -89,7 +89,7 @@ export class AppComponent {
         splash.present();
         setTimeout(() => {
             this.statusBar.show();
-            splash.dismiss()
-        }, 1500);
+            splash.dismiss();
+        }, 2000);
     }
 }
