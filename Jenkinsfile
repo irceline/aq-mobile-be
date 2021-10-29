@@ -9,6 +9,7 @@ pipeline {
         KEYSTORE_NAME = 'irceline2018.keystore'
         HOME = "${WORKSPACE}"
         NPM_CONFIG_CACHE = "${WORKSPACE}/.npm"
+        APP_VERSION = ""
     }
     
     agent any
@@ -23,6 +24,7 @@ pipeline {
                     sh "cp \$GSERVICE_JSON google-services.json"
                     sh "chmod 600 google-services.json"
                     sh "cp \$KEYSTORE_FILE ."
+                    sh "APP_VERSION=$(node tools/bump_version.js \$BUILD_NUMBER)"
                 }
             }
         }
@@ -75,7 +77,7 @@ pipeline {
                         filesPattern: 'app-release.aab',
                         rolloutPercentage: '100',
                         trackName: 'internal',
-                        releaseName: "build $BUILD_NUMBER",
+                        releaseName: "$APP_VERSION",
                     )
                 }
             }

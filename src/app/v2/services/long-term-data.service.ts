@@ -137,11 +137,11 @@ export class LongTermDataService {
   private getWorldBenchMark(phenomenon: MainPhenomenon): number {
     switch (phenomenon) {
       case MainPhenomenon.NO2:
-        return 40;
-      case MainPhenomenon.PM10:
-        return 20;
-      case MainPhenomenon.PM25:
         return 10;
+      case MainPhenomenon.PM10:
+        return 15;
+      case MainPhenomenon.PM25:
+        return 5;
       default:
         return null;
     }

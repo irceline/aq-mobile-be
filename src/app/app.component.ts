@@ -61,13 +61,15 @@ export class AppComponent {
     }
 
     initializeApp() {
+        const splash = this.modalCtrl.create({ component: SplashScreenComponent });
+
         this.platform.ready().then(async () => {
             // this.statusBar.styleDefault();
             // this.errorLoggingSrvc.init();
             // this.splashScreen.hide();
             this.statusBar.hide();
             this.pouchDbInit.init();
-            await this.presentSplashScreen();
+            await this.presentSplashScreen(await splash);
         });
 
         this.networkAlertSrvc.isConnected.subscribe(connected => console.log(`Device has network connection: ${connected}`))
@@ -84,12 +86,14 @@ export class AppComponent {
           });
       }
 
-    private async presentSplashScreen() {
-        const splash = await this.modalCtrl.create({ component: SplashScreenComponent });
-        splash.present();
+    private async presentSplashScreen(splash: HTMLIonModalElement) {
         setTimeout(() => {
-            this.statusBar.show();
-            splash.dismiss()
-        }, 1500);
+            splash.present();
+            
+            setTimeout(() => {
+                this.statusBar.show();
+                splash.dismiss()
+            }, 1500)
+        }, 1000);
     }
 }
