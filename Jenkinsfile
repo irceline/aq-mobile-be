@@ -69,10 +69,11 @@ pipeline {
 
 
         stage('Publish to playstore') {
+            environment {
+                APP_VERSION = sh("node tools/bump_version.js \$BUILD_NUMBER")
+            }
+            
             steps {
-                environment {
-                    APP_VERSION = sh("node tools/bump_version.js \$BUILD_NUMBER")
-                }
                 script {
                     androidApkUpload(
                         googleCredentialsId: 'belair_svc_account',
