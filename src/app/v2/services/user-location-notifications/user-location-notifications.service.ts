@@ -50,10 +50,10 @@ export class UserLocationNotificationsService {
     });
   }
 
-  public subscribeLocation(location: UserLocation): Observable<boolean> {
+  public subscribeLocation(location: UserLocation, isLocation = false): Observable<boolean> {
     const langCode = this.translate.currentLang;
     return new Observable<boolean>((observer: Observer<boolean>) => {
-      const subscription = this.generateSubscriptionObject(location.latitude, location.longitude, langCode);
+      const subscription = this.generateSubscriptionObject(location.latitude, location.longitude, langCode, isLocation ? 1 : undefined);
 
       // register to Backend
       this.registerSubscription(subscription).subscribe(
@@ -154,11 +154,12 @@ export class UserLocationNotificationsService {
     observer.complete();
   }
 
-  private generateSubscriptionObject(lat: number, lng: number, language: string): LocationSubscription {
+  private generateSubscriptionObject(lat: number, lng: number, language: string, index: number): LocationSubscription {
     return {
       lat,
       lng,
       language,
+      index,
       key: this.notifications.fcmToken,
       version: this.notifications.appVersion,
     };

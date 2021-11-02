@@ -27,6 +27,7 @@ export interface LocationSubscription {
     lat: number;
     lng: number;
     language: string;
+    index?: number;
     key: string;
     version: string;
 }

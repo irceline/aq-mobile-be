@@ -38,6 +38,7 @@ export class UserNotificationSettingsComponent implements OnInit {
                 }
             });
         } else {
+            if (this.userLocationNotifications) this.toggleUserLocationNotifications(event);
             this.generalNotificationSrvc.unsubscribeNotification(true).subscribe(success => {
                 if (success) {
                     this.generalNotification = !this.generalNotification;
@@ -50,6 +51,7 @@ export class UserNotificationSettingsComponent implements OnInit {
         event.stopImmediatePropagation();
         event.stopPropagation();
         event.preventDefault();
+        if (!this.generalNotification) this.toggleGeneralNotification(event);
         if (!this.userLocationNotifications) {
             this.userSettingsSrvc.subscribeNotification().subscribe();
         } else {
