@@ -9,9 +9,12 @@ pipeline {
         KEYSTORE_NAME = 'irceline2018.keystore'
         HOME = "${WORKSPACE}"
         NPM_CONFIG_CACHE = "${WORKSPACE}/.npm"
+        APP_VERSION = ""
     }
     
     agent any
+    
+    tools {nodejs "node.js"}
 
     stages {
         stage('Configure environment') {
@@ -20,7 +23,6 @@ pipeline {
                     file(credentialsId: 'google-services.json', variable: 'GSERVICE_JSON'),
                     file(credentialsId: 'KEYSTORE_FILE', variable: 'KEYSTORE_FILE')
                 ]) {
-                    sh "npm i -g xml2js"
                     sh "cp \$GSERVICE_JSON google-services.json"
                     sh "chmod 600 google-services.json"
                     sh "cp \$KEYSTORE_FILE ."
@@ -69,18 +71,18 @@ pipeline {
 
 
         stage('Publish to playstore') {
-            environment {
-                APP_VERSION = sh("node tools/bump_version.js \$BUILD_NUMBER")
-            }
-            
             steps {
                 script {
+                    sh "npm i xml2js"
+                    APP_VERSION = sh(returnStdout: true, script: 'echo $(node tools/bump_version.js \$BUILD_NUMBER)')
+                    sh "echo ${APP_VERSION}"
+                    
                     androidApkUpload(
                         googleCredentialsId: 'belair_svc_account',
                         filesPattern: 'app-release.aab',
                         rolloutPercentage: '100',
                         trackName: 'internal',
-                        releaseName: "$APP_VERSION",
+                        releaseName: "Version: ${APP_VERSION}",
                     )
                 }
             }
