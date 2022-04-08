@@ -18,9 +18,30 @@ pipeline {
 
     stages {
         stage('Configure environment') {
+            when {
+                branch 'neb-v2-upgrade'
+            }
             steps {
                 withCredentials([
                     file(credentialsId: 'google-services.json', variable: 'GSERVICE_JSON'),
+                    file(credentialsId: 'KEYSTORE_FILE', variable: 'KEYSTORE_FILE')
+                ]) {
+                    sh "cp \$GSERVICE_JSON google-services.json"
+                    sh "chmod 600 google-services.json"
+                    sh "cp \$KEYSTORE_FILE ."
+                }
+            }
+        }
+
+        stage('Configure testing environment') {
+            when {
+                not {
+                    branch 'neb-v2-upgrade'
+                }
+            }
+            steps {
+                withCredentials([
+                    file(credentialsId: 'google_services_testing.json', variable: 'GSERVICE_JSON'),
                     file(credentialsId: 'KEYSTORE_FILE', variable: 'KEYSTORE_FILE')
                 ]) {
                     sh "cp \$GSERVICE_JSON google-services.json"
@@ -68,9 +89,33 @@ pipeline {
             }
         }
 
-
+        stage('Publish to playstore') {
+            when {
+                not {
+                    branch 'neb-v2-upgrade'
+                }
+            }
+            steps {
+                script {
+                    sh "npm i xml2js"
+                    APP_VERSION = sh(returnStdout: true, script: 'echo $(node tools/bump_version.js \$BUILD_NUMBER)')
+                    sh "echo Testing ${APP_VERSION}"
+                    
+                    androidApkUpload(
+                        googleCredentialsId: 'belair_svc_account',
+                        filesPattern: 'app-release.aab',
+                        rolloutPercentage: '100',
+                        trackName: 'internal',
+                        releaseName: "Testing Version: ${APP_VERSION}",
+                    )
+                }
+            }
+        }
 
         stage('Publish to playstore') {
+            when {
+                branch 'neb-v2-upgrade'
+            }
             steps {
                 script {
                     sh "npm i xml2js"
@@ -87,68 +132,6 @@ pipeline {
                 }
             }
         }
-
-        // stage('Run Device Farm Test') {
-        //     steps {
-        //         devicefarm (
-        //             projectName: 'AcopicTest',
-        //             devicePoolName: 'Top Devices',
-        //             // testSpecName: 'nebulae.yml',
-        //             testSpecName: '',
-        //             // environmentToRun: 'CustomEnvironment',
-        //             environmentToRun: '',
-        //             appArtifact:'app-debug-latest.apk',
-        //             runName: "Belair-build-${BUILD_ID}",
-        //             // testToRun: 'APPIUM_JAVA_TESTNG',
-        //             testToRun: 'BUILTIN_FUZZ',
-        //             storeResults: '',
-        //             isRunUnmetered: '',
-        //             eventCount: '',
-        //             eventThrottle: '',
-        //             seed: '',
-        //             username: '',
-        //             password: '',
-        //             appiumJavaJUnitTest: '',
-        //             appiumJavaTestNGTest: 'test.zip',
-        //             appiumPythonTest: '',
-        //             appiumRubyTest: '',
-        //             appiumNodeTest: '',
-        //             calabashFeatures: '',
-        //             calabashTags: '',
-        //             calabashProfile: '',
-        //             junitArtifact: '',
-        //             junitFilter: '',
-        //             uiautomatorArtifact: '',
-        //             uiautomatorFilter: '',
-        //             uiautomationArtifact: '',
-        //             xctestArtifact: '',
-        //             xctestFilter: '',
-        //             xctestUiArtifact: '',
-        //             xctestUiFilter: '',
-        //             appiumVersionJunit: '',
-        //             appiumVersionPython: '',
-        //             appiumVersionTestng: '',
-        //             ifWebApp: false,
-        //             extraData: false,
-        //             extraDataArtifact: '',
-        //             deviceLocation: false,
-        //             deviceLatitude: 0,
-        //             deviceLongitude: 0,
-        //             radioDetails: true,
-        //             ifBluetooth: true,
-        //             ifWifi: true,
-        //             ifGPS: true,
-        //             ifNfc: false,
-        //             jobTimeoutMinutes: 10,
-        //             ifVideoRecording: true,
-        //             ifAppPerformanceMonitoring: false,
-        //             ignoreRunError: false,
-        //             ifVpce: false,
-        //             ifSkipAppResigning: false,
-        //             vpceServiceName: '',
-        //         )
-        //     }
-        // }
     }
 
     post {
@@ -156,7 +139,7 @@ pipeline {
             slackSend(
                 color: "good",
                 channel: "${SLACK_CHANNEL}", 
-                message: "New apk file available at: https://${S3_BUCKET}.s3.${S3_REGION}.amazonaws.com/belair-v2/${BRANCH_NAME}/${BUILD_ID}/artifacts/app-debug-latest.apk"
+                message: "testing apk file available at: https://${S3_BUCKET}.s3.${S3_REGION}.amazonaws.com/belair-v2/${BRANCH_NAME}/${BUILD_ID}/artifacts/app-debug-latest.apk"
             )
         }
 
