@@ -56,7 +56,9 @@ cordova -v
 1. nvm use
 2. npm install (do not use yarn)
 3. ionic cordova prepare
-4. try build `ionic cordova build android`
+4. try build android `ionic cordova build android`
+5. try build ios `ionic cordova build ios`
+6. if theres no error when build you're good to go
 
 ## Issues
 1. `Installed Build Tools revision 33.0.0-rc2 is corrupted`
