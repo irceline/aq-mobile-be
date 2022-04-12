@@ -28,7 +28,9 @@
 	"controls": {
 		"cancel": "Annuler",
 		"close": "Fermer",
-		"ok": "OK"
+		"ok": "OK",
+		"no": "Non",
+		"yes": "Oui"
 	},
 	"edit-location-hint": "Vous pouvez déplacer le curseur de localisation à l'endroit souhaité.",
 	"edit-location-label": {

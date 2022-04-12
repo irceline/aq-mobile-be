@@ -28,7 +28,9 @@
 	"controls": {
 		"cancel": "annuleer",
 		"close": "sluiten",
-		"ok": "OK"
+		"ok": "OK",
+		"no": "Nee",
+		"yes": "Ja"
 	},
 	"edit-location-hint": "U kunt het locatie icoon op de kaart naar elke gewenste locatie verplaatsen.",
 	"edit-location-label": {

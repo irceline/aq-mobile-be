@@ -28,7 +28,9 @@
 	"controls": {
 		"cancel": "Cancel",
 		"close": "Close",
-		"ok": "OK"
+		"ok": "OK",
+		"no": "No",
+		"yes": "Yes"
 	},
 	"edit-location-hint": "You can move the location icon on the map to any desired location",
 	"edit-location-label": {
