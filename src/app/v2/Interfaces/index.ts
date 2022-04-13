@@ -20,6 +20,7 @@ export interface UserLocation {
     order?: number;
     wasEdited?: boolean;
     subscription?: LocationSubscription;
+    indexThreshold?: number;
     notification?: PushNotification;
 }
 

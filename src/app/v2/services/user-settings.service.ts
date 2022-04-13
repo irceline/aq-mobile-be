@@ -8,6 +8,7 @@ import { UserLocation } from '../Interfaces';
 import { UserLocationNotificationsService } from './user-location-notifications/user-location-notifications.service';
 
 const userLocationsLSkey = 'belAir.userLocations';
+const userAqiIndexThresholdKey = 'belAir.aqiIndexThreshold';
 
 const userLocationNotificationsLSkey = 'belAir.userLocationNotifications';
 
@@ -17,6 +18,7 @@ const userLocationNotificationsLSkey = 'belAir.userLocationNotifications';
 export class UserSettingsService {
 
     public $userLocations: BehaviorSubject<UserLocation[]>;
+    public $userAqiIndexThreshold: BehaviorSubject<number>;
 
     public $userLocationNotificationsActive: BehaviorSubject<boolean>;
 
@@ -42,6 +44,9 @@ export class UserSettingsService {
         this.$userLocationNotificationsActive = new BehaviorSubject(localStorage.getItem(userLocationNotificationsLSkey) === 'true');
 
         const userLocations = localStorage.getItem(userLocationsLSkey);
+        const userAqiIndexThreshold = localStorage.getItem(userAqiIndexThresholdKey);
+
+        this.$userAqiIndexThreshold = new BehaviorSubject(userAqiIndexThreshold ? parseInt(userAqiIndexThreshold) : 1);
 
         if (userLocations) {
             // todo : some verification that the stored data is not corrupt
@@ -69,6 +74,10 @@ export class UserSettingsService {
                 this.unsubscribeNotification().subscribe(() => this.subscribeNotification().subscribe());
             }
         });
+    }
+
+    public setUserAQIIndexThreshold(value: number): void {
+        localStorage.setItem(userAqiIndexThresholdKey, value.toString());
     }
 
     public getUserSavedLocations(): UserLocation[] {
@@ -122,7 +131,11 @@ export class UserSettingsService {
     }
 
     public subscribeNotification(): Observable<boolean> {
-        const subscriptions = this.$userLocations.getValue().map(uLoc => this.userLocationNotificationSrvc.subscribeLocation(uLoc, true));
+        const subscriptions = this.$userLocations.getValue().map(uLoc => {
+            console.log(`subscribeNotification`, uLoc)
+            return this.userLocationNotificationSrvc.subscribeLocation(uLoc, uLoc.indexThreshold);
+        });
+
         return forkJoin(subscriptions).pipe(
             catchError(error => {
                 console.error(error);

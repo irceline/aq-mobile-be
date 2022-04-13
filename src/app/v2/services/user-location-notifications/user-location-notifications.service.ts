@@ -20,7 +20,7 @@ export interface UserLocationNotification {
   notification: PushNotification
 }
 
-const NOTIFICATION_SUBSCRIPTION_BACKEND_URL = 'https://www.irceline.be/air/belair_channel.php';
+const NOTIFICATION_SUBSCRIPTION_BACKEND_URL = 'http://10.0.2.2:8086/belair_channel.php';
 const USER_LOCATION_SUBSCRIPTIONS_PARAM = 'user_location_subscriptions';
 
 @Injectable({
@@ -50,10 +50,10 @@ export class UserLocationNotificationsService {
     });
   }
 
-  public subscribeLocation(location: UserLocation, isLocation = false): Observable<boolean> {
+  public subscribeLocation(location: UserLocation, index: number = null): Observable<boolean> {
     const langCode = this.translate.currentLang;
     return new Observable<boolean>((observer: Observer<boolean>) => {
-      const subscription = this.generateSubscriptionObject(location.latitude, location.longitude, langCode, isLocation ? 1 : undefined);
+      const subscription = this.generateSubscriptionObject(location.latitude, location.longitude, langCode, index);
 
       // register to Backend
       this.registerSubscription(subscription).subscribe(
@@ -70,6 +70,7 @@ export class UserLocationNotificationsService {
               () => this.publishError(observer, UserLocationSubscriptionError.NotificationSubscription)
             )
           } else {
+            console.log(`registerSubscription failed`, subscription);
             this.publishError(observer, UserLocationSubscriptionError.BackendRegistration);
           }
         },
@@ -113,6 +114,7 @@ export class UserLocationNotificationsService {
     return new Observable<boolean>((observer: Observer<boolean>) => {
 
       const encriptedSubscription = this.encryption.encrypt(JSON.stringify(subscription));
+      console.log(encriptedSubscription)
       if (encriptedSubscription) {
         this.http.post(NOTIFICATION_SUBSCRIPTION_BACKEND_URL, encriptedSubscription, {
           observe: 'response',

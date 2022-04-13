@@ -21,6 +21,8 @@ export class UserNotificationSettingsComponent implements OnInit {
     public aqiScoreColor: string;
     public aqiIndexName: string;
 
+    aqiThresholdDelayTimer?: any
+
     constructor(
         private generalNotificationSrvc: GeneralNotificationService,
         private userSettingsSrvc: UserSettingsService
@@ -30,7 +32,7 @@ export class UserNotificationSettingsComponent implements OnInit {
         this.generalNotificationSrvc.$active.pipe(first()).subscribe(res => this.generalNotification = res);
         this.userSettingsSrvc.$userLocationNotificationsActive.pipe(first()).subscribe(res => this.userLocationNotifications = res);
         // @todo: get aqi score notif
-        this.aqiScoreNotifications = 1
+        this.userSettingsSrvc.$userAqiIndexThreshold.subscribe(res => this.aqiScoreNotifications = res);
         this.aqiScoreColor = `aqi${this.aqiScoreNotifications}`
         this.aqiIndexName = indexLabel[this.aqiScoreNotifications]
     }
@@ -77,12 +79,33 @@ export class UserNotificationSettingsComponent implements OnInit {
     }
 
     changeThresholdEnd(event) {
-        console.log(event.target.value)
+        // console.log(this.aqiScoreNotifications, this.userLocationNotifications)
+        // if (this.aqiThresholdDelayTimer) clearTimeout(this.aqiThresholdDelayTimer)
+
+        // this.aqiThresholdDelayTimer = setTimeout(() => {
+        //     this.userSettingsSrvc.subscribeNotification().subscribe();
+        // })
     }
 
     changeThreshold(event) {
         this.aqiScoreNotifications = event.target.value
         this.aqiScoreColor = `aqi${event.target.value}`
         this.aqiIndexName = indexLabel[event.target.value]
+
+        if (this.aqiThresholdDelayTimer) clearTimeout(this.aqiThresholdDelayTimer)
+
+        this.aqiThresholdDelayTimer = setTimeout(() => {
+            console.log(this.aqiScoreNotifications, this.userLocationNotifications)
+            const locations = this.userSettingsSrvc.getUserSavedLocations()
+
+            console.log(locations)
+
+            this.userSettingsSrvc.updateUserLocationsOrder(locations.map(location => ({
+                ...location,
+                indexThreshold: event.target.value
+            })))
+
+            this.userSettingsSrvc.subscribeNotification().subscribe();
+        }, 500)
     }
 }
