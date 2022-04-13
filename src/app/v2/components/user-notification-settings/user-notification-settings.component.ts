@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { first } from 'rxjs/operators';
+import { indexLabel } from '../../common/constants';
 
 import { GeneralNotificationService } from '../../services/push-notifications/general-notification.service';
 import { UserSettingsService } from './../../services/user-settings.service';
@@ -16,6 +17,9 @@ export class UserNotificationSettingsComponent implements OnInit {
 
     public generalNotification: boolean;
     public userLocationNotifications: boolean;
+    public aqiScoreNotifications: number;
+    public aqiScoreColor: string;
+    public aqiIndexName: string;
 
     constructor(
         private generalNotificationSrvc: GeneralNotificationService,
@@ -25,6 +29,10 @@ export class UserNotificationSettingsComponent implements OnInit {
     ngOnInit() {
         this.generalNotificationSrvc.$active.pipe(first()).subscribe(res => this.generalNotification = res);
         this.userSettingsSrvc.$userLocationNotificationsActive.pipe(first()).subscribe(res => this.userLocationNotifications = res);
+        // @todo: get aqi score notif
+        this.aqiScoreNotifications = 1
+        this.aqiScoreColor = `aqi${this.aqiScoreNotifications}`
+        this.aqiIndexName = indexLabel[this.aqiScoreNotifications]
     }
 
     toggleGeneralNotification(event: MouseEvent) {
@@ -66,5 +74,15 @@ export class UserNotificationSettingsComponent implements OnInit {
 
     blurFocus() {
         this.loseFocus.next(false);
+    }
+
+    changeThresholdEnd(event) {
+        console.log(event.target.value)
+    }
+
+    changeThreshold(event) {
+        this.aqiScoreNotifications = event.target.value
+        this.aqiScoreColor = `aqi${event.target.value}`
+        this.aqiIndexName = indexLabel[event.target.value]
     }
 }
