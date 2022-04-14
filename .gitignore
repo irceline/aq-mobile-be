@@ -34,3 +34,5 @@ Thumbs.db
 UserInterfaceState.xcuserstate
 tsconfig.scripts.json
 scripts
+*.keystore
+secrets
