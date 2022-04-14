@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { first } from 'rxjs/operators';
+import { indexLabel } from '../../common/constants';
 
 import { GeneralNotificationService } from '../../services/push-notifications/general-notification.service';
 import { UserSettingsService } from './../../services/user-settings.service';
@@ -16,6 +17,11 @@ export class UserNotificationSettingsComponent implements OnInit {
 
     public generalNotification: boolean;
     public userLocationNotifications: boolean;
+    public aqiScoreNotifications: number;
+    public aqiScoreColor: string;
+    public aqiIndexName: string;
+
+    aqiThresholdDelayTimer?: any
 
     constructor(
         private generalNotificationSrvc: GeneralNotificationService,
@@ -25,6 +31,10 @@ export class UserNotificationSettingsComponent implements OnInit {
     ngOnInit() {
         this.generalNotificationSrvc.$active.pipe(first()).subscribe(res => this.generalNotification = res);
         this.userSettingsSrvc.$userLocationNotificationsActive.pipe(first()).subscribe(res => this.userLocationNotifications = res);
+        // @todo: get aqi score notif
+        this.userSettingsSrvc.$userAqiIndexThreshold.subscribe(res => this.aqiScoreNotifications = res);
+        this.aqiScoreColor = `aqi${this.aqiScoreNotifications}`
+        this.aqiIndexName = indexLabel[this.aqiScoreNotifications]
     }
 
     toggleGeneralNotification(event: MouseEvent) {
@@ -66,5 +76,39 @@ export class UserNotificationSettingsComponent implements OnInit {
 
     blurFocus() {
         this.loseFocus.next(false);
+    }
+
+    changeThresholdEnd(event) {
+        // console.log(this.aqiScoreNotifications, this.userLocationNotifications)
+        // if (this.aqiThresholdDelayTimer) clearTimeout(this.aqiThresholdDelayTimer)
+
+        // this.aqiThresholdDelayTimer = setTimeout(() => {
+        //     this.userSettingsSrvc.subscribeNotification().subscribe();
+        // })
+    }
+
+    changeThreshold(event) {
+        this.aqiScoreNotifications = event.target.value
+        this.aqiScoreColor = `aqi${event.target.value}`
+        this.aqiIndexName = indexLabel[event.target.value]
+
+        // Update user AQI threshold to storage
+        this.userSettingsSrvc.setUserAQIIndexThreshold(event.target.value)
+
+        if (this.aqiThresholdDelayTimer) clearTimeout(this.aqiThresholdDelayTimer)
+
+        this.aqiThresholdDelayTimer = setTimeout(() => {
+            const locations = this.userSettingsSrvc.getUserSavedLocations()
+
+            this.userSettingsSrvc.updateUserLocationsOrder(locations.map(location => ({
+                ...location,
+                indexThreshold: event.target.value
+            })))
+
+            if (this.userLocationNotifications) {
+                // resubscribe to update the index AQI threshold
+                this.userSettingsSrvc.subscribeNotification().subscribe();
+            }
+        }, 500)
     }
 }
