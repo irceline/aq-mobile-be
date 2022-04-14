@@ -4,6 +4,7 @@ import { AlertController, NavController, Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { forkJoin } from 'rxjs';
+import { Storage } from '@ionic/storage';
 
 import { ValueDate } from '../../common/enums';
 import { MainPhenomenon } from '../../common/phenomenon';
@@ -123,6 +124,7 @@ export class MainScreenComponent implements OnInit {
         public router: Router,
         public alertCtrl: AlertController,
         public navCtrl: NavController,
+        private storage: Storage
     ) {
         this.registerBackButtonEvent();
 
@@ -263,8 +265,9 @@ export class MainScreenComponent implements OnInit {
         this.screenHeight = this.platform.height();
 
         if (this.platform.is('ios')) this.iosPadding = 50;
-        // @todo: check whether user has push token or not
-        setTimeout(() => this.showPushNotifAlert(), 3000)
+        this.storage.get('GENERAL_NOTIFICATION_TOPIC_STORAGE_KEY').then((val) => {
+            if (val === null) setTimeout(() => this.showPushNotifAlert(), 3000)
+        })
     }
 
     ionViewWillEnter() {
