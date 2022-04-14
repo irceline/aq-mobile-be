@@ -31,6 +31,7 @@ export interface LocationSubscription {
     index?: number;
     key: string;
     version: string;
+    uniqueId: string;
 }
 
 export interface IBarChartData {

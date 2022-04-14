@@ -92,20 +92,23 @@ export class UserNotificationSettingsComponent implements OnInit {
         this.aqiScoreColor = `aqi${event.target.value}`
         this.aqiIndexName = indexLabel[event.target.value]
 
+        // Update user AQI threshold to storage
+        this.userSettingsSrvc.setUserAQIIndexThreshold(event.target.value)
+
         if (this.aqiThresholdDelayTimer) clearTimeout(this.aqiThresholdDelayTimer)
 
         this.aqiThresholdDelayTimer = setTimeout(() => {
-            console.log(this.aqiScoreNotifications, this.userLocationNotifications)
             const locations = this.userSettingsSrvc.getUserSavedLocations()
-
-            console.log(locations)
 
             this.userSettingsSrvc.updateUserLocationsOrder(locations.map(location => ({
                 ...location,
                 indexThreshold: event.target.value
             })))
 
-            this.userSettingsSrvc.subscribeNotification().subscribe();
+            if (this.userLocationNotifications) {
+                // resubscribe to update the index AQI threshold
+                this.userSettingsSrvc.subscribeNotification().subscribe();
+            }
         }, 500)
     }
 }
