@@ -121,7 +121,8 @@
 				"exercise": "Sporten",
 				"highConcentration": "(Te) hoge concentraties",
 				"official": "Officiële waarschuwingen op basis van een grondige analyse van de situatie",
-				"transport": "Verplaatsingen"
+				"transport": "Verplaatsingen",
+				"indexThreshold": "Drempelwaarschuwing op basis van AQI-score"
 			}
 		},
 		"screens": {

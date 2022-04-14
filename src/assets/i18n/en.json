@@ -121,7 +121,8 @@
 				"exercise": "Workout",
 				"highConcentration": "(Too) high concentrations",
 				"official": "Official alerts based on a thorough analysis of the situation",
-				"transport": "Getting around"
+				"transport": "Getting around",
+				"indexThreshold": "Threshold alert based on AQI score"
 			}
 		},
 		"screens": {

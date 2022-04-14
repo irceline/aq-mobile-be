@@ -121,7 +121,8 @@
 				"exercise": "Faire des exercices",
 				"highConcentration": "Concentrations (trop) élevées",
 				"official": "Alertes officielles basées sur une étude approfondie de la situation",
-				"transport": "Déplacements"
+				"transport": "Déplacements",
+				"indexThreshold": "Alerte de seuil basée sur le score AQI"
 			}
 		},
 		"screens": {

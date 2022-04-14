@@ -121,7 +121,8 @@
 				"exercise": "Training",
 				"highConcentration": "(Zu) hohe Konzentrationen",
 				"official": "Offizielle Warnmeldungen basierend auf einer gründlichen Analyse der Situation",
-				"transport": "Unterwegs"
+				"transport": "Unterwegs",
+				"indexThreshold": "Schwellenwertalarm basierend auf dem AQI-Score"
 			}
 		},
 		"screens": {

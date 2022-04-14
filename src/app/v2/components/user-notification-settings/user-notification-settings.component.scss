@@ -12,10 +12,15 @@
   ion-item {
     padding-inline-start: 16px;
     width: 100%;
+    img.icon-standard,
+    img.icon-dark {
+      height: 27px;
+      width: 27px;
+    }
   }
 
   ion-label {
-    color: white;
+    // color: white;
     font-size: 16px;
     display: flex;
     align-items: center;
@@ -27,6 +32,9 @@
       max-width: 20px;
       margin-right: 20px;
       margin-bottom: 0;
+    }
+    &.notification-desc {
+      color: white;
     }
   }
 
@@ -46,5 +54,45 @@
   .ion-no-padding {
     padding: 1em 0;
     padding-inline-start: 16px;
+  }
+
+  .notification-threshold {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 16px 16px 16px;
+    &--value-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: white;
+      border-radius: 20px;
+    }
+    &--value {
+      padding: 15px 20px;
+      font-size: 20px;
+      font-weight: 600;
+    }
+    ion-range {
+      width: 100%;
+      --bar-background: linear-gradient(
+        to right,
+        #1e7ae0,
+        #54bad3,
+        #29c442,
+        #27d25d,
+        #e3c823,
+        #de8207,
+        #de5328,
+        #de3f28,
+        #af234a,
+        #5d141e
+      );
+      --bar-height: 5px;
+      --bar-background-active: transparent;
+      --bar-border-radius: 20px;
+    }
   }
 }

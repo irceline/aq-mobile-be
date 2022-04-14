@@ -8,6 +8,7 @@ import { UserLocation } from '../Interfaces';
 import { UserLocationNotificationsService } from './user-location-notifications/user-location-notifications.service';
 
 const userLocationsLSkey = 'belAir.userLocations';
+const userAqiIndexThresholdKey = 'belAir.aqiIndexThreshold';
 
 const userLocationNotificationsLSkey = 'belAir.userLocationNotifications';
 
@@ -17,6 +18,7 @@ const userLocationNotificationsLSkey = 'belAir.userLocationNotifications';
 export class UserSettingsService {
 
     public $userLocations: BehaviorSubject<UserLocation[]>;
+    public $userAqiIndexThreshold: BehaviorSubject<number>;
 
     public $userLocationNotificationsActive: BehaviorSubject<boolean>;
 
@@ -42,6 +44,11 @@ export class UserSettingsService {
         this.$userLocationNotificationsActive = new BehaviorSubject(localStorage.getItem(userLocationNotificationsLSkey) === 'true');
 
         const userLocations = localStorage.getItem(userLocationsLSkey);
+        const userAqiIndexThreshold = localStorage.getItem(userAqiIndexThresholdKey);
+
+        console.log(`Got user AQI index threshold from localStorage:`, userAqiIndexThreshold);
+
+        this.$userAqiIndexThreshold = new BehaviorSubject(userAqiIndexThreshold ? parseInt(userAqiIndexThreshold) : 1);
 
         if (userLocations) {
             // todo : some verification that the stored data is not corrupt
@@ -71,6 +78,11 @@ export class UserSettingsService {
         });
     }
 
+    public setUserAQIIndexThreshold(value: number): void {
+        this.$userAqiIndexThreshold.next(value);
+        localStorage.setItem(userAqiIndexThresholdKey, value.toString());
+    }
+
     public getUserSavedLocations(): UserLocation[] {
         return this._userLocations;
     }
@@ -81,9 +93,10 @@ export class UserSettingsService {
             if (this._userLocations.find(loc => loc.latitude === location.latitude && loc.longitude === location.longitude) != undefined) {
                 return;
             };
+
             this._userLocations.unshift(location);
             if (this.$userLocationNotificationsActive.getValue()) {
-                this.userLocationNotificationSrvc.subscribeLocation(location).subscribe(res => this.saveLocations());
+                this.userLocationNotificationSrvc.subscribeLocation(location, this.$userAqiIndexThreshold.value).subscribe(res => this.saveLocations());
             } else {
                 this.saveLocations();
             }
@@ -102,7 +115,7 @@ export class UserSettingsService {
         matchedLocation.longitude = userLocation.longitude;
         if (this.$userLocationNotificationsActive.getValue()) {
             this.userLocationNotificationSrvc.unsubscribeLocation(matchedLocation).subscribe(() => {
-                this.userLocationNotificationSrvc.subscribeLocation(matchedLocation).subscribe();
+                this.userLocationNotificationSrvc.subscribeLocation(matchedLocation, this.$userAqiIndexThreshold.value).subscribe();
             })
         }
         this.saveLocations();
@@ -122,7 +135,11 @@ export class UserSettingsService {
     }
 
     public subscribeNotification(): Observable<boolean> {
-        const subscriptions = this.$userLocations.getValue().map(uLoc => this.userLocationNotificationSrvc.subscribeLocation(uLoc, true));
+        const subscriptions = this.$userLocations.getValue().map(uLoc => {
+            console.log(`subscribeNotification`, uLoc)
+            return this.userLocationNotificationSrvc.subscribeLocation(uLoc, this.$userAqiIndexThreshold.value);
+        });
+
         return forkJoin(subscriptions).pipe(
             catchError(error => {
                 console.error(error);
