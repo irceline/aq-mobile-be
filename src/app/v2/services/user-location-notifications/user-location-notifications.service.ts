@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { NavController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, Observer, Subject } from 'rxjs';
 
@@ -37,6 +38,7 @@ export class UserLocationNotificationsService {
     private http: HttpClient,
     private translate: TranslateService,
     private topicGenerator: UserLocationTopicGeneratorService,
+    private nav: NavController,
   ) {
 
     this.notifications.notificationReceived.subscribe(notification => {
@@ -47,6 +49,8 @@ export class UserLocationNotificationsService {
           lng: coords.lng,
           notification
         });
+
+        this.nav.navigateBack('main')
       }
     });
   }
