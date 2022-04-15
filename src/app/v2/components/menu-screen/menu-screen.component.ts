@@ -35,7 +35,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class MenuScreenComponent implements OnInit {
     @Output() menuClosed = new EventEmitter();
-    @ViewChild(IonContent, null) content: IonContent;
+    @ViewChild(IonContent) content: IonContent;
 
     public backgroundColor;
 
