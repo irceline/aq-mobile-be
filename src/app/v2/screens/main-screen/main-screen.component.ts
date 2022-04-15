@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
-import { Platform } from '@ionic/angular';
+import { AlertController, NavController, Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { forkJoin } from 'rxjs';
@@ -14,6 +14,8 @@ import { UserSettingsService } from '../../services/user-settings.service';
 import { AnnualMeanValueService } from '../../services/value-provider/annual-mean-value.service';
 import { ModelledValueService } from '../../services/value-provider/modelled-value.service';
 import moment from 'moment';
+import { GeneralNotificationService } from '../../services/push-notifications/general-notification.service';
+import { first } from 'rxjs/operators';
 
 interface IndexValueResult extends BelAqiIndexResult {
     value: number;
@@ -121,6 +123,9 @@ export class MainScreenComponent implements OnInit {
         private annulMeanValueService: AnnualMeanValueService,
         private platform: Platform,
         public router: Router,
+        public alertCtrl: AlertController,
+        public navCtrl: NavController,
+        private generalNotificationSrvc: GeneralNotificationService,
     ) {
         this.registerBackButtonEvent();
 
@@ -163,7 +168,7 @@ export class MainScreenComponent implements OnInit {
                     const data = res.filter(e => e !== null);
                     const belAqiData = [...res];
                     belAqiData.forEach((item, index) => {
-                        if (!item) belAqiData[index] = {indexScore: 0, location: data[0].location, valueDate: index }
+                        if (!item) belAqiData[index] = { indexScore: 0, location: data[0].location, valueDate: index }
                     })
 
                     this.belAqiForCurrentLocation = belAqiData;
@@ -261,6 +266,9 @@ export class MainScreenComponent implements OnInit {
         this.screenHeight = this.platform.height();
 
         if (this.platform.is('ios')) this.iosPadding = 50;
+        this.generalNotificationSrvc.$active.pipe(first()).subscribe(res => {
+            if (!res) setTimeout(() => this.showPushNotifAlert(), 3000)
+        })
     }
 
     ionViewWillEnter() {
@@ -291,7 +299,7 @@ export class MainScreenComponent implements OnInit {
             // Handling if there is null data in details
             const belAqiData = [...res];
             belAqiData.forEach((item, index) => {
-                if (!item) belAqiData[index] = {index: 0, value: 0, valueDate: index, date: moment() }
+                if (!item) belAqiData[index] = { index: 0, value: 0, valueDate: index, date: moment() }
             })
             this.valueTimeline = belAqiData
                 .filter(e => e !== null)
@@ -323,5 +331,23 @@ export class MainScreenComponent implements OnInit {
 
     updateClicked(value: boolean) {
         this.pullTabOpen = value
+    }
+
+    async showPushNotifAlert() {
+        const alert = await this.alertCtrl.create({
+            header: this.translateService.instant('v2.screens.menu.notifications'),
+            message: this.translateService.instant('v2.screens.onboarding.ask-notifications'),
+            buttons: [{
+                text: this.translateService.instant('controls.no'),
+                role: 'cancel',
+                cssClass: 'secondary',
+                handler: () => alert.dismiss(),
+            },
+            {
+                text: this.translateService.instant('controls.yes'),
+                handler: () => this.navCtrl.navigateForward('main/menu', { fragment: 'notification' }),
+            },],
+        });
+        await alert.present();
     }
 }
