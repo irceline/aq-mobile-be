@@ -28,7 +28,9 @@
 	"controls": {
 		"cancel": "Abbrechen",
 		"close": "Schließen",
-		"ok": "OK"
+		"ok": "OK",
+		"no": "Nein",
+		"yes": "Ja"
 	},
 	"edit-location-hint": "Sie können das Standortsymbol auf der Karte an jeden gewünschten Ort verschieben.",
 	"edit-location-label": {
