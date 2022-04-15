@@ -43,6 +43,11 @@
     border-radius: 25.5px;
   }
 
+  .custom-icon {
+    height: 24px;
+    width: 24px;
+  }
+
   .icon-standard {
     display: block;
   }
@@ -71,7 +76,7 @@
       border-radius: 20px;
     }
     &--value {
-      padding: 15px 20px;
+      padding: 5px 15px;
       font-size: 20px;
       font-weight: 600;
     }
