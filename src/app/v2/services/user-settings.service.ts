@@ -186,7 +186,14 @@ export class UserSettingsService {
         this.userLocationNotificationSrvc.receivedUserLocationNotification.subscribe(notif => {
             if (notif.notification.expiration.getTime() > new Date().getTime()) {
                 console.log(`receive Notification: ${notif.notification.topic}`);
-                const matchedUserLocation = this._userLocations.find(e => e.latitude === notif.lat && e.longitude === notif.lng);
+                const matchedUserLocation = this._userLocations.find(e => {
+                    if (!e.subscription) {
+                        return false
+                    }
+
+                    return String(e.subscription.lat) === String(notif.lat)
+                        && String(e.subscription.lng) === String(notif.lng)
+                });
                 console.log(`found match '${matchedUserLocation.label}' for notification`);
                 matchedUserLocation.notification = notif.notification;
                 if (this.notificationExpirationTimer.has(matchedUserLocation.id)) {
@@ -198,6 +205,10 @@ export class UserSettingsService {
                 }
                 const expirationTimer = timer(notif.notification.expiration).subscribe(() => this.clearNotification(matchedUserLocation));
                 this.notificationExpirationTimer.set(matchedUserLocation.id, expirationTimer);
+
+                // set default user location
+                this.selectedUserLocation = matchedUserLocation
+
                 this.saveLocations();
             } else {
                 console.log(`Notification expired`);

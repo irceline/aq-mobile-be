@@ -60,13 +60,17 @@ export class UserLocationNotificationsService {
 
       // register to Backend
       this.registerSubscription(subscription).subscribe(
-        subscriptionId => {
-          if (subscriptionId) {
+        (data: any) => {
+          if (data) {
             // subscribe to Topic
-            const topic = this.topicGenerator.generateTopic(location.latitude, location.longitude, langCode);
+            const topic = this.topicGenerator.generateTopic(data.lat, data.lng, langCode);
             this.notifications.subscribeTopic(topic).subscribe(
               () => {
-                location.subscription = subscription;
+                location.subscription = {
+                  ...data,
+                  uniqueId: data.unique_id
+                };
+                
                 observer.next(true);
                 observer.complete();
               },
@@ -113,8 +117,8 @@ export class UserLocationNotificationsService {
     });
   }
 
-  private registerSubscription(subscription: LocationSubscription): Observable<number> {
-    return new Observable<number>((observer: Observer<number>) => {
+  private registerSubscription(subscription: LocationSubscription): Observable<LocationSubscription> {
+    return new Observable<LocationSubscription>((observer: Observer<any>) => {
 
       const encriptedSubscription = this.encryption.encrypt(JSON.stringify(subscription));
       if (encriptedSubscription) {
@@ -123,7 +127,7 @@ export class UserLocationNotificationsService {
           responseType: 'text'
         }).subscribe(
           response => {
-            observer.next(response.body && !isNaN(parseInt(response.body)) ? parseInt(response.body) : null);
+            observer.next(typeof response.body === 'string' ? JSON.parse(response.body) : null);
             observer.complete();
 
           }, () => {
