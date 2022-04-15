@@ -4,7 +4,6 @@ import { AlertController, NavController, Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { forkJoin } from 'rxjs';
-import { Storage } from '@ionic/storage';
 
 import { ValueDate } from '../../common/enums';
 import { MainPhenomenon } from '../../common/phenomenon';
@@ -15,6 +14,8 @@ import { UserSettingsService } from '../../services/user-settings.service';
 import { AnnualMeanValueService } from '../../services/value-provider/annual-mean-value.service';
 import { ModelledValueService } from '../../services/value-provider/modelled-value.service';
 import moment from 'moment';
+import { GeneralNotificationService } from '../../services/push-notifications/general-notification.service';
+import { first } from 'rxjs/operators';
 
 interface IndexValueResult extends BelAqiIndexResult {
     value: number;
@@ -124,7 +125,7 @@ export class MainScreenComponent implements OnInit {
         public router: Router,
         public alertCtrl: AlertController,
         public navCtrl: NavController,
-        private storage: Storage
+        private generalNotificationSrvc: GeneralNotificationService,
     ) {
         this.registerBackButtonEvent();
 
@@ -265,8 +266,8 @@ export class MainScreenComponent implements OnInit {
         this.screenHeight = this.platform.height();
 
         if (this.platform.is('ios')) this.iosPadding = 50;
-        this.storage.get('GENERAL_NOTIFICATION_TOPIC_STORAGE_KEY').then((val) => {
-            if (val === null) setTimeout(() => this.showPushNotifAlert(), 3000)
+        this.generalNotificationSrvc.$active.pipe(first()).subscribe(res => {
+            if (!res) setTimeout(() => this.showPushNotifAlert(), 3000)
         })
     }
 
