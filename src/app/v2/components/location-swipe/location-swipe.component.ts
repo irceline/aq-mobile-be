@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
+import { Observable, Subscription } from 'rxjs';
 
 import { UserLocation } from '../../Interfaces';
 
@@ -9,10 +10,22 @@ import { UserLocation } from '../../Interfaces';
     styleUrls: ['./location-swipe.component.scss', './location-swipe.component.hc.scss'],
 })
 export class LocationSwipeComponent implements OnInit {
+    private eventsSubscription: Subscription;
+    
     @ViewChild(IonSlides, { static: true }) slides: IonSlides;
     @Output() locationChange = new EventEmitter<UserLocation>();
     @Input() locations: UserLocation[] = [];
-    @Input() activeIndex: number;
+    @Input() slideEvent: Observable<number>;
+
+    private _activeIndex: number;
+    
+    @Input() set activeIndex(value: number) {
+        this._activeIndex = value;
+    }
+    
+    get activeIndex(): number {
+        return this._activeIndex;
+    }
 
     sliderOptions = {
         spaceBetween: 20,
@@ -22,11 +35,21 @@ export class LocationSwipeComponent implements OnInit {
 
     constructor() { }
 
+    ngOnDestroy() {
+        this.eventsSubscription.unsubscribe();
+    }
+
     ngOnInit() {
         if (!isNaN(this.activeIndex)) {
             this.slides.slideTo(this.activeIndex);
             this.slides.update();
         }
+
+        this.eventsSubscription = this.slideEvent.subscribe((index) => {
+            this.activeIndex = index
+            this.slides.slideTo(index);
+            this.slides.update();
+        });
     }
 
     // Emit location change

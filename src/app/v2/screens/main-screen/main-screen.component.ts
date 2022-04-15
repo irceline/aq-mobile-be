@@ -3,7 +3,7 @@ import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 import { Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Subject } from 'rxjs';
 
 import { ValueDate } from '../../common/enums';
 import { MainPhenomenon } from '../../common/phenomenon';
@@ -113,6 +113,8 @@ export class MainScreenComponent implements OnInit {
     iosPadding = 0;
     pullTabOpen = false;
 
+    slideEvent: Subject<number> = new Subject<number>();
+
     constructor(
         public userSettingsService: UserSettingsService,
         private translateService: TranslateService,
@@ -156,7 +158,13 @@ export class MainScreenComponent implements OnInit {
     }
 
     private updateCurrentLocation(loadFinishedCb?: () => any) {
+       
+
         if (this.userSettingsService.selectedUserLocation) {
+            const index = this.locations.findIndex(d => d.label === this.userSettingsService.selectedUserLocation.label);
+
+            this.slideEvent.next(index);
+            
             return this.belAqiService.getIndexScoresAsObservable(this.userSettingsService.selectedUserLocation).subscribe(
                 res => {
                     // Handling if there is null data main timeline
