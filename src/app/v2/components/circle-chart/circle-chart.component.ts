@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Settings, SettingsService } from '@helgoland/core';
 import { Platform, PopoverController } from '@ionic/angular';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
@@ -70,7 +71,8 @@ export class CircleChartComponent implements OnInit {
         private themeHandlerService: ThemeHandlerService,
         private platform: Platform,
         private annualMeanValueSrvc: AnnualMeanValueService,
-        private settingsSrvc: SettingsService<Settings>
+        private settingsSrvc: SettingsService<Settings>,
+        private route: ActivatedRoute
     ) {
         this.belaqiService.$activeIndex.subscribe((newIndex) => {
             if (newIndex) {
@@ -97,7 +99,7 @@ export class CircleChartComponent implements OnInit {
             }
         })
 
-        translate.onLangChange.subscribe((event: LangChangeEvent)  => {
+        translate.onLangChange.subscribe((event: LangChangeEvent) => {
             this._initializeChart(() => {
                 this._initialize();
             })
@@ -107,6 +109,14 @@ export class CircleChartComponent implements OnInit {
     ngAfterViewInit() {
         this._initializeChart(() => {
             this._initialize();
+        })
+        this.route.queryParams.subscribe(params => {
+            this.zone.run(() => {
+                if (params.notification) {
+                    this.activeUserLocation.notification = params.notification
+                    document.getElementById('notif-btn').dispatchEvent(new Event('click'))
+                }
+            })
         })
     }
 
@@ -121,18 +131,22 @@ export class CircleChartComponent implements OnInit {
     }
 
     public openNotification(ev: Event) {
-        const notifications = [];
-        if (this.notification) {
-            notifications.push(this.notification);
+        try {
+            const notifications = [];
+            if (this.notification) {
+                notifications.push(this.notification);
+            }
+            if (this.activeUserLocation.notification) {
+                notifications.push(this.activeUserLocation.notification);
+            }
+            this.popoverController.create({
+                component: NotificationPopoverComponent,
+                event: ev,
+                componentProps: { notifications }
+            }).then(popover => popover.present());
+        } catch (error) {
+
         }
-        if (this.activeUserLocation.notification) {
-            notifications.push(this.activeUserLocation.notification);
-        }
-        this.popoverController.create({
-            component: NotificationPopoverComponent,
-            event: ev,
-            componentProps: { notifications }
-        }).then(popover => popover.present());
     }
 
     private _initializeChart(cb?) {
@@ -184,14 +198,14 @@ export class CircleChartComponent implements OnInit {
             .attr('fill', 'rgba(0,0,0,0.1)')
             .attr("stroke-width", 1)
             .attr("stroke", "rgba(0,0,0,0.1)")
-            .datum({startAngle: this.belAqiScale(11), endAngle: this.belAqiScale(0)})
+            .datum({ startAngle: this.belAqiScale(11), endAngle: this.belAqiScale(0) })
             .attr("d", this.wheelArc)
 
         this.wheel = g.append("path")
             .attr('fill', this.chartColor)
             .attr("stroke-width", 1)
             .attr("stroke", "white")
-            .datum({startAngle: this.belAqiScale(11), endAngle: this.belAqiScale(11)})
+            .datum({ startAngle: this.belAqiScale(11), endAngle: this.belAqiScale(11) })
             .attr("d", this.wheelArc)
 
         g.append('path')
@@ -199,7 +213,7 @@ export class CircleChartComponent implements OnInit {
             .attr('stroke', 'rgba(0,0,0,0.2)')
             .attr('stroke-width', '5')
             .attr('stroke-linejoin', 'bevel')
-            .attr('stroke-dasharray', `2, ${k/11}`)
+            .attr('stroke-dasharray', `2, ${k / 11}`)
             .style('mix-blend-mode', 'multiply')
             .attr('d', railArc)
 
@@ -207,8 +221,8 @@ export class CircleChartComponent implements OnInit {
             .append('circle')
             .attr('fill', this.chartColor)
             .attr('r', this.dotRadius)
-            .attr('cx', this.wheelArc.centroid({startAngle: Math.PI * -0.975, endAngle: Math.PI * 0.975})[0])
-            .attr('cy', this.wheelArc.centroid({startAngle: Math.PI * -0.975, endAngle: Math.PI * 0.975})[1])
+            .attr('cx', this.wheelArc.centroid({ startAngle: Math.PI * -0.975, endAngle: Math.PI * 0.975 })[0])
+            .attr('cy', this.wheelArc.centroid({ startAngle: Math.PI * -0.975, endAngle: Math.PI * 0.975 })[1])
 
         this._initialize();
     }
