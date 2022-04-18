@@ -20,7 +20,10 @@ export interface UserLocationNotification {
   notification: PushNotification
 }
 
-const NOTIFICATION_SUBSCRIPTION_BACKEND_URL = 'https://www.irceline.be/air/belair_channel.php';
+// const NOTIFICATION_SUBSCRIPTION_BACKEND_URL = 'https://www.irceline.be/air/belair_channel.php';
+// TODO change this later when test complete
+const NOTIFICATION_SUBSCRIPTION_BACKEND_URL = 'http://52.59.34.103:8086/belair_channel.php';
+// const NOTIFICATION_SUBSCRIPTION_BACKEND_URL = 'http://192.168.0.7:8086/belair_channel.php';
 const USER_LOCATION_SUBSCRIPTIONS_PARAM = 'user_location_subscriptions';
 
 @Injectable({
@@ -50,26 +53,31 @@ export class UserLocationNotificationsService {
     });
   }
 
-  public subscribeLocation(location: UserLocation, isLocation = false): Observable<boolean> {
+  public subscribeLocation(location: UserLocation, index: number = null): Observable<boolean> {
     const langCode = this.translate.currentLang;
     return new Observable<boolean>((observer: Observer<boolean>) => {
-      const subscription = this.generateSubscriptionObject(location.latitude, location.longitude, langCode, isLocation ? 1 : undefined);
+      const subscription = this.generateSubscriptionObject(location.latitude, location.longitude, langCode, index, location.subscription ? location.subscription.uniqueId : null);
 
       // register to Backend
       this.registerSubscription(subscription).subscribe(
-        success => {
-          if (success) {
+        (data: any) => {
+          if (data) {
             // subscribe to Topic
-            const topic = this.topicGenerator.generateTopic(location.latitude, location.longitude, langCode);
+            const topic = this.topicGenerator.generateTopic(data.lat, data.lng, langCode);
             this.notifications.subscribeTopic(topic).subscribe(
               () => {
-                location.subscription = subscription;
+                location.subscription = {
+                  ...data,
+                  uniqueId: data.unique_id
+                };
+                
                 observer.next(true);
                 observer.complete();
               },
               () => this.publishError(observer, UserLocationSubscriptionError.NotificationSubscription)
             )
           } else {
+            console.log(`registerSubscription failed`, subscription);
             this.publishError(observer, UserLocationSubscriptionError.BackendRegistration);
           }
         },
@@ -109,8 +117,8 @@ export class UserLocationNotificationsService {
     });
   }
 
-  private registerSubscription(subscription: LocationSubscription): Observable<boolean> {
-    return new Observable<boolean>((observer: Observer<boolean>) => {
+  private registerSubscription(subscription: LocationSubscription): Observable<LocationSubscription> {
+    return new Observable<LocationSubscription>((observer: Observer<any>) => {
 
       const encriptedSubscription = this.encryption.encrypt(JSON.stringify(subscription));
       if (encriptedSubscription) {
@@ -119,8 +127,9 @@ export class UserLocationNotificationsService {
           responseType: 'text'
         }).subscribe(
           response => {
-            observer.next(response.status === 200);
+            observer.next(typeof response.body === 'string' ? JSON.parse(response.body) : null);
             observer.complete();
+
           }, () => {
             observer.error(UserLocationSubscriptionError.BackendRegistration);
             observer.complete();
@@ -135,7 +144,8 @@ export class UserLocationNotificationsService {
   private deleteSubscription(subscription: LocationSubscription): Observable<boolean> {
     return new Observable<boolean>((observer: Observer<boolean>) => {
 
-      this.http.delete(`${NOTIFICATION_SUBSCRIPTION_BACKEND_URL}?key=${subscription.key}`, {
+
+      this.http.delete(`${NOTIFICATION_SUBSCRIPTION_BACKEND_URL}?key=${subscription.key}&uniqueId=${subscription.uniqueId}`, {
         observe: 'response',
         responseType: 'text'
       }).subscribe(
@@ -154,7 +164,7 @@ export class UserLocationNotificationsService {
     observer.complete();
   }
 
-  private generateSubscriptionObject(lat: number, lng: number, language: string, index: number): LocationSubscription {
+  private generateSubscriptionObject(lat: number, lng: number, language: string, index: number, uniqueId: string = null): LocationSubscription {
     return {
       lat,
       lng,
@@ -162,6 +172,7 @@ export class UserLocationNotificationsService {
       index,
       key: this.notifications.fcmToken,
       version: this.notifications.appVersion,
+      uniqueId: uniqueId ? uniqueId : this.generateKey()
     };
   }
 

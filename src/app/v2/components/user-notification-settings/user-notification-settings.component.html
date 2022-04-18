@@ -17,9 +17,9 @@
     <ion-toggle mode="ios" [ngModel]="userLocationNotifications" color="success"
       (click)="toggleUserLocationNotifications($event)" (ionFocus)="hasFocus()" (ionBlur)="blurFocus()"></ion-toggle>
   </ion-item>
-  <ion-item lines="none" class="ion-no-padding">
-    <img class="icon-standard" name="alert-circle-outline" src="/assets/images/icons/alert-white.png" slot="start" />
-    <img class="icon-dark" src="/assets/images/icons/alert-dark.png" slot="start" />
+  <ion-item lines="none" class="ion-no-padding threshold-desc">
+    <ion-img class="icon-standard custom-icon" src="/assets/images/icons/alert-white.png" slot="start"></ion-img>
+    <ion-img class="icon-dark custom-icon" src="/assets/images/icons/alert-dark.png" slot="start"></ion-img>
     <ion-label class="notification-desc" text-wrap>
       {{ 'v2.components.user-notification-settings.indexThreshold' |translate }}
     </ion-label>
