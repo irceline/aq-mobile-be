@@ -36,7 +36,9 @@ export class LocationSwipeComponent implements OnInit {
     constructor() { }
 
     ngOnDestroy() {
-        this.eventsSubscription.unsubscribe();
+        if (this.eventsSubscription) {
+            this.eventsSubscription.unsubscribe();
+        }
     }
 
     ngOnInit() {
@@ -45,11 +47,13 @@ export class LocationSwipeComponent implements OnInit {
             this.slides.update();
         }
 
-        this.eventsSubscription = this.slideEvent.subscribe((index) => {
-            this.activeIndex = index
-            this.slides.slideTo(index);
-            this.slides.update();
-        });
+        if (this.slideEvent) {
+            this.eventsSubscription = this.slideEvent.subscribe((index) => {
+                this.activeIndex = index
+                this.slides.slideTo(index);
+                this.slides.update();
+            });
+        }
     }
 
     // Emit location change

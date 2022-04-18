@@ -136,7 +136,6 @@ export class UserSettingsService {
 
     public subscribeNotification(): Observable<boolean> {
         const subscriptions = this.$userLocations.getValue().map(uLoc => {
-            console.log(`subscribeNotification`, uLoc)
             return this.userLocationNotificationSrvc.subscribeLocation(uLoc, this.$userAqiIndexThreshold.value);
         });
 
