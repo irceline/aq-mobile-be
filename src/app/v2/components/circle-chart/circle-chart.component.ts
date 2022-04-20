@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Settings, SettingsService } from '@helgoland/core';
-import { Platform, PopoverController } from '@ionic/angular';
+import { NavController, Platform, PopoverController } from '@ionic/angular';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 import { select, scaleLinear, path, arc, interpolate } from 'd3';
 import { Subscription } from 'rxjs';
@@ -72,7 +72,9 @@ export class CircleChartComponent implements OnInit {
         private platform: Platform,
         private annualMeanValueSrvc: AnnualMeanValueService,
         private settingsSrvc: SettingsService<Settings>,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private router: Router,
+        private nav: NavController
     ) {
         this.belaqiService.$activeIndex.subscribe((newIndex) => {
             if (newIndex) {
@@ -110,20 +112,19 @@ export class CircleChartComponent implements OnInit {
         this._initializeChart(() => {
             this._initialize();
         })
-        this.route.queryParams.subscribe(params => {
-            this.zone.run(() => {
-                if (params.notification) {
-                    this.activeUserLocation.notification = params.notification
-                    document.getElementById('notif-btn').dispatchEvent(new Event('click'))
-                }
-            })
-        })
     }
 
     ngOnInit() {
         this.generalNotification.getNotifications().subscribe(notif => this.zone.run(() => this.notification = notif));
         this.generalNotification.$active.subscribe(active => this.notificationActive = active);
         this.isIos = this.platform.is('ios');
+        this.route.queryParams.subscribe(params => {
+            if (params.notification) {
+                this.activeUserLocation.notification = params.notification
+                document.getElementById('notif-btn').dispatchEvent(new Event('click'))
+                setTimeout(() => this.router.navigate(['.'], { relativeTo: this.route, queryParams: { ...params, notification: null } }), 500)
+            }
+        })
     }
 
     getChartHeight() {
