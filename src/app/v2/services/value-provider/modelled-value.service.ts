@@ -101,10 +101,11 @@ export class ModelledValueService extends ValueProvider {
           .subscribe(
             res => {
               const value = this.getValueOfResponse(res);
+              const roundValue = Math.round(value);
               if (isDefined(value)) {
                 observer.next({
                   value,
-                  index: this.categorize(value, phenomenon),
+                  index: this.categorize(roundValue, phenomenon),
                   date: moment(timeparam),
                   valueDate: ValueDate.CURRENT
                 });
@@ -186,10 +187,11 @@ export class ModelledValueService extends ValueProvider {
             .subscribe(
               res => {
                 const value = this.getValueOfResponse(res);
+                const roundValue = Math.round(value);
                 if (isDefined(value) && value !== -9999) {
                   observer.next({
                     value,
-                    index: this.categorize(value, phenomenon),
+                    index: this.categorize(roundValue, phenomenon),
                     date: this.createDate(date),
                     valueDate: date
                   });
@@ -223,10 +225,11 @@ export class ModelledValueService extends ValueProvider {
           .subscribe(
             res => {
               const value = this.getValueOfResponse(res);
+              const roundValue = Math.round(value);
               if (isDefined(value)) {
                 observer.next({
                   value,
-                  index: this.categorize(value, phenomenon),
+                  index: this.categorize(roundValue, phenomenon),
                   date: this.createDate(date),
                   valueDate: date
                 });

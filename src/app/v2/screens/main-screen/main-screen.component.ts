@@ -1,16 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 import { Platform } from '@ionic/angular';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { forkJoin } from 'rxjs';
 
 import { ValueDate } from '../../common/enums';
 import { MainPhenomenon } from '../../common/phenomenon';
+import { PullTabComponent } from '../../components/pull-tab/pull-tab.component';
 import { DataPoint, Substance, UserLocation } from '../../Interfaces';
 import { BelAqiIndexResult, BelAQIService } from '../../services/bel-aqi.service';
 import { UserSettingsService } from '../../services/user-settings.service';
 import { AnnualMeanValueService } from '../../services/value-provider/annual-mean-value.service';
 import { ModelledValueService } from '../../services/value-provider/modelled-value.service';
+import moment from 'moment';
 
 interface IndexValueResult extends BelAqiIndexResult {
     value: number;
@@ -26,9 +29,12 @@ marker('v2.screens.app-info.belaqi-title');
     selector: 'app-main-screen',
     templateUrl: './main-screen.component.html',
     styleUrls: ['./main-screen.component.scss', './main-screen.component.hc.scss'],
-    animations: [],
+    animations: []
 })
 export class MainScreenComponent implements OnInit {
+    @ViewChild('backButton') backButton: ElementRef<HTMLElement>;
+    @ViewChild(PullTabComponent) pullTab;
+
     // location data
     locations: UserLocation[] = [];
 
@@ -100,10 +106,12 @@ export class MainScreenComponent implements OnInit {
     protected belAqi = 10;
 
     detailPoint: DataPoint = null;
+    detailActive = false;
     contentHeight = 0;
     screenHeight = 0;
 
     iosPadding = 0;
+    pullTabOpen = false;
 
     constructor(
         public userSettingsService: UserSettingsService,
@@ -112,7 +120,10 @@ export class MainScreenComponent implements OnInit {
         private modelledValueService: ModelledValueService,
         private annulMeanValueService: AnnualMeanValueService,
         private platform: Platform,
+        public router: Router,
     ) {
+        this.registerBackButtonEvent();
+
         this.locations = this.userSettingsService.getUserSavedLocations();
 
         this.userSettingsService.$userLocations.subscribe((locations) => {
@@ -121,11 +132,41 @@ export class MainScreenComponent implements OnInit {
         });
     }
 
+    registerBackButtonEvent() {
+        this.platform.backButton.subscribe(() => {
+            if (this.router.url === '/main') {
+                if (this.detailActive) {
+                    let el: HTMLElement = this.backButton.nativeElement;
+                    el.click();
+                } else {
+                    if (this.pullTabOpen) this.closeTabAction();
+                    else navigator['app'].exitApp();
+                }
+            }
+        });
+    }
+
+    backDetailAction() {
+        this.detailActive = false;
+        this.detailPoint = null;
+    }
+
+    closeTabAction() {
+        this.pullTab.handlePan({ additionalEvent: 'pandown', center: { y: 0 } })
+    }
+
     private updateCurrentLocation(loadFinishedCb?: () => any) {
         if (this.userSettingsService.selectedUserLocation) {
             return this.belAqiService.getIndexScoresAsObservable(this.userSettingsService.selectedUserLocation).subscribe(
                 res => {
-                    this.belAqiForCurrentLocation = res.filter(e => e !== null);
+                    // Handling if there is null data main timeline
+                    const data = res.filter(e => e !== null);
+                    const belAqiData = [...res];
+                    belAqiData.forEach((item, index) => {
+                        if (!item) belAqiData[index] = {indexScore: 0, location: data[0].location, valueDate: index }
+                    })
+
+                    this.belAqiForCurrentLocation = belAqiData;
                     this.updateDetailData(loadFinishedCb);
                 }, error => {
                     console.error('Error occured while fetching the bel aqi indicies');
@@ -241,12 +282,18 @@ export class MainScreenComponent implements OnInit {
     }
 
     openDetails(selectedDataPoint: DataPoint) {
+        this.detailActive = true;
         this.detailPoint = selectedDataPoint;
         this.modelledValueService.getValueTimeline(
             this.userSettingsService.selectedUserLocation,
             selectedDataPoint.substance.phenomenon
         ).subscribe(res => {
-            this.valueTimeline = res
+            // Handling if there is null data in details
+            const belAqiData = [...res];
+            belAqiData.forEach((item, index) => {
+                if (!item) belAqiData[index] = {index: 0, value: 0, valueDate: index, date: moment() }
+            })
+            this.valueTimeline = belAqiData
                 .filter(e => e !== null)
                 .map(e => ({
                     date: e.date,
@@ -259,6 +306,7 @@ export class MainScreenComponent implements OnInit {
     }
 
     openBelaqiDetails() {
+        this.detailActive = true;
         this.detailPoint = this.belaqiDetailData;
         this.valueTimeline = this.belAqiForCurrentLocation;
     }
@@ -271,5 +319,9 @@ export class MainScreenComponent implements OnInit {
         if (location) {
             this.userSettingsService.addUserLocation(location);
         }
+    }
+
+    updateClicked(value: boolean) {
+        this.pullTabOpen = value
     }
 }

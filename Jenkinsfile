@@ -9,9 +9,12 @@ pipeline {
         KEYSTORE_NAME = 'irceline2018.keystore'
         HOME = "${WORKSPACE}"
         NPM_CONFIG_CACHE = "${WORKSPACE}/.npm"
+        APP_VERSION = ""
     }
     
     agent any
+    
+    tools {nodejs "node.js"}
 
     stages {
         stage('Configure environment') {
@@ -70,78 +73,82 @@ pipeline {
         stage('Publish to playstore') {
             steps {
                 script {
+                    sh "npm i xml2js"
+                    APP_VERSION = sh(returnStdout: true, script: 'echo $(node tools/bump_version.js \$BUILD_NUMBER)')
+                    sh "echo ${APP_VERSION}"
+                    
                     androidApkUpload(
                         googleCredentialsId: 'belair_svc_account',
                         filesPattern: 'app-release.aab',
                         rolloutPercentage: '100',
                         trackName: 'internal',
-                        releaseName: "build $BUILD_NUMBER",
+                        releaseName: "Version: ${APP_VERSION}",
                     )
                 }
             }
         }
 
-        stage('Run Device Farm Test') {
-            steps {
-                devicefarm (
-                    projectName: 'AcopicTest',
-                    devicePoolName: 'Top Devices',
-                    // testSpecName: 'nebulae.yml',
-                    testSpecName: '',
-                    // environmentToRun: 'CustomEnvironment',
-                    environmentToRun: '',
-                    appArtifact:'app-debug-latest.apk',
-                    runName: "Belair-build-${BUILD_ID}",
-                    // testToRun: 'APPIUM_JAVA_TESTNG',
-                    testToRun: 'BUILTIN_FUZZ',
-                    storeResults: '',
-                    isRunUnmetered: '',
-                    eventCount: '',
-                    eventThrottle: '',
-                    seed: '',
-                    username: '',
-                    password: '',
-                    appiumJavaJUnitTest: '',
-                    appiumJavaTestNGTest: 'test.zip',
-                    appiumPythonTest: '',
-                    appiumRubyTest: '',
-                    appiumNodeTest: '',
-                    calabashFeatures: '',
-                    calabashTags: '',
-                    calabashProfile: '',
-                    junitArtifact: '',
-                    junitFilter: '',
-                    uiautomatorArtifact: '',
-                    uiautomatorFilter: '',
-                    uiautomationArtifact: '',
-                    xctestArtifact: '',
-                    xctestFilter: '',
-                    xctestUiArtifact: '',
-                    xctestUiFilter: '',
-                    appiumVersionJunit: '',
-                    appiumVersionPython: '',
-                    appiumVersionTestng: '',
-                    ifWebApp: false,
-                    extraData: false,
-                    extraDataArtifact: '',
-                    deviceLocation: false,
-                    deviceLatitude: 0,
-                    deviceLongitude: 0,
-                    radioDetails: true,
-                    ifBluetooth: true,
-                    ifWifi: true,
-                    ifGPS: true,
-                    ifNfc: false,
-                    jobTimeoutMinutes: 10,
-                    ifVideoRecording: true,
-                    ifAppPerformanceMonitoring: false,
-                    ignoreRunError: false,
-                    ifVpce: false,
-                    ifSkipAppResigning: false,
-                    vpceServiceName: '',
-                )
-            }
-        }
+        // stage('Run Device Farm Test') {
+        //     steps {
+        //         devicefarm (
+        //             projectName: 'AcopicTest',
+        //             devicePoolName: 'Top Devices',
+        //             // testSpecName: 'nebulae.yml',
+        //             testSpecName: '',
+        //             // environmentToRun: 'CustomEnvironment',
+        //             environmentToRun: '',
+        //             appArtifact:'app-debug-latest.apk',
+        //             runName: "Belair-build-${BUILD_ID}",
+        //             // testToRun: 'APPIUM_JAVA_TESTNG',
+        //             testToRun: 'BUILTIN_FUZZ',
+        //             storeResults: '',
+        //             isRunUnmetered: '',
+        //             eventCount: '',
+        //             eventThrottle: '',
+        //             seed: '',
+        //             username: '',
+        //             password: '',
+        //             appiumJavaJUnitTest: '',
+        //             appiumJavaTestNGTest: 'test.zip',
+        //             appiumPythonTest: '',
+        //             appiumRubyTest: '',
+        //             appiumNodeTest: '',
+        //             calabashFeatures: '',
+        //             calabashTags: '',
+        //             calabashProfile: '',
+        //             junitArtifact: '',
+        //             junitFilter: '',
+        //             uiautomatorArtifact: '',
+        //             uiautomatorFilter: '',
+        //             uiautomationArtifact: '',
+        //             xctestArtifact: '',
+        //             xctestFilter: '',
+        //             xctestUiArtifact: '',
+        //             xctestUiFilter: '',
+        //             appiumVersionJunit: '',
+        //             appiumVersionPython: '',
+        //             appiumVersionTestng: '',
+        //             ifWebApp: false,
+        //             extraData: false,
+        //             extraDataArtifact: '',
+        //             deviceLocation: false,
+        //             deviceLatitude: 0,
+        //             deviceLongitude: 0,
+        //             radioDetails: true,
+        //             ifBluetooth: true,
+        //             ifWifi: true,
+        //             ifGPS: true,
+        //             ifNfc: false,
+        //             jobTimeoutMinutes: 10,
+        //             ifVideoRecording: true,
+        //             ifAppPerformanceMonitoring: false,
+        //             ignoreRunError: false,
+        //             ifVpce: false,
+        //             ifSkipAppResigning: false,
+        //             vpceServiceName: '',
+        //         )
+        //     }
+        // }
     }
 
     post {

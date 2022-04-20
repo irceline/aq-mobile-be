@@ -47,7 +47,7 @@ pipeline {
 
         stage('Archive artifact to s3') {
             steps {
-                archiveArtifacts artifacts: 'platforms/ios/build/device/BelAir_v2.ipa', fingerprint: true
+                archiveArtifacts artifacts: 'platforms/ios/build/device/BelAir.ipa', fingerprint: true
             }
         }
     }

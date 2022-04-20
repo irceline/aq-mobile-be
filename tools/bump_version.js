@@ -40,7 +40,6 @@ fs.readFile('config.xml', 'utf8', function(err, data) {
         if(typeof result['widget']['$']['version'] === 'undefined') {
             versionCode = ['0', '0', '1']
             versionCode.splice(3, 1, args[0])
-            console.log('Version Undefined; Setting to 0.0.1');
         } else {
             let v = result['widget']['$']['version'].split('.');
             versionCode = v
@@ -66,7 +65,7 @@ fs.readFile('config.xml', 'utf8', function(err, data) {
                 return console.log(err);
             }
 
-            console.log('Build & version numbers successfully incremented');
+            console.log(versionCode.join('.'))
         });
 
     });

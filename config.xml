@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="1802" id="be.irceline.aqmobile" ios-CFBundleVersion="1.8.0.2" version="1.8.0" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-versionCode="1802" id="be.irceline.aqmobile" ios-CFBundleVersion="1.8.1.0" version="1.8.1" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>BelAir</name>
     <description>Personalised air quality data throughout Belgium</description>
     <author email="belair@irceline.be" href="https://www.irceline.be/">The BelAir Team</author>
@@ -16,13 +16,17 @@
     <allow-intent href="geo:*" />
     <preference name="ScrollEnabled" value="false" />
     <preference name="android-minSdkVersion" value="22" />
-    <preference name="android-targetSdkVersion" value="29" />
+    <preference name="android-targetSdkVersion" value="30" />
     <preference name="BackupWebStorage" value="none" />
-    <preference name="ShowSplashScreen" value="false" />
+    <preference name="AutoHideSplashScreen" value="true" />
+    <preference name="SplashScreenDelay" value="5000" />
+    <preference name="FadeSplashScreenDuration" value="1000" />
+    <preference name="SplashScreen" value="screen" />
+    <preference name="ShowSplashScreen" value="true" />
+    <preference name="ShowSplashScreenSpinner" value="false" />
+    <preference name="SplashMaintainAspectRatio" value="true" />
+    <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="FadeSplashScreen" value="false" />
-    <preference name="AutoHideSplashScreen" value="false" />
-    <preference name="SplashScreenDelay" value="0" />
-    <preference name="SplashScreen" value="none" />
     <preference name="orientation" value="portrait" />
     <hook src="hooks/before_compile.js" type="before_compile" />
     <platform name="android">
@@ -54,6 +58,7 @@
         <preference name="StatusBarStyle" value="default" />
         <preference name="DisallowOverscroll" value="true" />
         <preference name="WKWebViewOnly" value="true" />
+        <preference name="deployment-target" value="11.0" />
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
         <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
@@ -117,8 +122,6 @@
     <plugin name="cordova-plugin-statusbar" spec="2.4.2" />
     <plugin name="cordova-sqlite-storage" spec="3.1.0" />
     <plugin name="cordova-plugin-geolocation" spec="4.0.1" />
-    <plugin name="cordova.plugins.diagnostic" spec="6.0.3" />
-    <plugin name="cordova-plugin-firebasex" spec="12.1.0" />
     <plugin name="cordova-plugin-request-location-accuracy" spec="2.2.3" />
     <plugin name="cordova-plugin-network-information" spec="2.0.1" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="~2.1.3" />

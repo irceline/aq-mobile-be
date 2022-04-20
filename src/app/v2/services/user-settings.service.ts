@@ -122,7 +122,7 @@ export class UserSettingsService {
     }
 
     public subscribeNotification(): Observable<boolean> {
-        const subscriptions = this.$userLocations.getValue().map(uLoc => this.userLocationNotificationSrvc.subscribeLocation(uLoc));
+        const subscriptions = this.$userLocations.getValue().map(uLoc => this.userLocationNotificationSrvc.subscribeLocation(uLoc, true));
         return forkJoin(subscriptions).pipe(
             catchError(error => {
                 console.error(error);

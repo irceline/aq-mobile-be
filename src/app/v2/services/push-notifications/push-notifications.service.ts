@@ -3,6 +3,8 @@ import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 import { Platform } from '@ionic/angular';
 import { from, Observable, of, ReplaySubject } from 'rxjs';
 
+declare var cordova:any;
+
 export interface PushNotification {
   topic: string;
   title: string;
@@ -16,6 +18,8 @@ export interface PushNotification {
 export class PushNotificationsService {
 
   public notificationReceived: ReplaySubject<PushNotification> = new ReplaySubject(1);
+  public fcmToken: string;
+  public appVersion: string;
 
   constructor(
     private platform: Platform,
@@ -23,11 +27,16 @@ export class PushNotificationsService {
   ) {
     this.platform.ready().then(() => {
       if (this.platform.is('cordova')) {
+        cordova.getAppVersion.getVersionCode().then((version) => {
+          this.appVersion = version
+        });
+
         if (this.platform.is('ios')) {
           this.firebase.grantPermission();
         }
-        this.firebase.getToken().then(token => console.log(`Got token ${token}`));
-        this.firebase.onTokenRefresh().subscribe(token => console.log(`Refresh token ${token}`));
+
+        this.firebase.getToken().then(token => this.fcmToken = token);
+        this.firebase.onTokenRefresh().subscribe(token => this.fcmToken = token);
 
         this.firebase.onMessageReceived().subscribe(data => {
           if (data.wasTapped) {

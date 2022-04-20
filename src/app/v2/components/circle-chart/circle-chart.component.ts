@@ -114,8 +114,6 @@ export class CircleChartComponent implements OnInit {
         this.generalNotification.getNotifications().subscribe(notif => this.zone.run(() => this.notification = notif));
         this.generalNotification.$active.subscribe(active => this.notificationActive = active);
         this.isIos = this.platform.is('ios');
-
-
     }
 
     getChartHeight() {
@@ -285,7 +283,7 @@ export class CircleChartComponent implements OnInit {
     }
 
     private setSubtitle(annualValue): void {
-        if (annualValue !== undefined) {
+        if (annualValue !== undefined && this.belAqi !== 0) {
             const annualLabel = this.belaqiService.getLabelForIndex(annualValue);
             if (annualLabel) {
                 this.text = this.translate.instant(
@@ -293,6 +291,8 @@ export class CircleChartComponent implements OnInit {
                     { score: this.translate.instant(annualLabel).toLowerCase() }
                 );
             }
+        } else if (this.belAqi === 0) {
+            this.text = this.translate.instant('belaqi.no-data-available');
         }
     }
 

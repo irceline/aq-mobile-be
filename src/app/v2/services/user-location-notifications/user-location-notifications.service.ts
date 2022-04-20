@@ -35,7 +35,7 @@ export class UserLocationNotificationsService {
     private encryption: EncryptionService,
     private http: HttpClient,
     private translate: TranslateService,
-    private topicGenerator: UserLocationTopicGeneratorService
+    private topicGenerator: UserLocationTopicGeneratorService,
   ) {
 
     this.notifications.notificationReceived.subscribe(notification => {
@@ -50,10 +50,11 @@ export class UserLocationNotificationsService {
     });
   }
 
-  public subscribeLocation(location: UserLocation): Observable<boolean> {
+  public subscribeLocation(location: UserLocation, isLocation = false): Observable<boolean> {
     const langCode = this.translate.currentLang;
     return new Observable<boolean>((observer: Observer<boolean>) => {
-      const subscription = this.generateSubscriptionObject(location.latitude, location.longitude, langCode);
+      const subscription = this.generateSubscriptionObject(location.latitude, location.longitude, langCode, isLocation ? 1 : undefined);
+
       // register to Backend
       this.registerSubscription(subscription).subscribe(
         success => {
@@ -110,6 +111,7 @@ export class UserLocationNotificationsService {
 
   private registerSubscription(subscription: LocationSubscription): Observable<boolean> {
     return new Observable<boolean>((observer: Observer<boolean>) => {
+
       const encriptedSubscription = this.encryption.encrypt(JSON.stringify(subscription));
       if (encriptedSubscription) {
         this.http.post(NOTIFICATION_SUBSCRIPTION_BACKEND_URL, encriptedSubscription, {
@@ -132,6 +134,7 @@ export class UserLocationNotificationsService {
 
   private deleteSubscription(subscription: LocationSubscription): Observable<boolean> {
     return new Observable<boolean>((observer: Observer<boolean>) => {
+
       this.http.delete(`${NOTIFICATION_SUBSCRIPTION_BACKEND_URL}?key=${subscription.key}`, {
         observe: 'response',
         responseType: 'text'
@@ -151,12 +154,14 @@ export class UserLocationNotificationsService {
     observer.complete();
   }
 
-  private generateSubscriptionObject(lat: number, lng: number, language: string): LocationSubscription {
+  private generateSubscriptionObject(lat: number, lng: number, language: string, index: number): LocationSubscription {
     return {
       lat,
       lng,
       language,
-      key: this.generateKey()
+      index,
+      key: this.notifications.fcmToken,
+      version: this.notifications.appVersion,
     };
   }
 
