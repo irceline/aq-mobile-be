@@ -1,10 +1,12 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
-import { IonReorderGroup, NavController } from '@ionic/angular';
+import { Component, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { AlertController, IonReorderGroup, NavController, Platform } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
 import { BelAQIService } from '../../services/bel-aqi.service';
+import { GeneralNotificationService } from '../../services/push-notifications/general-notification.service';
 
 @Component({
     selector: 'app-header',
@@ -26,7 +28,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
     constructor(
         private navCtrl: NavController,
         private belAQIService: BelAQIService,
-        private router: Router
+        private router: Router,
+        private generalNotifService: GeneralNotificationService,
+        private alertCtrl: AlertController,
+        private translate: TranslateService,
+        private activeRoute: ActivatedRoute,
+        private zone: NgZone,
+        private platform: Platform,
+        private route: ActivatedRoute
     ) {
         router.events
             .pipe(filter((event) => event instanceof NavigationEnd))
@@ -39,6 +48,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.indexSubscription = this.belAQIService.$activeIndex
             .subscribe((newIndex) => this.locationsAvailable = !!newIndex);
+        this.generalNotifService.getNotifications().subscribe((notif) => {
+            if (notif) {
+                this.platform.resume.subscribe(() => {
+                    this.navCtrl.navigateBack(this.router.url, { queryParams: { generalNotification: notif } })
+                    setTimeout(() => this.router.navigate(['.'], { relativeTo: this.route, queryParams: { generalNotification: null, notification: null } }), 500)
+                })
+            }
+        })
+        this.activeRoute.queryParams.subscribe((params) => {
+            if (params.generalNotification) this.presentGeneralNotif(params.generalNotification)
+        })
+    }
+
+    ngAfterViewInit() {
     }
 
     ngOnDestroy(): void {
@@ -64,5 +87,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
             this.navCtrl.navigateForward(['main/rating']);
         }
         // this.menuVisible = false;
+    }
+
+    async presentGeneralNotif(notif) {
+        const alert = await this.alertCtrl.create({
+            header: notif.title,
+            message: notif.body,
+            buttons: [{
+                text: this.translate.instant('controls.ok'),
+                handler: () => {
+                    alert.dismiss()
+                },
+            }],
+        });
+        await alert.present();
     }
 }
