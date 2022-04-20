@@ -1,8 +1,8 @@
-<div *ngFor="let notification of notifications">
-  <p class="title">
+<div *ngFor="let notification of notifications" class="popover-notif">
+  <div class="title">
     {{notification.title}}
-  </p>
-  <div class="body">
+  </div>
+  <div class="description">
     {{notification.body}}
   </div>
   <div class="expiration">

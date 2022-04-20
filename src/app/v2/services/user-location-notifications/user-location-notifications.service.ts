@@ -51,8 +51,7 @@ export class UserLocationNotificationsService {
           lng: coords.lng,
           notification
         });
-
-        this.nav.navigateBack('main')
+        this.nav.navigateBack('main', { queryParams: { notification: notification } })
       }
     });
   }
@@ -74,7 +73,7 @@ export class UserLocationNotificationsService {
                   ...data,
                   uniqueId: data.unique_id
                 };
-                
+
                 observer.next(true);
                 observer.complete();
               },

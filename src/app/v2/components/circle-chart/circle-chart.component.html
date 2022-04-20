@@ -1,5 +1,6 @@
 <div class="circle-chart">
-  <svg id="main-svg" viewBox="0 0 400 400" version="1.1" [ngStyle]="{'height': getChartHeight() + 'px'}"   xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="circle" #chartRef>
+  <svg id="main-svg" viewBox="0 0 400 400" version="1.1" [ngStyle]="{'height': getChartHeight() + 'px'}"
+    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="circle" #chartRef>
     <g id="chart-stage"></g>
     <!-- <g id="Screens" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       <g id="03---home-copy-2" transform="translate(-49.000000, -181.000000)">
@@ -32,8 +33,9 @@
     <g id="03---home-copy-2" transform="translate(-49.000000, -181.000000)">
       <g id="Heel-goed" transform="translate(42.000000, 178.000000)">
         <g id="Group" transform="translate(15.000000, 15.000000)">
-    <image xlink:href="/assets/images/icons/alert.svg" x="10%" y="10%" *ngIf="(notificationActive && notification) || activeUserLocation?.notification" (click)="openNotification($event)" />
-
+          <image id="notif-btn" xlink:href="/assets/images/icons/alert.svg" x="10%" y="10%"
+            [ngStyle]="{'opacity': (notificationActive && notification) || activeUserLocation?.notification ? 1 :0}"
+            (click)="openNotification($event)" />
         </g>
       </g>
     </g>
