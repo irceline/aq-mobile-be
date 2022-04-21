@@ -163,13 +163,13 @@ export class MainScreenComponent implements OnInit {
     }
 
     private updateCurrentLocation(loadFinishedCb?: () => any) {
-       
+
 
         if (this.userSettingsService.selectedUserLocation) {
             const index = this.locations.findIndex(d => d.label === this.userSettingsService.selectedUserLocation.label);
 
             this.slideEvent.next(index);
-            
+
             return this.belAqiService.getIndexScoresAsObservable(this.userSettingsService.selectedUserLocation).subscribe(
                 res => {
                     // Handling if there is null data main timeline
@@ -274,8 +274,11 @@ export class MainScreenComponent implements OnInit {
         this.screenHeight = this.platform.height();
 
         if (this.platform.is('ios')) this.iosPadding = 50;
-        this.generalNotificationSrvc.$active.pipe(first()).subscribe(res => {
-            if (!res) setTimeout(() => this.showPushNotifAlert(), 3000)
+        this.generalNotificationSrvc.$active.pipe(first()).subscribe(async (res) => {
+            if (!res) {
+                const asked = await this.generalNotificationSrvc.getAskedEnableNotif()
+                if (!asked || asked === '') setTimeout(() => this.showPushNotifAlert(), 3000)
+            }
         })
     }
 
@@ -349,7 +352,10 @@ export class MainScreenComponent implements OnInit {
                 text: this.translateService.instant('controls.no'),
                 role: 'cancel',
                 cssClass: 'secondary',
-                handler: () => alert.dismiss(),
+                handler: () => {
+                    this.generalNotificationSrvc.setAskedEnableNotif('1')
+                    alert.dismiss()
+                },
             },
             {
                 text: this.translateService.instant('controls.yes'),
