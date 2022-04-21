@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { FirebaseX } from '@ionic-native/firebase-x/ngx';
-import { Platform } from '@ionic/angular';
+import { AlertController, NavController, Platform } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { from, Observable, of, ReplaySubject } from 'rxjs';
 
-declare var cordova:any;
+declare var cordova: any;
 
 export interface PushNotification {
   topic: string;
@@ -23,7 +24,11 @@ export class PushNotificationsService {
 
   constructor(
     private platform: Platform,
-    private firebase: FirebaseX
+    private firebase: FirebaseX,
+    private nav: NavController,
+    private zone: NgZone,
+    private alertCtrl: AlertController,
+    private translate: TranslateService,
   ) {
     this.platform.ready().then(() => {
       if (this.platform.is('cordova')) {
@@ -39,11 +44,6 @@ export class PushNotificationsService {
         this.firebase.onTokenRefresh().subscribe(token => this.fcmToken = token);
 
         this.firebase.onMessageReceived().subscribe(data => {
-          if (data.wasTapped) {
-            // Notification was received on device tray and tapped by the user.
-          } else {
-            // Notification was received in foreground. Maybe the user needs to be notified.
-          }
           if (data.title && data.body && data.expiration && data.topic) {
             const notification: PushNotification = {
               title: data.title,
@@ -53,6 +53,17 @@ export class PushNotificationsService {
             };
             console.log(`New notification arrived (${data.topic}, ${data.title}, ${data.expiration})`);
             this.notificationReceived.next(notification);
+            
+            if (data.wasTapped) {
+              // Notification was received on device tray and tapped by the user.
+            }
+            else if (data.tap === 'background') {
+              // Notification tapped on background
+              this.onNotifTapped(notification)
+            }
+            else {
+              // Notification was received in foreground. Maybe the user needs to be notified.
+            }
           }
         });
       }
@@ -83,4 +94,23 @@ export class PushNotificationsService {
     }
   }
 
+  onNotifTapped(notification: PushNotification) {
+    // general notif show simple alert
+    if (notification.topic.startsWith('belair_')) return this.zone.run(
+      async () => {
+        const alert = await this.alertCtrl.create({
+          header: notification.title,
+          message: notification.body,
+          buttons: [{
+            text: this.translate.instant('controls.ok'),
+            handler: () => {
+              alert.dismiss()
+            },
+          }],
+        });
+        await alert.present();
+      })
+    // loc notif
+    return this.zone.run(() => this.nav.navigateBack('main', { queryParams: { popNotif: true } }))
+  }
 }

@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Settings, SettingsService } from '@helgoland/core';
-import { NavController, Platform, PopoverController } from '@ionic/angular';
+import { Platform, PopoverController } from '@ionic/angular';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 import { select, scaleLinear, path, arc, interpolate } from 'd3';
 import { Subscription } from 'rxjs';
@@ -73,8 +73,7 @@ export class CircleChartComponent implements OnInit {
         private annualMeanValueSrvc: AnnualMeanValueService,
         private settingsSrvc: SettingsService<Settings>,
         private route: ActivatedRoute,
-        private router: Router,
-        private nav: NavController
+        private router: Router
     ) {
         this.belaqiService.$activeIndex.subscribe((newIndex) => {
             if (newIndex) {
@@ -118,13 +117,7 @@ export class CircleChartComponent implements OnInit {
         this.generalNotification.getNotifications().subscribe(notif => this.zone.run(() => this.notification = notif));
         this.generalNotification.$active.subscribe(active => this.notificationActive = active);
         this.isIos = this.platform.is('ios');
-        this.route.queryParams.subscribe(params => {
-            if (params.notification) {
-                this.activeUserLocation.notification = params.notification
-                document.getElementById('notif-btn').dispatchEvent(new Event('click'))
-                setTimeout(() => this.router.navigate(['.'], { relativeTo: this.route, queryParams: { ...params, notification: null } }), 500)
-            }
-        })
+        this.route.queryParams.subscribe((params) => this.handleNotification(params.popNotif))
     }
 
     getChartHeight() {
@@ -140,11 +133,13 @@ export class CircleChartComponent implements OnInit {
             if (this.activeUserLocation.notification) {
                 notifications.push(this.activeUserLocation.notification);
             }
-            this.popoverController.create({
-                component: NotificationPopoverComponent,
-                event: ev,
-                componentProps: { notifications }
-            }).then(popover => popover.present());
+            if (notifications.length > 0) {
+                this.popoverController.create({
+                    component: NotificationPopoverComponent,
+                    event: ev,
+                    componentProps: { notifications: notifications.sort((a, b) => b.expiration - a.expiration) }
+                }).then(popover => popover.present());
+            }
         } catch (error) {
 
         }
@@ -319,5 +314,14 @@ export class CircleChartComponent implements OnInit {
         else this.titleSize = 40;
 
         if (this.platform.is('ipad') || this.platform.is('tablet')) this.titleSize = 52;
+    }
+
+    handleNotification(popNotif) {
+        if (popNotif) {
+            setTimeout(() => {
+                document.getElementById('notif-btn').dispatchEvent(new Event('click'))
+                this.router.navigate(['.'], { relativeTo: this.route, queryParams: { generalNotification: null, notification: null } })
+            }, 500)
+        }
     }
 }
