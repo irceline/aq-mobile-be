@@ -54,6 +54,9 @@ pipeline {
         }
 
         stage('Build ipa') {
+            when {
+                branch 'neb-v2-upgrade'
+            }
             steps {
                 withCredentials([
                     string(credentialsId: 'FASTLANE_SESSION', variable: 'session'),
@@ -65,6 +68,9 @@ pipeline {
         }
 
         stage('Archive artifact to s3') {
+            when {
+                branch 'neb-v2-upgrade'
+            }
             steps {
                 archiveArtifacts artifacts: 'platforms/ios/build/device/BelAir.ipa', fingerprint: true
             }

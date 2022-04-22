@@ -36,3 +36,5 @@ tsconfig.scripts.json
 scripts
 *.keystore
 secrets
+*.mobileProvision
+*.cer
