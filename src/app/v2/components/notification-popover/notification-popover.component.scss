@@ -1,16 +1,20 @@
 :host {
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  .title {
+    padding-top: 4px;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  .description {
+    font-size: 12px;
+    padding: 8px 0px;
+  }
 
-    .title {
-        font-weight: bold;
-    }
-
-    .expiration {
-        padding-top: 10px;
-        color: grey;
-        font-size: 80%;
-        align-self: flex-end;
-    }
+  .expiration {
+    font-size: 10px;
+    text-align: right;
+    color: rgba(0, 0, 0, 0.5);
+  }
 }

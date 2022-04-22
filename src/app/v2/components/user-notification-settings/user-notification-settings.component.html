@@ -2,7 +2,7 @@
   <ion-item lines="none" class="ion-no-padding">
     <ion-icon class="icon-standard" src="/assets/images/icons/official.svg" slot="start"></ion-icon>
     <ion-icon class="icon-dark" src="/assets/images/icons/official-dark.svg" slot="start"></ion-icon>
-    <ion-label text-wrap>
+    <ion-label class="notification-desc" text-wrap>
       {{ 'v2.components.user-notification-settings.official' |translate }}
     </ion-label>
     <ion-toggle mode="ios" [ngModel]="generalNotification" ng-checked="true" color="success"
@@ -11,13 +11,30 @@
   <ion-item lines="none" class="ion-no-padding">
     <ion-icon class="icon-standard" src="/assets/images/icons/automated.svg" slot="start"></ion-icon>
     <ion-icon class="icon-dark" src="/assets/images/icons/automated-dark.svg" slot="start"></ion-icon>
-    <ion-label text-wrap>
+    <ion-label class="notification-desc" text-wrap>
       {{ 'v2.components.user-notification-settings.automated' |translate }}
     </ion-label>
-    <ion-toggle mode="ios" [ngModel]="userLocationNotifications" color="success" (click)="toggleUserLocationNotifications($event)"
-      (ionFocus)="hasFocus()" (ionBlur)="blurFocus()"></ion-toggle>
+    <ion-toggle mode="ios" [ngModel]="userLocationNotifications" color="success"
+      (click)="toggleUserLocationNotifications($event)" (ionFocus)="hasFocus()" (ionBlur)="blurFocus()"></ion-toggle>
   </ion-item>
-
+  <ion-item lines="none" class="ion-no-padding threshold-desc">
+    <ion-img class="icon-standard custom-icon" src="/assets/images/icons/alert-white.png" slot="start"></ion-img>
+    <ion-img class="icon-dark custom-icon" src="/assets/images/icons/alert-dark.png" slot="start"></ion-img>
+    <ion-label class="notification-desc" text-wrap>
+      {{ 'v2.components.user-notification-settings.indexThreshold' |translate }}
+    </ion-label>
+  </ion-item>
+  <div [class]="'notification-threshold'">
+    <div class="notification-threshold--value-container">
+      <ion-label [color]="aqiScoreColor" class="notification-threshold--value" textWrap>
+        {{ aqiIndexName | translate }}
+      </ion-label>
+    </div>
+    <ion-range snaps="true" mode="ios" [ngModel]="aqiScoreNotifications" min="1" max="10" step="1" ticks="false"
+      (ionChange)="changeThreshold($event)" (onmouseup)="changeThresholdEnd($event)"
+      (touchend)="changeThresholdEnd($event)">
+    </ion-range>
+  </div>
   <!-- <ion-item *ngFor="let setting of userSettings" lines="none" class="ion-no-padding">
     <ion-label text-wrap>
       <img [src]="setting.icon" alt=""> {{ setting.label }}</ion-label>

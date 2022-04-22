@@ -18,9 +18,30 @@ pipeline {
 
     stages {
         stage('Configure environment') {
+            when {
+                branch 'neb-v2-upgrade'
+            }
             steps {
                 withCredentials([
                     file(credentialsId: 'google-services.json', variable: 'GSERVICE_JSON'),
+                    file(credentialsId: 'KEYSTORE_FILE', variable: 'KEYSTORE_FILE')
+                ]) {
+                    sh "cp \$GSERVICE_JSON google-services.json"
+                    sh "chmod 600 google-services.json"
+                    sh "cp \$KEYSTORE_FILE ."
+                }
+            }
+        }
+
+        stage('Configure testing environment') {
+            when {
+                not {
+                    branch 'neb-v2-upgrade'
+                }
+            }
+            steps {
+                withCredentials([
+                    file(credentialsId: 'google_services_testing.json', variable: 'GSERVICE_JSON'),
                     file(credentialsId: 'KEYSTORE_FILE', variable: 'KEYSTORE_FILE')
                 ]) {
                     sh "cp \$GSERVICE_JSON google-services.json"
@@ -38,7 +59,27 @@ pipeline {
             }
         }
 
+        stage('Export testing binary') {
+            when {
+                not {
+                    branch 'neb-v2-upgrade'
+                }
+            }
+            steps {
+                script {
+                    app.inside() {
+                        sh 'cp /app/platforms/android/app/build/outputs/apk/debug/app-debug.apk \$WORKSPACE/app-debug-latest.apk'
+                    }
+                }
+
+                archiveArtifacts artifacts: 'app-debug-latest.apk', fingerprint: true
+            }
+        }
+
         stage('Sign app bundle') {
+            when {
+                branch 'neb-v2-upgrade'
+            }
             steps {
                 withCredentials([
                     string(credentialsId: 'KEYSTORE_ALIAS', variable: 'KEYSTORE_ALIAS'),
@@ -62,15 +103,19 @@ pipeline {
         }
 
         stage('Archive artifact to s3') {
+            when {
+                branch 'neb-v2-upgrade'
+            }
             steps {
                 archiveArtifacts artifacts: 'app-release.aab', fingerprint: true
                 archiveArtifacts artifacts: 'app-debug-latest.apk', fingerprint: true
             }
         }
 
-
-
         stage('Publish to playstore') {
+            when {
+                branch 'neb-v2-upgrade'
+            }
             steps {
                 script {
                     sh "npm i xml2js"
@@ -87,68 +132,6 @@ pipeline {
                 }
             }
         }
-
-        // stage('Run Device Farm Test') {
-        //     steps {
-        //         devicefarm (
-        //             projectName: 'AcopicTest',
-        //             devicePoolName: 'Top Devices',
-        //             // testSpecName: 'nebulae.yml',
-        //             testSpecName: '',
-        //             // environmentToRun: 'CustomEnvironment',
-        //             environmentToRun: '',
-        //             appArtifact:'app-debug-latest.apk',
-        //             runName: "Belair-build-${BUILD_ID}",
-        //             // testToRun: 'APPIUM_JAVA_TESTNG',
-        //             testToRun: 'BUILTIN_FUZZ',
-        //             storeResults: '',
-        //             isRunUnmetered: '',
-        //             eventCount: '',
-        //             eventThrottle: '',
-        //             seed: '',
-        //             username: '',
-        //             password: '',
-        //             appiumJavaJUnitTest: '',
-        //             appiumJavaTestNGTest: 'test.zip',
-        //             appiumPythonTest: '',
-        //             appiumRubyTest: '',
-        //             appiumNodeTest: '',
-        //             calabashFeatures: '',
-        //             calabashTags: '',
-        //             calabashProfile: '',
-        //             junitArtifact: '',
-        //             junitFilter: '',
-        //             uiautomatorArtifact: '',
-        //             uiautomatorFilter: '',
-        //             uiautomationArtifact: '',
-        //             xctestArtifact: '',
-        //             xctestFilter: '',
-        //             xctestUiArtifact: '',
-        //             xctestUiFilter: '',
-        //             appiumVersionJunit: '',
-        //             appiumVersionPython: '',
-        //             appiumVersionTestng: '',
-        //             ifWebApp: false,
-        //             extraData: false,
-        //             extraDataArtifact: '',
-        //             deviceLocation: false,
-        //             deviceLatitude: 0,
-        //             deviceLongitude: 0,
-        //             radioDetails: true,
-        //             ifBluetooth: true,
-        //             ifWifi: true,
-        //             ifGPS: true,
-        //             ifNfc: false,
-        //             jobTimeoutMinutes: 10,
-        //             ifVideoRecording: true,
-        //             ifAppPerformanceMonitoring: false,
-        //             ignoreRunError: false,
-        //             ifVpce: false,
-        //             ifSkipAppResigning: false,
-        //             vpceServiceName: '',
-        //         )
-        //     }
-        // }
     }
 
     post {

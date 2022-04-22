@@ -1,7 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { AppVersion } from '@ionic-native/app-version/ngx';
-import { NavController, Platform } from '@ionic/angular';
+import { IonContent, NavController, Platform } from '@ionic/angular';
 
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { contrastModeColor } from '../../common/constants'
@@ -9,6 +9,7 @@ import { UserLocation } from '../../Interfaces';
 import { BelAQIService } from '../../services/bel-aqi.service';
 import { UserSettingsService } from '../../services/user-settings.service';
 import { ThemeHandlerService } from '../../services/theme-handler/theme-handler.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-menu-screen',
@@ -34,6 +35,7 @@ import { ThemeHandlerService } from '../../services/theme-handler/theme-handler.
 })
 export class MenuScreenComponent implements OnInit {
     @Output() menuClosed = new EventEmitter();
+    @ViewChild(IonContent) content: IonContent;
 
     public backgroundColor;
 
@@ -58,7 +60,8 @@ export class MenuScreenComponent implements OnInit {
         private appVersion: AppVersion,
         private platform: Platform,
         private themeService: ThemeHandlerService,
-        private statusBar: StatusBar
+        private statusBar: StatusBar,
+        private route: ActivatedRoute
     ) { }
 
     ngOnInit() {
@@ -73,6 +76,12 @@ export class MenuScreenComponent implements OnInit {
         if (this.platform.is('cordova')) {
             this.appVersion.getVersionNumber().then(res => this.version = res);
         }
+    }
+
+    ionViewDidEnter() {
+        this.route.fragment.subscribe((qfragment) => {
+            if (qfragment === 'notification') this.content.scrollToBottom(500)
+        });
     }
 
     updateLocation(newLocations: UserLocation[]) {

@@ -28,7 +28,9 @@
 	"controls": {
 		"cancel": "Annuler",
 		"close": "Fermer",
-		"ok": "OK"
+		"ok": "OK",
+		"no": "Non",
+		"yes": "Oui"
 	},
 	"edit-location-hint": "Vous pouvez déplacer le curseur de localisation à l'endroit souhaité.",
 	"edit-location-label": {
@@ -119,7 +121,8 @@
 				"exercise": "Faire des exercices",
 				"highConcentration": "Concentrations (trop) élevées",
 				"official": "Alertes officielles basées sur une étude approfondie de la situation",
-				"transport": "Déplacements"
+				"transport": "Déplacements",
+				"indexThreshold": "Alerte de seuil basée sur le score AQI"
 			}
 		},
 		"screens": {

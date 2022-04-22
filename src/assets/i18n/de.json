@@ -28,7 +28,9 @@
 	"controls": {
 		"cancel": "Abbrechen",
 		"close": "Schließen",
-		"ok": "OK"
+		"ok": "OK",
+		"no": "Nein",
+		"yes": "Ja"
 	},
 	"edit-location-hint": "Sie können das Standortsymbol auf der Karte an jeden gewünschten Ort verschieben.",
 	"edit-location-label": {
@@ -119,7 +121,8 @@
 				"exercise": "Training",
 				"highConcentration": "(Zu) hohe Konzentrationen",
 				"official": "Offizielle Warnmeldungen basierend auf einer gründlichen Analyse der Situation",
-				"transport": "Unterwegs"
+				"transport": "Unterwegs",
+				"indexThreshold": "Schwellenwertalarm basierend auf dem AQI-Score"
 			}
 		},
 		"screens": {

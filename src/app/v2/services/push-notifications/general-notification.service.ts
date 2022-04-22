@@ -9,6 +9,7 @@ import { PushNotification, PushNotificationsService } from './push-notifications
 const NOTIFICATION_PREFIX = 'belair_';
 const GENERAL_NOTIFICATION_STORAGE_KEY = 'GENERAL_NOTIFICATION_STORAGE_KEY';
 const GENERAL_NOTIFICATION_TOPIC_STORAGE_KEY = 'GENERAL_NOTIFICATIOPN_TOPIC_STORAGE_KEY';
+const ASKED_ENABLE_NOTIFICATION = 'ASKED_ENABLE_NOTIFICATION';
 
 @Injectable({
   providedIn: 'root'
@@ -107,4 +108,11 @@ export class GeneralNotificationService {
     });
   }
 
+  public setAskedEnableNotif(value) {
+    this.storage.set(ASKED_ENABLE_NOTIFICATION, value)
+  }
+
+  public getAskedEnableNotif(): Promise<string> {
+    return this.storage.get(ASKED_ENABLE_NOTIFICATION)
+  }
 }

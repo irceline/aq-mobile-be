@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
-import { Platform } from '@ionic/angular';
+import { AlertController, NavController, Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Subject } from 'rxjs';
 
 import { ValueDate } from '../../common/enums';
 import { MainPhenomenon } from '../../common/phenomenon';
@@ -14,6 +14,8 @@ import { UserSettingsService } from '../../services/user-settings.service';
 import { AnnualMeanValueService } from '../../services/value-provider/annual-mean-value.service';
 import { ModelledValueService } from '../../services/value-provider/modelled-value.service';
 import moment from 'moment';
+import { GeneralNotificationService } from '../../services/push-notifications/general-notification.service';
+import { first } from 'rxjs/operators';
 
 interface IndexValueResult extends BelAqiIndexResult {
     value: number;
@@ -113,6 +115,8 @@ export class MainScreenComponent implements OnInit {
     iosPadding = 0;
     pullTabOpen = false;
 
+    slideEvent: Subject<number> = new Subject<number>();
+
     constructor(
         public userSettingsService: UserSettingsService,
         private translateService: TranslateService,
@@ -121,6 +125,9 @@ export class MainScreenComponent implements OnInit {
         private annulMeanValueService: AnnualMeanValueService,
         private platform: Platform,
         public router: Router,
+        public alertCtrl: AlertController,
+        public navCtrl: NavController,
+        private generalNotificationSrvc: GeneralNotificationService,
     ) {
         this.registerBackButtonEvent();
 
@@ -156,14 +163,20 @@ export class MainScreenComponent implements OnInit {
     }
 
     private updateCurrentLocation(loadFinishedCb?: () => any) {
+
+
         if (this.userSettingsService.selectedUserLocation) {
+            const index = this.locations.findIndex(d => d.label === this.userSettingsService.selectedUserLocation.label);
+
+            this.slideEvent.next(index);
+
             return this.belAqiService.getIndexScoresAsObservable(this.userSettingsService.selectedUserLocation).subscribe(
                 res => {
                     // Handling if there is null data main timeline
                     const data = res.filter(e => e !== null);
                     const belAqiData = [...res];
                     belAqiData.forEach((item, index) => {
-                        if (!item) belAqiData[index] = {indexScore: 0, location: data[0].location, valueDate: index }
+                        if (!item) belAqiData[index] = { indexScore: 0, location: data[0].location, valueDate: index }
                     })
 
                     this.belAqiForCurrentLocation = belAqiData;
@@ -261,6 +274,12 @@ export class MainScreenComponent implements OnInit {
         this.screenHeight = this.platform.height();
 
         if (this.platform.is('ios')) this.iosPadding = 50;
+        this.generalNotificationSrvc.$active.pipe(first()).subscribe(async (res) => {
+            if (!res) {
+                const asked = await this.generalNotificationSrvc.getAskedEnableNotif()
+                if (!asked || asked === '') setTimeout(() => this.showPushNotifAlert(), 3000)
+            }
+        })
     }
 
     ionViewWillEnter() {
@@ -291,7 +310,7 @@ export class MainScreenComponent implements OnInit {
             // Handling if there is null data in details
             const belAqiData = [...res];
             belAqiData.forEach((item, index) => {
-                if (!item) belAqiData[index] = {index: 0, value: 0, valueDate: index, date: moment() }
+                if (!item) belAqiData[index] = { index: 0, value: 0, valueDate: index, date: moment() }
             })
             this.valueTimeline = belAqiData
                 .filter(e => e !== null)
@@ -323,5 +342,26 @@ export class MainScreenComponent implements OnInit {
 
     updateClicked(value: boolean) {
         this.pullTabOpen = value
+    }
+
+    async showPushNotifAlert() {
+        const alert = await this.alertCtrl.create({
+            header: this.translateService.instant('v2.screens.menu.notifications'),
+            message: this.translateService.instant('v2.screens.onboarding.ask-notifications'),
+            buttons: [{
+                text: this.translateService.instant('controls.no'),
+                role: 'cancel',
+                cssClass: 'secondary',
+                handler: () => {
+                    this.generalNotificationSrvc.setAskedEnableNotif('1')
+                    alert.dismiss()
+                },
+            },
+            {
+                text: this.translateService.instant('controls.yes'),
+                handler: () => this.navCtrl.navigateForward('main/menu', { fragment: 'notification' }),
+            },],
+        });
+        await alert.present();
     }
 }
