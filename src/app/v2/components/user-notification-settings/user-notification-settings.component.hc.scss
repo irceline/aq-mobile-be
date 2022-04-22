@@ -1,4 +1,4 @@
-@import '../../theme/variables.scss';
+@import "../../theme/variables.scss";
 .high-contrast {
   :host {
     .icon-standard {
@@ -8,7 +8,9 @@
       display: block;
     }
     ion-label {
-      color: $black;
+      &.notification-desc {
+        color: $black;
+      }
     }
     ion-toggle {
       --background: white;

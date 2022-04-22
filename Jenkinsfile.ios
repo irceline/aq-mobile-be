@@ -16,11 +16,32 @@ pipeline {
                     sh 'ionic cordova platform add ios@6.2.0'
                     sh 'ionic cordova plugin rm cordova-plugin-firebasex'
                     sh 'ionic cordova plugin add cordova-plugin-firebasex@12.1.0-cli'
+                    sh 'cp -R conf/fastlane platforms/ios/'
+                }
+            }
+        }
+
+        stage('Configure environment for test') {
+            when {
+                not {
+                    branch 'neb-v2-upgrade'
+                }
+            }
+            steps {
+                withCredentials([
+                    file(credentialsId: 'belair_appstore', variable: 'PROVISIONING'),
+                    file(credentialsId: 'GoogleService-Info.plist-test', variable: 'GSERVICE_PLIST')
+                ]) {
+                    sh "cp \$PROVISIONING BelAir_App_Store.mobileprovision"
+                    sh "cp \$GSERVICE_PLIST GoogleService-Info.plist"
                 }
             }
         }
 
         stage('Configure environment') {
+            when {
+                branch 'neb-v2-upgrade'
+            }
             steps {
                 withCredentials([
                     file(credentialsId: 'belair_appstore', variable: 'PROVISIONING'),
@@ -29,12 +50,13 @@ pipeline {
                     sh "cp \$PROVISIONING BelAir_App_Store.mobileprovision"
                     sh "cp \$GSERVICE_PLIST GoogleService-Info.plist"
                 }
-
-                sh 'cp -R conf/fastlane platforms/ios/'
             }
         }
 
         stage('Build ipa') {
+            when {
+                branch 'neb-v2-upgrade'
+            }
             steps {
                 withCredentials([
                     string(credentialsId: 'FASTLANE_SESSION', variable: 'session'),
@@ -46,6 +68,9 @@ pipeline {
         }
 
         stage('Archive artifact to s3') {
+            when {
+                branch 'neb-v2-upgrade'
+            }
             steps {
                 archiveArtifacts artifacts: 'platforms/ios/build/device/BelAir.ipa', fingerprint: true
             }

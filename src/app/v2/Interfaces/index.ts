@@ -20,6 +20,7 @@ export interface UserLocation {
     order?: number;
     wasEdited?: boolean;
     subscription?: LocationSubscription;
+    indexThreshold?: number;
     notification?: PushNotification;
 }
 
@@ -30,6 +31,7 @@ export interface LocationSubscription {
     index?: number;
     key: string;
     version: string;
+    uniqueId: string;
 }
 
 export interface IBarChartData {

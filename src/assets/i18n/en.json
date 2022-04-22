@@ -28,7 +28,9 @@
 	"controls": {
 		"cancel": "Cancel",
 		"close": "Close",
-		"ok": "OK"
+		"ok": "OK",
+		"no": "No",
+		"yes": "Yes"
 	},
 	"edit-location-hint": "You can move the location icon on the map to any desired location",
 	"edit-location-label": {
@@ -119,7 +121,8 @@
 				"exercise": "Workout",
 				"highConcentration": "(Too) high concentrations",
 				"official": "Official alerts based on a thorough analysis of the situation",
-				"transport": "Getting around"
+				"transport": "Getting around",
+				"indexThreshold": "Threshold alert based on AQI score"
 			}
 		},
 		"screens": {

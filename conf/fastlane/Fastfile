@@ -22,8 +22,8 @@ platform :ios do
   workspace_name = 'BelAir.xcworkspace'
   project_name = 'BelAir'
   output_name = 'BelAir.ipa'
-  profile_adhoc_name = 'BelAir App Store'
-  profile_adhoc_uuid = '82ade11d-8fdc-47ea-aef8-e65bbc4ad52c'
+  profile_appstore_name = 'BelAir App Store'
+  profile_appstore_uuid = '82ade11d-8fdc-47ea-aef8-e65bbc4ad52c'
   apple_id = '1441924418'
 
   lane :fix_missing_compliance do
@@ -54,13 +54,6 @@ platform :ios do
     fix_firebasex_cli
     install_profile
 
-    update_project_provisioning(
-      xcodeproj: xcodeproj_name,
-      profile: "../../BelAir_App_Store.mobileprovision",
-      build_configuration: "Release",
-      code_signing_identity: "iPhone Distribution"
-    )
-
     update_project_team(
       path: xcodeproj_name,
       teamid: team_id
@@ -70,8 +63,8 @@ platform :ios do
       use_automatic_signing: false,
       path: xcodeproj_name,
       code_sign_identity: 'iPhone Distribution',
-      profile_name: profile_adhoc_name,
-      profile_uuid: profile_adhoc_uuid
+      profile_name: profile_appstore_name,
+      profile_uuid: profile_appstore_uuid
     )
 
     fix_missing_compliance
