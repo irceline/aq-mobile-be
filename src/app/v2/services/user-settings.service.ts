@@ -73,7 +73,7 @@ export class UserSettingsService {
 
         this.translate.onLangChange.subscribe(() => {
             if (this.$userLocationNotificationsActive.getValue()) {
-                this.unsubscribeNotification().subscribe(() => this.subscribeNotification().subscribe());
+                this.unsubscribeNotification(true).subscribe(() => this.subscribeNotification().subscribe());
             }
         });
     }
@@ -152,8 +152,8 @@ export class UserSettingsService {
         );
     }
 
-    public unsubscribeNotification(): Observable<boolean> {
-        const unsubscriptions = this.$userLocations.getValue().map(uLoc => this.userLocationNotificationSrvc.unsubscribeLocation(uLoc));
+    public unsubscribeNotification(performUpdate: boolean = false): Observable<boolean> {
+        const unsubscriptions = this.$userLocations.getValue().map(uLoc => this.userLocationNotificationSrvc.unsubscribeLocation(uLoc, performUpdate));
         return forkJoin(unsubscriptions).pipe(
             catchError(error => {
                 console.error(error);

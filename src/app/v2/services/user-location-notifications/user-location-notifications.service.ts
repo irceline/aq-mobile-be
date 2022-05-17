@@ -56,7 +56,7 @@ export class UserLocationNotificationsService {
   public subscribeLocation(location: UserLocation, index: number = null): Observable<boolean> {
     const langCode = this.translate.currentLang;
     return new Observable<boolean>((observer: Observer<boolean>) => {
-      const subscription = this.generateSubscriptionObject(location.latitude, location.longitude, langCode, index, location.subscription ? location.subscription.uniqueId : null);
+      const subscription = this.generateSubscriptionObject(location.latitude, location.longitude, location.label, langCode, index, location.subscription ? location.subscription.uniqueId : null);
 
       // register to Backend
       this.registerSubscription(subscription).subscribe(
@@ -86,30 +86,47 @@ export class UserLocationNotificationsService {
     });
   }
 
-  public unsubscribeLocation(location: UserLocation): Observable<boolean> {
+  public unsubscribeLocation(location: UserLocation, performUpdate: boolean = false): Observable<boolean> {
     return new Observable<boolean>((observer: Observer<boolean>) => {
       if (location.subscription) {
         const subscription: LocationSubscription = location.subscription;
-        // unregister to Backend
-        this.deleteSubscription(subscription).subscribe(
-          success => {
-            if (success) {
-              const topic = this.topicGenerator.generateTopic(subscription.lat, subscription.lng, subscription.language);
+
+        if (performUpdate) {
+          const topic = this.topicGenerator.generateTopic(subscription.lat, subscription.lng, subscription.language);
+
               // unsubscribe to Topic
-              this.notifications.unsubscribeTopic(topic).subscribe(
-                () => {
-                  location.subscription = null;
-                  observer.next(true);
-                  observer.complete();
-                },
-                () => this.publishError(observer, UserLocationSubscriptionError.NotificationSubscription)
-              )
-            } else {
-              this.publishError(observer, UserLocationSubscriptionError.BackendRegistration);
-            }
-          },
-          () => this.publishError(observer, UserLocationSubscriptionError.BackendRegistration)
-        );
+          this.notifications.unsubscribeTopic(topic).subscribe(
+            () => {
+              location.subscription = null;
+              observer.next(true);
+              observer.complete();
+            },
+            () => this.publishError(observer, UserLocationSubscriptionError.NotificationSubscription)
+          )
+        } else {
+          // unregister to Backend
+          this.deleteSubscription(subscription).subscribe(
+            success => {
+              if (success) {
+                const topic = this.topicGenerator.generateTopic(subscription.lat, subscription.lng, subscription.language);
+                // unsubscribe to Topic
+                this.notifications.unsubscribeTopic(topic).subscribe(
+                  () => {
+                    location.subscription = null;
+                    observer.next(true);
+                    observer.complete();
+                  },
+                  () => this.publishError(observer, UserLocationSubscriptionError.NotificationSubscription)
+                )
+              } else {
+                this.publishError(observer, UserLocationSubscriptionError.BackendRegistration);
+              }
+            },
+            () => this.publishError(observer, UserLocationSubscriptionError.BackendRegistration)
+          );
+        }
+
+        
       } else {
         observer.next(true);
         observer.complete();
@@ -164,11 +181,12 @@ export class UserLocationNotificationsService {
     observer.complete();
   }
 
-  private generateSubscriptionObject(lat: number, lng: number, language: string, index: number, uniqueId: string = null): LocationSubscription {
+  private generateSubscriptionObject(lat: number, lng: number, label: string, language: string, index: number, uniqueId: string = null): LocationSubscription {
     return {
       lat,
       lng,
       language,
+      location_name: label,
       index,
       key: this.notifications.fcmToken,
       version: this.notifications.appVersion,
