@@ -86,30 +86,47 @@ export class UserLocationNotificationsService {
     });
   }
 
-  public unsubscribeLocation(location: UserLocation): Observable<boolean> {
+  public unsubscribeLocation(location: UserLocation, performUpdate: boolean = false): Observable<boolean> {
     return new Observable<boolean>((observer: Observer<boolean>) => {
       if (location.subscription) {
         const subscription: LocationSubscription = location.subscription;
-        // unregister to Backend
-        this.deleteSubscription(subscription).subscribe(
-          success => {
-            if (success) {
-              const topic = this.topicGenerator.generateTopic(subscription.lat, subscription.lng, subscription.language);
+
+        if (performUpdate) {
+          const topic = this.topicGenerator.generateTopic(subscription.lat, subscription.lng, subscription.language);
+
               // unsubscribe to Topic
-              this.notifications.unsubscribeTopic(topic).subscribe(
-                () => {
-                  location.subscription = null;
-                  observer.next(true);
-                  observer.complete();
-                },
-                () => this.publishError(observer, UserLocationSubscriptionError.NotificationSubscription)
-              )
-            } else {
-              this.publishError(observer, UserLocationSubscriptionError.BackendRegistration);
-            }
-          },
-          () => this.publishError(observer, UserLocationSubscriptionError.BackendRegistration)
-        );
+          this.notifications.unsubscribeTopic(topic).subscribe(
+            () => {
+              location.subscription = null;
+              observer.next(true);
+              observer.complete();
+            },
+            () => this.publishError(observer, UserLocationSubscriptionError.NotificationSubscription)
+          )
+        } else {
+          // unregister to Backend
+          this.deleteSubscription(subscription).subscribe(
+            success => {
+              if (success) {
+                const topic = this.topicGenerator.generateTopic(subscription.lat, subscription.lng, subscription.language);
+                // unsubscribe to Topic
+                this.notifications.unsubscribeTopic(topic).subscribe(
+                  () => {
+                    location.subscription = null;
+                    observer.next(true);
+                    observer.complete();
+                  },
+                  () => this.publishError(observer, UserLocationSubscriptionError.NotificationSubscription)
+                )
+              } else {
+                this.publishError(observer, UserLocationSubscriptionError.BackendRegistration);
+              }
+            },
+            () => this.publishError(observer, UserLocationSubscriptionError.BackendRegistration)
+          );
+        }
+
+        
       } else {
         observer.next(true);
         observer.complete();
