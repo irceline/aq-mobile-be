@@ -28,6 +28,7 @@ export interface LocationSubscription {
     lat: number;
     lng: number;
     language: string;
+    location_name: string;
     index?: number;
     key: string;
     version: string;
