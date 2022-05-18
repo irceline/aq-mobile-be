@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { LoadingController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, forkJoin, Observable, of, Subscription, timer } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -23,6 +24,8 @@ export class UserSettingsService {
     public $userLocationNotificationsActive: BehaviorSubject<boolean>;
 
     private _selectedUserLocation: UserLocation;
+    private _loadingInstance: HTMLIonLoadingElement;
+
     public get selectedUserLocation(): UserLocation {
         return this._selectedUserLocation
             ? this._selectedUserLocation
@@ -39,7 +42,8 @@ export class UserSettingsService {
 
     constructor(
         private userLocationNotificationSrvc: UserLocationNotificationsService,
-        private translate: TranslateService
+        private translate: TranslateService,
+        private loadingController: LoadingController,
     ) {
         this.$userLocationNotificationsActive = new BehaviorSubject(localStorage.getItem(userLocationNotificationsLSkey) === 'true');
 
@@ -73,9 +77,32 @@ export class UserSettingsService {
 
         this.translate.onLangChange.subscribe(() => {
             if (this.$userLocationNotificationsActive.getValue()) {
-                this.unsubscribeNotification(true).subscribe(() => this.subscribeNotification().subscribe());
+                this.showLoading().then(() => {
+                    this.unsubscribeNotification(true).subscribe(() => {
+                        this.subscribeNotification().subscribe(() => {
+                            this.dismissLoading()
+                        })
+                    });
+                }).catch(() => this.dismissLoading())
             }
         });
+    }
+
+    public async showLoading() {
+        this._loadingInstance = await this.loadingController.create({
+            message: this.translate.instant(
+                'v2.components.location-input.please-wait'
+            ),
+        });
+
+        await this._loadingInstance.present();
+    }
+
+    public async dismissLoading() {
+        if (this._loadingInstance) {
+            this._loadingInstance.dismiss()
+            // this._loadingInstance.remove()
+        }
     }
 
     public setUserAQIIndexThreshold(value: number): void {
@@ -87,7 +114,7 @@ export class UserSettingsService {
         return this._userLocations;
     }
 
-    public addUserLocation(location: UserLocation) {
+    public async addUserLocation(location: UserLocation) {
         if (location != null) {
             // Check if the location is duplicate
             if (this._userLocations.find(loc => loc.latitude === location.latitude && loc.longitude === location.longitude) != undefined) {
@@ -95,8 +122,14 @@ export class UserSettingsService {
             };
 
             this._userLocations.unshift(location);
+
             if (this.$userLocationNotificationsActive.getValue()) {
-                this.userLocationNotificationSrvc.subscribeLocation(location, this.$userAqiIndexThreshold.value).subscribe(res => this.saveLocations());
+                await this.showLoading()
+
+                this.userLocationNotificationSrvc.subscribeLocation(location, this.$userAqiIndexThreshold.value).subscribe(res => {
+                    this.saveLocations()
+                    this.dismissLoading()
+                });
             } else {
                 this.saveLocations();
             }
@@ -114,23 +147,29 @@ export class UserSettingsService {
         matchedLocation.latitude = userLocation.latitude;
         matchedLocation.longitude = userLocation.longitude;
         if (this.$userLocationNotificationsActive.getValue()) {
-            this.userLocationNotificationSrvc.unsubscribeLocation(matchedLocation).subscribe(() => {
-                this.userLocationNotificationSrvc.subscribeLocation(matchedLocation, this.$userAqiIndexThreshold.value).subscribe();
+            this.showLoading().then(() => {
+                this.userLocationNotificationSrvc.unsubscribeLocation(matchedLocation).subscribe(() => {
+                    this.userLocationNotificationSrvc.subscribeLocation(matchedLocation, this.$userAqiIndexThreshold.value).subscribe(this.dismissLoading);
+                })
             })
         }
         this.saveLocations();
     }
 
-    public removeUserLocation(locationToRemove: UserLocation) {
+    public async removeUserLocation(locationToRemove: UserLocation) {
+        await this.showLoading()
+
         this._userLocations = this._userLocations.filter(
             (l) => l.id !== locationToRemove.id
         );
         if (this.$userLocationNotificationsActive.getValue()) {
             this.userLocationNotificationSrvc.unsubscribeLocation(locationToRemove).subscribe(() => {
                 this.saveLocations();
+                this.dismissLoading()
             });
         } else {
             this.saveLocations();
+            this.dismissLoading()
         }
     }
 

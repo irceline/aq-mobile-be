@@ -62,12 +62,22 @@ export class UserNotificationSettingsComponent implements OnInit {
         event.stopPropagation();
         event.preventDefault();
         if (!this.generalNotification) this.toggleGeneralNotification(event);
-        if (!this.userLocationNotifications) {
-            this.userSettingsSrvc.subscribeNotification().subscribe();
-        } else {
-            this.userSettingsSrvc.unsubscribeNotification().subscribe();
-        }
-        this.userLocationNotifications = !this.userLocationNotifications;
+
+        // Make sure the user sees the notification toggle changed first
+
+        this.userSettingsSrvc.showLoading().then(async () => {
+            await new Promise((resolve) => {
+                if (!this.userLocationNotifications) {
+                    this.userSettingsSrvc.subscribeNotification().subscribe(resolve);
+                } else {
+                    this.userSettingsSrvc.unsubscribeNotification().subscribe(resolve);
+                }
+            })
+
+            this.userSettingsSrvc.dismissLoading()
+
+            this.userLocationNotifications = !this.userLocationNotifications;
+        });
     }
 
     hasFocus() {
@@ -88,7 +98,11 @@ export class UserNotificationSettingsComponent implements OnInit {
         })))
         if (this.userLocationNotifications) {
             // resubscribe to update the index AQI threshold
-            this.userSettingsSrvc.subscribeNotification().subscribe();
+            this.userSettingsSrvc.showLoading().then(() => {
+                this.userSettingsSrvc.subscribeNotification().subscribe(() => {
+                    this.userSettingsSrvc.dismissLoading()
+                });
+            }).catch(() => this.userSettingsSrvc.dismissLoading())
         }
     }
 
