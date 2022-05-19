@@ -97,9 +97,7 @@ pipeline {
 
         stage('Export testing binary') {
             when {
-                not {
-                    branch 'neb-v2-upgrade-testing'
-                }
+                branch 'neb-v2-upgrade-testing'
             }
             steps {
                 script {
