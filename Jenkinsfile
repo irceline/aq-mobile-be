@@ -18,30 +18,9 @@ pipeline {
 
     stages {
         stage('Configure environment') {
-            when {
-                branch 'neb-v2-upgrade'
-            }
             steps {
                 withCredentials([
                     file(credentialsId: 'google-services.json', variable: 'GSERVICE_JSON'),
-                    file(credentialsId: 'KEYSTORE_FILE', variable: 'KEYSTORE_FILE')
-                ]) {
-                    sh "cp \$GSERVICE_JSON google-services.json"
-                    sh "chmod 600 google-services.json"
-                    sh "cp \$KEYSTORE_FILE ."
-                }
-            }
-        }
-
-        stage('Configure testing environment') {
-            when {
-                not {
-                    branch 'neb-v2-upgrade'
-                }
-            }
-            steps {
-                withCredentials([
-                    file(credentialsId: 'google_services_testing.json', variable: 'GSERVICE_JSON'),
                     file(credentialsId: 'KEYSTORE_FILE', variable: 'KEYSTORE_FILE')
                 ]) {
                     sh "cp \$GSERVICE_JSON google-services.json"
@@ -56,23 +35,6 @@ pipeline {
                 script {
                     app = docker.build(appImg, "-f ./docker/release-android/Dockerfile . --build-arg VERSION_CODE=\$BUILD_NUMBER")
                 }
-            }
-        }
-
-        stage('Export testing binary') {
-            when {
-                not {
-                    branch 'neb-v2-upgrade'
-                }
-            }
-            steps {
-                script {
-                    app.inside() {
-                        sh 'cp /app/platforms/android/app/build/outputs/apk/debug/app-debug.apk \$WORKSPACE/app-debug-latest.apk'
-                    }
-                }
-
-                archiveArtifacts artifacts: 'app-debug-latest.apk', fingerprint: true
             }
         }
 
@@ -130,6 +92,23 @@ pipeline {
                         releaseName: "Version: ${APP_VERSION}",
                     )
                 }
+            }
+        }
+
+        stage('Export testing binary') {
+            when {
+                not {
+                    branch 'neb-v2-upgrade-testing'
+                }
+            }
+            steps {
+                script {
+                    app.inside() {
+                        sh 'cp /app/platforms/android/app/build/outputs/apk/debug/app-debug.apk \$WORKSPACE/app-debug-latest.apk'
+                    }
+                }
+
+                archiveArtifacts artifacts: 'app-debug-latest.apk', fingerprint: true
             }
         }
     }
