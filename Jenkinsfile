@@ -18,9 +18,28 @@ pipeline {
 
     stages {
         stage('Configure environment') {
+            when {
+                branch 'neb-v2-upgrade'
+            }
             steps {
                 withCredentials([
                     file(credentialsId: 'google-services.json', variable: 'GSERVICE_JSON'),
+                    file(credentialsId: 'KEYSTORE_FILE', variable: 'KEYSTORE_FILE')
+                ]) {
+                    sh "cp \$GSERVICE_JSON google-services.json"
+                    sh "chmod 600 google-services.json"
+                    sh "cp \$KEYSTORE_FILE ."
+                }
+            }
+        }
+
+        stage('Configure test environment') {
+            when {
+                branch 'neb-v2-upgrade-testing'
+            }
+            steps {
+                withCredentials([
+                    file(credentialsId: 'google_services_testing.json', variable: 'GSERVICE_JSON'),
                     file(credentialsId: 'KEYSTORE_FILE', variable: 'KEYSTORE_FILE')
                 ]) {
                     sh "cp \$GSERVICE_JSON google-services.json"
