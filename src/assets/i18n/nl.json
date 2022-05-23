@@ -98,7 +98,8 @@
 				"please-wait": "Even geduld",
 				"success-add-location": "Uw huidige locatie is succesvol geselecteerd.",
 				"success-choose-location": "Locatie succesvol toegevoegd.",
-				"error-choose-location": "Kan locatie niet toevoegen."
+				"error-choose-location": "Kan locatie niet toevoegen.",
+				"error-remove-location": "Kan locatie niet verwijderen."
 			},
 			"location-sortable": {
 				"cancel": "Annuleren",

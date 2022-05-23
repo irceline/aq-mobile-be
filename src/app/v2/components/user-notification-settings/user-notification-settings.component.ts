@@ -66,15 +66,17 @@ export class UserNotificationSettingsComponent implements OnInit {
         // Make sure the user sees the notification toggle changed first
 
         this.userSettingsSrvc.showLoading().then(async () => {
-            await new Promise((resolve) => {
-                if (!this.userLocationNotifications) {
-                    this.userSettingsSrvc.subscribeNotification().subscribe(resolve);
-                } else {
-                    this.userSettingsSrvc.unsubscribeNotification().subscribe(resolve);
-                }
-            })
-
-            this.userSettingsSrvc.dismissLoading()
+            try {
+                await new Promise((resolve, reject) => {
+                    if (!this.userLocationNotifications) {
+                        this.userSettingsSrvc.subscribeNotification().subscribe(resolve, reject);
+                    } else {
+                        this.userSettingsSrvc.unsubscribeNotification().subscribe(resolve, reject);
+                    }
+                })
+            } finally {
+                this.userSettingsSrvc.dismissLoading()
+            }
 
             this.userLocationNotifications = !this.userLocationNotifications;
         });

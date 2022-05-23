@@ -74,7 +74,13 @@ export class MenuScreenComponent implements OnInit {
         });
 
         if (this.platform.is('cordova')) {
-            this.appVersion.getVersionNumber().then(res => this.version = res);
+            Promise.all([
+                this.appVersion.getVersionNumber(),
+                this.appVersion.getVersionCode()
+            ]).then(results => {
+                this.version = `${results[0]} (${results[1]})`
+            })
+            // this.appVersion.getVersionNumber().then(res => this.version = res);
         }
     }
 
