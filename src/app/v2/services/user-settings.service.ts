@@ -185,10 +185,16 @@ export class UserSettingsService {
             (l) => l.id !== locationToRemove.id
         );
         if (this.$userLocationNotificationsActive.getValue()) {
-            this.userLocationNotificationSrvc.unsubscribeLocation(locationToRemove).subscribe(() => {
-                this.saveLocations();
-                this.dismissLoading()
-            });
+            this.userLocationNotificationSrvc.unsubscribeLocation(locationToRemove).subscribe(
+                () => {
+                    this.saveLocations();
+                    this.dismissLoading()
+                },
+                (err) => {
+                    this.dismissLoading();
+                    this.showToast(this.translate.instant('v2.components.location-input.error-remove-location'))
+                }
+            );
         } else {
             this.saveLocations();
             this.dismissLoading()

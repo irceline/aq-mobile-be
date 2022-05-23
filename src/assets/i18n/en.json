@@ -98,7 +98,8 @@
 				"please-wait": "Patience",
 				"success-add-location": "Your current location successfully selected.",
 				"success-choose-location": "Location successfully added.",
-				"error-choose-location": "Failed to add location."
+				"error-choose-location": "Failed to add location.",
+				"error-remove-location": "Failed to remove location."
 			},
 			"location-sortable": {
 				"cancel": "Cancel",
