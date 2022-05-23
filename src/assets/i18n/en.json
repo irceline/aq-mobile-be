@@ -97,7 +97,8 @@
 				"no-results": "No results",
 				"please-wait": "Patience",
 				"success-add-location": "Your current location successfully selected.",
-				"success-choose-location": "Location successfully added."
+				"success-choose-location": "Location successfully added.",
+				"error-choose-location": "Failed to add location."
 			},
 			"location-sortable": {
 				"cancel": "Cancel",

@@ -97,7 +97,8 @@
 				"no-results": "Geen resultaten",
 				"please-wait": "Even geduld",
 				"success-add-location": "Uw huidige locatie is succesvol geselecteerd.",
-				"success-choose-location": "Locatie succesvol toegevoegd."
+				"success-choose-location": "Locatie succesvol toegevoegd.",
+				"error-choose-location": "Kan locatie niet toevoegen."
 			},
 			"location-sortable": {
 				"cancel": "Annuleren",

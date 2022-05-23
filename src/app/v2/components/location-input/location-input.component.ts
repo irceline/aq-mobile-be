@@ -143,10 +143,7 @@ export class LocationInputComponent implements OnInit, OnDestroy {
         }
 
         if (this.editable) this.searchText = this.selectedItem.label;
-        else {
-            this.toastController.create({ message: this.translateSrvc.instant('v2.components.location-input.success-choose-location'), duration: 2000 })
-                .then(toast => toast.present());
-        }
+
         // set cursor after selected option
         this.input.setFocus();
         // emit selected option
