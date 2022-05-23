@@ -97,7 +97,8 @@
 				"no-results": "Aucun résultat",
 				"please-wait": "Patience",
 				"success-add-location": "Votre position actuelle a été sélectionnée avec succès.",
-				"success-choose-location": "Emplacement ajouté avec succès."
+				"success-choose-location": "Emplacement ajouté avec succès.",
+				"error-choose-location": "Échec de l'ajout du lieu."
 			},
 			"location-sortable": {
 				"cancel": "Annuler",

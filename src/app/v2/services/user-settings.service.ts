@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, forkJoin, Observable, of, Subscription, timer } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -25,6 +25,7 @@ export class UserSettingsService {
 
     private _selectedUserLocation: UserLocation;
     private _loadingInstance: HTMLIonLoadingElement;
+    private _toastInstance: HTMLIonToastElement;
 
     public get selectedUserLocation(): UserLocation {
         return this._selectedUserLocation
@@ -44,6 +45,7 @@ export class UserSettingsService {
         private userLocationNotificationSrvc: UserLocationNotificationsService,
         private translate: TranslateService,
         private loadingController: LoadingController,
+        private toastController: ToastController,
     ) {
         this.$userLocationNotificationsActive = new BehaviorSubject(localStorage.getItem(userLocationNotificationsLSkey) === 'true');
 
@@ -77,13 +79,13 @@ export class UserSettingsService {
 
         this.translate.onLangChange.subscribe(() => {
             if (this.$userLocationNotificationsActive.getValue()) {
-                this.showLoading().then(() => {
+                this.showLoading()
+                .then(() => {
                     this.unsubscribeNotification(true).subscribe(() => {
-                        this.subscribeNotification().subscribe(() => {
-                            this.dismissLoading()
-                        })
-                    });
-                }).catch(() => this.dismissLoading())
+                        this.subscribeNotification().subscribe(this.dismissLoading.bind(this))
+                    }, this.dismissLoading.bind(this));
+                })
+                .catch(() => this.dismissLoading())
             }
         });
     }
@@ -96,6 +98,15 @@ export class UserSettingsService {
         });
 
         await this._loadingInstance.present();
+    }
+
+    private async showToast(message: string) {
+        this._toastInstance = await this.toastController.create({
+            message,
+            duration: 3000,
+        });
+
+        this._toastInstance.present()
     }
 
     public async dismissLoading() {
@@ -126,10 +137,21 @@ export class UserSettingsService {
             if (this.$userLocationNotificationsActive.getValue()) {
                 await this.showLoading()
 
-                this.userLocationNotificationSrvc.subscribeLocation(location, this.$userAqiIndexThreshold.value).subscribe(res => {
-                    this.saveLocations()
-                    this.dismissLoading()
-                });
+                this.userLocationNotificationSrvc
+                    .subscribeLocation(location, this.$userAqiIndexThreshold.value)
+                    .subscribe(() => {
+                        this.saveLocations()
+                        this.dismissLoading()
+
+                        this.showToast(this.translate.instant('v2.components.location-input.success-choose-location'))
+                    },
+                    async (err) => {
+                        this.dismissLoading()
+                        this._userLocations.shift()
+                        console.log(`ERR: addUserLocation`, err)
+                        this.showToast(this.translate.instant('v2.components.location-input.error-choose-location'))
+                    }
+                );
             } else {
                 this.saveLocations();
             }
@@ -178,6 +200,10 @@ export class UserSettingsService {
             return this.userLocationNotificationSrvc.subscribeLocation(uLoc, this.$userAqiIndexThreshold.value);
         });
 
+        if (subscriptions.length === 0) {
+            return of(false);
+        }
+
         return forkJoin(subscriptions).pipe(
             catchError(error => {
                 console.error(error);
@@ -193,6 +219,11 @@ export class UserSettingsService {
 
     public unsubscribeNotification(performUpdate: boolean = false): Observable<boolean> {
         const unsubscriptions = this.$userLocations.getValue().map(uLoc => this.userLocationNotificationSrvc.unsubscribeLocation(uLoc, performUpdate));
+
+        if (unsubscriptions.length === 0) {
+            return of(false);
+        }
+
         return forkJoin(unsubscriptions).pipe(
             catchError(error => {
                 console.error(error);

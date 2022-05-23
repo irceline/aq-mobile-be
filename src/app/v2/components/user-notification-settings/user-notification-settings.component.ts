@@ -98,11 +98,12 @@ export class UserNotificationSettingsComponent implements OnInit {
         })))
         if (this.userLocationNotifications) {
             // resubscribe to update the index AQI threshold
-            this.userSettingsSrvc.showLoading().then(() => {
-                this.userSettingsSrvc.subscribeNotification().subscribe(() => {
-                    this.userSettingsSrvc.dismissLoading()
-                });
-            }).catch(() => this.userSettingsSrvc.dismissLoading())
+            this.userSettingsSrvc.showLoading()
+                .then(() => {
+                    this.userSettingsSrvc.subscribeNotification().subscribe(() => {
+                        this.userSettingsSrvc.dismissLoading()
+                    }, () => this.userSettingsSrvc.dismissLoading());
+                }).catch(() => this.userSettingsSrvc.dismissLoading())
         }
     }
 
