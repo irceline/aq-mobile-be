@@ -124,7 +124,7 @@
 				"highConcentration": "Concentrations (trop) élevées",
 				"official": "Alertes officielles basées sur une étude approfondie de la situation",
 				"transport": "Déplacements",
-				"indexThreshold": "Alerte de seuil basée sur le score AQI"
+				"indexThreshold": "M'avertir lorsque le score BelAQI atteint ce niveau:"
 			}
 		},
 		"screens": {
