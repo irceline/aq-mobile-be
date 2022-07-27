@@ -7,8 +7,8 @@
 			"in-three-days": "+ 3 jours",
 			"in-two-days": "+ 2 jours",
 			"today": "Aujourd' hui",
-			"tomorrow": "+ 1 jour",
-			"yesterday": "- 1 jour"
+			"tomorrow": "Demain",
+			"yesterday": "Hier"
 		},
 		"level": {
 			"bad": "Mauvais",
