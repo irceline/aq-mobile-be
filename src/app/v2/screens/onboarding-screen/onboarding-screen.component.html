@@ -2,7 +2,6 @@
     <div class="button-wrapper">
         <app-theme-button></app-theme-button>
     </div>
-
     <app-onboarding-slider (slideShowComplete)="onboardingComplete()" [disabled]="sliderDisabled">
         <ion-slide>
             <div class="slide">
@@ -43,7 +42,8 @@
                     <p [innerHTML]="'v2.screens.onboarding.aq-info' | translate"></p>
                 </div>
                 <img class="index-wheel" src="{{ 'v2.screens.onboarding.circle-slider-uri' | translate }}" alt="">
-                <img class="index-wheel dark" src="{{ 'v2.screens.onboarding.circle-slider-uri-hc' | translate }}" alt="">
+                <img class="index-wheel dark" src="{{ 'v2.screens.onboarding.circle-slider-uri-hc' | translate }}"
+                    alt="">
             </div>
         </ion-slide>
 
@@ -53,8 +53,10 @@
                     <h1>Belair</h1>
                     <p [innerHTML]="'v2.screens.onboarding.aq-info' | translate"></p>
                 </div>
-                <img class="onboarding-screenshot default" src="{{ 'v2.screens.onboarding.details-card-uri' | translate }}" alt="">
-                <img class="onboarding-screenshot dark" src="{{ 'v2.screens.onboarding.details-card-uri-hc' | translate }}" alt="">
+                <img class="onboarding-screenshot default"
+                    src="{{ 'v2.screens.onboarding.details-card-uri' | translate }}" alt="">
+                <img class="onboarding-screenshot dark"
+                    src="{{ 'v2.screens.onboarding.details-card-uri-hc' | translate }}" alt="">
             </div>
         </ion-slide>
 
@@ -65,8 +67,10 @@
                     <p [innerHTML]="'v2.screens.onboarding.aq-long-term' | translate"></p>
                 </div>
 
-                <img class="onboarding-screenshot default" src="{{ 'v2.screens.onboarding.stats-card-uri' | translate }}" alt="">
-                <img class="onboarding-screenshot dark" src="{{ 'v2.screens.onboarding.stats-card-uri-hc' | translate }}" alt="">
+                <img class="onboarding-screenshot default"
+                    src="{{ 'v2.screens.onboarding.stats-card-uri' | translate }}" alt="">
+                <img class="onboarding-screenshot dark"
+                    src="{{ 'v2.screens.onboarding.stats-card-uri-hc' | translate }}" alt="">
             </div>
         </ion-slide>
 

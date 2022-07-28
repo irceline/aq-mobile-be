@@ -9,10 +9,11 @@
         ::ng-deep ion-slide {
             flex-direction: column;
             justify-content: center;
-            padding-bottom: 75px;
+            padding-bottom: 60px;
             color: white;
 
             .slide {
+                overflow: scroll;
                 width: 100%;
                 display: flex;
                 flex-direction: column;
@@ -21,6 +22,7 @@
 
                 &--content {
                     padding: 30px;
+                    padding-top: 80px;
                     flex: 1;
                     display: flex;
                     flex-direction: column;
@@ -111,8 +113,8 @@
             text-align: left !important;
             display: flex;
             align-items: center;
-            bottom: 57px;
-            left: 48px;
+            bottom: 31px;
+            left: 16px;
 
             .swiper-pagination-bullet {
                 width: 6px;
@@ -130,8 +132,8 @@
     }
     .next {
         position: absolute;
-        bottom: 40px;
-        right: 25px;
+        bottom: 14px;
+        right: 0px;
         text-align: center;
         cursor: pointer;
         z-index: 5;
