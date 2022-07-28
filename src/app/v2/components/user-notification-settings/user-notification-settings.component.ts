@@ -61,7 +61,6 @@ export class UserNotificationSettingsComponent implements OnInit {
         event.stopImmediatePropagation();
         event.stopPropagation();
         event.preventDefault();
-        if (!this.generalNotification) this.toggleGeneralNotification(event);
 
         // Make sure the user sees the notification toggle changed first
 
@@ -79,6 +78,7 @@ export class UserNotificationSettingsComponent implements OnInit {
             }
 
             this.userLocationNotifications = !this.userLocationNotifications;
+            if (!this.generalNotification && this.userLocationNotifications) this.toggleGeneralNotification(event);
         });
     }
 
@@ -98,11 +98,13 @@ export class UserNotificationSettingsComponent implements OnInit {
             ...location,
             indexThreshold: event.target.value
         })))
-        if (this.userLocationNotifications) {
+        if (!this.userLocationNotifications) {
             // resubscribe to update the index AQI threshold
             this.userSettingsSrvc.showLoading()
                 .then(() => {
                     this.userSettingsSrvc.subscribeNotification().subscribe(() => {
+                        this.userLocationNotifications = true
+                        if (!this.generalNotification) this.toggleGeneralNotification(event);
                         this.userSettingsSrvc.dismissLoading()
                     }, () => this.userSettingsSrvc.dismissLoading());
                 }).catch(() => this.userSettingsSrvc.dismissLoading())
