@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { IonSlides } from '@ionic/angular';
 import { first } from 'rxjs/operators';
 import { indexLabel } from '../../common/constants';
 
@@ -11,9 +12,12 @@ import { UserSettingsService } from './../../services/user-settings.service';
     styleUrls: ['./user-notification-settings.component.scss', './user-notification-settings.component.hc.scss'],
 })
 export class UserNotificationSettingsComponent implements OnInit {
+    @ViewChild(IonSlides) slides: IonSlides;
 
     @Output() getFocus = new EventEmitter<boolean>();
     @Output() loseFocus = new EventEmitter<boolean>();
+
+    @Output() lockSwipes = new EventEmitter<boolean>();
 
     public generalNotification: boolean;
     public userLocationNotifications: boolean;
@@ -91,6 +95,7 @@ export class UserNotificationSettingsComponent implements OnInit {
     }
 
     changeThresholdEnd(event) {
+        this.blurFocus()
         // Update user AQI threshold to storage
         this.userSettingsSrvc.setUserAQIIndexThreshold(event.target.value)
         const locations = this.userSettingsSrvc.getUserSavedLocations()
