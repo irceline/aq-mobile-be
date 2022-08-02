@@ -54,7 +54,7 @@ export class UserSettingsService {
 
         console.log(`Got user AQI index threshold from localStorage:`, userAqiIndexThreshold);
 
-        this.$userAqiIndexThreshold = new BehaviorSubject(userAqiIndexThreshold ? parseInt(userAqiIndexThreshold) : 1);
+        this.$userAqiIndexThreshold = new BehaviorSubject(userAqiIndexThreshold ? parseInt(userAqiIndexThreshold) : 6);
 
         if (userLocations) {
             // todo : some verification that the stored data is not corrupt

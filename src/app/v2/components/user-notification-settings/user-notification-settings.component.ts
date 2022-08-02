@@ -94,7 +94,7 @@ export class UserNotificationSettingsComponent implements OnInit {
         this.loseFocus.next(false);
     }
 
-    changeThresholdEnd(event) {
+    async changeThresholdEnd(event) {
         this.blurFocus()
         // Update user AQI threshold to storage
         this.userSettingsSrvc.setUserAQIIndexThreshold(event.target.value)
@@ -103,16 +103,39 @@ export class UserNotificationSettingsComponent implements OnInit {
             ...location,
             indexThreshold: event.target.value
         })))
-        if (!this.userLocationNotifications) {
-            // resubscribe to update the index AQI threshold
-            this.userSettingsSrvc.showLoading()
-                .then(() => {
-                    this.userSettingsSrvc.subscribeNotification().subscribe(() => {
+
+        console.log('changeThresholdEnded', this.userLocationNotifications)
+
+        try {
+            await this.userSettingsSrvc.showLoading()
+            
+            this.userSettingsSrvc.subscribeNotification().subscribe(
+                () => {
+                    if (!this.userLocationNotifications) {
+                        console.log('resubscribe userLocationNotifications to update the index AQI threshold')
+
                         this.userLocationNotifications = true
-                        if (!this.generalNotification) this.toggleGeneralNotification(event);
-                        this.userSettingsSrvc.dismissLoading()
-                    }, () => this.userSettingsSrvc.dismissLoading());
-                }).catch(() => this.userSettingsSrvc.dismissLoading())
+                    }
+                    
+                    if (!this.generalNotification) {
+                        this.toggleGeneralNotification(event);
+                    }
+
+                    const locations = this.userSettingsSrvc.getUserSavedLocations()
+
+                    this.userSettingsSrvc.updateUserLocationsOrder(
+                        locations.map(location => ({
+                            ...location,
+                            indexThreshold: event.target.value
+                        }))
+                    )
+
+                    this.userSettingsSrvc.dismissLoading()
+                }, 
+                () => this.userSettingsSrvc.dismissLoading()
+            );
+        } catch (e) {
+            await this.userSettingsSrvc.dismissLoading()
         }
     }
 
@@ -125,12 +148,12 @@ export class UserNotificationSettingsComponent implements OnInit {
         // if (this.aqiThresholdDelayTimer) clearTimeout(this.aqiThresholdDelayTimer)
 
         // this.aqiThresholdDelayTimer = setTimeout(() => {
-        //     const locations = this.userSettingsSrvc.getUserSavedLocations()
+        // const locations = this.userSettingsSrvc.getUserSavedLocations()
 
-        //     this.userSettingsSrvc.updateUserLocationsOrder(locations.map(location => ({
-        //         ...location,
-        //         indexThreshold: event.target.value
-        //     })))
+        // this.userSettingsSrvc.updateUserLocationsOrder(locations.map(location => ({
+        //     ...location,
+        //     indexThreshold: event.target.value
+        // })))
 
         //     if (this.userLocationNotifications) {
         //         // resubscribe to update the index AQI threshold
