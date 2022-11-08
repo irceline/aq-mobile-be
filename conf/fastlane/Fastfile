@@ -23,7 +23,7 @@ platform :ios do
   project_name = 'BelAir'
   output_name = 'BelAir.ipa'
   profile_appstore_name = 'BelAir App Store'
-  profile_appstore_uuid = '82ade11d-8fdc-47ea-aef8-e65bbc4ad52c'
+  profile_appstore_uuid = '45c635c8-d076-445d-b486-f6d45b928c7c'
   apple_id = '1441924418'
 
   lane :fix_missing_compliance do

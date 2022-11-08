@@ -97,7 +97,9 @@
 				"no-results": "Geen resultaten",
 				"please-wait": "Even geduld",
 				"success-add-location": "Uw huidige locatie is succesvol geselecteerd.",
-				"success-choose-location": "Locatie succesvol toegevoegd."
+				"success-choose-location": "Locatie succesvol toegevoegd.",
+				"error-choose-location": "Kan locatie niet toevoegen.",
+				"error-remove-location": "Kan locatie niet verwijderen."
 			},
 			"location-sortable": {
 				"cancel": "Annuleren",
@@ -122,7 +124,7 @@
 				"highConcentration": "(Te) hoge concentraties",
 				"official": "Officiële waarschuwingen op basis van een grondige analyse van de situatie",
 				"transport": "Verplaatsingen",
-				"indexThreshold": "Drempelwaarschuwing op basis van AQI-score"
+				"indexThreshold": "Waarschuw mij wanneer BelAQI score dit niveau bereikt:"
 			}
 		},
 		"screens": {

@@ -1,15 +1,18 @@
-@import '../../theme/variables';
+@import "../../theme/variables";
 
 :host {
+  ion-button::part(native) {
+    padding-left: 10px;
+  }
   .theme-button {
     background: white;
     box-shadow: 0 2px 45px 0 rgba(2, 136, 171, 0.4);
     border-radius: 30px;
-    height: 60px;
     color: $black;
-    min-width: 100%;
-    width: 225px;
-    max-width: 270px;
+    height: 60px;
+    // min-width: 100%;
+    // width: 225px;
+    max-width: 200px;
     text-transform: inherit;
     letter-spacing: 0;
     font-weight: 600;

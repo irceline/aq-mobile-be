@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { IonSlides } from '@ionic/angular';
 import { first } from 'rxjs/operators';
 import { indexLabel } from '../../common/constants';
 
@@ -11,9 +12,12 @@ import { UserSettingsService } from './../../services/user-settings.service';
     styleUrls: ['./user-notification-settings.component.scss', './user-notification-settings.component.hc.scss'],
 })
 export class UserNotificationSettingsComponent implements OnInit {
+    @ViewChild(IonSlides) slides: IonSlides;
 
     @Output() getFocus = new EventEmitter<boolean>();
     @Output() loseFocus = new EventEmitter<boolean>();
+
+    @Output() lockSwipes = new EventEmitter<boolean>();
 
     public generalNotification: boolean;
     public userLocationNotifications: boolean;
@@ -61,13 +65,25 @@ export class UserNotificationSettingsComponent implements OnInit {
         event.stopImmediatePropagation();
         event.stopPropagation();
         event.preventDefault();
-        if (!this.generalNotification) this.toggleGeneralNotification(event);
-        if (!this.userLocationNotifications) {
-            this.userSettingsSrvc.subscribeNotification().subscribe();
-        } else {
-            this.userSettingsSrvc.unsubscribeNotification().subscribe();
-        }
-        this.userLocationNotifications = !this.userLocationNotifications;
+
+        // Make sure the user sees the notification toggle changed first
+
+        this.userSettingsSrvc.showLoading().then(async () => {
+            try {
+                await new Promise((resolve, reject) => {
+                    if (!this.userLocationNotifications) {
+                        this.userSettingsSrvc.subscribeNotification().subscribe(resolve, reject);
+                    } else {
+                        this.userSettingsSrvc.unsubscribeNotification().subscribe(resolve, reject);
+                    }
+                })
+            } finally {
+                this.userSettingsSrvc.dismissLoading()
+            }
+
+            this.userLocationNotifications = !this.userLocationNotifications;
+            if (!this.generalNotification && this.userLocationNotifications) this.toggleGeneralNotification(event);
+        });
     }
 
     hasFocus() {
@@ -78,7 +94,8 @@ export class UserNotificationSettingsComponent implements OnInit {
         this.loseFocus.next(false);
     }
 
-    changeThresholdEnd(event) {
+    async changeThresholdEnd(event) {
+        this.blurFocus()
         // Update user AQI threshold to storage
         this.userSettingsSrvc.setUserAQIIndexThreshold(event.target.value)
         const locations = this.userSettingsSrvc.getUserSavedLocations()
@@ -86,9 +103,39 @@ export class UserNotificationSettingsComponent implements OnInit {
             ...location,
             indexThreshold: event.target.value
         })))
-        if (this.userLocationNotifications) {
-            // resubscribe to update the index AQI threshold
-            this.userSettingsSrvc.subscribeNotification().subscribe();
+
+        console.log('changeThresholdEnded', this.userLocationNotifications)
+
+        try {
+            await this.userSettingsSrvc.showLoading()
+            
+            this.userSettingsSrvc.subscribeNotification().subscribe(
+                () => {
+                    if (!this.userLocationNotifications) {
+                        console.log('resubscribe userLocationNotifications to update the index AQI threshold')
+
+                        this.userLocationNotifications = true
+                    }
+                    
+                    if (!this.generalNotification) {
+                        this.toggleGeneralNotification(event);
+                    }
+
+                    const locations = this.userSettingsSrvc.getUserSavedLocations()
+
+                    this.userSettingsSrvc.updateUserLocationsOrder(
+                        locations.map(location => ({
+                            ...location,
+                            indexThreshold: event.target.value
+                        }))
+                    )
+
+                    this.userSettingsSrvc.dismissLoading()
+                }, 
+                () => this.userSettingsSrvc.dismissLoading()
+            );
+        } catch (e) {
+            await this.userSettingsSrvc.dismissLoading()
         }
     }
 
@@ -101,12 +148,12 @@ export class UserNotificationSettingsComponent implements OnInit {
         // if (this.aqiThresholdDelayTimer) clearTimeout(this.aqiThresholdDelayTimer)
 
         // this.aqiThresholdDelayTimer = setTimeout(() => {
-        //     const locations = this.userSettingsSrvc.getUserSavedLocations()
+        // const locations = this.userSettingsSrvc.getUserSavedLocations()
 
-        //     this.userSettingsSrvc.updateUserLocationsOrder(locations.map(location => ({
-        //         ...location,
-        //         indexThreshold: event.target.value
-        //     })))
+        // this.userSettingsSrvc.updateUserLocationsOrder(locations.map(location => ({
+        //     ...location,
+        //     indexThreshold: event.target.value
+        // })))
 
         //     if (this.userLocationNotifications) {
         //         // resubscribe to update the index AQI threshold

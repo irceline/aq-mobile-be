@@ -97,7 +97,9 @@
 				"no-results": "Keine Ergebnisse",
 				"please-wait": "Kurz Geduld",
 				"success-add-location": "Ihr aktueller Standort wurde erfolgreich ausgewählt.",
-				"success-choose-location": "Speicherort erfolgreich hinzugefügt."
+				"success-choose-location": "Speicherort erfolgreich hinzugefügt.",
+				"error-choose-location": "Standort konnte nicht hinzugefügt werden.",
+				"error-remove-location": "Standort konnte nicht entfernt werden."
 			},
 			"location-sortable": {
 				"cancel": "Abbrechen",

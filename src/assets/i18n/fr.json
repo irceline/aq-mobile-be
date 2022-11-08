@@ -7,8 +7,8 @@
 			"in-three-days": "+ 3 jours",
 			"in-two-days": "+ 2 jours",
 			"today": "Aujourd' hui",
-			"tomorrow": "+ 1 jour",
-			"yesterday": "- 1 jour"
+			"tomorrow": "Demain",
+			"yesterday": "Hier"
 		},
 		"level": {
 			"bad": "Mauvais",
@@ -97,7 +97,9 @@
 				"no-results": "Aucun résultat",
 				"please-wait": "Patience",
 				"success-add-location": "Votre position actuelle a été sélectionnée avec succès.",
-				"success-choose-location": "Emplacement ajouté avec succès."
+				"success-choose-location": "Emplacement ajouté avec succès.",
+				"error-choose-location": "Échec de l'ajout du lieu.",
+				"error-remove-location": "Échec de la suppression de la position."
 			},
 			"location-sortable": {
 				"cancel": "Annuler",
@@ -122,7 +124,7 @@
 				"highConcentration": "Concentrations (trop) élevées",
 				"official": "Alertes officielles basées sur une étude approfondie de la situation",
 				"transport": "Déplacements",
-				"indexThreshold": "Alerte de seuil basée sur le score AQI"
+				"indexThreshold": "M'avertir lorsque le score BelAQI atteint ce niveau:"
 			}
 		},
 		"screens": {

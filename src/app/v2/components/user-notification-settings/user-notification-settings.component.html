@@ -31,8 +31,8 @@
       </ion-label>
     </div>
     <ion-range snaps="true" mode="ios" [ngModel]="aqiScoreNotifications" min="1" max="10" step="1" ticks="false"
-      (ionChange)="changeThreshold($event)" (onmouseup)="changeThresholdEnd($event)"
-      (touchend)="changeThresholdEnd($event)">
+      (onmousedown)="hasFocus()" (touchstart)="hasFocus()" (ionChange)="changeThreshold($event)"
+      (onmouseup)="changeThresholdEnd($event)" (touchend)="changeThresholdEnd($event)">
     </ion-range>
   </div>
   <!-- <ion-item *ngFor="let setting of userSettings" lines="none" class="ion-no-padding">
