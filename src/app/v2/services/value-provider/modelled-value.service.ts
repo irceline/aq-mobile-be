@@ -189,7 +189,7 @@ export class ModelledValueService extends ValueProvider {
                 if (isDefined(value) && value !== -9999) {
                   observer.next({
                     value,
-                    index: this.categorize(value, phenomenon),
+                    index: this.categorize_pf(value, phenomenon), /* use daily index (_pf) */
                     date: this.createDate(date),
                     valueDate: date
                   });
@@ -226,7 +226,7 @@ export class ModelledValueService extends ValueProvider {
               if (isDefined(value)) {
                 observer.next({
                   value,
-                  index: this.categorize(value, phenomenon),
+                  index: this.categorize_pf(value, phenomenon), /* use daily index (_pf) */
                   date: this.createDate(date),
                   valueDate: date
                 });
@@ -325,6 +325,7 @@ export class ModelledValueService extends ValueProvider {
     }
   }
 
+  /* use hourly index for current situation */
   private categorize(value: number, phenomenon: MainPhenomenon): number {
     switch (phenomenon) {
       case MainPhenomenon.O3:
@@ -337,6 +338,24 @@ export class ModelledValueService extends ValueProvider {
         return this.categorizeNO2(value);
       case MainPhenomenon.BC:
         return this.categorizeBC(value);
+      default:
+        throw new Error('not implemented for ' + phenomenon);
+    }
+  }
+  
+  /* for daily index, previous days and forecast (_pf) */
+  private categorize_pf(value: number, phenomenon: MainPhenomenon): number {
+    switch (phenomenon) {
+      case MainPhenomenon.O3:
+        return this.categorizeO3_pf(value);
+      case MainPhenomenon.PM10:
+        return this.categorizePM10_pf(value);
+      case MainPhenomenon.PM25:
+        return this.categorizePM25_pf(value);
+      case MainPhenomenon.NO2:
+        return this.categorizeNO2_pf(value);
+      case MainPhenomenon.BC:
+        return this.categorizeBC_pf(value);
       default:
         throw new Error('not implemented for ' + phenomenon);
     }
