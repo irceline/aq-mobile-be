@@ -24,23 +24,23 @@ export interface ModelledValue {
 enum CurrentModelledPhenomenonLayer {
   no2 = 'rioifdm:no2_hmean',
   o3 = 'rioifdm:o3_hmean',
-  pm10 = 'rioifdm:pm10_24hmean',
-  pm25 = 'rioifdm:pm25_24hmean',
+  pm10 = 'rioifdm:pm10_hmean',
+  pm25 = 'rioifdm:pm25_hmean',
   bc = 'rioifdm:bc_hmean'
 }
 
 const No2ForcastLayerMapping = [
-  { date: ValueDate.TODAY, layerId: 'forecast:no2_maxhmean_d0' },
-  { date: ValueDate.TOMORROW, layerId: 'forecast:no2_maxhmean_d1' },
-  { date: ValueDate.IN_TWO_DAYS, layerId: 'forecast:no2_maxhmean_d2' },
-  { date: ValueDate.IN_THREE_DAYS, layerId: 'forecast:no2_maxhmean_d3' }
+  { date: ValueDate.TODAY, layerId: 'forecast:no2_dmean_d0' },
+  { date: ValueDate.TOMORROW, layerId: 'forecast:no2_dmean_d1' },
+  { date: ValueDate.IN_TWO_DAYS, layerId: 'forecast:no2_dmean_d2' },
+  { date: ValueDate.IN_THREE_DAYS, layerId: 'forecast:no2_dmean_d3' }
 ];
 
 const O3ForcastLayerMapping = [
-  { date: ValueDate.TODAY, layerId: 'forecast:o3_maxhmean_d0' },
-  { date: ValueDate.TOMORROW, layerId: 'forecast:o3_maxhmean_d1' },
-  { date: ValueDate.IN_TWO_DAYS, layerId: 'forecast:o3_maxhmean_d2' },
-  { date: ValueDate.IN_THREE_DAYS, layerId: 'forecast:o3_maxhmean_d3' }
+  { date: ValueDate.TODAY, layerId: 'forecast:o3_max8hmean_d0' },
+  { date: ValueDate.TOMORROW, layerId: 'forecast:o3_max8hmean_d1' },
+  { date: ValueDate.IN_TWO_DAYS, layerId: 'forecast:o3_max8hmean_d2' },
+  { date: ValueDate.IN_THREE_DAYS, layerId: 'forecast:o3_max8hmean_d3' }
 ];
 
 const PM10ForcastLayerMapping = [
@@ -58,8 +58,8 @@ const PM25ForcastLayerMapping = [
 ];
 
 enum PastModelledPhenomenonLayer {
-  no2 = 'no2_maxhmean',
-  o3 = 'o3_maxhmean',
+  no2 = 'no2_24hmean',
+  o3 = 'o3_max8hmean',
   pm10 = 'pm10_24hmean',
   pm25 = 'pm25_24hmean'
 }
@@ -101,11 +101,10 @@ export class ModelledValueService extends ValueProvider {
           .subscribe(
             res => {
               const value = this.getValueOfResponse(res);
-              const roundValue = Math.round(value);
               if (isDefined(value)) {
                 observer.next({
                   value,
-                  index: this.categorize(roundValue, phenomenon),
+                  index: this.categorize(value, phenomenon),
                   date: moment(timeparam),
                   valueDate: ValueDate.CURRENT
                 });
@@ -187,11 +186,10 @@ export class ModelledValueService extends ValueProvider {
             .subscribe(
               res => {
                 const value = this.getValueOfResponse(res);
-                const roundValue = Math.round(value);
                 if (isDefined(value) && value !== -9999) {
                   observer.next({
                     value,
-                    index: this.categorize(roundValue, phenomenon),
+                    index: this.categorize(value, phenomenon),
                     date: this.createDate(date),
                     valueDate: date
                   });
@@ -225,11 +223,10 @@ export class ModelledValueService extends ValueProvider {
           .subscribe(
             res => {
               const value = this.getValueOfResponse(res);
-              const roundValue = Math.round(value);
               if (isDefined(value)) {
                 observer.next({
                   value,
-                  index: this.categorize(roundValue, phenomenon),
+                  index: this.categorize(value, phenomenon),
                   date: this.createDate(date),
                   valueDate: date
                 });
@@ -344,64 +341,137 @@ export class ModelledValueService extends ValueProvider {
         throw new Error('not implemented for ' + phenomenon);
     }
   }
-
-  private categorizeNO2(value: number): number {
+  
+  /*scales for current situation, these scales should be used only for the CURRENT situation */
+  
+    private categorizeNO2(value: number): number {
     if (value <= -1) { return 0; }
-    if (value <= 20) { return 1; }
-    if (value <= 50) { return 2; }
-    if (value <= 70) { return 3; }
-    if (value <= 120) { return 4; }
-    if (value <= 150) { return 5; }
-    if (value <= 180) { return 6; }
-    if (value <= 200) { return 7; }
-    if (value <= 250) { return 8; }
-    if (value <= 300) { return 9; }
+    if (value < 10.5) { return 1; }
+    if (value < 15.5) { return 2; }
+    if (value < 20.5) { return 3; }
+    if (value < 30.5) { return 4; }
+    if (value < 40.5) { return 5; }
+    if (value < 45.5) { return 6; }
+    if (value < 50.5) { return 7; }
+    if (value < 60.5) { return 8; }
+    if (value < 75.5) { return 9; }
     return 10;
   }
 
   private categorizeO3(value: number): number {
     if (value <= -1) { return 0; }
-    if (value <= 25) { return 1; }
-    if (value <= 50) { return 2; }
-    if (value <= 70) { return 3; }
-    if (value <= 120) { return 4; }
-    if (value <= 160) { return 5; }
-    if (value <= 180) { return 6; }
-    if (value <= 240) { return 7; }
-    if (value <= 280) { return 8; }
-    if (value <= 320) { return 9; }
+    if (value < 30.5) { return 1; }
+    if (value < 65.5) { return 2; }
+    if (value < 75.5) { return 3; }
+    if (value < 90.5) { return 4; }
+    if (value < 110.5) { return 5; }
+    if (value < 150.5) { return 6; }
+    if (value < 180.5) { return 7; }
+    if (value < 210.5) { return 8; }
+    if (value < 240.5) { return 9; }
     return 10;
   }
 
   private categorizePM10(value: number): number {
     if (value <= -1) { return 0; }
-    if (value <= 10) { return 1; }
-    if (value <= 20) { return 2; }
-    if (value <= 30) { return 3; }
-    if (value <= 40) { return 4; }
-    if (value <= 50) { return 5; }
-    if (value <= 60) { return 6; }
-    if (value <= 70) { return 7; }
-    if (value <= 80) { return 8; }
-    if (value <= 100) { return 9; }
+    if (value < 10.5) { return 1; }
+    if (value < 20.5) { return 2; }
+    if (value < 35.5) { return 3; }
+    if (value < 45.5) { return 4; }
+    if (value < 60.5) { return 5; }
+    if (value < 80.5) { return 6; }
+    if (value < 95.5) { return 7; }
+    if (value < 110.5) { return 8; }
+    if (value < 140.5) { return 9; }
     return 10;
   }
 
   private categorizePM25(value: number): number {
     if (value <= -1) { return 0; }
-    if (value <= 5) { return 1; }
-    if (value <= 10) { return 2; }
-    if (value <= 15) { return 3; }
-    if (value <= 25) { return 4; }
-    if (value <= 35) { return 5; }
-    if (value <= 40) { return 6; }
-    if (value <= 50) { return 7; }
-    if (value <= 60) { return 8; }
-    if (value <= 70) { return 9; }
+    if (value < 3.55) { return 1; }
+    if (value < 7.55) { return 2; }
+    if (value < 10.5) { return 3; }
+    if (value < 15.5) { return 4; }
+    if (value < 20.5) { return 5; }
+    if (value < 35.5) { return 6; }
+    if (value < 50.5) { return 7; }
+    if (value < 60.5) { return 8; }
+    if (value < 75.5) { return 9; }
     return 10;
   }
 
   private categorizeBC(value: number): number {
+    if (value <= -1) { return 0; }
+    if (value <= 0.99) { return 1; }
+    if (value <= 1.99) { return 2; }
+    if (value <= 2.99) { return 3; }
+    if (value <= 3.99) { return 4; }
+    if (value <= 4.99) { return 5; }
+    if (value <= 6.99) { return 6; }
+    if (value <= 9.99) { return 7; }
+    if (value <= 14.99) { return 8; }
+    if (value <= 19.99) { return 9; }
+    return 10;
+  }
+  
+  /*scales for previous days and forecasts, these scales should be used for the PAST and FORECAST situation */
+  private categorizeNO2_pf(value: number): number {
+    if (value <= -1) { return 0; }
+    if (value < 5.5) { return 1; }
+    if (value < 10.5) { return 2; }
+    if (value < 15.5) { return 3; }
+    if (value < 20.5) { return 4; }
+    if (value < 25.5) { return 5; }
+    if (value < 30.5) { return 6; }
+    if (value < 35.5) { return 7; }
+    if (value < 40.5) { return 8; }
+    if (value < 50.5) { return 9; }
+    return 10;
+  }
+
+  private categorizeO3_pf(value: number): number {
+    if (value <= -1) { return 0; }
+    if (value < 30.5) { return 1; }
+    if (value < 60.5) { return 2; }
+    if (value < 70.5) { return 3; }
+    if (value < 80.5) { return 4; }
+    if (value < 100.5) { return 5; }
+    if (value < 130.5) { return 6; }
+    if (value < 160.5) { return 7; }
+    if (value < 190.5) { return 8; }
+    if (value < 220.5) { return 9; }
+    return 10;
+  }
+
+  private categorizePM10_pf(value: number): number {
+    if (value <= -1) { return 0; }
+    if (value < 5.5) { return 1; }
+    if (value < 15.5) { return 2; }
+    if (value < 25.5) { return 3; }
+    if (value < 35.5) { return 4; }
+    if (value < 45.5) { return 5; }
+    if (value < 60.5) { return 6; }
+    if (value < 70.5) { return 7; }
+    if (value < 80.5) { return 8; }
+    if (value < 100.5) { return 9; }
+    return 10;
+  }
+
+  private categorizePM25_pf(value: number): number {
+    if (value <= -1) { return 0; }
+    if (value < 2.55) { return 1; }
+    if (value < 5.05) { return 2; }
+    if (value < 7.55) { return 3; }
+    if (value < 10.5) { return 4; }
+    if (value < 15.5) { return 5; }
+    if (value < 25.5) { return 6; }
+    if (value < 35.5) { return 7; }
+    if (value < 40.5) { return 8; }
+    if (value < 50.5) { return 9; }
+    return 10;
+  }
+
+  private categorizeBC_pf(value: number): number {
     if (value <= -1) { return 0; }
     if (value <= 0.99) { return 1; }
     if (value <= 1.99) { return 2; }
