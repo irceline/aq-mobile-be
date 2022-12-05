@@ -96,7 +96,12 @@ export class MapComponent {
                     layerOptions.crossOrigin = true;
                     wmsurl = this.belaqiIndexSrvc.getWmsUrl(this._valueDate);
                 } else {
-                    layerOptions = {
+					/*get last 6 character of map layer name, if not '_hmean' then use _pf styles for previous and forecast days */
+					let layname = String((this.modelledValueSrvc.getLayersId(this._phenomenon, this._valueDate)));
+					let laynamelenght = layname.length;
+					let lastcharlayn = layname.substring(laynamelenght - 6);
+                    if(lastcharlayn == '_hmean') {
+					 layerOptions = {
                         layers: this.modelledValueSrvc.getLayersId(this._phenomenon, this._valueDate),
                         styles: this.createStyleId(),
                         transparent: true,
@@ -107,7 +112,21 @@ export class MapComponent {
                         useBoundaryGreaterAsZoom: 12,
                         useCache: true,
                         crossOrigin: true,
-                    };
+                     };	
+					}else{	
+                     layerOptions = {
+                        layers: this.modelledValueSrvc.getLayersId(this._phenomenon, this._valueDate),
+                        styles: this.createStyleId_pf(),
+                        transparent: true,
+                        format: 'image/png',
+                        opacity: 0.7,
+                        tiled: true,
+                        boundary: boundary as GeoJSON.GeoJsonObject,
+                        useBoundaryGreaterAsZoom: 12,
+                        useCache: true,
+                        crossOrigin: true,
+                     };
+                    } 
                     wmsurl = this.modelledValueSrvc.getWmsUrl(this._phenomenon, this._valueDate);
                 }
 
@@ -118,7 +137,6 @@ export class MapComponent {
                 if (this._phenomenonLayer) {
                     this._phenomenonLayer.remove();
                 }
-
                 this._phenomenonLayer = L.tileLayer.customCanvas(
                     wmsurl,
                     layerOptions
@@ -143,4 +161,22 @@ export class MapComponent {
                 return 'bc_hmean_raster_discrete_belair';
         }
     }
+    
+    private createStyleId_pf(): string {
+        switch (this._phenomenon) {
+            case MainPhenomenon.NO2:
+                return 'no2_dmean_raster_discrete_belair';
+            case MainPhenomenon.O3:
+                return 'o3_max8hmean_raster_discrete_belair';
+            case MainPhenomenon.PM10:
+                return 'pm10_dmean_raster_discrete_belair';
+            case MainPhenomenon.PM25:
+                return 'pm25_dmean_raster_discrete_belair';
+            case MainPhenomenon.BELAQI:
+                return 'belaqi_raster_discrete_belair';
+            case MainPhenomenon.BC:
+                return 'bc_dmean_raster_discrete_belair';
+        }
+    }   
+    
 }
