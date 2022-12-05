@@ -415,6 +415,7 @@ export class ModelledValueService extends ValueProvider {
   }
   
   /*scales for previous days and forecasts, these scales should be used for the PAST and FORECAST situation */
+  
   private categorizeNO2_pf(value: number): number {
     if (value <= -1) { return 0; }
     if (value < 5.5) { return 1; }
