@@ -57,7 +57,7 @@
 
       <app-parameter-information [parameter]="detailPoint.substance.phenomenon"></app-parameter-information>
 
-      <map-component [currentLocation]="userSettingsService.selectedUserLocation"
+      <map-component [center]="mapCenter" [currentLocation]="userSettingsService.selectedUserLocation"
         [phenomenon]="detailPoint.substance.phenomenon" [valueDate]="selectedResult?.valueDate"></map-component>
       <div class="longterm" [ngStyle]="{'padding-bottom': iosPadding + 'px'}">
         <ion-item>
