@@ -1,5 +1,6 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { NavController, Platform } from '@ionic/angular';
 
 import { UserLocation } from '../../Interfaces';
@@ -20,7 +21,9 @@ export class OnboardingScreenComponent implements OnInit {
         private navCtrl: NavController,
         private userSettingsService: UserSettingsService,
         private zone: NgZone,
-        public keyboard: Keyboard
+        public keyboard: Keyboard,
+        private splashScreen: SplashScreen,
+        private platform: Platform
     ) {
         this.keyboard.onKeyboardShow().subscribe((e) => {
             this.zone.run(() => this.keyboardShown = true)
@@ -28,9 +31,12 @@ export class OnboardingScreenComponent implements OnInit {
         this.keyboard.onKeyboardHide().subscribe((e) => {
             this.zone.run(() => this.keyboardShown = false)
         })
+        this.platform.ready().then(()=>{
+            setTimeout(() => this.splashScreen.hide(), 1000)
+        })
     }
 
-    ngOnInit() { }
+    ngOnInit() {}
 
     confirmLocation(location: UserLocation) {
         if (location !== null) {

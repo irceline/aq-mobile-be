@@ -2,7 +2,6 @@ import { Component, QueryList, ViewChildren } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { IonRouterOutlet, ModalController, Platform } from '@ionic/angular';
-import { SplashScreenComponent } from './v2/screens/splash-screen/splash-screen.component';
 import { NetworkAlertService } from './v2/services/network-alert/network-alert.service';
 import { PouchDBInitializerService } from './v2/services/pouch-db-initializer/pouch-db-initializer.service';
 import { ThemeHandlerService } from './v2/services/theme-handler/theme-handler.service';
@@ -61,15 +60,13 @@ export class AppComponent {
     }
 
     initializeApp() {
-        const splash = this.modalCtrl.create({ component: SplashScreenComponent });
-
         this.platform.ready().then(async () => {
             // this.statusBar.styleDefault();
             // this.errorLoggingSrvc.init();
+            // splash screen hide is moved to onboarding-screen and main-screen
             // this.splashScreen.hide();
             this.statusBar.hide();
             this.pouchDbInit.init();
-            await this.presentSplashScreen(await splash);
         });
 
         this.networkAlertSrvc.isConnected.subscribe(connected => console.log(`Device has network connection: ${connected}`))
@@ -85,15 +82,4 @@ export class AppComponent {
             this.lastNavigation = ['main', this.lastNavigation[2], urlAfterRedirects];
           });
       }
-
-    private async presentSplashScreen(splash: HTMLIonModalElement) {
-        setTimeout(() => {
-            splash.present();
-            
-            setTimeout(() => {
-                this.statusBar.show();
-                splash.dismiss()
-            }, 1500)
-        }, 1000);
-    }
 }
