@@ -117,6 +117,7 @@ export class MainScreenComponent implements OnInit {
     pullTabOpen = false;
 
     slideEvent: Subject<number> = new Subject<number>();
+    mapCenter = { latitude: 50.5039, longitude: 4.4699 }
 
     constructor(
         public userSettingsService: UserSettingsService,
