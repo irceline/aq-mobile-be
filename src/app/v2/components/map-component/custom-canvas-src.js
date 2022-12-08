@@ -26,7 +26,7 @@ const isRingBbox = function (ring, bbox) {
 // 🍂section PouchDB tile caching options
 // 🍂option useCache: Boolean = false
 // Whether to use a PouchDB cache on this tile layer, or not
-L.TileLayer.prototype.options.useCache = true;
+L.TileLayer.prototype.options.useCache = false;
 
 // 🍂option saveToCache: Boolean = true
 // When caching is enabled, whether to save new tiles to the cache or not
