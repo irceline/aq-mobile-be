@@ -1,0 +1,80 @@
+pipeline {
+    environment {
+        NPM_CONFIG_CACHE = "${WORKSPACE}/.npm"
+        APP_VERSION = ""
+    }
+    
+    agent {
+        docker {
+            image 'igez/ionic-android-build-box:latest'
+            args '-v belair_gradle:/tmp/.gradle:rw -v belair_node_modules:/project/node_modules:rw -e CI=true'
+        }
+    }
+    
+    stages {
+        stage('Configure environment') {
+            steps {
+                withCredentials([
+                    file(credentialsId: 'google_services.json', variable: 'GSERVICE_JSON'),
+                    file(credentialsId: 'KEYSTORE_FILE', variable: 'KEYSTORE_FILE')
+                ]) {
+                    APP_VERSION = sh(returnStdout: true, script: 'echo $(node tools/bump_version.js \$BUILD_NUMBER)')
+                    sh "cp \$GSERVICE_JSON \$WORKSPACE/google-services.json"
+                    sh "cp \$KEYSTORE_FILE \$WORKSPACE/irceline2018.keystore"
+                    // Docker image fixes for Java
+                    sh "export PATH=/root/.jenv/shims:\$PATH"
+                    sh "jenv local 1.8"
+                    sh "JAVA_HOME=\$HOME/.jenv/versions/1.8"
+                    sh "echo $JAVA_HOME"
+                    sh "java -version"
+                    sh "cd /project"
+                    sh "npm i"
+                    sh "ionic cordova platform add android"
+                    // Fix dx on 31.0.0 build tools
+                    sh "cd /opt/android-sdk/build-tools/31.0.0"
+                    sh "mv d8 dx"
+                    sh "cd lib"
+                    sh "mv d8.jar dx.jar"
+                }
+            }
+        }
+
+        stage('Build & Sign App bundle') {
+            steps {
+                withCredentials([
+                    string(credentialsId: 'KEYSTORE_ALIAS', variable: 'KEYSTORE_ALIAS'),
+                    string(credentialsId: 'KEYSTORE_PASSWORD', variable: 'KEYSTORE_PASSWORD')
+                ]) {
+                    script {
+                        // Build android
+                        sh "cd /project"
+                        sh "ionic cordova build android --prod --release -- -- --packageType=bundle"
+                        sh "jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore irceline2018.keystore /project/platforms/android/app/build/outputs/bundle/release/app-release.aab irceline_2018_android -storepass Hamba123,./"
+                    }
+                }
+            }
+        }
+
+        stage('Publish to playstore') {
+            steps {
+                script {
+                    androidApkUpload(
+                        googleCredentialsId: 'belair_svc_account',
+                        filesPattern: 'app-release.aab',
+                        rolloutPercentage: '100',
+                        trackName: 'internal',
+                        releaseName: "Version: ${APP_VERSION}",
+                    )
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}
+
+
