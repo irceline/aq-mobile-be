@@ -14,11 +14,15 @@ pipeline {
     stages {
         stage('Configure environment') {
             steps {
+                script {
+                    APP_VERSION = sh(returnStdout: true, script: 'echo $(node tools/bump_version.js \$BUILD_NUMBER)')
+                }
+                
                 withCredentials([
                     file(credentialsId: 'google_services.json', variable: 'GSERVICE_JSON'),
                     file(credentialsId: 'KEYSTORE_FILE', variable: 'KEYSTORE_FILE')
                 ]) {
-                    APP_VERSION = sh(returnStdout: true, script: 'echo $(node tools/bump_version.js \$BUILD_NUMBER)')
+
                     sh "cp \$GSERVICE_JSON \$WORKSPACE/google-services.json"
                     sh "cp \$KEYSTORE_FILE \$WORKSPACE/irceline2018.keystore"
                     // Docker image fixes for Java
@@ -45,12 +49,10 @@ pipeline {
                     string(credentialsId: 'KEYSTORE_ALIAS', variable: 'KEYSTORE_ALIAS'),
                     string(credentialsId: 'KEYSTORE_PASSWORD', variable: 'KEYSTORE_PASSWORD')
                 ]) {
-                    script {
-                        // Build android
-                        sh "cd /project"
-                        sh "ionic cordova build android --prod --release -- -- --packageType=bundle"
-                        sh "jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore irceline2018.keystore /project/platforms/android/app/build/outputs/bundle/release/app-release.aab irceline_2018_android -storepass Hamba123,./"
-                    }
+                    // Build android
+                    sh "cd /project"
+                    sh "ionic cordova build android --prod --release -- -- --packageType=bundle"
+                    sh "jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore irceline2018.keystore /project/platforms/android/app/build/outputs/bundle/release/app-release.aab irceline_2018_android -storepass Hamba123,./"
                 }
             }
         }
