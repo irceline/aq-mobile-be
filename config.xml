@@ -5,8 +5,13 @@
     <author email="belair@irceline.be" href="https://www.irceline.be/">The BelAir Team</author>
     <content src="index.html" />
     <access origin="*" />
+    <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest" xmlns:android="http://schemas.android.com/apk/res/android">
+        <manifest xmlns:tools="http://schemas.android.com/tools" />
+    </edit-config>
     <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
         <application android:usesCleartextTraffic="true" />
+    </edit-config>
+    <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application/activity">
         <activity android:exported="true" />
     </edit-config>
     <allow-intent href="http://*/*" />
@@ -31,6 +36,7 @@
     <preference name="orientation" value="portrait" />
     <hook src="hooks/before_compile.js" type="before_compile" />
     <platform name="android">
+        <hook src="tools/android-after-prepare.js" type="after-prepare" />
         <preference name="AndroidXEnabled" value="true" />
         <preference name="StatusBarOverlaysWebView" value="false" />
         <preference name="StatusBarStyle" value="lightcontent" />

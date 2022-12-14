@@ -104,6 +104,7 @@
         "karma-jasmine": "~3.0.1",
         "karma-jasmine-html-reporter": "^1.4.2",
         "karma-mocha-reporter": "^2.2.5",
+        "lodash": "^4.17.21",
         "pre-commit": "^1.2.2",
         "protractor": "~5.4.3",
         "tar": "^5.0.5",
