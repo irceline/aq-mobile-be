@@ -1,0 +1,62 @@
+pipeline {
+    environment {
+        NPM_CONFIG_CACHE = "${WORKSPACE}/.npm"
+        APP_VERSION = ""
+        GRADLE_USER_HOME="/tmp/.gradle"
+    }
+
+    agent any
+    
+    stages {
+        stage('Build & Sign Android bundle') {
+            steps {
+                withCredentials([
+                    file(credentialsId: 'google_services.json', variable: 'GSERVICE_JSON'),
+                    file(credentialsId: 'KEYSTORE_FILE', variable: 'KEYSTORE_FILE'),
+                    string(credentialsId: 'KEYSTORE_ALIAS', variable: 'KEYSTORE_ALIAS'),
+                    string(credentialsId: 'KEYSTORE_PASSWORD', variable: 'KEYSTORE_PASSWORD')
+                ]) {
+                    script {
+                        sh "cp \$GSERVICE_JSON \$WORKSPACE/google-services.json"
+                        sh "cp \$KEYSTORE_FILE \$WORKSPACE/irceline2018.keystore"
+                        sh '''
+                        docker run --rm \
+                          -v $WORKSPACE:/project \
+                          -v belair_gradle:/tmp/.gradle:rw -v belair_node_modules:/project/node_modules:rw \
+                          -e CI=true \
+                          -e KEYSTORE_FILE=$KEYSTORE_FILE \
+                          -e KEYSTORE_PASSWORD=$KEYSTORE_PASSWORD \
+                          -e KEYSTORE_ALIAS=$KEYSTORE_ALIAS \
+                          -e GRADLE_USER_HOME=/tmp/.gradle \
+                          igez/ionic-android-build-box \
+                          bash -c "export PATH=/root/.jenv/shims:\\$PATH && jenv local 1.8 && JAVA_HOME=\\$HOME/.jenv/versions/1.8 && echo \\$JAVA_HOME && java -version && cd /project && npm i && echo \\$(node tools/bump_version.js \$BUILD_NUMBER) >> version && ionic cordova platform add android && cd /opt/android-sdk/build-tools/31.0.0 && mv d8 dx && cd lib && mv d8.jar dx.jar && cd /project && ionic cordova build android --prod --release -- -- --packageType=bundle && jarsigner -sigalg SHA1withRSA -digestalg SHA1 -keystore irceline2018.keystore /project/platforms/android/app/build/outputs/bundle/release/app-release.aab \\$KEYSTORE_ALIAS -storepass \\$KEYSTORE_PASSWORD && mv /project/platforms/android/app/build/outputs/bundle/release/app-release.aab app-release.aab"
+                        '''
+                    }
+                }
+            }
+        }
+
+        stage('Publish to playstore') {
+            steps {
+                script {
+                    APP_VERSION = sh(returnStdout: true, script: 'cat version')
+                    androidApkUpload(
+                        googleCredentialsId: 'belair_svc_account',
+                        filesPattern: "app-release.aab",
+                        rolloutPercentage: '100',
+                        trackName: 'internal',
+                        releaseName: "Version: ${APP_VERSION}",
+                    )
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}
+
+

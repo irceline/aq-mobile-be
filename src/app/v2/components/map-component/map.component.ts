@@ -22,6 +22,7 @@ import { ModelledValueService } from '../../services/value-provider/modelled-val
 export class MapComponent {
 
     private map: L.Map;
+    private _center: Partial<UserLocation>;
     private _currentLocation: UserLocation;
     private _phenomenon: MainPhenomenon;
     private _valueDate: ValueDate;
@@ -42,6 +43,11 @@ export class MapComponent {
     }
 
     @Input()
+    set center(loc: UserLocation) {
+        this._center = loc;
+    }
+
+    @Input()
     set phenomenon(phen: MainPhenomenon) {
         this._phenomenon = phen;
         this.addPhenomenonLayer();
@@ -58,8 +64,8 @@ export class MapComponent {
             this.map.remove();
         }
         this.map = L.map('mapElement', {
-            center: [this._currentLocation.latitude, this._currentLocation.longitude],
-            zoom: 12
+            center: [this._center.latitude, this._center.longitude],
+            zoom: 7
         });
         const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,

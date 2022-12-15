@@ -15,7 +15,6 @@ import { MainScreenComponent } from './main-screen/main-screen.component';
 import { OnboardingScreenComponent } from './onboarding-screen/onboarding-screen.component';
 import { RatingScreenComponent } from './rating-screen/rating-screen.component';
 import { RouterModule } from '@angular/router';
-import { SplashScreenComponent } from './splash-screen/splash-screen.component';
 
 const SCREENS = [
     AppInfoScreenComponent,
@@ -24,7 +23,6 @@ const SCREENS = [
     MainScreenComponent,
     OnboardingScreenComponent,
     RatingScreenComponent,
-    SplashScreenComponent,
 ];
 
 @NgModule({

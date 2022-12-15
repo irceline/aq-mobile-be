@@ -16,6 +16,7 @@ import { ModelledValueService } from '../../services/value-provider/modelled-val
 import moment from 'moment';
 import { GeneralNotificationService } from '../../services/push-notifications/general-notification.service';
 import { first } from 'rxjs/operators';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 
 interface IndexValueResult extends BelAqiIndexResult {
     value: number;
@@ -116,6 +117,7 @@ export class MainScreenComponent implements OnInit {
     pullTabOpen = false;
 
     slideEvent: Subject<number> = new Subject<number>();
+    mapCenter = { latitude: 50.5039, longitude: 4.4699 }
 
     constructor(
         public userSettingsService: UserSettingsService,
@@ -128,6 +130,7 @@ export class MainScreenComponent implements OnInit {
         public alertCtrl: AlertController,
         public navCtrl: NavController,
         private generalNotificationSrvc: GeneralNotificationService,
+        private splashScreen: SplashScreen
     ) {
         this.registerBackButtonEvent();
 
@@ -137,6 +140,10 @@ export class MainScreenComponent implements OnInit {
             this.updateCurrentLocation();
             return this.locations = locations;
         });
+
+        this.platform.ready().then(()=>{
+            setTimeout(() => this.splashScreen.hide(), 1500)
+        })
     }
 
     registerBackButtonEvent() {

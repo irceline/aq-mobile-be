@@ -5,40 +5,25 @@ pipeline {
       SLACK_CHANNEL = '#belair'
     }
 
-   agent any
+    agent any
 
     stages {
-        stage('Create app environment') {
+        stage('Installing dependencies') {
             steps {
                 script {
-                    sh 'npm i'
-                    sh 'node tools/bump_version.js \$BUILD_NUMBER'
-                    sh 'ionic cordova platform add ios@6.2.0'
-                    sh 'ionic cordova plugin rm cordova-plugin-firebasex'
-                    sh 'ionic cordova plugin add cordova-plugin-firebasex@12.1.0-cli'
-                    sh 'cp -R conf/fastlane platforms/ios/'
+                    nvm('v12.22.12') {
+                        sh 'npm i'
+                        sh 'node tools/bump_version.js \$BUILD_NUMBER'
+                        sh 'ionic cordova platform add ios@6.2.0'
+                        sh 'ionic cordova plugin rm cordova-plugin-firebasex'
+                        sh 'ionic cordova plugin add cordova-plugin-firebasex@12.1.0-cli'
+                        sh 'cp -R conf/fastlane platforms/ios/'
+                    }
                 }
             }
         }
 
-        stage('Configure environment for test') {
-            when {
-                not {
-                    branch 'neb-v2-upgrade'
-                }
-            }
-            steps {
-                withCredentials([
-                    file(credentialsId: 'belair_appstore', variable: 'PROVISIONING'),
-                    file(credentialsId: 'GoogleService-Info.plist-test', variable: 'GSERVICE_PLIST')
-                ]) {
-                    sh "cp \$PROVISIONING BelAir_App_Store.mobileprovision"
-                    sh "cp \$GSERVICE_PLIST GoogleService-Info.plist"
-                }
-            }
-        }
-
-        stage('Configure environment') {
+        stage('Configure secrets files') {
             when {
                 branch 'neb-v2-upgrade'
             }
@@ -62,34 +47,17 @@ pipeline {
                     string(credentialsId: 'FASTLANE_SESSION', variable: 'session'),
                     string(credentialsId: 'testflight_specific_password', variable: 'pass')
                 ]) {
-                    sh 'cd platforms/ios && CI=true FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=\$pass FASTLANE_SESSION=\$session fastlane adhoc'
+                    nvm('v12.22.12') {
+                        sh 'cd platforms/ios && CI=true FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=\$pass FASTLANE_SESSION=\$session fastlane adhoc'
+                    }
                 }
-            }
-        }
-
-        stage('Archive artifact to s3') {
-            when {
-                branch 'neb-v2-upgrade'
-            }
-            steps {
-                archiveArtifacts artifacts: 'platforms/ios/build/device/BelAir.ipa', fingerprint: true
             }
         }
     }
 
     post {
-        failure {
-            slackSend(
-                color: 'danger',
-                channel: "${SLACK_CHANNEL}", 
-                message: "iOS Pipeline for ${BRANCH_NAME}#${BUILD_ID} failure"
-            )
-        }
-
         always {
             cleanWs()
         }
     }
 }
-
-
