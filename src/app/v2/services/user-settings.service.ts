@@ -80,12 +80,12 @@ export class UserSettingsService {
         this.translate.onLangChange.subscribe(() => {
             if (this.$userLocationNotificationsActive.getValue()) {
                 this.showLoading()
-                .then(() => {
-                    this.unsubscribeNotification(true).subscribe(() => {
-                        this.subscribeNotification().subscribe(this.dismissLoading.bind(this))
-                    }, this.dismissLoading.bind(this));
-                })
-                .catch(() => this.dismissLoading())
+                    .then(() => {
+                        this.unsubscribeNotification(true).subscribe(() => {
+                            this.subscribeNotification().subscribe(this.dismissLoading.bind(this))
+                        }, this.dismissLoading.bind(this));
+                    })
+                    .catch(() => this.dismissLoading())
             }
         });
     }
@@ -145,13 +145,13 @@ export class UserSettingsService {
 
                         this.showToast(this.translate.instant('v2.components.location-input.success-choose-location'))
                     },
-                    async (err) => {
-                        this.dismissLoading()
-                        this._userLocations.shift()
-                        console.log(`ERR: addUserLocation`, err)
-                        this.showToast(this.translate.instant('v2.components.location-input.error-choose-location'))
-                    }
-                );
+                        async (err) => {
+                            this.dismissLoading()
+                            this._userLocations.shift()
+                            console.log(`ERR: addUserLocation`, err)
+                            this.showToast(this.translate.instant('v2.components.location-input.error-choose-location'))
+                        }
+                    );
             } else {
                 this.saveLocations();
             }
@@ -266,23 +266,26 @@ export class UserSettingsService {
                         return false
                     }
 
-                    return String(e.subscription.lat) === String(notif.lat)
-                        && String(e.subscription.lng) === String(notif.lng)
+                    return (String(e.subscription.lat) === String(notif.lat)
+                        && String(e.subscription.lng) === String(notif.lng)) ||
+                        (e.label.toLowerCase() === notif.notification.location_name.toLowerCase())
                 });
-                console.log(`found match '${matchedUserLocation.label}' for notification`);
-                matchedUserLocation.notification = notif.notification;
-                if (this.notificationExpirationTimer.has(matchedUserLocation.id)) {
-                    const t = this.notificationExpirationTimer.get(matchedUserLocation.id);
-                    if (!t.closed) {
-                        t.unsubscribe();
-                        this.notificationExpirationTimer.delete(matchedUserLocation.id);
+                console.log(`notification location:'${matchedUserLocation?.label}'`);
+                if (matchedUserLocation) {
+                    matchedUserLocation.notification = notif.notification;
+                    if (this.notificationExpirationTimer.has(matchedUserLocation.id)) {
+                        const t = this.notificationExpirationTimer.get(matchedUserLocation.id);
+                        if (!t.closed) {
+                            t.unsubscribe();
+                            this.notificationExpirationTimer.delete(matchedUserLocation.id);
+                        }
                     }
-                }
-                const expirationTimer = timer(notif.notification.expiration).subscribe(() => this.clearNotification(matchedUserLocation));
-                this.notificationExpirationTimer.set(matchedUserLocation.id, expirationTimer);
+                    const expirationTimer = timer(notif.notification.expiration).subscribe(() => this.clearNotification(matchedUserLocation));
+                    this.notificationExpirationTimer.set(matchedUserLocation.id, expirationTimer);
 
-                // set default user location
-                this.selectedUserLocation = matchedUserLocation
+                    // set default user location
+                    this.selectedUserLocation = matchedUserLocation
+                }
 
                 this.saveLocations();
             } else {
