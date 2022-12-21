@@ -102,7 +102,7 @@ export class AnnualMeanValueService extends ValueProvider {
   }
 
   private createWmsUrl(layerId: string): string {
-    return `https://geo.irceline.be/rioifdm/wms`;
+    return `https://geobelair.irceline.be/annual/wms`;
   }
 
 
@@ -110,9 +110,9 @@ export class AnnualMeanValueService extends ValueProvider {
     switch (phenomenon) {
       case MainPhenomenon.NO2: return this.categorizeNO2(value);
       case MainPhenomenon.O3: return this.categorizeO3(value);
-      case MainPhenomenon.PM10: return this.categorizePM10(value);
-      case MainPhenomenon.PM25: return this.categorizePM25(value);
-      case MainPhenomenon.BC: return this.categorizeBC(value);
+      //case MainPhenomenon.PM10: return this.categorizePM10(value);
+     // case MainPhenomenon.PM25: return this.categorizePM25(value);
+      //case MainPhenomenon.BC: return this.categorizeBC(value);
       case MainPhenomenon.BELAQI: return value;
     }
   }

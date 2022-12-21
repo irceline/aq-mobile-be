@@ -57,12 +57,37 @@ const PM25ForcastLayerMapping = [
   { date: ValueDate.IN_THREE_DAYS, layerId: 'forecast:pm25_dmean_d3' }
 ];
 
-enum PastModelledPhenomenonLayer {
+const No2PastLayerMapping = [
+  { date: ValueDate.YESTERDAY, layerId: 'rioifdm:no2_dm1' },
+  { date: ValueDate.BEFORE_TWO_DAYS, layerId: 'rioifdm:no2_dm2' },
+  { date: ValueDate.BEFORE_THREE_DAYS, layerId: 'rioifdm:no2_dm3' }
+];
+
+const O3PastLayerMapping = [
+  { date: ValueDate.YESTERDAY, layerId: 'rioifdm:o3_dm1' },
+  { date: ValueDate.BEFORE_TWO_DAYS, layerId: 'rioifdm:o3_dm2' },
+  { date: ValueDate.BEFORE_THREE_DAYS, layerId: 'rioifdm:o3_dm3' }
+];
+
+const PM10PastLayerMapping = [
+  { date: ValueDate.YESTERDAY, layerId: 'rioifdm:pm10_dm1' },
+  { date: ValueDate.BEFORE_TWO_DAYS, layerId: 'rioifdm:pm10_dm2' },
+  { date: ValueDate.BEFORE_THREE_DAYS, layerId: 'rioifdm:pm10_dm3' }
+];
+
+const PM25PastLayerMapping = [
+  { date: ValueDate.YESTERDAY, layerId: 'rioifdm:pm25_dm1' },
+  { date: ValueDate.BEFORE_TWO_DAYS, layerId: 'rioifdm:pm25_dm2' },
+  { date: ValueDate.BEFORE_THREE_DAYS, layerId: 'rioifdm:pm25_dm3' }
+];
+
+
+/*enum PastModelledPhenomenonLayer {
   no2 = 'no2_24hmean',
   o3 = 'o3_max8hmean',
   pm10 = 'pm10_24hmean',
   pm25 = 'pm25_24hmean'
-}
+}*/
 
 @Injectable({
   providedIn: 'root'
@@ -160,7 +185,7 @@ export class ModelledValueService extends ValueProvider {
       case ValueDate.BEFORE_THREE_DAYS:
       case ValueDate.BEFORE_TWO_DAYS:
       case ValueDate.YESTERDAY:
-        return this.createPastLayerId(phenomenon);
+        return this.createPastLayerId(phenomenon, valueDate);
       case ValueDate.CURRENT:
         return this.createCurrentLayerId(phenomenon);
       case ValueDate.TODAY:
@@ -265,7 +290,7 @@ export class ModelledValueService extends ValueProvider {
     });
   }
 
-  private createPastLayerId(phenomenon: MainPhenomenon): string {
+  /*private createPastLayerId(phenomenon: MainPhenomenon): string {
     switch (phenomenon) {
       case MainPhenomenon.NO2:
         return PastModelledPhenomenonLayer.no2;
@@ -276,7 +301,21 @@ export class ModelledValueService extends ValueProvider {
       case MainPhenomenon.PM25:
         return PastModelledPhenomenonLayer.pm25;
     }
+  }*/
+  
+    private createPastLayerId(phenomenon: MainPhenomenon, date: ValueDate): string {
+    switch (phenomenon) {
+      case MainPhenomenon.NO2:
+        return No2PastLayerMapping.find(e => e.date === date).layerId;
+      case MainPhenomenon.O3:
+        return O3PastLayerMapping.find(e => e.date === date).layerId;
+      case MainPhenomenon.PM10:
+        return PM10PastLayerMapping.find(e => e.date === date).layerId;
+      case MainPhenomenon.PM25:
+        return PM25PastLayerMapping.find(e => e.date === date).layerId;
+    }
   }
+  
 
   private createDate(date: ValueDate): moment.Moment {
     switch (date) {
