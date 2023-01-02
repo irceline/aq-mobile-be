@@ -118,8 +118,8 @@ export class BelaqiIndexService extends ValueProvider {
       const params = this.createFeatureInfoRequestParams(this.getLayersId(valueDate), location);
       const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(
         rioifdmWmsURL, { responseType: 'json', params: params });
-      const cacheKey = createCacheKey(rioifdmWmsURL, JSON.stringify(params));
-      this.cacheService.loadFromObservable(cacheKey, request)
+        const cacheKey = createCacheKey(rioifdmWmsURL, JSON.stringify(params)); 
+        this.cacheService.loadFromObservable(cacheKey, request)
         .subscribe(
           res => this.handleResponse(res, observer, valueDate, location, cacheKey),
           error => this.handleError(error, observer)
@@ -135,8 +135,8 @@ export class BelaqiIndexService extends ValueProvider {
             location, settings.lastupdate.toISOString());
           const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(
             rioifdmBelaqiWmsURL, { responseType: 'json', params: params });
-          const cacheKey = createCacheKey(rioifdmBelaqiWmsURL, JSON.stringify(params), settings.lastupdate.toISOString());
-          this.cacheService.loadFromObservable(cacheKey, request).subscribe(
+            const cacheKey = createCacheKey(rioifdmBelaqiWmsURL, JSON.stringify(params), settings.lastupdate.toISOString());
+            this.cacheService.loadFromObservable(cacheKey, request).subscribe(
             res => this.handleResponse(res, observer, ValueDate.CURRENT, location, cacheKey),
             error => this.handleError(error, observer)
           );

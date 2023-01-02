@@ -94,50 +94,32 @@ export class MapComponent {
                 if (this._phenomenon === MainPhenomenon.BELAQI) {
                     layerOptions = this.belaqiIndexSrvc.getLayerOptions(this._valueDate);
                     layerOptions.opacity = 0.7;
-                    layerOptions.styles = this.createStyleId();
+                    //layerOptions.styles = this.createStyleId(); //styles via geobelair server, easier to change when necessary
                     layerOptions.tiled = true;
                     layerOptions.boundary = boundary as GeoJSON.GeoJsonObject;
                     layerOptions.useBoundaryGreaterAsZoom = 12;
-                    layerOptions.useCache = true;
+                    layerOptions.useCache = false; //never use cache
                     layerOptions.crossOrigin = true;
                     wmsurl = this.belaqiIndexSrvc.getWmsUrl(this._valueDate);
                 } else {
-					/*get last 6 character of map layer name, if not '_hmean' then use _pf styles for previous and forecast days */
-					let layname = String((this.modelledValueSrvc.getLayersId(this._phenomenon, this._valueDate)));
-					let laynamelenght = layname.length;
-					let lastcharlayn = layname.substring(laynamelenght - 6);
-                    if(lastcharlayn == '_hmean') {
-					 layerOptions = {
-                        layers: this.modelledValueSrvc.getLayersId(this._phenomenon, this._valueDate),
-                        styles: this.createStyleId(),
-                        transparent: true,
-                        format: 'image/png',
-                        opacity: 0.7,
-                        tiled: true,
-                        boundary: boundary as GeoJSON.GeoJsonObject,
-                        useBoundaryGreaterAsZoom: 12,
-                        useCache: true,
-                        crossOrigin: true,
-                     };	
-					}else{	
                      layerOptions = {
                         layers: this.modelledValueSrvc.getLayersId(this._phenomenon, this._valueDate),
-                        styles: this.createStyleId_pf(),
+                        //styles: this.createStyleId_pf(), //styles via geobelair server, easier to change when necessary
                         transparent: true,
                         format: 'image/png',
                         opacity: 0.7,
                         tiled: true,
                         boundary: boundary as GeoJSON.GeoJsonObject,
                         useBoundaryGreaterAsZoom: 12,
-                        useCache: true,
+                        useCache: false, //never use cache
                         crossOrigin: true,
                      };
-                    } 
                     wmsurl = this.modelledValueSrvc.getWmsUrl(this._phenomenon, this._valueDate);
                 }
 
                 if (time && !layerOptions.time) {
-                    layerOptions.time = time;
+                    //layerOptions.time = time; //time not necessary, only one geotiff available via server scripts
+                    layerOptions.time = "";
                 }
 
                 if (this._phenomenonLayer) {
@@ -151,6 +133,8 @@ export class MapComponent {
         }
     }
 
+//styles via geobelair server, easier to change when necessary
+/*
     private createStyleId(): string {
         switch (this._phenomenon) {
             case MainPhenomenon.NO2:
@@ -183,6 +167,6 @@ export class MapComponent {
             case MainPhenomenon.BC:
                 return 'bc_dmean_raster_discrete_belair';
         }
-    }   
+    }*/   
     
 }

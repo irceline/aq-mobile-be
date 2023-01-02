@@ -121,8 +121,8 @@ export class ModelledValueService extends ValueProvider {
         const layerId = this.getLayersId(phenomenon, ValueDate.CURRENT);
         const url = this.getWmsUrl(phenomenon, ValueDate.CURRENT);
         const params = this.createFeatureInfoRequestParams(layerId, userLocation, timeparam);
-        const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url, { params });
-        this.cacheService.loadFromObservable(createCacheKey(url, JSON.stringify(params), timeparam), request)
+        const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url, { params })//; //do not use cache
+        //this.cacheService.loadFromObservable(createCacheKey(url, JSON.stringify(params), timeparam), request)
           .subscribe(
             res => {
               const value = this.getValueOfResponse(res);
@@ -206,8 +206,8 @@ export class ModelledValueService extends ValueProvider {
           const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url, {
             responseType: 'json',
             params: params
-          });
-          this.cacheService.loadFromObservable(createCacheKey(url, JSON.stringify(params), settings.lastupdate), request)
+          })//; //do not use cache
+          //this.cacheService.loadFromObservable(createCacheKey(url, JSON.stringify(params), settings.lastupdate), request)
             .subscribe(
               res => {
                 const value = this.getValueOfResponse(res);
@@ -243,8 +243,8 @@ export class ModelledValueService extends ValueProvider {
         const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url, {
           responseType: 'json',
           params: params
-        });
-        this.cacheService.loadFromObservable(createCacheKey(url, JSON.stringify(params), timeparam), request)
+        })//; do not use cache
+        //this.cacheService.loadFromObservable(createCacheKey(url, JSON.stringify(params), timeparam), request)
           .subscribe(
             res => {
               const value = this.getValueOfResponse(res);
