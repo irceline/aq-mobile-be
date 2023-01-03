@@ -5,7 +5,7 @@ import { map, share, tap } from 'rxjs/operators';
 import { CacheService } from 'ionic-cache';
 import { Network } from '@ionic-native/network/ngx';
 
-const FORECAST_TIMESTRING_URL = 'https://www.irceline.be/air/timestring_forecast.php';
+const FORECAST_TIMESTRING_URL = 'https://geobelair.irceline.be/www/timestring_forecast.php';
 const DEFAULT_TTL_CACHE_LAST_UPDATE_CHECK = 600000; // every 10 minutes
 
 @Injectable({
