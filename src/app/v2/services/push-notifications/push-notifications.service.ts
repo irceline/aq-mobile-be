@@ -11,6 +11,9 @@ export interface PushNotification {
   title: string;
   body: string;
   expiration: Date;
+  location_name?: string;
+  channel_id?: string;
+  unique_id?: string;
 }
 
 @Injectable({
@@ -49,7 +52,10 @@ export class PushNotificationsService {
               title: data.title,
               body: data.body,
               topic: data.topic,
-              expiration: new Date(data.expiration)
+              expiration: new Date(data.expiration),
+              location_name: data?.location_name ?? '',
+              unique_id: data?.unique_id ?? '',
+              channel_id: data?.channel_id ?? ''
             };
             console.log(`New notification arrived (${data.topic}, ${data.title}, ${data.expiration})`);
             this.notificationReceived.next(notification);
