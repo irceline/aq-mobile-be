@@ -121,8 +121,9 @@ export class ModelledValueService extends ValueProvider {
         const layerId = this.getLayersId(phenomenon, ValueDate.CURRENT);
         const url = this.getWmsUrl(phenomenon, ValueDate.CURRENT);
         const params = this.createFeatureInfoRequestParams(layerId, userLocation, timeparam);
-        const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url, { params })//; //do not use cache
-        //this.cacheService.loadFromObservable(createCacheKey(url, JSON.stringify(params), timeparam), request)
+        const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url, { params }); 
+        let ttl = 60 * 5; // 5 minutes
+        this.cacheService.loadFromObservable(createCacheKey(url, JSON.stringify(params), timeparam), request, '', ttl)
           .subscribe(
             res => {
               const value = this.getValueOfResponse(res);
@@ -206,8 +207,9 @@ export class ModelledValueService extends ValueProvider {
           const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url, {
             responseType: 'json',
             params: params
-          })//; //do not use cache
-          //this.cacheService.loadFromObservable(createCacheKey(url, JSON.stringify(params), settings.lastupdate), request)
+          }); 
+          let ttl = 60 * 60 * 1; // 1 hour
+          this.cacheService.loadFromObservable(createCacheKey(url, JSON.stringify(params), settings.lastupdate), request, '', ttl)
             .subscribe(
               res => {
                 const value = this.getValueOfResponse(res);
@@ -243,8 +245,9 @@ export class ModelledValueService extends ValueProvider {
         const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url, {
           responseType: 'json',
           params: params
-        })//; do not use cache
-        //this.cacheService.loadFromObservable(createCacheKey(url, JSON.stringify(params), timeparam), request)
+        }); 
+        let ttl = 60 * 60 * 4; // 4 hours
+        this.cacheService.loadFromObservable(createCacheKey(url, JSON.stringify(params), timeparam), request, '', ttl)
           .subscribe(
             res => {
               const value = this.getValueOfResponse(res);

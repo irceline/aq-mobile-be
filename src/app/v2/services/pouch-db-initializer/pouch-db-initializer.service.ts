@@ -5,7 +5,7 @@ import { ForecastDateService } from '../forecast-date.service';
 import { CacheService } from 'ionic-cache';
 import { from } from 'rxjs';
 
-const FORECAST_TIMESTRING_URL = 'https://www.irceline.be/air/timestring_forecast.php';
+const FORECAST_TIMESTRING_URL = 'https://geobelair.irceline.be/www/timestring_forecast.php';
 
 @Injectable({
   providedIn: 'root'

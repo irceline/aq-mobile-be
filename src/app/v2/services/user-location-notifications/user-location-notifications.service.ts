@@ -21,7 +21,7 @@ export interface UserLocationNotification {
   notification: PushNotification
 }
 
-const NOTIFICATION_SUBSCRIPTION_BACKEND_URL = 'https://www.irceline.be/air/belair_channel.php';
+const NOTIFICATION_SUBSCRIPTION_BACKEND_URL = 'https://geobelair.irceline.be/air/belair_channel.php';
 const USER_LOCATION_SUBSCRIPTIONS_PARAM = 'user_location_subscriptions';
 
 @Injectable({

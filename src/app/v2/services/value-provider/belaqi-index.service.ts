@@ -119,7 +119,8 @@ export class BelaqiIndexService extends ValueProvider {
       const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(
         rioifdmWmsURL, { responseType: 'json', params: params });
         const cacheKey = createCacheKey(rioifdmWmsURL, JSON.stringify(params)); 
-        this.cacheService.loadFromObservable(cacheKey, request)
+        let ttl = 60 * 60 * 4 // 4 hours
+        this.cacheService.loadFromObservable(cacheKey, request, '', ttl)
         .subscribe(
           res => this.handleResponse(res, observer, valueDate, location, cacheKey),
           error => this.handleError(error, observer)
@@ -136,7 +137,8 @@ export class BelaqiIndexService extends ValueProvider {
           const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(
             rioifdmBelaqiWmsURL, { responseType: 'json', params: params });
             const cacheKey = createCacheKey(rioifdmBelaqiWmsURL, JSON.stringify(params), settings.lastupdate.toISOString());
-            this.cacheService.loadFromObservable(cacheKey, request).subscribe(
+            let ttl = 60 * 5; //5 minutes
+            this.cacheService.loadFromObservable(cacheKey, request, '', ttl).subscribe(
             res => this.handleResponse(res, observer, ValueDate.CURRENT, location, cacheKey),
             error => this.handleError(error, observer)
           );
@@ -158,7 +160,8 @@ export class BelaqiIndexService extends ValueProvider {
             const params = this.createFeatureInfoRequestParams(this.getLayersId(valueDate), location);
             const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url, { responseType: 'json', params: params });
             const cacheKey = createCacheKey(url, JSON.stringify(params));
-            this.cacheService.loadFromObservable(cacheKey, request)
+            let ttl = 60 * 60 * 1; //1 hour
+            this.cacheService.loadFromObservable(cacheKey, request, '', ttl)
               .subscribe(
                 res => this.handleResponse(res, observer, valueDate, location, cacheKey),
                 error => this.handleError(error, observer)

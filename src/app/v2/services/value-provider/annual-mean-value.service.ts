@@ -76,7 +76,8 @@ export class AnnualMeanValueService extends ValueProvider {
     const url = this.createWmsUrl(layerId);
     const params = this.createFeatureInfoRequestParams(layerId, userLocation);
     const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url, { responseType: 'json', params: params });
-    return this.cacheService.loadFromObservable(createCacheKey(url, JSON.stringify(params), `${year}`), request).pipe(
+    let ttl = 3600 * 24; // one day
+    return this.cacheService.loadFromObservable(createCacheKey(url, JSON.stringify(params), `${year}`), request, '', ttl).pipe(
       catchError(_ => of({})),
       map(res => {
         const value = this.getValueOfResponse(res);

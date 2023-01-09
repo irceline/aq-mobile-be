@@ -38,7 +38,7 @@ export enum FeedbackCode {
 }
 
 const FEEDBACK_KEY = 'feedback_key';
-const FEEDBACK_SERVICE_URL = 'https://www.irceline.be/air/belair_feedback.php';
+const FEEDBACK_SERVICE_URL = 'https://geobelair.irceline.be/air/belair_feedback.php';
 
 @Injectable({
   providedIn: 'root'
