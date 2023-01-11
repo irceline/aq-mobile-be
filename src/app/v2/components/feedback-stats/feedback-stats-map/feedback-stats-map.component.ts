@@ -36,8 +36,8 @@ var agricultureIcon = L.icon({
   iconSize: [40, 40]
 })
 
-var industrieIcon = L.icon({
-  iconUrl: 'assets/images/icons/industrie.svg',
+var industryIcon = L.icon({
+  iconUrl: 'assets/images/icons/industry.svg',
   iconAnchor: [20, 20],
   iconSize: [40, 40]
 })
@@ -120,7 +120,7 @@ export class FeedbackStatsMapComponent implements AfterViewInit, OnInit {
               case 2: return L.marker(latlng, { icon: woodburnIcon })
               case 3: return L.marker(latlng, { icon: trafficIcon })
               case 4: return L.marker(latlng, { icon: agricultureIcon })
-              case 5: return L.marker(latlng, { icon: industrieIcon })
+              case 5: return L.marker(latlng, { icon: industryIcon })
             }
           }
         })
@@ -135,7 +135,7 @@ export class FeedbackStatsMapComponent implements AfterViewInit, OnInit {
 
   private getFeatures(name: string): Observable<GeoJSON.GeoJsonObject> {
     // const bbox = this.map.getBounds().toBBoxString();
-    const url = 'https://geo.irceline.be/belair/ows?'
+    const url = 'https://geobelair.irceline.be/belair/ows?'
     return this.http.get<GeoJSON.GeoJsonObject>(url, {
       params: {
         service: 'WFS',
