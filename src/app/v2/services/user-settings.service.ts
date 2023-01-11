@@ -171,7 +171,9 @@ export class UserSettingsService {
         if (this.$userLocationNotificationsActive.getValue()) {
             this.showLoading().then(() => {
                 this.userLocationNotificationSrvc.unsubscribeLocation(matchedLocation).subscribe(() => {
-                    this.userLocationNotificationSrvc.subscribeLocation(matchedLocation, this.$userAqiIndexThreshold.value).subscribe(this.dismissLoading);
+                    this.userLocationNotificationSrvc.subscribeLocation(matchedLocation, this.$userAqiIndexThreshold.value).subscribe(() => {
+                        this.dismissLoading()
+                    });
                 })
             })
         }
