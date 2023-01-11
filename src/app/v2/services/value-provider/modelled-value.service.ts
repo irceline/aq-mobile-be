@@ -246,7 +246,7 @@ export class ModelledValueService extends ValueProvider {
           responseType: 'json',
           params: params
         }); 
-        let ttl = 60 * 60 * 4; // 4 hours
+        let ttl = 60 * 60 * 1; // 1 hour
         this.cacheService.loadFromObservable(createCacheKey(url, JSON.stringify(params), timeparam), request, '', ttl)
           .subscribe(
             res => {

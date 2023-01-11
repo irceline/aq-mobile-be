@@ -119,7 +119,7 @@ export class BelaqiIndexService extends ValueProvider {
       const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(
         rioifdmWmsURL, { responseType: 'json', params: params });
         const cacheKey = createCacheKey(rioifdmWmsURL, JSON.stringify(params)); 
-        let ttl = 60 * 60 * 4 // 4 hours
+        let ttl = 60 * 60 * 1 // 1 hour
         this.cacheService.loadFromObservable(cacheKey, request, '', ttl)
         .subscribe(
           res => this.handleResponse(res, observer, valueDate, location, cacheKey),
