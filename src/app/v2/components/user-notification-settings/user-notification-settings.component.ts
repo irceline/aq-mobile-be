@@ -41,49 +41,55 @@ export class UserNotificationSettingsComponent implements OnInit {
         this.aqiIndexName = indexLabel[this.aqiScoreNotifications]
     }
 
-    toggleGeneralNotification(event: MouseEvent) {
-        event.stopImmediatePropagation();
-        event.stopPropagation();
-        event.preventDefault();
-        if (!this.generalNotification) {
-            this.generalNotificationSrvc.subscribeNotification(true).subscribe(success => {
-                if (success) {
-                    this.generalNotification = !this.generalNotification;
-                }
-            });
-        } else {
-            if (this.userLocationNotifications) this.toggleUserLocationNotifications(event);
-            this.generalNotificationSrvc.unsubscribeNotification(true).subscribe(success => {
-                if (success) {
-                    this.generalNotification = !this.generalNotification;
-                }
-            });
+    async generalNotifToggleChange(event) {
+        if (this.generalNotification === event.detail.checked) return
+        console.log('general notif toggle changed from', this.generalNotification, 'to', event.detail.checked)
+        this.generalNotification = event.detail.checked
+        // subscribe
+        if (event.detail.checked) {
+            this.generalNotificationSrvc.subscribeNotification(true).subscribe(subscribed => {
+                setTimeout(() => {
+                    this.generalNotification = subscribed ? true : false
+                }, 250)
+            })
+        }
+        // unsubs
+        else {
+            if (this.userLocationNotifications) this.userLocationNotifToggleChange(event);
+            this.generalNotificationSrvc.unsubscribeNotification(true).subscribe(unsubscribed => {
+                setTimeout(() => {
+                    this.generalNotification = unsubscribed ? false : true
+                }, 250)
+            })
         }
     }
 
-    toggleUserLocationNotifications(event: MouseEvent) {
-        event.stopImmediatePropagation();
-        event.stopPropagation();
-        event.preventDefault();
-
-        // Make sure the user sees the notification toggle changed first
-
-        this.userSettingsSrvc.showLoading().then(async () => {
-            try {
-                await new Promise((resolve, reject) => {
-                    if (!this.userLocationNotifications) {
-                        this.userSettingsSrvc.subscribeNotification().subscribe(resolve, reject);
-                    } else {
-                        this.userSettingsSrvc.unsubscribeNotification().subscribe(resolve, reject);
-                    }
-                })
-            } finally {
-                this.userSettingsSrvc.dismissLoading()
-            }
-
-            this.userLocationNotifications = !this.userLocationNotifications;
-            if (!this.generalNotification && this.userLocationNotifications) this.toggleGeneralNotification(event);
-        });
+    async userLocationNotifToggleChange(event) {
+        if (this.userLocationNotifications === event.detail.checked) return
+        console.log('user loc toggle changed from', this.userLocationNotifications, 'to', event.detail.checked)
+        await this.userSettingsSrvc.showLoading()
+        // subscribe
+        if (event.detail.checked) {
+            this.userSettingsSrvc.subscribeNotification().subscribe(subscribed => {
+                const toggle = subscribed ? true : false
+                if (toggle && !this.generalNotification) this.generalNotifToggleChange(event)
+                setTimeout(() => {
+                    this.userLocationNotifications = toggle
+                    this.userSettingsSrvc.dismissLoading()
+                }, 250)
+            })
+        }
+        // unsubs
+        else {
+            this.userSettingsSrvc.unsubscribeNotification().subscribe(unsubscribed => {
+                // unsubscribed always returning false even requests are success(?)
+                // console.log(unsubscribed, 'this always false')
+                setTimeout(() => {
+                    this.userLocationNotifications = false
+                    this.userSettingsSrvc.dismissLoading()
+                }, 250)
+            })
+        }
     }
 
     hasFocus() {
@@ -94,7 +100,7 @@ export class UserNotificationSettingsComponent implements OnInit {
         this.loseFocus.next(false);
     }
 
-    async changeThresholdEnd(event) {
+    changeThresholdEnd(event) {
         this.blurFocus()
         // Update user AQI threshold to storage
         this.userSettingsSrvc.setUserAQIIndexThreshold(event.target.value)
@@ -103,40 +109,9 @@ export class UserNotificationSettingsComponent implements OnInit {
             ...location,
             indexThreshold: event.target.value
         })))
-
-        console.log('changeThresholdEnded', this.userLocationNotifications)
-
-        try {
-            await this.userSettingsSrvc.showLoading()
-            
-            this.userSettingsSrvc.subscribeNotification().subscribe(
-                () => {
-                    if (!this.userLocationNotifications) {
-                        console.log('resubscribe userLocationNotifications to update the index AQI threshold')
-
-                        this.userLocationNotifications = true
-                    }
-                    
-                    if (!this.generalNotification) {
-                        this.toggleGeneralNotification(event);
-                    }
-
-                    const locations = this.userSettingsSrvc.getUserSavedLocations()
-
-                    this.userSettingsSrvc.updateUserLocationsOrder(
-                        locations.map(location => ({
-                            ...location,
-                            indexThreshold: event.target.value
-                        }))
-                    )
-
-                    this.userSettingsSrvc.dismissLoading()
-                }, 
-                () => this.userSettingsSrvc.dismissLoading()
-            );
-        } catch (e) {
-            await this.userSettingsSrvc.dismissLoading()
-        }
+        // revert userLocationNotifications to false first so we can re-trigger userLocationNotifToggleChange
+        this.userLocationNotifications = false
+        this.userLocationNotifToggleChange({ detail: { checked: true } })
     }
 
     changeThreshold(event) {
