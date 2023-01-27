@@ -23,7 +23,7 @@ export class LongTermDataService {
     this._substances = [
       {
         name: translateService.instant('v2.screens.app-info.belaqi-title'),
-        abbreviation: 'BelAQI',
+        abbreviation: 'AQ', 
         phenomenon: MainPhenomenon.BELAQI
       },
       {

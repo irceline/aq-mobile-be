@@ -5,7 +5,8 @@ export enum MainPhenomenon {
     PM10,
     PM25,
     BC,
-    BELAQI
+    BELAQI,
+    BELAQI_DAY
 }
 
 export const PhenomenonSeriesID = {

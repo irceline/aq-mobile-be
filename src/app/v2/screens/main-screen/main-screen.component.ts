@@ -223,7 +223,7 @@ export class MainScreenComponent implements OnInit {
             }
         };
 
-        this.annulMeanValueService.getLastValue(this.userSettingsService.selectedUserLocation, MainPhenomenon.BELAQI).subscribe(
+        this.annulMeanValueService.getLastValue(this.userSettingsService.selectedUserLocation, MainPhenomenon.BELAQI_DAY).subscribe(
             value => {
                 this.belaqiDetailData.lastAnnualIndex = {
                     color: this.belAqiService.getLightColorForIndex(value.index),

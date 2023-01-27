@@ -35,6 +35,10 @@ const phenomenonMapping = [
   {
     phenomenon: MainPhenomenon.BELAQI,
     layerPrefix: 'belaqi_anmean_'
+  },
+  {
+    phenomenon: MainPhenomenon.BELAQI_DAY, //anmean BelAQI based on the daily index scales. To used to indicate the "Average score at location"
+    layerPrefix: 'belaqi_anmean_dayscale_'
   }
 ];
 
@@ -115,6 +119,7 @@ export class AnnualMeanValueService extends ValueProvider {
       case MainPhenomenon.PM25: return this.categorizePM25(value);
       //case MainPhenomenon.BC: return this.categorizeBC(value);
       case MainPhenomenon.BELAQI: return value;
+      case MainPhenomenon.BELAQI_DAY: return value;
     }
   }
 
@@ -132,28 +137,28 @@ export class AnnualMeanValueService extends ValueProvider {
   }
 
   private categorizePM25(value: number): number {
-    if (value <= 5.5) { return 1; }
-    if (value <= 7.5) { return 2; }
-    if (value <= 10.5) { return 3; }
-    if (value <= 12.5) { return 4; }
-    if (value <= 15.5) { return 5; }
-    if (value <= 20.5) { return 6; }
-    if (value <= 25.5) { return 7; }
-    if (value <= 30.5) { return 8; }
-    if (value <= 35.5) { return 9; }
+    if (value <= 1.55) { return 1; }
+    if (value <= 2.55) { return 2; }
+    if (value <= 3.55) { return 3; }
+    if (value <= 5.05) { return 4; }
+    if (value <= 7.55) { return 5; }
+    if (value <= 10.55) { return 6; }
+    if (value <= 12.55) { return 7; }
+    if (value <= 15.5) { return 8; }
+    if (value <= 20.5) { return 9; }
     return 10;
   }
 
   private categorizePM10(value: number): number {
-    if (value <= 10.5) { return 1; }
-    if (value <= 15.5) { return 2; }
-    if (value <= 20.5) { return 3; }
-    if (value <= 25.5) { return 4; }
-    if (value <= 30.5) { return 5; }
-    if (value <= 35.5) { return 6; }
-    if (value <= 40.5) { return 7; }
-    if (value <= 45.5) { return 8; }
-    if (value <= 50.5) { return 9; }
+    if (value <= 3.5) { return 1; }
+    if (value <= 7.5) { return 2; }
+    if (value <= 10.5) { return 3; }
+    if (value <= 15.5) { return 4; }
+    if (value <= 20.5) { return 5; }
+    if (value <= 25.5) { return 6; }
+    if (value <= 30.5) { return 7; }
+    if (value <= 35.5) { return 8; }
+    if (value <= 40.5) { return 9; }
     return 10;
   }
 
@@ -171,15 +176,15 @@ export class AnnualMeanValueService extends ValueProvider {
   }
 
   private categorizeNO2(value: number): number {
-    if (value <= 10.5) { return 1; }
-    if (value <= 15.5) { return 2; }
-    if (value <= 20.5) { return 3; }
-    if (value <= 25.5) { return 4; }
-    if (value <= 30.5) { return 5; }
-    if (value <= 35.5) { return 6; }
-    if (value <= 40.5) { return 7; }
-    if (value <= 45.5) { return 8; }
-    if (value <= 50.5) { return 9; }
+    if (value <= 2.5) { return 1; }
+    if (value <= 5.5) { return 2; }
+    if (value <= 7.5) { return 3; }
+    if (value <= 10.5) { return 4; }
+    if (value <= 15.5) { return 5; }
+    if (value <= 20.5) { return 6; }
+    if (value <= 25.5) { return 7; }
+    if (value <= 30.5) { return 8; }
+    if (value <= 40.5) { return 9; }
     return 10;
   }
 

@@ -289,7 +289,7 @@ export class CircleChartComponent implements OnInit {
     }
 
     private loadAnnualValue(loc: UserLocation) {
-        this.annualMeanValueSrvc.getLastValue(loc, MainPhenomenon.BELAQI).subscribe(res => this.setSubtitle(res.index))
+        this.annualMeanValueSrvc.getLastValue(loc, MainPhenomenon.BELAQI_DAY).subscribe(res => this.setSubtitle(res.index))
     }
 
     private setSubtitle(annualValue): void {
