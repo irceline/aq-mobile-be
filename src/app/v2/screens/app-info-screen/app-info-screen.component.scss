@@ -8,11 +8,11 @@ ion-content {
         display: none !important;
     }
     .img-notification {
-        margin: 0 auto;
+        margin: 0px auto;
     }
     .app-info {
         color: white;
-        padding: 25px 10vw;
+        padding: 25px 10vw 0px 10vw;
 
         .arrow-back {
             width: 10px;
@@ -181,6 +181,10 @@ ion-content {
                 font-size: 14px;
                 line-height: 22px;
             }
+        }
+
+        .notification {
+            margin-bottom: 0px;
         }
     }
 }

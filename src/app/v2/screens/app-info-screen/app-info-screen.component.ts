@@ -5,6 +5,7 @@ import { MainPhenomenon } from '../../common/phenomenon';
 import { lightIndexColor } from '../../common/constants';
 import { ModelledValueService } from '../../services/value-provider/modelled-value.service';
 import { UserSettingsService } from './../../services/user-settings.service';
+import { TranslateService } from '@ngx-translate/core';
 
 interface ValColorPair {
     value: number;
@@ -22,12 +23,18 @@ export class AppInfoScreenComponent implements OnInit {
     public no2: ValColorPair;
     public pm10: ValColorPair;
     public pm25: ValColorPair;
+    public notifImgHc: string;
+    public notifImg: string;
 
     constructor(
         private navCtrl: NavController,
         private userSettingsSrvc: UserSettingsService,
-        private modelledValueSrvc: ModelledValueService
-    ) { }
+        private modelledValueSrvc: ModelledValueService,
+        private translateSrvc: TranslateService
+    ) {
+        this.notifImg = `/assets/images/group-9@3x_main_${this.translateSrvc.currentLang.substring(0, 2).toLowerCase()}.png`
+        this.notifImgHc = `/assets/images/group-9@3x_${this.translateSrvc.currentLang.substring(0, 2).toLowerCase()}.png`
+    }
 
     ngOnInit() {
         const location = this.userSettingsSrvc.selectedUserLocation;
