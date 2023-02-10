@@ -339,6 +339,14 @@ export class MainScreenComponent implements OnInit {
 
     onDetailsDayChange(index: IndexValueResult) {
         this.selectedResult = index;
+
+        this.detailPoint = {
+            ...this.detailPoint,
+            color: this.belAqiService.getLightColorForIndex(index.indexScore),
+            evaluation: this.belAqiService.getLabelForIndex(index.indexScore),
+            location: this.userSettingsService.selectedUserLocation,
+            currentValue: isNaN(index.value) ? null : Math.round(index.value),
+        }
     }
 
     useLocation(location: UserLocation) {
