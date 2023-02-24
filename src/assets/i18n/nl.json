@@ -32,13 +32,13 @@
 		"no": "Nee",
 		"yes": "Ja"
 	},
-	"edit-location-hint": "U kunt het locatie icoon op de kaart naar elke gewenste locatie verplaatsen.",
+	"edit-location-hint": "Je kan het locatie icoon op de kaart naar elke gewenste locatie verplaatsen.",
 	"edit-location-label": {
 		"title": "Wijzig de locatienaam"
 	},
 	"error-modal": {
 		"back-to-app": "Terug naar de app",
-		"no-network-connection": "U bent waarschijnlijk offline. Gegevens die eerder zijn geladen voor uw opgeslagen locaties zijn nog steeds beschikbaar, maar de bruikbaarheid van de app is aanzienlijk beperkt.",
+		"no-network-connection": "Je bent waarschijnlijk offline. Gegevens die eerder zijn geladen voor jouw opgeslagen locaties zijn nog steeds beschikbaar, maar de bruikbaarheid van de app is aanzienlijk beperkt.",
 		"no_irceline_settings": "Er kunnen geen nieuwe gegevens worden geladen. De app toont de laatst geladen gegevens.",
 		"title": "Connectie problemen"
 	},
@@ -55,7 +55,7 @@
 	"feedback": {
 		"ajdust-location-for-feedback-button": "Feedback locatie verplaatsen",
 		"show-feedback-button": "Feedback weergeven",
-		"edit-location-anonymise": "De locatie die u hier instelt, wordt willekeurig verplaatst voordat deze wordt verzonden om uw privacy te beschermen.",
+		"edit-location-anonymise": "De locatie die je hier instelt, wordt willekeurig verplaatst voordat deze wordt verzonden om je privacy te beschermen.",
 		"stats": {
 			"submission": "Ingezonden feedback",
 			"submission-today": "Vandaag",
@@ -68,7 +68,7 @@
 		"subtitle": "Luchtstalen verzamelen"
 	},
 	"network": {
-		"geolocationDenied": "U hebt het gebruik van uw locatie niet toegestaan de app.",
+		"geolocationDenied": "Je hebt het gebruik van jouw locatie niet toegestaan in de app.",
 		"geolocationDisabled": "Geolocatie is uitgeschakeld"
 	},
 	"no-location-hint": "De app vereist een locatie om gegevens weer te geven.",
@@ -96,7 +96,7 @@
 				"current-location": "Huidige locatie",
 				"no-results": "Geen resultaten",
 				"please-wait": "Even geduld",
-				"success-add-location": "Uw huidige locatie is succesvol geselecteerd.",
+				"success-add-location": "Je huidige locatie is succesvol geselecteerd.",
 				"success-choose-location": "Locatie succesvol toegevoegd.",
 				"error-choose-location": "Kan locatie niet toevoegen.",
 				"error-remove-location": "Kan locatie niet verwijderen."
@@ -119,7 +119,7 @@
 			"user-notification-settings": {
 				"activity": "Inspanningen",
 				"allergies": "Allergieën",
-				"automated": "Geautomatiseerde waarschuwingen op basis van gemodelleerde waarden voor de door u gekozen locatie(s).",
+				"automated": "Geautomatiseerde waarschuwingen op basis van gemodelleerde waarden voor de door jouw gekozen locatie(s).",
 				"exercise": "Sporten",
 				"highConcentration": "(Te) hoge concentraties",
 				"official": "Officiële waarschuwingen op basis van een grondige analyse van de situatie",
@@ -133,7 +133,7 @@
 				"aq-index-2": "Die geeft aan elk van de <strong>berekende concentraties van verschillende verontreinigende stoffen</strong> één score (b.v. heel goed). De slechtste score bepaalt de algemene luchtkwaliteit.",
 				"belaqi-title": "Algemeen",
 				"current-items": "De stoffen die we in rekening brengen, zijn:",
-				"data-models": "We berekenen voor uw locatie ook de luchtkwaliteit op de lange termijn en toetsen die aan de Europese grenswaarden en de advieswaarden van de Wereldgezondheidsorganisatie.",
+				"data-models": "We berekenen voor jouw locatie ook de luchtkwaliteit op de lange termijn en toetsen die aan de Europese grenswaarden en de advieswaarden van de Wereldgezondheidsorganisatie.",
 				"fine-dust": "Fijn stof",
 				"how-this-works": "Hoe werkt dit?",
 				"nitrogen-dioxide": "Stikstofdioxide",
