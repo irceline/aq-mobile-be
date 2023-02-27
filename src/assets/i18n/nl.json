@@ -23,7 +23,7 @@
 			"very-poor": "Vrij Slecht",
 			"no-data": "N/B"
 		},
-		"no-data-available": "Er is geen data beschikbaar op deze dag"
+		"no-data-available": "Er zijn geen data beschikbaar op deze dag"
 	},
 	"controls": {
 		"cancel": "annuleer",
@@ -32,7 +32,7 @@
 		"no": "Nee",
 		"yes": "Ja"
 	},
-	"edit-location-hint": "Je kan het locatie icoon op de kaart naar elke gewenste locatie verplaatsen.",
+	"edit-location-hint": "Je kan het locatie-icoon op de kaart naar elke gewenste locatie verplaatsen.",
 	"edit-location-label": {
 		"title": "Wijzig de locatienaam"
 	},
@@ -40,7 +40,7 @@
 		"back-to-app": "Terug naar de app",
 		"no-network-connection": "Je bent waarschijnlijk offline. Gegevens die eerder zijn geladen voor jouw opgeslagen locaties zijn nog steeds beschikbaar, maar de bruikbaarheid van de app is aanzienlijk beperkt.",
 		"no_irceline_settings": "Er kunnen geen nieuwe gegevens worden geladen. De app toont de laatst geladen gegevens.",
-		"title": "Connectie problemen"
+		"title": "Connectieproblemen"
 	},
 	"feedback-reason": {
 		"agriculture": "Uitstoot door landbouw",
@@ -53,14 +53,14 @@
 		"total": "Totaal"
 	},
 	"feedback": {
-		"ajdust-location-for-feedback-button": "Feedback locatie verplaatsen",
+		"ajdust-location-for-feedback-button": "Feedbacklocatie verplaatsen",
 		"show-feedback-button": "Feedback weergeven",
 		"edit-location-anonymise": "De locatie die je hier instelt, wordt willekeurig verplaatst voordat deze wordt verzonden om je privacy te beschermen.",
 		"stats": {
 			"submission": "Ingezonden feedback",
 			"submission-today": "Vandaag",
 			"submission-total": "In totaal",
-			"anonymisation": "De locaties die hier getoond worden, werden willekeurig verplaatst de privacy van de verzender te beschermen."
+			"anonymisation": "De locaties die hier getoond worden, werden willekeurig verplaatst om de privacy van de verzender te beschermen."
 		}
 	},
 	"loader": {
@@ -113,7 +113,7 @@
 			},
 			"success-display": {
 				"back-to-main": "Naar beginscherm",
-				"thanks": "Bedankt !",
+				"thanks": "Bedankt!",
 				"well-received": "We hebben je opmerking goed ontvangen. Dankzij jouw input kunnen we onze toepassing verbeteren."
 			},
 			"user-notification-settings": {
@@ -124,7 +124,7 @@
 				"highConcentration": "(Te) hoge concentraties",
 				"official": "Officiële waarschuwingen op basis van een grondige analyse van de situatie",
 				"transport": "Verplaatsingen",
-				"indexThreshold": "Waarschuw mij wanneer BelAQI score dit niveau bereikt:"
+				"indexThreshold": "Waarschuw mij wanneer BelAQI-score dit niveau bereikt:"
 			}
 		},
 		"screens": {
@@ -148,11 +148,11 @@
 				"lt-effects-diseases": "Langdurige blootstelling aan luchtvervuilende stoffen kan chronische effecten uitlokken en voor een hoger risico op hart- en longziekten zorgen."
 			},
 			"main-screen": {
-				"about-belaqi": "De BelAQI is een luchtkwaliteitsindex. Aan de vier belangrijkste luchtverontreinigende stoffen (NO2, O3, PM10 en PM2.5) wordt een score gegeven op basis van hun impact op de gezondheid op korte termijn. De hoogste  score bepaalt de BelAQI.",
-				"about-no2": "Stikstofdioxide (NO2) is een gas dat voor irritatie kan zorgen aan ogen, neus en keel. Bij inademing kan NO2 ook voor longirritatie en een verminderde longfunctie zorgen. Op plaatsen met meer NO2 is er een grotere kans op astma-aanvallen en neemt het aantal ziekenhuisopnames door klachten aan de luchtwegen toe. NO2 wordt voornamelijk uitgestoten tijdens verbrandingsprocessen  bij hoge temperaturen. De belangrijkste bron zijn dieselwagens.",
-				"about-o3": "Ozon (O3) ontstaat op warme dagen door de inwerking van zonlicht (UV) op lucht verontreinigd met stikstofoxiden en vluchtige organische stoffen. Bij inademing kan O3 voor longirritatie en een verminderde longfunctie zorgen.  Op plaatsen met meer O3 is er een grotere kans op astma-aanvallen en neemt het aantal ziekenhuisopnames door klachten aan de luchtwegen toe. Binnenhuis zijn de ozonconcentraties doorgaans maar half zo hoog als buiten.",
+				"about-belaqi": "De BelAQI is een luchtkwaliteitsindex. Aan de vier belangrijkste luchtverontreinigende stoffen (NO2, O3, PM10 en PM2.5) wordt een score gegeven op basis van hun impact op de gezondheid op korte termijn. De hoogste score bepaalt de BelAQI.",
+				"about-no2": "Stikstofdioxide (NO2) is een gas dat voor irritatie kan zorgen aan ogen, neus en keel. Bij inademing kan NO2 ook voor longirritatie en een verminderde longfunctie zorgen. Op plaatsen met meer NO2 is er een grotere kans op astma-aanvallen en neemt het aantal ziekenhuisopnames door klachten aan de luchtwegen toe. NO2 wordt voornamelijk uitgestoten tijdens verbrandingsprocessen bij hoge temperaturen. De belangrijkste bron zijn dieselwagens.",
+				"about-o3": "Ozon (O3) ontstaat op warme dagen door de inwerking van zonlicht (UV) op lucht verontreinigd met stikstofoxiden en vluchtige organische stoffen. Bij inademing kan O3 voor longirritatie en een verminderde longfunctie zorgen. Op plaatsen met meer O3 is er een grotere kans op astma-aanvallen en neemt het aantal ziekenhuisopnames door klachten aan de luchtwegen toe. Binnenhuis zijn de ozonconcentraties doorgaans maar half zo hoog als buiten.",
 				"about-pm10": "Fijn stof (PM10) bestaat uit zeer kleine zwevende deeltjes van verschillende grootte, herkomst en chemische samenstelling. Bij inademing veroorzaken deze kleine deeltjes ontstekingsreacties in de luchtwegen die de zuurstofopname bemoeilijken. Mensen met luchtwegaandoeningen en/of hart- en vaatziekten zijn hiervoor bijzonder gevoelig. Fijn stof kan ook drager zijn van kankerverwekkende deeltjes. PM10 zijn alle deeltjes kleiner dan 10 micrometer. Het verschil met de kleinere PM2.5 fractie zijn voornamelijk grovere deeltjes in opwaaiend stof (b.v. zand, stof opgewaaid van het wegdek door passerende auto's, etc.).",
-				"about-pm25": "Fijn stof (PM2.5) bestaat uit zeer kleine zwevende deeltjes van verschillende grootte, herkomst en chemische samenstelling. Bij inademing veroorzaken deze kleine deeltjes ontstekingsreacties in de luchtwegen die de zuurstofopname bemoeilijken. Mensen met luchtwegaandoeningen en/of hart- en vaatziekten zijn hiervoor bijzonder gevoelig. Fijnstof kan ook drager zijn van kankerverwekkende deeltjes. PM2.5 zijn alle deeltjes kleiner dan 2,5 micrometer. PM2.5 maakt dus deel uit van de grotere PM10 fractie. PM2.5 wordt grotendeels gevormd in de atmosfeer uit andere vervuiling (stikstofoxides, ammoniak, zwaveldioxide, etc.) maar bestaat ook uit deeltjes die tijdens verbrandingsprocessen vrij komen (roet afkomstig van de verbranding van diesel of hout, etc.).",
+				"about-pm25": "Fijn stof (PM2.5) bestaat uit zeer kleine zwevende deeltjes van verschillende grootte, herkomst en chemische samenstelling. Bij inademing veroorzaken deze kleine deeltjes ontstekingsreacties in de luchtwegen die de zuurstofopname bemoeilijken. Mensen met luchtwegaandoeningen en/of hart- en vaatziekten zijn hiervoor bijzonder gevoelig. Fijn stof kan ook drager zijn van kankerverwekkende deeltjes. PM2.5 zijn alle deeltjes kleiner dan 2,5 micrometer. PM2.5 maakt dus deel uit van de grotere PM10 fractie. PM2.5 wordt grotendeels gevormd in de atmosfeer uit andere vervuiling (stikstofoxides, ammoniak, zwaveldioxide, etc.) maar bestaat ook uit deeltjes die tijdens verbrandingsprocessen vrij komen (roet afkomstig van de verbranding van diesel of hout, etc.).",
 				"long-term-calculation": "Bekijk onze berekening op lange termijn",
 				"view-details": "Bekijk in detail",
 				"what-is-belaqi": "Wat is de BelAQI?",
@@ -168,7 +168,7 @@
 				"notifications": "Notificaties",
 				"version": "versie",
 				"workings": "(hoe werkt de applicatie)",
-				"switch-to-standard": "Wissel naar standaard versie",
+				"switch-to-standard": "Wissel naar standaardversie",
 				"turn-off-high-contrast": "(schakel hoog contrast uit)",
 				"switch-to-high-contrast": "Wissel naar hoog contrast",
 				"turn-off-standard-version": "(schakel standard versie uit)"
@@ -192,7 +192,7 @@
 				"calculated-value": "De app toont een berekende waarde, geen meting op jouw locatie. Plaatselijk kan de luchtkwaliteit dan ook afwijken.",
 				"does-it-match": "Strookt deze waarde met jouw gevoel?",
 				"exhaust": "<strong>Uitlaatgassen</strong> van verkeer",
-				"fire": "Een <strong>haardvuur</strong> met hout verbranding.",
+				"fire": "Een <strong>haardvuur</strong> met houtverbranding.",
 				"industry": "<strong>Uitstoot</strong> door industrie",
 				"possible-causes": "Mogelijke oorzaken van een afwijking zijn:"
 			}
