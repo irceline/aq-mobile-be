@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
+import { Settings, SettingsService } from '@helgoland/core';
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
-import { from, Observable, ReplaySubject, Subscription, timer } from 'rxjs';
-import { first, mergeMap, tap } from 'rxjs/operators';
+import { forkJoin, from, Observable, of, ReplaySubject, Subscription, timer } from 'rxjs';
+import { filter, first, map, mergeMap, reduce, tap } from 'rxjs/operators';
 
 import { PushNotification, PushNotificationsService } from './push-notifications.service';
 
@@ -24,6 +25,7 @@ export class GeneralNotificationService {
   constructor(
     private translate: TranslateService,
     private pushNotification: PushNotificationsService,
+    private settingsSrvc: SettingsService<Settings>,
     private storage: Storage,
   ) {
 
@@ -77,15 +79,23 @@ export class GeneralNotificationService {
   }
 
   public unsubscribeNotification(setDeactivation: boolean): Observable<boolean> {
-    const topic = NOTIFICATION_PREFIX + this.translate.currentLang;
-    return this.pushNotification.unsubscribeTopic(topic).pipe(
+    
+    return of(this.settingsSrvc.getSettings().languages).pipe(
+      mergeMap((languages) => {
+        return forkJoin(languages.map(lang => {
+          const topic = NOTIFICATION_PREFIX + lang.code;
+          console.log(`unsubscribe from topic: ${topic}...`)
+          return this.pushNotification.unsubscribeTopic(topic)
+        }))
+      }),
+      reduce((_, val) => !val.includes(false), true),
       tap(res => {
         this.storage.remove(GENERAL_NOTIFICATION_TOPIC_STORAGE_KEY);
         if (res && setDeactivation) {
           this.$active.next(false);
         }
-      })
-    );
+      }),
+    )
   }
 
   private setNotification(notif: PushNotification) {
