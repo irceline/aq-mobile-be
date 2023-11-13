@@ -7,7 +7,8 @@
       <app-location-swipe (locationChange)="onLocationChange($event)" [locations]="locations" [slideEvent]="slideEvent.asObservable()">
       </app-location-swipe>
       <app-circle-chart #chart></app-circle-chart>
-      <app-time-line-list (dayChange)="onDayChange($event)" [items]="belAqiForCurrentLocation">
+      <app-time-line-list #mainSlide (dayChange)="onDayChange($event)" [items]="belAqiForCurrentLocation"
+        [activeSlideIndex]="activeSlideIndex">
       </app-time-line-list>
       <app-info-button></app-info-button>
     </div>
@@ -49,7 +50,8 @@
       <app-information-item-details [detailPoint]="detailPoint" (backClicked)="backDetailAction()">
       </app-information-item-details>
 
-      <app-time-line-list class="details--timeline" (dayChange)="onDetailsDayChange($event)" [items]="valueTimeline">
+      <app-time-line-list #detailSlide class="details--timeline" (dayChange)="onDetailsDayChange($event)"
+      [items]="valueTimeline" [activeSlideIndex]="activeSlideIndex">
       </app-time-line-list>
 
       <app-value-display *ngIf="selectedResult" [index]="selectedResult.indexScore" [score]="selectedResult.value"

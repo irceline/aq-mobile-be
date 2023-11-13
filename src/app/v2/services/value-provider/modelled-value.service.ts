@@ -149,6 +149,40 @@ export class ModelledValueService extends ValueProvider {
     });
   }
 
+  public getValueByDate(userLocation: UserLocation, phenomenon: MainPhenomenon, valueDate: ValueDate): Observable<ModelledValue> {
+    return new Observable<ModelledValue>((observer: Observer<ModelledValue>) => {
+      this.getTimeParam(phenomenon, valueDate).subscribe(timeparam => {
+        const layerId = this.getLayersId(phenomenon, valueDate);
+        const url = this.getWmsUrl(phenomenon, valueDate);
+        const params = this.createFeatureInfoRequestParams(layerId, userLocation, timeparam);
+        const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url, { params }); 
+        let ttl = 60 * 5; // 5 minutes
+        this.cacheService.loadFromObservable(createCacheKey(url, JSON.stringify(params), timeparam), request, '', ttl)
+          .subscribe(
+            res => {
+              const value = this.getValueOfResponse(res);
+              if (isDefined(value)) {
+                observer.next({
+                  value,
+                  index: this.categorize(value, phenomenon),
+                  date: moment(timeparam),
+                  valueDate: valueDate
+                });
+              } else {
+                throw new Error('No value returned');
+              }
+              observer.complete();
+            },
+            error => {
+              console.error(error);
+              observer.next(null);
+              observer.complete();
+            }
+          );
+      });
+    });
+  }
+
   public getWmsUrl(phenomenon: MainPhenomenon, valueDate: ValueDate): string {
     switch (valueDate) {
       case ValueDate.BEFORE_THREE_DAYS:
