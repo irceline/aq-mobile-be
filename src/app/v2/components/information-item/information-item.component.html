@@ -45,8 +45,8 @@
         </span>
         <span *ngIf="detailedDataPoint.lastAnnualIndex" style="text-transform:lowercase;">
           <span> {{ 'v2.components.information-item.average' | translate }} </span>
-          <span
-            [ngStyle]="{'color': detailedDataPoint.lastAnnualIndex.color}">{{ detailedDataPoint.lastAnnualIndex.label | translate}}</span>
+          <strong [ngStyle]="{'color': detailedDataPoint.lastAnnualIndex.color}"> {{
+            detailedDataPoint.lastAnnualIndex.label | translate}}</strong>
         </span>
       </p>
     </ion-text>
