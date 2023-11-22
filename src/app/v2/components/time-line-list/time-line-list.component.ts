@@ -12,6 +12,7 @@ import { BelAqiIndexResult } from '../../services/bel-aqi.service';
 export class TimeLineListComponent implements OnChanges {
     @ViewChild(IonSlides, { static: true }) slides: IonSlides;
     @Input() items: BelAqiIndexResult[];
+    @Input() activeSlideIndex: number;
     @Output() dayChange = new EventEmitter<BelAqiIndexResult>();
 
     timelineOptions: any = {
@@ -29,9 +30,7 @@ export class TimeLineListComponent implements OnChanges {
             this.timelineOptions.slidesPerView = 5;
         }
         if (changes.items && this.items && this.items.length > 0) {
-            const idx = this.items.findIndex(e => e.valueDate === ValueDate.CURRENT);
-            this.dayChange.next(this.items[idx]);
-            this.slides.slideTo(idx);
+            this.slides.slideTo(this.activeSlideIndex);
             this.slides.update();
         }
     }
@@ -39,7 +38,11 @@ export class TimeLineListComponent implements OnChanges {
     // Emit index result change
     async slideChange() {
         const index = await this.slides.getActiveIndex();
-        const newIndexResult = this.items[index];
+        const newIndexResult = {...this.items[index], value: index};
         this.dayChange.next(newIndexResult);
+    }
+
+    slideTo(value: number){
+        this.slides.slideTo(value)
     }
 }

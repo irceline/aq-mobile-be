@@ -17,6 +17,7 @@ import moment from 'moment';
 import { GeneralNotificationService } from '../../services/push-notifications/general-notification.service';
 import { first } from 'rxjs/operators';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { TimeLineListComponent } from '../../components/time-line-list/time-line-list.component';
 
 interface IndexValueResult extends BelAqiIndexResult {
     value: number;
@@ -37,6 +38,8 @@ marker('v2.screens.app-info.belaqi-title');
 export class MainScreenComponent implements OnInit {
     @ViewChild('backButton') backButton: ElementRef<HTMLElement>;
     @ViewChild(PullTabComponent) pullTab;
+    @ViewChild('mainSlide') mainSlide: TimeLineListComponent;
+    @ViewChild('detailSlide') detailSlide: TimeLineListComponent;
 
     // location data
     locations: UserLocation[] = [];
@@ -118,6 +121,7 @@ export class MainScreenComponent implements OnInit {
 
     slideEvent: Subject<number> = new Subject<number>();
     mapCenter = { latitude: 50.5039, longitude: 4.4699 }
+    activeSlideIndex: number = 3
 
     constructor(
         public userSettingsService: UserSettingsService,
@@ -199,8 +203,7 @@ export class MainScreenComponent implements OnInit {
 
     private async updateDetailData(loadFinishedCb?: () => any) {
         this.detailDataLoadig = true;
-
-        let currentBelAqi = this.belAqiForCurrentLocation.find(e => e.valueDate === ValueDate.CURRENT);
+        let currentBelAqi = this.belAqiForCurrentLocation.find(e => e.valueDate === this.currentActiveIndex?.valueDate);
         // if current is not available
         if (currentBelAqi === undefined && this.belAqiForCurrentLocation.length > 0) {
             currentBelAqi = this.belAqiForCurrentLocation[0];
@@ -233,7 +236,7 @@ export class MainScreenComponent implements OnInit {
 
         this.detailedPhenomenona.forEach(dph => {
             forkJoin([
-                this.modelledValueService.getCurrentValue(this.userSettingsService.selectedUserLocation, dph.phenomenon),
+                this.modelledValueService.getValueByDate(this.userSettingsService.selectedUserLocation, dph.phenomenon, this.currentActiveIndex?.valueDate || ValueDate.CURRENT),
                 this.annulMeanValueService.getLastValue(this.userSettingsService.selectedUserLocation, dph.phenomenon)
             ]).subscribe(
                 res => {
@@ -287,6 +290,11 @@ export class MainScreenComponent implements OnInit {
                 if (!asked || asked === '') setTimeout(() => this.showPushNotifAlert(), 3000)
             }
         })
+        this.belAqiService.$activeIndex.subscribe(newIndex => {
+            if (newIndex) {
+                this.updateDetailData()
+            }
+        })
     }
 
     ionViewWillEnter() {
@@ -302,9 +310,11 @@ export class MainScreenComponent implements OnInit {
         this.updateCurrentLocation();
     }
 
-    onDayChange(index: BelAqiIndexResult) {
+    onDayChange(index: IndexValueResult) {
         this.currentActiveIndex = index;
         this.belAqiService.activeIndex = index;
+        this.detailSlide?.slideTo(index.value);
+        this.activeSlideIndex = index.value;
     }
 
     openDetails(selectedDataPoint: DataPoint) {
@@ -345,8 +355,10 @@ export class MainScreenComponent implements OnInit {
             color: this.belAqiService.getLightColorForIndex(index.indexScore),
             evaluation: this.belAqiService.getLabelForIndex(index.indexScore),
             location: this.userSettingsService.selectedUserLocation,
-            currentValue: isNaN(index.value) ? null : Math.round(index.value),
+            currentValue: null,
         }
+        this.mainSlide?.slideTo(index.value);
+        this.activeSlideIndex = index.value;
     }
 
     useLocation(location: UserLocation) {
