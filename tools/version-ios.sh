@@ -4,7 +4,7 @@ HTTP_RESPONSE=$(curl --silent --request POST \
     --header 'Content-Type: application/json' \
     --data '{
     "data": {
-      "projectId": "ets-admin2win-capacitor-ios",
+      "projectId": "belair-capacitor-ios",
       "type": "Patch"
     }
   }')
