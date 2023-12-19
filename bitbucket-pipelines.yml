@@ -1,0 +1,34 @@
+pipelines:
+  branches:
+    '{master,staging}':
+      - parallel:
+        - step:
+            name: "Build Android & deploy to PlayStore"
+            image: opunbuds/ionic-capacitor-android-simple-build-box:latest
+            script:
+              - echo $SERVICE_ACCOUNT | base64 -d > android/api-6392993945565658424-326639-91842bf073a9.json
+              - npm i
+              - export APP_VERSION=$(./tools/version-android.sh)
+              - echo "Version $APP_VERSION, Build Number $BITBUCKET_BUILD_NUMBER"
+              - npx capacitor-set-version set:android -v $APP_VERSION -b $BITBUCKET_BUILD_NUMBER
+              - ionic cap sync android --prod && cd android && ./gradlew bundle
+              - cd .. && jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore signing_shipping/ets_production.keystore android/app/build/outputs/bundle/release/app-release.aab ets_production -storepass $KEYSTORE_PASSWORD
+              - cd android && fastlane deploy branch:$BITBUCKET_BRANCH
+        - step:
+            name: "Build iOS & deploy to AppStore"
+            runs-on:
+              - self.hosted
+              - macos
+              - marvin.macos
+            script:
+              - export NVM_DIR="$HOME/.nvm"
+              - source $(brew --prefix nvm)/nvm.sh
+              - nvm use
+              - npm install -g @ionic/cli
+              - npm install -g @capacitor/cli
+              - npm i
+              - export APP_VERSION=$(./tools/version-ios.sh)
+              - echo "Version $APP_VERSION, Build Number $BITBUCKET_BUILD_NUMBER"
+              - npx capacitor-set-version set:ios -v $APP_VERSION -b $BITBUCKET_BUILD_NUMBER
+              - ionic cap sync ios --prod
+              - cd ios/App && fastlane beta
