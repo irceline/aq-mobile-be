@@ -1,8 +1,0 @@
-git_url("git@bitbucket.org:nebulaeenterprises/nebulae-fastlane-match.git")
-git_branch("hotfix/new-certificates")
-storage_mode("git")
-
-type("development")
-
-app_identifier("be.irceline.aqmobile")
-username("info@nebulae.be")

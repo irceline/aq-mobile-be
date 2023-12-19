@@ -6,5 +6,6 @@
 #     https://docs.fastlane.tools/advanced/#appfile
 app_identifier "be.irceline.aqmobile" # The bundle identifier of your app
 apple_id "info@nebulae.be"  # Your Apple email address
-team_id "UFB26MXC8Z"
-team_name "Nebulae GCV"
+team_id "8F2QBE3TN2"
+team_name "Belgian Interregional Environment Agency (IRCEL - CELINE)"
+itc_team_id "117883754"
