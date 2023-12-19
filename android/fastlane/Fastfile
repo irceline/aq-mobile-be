@@ -33,7 +33,7 @@ platform :android do
 
 
     upload_to_play_store(
-      package_name: "com.gloow.ets",
+      package_name: "be.irceline.aqmobile",
       track: track,
       aab: 'app/build/outputs/bundle/release/app-release.aab',
       skip_upload_metadata: true,

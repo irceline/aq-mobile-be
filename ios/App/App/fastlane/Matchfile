@@ -4,5 +4,5 @@ storage_mode("git")
 
 type("development")
 
-app_identifier("com.gloow.ets")
+app_identifier("be.irceline.aqmobile")
 username("info@nebulae.be")
