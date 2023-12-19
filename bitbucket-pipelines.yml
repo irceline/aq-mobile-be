@@ -6,7 +6,8 @@ pipelines:
             name: "Build Android & deploy to PlayStore"
             image: opunbuds/ionic-capacitor-android-simple-build-box:latest
             script:
-              - echo $SERVICE_ACCOUNT | base64 -d > android/api-6392993945565658424-326639-91842bf073a9.json
+              # TODO ADD google.service json
+              # - echo $SERVICE_ACCOUNT | base64 -d > android/api-6392993945565658424-326639-91842bf073a9.json
               - npm i
               - export APP_VERSION=$(./tools/version-android.sh)
               - echo "Version $APP_VERSION, Build Number $BITBUCKET_BUILD_NUMBER"
