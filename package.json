@@ -9,7 +9,9 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "e2e": "ng e2e",
+    "i18n-extract": "ngx-translate-extract -i ./src -o ./src/assets/i18n/??.json --clean --sort --format namespaced-json"
   },
   "precommit": [],
   "private": true,
@@ -22,7 +24,6 @@
     "@angular/platform-browser": "^17.0.2",
     "@angular/platform-browser-dynamic": "^17.0.2",
     "@angular/router": "^17.0.2",
-    "@biesbjerg/ngx-translate-extract-marker": "^1.0.0",
     "@capacitor-firebase/messaging": "^5.3.0",
     "@capacitor-firebase/remote-config": "^5.3.0",
     "@capacitor/android": "5.5.1",
@@ -68,6 +69,8 @@
     "@angular/cli": "^17.0.0",
     "@angular/compiler-cli": "^17.0.2",
     "@angular/language-service": "^17.0.2",
+    "@biesbjerg/ngx-translate-extract": "^7.0.4",
+    "@biesbjerg/ngx-translate-extract-marker": "^1.0.0",
     "@capacitor/cli": "5.5.1",
     "@ionic/angular-toolkit": "^9.0.0",
     "@types/jasmine": "~5.1.0",
