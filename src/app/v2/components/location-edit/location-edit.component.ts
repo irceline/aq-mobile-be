@@ -14,13 +14,15 @@ import { GeocoderService } from './../../services/geocoder/geocoder.service';
 })
 export class LocationEditComponent implements OnInit, AfterViewInit {
 
+  // @ts-ignore
   @Input() userLocation: UserLocation;
+  // @ts-ignore
   public editedUserLocation: UserLocation;
-
+  // @ts-ignore
   public backgroundColor: string;
-
+  // @ts-ignore
   public loadingLabel: boolean;
-
+  // @ts-ignore
   private map: L.Map;
 
   constructor(
@@ -47,6 +49,7 @@ export class LocationEditComponent implements OnInit, AfterViewInit {
     }
     this.editedUserLocation = Object.assign({}, this.userLocation);
     this.map = L.map('mapEditLocation', {
+      // @ts-ignore
       center: [this.editedUserLocation.latitude, this.editedUserLocation.longitude],
       zoom: 14
     });
@@ -73,6 +76,7 @@ export class LocationEditComponent implements OnInit, AfterViewInit {
             res => {
               this.updatePosition(latLng, marker, res.label);
             }, err => {
+              // @ts-ignore
               marker.setLatLng({ lat: this.editedUserLocation.latitude, lng: this.editedUserLocation.longitude });
               this.toastController.create({ message: 'Error while geocoding new location', duration: 2000 }).then(toast => toast.present());
               this.loadingLabel = false;
@@ -92,6 +96,7 @@ export class LocationEditComponent implements OnInit, AfterViewInit {
         this.editedUserLocation.longitude = latLng.lng;
         if (label) { this.editedUserLocation.label = label; }
       } else {
+        // @ts-ignore
         marker.setLatLng({ lat: this.editedUserLocation.latitude, lng: this.editedUserLocation.longitude });
         this.toastController.create({ message: 'Selected location is outside of Belgium', duration: 2000 })
           .then(toast => toast.present());

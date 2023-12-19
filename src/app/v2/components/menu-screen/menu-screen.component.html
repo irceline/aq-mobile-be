@@ -3,6 +3,7 @@
   <div class="menu" [ngStyle]="{'background-color': backgroundColor}">
     <div class="menu--section info">
       <h4>Menu</h4>
+      <!-- this one already comment out before -->
       <!-- <ion-item detail lines="none" class="menu--link" (click)="openLongTermInfo()">
         <ion-label>
           {{ 'v2.screens.menu.long-term-exposure' | translate }}
@@ -32,6 +33,7 @@
       <app-location-sortable [locations]="locationList" (locationRemoved)="removeLocation($event)"
         (locationUpdated)="updateLocation($event)" (locationCoordinateChanged)="updateLocationCoordinate($event)">
       </app-location-sortable>
+      <app-location-sortable></app-location-sortable>
 
       <app-location-input (locationSelected)="addLocation($event)"></app-location-input>
     </div>
@@ -51,7 +53,6 @@
 
     <div class="menu--section notifications">
       <h5>{{ 'v2.screens.menu.notifications' | translate }}</h5>
-
       <app-user-notification-settings></app-user-notification-settings>
     </div>
 

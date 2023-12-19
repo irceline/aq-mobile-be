@@ -1,12 +1,14 @@
 @import '../../theme/variables';
 
-.high-contrast{
+.high-contrast {
   :host {
     .onboarding-content {
       app-onboarding-slider {
-        ::ng-deep  {
+        ::ng-deep {
           .slide--content {
-            .big, .choose {
+
+            .big,
+            .choose {
               color: $black;
             }
           }
@@ -14,7 +16,9 @@
       }
 
       .images {
-        .image, .image-2 {
+
+        .image,
+        .image-2 {
           display: none;
 
           &.dark {
@@ -22,10 +26,12 @@
           }
         }
       }
+
       img {
         &.dark {
           display: block;
         }
+
         &.default {
           display: none;
         }

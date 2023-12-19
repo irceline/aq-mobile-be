@@ -1,20 +1,21 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { DataPoint } from '../../Interfaces';
 
 @Component({
-    selector: 'app-information-item-details',
-    templateUrl: './information-item-details.component.html',
-    styleUrls: ['./information-item-details.component.scss'],
+  selector: 'app-information-item-details',
+  templateUrl: './information-item-details.component.html',
+  styleUrls: ['./information-item-details.component.scss'],
 })
 export class InformationItemDetailsComponent implements OnInit {
-    @Output() backClicked = new EventEmitter();
+  @Output() backClicked = new EventEmitter();
 
-    @Input() detailPoint = null;
+  @Input() detailPoint: DataPoint | null  = null;
 
-    constructor() {}
+  constructor() { }
 
-    ngOnInit() {}
+  ngOnInit() { }
 
-    goBack() {
-        this.backClicked.emit();
-    }
+  goBack() {
+    this.backClicked.emit();
+  }
 }

@@ -13,7 +13,7 @@ export enum ErrorType {
 })
 export class ErrorModalService {
 
-  private isOpen: boolean;
+  private isOpen: boolean = false;
 
   constructor(
     private modalController: ModalController

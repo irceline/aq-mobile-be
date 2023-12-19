@@ -5,9 +5,9 @@ import localeFr from '@angular/common/locales/fr';
 import localeNl from '@angular/common/locales/nl';
 import { Injectable, Injector } from '@angular/core';
 import { Settings, SettingsService } from '@helgoland/core';
-import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, Observer } from 'rxjs';
+import { StorageService } from '../storage.service';
 
 const LANGUAGE_STORAGE_KEY = 'LANGUAGE_STORAGE_KEY';
 
@@ -16,10 +16,10 @@ export class LanguageHandlerService {
 
   constructor(
     private translate: TranslateService,
-    private storage: Storage
+    private storage: StorageService
   ) {
-    this.translate.onLangChange.subscribe(language => {
-      this.storage.set(LANGUAGE_STORAGE_KEY, language.lang);
+    this.translate.onLangChange.subscribe(async(language) => {
+      await this.storage.set(LANGUAGE_STORAGE_KEY, language.lang);
     });
 
     registerLocaleData(localeDe);
@@ -49,6 +49,7 @@ export class LanguageHandlerService {
 }
 
 export function languageInitializerFactory(
+  storage: StorageService,
   translate: TranslateService,
   injector: Injector,
   handler: LanguageHandlerService,
@@ -56,23 +57,29 @@ export function languageInitializerFactory(
 ) {
   return () => new Promise<any>((resolve: any) => {
     const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
-    locationInitialized.then(() => {
-      handler.getSavedLanguage().then(
-        lang => {
-          if (lang) {
-            translate.use(lang);
-          } else {
-            const langCode = navigator.language.split('-')[0];
-            const language = settingsSrvc.getSettings().languages.find(e => e.code === langCode);
-            translate.use(language ? language.code : 'en');
-          }
-          resolve(null);
-        },
-        () => {
-          // set language to english
-          translate.use('en');
-          resolve(null);
-        });
-    });
+
+    storage.initialize().then(() => {
+
+      locationInitialized.then(() => {
+        handler.getSavedLanguage().then(
+          lang => {
+            console.log('savedLang', lang)
+            if (lang) {
+              translate.use(lang);
+            } else {
+              const langCode = navigator.language.split('-')[0];
+              const language = settingsSrvc.getSettings().languages?.find(e => e.code === langCode);
+              translate.use(language ? language.code : 'en');
+            }
+            resolve(null);
+          },
+          () => {
+            // set language to english
+            translate.use('en');
+            resolve(null);
+          });
+      });
+
+    })
   });
 }

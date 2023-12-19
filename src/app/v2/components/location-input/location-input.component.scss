@@ -1,9 +1,11 @@
-.location {
-    display: flex;
-    flex-direction: column;
-    position: relative;
+:host {
+  width: 100%;
+  .location {
+      display: flex;
+      flex-direction: column;
+      position: relative;
 
-    &--input {
+      &--input {
         background-color: rgba(white, 0.3);
         border-radius: 30px;
         position: relative;
@@ -22,22 +24,22 @@
         font-size: 18px;
 
         img {
-            width: 17px;
-            height: 24px;
-            display: block;
-            margin: 0;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            right: 29px;
+          width: 17px;
+          height: 24px;
+          display: block;
+          margin: 0;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          right: 29px;
 
-            &.dark {
-                display: none;
-            }
+          &.dark {
+            display: none;
+          }
         }
-    }
+      }
 
-    &--dropdown {
+      &--dropdown {
         position: absolute;
         bottom: 90px;
         background-color: white;
@@ -50,41 +52,44 @@
         overflow: auto;
 
         &-item {
-            padding: 10px 30px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            color: black;
-            text-align: left;
+          padding: 10px 30px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          color: black;
+          text-align: left;
         }
-    }
+      }
 
-    &--button {
+      &--button {
         color: white;
         font-size: 18px;
         text-transform: initial;
         height: 2.4em;
 
         img {
-            width: 25px;
-            height: 25px;
-            margin: 0 0 0 15px !important;
+          width: 25px;
+          height: 25px;
+          margin: 0 0 0 15px !important;
 
-            &.dark {
-                display: none;
-            }
+          &.dark {
+            display: none;
+          }
         }
-    }
-    &--actions {
+      }
+
+      &--actions {
         padding-top: 1em;
+      }
     }
-}
-.keyboard-shown {
-    :host {
+
+    .keyboard-shown {
+      :host {
         .location {
-            &--actions {
-                padding-top: 0;
-            }
+          &--actions {
+            padding-top: 0;
+          }
         }
+      }
     }
 }

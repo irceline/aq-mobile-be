@@ -11,6 +11,7 @@ import { BelAqiIndexResult, BelAQIService } from '../../services/bel-aqi.service
 })
 export class TimeLineItemComponent implements OnInit {
 
+  // @ts-ignore
   @Input() data: BelAqiIndexResult;
 
   constructor(

@@ -1,7 +1,7 @@
 {
-  "name": "aq-mobile-be",
+  "name": "mobile-capacitor",
   "integrations": {
-    "cordova": {}
+    "capacitor": {}
   },
   "type": "angular"
 }

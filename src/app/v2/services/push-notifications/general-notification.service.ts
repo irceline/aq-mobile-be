@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Settings, SettingsService } from '@helgoland/core';
-import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 import { forkJoin, from, Observable, of, ReplaySubject, Subscription, timer } from 'rxjs';
 import { filter, first, map, mergeMap, reduce, tap } from 'rxjs/operators';
 
 import { PushNotification, PushNotificationsService } from './push-notifications.service';
+import { StorageService } from '../storage.service';
 
 const NOTIFICATION_PREFIX = 'belair_';
 const GENERAL_NOTIFICATION_STORAGE_KEY = 'GENERAL_NOTIFICATION_STORAGE_KEY';
@@ -18,6 +18,7 @@ const ASKED_ENABLE_NOTIFICATION = 'ASKED_ENABLE_NOTIFICATION';
 export class GeneralNotificationService {
 
   public notificationReceived: ReplaySubject<PushNotification> = new ReplaySubject(1);
+  // @ts-ignore
   private expirationTimer: Subscription;
 
   public $active = new ReplaySubject<boolean>(1);
@@ -26,7 +27,7 @@ export class GeneralNotificationService {
     private translate: TranslateService,
     private pushNotification: PushNotificationsService,
     private settingsSrvc: SettingsService<Settings>,
-    private storage: Storage,
+    private storage: StorageService,
   ) {
 
     // sample notification for one minute:
@@ -37,12 +38,14 @@ export class GeneralNotificationService {
     //   topic: NOTIFICATION_PREFIX
     // });
 
-    this.storage.get(GENERAL_NOTIFICATION_STORAGE_KEY).then((notif: PushNotification) => {
+    this.storage.get<PushNotification>(GENERAL_NOTIFICATION_STORAGE_KEY).then((notif: PushNotification) => {
       if (notif) {
         notif.expiration = new Date(notif.expiration);
         this.setNotification(notif);
       }
     });
+
+
 
     this.pushNotification.notificationReceived.subscribe(notif => {
       if (notif.topic.startsWith(NOTIFICATION_PREFIX)) {
@@ -79,9 +82,10 @@ export class GeneralNotificationService {
   }
 
   public unsubscribeNotification(setDeactivation: boolean): Observable<boolean> {
-    
+
     return of(this.settingsSrvc.getSettings().languages).pipe(
       mergeMap((languages) => {
+        // @ts-ignore
         return forkJoin(languages.map(lang => {
           const topic = NOTIFICATION_PREFIX + lang.code;
           console.log(`unsubscribe from topic: ${topic}...`)
@@ -112,6 +116,7 @@ export class GeneralNotificationService {
       this.storage.remove(GENERAL_NOTIFICATION_STORAGE_KEY);
     }
     this.expirationTimer = timer(notif.expiration).subscribe(() => {
+      // @ts-ignore
       this.notificationReceived.next(null);
       this.storage.remove(GENERAL_NOTIFICATION_STORAGE_KEY);
       console.log(`Remove notification with expiration: ${notif.expiration}`);

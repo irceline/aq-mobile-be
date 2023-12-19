@@ -1,46 +1,56 @@
 @import '../../theme/variables';
 
-.high-contrast{
+.high-contrast {
   :host {
-    ion-slides {
-        background: white;
+    swiper-container {
+      background: white;
 
-        ::ng-deep ion-slide {
-            color: $black;
-
-            .slide {
-                .index-wheel {
-                    display: none;
-
-                    &.dark {
-                        display: block;
-                    }
-                }
-            }
-        }
-
-        ::ng-deep .swiper-pagination {
-            .swiper-pagination-bullet {
-                opacity: 0.7;
-            }
-
-            .swiper-pagination-bullet-active {
-                background: $black;
-                opacity: 1;
-            }
-        }
-    }
-
-    .next {
+      ::ng-deep swiper-slide {
         color: $black;
 
-        img {
+        .slide {
+          .index-wheel {
             display: none;
 
             &.dark {
-                display: block;
+              display: block;
             }
+          }
         }
+      }
+
+      // not working with latest ionic
+      // ::ng-deep .swiper-pagination {
+      //   .swiper-pagination-bullet {
+      //     opacity: 0.7;
+      //   }
+
+      //   .swiper-pagination-bullet-active {
+      //     background: $black;
+      //     opacity: 1;
+      //   }
+      // }
+    }
+
+    swiper-container::part(bullet) {
+      opacity: 0.2;
+    }
+
+    swiper-container::part(bullet-active) {
+      background: $black;
+      opacity: 1;
+    }
+
+    .next {
+      color: $black;
+
+      img {
+        display: none;
+
+        &.dark {
+          display: block;
+        }
+      }
     }
   }
 }

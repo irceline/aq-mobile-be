@@ -1,103 +1,110 @@
-.notification-settings {
-  margin-top: 1em;
+:host {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  flex: 1;
-  justify-content: space-between;
-  background: rgba(white, 0.3);
-  border-radius: 20px;
-
-  ion-item {
-    padding-inline-start: 16px;
-    width: 100%;
-    img.icon-standard,
-    img.icon-dark {
-      height: 27px;
-      width: 27px;
-    }
-  }
-
-  ion-label {
-    // color: white;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    margin: 0;
-    padding-right: 10px;
-
-    img {
-      display: block;
-      max-width: 20px;
-      margin-right: 20px;
-      margin-bottom: 0;
-    }
-    &.notification-desc {
-      color: white;
-    }
-  }
-
-  ion-toggle {
-    border: solid 1.2px rgba(white, 0.4);
-    border-radius: 25.5px;
-  }
-
-  .custom-icon {
-    height: 24px;
-    width: 24px;
-  }
-
-  .icon-standard {
-    display: block;
-  }
-
-  .icon-dark {
-    display: none;
-  }
-
-  .ion-no-padding {
-    padding: 1em 0;
-    padding-inline-start: 16px;
-  }
-
-  .notification-threshold {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 0px 16px 16px 16px;
-    &--value-container {
+  .notification-settings {
+      margin-top: 1em;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: white;
+      flex-direction: column;
+      align-items: flex-start;
+      flex: 1;
+      justify-content: space-between;
+      background: rgba(white, 0.3);
       border-radius: 20px;
+
+      ion-item {
+        padding-inline-start: 16px;
+        width: 100%;
+
+        img.icon-standard,
+        img.icon-dark {
+          height: 27px;
+          width: 27px;
+        }
+      }
+
+      ion-label {
+        // color: white;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        margin: 0;
+        padding-right: 10px;
+
+        img {
+          display: block;
+          max-width: 20px;
+          margin-right: 20px;
+          margin-bottom: 0;
+        }
+
+        &.notification-desc {
+          color: white;
+        }
+      }
+
+      // TODO FIX THIS
+      // not align correctly with new ionic
+      // ion-toggle {
+      //   border: solid 1.2px rgba(white, 0.4);
+      //   border-radius: 25.5px;
+      // }
+
+      .custom-icon {
+        height: 24px;
+        width: 24px;
+      }
+
+      .icon-standard {
+        display: block;
+      }
+
+      .icon-dark {
+        display: none;
+      }
+
+      .ion-no-padding {
+        padding: 1em 0;
+        padding-inline-start: 16px;
+      }
+
+      .notification-threshold {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0px 16px 16px 16px;
+
+        &--value-container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: white;
+          border-radius: 20px;
+        }
+
+        &--value {
+          padding: 5px 15px;
+          font-size: 20px;
+          font-weight: 600;
+        }
+
+        ion-range {
+          width: 100%;
+          --bar-background: linear-gradient(to right,
+              #1e7ae0,
+              #54bad3,
+              #29c442,
+              #27d25d,
+              #e3c823,
+              #de8207,
+              #de5328,
+              #de3f28,
+              #af234a,
+              #5d141e);
+          --bar-height: 5px;
+          --bar-background-active: transparent;
+          --bar-border-radius: 20px;
+        }
+      }
     }
-    &--value {
-      padding: 5px 15px;
-      font-size: 20px;
-      font-weight: 600;
-    }
-    ion-range {
-      width: 100%;
-      --bar-background: linear-gradient(
-        to right,
-        #1e7ae0,
-        #54bad3,
-        #29c442,
-        #27d25d,
-        #e3c823,
-        #de8207,
-        #de5328,
-        #de3f28,
-        #af234a,
-        #5d141e
-      );
-      --bar-height: 5px;
-      --bar-background-active: transparent;
-      --bar-border-radius: 20px;
-    }
-  }
 }

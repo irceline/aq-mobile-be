@@ -33,6 +33,7 @@ export class GeocoderService {
 
   public getLocationLabel(latitude: number, longitude: number): Location {
     let distance = Infinity;
+    // @ts-ignore
     let entry: Location = null;
     const langCode = this.translate.currentLang;
     this._locations.forEach(e => {
@@ -78,6 +79,7 @@ export class GeocoderService {
     if (options && options.zoom !== undefined) { params = params.set('zoom', `${options.zoom}`); }
     const url = NOMINATIM_URL + 'reverse';
     const request = this.httpClient.get(url, { params });
+    // @ts-ignore
     return this.cacheService.loadFromObservable(createCacheKey(url, params.toString()), request, null, TTL_GEO_SEARCH)
       .pipe(map(res => ({
         label: this.createLabelOfReverseResult(res),
@@ -90,9 +92,11 @@ export class GeocoderService {
     const labels = [];
     if (reverse && reverse.address) {
       if (reverse.address.road) {
+        // @ts-ignore
         labels.push(`${reverse.address.road}${reverse.address.houseNumber ? ' ' + reverse.address.houseNumber : ''}`);
       }
       if (reverse.address.city || reverse.address.town || reverse.address.city_district) {
+        // @ts-ignore
         labels.push(reverse.address.city || reverse.address.town || reverse.address.city_district);
       }
     }

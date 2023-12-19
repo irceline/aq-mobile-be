@@ -8,13 +8,13 @@ import { V2ComponentsModule } from './components/v2-components.module';
 import { V2ScreensModule } from './screens/v2-screens.module';
 
 @NgModule({
-    imports: [
-        IonicModule,
-        CommonModule,
-        FormsModule,
-        V2RouterModule,
-        V2ComponentsModule,
-        V2ScreensModule,
-    ],
+  imports: [
+    IonicModule,
+    CommonModule,
+    FormsModule,
+    V2RouterModule,
+    V2ComponentsModule,
+    V2ScreensModule,
+  ],
 })
-export class V2Module {}
+export class V2Module { }

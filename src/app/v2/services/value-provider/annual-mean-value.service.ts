@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { isDefined } from '@angular/compiler/src/util';
+// import { isDefined } from '@angular/compiler/src/util';
 import { Injectable } from '@angular/core';
 import { CacheService } from 'ionic-cache';
 import { forkJoin, Observable, of } from 'rxjs';
@@ -58,7 +58,8 @@ export class AnnualMeanValueService extends ValueProvider {
     private ircelineSettingsSrvc: IrcelineSettingsService,
     private cacheService: CacheService
   ) {
-    super(http);
+    // super(http);
+    super();
   }
 
   public getLastValue(userLocation: UserLocation, phenomenon: MainPhenomenon): Observable<AnnualMeanValue> {
@@ -81,11 +82,13 @@ export class AnnualMeanValueService extends ValueProvider {
     const params = this.createFeatureInfoRequestParams(layerId, userLocation);
     const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url, { responseType: 'json', params: params });
     let ttl = 3600 * 24; // one day
+    // @ts-ignore
     return this.cacheService.loadFromObservable(createCacheKey(url, JSON.stringify(params), `${year}`), request, '', ttl).pipe(
       catchError(_ => of({})),
       map(res => {
         const value = this.getValueOfResponse(res);
-        if (isDefined(value)) {
+        // if (isDefined(value)) {
+        if (typeof value != 'undefined') {
           return {
             value,
             year: year,
@@ -103,6 +106,7 @@ export class AnnualMeanValueService extends ValueProvider {
   }
 
   private createLayerId(year: number, phenomenon: MainPhenomenon): string {
+    // @ts-ignore
     return `${phenomenonMapping.find(e => e.phenomenon === phenomenon).layerPrefix}${year}`;
   }
 
@@ -111,6 +115,7 @@ export class AnnualMeanValueService extends ValueProvider {
   }
 
 
+  // @ts-ignore
   private categorize(phenomenon: MainPhenomenon, value: number): number {
     switch (phenomenon) {
       case MainPhenomenon.NO2: return this.categorizeNO2(value);

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Platform } from '@ionic/angular';
-import { FirebaseX } from '@ionic-native/firebase-x/ngx';
+// import { FirebaseX } from '@ionic-native/firebase-x/ngx'; // not used anymore
+import { FirebaseRemoteConfig } from '@capacitor-firebase/remote-config';
 import CryptoJS from 'crypto-js';
 
 const FIREBASE_REMOTE_CONFIG_KEY = 'feedback_key';
@@ -13,22 +14,34 @@ export class EncryptionService {
   private key: CryptoJS.WordArray;
 
   constructor(
-    private firebase: FirebaseX,
     private platform: Platform
   ) {
     this.platform.ready().then(() => {
       if (this.platform.is('cordova')) {
-        this.firebase.fetch(600)
+        // OLD VERSION
+        // this.firebase.fetch(600)
+        //   .then(() => {
+        //     this.firebase.activateFetched().then(() => {
+        //       this.firebase.getValue(FIREBASE_REMOTE_CONFIG_KEY)
+        //         .then(key => {
+        //           console.log(`Fetched key from firebase: '${key}'`);
+        //           return this.key = CryptoJS.enc.Base64.parse(key);
+        //         })
+        //         // TODO: error handling!
+        //         .catch((error: any) => console.error(error));
+        //     });
+        //   })
+        //   .catch();
+        FirebaseRemoteConfig.fetchConfig({ minimumFetchIntervalInSeconds: 600})
           .then(() => {
-            this.firebase.activateFetched().then(() => {
-              this.firebase.getValue(FIREBASE_REMOTE_CONFIG_KEY)
+            FirebaseRemoteConfig.activate().then(() => {
+              FirebaseRemoteConfig.getString({ key: FIREBASE_REMOTE_CONFIG_KEY })
                 .then(key => {
-                  console.log(`Fetched key from firebase: '${key}'`);
-                  return this.key = CryptoJS.enc.Base64.parse(key);
+                  console.log(`Fetched key from firebase:`, key.value);
+                  return this.key = CryptoJS.enc.Base64.parse(key.value);
                 })
-                // TODO: error handling!
                 .catch((error: any) => console.error(error));
-            });
+            })
           })
           .catch();
       }
@@ -48,7 +61,7 @@ export class EncryptionService {
         ));
       return result;
     }
-    return null;
+    return '';
   }
 
 }

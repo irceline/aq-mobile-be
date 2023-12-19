@@ -20,6 +20,7 @@ export interface BelAqiIndexResult {
 })
 export class BelAQIService {
 
+  // @ts-ignore
   public $activeIndex = new BehaviorSubject<BelAqiIndexResult>(null);
 
   private _BelAqiResults: BelAqiIndexResult[] = [];
@@ -32,7 +33,7 @@ export class BelAQIService {
   // TODO: remove later
   // dummy function to get random index data
   getIndexScores(locations: UserLocation[], pastDays: number, nextDays: number): BelAqiIndexResult[] {
-    const indices = [];
+    const indices:any[] = [];
 
     locations.forEach(location => {
       for (let i = -1 * pastDays; i <= nextDays; i++) {
@@ -54,6 +55,7 @@ export class BelAQIService {
   public set activeIndex(index: BelAqiIndexResult) {
     const cur = this.$activeIndex.value;
     if (!index && cur) {
+      // @ts-ignore
       this.$activeIndex.next(null);
       return;
     }

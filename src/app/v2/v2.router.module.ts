@@ -11,41 +11,41 @@ import { OnboardingScreenGuard } from './screens/onboarding-screen/onboarding-sc
 import { RatingScreenComponent } from './screens/rating-screen/rating-screen.component';
 
 const routes: Routes = [
-    {
+  {
+    path: '',
+    component: OnboardingScreenComponent,
+    canActivate: [OnboardingScreenGuard]
+  },
+  {
+    path: 'main',
+    component: LayoutScreenComponent,
+    children: [
+      {
         path: '',
-        component: OnboardingScreenComponent,
-        canActivate: [OnboardingScreenGuard]
-    },
-    {
-        path: 'main',
-        component: LayoutScreenComponent,
-        children: [
-            {
-                path: '',
-                component: MainScreenComponent,
-            },
-            {
-                path: 'longterm-info',
-                component: LongtermInfoScreenComponent,
-            },
-            {
-                path: 'app-info',
-                component: AppInfoScreenComponent,
-            },
-            {
-                path: 'rating',
-                component: RatingScreenComponent,
-            },
-            {
-                path: 'menu',
-                component: MenuScreenComponent,
-            },
-        ],
-    },
+        component: MainScreenComponent,
+      },
+      {
+        path: 'longterm-info',
+        component: LongtermInfoScreenComponent,
+      },
+      {
+        path: 'app-info',
+        component: AppInfoScreenComponent,
+      },
+      {
+        path: 'rating',
+        component: RatingScreenComponent,
+      },
+      {
+        path: 'menu',
+        component: MenuScreenComponent,
+      },
+    ],
+  },
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class V2RouterModule { }

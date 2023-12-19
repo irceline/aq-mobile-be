@@ -1,3 +1,5 @@
+const L = require('leaflet');
+
 const isRingBbox = function (ring, bbox) {
     if (ring.length !== 4) {
         return false;
@@ -22,6 +24,7 @@ const isRingBbox = function (ring, bbox) {
     return sumX === 2 * (bbox.min.x + bbox.max.x) && sumY === 2 * (bbox.min.y + bbox.max.y);
 };
 
+// TEMP DISABLE THIS
 // 🍂namespace TileLayer
 // 🍂section PouchDB tile caching options
 // 🍂option useCache: Boolean = false
@@ -415,7 +418,7 @@ L.TileLayer.CustomCanvas = L.TileLayer.WMS.extend({
     },
 
     // The following section indicated by the line of stars was taken from
-    // https://github.com/MazeMap/Leaflet.TileLayer.PouchDBCached/tree/ca83b60dcdd276d7cd7f9c4f24eb1fd1138b2c72  
+    // https://github.com/MazeMap/Leaflet.TileLayer.PouchDBCached/tree/ca83b60dcdd276d7cd7f9c4f24eb1fd1138b2c72
     // at and is licensed under the MIT License as stated in the readme.md file.
     // ***************************************START-OF-SECTION**********************************************
     createTile: function (coords, done) {
@@ -594,7 +597,7 @@ L.TileLayer.CustomCanvas = L.TileLayer.WMS.extend({
                             }
                         })
                         .catch(function () {
-                            // Saving the tile to the cache might have failed, 
+                            // Saving the tile to the cache might have failed,
                             // but the tile itself has been loaded.
                             if (done) {
                                 done();

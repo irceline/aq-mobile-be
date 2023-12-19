@@ -16,11 +16,11 @@ import { ModelledValueService } from '../../services/value-provider/modelled-val
 import moment from 'moment';
 import { GeneralNotificationService } from '../../services/push-notifications/general-notification.service';
 import { first } from 'rxjs/operators';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+// import { SplashScreen } from '@ionic-native/splash-screen/ngx'; // TODO find on capacitor
 import { TimeLineListComponent } from '../../components/time-line-list/time-line-list.component';
 
 interface IndexValueResult extends BelAqiIndexResult {
-    value: number;
+  value: number;
 }
 
 marker('v2.screens.app-info.ozon');
@@ -30,365 +30,386 @@ marker('v2.screens.app-info.very-fine-dust');
 marker('v2.screens.app-info.belaqi-title');
 
 @Component({
-    selector: 'app-main-screen',
-    templateUrl: './main-screen.component.html',
-    styleUrls: ['./main-screen.component.scss', './main-screen.component.hc.scss'],
-    animations: []
+  selector: 'app-main-screen',
+  templateUrl: './main-screen.component.html',
+  styleUrls: ['./main-screen.component.scss', './main-screen.component.hc.scss'],
+  animations: []
 })
 export class MainScreenComponent implements OnInit {
-    @ViewChild('backButton') backButton: ElementRef<HTMLElement>;
-    @ViewChild(PullTabComponent) pullTab;
-    @ViewChild('mainSlide') mainSlide: TimeLineListComponent;
-    @ViewChild('detailSlide') detailSlide: TimeLineListComponent;
+  // @ts-ignore
+  @ViewChild('backButton') backButton: ElementRef<HTMLElement>;
+  @ViewChild(PullTabComponent) pullTab: any;
+  @ViewChild('mainSlide') mainSlide!: TimeLineListComponent;
+  @ViewChild('detailSlide') detailSlide!: TimeLineListComponent;
 
-    // location data
-    locations: UserLocation[] = [];
+  // location data
+  locations: UserLocation[] = [];
 
-    // belAqi data
-    belAqiForCurrentLocation: BelAqiIndexResult[] = [];
-    currentActiveIndex: BelAqiIndexResult;
+  // belAqi data
+  belAqiForCurrentLocation: BelAqiIndexResult[] = [];
+  // @ts-ignore
+  currentActiveIndex: BelAqiIndexResult;
 
-    valueTimeline: BelAqiIndexResult[] = [];
-    selectedResult: IndexValueResult;
+  valueTimeline: BelAqiIndexResult[] = [];
+  // @ts-ignore
+  selectedResult: IndexValueResult;
 
-    detailedPhenomenona: Substance[] = [
-        {
-            name: 'v2.screens.app-info.nitrogen-dioxide',
-            abbreviation: 'NO₂',
-            unit: 'µg/m³',
-            phenomenon: MainPhenomenon.NO2
-        },
-        {
-            name: 'v2.screens.app-info.fine-dust',
-            abbreviation: 'PM 10',
-            unit: 'µg/m³',
-            phenomenon: MainPhenomenon.PM10
-        },
-        {
-            name: 'v2.screens.app-info.very-fine-dust',
-            abbreviation: 'PM 2.5',
-            unit: 'µg/m³',
-            phenomenon: MainPhenomenon.PM25
-        },
-        {
-            name: 'v2.screens.app-info.ozon',
-            abbreviation: 'O₃',
-            unit: 'µg/m³',
-            phenomenon: MainPhenomenon.O3
-        },
-    ];
+  detailedPhenomenona: Substance[] = [
+    {
+      name: 'v2.screens.app-info.nitrogen-dioxide',
+      abbreviation: 'NO₂',
+      unit: 'µg/m³',
+      phenomenon: MainPhenomenon.NO2
+    },
+    {
+      name: 'v2.screens.app-info.fine-dust',
+      abbreviation: 'PM 10',
+      unit: 'µg/m³',
+      phenomenon: MainPhenomenon.PM10
+    },
+    {
+      name: 'v2.screens.app-info.very-fine-dust',
+      abbreviation: 'PM 2.5',
+      unit: 'µg/m³',
+      phenomenon: MainPhenomenon.PM25
+    },
+    {
+      name: 'v2.screens.app-info.ozon',
+      abbreviation: 'O₃',
+      unit: 'µg/m³',
+      phenomenon: MainPhenomenon.O3
+    },
+  ];
 
-    // horizontal slider data
-    slidesData = [
-        {
-            icon: '/assets/images/icons/sport-kleur.svg',
-            title: 'Sporttip',
-            text:
-                '106 µg/m³ berekend op jouw locatie, gemiddeld is dit 78 µg/m³.',
-        },
-        {
-            icon: '/assets/images/icons/sport-kleur.svg',
-            title: 'Sporttip',
-            text:
-                '106 µg/m³ berekend op jouw locatie, gemiddeld is dit 78 µg/m³.',
-        },
-        {
-            icon: '/assets/images/icons/sport-kleur.svg',
-            title: 'Sporttip',
-            text:
-                '106 µg/m³ berekend op jouw locatie, gemiddeld is dit 78 µg/m³.',
-        },
-    ];
+  // horizontal slider data
+  slidesData = [
+    {
+      icon: '/assets/images/icons/sport-kleur.svg',
+      title: 'Sporttip',
+      text:
+        '106 µg/m³ berekend op jouw locatie, gemiddeld is dit 78 µg/m³.',
+    },
+    {
+      icon: '/assets/images/icons/sport-kleur.svg',
+      title: 'Sporttip',
+      text:
+        '106 µg/m³ berekend op jouw locatie, gemiddeld is dit 78 µg/m³.',
+    },
+    {
+      icon: '/assets/images/icons/sport-kleur.svg',
+      title: 'Sporttip',
+      text:
+        '106 µg/m³ berekend op jouw locatie, gemiddeld is dit 78 µg/m³.',
+    },
+  ];
 
-    // keep track of loading status
-    detailDataLoadig = false;
+  // keep track of loading status
+  detailDataLoadig = false;
 
-    detailData: DataPoint[] = [];
+  detailData: DataPoint[] = [];
+  // @ts-ignore
+  belaqiDetailData: DataPoint;
 
-    belaqiDetailData: DataPoint;
+  drawerOptions: any;
 
-    drawerOptions: any;
+  protected belAqi = 10;
+  detailPoint: DataPoint | null = null;
+  detailActive = false;
+  contentHeight = 0;
+  screenHeight = 0;
 
-    protected belAqi = 10;
+  iosPadding = 0;
+  pullTabOpen = false;
 
-    detailPoint: DataPoint = null;
-    detailActive = false;
-    contentHeight = 0;
-    screenHeight = 0;
+  slideEvent: Subject<number> = new Subject<number>();
+  mapCenter = { latitude: 50.5039, longitude: 4.4699 };
+  // activeSlideIndex: number = 3; // ivans original commit
+  activeSlideIndex: number = ValueDate.CURRENT;
 
-    iosPadding = 0;
-    pullTabOpen = false;
+  constructor(
+    public userSettingsService: UserSettingsService,
+    private translateService: TranslateService,
+    private belAqiService: BelAQIService,
+    private modelledValueService: ModelledValueService,
+    private annulMeanValueService: AnnualMeanValueService,
+    private platform: Platform,
+    public router: Router,
+    public alertCtrl: AlertController,
+    public navCtrl: NavController,
+    private generalNotificationSrvc: GeneralNotificationService,
+    // private splashScreen: SplashScreen
+  ) {
+    this.registerBackButtonEvent();
 
-    slideEvent: Subject<number> = new Subject<number>();
-    mapCenter = { latitude: 50.5039, longitude: 4.4699 }
-    activeSlideIndex: number = 3
+    this.locations = this.userSettingsService.getUserSavedLocations();
 
-    constructor(
-        public userSettingsService: UserSettingsService,
-        private translateService: TranslateService,
-        private belAqiService: BelAQIService,
-        private modelledValueService: ModelledValueService,
-        private annulMeanValueService: AnnualMeanValueService,
-        private platform: Platform,
-        public router: Router,
-        public alertCtrl: AlertController,
-        public navCtrl: NavController,
-        private generalNotificationSrvc: GeneralNotificationService,
-        private splashScreen: SplashScreen
-    ) {
-        this.registerBackButtonEvent();
+    this.userSettingsService.$userLocations.subscribe((locations) => {
+      this.updateCurrentLocation();
+      return this.locations = locations;
+    });
 
-        this.locations = this.userSettingsService.getUserSavedLocations();
+    // this.platform.ready().then(()=>{
+    //     setTimeout(() => this.splashScreen.hide(), 1500)
+    // })
+  }
 
-        this.userSettingsService.$userLocations.subscribe((locations) => {
-            this.updateCurrentLocation();
-            return this.locations = locations;
-        });
-
-        this.platform.ready().then(()=>{
-            setTimeout(() => this.splashScreen.hide(), 1500)
-        })
-    }
-
-    registerBackButtonEvent() {
-        this.platform.backButton.subscribe(() => {
-            if (this.router.url === '/main') {
-                if (this.detailActive) {
-                    let el: HTMLElement = this.backButton.nativeElement;
-                    el.click();
-                } else {
-                    if (this.pullTabOpen) this.closeTabAction();
-                    else navigator['app'].exitApp();
-                }
-            }
-        });
-    }
-
-    backDetailAction() {
-        this.detailActive = false;
-        this.detailPoint = null;
-    }
-
-    closeTabAction() {
-        this.pullTab.handlePan({ additionalEvent: 'pandown', center: { y: 0 } })
-    }
-
-    private updateCurrentLocation(loadFinishedCb?: () => any) {
-
-
-        if (this.userSettingsService.selectedUserLocation) {
-            const index = this.locations.findIndex(d => d.label === this.userSettingsService.selectedUserLocation.label);
-
-            this.slideEvent.next(index);
-
-            return this.belAqiService.getIndexScoresAsObservable(this.userSettingsService.selectedUserLocation).subscribe(
-                res => {
-                    // Handling if there is null data main timeline
-                    const data = res.filter(e => e !== null);
-                    const belAqiData = [...res];
-                    belAqiData.forEach((item, index) => {
-                        if (!item) belAqiData[index] = { indexScore: 0, location: data[0].location, valueDate: index }
-                    })
-
-                    this.belAqiForCurrentLocation = belAqiData;
-                    this.updateDetailData(loadFinishedCb);
-                }, error => {
-                    console.error('Error occured while fetching the bel aqi indicies');
-                    if (loadFinishedCb) { loadFinishedCb(); }
-                });
+  registerBackButtonEvent() {
+    this.platform.backButton.subscribe(() => {
+      if (this.router.url === '/main') {
+        if (this.detailActive) {
+          let el: HTMLElement = this.backButton.nativeElement;
+          el.click();
         } else {
-            this.belAqiService.activeIndex = null;
+          if (this.pullTabOpen) this.closeTabAction();
+          else navigator['app'].exitApp();
         }
+      }
+    });
+  }
+
+  backDetailAction() {
+    this.detailActive = false;
+    this.detailPoint = null;
+  }
+
+  closeTabAction() {
+    this.pullTab.handlePan({ additionalEvent: 'pandown', center: { y: 0 } })
+  }
+
+  private updateCurrentLocation(loadFinishedCb?: () => any) {
+
+
+    if (this.userSettingsService.selectedUserLocation) {
+      const index = this.locations.findIndex(d => d.label === this.userSettingsService.selectedUserLocation.label);
+
+      this.slideEvent.next(index);
+
+      return this.belAqiService.getIndexScoresAsObservable(this.userSettingsService.selectedUserLocation).subscribe(
+        res => {
+          // Handling if there is null data main timeline
+          const data = res.filter(e => e !== null);
+          const belAqiData = [...res];
+          belAqiData.forEach((item, index) => {
+            if (!item) belAqiData[index] = { indexScore: 0, location: data[0].location, valueDate: index }
+          })
+
+          this.belAqiForCurrentLocation = belAqiData;
+          this.updateDetailData(loadFinishedCb);
+        }, error => {
+          console.error('Error occured while fetching the bel aqi indicies');
+          if (loadFinishedCb) { loadFinishedCb(); }
+        });
+    } else {
+      // @ts-ignore
+      this.belAqiService.activeIndex = null;
     }
 
-    private async updateDetailData(loadFinishedCb?: () => any) {
-        this.detailDataLoadig = true;
-        let currentBelAqi = this.belAqiForCurrentLocation.find(e => e.valueDate === this.currentActiveIndex?.valueDate);
-        // if current is not available
-        if (currentBelAqi === undefined && this.belAqiForCurrentLocation.length > 0) {
-            currentBelAqi = this.belAqiForCurrentLocation[0];
-        }
-        this.belAqiService.activeIndex = currentBelAqi;
+    return true
+  }
 
-        this.belaqiDetailData = {
-            color: this.belAqiService.getLightColorForIndex(currentBelAqi.indexScore),
-            evaluation: this.belAqiService.getLabelForIndex(currentBelAqi.indexScore),
-            location: this.userSettingsService.selectedUserLocation,
-            mainTab: true,
-            showValues: false,
-            showThreshold: false,
-            euBenchMark: null,
-            worldBenchMark: null,
-            substance: {
-                name: 'v2.screens.app-info.belaqi-title',
-                abbreviation: 'BelAQI',
-                phenomenon: MainPhenomenon.BELAQI
-            }
+  private async updateDetailData(loadFinishedCb?: () => any) {
+    this.detailDataLoadig = true;
+
+    // let currentBelAqi = this.belAqiForCurrentLocation.find(e => e.valueDate === ValueDate.CURRENT);
+    let currentBelAqi = this.belAqiForCurrentLocation.find(e => e.valueDate === this.currentActiveIndex?.valueDate);
+    // if current is not available
+    if (currentBelAqi === undefined && this.belAqiForCurrentLocation.length > 0) {
+      currentBelAqi = this.belAqiForCurrentLocation[0];
+    }
+    // @ts-ignore
+    this.belAqiService.activeIndex = currentBelAqi;
+
+    this.belaqiDetailData = {
+      // @ts-ignore
+      color: this.belAqiService.getLightColorForIndex(currentBelAqi.indexScore),
+      // @ts-ignore
+      evaluation: this.belAqiService.getLabelForIndex(currentBelAqi.indexScore),
+      location: this.userSettingsService.selectedUserLocation,
+      mainTab: true,
+      showValues: false,
+      showThreshold: false,
+      // @ts-ignore
+      euBenchMark: null,
+      // @ts-ignore
+      worldBenchMark: null,
+      substance: {
+        name: 'v2.screens.app-info.belaqi-title',
+        abbreviation: 'BelAQI',
+        phenomenon: MainPhenomenon.BELAQI
+      }
+    };
+
+    this.annulMeanValueService.getLastValue(this.userSettingsService.selectedUserLocation, MainPhenomenon.BELAQI_DAY).subscribe(
+      value => {
+        this.belaqiDetailData.lastAnnualIndex = {
+          color: this.belAqiService.getLightColorForIndex(value.index),
+          label: this.belAqiService.getLabelForIndex(value.index)
         };
+      })
 
-        this.annulMeanValueService.getLastValue(this.userSettingsService.selectedUserLocation, MainPhenomenon.BELAQI_DAY).subscribe(
-            value => {
-                this.belaqiDetailData.lastAnnualIndex = {
-                    color: this.belAqiService.getLightColorForIndex(value.index),
-                    label: this.belAqiService.getLabelForIndex(value.index)
-                };
-            })
-
-        this.detailedPhenomenona.forEach(dph => {
-            forkJoin([
-                this.modelledValueService.getValueByDate(this.userSettingsService.selectedUserLocation, dph.phenomenon, this.currentActiveIndex?.valueDate || ValueDate.CURRENT),
-                this.annulMeanValueService.getLastValue(this.userSettingsService.selectedUserLocation, dph.phenomenon)
-            ]).subscribe(
-                res => {
-                    if (res[0] != null) {
-                        const entry = {
-                            location: this.userSettingsService.selectedUserLocation,
-                            currentValue: Math.round(res[0].value),
-                            averageValue: res[1] ? Math.round(res[1].value) : null,
-                            substance: dph,
-                            mainTab: true,
-                            showValues: false,
-                            showThreshold: false,
-                            euBenchMark: null,
-                            worldBenchMark: null,
-                            evaluation: this.belAqiService.getLabelForIndex(res[0].index),
-                            color: this.belAqiService.getLightColorForIndex(res[0].index)
-                        };
-                        const idx = this.detailData.findIndex(e => e.substance === dph);
-                        if (idx > -1) {
-                            this.detailData[idx] = entry;
-                        } else {
-                            this.detailData.push(entry);
-                        }
-                    }
-                    this.detailDataLoadig = false;
-                    if (loadFinishedCb) { loadFinishedCb(); }
-                },
-                error => {
-                    console.error(error);
-                    if (loadFinishedCb) { loadFinishedCb(); }
-                });
-        });
-    }
-
-    ngOnInit() {
-        this.drawerOptions = {
-            handleHeight: 150,
-            gap: 120,
-            thresholdFromBottom: 300,
-            thresholdFromTop: 50,
-            bounceBack: true,
-        };
-        this.contentHeight =
-            this.platform.height() - this.drawerOptions.handleHeight - 56;
-        this.screenHeight = this.platform.height();
-
-        if (this.platform.is('ios')) this.iosPadding = 50;
-        this.generalNotificationSrvc.$active.pipe(first()).subscribe(async (res) => {
-            if (!res) {
-                const asked = await this.generalNotificationSrvc.getAskedEnableNotif()
-                if (!asked || asked === '') setTimeout(() => this.showPushNotifAlert(), 3000)
+    this.detailedPhenomenona.forEach(dph => {
+      forkJoin([
+        // this.modelledValueService.getCurrentValue(this.userSettingsService.selectedUserLocation, dph.phenomenon),
+        this.modelledValueService.getValueByDate(this.userSettingsService.selectedUserLocation, dph.phenomenon, this.currentActiveIndex?.valueDate || ValueDate.CURRENT),
+        this.annulMeanValueService.getLastValue(this.userSettingsService.selectedUserLocation, dph.phenomenon)
+      ]).subscribe(
+        res => {
+          if (res[0] != null) {
+            const entry = {
+              location: this.userSettingsService.selectedUserLocation,
+              currentValue: Math.round(res[0].value),
+              averageValue: res[1] ? Math.round(res[1].value) : null,
+              substance: dph,
+              mainTab: true,
+              showValues: false,
+              showThreshold: false,
+              euBenchMark: null,
+              worldBenchMark: null,
+              evaluation: this.belAqiService.getLabelForIndex(res[0].index),
+              color: this.belAqiService.getLightColorForIndex(res[0].index)
+            };
+            const idx = this.detailData.findIndex(e => e.substance === dph);
+            if (idx > -1) {
+              // @ts-ignore
+              this.detailData[idx] = entry;
+            } else {
+              // @ts-ignore
+              this.detailData.push(entry);
             }
-        })
-        this.belAqiService.$activeIndex.subscribe(newIndex => {
-            if (newIndex) {
-                this.updateDetailData()
-            }
-        })
-    }
-
-    ionViewWillEnter() {
-        this.updateCurrentLocation();
-    }
-
-    doRefresh(event) {
-        this.updateCurrentLocation(() => event.target.complete());
-    }
-
-    onLocationChange(location: UserLocation) {
-        this.userSettingsService.selectedUserLocation = location;
-        this.updateCurrentLocation();
-    }
-
-    onDayChange(index: IndexValueResult) {
-        this.currentActiveIndex = index;
-        this.belAqiService.activeIndex = index;
-        this.detailSlide?.slideTo(index.value);
-        this.activeSlideIndex = index.value;
-    }
-
-    openDetails(selectedDataPoint: DataPoint) {
-        this.detailActive = true;
-        this.detailPoint = selectedDataPoint;
-        this.modelledValueService.getValueTimeline(
-            this.userSettingsService.selectedUserLocation,
-            selectedDataPoint.substance.phenomenon
-        ).subscribe(res => {
-            // Handling if there is null data in details
-            const belAqiData = [...res];
-            belAqiData.forEach((item, index) => {
-                if (!item) belAqiData[index] = { index: 0, value: 0, valueDate: index, date: moment() }
-            })
-            this.valueTimeline = belAqiData
-                .filter(e => e !== null)
-                .map(e => ({
-                    date: e.date,
-                    indexScore: e.index,
-                    value: e.value,
-                    valueDate: e.valueDate,
-                    location: this.userSettingsService.selectedUserLocation,
-                }));
+          }
+          this.detailDataLoadig = false;
+          if (loadFinishedCb) { loadFinishedCb(); }
+        },
+        error => {
+          console.error(error);
+          if (loadFinishedCb) { loadFinishedCb(); }
         });
-    }
+    });
+  }
 
-    openBelaqiDetails() {
-        this.detailActive = true;
-        this.detailPoint = this.belaqiDetailData;
-        this.valueTimeline = this.belAqiForCurrentLocation;
-    }
+  ngOnInit() {
+    this.drawerOptions = {
+      handleHeight: 150,
+      gap: 120,
+      thresholdFromBottom: 300,
+      thresholdFromTop: 50,
+      bounceBack: true,
+    };
+    this.contentHeight =
+      this.platform.height() - this.drawerOptions.handleHeight - 56;
+    this.screenHeight = this.platform.height();
 
-    onDetailsDayChange(index: IndexValueResult) {
-        this.selectedResult = index;
+    if (this.platform.is('ios')) this.iosPadding = 50;
+    this.generalNotificationSrvc.$active.pipe(first()).subscribe(async (res) => {
+      if (!res) {
+        const asked = await this.generalNotificationSrvc.getAskedEnableNotif()
+        if (!asked || asked === '') setTimeout(() => this.showPushNotifAlert(), 3000)
+      }
+    })
+    this.belAqiService.$activeIndex.subscribe(newIndex => {
+      if (newIndex) {
+        this.updateDetailData();
+      }
+    });
+  }
 
-        this.detailPoint = {
-            ...this.detailPoint,
-            color: this.belAqiService.getLightColorForIndex(index.indexScore),
-            evaluation: this.belAqiService.getLabelForIndex(index.indexScore),
-            location: this.userSettingsService.selectedUserLocation,
-            currentValue: null,
-        }
-        this.mainSlide?.slideTo(index.value);
-        this.activeSlideIndex = index.value;
-    }
+  ionViewWillEnter() {
+    this.updateCurrentLocation();
+  }
 
-    useLocation(location: UserLocation) {
-        if (location) {
-            this.userSettingsService.addUserLocation(location);
-        }
-    }
+  doRefresh(event) {
+    this.updateCurrentLocation(() => event.target.complete());
+  }
 
-    updateClicked(value: boolean) {
-        this.pullTabOpen = value
-    }
+  // @ts-ignore
+  onLocationChange(location: UserLocation) {
+    this.userSettingsService.selectedUserLocation = location;
+    this.updateCurrentLocation();
+  }
 
-    async showPushNotifAlert() {
-        const alert = await this.alertCtrl.create({
-            header: this.translateService.instant('v2.screens.menu.notifications'),
-            message: this.translateService.instant('v2.screens.onboarding.ask-notifications'),
-            buttons: [{
-                text: this.translateService.instant('controls.no'),
-                role: 'cancel',
-                cssClass: 'secondary',
-                handler: () => {
-                    this.generalNotificationSrvc.setAskedEnableNotif('1')
-                    alert.dismiss()
-                },
-            },
-            {
-                text: this.translateService.instant('controls.yes'),
-                handler: () => this.navCtrl.navigateForward('main/menu', { fragment: 'notification' }),
-            },],
-        });
-        await alert.present();
+  onDayChange(index: BelAqiIndexResult) {
+    // console.log('onDayChange', index);
+    this.currentActiveIndex = index;
+    this.belAqiService.activeIndex = index;
+    this.detailSlide?.slideTo(index.valueDate);
+    this.activeSlideIndex = index.valueDate;
+  }
+
+  openDetails(selectedDataPoint: DataPoint) {
+    this.detailActive = true;
+    this.detailPoint = selectedDataPoint;
+    this.modelledValueService.getValueTimeline(
+      this.userSettingsService.selectedUserLocation,
+      selectedDataPoint.substance.phenomenon
+    ).subscribe(res => {
+      // Handling if there is null data in details
+      const belAqiData = [...res];
+      belAqiData.forEach((item, index) => {
+        if (!item) belAqiData[index] = { index: 0, value: 0, valueDate: index, date: moment() }
+      })
+      this.valueTimeline = belAqiData
+        .filter(e => e !== null)
+        .map(e => ({
+          date: e.date,
+          indexScore: e.index,
+          value: e.value,
+          valueDate: e.valueDate,
+          location: this.userSettingsService.selectedUserLocation,
+        }));
+    });
+  }
+
+  openBelaqiDetails() {
+    this.detailActive = true;
+    this.detailPoint = this.belaqiDetailData;
+    this.valueTimeline = this.belAqiForCurrentLocation;
+  }
+
+  // onDetailsDayChange(index: IndexValueResult) {
+  onDetailsDayChange(index: any) {
+    this.selectedResult = index;
+
+    this.detailPoint = {
+      ...this.detailPoint,
+      color: this.belAqiService.getLightColorForIndex(index.indexScore),
+      evaluation: this.belAqiService.getLabelForIndex(index.indexScore),
+      location: this.userSettingsService.selectedUserLocation,
+      // @ts-ignore
+      // currentValue: isNaN(index.value) ? null : Math.round(index.value),
+      currentValue: null
     }
+    this.mainSlide?.slideTo(index.value); // TODO UNCOMMENT ME
+    this.activeSlideIndex = index.value;
+  }
+
+  useLocation(location: UserLocation) {
+    if (location) {
+      this.userSettingsService.addUserLocation(location);
+    }
+  }
+
+  updateClicked(value: boolean) {
+    this.pullTabOpen = value
+  }
+
+  async showPushNotifAlert() {
+    const alert = await this.alertCtrl.create({
+      header: this.translateService.instant('v2.screens.menu.notifications'),
+      message: this.translateService.instant('v2.screens.onboarding.ask-notifications'),
+      buttons: [{
+        text: this.translateService.instant('controls.no'),
+        role: 'cancel',
+        cssClass: 'secondary',
+        handler: () => {
+          this.generalNotificationSrvc.setAskedEnableNotif('1')
+          alert.dismiss()
+        },
+      },
+      {
+        text: this.translateService.instant('controls.yes'),
+        handler: () => this.navCtrl.navigateForward('main/menu', { fragment: 'notification' }),
+      },],
+    });
+    await alert.present();
+  }
 }

@@ -45,7 +45,9 @@ export class UserLocationNotificationsService {
       if (this.topicGenerator.isUserLocationTopic(notification.topic)) {
         const coords = this.topicGenerator.generateLatLngOfTopic(notification.topic);
         this.receivedUserLocationNotification.next({
+          // @ts-ignore
           lat: coords.lat,
+          // @ts-ignore
           lng: coords.lng,
           notification
         });
@@ -53,9 +55,11 @@ export class UserLocationNotificationsService {
     });
   }
 
+  // @ts-ignore
   public subscribeLocation(location: UserLocation, index: number = null): Observable<boolean> {
     const langCode = this.translate.currentLang;
     return new Observable<boolean>((observer: Observer<boolean>) => {
+      // @ts-ignore
       const subscription = this.generateSubscriptionObject(location.latitude, location.longitude, location.label, langCode, index, location.subscription ? location.subscription.uniqueId : null);
 
       // register to Backend
@@ -97,6 +101,7 @@ export class UserLocationNotificationsService {
               // unsubscribe to Topic
           this.notifications.unsubscribeTopic(topic).subscribe(
             () => {
+              // @ts-ignore
               location.subscription = null;
               observer.next(true);
               observer.complete();
@@ -112,6 +117,7 @@ export class UserLocationNotificationsService {
                 // unsubscribe to Topic
                 this.notifications.unsubscribeTopic(topic).subscribe(
                   () => {
+                    // @ts-ignore
                     location.subscription = null;
                     observer.next(true);
                     observer.complete();
@@ -126,7 +132,7 @@ export class UserLocationNotificationsService {
           );
         }
 
-        
+
       } else {
         observer.next(true);
         observer.complete();
@@ -181,6 +187,7 @@ export class UserLocationNotificationsService {
     observer.complete();
   }
 
+  // @ts-ignore
   private generateSubscriptionObject(lat: number, lng: number, label: string, language: string, index: number, uniqueId: string = null): LocationSubscription {
     return {
       lat,

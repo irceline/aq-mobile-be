@@ -21,12 +21,11 @@ export interface UserCreatedFeedback {
 })
 export class FeedbackComponent implements OnInit {
 
-    @Input() location: UserLocation;
+    @Input() location?: UserLocation;
 
     @Output() feedbackOpened = new EventEmitter();
     @Output() feedbackGiven = new EventEmitter<UserCreatedFeedback>();
-
-    private feedback: UserCreatedFeedback;
+    private feedback!: UserCreatedFeedback;
 
     like = false;
     dislike = false;
@@ -56,7 +55,9 @@ export class FeedbackComponent implements OnInit {
             this.feedbackOpened.emit(true);
         }
         this.feedback = {
+          // @ts-ignore
             latitude: this.location.latitude,
+          // @ts-ignore
             longitude: this.location.longitude,
             codes: []
         }
@@ -66,6 +67,7 @@ export class FeedbackComponent implements OnInit {
         this.modalController.create({
             component: FeedbackStatsComponent,
             componentProps: {
+              // @ts-ignore
                 location: new L.LatLng(this.location.latitude, this.location.longitude)
             }
         }).then(modal => modal.present());
@@ -76,7 +78,9 @@ export class FeedbackComponent implements OnInit {
             component: FeedbackLocationEditComponent,
             componentProps: {
                 location: {
+                // @ts-ignore
                     longitude: this.location.longitude,
+                // @ts-ignore
                     latitude: this.location.latitude
                 }
             }

@@ -25,5 +25,9 @@ export class UserLocationTopicGeneratorService {
         lng: lng
       };
     }
+    return {
+      lat: 0,
+      lng: 0
+    };
   }
 }

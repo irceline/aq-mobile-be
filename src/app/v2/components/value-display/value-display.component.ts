@@ -5,46 +5,46 @@ import { lightIndexColor } from '../../common/constants';
 import { indexLabel } from './../../common/constants';
 
 @Component({
-    selector: 'app-value-display',
-    templateUrl: './value-display.component.html',
-    styleUrls: ['./value-display.component.scss', './value-display.component.hc.scss'],
+  selector: 'app-value-display',
+  templateUrl: './value-display.component.html',
+  styleUrls: ['./value-display.component.scss', './value-display.component.hc.scss'],
 })
 export class ValueDisplayComponent implements OnChanges, OnInit {
 
-    @Input() color;
-    @Input() index;
-    @Input() score;
-    @Input() value: string;
+  @Input() color;
+  @Input() index;
+  @Input() score;
+  @Input() value?: string;
 
-    public label: string;
+  public label!: string;
+  public labelColor!: string;
 
-    public labelColor: string;
+  constructor(
+    private translateSrvc: TranslateService
+  ) { }
 
-    constructor(
-        private translateSrvc: TranslateService
-    ) { }
-
-    ngOnInit() {
-        if (this.color) {
-            this.labelColor = this.color;
-        }
+  ngOnInit() {
+    if (this.color) {
+      this.labelColor = this.color;
     }
+  }
 
-    ngOnChanges(changes: SimpleChanges): void {
-        if (changes.score || changes.index) {
-            if (isNaN(this.score)) {
-                this.label = this.translateSrvc.instant(indexLabel[this.index]);
-            } else {
-                this.label = Math.round(this.score).toString();
-            }
-        }
-
-        if (changes.color || changes.index) {
-            if (this.color) {
-                this.labelColor = this.color;
-            }
-            this.labelColor = lightIndexColor[this.index];
-        }
+  ngOnChanges(changes: SimpleChanges): void {
+    // @ts-ignore
+    if (changes.score || changes.index) {
+      if (isNaN(this.score)) {
+        this.label = this.translateSrvc.instant(indexLabel[this.index]);
+      } else {
+        this.label = Math.round(this.score).toString();
+      }
     }
+    // @ts-ignore
+    if (changes.color || changes.index) {
+      if (this.color) {
+        this.labelColor = this.color;
+      }
+      this.labelColor = lightIndexColor[this.index];
+    }
+  }
 
 }

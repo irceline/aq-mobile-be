@@ -1,24 +1,32 @@
 @import "../../theme/variables.scss";
+
 .high-contrast {
   :host {
-    .icon-standard {
-      display: none;
-    }
-    .icon-dark {
-      display: block;
-    }
-    ion-label {
-      &.notification-desc {
-        color: $black;
+    .notification-settings {
+      .icon-standard {
+        display: none;
       }
-    }
-    ion-toggle {
-      --background: white;
-      border: solid 1.2px rgba(0, 0, 0, 0.1);
-      border-radius: 25.5px;
-      &.toggle-checked {
-        border: none;
+
+      .icon-dark {
+        display: block;
       }
+
+      ion-label {
+        &.notification-desc {
+          color: $black;
+        }
+      }
+
+      // TODO FIX THIS
+      // ion-toggle {
+      //   --background: white;
+      //   border: solid 1.2px rgba(0, 0, 0, 0.1);
+      //   border-radius: 25.5px;
+
+      //   &.toggle-checked {
+      //     border: none;
+      //   }
+      // }
     }
   }
 }

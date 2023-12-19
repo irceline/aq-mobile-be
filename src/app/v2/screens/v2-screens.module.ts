@@ -1,9 +1,9 @@
 // modules
-import { AutoCompleteModule } from 'ionic4-auto-complete';
+// import { AutoCompleteModule } from 'ionic4-auto-complete';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { V2ComponentsModule } from '../components/v2-components.module';
 
@@ -16,27 +16,29 @@ import { OnboardingScreenComponent } from './onboarding-screen/onboarding-screen
 import { RatingScreenComponent } from './rating-screen/rating-screen.component';
 import { RouterModule } from '@angular/router';
 
+
 const SCREENS = [
-    AppInfoScreenComponent,
-    LayoutScreenComponent,
-    LongtermInfoScreenComponent,
-    MainScreenComponent,
-    OnboardingScreenComponent,
-    RatingScreenComponent,
+  AppInfoScreenComponent,
+  LayoutScreenComponent,
+  LongtermInfoScreenComponent,
+  MainScreenComponent,
+  OnboardingScreenComponent,
+  RatingScreenComponent,
 ];
 
 @NgModule({
-    imports: [
-        AutoCompleteModule,
-        CommonModule,
-        FormsModule,
-        IonicModule,
-        V2ComponentsModule,
-        TranslateModule,
-        RouterModule,
-    ],
-    declarations: SCREENS,
-    exports: SCREENS,
-    entryComponents: SCREENS,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  imports: [
+    // AutoCompleteModule,
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    V2ComponentsModule,
+    TranslateModule,
+    RouterModule,
+  ],
+  declarations: SCREENS,
+  exports: SCREENS,
+  // entryComponents: SCREENS,
 })
-export class V2ScreensModule {}
+export class V2ScreensModule { }

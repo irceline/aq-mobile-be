@@ -10,8 +10,9 @@ import { FeedbackStatsComponent } from './../feedback-stats/feedback-stats.compo
   styleUrls: ['./success-display.component.scss', './success-display.component.hc.scss'],
 })
 export class SuccessDisplayComponent implements OnInit {
-
+  // @ts-ignore
   @Input() location: L.LatLng;
+  // @ts-ignore
   @Input() feedbackStats: FeedbackStats;
 
   constructor(

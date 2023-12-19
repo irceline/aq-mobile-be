@@ -13,6 +13,7 @@ import { LongTermDataService } from '../../services/long-term-data.service';
 export class LongtermInfoScreenComponent implements OnInit {
 
     longTermData: LongTermDataPoint[] = [];
+    // @ts-ignore
     loading: boolean;
 
     constructor(

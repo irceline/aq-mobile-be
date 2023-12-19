@@ -1,10 +1,10 @@
 import { Injectable, NgZone } from '@angular/core';
-import { FirebaseX } from '@ionic-native/firebase-x/ngx';
+import { FirebaseMessaging } from '@capacitor-firebase/messaging';
+import { App } from '@capacitor/app';
+import { NativeSettings, AndroidSettings, IOSSettings } from 'capacitor-native-settings';
 import { AlertController, NavController, Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { from, Observable, of, ReplaySubject } from 'rxjs';
-
-declare var cordova: any;
 
 export interface PushNotification {
   topic: string;
@@ -22,65 +22,137 @@ export interface PushNotification {
 export class PushNotificationsService {
 
   public notificationReceived: ReplaySubject<PushNotification> = new ReplaySubject(1);
-  public fcmToken: string;
-  public appVersion: string;
+
+  public fcmToken!: string;
+  public appVersion!: string;
 
   constructor(
     private platform: Platform,
-    private firebase: FirebaseX,
     private nav: NavController,
     private zone: NgZone,
     private alertCtrl: AlertController,
     private translate: TranslateService,
   ) {
     this.platform.ready().then(() => {
-      if (this.platform.is('cordova')) {
-        cordova.getAppVersion.getVersionCode().then((version) => {
-          this.appVersion = version
+      if (this.platform.is('capacitor')) {
+
+        App.getInfo()
+          .then((info) => {
+            this.appVersion = info.version;
+          })
+
+        // NOT USED ANYMORE ?
+        // if (this.platform.is('ios')) {
+        //   this.firebase.grantPermission();
+        // }
+
+        FirebaseMessaging.getToken().then((token) => {
+          console.log('FCM Token', token.token);
+          this.fcmToken = token.token
         });
+        FirebaseMessaging.addListener('tokenReceived', (event) => {
+          console.log('FCM new tokenReceived', event.token);
+          this.fcmToken = event.token
+        })
 
-        if (this.platform.is('ios')) {
-          this.firebase.grantPermission();
-        }
+        // OLD CODE
+        // this.firebase.onMessageReceived().subscribe(data => {
+        //   if (data.title && data.body && data.expiration && data.topic) {
+        //     const notification: PushNotification = {
+        //       title: data.title,
+        //       body: data.body,
+        //       topic: data.topic,
+        //       expiration: new Date(data.expiration),
+        //       location_name: data?.location_name ?? '',
+        //       unique_id: data?.unique_id ?? '',
+        //       channel_id: data?.channel_id ?? ''
+        //     };
+        //     console.log(`New notification arrived (${data.topic}, ${data.title}, ${data.expiration})`);
+        //     this.notificationReceived.next(notification);
 
-        this.firebase.getToken().then(token => this.fcmToken = token);
-        this.firebase.onTokenRefresh().subscribe(token => this.fcmToken = token);
-
-        this.firebase.onMessageReceived().subscribe(data => {
-          if (data.title && data.body && data.expiration && data.topic) {
+        //     if (data.wasTapped) {
+        //       // Notification was received on device tray and tapped by the user.
+        //     }
+        //     else if (data.tap === 'background') {
+        //       // Notification tapped on background
+        //       this.onNotifTapped(notification)
+        //     }
+        //     else {
+        //       // Notification was received in foreground. Maybe the user needs to be notified.
+        //     }
+        //   }
+        // });
+        // New Code
+        FirebaseMessaging.addListener('notificationReceived', (event) => {
+          console.log('notificationReceived', JSON.stringify(event.notification))
+          const data = event.notification;
+          const extraData:any = data.data;
+          // TODO since on lastest android update foreground notif its not working, need to add local notif plugins
+          if (data.title && data.body && extraData.expiration && extraData.topic) {
             const notification: PushNotification = {
               title: data.title,
               body: data.body,
-              topic: data.topic,
-              expiration: new Date(data.expiration),
-              location_name: data?.location_name ?? '',
-              unique_id: data?.unique_id ?? '',
-              channel_id: data?.channel_id ?? ''
+              topic: extraData.topic,
+              expiration: new Date(extraData.expiration),
+              location_name: extraData?.location_name ?? '',
+              unique_id: extraData?.unique_id ?? '',
+              channel_id: extraData?.channel_id ?? ''
             };
-            console.log(`New notification arrived (${data.topic}, ${data.title}, ${data.expiration})`);
+            console.log(`New notification arrived (${extraData.topic}, ${data.title}, ${extraData.expiration})`);
             this.notificationReceived.next(notification);
-            
-            if (data.wasTapped) {
+
+            // TODO tap logic is different in newer version
+            if (extraData.wasTapped) {
               // Notification was received on device tray and tapped by the user.
+              console.log('Notification was received on device tray and tapped by the user.')
             }
-            else if (data.tap === 'background') {
+            else if (extraData.tap === 'background') {
               // Notification tapped on background
               this.onNotifTapped(notification)
             }
             else {
               // Notification was received in foreground. Maybe the user needs to be notified.
+              console.log('Notification was received in foreground. Maybe the user needs to be notified')
             }
           }
         });
+
+        FirebaseMessaging.addListener('notificationActionPerformed', (event) => {
+          console.log('notificationActionPerformed', JSON.stringify(event))
+
+        })
       }
     });
   }
 
   public subscribeTopic(topic: string): Observable<boolean> {
-    if (this.platform.is('cordova') || this.platform.is('ios') || this.platform.is('android')) {
-      this.firebase.subscribe(topic).then((response) => {
-        console.log(`subscribing to topic: ${topic} gave status: ${response}`);
-      })
+    if (this.platform.is('capacitor') || this.platform.is('ios') || this.platform.is('android')) {
+
+      FirebaseMessaging.checkPermissions().then((permission) => {
+        console.log('FCM permission', permission.receive)
+        if (permission.receive !== 'granted') {
+          FirebaseMessaging.requestPermissions()
+            .then((d) => {
+              console.log('FCM request permission', d.receive)
+              if(d.receive == 'denied') {
+                console.log(`FCM request permission ${d.receive}`)
+                console.log(`Opening app setting ...`);
+                NativeSettings.open({
+                  optionAndroid: AndroidSettings.AppNotification,
+                  optionIOS: IOSSettings.App // for iOS only supportApp
+                })
+              }
+            })
+            .catch(error => console.error('FCM request permission ERR!', JSON.stringify(error)));
+        }
+
+        FirebaseMessaging.subscribeToTopic({ topic: topic })
+          .then(() => {
+            console.log(`subscribing to topic: ${topic} gave status: OK`);
+          })
+          .catch(error => console.error('subscribeTopic ERR!', JSON.stringify(error)));
+      });
+
       return of(true);
     } else {
       console.error(`Push notifications are not supported`);
@@ -89,10 +161,12 @@ export class PushNotificationsService {
   }
 
   public unsubscribeTopic(topic: string): Observable<boolean> {
-    if (this.platform.is('cordova') || this.platform.is('ios') || this.platform.is('android')) {
-      this.firebase.unsubscribe(topic).then((response) => {
-        console.log(`unsubscribe from topic: ${topic} gave status: ${response}`);
-      });
+    if (this.platform.is('capacitor') || this.platform.is('ios') || this.platform.is('android')) {
+      FirebaseMessaging.unsubscribeFromTopic({ topic: topic })
+        .then(() => {
+          console.log(`unsubscribeFromTopic to topic: ${topic} gave status: OK`);
+        })
+        .catch(error => console.error('unsubscribeFromTopic ERR!', JSON.stringify(error)));
       return of(true);
     } else {
       console.error(`Push notifications are not supported`);
@@ -102,6 +176,7 @@ export class PushNotificationsService {
 
   onNotifTapped(notification: PushNotification) {
     // general notif show simple alert
+    console.log('onNotifTapped')
     if (notification.topic.startsWith('belair_')) return this.zone.run(
       async () => {
         const alert = await this.alertCtrl.create({

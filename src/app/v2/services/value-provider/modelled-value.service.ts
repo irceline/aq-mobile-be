@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { isDefined } from '@angular/compiler/src/util';
+// import { isDefined } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { CacheService } from 'ionic-cache';
 import moment from 'moment';
@@ -99,7 +99,8 @@ export class ModelledValueService extends ValueProvider {
     private cacheService: CacheService,
     private ircelineSettings: IrcelineSettingsService
   ) {
-    super(http);
+    // super(http);
+    super()
   }
 
   public getValueTimeline(userLocation: UserLocation, phenomenon: MainPhenomenon): Observable<ModelledValue[]> {
@@ -121,13 +122,14 @@ export class ModelledValueService extends ValueProvider {
         const layerId = this.getLayersId(phenomenon, ValueDate.CURRENT);
         const url = this.getWmsUrl(phenomenon, ValueDate.CURRENT);
         const params = this.createFeatureInfoRequestParams(layerId, userLocation, timeparam);
-        const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url, { params }); 
+        const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url, { params });
         let ttl = 60 * 5; // 5 minutes
         this.cacheService.loadFromObservable(createCacheKey(url, JSON.stringify(params), timeparam), request, '', ttl)
           .subscribe(
             res => {
               const value = this.getValueOfResponse(res);
-              if (isDefined(value)) {
+              // if (isDefined(value)) {
+              if (typeof value != 'undefined') {
                 observer.next({
                   value,
                   index: this.categorize(value, phenomenon),
@@ -141,6 +143,7 @@ export class ModelledValueService extends ValueProvider {
             },
             error => {
               console.error(error);
+              // @ts-ignore
               observer.next(null);
               observer.complete();
             }
@@ -155,13 +158,14 @@ export class ModelledValueService extends ValueProvider {
         const layerId = this.getLayersId(phenomenon, valueDate);
         const url = this.getWmsUrl(phenomenon, valueDate);
         const params = this.createFeatureInfoRequestParams(layerId, userLocation, timeparam);
-        const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url, { params }); 
+        const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url, { params });
         let ttl = 60 * 5; // 5 minutes
         this.cacheService.loadFromObservable(createCacheKey(url, JSON.stringify(params), timeparam), request, '', ttl)
           .subscribe(
             res => {
               const value = this.getValueOfResponse(res);
-              if (isDefined(value)) {
+              // if (isDefined(value)) {
+              if (typeof value != 'undefined') {
                 observer.next({
                   value,
                   index: this.categorize(value, phenomenon),
@@ -175,6 +179,7 @@ export class ModelledValueService extends ValueProvider {
             },
             error => {
               console.error(error);
+              // @ts-ignore
               observer.next(null);
               observer.complete();
             }
@@ -211,6 +216,7 @@ export class ModelledValueService extends ValueProvider {
       case ValueDate.TOMORROW:
       case ValueDate.IN_TWO_DAYS:
       case ValueDate.IN_THREE_DAYS:
+        // @ts-ignore
         return of(null);
     }
   }
@@ -222,6 +228,7 @@ export class ModelledValueService extends ValueProvider {
       case ValueDate.YESTERDAY:
         return this.createPastLayerId(phenomenon, valueDate);
       case ValueDate.CURRENT:
+        // @ts-ignore
         return this.createCurrentLayerId(phenomenon);
       case ValueDate.TODAY:
       case ValueDate.TOMORROW:
@@ -241,13 +248,14 @@ export class ModelledValueService extends ValueProvider {
           const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url, {
             responseType: 'json',
             params: params
-          }); 
+          });
           let ttl = 60 * 60 * 1; // 1 hour
           this.cacheService.loadFromObservable(createCacheKey(url, JSON.stringify(params), settings.lastupdate), request, '', ttl)
             .subscribe(
               res => {
                 const value = this.getValueOfResponse(res);
-                if (isDefined(value) && value !== -9999) {
+                // if (isDefined(value) && value !== -9999) {
+                if (typeof value != 'undefined' && value !== -9999) {
                   observer.next({
                     value,
                     index: this.categorize_pf(value, phenomenon), /* use daily index (_pf) */
@@ -256,11 +264,13 @@ export class ModelledValueService extends ValueProvider {
                   });
                   observer.complete();
                 }
+                // @ts-ignore
                 observer.next(null);
                 observer.complete();
               },
               error => {
                 console.error(error);
+                // @ts-ignore
                 observer.next(null);
                 observer.complete();
               }
@@ -279,13 +289,14 @@ export class ModelledValueService extends ValueProvider {
         const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url, {
           responseType: 'json',
           params: params
-        }); 
+        });
         let ttl = 60 * 60 * 1; // 1 hour
         this.cacheService.loadFromObservable(createCacheKey(url, JSON.stringify(params), timeparam), request, '', ttl)
           .subscribe(
             res => {
               const value = this.getValueOfResponse(res);
-              if (isDefined(value)) {
+              // if (isDefined(value)) {
+              if (typeof value != 'undefined') {
                 observer.next({
                   value,
                   index: this.categorize_pf(value, phenomenon), /* use daily index (_pf) */
@@ -293,12 +304,14 @@ export class ModelledValueService extends ValueProvider {
                   valueDate: date
                 });
               } else {
+                // @ts-ignore
                 observer.next(null);
               }
               observer.complete();
             },
             error => {
               console.error(error);
+              // @ts-ignore
               observer.next(null);
               observer.complete();
             }
@@ -339,21 +352,26 @@ export class ModelledValueService extends ValueProvider {
         return PastModelledPhenomenonLayer.pm25;
     }
   }*/
-  
-    private createPastLayerId(phenomenon: MainPhenomenon, date: ValueDate): string {
+
+  // @ts-ignore
+  private createPastLayerId(phenomenon: MainPhenomenon, date: ValueDate): string {
     switch (phenomenon) {
       case MainPhenomenon.NO2:
+        // @ts-ignore
         return No2PastLayerMapping.find(e => e.date === date).layerId;
       case MainPhenomenon.O3:
+        // @ts-ignore
         return O3PastLayerMapping.find(e => e.date === date).layerId;
       case MainPhenomenon.PM10:
+        // @ts-ignore
         return PM10PastLayerMapping.find(e => e.date === date).layerId;
       case MainPhenomenon.PM25:
+        // @ts-ignore
         return PM25PastLayerMapping.find(e => e.date === date).layerId;
     }
   }
-  
 
+  // @ts-ignore
   private createDate(date: ValueDate): moment.Moment {
     switch (date) {
       case ValueDate.BEFORE_THREE_DAYS:
@@ -373,19 +391,25 @@ export class ModelledValueService extends ValueProvider {
     }
   }
 
+  // @ts-ignore
   private createForecastLayerId(phenomenon: MainPhenomenon, date: ValueDate): string {
     switch (phenomenon) {
       case MainPhenomenon.NO2:
+        // @ts-ignore
         return No2ForcastLayerMapping.find(e => e.date === date).layerId;
       case MainPhenomenon.O3:
+        // @ts-ignore
         return O3ForcastLayerMapping.find(e => e.date === date).layerId;
       case MainPhenomenon.PM10:
+        // @ts-ignore
         return PM10ForcastLayerMapping.find(e => e.date === date).layerId;
       case MainPhenomenon.PM25:
+        // @ts-ignore
         return PM25ForcastLayerMapping.find(e => e.date === date).layerId;
     }
   }
 
+  // @ts-ignore
   private createCurrentLayerId(phenomenon: MainPhenomenon) {
     switch (phenomenon) {
       case MainPhenomenon.NO2:
@@ -399,6 +423,8 @@ export class ModelledValueService extends ValueProvider {
       case MainPhenomenon.BC:
         return CurrentModelledPhenomenonLayer.bc.toString();
     }
+
+    return ''
   }
 
   /* use hourly index for current situation */
@@ -418,7 +444,7 @@ export class ModelledValueService extends ValueProvider {
         throw new Error('not implemented for ' + phenomenon);
     }
   }
-  
+
   /* for daily index, previous days and forecast (_pf) */
   private categorize_pf(value: number, phenomenon: MainPhenomenon): number {
     switch (phenomenon) {
@@ -436,10 +462,10 @@ export class ModelledValueService extends ValueProvider {
         throw new Error('not implemented for ' + phenomenon);
     }
   }
-  
+
   /*scales for current situation, these scales should be used only for the CURRENT situation */
-  
-    private categorizeNO2(value: number): number {
+
+  private categorizeNO2(value: number): number {
     if (value <= -1) { return 0; }
     if (value < 10.5) { return 1; }
     if (value < 15.5) { return 2; }
@@ -508,9 +534,9 @@ export class ModelledValueService extends ValueProvider {
     if (value <= 19.99) { return 9; }
     return 10;
   }
-  
+
   /*scales for previous days and forecasts, these scales should be used for the PAST and FORECAST situation */
-  
+
   private categorizeNO2_pf(value: number): number {
     if (value <= -1) { return 0; }
     if (value < 5.5) { return 1; }

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">BelAir</string>
+    <string name="title_activity_main">BelAir</string>
+    <string name="package_name">be.irceline.aqmobile</string>
+    <string name="custom_url_scheme">be.irceline.aqmobile</string>
+</resources>

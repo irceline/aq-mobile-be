@@ -48,13 +48,17 @@ var industryIcon = L.icon({
   styleUrls: ['./feedback-stats-map.component.scss', './feedback-stats-map.component.hc.scss']
 })
 export class FeedbackStatsMapComponent implements AfterViewInit, OnInit {
-
+  // @ts-ignore
   @Input() location: L.LatLng;
 
   private fitBounds: L.LatLngBoundsExpression = [[49.5294835476, 2.51357303225], [51.4750237087, 6.15665815596]];
+  // @ts-ignore
   private map: L.Map;
+  // @ts-ignore
   private markers: L.MarkerClusterGroup;
+  // @ts-ignore
   public loading: boolean;
+  // @ts-ignore
   public backgroundColor: string;
 
   constructor(
@@ -113,6 +117,7 @@ export class FeedbackStatsMapComponent implements AfterViewInit, OnInit {
       res => {
         this.markers = L.markerClusterGroup();
         const geojsonLayer = L.geoJSON(res, {
+          // @ts-ignore
           pointToLayer: function (feature, latlng) {
             switch (feature.properties.feedback_code) {
               case 0: return L.marker(latlng, { icon: inlineIcon })

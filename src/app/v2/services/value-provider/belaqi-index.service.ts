@@ -42,7 +42,8 @@ export class BelaqiIndexService extends ValueProvider {
     private forecastDateSrvc: ForecastDateService,
     private ircelineSettings: IrcelineSettingsService
   ) {
-    super(http);
+    // super(http);
+    super();
   }
 
   public getIndexScores(location: UserLocation): Observable<BelAqiIndexResult[]> {
@@ -108,7 +109,7 @@ export class BelaqiIndexService extends ValueProvider {
       transparent: true,
       format: 'image/png',
     };
-    
+
     return options;
   }
 
@@ -118,7 +119,7 @@ export class BelaqiIndexService extends ValueProvider {
       const params = this.createFeatureInfoRequestParams(this.getLayersId(valueDate), location);
       const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(
         rioifdmWmsURL, { responseType: 'json', params: params });
-        const cacheKey = createCacheKey(rioifdmWmsURL, JSON.stringify(params)); 
+        const cacheKey = createCacheKey(rioifdmWmsURL, JSON.stringify(params));
         let ttl = 60 * 60 * 1 // 1 hour
         this.cacheService.loadFromObservable(cacheKey, request, '', ttl)
         .subscribe(
@@ -195,6 +196,7 @@ export class BelaqiIndexService extends ValueProvider {
         return;
       }
     }
+    // @ts-ignore
     observer.next(null);
     observer.complete();
     setTimeout(() => {
@@ -202,6 +204,8 @@ export class BelaqiIndexService extends ValueProvider {
     }, 100);
   }
 
+
+  // @ts-ignore
   private createMoment(valueDate: ValueDate): moment.Moment {
     switch (valueDate) {
       case ValueDate.BEFORE_THREE_DAYS: return moment().subtract(3, 'day');
@@ -216,6 +220,7 @@ export class BelaqiIndexService extends ValueProvider {
 
   private handleError(error: any, observer: Observer<BelAqiIndexResult>) {
     console.error(error);
+    // @ts-ignore
     observer.next(null);
     observer.complete();
   }

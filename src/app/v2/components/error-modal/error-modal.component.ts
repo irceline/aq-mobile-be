@@ -10,6 +10,7 @@ import { ErrorType } from './error-modal.service';
 })
 export class ErrorModalComponent {
 
+  // @ts-ignore
   public errorType: ErrorType;
 
   constructor(

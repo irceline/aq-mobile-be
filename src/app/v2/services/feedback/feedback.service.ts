@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
-import { HttpService } from '@helgoland/core';
-import { Storage } from '@ionic/storage';
+import { Injectable, inject } from '@angular/core';
+import { HttpService } from '@helgoland/core'; // i dont know why but its not working
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { EncryptionService } from './../encryption/encryption.service';
+import { StorageService } from '../storage.service';
 
 export interface FeedbackStats {
   submissions_day: string;
@@ -45,14 +46,16 @@ const FEEDBACK_SERVICE_URL = 'https://geobelair.irceline.be/air/belair_feedback.
 })
 export class FeedbackService {
 
-  private key: string;
+  private key!: string;
+
 
   constructor(
-    private storage: Storage,
-    private httpSrvc: HttpService,
+    private storage: StorageService,
+    // private httpSrvc: HttpService, // error
+    private httpSrvc: HttpClient,
     private encryption: EncryptionService
   ) {
-    this.storage.get(FEEDBACK_KEY)
+    this.storage.get<string>(FEEDBACK_KEY)
       .then(key => {
         if (key) {
           this.key = key;
@@ -68,7 +71,13 @@ export class FeedbackService {
     const encriptedFeedback = this.encryption.encrypt(JSON.stringify(feedback));
     console.log(feedback);
     console.log(encriptedFeedback);
-    return this.httpSrvc.client().post<FeedbackStats>(FEEDBACK_SERVICE_URL, encriptedFeedback, {
+    // old code use helgoland
+    // return this.httpSrvc.client().post<FeedbackStats>(FEEDBACK_SERVICE_URL, encriptedFeedback, {
+    //   headers: {
+    //     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+    //   }
+    // });
+    return this.httpSrvc.post<FeedbackStats>(FEEDBACK_SERVICE_URL, encriptedFeedback, {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
       }
@@ -76,7 +85,9 @@ export class FeedbackService {
   }
 
   public getFeedbackStats(): Observable<FeedbackStats> {
-    return this.httpSrvc.client({ expirationAtMs: 1000 * 60 * 60 }).get<FeedbackStats>(FEEDBACK_SERVICE_URL);
+    // old code use helgoland
+    // return this.httpSrvc.client({ expirationAtMs: 1000 * 60 * 60 }).get<FeedbackStats>(FEEDBACK_SERVICE_URL);
+    return this.httpSrvc.get<FeedbackStats>(FEEDBACK_SERVICE_URL);
   }
 
   private createKey() {

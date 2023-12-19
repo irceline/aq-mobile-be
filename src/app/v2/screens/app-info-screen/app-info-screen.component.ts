@@ -19,9 +19,13 @@ interface ValColorPair {
 })
 export class AppInfoScreenComponent implements OnInit {
 
+  // @ts-ignore
     public o3: ValColorPair;
+  // @ts-ignore
     public no2: ValColorPair;
+  // @ts-ignore
     public pm10: ValColorPair;
+  // @ts-ignore
     public pm25: ValColorPair;
     public notifImgHc: string;
     public notifImg: string;

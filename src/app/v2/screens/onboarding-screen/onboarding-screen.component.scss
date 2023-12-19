@@ -16,22 +16,28 @@
       display: none;
     }
   }
+
   .image {
     max-width: 29%;
   }
+
   .image-2 {
     max-width: 40%;
   }
+
   img {
     margin: 0 !important;
+
     &.dark {
       display: none;
     }
   }
+
   .index-wheel {
     max-width: 60%;
     padding: 1em 0 2em;
   }
+
   .onboarding-content {
     position: relative;
 

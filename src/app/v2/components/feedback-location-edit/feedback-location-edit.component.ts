@@ -11,13 +11,13 @@ import { GeocoderService } from '../../services/geocoder/geocoder.service';
   styleUrls: ['./feedback-location-edit.component.scss', './feedback-location-edit.component.hc.scss'],
 })
 export class FeedbackLocationEditComponent implements OnInit {
-
+  // @ts-ignore
   @Input() location: { longitude: number, latitude: number };
-
+  // @ts-ignore
   public backgroundColor: string;
-
+  // @ts-ignore
   public loadingLabel: boolean;
-
+  // @ts-ignore
   private map: L.Map;
 
   constructor(

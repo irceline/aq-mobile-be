@@ -1,177 +1,207 @@
 :host {
-    display: block;
+  display: block;
+  height: 100%;
+
+  swiper-container {
     height: 100%;
+    background: url('/assets/images/bg.svg') no-repeat top center / cover;
 
-    ion-slides {
+    ::ng-deep swiper-slide {
+      flex-direction: column;
+      justify-content: center;
+      padding-bottom: 60px;
+      color: white;
+
+      .slide {
+        overflow: scroll;
+        width: 100%;
         height: 100%;
-        background: url('/assets/images/bg.svg') no-repeat top center / cover;
-
-        ::ng-deep ion-slide {
-            flex-direction: column;
-            justify-content: center;
-            padding-bottom: 60px;
-            color: white;
-
-            .slide {
-                overflow: scroll;
-                width: 100%;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                flex: 1;
-
-                &--content {
-                    padding: 30px;
-                    padding-top: 80px;
-                    flex: 1;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    width: 100%;
-
-                    &.flex-end {
-                        justify-content: flex-end;
-                    }
-
-                    h1 {
-                        font-family: var(--ion-cookie-family);
-                        margin: 0;
-                        font-size: 80px;
-
-                        &.big {
-                            font-size: 120px;
-                        }
-                    }
-
-                    p {
-                        font-size: 18px;
-                        margin: 0;
-                        // font-family: var(--ion-metro-family);
-                    }
-                }
-
-                .index-wheel {
-                    &.dark {
-                        display: none;
-                    }
-                }
-
-                .onboarding-screenshot {
-                    border-top-left-radius: 30px;
-                    border-top-right-radius: 30px;
-                    box-shadow: 0 -10px 15px 0 rgba(18, 35, 52, 0.15);
-                }
-
-                &--image {
-                    align-items: flex-end;
-                    display: flex;
-                    justify-content: center;
-                    height: 50px;
-                    margin-bottom: 37px;
-                }
-
-                ion-input {
-                    text-align: left;
-                    min-height: 61px;
-                    margin-bottom: 10px;
-
-                    img {
-                        position: absolute;
-                        top: 50%;
-                        transform: translateY(-50%);
-                        right: 29px;
-                    }
-                }
-
-                img {
-                    margin-bottom: 50px;
-
-                    &.medium {
-                        margin-bottom: 75px;
-                    }
-                }
-
-                .location {
-                    margin-top: 40px;
-                }
-
-                .flanders {
-                    margin-top: 240px;
-                    margin-bottom: 0;
-                }
-
-                h5 {
-                    text-align: left;
-                    font-weight: bold;
-                    font-size: 16px;
-                    margin-top: 30px;
-                }
-            }
-        }
-
-        ::ng-deep .swiper-pagination {
-            text-align: left !important;
-            display: flex;
-            align-items: center;
-            bottom: 31px;
-            left: 16px;
-
-            .swiper-pagination-bullet {
-                width: 6px;
-                height: 6px;
-                opacity: 0.3;
-            }
-
-            .swiper-pagination-bullet-active {
-                background: white;
-                width: 10px;
-                height: 10px;
-                opacity: 1;
-            }
-        }
-    }
-    .next {
-        position: absolute;
-        bottom: 14px;
-        right: 0px;
-        text-align: center;
-        cursor: pointer;
-        z-index: 5;
-        color: white;
-        padding: 0;
-        font-size: 14px !important;
-        font-weight: 600;
         display: flex;
+        flex-direction: column;
         align-items: center;
-        outline: none;
-        text-transform: initial !important;
+        flex: 1;
+
+        &--content {
+          padding: 30px;
+          padding-top: 80px;
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+
+          &.flex-end {
+            justify-content: flex-end;
+          }
+
+          h1 {
+            font-family: var(--ion-cookie-family);
+            margin: 0;
+            font-size: 80px;
+
+            &.big {
+              font-size: 120px;
+            }
+          }
+
+          p {
+            font-size: 18px;
+            margin: 0;
+            // font-family: var(--ion-metro-family);
+            text-align: center;
+          }
+        }
+
+        .index-wheel {
+          &.dark {
+            display: none;
+          }
+        }
+
+        .onboarding-screenshot {
+          border-top-left-radius: 30px;
+          border-top-right-radius: 30px;
+          box-shadow: 0 -10px 15px 0 rgba(18, 35, 52, 0.15);
+        }
+
+        &--image {
+          align-items: flex-end;
+          display: flex;
+          justify-content: center;
+          height: 50px;
+          margin-bottom: 37px;
+        }
+
+        ion-input {
+          text-align: left;
+          min-height: 61px;
+          margin-bottom: 10px;
+
+          img {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 29px;
+          }
+        }
 
         img {
-            width: 13px;
-            margin-left: 20px;
+          margin-bottom: 50px;
 
-            &.dark {
-                display: none;
-            }
+          &.medium {
+            margin-bottom: 75px;
+          }
         }
+
+        .location {
+          margin-top: 40px;
+        }
+
+        .flanders {
+          margin-top: 240px;
+          margin-bottom: 0;
+        }
+
+        h5 {
+          text-align: left;
+          font-weight: bold;
+          font-size: 16px;
+          margin-top: 30px;
+        }
+      }
     }
+
+    // not working with latest ionic
+    // ::ng-deep .swiper-pagination {
+    //   text-align: left !important;
+    //   display: flex;
+    //   align-items: center;
+    //   bottom: 31px;
+    //   left: 16px;
+
+    //   .swiper-pagination-bullet {
+    //     width: 6px;
+    //     height: 6px;
+    //     opacity: 0.3;
+    //   }
+
+    //   .swiper-pagination-bullet-active {
+    //     background: white;
+    //     width: 10px;
+    //     height: 10px;
+    //     opacity: 1;
+    //   }
+    // }
+  }
+
+  swiper-container::part(pagination) {
+    text-align: left !important;
+    display: flex;
+    align-items: center;
+    bottom: 31px;
+    left: 16px;
+  }
+
+  swiper-container::part(bullet) {
+    width: 6px;
+    height: 6px;
+    // opacity: 0.3;
+    opacity: 0;
+  }
+
+  swiper-container::part(bullet-active) {
+    background: white;
+    width: 10px;
+    height: 10px;
+    opacity: 1;
+  }
+
+  .next {
+    position: absolute;
+    bottom: 14px;
+    right: 0px;
+    text-align: center;
+    cursor: pointer;
+    z-index: 5;
+    color: white;
+    padding: 0;
+    font-size: 14px !important;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    outline: none;
+    text-transform: initial !important;
+
+    img {
+      width: 13px;
+      margin-left: 20px;
+
+      &.dark {
+        display: none;
+      }
+    }
+  }
 }
 
 .keyboard-shown {
-    :host {
-        ion-slides {
-            ::ng-deep ion-slide {
-                padding-bottom: 50px;
-                .slide {
-                    overflow: auto;
-                }
-            }
-            ::ng-deep .swiper-pagination {
-                bottom: 20px;
-            }
+  :host {
+    swiper-container {
+      ::ng-deep swiper-slide {
+        padding-bottom: 50px;
+
+        .slide {
+          overflow: auto;
         }
-        .next {
-            bottom: 0px;
-        }
+      }
+
+      ::ng-deep .swiper-pagination {
+        bottom: 20px;
+      }
     }
+
+    .next {
+      bottom: 0px;
+    }
+  }
 }

@@ -5,7 +5,7 @@ import { UserLocation } from '../../Interfaces';
 export abstract class ValueProvider {
 
     constructor(
-        protected http: HttpClient
+        // protected http: HttpClient
     ) { }
 
     protected calculateRequestBbox(latitude: number, longitude: number): string {
@@ -46,7 +46,8 @@ export abstract class ValueProvider {
             width: '1',
             height: '1',
             srs: 'EPSG:4326',
-            bbox: this.calculateRequestBbox(userLocation.latitude, userLocation.longitude),
+            // @ts-ignore
+            bbox: this.calculateRequestBbox(userLocation?.latitude, userLocation.longitude),
             query_layers: layerId,
             X: '1',
             Y: '1',

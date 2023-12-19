@@ -37,11 +37,12 @@
 
       <ul>
         <li *ngFor="let ltd of longTermData">
-          <app-information-item [detailedDataPoint]="ltd"></app-information-item>
+          <!-- TEMP DISABLE THIS -->
+          <!-- <app-information-item [detailedDataPoint]="ltd"></app-information-item>
           <app-bar-chart [max]="ltd.chartData.max" [options]="ltd.chartData" [euMax]="ltd.euBenchMark"
             [worldMax]="ltd.worldBenchMark" [showValues]="ltd.showValues"></app-bar-chart>
           <app-value-display [color]="ltd.color" [index]="ltd.currentIndex" [score]="ltd.currentValue" [value]="ltd.substance.unit">
-          </app-value-display>
+          </app-value-display> -->
         </li>
       </ul>
 

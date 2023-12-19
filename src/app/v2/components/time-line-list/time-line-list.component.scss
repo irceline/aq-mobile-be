@@ -1,14 +1,15 @@
 :host {
-    display: block;
+  display: block;
 
-    .swiper-slide-active {
-        ::ng-deep .timeline--item-day {
-            font-weight: bold;
-        }
+  .swiper-slide-active {
+    ::ng-deep .timeline--item-day {
+      font-weight: bold;
     }
-    ion-slide {
-        &::before {
-            top: 93% !important;
-        }
+  }
+
+  swiper-slide {
+    &::before {
+      top: 93% !important;
     }
+  }
 }

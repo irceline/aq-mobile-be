@@ -2,7 +2,7 @@
   <ion-item lines="none" class="ion-no-padding">
     <ion-icon class="icon-standard" src="/assets/images/icons/official.svg" slot="start"></ion-icon>
     <ion-icon class="icon-dark" src="/assets/images/icons/official-dark.svg" slot="start"></ion-icon>
-    <ion-label class="notification-desc" text-wrap>
+    <ion-label class="notification-desc ion-text-wrap" text-wrap>
       {{ 'v2.components.user-notification-settings.official' |translate }}
     </ion-label>
     <ion-toggle mode="ios" [checked]="generalNotification" ng-checked="true" color="success"
@@ -11,7 +11,7 @@
   <ion-item lines="none" class="ion-no-padding">
     <ion-icon class="icon-standard" src="/assets/images/icons/automated.svg" slot="start"></ion-icon>
     <ion-icon class="icon-dark" src="/assets/images/icons/automated-dark.svg" slot="start"></ion-icon>
-    <ion-label class="notification-desc" text-wrap>
+    <ion-label class="notification-desc ion-text-wrap" text-wrap>
       {{ 'v2.components.user-notification-settings.automated' |translate }}
     </ion-label>
     <ion-toggle mode="ios" [checked]="userLocationNotifications" color="success"
@@ -20,7 +20,7 @@
   <ion-item lines="none" class="ion-no-padding threshold-desc">
     <ion-img class="icon-standard custom-icon" src="/assets/images/icons/alert-white.png" slot="start"></ion-img>
     <ion-img class="icon-dark custom-icon" src="/assets/images/icons/alert-dark.png" slot="start"></ion-img>
-    <ion-label class="notification-desc" text-wrap>
+    <ion-label class="notification-desc ion-text-wrap" text-wrap>
       {{ 'v2.components.user-notification-settings.indexThreshold' |translate }}
     </ion-label>
   </ion-item>

@@ -1,14 +1,14 @@
 @import '../../theme/variables';
 
-.high-contrast{
+.high-contrast {
   :host {
     .language--dropdown {
-        background-color: rgba($black, 0.05);
-        color: $black;
+      background-color: rgba($black, 0.05);
+      color: $black;
 
-        &:after {
-            background: url('/assets/images/icons/arrow-dark.svg') no-repeat center center / 18px;
-        }
+      &:after {
+        background: url('/assets/images/icons/arrow-dark.svg') no-repeat center center / 18px;
+      }
     }
   }
 }

@@ -15,11 +15,13 @@ export class LayoutScreenComponent implements OnInit {
 
     // location data
     locations: UserLocation[] = [];
+    // @ts-ignore
     currentLocation: UserLocation;
 
     // belAqi data
     private belAqiScores: BelAqiIndexResult[] = [];
     belAqiForCurrentLocation: BelAqiIndexResult[] = [];
+    // @ts-ignore
     currentActiveIndex: BelAqiIndexResult;
 
     constructor(
@@ -42,6 +44,7 @@ export class LayoutScreenComponent implements OnInit {
         this.belAqiForCurrentLocation = this.belAqiScores.filter(
             (iR) => iR.location.id === location.id
         );
+        // @ts-ignore
         this.currentActiveIndex = this.belAqiForCurrentLocation.find(
             (iR) => iR.valueDate === ValueDate.CURRENT
         );

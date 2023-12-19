@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HelgolandMapViewModule } from '@helgoland/map';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { AutoCompleteModule } from 'ionic4-auto-complete';
+// import { AutoCompleteModule } from 'ionic4-auto-complete';
 
 import { BackgroundComponent } from './background/background.component';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
@@ -39,52 +39,59 @@ import { ThemeButtonComponent } from './theme-button/theme-button.component';
 import { UserNotificationSettingsComponent } from './user-notification-settings/user-notification-settings.component';
 import { ValueDisplayComponent } from './value-display/value-display.component';
 
+import { register } from 'swiper/element/bundle';
+import { SwiperDirective } from '../directives/swipper.directive';
+
+register();
+
 const COMPONENTS = [
-    ParameterInformationComponent,
-    CircleChartComponent,
-    HeaderComponent,
-    LocationSwipeComponent,
-    PullTabComponent,
-    TimeLineItemComponent,
-    TimeLineListComponent,
-    OnboardingSliderComponent,
-    LanguageDropdownComponent,
-    LocationInputComponent,
-    UserNotificationSettingsComponent,
-    LocationSortableComponent,
-    BackgroundComponent,
-    InformationItemComponent,
-    HorizontalCardComponent,
-    HorizontalCardsSliderComponent,
-    NotificationPopoverComponent,
-    LocationEditComponent,
-    BarChartComponent,
-    MenuScreenComponent,
-    InfoButtonComponent,
-    FeedbackComponent,
-    FeedbackStatsComponent,
-    FeedbackStatsMapComponent,
-    ValueDisplayComponent,
-    SuccessDisplayComponent,
-    InformationItemDetailsComponent,
-    MapComponent,
-    ErrorModalComponent,
-    FeedbackLocationEditComponent,
-    ThemeButtonComponent
+  SwiperDirective,
+  ParameterInformationComponent,
+  CircleChartComponent,
+  HeaderComponent,
+  LocationSwipeComponent,
+  PullTabComponent,
+  TimeLineItemComponent,
+  TimeLineListComponent,
+  OnboardingSliderComponent,
+  LanguageDropdownComponent,
+  LocationInputComponent,
+  UserNotificationSettingsComponent,
+  LocationSortableComponent,
+  BackgroundComponent,
+  InformationItemComponent,
+  HorizontalCardComponent,
+  HorizontalCardsSliderComponent,
+  NotificationPopoverComponent,
+  LocationEditComponent,
+  BarChartComponent,
+  MenuScreenComponent,
+  InfoButtonComponent,
+  FeedbackComponent,
+  FeedbackStatsComponent,
+  FeedbackStatsMapComponent,
+  FeedbackLocationEditComponent,
+  ValueDisplayComponent,
+  SuccessDisplayComponent,
+  InformationItemDetailsComponent,
+  MapComponent,
+  ErrorModalComponent,
+  ThemeButtonComponent
 ];
 
 @NgModule({
-    imports: [
-        AutoCompleteModule,
-        CommonModule,
-        FormsModule,
-        IonicModule,
-        TranslateModule,
-        RouterModule,
-        HelgolandMapViewModule
-    ],
-    declarations: COMPONENTS,
-    exports: COMPONENTS,
-    entryComponents: COMPONENTS,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  imports: [
+    // AutoCompleteModule,
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    TranslateModule,
+    RouterModule,
+    HelgolandMapViewModule
+  ],
+  declarations: COMPONENTS,
+  exports: COMPONENTS,
+  // entryComponents: COMPONENTS,
 })
 export class V2ComponentsModule { }

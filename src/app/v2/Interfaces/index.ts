@@ -1,5 +1,6 @@
 import { MainPhenomenon } from '../common/phenomenon';
-import { PushNotification } from './../services/push-notifications/push-notifications.service';
+// import { PushNotification } from './../services/push-notifications/push-notifications.service';
+import { PushNotification } from '../services/push-notifications/push-notifications.service';
 
 export enum BelAirColor {
     Red = 'red',
@@ -21,7 +22,7 @@ export interface UserLocation {
     wasEdited?: boolean;
     subscription?: LocationSubscription;
     indexThreshold?: number;
-    notification?: PushNotification;
+    notification?: PushNotification | null;
 }
 
 export interface LocationSubscription {

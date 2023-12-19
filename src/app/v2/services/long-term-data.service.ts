@@ -23,7 +23,7 @@ export class LongTermDataService {
     this._substances = [
       {
         name: translateService.instant('v2.screens.app-info.belaqi-title'),
-        abbreviation: 'AQ', 
+        abbreviation: 'AQ',
         phenomenon: MainPhenomenon.BELAQI
       },
       {
@@ -54,11 +54,13 @@ export class LongTermDataService {
   }
 
   getLongTermDataFor(location: UserLocation): Promise<LongTermDataPoint[]> {
+    // @ts-ignore
     return forkJoin(this._substances.map(substance => this.getLongTermDataForSubstance(substance, location))).toPromise();
   }
 
   private getLongTermDataForSubstance(substance: Substance, location: UserLocation): Observable<LongTermDataPoint> {
     if (substance.phenomenon === MainPhenomenon.BELAQI) {
+      // @ts-ignore
       return this.annualMeanValueSrvc.getAnnualValueList(location, substance.phenomenon)
         .pipe(map(res => {
           const currentIndex = res[0].index;
@@ -85,6 +87,7 @@ export class LongTermDataService {
           };
         }));
     } else {
+      // @ts-ignore
       return this.annualMeanValueSrvc.getAnnualValueList(location, substance.phenomenon)
         .pipe(map(res => {
           const lastEntry = res[0];
@@ -143,6 +146,7 @@ export class LongTermDataService {
       case MainPhenomenon.PM25:
         return 5;
       default:
+        // @ts-ignore
         return null;
     }
   }
@@ -156,6 +160,7 @@ export class LongTermDataService {
       case MainPhenomenon.PM25:
         return 25;
       default:
+        // @ts-ignore
         return null;
     }
   }

@@ -11,6 +11,7 @@ export class BarChartComponent implements OnInit {
     @Input() worldMax = 0;
     @Input() euMax = 0;
     @Input() showValues = true;
+    // @ts-ignore
     @Input() options: IBarChartData;
 
     constructor() {}

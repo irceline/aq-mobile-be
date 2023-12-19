@@ -1,3 +1,8 @@
-<ion-slides [options]="sliderOptions" (ionSlideDidChange)="slideChange()">
-  <ion-slide *ngFor="let location of locations">{{ location.label }}</ion-slide>
-</ion-slides>
+<swiper-container
+  (swiperslidechange)="slideChange()"
+  #slider
+>
+  <swiper-slide *ngFor="let location of locations">
+    {{ location.label }}
+  </swiper-slide>
+</swiper-container>

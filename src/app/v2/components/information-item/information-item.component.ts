@@ -11,6 +11,7 @@ import { DataPoint } from '../../Interfaces';
 export class InformationItemComponent implements OnInit {
     @Output() backClicked = new EventEmitter();
 
+    // @ts-ignore
     @Input() detailedDataPoint: DataPoint;
     @Input() isButton = false;
     @Input() hasBackBtn = false;

@@ -10,12 +10,9 @@ import { FeedbackService, FeedbackStats } from '../../services/feedback/feedback
   styleUrls: ['./feedback-stats.component.scss', './feedback-stats.component.hc.scss'],
 })
 export class FeedbackStatsComponent implements OnInit {
-
-  @Input() public feedbackStats: FeedbackStats;
-
-  @Input() public location: L.LatLng;
-
-  public backgroundColor: string;
+  @Input() public feedbackStats!: FeedbackStats;
+  @Input() public location!: L.LatLng;
+  public backgroundColor!: string;
 
   constructor(
     private modalCtrl: ModalController,

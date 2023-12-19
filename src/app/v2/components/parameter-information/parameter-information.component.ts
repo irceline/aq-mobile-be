@@ -21,10 +21,9 @@ marker('v2.screens.main-screen.about-pm25');
   styleUrls: ['./parameter-information.component.scss', './parameter-information.component.hc.scss'],
 })
 export class ParameterInformationComponent {
-
+  // @ts-ignore
   expandHint: boolean;
-
-  @Input() parameter: MainPhenomenon;
+  @Input() parameter?: MainPhenomenon;
 
   parameterHints = [
     {
@@ -59,13 +58,15 @@ export class ParameterInformationComponent {
   ) { }
 
 
-  public get title(): string {
+  public get title(): string | null {
     if (!this.parameter) return null;
+    // @ts-ignore
     return this.parameterHints.find(e => e.parameter === this.parameter).title;
   }
 
 
   public get about(): string {
+    // @ts-ignore
     return this.parameterHints.find(e => e.parameter === this.parameter).about;
   }
 

@@ -54,6 +54,7 @@ export class IrcelineSettingsService {
 
   private doRequest(url: string, observer: Observer<IrcelineSettings>) {
     const request = this.http.get(url);
+    // @ts-ignore
     this.cacheService.loadFromObservable(url, request, null, DEFAULT_TTL_CACHE_LAST_UPDATE_CHECK).subscribe(
       result => {
         observer.next({
