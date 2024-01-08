@@ -228,6 +228,7 @@ export class CircleChartComponent implements OnInit {
   }
 
   private _initialize() {
+    console.log('chart init ...')
     const inverted = 11 - this.belAqi;
 
     this.wheel
@@ -281,6 +282,8 @@ export class CircleChartComponent implements OnInit {
     this.pulsingText.pulsing = true;
 
     this.title = this.belaqiService.getLabelForIndex(value);
+    // DEBUG
+    console.log('circle chart _changeTitle', this.title)
 
     // Handle dynamic size
     this.titleSize = 40;

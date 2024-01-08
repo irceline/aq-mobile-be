@@ -178,7 +178,6 @@ export class MainScreenComponent implements OnInit {
 
   private updateCurrentLocation(loadFinishedCb?: () => any) {
 
-
     if (this.userSettingsService.selectedUserLocation) {
       const index = this.locations.findIndex(d => d.label === this.userSettingsService.selectedUserLocation.label);
 
@@ -378,7 +377,7 @@ export class MainScreenComponent implements OnInit {
       // currentValue: isNaN(index.value) ? null : Math.round(index.value),
       currentValue: null
     }
-    this.mainSlide?.slideTo(index.value); // TODO UNCOMMENT ME
+    this.mainSlide?.slideTo(index.value);
     this.activeSlideIndex = index.value;
   }
 
