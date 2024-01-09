@@ -41,6 +41,9 @@ $animationColor: white;
                 @media screen and (min-width: 640px) {
                     max-width: 400px;
                 }
+                &.hidden {
+                    display: none;
+                }
 
                 .loader {
                     background: transparent;
