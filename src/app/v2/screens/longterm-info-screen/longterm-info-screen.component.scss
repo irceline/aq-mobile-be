@@ -1,6 +1,6 @@
 ion-content {
     --background: transparent;
-    --padding-top: 56px;
+    --padding-top: calc(56px + env(safe-area-inset-top));
     .longterm-info {
         color: white;
         margin: 0 50px;

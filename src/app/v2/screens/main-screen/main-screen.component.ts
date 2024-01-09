@@ -295,8 +295,13 @@ export class MainScreenComponent implements OnInit {
       thresholdFromTop: 50,
       bounceBack: true,
     };
-    this.contentHeight =
-      this.platform.height() - this.drawerOptions.handleHeight - 56;
+    if (this.platform.is('ios')) {
+      this.contentHeight =
+        this.platform.height() - this.drawerOptions.handleHeight - 106;
+    } else {
+      this.contentHeight =
+        this.platform.height() - this.drawerOptions.handleHeight - 56;
+    }
     this.screenHeight = this.platform.height();
 
     if (this.platform.is('ios')) this.iosPadding = 50;

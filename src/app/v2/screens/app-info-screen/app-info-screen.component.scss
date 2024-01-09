@@ -1,6 +1,6 @@
 ion-content {
     --background: transparent;
-    --padding-top: 56px;
+    --padding-top: calc(56px + env(safe-area-inset-top));
     .img-standard {
         display: block !important;
     }

@@ -1,7 +1,7 @@
 ion-button {
     --opacity: 1;
     position: fixed;
-    top: 115px;
+    top: calc(115px + env(safe-area-inset-top));
     right: -1px;
     --border-radius: 0;
     --padding-bottom: 0;
@@ -9,7 +9,7 @@ ion-button {
     --padding-end: 0;
     margin: 0;
     height: auto;
-
+    
     .dark {
         display: none;
     }

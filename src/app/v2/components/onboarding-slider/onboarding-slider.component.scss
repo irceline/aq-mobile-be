@@ -23,7 +23,7 @@
 
         &--content {
           padding: 30px;
-          padding-top: 80px;
+          padding-top: calc(80px + env(safe-area-inset-top));
           flex: 1;
           display: flex;
           flex-direction: column;
