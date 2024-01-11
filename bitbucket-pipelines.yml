@@ -57,7 +57,8 @@ definitions:
           - ios/App/ets-mobile-capacitor.app.dSYM.zip
 pipelines:
   branches:
-    '{master,staging}':
+    # '{master,staging}':
+    capacitor:
       - step: *prepare-environment
       - parallel:
         - step: *build-deploy-android
