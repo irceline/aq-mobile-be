@@ -1,6 +1,7 @@
 :host {
   padding-top: 56px;
   .menu {
+    padding-top: env(safe-area-inset-top);
     transition: background-color 0.5s ease-in-out;
     z-index: 11;
     overflow: auto;
