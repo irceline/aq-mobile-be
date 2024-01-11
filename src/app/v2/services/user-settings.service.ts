@@ -185,6 +185,11 @@ export class UserSettingsService {
     }
   }
 
+  /**
+   * Remove saved locations
+   *
+   * @param locationToRemove
+   */
   public async removeUserLocation(locationToRemove: UserLocation) {
     await this.showLoading()
 
@@ -192,7 +197,7 @@ export class UserSettingsService {
       (l) => l.id !== locationToRemove.id
     );
     if (this.$userLocationNotificationsActive.getValue()) {
-      this.userLocationNotificationSrvc.unsubscribeLocation(locationToRemove).subscribe(
+      this.userLocationNotificationSrvc.unsubscribeLocation(locationToRemove, true).subscribe(
         () => {
           this.saveLocations();
           this.dismissLoading()
