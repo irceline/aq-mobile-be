@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 
@@ -6,7 +6,7 @@ import { StatusBar, Style } from '@capacitor/status-bar';
 import { backgroundImages, lightIndexColor, contrastModeColor, defaultColor } from '../../common/constants';
 import { BelAQIService } from '../../services/bel-aqi.service';
 import { ThemeHandlerService } from '../../services/theme-handler/theme-handler.service';
-import { Platform } from '@ionic/angular';
+import { IonContent, Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-background',
@@ -20,6 +20,8 @@ export class BackgroundComponent implements OnDestroy {
   private indexSubscription: Subscription;
   // @ts-ignore
   background: string;
+
+  @ViewChild('content') private content!: IonContent;
 
   constructor(
     private _sanitizer: DomSanitizer,
@@ -60,6 +62,13 @@ export class BackgroundComponent implements OnDestroy {
         StatusBar.setBackgroundColor({ color: color });
       }
     })
+  }
+
+  scroll(){
+    // wait for element to appear, then scroll
+    setTimeout(() => {
+      this.content.scrollToBottom();
+    }, 300);
   }
 
   ngOnDestroy(): void {
