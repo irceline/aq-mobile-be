@@ -97,8 +97,7 @@ export class UserLocationNotificationsService {
 
         if (performUpdate) {
           const topic = this.topicGenerator.generateTopic(subscription.lat, subscription.lng, subscription.language);
-
-              // unsubscribe to Topic
+          // unsubscribe to Topic
           this.notifications.unsubscribeTopic(topic).subscribe(
             () => {
               // @ts-ignore
@@ -166,8 +165,6 @@ export class UserLocationNotificationsService {
 
   private deleteSubscription(subscription: LocationSubscription): Observable<boolean> {
     return new Observable<boolean>((observer: Observer<boolean>) => {
-
-
       this.http.delete(`${NOTIFICATION_SUBSCRIPTION_BACKEND_URL}?key=${subscription.key}&uniqueId=${subscription.uniqueId}`, {
         observe: 'response',
         responseType: 'text'
