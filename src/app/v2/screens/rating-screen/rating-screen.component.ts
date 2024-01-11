@@ -54,6 +54,7 @@ export class RatingScreenComponent implements OnInit {
     );
   }
 
+  // @ts-ignore
   onLocationChange(location: UserLocation) {
     this.updateCurrentLocation(location);
   }
@@ -62,6 +63,11 @@ export class RatingScreenComponent implements OnInit {
     this.isFeedbackOpened = true;
   }
 
+  /**
+   * Send feedback
+   *
+   * @param feedback
+   */
   feedbackGiven(feedback: UserCreatedFeedback) {
     this.randomizeFeedbackLocation(feedback);
     const feedbackSubmits = feedback.codes.map(fbcode =>
@@ -71,13 +77,18 @@ export class RatingScreenComponent implements OnInit {
         feedback_code: fbcode
       })
     );
-    forkJoin(feedbackSubmits).subscribe(stats => {
-      if (stats.length >= 1) {
-        this.feedbackStats = stats[0];
-        console.log(this.feedbackStats);
-      }
-      this.feedbackLocation = new L.LatLng(feedback.latitude, feedback.longitude);
-    });
+
+    try {
+      forkJoin(feedbackSubmits).subscribe(stats => {
+        if (stats.length >= 1) {
+          this.feedbackStats = stats[0];
+          console.log(this.feedbackStats);
+        }
+        this.feedbackLocation = new L.LatLng(feedback.latitude, feedback.longitude);
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   private randomizeFeedbackLocation(feedback: UserCreatedFeedback): UserCreatedFeedback {

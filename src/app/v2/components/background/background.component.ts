@@ -6,6 +6,7 @@ import { StatusBar, Style } from '@capacitor/status-bar';
 import { backgroundImages, lightIndexColor, contrastModeColor, defaultColor } from '../../common/constants';
 import { BelAQIService } from '../../services/bel-aqi.service';
 import { ThemeHandlerService } from '../../services/theme-handler/theme-handler.service';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-background',
@@ -23,7 +24,8 @@ export class BackgroundComponent implements OnDestroy {
   constructor(
     private _sanitizer: DomSanitizer,
     private belAQIService: BelAQIService,
-    private themeService: ThemeHandlerService
+    private themeService: ThemeHandlerService,
+    private platform: Platform
   ) {
     belAQIService.$activeIndex.subscribe((newIndex) => {
       if (newIndex) this.background = this.belAQIService.getBackgroundForIndex(newIndex.indexScore);
@@ -31,15 +33,20 @@ export class BackgroundComponent implements OnDestroy {
   }
 
   ngOnInit(): void {
-    // this.statusBar.styleLightContent();
-    StatusBar.setStyle({ style: Style.Light });
+    if(this.platform.is('capacitor')) {
+      StatusBar.setStyle({ style: Style.Light });
+    }
     this.indexSubscription = this.belAQIService.$activeIndex.subscribe(async (entry) => {
       if (entry) {
         this.backgroundImage = this._sanitizer.bypassSecurityTrustUrl(`${backgroundImages[entry.indexScore]}`);
-        this.statusBarSet(lightIndexColor[entry.indexScore])
+        if (this.platform.is('capacitor')) {
+          this.statusBarSet(lightIndexColor[entry.indexScore])
+        }
       } else {
         this.backgroundImage = this._sanitizer.bypassSecurityTrustUrl(`/assets/images/bg.svg`);
-        this.statusBarSet(defaultColor)
+        if (this.platform.is('capacitor')) {
+          this.statusBarSet(defaultColor)
+        }
       }
     });
   }
@@ -47,11 +54,9 @@ export class BackgroundComponent implements OnDestroy {
   statusBarSet(color: string): void {
     this.themeService.getActiveTheme().then((theme) => {
       if (theme === this.themeService.CONTRAST_MODE) {
-        // this.statusBar.backgroundColorByHexString(contrastModeColor)
         StatusBar.setBackgroundColor({ color: contrastModeColor });
       }
       else {
-        // this.statusBar.backgroundColorByHexString(color)
         StatusBar.setBackgroundColor({ color: color });
       }
     })
