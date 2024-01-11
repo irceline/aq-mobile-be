@@ -178,7 +178,6 @@ export class MainScreenComponent implements OnInit {
 
   private updateCurrentLocation(loadFinishedCb?: () => any) {
 
-
     if (this.userSettingsService.selectedUserLocation) {
       const index = this.locations.findIndex(d => d.label === this.userSettingsService.selectedUserLocation.label);
 
@@ -295,8 +294,13 @@ export class MainScreenComponent implements OnInit {
       thresholdFromTop: 50,
       bounceBack: true,
     };
-    this.contentHeight =
-      this.platform.height() - this.drawerOptions.handleHeight - 56;
+    if (this.platform.is('ios')) {
+      this.contentHeight =
+        this.platform.height() - this.drawerOptions.handleHeight - 106;
+    } else {
+      this.contentHeight =
+        this.platform.height() - this.drawerOptions.handleHeight - 56;
+    }
     this.screenHeight = this.platform.height();
 
     if (this.platform.is('ios')) this.iosPadding = 50;
@@ -378,7 +382,7 @@ export class MainScreenComponent implements OnInit {
       // currentValue: isNaN(index.value) ? null : Math.round(index.value),
       currentValue: null
     }
-    this.mainSlide?.slideTo(index.value); // TODO UNCOMMENT ME
+    this.mainSlide?.slideTo(index.value);
     this.activeSlideIndex = index.value;
   }
 

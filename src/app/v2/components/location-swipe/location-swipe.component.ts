@@ -70,7 +70,7 @@ export class LocationSwipeComponent implements OnInit, AfterViewInit {
 
   // Emit location change
   async slideChange() {
-    console.log('slideChange')
+    console.log('LocationSwipe slideChange')
     const index = this.slides.nativeElement.swiper.realIndex;
     const location = this.locations[index];
     this.locationChange.next(location);

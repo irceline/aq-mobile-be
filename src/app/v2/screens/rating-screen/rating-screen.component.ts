@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import L from 'leaflet';
 import { forkJoin } from 'rxjs';
+import { BackgroundComponent } from '../../components/background/background.component';
 
 import { UserCreatedFeedback } from '../../components/feedback/feedback.component';
 import { UserLocation } from '../../Interfaces';
@@ -24,6 +25,10 @@ export class RatingScreenComponent implements OnInit {
   feedbackStats!: FeedbackStats;
   activeIndex!: number;
   feedbackLocation!: L.LatLng;
+  ionContentRef!: any
+
+  @ViewChild('background') private background!: BackgroundComponent;
+
 
   constructor(
     private userSettingsService: UserSettingsService,
@@ -34,7 +39,6 @@ export class RatingScreenComponent implements OnInit {
 
   ngOnInit() {
     this.locations = this.userSettingsService.getUserSavedLocations();
-
     // activate first location by default
     this.activeIndex = this.locations.findIndex(e => this.userSettingsService.selectedUserLocation.id === e.id);
     this.updateCurrentLocation(this.locations[this.activeIndex]);
@@ -54,14 +58,21 @@ export class RatingScreenComponent implements OnInit {
     );
   }
 
+  // @ts-ignore
   onLocationChange(location: UserLocation) {
     this.updateCurrentLocation(location);
   }
 
   feedbackOpened() {
     this.isFeedbackOpened = true;
+    this.background.scroll();
   }
 
+  /**
+   * Send feedback
+   *
+   * @param feedback
+   */
   feedbackGiven(feedback: UserCreatedFeedback) {
     this.randomizeFeedbackLocation(feedback);
     const feedbackSubmits = feedback.codes.map(fbcode =>
@@ -71,13 +82,18 @@ export class RatingScreenComponent implements OnInit {
         feedback_code: fbcode
       })
     );
-    forkJoin(feedbackSubmits).subscribe(stats => {
-      if (stats.length >= 1) {
-        this.feedbackStats = stats[0];
-        console.log(this.feedbackStats);
-      }
-      this.feedbackLocation = new L.LatLng(feedback.latitude, feedback.longitude);
-    });
+
+    try {
+      forkJoin(feedbackSubmits).subscribe(stats => {
+        if (stats.length >= 1) {
+          this.feedbackStats = stats[0];
+          console.log(this.feedbackStats);
+        }
+        this.feedbackLocation = new L.LatLng(feedback.latitude, feedback.longitude);
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   private randomizeFeedbackLocation(feedback: UserCreatedFeedback): UserCreatedFeedback {

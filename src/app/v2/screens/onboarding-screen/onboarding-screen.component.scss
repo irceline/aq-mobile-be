@@ -43,7 +43,7 @@
 
     .button-wrapper {
       position: absolute;
-      top: 15px;
+      top: calc(env(safe-area-inset-top) + 15px);
       right: 20px;
       z-index: 10;
     }

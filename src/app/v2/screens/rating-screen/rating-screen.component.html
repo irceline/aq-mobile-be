@@ -1,17 +1,17 @@
 <ion-content>
-  <app-background>
-    <!-- TEMP DISABLE THIS -->
+  <app-background #background>
+    <!-- TODO CHECK THIS -->
     <!-- <app-location-swipe *ngIf="!feedbackLocation" (locationChange)="onLocationChange($event)" [activeIndex]="activeIndex" [locations]="locations">
     </app-location-swipe> -->
+    <app-location-swipe *ngIf="!feedbackLocation" (locationChange)="onLocationChange($event)" [locations]="locations">
+    </app-location-swipe>
 
     <ng-container *ngIf="!feedbackLocation">
-      <!-- TEMP DISABLE THIS -->
-      <app-circle-chart></app-circle-chart>
+      <app-circle-chart #ratingChart></app-circle-chart>
 
       <div class="rating ion-padding">
         <p>{{ 'v2.screens.rating-screen.does-it-match' | translate  }}</p>
 
-        <!-- TEMP DISABLE THIS -->
         <app-feedback [location]="currentActiveIndex?.location" (feedbackOpened)="feedbackOpened()"
           (feedbackGiven)="feedbackGiven($event)"></app-feedback>
       </div>
@@ -47,8 +47,8 @@
 
     <ng-container *ngIf="feedbackLocation">
       <!-- TEMP DISABLE THIS -->
-      <!-- <app-success-display [feedbackStats]="feedbackStats" [location]="feedbackLocation">
-      </app-success-display> -->
+      <app-success-display [feedbackStats]="feedbackStats" [location]="feedbackLocation">
+      </app-success-display>
     </ng-container>
   </app-background>
 </ion-content>

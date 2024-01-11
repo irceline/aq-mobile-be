@@ -24,7 +24,6 @@ const isRingBbox = function (ring, bbox) {
     return sumX === 2 * (bbox.min.x + bbox.max.x) && sumY === 2 * (bbox.min.y + bbox.max.y);
 };
 
-// TEMP DISABLE THIS
 // 🍂namespace TileLayer
 // 🍂section PouchDB tile caching options
 // 🍂option useCache: Boolean = false
