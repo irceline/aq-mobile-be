@@ -123,7 +123,6 @@ export class MainScreenComponent implements OnInit {
 
   slideEvent: Subject<number> = new Subject<number>();
   mapCenter = { latitude: 50.5039, longitude: 4.4699 };
-  // activeSlideIndex: number = 3; // ivans original commit
   activeSlideIndex: number = ValueDate.CURRENT;
 
   constructor(
@@ -248,8 +247,7 @@ export class MainScreenComponent implements OnInit {
 
     this.detailedPhenomenona.forEach(dph => {
       forkJoin([
-        // this.modelledValueService.getCurrentValue(this.userSettingsService.selectedUserLocation, dph.phenomenon),
-        this.modelledValueService.getValueByDate(this.userSettingsService.selectedUserLocation, dph.phenomenon, this.currentActiveIndex?.valueDate || ValueDate.CURRENT),
+        this.modelledValueService.getCurrentValue(this.userSettingsService.selectedUserLocation, dph.phenomenon),
         this.annulMeanValueService.getLastValue(this.userSettingsService.selectedUserLocation, dph.phenomenon)
       ]).subscribe(
         res => {
@@ -332,7 +330,6 @@ export class MainScreenComponent implements OnInit {
   }
 
   onDayChange(index: BelAqiIndexResult) {
-    // console.log('onDayChange', index);
     this.currentActiveIndex = index;
     this.belAqiService.activeIndex = index;
     this.detailSlide?.slideTo(index.valueDate);
@@ -379,11 +376,10 @@ export class MainScreenComponent implements OnInit {
       evaluation: this.belAqiService.getLabelForIndex(index.indexScore),
       location: this.userSettingsService.selectedUserLocation,
       // @ts-ignore
-      // currentValue: isNaN(index.value) ? null : Math.round(index.value),
-      currentValue: null
+      currentValue: isNaN(index.value) ? null : Math.round(index.value),
     }
-    this.mainSlide?.slideTo(index.value);
-    this.activeSlideIndex = index.value;
+    this.mainSlide?.slideTo(index.valueDate);
+    this.activeSlideIndex = index.valueDate;
   }
 
   useLocation(location: UserLocation) {

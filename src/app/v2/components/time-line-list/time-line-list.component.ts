@@ -14,7 +14,7 @@ import { BelAqiIndexResult } from '../../services/bel-aqi.service';
 export class TimeLineListComponent implements OnChanges, AfterViewInit {
   @ViewChild('slider') slides!: ElementRef<SwiperContainer>;
   @Input() items: BelAqiIndexResult[] = [];
-  @Input() activeSlideIndex!: number;
+  @Input() activeSlideIndex: number = ValueDate.CURRENT;
   @Output() dayChange = new EventEmitter<BelAqiIndexResult>();
 
   public timelineOptions: SwiperOptions = {
@@ -42,7 +42,9 @@ export class TimeLineListComponent implements OnChanges, AfterViewInit {
       });
 
       if (this.activeSlideIndex) {
-        this.slideTo(this.activeSlideIndex);
+        setTimeout(() => {
+          this.slideTo(this.activeSlideIndex);
+        }, 500);
       }
 
       this.slides.nativeElement.swiper.update();
@@ -61,7 +63,6 @@ export class TimeLineListComponent implements OnChanges, AfterViewInit {
           this.slides.nativeElement.setAttribute(this.toKebabCase(key), `${value}`);
         });
 
-        // console.log('this.activeSlideIndex', this.activeSlideIndex);
         this.slides.nativeElement.setAttribute(this.toKebabCase('initialSlide'), `3`);
         if (this.activeSlideIndex) {
           this.slideTo(this.activeSlideIndex);
@@ -75,7 +76,7 @@ export class TimeLineListComponent implements OnChanges, AfterViewInit {
   async slideChange(event: any) {
     const index = this.slides.nativeElement.swiper.activeIndex;
     // console.log('slideChange', index);
-    const newIndexResult = { ...this.items[index], value: index };
+    const newIndexResult = { ...this.items[index]};
     this.dayChange.next(newIndexResult);
   }
 
