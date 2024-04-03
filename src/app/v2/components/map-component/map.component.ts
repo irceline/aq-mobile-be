@@ -49,7 +49,7 @@ export class MapComponent {
 
   @Input()
   set phenomenon(phen: MainPhenomenon | undefined) {
-    if (phen) {
+    if (phen || phen === 0) {
       this._phenomenon = phen;
       this.addPhenomenonLayer();
     }
@@ -92,7 +92,8 @@ export class MapComponent {
   }
 
   private addPhenomenonLayer() {
-    if (this.map && typeof this._phenomenon != 'undefined' && typeof this._phenomenon != 'undefined') {
+    console.log('this._phenomenon', this._phenomenon)
+    if (this.map && typeof this._phenomenon != 'undefined' && typeof this._valueDate != 'undefined') {
       this.modelledValueSrvc.getTimeParam(this._phenomenon, this._valueDate).subscribe(time => {
         let layerOptions: L.CustomCanvasOptions;
         let wmsurl: string;
