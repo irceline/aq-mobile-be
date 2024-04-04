@@ -76,7 +76,7 @@ export class CircleChartComponent implements OnInit {
     private router: Router
   ) {
     this.belaqiService.$activeIndex.subscribe((newIndex) => {
-      if (newIndex) {
+      if (newIndex?.indexScore) {
         this.belAqi = newIndex.indexScore;
         this.activeUserLocation = newIndex.location;
 

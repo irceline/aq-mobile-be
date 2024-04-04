@@ -65,7 +65,9 @@ export class TimeLineListComponent implements OnChanges, AfterViewInit {
 
         this.slides.nativeElement.setAttribute(this.toKebabCase('initialSlide'), `3`);
         if (this.activeSlideIndex) {
-          this.slideTo(this.activeSlideIndex);
+          setTimeout(() => {
+            this.slideTo(this.activeSlideIndex);
+          }, 500);
         }
         this.slides.nativeElement.swiper.update();
       }

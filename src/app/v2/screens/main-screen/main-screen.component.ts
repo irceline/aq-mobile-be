@@ -332,8 +332,10 @@ export class MainScreenComponent implements OnInit {
   onDayChange(index: BelAqiIndexResult) {
     this.currentActiveIndex = index;
     this.belAqiService.activeIndex = index;
-    this.detailSlide?.slideTo(index.valueDate);
-    this.activeSlideIndex = index.valueDate;
+    if (index.valueDate === 0 || index.valueDate) {
+      this.detailSlide?.slideTo(index.valueDate);
+      this.activeSlideIndex = index.valueDate;
+    }
   }
 
   openDetails(selectedDataPoint: DataPoint) {
@@ -378,8 +380,10 @@ export class MainScreenComponent implements OnInit {
       // @ts-ignore
       currentValue: isNaN(index.value) ? null : Math.round(index.value),
     }
-    this.mainSlide?.slideTo(index.valueDate);
-    this.activeSlideIndex = index.valueDate;
+    if (index.valueDate === 0 || index.valueDate) {
+      this.mainSlide?.slideTo(index.valueDate);
+      this.activeSlideIndex = index.valueDate;
+    }
   }
 
   useLocation(location: UserLocation) {

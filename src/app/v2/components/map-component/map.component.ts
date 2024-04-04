@@ -92,7 +92,6 @@ export class MapComponent {
   }
 
   private addPhenomenonLayer() {
-    console.log('this._phenomenon', this._phenomenon)
     if (this.map && typeof this._phenomenon != 'undefined' && typeof this._valueDate != 'undefined') {
       this.modelledValueSrvc.getTimeParam(this._phenomenon, this._valueDate).subscribe(time => {
         let layerOptions: L.CustomCanvasOptions;
