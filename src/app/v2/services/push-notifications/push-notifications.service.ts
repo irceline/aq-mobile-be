@@ -52,8 +52,10 @@ export class PushNotificationsService {
 
   public subscribeTopic(topic: string): Observable<boolean> {
     if (this.platform.is('cordova') || this.platform.is('ios') || this.platform.is('android')) {
-      console.log(`subscribe topic: ${topic}`);
-      return from(this.firebase.subscribe(topic));
+      this.firebase.subscribe(topic).then((response) => {
+        console.log(`subscribing to topic: ${topic} gave status: ${response}`);
+      })
+      return of(true);
     } else {
       console.error(`Push notifications are not supported`);
       return of(false);
@@ -62,8 +64,10 @@ export class PushNotificationsService {
 
   public unsubscribeTopic(topic: string): Observable<boolean> {
     if (this.platform.is('cordova') || this.platform.is('ios') || this.platform.is('android')) {
-      console.log(`unsubscribe topic: ${topic}`);
-      return from(this.firebase.unsubscribe(topic));
+      this.firebase.unsubscribe(topic).then((response) => {
+        console.log(`unsubscribe from topic: ${topic} gave status: ${response}`);
+      });
+      return of(true);
     } else {
       console.error(`Push notifications are not supported`);
       return of(false);
