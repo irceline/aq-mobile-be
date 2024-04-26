@@ -1,20 +1,8 @@
-# fastlane_require 'dotenv'
-
-# before_all do
-#   Dotenv.overload '../../.env'
-# end
-
 default_platform(:ios)
 
 platform :ios do
   team_id = CredentialsManager::AppfileConfig.try_fetch_value(:team_id)
   app_identifier = CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
-
-  # lane :bump_version do
-  #   Dir.chdir "../../" do
-  #     sh("./scripts/ios-prebuild.sh")
-  #   end
-  # end
 
   lane :configure do
     ensure_env_vars(
@@ -24,10 +12,11 @@ platform :ios do
       ]
     )
 
+    setup_ci
+
     match(
       type: "appstore",
       app_identifier: app_identifier,
-      # force_for_new_certificates: true,
       team_id: team_id,
       readonly: true,
     )
@@ -36,9 +25,7 @@ platform :ios do
   lane :build do
     configure
 
-    # bump_version
-
-    # sh("pod install --repo-update")
+    sh("pod install --repo-update")
 
     build_app(
       scheme: "App",
@@ -50,45 +37,46 @@ platform :ios do
     )
   end
 
+  lane :app_store_connection do
+    app_store_connect_api_key(
+      key_id: ENV["APPLE_API_KEY_ID"],
+      issuer_id: ENV["APPLE_API_KEY_ISSUER_ID"],
+      key_content: ENV["APPLE_API_KEY_P8_BASE64"],
+      duration: 1200,
+      in_house: false,
+      is_key_content_base64: true,
+    )
+  end
+
   lane :deploy_testflight do
     ensure_env_vars(
       env_vars: [
         'KEYCHAIN_PASSWORD',
         'MATCH_PASSWORD',
-        'FASTLANE_SESSION',
-        'FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD',
-        # 'APPLE_API_KEY_ID',
-        # 'APPLE_API_KEY_ISSUER_ID',
-        # 'APPLE_API_KEY_P8_BASE64',
+        'APPLE_API_KEY_ID',
+        'APPLE_API_KEY_ISSUER_ID',
+        'APPLE_API_KEY_P8_BASE64',
       ]
     )
 
-    # app_store_connect_api_key(
-    #   key_id: ENV["APPLE_API_KEY_ID"],
-    #   issuer_id: ENV["APPLE_API_KEY_ISSUER_ID"],
-    #   key_content: ENV["APPLE_API_KEY_P8_BASE64"],
-    #   duration: 1200,
-    #   in_house: false,
-    #   is_key_content_base64: true,
-    # )
+    app_store_connection
+
+    app_store_connect_api_key(
+      key_id: ENV["APPLE_API_KEY_ID"],
+      issuer_id: ENV["APPLE_API_KEY_ISSUER_ID"],
+      key_content: ENV["APPLE_API_KEY_P8_BASE64"],
+      duration: 1200,
+      in_house: false,
+      is_key_content_base64: true,
+    )
 
     upload_to_testflight(
       skip_waiting_for_build_processing: true,
-      # changelog: ENV["BRANCH_NAME"] == "master" ? "Production build" : "Staging build"
     )
   end
 
-  lane :beta do
+  lane :deploy do
     build
     deploy_testflight
-  end
-
-  lane :dev do
-    build
-
-    upload_to_testflight(
-      skip_waiting_for_build_processing: true,
-      # changelog: "Test Build."
-    )
   end
 end
