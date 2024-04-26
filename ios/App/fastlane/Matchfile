@@ -1,8 +1,9 @@
-git_url("git@bitbucket.org:nebulaeenterprises/belair-provisioning-match.git")
+# git_url("git@bitbucket.org:nebulaeenterprises/belair-provisioning-match.git")
+git_url("https://NebulaePipelineUser:#{ENV['MATCH_REPO_PASSWORD']}@bitbucket.org/nebulaeenterprises/belair-provisioning-match.git")
 git_branch("master")
 storage_mode("git")
 
 type("development")
 
 app_identifier("be.irceline.aqmobile")
-username("info@nebulae.be")
+# username("info@nebulae.be")
