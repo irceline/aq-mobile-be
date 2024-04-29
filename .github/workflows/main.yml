@@ -3,7 +3,8 @@ name: CI/CD Workflow
 on:
   push:
     branches:
-      - pipeline/github-actions
+      - dev
+      - master
 
 jobs:
   build-deploy-android:
