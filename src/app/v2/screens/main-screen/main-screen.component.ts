@@ -339,6 +339,7 @@ export class MainScreenComponent implements OnInit {
   }
 
   openDetails(selectedDataPoint: DataPoint) {
+    this.activeSlideIndex = ValueDate.CURRENT;
     this.detailActive = true;
     this.detailPoint = selectedDataPoint;
     this.modelledValueService.getValueTimeline(
@@ -363,6 +364,7 @@ export class MainScreenComponent implements OnInit {
   }
 
   openBelaqiDetails() {
+    this.activeSlideIndex = ValueDate.CURRENT;
     this.detailActive = true;
     this.detailPoint = this.belaqiDetailData;
     this.valueTimeline = this.belAqiForCurrentLocation;

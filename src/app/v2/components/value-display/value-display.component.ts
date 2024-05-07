@@ -30,7 +30,6 @@ export class ValueDisplayComponent implements OnChanges, OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.score !== 0 && !this.score) return;
     // @ts-ignore
     if (changes.score || changes.index) {
       if (isNaN(this.score)) {
