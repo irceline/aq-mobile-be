@@ -197,7 +197,8 @@ export class UserSettingsService {
       (l) => l.id !== locationToRemove.id
     );
     if (this.$userLocationNotificationsActive.getValue()) {
-      this.userLocationNotificationSrvc.unsubscribeLocation(locationToRemove, true).subscribe(
+      // Remove user location
+      this.userLocationNotificationSrvc.unsubscribeLocation(locationToRemove, false).subscribe(
         () => {
           this.saveLocations();
           this.dismissLoading()
