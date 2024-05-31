@@ -168,7 +168,7 @@ export class ModelledValueService extends ValueProvider {
               if (typeof value != 'undefined') {
                 observer.next({
                   value,
-                  index: this.categorize(value, phenomenon),
+                  index: this.categorize_pf(value, phenomenon),
                   date: moment(timeparam),
                   valueDate: valueDate
                 });

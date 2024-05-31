@@ -46,7 +46,7 @@ export class MainScreenComponent implements OnInit {
   locations: UserLocation[] = [];
 
   // belAqi data
-  belAqiForCurrentLocation: BelAqiIndexResult[] = [];
+  belAqiForCurrentLocation!: BelAqiIndexResult[];
   // @ts-ignore
   currentActiveIndex: BelAqiIndexResult;
 
@@ -104,7 +104,7 @@ export class MainScreenComponent implements OnInit {
   ];
 
   // keep track of loading status
-  detailDataLoadig = false;
+  detailDataLoading = false;
 
   detailData: DataPoint[] = [];
   // @ts-ignore
@@ -135,7 +135,7 @@ export class MainScreenComponent implements OnInit {
     public router: Router,
     public alertCtrl: AlertController,
     public navCtrl: NavController,
-    private generalNotificationSrvc: GeneralNotificationService,
+    private generalNotificationSrvc: GeneralNotificationService
     // private splashScreen: SplashScreen
   ) {
     this.registerBackButtonEvent();
@@ -196,6 +196,7 @@ export class MainScreenComponent implements OnInit {
         }, error => {
           console.error('Error occured while fetching the bel aqi indicies');
           if (loadFinishedCb) { loadFinishedCb(); }
+          this.showErrorAlert()
         });
     } else {
       // @ts-ignore
@@ -206,10 +207,16 @@ export class MainScreenComponent implements OnInit {
   }
 
   private async updateDetailData(loadFinishedCb?: () => any) {
-    this.detailDataLoadig = true;
+    this.detailDataLoading = true;
 
-    // let currentBelAqi = this.belAqiForCurrentLocation.find(e => e.valueDate === ValueDate.CURRENT);
-    let currentBelAqi = this.belAqiForCurrentLocation.find(e => e.valueDate === this.currentActiveIndex?.valueDate);
+    let currentActiveIndex = ValueDate.CURRENT;
+    if (this.currentActiveIndex) {
+      if (typeof this.currentActiveIndex.valueDate != 'undefined') {
+        currentActiveIndex = this.currentActiveIndex.valueDate;
+      }
+    }
+
+    let currentBelAqi = this.belAqiForCurrentLocation.find(e => e.valueDate === currentActiveIndex);
     // if current is not available
     if (currentBelAqi === undefined && this.belAqiForCurrentLocation.length > 0) {
       currentBelAqi = this.belAqiForCurrentLocation[0];
@@ -243,15 +250,16 @@ export class MainScreenComponent implements OnInit {
           color: this.belAqiService.getLightColorForIndex(value.index),
           label: this.belAqiService.getLabelForIndex(value.index)
         };
-      })
+      });
 
     this.detailedPhenomenona.forEach(dph => {
       forkJoin([
-        this.modelledValueService.getCurrentValue(this.userSettingsService.selectedUserLocation, dph.phenomenon),
+        this.modelledValueService.getValueByDate(this.userSettingsService.selectedUserLocation, dph.phenomenon, currentActiveIndex),
         this.annulMeanValueService.getLastValue(this.userSettingsService.selectedUserLocation, dph.phenomenon)
       ]).subscribe(
         res => {
           if (res[0] != null) {
+            const idx = this.detailData.findIndex(e => e.substance === dph);
             const entry = {
               location: this.userSettingsService.selectedUserLocation,
               currentValue: Math.round(res[0].value),
@@ -265,7 +273,6 @@ export class MainScreenComponent implements OnInit {
               evaluation: this.belAqiService.getLabelForIndex(res[0].index),
               color: this.belAqiService.getLightColorForIndex(res[0].index)
             };
-            const idx = this.detailData.findIndex(e => e.substance === dph);
             if (idx > -1) {
               // @ts-ignore
               this.detailData[idx] = entry;
@@ -274,7 +281,7 @@ export class MainScreenComponent implements OnInit {
               this.detailData.push(entry);
             }
           }
-          this.detailDataLoadig = false;
+          this.detailDataLoading = false;
           if (loadFinishedCb) { loadFinishedCb(); }
         },
         error => {
@@ -295,19 +302,21 @@ export class MainScreenComponent implements OnInit {
     if (this.platform.is('ios')) {
       this.contentHeight =
         this.platform.height() - this.drawerOptions.handleHeight - 106;
+      this.iosPadding = 50;
     } else {
       this.contentHeight =
         this.platform.height() - this.drawerOptions.handleHeight - 56;
     }
     this.screenHeight = this.platform.height();
 
-    if (this.platform.is('ios')) this.iosPadding = 50;
+
     this.generalNotificationSrvc.$active.pipe(first()).subscribe(async (res) => {
       if (!res) {
         const asked = await this.generalNotificationSrvc.getAskedEnableNotif()
         if (!asked || asked === '') setTimeout(() => this.showPushNotifAlert(), 3000)
       }
     })
+
     this.belAqiService.$activeIndex.subscribe(newIndex => {
       if (newIndex) {
         this.updateDetailData();
@@ -339,8 +348,9 @@ export class MainScreenComponent implements OnInit {
   }
 
   openDetails(selectedDataPoint: DataPoint) {
-    this.activeSlideIndex = ValueDate.CURRENT;
-    this.detailActive = true;
+    if (this.detailDataLoading) {
+      this.activeSlideIndex = ValueDate.CURRENT;
+    }
     this.detailPoint = selectedDataPoint;
     this.modelledValueService.getValueTimeline(
       this.userSettingsService.selectedUserLocation,
@@ -360,6 +370,9 @@ export class MainScreenComponent implements OnInit {
           valueDate: e.valueDate,
           location: this.userSettingsService.selectedUserLocation,
         }));
+
+      this.detailActive = true;
+      this.detailSlide?.slideTo(this.activeSlideIndex);
     });
   }
 
@@ -416,6 +429,24 @@ export class MainScreenComponent implements OnInit {
         handler: () => this.navCtrl.navigateForward('main/menu', { fragment: 'notification' }),
       },],
     });
+    await alert.present();
+  }
+
+  async showErrorAlert() {
+    const alert = await this.alertCtrl.create({
+      header: this.translateService.instant('error-modal.title'),
+      message: this.translateService.instant('error-modal.no-network-connection'),
+      buttons: [
+        {
+          text: this.translateService.instant('error-modal.back-to-app'),
+          role: 'confirm',
+          handler: () => {
+            this.updateDetailData()
+          },
+        },
+      ],
+    });
+
     await alert.present();
   }
 }
