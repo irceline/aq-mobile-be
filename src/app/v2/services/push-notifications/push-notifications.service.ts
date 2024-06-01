@@ -82,12 +82,13 @@ export class PushNotificationsService {
         //     }
         //   }
         // });
+
         // New Code
         FirebaseMessaging.addListener('notificationReceived', (event) => {
           console.log('notificationReceived', JSON.stringify(event.notification))
           const data = event.notification;
           const extraData:any = data.data;
-          // TODO since on lastest android update foreground notif its not working, need to add local notif plugins
+          // since on latest android update foreground notif its not working, need to add local notif plugins
           if (data.title && data.body && extraData.expiration && extraData.topic) {
             const notification: PushNotification = {
               title: data.title,
@@ -101,25 +102,34 @@ export class PushNotificationsService {
             console.log(`New notification arrived (${extraData.topic}, ${data.title}, ${extraData.expiration})`);
             this.notificationReceived.next(notification);
 
-            // TODO tap logic is different in newer version
-            if (extraData.wasTapped) {
-              // Notification was received on device tray and tapped by the user.
-              console.log('Notification was received on device tray and tapped by the user.')
-            }
-            else if (extraData.tap === 'background') {
-              // Notification tapped on background
-              this.onNotifTapped(notification)
-            }
-            else {
-              // Notification was received in foreground. Maybe the user needs to be notified.
-              console.log('Notification was received in foreground. Maybe the user needs to be notified')
-            }
+            this.onNotifTapped(notification)
           }
         });
 
+        // This handler on FCM background
         FirebaseMessaging.addListener('notificationActionPerformed', (event) => {
           console.log('notificationActionPerformed', JSON.stringify(event))
 
+          const data = event.notification;
+          const extraData: any = data.data;
+          // since on latest android update foreground notif its not working, need to add local notif plugins
+          if (extraData.title && extraData.body && extraData.expiration && extraData.topic) {
+            const notification: PushNotification = {
+              title: extraData.title,
+              body: extraData.body,
+              topic: extraData.topic,
+              expiration: new Date(extraData.expiration),
+              location_name: extraData?.location_name ?? '',
+              unique_id: extraData?.unique_id ?? '',
+              channel_id: extraData?.channel_id ?? ''
+            };
+            console.log(`New notification arrived from background(${extraData.topic}, ${data.title}, ${extraData.expiration})`);
+            this.notificationReceived.next(notification);
+
+            this.onNotifTapped(notification)
+          } else {
+            console.log('Notification handler failed, probably because title or body not exist on data');
+          }
         })
       }
     });
