@@ -63,6 +63,10 @@
           border-top-left-radius: 30px;
           border-top-right-radius: 30px;
           box-shadow: 0 -10px 15px 0 rgba(18, 35, 52, 0.15);
+          &.guideline {
+            box-shadow: none;
+            margin: -52px 0 !important;
+          }
         }
 
         &--image {
