@@ -69,7 +69,8 @@
 	},
 	"network": {
 		"geolocationDenied": "You have not allowed the use of your location to the app.",
-		"geolocationDisabled": "Geolocation is disabled"
+		"geolocationDisabled": "Geolocation is disabled",
+		"openAppSetting": "Open Settings"
 	},
 	"no-location-hint": "The app needs you to select a location to function properly.",
 	"no-location": {

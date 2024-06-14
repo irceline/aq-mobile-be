@@ -69,7 +69,8 @@
 	},
 	"network": {
 		"geolocationDenied": "La géolocalisation n'a pas été autorisée dans l'application.",
-		"geolocationDisabled": "La géolocalisation est désactivée"
+		"geolocationDisabled": "La géolocalisation est désactivée",
+    "openAppSetting": "Ouvrir les paramètres"
 	},
 	"no-location-hint": "L'application nécessite une localisation pour afficher les données.",
 	"no-location": {
