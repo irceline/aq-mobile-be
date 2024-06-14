@@ -5,6 +5,7 @@ import { Geolocation, Position } from '@capacitor/geolocation';
 // import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx'; // not used anymore
 import { Platform, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
+import { AndroidSettings, IOSSettings, NativeSettings } from 'capacitor-native-settings';
 import { Observable, Observer, ReplaySubject } from 'rxjs';
 
 export const enum LocationStatus {
@@ -250,7 +251,6 @@ export class LocateService implements OnInit {
       // }
 
       // New Code with capacitor
-      // console.log('permission ?', this.askForPermission())
       if (this.locationStatus !== LocationStatus.DENIED || askForPermission) {
         if (this.platform.is('cordova')) {
           this.askForPermission()
@@ -263,7 +263,7 @@ export class LocateService implements OnInit {
             })
             .catch((error) => {
               this.processError(observer, { code: 52, message: 'Permission denied!' });
-              console.error(`Error occured ${JSON.stringify(error)}`)
+              console.error(`Error occurred ${JSON.stringify(error)}`)
             })
         } else {
           // Webview handler (dev mode)
@@ -282,7 +282,7 @@ export class LocateService implements OnInit {
             })
             .catch((error) => {
               this.processError(observer, { code: 52, message: 'Permission denied!' });
-              console.error(`Error occured ${JSON.stringify(error)}`)
+              console.error(`Error occurred ${JSON.stringify(error)}`)
             })
         }
       }
@@ -317,7 +317,7 @@ export class LocateService implements OnInit {
         //               break;
         //           }
         //         }, error => {
-        //           console.error(`Error occured: ${error.message || error}`);
+        //           console.error(`Error occurred: ${error.message || error}`);
         //           this.setLocationMode(LocationStatus.OFF);
         //           resolve(LocationStatus.OFF);
         //         });
@@ -377,14 +377,37 @@ export class LocateService implements OnInit {
       // timeout
       if (error.code === 3) { }
       console.error(`Error while gathering location. Error-Code: ${error.code}, Error-Message: ${error.message}`);
+
       this.toast.create({
-        message: `Code: ${error.code}, Error: ${error.message || error}`,
-        duration: 3000
+        // message: `Code: ${error.code}, Error: ${error.message || error}`,
+        message: this.translate.instant('network.geolocationDenied'),
+        duration: 3000,
+        buttons: [
+          {
+            text: this.translate.instant('network.openAppSetting'),
+            handler: () => {
+              this.openSetting();
+            }
+          }
+        ]
       }).then(toast => toast.present());
+
       observer.error(error.message);
     } else {
       console.error(`Error while gathering location: ${error}`);
-      this.toast.create({ message: `Error: ${error}`, duration: 3000 }).then(toast => toast.present());
+      this.toast.create({
+        // message: `Error: ${error}`,
+        message: this.translate.instant('network.geolocationDenied'),
+        duration: 3000,
+        buttons: [
+          {
+            text: this.translate.instant('network.openAppSetting'),
+            handler: () => {
+              this.openSetting();
+            }
+          }
+        ]
+      }).then(toast => toast.present());
       observer.error(error);
     }
     observer.complete();
@@ -404,5 +427,15 @@ export class LocateService implements OnInit {
 
   private unsubscribeToResume() {
     if (this.resumeSubscription) { this.resumeSubscription.unsubscribe(); }
+  }
+
+  /**
+   * Open Native Setting
+   */
+  private openSetting() {
+    NativeSettings.open({
+      optionAndroid: AndroidSettings.ApplicationDetails,
+      optionIOS: IOSSettings.App // for iOS only supportApp
+    })
   }
 }

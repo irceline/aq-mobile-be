@@ -69,7 +69,8 @@
 	},
 	"network": {
 		"geolocationDenied": "Je hebt het gebruik van jouw locatie niet toegestaan in de app.",
-		"geolocationDisabled": "Geolocatie is uitgeschakeld"
+		"geolocationDisabled": "Geolocatie is uitgeschakeld",
+    "openAppSetting": "Open instellingen"
 	},
 	"no-location-hint": "De app vereist een locatie om gegevens weer te geven.",
 	"no-location": {

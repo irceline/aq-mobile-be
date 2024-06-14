@@ -69,7 +69,8 @@
 	},
 	"network": {
 		"geolocationDenied": "Sie haben der App die Standortermittlung nicht erlaubt.",
-		"geolocationDisabled": "Die Standortermittlung ist deaktiviert"
+		"geolocationDisabled": "Die Standortermittlung ist deaktiviert",
+    "openAppSetting": "Einstellungen öffnen"
 	},
 	"no-location-hint": "Die App benötigt einen Standort für die Anzeige von Daten.",
 	"no-location": {
