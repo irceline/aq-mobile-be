@@ -381,7 +381,7 @@ export class LocateService implements OnInit {
       this.toast.create({
         // message: `Code: ${error.code}, Error: ${error.message || error}`,
         message: this.translate.instant('network.geolocationDenied'),
-        duration: 5000,
+        duration: 3000,
         buttons: [
           {
             text: this.translate.instant('network.openAppSetting'),
