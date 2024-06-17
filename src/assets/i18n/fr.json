@@ -80,7 +80,7 @@
 	"v2": {
 		"components": {
 			"circle-chart": {
-				"avg-score": "L'indice moyen de votre localisation est de {{ score }}"
+				"avg-score": "L'indice moyen de votre localisation est {{ score }}"
 			},
 			"feedback": {
 				"cause": "Connaissez-vous la cause? (optionnel)",
