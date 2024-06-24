@@ -190,7 +190,7 @@
 			},
 			"rating-screen": {
 				"agriculture": "<strong>Émissions</strong> provenant de l'agriculture.",
-				"calculated-value": "L'application affiche une valeur calculée par nos modèle, et non pas une mesure à votre emplacement. La qualité de l'air peut donc différer localement.",
+				"calculated-value": "L'application affiche une valeur calculée par nos modèles, et non pas une mesure à votre emplacement. La qualité de l'air peut donc différer localement.",
 				"does-it-match": "Cette valeur correspond-elle à votre ressenti?",
 				"exhaust": "<strong>Émissions</strong> du trafic routier.",
 				"fire": "Un <strong> feu </strong> de bois.",
