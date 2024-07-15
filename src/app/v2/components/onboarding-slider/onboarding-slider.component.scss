@@ -150,8 +150,7 @@
   swiper-container::part(bullet) {
     width: 6px;
     height: 6px;
-    // opacity: 0.3;
-    opacity: 0;
+    opacity: 0.3;
   }
 
   swiper-container::part(bullet-active) {
