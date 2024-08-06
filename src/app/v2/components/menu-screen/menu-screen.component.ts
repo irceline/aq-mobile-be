@@ -1,6 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 // import { AppVersion } from '@ionic-native/app-version/ngx';
+import { App } from '@capacitor/app';
 import { IonContent, NavController, Platform } from '@ionic/angular';
 
 // import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -53,7 +54,7 @@ export class MenuScreenComponent implements OnInit {
 
   locationList: UserLocation[] = [];
 
-  version = 'desktop';
+  version:string = 'mobile';
 
   constructor(
     private navCtrl: NavController,
@@ -75,16 +76,11 @@ export class MenuScreenComponent implements OnInit {
       this.locationList = userLocations;
     });
 
-    // TEMP DISABLE THIS
-    // if (this.platform.is('cordova')) {
-    //     Promise.all([
-    //         this.appVersion.getVersionNumber(),
-    //         this.appVersion.getVersionCode()
-    //     ]).then(results => {
-    //         this.version = `${results[0]} (${results[1]})`
-    //     })
-    //     // this.appVersion.getVersionNumber().then(res => this.version = res);
-    // }
+    if (this.platform.is('capacitor')) {
+      App.getInfo().then((info) => {
+        this.version = info.version;
+      });
+    }
   }
 
   ionViewDidEnter() {
