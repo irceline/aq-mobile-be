@@ -9,10 +9,9 @@ platform :ios do
       env_vars: [
         'KEYCHAIN_PASSWORD',
         'MATCH_PASSWORD',
+        # 'MATCH_REPO_PASSWORD',
       ]
     )
-
-    setup_ci
 
     match(
       type: "appstore",
