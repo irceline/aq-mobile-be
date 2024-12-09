@@ -1,5 +1,11 @@
 default_platform(:ios)
 
+fastlane_require 'dotenv'
+
+before_all do
+  Dotenv.overload '../../../.env'
+end
+
 platform :ios do
   team_id = CredentialsManager::AppfileConfig.try_fetch_value(:team_id)
   app_identifier = CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
@@ -9,8 +15,13 @@ platform :ios do
       env_vars: [
         'KEYCHAIN_PASSWORD',
         'MATCH_PASSWORD',
-        # 'MATCH_REPO_PASSWORD',
+        'MATCH_REPO_PASSWORD',
       ]
+    )
+
+    unlock_keychain(
+      path: "login.keychain-db",
+      password: ENV["KEYCHAIN_PASSWORD"]
     )
 
     match(
@@ -32,7 +43,7 @@ platform :ios do
       include_bitcode: false,
       export_method: "app-store",
       clean: true,
-      output_name: "ets-mobile-capacitor.ipa",
+      output_name: "belair.ipa",
     )
   end
 
