@@ -57,7 +57,7 @@ export class MapComponent {
 
   @Input()
   set valueDate(valueDate: ValueDate | undefined) {
-    if (valueDate) {
+    if (valueDate !== undefined && valueDate > -1) {
       this._valueDate = valueDate;
       this.addPhenomenonLayer();
     }
