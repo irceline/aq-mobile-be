@@ -168,7 +168,9 @@ export class ModelledValueService extends ValueProvider {
               if (typeof value != 'undefined') {
                 observer.next({
                   value,
-                  index: this.categorize_pf(value, phenomenon),
+                  // As described categorize_pf is used for past or forecast values
+                  // For current value, we use categorize
+                  index: valueDate === ValueDate.CURRENT ? this.categorize(value, phenomenon) : this.categorize_pf(value, phenomenon),
                   date: moment(timeparam),
                   valueDate: valueDate
                 });

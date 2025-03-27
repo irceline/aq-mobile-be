@@ -377,7 +377,11 @@ export class MainScreenComponent implements OnInit {
   }
 
   openBelaqiDetails() {
-    this.activeSlideIndex = ValueDate.CURRENT;
+    // Not sure why previously when opening the belaqi details, the active slide index was set to the current value?
+    // Related commit: https://github.com/irceline/aq-mobile-be/commit/96f1d5004f715391851eea2a40b92a348d178598#diff-2d30ee05edbfec46a8a8367f7adfefc9245cf3c770f59a24bfdd945c74cf362cR342-R365
+    if (this.detailDataLoading) {
+      this.activeSlideIndex = ValueDate.CURRENT;
+    }
     this.detailActive = true;
     this.detailPoint = this.belaqiDetailData;
     this.valueTimeline = this.belAqiForCurrentLocation;
