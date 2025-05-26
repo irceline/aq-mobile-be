@@ -25,7 +25,7 @@
   <div class="details--wrapper" [ngClass]="{'inactive': detailActive, 'active': !detailActive}">
     <ng-container *ngIf="!detailActive">
       <div class="details">
-        <h5>{{ 'v2.screens.main-screen.view-details' | translate }}</h5>
+        <h5>{{ 'v2.screens.main-screen.view-details' | translate }} ieu</h5>
 
         <app-information-item *ngIf="belaqiDetailData" [detailedDataPoint]="belaqiDetailData" [isButton]="true"
           (click)="openBelaqiDetails()">
