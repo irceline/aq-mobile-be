@@ -258,8 +258,9 @@ export class MainScreenComponent implements OnInit {
         this.annulMeanValueService.getLastValue(this.userSettingsService.selectedUserLocation, dph.phenomenon)
       ]).subscribe(
         res => {
+
           if (res[0] != null) {
-            const idx = this.detailData.findIndex(e => e.substance === dph);
+            const idx = this.detailData.findIndex(e => e.substance.phenomenon === dph.phenomenon);
             const entry = {
               location: this.userSettingsService.selectedUserLocation,
               currentValue: Math.round(res[0].value),
