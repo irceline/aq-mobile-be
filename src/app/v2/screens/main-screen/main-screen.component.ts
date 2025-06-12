@@ -3,7 +3,7 @@ import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 import { AlertController, NavController, Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { forkJoin, Subject } from 'rxjs';
+import { forkJoin, Subject, from } from 'rxjs';
 
 import { ValueDate } from '../../common/enums';
 import { MainPhenomenon } from '../../common/phenomenon';
@@ -15,7 +15,7 @@ import { AnnualMeanValueService } from '../../services/value-provider/annual-mea
 import { ModelledValueService } from '../../services/value-provider/modelled-value.service';
 import moment from 'moment';
 import { GeneralNotificationService } from '../../services/push-notifications/general-notification.service';
-import { first } from 'rxjs/operators';
+import { first, map, mergeMap, toArray } from 'rxjs/operators';
 // import { SplashScreen } from '@ionic-native/splash-screen/ngx'; // TODO find on capacitor
 import { TimeLineListComponent } from '../../components/time-line-list/time-line-list.component';
 
@@ -192,9 +192,11 @@ export class MainScreenComponent implements OnInit {
           })
 
           this.belAqiForCurrentLocation = belAqiData;
-          this.updateDetailData(loadFinishedCb);
+          this.updateDetailData().then(() => {
+            this.updateDetailDataOthers(loadFinishedCb)
+          });
         }, error => {
-          console.error('Error occured while fetching the bel aqi indicies');
+          console.error('Error occurred while fetching the bel aqi indices');
           if (loadFinishedCb) { loadFinishedCb(); }
           this.showErrorAlert()
         });
@@ -206,9 +208,65 @@ export class MainScreenComponent implements OnInit {
     return true
   }
 
-  private async updateDetailData(loadFinishedCb?: () => any) {
+  private async updateDetailDataOthers(loadFinishedCb?: () => any) {
+    this.detailData = []; // set to default state
     this.detailDataLoading = true;
+    let currentActiveIndex = ValueDate.CURRENT;
 
+    from(this.detailedPhenomenona).pipe(
+      mergeMap(dph =>
+        forkJoin([
+          this.modelledValueService.getValueByDate(this.userSettingsService.selectedUserLocation, dph.phenomenon, currentActiveIndex),
+          this.annulMeanValueService.getLastValue(this.userSettingsService.selectedUserLocation, dph.phenomenon)
+        ]).pipe(
+          map(([currentVal, avgVal]) => {
+            if (currentVal != null) {
+              const entry = {
+                location: this.userSettingsService.selectedUserLocation,
+                currentValue: Math.round(currentVal.value),
+                averageValue: avgVal ? Math.round(avgVal.value) : null,
+                substance: dph,
+                mainTab: true,
+                showValues: false,
+                showThreshold: false,
+                euBenchMark: null,
+                worldBenchMark: null,
+                evaluation: this.belAqiService.getLabelForIndex(currentVal.index),
+                color: this.belAqiService.getLightColorForIndex(currentVal.index)
+              };
+              return entry;
+            }
+            return null;
+          })
+        )
+      ),
+      toArray(),
+      map(entries => entries.filter(Boolean))
+    ).subscribe({
+      next: entries => {
+        for (const entry of entries) {
+          // @ts-ignore
+          const idx = this.detailData.findIndex(e => e.substance.phenomenon === entry.substance.phenomenon);
+          if (idx > -1) {
+            // @ts-ignore
+            this.detailData[idx] = entry;
+          } else {
+            // @ts-ignore
+            this.detailData.push(entry);
+          }
+        }
+        if (loadFinishedCb) loadFinishedCb();
+        this.detailDataLoading = false;
+      },
+      error: err => {
+        console.error(err);
+        this.detailDataLoading = false;
+        if (loadFinishedCb) loadFinishedCb();
+      }
+    });
+  }
+
+  private async updateDetailData(loadFinishedCb?: () => any) {
     let currentActiveIndex = ValueDate.CURRENT;
     if (this.currentActiveIndex) {
       if (typeof this.currentActiveIndex.valueDate != 'undefined') {
@@ -252,44 +310,44 @@ export class MainScreenComponent implements OnInit {
         };
       });
 
-    this.detailedPhenomenona.forEach(dph => {
-      forkJoin([
-        this.modelledValueService.getValueByDate(this.userSettingsService.selectedUserLocation, dph.phenomenon, currentActiveIndex),
-        this.annulMeanValueService.getLastValue(this.userSettingsService.selectedUserLocation, dph.phenomenon)
-      ]).subscribe(
-        res => {
-
-          if (res[0] != null) {
-            const idx = this.detailData.findIndex(e => e.substance.phenomenon === dph.phenomenon);
-            const entry = {
-              location: this.userSettingsService.selectedUserLocation,
-              currentValue: Math.round(res[0].value),
-              averageValue: res[1] ? Math.round(res[1].value) : null,
-              substance: dph,
-              mainTab: true,
-              showValues: false,
-              showThreshold: false,
-              euBenchMark: null,
-              worldBenchMark: null,
-              evaluation: this.belAqiService.getLabelForIndex(res[0].index),
-              color: this.belAqiService.getLightColorForIndex(res[0].index)
-            };
-            if (idx > -1) {
-              // @ts-ignore
-              this.detailData[idx] = entry;
-            } else {
-              // @ts-ignore
-              this.detailData.push(entry);
-            }
-          }
-          this.detailDataLoading = false;
-          if (loadFinishedCb) { loadFinishedCb(); }
-        },
-        error => {
-          console.error(error);
-          if (loadFinishedCb) { loadFinishedCb(); }
-        });
-    });
+    // Refactored version on updateDetailDataOthers method
+    // this.detailedPhenomenona.forEach(dph => {
+    //   forkJoin([
+    //     this.modelledValueService.getValueByDate(this.userSettingsService.selectedUserLocation, dph.phenomenon, currentActiveIndex),
+    //     this.annulMeanValueService.getLastValue(this.userSettingsService.selectedUserLocation, dph.phenomenon)
+    //   ]).subscribe(
+    //     res => {
+    //       if (res[0] != null) {
+    //         const idx = this.detailData.findIndex(e => e.substance.phenomenon === dph.phenomenon);
+    //         const entry = {
+    //           location: this.userSettingsService.selectedUserLocation,
+    //           currentValue: Math.round(res[0].value),
+    //           averageValue: res[1] ? Math.round(res[1].value) : null,
+    //           substance: dph,
+    //           mainTab: true,
+    //           showValues: false,
+    //           showThreshold: false,
+    //           euBenchMark: null,
+    //           worldBenchMark: null,
+    //           evaluation: this.belAqiService.getLabelForIndex(res[0].index),
+    //           color: this.belAqiService.getLightColorForIndex(res[0].index)
+    //         };
+    //         if (idx > -1) {
+    //           // @ts-ignore
+    //           this.detailData[idx] = entry;
+    //         } else {
+    //           // @ts-ignore
+    //           this.detailData.push(entry);
+    //         }
+    //       }
+    //       this.detailDataLoading = false;
+    //       if (loadFinishedCb) { loadFinishedCb(); }
+    //     },
+    //     error => {
+    //       console.error(error);
+    //       if (loadFinishedCb) { loadFinishedCb(); }
+    //     });
+    // });
   }
 
   ngOnInit() {
@@ -413,7 +471,9 @@ export class MainScreenComponent implements OnInit {
   }
 
   updateClicked(value: boolean) {
-    this.pullTabOpen = value
+    if (value) {
+      this.updateDetailDataOthers(() => { this.pullTabOpen = value });
+    }
   }
 
   async showPushNotifAlert() {
