@@ -159,7 +159,7 @@ export class ModelledValueService extends ValueProvider {
         const url = this.getWmsUrl(phenomenon, valueDate);
         const params = this.createFeatureInfoRequestParams(layerId, userLocation, timeparam);
         const request = this.http.get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(url, { params });
-        let ttl = 60 * 1; // 1 minutes
+        let ttl = 60 * 5; // 5 minutes
         this.cacheService.loadFromObservable(createCacheKey(url, JSON.stringify(params), timeparam), request, '', ttl)
           .subscribe(
             res => {
