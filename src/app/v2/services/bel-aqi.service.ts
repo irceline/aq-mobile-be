@@ -34,7 +34,6 @@ export class BelAQIService {
   // dummy function to get random index data
   getIndexScores(locations: UserLocation[], pastDays: number, nextDays: number): BelAqiIndexResult[] {
     const indices:any[] = [];
-
     locations.forEach(location => {
       for (let i = -1 * pastDays; i <= nextDays; i++) {
         indices.push({

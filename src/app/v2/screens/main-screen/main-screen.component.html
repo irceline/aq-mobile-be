@@ -31,9 +31,17 @@
           (click)="openBelaqiDetails()">
         </app-information-item>
 
-        <app-information-item *ngFor="let detailDataPoint of detailData" [detailedDataPoint]="detailDataPoint"
-          [isButton]="true" (click)="openDetails(detailDataPoint)">
-        </app-information-item>
+        <ng-container *ngIf="detailDataLoading; else detailDataList">
+          <div class="calculating-message">
+            <ion-spinner name="crescent"></ion-spinner>
+          </div>
+        </ng-container>
+
+        <ng-template #detailDataList>
+          <app-information-item *ngFor="let detailDataPoint of detailData" [detailedDataPoint]="detailDataPoint"
+            [isButton]="true" (click)="openDetails(detailDataPoint)">
+          </app-information-item>
+        </ng-template>
 
       </div>
 
@@ -42,6 +50,7 @@
     </ng-container>
   </div>
 
+  <!-- This is detail section -->
   <div class="details--wrapper children" [ngClass]="{'active': detailActive, 'inactive': !detailActive}">
     <div class="details" *ngIf="detailActive">
       <h5>{{ 'v2.screens.main-screen.view-details' | translate }}</h5>
