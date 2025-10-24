@@ -1,4 +1,7 @@
 :host {
+  ion-content {
+    --padding-bottom: env(safe-area-inset-bottom);
+  }
   .images {
     justify-content: center;
     text-align: center;
