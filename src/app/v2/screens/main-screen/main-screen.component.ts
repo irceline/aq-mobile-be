@@ -366,8 +366,7 @@ export class MainScreenComponent implements OnInit {
       this.contentHeight =
         this.platform.height() - this.drawerOptions.handleHeight - 56;
     }
-    this.screenHeight = this.platform.height();
-
+    this.screenHeight = this.platform.is('android') ? this.platform.height() + 34 : this.platform.height()
 
     this.generalNotificationSrvc.$active.pipe(first()).subscribe(async (res) => {
       if (!res) {
