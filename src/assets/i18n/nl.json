@@ -61,7 +61,8 @@
 			"submission-today": "Vandaag",
 			"submission-total": "In totaal",
 			"anonymisation": "De locaties die hier getoond worden, werden willekeurig verplaatst om de privacy van de verzender te beschermen."
-		}
+		},
+		"make-a-report": "Faire un rapport"
 	},
 	"loader": {
 		"text": "Gegevens voor je locatie worden opgehaald.",
@@ -189,13 +190,22 @@
 				"start-quickly": "Snel van start!"
 			},
 			"rating-screen": {
-				"agriculture": "<strong>Uitstoot</strong> door landbouw",
+				"agriculture": "Uitstoot door landbouw",
 				"calculated-value": "De app toont een berekende waarde, geen meting op jouw locatie. Plaatselijk kan de luchtkwaliteit dan ook afwijken.",
 				"does-it-match": "Strookt deze waarde met jouw gevoel?",
-				"exhaust": "<strong>Uitlaatgassen</strong> van verkeer",
-				"fire": "Een <strong>haardvuur</strong> met houtverbranding.",
-				"industry": "<strong>Uitstoot</strong> door industrie",
-				"possible-causes": "Mogelijke oorzaken van een afwijking zijn:"
+				"exhaust": "Uitlaatgassen van verkeer",
+				"fire": "Houtverbranding",
+				"industry": "Uitstoot door industrie",
+				"possible-causes": "Mogelijke oorzaken van een afwijking zijn:",
+				"report-air-pollution": "Luchtvervuiling melden",
+				"report-description": "Ons model bevat niet alle bronnen die de luchtkwaliteit beïnvloeden. Merk je een lokale bron? Laat het ons hier dan weten",
+				"no-location-found": "Geen locatie gevonden",
+				"now": "Nu",
+				"other": "Overig",
+				"specify-the-cause": "Specificeer de oorzaak, alstublieft",
+				"start-writing": "Begin met schrijven...",
+				"describe-situation": "Beschrijf de situatie (optioneel)",
+				"send-observation": "Verstuur de observatie"
 			}
 		}
 	}

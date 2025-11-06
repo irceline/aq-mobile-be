@@ -1,20 +1,7 @@
-<div class="feedback--buttons">
-  <ion-button (click)="openFeedback('like')" class="feedback--rating-button" fill="clear" [ngClass]="{'active': like, 'inactive': dislike}">
-    <ion-icon slot="icon-only" src="/assets/images/icons/like.svg"></ion-icon>
-    <ion-icon slot="icon-only" class="dark" src="/assets/images/icons/like-white.svg"></ion-icon>
-  </ion-button>
-  <ion-button (click)="openFeedback('dislike')" class="feedback--rating-button" fill="clear" [ngClass]="{'active': dislike, 'inactive': like}">
-    <ion-icon slot="icon-only" src="/assets/images/icons/dislike.svg"></ion-icon>
-    <ion-icon slot="icon-only" class="dark" src="/assets/images/icons/dislike-white.svg"></ion-icon>
-  </ion-button>
-</div>
 
 <div style="text-align: center; padding: 1em 0;">
-  <ion-button fill="clear" (click)="openFeedbackStats()" class="feedback--interact">
-    {{ 'feedback.show-feedback-button' | translate }}
-  </ion-button>
-  <ion-button fill="clear" (click)="adjustLocation()" class="feedback--interact">
-    {{ 'feedback.ajdust-location-for-feedback-button' | translate }}
+  <ion-button fill="white" (click)="openFeedbackStats()" class="feedback--interact" [ngStyle]="{'color': backgroundColor}">
+    {{ 'feedback.make-a-report' | translate }}
   </ion-button>
 </div>
 

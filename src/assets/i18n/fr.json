@@ -61,7 +61,8 @@
 			"submission-today": "Aujourd'hui",
 			"submission-total": "Au total",
 			"anonymisation": "Les localisations affichées ici ont été déplacées de manière aléatoire avant leur soumission afin de protéger la vie privée de l'auteur."
-		}
+		},
+		"make-a-report": "Faire un rapport"
 	},
 	"loader": {
 		"text": "Les données concernant votre localisation sont en cours de récupération.",
@@ -189,13 +190,23 @@
 				"start-quickly": "Démarrage rapide"
 			},
 			"rating-screen": {
-				"agriculture": "<strong>Émissions</strong> provenant de l'agriculture.",
+				"agriculture": "Émissions provenant de l’agriculture",
 				"calculated-value": "L'application affiche une valeur calculée par nos modèles, et non pas une mesure à votre emplacement. La qualité de l'air peut donc différer localement.",
 				"does-it-match": "Cette valeur correspond-elle à votre ressenti?",
-				"exhaust": "<strong>Émissions</strong> du trafic routier.",
-				"fire": "Un <strong> feu </strong> de bois.",
-				"industry": "<strong>Émissions</strong> industrielles.",
-				"possible-causes": "Les causes possibles d'un écart sont:"
+				"exhaust": "Gaz d’échappement du trafic",
+				"fire": "Un feu de bois.",
+				"industry": "Émissions provenant de l’industrie",
+				"possible-causes": "Les causes possibles d'un écart sont:",
+				"report-air-pollution": "Signaler la pollution de l’air",
+				"report-description": "Notre modèle n’inclut pas toutes les sources qui influencent la qualité de l’air. Vous remarquez une source locale ? Faites-le-nous savoir ici.",
+				"no-location-found": "Aucun emplacement trouvé",
+				"location-turned-off": "Les services de localisation sont désactivés. Modifiez-les dans les paramètres.",
+				"now": "Maintenant",
+				"other": "Autre",
+				"specify-the-cause": "Veuillez préciser la cause",
+				"start-writing": "Commencez à écrire...",
+				"describe-situation": "Décrivez la situation (facultatif)",
+				"send-observation": "Envoyer l’observation"
 			}
 		}
 	}

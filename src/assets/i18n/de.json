@@ -61,7 +61,8 @@
 			"submission-today": "Heute",
 			"submission-total": "Insgesamt",
 			"anonymisation": "Die hier angezeigten Standorte wurden vor der Einreichung nach dem Zufallsprinzip verschoben, um die Privatsphäre des Einreichers zu schützen."
-		}
+		},
+		"make-a-report": "Einen Bericht erstellen"
 	},
 	"loader": {
 		"text": "Die Daten für Ihren Standort werden gerade abgerufen.",
@@ -189,13 +190,23 @@
 				"start-quickly": "Schnellstart!"
 			},
 			"rating-screen": {
-				"agriculture": "<strong>Emissionen</strong> aus Landwirtschaft",
+				"agriculture": "Emissionen aus der Landwirtschaft",
 				"calculated-value": "Die App zeigt einen berechneten Wert, keine Messung an Ihrem Standort. Die Luftqualität kann daher lokal unterschiedlich sein.",
 				"does-it-match": "Entspricht dieser Wert Ihren Gefühlen?",
-				"exhaust": "<strong>Abgase</strong> aus dem Verkehr",
-				"fire": "Ein <strong>Kamin</strong> mit Holzverbrennung.",
-				"industry": "<strong>Emissionen</strong> aus Industrie",
-				"possible-causes": "Mogelijke oorzaken van een afwijking zijn:"
+				"exhaust": "Abgase vom Verkehr",
+				"fire": "Ein Kamin mit Holzverbrennung.",
+				"industry": "Emissionen aus der Industrie",
+				"possible-causes": "Mogelijke oorzaken van een afwijking zijn:",
+				"report-air-pollution": "Luftverschmutzung melden",
+				"report-description": "Unser Modell enthält nicht alle Quellen, die die Luftqualität beeinflussen. Bemerken Sie eine lokale Quelle? Teilen Sie es uns hier mit.",
+				"no-location-found": "No location found",
+				"location-turned-off": "Ortungsdienste sind deaktiviert. Ändern Sie dies in den Einstellungen.",
+				"now": "Jetzt",
+				"other": "Andere",
+				"specify-the-cause": "Bitte geben Sie die Ursache an",
+				"start-writing": "Fangen Sie an zu schreiben...",
+				"describe-situation": "Beschreiben Sie die Situation (optional)",
+				"send-observation": "Senden Sie die Beobachtung"
 			}
 		}
 	}

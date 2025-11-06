@@ -61,7 +61,8 @@
 			"submission-today": "Today",
 			"submission-total": "In total",
 			"anonymisation": "The locations displayed here were displaced at random before submission to protect the privacy of the submitter."
-		}
+		},
+		"make-a-report": "Make a report"
 	},
 	"loader": {
 		"text": "Data for your location is being retrieved.",
@@ -189,13 +190,23 @@
 				"start-quickly": "Quick start!"
 			},
 			"rating-screen": {
-				"agriculture": "<strong>Emissions</strong> from agriculture",
+				"agriculture": "Emissions from agriculture",
 				"calculated-value": "The app shows a calculated value, not a measurement at your location. The air quality may therefore differ locally.",
 				"does-it-match": "Is this value in line with your feelings?",
-				"exhaust": "<strong>Exhaust fumes</strong> from traffic",
-				"fire": "<strong>Wood burn</strong>",
-				"industry": "<strong>Emissions</strong> from industry",
-				"possible-causes": "Possible causes of a deviation are:"
+				"exhaust": "Exhaust fumes from traffic",
+				"fire": "Wood burn",
+				"industry": "Emissions from industry",
+				"possible-causes": "Possible causes of a deviation are:",
+				"report-air-pollution": "Report air pollution",
+				"report-description": "Our model does not include all sources that affect air quality. Do you notice a local source? Let us know here.",
+				"no-location-found": "No location found",
+				"location-turned-off": "Location services are turned off. Change them in Settings",
+				"now": "Now",
+				"other": "Other",
+				"specify-the-cause": "Specify the cause, please",
+				"start-writing": "Start writing...",
+				"describe-situation": "Describe the situation (optional)",
+				"send-observation": "Send the observation"
 			}
 		}
 	}

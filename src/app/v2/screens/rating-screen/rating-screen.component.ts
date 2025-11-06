@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import L from 'leaflet';
 import { forkJoin } from 'rxjs';
 import { BackgroundComponent } from '../../components/background/background.component';
@@ -10,6 +10,7 @@ import { FeedbackService } from '../../services/feedback/feedback.service';
 import { UserSettingsService } from '../../services/user-settings.service';
 import { BelaqiIndexService } from '../../services/value-provider/belaqi-index.service';
 import { FeedbackStats } from './../../services/feedback/feedback.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-rating-screen',
@@ -27,6 +28,13 @@ export class RatingScreenComponent implements OnInit {
   feedbackLocation!: L.LatLng;
   ionContentRef!: any
 
+  public backgroundColor;
+
+  @Input()
+  set belAqi(index: number) {
+    this.backgroundColor = this.belAqiService.getLightColorForIndex(index);
+  }
+
   @ViewChild('background') private background!: BackgroundComponent;
 
 
@@ -34,7 +42,8 @@ export class RatingScreenComponent implements OnInit {
     private userSettingsService: UserSettingsService,
     private belAqiService: BelAQIService,
     private belaqiIndexSrvc: BelaqiIndexService,
-    private feedbackSrvc: FeedbackService
+    private feedbackSrvc: FeedbackService,
+    private navCtrl: NavController
   ) { }
 
   ngOnInit() {
@@ -46,6 +55,7 @@ export class RatingScreenComponent implements OnInit {
     this.userSettingsService.$userLocations.subscribe((locations) => {
       this.locations = locations;
     });
+    this.belAqiService.$activeIndex.subscribe((newIndex) => this.belAqi = newIndex?.indexScore);
   }
 
   private updateCurrentLocation(location: UserLocation) {
@@ -106,6 +116,10 @@ export class RatingScreenComponent implements OnInit {
     feedback.latitude = randomize(feedback.latitude, 4);
     feedback.longitude = randomize(feedback.longitude, 4);
     return feedback;
+  }
+
+  goToForm() {
+    this.navCtrl.navigateForward('/main/rating/form');
   }
 
 }
