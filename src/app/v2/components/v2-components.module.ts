@@ -41,6 +41,11 @@ import { ValueDisplayComponent } from './value-display/value-display.component';
 
 import { register } from 'swiper/element/bundle';
 import { SwiperDirective } from '../directives/swipper.directive';
+import { FeedbackLocationComponent } from './feedback-location/feedback-location.component';
+import { FeedbackCalendarComponent } from './feedback-calendar/feedback-calendar.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { CalendarTemplateComponent } from './calendar-template/calendar-template';
 
 register();
 
@@ -76,7 +81,10 @@ const COMPONENTS = [
   InformationItemDetailsComponent,
   MapComponent,
   ErrorModalComponent,
-  ThemeButtonComponent
+  ThemeButtonComponent,
+  FeedbackLocationComponent,
+  FeedbackCalendarComponent,
+  CalendarTemplateComponent
 ];
 
 @NgModule({
@@ -88,7 +96,11 @@ const COMPONENTS = [
     IonicModule,
     TranslateModule,
     RouterModule,
-    HelgolandMapViewModule
+    HelgolandMapViewModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
   ],
   declarations: COMPONENTS,
   exports: COMPONENTS,

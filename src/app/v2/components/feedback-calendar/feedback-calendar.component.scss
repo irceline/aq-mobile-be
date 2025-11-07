@@ -1,0 +1,178 @@
+:host {
+
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        border-radius: 24px 24px 0 0;
+        overflow-y: auto;
+
+        p {
+            margin: 0;
+        }
+
+        .map {
+            background-color: white;
+            flex: 1;
+            height: 300px;
+        }
+
+        .calendar-header {
+            background-color: white;
+            display: flex;
+            justify-content: space-between;
+            padding: 18px 20px;
+
+            p {
+                margin: 0;
+            }
+
+            .title {
+                font-size: 18px;
+                color: #747474;
+                font-weight: 700;
+            }
+
+            .cancel {
+                color: #979797;
+                font-size: 15px;
+            }
+        }
+
+        .datetime-desc {
+            color: #747474;
+            padding: 16px 0;
+            margin: 0 20px;
+            text-align: center;
+            font-size: 15px;
+            border-top: 1px solid #D8D8D8;
+        }
+
+        .datetime-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .month-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .month-name {
+            font-weight: bold;
+            font-size: 16px;
+            text-transform: capitalize;
+        }
+
+        .calendar-wrapper {
+            position: relative;
+            width: 100%;
+            margin-bottom: 16px;
+            border-radius: 16px;
+            border: 1px solid #F0F0F0;
+            padding: 0 12px;
+
+            .calendar-top {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                margin: 15\px 0 24px 0;
+
+                h2 {
+                    margin: 0;
+                    font-size: 18px;
+                    color: #747474;
+                    font-weight: 700;
+                }
+
+                ion-icon {
+                    font-size: 12px;
+                }
+            }
+
+            &.end {
+                &.error {
+                    border-bottom: 1px solid #fc3b34;
+                }
+            }
+
+            &.error {
+                border-right: 1px solid #fc3b34;
+                border-left: 1px solid #fc3b34;
+            }
+        }
+
+        .time-section {
+            padding: 0 20px;
+            margin-bottom: 16px;
+
+            .time-title {
+                color: #747474;
+                font-size: 15px;
+                font-weight: 500;
+                margin-bottom: 16px;
+            }
+
+            .time-options {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr); // 3 pills per row
+                gap: 8px; // spacing between pills
+
+                .time-pill {
+                    background-color: #F0F0F0;
+                    border-radius: 1000px;
+                    text-align: center;
+                    padding: 8px 0;
+                    font-size: 15px;
+
+                    &.selected {
+                        background-color: #23B1D6;
+                        color: white;
+                    }
+                }
+            }
+        }
+
+        .action-btn {
+            padding: 0 20px;
+
+            ion-button {
+                text-transform: none;
+                font-weight: 500;
+                font-size: 15px;
+
+                &.reset {
+                    color: #747474;
+                    margin-bottom: 8px;
+                }
+
+                &.save {
+                    border: 1px solid;
+                    border-radius: 10px;
+                }
+            }
+        }
+
+    }
+
+}
+
+ion-datetime {
+    --background: transparent;
+    --wheel-highlight-background: transparent;
+    --ion-color-step-50: transparent;
+    --ion-color-step-100: transparent;
+
+    --title-display: none;
+    --header-background: transparent;
+    --header-color: transparent;
+    --header-height: 0;
+    --header-padding-start: 0;
+    --header-padding-end: 0;
+}

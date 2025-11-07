@@ -1,0 +1,17 @@
+@import '../../theme/variables';
+
+.high-contrast {
+    :host {
+        ion-content {
+            .rating {
+                p {
+                    color: $black;
+                }
+
+                &--info {
+                    border-top: 1px solid $borderColor;
+                }
+            }
+        }
+    }
+}

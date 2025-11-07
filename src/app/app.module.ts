@@ -17,6 +17,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { LanguageHandlerService, languageInitializerFactory } from './v2/services/language-handler/language-handler.service';
 import { StorageService } from './v2/services/storage.service';
 import { JSSONSettingsService } from './v2/services/settings/settings.service';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -60,4 +62,4 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

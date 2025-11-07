@@ -1,4 +1,8 @@
-<div class="wrapper" [ngStyle]="{'background-color': backgroundColor}">
+<div class="wrapper" >
+  <div class="map-header">
+    <p class="title">{{ 'v2.screens.rating-screen.specify-location' | translate }}</p>
+    <p class="cancel" (click)="cancel()">{{ 'controls.cancel' | translate}}</p>
+  </div>
   <div class="map" id="mapEditLocation">
   </div>
   <div class="edit-location-hint" text-wrap>
@@ -7,13 +11,7 @@
   <div class="edit-location-anonymise" text-wrap>
     {{ 'feedback.edit-location-anonymise' | translate }}
   </div>
-  <div class="controls">
-    <ion-button fill="clear" (click)="cancel()">
-      {{ 'controls.cancel' | translate }}
-    </ion-button>
-    <div style="flex: 1;"></div>
-    <ion-button fill="clear" (click)="confirm()">
-      {{ 'controls.ok' | translate }}
-    </ion-button>
-  </div>
+  <button fill="white" class="submit" (click)="cancel()" [ngStyle]="{'color': backgroundColor}">
+    {{ 'feedback.save-location' | translate }}
+  </button>
 </div>

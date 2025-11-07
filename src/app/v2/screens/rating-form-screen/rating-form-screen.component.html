@@ -1,0 +1,59 @@
+<ion-content>
+  <div class="rating-form-top" [ngStyle]="{ 'background-color': backgroundColor }"></div>
+  <div [ngStyle]="{ 'background-color': backgroundColor }" class="rating-content">
+    <ng-container *ngIf="!feedbackLocation">
+      <div class="rating">
+        <p class="report-title">
+          {{ "v2.screens.rating-screen.report-air-pollution" | translate }}
+        </p>
+        <div class="pill" (click)="openMaps()">
+          <img src="/assets/images/icons/location.svg" />
+          <p>{{ "v2.screens.rating-screen.no-location-found" | translate }}</p>
+          <img src="/assets/images/icons/chevron-down.svg" />
+        </div>
+        <p class="no-location-desc">
+          {{ "v2.screens.rating-screen.location-turned-off" | translate }}
+        </p>
+        <div class="pill calendar" (click)="openCalendar()" >
+          <img src="/assets/images/icons/calendar.svg" />
+          <p>{{ "v2.screens.rating-screen.now" | translate }}</p>
+          <img src="/assets/images/icons/chevron-down.svg" />
+        </div>
+        <p class="cause-title">Do you know the cause?</p>
+        <div class="causes">
+          <div *ngFor="let item of causes; let i = index" [class.active]="item.selected" (click)="selectCause(i)"
+            class="cause-item">
+            <div class="cause-label">
+              <ion-icon [src]="!item.selected ? item.iconInactive : item.iconActive" slot="start"></ion-icon>
+              <ion-label class="ion-text-wrap">{{ item.val }}</ion-label>
+            </div>
+            <ion-icon src="/assets/images/icons/check.svg" slot="end" *ngIf="item.selected"></ion-icon>
+          </div>
+          <div *ngIf="causes[4].selected" class="specify-cause">
+            <p>
+              {{ "v2.screens.rating-screen.specify-the-cause" | translate }}
+            </p>
+            <input type="text" [placeholder]="
+                'v2.screens.rating-screen.start-writing' | translate
+              " />
+          </div>
+        </div>
+        <div class="situation">
+          <p>{{ "v2.screens.rating-screen.describe-situation" | translate }}</p>
+          <textarea name="situation" [placeholder]="'v2.screens.rating-screen.start-writing' | translate"></textarea>
+        </div>
+        <ion-button [ngStyle]="{ color: backgroundColor }" fill="white" class="submit">
+          {{ "v2.screens.rating-screen.send-observation" | translate }}
+        </ion-button>
+        <app-feedback [location]="currentActiveIndex?.location" (feedbackGiven)="feedbackGiven($event)"></app-feedback>
+        <app-feedbck-location [isOpen]="showMap" (closed)="showMap = false"></app-feedbck-location>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="feedbackLocation">
+      <!-- TEMP DISABLE THIS -->
+      <app-success-display [feedbackStats]="feedbackStats" [location]="feedbackLocation">
+      </app-success-display>
+    </ng-container>
+  </div>
+</ion-content>
