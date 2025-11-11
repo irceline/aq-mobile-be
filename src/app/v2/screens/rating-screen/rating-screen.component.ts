@@ -127,6 +127,7 @@ export class RatingScreenComponent implements OnInit {
   }
 
   goToForm() {
+    console.log('yuhuuuu')
     this.navCtrl.navigateForward('/main/rating/form');
   }
 

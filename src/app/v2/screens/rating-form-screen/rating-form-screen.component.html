@@ -22,10 +22,17 @@
                 : '/assets/images/icons/location.svg'
             "
           />
-          <p>{{ "v2.screens.rating-screen.no-location-found" | translate }}</p>
+          <ion-spinner
+            *ngIf="loadingLocation"
+            name="dots"
+            [ngStyle]="{
+              color: !isContrastMode ? 'white' : backgroundColor
+            }"
+          ></ion-spinner>
+          <p *ngIf="!loadingLocation" >{{ locationName }}</p>
           <img src="/assets/images/icons/chevron-down.svg" />
         </div>
-        <p class="no-location-desc">
+        <p class="no-location-desc" *ngIf="!isLocationAllowed">
           {{ "v2.screens.rating-screen.location-turned-off" | translate }}
         </p>
         <div class="pill calendar" (click)="openCalendar()">
@@ -341,10 +348,6 @@
         >
           {{ "v2.screens.rating-screen.send-observation" | translate }}
         </ion-button>
-        <!-- <app-feedback-location
-          [isOpen]="showMap"
-          (closed)="showMap = false"
-        ></app-feedback-location> -->
         <app-maps-bottom-sheet
           [isOpen]="showMap"
           (closed)="showMap = false"

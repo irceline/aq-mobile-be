@@ -18,11 +18,9 @@ import { BelaqiIndexService } from '../../services/value-provider/belaqi-index.s
 import { FeedbackStats } from '../../services/feedback/feedback.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ModalController, NavController } from '@ionic/angular';
-import { FeedbackStatsComponent } from '../../components/feedback-stats/feedback-stats.component';
-import { FeedbackStatsMapComponent } from '../../components/feedback-stats/feedback-stats-map/feedback-stats-map.component';
-import { FeedbackLocationEditComponent } from '../../components/feedback-location-edit/feedback-location-edit.component';
 import { FeedbackCalendarComponent } from '../../components/feedback-calendar/feedback-calendar.component';
 import { ThemeHandlerService } from '../../services/theme-handler/theme-handler.service';
+import { Geolocation, PermissionStatus } from '@capacitor/geolocation';
 
 export interface CauseItem {
   val: string;
@@ -51,11 +49,15 @@ export class RatingFormScreenComponent implements OnInit {
   ionContentRef!: any;
   feedback!: UserCreatedFeedback;
   showMap: boolean = false;
-  feedbackCode = FeedbackCode
+  feedbackCode = FeedbackCode;
   isContrastMode: boolean = false;
   selectedCause: number[] = [];
-  rugada = {latitude: 22.11111, longitude: 100.233121}
   public backgroundColor = '';
+  isLocationAllowed: boolean = false;
+  loadingLocation: boolean = false;
+  locationName: string = this.translateSrvc.instant(
+    'v2.screens.rating-screen.no-location-found'
+  );
   causes = [
     {
       val: this.translateSrvc.instant('v2.screens.rating-screen.fire'),
@@ -114,6 +116,7 @@ export class RatingFormScreenComponent implements OnInit {
     this.themeHandlerService.getActiveTheme().then((theme) => {
       this.isContrastMode = theme === this.themeHandlerService.CONTRAST_MODE;
     });
+    this.checkAndRequestLocationPermission();
   }
 
   private updateCurrentLocation(location: UserLocation) {
@@ -184,45 +187,13 @@ export class RatingFormScreenComponent implements OnInit {
 
   openMaps() {
     this.showMap = true;
-    // this.modalController
-    //   .create({
-    //     component: FeedbackLocationEditComponent,
-    //     componentProps: {
-    //       location: {
-    //         // @ts-ignore
-    //         longitude: this.currentActiveIndex?.location?.longitude,
-    //         // @ts-ignore
-    //         latitude: this.currentActiveIndex?.location?.latitude,
-    //       },
-    //     },
-    //     cssClass: 'bottom-sheet-modal',
-    //     breakpoints: [0, 1],
-    //     initialBreakpoint: 1,
-    //     handle: false,
-    //   })
-    //   .then((modal) => {
-    //     modal.present();
-
-    //     modal.onDidDismiss().then((dismissed) => {
-    //       if (
-    //         dismissed &&
-    //         dismissed.data &&
-    //         dismissed.data.latitude &&
-    //         dismissed.data.longitude
-    //       ) {
-    //         this.feedback.latitude = dismissed.data.latitude;
-    //         this.feedback.longitude = dismissed.data.longitude;
-    //       }
-    //       this.showMap = false;
-    //     });
-    //   });
   }
 
   openCalendar() {
     this.modalController
       .create({
         component: FeedbackCalendarComponent,
-        componentProps:  { color: this.backgroundColor},
+        componentProps: { color: this.backgroundColor },
         cssClass: 'bottom-sheet-modal',
         breakpoints: [0, 1],
         initialBreakpoint: 1,
@@ -247,5 +218,64 @@ export class RatingFormScreenComponent implements OnInit {
 
   onSubmit() {
     this.navCtrl.navigateForward('/main/rating/success');
+  }
+
+  async checkAndRequestLocationPermission() {
+    try {
+      this.loadingLocation = true;
+      const permStatus: PermissionStatus = await Geolocation.checkPermissions();
+      if (permStatus.location === 'granted') {
+        this.isLocationAllowed = true;
+        const position = await Geolocation.getCurrentPosition();
+        this.fetchLocationName(
+          position.coords.latitude,
+          position.coords.longitude
+        );
+        this.loadingLocation = false
+      } else {
+        const requestStatus = await Geolocation.requestPermissions();
+
+        if (requestStatus.location === 'granted') {
+          this.isLocationAllowed = true;
+          const position = await Geolocation.getCurrentPosition();
+          await this.fetchLocationName(
+            position.coords.latitude,
+            position.coords.longitude
+          );
+          this.loadingLocation = false;
+        } else {
+          this.loadingLocation = false;
+          this.isLocationAllowed = false;
+        }
+      }
+    } catch (err) {
+      this.loadingLocation = false;
+      this.locationName = this.translateSrvc.instant(
+        'v2.screens.rating-screen.no-location-found'
+      );
+    }
+  }
+
+  private async fetchLocationName(lat: number, lon: number) {
+    try {
+      const res = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`
+      );
+
+      const data = await res.json();
+
+      this.locationName =
+        data?.address?.city ||
+        data?.address?.town ||
+        data?.address?.village ||
+        data?.display_name ||
+        this.translateSrvc.instant(
+          'v2.screens.rating-screen.no-location-found'
+        );
+    } catch (error) {
+      this.locationName = this.translateSrvc.instant(
+        'v2.screens.rating-screen.no-location-found'
+      );
+    }
   }
 }
