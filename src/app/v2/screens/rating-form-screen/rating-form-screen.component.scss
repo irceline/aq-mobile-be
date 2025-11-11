@@ -12,16 +12,17 @@ ion-content {
 
     .rating-content {
         overflow-y: auto;
-        height: calc(100vh - 56px);
+        height: calc(100vh);
         padding-bottom: 70px;
     }
 
     .rating-form-top {
-        height: 56px;
-        position: absolute;
+        height: calc(56px + env(safe-area-inset-top));
+        position: fixed;
         top: 0;
         left: 0;
         width: 100%;
+        z-index: 10;
     }
 
     .report-title {
@@ -69,7 +70,7 @@ ion-content {
     .cause-item {
         display: flex;
         align-items: center;
-        padding: 10px 0 10px 16px;
+        padding: 10px 16px;
         background-color: #FFFFFF1A;
         border-radius: 10px;
         border: 1px solid #FFFFFF33;
@@ -81,6 +82,13 @@ ion-content {
         ion-label {
             margin: 0;
             line-height: 1;
+        }
+
+        svg {
+            margin-right: 8px;
+            &.check-icon {
+                margin-right: 0;
+            }
         }
 
         ion-icon {
@@ -169,6 +177,6 @@ ion-content {
         font-size: 15px;
         font-weight: 500;
         position: fixed;
-        bottom: 19px;
+        bottom: calc(19px + env(safe-area-inset-top));
     }
 }

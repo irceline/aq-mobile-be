@@ -212,7 +212,9 @@
 				"datetime-description": "La date et l’heure sont définies par défaut sur maintenant. Vous pouvez signaler des observations jusqu’à une semaine plus tôt.",
 				"time": "Heure",
 				"reset-to-default": "Réinitialiser par défaut",
-				"save-datetime": "Enregistrer la date et l’heure"
+				"save-datetime": "Enregistrer la date et l’heure",
+				"make-new-report": "Faire un nouveau rapport",
+				"back-to-home": "Retour à l’écran d’accueil"
 			}
 		}
 	}

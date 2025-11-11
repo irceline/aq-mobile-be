@@ -1,6 +1,6 @@
 <ng-template #customCellTemplate let-day="day" let-locale="locale">
-  <div class="cal-cell-top" [class.selected]="getDate(day.date)">
-    <span class="cal-day-number" [class.cal-active]="getDate(day.date)">
+  <div class="cal-cell-top" [class.selected]="getDate(day.date)" [ngStyle]="getCellStyle(day.date)">
+    <span class="cal-day-number" [class.cal-active]="getDate(day.date)" [ngStyle]="getDayNumberStyle(day.date)">
       {{ day.date | calendarDate:'monthViewDayNumber':locale }}
     </span>
   </div>

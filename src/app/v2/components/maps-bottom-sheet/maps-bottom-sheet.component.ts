@@ -2,23 +2,25 @@ import {
   Component,
   EventEmitter,
   Input,
-  Output,
   NgZone,
-  OnInit,
+  Output,
+  SimpleChanges,
 } from '@angular/core';
 import { animate, style, transition, trigger } from '@angular/animations';
-import { ModalController, ToastController } from '@ionic/angular';
-import L from 'leaflet';
-
 import { BelAQIService } from '../../services/bel-aqi.service';
 import { GeocoderService } from '../../services/geocoder/geocoder.service';
+import { ToastController } from '@ionic/angular';
+import L from 'leaflet';
 
 @Component({
-  selector: 'app-feedback-location',
-  templateUrl: './feedback-location.component.html',
-  styleUrls: ['./feedback-location.component.scss'],
+  selector: 'app-maps-bottom-sheet',
+  templateUrl: './maps-bottom-sheet.component.html',
+  styleUrls: [
+    './maps-bottom-sheet.component.scss',
+    './maps-bottom-sheet.component.hc.scss',
+  ],
   animations: [
-    trigger('slideUp', [
+    trigger('slideUpMaps', [
       transition(':enter', [
         style({ transform: 'translateY(100%)' }),
         animate('250ms ease-out', style({ transform: 'translateY(0)' })),
@@ -27,7 +29,7 @@ import { GeocoderService } from '../../services/geocoder/geocoder.service';
         animate('200ms ease-in', style({ transform: 'translateY(100%)' })),
       ]),
     ]),
-    trigger('fadeBackdrop', [
+    trigger('fadeBackdropMaps', [
       transition(':enter', [
         style({ opacity: 0 }),
         animate('200ms ease-out', style({ opacity: 1 })),
@@ -36,11 +38,15 @@ import { GeocoderService } from '../../services/geocoder/geocoder.service';
     ]),
   ],
 })
-export class FeedbackLocationComponent {
+export class MapsBottomSheetComponent {
   @Input() isOpen = false;
   @Output() closed = new EventEmitter<void>();
   // @ts-ignore
   @Input() location: { longitude: number; latitude: number };
+  @Output() confirmed = new EventEmitter<{
+    latitude: number;
+    longitude: number;
+  }>();
   // @ts-ignore
   public backgroundColor: string;
   // @ts-ignore
@@ -50,7 +56,6 @@ export class FeedbackLocationComponent {
 
   constructor(
     private belAQIService: BelAQIService,
-    private modalCtrl: ModalController,
     private geocoder: GeocoderService,
     private zone: NgZone,
     private toastController: ToastController
@@ -63,13 +68,23 @@ export class FeedbackLocationComponent {
           idx?.indexScore
         ))
     );
+
+    console.log('this.location', this.location);
   }
 
-  ngAfterViewInit(): void {
-    setTimeout(() => this.drawMap(), 200);
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.location.latitude && this.location.longitude) {
+      setTimeout(() => {
+        this.drawMap();
+      }, 200);
+    }
   }
 
   drawMap() {
+    const container = document.getElementById('mapEditLocation');
+
+    if (!container) return;
+
     if (this.map !== undefined) {
       this.map.remove();
     }
@@ -128,21 +143,18 @@ export class FeedbackLocationComponent {
             duration: 2000,
           })
           .then((toast) => toast.present());
-        FeedbackLocationComponent;
       }
       this.loadingLabel = false;
     });
   }
 
   confirm() {
-    this.modalCtrl.dismiss({
-      latitude: this.location.latitude,
-      longitude: this.location.longitude,
-    });
+    this.confirmed.emit(this.location);
+    this.close();
   }
 
   cancel() {
-    this.modalCtrl.dismiss();
+    this.close();
   }
 
   close() {

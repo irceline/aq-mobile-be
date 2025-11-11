@@ -213,7 +213,9 @@
 				"datetime-description": "Date and time default to now. You can report observations from up to one week earlier.",
 				"time": "Time",
 				"reset-to-default": "Reset to default",
-				"save-datetime": "Save date & time"
+				"save-datetime": "Save date & time",
+				"make-new-report": "Make a new report",
+				"back-to-home": "Back to homescreen"
 			}
 		}
 	}

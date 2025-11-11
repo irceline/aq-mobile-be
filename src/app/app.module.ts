@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
+import { APP_INITIALIZER, importProvidersFrom, Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -19,6 +19,7 @@ import { StorageService } from './v2/services/storage.service';
 import { JSSONSettingsService } from './v2/services/settings/settings.service';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -58,7 +59,8 @@ export function HttpLoaderFactory(http: HttpClient) {
       multi: true,
     },
     StorageService,
-    LanguageHandlerService
+    LanguageHandlerService,
+    importProvidersFrom([BrowserAnimationsModule])
   ],
   bootstrap: [AppComponent],
 })

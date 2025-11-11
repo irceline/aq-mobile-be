@@ -72,7 +72,7 @@
 	"network": {
 		"geolocationDenied": "Je hebt het gebruik van jouw locatie niet toegestaan in de app.",
 		"geolocationDisabled": "Geolocatie is uitgeschakeld",
-    "openAppSetting": "Open instellingen"
+		"openAppSetting": "Open instellingen"
 	},
 	"no-location-hint": "De app vereist een locatie om gegevens weer te geven.",
 	"no-location": {
@@ -212,7 +212,9 @@
 				"datetime-description": "Datum en tijd staan standaard op nu. Je kunt observaties melden tot een week eerder.",
 				"time": "Tijd",
 				"reset-to-default": "Reset naar standaard",
-				"save-datetime": "Datum en tijd opslaan"
+				"save-datetime": "Datum en tijd opslaan",
+				"make-new-report": "Maak een nieuw rapport",
+				"back-to-home": "Terug naar het startscherm"
 			}
 		}
 	}

@@ -10,6 +10,7 @@ import { OnboardingScreenComponent } from './screens/onboarding-screen/onboardin
 import { OnboardingScreenGuard } from './screens/onboarding-screen/onboarding-screen.guard';
 import { RatingScreenComponent } from './screens/rating-screen/rating-screen.component';
 import { RatingFormScreenComponent } from './screens/rating-form-screen/rating-form-screen.component';
+import { FormSuccessScreenComponent } from './screens/form-success-screen/form-success-screen.component';
 
 const routes: Routes = [
   {
@@ -40,6 +41,10 @@ const routes: Routes = [
       {
         path: 'rating/form',
         component: RatingFormScreenComponent,
+      },
+      {
+        path: 'rating/success',
+        component: FormSuccessScreenComponent,
       },
       {
         path: 'menu',

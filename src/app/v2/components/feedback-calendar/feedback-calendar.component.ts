@@ -20,7 +20,8 @@ import { ModalController } from '@ionic/angular';
   ],
 })
 export class FeedbackCalendarComponent implements OnInit {
-  @Input() lang: string = 'en'; // example: 'en', 'fr', 'id', 'nl', etc.
+  @Input() lang: string = 'en';
+  @Input() color: string = '';
 
   selectedDate: string = new Date().toISOString();
   currentMonth: Date = new Date();
@@ -57,27 +58,7 @@ export class FeedbackCalendarComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.updateMonthDisplay();
     this.getCurrentTime();
-  }
-
-  updateMonthDisplay() {
-    this.currentMonthName = this.currentMonth.toLocaleString(this.lang, {
-      month: 'long',
-    });
-    this.currentYear = this.currentMonth.getFullYear();
-  }
-
-  goToPreviousMonth() {
-    this.currentMonth.setMonth(this.currentMonth.getMonth() - 1);
-    this.updateMonthDisplay();
-    this.selectedDate = this.currentMonth.toISOString();
-  }
-
-  goToNextMonth() {
-    this.currentMonth.setMonth(this.currentMonth.getMonth() + 1);
-    this.updateMonthDisplay();
-    this.selectedDate = this.currentMonth.toISOString();
   }
 
   onDateChange(event: any) {

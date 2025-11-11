@@ -1,0 +1,10 @@
+.high-contrast {
+    :host {
+        .wrapper {
+            .submit {
+                background-color: #122334;
+                color: white !important;
+            }
+        }
+    }
+}

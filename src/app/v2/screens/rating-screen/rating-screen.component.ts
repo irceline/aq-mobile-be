@@ -11,6 +11,7 @@ import { UserSettingsService } from '../../services/user-settings.service';
 import { BelaqiIndexService } from '../../services/value-provider/belaqi-index.service';
 import { FeedbackStats } from './../../services/feedback/feedback.service';
 import { NavController } from '@ionic/angular';
+import { ThemeHandlerService } from '../../services/theme-handler/theme-handler.service';
 
 @Component({
   selector: 'app-rating-screen',
@@ -27,6 +28,7 @@ export class RatingScreenComponent implements OnInit {
   activeIndex!: number;
   feedbackLocation!: L.LatLng;
   ionContentRef!: any
+  isContrastMode: boolean = false;
 
   public backgroundColor;
 
@@ -43,7 +45,8 @@ export class RatingScreenComponent implements OnInit {
     private belAqiService: BelAQIService,
     private belaqiIndexSrvc: BelaqiIndexService,
     private feedbackSrvc: FeedbackService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private themeHandlerService: ThemeHandlerService
   ) { }
 
   ngOnInit() {
@@ -55,7 +58,12 @@ export class RatingScreenComponent implements OnInit {
     this.userSettingsService.$userLocations.subscribe((locations) => {
       this.locations = locations;
     });
-    this.belAqiService.$activeIndex.subscribe((newIndex) => this.belAqi = newIndex?.indexScore);
+    this.belAqiService.$activeIndex.subscribe((newIndex) => {
+      console.log('newIndex', newIndex)
+      this.belAqi = newIndex?.indexScore});
+    this.themeHandlerService.getActiveTheme().then(theme => {
+      this.isContrastMode = theme === this.themeHandlerService.CONTRAST_MODE;
+    })
   }
 
   private updateCurrentLocation(location: UserLocation) {

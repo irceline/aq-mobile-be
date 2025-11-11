@@ -1,0 +1,44 @@
+    .high-contrast {
+        :host {
+            ion-content {
+                .wrapper {
+                    svg {
+                        display: block;
+                    }
+
+                    img {
+                        display: none;
+                    }
+
+                    h1,
+                    p {
+                        color: #122334;
+                    }
+
+                    .success-top {
+                        height: calc(56px + env(safe-area-inset-top));
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        z-index: 10;
+                    }
+                }
+                .action-btn {
+                    .make-report {
+                        color: black;
+                    }
+                    .back-home {
+                        background-color: #122334;
+                        color: white !important;
+                    }
+                }
+                .bottom-bg {
+                    img {
+                        display: none;
+                    }
+                }
+
+            }
+        }
+    }

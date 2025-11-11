@@ -16,8 +16,7 @@ import { OnboardingScreenComponent } from './onboarding-screen/onboarding-screen
 import { RatingScreenComponent } from './rating-screen/rating-screen.component';
 import { RouterModule } from '@angular/router';
 import { RatingFormScreenComponent } from './rating-form-screen/rating-form-screen.component';
-import { CalendarModule, DateAdapter } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { FormSuccessScreenComponent } from './form-success-screen/form-success-screen.component';
 
 const SCREENS = [
   AppInfoScreenComponent,
@@ -27,6 +26,7 @@ const SCREENS = [
   OnboardingScreenComponent,
   RatingScreenComponent,
   RatingFormScreenComponent,
+  FormSuccessScreenComponent
 ];
 
 @NgModule({

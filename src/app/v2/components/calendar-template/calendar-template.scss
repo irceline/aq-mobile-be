@@ -36,13 +36,14 @@
         outline: none;
 
         &.cal-today {
-          border: 1px solid #23B1D6 !important;
+          // border: 1px solid #23B1D6 !important;
+          border: 1px solid;
           border-radius: 8px;
 
           .cal-cell-top {
             .cal-day-number {
               &.cal-active {
-                color: #23B1D6 !important;
+                // color: #23B1D6 !important;
               }
             }
           }
@@ -64,12 +65,12 @@
           text-align: center;
 
           &.selected {
-            background-color: #23B1D6;
+            // background-color: #23B1D6;
             border-radius: 8px;
 
             .cal-day-number {
               &.cal-active {
-                color: white !important;
+                // color: white !important;
               }
             }
           }
@@ -81,7 +82,7 @@
           .cal-day-number {
             margin: 0 auto;
             float: none;
-            color: var(--font-color) !important;
+            // color: var(--font-color) !important;
             opacity: 1;
             font-weight: 500;
             font-size: 15px;
@@ -94,7 +95,7 @@
             left: 0;
 
             &.cal-active {
-              color: white !important;
+              // color: white !important;
             }
           }
         }

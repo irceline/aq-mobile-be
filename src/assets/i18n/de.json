@@ -213,7 +213,9 @@
 				"datetime-description": "Datum und Uhrzeit sind standardmäßig auf jetzt eingestellt. Sie können Beobachtungen bis zu einer Woche zuvor melden.",
 				"time": "Uhrzeit",
 				"reset-to-default": "Auf Standard zurücksetzen",
-				"save-datetime": "Datum und Uhrzeit speichern"
+				"save-datetime": "Datum und Uhrzeit speichern",
+				"make-new-report": "Einen neuen Bericht erstellen",
+				"back-to-home": "Zurück zum Startbildschirm"
 			}
 		}
 	}

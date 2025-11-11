@@ -41,11 +41,11 @@ import { ValueDisplayComponent } from './value-display/value-display.component';
 
 import { register } from 'swiper/element/bundle';
 import { SwiperDirective } from '../directives/swipper.directive';
-import { FeedbackLocationComponent } from './feedback-location/feedback-location.component';
 import { FeedbackCalendarComponent } from './feedback-calendar/feedback-calendar.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { CalendarTemplateComponent } from './calendar-template/calendar-template';
+import { MapsBottomSheetComponent } from './maps-bottom-sheet/maps-bottom-sheet.component';
 
 register();
 
@@ -82,9 +82,9 @@ const COMPONENTS = [
   MapComponent,
   ErrorModalComponent,
   ThemeButtonComponent,
-  FeedbackLocationComponent,
   FeedbackCalendarComponent,
-  CalendarTemplateComponent
+  CalendarTemplateComponent,
+  MapsBottomSheetComponent
 ];
 
 @NgModule({

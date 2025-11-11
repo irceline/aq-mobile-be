@@ -88,9 +88,9 @@ export class FeedbackLocationEditComponent implements OnInit {
     this.modalCtrl.dismiss();
   }
 
-  virtualScrolled(event: any) {
-    event.stopPropagation();
-  }
+  // virtualScrolled(event: any) {
+  //   event.stopPropagation();
+  // }
 
 
 }

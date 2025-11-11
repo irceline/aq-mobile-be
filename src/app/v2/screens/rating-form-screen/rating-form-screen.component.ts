@@ -17,11 +17,19 @@ import { UserSettingsService } from '../../services/user-settings.service';
 import { BelaqiIndexService } from '../../services/value-provider/belaqi-index.service';
 import { FeedbackStats } from '../../services/feedback/feedback.service';
 import { TranslateService } from '@ngx-translate/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { FeedbackStatsComponent } from '../../components/feedback-stats/feedback-stats.component';
 import { FeedbackStatsMapComponent } from '../../components/feedback-stats/feedback-stats-map/feedback-stats-map.component';
 import { FeedbackLocationEditComponent } from '../../components/feedback-location-edit/feedback-location-edit.component';
 import { FeedbackCalendarComponent } from '../../components/feedback-calendar/feedback-calendar.component';
+import { ThemeHandlerService } from '../../services/theme-handler/theme-handler.service';
+
+export interface CauseItem {
+  val: string;
+  icon: string;
+  selected: boolean;
+  code: number;
+}
 
 @Component({
   selector: 'app-rating-form-screen',
@@ -43,45 +51,33 @@ export class RatingFormScreenComponent implements OnInit {
   ionContentRef!: any;
   feedback!: UserCreatedFeedback;
   showMap: boolean = false;
+  feedbackCode = FeedbackCode
+  isContrastMode: boolean = false;
+  selectedCause: number[] = [];
+  rugada = {latitude: 22.11111, longitude: 100.233121}
+  public backgroundColor = '';
   causes = [
     {
       val: this.translateSrvc.instant('v2.screens.rating-screen.fire'),
-      iconInactive: '/assets/images/icons/woodburn.svg',
-      iconActive: '/assets/images/icons/woodburn-blue.svg',
-      selected: false,
       code: FeedbackCode.WOODBURN,
     },
     {
       val: this.translateSrvc.instant('v2.screens.rating-screen.exhaust'),
-      iconInactive: '/assets/images/icons/traffic.svg',
-      iconActive: '/assets/images/icons/traffic-blue.svg',
-      selected: false,
       code: FeedbackCode.TRAFFIC,
     },
     {
       val: this.translateSrvc.instant('v2.screens.rating-screen.industry'),
-      iconInactive: '/assets/images/icons/industry.svg',
-      iconActive: '/assets/images/icons/industry-blue.svg',
-      selected: false,
       code: FeedbackCode.INDUSTRY,
     },
     {
       val: this.translateSrvc.instant('v2.screens.rating-screen.agriculture'),
-      iconInactive: '/assets/images/icons/agriculture.svg',
-      iconActive: '/assets/images/icons/agriculture-blue.svg',
-      selected: false,
       code: FeedbackCode.AGRICULTURE,
     },
     {
       val: this.translateSrvc.instant('v2.screens.rating-screen.other'),
-      iconInactive: '/assets/images/icons/more.svg',
-      iconActive: '/assets/images/icons/more-blue.svg',
-      selected: false,
       code: FeedbackCode.NOT_INLINE_WITHOUT_INFO,
     },
   ];
-
-  public backgroundColor;
 
   @Input()
   set belAqi(index: number) {
@@ -96,7 +92,9 @@ export class RatingFormScreenComponent implements OnInit {
     private belaqiIndexSrvc: BelaqiIndexService,
     private feedbackSrvc: FeedbackService,
     private translateSrvc: TranslateService,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private navCtrl: NavController,
+    private themeHandlerService: ThemeHandlerService
   ) {}
 
   ngOnInit() {
@@ -113,6 +111,9 @@ export class RatingFormScreenComponent implements OnInit {
     this.belAqiService.$activeIndex.subscribe(
       (newIndex) => (this.belAqi = newIndex?.indexScore)
     );
+    this.themeHandlerService.getActiveTheme().then((theme) => {
+      this.isContrastMode = theme === this.themeHandlerService.CONTRAST_MODE;
+    });
   }
 
   private updateCurrentLocation(location: UserLocation) {
@@ -173,51 +174,55 @@ export class RatingFormScreenComponent implements OnInit {
     return feedback;
   }
 
-  selectCause(index: number) {
-    this.causes[index].selected = !this.causes[index].selected;
+  selectCause(code: number) {
+    if (this.selectedCause.includes(code)) {
+      this.selectedCause = this.selectedCause.filter((item) => item !== code);
+    } else {
+      this.selectedCause.push(code);
+    }
   }
 
   openMaps() {
     this.showMap = true;
-    this.modalController
-      .create({
-        component: FeedbackLocationEditComponent,
-        componentProps: {
-          location: {
-            // @ts-ignore
-            longitude: this.currentActiveIndex?.location?.longitude,
-            // @ts-ignore
-            latitude: this.currentActiveIndex?.location?.latitude,
-          },
-        },
-        cssClass: 'bottom-sheet-modal',
-        breakpoints: [0, 1],
-        initialBreakpoint: 1,
-        handle: false,
-        canDismiss: false,
-      })
-      .then((modal) => {
-        modal.present();
+    // this.modalController
+    //   .create({
+    //     component: FeedbackLocationEditComponent,
+    //     componentProps: {
+    //       location: {
+    //         // @ts-ignore
+    //         longitude: this.currentActiveIndex?.location?.longitude,
+    //         // @ts-ignore
+    //         latitude: this.currentActiveIndex?.location?.latitude,
+    //       },
+    //     },
+    //     cssClass: 'bottom-sheet-modal',
+    //     breakpoints: [0, 1],
+    //     initialBreakpoint: 1,
+    //     handle: false,
+    //   })
+    //   .then((modal) => {
+    //     modal.present();
 
-        modal.onDidDismiss().then((dismissed) => {
-          if (
-            dismissed &&
-            dismissed.data &&
-            dismissed.data.latitude &&
-            dismissed.data.longitude
-          ) {
-            this.feedback.latitude = dismissed.data.latitude;
-            this.feedback.longitude = dismissed.data.longitude;
-          }
-          this.showMap = false;
-        });
-      });
+    //     modal.onDidDismiss().then((dismissed) => {
+    //       if (
+    //         dismissed &&
+    //         dismissed.data &&
+    //         dismissed.data.latitude &&
+    //         dismissed.data.longitude
+    //       ) {
+    //         this.feedback.latitude = dismissed.data.latitude;
+    //         this.feedback.longitude = dismissed.data.longitude;
+    //       }
+    //       this.showMap = false;
+    //     });
+    //   });
   }
 
   openCalendar() {
     this.modalController
       .create({
         component: FeedbackCalendarComponent,
+        componentProps:  { color: this.backgroundColor},
         cssClass: 'bottom-sheet-modal',
         breakpoints: [0, 1],
         initialBreakpoint: 1,
@@ -238,5 +243,9 @@ export class RatingFormScreenComponent implements OnInit {
           this.showMap = false;
         });
       });
+  }
+
+  onSubmit() {
+    this.navCtrl.navigateForward('/main/rating/success');
   }
 }

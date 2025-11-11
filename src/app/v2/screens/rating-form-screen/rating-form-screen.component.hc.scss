@@ -12,6 +12,35 @@
                     border-top: 1px solid $borderColor;
                 }
             }
+
+            .pill,
+            .cause-item {
+                background-color: #1223340D;
+                border: 1px solid #1223341A;
+                color: #122334;
+
+                &.active {
+                    background-color: #122334;
+
+                    ion-label {
+                        color: white;
+                    }
+                }
+            }
+
+            textarea {
+                background-color: #1223340D;
+
+                &::placeholder {
+                    color: #122334;
+                    opacity: 0.5;
+                }
+            }
+
+            .submit {
+                background-color: #122334;
+                color: white !important;
+            }
         }
     }
 }

@@ -1,6 +1,9 @@
 ion-content {
     --background: transparent;
     --padding-top: calc(56px + env(safe-area-inset-top));
+    // --padding-bottom: calc(19px + env(safe-area-inset-bottom));
+    overflow-y: auto;
+    // max-height: calc(100vh - env(safe-area-inset-bottom));
 
     .rating {
         --padding-inline-start: 0;
@@ -18,6 +21,7 @@ ion-content {
             padding: 16px;
             border-radius: 10px;
             color: white;
+            margin-bottom: calc(65px + env(safe-area-inset-bottom));
 
             p {
                 font-size: 15px;
@@ -40,6 +44,10 @@ ion-content {
                 color: white;
                 margin-bottom: 8px;
 
+                svg {
+                    margin-right: 8px;
+                }
+
                 ion-label {
                     margin: 0;
                     line-height: 1;
@@ -57,11 +65,12 @@ ion-content {
 
 
     .rating-top {
-        height: 56px;
-        position: absolute;
+        height: calc(56px + env(safe-area-inset-top));
+        position: fixed;
         top: 0;
         left: 0;
         width: 100%;
+        z-index: 10;
     }
 
     .report-title {
@@ -110,10 +119,13 @@ ion-content {
         text-transform: none;
         font-size: 15px;
         font-weight: 500;
-        width: 100%;
+        width: calc(100% - 40px);
         height: 42px;
         background: white;
         border-radius: 10px;
+        position: fixed;
+        bottom: calc(19px + env(safe-area-inset-top));
+        z-index: 10;
     }
 
 }
