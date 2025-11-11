@@ -214,7 +214,10 @@
 				"reset-to-default": "Réinitialiser par défaut",
 				"save-datetime": "Enregistrer la date et l’heure",
 				"make-new-report": "Faire un nouveau rapport",
-				"back-to-home": "Retour à l’écran d’accueil"
+				"back-to-home": "Retour à l’écran d’accueil",
+				"select-cause": "Veuillez sélectionner l’une des causes",
+				"error-send-feedback": "Échec de l’envoi du retour",
+				"current-location-outside-belgium": "Votre position actuelle est en dehors de la Belgique, aucune entrée n’est donc créée"
 			}
 		}
 	}

@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 
 import { EncryptionService } from './../encryption/encryption.service';
 import { StorageService } from '../storage.service';
+import { environment } from 'src/environments/environment';
 
 export interface FeedbackStats {
   submissions_day: string;
@@ -27,6 +28,10 @@ export interface Feedback {
   lat: number;
   lng: number;
   feedback_code: FeedbackCode;
+  situation?: string;
+  date_start?: string;
+  date_end?: string;
+  others_cause?: string;
 }
 
 export enum FeedbackCode {
@@ -39,7 +44,6 @@ export enum FeedbackCode {
 }
 
 const FEEDBACK_KEY = 'feedback_key';
-const FEEDBACK_SERVICE_URL = 'https://geobelair.irceline.be/air/belair_feedback.php';
 
 @Injectable({
   providedIn: 'root'
@@ -67,6 +71,7 @@ export class FeedbackService {
   }
 
   public sendFeedback(feedback: Feedback): Observable<FeedbackStats> {
+    console.log('feedback', feedback)
     feedback.uuid = this.key;
     const encriptedFeedback = this.encryption.encrypt(JSON.stringify(feedback));
     console.log(feedback);
@@ -77,7 +82,7 @@ export class FeedbackService {
     //     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
     //   }
     // });
-    return this.httpSrvc.post<FeedbackStats>(FEEDBACK_SERVICE_URL, encriptedFeedback, {
+    return this.httpSrvc.post<FeedbackStats>(environment.FEEDBACK_SERVICE_URL, encriptedFeedback, {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
       }
@@ -87,7 +92,7 @@ export class FeedbackService {
   public getFeedbackStats(): Observable<FeedbackStats> {
     // old code use helgoland
     // return this.httpSrvc.client({ expirationAtMs: 1000 * 60 * 60 }).get<FeedbackStats>(FEEDBACK_SERVICE_URL);
-    return this.httpSrvc.get<FeedbackStats>(FEEDBACK_SERVICE_URL);
+    return this.httpSrvc.get<FeedbackStats>(environment.FEEDBACK_SERVICE_URL);
   }
 
   private createKey() {

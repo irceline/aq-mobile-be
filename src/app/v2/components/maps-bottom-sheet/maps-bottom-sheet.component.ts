@@ -150,6 +150,7 @@ export class MapsBottomSheetComponent {
 
   confirm() {
     this.confirmed.emit(this.location);
+    console.log('this.location', this.location)
     this.close();
   }
 

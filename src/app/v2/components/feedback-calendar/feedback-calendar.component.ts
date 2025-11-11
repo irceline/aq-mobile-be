@@ -22,16 +22,17 @@ import { ModalController } from '@ionic/angular';
 export class FeedbackCalendarComponent implements OnInit {
   @Input() lang: string = 'en';
   @Input() color: string = '';
+  @Input() minDate!: string;
+  @Input() maxDate!: string;
+  @Input() initialDate?: Date;
+  @Input() initialStartDate?: Date;
+  @Input() initialEndDate?: Date;
 
   selectedDate: string = new Date().toISOString();
   currentMonth: Date = new Date();
   currentMonthName: string = '';
   currentYear: number = 0;
-
-  minDate = '2000-01-01';
-  maxDate = '2100-12-31';
   view: CalendarView = CalendarView.Month;
-  formattedDate: string = '';
   showCalendar: boolean = false;
   CalendarView = CalendarView;
   timeError: boolean = false;
@@ -51,6 +52,7 @@ export class FeedbackCalendarComponent implements OnInit {
     { start: '22:00', end: '00:00' },
   ];
   selectedTime = { start: '', end: '' };
+  isNow: boolean = false;
 
   constructor(
     private translate: TranslateService,
@@ -58,7 +60,16 @@ export class FeedbackCalendarComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getCurrentTime();
+    if (this.initialStartDate?.getHours() !== this.initialEndDate?.getHours()) {
+      this.setInitialSelectedTime();
+    } else {
+      this.getSelectedTime();
+    }
+
+    if (this.initialDate) {
+      this.viewDate = this.initialDate;
+      this.selectedDate = this.initialDate.toISOString();
+    }
   }
 
   onDateChange(event: any) {
@@ -73,10 +84,10 @@ export class FeedbackCalendarComponent implements OnInit {
   }
 
   changeDay(event: any) {
-    const date = event.detail || event; // support both cases
+    const date = event.detail || event;
     this.viewDate = date;
-    this.formattedDate = moment(date).format('DD.MM.YYYY');
     this.showCalendar = false;
+    this.isNow = false;
   }
 
   getLocale() {
@@ -87,7 +98,7 @@ export class FeedbackCalendarComponent implements OnInit {
     this.modalCtrl.dismiss();
   }
 
-  getCurrentTime() {
+  getSelectedTime() {
     const now = new Date();
     const hours = now.getHours();
     for (let i = 0; i < this.timeOptions.length; i++) {
@@ -95,18 +106,75 @@ export class FeedbackCalendarComponent implements OnInit {
       const endHour = parseInt(this.timeOptions[i].end.split(':')[0]);
       if (hours >= startHour || (startHour === 22 && hours < 2)) {
         if (hours >= startHour && hours < endHour) {
-          return this.selectedTime = this.timeOptions[i];
+          return (this.selectedTime = this.timeOptions[i]);
         }
         if (startHour === 22 && (hours >= 22 || hours < 2)) {
-          return this.selectedTime = this.timeOptions[i];
+          return (this.selectedTime = this.timeOptions[i]);
         }
       }
     }
 
-    return this.selectedTime = this.timeOptions[0];
+    return (this.selectedTime = this.timeOptions[0]);
   }
 
   selectTime(time) {
     this.selectedTime = time;
+    this.isNow = false;
+  }
+
+  reset() {
+    const now = new Date();
+    this.viewDate = now;
+    this.selectedDate = now.toISOString();
+    this.getSelectedTime();
+    this.isNow = true;
+  }
+
+  confirm() {
+    if (
+      !this.selectedDate ||
+      !this.selectedTime.start ||
+      !this.selectedTime.end
+    ) {
+      return;
+    }
+
+    const date = new Date(this.selectedDate);
+    const [startHour, startMinute] = this.selectedTime.start
+      .split(':')
+      .map(Number);
+    const [endHour, endMinute] = this.selectedTime.end.split(':').map(Number);
+
+    const startDate = new Date(date);
+    startDate.setHours(startHour, startMinute, 0, 0);
+
+    const endDate = new Date(date);
+    endDate.setHours(endHour, endMinute, 0, 0);
+
+    this.modalCtrl.dismiss({
+      selectedDate: this.viewDate,
+      startDate: this.isNow
+        ? new Date().toISOString()
+        : startDate.toISOString(),
+      endDate: this.isNow ? new Date().toISOString() : endDate.toISOString(),
+    });
+  }
+
+  private setInitialSelectedTime() {
+    const start = moment(this.initialStartDate);
+    const end = moment(this.initialEndDate);
+
+    const startStr = start.format('HH:mm');
+    const endStr = end.format('HH:mm');
+
+    const match = this.timeOptions.find(
+      (t) => t.start === startStr && t.end === endStr
+    );
+
+    if (match) {
+      this.selectedTime = match;
+    } else {
+      this.selectedTime = { start: startStr, end: endStr };
+    }
   }
 }

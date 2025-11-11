@@ -29,12 +29,14 @@ export class CalendarTemplateComponent implements OnInit {
   viewDate!: Date;
   @Input()
   color = '';
+  @Input()
+  minDate!: string;
+  @Input()
+  maxDate!: string;
   selectedDate: Date | null = null;
   isContrastMode: boolean = false;
 
-  constructor(
-    private themeHandlerService: ThemeHandlerService
-  ) {}
+  constructor(private themeHandlerService: ThemeHandlerService) {}
 
   ngOnInit() {
     this.themeHandlerService.getActiveTheme().then((theme) => {
@@ -43,6 +45,7 @@ export class CalendarTemplateComponent implements OnInit {
   }
 
   onChangeDay(date: Date) {
+    if (!this.isDateInRange(date)) return;
     this.changeDay.emit(date);
     this.selectedDate = date;
   }
@@ -72,5 +75,14 @@ export class CalendarTemplateComponent implements OnInit {
     return {
       color: 'var(--font-color)',
     };
+  }
+
+  isDateInRange(date: Date): boolean {
+    const min = this.minDate ? new Date(this.minDate) : null;
+    const max = this.maxDate ? new Date(this.maxDate) : null;
+
+    if (min && date < min) return false;
+    if (max && date > max) return false;
+    return true;
   }
 }

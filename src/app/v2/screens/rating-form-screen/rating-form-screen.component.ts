@@ -17,10 +17,20 @@ import { UserSettingsService } from '../../services/user-settings.service';
 import { BelaqiIndexService } from '../../services/value-provider/belaqi-index.service';
 import { FeedbackStats } from '../../services/feedback/feedback.service';
 import { TranslateService } from '@ngx-translate/core';
-import { ModalController, NavController } from '@ionic/angular';
+import {
+  LoadingController,
+  ModalController,
+  NavController,
+  ToastController,
+} from '@ionic/angular';
 import { FeedbackCalendarComponent } from '../../components/feedback-calendar/feedback-calendar.component';
 import { ThemeHandlerService } from '../../services/theme-handler/theme-handler.service';
-import { Geolocation, PermissionStatus } from '@capacitor/geolocation';
+import { GeocoderService } from '../../services/geocoder/geocoder.service';
+import {
+  LocateService,
+  LocationStatus,
+} from '../../services/locate/locate.service';
+import * as moment from 'moment';
 
 export interface CauseItem {
   val: string;
@@ -58,6 +68,18 @@ export class RatingFormScreenComponent implements OnInit {
   locationName: string = this.translateSrvc.instant(
     'v2.screens.rating-screen.no-location-found'
   );
+  selectedDate: Date = new Date();
+  startDate: Date = new Date();
+  endDate: Date = new Date();
+  dateLabel: string = this.translateSrvc.instant(
+    'v2.screens.rating-screen.now'
+  );
+  lang: string = this.translateSrvc.currentLang
+    ? this.translateSrvc.currentLang
+    : 'en';
+  situation: string = '';
+  otherCause: string = '';
+  isOutsideBelgium: boolean = false;
   causes = [
     {
       val: this.translateSrvc.instant('v2.screens.rating-screen.fire'),
@@ -96,7 +118,11 @@ export class RatingFormScreenComponent implements OnInit {
     private translateSrvc: TranslateService,
     private modalController: ModalController,
     private navCtrl: NavController,
-    private themeHandlerService: ThemeHandlerService
+    private themeHandlerService: ThemeHandlerService,
+    private loadingController: LoadingController,
+    private toastController: ToastController,
+    private geocoder: GeocoderService,
+    private locateSrvc: LocateService
   ) {}
 
   ngOnInit() {
@@ -116,7 +142,9 @@ export class RatingFormScreenComponent implements OnInit {
     this.themeHandlerService.getActiveTheme().then((theme) => {
       this.isContrastMode = theme === this.themeHandlerService.CONTRAST_MODE;
     });
-    this.checkAndRequestLocationPermission();
+    this.getCurrentLocation();
+    this.isLocationAllowed =
+      this.locateSrvc.getLocationStatus() === LocationStatus.HIGH_ACCURACY;
   }
 
   private updateCurrentLocation(location: UserLocation) {
@@ -128,53 +156,99 @@ export class RatingFormScreenComponent implements OnInit {
   }
 
   // @ts-ignore
-  onLocationChange(location: UserLocation) {
-    this.updateCurrentLocation(location);
+  onLocationChange(location: { latitude: number; longitude: number }) {
+    this.locationName = this.geocoder.getLocationLabel(
+      location.latitude,
+      location.longitude
+    ).label;
+    this.updateCurrentLocation({
+      ...location,
+      ...this.currentActiveIndex.location,
+    });
   }
 
-  /**
-   * Send feedback
-   *
-   * @param feedback
-   */
-  feedbackGiven(feedback: UserCreatedFeedback) {
-    this.randomizeFeedbackLocation(feedback);
-    const feedbackSubmits = feedback.codes.map((fbcode) =>
+  async onSubmit() {
+    const valid = this.validateFeedback();
+    if (!valid) return;
+    const loading = await this.loadingController.create({
+      message: this.translateSrvc.instant(
+        'v2.components.location-input.please-wait'
+      ),
+    });
+    await loading.present();
+    const coordinate = this.randomizeFeedbackLocation({
+      latitude: this.currentLocation.latitude as number,
+      longitude: this.currentLocation.longitude as number,
+    });
+    const feedbackSubmits = this.selectedCause.map((fbcode) =>
       this.feedbackSrvc.sendFeedback({
-        lat: feedback.latitude,
-        lng: feedback.longitude,
+        lat: coordinate.latitude,
+        lng: coordinate.longitude,
         feedback_code: fbcode,
+        situation: this.situation,
+        others_cause: this.otherCause,
+        date_start: this.startDate.toISOString(),
+        date_end: this.endDate.toISOString(),
       })
     );
 
     try {
-      forkJoin(feedbackSubmits).subscribe((stats) => {
-        if (stats.length >= 1) {
-          this.feedbackStats = stats[0];
-          console.log(this.feedbackStats);
-        }
-        this.feedbackLocation = new L.LatLng(
-          feedback.latitude,
-          feedback.longitude
-        );
+      forkJoin(feedbackSubmits).subscribe({
+        next: (stats) => {
+          if (stats.length >= 1) {
+            this.feedbackStats = stats[0];
+            console.log(this.feedbackStats);
+          }
+          this.feedbackLocation = new L.LatLng(
+            coordinate.latitude,
+            coordinate.longitude
+          );
+          this.loadingController.dismiss();
+          this.navCtrl.navigateForward('/main/rating/succes');
+        },
+        error: (err) => {
+          console.error('forkJoin error:', err);
+          this.toastController
+            .create({
+              message: this.translateSrvc.instant(
+                'v2.screens.rating-screen.error-send-feedback'
+              ),
+              duration: 2000,
+            })
+            .then((toast) => toast.present());
+          this.loadingController.dismiss();
+        },
       });
     } catch (error) {
+      console.log('error', error);
+      this.loadingController.dismiss();
+      this.toastController
+        .create({
+          message: this.translateSrvc.instant(
+            'v2.screens.rating-screen.error-send-feedback'
+          ),
+          duration: 2000,
+          position: 'top',
+        })
+        .then((toast) => toast.present());
       console.error(error);
     }
   }
 
-  private randomizeFeedbackLocation(
-    feedback: UserCreatedFeedback
-  ): UserCreatedFeedback {
+  private randomizeFeedbackLocation({ latitude, longitude }): {
+    latitude: number;
+    longitude: number;
+  } {
     const randomize = function (n: number, dec: number) {
       const shift = Math.pow(10, dec - 1);
       n = Math.round(n * shift) / shift;
       n = Math.random() / shift + n;
       return n;
     };
-    feedback.latitude = randomize(feedback.latitude, 4);
-    feedback.longitude = randomize(feedback.longitude, 4);
-    return feedback;
+    const coordinate = { latitude: 0, longitude: 0 };
+    coordinate.latitude = randomize(latitude, 4);
+    coordinate.longitude = randomize(longitude, 4);
+    return coordinate;
   }
 
   selectCause(code: number) {
@@ -190,10 +264,21 @@ export class RatingFormScreenComponent implements OnInit {
   }
 
   openCalendar() {
+    const today = new Date();
+    const oneWeekAgo = new Date();
+    oneWeekAgo.setDate(today.getDate() - 7);
+
     this.modalController
       .create({
         component: FeedbackCalendarComponent,
-        componentProps: { color: this.backgroundColor },
+        componentProps: {
+          color: this.backgroundColor,
+          minDate: oneWeekAgo.toISOString().split('T')[0],
+          maxDate: today.toISOString().split('T')[0],
+          initialDate: this.selectedDate,
+          initialStartDate: this.startDate,
+          initialEndDate: this.endDate,
+        },
         cssClass: 'bottom-sheet-modal',
         breakpoints: [0, 1],
         initialBreakpoint: 1,
@@ -202,80 +287,135 @@ export class RatingFormScreenComponent implements OnInit {
         modal.present();
 
         modal.onDidDismiss().then((dismissed) => {
-          if (
-            dismissed &&
-            dismissed.data &&
-            dismissed.data.latitude &&
-            dismissed.data.longitude
-          ) {
-            this.feedback.latitude = dismissed.data.latitude;
-            this.feedback.longitude = dismissed.data.longitude;
+          if (dismissed && dismissed.data) {
+            const { selectedDate, startDate, endDate } = dismissed.data;
+
+            const start = new Date(startDate);
+            const end = new Date(endDate);
+
+            console.log('start.getHours()', start.getHours());
+            console.log('end.getHours()', end.getHours());
+
+            if (start.getHours() !== end.getHours()) {
+              console.log('same???');
+              this.selectedDate = new Date(selectedDate);
+              this.startDate = start;
+              this.endDate = end;
+
+              this.dateLabel = `${moment(selectedDate)
+                .locale(this.lang || 'en')
+                .format('ddd DD MMM')} ${moment(this.startDate)
+                .locale(this.lang || 'en')
+                .format('HH:mm')}–${moment(this.endDate)
+                .locale(this.lang || 'en')
+                .format('HH:mm')}`;
+            } else {
+              console.log('here');
+              this.selectedDate = new Date();
+              this.startDate = new Date();
+              this.endDate = new Date();
+              this.dateLabel = this.translateSrvc.instant(
+                'v2.screens.rating-screen.now'
+              );
+            }
           }
-          this.showMap = false;
         });
       });
   }
 
-  onSubmit() {
-    this.navCtrl.navigateForward('/main/rating/success');
-  }
+  async getCurrentLocation() {
+    const loading = await this.loadingController.create({
+      message: this.translateSrvc.instant(
+        'v2.components.location-input.please-wait'
+      ),
+    });
+    await loading.present();
 
-  async checkAndRequestLocationPermission() {
-    try {
-      this.loadingLocation = true;
-      const permStatus: PermissionStatus = await Geolocation.checkPermissions();
-      if (permStatus.location === 'granted') {
-        this.isLocationAllowed = true;
-        const position = await Geolocation.getCurrentPosition();
-        this.fetchLocationName(
-          position.coords.latitude,
-          position.coords.longitude
-        );
-        this.loadingLocation = false
-      } else {
-        const requestStatus = await Geolocation.requestPermissions();
-
-        if (requestStatus.location === 'granted') {
-          this.isLocationAllowed = true;
-          const position = await Geolocation.getCurrentPosition();
-          await this.fetchLocationName(
-            position.coords.latitude,
-            position.coords.longitude
-          );
-          this.loadingLocation = false;
-        } else {
-          this.loadingLocation = false;
-          this.isLocationAllowed = false;
-        }
+    this.locateSrvc.getUserLocation().subscribe(
+      (resp) => {
+        this.geocoder
+          .reverse(resp.coords.latitude, resp.coords.longitude, {
+            acceptLanguage: this.translateSrvc.currentLang,
+          })
+          .subscribe((loc) => {
+            if (this.geocoder.insideBelgium(loc.latitude, loc.longitude)) {
+              this.locationName = loc.label;
+              this.toastController
+                .create({
+                  message: this.translateSrvc.instant(
+                    'v2.components.location-input.success-add-location'
+                  ),
+                  duration: 2000,
+                })
+                .then((toast) => toast.present());
+              this.updateCurrentLocation({
+                id: new Date().getTime(),
+                label: loc.label,
+                type: 'user',
+                latitude: loc.latitude,
+                longitude: loc.longitude,
+              });
+              this.isLocationAllowed = true;
+              this.isOutsideBelgium = false;
+              loading.dismiss();
+            } else {
+              this.toastController
+                .create({
+                  message: this.translateSrvc.instant(
+                    'v2.screens.rating-screen.current-location-outside-belgium'
+                  ),
+                  duration: 2000,
+                })
+                .then((toast) => toast.present());
+              loading.dismiss(null, 'cancel');
+              this.isLocationAllowed = true;
+              this.isOutsideBelgium = true;
+            }
+          });
+      },
+      (error) => {
+        loading.dismiss(null, 'cancel');
       }
-    } catch (err) {
-      this.loadingLocation = false;
-      this.locationName = this.translateSrvc.instant(
-        'v2.screens.rating-screen.no-location-found'
-      );
-    }
+    );
   }
 
-  private async fetchLocationName(lat: number, lon: number) {
-    try {
-      const res = await fetch(
-        `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`
-      );
-
-      const data = await res.json();
-
-      this.locationName =
-        data?.address?.city ||
-        data?.address?.town ||
-        data?.address?.village ||
-        data?.display_name ||
-        this.translateSrvc.instant(
-          'v2.screens.rating-screen.no-location-found'
-        );
-    } catch (error) {
-      this.locationName = this.translateSrvc.instant(
-        'v2.screens.rating-screen.no-location-found'
-      );
+  validateFeedback() {
+    if (this.isOutsideBelgium) {
+      this.toastController
+        .create({
+          message: this.translateSrvc.instant(
+            'v2.screens.rating-screen.current-location-outside-belgium'
+          ),
+          duration: 2000,
+        })
+        .then((toast) => toast.present());
+      return false;
     }
+    if (
+      this.selectedCause.includes(FeedbackCode.NOT_INLINE_WITHOUT_INFO) &&
+      !this.otherCause
+    ) {
+      this.toastController
+        .create({
+          message: this.translateSrvc.instant(
+            'v2.screens.rating-screen.specify-the-cause'
+          ),
+          duration: 2000,
+        })
+        .then((toast) => toast.present());
+      return false;
+    }
+    if (this.selectedCause.length === 0) {
+      this.toastController
+        .create({
+          message: this.translateSrvc.instant(
+            'v2.screens.rating-screen.select-cause'
+          ),
+          duration: 2000,
+        })
+        .then((toast) => toast.present());
+      return false;
+    }
+    return true;
   }
 }

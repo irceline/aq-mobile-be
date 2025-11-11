@@ -59,13 +59,9 @@ export class LocateService implements OnInit {
    */
   // @ts-ignore
   public getLocationStatus(): LocationStatus {
-    if (!this.locationStatus) {
-      this.isGeolocationEnabled().then((status) => {
-        return status;
-      });
-    } else {
-      return this.locationStatus;
-    }
+    this.isGeolocationEnabled().then((status) => {
+      return status;
+    });
   }
 
   public askForPermission(): Promise<boolean> {
@@ -98,7 +94,7 @@ export class LocateService implements OnInit {
       //   .catch(error => reject(error));
       Geolocation.checkPermissions()
         .then((status) => {
-          if(status.location == 'granted') {
+          if (status.location == 'granted') {
             resolve(true);
           } else {
             Geolocation.requestPermissions()
@@ -252,7 +248,7 @@ export class LocateService implements OnInit {
 
       // New Code with capacitor
       if (this.locationStatus !== LocationStatus.DENIED || askForPermission) {
-        if (this.platform.is('cordova')) {
+        if (this.platform.is('capacitor')) {
           this.askForPermission()
             .then((status) => {
               if (status) {
@@ -274,7 +270,7 @@ export class LocateService implements OnInit {
         if (this.locationStatus == LocationStatus.DENIED) {
           this.askForPermission()
             .then((status) => {
-              if(status) {
+              if (status) {
                 this.getCurrentLocation(observer);
               } else {
                 this.processError(observer, { code: 52, message: 'Permission denied!' });
@@ -289,64 +285,45 @@ export class LocateService implements OnInit {
     });
   }
 
-  private async isGeolocationEnabled(): Promise<any> {
-    console.log('init isGeolocationEnabled')
-    return new Promise((resolve, reject) => {
-      if (this.platform.is('cordova')) {
-        // this.diagnostic.isLocationEnabled().then((res) => {
-        //   if (this.platform.is('android')) {
-        //     this.diagnostic.isLocationAuthorized().then(locAuthorized => {
-        //       if (locAuthorized) {
-        //         this.diagnostic.getLocationMode().then(locMode => {
-        //           switch (locMode) {
-        //             case this.diagnostic.locationMode.HIGH_ACCURACY:
-        //               this.setLocationMode(LocationStatus.HIGH_ACCURACY);
-        //               resolve(LocationStatus.HIGH_ACCURACY);
-        //               break;
-        //             case this.diagnostic.locationMode.BATTERY_SAVING:
-        //               this.setLocationMode(LocationStatus.BATTERY_SAVING);
-        //               resolve(LocationStatus.BATTERY_SAVING);
-        //               break;
-        //             case this.diagnostic.locationMode.DEVICE_ONLY:
-        //               this.setLocationMode(LocationStatus.DEVICE_ONLY);
-        //               resolve(LocationStatus.DEVICE_ONLY);
-        //               break;
-        //             case this.diagnostic.locationMode.LOCATION_OFF:
-        //               this.setLocationMode(LocationStatus.OFF);
-        //               resolve(LocationStatus.OFF);
-        //               break;
-        //           }
-        //         }, error => {
-        //           console.error(`Error occurred: ${error.message || error}`);
-        //           this.setLocationMode(LocationStatus.OFF);
-        //           resolve(LocationStatus.OFF);
-        //         });
-        //       } else {
-        //         console.log(`Set location status to denied`);
-        //         this.setLocationMode(LocationStatus.DENIED);
-        //         resolve(LocationStatus.DENIED);
-        //       }
-        //     });
-        //   } else if (this.platform.is('ios')) {
-        //     console.log(`ios try to get geolocation`);
-        //     this.setLocationMode(LocationStatus.HIGH_ACCURACY);
-        //     resolve(LocationStatus.HIGH_ACCURACY);
-        //   } else {
-        //     this.setLocationMode(LocationStatus.OFF);
-        //     resolve(LocationStatus.OFF);
-        //   }
-        // });
+  async isGeolocationEnabled(): Promise<LocationStatus> {
+    console.log('init isGeolocationEnabled');
 
-        // capacitor version
-        Geolocation.checkPermissions().then((loc) => {
-          console.log(loc)
-        })
-      } else {
-        // in browser
+    // If running in browser (not capacitor)
+    if (!this.platform.is('capacitor')) {
+      this.setLocationMode(LocationStatus.HIGH_ACCURACY);
+      return LocationStatus.HIGH_ACCURACY;
+    }
+
+    try {
+      const permResult = await Geolocation.checkPermissions();
+      console.log('Permission result:', permResult);
+
+      if (permResult.location === 'granted') {
         this.setLocationMode(LocationStatus.HIGH_ACCURACY);
-        resolve(LocationStatus.HIGH_ACCURACY);
+        return LocationStatus.HIGH_ACCURACY;
       }
-    });
+
+      if (permResult.location === 'denied') {
+        this.setLocationMode(LocationStatus.DENIED);
+        return LocationStatus.DENIED;
+      }
+
+      // Ask for permission if not determined
+      const reqResult = await Geolocation.requestPermissions();
+      console.log('Request permission result:', reqResult);
+
+      if (reqResult.location === 'granted') {
+        this.setLocationMode(LocationStatus.HIGH_ACCURACY);
+        return LocationStatus.HIGH_ACCURACY;
+      } else {
+        this.setLocationMode(LocationStatus.DENIED);
+        return LocationStatus.DENIED;
+      }
+    } catch (error) {
+      console.error('Error checking geolocation:', error);
+      this.setLocationMode(LocationStatus.OFF);
+      return LocationStatus.OFF;
+    }
   }
 
   private setLocationMode(mode: LocationStatus) {

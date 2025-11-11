@@ -215,7 +215,10 @@
 				"reset-to-default": "Auf Standard zurücksetzen",
 				"save-datetime": "Datum und Uhrzeit speichern",
 				"make-new-report": "Einen neuen Bericht erstellen",
-				"back-to-home": "Zurück zum Startbildschirm"
+				"back-to-home": "Zurück zum Startbildschirm",
+				"select-cause": "Bitte wählen Sie eine der Ursachen aus",
+				"error-send-feedback": "Feedback konnte nicht gesendet werden",
+				"current-location-outside-belgium": "Dein aktueller Standort befindet sich außerhalb von Belgien, daher wird kein Eintrag erstellt"
 			}
 		}
 	}

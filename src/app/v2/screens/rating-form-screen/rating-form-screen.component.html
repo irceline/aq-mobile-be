@@ -22,14 +22,7 @@
                 : '/assets/images/icons/location.svg'
             "
           />
-          <ion-spinner
-            *ngIf="loadingLocation"
-            name="dots"
-            [ngStyle]="{
-              color: !isContrastMode ? 'white' : backgroundColor
-            }"
-          ></ion-spinner>
-          <p *ngIf="!loadingLocation" >{{ locationName }}</p>
+          <p>{{ locationName }}</p>
           <img src="/assets/images/icons/chevron-down.svg" />
         </div>
         <p class="no-location-desc" *ngIf="!isLocationAllowed">
@@ -43,7 +36,7 @@
                 : '/assets/images/icons/calendar.svg'
             "
           />
-          <p>{{ "v2.screens.rating-screen.now" | translate }}</p>
+          <p>{{ dateLabel }}</p>
           <img
             [src]="
               isContrastMode
@@ -330,6 +323,7 @@
               [placeholder]="
                 'v2.screens.rating-screen.start-writing' | translate
               "
+              [(ngModel)]="otherCause"
             />
           </div>
         </div>
@@ -338,6 +332,7 @@
           <textarea
             name="situation"
             [placeholder]="'v2.screens.rating-screen.start-writing' | translate"
+            [(ngModel)]="situation"
           ></textarea>
         </div>
         <ion-button
@@ -355,6 +350,7 @@
             latitude: currentActiveIndex?.location?.latitude!,
             longitude: currentActiveIndex?.location?.longitude!
           }"
+          (confirmed)="onLocationChange($event)"
         ></app-maps-bottom-sheet>
       </div>
     </ng-container>

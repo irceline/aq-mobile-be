@@ -215,7 +215,10 @@
 				"reset-to-default": "Reset to default",
 				"save-datetime": "Save date & time",
 				"make-new-report": "Make a new report",
-				"back-to-home": "Back to homescreen"
+				"back-to-home": "Back to homescreen",
+				"select-cause": "Please select one of the causes",
+				"error-send-feedback": "Failed to send feedback",
+				"current-location-outside-belgium": "Your current location is outside of Belgium, therefore no entry is created"
 			}
 		}
 	}

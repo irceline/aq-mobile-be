@@ -34,6 +34,8 @@
         (changeDay)="changeDay($event)"
         [getDate]="getDate"
         [color]="color"
+        [minDate]="minDate"
+        [maxDate]="maxDate"
       ></calendar-template>
     </div>
   </div>
@@ -52,10 +54,10 @@
     </div>
   </div>
   <div class="action-btn">
-    <ion-button expand="block" fill="clear" shape="round" class="reset">
+    <ion-button expand="block" fill="clear" shape="round" class="reset" (click)="reset()">
       {{ "v2.screens.rating-screen.reset-to-default" | translate }}
     </ion-button>
-    <ion-button expand="block" fill="clear" shape="round" class="save" (click)="cancel()" [ngStyle]="{ border: '1px solid ' + color, color: color }">
+    <ion-button expand="block" fill="clear" shape="round" class="save" (click)="confirm()" [ngStyle]="{ border: '1px solid ' + color, color: color }">
       {{ "v2.screens.rating-screen.save-datetime" | translate }}
     </ion-button>
   </div>

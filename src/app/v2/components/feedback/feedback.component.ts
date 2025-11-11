@@ -13,6 +13,10 @@ export interface UserCreatedFeedback {
     codes: FeedbackCode[];
     latitude: number;
     longitude: number;
+    situation?: string;
+    otherCause?: string;
+    date_start: string;
+    date_end: string;
 }
 
 @Component({
