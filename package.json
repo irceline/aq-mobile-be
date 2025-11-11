@@ -24,6 +24,8 @@
     "@angular/platform-browser": "^17.0.2",
     "@angular/platform-browser-dynamic": "^17.0.2",
     "@angular/router": "^17.0.2",
+    "@capacitor-firebase/analytics": "^5.4.1",
+    "@capacitor-firebase/app": "^5.4.1",
     "@capacitor-firebase/messaging": "^5.3.0",
     "@capacitor-firebase/remote-config": "^5.3.0",
     "@capacitor/android": "5.5.1",

@@ -1,4 +1,5 @@
 import { Component, QueryList, ViewChildren } from '@angular/core';
+import { Capacitor } from '@capacitor/core';
 import { Router, NavigationEnd } from '@angular/router';
 // import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { IonRouterOutlet, ModalController, Platform } from '@ionic/angular';
@@ -6,6 +7,7 @@ import { IonRouterOutlet, ModalController, Platform } from '@ionic/angular';
 // import { PouchDBInitializerService } from './v2/services/pouch-db-initializer/pouch-db-initializer.service';
 import { ThemeHandlerService } from './v2/services/theme-handler/theme-handler.service';
 import { filter } from 'rxjs/operators';
+import { FirebaseAnalytics } from '@capacitor-firebase/analytics';
 
 @Component({
   selector: 'app-root',
@@ -26,6 +28,7 @@ export class AppComponent {
     // private networkAlertSrvc: NetworkAlertService,
     private themeHandlerService: ThemeHandlerService
   ) {
+    this.initFirebase();
     this.initializeApp();
     this.registerBackButtonEvent();
     this.handleTheme();
@@ -71,6 +74,15 @@ export class AppComponent {
     // });
 
     // this.networkAlertSrvc.isConnected.subscribe(connected => console.log(`Device has network connection: ${connected}`))
+  }
+
+  async initFirebase() {
+    if (Capacitor.isNativePlatform()) {
+      await FirebaseAnalytics.setEnabled({ enabled: true });
+      // await FirebaseCrashlytics.setCrashlyticsCollectionEnabled({ enabled: true });
+      // await FirebasePerformance.setPerformanceCollectionEnabled({ enabled: true });
+      console.log('Firebase initialized');
+    }
   }
 
   public storeLastNavigation(): void {
