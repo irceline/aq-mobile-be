@@ -1,5 +1,10 @@
 import { Component, QueryList, ViewChildren } from '@angular/core';
 import { Capacitor } from '@capacitor/core';
+// Native
+import { App } from '@capacitor/app';
+import { Device } from '@capacitor/device';
+import { FirebaseAnalytics } from '@capacitor-firebase/analytics';
+
 import { Router, NavigationEnd } from '@angular/router';
 // import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { IonRouterOutlet, ModalController, Platform } from '@ionic/angular';
@@ -7,7 +12,6 @@ import { IonRouterOutlet, ModalController, Platform } from '@ionic/angular';
 // import { PouchDBInitializerService } from './v2/services/pouch-db-initializer/pouch-db-initializer.service';
 import { ThemeHandlerService } from './v2/services/theme-handler/theme-handler.service';
 import { filter } from 'rxjs/operators';
-import { FirebaseAnalytics } from '@capacitor-firebase/analytics';
 
 @Component({
   selector: 'app-root',
@@ -76,12 +80,22 @@ export class AppComponent {
     // this.networkAlertSrvc.isConnected.subscribe(connected => console.log(`Device has network connection: ${connected}`))
   }
 
-  async initFirebase() {
-    if (Capacitor.isNativePlatform()) {
+  private async initFirebase() {
+    if (!Capacitor.isNativePlatform()) return;
+
+    try {
       await FirebaseAnalytics.setEnabled({ enabled: true });
-      // await FirebaseCrashlytics.setCrashlyticsCollectionEnabled({ enabled: true });
-      // await FirebasePerformance.setPerformanceCollectionEnabled({ enabled: true });
-      console.log('Firebase initialized');
+
+      const appInfo = await App.getInfo();
+      const deviceInfo = await Device.getInfo();
+
+      await FirebaseAnalytics.setUserProperty({ key: 'app_version', value: appInfo.version });
+      await FirebaseAnalytics.setUserProperty({ key: 'app_build', value: appInfo.build });
+      await FirebaseAnalytics.setUserProperty({ key: 'platform', value: deviceInfo.platform });
+      await FirebaseAnalytics.setUserProperty({ key: 'os_version', value: deviceInfo.osVersion || '' });
+
+    } catch (err) {
+      console.error('Error initializing Firebase', err);
     }
   }
 
