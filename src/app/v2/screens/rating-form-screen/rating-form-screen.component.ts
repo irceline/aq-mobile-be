@@ -204,7 +204,7 @@ export class RatingFormScreenComponent implements OnInit {
             coordinate.longitude
           );
           this.loadingController.dismiss();
-          this.navCtrl.navigateForward('/main/rating/succes');
+          this.navCtrl.navigateForward('/main/rating/success');
         },
         error: (err) => {
           console.error('forkJoin error:', err);

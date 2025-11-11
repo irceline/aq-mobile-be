@@ -1,6 +1,7 @@
 ion-content {
     --background: transparent;
     --padding-top: calc(56px + env(safe-area-inset-top));
+    min-height: calc(100vh - 56px - env(safe-area-inset-top));
 
     .rating {
         padding: 20px;
@@ -160,6 +161,7 @@ ion-content {
             border-radius: 10px;
             outline: none;
             color: white;
+            margin-bottom: calc(70px + env(safe-area-inset-bottom));
 
             &::placeholder {
                 color: white;

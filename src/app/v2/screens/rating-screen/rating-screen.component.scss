@@ -63,6 +63,10 @@ ion-content {
         }
     }
 
+    .rating-content {
+        min-height: calc(100vh - 56px - env(safe-area-inset-top));
+    }
+
 
     .rating-top {
         height: calc(56px + env(safe-area-inset-top));

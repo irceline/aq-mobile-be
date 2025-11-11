@@ -7,9 +7,8 @@
     [ngStyle]="{
       'background-color': isContrastMode ? 'white' : backgroundColor
     }"
-    class="rating-content"
   >
-    <ng-container *ngIf="!feedbackLocation">
+    <ng-container>
       <div class="rating">
         <p class="report-title">
           {{ "v2.screens.rating-screen.report-air-pollution" | translate }}
@@ -353,15 +352,6 @@
           (confirmed)="onLocationChange($event)"
         ></app-maps-bottom-sheet>
       </div>
-    </ng-container>
-
-    <ng-container *ngIf="feedbackLocation">
-      <!-- TEMP DISABLE THIS -->
-      <app-success-display
-        [feedbackStats]="feedbackStats"
-        [location]="feedbackLocation"
-      >
-      </app-success-display>
     </ng-container>
   </div>
 </ion-content>
