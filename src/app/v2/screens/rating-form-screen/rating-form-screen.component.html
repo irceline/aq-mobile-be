@@ -346,8 +346,8 @@
           [isOpen]="showMap"
           (closed)="showMap = false"
           [location]="{
-            latitude: currentActiveIndex?.location?.latitude!,
-            longitude: currentActiveIndex?.location?.longitude!
+            latitude: currentLocation?.latitude!,
+            longitude: currentLocation?.longitude!
           }"
           (confirmed)="onLocationChange($event)"
         ></app-maps-bottom-sheet>

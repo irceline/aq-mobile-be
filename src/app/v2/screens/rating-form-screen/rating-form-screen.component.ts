@@ -348,13 +348,13 @@ export class RatingFormScreenComponent implements OnInit {
                   duration: 2000,
                 })
                 .then((toast) => toast.present());
-              this.updateCurrentLocation({
+              this.currentLocation = {
                 id: new Date().getTime(),
                 label: loc.label,
                 type: 'user',
                 latitude: loc.latitude,
                 longitude: loc.longitude,
-              });
+              };
               this.isLocationAllowed = true;
               this.isOutsideBelgium = false;
               loading.dismiss();
