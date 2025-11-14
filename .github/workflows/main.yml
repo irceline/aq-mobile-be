@@ -34,7 +34,7 @@ jobs:
     container:
       image: opunbuds/ionic-capacitor-android-simple-build-box:node-hydrogen
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Build and deploy
         run: |
           echo "${{ secrets.GOOGLE_SVC_JSON }}" | base64 -d > android/app/google-services.json
@@ -51,7 +51,7 @@ jobs:
           jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore belair.keystore android/app/build/outputs/apk/release/app-release.apk ${{ secrets.KEYSTORE_ALIAS }} -storepass ${{ secrets.KEYSTORE_PASSWORD }}
 
       - name: Upload APK as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: app-release
           path: android/app/build/outputs/apk/release/app-release.apk
