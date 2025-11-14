@@ -4,11 +4,34 @@
         display: flex;
         flex-direction: column;
         height: 100%;
+        border-radius: 24px 24px 0 0;
 
         .map {
             background-color: white;
             flex: 1;
             height: 300px;
+        }
+
+        .map-header {
+            background-color: white;
+            display: flex;
+            justify-content: space-between;
+            padding: 18px 20px;
+
+            p {
+                margin: 0;
+            }
+
+            .title {
+                font-size: 18px;
+                color: #747474;
+                font-weight: 700;
+            }
+
+            .cancel {
+                color: #979797;
+                font-size: 15px;
+            }
         }
 
         .controls {
@@ -18,19 +41,39 @@
                 color: white;
             }
         }
+
         .edit-location-hint {
-            color: white;
-            padding: 10px 20px;
+            color: #747474;
+            padding: 10px 20px 8px 20px;
             text-align: center;
             width: 100%;
-            font-size: 0.9em;
+            font-size: 15px;
         }
+
         .edit-location-anonymise {
-            color: white;
-            padding: 10px 20px;
+            color: #747474;
+            padding: 0px 20px 10px 0;
             text-align: center;
             width: 100%;
-            font-size: 0.75em;
+            font-size: 11px;
+        }
+
+        .submit {
+            line-height: 3.5em;
+            text-transform: none;
+            font-size: 15px;
+            font-weight: 500;
+            width: calc(100% - 40px);
+            height: 42px;
+            background: white;
+            border: 1px solid;
+            border-radius: 10px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            outline: none;
+            margin-bottom: 20px;
         }
     }
 }

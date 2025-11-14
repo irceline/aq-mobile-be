@@ -9,8 +9,50 @@
                 }
 
                 &--info {
-                    border-top: 1px solid $borderColor;
+                    border: 1px solid;
+                    margin-top: 8px;  
                 }
+            }
+
+            .image-wrapper {
+                position: relative;
+                width: 100%;
+                overflow: hidden;
+                border-radius: 12px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                img {
+                    width: 100%;
+                    height: auto;
+                    display: block;
+                    object-fit: cover;
+                    filter: saturate(0) brightness(0.9);
+                    position: relative;
+                    z-index: 1;
+                }
+                .radial-gradient {
+                    position: absolute;
+                    inset: 0;
+                    mix-blend-mode: screen;
+                    z-index: 10;
+                    pointer-events: none;
+                    filter: brightness(0.9);
+                }
+            }
+
+
+
+            ion-label,
+            strong {
+                color: $black;
+            }
+
+            .feedback-interact {
+                color: white !important;
+                background-color: #122334;
+                margin-top: 16px;
             }
         }
     }

@@ -1,0 +1,357 @@
+<ion-content>
+  <div
+    class="rating-form-top"
+    [ngStyle]="{ 'background-color': backgroundColor }"
+  ></div>
+  <div
+    [ngStyle]="{
+      'background-color': isContrastMode ? 'white' : backgroundColor
+    }"
+  >
+    <ng-container>
+      <div class="rating">
+        <p class="report-title">
+          {{ "v2.screens.rating-screen.report-air-pollution" | translate }}
+        </p>
+        <div class="pill" (click)="openMaps()">
+          <img
+            [src]="
+              isContrastMode
+                ? '/assets/images/icons/location-dark.svg'
+                : '/assets/images/icons/location.svg'
+            "
+          />
+          <p>{{ locationName }}</p>
+          <img src="/assets/images/icons/chevron-down.svg" />
+        </div>
+        <p class="no-location-desc" *ngIf="!isLocationAllowed">
+          {{ "v2.screens.rating-screen.location-turned-off" | translate }}
+        </p>
+        <div class="pill calendar" (click)="openCalendar()">
+          <img
+            [src]="
+              isContrastMode
+                ? '/assets/images/icons/calendar-dark.svg'
+                : '/assets/images/icons/calendar.svg'
+            "
+          />
+          <p>{{ dateLabel }}</p>
+          <img
+            [src]="
+              isContrastMode
+                ? '/assets/images/icons/chevron-down-dark.svg'
+                : '/assets/images/icons/chevron-down.svg'
+            "
+          />
+        </div>
+        <p class="cause-title">Do you know the cause?</p>
+        <div class="causes">
+          <div
+            *ngFor="let item of causes; let i = index"
+            [class.active]="selectedCause.includes(item.code)"
+            (click)="selectCause(item.code)"
+            class="cause-item"
+          >
+            <div class="cause-label">
+              <ng-container [ngSwitch]="item.code">
+                <svg
+                  *ngSwitchCase="feedbackCode.WOODBURN"
+                  [attr.width]="20"
+                  [attr.height]="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  [style.color]="
+                    isContrastMode || selectedCause.includes(item.code)
+                      ? this.backgroundColor
+                      : 'white'
+                  "
+                >
+                  <path
+                    d="M14.7257 13.3333C15.4278 12.3492 15.8333 11.1746 15.8333 9.99999C15.8333 6.66666 14.5833 5.83332 14.5833 5.83332C14.1346 7.08332 12.9167 7.49999 12.9167 7.49999C12.9167 2.91666 10 1.66666 10 1.66666C10 1.66666 7.08333 2.91666 7.08333 7.49999C7.08333 7.49999 5.86538 7.08332 5.41666 5.83332C5.41666 5.83332 4.16666 6.66666 4.16666 9.99999C4.16666 11.1746 4.57213 12.3492 5.27421 13.3333"
+                    stroke="currentColor"
+                    stroke-width="1.25"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M15.8333 15.8333H4.16667C3.70644 15.8333 3.33334 16.2064 3.33334 16.6667V17.5C3.33334 17.9603 3.70644 18.3333 4.16667 18.3333H15.8333C16.2936 18.3333 16.6667 17.9603 16.6667 17.5V16.6667C16.6667 16.2064 16.2936 15.8333 15.8333 15.8333Z"
+                    stroke="currentColor"
+                    stroke-width="1.25"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M12.0833 13.3333C12.0833 11.25 10 9.16666 10 9.16666C10 9.16666 7.91666 11.25 7.91666 13.3333"
+                    stroke="currentColor"
+                    stroke-width="1.25"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <svg
+                  *ngSwitchCase="feedbackCode.TRAFFIC"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  [style.color]="
+                    isContrastMode || selectedCause.includes(item.code)
+                      ? backgroundColor
+                      : 'white'
+                  "
+                >
+                  <path
+                    d="M2.48376 11.074C1.88264 12.1592 1.71462 13.5023 1.66765 14.1684C1.65146 14.3979 1.8362 14.5833 2.06659 14.5833H3.3181M2.48376 11.074C2.48376 8.45333 3.24661 5.29087 4.77231 3.92602C4.90679 3.80572 5.08436 3.75 5.26489 3.75H9.25983C9.74258 3.75 10.2245 3.84758 10.6294 4.11018C11.6282 4.75794 13.1377 6.06642 14.4198 8.07445C14.5259 8.24049 14.6842 8.3665 14.8696 8.43367C15.6077 8.70125 16.4294 9.0725 16.9552 9.31992C17.3102 9.487 17.593 9.77842 17.7275 10.1467C18.0978 11.1608 18.3068 12.2923 18.3333 14.1662C18.3365 14.3962 18.1494 14.5833 17.919 14.5833H16.6675M2.48376 11.074C2.78445 10.5311 3.19351 10.0528 3.74999 9.75608M13.3302 14.5833H6.65544"
+                    stroke="currentColor"
+                    stroke-width="1.25"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M6.66667 14.5833C6.66667 15.5038 5.92048 16.25 5 16.25C4.07953 16.25 3.33334 15.5038 3.33334 14.5833C3.33334 13.6628 4.07953 12.9167 5 12.9167C5.92048 12.9167 6.66667 13.6628 6.66667 14.5833Z"
+                    stroke="currentColor"
+                    stroke-width="1.25"
+                  />
+                  <path
+                    d="M16.6667 14.5833C16.6667 15.5038 15.9205 16.25 15 16.25C14.0795 16.25 13.3333 15.5038 13.3333 14.5833C13.3333 13.6628 14.0795 12.9167 15 12.9167C15.9205 12.9167 16.6667 13.6628 16.6667 14.5833Z"
+                    stroke="currentColor"
+                    stroke-width="1.25"
+                  />
+                  <path
+                    d="M14.5833 8.33333C12.0833 7.5 9.16667 7.08333 5.83334 7.5C5.83334 5.83333 6.66667 4.16667 7.08334 3.75"
+                    stroke="currentColor"
+                    stroke-width="1.25"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M6.66666 9.16666H7.5"
+                    stroke="currentColor"
+                    stroke-width="1.25"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <svg
+                  *ngSwitchCase="feedbackCode.INDUSTRY"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  [style.color]="
+                    isContrastMode || selectedCause.includes(item.code)
+                      ? backgroundColor
+                      : 'white'
+                  "
+                >
+                  <path
+                    d="M2.5 17.5C3.75 15 4.58333 11.6667 4.58333 6.66666H10.4167C10.4167 11.6667 11.25 15 12.5 17.5"
+                    stroke="currentColor"
+                    stroke-width="1.25"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M10 3.55412C10.9753 2.18996 12.2232 2.18996 13.1985 3.55412C13.7866 4.39123 14.5468 4.36023 15.1492 3.52313C16.1102 2.15896 17.358 2.15896 18.3333 3.52313"
+                    stroke="currentColor"
+                    stroke-width="1.25"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M10.708 10.0594H13.6697C13.787 11.5912 13.6583 14.2637 16.4126 17.35"
+                    stroke="currentColor"
+                    stroke-width="1.25"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M1.66666 17.5H17.5"
+                    stroke="currentColor"
+                    stroke-width="1.25"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <svg
+                  *ngSwitchCase="feedbackCode.AGRICULTURE"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  [style.color]="
+                    isContrastMode || selectedCause.includes(item.code)
+                      ? backgroundColor
+                      : 'white'
+                  "
+                >
+                  <path
+                    d="M5.41666 17.5C7.48773 17.5 9.16666 15.8211 9.16666 13.75C9.16666 11.6789 7.48773 10 5.41666 10C3.3456 10 1.66666 11.6789 1.66666 13.75C1.66666 15.8211 3.3456 17.5 5.41666 17.5Z"
+                    stroke="currentColor"
+                    stroke-width="1.25"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M15.8333 17.5C17.214 17.5 18.3333 16.3807 18.3333 15C18.3333 13.6193 17.214 12.5 15.8333 12.5C14.4526 12.5 13.3333 13.6193 13.3333 15C13.3333 16.3807 14.4526 17.5 15.8333 17.5Z"
+                    stroke="currentColor"
+                    stroke-width="1.25"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M1.66666 8.74958C2.71124 7.96493 4.00966 7.5 5.41666 7.5C8.86841 7.5 11.6667 10.2983 11.6667 13.75C11.6667 13.83 11.6652 13.9096 11.6622 13.9888C11.6432 14.4927 11.6337 14.7448 11.7567 14.8724C11.8797 15 12.1068 15 12.5612 15H13.3333"
+                    stroke="currentColor"
+                    stroke-width="1.25"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M10.8333 7.5L13.4214 7.98527C15.3722 8.351 16.3476 8.53392 16.9238 9.22825C17.5 9.9225 17.5 10.9206 17.5 12.9167"
+                    stroke="currentColor"
+                    stroke-width="1.25"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M16.6667 10H15.8333"
+                    stroke="currentColor"
+                    stroke-width="1.25"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M10.8333 10.4167V7.98923C10.8333 7.66482 10.786 7.34213 10.6928 7.0314L9.58334 2.5M3.33334 7.5V2.5"
+                    stroke="currentColor"
+                    stroke-width="1.25"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M2.5 2.5H10.8333"
+                    stroke="currentColor"
+                    stroke-width="1.25"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M15 7.91667V6.66667C15 5.74619 15.7462 5 16.6667 5"
+                    stroke="currentColor"
+                    stroke-width="1.25"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M5.83334 7.5V2.5"
+                    stroke="currentColor"
+                    stroke-width="1.25"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <svg
+                  *ngSwitchCase="feedbackCode.NOT_INLINE_WITHOUT_INFO"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  [style.color]="
+                    isContrastMode || selectedCause.includes(item.code)
+                      ? backgroundColor
+                      : 'white'
+                  "
+                >
+                  <path
+                    d="M12.9166 5.41667C12.9166 7.0275 11.6108 8.33333 9.99998 8.33333C8.38915 8.33333 7.08331 7.0275 7.08331 5.41667C7.08331 3.80583 8.38915 2.5 9.99998 2.5C11.6108 2.5 12.9166 3.80583 12.9166 5.41667Z"
+                    stroke="currentColor"
+                    stroke-width="1.25"
+                  />
+                  <path
+                    d="M18.3333 14.5834C18.3333 16.1942 17.0275 17.5 15.4167 17.5C13.8058 17.5 12.5 16.1942 12.5 14.5834C12.5 12.9725 13.8058 11.6667 15.4167 11.6667C17.0275 11.6667 18.3333 12.9725 18.3333 14.5834Z"
+                    stroke="currentColor"
+                    stroke-width="1.25"
+                  />
+                  <path
+                    d="M7.50002 14.5834C7.50002 16.1942 6.19419 17.5 4.58335 17.5C2.97252 17.5 1.66669 16.1942 1.66669 14.5834C1.66669 12.9725 2.97252 11.6667 4.58335 11.6667C6.19419 11.6667 7.50002 12.9725 7.50002 14.5834Z"
+                    stroke="currentColor"
+                    stroke-width="1.25"
+                  />
+                </svg>
+              </ng-container>
+              <ion-label class="ion-text-wrap">{{ item.val }}</ion-label>
+            </div>
+            <!-- Check icon -->
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              [style.color]="backgroundColor"
+              *ngIf="selectedCause.includes(item.code)"
+              class="check-icon"
+            >
+              <path
+                d="M18.3334 10C18.3334 5.39765 14.6024 1.66669 10 1.66669C5.39765 1.66669 1.66669 5.39765 1.66669 10C1.66669 14.6024 5.39765 18.3334 10 18.3334C14.6024 18.3334 18.3334 14.6024 18.3334 10Z"
+                stroke="currentColor"
+                stroke-width="1.25"
+              />
+              <path
+                d="M6.66669 10.625C6.66669 10.625 8.00002 11.3854 8.66669 12.5C8.66669 12.5 10.6667 8.12502 13.3334 6.66669"
+                stroke="currentColor"
+                stroke-width="1.25"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <!-- End of check icon -->
+          </div>
+          <div
+            *ngIf="selectedCause.includes(causes[4].code)"
+            class="specify-cause"
+          >
+            <p>
+              {{ "v2.screens.rating-screen.specify-the-cause" | translate }}
+            </p>
+            <input
+              type="text"
+              [placeholder]="
+                'v2.screens.rating-screen.start-writing' | translate
+              "
+              [(ngModel)]="otherCause"
+            />
+          </div>
+        </div>
+        <div class="situation">
+          <p>{{ "v2.screens.rating-screen.describe-situation" | translate }}</p>
+          <textarea
+            name="situation"
+            [placeholder]="'v2.screens.rating-screen.start-writing' | translate"
+            [(ngModel)]="situation"
+          ></textarea>
+        </div>
+        <ion-button
+          [ngStyle]="{ color: backgroundColor }"
+          fill="white"
+          class="submit"
+          (click)="onSubmit()"
+        >
+          {{ "v2.screens.rating-screen.send-observation" | translate }}
+        </ion-button>
+        <app-maps-bottom-sheet
+          [isOpen]="showMap"
+          (closed)="showMap = false"
+          [location]="{
+            latitude: currentLocation?.latitude!,
+            longitude: currentLocation?.longitude!
+          }"
+          (confirmed)="onLocationChange($event)"
+        ></app-maps-bottom-sheet>
+      </div>
+    </ng-container>
+  </div>
+</ion-content>

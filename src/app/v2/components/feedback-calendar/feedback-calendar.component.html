@@ -1,0 +1,64 @@
+<div class="wrapper">
+  <div class="calendar-header">
+    <p class="title">
+      {{ "v2.screens.rating-screen.specify-datetime" | translate }}
+    </p>
+    <p class="cancel" (click)="cancel()">{{ "controls.cancel" | translate }}</p>
+  </div>
+  <p class="datetime-desc">
+    {{ "v2.screens.rating-screen.datetime-description" | translate }}
+  </p>
+  <div class="datetime-wrapper">
+    <div class="calendar-wrapper" [class.error]="timeError">
+      <div class="calendar-top">
+        <div
+          class="btn"
+          mwlCalendarPreviousView
+          [view]="'month'"
+          [(viewDate)]="viewDate"
+        >
+          <ion-icon name="chevron-back-outline"></ion-icon>
+        </div>
+        <h2>{{ viewDate | calendarDate : "monthViewTitle" : getLocale() }}</h2>
+        <div
+          class="btn"
+          mwlCalendarNextView
+          [view]="'month'"
+          [(viewDate)]="viewDate"
+        >
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </div>
+      </div>
+      <calendar-template
+        [viewDate]="viewDate"
+        (changeDay)="changeDay($event)"
+        [getDate]="getDate"
+        [color]="color"
+        [minDate]="minDate"
+        [maxDate]="maxDate"
+      ></calendar-template>
+    </div>
+  </div>
+  <div class="time-section">
+    <p class="time-title">{{ "v2.screens.rating-screen.time" | translate }}</p>
+    <div class="time-options">
+      <div
+        *ngFor="let item of timeOptions"
+        class="time-pill"
+        [class.selected]="selectedTime === item"
+        (click)="selectTime(item)"
+        [ngStyle]="{'background-color': selectedTime === item ? color : '#F0F0F0'}"
+      >
+        <p>{{ item.start }}-{{ item.end }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="action-btn">
+    <ion-button expand="block" fill="clear" shape="round" class="reset" (click)="reset()">
+      {{ "v2.screens.rating-screen.reset-to-default" | translate }}
+    </ion-button>
+    <ion-button expand="block" fill="clear" shape="round" class="save" (click)="confirm()" [ngStyle]="{ border: '1px solid ' + color, color: color }">
+      {{ "v2.screens.rating-screen.save-datetime" | translate }}
+    </ion-button>
+  </div>
+</div>

@@ -11,7 +11,8 @@ jobs:
     name: Build Android & deploy to PlayStore
     runs-on: ubuntu-latest
     container:
-      image: opunbuds/ionic-capacitor-android-simple-build-box:node-hydrogen
+      # image: opunbuds/ionic-capacitor-android-simple-build-box:node-hydrogen
+      image: opunbuds/ionic-capacitor-7-android:latest
     steps:
       - uses: actions/checkout@v2
       - name: Build and deploy
@@ -21,8 +22,9 @@ jobs:
           echo "${{ secrets.KEYSTORE_FILE }}" | base64 -d > belair.keystore
           npm i
           export APP_VERSION=$(./tools/version-android.sh)
-          echo "Version $APP_VERSION, Build Number $GITHUB_RUN_NUMBER"
-          npx capacitor-set-version set:android -v $APP_VERSION -b $GITHUB_RUN_NUMBER
+          export BUILD_NUMBER=$(echo $APP_VERSION | awk -F. '{printf "%01d%02d%04d", $1, $2, $3}')
+          echo "Version $APP_VERSION, Build Number $BUILD_NUMBER"
+          npx capacitor-set-version set:android -v $APP_VERSION -b $BUILD_NUMBER
           ionic cap sync android --prod && cd android && ./gradlew bundle
           cd .. && jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore belair.keystore android/app/build/outputs/bundle/release/app-release.aab ${{ secrets.KEYSTORE_ALIAS }} -storepass ${{ secrets.KEYSTORE_PASSWORD }}
           cd android && fastlane deploy branch:${{ github.ref_name }}
@@ -44,12 +46,13 @@ jobs:
           echo "${{ secrets.GOOGLE_SVC_PLIST }}" | base64 -d > ios/App/App/GoogleService-Info.plist
           export NVM_DIR="$HOME/.nvm"
           source $(brew --prefix nvm)/nvm.sh
-          nvm use
+          nvm install
           npm install -g @ionic/cli
           npm install -g @capacitor/cli
           npm i
           export APP_VERSION=$(./tools/version-ios.sh)
-          echo "Version $APP_VERSION, Build Number $GITHUB_RUN_NUMBER"
-          npx capacitor-set-version set:ios -v $APP_VERSION -b $GITHUB_RUN_NUMBER
+          export BUILD_NUMBER=$(echo $APP_VERSION | awk -F. '{printf "%01d%02d%04d", $1, $2, $3}')
+          echo "Version $APP_VERSION, Build Number $BUILD_NUMBER"
+          npx capacitor-set-version set:ios -v $APP_VERSION -b $BUILD_NUMBER
           ionic cap sync ios --prod
           cd ios/App && fastlane deploy

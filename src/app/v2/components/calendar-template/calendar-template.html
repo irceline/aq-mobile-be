@@ -1,0 +1,58 @@
+<ng-template #customCellTemplate let-day="day" let-locale="locale">
+  <div
+    class="cal-cell-top"
+    [class.selected]="getDate(day.date)"
+    [class.disabled]="!isDateInRange(day.date)"
+    [ngStyle]="getCellStyle(day.date)"
+  >
+    <span
+      class="cal-day-number"
+      [class.cal-active]="getDate(day.date)"
+      [ngStyle]="getDayNumberStyle(day.date)"
+    >
+      {{ day.date | calendarDate:'monthViewDayNumber':locale }}
+    </span>
+  </div>
+</ng-template>
+<ng-template
+  #headerTemplate
+  let-days="days"
+  let-locale="locale"
+  let-dayClicked="dayClicked"
+  let-eventDropped="eventDropped"
+>
+  <div class="cal-day-headers cursor-default">
+    <div
+      class="cal-header"
+      *ngFor="let day of days"
+      [class.cal-past]="day.isPast"
+      [class.cal-future]="day.isFuture"
+      [class.cal-drag-over]="day.dragOver"
+      [class.cal-active]="getDate(day.date)"
+      (mwlClick)="onChangeDay(day.date)"
+      mwlDroppable
+      (dragEnter)="day.dragOver = true"
+      (dragLeave)="day.dragOver = false"
+      (drop)="day.dragOver = false; eventDropped.emit({event: $event.dropData.event, newStart: day.date, fromHeader: true})"
+    >
+      <div class="top" [class.today]="day.isToday">
+        <div class="day-label text-uppercase">
+          {{ day.date | calendarDate:'weekViewColumnHeader':locale }}
+        </div>
+
+        <div class="day-number">
+          {{ day.date | calendarDate:'weekViewColumnSubHeader':locale }}
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<mwl-calendar-month-view
+  [viewDate]="viewDate"
+  [cellTemplate]="customCellTemplate"
+  locale="en"
+  class="agenda-month"
+  [weekStartsOn]="1"
+  (dayClicked)="onChangeDay($event.day.date)"
+></mwl-calendar-month-view>

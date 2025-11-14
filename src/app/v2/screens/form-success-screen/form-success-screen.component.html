@@ -1,0 +1,95 @@
+<ion-content>
+  <div
+    class="success-top"
+    [ngStyle]="{ 'background-color': backgroundColor }"
+  ></div>
+  <app-background>
+    <div class="wrapper">
+      <img src="/assets/images/icons/check-circle.svg" />
+      <!-- check-circle icon high contrast -->
+      <svg
+        width="160"
+        height="160"
+        viewBox="0 0 160 160"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        [style.color]="backgroundColor"
+      >
+        <path
+          d="M137.143 74.7755V80.0327C137.136 92.3551 133.146 104.345 125.768 114.215C118.39 124.084 108.019 131.304 96.2021 134.798C84.3853 138.292 71.7558 137.872 60.197 133.602C48.6382 129.331 38.7695 121.439 32.0627 111.102C25.3558 100.764 22.1703 88.5359 22.981 76.2402C23.7918 63.9445 28.5555 52.2403 36.5616 42.8731C44.5678 33.5059 55.3874 26.9777 67.4068 24.2621C79.4263 21.5465 92.0016 22.7889 103.257 27.8041M137.143 34.3185L80 91.5185L62.8572 74.3756"
+          stroke="currentColor"
+          stroke-width="4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+      <!-- End of check circle -->
+      <h1>{{ "v2.components.success-display.thanks" | translate }}</h1>
+      <p>{{ "v2.components.success-display.well-received" | translate }}</p>
+    </div>
+    <div class="action-btn">
+      <ion-button
+        expand="block"
+        fill="clear"
+        shape="round"
+        class="make-report"
+        (click)="goToReport()"
+      >
+        <p>
+          {{ "v2.screens.rating-screen.make-new-report" | translate }}
+        </p>
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </ion-button>
+      <ion-button
+        expand="block"
+        fill="clear"
+        shape="round"
+        class="back-home"
+        [ngStyle]="{ color: backgroundColor }"
+        (click)="goToHome()"
+      >
+        {{ "v2.screens.rating-screen.back-to-home" | translate }}
+      </ion-button>
+    </div>
+    <div class="bottom-bg">
+      <img src="/assets/images/bg-thanks.png" />
+      <!--  bottom cloud decoration -->
+      <svg
+        width="390"
+        height="460"
+        viewBox="0 0 390 460"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        [style.color]="backgroundColor"
+      >
+        <g opacity="0.2" clip-path="url(#clip0_685_8267)">
+          <path
+            opacity="0.35"
+            d="M435.4 460C432.977 455.205 430.553 450.512 428.158 445.786C370.816 335.05 301.812 277.952 233.378 284.392C168.509 290.591 106.063 355.293 52.2285 459.932H435.4V460Z"
+            fill="currentColor"
+          />
+          <path
+            opacity="0.35"
+            d="M578.626 368.856C529.81 238.46 472.44 99.4669 406.858 132.691C360.579 156.119 330.126 285.316 289.408 348.237C236.515 429.893 195.055 325.596 147.722 255.449C83.8506 160.914 4.9522 186.637 -51.9904 320.527C-69.6121 362.006 -86.4639 414.24 -104 458.664H578.626V368.856Z"
+            fill="currentColor"
+          />
+          <path
+            opacity="0.35"
+            d="M874.859 310.046C868.7 307.614 862.598 307.238 857.095 308.608C836.279 313.574 816.548 338.818 797.358 364.986C778.168 391.154 758.892 418.727 738.277 429.139C669.501 463.802 612.615 308.231 549.086 258.086C491.516 212.669 430.524 251.921 374.637 314.739C317.751 378.618 259.012 468.323 199.874 430.133C158.244 403.245 123.4 316.211 84.9341 259.011C16.757 157.489 -55.6401 159.75 -126.212 208.867V480.208H874.859V310.046Z"
+            fill="currentColor"
+          />
+        </g>
+        <defs>
+          <clipPath id="clip0_685_8267">
+            <rect
+              width="639"
+              height="460"
+              fill="white"
+              transform="translate(-104)"
+            />
+          </clipPath>
+        </defs>
+      </svg>
+    </div>
+  </app-background>
+</ion-content>

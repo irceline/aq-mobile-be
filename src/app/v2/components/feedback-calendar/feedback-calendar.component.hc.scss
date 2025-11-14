@@ -1,0 +1,23 @@
+.high-contrast {
+    :host {
+        .wrapper {
+            .time-section {
+                .time-options {
+                    .time-pill {
+                        &.selected {
+                            color: black;
+                        }
+                    }
+                }
+            }
+            .action-btn {
+                ion-button {
+                    &.save {
+                        background-color: #122334;
+                        color: white !important;
+                    }
+                }
+            }
+        }
+    }
+}

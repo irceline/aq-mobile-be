@@ -15,7 +15,8 @@ import { MainScreenComponent } from './main-screen/main-screen.component';
 import { OnboardingScreenComponent } from './onboarding-screen/onboarding-screen.component';
 import { RatingScreenComponent } from './rating-screen/rating-screen.component';
 import { RouterModule } from '@angular/router';
-
+import { RatingFormScreenComponent } from './rating-form-screen/rating-form-screen.component';
+import { FormSuccessScreenComponent } from './form-success-screen/form-success-screen.component';
 
 const SCREENS = [
   AppInfoScreenComponent,
@@ -24,6 +25,8 @@ const SCREENS = [
   MainScreenComponent,
   OnboardingScreenComponent,
   RatingScreenComponent,
+  RatingFormScreenComponent,
+  FormSuccessScreenComponent
 ];
 
 @NgModule({
@@ -41,4 +44,4 @@ const SCREENS = [
   exports: SCREENS,
   // entryComponents: SCREENS,
 })
-export class V2ScreensModule { }
+export class V2ScreensModule {}

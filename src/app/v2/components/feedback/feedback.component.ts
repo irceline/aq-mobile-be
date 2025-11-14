@@ -7,11 +7,16 @@ import { FeedbackCode } from '../../services/feedback/feedback.service';
 import { FeedbackLocationEditComponent } from '../feedback-location-edit/feedback-location-edit.component';
 import { FeedbackStatsComponent } from '../feedback-stats/feedback-stats.component';
 import { UserLocation } from './../../Interfaces';
+import { BelAQIService } from '../../services/bel-aqi.service';
 
 export interface UserCreatedFeedback {
     codes: FeedbackCode[];
     latitude: number;
     longitude: number;
+    situation?: string;
+    otherCause?: string;
+    date_start: string;
+    date_end: string;
 }
 
 @Component({
@@ -23,9 +28,14 @@ export class FeedbackComponent implements OnInit {
 
     @Input() location?: UserLocation;
 
+    @Input()
+    set belAqi(index: number) {
+        this.backgroundColor = this.belAqiService.getLightColorForIndex(index);
+    }
     @Output() feedbackOpened = new EventEmitter();
     @Output() feedbackGiven = new EventEmitter<UserCreatedFeedback>();
     private feedback!: UserCreatedFeedback;
+    public backgroundColor;
 
     like = false;
     dislike = false;
@@ -39,10 +49,13 @@ export class FeedbackComponent implements OnInit {
 
     constructor(
         private modalController: ModalController,
-        private translateSrvc: TranslateService
+        private translateSrvc: TranslateService,
+        private belAqiService: BelAQIService,
     ) { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.belAqiService.$activeIndex.subscribe((newIndex) => this.belAqi = newIndex?.indexScore);
+     }
 
     openFeedback(type: string) {
         if (type === 'like') {
@@ -55,9 +68,9 @@ export class FeedbackComponent implements OnInit {
             this.feedbackOpened.emit(true);
         }
         this.feedback = {
-          // @ts-ignore
+            // @ts-ignore
             latitude: this.location.latitude,
-          // @ts-ignore
+            // @ts-ignore
             longitude: this.location.longitude,
             codes: []
         }
@@ -67,7 +80,7 @@ export class FeedbackComponent implements OnInit {
         this.modalController.create({
             component: FeedbackStatsComponent,
             componentProps: {
-              // @ts-ignore
+                // @ts-ignore
                 location: new L.LatLng(this.location.latitude, this.location.longitude)
             }
         }).then(modal => modal.present());
@@ -78,9 +91,9 @@ export class FeedbackComponent implements OnInit {
             component: FeedbackLocationEditComponent,
             componentProps: {
                 location: {
-                // @ts-ignore
+                    // @ts-ignore
                     longitude: this.location.longitude,
-                // @ts-ignore
+                    // @ts-ignore
                     latitude: this.location.latitude
                 }
             }
