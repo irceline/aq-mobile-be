@@ -1,4 +1,10 @@
 import { Component, QueryList, ViewChildren } from '@angular/core';
+import { Capacitor } from '@capacitor/core';
+// Native
+import { App } from '@capacitor/app';
+import { Device } from '@capacitor/device';
+import { FirebaseAnalytics } from '@capacitor-firebase/analytics';
+
 import { Router, NavigationEnd } from '@angular/router';
 // import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { IonRouterOutlet, ModalController, Platform } from '@ionic/angular';
@@ -26,6 +32,7 @@ export class AppComponent {
     // private networkAlertSrvc: NetworkAlertService,
     private themeHandlerService: ThemeHandlerService
   ) {
+    this.initFirebase();
     this.initializeApp();
     this.registerBackButtonEvent();
     this.handleTheme();
@@ -71,6 +78,25 @@ export class AppComponent {
     // });
 
     // this.networkAlertSrvc.isConnected.subscribe(connected => console.log(`Device has network connection: ${connected}`))
+  }
+
+  private async initFirebase() {
+    if (!Capacitor.isNativePlatform()) return;
+
+    try {
+      await FirebaseAnalytics.setEnabled({ enabled: true });
+
+      const appInfo = await App.getInfo();
+      const deviceInfo = await Device.getInfo();
+
+      await FirebaseAnalytics.setUserProperty({ key: 'app_version', value: appInfo.version });
+      await FirebaseAnalytics.setUserProperty({ key: 'app_build', value: appInfo.build });
+      await FirebaseAnalytics.setUserProperty({ key: 'platform', value: deviceInfo.platform });
+      await FirebaseAnalytics.setUserProperty({ key: 'os_version', value: deviceInfo.osVersion || '' });
+
+    } catch (err) {
+      console.error('Error initializing Firebase', err);
+    }
   }
 
   public storeLastNavigation(): void {

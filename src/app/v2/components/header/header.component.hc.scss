@@ -10,7 +10,7 @@
   .high-contrast {
     :host {
       ion-header {
-        max-height: 50px;
+        max-height: calc(50px + env(safe-area-inset-top));
       }
     }
   }

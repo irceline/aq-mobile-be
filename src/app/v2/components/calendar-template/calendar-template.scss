@@ -1,0 +1,115 @@
+.agenda-month {
+  left: 0;
+  width: calc(100% - 2px);
+
+  &::ng-deep {
+    .cal-month-view {
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
+      padding-bottom: 10px;
+
+      .cal-header {
+        .cal-cell {
+          font-weight: normal;
+          font-size: 14px;
+          opacity: 0.4;
+          display: inline-block;
+          text-transform: none;
+        }
+      }
+
+      .cal-days {
+        border: none;
+
+        .cal-cell-row {
+          border: none;
+
+          &:hover {
+            background: none;
+          }
+        }
+      }
+
+      .cal-day-cell {
+        min-height: 20px;
+        border: none !important;
+        outline: none;
+
+        &.cal-today {
+          // border: 1px solid #23B1D6 !important;
+          border: 1px solid;
+          border-radius: 8px;
+
+          .cal-cell-top {
+            .cal-day-number {
+              &.cal-active {
+                // color: #23B1D6 !important;
+              }
+            }
+          }
+        }
+
+        &.cal-today,
+        &:hover {
+          background: none;
+        }
+
+        &.cal-out-month {
+          opacity: 0;
+          pointer-events: none;
+        }
+
+        .cal-cell-top {
+          min-height: 45px;
+          padding-top: 7px;
+          text-align: center;
+
+          &.disabled {
+            pointer-events: none;
+            opacity: 0.3;
+            cursor: not-allowed;
+          }
+
+          &.selected {
+            // background-color: #23B1D6;
+            border-radius: 8px;
+
+            .cal-day-number {
+              &.cal-active {
+                // color: white !important;
+              }
+            }
+          }
+
+          .cal-day-badge {
+            display: none;
+          }
+
+          .cal-day-number {
+            margin: 0 auto;
+            float: none;
+            // color: var(--font-color) !important;
+            opacity: 1;
+            font-weight: 500;
+            font-size: 15px;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            left: 0;
+
+            &.cal-active {
+              // color: white !important;
+            }
+          }
+        }
+
+        .cal-events {
+          display: none;
+        }
+      }
+    }
+  }
+}

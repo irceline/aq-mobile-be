@@ -9,12 +9,14 @@ import { MainScreenComponent } from './screens/main-screen/main-screen.component
 import { OnboardingScreenComponent } from './screens/onboarding-screen/onboarding-screen.component';
 import { OnboardingScreenGuard } from './screens/onboarding-screen/onboarding-screen.guard';
 import { RatingScreenComponent } from './screens/rating-screen/rating-screen.component';
+import { RatingFormScreenComponent } from './screens/rating-form-screen/rating-form-screen.component';
+import { FormSuccessScreenComponent } from './screens/form-success-screen/form-success-screen.component';
 
 const routes: Routes = [
   {
     path: '',
     component: OnboardingScreenComponent,
-    canActivate: [OnboardingScreenGuard]
+    canActivate: [OnboardingScreenGuard],
   },
   {
     path: 'main',
@@ -37,6 +39,14 @@ const routes: Routes = [
         component: RatingScreenComponent,
       },
       {
+        path: 'rating/form',
+        component: RatingFormScreenComponent,
+      },
+      {
+        path: 'rating/success',
+        component: FormSuccessScreenComponent,
+      },
+      {
         path: 'menu',
         component: MenuScreenComponent,
       },
@@ -48,4 +58,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class V2RouterModule { }
+export class V2RouterModule {}

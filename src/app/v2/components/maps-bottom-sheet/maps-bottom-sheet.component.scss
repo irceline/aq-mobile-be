@@ -1,0 +1,101 @@
+:host {
+    .backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+        z-index: 1000;
+    }
+
+    .bottom-sheet {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 80vh;
+        background-color: var(--ion-background-color, #fff);
+        border-radius: 20px 20px 0 0;
+        z-index: 1001;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.25);
+        overflow: hidden;
+    }
+
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        border-radius: 24px 24px 0 0;
+        padding-bottom: env(safe-area-inset-bottom);
+
+        .map {
+            background-color: white;
+            flex: 1;
+            height: 300px;
+        }
+
+        .map-header {
+            background-color: white;
+            display: flex;
+            justify-content: space-between;
+            padding: 18px 20px;
+
+            p {
+                margin: 0;
+            }
+
+            .title {
+                font-size: 18px;
+                color: #747474;
+                font-weight: 700;
+            }
+
+            .cancel {
+                color: #979797;
+                font-size: 15px;
+            }
+        }
+
+        .controls {
+            display: flex;
+
+            .button {
+                color: white;
+            }
+        }
+
+        .edit-location-hint {
+            color: #747474;
+            padding: 10px 20px 8px 20px;
+            text-align: center;
+            width: 100%;
+            font-size: 15px;
+        }
+
+        .edit-location-anonymise {
+            color: #747474;
+            padding: 0px 20px 10px 0;
+            text-align: center;
+            width: 100%;
+            font-size: 11px;
+        }
+
+        .submit {
+            line-height: 3.5em;
+            text-transform: none;
+            font-size: 15px;
+            font-weight: 500;
+            width: calc(100% - 40px);
+            height: 42px;
+            background: white;
+            border: 1px solid;
+            border-radius: 10px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            outline: none;
+            margin-bottom: 20px;
+        }
+    }
+}

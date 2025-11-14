@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .pipe(filter((event) => event instanceof NavigationEnd))
       // @ts-ignore
       .subscribe((newRoute: NavigationEnd) => {
-        this.onRatingScreen = newRoute.url === '/main/rating';
+        this.onRatingScreen = newRoute.url.includes('/main/rating');
         this.onMenuScreen = newRoute.url.includes('/main/menu');
       });
   }

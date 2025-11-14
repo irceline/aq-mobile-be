@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
 import { AlertController, NavController, Platform } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { NavigationStart, Router, Event as RouterEvent } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { forkJoin, Subject, from } from 'rxjs';
 
@@ -15,7 +15,7 @@ import { AnnualMeanValueService } from '../../services/value-provider/annual-mea
 import { ModelledValueService } from '../../services/value-provider/modelled-value.service';
 import moment from 'moment';
 import { GeneralNotificationService } from '../../services/push-notifications/general-notification.service';
-import { first, map, mergeMap, toArray } from 'rxjs/operators';
+import { filter, first, map, mergeMap, toArray } from 'rxjs/operators';
 // import { SplashScreen } from '@ionic-native/splash-screen/ngx'; // TODO find on capacitor
 import { TimeLineListComponent } from '../../components/time-line-list/time-line-list.component';
 
@@ -146,6 +146,14 @@ export class MainScreenComponent implements OnInit {
       this.updateCurrentLocation();
       return this.locations = locations;
     });
+    this.router.events
+      .pipe(filter((event: RouterEvent): event is NavigationStart => event instanceof NavigationStart))
+      .subscribe(event => {
+        // optional: reset only when leaving /main
+        if (this.router.url === '/main' && event.url !== '/main') {
+          this.resetActiveSlide();
+        }
+      });
 
     // this.platform.ready().then(()=>{
     //     setTimeout(() => this.splashScreen.hide(), 1500)
@@ -513,5 +521,11 @@ export class MainScreenComponent implements OnInit {
     });
 
     await alert.present();
+  }
+
+  private resetActiveSlide() {
+    this.activeSlideIndex = ValueDate.CURRENT;
+    this.detailActive = false;
+    this.detailPoint = null;
   }
 }

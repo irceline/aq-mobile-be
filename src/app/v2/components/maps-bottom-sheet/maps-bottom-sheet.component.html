@@ -1,0 +1,33 @@
+<ng-container *ngIf="isOpen">
+  <!-- Backdrop -->
+  <div class="backdrop" [@fadeBackdropMaps] (click)="close()"></div>
+
+  <!-- Bottom Sheet -->
+  <div class="bottom-sheet" [@slideUpMaps] (click)="$event.stopPropagation()">
+    <div class="wrapper">
+      <div class="map-header">
+        <p class="title">
+          {{ "v2.screens.rating-screen.specify-location" | translate }}
+        </p>
+        <p class="cancel" (click)="cancel()">
+          {{ "controls.cancel" | translate }}
+        </p>
+      </div>
+      <div class="map" id="mapEditLocation"></div>
+      <div class="edit-location-hint" text-wrap>
+        {{ "edit-location-hint" | translate }}
+      </div>
+      <div class="edit-location-anonymise" text-wrap>
+        {{ "feedback.edit-location-anonymise" | translate }}
+      </div>
+      <button
+        fill="white"
+        class="submit"
+        (click)="confirm()"
+        [ngStyle]="{ color: backgroundColor }"
+      >
+        {{ "feedback.save-location" | translate }}
+      </button>
+    </div>
+  </div>
+</ng-container>
