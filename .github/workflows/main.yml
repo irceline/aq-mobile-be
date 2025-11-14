@@ -11,8 +11,7 @@ jobs:
     name: Build Android & deploy to PlayStore
     runs-on: ubuntu-latest
     container:
-      # image: opunbuds/ionic-capacitor-android-simple-build-box:node-hydrogen
-      image: opunbuds/ionic-capacitor-7-android:latest
+      image: opunbuds/ionic-capacitor-android-simple-build-box:node-hydrogen
     steps:
       - uses: actions/checkout@v2
       - name: Build and deploy
