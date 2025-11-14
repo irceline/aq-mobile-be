@@ -8,12 +8,31 @@ on:
       - pipeline/android
 
 jobs:
+  # build-deploy-android:
+  #   name: Build Android & deploy to PlayStore
+  #   runs-on: ubuntu-latest
+  #   container:
+  #     image: opunbuds/ionic-capacitor-android-simple-build-box:node-hydrogen
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Build and deploy
+  #       run: |
+  #         echo "${{ secrets.GOOGLE_SVC_JSON }}" | base64 -d > android/app/google-services.json
+  #         echo "${{ secrets.SVC_ACCOUNT }}" | base64 -d > pc-api-8152115809467011764-994-c96c4f0b05ff.json
+  #         echo "${{ secrets.KEYSTORE_FILE }}" | base64 -d > belair.keystore
+  #         npm i
+  #         export APP_VERSION=$(./tools/version-android.sh)
+  #         export BUILD_NUMBER=$(echo $APP_VERSION | awk -F. '{printf "%01d%02d%04d", $1, $2, $3}')
+  #         echo "Version $APP_VERSION, Build Number $BUILD_NUMBER"
+  #         npx capacitor-set-version set:android -v $APP_VERSION -b $BUILD_NUMBER
+  #         ionic cap sync android --prod && cd android && ./gradlew bundle
+  #         cd .. && jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore belair.keystore android/app/build/outputs/bundle/release/app-release.aab ${{ secrets.KEYSTORE_ALIAS }} -storepass ${{ secrets.KEYSTORE_PASSWORD }}
+  #         cd android && fastlane deploy branch:${{ github.ref_name }}
   build-deploy-android:
     name: Build Android & deploy to PlayStore
     runs-on: ubuntu-latest
     container:
       image: opunbuds/ionic-capacitor-android-simple-build-box:node-hydrogen
-      # image: opunbuds/ionic-capacitor-7-android:latest
     steps:
       - uses: actions/checkout@v2
       - name: Build and deploy
@@ -26,9 +45,16 @@ jobs:
           export BUILD_NUMBER=$(echo $APP_VERSION | awk -F. '{printf "%01d%02d%04d", $1, $2, $3}')
           echo "Version $APP_VERSION, Build Number $BUILD_NUMBER"
           npx capacitor-set-version set:android -v $APP_VERSION -b $BUILD_NUMBER
-          ionic cap sync android --prod && cd android && ./gradlew bundle
+          ionic cap sync android --prod && cd android && ./gradlew bundle assembleRelease
           cd .. && jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore belair.keystore android/app/build/outputs/bundle/release/app-release.aab ${{ secrets.KEYSTORE_ALIAS }} -storepass ${{ secrets.KEYSTORE_PASSWORD }}
-          # cd android && fastlane deploy branch:${{ github.ref_name }}
+          # Sign the APK as well
+          jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore belair.keystore android/app/build/outputs/apk/release/app-release.apk ${{ secrets.KEYSTORE_ALIAS }} -storepass ${{ secrets.KEYSTORE_PASSWORD }}
+
+      - name: Upload APK as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-release
+          path: android/app/build/outputs/apk/release/app-release.apk
 
   # build-deploy-ios:
   #   name: Build iOS & deploy to AppStore
