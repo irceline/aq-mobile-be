@@ -11,23 +11,58 @@ jobs:
     name: Build Android & deploy to PlayStore
     runs-on: ubuntu-latest
     container:
-      # image: opunbuds/ionic-capacitor-android-simple-build-box:node-hydrogen
-      image: opunbuds/ionic-capacitor-7-android:latest
+      image: opunbuds/ionic-capacitor-android-simple-build-box:node-hydrogen
     steps:
-      - uses: actions/checkout@v2
-      - name: Build and deploy
+      - uses: actions/checkout@v4
+
+      - name: Setup secrets
         run: |
           echo "${{ secrets.GOOGLE_SVC_JSON }}" | base64 -d > android/app/google-services.json
           echo "${{ secrets.SVC_ACCOUNT }}" | base64 -d > pc-api-8152115809467011764-994-c96c4f0b05ff.json
           echo "${{ secrets.KEYSTORE_FILE }}" | base64 -d > belair.keystore
-          npm i
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Set app version & build number
+        run: |
           export APP_VERSION=$(./tools/version-android.sh)
           export BUILD_NUMBER=$(echo $APP_VERSION | awk -F. '{printf "%01d%02d%04d", $1, $2, $3}')
           echo "Version $APP_VERSION, Build Number $BUILD_NUMBER"
           npx capacitor-set-version set:android -v $APP_VERSION -b $BUILD_NUMBER
-          ionic cap sync android --prod && cd android && ./gradlew bundle
-          cd .. && jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore belair.keystore android/app/build/outputs/bundle/release/app-release.aab ${{ secrets.KEYSTORE_ALIAS }} -storepass ${{ secrets.KEYSTORE_PASSWORD }}
-          cd android && fastlane deploy branch:${{ github.ref_name }}
+
+      - name: Sync Capacitor Android
+        run: ionic cap sync android --prod
+
+      - name: Remove AD_ID permission
+        run: |
+          # Add tools namespace if not present
+          if ! grep -q "xmlns:tools=" android/app/src/main/AndroidManifest.xml; then
+            sed -i 's/<manifest/<manifest xmlns:tools="http:\/\/schemas.android.com\/tools"/' android/app/src/main/AndroidManifest.xml
+          fi
+
+          # Remove AD_ID permission
+          if ! grep -q "com.google.android.gms.permission.AD_ID.*tools:node=\"remove\"" android/app/src/main/AndroidManifest.xml; then
+            sed -i '/<\/manifest>/i\<uses-permission android:name="com.google.android.gms.permission.AD_ID" tools:node="remove" />' android/app/src/main/AndroidManifest.xml
+          fi
+
+      - name: Build Android bundle
+        run: |
+          cd android
+          ./gradlew bundle
+
+      - name: Sign AAB
+        run: |
+          jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA-256 \
+            -keystore belair.keystore \
+            android/app/build/outputs/bundle/release/app-release.aab \
+            ${{ secrets.KEYSTORE_ALIAS }} \
+            -storepass ${{ secrets.KEYSTORE_PASSWORD }}
+
+      - name: Deploy to PlayStore
+        run: |
+          cd android
+          fastlane deploy branch:${{ github.ref_name }}
 
   build-deploy-ios:
     name: Build iOS & deploy to AppStore
