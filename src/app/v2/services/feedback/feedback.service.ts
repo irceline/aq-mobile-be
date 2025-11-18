@@ -71,10 +71,8 @@ export class FeedbackService {
   }
 
   public sendFeedback(feedback: Feedback): Observable<FeedbackStats> {
-    console.log('feedback', feedback)
     feedback.uuid = this.key;
     const encriptedFeedback = this.encryption.encrypt(JSON.stringify(feedback));
-    console.log(feedback);
     console.log(encriptedFeedback);
     // old code use helgoland
     // return this.httpSrvc.client().post<FeedbackStats>(FEEDBACK_SERVICE_URL, encriptedFeedback, {

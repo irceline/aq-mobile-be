@@ -10,6 +10,7 @@ import {
   BelAQIService,
 } from '../../services/bel-aqi.service';
 import {
+  Feedback,
   FeedbackCode,
   FeedbackService,
 } from '../../services/feedback/feedback.service';
@@ -179,7 +180,7 @@ export class RatingFormScreenComponent implements OnInit {
     date_start.setHours(startHour);
     const date_end = new Date(this.selectedDate);
     date_end.setHours(endHour);
-    const payload = {
+    const payload: Feedback = {
       lat: this.currentLocation.latitude || 0,
       lng: this.currentLocation.longitude || 0,
       report_code: this.selectedCause,
@@ -188,7 +189,9 @@ export class RatingFormScreenComponent implements OnInit {
       date_start: date_start.toISOString(),
       date_end: date_end.toISOString(),
     };
-    console.log('payload', payload);
+    if (!this.selectedCause.includes(this.feedbackCode.NOT_INLINE_WITHOUT_INFO)) {
+      delete payload.others_cause
+    }
     this.feedbackSrvc.sendFeedback(payload).subscribe({
       next: () => {
         this.loadingController.dismiss();
@@ -250,11 +253,7 @@ export class RatingFormScreenComponent implements OnInit {
             const start = new Date(startDate);
             const end = new Date(endDate);
 
-            console.log('start.getHours()', start.getHours());
-            console.log('end.getHours()', end.getHours());
-
             if (start.getHours() !== end.getHours()) {
-              console.log('same???');
               this.selectedDate = new Date(selectedDate);
               this.startDate = start;
               this.endDate = end;
@@ -267,7 +266,6 @@ export class RatingFormScreenComponent implements OnInit {
                 .locale(this.lang || 'en')
                 .format('HH:mm')}`;
             } else {
-              console.log('here');
               this.selectedDate = new Date();
               this.startDate = new Date();
               this.endDate = new Date();
