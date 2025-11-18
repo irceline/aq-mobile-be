@@ -161,10 +161,7 @@ export class RatingFormScreenComponent implements OnInit {
       location.latitude,
       location.longitude
     ).label;
-    this.updateCurrentLocation({
-      ...location,
-      ...this.currentActiveIndex.location,
-    });
+    this.currentLocation = {...this.currentLocation, ...location}
   }
 
   async onSubmit() {
