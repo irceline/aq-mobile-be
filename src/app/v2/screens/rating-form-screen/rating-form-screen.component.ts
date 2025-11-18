@@ -161,7 +161,7 @@ export class RatingFormScreenComponent implements OnInit {
       location.latitude,
       location.longitude
     ).label;
-    this.currentLocation = {...this.currentLocation, ...location}
+    this.currentLocation = { ...this.currentLocation, ...location };
   }
 
   async onSubmit() {
@@ -178,61 +178,34 @@ export class RatingFormScreenComponent implements OnInit {
     const date_start = new Date(this.selectedDate);
     date_start.setHours(startHour);
     const date_end = new Date(this.selectedDate);
-    date_end.setHours(endHour)
-
-    const feedbackSubmits = this.selectedCause.map((fbcode) =>
-      this.feedbackSrvc.sendFeedback({
-        lat: this.currentLocation.latitude || 0,
-        lng: this.currentLocation.longitude || 0,
-        feedback_code: fbcode,
-        situation: this.situation,
-        others_cause: this.otherCause,
-        date_start: date_start.toISOString(),
-        date_end: date_end.toISOString(),
-      })
-    );
-
-    try {
-      forkJoin(feedbackSubmits).subscribe({
-        next: (stats) => {
-          if (stats.length >= 1) {
-            this.feedbackStats = stats[0];
-            console.log(this.feedbackStats);
-          }
-          this.feedbackLocation = new L.LatLng(
-            this.currentLocation.latitude || 0,
-            this.currentLocation.longitude || 0
-          );
-          this.loadingController.dismiss();
-          this.navCtrl.navigateForward('/main/rating/success');
-        },
-        error: (err) => {
-          console.error('forkJoin error:', err);
-          this.toastController
-            .create({
-              message: this.translateSrvc.instant(
-                'v2.screens.rating-screen.error-send-feedback'
-              ),
-              duration: 2000,
-            })
-            .then((toast) => toast.present());
-          this.loadingController.dismiss();
-        },
-      });
-    } catch (error) {
-      console.log('error', error);
-      this.loadingController.dismiss();
-      this.toastController
-        .create({
-          message: this.translateSrvc.instant(
-            'v2.screens.rating-screen.error-send-feedback'
-          ),
-          duration: 2000,
-          position: 'top',
-        })
-        .then((toast) => toast.present());
-      console.error(error);
-    }
+    date_end.setHours(endHour);
+    const payload = {
+      lat: this.currentLocation.latitude || 0,
+      lng: this.currentLocation.longitude || 0,
+      report_code: this.selectedCause,
+      situation: this.situation,
+      others_cause: this.otherCause,
+      date_start: date_start.toISOString(),
+      date_end: date_end.toISOString(),
+    };
+    console.log('payload', payload);
+    this.feedbackSrvc.sendFeedback(payload).subscribe({
+      next: () => {
+        this.loadingController.dismiss();
+        this.navCtrl.navigateForward('/main/rating/success');
+      },
+      error: () => {
+        this.toastController
+          .create({
+            message: this.translateSrvc.instant(
+              'v2.screens.rating-screen.error-send-feedback'
+            ),
+            duration: 2000,
+          })
+          .then((toast) => toast.present());
+        this.loadingController.dismiss();
+      },
+    });
   }
 
   selectCause(code: number) {

@@ -27,7 +27,7 @@ export interface Feedback {
   uuid?: string;
   lat: number;
   lng: number;
-  feedback_code: FeedbackCode;
+  report_code: FeedbackCode[];
   situation?: string;
   date_start?: string;
   date_end?: string;
