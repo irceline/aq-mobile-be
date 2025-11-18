@@ -176,19 +176,22 @@ export class RatingFormScreenComponent implements OnInit {
       ),
     });
     await loading.present();
-    const coordinate = this.randomizeFeedbackLocation({
-      latitude: this.currentLocation.latitude as number,
-      longitude: this.currentLocation.longitude as number,
-    });
+    const startHour = this.startDate.getHours();
+    const endHour = this.endDate.getHours();
+    const date_start = new Date(this.selectedDate);
+    date_start.setHours(startHour);
+    const date_end = new Date(this.selectedDate);
+    date_end.setHours(endHour)
+
     const feedbackSubmits = this.selectedCause.map((fbcode) =>
       this.feedbackSrvc.sendFeedback({
-        lat: coordinate.latitude,
-        lng: coordinate.longitude,
+        lat: this.currentLocation.latitude || 0,
+        lng: this.currentLocation.longitude || 0,
         feedback_code: fbcode,
         situation: this.situation,
         others_cause: this.otherCause,
-        date_start: this.startDate.toISOString(),
-        date_end: this.endDate.toISOString(),
+        date_start: date_start.toISOString(),
+        date_end: date_end.toISOString(),
       })
     );
 
@@ -200,8 +203,8 @@ export class RatingFormScreenComponent implements OnInit {
             console.log(this.feedbackStats);
           }
           this.feedbackLocation = new L.LatLng(
-            coordinate.latitude,
-            coordinate.longitude
+            this.currentLocation.latitude || 0,
+            this.currentLocation.longitude || 0
           );
           this.loadingController.dismiss();
           this.navCtrl.navigateForward('/main/rating/success');
@@ -233,22 +236,6 @@ export class RatingFormScreenComponent implements OnInit {
         .then((toast) => toast.present());
       console.error(error);
     }
-  }
-
-  private randomizeFeedbackLocation({ latitude, longitude }): {
-    latitude: number;
-    longitude: number;
-  } {
-    const randomize = function (n: number, dec: number) {
-      const shift = Math.pow(10, dec - 1);
-      n = Math.round(n * shift) / shift;
-      n = Math.random() / shift + n;
-      return n;
-    };
-    const coordinate = { latitude: 0, longitude: 0 };
-    coordinate.latitude = randomize(latitude, 4);
-    coordinate.longitude = randomize(longitude, 4);
-    return coordinate;
   }
 
   selectCause(code: number) {
