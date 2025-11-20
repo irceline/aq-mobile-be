@@ -91,40 +91,6 @@ export class RatingScreenComponent implements OnInit {
    *
    * @param feedback
    */
-  feedbackGiven(feedback: UserCreatedFeedback) {
-    this.randomizeFeedbackLocation(feedback);
-    const feedbackSubmits = feedback.codes.map(fbcode =>
-      this.feedbackSrvc.sendFeedback({
-        lat: feedback.latitude,
-        lng: feedback.longitude,
-        feedback_code: fbcode
-      })
-    );
-
-    try {
-      forkJoin(feedbackSubmits).subscribe(stats => {
-        if (stats.length >= 1) {
-          this.feedbackStats = stats[0];
-          console.log(this.feedbackStats);
-        }
-        this.feedbackLocation = new L.LatLng(feedback.latitude, feedback.longitude);
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  private randomizeFeedbackLocation(feedback: UserCreatedFeedback): UserCreatedFeedback {
-    const randomize = function (n: number, dec: number) {
-      const shift = Math.pow(10, dec - 1);
-      n = Math.round(n * shift) / shift;
-      n = Math.random() / shift + n;
-      return n;
-    }
-    feedback.latitude = randomize(feedback.latitude, 4);
-    feedback.longitude = randomize(feedback.longitude, 4);
-    return feedback;
-  }
 
   goToForm() {
     console.log('yuhuuuu')
