@@ -78,7 +78,7 @@ export class RatingFormScreenComponent implements OnInit {
   lang: string = this.translateSrvc.currentLang
     ? this.translateSrvc.currentLang
     : 'en';
-  situation: string = '';
+  situation: string | null = null;
   otherCause: string = '';
   isOutsideBelgium: boolean = false;
   causes = [

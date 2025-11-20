@@ -28,7 +28,7 @@ export interface Feedback {
   lat: number;
   lng: number;
   report_code: FeedbackCode[];
-  situation?: string;
+  situation?: string | null;
   date_start?: string;
   date_end?: string;
   others_cause?: string;
