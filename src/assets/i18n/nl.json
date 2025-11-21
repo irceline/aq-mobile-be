@@ -62,8 +62,8 @@
 			"submission-total": "In totaal",
 			"anonymisation": "De locaties die hier getoond worden, werden willekeurig verplaatst om de privacy van de verzender te beschermen."
 		},
-		"make-a-report": "Faire un rapport",
-		"save-location": "Enregistrer l’emplacement"
+		"make-a-report": "Maak een melding",
+		"save-location": "Bevestig locatie"
 	},
 	"loader": {
 		"text": "Gegevens voor je locatie worden opgehaald.",
