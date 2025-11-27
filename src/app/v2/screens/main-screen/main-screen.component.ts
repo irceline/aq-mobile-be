@@ -224,7 +224,7 @@ export class MainScreenComponent implements OnInit {
     from(this.detailedPhenomenona).pipe(
       mergeMap(dph =>
         forkJoin([
-          this.modelledValueService.getValueByDate(this.userSettingsService.selectedUserLocation, dph.phenomenon, currentActiveIndex),
+          this.modelledValueService.getValueByDate(this.userSettingsService.selectedUserLocation, dph.phenomenon, this.activeSlideIndex),
           this.annulMeanValueService.getLastValue(this.userSettingsService.selectedUserLocation, dph.phenomenon)
         ]).pipe(
           map(([currentVal, avgVal]) => {
