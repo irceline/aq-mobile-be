@@ -53,6 +53,7 @@ export class MapsBottomSheetComponent {
   public loadingLabel: boolean;
   // @ts-ignore
   private map: L.Map;
+  private markerRef!: L.Marker;
 
   constructor(
     private belAQIService: BelAQIService,
@@ -103,6 +104,13 @@ export class MapsBottomSheetComponent {
     tiles.addTo(this.map);
 
     this.addMarker();
+
+    this.map.on('click', (e: L.LeafletMouseEvent) => {
+      const latLng = e.latlng;
+      this.loadingLabel = true;
+      this.updatePosition(latLng, this.markerRef);
+      this.markerRef.setLatLng(latLng)
+    });
   }
 
   addMarker() {
@@ -111,18 +119,21 @@ export class MapsBottomSheetComponent {
         lat: this.location.latitude,
         lng: this.location.longitude,
       } as L.LatLngLiteral;
+
       const icondiv = L.divIcon({
         className: 'marker',
         iconAnchor: L.point(10, 40),
       });
-      const marker = L.marker(location, {
+
+      this.markerRef = L.marker(location, {
         draggable: true,
         icon: icondiv,
       }).addTo(this.map);
-      marker.on('dragend', (evt) => {
+
+      this.markerRef.on('dragend', (evt) => {
         this.loadingLabel = true;
         const latLng = evt.target.getLatLng() as L.LatLng;
-        this.updatePosition(latLng, marker);
+        this.updatePosition(latLng, this.markerRef);
       });
     }
   }
@@ -150,7 +161,6 @@ export class MapsBottomSheetComponent {
 
   confirm() {
     this.confirmed.emit(this.location);
-    console.log('this.location', this.location)
     this.close();
   }
 
