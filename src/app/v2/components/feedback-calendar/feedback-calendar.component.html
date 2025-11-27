@@ -46,7 +46,8 @@
         *ngFor="let item of timeOptions"
         class="time-pill"
         [class.selected]="selectedTime === item"
-        (click)="selectTime(item)"
+        [class.disabled]="isFutureTimeSlot(item)"
+        (click)="!isFutureTimeSlot(item) && selectTime(item)"
         [ngStyle]="{'background-color': selectedTime === item ? color : '#F0F0F0'}"
       >
         <p>{{ item.start }}-{{ item.end }}</p>
