@@ -178,14 +178,30 @@ export class FeedbackCalendarComponent implements OnInit {
     }
   }
 
-  isFutureTimeSlot(item: { start: string; end: string }) {
+  isTimeSlotDisabled(item: { start: string; end: string }) {
     const selected = moment(this.viewDate).startOf('day');
     const today = moment().startOf('day');
-    if (selected.isAfter(today)) return true;
-    if (selected.isBefore(today)) return false;
-    const now = moment();
-    const start = moment(item.start, 'HH:mm');
 
+    const oneWeekAgo = moment().subtract(6, 'days');
+    const now = moment();
+
+    const end = moment(item.end, 'HH:mm');
+    const endWithDate = moment(oneWeekAgo)
+      .hour(end.hour())
+      .minute(end.minute())
+      .second(0)
+      .millisecond(0);
+    if (
+      selected.isSame(oneWeekAgo, 'day') &&
+      endWithDate.isBefore(oneWeekAgo) &&
+      item.end !== '00:00'
+    ) {
+      return true;
+    }
+
+    if (selected.isBefore(today)) return false;
+
+    const start = moment(item.start, 'HH:mm');
     return start.isAfter(now);
   }
 }
