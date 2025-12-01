@@ -217,7 +217,8 @@
 				"back-to-home": "Retour à l’écran d’accueil",
 				"select-cause": "Veuillez sélectionner l’une des causes",
 				"error-send-feedback": "Échec de l’envoi du retour",
-				"current-location-outside-belgium": "Votre position actuelle est en dehors de la Belgique, aucune entrée n’est donc créée"
+				"current-location-outside-belgium": "Votre position actuelle est en dehors de la Belgique, aucune entrée n’est donc créée",
+				"send-observation": "Envoyer l'observation"
 			}
 		}
 	}

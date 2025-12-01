@@ -10,6 +10,7 @@ import {
   BelAQIService,
 } from '../../services/bel-aqi.service';
 import {
+  Feedback,
   FeedbackCode,
   FeedbackService,
 } from '../../services/feedback/feedback.service';
@@ -77,7 +78,7 @@ export class RatingFormScreenComponent implements OnInit {
   lang: string = this.translateSrvc.currentLang
     ? this.translateSrvc.currentLang
     : 'en';
-  situation: string = '';
+  situation: string | null = null;
   otherCause: string = '';
   isOutsideBelgium: boolean = false;
   causes = [
@@ -161,10 +162,7 @@ export class RatingFormScreenComponent implements OnInit {
       location.latitude,
       location.longitude
     ).label;
-    this.updateCurrentLocation({
-      ...location,
-      ...this.currentActiveIndex.location,
-    });
+    this.currentLocation = { ...this.currentLocation, ...location };
   }
 
   async onSubmit() {
@@ -176,79 +174,41 @@ export class RatingFormScreenComponent implements OnInit {
       ),
     });
     await loading.present();
-    const coordinate = this.randomizeFeedbackLocation({
-      latitude: this.currentLocation.latitude as number,
-      longitude: this.currentLocation.longitude as number,
-    });
-    const feedbackSubmits = this.selectedCause.map((fbcode) =>
-      this.feedbackSrvc.sendFeedback({
-        lat: coordinate.latitude,
-        lng: coordinate.longitude,
-        feedback_code: fbcode,
-        situation: this.situation,
-        others_cause: this.otherCause,
-        date_start: this.startDate.toISOString(),
-        date_end: this.endDate.toISOString(),
-      })
-    );
-
-    try {
-      forkJoin(feedbackSubmits).subscribe({
-        next: (stats) => {
-          if (stats.length >= 1) {
-            this.feedbackStats = stats[0];
-            console.log(this.feedbackStats);
-          }
-          this.feedbackLocation = new L.LatLng(
-            coordinate.latitude,
-            coordinate.longitude
-          );
-          this.loadingController.dismiss();
-          this.navCtrl.navigateForward('/main/rating/success');
-        },
-        error: (err) => {
-          console.error('forkJoin error:', err);
-          this.toastController
-            .create({
-              message: this.translateSrvc.instant(
-                'v2.screens.rating-screen.error-send-feedback'
-              ),
-              duration: 2000,
-            })
-            .then((toast) => toast.present());
-          this.loadingController.dismiss();
-        },
-      });
-    } catch (error) {
-      console.log('error', error);
-      this.loadingController.dismiss();
-      this.toastController
-        .create({
-          message: this.translateSrvc.instant(
-            'v2.screens.rating-screen.error-send-feedback'
-          ),
-          duration: 2000,
-          position: 'top',
-        })
-        .then((toast) => toast.present());
-      console.error(error);
-    }
-  }
-
-  private randomizeFeedbackLocation({ latitude, longitude }): {
-    latitude: number;
-    longitude: number;
-  } {
-    const randomize = function (n: number, dec: number) {
-      const shift = Math.pow(10, dec - 1);
-      n = Math.round(n * shift) / shift;
-      n = Math.random() / shift + n;
-      return n;
+    const startHour = this.startDate.getHours();
+    const endHour = this.endDate.getHours();
+    const date_start = new Date(this.selectedDate);
+    date_start.setHours(startHour);
+    const date_end = new Date(this.selectedDate);
+    date_end.setHours(endHour);
+    const payload: Feedback = {
+      lat: this.currentLocation.latitude || 0,
+      lng: this.currentLocation.longitude || 0,
+      report_code: this.selectedCause,
+      situation: this.situation,
+      others_cause: this.otherCause,
+      date_start: date_start.toISOString(),
+      date_end: date_end.toISOString(),
     };
-    const coordinate = { latitude: 0, longitude: 0 };
-    coordinate.latitude = randomize(latitude, 4);
-    coordinate.longitude = randomize(longitude, 4);
-    return coordinate;
+    if (!this.selectedCause.includes(this.feedbackCode.NOT_INLINE_WITHOUT_INFO)) {
+      delete payload.others_cause
+    }
+    this.feedbackSrvc.sendFeedback(payload).subscribe({
+      next: () => {
+        this.loadingController.dismiss();
+        this.navCtrl.navigateForward('/main/rating/success');
+      },
+      error: () => {
+        this.toastController
+          .create({
+            message: this.translateSrvc.instant(
+              'v2.screens.rating-screen.error-send-feedback'
+            ),
+            duration: 2000,
+          })
+          .then((toast) => toast.present());
+        this.loadingController.dismiss();
+      },
+    });
   }
 
   selectCause(code: number) {
@@ -293,11 +253,7 @@ export class RatingFormScreenComponent implements OnInit {
             const start = new Date(startDate);
             const end = new Date(endDate);
 
-            console.log('start.getHours()', start.getHours());
-            console.log('end.getHours()', end.getHours());
-
             if (start.getHours() !== end.getHours()) {
-              console.log('same???');
               this.selectedDate = new Date(selectedDate);
               this.startDate = start;
               this.endDate = end;
@@ -310,7 +266,6 @@ export class RatingFormScreenComponent implements OnInit {
                 .locale(this.lang || 'en')
                 .format('HH:mm')}`;
             } else {
-              console.log('here');
               this.selectedDate = new Date();
               this.startDate = new Date();
               this.endDate = new Date();
