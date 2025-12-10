@@ -85,6 +85,14 @@ export class FeedbackCalendarComponent implements OnInit {
 
   changeDay(event: any) {
     const date = event.detail || event;
+    const selected = moment(date).startOf('day');
+    const today = moment().startOf('day');
+    const min = moment().subtract(6, 'days').startOf('day');
+
+    if (selected.isAfter(today) || selected.isBefore(min)) {
+      return;
+    }
+
     this.viewDate = date;
     this.showCalendar = false;
     this.isNow = false;
@@ -99,6 +107,7 @@ export class FeedbackCalendarComponent implements OnInit {
   }
 
   getSelectedTime() {
+    this.isNow = true;
     const now = new Date();
     const hours = now.getHours();
     for (let i = 0; i < this.timeOptions.length; i++) {
@@ -113,7 +122,7 @@ export class FeedbackCalendarComponent implements OnInit {
         }
       }
     }
-
+    
     return (this.selectedTime = this.timeOptions[0]);
   }
 
