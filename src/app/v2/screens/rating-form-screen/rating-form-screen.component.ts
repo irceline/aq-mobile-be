@@ -32,6 +32,7 @@ import {
   LocationStatus,
 } from '../../services/locate/locate.service';
 import * as moment from 'moment';
+import { formatWithTimezone } from '../../utils/date-helper';
 
 export interface CauseItem {
   val: string;
@@ -186,8 +187,10 @@ export class RatingFormScreenComponent implements OnInit {
       report_code: this.selectedCause,
       situation: this.situation,
       others_cause: this.otherCause,
-      date_start: date_start.toISOString(),
-      date_end: date_end.toISOString(),
+      // date_start: date_start.toISOString(),
+      date_start: formatWithTimezone(date_start),
+      // date_end: date_end.toISOString(),
+      date_end: formatWithTimezone(date_end),
     };
     if (!this.selectedCause.includes(this.feedbackCode.NOT_INLINE_WITHOUT_INFO)) {
       delete payload.others_cause
