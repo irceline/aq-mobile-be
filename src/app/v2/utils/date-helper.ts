@@ -1,6 +1,5 @@
 export const formatWithTimezone = (date: Date): string => {
   const offset = -date.getTimezoneOffset();
-  console.log('tz offset', offset);
   const sign = offset >= 0 ? '+' : '-';
   const hours = Math.floor(Math.abs(offset) / 60).toString().padStart(2, '0');
   const minutes = (Math.abs(offset) % 60).toString().padStart(2, '0');
