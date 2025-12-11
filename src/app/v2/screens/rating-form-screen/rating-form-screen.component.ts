@@ -192,8 +192,10 @@ export class RatingFormScreenComponent implements OnInit {
       // date_end: date_end.toISOString(),
       date_end: formatWithTimezone(date_end),
     };
-    if (!this.selectedCause.includes(this.feedbackCode.NOT_INLINE_WITHOUT_INFO)) {
-      delete payload.others_cause
+    if (
+      !this.selectedCause.includes(this.feedbackCode.NOT_INLINE_WITHOUT_INFO)
+    ) {
+      delete payload.others_cause;
     }
     this.feedbackSrvc.sendFeedback(payload).subscribe({
       next: () => {
@@ -252,6 +254,13 @@ export class RatingFormScreenComponent implements OnInit {
         modal.onDidDismiss().then((dismissed) => {
           if (dismissed && dismissed.data) {
             const { selectedDate, startDate, endDate } = dismissed.data;
+            const selected = moment(selectedDate).startOf('day');
+            const today = moment().startOf('day');
+            const min = moment().subtract(6, 'days').startOf('day');
+
+            if (selected.isAfter(today) || selected.isBefore(min)) {
+              return;
+            }
 
             const start = new Date(startDate);
             const end = new Date(endDate);
