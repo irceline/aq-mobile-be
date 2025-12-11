@@ -85,6 +85,14 @@ export class FeedbackCalendarComponent implements OnInit {
 
   changeDay(event: any) {
     const date = event.detail || event;
+    const selected = moment(date).startOf('day');
+    const today = moment().startOf('day');
+    const min = moment().subtract(6, 'days').startOf('day');
+
+    if (selected.isAfter(today) || selected.isBefore(min)) {
+      return;
+    }
+
     this.viewDate = date;
     this.showCalendar = false;
     this.isNow = false;
@@ -99,6 +107,7 @@ export class FeedbackCalendarComponent implements OnInit {
   }
 
   getSelectedTime() {
+    this.isNow = true;
     const now = new Date();
     const hours = now.getHours();
     for (let i = 0; i < this.timeOptions.length; i++) {
@@ -113,7 +122,7 @@ export class FeedbackCalendarComponent implements OnInit {
         }
       }
     }
-
+    
     return (this.selectedTime = this.timeOptions[0]);
   }
 
@@ -176,5 +185,32 @@ export class FeedbackCalendarComponent implements OnInit {
     } else {
       this.selectedTime = { start: startStr, end: endStr };
     }
+  }
+
+  isTimeSlotDisabled(item: { start: string; end: string }) {
+    const selected = moment(this.viewDate).startOf('day');
+    const today = moment().startOf('day');
+
+    const oneWeekAgo = moment().subtract(6, 'days');
+    const now = moment();
+
+    const end = moment(item.end, 'HH:mm');
+    const endWithDate = moment(oneWeekAgo)
+      .hour(end.hour())
+      .minute(end.minute())
+      .second(0)
+      .millisecond(0);
+    if (
+      selected.isSame(oneWeekAgo, 'day') &&
+      endWithDate.isBefore(oneWeekAgo) &&
+      item.end !== '00:00'
+    ) {
+      return true;
+    }
+
+    if (selected.isBefore(today)) return false;
+
+    const start = moment(item.start, 'HH:mm');
+    return start.isAfter(now);
   }
 }

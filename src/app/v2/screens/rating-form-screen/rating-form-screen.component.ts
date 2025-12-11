@@ -32,6 +32,7 @@ import {
   LocationStatus,
 } from '../../services/locate/locate.service';
 import * as moment from 'moment';
+import { formatWithTimezone } from '../../utils/date-helper';
 
 export interface CauseItem {
   val: string;
@@ -186,11 +187,15 @@ export class RatingFormScreenComponent implements OnInit {
       report_code: this.selectedCause,
       situation: this.situation,
       others_cause: this.otherCause,
-      date_start: date_start.toISOString(),
-      date_end: date_end.toISOString(),
+      // date_start: date_start.toISOString(),
+      date_start: formatWithTimezone(date_start),
+      // date_end: date_end.toISOString(),
+      date_end: formatWithTimezone(date_end),
     };
-    if (!this.selectedCause.includes(this.feedbackCode.NOT_INLINE_WITHOUT_INFO)) {
-      delete payload.others_cause
+    if (
+      !this.selectedCause.includes(this.feedbackCode.NOT_INLINE_WITHOUT_INFO)
+    ) {
+      delete payload.others_cause;
     }
     this.feedbackSrvc.sendFeedback(payload).subscribe({
       next: () => {
@@ -249,6 +254,13 @@ export class RatingFormScreenComponent implements OnInit {
         modal.onDidDismiss().then((dismissed) => {
           if (dismissed && dismissed.data) {
             const { selectedDate, startDate, endDate } = dismissed.data;
+            const selected = moment(selectedDate).startOf('day');
+            const today = moment().startOf('day');
+            const min = moment().subtract(6, 'days').startOf('day');
+
+            if (selected.isAfter(today) || selected.isBefore(min)) {
+              return;
+            }
 
             const start = new Date(startDate);
             const end = new Date(endDate);

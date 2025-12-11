@@ -16,7 +16,6 @@ import { ModelledValueService } from '../../services/value-provider/modelled-val
 import moment from 'moment';
 import { GeneralNotificationService } from '../../services/push-notifications/general-notification.service';
 import { filter, first, map, mergeMap, toArray } from 'rxjs/operators';
-// import { SplashScreen } from '@ionic-native/splash-screen/ngx'; // TODO find on capacitor
 import { TimeLineListComponent } from '../../components/time-line-list/time-line-list.component';
 
 interface IndexValueResult extends BelAqiIndexResult {
@@ -37,7 +36,7 @@ marker('v2.screens.app-info.belaqi-title');
 })
 export class MainScreenComponent implements OnInit {
   // @ts-ignore
-  @ViewChild('backButton') backButton: ElementRef<HTMLElement>;
+  @ViewChild('backButton', { static: false }) backButton: ElementRef<HTMLElement>;
   @ViewChild(PullTabComponent) pullTab: any;
   @ViewChild('mainSlide') mainSlide!: TimeLineListComponent;
   @ViewChild('detailSlide') detailSlide!: TimeLineListComponent;
@@ -136,9 +135,7 @@ export class MainScreenComponent implements OnInit {
     public alertCtrl: AlertController,
     public navCtrl: NavController,
     private generalNotificationSrvc: GeneralNotificationService
-    // private splashScreen: SplashScreen
   ) {
-    this.registerBackButtonEvent();
 
     this.locations = this.userSettingsService.getUserSavedLocations();
 
@@ -155,9 +152,9 @@ export class MainScreenComponent implements OnInit {
         }
       });
 
-    // this.platform.ready().then(()=>{
-    //     setTimeout(() => this.splashScreen.hide(), 1500)
-    // })
+    this.platform.ready().then(()=>{
+      this.registerBackButtonEvent();
+    })
   }
 
   registerBackButtonEvent() {
@@ -224,7 +221,7 @@ export class MainScreenComponent implements OnInit {
     from(this.detailedPhenomenona).pipe(
       mergeMap(dph =>
         forkJoin([
-          this.modelledValueService.getValueByDate(this.userSettingsService.selectedUserLocation, dph.phenomenon, currentActiveIndex),
+          this.modelledValueService.getValueByDate(this.userSettingsService.selectedUserLocation, dph.phenomenon, this.activeSlideIndex),
           this.annulMeanValueService.getLastValue(this.userSettingsService.selectedUserLocation, dph.phenomenon)
         ]).pipe(
           map(([currentVal, avgVal]) => {
