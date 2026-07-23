@@ -24,12 +24,12 @@ jobs:
       - name: Install dependencies
         run: npm i
 
-      # - name: Set app version & build number
-      #   run: |
-      #     export APP_VERSION=$(./tools/version-android.sh)
-      #     export BUILD_NUMBER=$(echo $APP_VERSION | awk -F. '{printf "%01d%02d%04d", $1, $2, $3}')
-      #     echo "Version $APP_VERSION, Build Number $BUILD_NUMBER"
-      #     npx capacitor-set-version set:android -v $APP_VERSION -b $BUILD_NUMBER
+      - name: Set app version & build number
+        run: |
+          export APP_VERSION=$(./tools/version-android.sh)
+          export BUILD_NUMBER=$(echo $APP_VERSION | awk -F. '{printf "%01d%02d%04d", $1, $2, $3}')
+          echo "Version $APP_VERSION, Build Number $BUILD_NUMBER"
+          npx capacitor-set-version set:android -v $APP_VERSION -b $BUILD_NUMBER
 
       - name: Sync Capacitor Android
         run: ionic cap sync android --prod
