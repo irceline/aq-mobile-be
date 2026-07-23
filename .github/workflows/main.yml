@@ -47,18 +47,30 @@ jobs:
             sed -i '/<\/manifest>/i\<uses-permission android:name="com.google.android.gms.permission.AD_ID" tools:node="remove" />' android/app/src/main/AndroidManifest.xml
           fi
 
-      - name: Build Android bundle
+      # - name: Build Android bundle
+      #   run: |
+      #     cd android
+      #     ./gradlew bundle
+
+      # - name: Sign AAB
+      #   run: |
+      #     jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA-256 \
+      #       -keystore belair.keystore \
+      #       android/app/build/outputs/bundle/release/app-release.aab \
+      #       ${{ secrets.KEYSTORE_ALIAS }} \
+      #       -storepass ${{ secrets.KEYSTORE_PASSWORD }}
+
+      - name: Build Android APK (Debug)
         run: |
           cd android
-          ./gradlew bundle
+          ./gradlew assembleDebug
 
-      - name: Sign AAB
-        run: |
-          jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA-256 \
-            -keystore belair.keystore \
-            android/app/build/outputs/bundle/release/app-release.aab \
-            ${{ secrets.KEYSTORE_ALIAS }} \
-            -storepass ${{ secrets.KEYSTORE_PASSWORD }}
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-debug-apk
+          path: android/app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
 
       # - name: Deploy to PlayStore
       #   run: |
