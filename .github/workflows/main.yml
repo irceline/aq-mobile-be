@@ -11,7 +11,7 @@ jobs:
     name: Build Android & deploy to PlayStore
     runs-on: ubuntu-latest
     container:
-      image: opunbuds/ionic-capacitor-android-simple-build-box:node-hydrogen
+      image: opunbuds/ionic-capacitor-8-android:latest
     steps:
       - uses: actions/checkout@v4
 
@@ -58,6 +58,19 @@ jobs:
             android/app/build/outputs/bundle/release/app-release.aab \
             ${{ secrets.KEYSTORE_ALIAS }} \
             -storepass ${{ secrets.KEYSTORE_PASSWORD }}
+
+      # FOR TESTING ONLY
+      # - name: Build Android APK (Debug)
+      #   run: |
+      #     cd android
+      #     ./gradlew assembleDebug
+
+      # - name: Upload APK artifact
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: app-debug-apk
+      #     path: android/app/build/outputs/apk/debug/*.apk
+      #     if-no-files-found: error
 
       - name: Deploy to PlayStore
         run: |
