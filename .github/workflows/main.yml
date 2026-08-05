@@ -86,6 +86,7 @@ jobs:
         env:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
           MATCH_REPO_PASSWORD: ${{ secrets.MATCH_REPO_PASSWORD }}
+          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.NEB_GITHUB_TOKEN }}
           KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
           APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
           APPLE_API_KEY_ISSUER_ID: ${{ secrets.APPLE_API_KEY_ISSUER_ID }}
