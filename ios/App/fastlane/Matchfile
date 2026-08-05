@@ -1,5 +1,5 @@
 # git_url("git@bitbucket.org:nebulaeenterprises/belair-provisioning-match.git")
-git_url("https://github.com/NebulaeSoft/belair-ios-provisioning.git")
+git_url("https://#{ENV['NEB_GITHUB_TOKEN']}@github.com/NebulaeSoft/belair-ios-provisioning.git")
 git_branch("master")
 storage_mode("git")
 
