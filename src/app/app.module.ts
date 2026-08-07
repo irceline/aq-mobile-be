@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, importProvidersFrom, Injector, NgModule } from '@angular/core';
+import { APP_INITIALIZER, ErrorHandler, importProvidersFrom, Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -20,6 +20,7 @@ import { JSSONSettingsService } from './v2/services/settings/settings.service';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import * as Sentry from '@sentry/angular';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -45,6 +46,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: ErrorHandler, useValue: Sentry.createErrorHandler({ logErrors: true }) },
     { provide: SettingsService, useClass: JSSONSettingsService },
     {
       provide: APP_INITIALIZER,

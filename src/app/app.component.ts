@@ -4,6 +4,7 @@ import { Capacitor } from '@capacitor/core';
 import { App } from '@capacitor/app';
 import { Device } from '@capacitor/device';
 import { FirebaseAnalytics } from '@capacitor-firebase/analytics';
+import * as Sentry from '@sentry/angular';
 
 import { Router, NavigationEnd } from '@angular/router';
 // import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -94,8 +95,14 @@ export class AppComponent {
       await FirebaseAnalytics.setUserProperty({ key: 'platform', value: deviceInfo.platform });
       await FirebaseAnalytics.setUserProperty({ key: 'os_version', value: deviceInfo.osVersion || '' });
 
+      Sentry.setTag('app_version', appInfo.version);
+      Sentry.setTag('app_build', appInfo.build);
+      Sentry.setTag('platform', deviceInfo.platform);
+      Sentry.setTag('os_version', deviceInfo.osVersion || '');
+
     } catch (err) {
       console.error('Error initializing Firebase', err);
+      Sentry.captureException(err);
     }
   }
 
