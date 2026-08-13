@@ -24,6 +24,9 @@ jobs:
       - name: Install dependencies
         run: npm i
 
+      - name: Translation Import
+        run: npm run translation:import
+
       - name: Set app version & build number
         run: |
           export APP_VERSION=$(./tools/version-android.sh)
@@ -99,6 +102,7 @@ jobs:
           npm install -g @ionic/cli
           npm install -g @capacitor/cli
           npm i
+          npm run translation:import
           export APP_VERSION=$(./tools/version-ios.sh)
           export BUILD_NUMBER=$(echo $APP_VERSION | awk -F. '{printf "%01d%02d%04d", $1, $2, $3}')
           echo "Version $APP_VERSION, Build Number $BUILD_NUMBER"
