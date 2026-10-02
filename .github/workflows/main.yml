@@ -25,6 +25,11 @@ jobs:
         run: npm i
 
       - name: Translation Import
+        env:
+          TRADUORA_API_URL: ${{ vars.TRADUORA_API_URL }}
+          TRADUORA_PROJECT_ID: ${{ vars.TRADUORA_PROJECT_ID }}
+          TRADUORA_CLIENT_ID: ${{ vars.TRADUORA_CLIENT_ID }}
+          TRADUORA_CLIENT_SECRET: ${{ secrets.TRADUORA_CLIENT_SECRET }}
         run: npm run translation:import
 
       - name: Set app version & build number
@@ -94,6 +99,10 @@ jobs:
           APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
           APPLE_API_KEY_ISSUER_ID: ${{ secrets.APPLE_API_KEY_ISSUER_ID }}
           APPLE_API_KEY_P8_BASE64: ${{ secrets.APPLE_API_KEY_P8_BASE64 }}
+          TRADUORA_API_URL: ${{ vars.TRADUORA_API_URL }}
+          TRADUORA_PROJECT_ID: ${{ vars.TRADUORA_PROJECT_ID }}
+          TRADUORA_CLIENT_ID: ${{ vars.TRADUORA_CLIENT_ID }}
+          TRADUORA_CLIENT_SECRET: ${{ secrets.TRADUORA_CLIENT_SECRET }}
         run: |
           echo "${{ secrets.GOOGLE_SVC_PLIST }}" | base64 -d > ios/App/App/GoogleService-Info.plist
           export NVM_DIR="$HOME/.nvm"
