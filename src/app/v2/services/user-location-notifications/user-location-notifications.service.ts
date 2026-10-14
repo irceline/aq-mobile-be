@@ -92,49 +92,49 @@ export class UserLocationNotificationsService {
 
   public unsubscribeLocation(location: UserLocation, performUpdate: boolean = false): Observable<boolean> {
     return new Observable<boolean>((observer: Observer<boolean>) => {
+      const langCode = this.translate.currentLang;
+
+      // Always release the FCM topic, even when the backend registration could
+      // not be deleted: a failed backend delete must never leave the device
+      // subscribed to push notifications for a removed/changed location (NEB-613).
+      const unsubscribeTopic = (lat: number, lng: number, language: string) => {
+        const topic = this.topicGenerator.generateTopic(lat, lng, language);
+        // unsubscribe from Topic
+        this.notifications.unsubscribeTopic(topic).subscribe(
+          () => {
+            // @ts-ignore
+            location.subscription = null;
+            observer.next(true);
+            observer.complete();
+          },
+          () => this.publishError(observer, UserLocationSubscriptionError.NotificationSubscription)
+        )
+      };
+
       if (location.subscription) {
         const subscription: LocationSubscription = location.subscription;
 
         if (performUpdate) {
-          const topic = this.topicGenerator.generateTopic(subscription.lat, subscription.lng, subscription.language);
-          // unsubscribe to Topic
-          this.notifications.unsubscribeTopic(topic).subscribe(
-            () => {
-              // @ts-ignore
-              location.subscription = null;
-              observer.next(true);
-              observer.complete();
-            },
-            () => this.publishError(observer, UserLocationSubscriptionError.NotificationSubscription)
-          )
+          // Language-change flow: only the FCM topic needs to be released.
+          unsubscribeTopic(subscription.lat, subscription.lng, subscription.language);
         } else {
-          // unregister to Backend
+          // unregister from Backend, then release the topic either way so a
+          // failed backend delete can't leave a stale subscription behind.
           this.deleteSubscription(subscription).subscribe(
-            success => {
-              if (success) {
-                const topic = this.topicGenerator.generateTopic(subscription.lat, subscription.lng, subscription.language);
-                // unsubscribe to Topic
-                this.notifications.unsubscribeTopic(topic).subscribe(
-                  () => {
-                    // @ts-ignore
-                    location.subscription = null;
-                    observer.next(true);
-                    observer.complete();
-                  },
-                  () => this.publishError(observer, UserLocationSubscriptionError.NotificationSubscription)
-                )
-              } else {
-                this.publishError(observer, UserLocationSubscriptionError.BackendRegistration);
-              }
-            },
-            () => this.publishError(observer, UserLocationSubscriptionError.BackendRegistration)
+            () => unsubscribeTopic(subscription.lat, subscription.lng, subscription.language),
+            () => unsubscribeTopic(subscription.lat, subscription.lng, subscription.language)
           );
         }
-
-
       } else {
-        observer.next(true);
-        observer.complete();
+        // No stored subscription info; best-effort release of the topic built
+        // from the location coordinates so stale topic subscriptions can't
+        // keep producing notifications (NEB-613).
+        if (location.latitude != null && location.longitude != null) {
+          unsubscribeTopic(location.latitude, location.longitude, langCode);
+        } else {
+          observer.next(true);
+          observer.complete();
+        }
       }
     });
   }
