@@ -5,6 +5,7 @@ import { BehaviorSubject, forkJoin, Observable, of, Subscription, timer } from '
 import { catchError, map, tap } from 'rxjs/operators';
 
 import locations from '../../../assets/locations.json';
+import * as Sentry from '@sentry/angular';
 import { UserLocation } from '../Interfaces';
 import { UserLocationNotificationsService } from './user-location-notifications/user-location-notifications.service';
 
@@ -152,6 +153,10 @@ export class UserSettingsService {
               this.dismissLoading()
               this._userLocations = this._userLocations.filter(l => l.id !== location.id)
               console.log(`ERR: addUserLocation`, err)
+              Sentry.captureMessage('Add user location failed', {
+                level: 'error',
+                extra: { error: String(err) }
+              });
               this.showToast(this.translate.instant('v2.components.location-input.error-choose-location'))
             }
           );
@@ -210,6 +215,14 @@ export class UserSettingsService {
           // the next subscribe pass (NEB-613).
           this.saveLocations();
           this.dismissLoading();
+          Sentry.captureMessage('Remove user location failed', {
+            level: 'error',
+            extra: {
+              error: String(err),
+              hadSubscription: !!locationToRemove?.subscription,
+              notificationsActive: this.$userLocationNotificationsActive.getValue()
+            }
+          });
           this.showToast(this.translate.instant('v2.components.location-input.error-remove-location'))
         }
       );

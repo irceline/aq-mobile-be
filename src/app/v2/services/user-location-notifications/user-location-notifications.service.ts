@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, NgZone } from '@angular/core';
+import * as Sentry from '@sentry/angular';
 import { NavController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, Observer, Subject } from 'rxjs';
@@ -85,7 +86,13 @@ export class UserLocationNotificationsService {
             this.publishError(observer, UserLocationSubscriptionError.BackendRegistration);
           }
         },
-        error => this.publishError(observer, error)
+        error => {
+          Sentry.captureMessage('Location subscribe: backend registration failed', {
+            level: 'error',
+            extra: { uniqueId: subscription.uniqueId, lat: subscription.lat, lng: subscription.lng }
+          });
+          this.publishError(observer, error);
+        }
       );
     });
   }
@@ -107,7 +114,13 @@ export class UserLocationNotificationsService {
             observer.next(true);
             observer.complete();
           },
-          () => this.publishError(observer, UserLocationSubscriptionError.NotificationSubscription)
+          error => {
+            Sentry.captureMessage('Location unsubscribe: FCM topic unsubscribe failed', {
+              level: 'error',
+              extra: { topic, hadSubscription: !!location.subscription, performUpdate }
+            });
+            this.publishError(observer, UserLocationSubscriptionError.NotificationSubscription);
+          }
         )
       };
 
@@ -173,6 +186,10 @@ export class UserLocationNotificationsService {
           observer.next(response.status === 200);
           observer.complete();
         }, () => {
+          Sentry.captureMessage('Location unsubscribe: backend DELETE failed', {
+            level: 'error',
+            extra: { uniqueId: subscription.uniqueId, keyMatchesCurrentToken: subscription.key === this.notifications.fcmToken }
+          });
           observer.error(UserLocationSubscriptionError.BackendRegistration);
           observer.complete();
         });
