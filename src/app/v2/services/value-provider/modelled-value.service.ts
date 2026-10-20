@@ -37,10 +37,10 @@ const No2ForcastLayerMapping = [
 ];
 
 const O3ForcastLayerMapping = [
-  { date: ValueDate.TODAY, layerId: 'forecast:o3_max8hmean_d0' },
-  { date: ValueDate.TOMORROW, layerId: 'forecast:o3_max8hmean_d1' },
-  { date: ValueDate.IN_TWO_DAYS, layerId: 'forecast:o3_max8hmean_d2' },
-  { date: ValueDate.IN_THREE_DAYS, layerId: 'forecast:o3_max8hmean_d3' }
+  { date: ValueDate.TODAY, layerId: 'forecast:o3_max1hmean_d0' },
+  { date: ValueDate.TOMORROW, layerId: 'forecast:o3_max1hmean_d1' },
+  { date: ValueDate.IN_TWO_DAYS, layerId: 'forecast:o3_max1hmean_d2' },
+  { date: ValueDate.IN_THREE_DAYS, layerId: 'forecast:o3_max1hmean_d3' }
 ];
 
 const PM10ForcastLayerMapping = [
