@@ -5,6 +5,7 @@ import { BehaviorSubject, forkJoin, Observable, of, Subscription, timer } from '
 import { catchError, map, tap } from 'rxjs/operators';
 
 import locations from '../../../assets/locations.json';
+import * as Sentry from '@sentry/angular';
 import { UserLocation } from '../Interfaces';
 import { UserLocationNotificationsService } from './user-location-notifications/user-location-notifications.service';
 
@@ -150,8 +151,12 @@ export class UserSettingsService {
           },
             async (err) => {
               this.dismissLoading()
-              this._userLocations.shift()
+              this._userLocations = this._userLocations.filter(l => l.id !== location.id)
               console.log(`ERR: addUserLocation`, err)
+              Sentry.captureMessage('Add user location failed', {
+                level: 'error',
+                extra: { error: String(err) }
+              });
               this.showToast(this.translate.instant('v2.components.location-input.error-choose-location'))
             }
           );
@@ -175,10 +180,11 @@ export class UserSettingsService {
       if (this.$userLocationNotificationsActive.getValue()) {
         this.showLoading().then(() => {
           this.userLocationNotificationSrvc.unsubscribeLocation(matchedLocation).subscribe(() => {
-            this.userLocationNotificationSrvc.subscribeLocation(matchedLocation, this.$userAqiIndexThreshold.value).subscribe(() => {
-              this.dismissLoading()
-            });
-          })
+            this.userLocationNotificationSrvc.subscribeLocation(matchedLocation, this.$userAqiIndexThreshold.value).subscribe(
+              () => this.dismissLoading(),
+              () => this.dismissLoading()
+            );
+          }, () => this.dismissLoading())
         })
       }
       this.saveLocations();
@@ -204,7 +210,19 @@ export class UserSettingsService {
           this.dismissLoading()
         },
         (err) => {
+          // Still persist the removal so the location never comes back from
+          // localStorage while a stale push subscription may need cleanup on
+          // the next subscribe pass (NEB-613).
+          this.saveLocations();
           this.dismissLoading();
+          Sentry.captureMessage('Remove user location failed', {
+            level: 'error',
+            extra: {
+              error: String(err),
+              hadSubscription: !!locationToRemove?.subscription,
+              notificationsActive: this.$userLocationNotificationsActive.getValue()
+            }
+          });
           this.showToast(this.translate.instant('v2.components.location-input.error-remove-location'))
         }
       );
