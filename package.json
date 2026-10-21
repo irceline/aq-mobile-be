@@ -11,7 +11,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "i18n-extract": "ngx-translate-extract -i ./src -o ./src/assets/i18n/??.json --clean --sort --format namespaced-json"
+    "i18n-extract": "ngx-translate-extract -i ./src -o ./src/assets/i18n/??.json --clean --sort --format namespaced-json",
+    "translation:import": "node scripts/traduora-import.js"
   },
   "precommit": [],
   "private": true,
@@ -47,6 +48,7 @@
     "@ionic/storage-angular": "^4.0.0",
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
+    "@sentry/angular": "^10.69.0",
     "@types/hammerjs": "^2.0.45",
     "@types/leaflet.markercluster": "^1.5.4",
     "angular-calendar": "^0.31.0",
