@@ -119,6 +119,7 @@ jobs:
           echo "Version $APP_VERSION, Build Number $BUILD_NUMBER"
           npx capacitor-set-version set:ios -v $APP_VERSION -b $BUILD_NUMBER
           # Keep Sentry release in sync with the app version shipped to the store
-          sed -i "s/SENTRY_RELEASE: '.*'/SENTRY_RELEASE: '$APP_VERSION'/" src/environments/environment.prod.ts
+          # macOS/BSD sed requires an explicit empty backup suffix argument
+          sed -i '' "s/SENTRY_RELEASE: '.*'/SENTRY_RELEASE: '$APP_VERSION'/" src/environments/environment.prod.ts
           ionic cap sync ios --prod
           cd ios/App && fastlane deploy
