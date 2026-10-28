@@ -38,6 +38,8 @@ jobs:
           export BUILD_NUMBER=$(echo $APP_VERSION | awk -F. '{printf "%01d%02d%04d", $1, $2, $3}')
           echo "Version $APP_VERSION, Build Number $BUILD_NUMBER"
           npx capacitor-set-version set:android -v $APP_VERSION -b $BUILD_NUMBER
+          # Keep Sentry release in sync with the app version shipped to the store
+          sed -i "s/SENTRY_RELEASE: '.*'/SENTRY_RELEASE: '$APP_VERSION'/" src/environments/environment.prod.ts
 
       - name: Sync Capacitor Android
         run: ionic cap sync android --prod
@@ -116,5 +118,7 @@ jobs:
           export BUILD_NUMBER=$(echo $APP_VERSION | awk -F. '{printf "%01d%02d%04d", $1, $2, $3}')
           echo "Version $APP_VERSION, Build Number $BUILD_NUMBER"
           npx capacitor-set-version set:ios -v $APP_VERSION -b $BUILD_NUMBER
+          # Keep Sentry release in sync with the app version shipped to the store
+          sed -i "s/SENTRY_RELEASE: '.*'/SENTRY_RELEASE: '$APP_VERSION'/" src/environments/environment.prod.ts
           ionic cap sync ios --prod
           cd ios/App && fastlane deploy
