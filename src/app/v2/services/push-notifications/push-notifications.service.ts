@@ -1,4 +1,5 @@
 import { Injectable, NgZone } from '@angular/core';
+import * as Sentry from '@sentry/angular';
 import { FirebaseMessaging } from '@capacitor-firebase/messaging';
 import { App } from '@capacitor/app';
 import { NativeSettings, AndroidSettings, IOSSettings } from 'capacitor-native-settings';
@@ -25,6 +26,87 @@ export class PushNotificationsService {
 
   public fcmToken!: string;
   public appVersion!: string;
+
+  // FCM token + app version are fetched asynchronously in platform.ready().
+  // Anything that needs the token (e.g. channel subscription payloads) must
+  // await this promise instead of reading fcmToken synchronously, or the
+  // payload can be sent with key=undefined before the token arrives.
+  private fcmTokenReadyPromise: Promise<string> | null = null;
+  private appVersionReadyPromise: Promise<string> | null = null;
+
+  public get fcmTokenReady(): Promise<string> {
+    if (this.fcmToken) return Promise.resolve(this.fcmToken);
+    if (!this.fcmTokenReadyPromise) {
+      this.fcmTokenReadyPromise = FirebaseMessaging.getToken()
+        .then((token) => {
+          this.fcmToken = token.token;
+          return this.fcmToken;
+        })
+        .catch((e) => {
+          this.fcmTokenReadyPromise = null; // allow retry on next call
+          Sentry.captureMessage('FCM getToken failed (fcmTokenReady)', {
+            level: 'error',
+            extra: {
+              error: String(e),
+              isCapacitor: this.platform?.is?.('capacitor') ?? null
+            }
+          });
+          throw e;
+        });
+    }
+    return this.fcmTokenReadyPromise;
+  }
+
+  public get appVersionReady(): Promise<string> {
+    if (this.appVersion) return Promise.resolve(this.appVersion);
+    if (!this.appVersionReadyPromise) {
+      this.appVersionReadyPromise = App.getInfo()
+        .then((info) => (this.appVersion = info.version))
+        .catch((e) => {
+          this.appVersionReadyPromise = null; // allow retry on next call
+          Sentry.captureMessage('App.getInfo failed (appVersionReady)', {
+            level: 'error',
+            extra: { error: String(e) }
+          });
+          throw e;
+        });
+    }
+    return this.appVersionReadyPromise;
+  }
+
+  /**
+   * Resolves when fcmTokenReady settles (token or error). Rejects with a
+   * timeout error if getToken() hangs — e.g. notification permission prompt
+   * never answered, or the plugin is unavailable on web — so callers waiting
+   * on the token can fail fast instead of blocking forever (infinite loading
+   * spinner in subscription flows).
+   */
+  public async fcmTokenReadyWithTimeout(timeoutMs: number = 8000): Promise<string> {
+    const started = Date.now();
+    let timeoutId: any;
+    const timeout = new Promise<never>((_, reject) => {
+      timeoutId = setTimeout(() => {
+        const hasToken = !!this.fcmToken;
+        const pending = this.fcmTokenReadyPromise !== null;
+        Sentry.captureMessage('FCM token wait timed out', {
+          level: 'warning',
+          extra: {
+            timeoutMs,
+            hasToken,
+            promisePending: pending,
+            isCapacitor: this.platform?.is?.('capacitor') ?? null,
+            waitedMs: Date.now() - started
+          }
+        });
+        reject(new Error(`fcmTokenReady timed out after ${timeoutMs}ms`));
+      }, timeoutMs);
+    });
+    try {
+      return await Promise.race([this.fcmTokenReady, timeout]);
+    } finally {
+      clearTimeout(timeoutId);
+    }
+  }
 
   constructor(
     private platform: Platform,

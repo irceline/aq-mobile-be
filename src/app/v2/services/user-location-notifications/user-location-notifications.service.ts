@@ -23,6 +23,7 @@ export interface UserLocationNotification {
 }
 
 const NOTIFICATION_SUBSCRIPTION_BACKEND_URL = 'https://geobelair.irceline.be/air/belair_channel.php';
+// const NOTIFICATION_SUBSCRIPTION_BACKEND_URL = 'https://geobelair.irceline.be/air/belair_channel.debug.php';
 const USER_LOCATION_SUBSCRIPTIONS_PARAM = 'user_location_subscriptions';
 
 @Injectable({
@@ -60,40 +61,57 @@ export class UserLocationNotificationsService {
   public subscribeLocation(location: UserLocation, index: number = null): Observable<boolean> {
     const langCode = this.translate.currentLang;
     return new Observable<boolean>((observer: Observer<boolean>) => {
-      // @ts-ignore
-      const subscription = this.generateSubscriptionObject(location.latitude, location.longitude, location.label, langCode, index, location.subscription ? location.subscription.uniqueId : null);
+      // token + version are fetched asynchronously (FCM) — await them so the
+      // payload never contains key/version=undefined (NEB-614: server insert
+      // failed with null key because the token promise hadn't resolved yet).
+      // Uses a bounded wait so a hung getToken() (permission prompt never
+      // answered, plugin unavailable) can't leave the loading spinner up
+      // forever — it fails fast into the normal error path instead.
+      this.notifications.fcmTokenReadyWithTimeout()
+        .then(() => this.notifications.appVersionReady)
+        .then(() => {
+          // @ts-ignore
+          const subscription = this.generateSubscriptionObject(location.latitude, location.longitude, location.label, langCode, index, location.subscription ? location.subscription.uniqueId : null);
 
-      // register to Backend
-      this.registerSubscription(subscription).subscribe(
-        (data: any) => {
-          if (data) {
-            // subscribe to Topic
-            const topic = this.topicGenerator.generateTopic(data.lat, data.lng, langCode);
-            this.notifications.subscribeTopic(topic).subscribe(
-              () => {
-                location.subscription = {
-                  ...data,
-                  uniqueId: data.unique_id
-                };
+          // register to Backend
+          this.registerSubscription(subscription).subscribe(
+            (data: any) => {
+              if (data) {
+                // subscribe to Topic
+                const topic = this.topicGenerator.generateTopic(data.lat, data.lng, langCode);
+                this.notifications.subscribeTopic(topic).subscribe(
+                  () => {
+                    location.subscription = {
+                      ...data,
+                      uniqueId: data.unique_id
+                    };
 
-                observer.next(true);
-                observer.complete();
-              },
-              () => this.publishError(observer, UserLocationSubscriptionError.NotificationSubscription)
-            )
-          } else {
-            console.log(`registerSubscription failed`, subscription);
-            this.publishError(observer, UserLocationSubscriptionError.BackendRegistration);
-          }
-        },
-        error => {
-          Sentry.captureMessage('Location subscribe: backend registration failed', {
+                    observer.next(true);
+                    observer.complete();
+                  },
+                  () => this.publishError(observer, UserLocationSubscriptionError.NotificationSubscription)
+                )
+              } else {
+                console.log(`registerSubscription failed`, subscription);
+                this.publishError(observer, UserLocationSubscriptionError.BackendRegistration);
+              }
+            },
+            error => {
+              Sentry.captureMessage('Location subscribe: backend registration failed', {
+                level: 'error',
+                extra: { uniqueId: subscription.uniqueId, lat: subscription.lat, lng: subscription.lng }
+              });
+              this.publishError(observer, error);
+            }
+          );
+        })
+        .catch(error => {
+          Sentry.captureMessage('Location subscribe: FCM token/version unavailable', {
             level: 'error',
-            extra: { uniqueId: subscription.uniqueId, lat: subscription.lat, lng: subscription.lng }
+            extra: { lat: location.latitude, lng: location.longitude, error: String(error) }
           });
-          this.publishError(observer, error);
-        }
-      );
+          this.publishError(observer, UserLocationSubscriptionError.BackendRegistration);
+        });
     });
   }
 
