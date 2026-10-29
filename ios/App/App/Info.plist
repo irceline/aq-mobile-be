@@ -47,6 +47,8 @@
 	<true/>
   <key>NSLocationWhenInUseUsageDescription</key>
   <string>The BelAir-app uses your location to fetch the latest relevant hi-resolution air quality data available specifically for your location.</string>
+  <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+  <string>The BelAir-app uses your location to fetch the latest relevant hi-resolution air quality data available specifically for your location.</string>
   <key>NSBluetoothAlwaysUsageDescription</key>
   <string>The BelAir-app might use bluetooth to improve the location accuracy when establishing your location.</string>
   <key>ITSAppUsesNonExemptEncryption</key>
