@@ -1,4 +1,6 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { Capacitor, PluginListenerHandle } from '@capacitor/core';
+import { Keyboard, KeyboardResize } from '@capacitor/keyboard';
 import { SettingsService } from '@helgoland/core';
 import { IonInput, LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
@@ -33,6 +35,7 @@ export class LocationInputComponent implements OnInit, OnDestroy {
 
   @Output() locationSelected = new EventEmitter<UserLocation>();
   private langSubscription!: Subscription;
+  private keyboardDidShowListener?: PluginListenerHandle;
 
   constructor(
     private loadingController: LoadingController,
@@ -41,11 +44,23 @@ export class LocationInputComponent implements OnInit, OnDestroy {
     private geocoder: GeocoderService,
     private locateSrvc: LocateService,
     private modalController: ModalController,
-    private settingsSrvc: SettingsService<MobileSettings>
+    private settingsSrvc: SettingsService<MobileSettings>,
+    private elementRef: ElementRef
   ) { }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    if (this.visible && !this.elementRef.nativeElement.contains(event.target)) {
+      this.closeDropdown();
+    }
+  }
 
   ngOnDestroy(): void {
     if (this.langSubscription) { this.langSubscription.unsubscribe() }
+    if (Capacitor.isNativePlatform()) {
+      Keyboard.setResizeMode({ mode: KeyboardResize.Native });
+      this.keyboardDidShowListener?.remove();
+    }
   }
 
   ngOnInit() {
@@ -53,6 +68,17 @@ export class LocationInputComponent implements OnInit, OnDestroy {
       if (code && code.lang) this.updateSelectableLocations(code.lang)
     });
     this.updateSelectableLocations(this.translateSrvc.currentLang);
+
+    if (Capacitor.isNativePlatform()) {
+      Keyboard.setResizeMode({ mode: KeyboardResize.None });
+      Keyboard.addListener('keyboardDidShow', () => this.scrollInputIntoView())
+        .then(handle => this.keyboardDidShowListener = handle);
+    }
+  }
+
+  private async scrollInputIntoView() {
+    const inputEl = await this.input.getInputElement();
+    inputEl.scrollIntoView({ block: 'center', behavior: 'smooth' });
   }
 
   private updateSelectableLocations(code: string) {
@@ -146,12 +172,16 @@ export class LocationInputComponent implements OnInit, OnDestroy {
     // @ts-ignore
     if (this.editable) this.searchText = this.selectedItem.label;
 
-    // set cursor after selected option
-    this.input.setFocus();
+    this.closeDropdown();
+    this.blurInput();
     // emit selected option
     // @ts-ignore
     this.addLocation(this.selectedItem);
-    this.closeDropdown();
+  }
+
+  private async blurInput() {
+    const inputEl = await this.input.getInputElement();
+    inputEl.blur();
   }
 
   // filter logic
