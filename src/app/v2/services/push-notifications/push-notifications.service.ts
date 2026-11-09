@@ -39,7 +39,8 @@ export class PushNotificationsService {
   public get fcmTokenReady(): Promise<string> {
     if (this.fcmToken) return Promise.resolve(this.fcmToken);
     if (!this.fcmTokenReadyPromise) {
-      this.fcmTokenReadyPromise = FirebaseMessaging.getToken()
+      this.fcmTokenReadyPromise = this.ensureNotificationPermission()
+        .then(() => FirebaseMessaging.getToken())
         .then((token) => {
           this.fcmToken = token.token;
           return this.fcmToken;
@@ -74,6 +75,34 @@ export class PushNotificationsService {
         });
     }
     return this.appVersionReadyPromise;
+  }
+
+  /**
+   * FCM getToken() fails with "Unauthorized" when notification permission has
+   * not been granted yet (iOS/Android). The permission prompt was previously
+   * only requested inside subscribeTopic() — i.e. AFTER the backend
+   * registration that already failed — so the first add-location with
+   * notifications on always errored and the location was rolled back.
+   * Request permission first so getToken() can succeed (NEB-777 fix follow-up).
+   */
+  public async ensureNotificationPermission(): Promise<void> {
+    try {
+      const permission = await FirebaseMessaging.checkPermissions();
+      if (permission.receive === 'granted') return;
+      const req = await FirebaseMessaging.requestPermissions();
+      if (req.receive !== 'granted') {
+        Sentry.captureMessage('Notification permission not granted during subscribe flow', {
+          level: 'warning',
+          extra: { receive: req.receive }
+        });
+        // keep going: getToken() will surface its own error and the
+        // subscription flow will fall into the non-fatal path.
+      }
+    } catch (e) {
+      // checkPermissions/requestPermissions can throw on web or unsynced
+      // native builds — don't block the caller here.
+      console.warn('ensureNotificationPermission failed:', String(e));
+    }
   }
 
   /**

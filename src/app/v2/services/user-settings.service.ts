@@ -153,13 +153,21 @@ export class UserSettingsService {
 
         this.userLocationNotificationSrvc
           .subscribeLocation(location, this.$userAqiIndexThreshold.value)
-          .subscribe(() => {
+          .subscribe((subscribed) => {
+            // next(true) = fully subscribed; next(false) = location saved but
+            // the push subscription failed (no token/permission/plugin). The
+            // location is kept in both cases — rolling it back made adding a
+            // location look broken to the user.
             this.saveLocations()
             this.dismissLoading()
 
-            this.showToast(this.translate.instant('v2.components.location-input.success-choose-location'))
+            const messageKey = subscribed
+              ? 'v2.components.location-input.success-choose-location'
+              : 'v2.components.location-input.saved-no-notifications'
+            this.showToast(this.translate.instant(messageKey))
           },
             async (err) => {
+              // Hard failure (backend registration rejected). Roll back.
               this.dismissLoading()
               this._userLocations = this._userLocations.filter(l => l.id !== location.id)
               console.log(`ERR: addUserLocation`, err)

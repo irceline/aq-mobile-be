@@ -89,7 +89,23 @@ export class UserLocationNotificationsService {
                     observer.next(true);
                     observer.complete();
                   },
-                  () => this.publishError(observer, UserLocationSubscriptionError.NotificationSubscription)
+                  () => {
+                    // Topic subscription failed (e.g. permission denied mid-flow)
+                    // but the backend row WAS created. Keep the subscription info
+                    // so a later remove/change can still DELETE the row, save the
+                    // location, and signal a partial success instead of rolling
+                    // back the user's add (which read as "adding doesn't work").
+                    location.subscription = {
+                      ...data,
+                      uniqueId: data.unique_id
+                    };
+                    Sentry.captureMessage('Location saved but FCM topic subscription failed', {
+                      level: 'warning',
+                      extra: { uniqueId: data.unique_id, topic }
+                    });
+                    observer.next(false);
+                    observer.complete();
+                  }
                 )
               } else {
                 console.log(`registerSubscription failed`, subscription);
@@ -106,11 +122,17 @@ export class UserLocationNotificationsService {
           );
         })
         .catch(error => {
-          Sentry.captureMessage('Location subscribe: FCM token/version unavailable', {
-            level: 'error',
+          // FCM token/version unavailable (web preview, unsynced native build,
+          // permission prompt dismissed, getToken timeout). This must NOT fail
+          // the add-location flow: save the location without a push
+          // subscription (next(false)) so the user keeps their location and
+          // gets a "saved without notifications" toast instead of a rollback.
+          Sentry.captureMessage('Location saved without notifications (FCM token/version unavailable)', {
+            level: 'warning',
             extra: { lat: location.latitude, lng: location.longitude, error: String(error) }
           });
-          this.publishError(observer, UserLocationSubscriptionError.BackendRegistration);
+          observer.next(false);
+          observer.complete();
         });
     });
   }
