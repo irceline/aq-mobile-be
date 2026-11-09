@@ -23,7 +23,7 @@ export class UserNotificationSettingsComponent implements OnInit, OnDestroy {
   public userLocationNotifications!: boolean;
   public aqiScoreNotifications!: number;
   public aqiScoreColor!: string;
-  public aqiIndexName!: number | string;
+  public aqiIndexName!: string;
 
   aqiThresholdDelayTimer?: any
 
