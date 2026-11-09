@@ -77,6 +77,10 @@ export class UserNotificationSettingsComponent implements OnInit {
                 this.userLocationNotifications = toggle
                 this.userSettingsSrvc.dismissLoading()
             }, 250)
+        }, () => {
+            // error path was previously missing: any subscribe failure left
+            // the loading spinner up forever
+            this.userSettingsSrvc.dismissLoading()
         })
     }
     // unsubs
@@ -88,6 +92,8 @@ export class UserNotificationSettingsComponent implements OnInit {
                 this.userLocationNotifications = false
                 this.userSettingsSrvc.dismissLoading()
             }, 250)
+        }, () => {
+            this.userSettingsSrvc.dismissLoading()
         })
     }
   }
