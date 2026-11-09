@@ -7,6 +7,8 @@ import { AlertController, NavController, Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { from, Observable, of, ReplaySubject } from 'rxjs';
 
+import { PendingNotificationService } from './pending-notification.service';
+
 export interface PushNotification {
   topic: string;
   title: string;
@@ -114,6 +116,7 @@ export class PushNotificationsService {
     private zone: NgZone,
     private alertCtrl: AlertController,
     private translate: TranslateService,
+    private pendingNotification: PendingNotificationService,
   ) {
     this.platform.ready().then(() => {
       if (this.platform.is('capacitor')) {
@@ -267,8 +270,11 @@ export class PushNotificationsService {
   }
 
   onNotifTapped(notification: PushNotification) {
-    // general notif show simple alert
-    console.log('onNotifTapped')
+    console.log('onNotifTapped', notification.topic)
+    // Remember the tapped notification so the main screen can show it after
+    // the navigation completes — on a cold start the session state the
+    // popover used to read from doesn't exist yet (NEB-777).
+    this.pendingNotification.set(notification);
     if (notification.topic.startsWith('belair_')) return this.zone.run(
       async () => {
         const alert = await this.alertCtrl.create({
