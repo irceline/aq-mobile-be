@@ -1,6 +1,6 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 // import { IonSlides } from '@ionic/angular'; // not used ??
-import { first } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 import { indexLabel } from '../../common/constants';
 
 import { GeneralNotificationService } from '../../services/push-notifications/general-notification.service';
@@ -11,7 +11,7 @@ import { UserSettingsService } from './../../services/user-settings.service';
   templateUrl: './user-notification-settings.component.html',
   styleUrls: ['./user-notification-settings.component.scss', './user-notification-settings.component.hc.scss'],
 })
-export class UserNotificationSettingsComponent implements OnInit {
+export class UserNotificationSettingsComponent implements OnInit, OnDestroy {
   // @ViewChild(IonSlides) slides: IonSlides; // not used ??
 
   @Output() getFocus = new EventEmitter<boolean>();
@@ -23,9 +23,11 @@ export class UserNotificationSettingsComponent implements OnInit {
   public userLocationNotifications!: boolean;
   public aqiScoreNotifications!: number;
   public aqiScoreColor!: string;
-  public aqiIndexName!: string;
+  public aqiIndexName!: number | string;
 
   aqiThresholdDelayTimer?: any
+
+  private stateSubs: Subscription[] = [];
 
   constructor(
     private generalNotificationSrvc: GeneralNotificationService,
@@ -33,12 +35,35 @@ export class UserNotificationSettingsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.generalNotificationSrvc.$active.pipe(first()).subscribe(res => this.generalNotification = res);
-    this.userSettingsSrvc.$userLocationNotificationsActive.pipe(first()).subscribe(res => this.userLocationNotifications = res);
+    // LIVE subscriptions, not .pipe(first()) one-shot snapshots: a snapshot
+    // left the toggle stale (showing OFF) whenever the screen was opened
+    // while a subscribe/unsubscribe batch was still running, after a session
+    // killed before the state was persisted, or when this component was kept
+    // alive on the Ionic nav stack. Keeping the subscription open keeps the
+    // toggle in sync with the real notification state.
+    this.stateSubs.push(
+      this.generalNotificationSrvc.$active.subscribe(res => this.generalNotification = res)
+    );
+    this.stateSubs.push(
+      this.userSettingsSrvc.$userLocationNotificationsActive.subscribe(res => this.userLocationNotifications = res)
+    );
     // // @todo: get aqi score notif
-    this.userSettingsSrvc.$userAqiIndexThreshold.subscribe(res => this.aqiScoreNotifications = res);
-    this.aqiScoreColor = `aqi${this.aqiScoreNotifications}`
-    this.aqiIndexName = indexLabel[this.aqiScoreNotifications]
+    this.stateSubs.push(
+      this.userSettingsSrvc.$userAqiIndexThreshold.subscribe(res => {
+        this.aqiScoreNotifications = res;
+        this.aqiScoreColor = `aqi${this.aqiScoreNotifications}`
+        this.aqiIndexName = indexLabel[this.aqiScoreNotifications]
+      })
+    );
+  }
+
+  ngOnDestroy() {
+    // aqi threshold uses the same BehaviorSubject pattern the toggle states
+    // did before; unsubscribing here prevents leaked subscriptions when the
+    // component is destroyed (Ionic nav stack can keep components alive, so
+    // make teardown explicit).
+    this.stateSubs.forEach(s => s.unsubscribe());
+    this.stateSubs = [];
   }
 
   async generalNotifToggleChange(event) {
@@ -77,6 +102,10 @@ export class UserNotificationSettingsComponent implements OnInit {
                 this.userLocationNotifications = toggle
                 this.userSettingsSrvc.dismissLoading()
             }, 250)
+        }, () => {
+            // error path was previously missing: any subscribe failure left
+            // the loading spinner up forever
+            this.userSettingsSrvc.dismissLoading()
         })
     }
     // unsubs
@@ -88,6 +117,8 @@ export class UserNotificationSettingsComponent implements OnInit {
                 this.userLocationNotifications = false
                 this.userSettingsSrvc.dismissLoading()
             }, 250)
+        }, () => {
+            this.userSettingsSrvc.dismissLoading()
         })
     }
   }

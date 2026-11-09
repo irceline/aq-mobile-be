@@ -27,7 +27,7 @@ export class UserSettingsService {
   // @ts-ignore
   private _selectedUserLocation: UserLocation;
   // @ts-ignore
-  private _loadingInstance: HTMLIonLoadingElement;
+  private _loadingInstance: HTMLIonLoadingElement | null = null;
   // @ts-ignore
   private _toastInstance: HTMLIonToastElement;
 
@@ -117,6 +117,16 @@ export class UserSettingsService {
     if (this._loadingInstance) {
       this._loadingInstance.dismiss()
       // this._loadingInstance.remove()
+      // defensive: showLoading() can be called again before the previous
+      // loader is dismissed (double toggle / threshold slider re-trigger),
+      // overwriting _loadingInstance. Clear the reference so a later
+      // dismissLoading can't dismiss the wrong (already dead) loader, and
+      // force-close any leftover overlay from an overwritten instance.
+      this._loadingInstance = null
+      try {
+        const top = await this.loadingController.getTop()
+        if (top) await this.loadingController.dismiss()
+      } catch (e) { /* nothing to dismiss */ }
     }
   }
 
@@ -202,34 +212,35 @@ export class UserSettingsService {
     this._userLocations = this._userLocations.filter(
       (l) => l.id !== locationToRemove.id
     );
-    if (this.$userLocationNotificationsActive.getValue()) {
-      // Remove user location
-      this.userLocationNotificationSrvc.unsubscribeLocation(locationToRemove, false).subscribe(
-        () => {
-          this.saveLocations();
-          this.dismissLoading()
-        },
-        (err) => {
-          // Still persist the removal so the location never comes back from
-          // localStorage while a stale push subscription may need cleanup on
-          // the next subscribe pass (NEB-613).
-          this.saveLocations();
-          this.dismissLoading();
-          Sentry.captureMessage('Remove user location failed', {
-            level: 'error',
-            extra: {
-              error: String(err),
-              hadSubscription: !!locationToRemove?.subscription,
-              notificationsActive: this.$userLocationNotificationsActive.getValue()
-            }
-          });
-          this.showToast(this.translate.instant('v2.components.location-input.error-remove-location'))
-        }
-      );
-    } else {
-      this.saveLocations();
-      this.dismissLoading()
-    }
+    // Always attempt backend cleanup, regardless of the notifications-active
+    // toggle: the DB row (not the local flag) decides whether the backend
+    // keeps broadcasting to this device for that location. If the flag is off
+    // but a server row survived (toggle-off failed halfway, stale flag from an
+    // earlier session, legacy data), skipping the DELETE would leave the user
+    // receiving notifications for a location that no longer exists in the app.
+    // unsubscribeLocation() no-ops safely when there is nothing to release.
+    this.userLocationNotificationSrvc.unsubscribeLocation(locationToRemove, false).subscribe(
+      () => {
+        this.saveLocations();
+        this.dismissLoading()
+      },
+      (err) => {
+        // Still persist the removal so the location never comes back from
+        // localStorage while a stale push subscription may need cleanup on
+        // the next subscribe pass (NEB-613).
+        this.saveLocations();
+        this.dismissLoading();
+        Sentry.captureMessage('Remove user location failed', {
+          level: 'error',
+          extra: {
+            error: String(err),
+            hadSubscription: !!locationToRemove?.subscription,
+            notificationsActive: this.$userLocationNotificationsActive.getValue()
+          }
+        });
+        this.showToast(this.translate.instant('v2.components.location-input.error-remove-location'))
+      }
+    );
   }
 
   public subscribeNotification(): Observable<boolean> {
