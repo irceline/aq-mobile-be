@@ -58,3 +58,26 @@
     }
   }
 }
+
+// When the keyboard is up (class toggled on the onboarding <ion-content>),
+// tighten the slide bottom padding and let the slide scroll so inputs near the
+// bottom — the location input's Edit/Confirm actions — remain reachable.
+// (These rules previously lived in onboarding-slider.component.scss nested as
+// .keyboard-shown { :host { ... } } which can never match.)
+.keyboard-shown {
+  ::ng-deep swiper-slide {
+    padding-bottom: 50px;
+
+    .slide {
+      overflow: auto;
+    }
+  }
+
+  ::ng-deep .swiper-pagination {
+    bottom: 20px;
+  }
+
+  ::ng-deep .next {
+    bottom: 0px;
+  }
+}

@@ -79,6 +79,15 @@ export class LocationInputComponent implements OnInit, OnDestroy {
   private async scrollInputIntoView() {
     const inputEl = await this.input.getInputElement();
     inputEl.scrollIntoView({ block: 'center', behavior: 'smooth' });
+
+    // With KeyboardResize.None the keyboard overlays the bottom of the
+    // viewport; the Edit/Confirm actions sit BELOW the input and were pushed
+    // behind it. Scroll the actions wrapper into view as well so "Confirm"
+    // stays reachable while typing (fix/ios-keyboard-resize follow-up).
+    const actionsEl = this.elementRef.nativeElement.querySelector('.location--actions');
+    if (actionsEl) {
+      actionsEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }
   }
 
   private updateSelectableLocations(code: string) {

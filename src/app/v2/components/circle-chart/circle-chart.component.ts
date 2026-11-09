@@ -1,9 +1,10 @@
 import { Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Settings, SettingsService } from '@helgoland/core';
-import { Platform, PopoverController } from '@ionic/angular';
+import { AlertController, Platform, PopoverController } from '@ionic/angular';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 import { select, scaleLinear, path, arc, interpolate } from 'd3';
+import * as Sentry from '@sentry/angular';
 import { Subscription } from 'rxjs';
 
 import { ThemeHandlerService } from '../..//services/theme-handler/theme-handler.service';
@@ -11,6 +12,7 @@ import { MainPhenomenon } from '../../common/phenomenon';
 import { UserLocation } from '../../Interfaces';
 import { BelAQIService } from '../../services/bel-aqi.service';
 import { GeneralNotificationService } from '../../services/push-notifications/general-notification.service';
+import { PendingNotificationService } from '../../services/push-notifications/pending-notification.service';
 import { PushNotification } from './../../services/push-notifications/push-notifications.service';
 import { AnnualMeanValueService } from './../../services/value-provider/annual-mean-value.service';
 import { NotificationPopoverComponent } from './../notification-popover/notification-popover.component';
@@ -73,7 +75,9 @@ export class CircleChartComponent implements OnInit {
     private annualMeanValueSrvc: AnnualMeanValueService,
     private settingsSrvc: SettingsService<Settings>,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private alertCtrl: AlertController,
+    private pendingNotification: PendingNotificationService
   ) {
     this.belaqiService.$activeIndex.subscribe((newIndex) => {
       if (newIndex?.indexScore) {
@@ -125,15 +129,20 @@ export class CircleChartComponent implements OnInit {
     return this.element.nativeElement.offsetHeight || 315;
   }
 
-  public openNotification(ev: Event) {
+  public openNotification(ev?: Event) {
     try {
-      const notifications = [];
+      const notifications: PushNotification[] = [];
+      // A tapped push notification is passed through the pending service
+      // (NEB-777): on a cold start the tap handler runs before any session
+      // state exists, so the payload comes from the tap event itself.
+      const tapped = this.pendingNotification.take();
+      if (tapped) {
+        notifications.push(tapped);
+      }
       if (this.notification) {
-        // @ts-ignore
         notifications.push(this.notification);
       }
-      if (this.activeUserLocation.notification) {
-        // @ts-ignore
+      if (this.activeUserLocation?.notification) {
         notifications.push(this.activeUserLocation.notification);
       }
       if (notifications.length > 0) {
@@ -143,10 +152,40 @@ export class CircleChartComponent implements OnInit {
           // @ts-ignore
           componentProps: { notifications: notifications.sort((a, b) => b.expiration - a.expiration) }
         }).then(popover => popover.present());
+      } else {
+        // No active message (already expired, or tapped notification could
+        // not be recovered): show a neutral message instead of an empty
+        // screen (NEB-777 acceptance criterion).
+        this.showNoActiveNotificationMessage();
       }
     } catch (error) {
-
+      // Never swallow silently again — that hid this whole bug (NEB-777).
+      console.error('openNotification failed', error);
+      Sentry.captureMessage('Notification popover failed to open', {
+        level: 'error',
+        extra: { error: String(error) }
+      });
     }
+  }
+
+  private showNoActiveNotificationMessage() {
+    // translate.instant returns the KEY itself when the translation is
+    // missing (the i18n json files are generated from Traduora and may not
+    // have these new keys yet) — fall back to literal defaults so the alert
+    // always shows meaningful text.
+    const t = (key: string, fallback: string) => {
+      const res = this.translate.instant(key);
+      return res === key ? fallback : res;
+    };
+    this.zone.run(async () => {
+      const alert = await this.alertCtrl.create({
+        header: t('v2.components.notification-popover.no-active-title', 'No active message'),
+        message: t('v2.components.notification-popover.no-active-message',
+                   'There is currently no air quality message to show. It may have expired.'),
+        buttons: [this.translate.instant('controls.ok')]
+      });
+      await alert.present();
+    });
   }
 
   private _initializeChart(cb?) {
@@ -323,9 +362,13 @@ export class CircleChartComponent implements OnInit {
 
   handleNotification(popNotif) {
     if (popNotif) {
+      // Small delay so the main screen has finished rendering before the
+      // popover opens on top of it.
       setTimeout(() => {
-        // @ts-ignore
-        document.getElementById('notif-btn').dispatchEvent(new Event('click'))
+        // Direct method call instead of dispatching a synthetic DOM click on
+        // the SVG button - the click hack depended on layout being ready and
+        // silently did nothing when the element wasn't there (NEB-777).
+        this.openNotification();
         this.router.navigate(['.'], { relativeTo: this.route, queryParams: { generalNotification: null, notification: null } })
       }, 500)
     }

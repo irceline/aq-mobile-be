@@ -110,7 +110,9 @@ export class GeocoderService {
       const multipolygon = e.geometry as GeoJSON.MultiPolygon;
       const polygons = multipolygon.coordinates;
       polygons.forEach(pol => {
-        inside = this.isPointInPolygon(lat, lng, pol[0]);
+        // OR with the running result: the last polygon must not overwrite
+        // hits found in earlier polygons (exclaves/islands vs mainland).
+        inside = inside || this.isPointInPolygon(lat, lng, pol[0]);
       });
     });
     return inside;

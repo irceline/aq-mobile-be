@@ -7,6 +7,8 @@ import { AlertController, NavController, Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { from, Observable, of, ReplaySubject } from 'rxjs';
 
+import { PendingNotificationService } from './pending-notification.service';
+
 export interface PushNotification {
   topic: string;
   title: string;
@@ -37,7 +39,8 @@ export class PushNotificationsService {
   public get fcmTokenReady(): Promise<string> {
     if (this.fcmToken) return Promise.resolve(this.fcmToken);
     if (!this.fcmTokenReadyPromise) {
-      this.fcmTokenReadyPromise = FirebaseMessaging.getToken()
+      this.fcmTokenReadyPromise = this.ensureNotificationPermission()
+        .then(() => FirebaseMessaging.getToken())
         .then((token) => {
           this.fcmToken = token.token;
           return this.fcmToken;
@@ -72,6 +75,34 @@ export class PushNotificationsService {
         });
     }
     return this.appVersionReadyPromise;
+  }
+
+  /**
+   * FCM getToken() fails with "Unauthorized" when notification permission has
+   * not been granted yet (iOS/Android). The permission prompt was previously
+   * only requested inside subscribeTopic() — i.e. AFTER the backend
+   * registration that already failed — so the first add-location with
+   * notifications on always errored and the location was rolled back.
+   * Request permission first so getToken() can succeed (NEB-777 fix follow-up).
+   */
+  public async ensureNotificationPermission(): Promise<void> {
+    try {
+      const permission = await FirebaseMessaging.checkPermissions();
+      if (permission.receive === 'granted') return;
+      const req = await FirebaseMessaging.requestPermissions();
+      if (req.receive !== 'granted') {
+        Sentry.captureMessage('Notification permission not granted during subscribe flow', {
+          level: 'warning',
+          extra: { receive: req.receive }
+        });
+        // keep going: getToken() will surface its own error and the
+        // subscription flow will fall into the non-fatal path.
+      }
+    } catch (e) {
+      // checkPermissions/requestPermissions can throw on web or unsynced
+      // native builds — don't block the caller here.
+      console.warn('ensureNotificationPermission failed:', String(e));
+    }
   }
 
   /**
@@ -114,6 +145,7 @@ export class PushNotificationsService {
     private zone: NgZone,
     private alertCtrl: AlertController,
     private translate: TranslateService,
+    private pendingNotification: PendingNotificationService,
   ) {
     this.platform.ready().then(() => {
       if (this.platform.is('capacitor')) {
@@ -267,8 +299,11 @@ export class PushNotificationsService {
   }
 
   onNotifTapped(notification: PushNotification) {
-    // general notif show simple alert
-    console.log('onNotifTapped')
+    console.log('onNotifTapped', notification.topic)
+    // Remember the tapped notification so the main screen can show it after
+    // the navigation completes — on a cold start the session state the
+    // popover used to read from doesn't exist yet (NEB-777).
+    this.pendingNotification.set(notification);
     if (notification.topic.startsWith('belair_')) return this.zone.run(
       async () => {
         const alert = await this.alertCtrl.create({
