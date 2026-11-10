@@ -29,19 +29,5 @@
         }
       }
     }
-
-    ::ng-deep ion-popover.onboarding-location-dropdown {
-      .location--dropdown {
-        background-color: var(--ion-background-color, white);
-
-        &-item {
-          color: $black;
-        }
-
-        p {
-          color: $black;
-        }
-      }
-    }
   }
 }
