@@ -1,0 +1,51 @@
+<!-- Location input (onboarding variant: dropdown presented in an ion-popover overlay) -->
+<div class="location">
+  <ion-input class="location--input" [placeholder]="'v2.components.location-input.choose-location' | translate"
+    [(ngModel)]="searchText" (ionInput)="filterItems()" (click)="openDropdown()">
+    <img src="/assets/images/icons/pin.svg" alt="">
+    <img class="dark" src="/assets/images/icons/pin-dark.svg" alt="">
+  </ion-input>
+
+  <!-- Inline popover: rendered in Ionic's overlay layer above the keyboard,
+       anchored above the input. Content lives in this template so it keeps
+       this component's scope (filteredItems / chooseOption). -->
+  <ion-popover class="onboarding-location-dropdown" [isOpen]="visible" (didDismiss)="closeDropdown()"
+    side="top" alignment="start" showBackdrop="false" dismissOnSelect="false" arrow="false">
+    <ng-template>
+      <div class="location--dropdown">
+        <ng-container *ngIf="filteredItems.length; else elseTemplate">
+          <ion-row *ngFor="let item of filteredItems;" (click)="chooseOption(item)" class="ion-align-items-center">
+            <ion-col class="location--dropdown-item">
+              {{ item.label }} ({{item.postalCode}})
+              <ng-container *ngIf="selectedItem && ( item.id === selectedItem.id); else notSelect">
+                <ion-icon name="ios-checkmark-circle" color="dark"></ion-icon>
+              </ng-container>
+              <ng-template #notSelect>
+                <ion-icon name="ios-radio-button-off" color="dark"></ion-icon>
+              </ng-template>
+            </ion-col>
+          </ion-row>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <p>{{ 'v2.components.location-input.no-results' | translate }}</p>
+        </ng-template>
+      </div>
+    </ng-template>
+  </ion-popover>
+</div>
+
+<ion-button (click)="getCurrentLocation()" expand="block" fill="clear" shape="round" class="location--button"
+  *ngIf="currentLocation">
+  {{ 'v2.components.location-input.current-location' | translate }}
+  <img src="/assets/images/icons/navigation.svg" alt="">
+  <img class="dark" src="/assets/images/icons/navigation-dark.svg" alt="">
+</ion-button>
+
+<div *ngIf="editableLocation" class="location--actions">
+  <ion-button expand="block" fill="clear" shape="round" class="location--button" (click)="editLocation()">
+    {{ 'no-location.edit' | translate }}
+  </ion-button>
+  <ion-button expand="block" [fill]="btnStateConfirmLocation" shape="round" class="location--button" (click)="confirmLocation()">
+    {{ 'no-location.confirm' | translate }}
+  </ion-button>
+</div>

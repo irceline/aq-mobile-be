@@ -78,8 +78,8 @@
           <p>{{ 'v2.screens.onboarding.start-quickly' | translate }}</p>
           <p>{{ 'v2.screens.onboarding.ask-location' | translate }}</p>
 
-          <app-location-input (locationSelected)="confirmLocation($event)" [editable]="true">
-          </app-location-input>
+          <app-onboarding-location-input (locationSelected)="confirmLocation($event)" [editable]="true">
+          </app-onboarding-location-input>
         </div>
       </div>
     </swiper-slide>

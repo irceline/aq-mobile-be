@@ -1,0 +1,47 @@
+@import '../../theme/variables';
+
+.high-contrast {
+  :host {
+    .location {
+      &--input {
+        background-color: rgba($black, 0.05);
+        color: $black;
+        --placeholder-color: $black;
+
+        img {
+          display: none;
+
+          &.dark {
+            display: block;
+          }
+        }
+      }
+
+      &--button {
+        color: $black;
+
+        img {
+          display: none;
+
+          &.dark {
+            display: block;
+          }
+        }
+      }
+    }
+
+    ::ng-deep ion-popover.onboarding-location-dropdown {
+      .location--dropdown {
+        background-color: var(--ion-background-color, white);
+
+        &-item {
+          color: $black;
+        }
+
+        p {
+          color: $black;
+        }
+      }
+    }
+  }
+}
