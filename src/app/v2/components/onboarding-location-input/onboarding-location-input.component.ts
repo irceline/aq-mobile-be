@@ -16,16 +16,13 @@ import { LocateService } from './../../services/locate/locate.service';
  *
  * Differences from the shared component:
  * - NO global Keyboard manipulation (setResizeMode / keyboardDidShow listener).
- *   The onboarding screen owns KeyboardResize.None + the .keyboard-shown CSS.
- *   The shared component was setting the resize mode for the whole app as a
- *   side effect of being mounted, which fought with the swiper layout on
- *   Android and made the suggestion dropdown untappable.
- * - The suggestion dropdown is rendered inside an inline <ion-popover>
- *   anchored to the input (overlay top layer), so the keyboard can never
- *   cover the results and swiper transforms can't shift them out from under
- *   the user's finger.
+ *   The shared component set KeyboardResize.None app-wide as a side effect of
+ *   being mounted; with the default native resize the webview shrinks when the
+ *   keyboard opens, so the plain div dropdown above the input stays visible
+ *   and tappable on Android (and the keyboard still shows).
  * - Input click only ever OPENS the dropdown (the shared component toggled
  *   it; a synthetic Android click after focus closed it right after opening).
+ * - Markup and styles otherwise match the shared component exactly.
  */
 @Component({
   selector: 'app-onboarding-location-input',
