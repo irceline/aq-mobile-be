@@ -36,9 +36,13 @@ platform :ios do
       unlock: true,
       timeout: 3600,
       lock_when_sleeps: false,
-      add_to_search_list: true,
+      add_to_search_list: false,
       default_keychain: false,
     )
+    # Search ours first: the same signing identity may also exist in other keychains on the machine.
+    keychain_path = File.expand_path("~/Library/Keychains/#{KEYCHAIN}-db")
+    others = sh("security", "list-keychains", "-d", "user", log: false).shellsplit - [keychain_path]
+    sh("security", "list-keychains", "-d", "user", "-s", keychain_path, *others, log: false)
 
     match(
       type: "appstore",
