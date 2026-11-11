@@ -1,8 +1,10 @@
 {
-  "datasetApis": [{
-    "name": "IRCEL - CELINE: timeseries-api (SOS 2.0)",
-    "url": "https://geo.irceline.be/sos/api/v1/"
-  }],
+  "datasetApis": [
+    {
+      "name": "IRCEL - CELINE: timeseries-api (SOS 2.0)",
+      "url": "https://geo.irceline.be/sos/api/v1/"
+    }
+  ],
   "visiblePhenomenonIDs": [
     "391",
     "8",
@@ -10,7 +12,8 @@
     "5",
     "6001"
   ],
-  "languages": [{
+  "languages": [
+    {
       "label": "English",
       "code": "en"
     },
@@ -35,7 +38,8 @@
   ],
   "colorizedMarkerForLastMilliseconds": 7200000,
   "nearestStationTimeBufferInMillseconds": 7200000,
-  "personalAlert": [{
+  "personalAlert": [
+    {
       "period": 5
     },
     {
@@ -75,7 +79,7 @@
       "Lüttich",
       "Gent",
       "Charleroi",
-      "Ostende"
+      "Oostende"
     ],
     "en": [
       "Brussels",
@@ -83,7 +87,7 @@
       "Liège",
       "Ghent",
       "Charleroi",
-      "Ostend"
+      "Oostende"
     ],
     "fr": [
       "Bruxelles",

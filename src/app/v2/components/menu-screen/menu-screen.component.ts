@@ -76,11 +76,14 @@ export class MenuScreenComponent implements OnInit {
       this.locationList = userLocations;
     });
 
-    if (this.platform.is('capacitor')) {
-      App.getInfo().then((info) => {
+    // Get app version with fallback
+    App.getInfo()
+      .then((info) => {
         this.version = info.version;
+      })
+      .catch(() => {
+        // keep fallback 'mobile' (e.g. plugin unavailable on web or unsynced native build)
       });
-    }
   }
 
   ionViewDidEnter() {

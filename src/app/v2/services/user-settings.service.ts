@@ -27,7 +27,7 @@ export class UserSettingsService {
   // @ts-ignore
   private _selectedUserLocation: UserLocation;
   // @ts-ignore
-  private _loadingInstance: HTMLIonLoadingElement;
+  private _loadingInstance: HTMLIonLoadingElement | null = null;
   // @ts-ignore
   private _toastInstance: HTMLIonToastElement;
 
@@ -80,6 +80,7 @@ export class UserSettingsService {
     this.$userLocations = new BehaviorSubject(this._userLocations);
 
     this.registerNotificationHandling();
+    this.refreshBackendRegistrationsOnStartup();
 
     this.translate.onLangChange.subscribe(() => {
       if (this.$userLocationNotificationsActive.getValue()) {
@@ -117,6 +118,16 @@ export class UserSettingsService {
     if (this._loadingInstance) {
       this._loadingInstance.dismiss()
       // this._loadingInstance.remove()
+      // defensive: showLoading() can be called again before the previous
+      // loader is dismissed (double toggle / threshold slider re-trigger),
+      // overwriting _loadingInstance. Clear the reference so a later
+      // dismissLoading can't dismiss the wrong (already dead) loader, and
+      // force-close any leftover overlay from an overwritten instance.
+      this._loadingInstance = null
+      try {
+        const top = await this.loadingController.getTop()
+        if (top) await this.loadingController.dismiss()
+      } catch (e) { /* nothing to dismiss */ }
     }
   }
 
@@ -143,13 +154,21 @@ export class UserSettingsService {
 
         this.userLocationNotificationSrvc
           .subscribeLocation(location, this.$userAqiIndexThreshold.value)
-          .subscribe(() => {
+          .subscribe((subscribed) => {
+            // next(true) = fully subscribed; next(false) = location saved but
+            // the push subscription failed (no token/permission/plugin). The
+            // location is kept in both cases — rolling it back made adding a
+            // location look broken to the user.
             this.saveLocations()
             this.dismissLoading()
 
-            this.showToast(this.translate.instant('v2.components.location-input.success-choose-location'))
+            const messageKey = subscribed
+              ? 'v2.components.location-input.success-choose-location'
+              : 'v2.components.location-input.saved-no-notifications'
+            this.showToast(this.translate.instant(messageKey))
           },
             async (err) => {
+              // Hard failure (backend registration rejected). Roll back.
               this.dismissLoading()
               this._userLocations = this._userLocations.filter(l => l.id !== location.id)
               console.log(`ERR: addUserLocation`, err)
@@ -202,34 +221,72 @@ export class UserSettingsService {
     this._userLocations = this._userLocations.filter(
       (l) => l.id !== locationToRemove.id
     );
-    if (this.$userLocationNotificationsActive.getValue()) {
-      // Remove user location
-      this.userLocationNotificationSrvc.unsubscribeLocation(locationToRemove, false).subscribe(
-        () => {
-          this.saveLocations();
-          this.dismissLoading()
-        },
-        (err) => {
-          // Still persist the removal so the location never comes back from
-          // localStorage while a stale push subscription may need cleanup on
-          // the next subscribe pass (NEB-613).
-          this.saveLocations();
-          this.dismissLoading();
-          Sentry.captureMessage('Remove user location failed', {
-            level: 'error',
-            extra: {
-              error: String(err),
-              hadSubscription: !!locationToRemove?.subscription,
-              notificationsActive: this.$userLocationNotificationsActive.getValue()
-            }
-          });
-          this.showToast(this.translate.instant('v2.components.location-input.error-remove-location'))
-        }
-      );
-    } else {
-      this.saveLocations();
-      this.dismissLoading()
+    // Always attempt backend cleanup, regardless of the notifications-active
+    // toggle: the DB row (not the local flag) decides whether the backend
+    // keeps broadcasting to this device for that location. If the flag is off
+    // but a server row survived (toggle-off failed halfway, stale flag from an
+    // earlier session, legacy data), skipping the DELETE would leave the user
+    // receiving notifications for a location that no longer exists in the app.
+    // unsubscribeLocation() no-ops safely when there is nothing to release.
+    this.userLocationNotificationSrvc.unsubscribeLocation(locationToRemove, false).subscribe(
+      () => {
+        this.saveLocations();
+        this.dismissLoading()
+      },
+      (err) => {
+        // Still persist the removal so the location never comes back from
+        // localStorage while a stale push subscription may need cleanup on
+        // the next subscribe pass (NEB-613).
+        this.saveLocations();
+        this.dismissLoading();
+        Sentry.captureMessage('Remove user location failed', {
+          level: 'error',
+          extra: {
+            error: String(err),
+            hadSubscription: !!locationToRemove?.subscription,
+            notificationsActive: this.$userLocationNotificationsActive.getValue()
+          }
+        });
+        this.showToast(this.translate.instant('v2.components.location-input.error-remove-location'))
+      }
+    );
+  }
+
+  /**
+   * Silent startup re-registration of every saved location against the
+   * notification backend.
+   *
+   * The backend POST is an idempotent upsert (ON CONFLICT (key, lat, lng) DO
+   * UPDATE SET version, language, creation_date, ...), so re-POSTing the same
+   * locations on app start refreshes the stored app version / language for
+   * EXISTING rows. Previously version was only written when a location was
+   * added, so after an app update every old fcm_channel row kept the stale
+   * version (feedback 2026-11-10, point 2).
+   *
+   * Deliberately does NOT reuse subscribeNotification(): that method flips the
+   * notifications-active flag based on its result, which must never change as
+   * a side effect of a silent background refresh (e.g. offline at launch).
+   * Fire-and-forget: failures are only logged, no loading spinner, no toast.
+   */
+  private refreshBackendRegistrationsOnStartup(): void {
+    if (!this.$userLocationNotificationsActive.getValue() || this._userLocations.length === 0) {
+      return;
     }
+
+    const reRegistrations = this._userLocations.map(uLoc =>
+      this.userLocationNotificationSrvc.subscribeLocation(uLoc, this.$userAqiIndexThreshold.value)
+        .pipe(catchError(() => of(false)))
+    );
+
+    forkJoin(reRegistrations).pipe(
+      catchError(() => of(false)),
+    ).subscribe(results => {
+      // Persist any refreshed subscription payloads (uniqueId etc.) and report
+      // how many locations re-registered successfully.
+      this.saveLocations();
+      const ok = (results as boolean[]).filter(r => r === true).length;
+      console.log(`Startup notification re-registration: ${ok}/${this._userLocations.length} locations refreshed`);
+    });
   }
 
   public subscribeNotification(): Observable<boolean> {
