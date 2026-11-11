@@ -1,6 +1,5 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { Capacitor, PluginListenerHandle } from '@capacitor/core';
-import { Keyboard, KeyboardResize } from '@capacitor/keyboard';
+import { Capacitor } from '@capacitor/core';
 import { SettingsService } from '@helgoland/core';
 import { IonInput, LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
@@ -35,7 +34,6 @@ export class LocationInputComponent implements OnInit, OnDestroy {
 
   @Output() locationSelected = new EventEmitter<UserLocation>();
   private langSubscription!: Subscription;
-  private keyboardDidShowListener?: PluginListenerHandle;
 
   constructor(
     private loadingController: LoadingController,
@@ -57,10 +55,6 @@ export class LocationInputComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (this.langSubscription) { this.langSubscription.unsubscribe() }
-    if (Capacitor.isNativePlatform()) {
-      Keyboard.setResizeMode({ mode: KeyboardResize.Native });
-      this.keyboardDidShowListener?.remove();
-    }
   }
 
   ngOnInit() {
@@ -68,26 +62,6 @@ export class LocationInputComponent implements OnInit, OnDestroy {
       if (code && code.lang) this.updateSelectableLocations(code.lang)
     });
     this.updateSelectableLocations(this.translateSrvc.currentLang);
-
-    if (Capacitor.isNativePlatform()) {
-      Keyboard.setResizeMode({ mode: KeyboardResize.None });
-      Keyboard.addListener('keyboardDidShow', () => this.scrollInputIntoView())
-        .then(handle => this.keyboardDidShowListener = handle);
-    }
-  }
-
-  private async scrollInputIntoView() {
-    const inputEl = await this.input.getInputElement();
-    inputEl.scrollIntoView({ block: 'center', behavior: 'smooth' });
-
-    // With KeyboardResize.None the keyboard overlays the bottom of the
-    // viewport; the Edit/Confirm actions sit BELOW the input and were pushed
-    // behind it. Scroll the actions wrapper into view as well so "Confirm"
-    // stays reachable while typing (fix/ios-keyboard-resize follow-up).
-    const actionsEl = this.elementRef.nativeElement.querySelector('.location--actions');
-    if (actionsEl) {
-      actionsEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-    }
   }
 
   private updateSelectableLocations(code: string) {
@@ -231,7 +205,7 @@ export class LocationInputComponent implements OnInit, OnDestroy {
 
         // @ts-ignore
         // emit null
-        this.locationSelected.next(null);
+        this.locationSelected.emit(null);
       }
     }
   }

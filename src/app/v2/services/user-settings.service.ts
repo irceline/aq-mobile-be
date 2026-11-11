@@ -80,6 +80,7 @@ export class UserSettingsService {
     this.$userLocations = new BehaviorSubject(this._userLocations);
 
     this.registerNotificationHandling();
+    this.refreshBackendRegistrationsOnStartup();
 
     this.translate.onLangChange.subscribe(() => {
       if (this.$userLocationNotificationsActive.getValue()) {
@@ -249,6 +250,43 @@ export class UserSettingsService {
         this.showToast(this.translate.instant('v2.components.location-input.error-remove-location'))
       }
     );
+  }
+
+  /**
+   * Silent startup re-registration of every saved location against the
+   * notification backend.
+   *
+   * The backend POST is an idempotent upsert (ON CONFLICT (key, lat, lng) DO
+   * UPDATE SET version, language, creation_date, ...), so re-POSTing the same
+   * locations on app start refreshes the stored app version / language for
+   * EXISTING rows. Previously version was only written when a location was
+   * added, so after an app update every old fcm_channel row kept the stale
+   * version (feedback 2026-11-10, point 2).
+   *
+   * Deliberately does NOT reuse subscribeNotification(): that method flips the
+   * notifications-active flag based on its result, which must never change as
+   * a side effect of a silent background refresh (e.g. offline at launch).
+   * Fire-and-forget: failures are only logged, no loading spinner, no toast.
+   */
+  private refreshBackendRegistrationsOnStartup(): void {
+    if (!this.$userLocationNotificationsActive.getValue() || this._userLocations.length === 0) {
+      return;
+    }
+
+    const reRegistrations = this._userLocations.map(uLoc =>
+      this.userLocationNotificationSrvc.subscribeLocation(uLoc, this.$userAqiIndexThreshold.value)
+        .pipe(catchError(() => of(false)))
+    );
+
+    forkJoin(reRegistrations).pipe(
+      catchError(() => of(false)),
+    ).subscribe(results => {
+      // Persist any refreshed subscription payloads (uniqueId etc.) and report
+      // how many locations re-registered successfully.
+      this.saveLocations();
+      const ok = (results as boolean[]).filter(r => r === true).length;
+      console.log(`Startup notification re-registration: ${ok}/${this._userLocations.length} locations refreshed`);
+    });
   }
 
   public subscribeNotification(): Observable<boolean> {

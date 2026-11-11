@@ -24,6 +24,7 @@ import { InformationItemComponent } from './information-item/information-item.co
 import { LanguageDropdownComponent } from './language-dropdown/language-dropdown.component';
 import { LocationEditComponent } from './location-edit/location-edit.component';
 import { LocationInputComponent } from './location-input/location-input.component';
+import { OnboardingLocationInputComponent } from './onboarding-location-input/onboarding-location-input.component';
 import { LocationSortableComponent } from './location-sortable/location-sortable.component';
 import { LocationSwipeComponent } from './location-swipe/location-swipe.component';
 import { MapComponent } from './map-component/map.component';
@@ -61,6 +62,7 @@ const COMPONENTS = [
   OnboardingSliderComponent,
   LanguageDropdownComponent,
   LocationInputComponent,
+  OnboardingLocationInputComponent,
   UserNotificationSettingsComponent,
   LocationSortableComponent,
   BackgroundComponent,
