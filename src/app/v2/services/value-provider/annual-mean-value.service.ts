@@ -10,6 +10,7 @@ import { MainPhenomenon } from '../../common/phenomenon';
 import { UserLocation } from '../../Interfaces';
 import { IrcelineSettingsService } from './../irceline-settings/irceline-settings.service';
 import { ValueProvider } from './value-provider';
+import { environment } from 'src/environments/environment';
 
 const phenomenonMapping = [
   {
@@ -111,7 +112,7 @@ export class AnnualMeanValueService extends ValueProvider {
   }
 
   private createWmsUrl(layerId: string): string {
-    return `https://geobelair.irceline.be/annual/wms`;
+    return `${environment.API_BASE_URL}/annual/wms`;
   }
 
 

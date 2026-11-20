@@ -10,6 +10,7 @@ import { EncryptionService } from '../encryption/encryption.service';
 import { PushNotificationsService } from '../push-notifications/push-notifications.service';
 import { PushNotification } from './../push-notifications/push-notifications.service';
 import { UserLocationTopicGeneratorService } from './user-location-topic-generator.service';
+import { environment } from 'src/environments/environment';
 
 export enum UserLocationSubscriptionError {
   BackendRegistration,
@@ -22,8 +23,8 @@ export interface UserLocationNotification {
   notification: PushNotification
 }
 
-const NOTIFICATION_SUBSCRIPTION_BACKEND_URL = 'https://geobelair.irceline.be/air/belair_channel.php';
-// const NOTIFICATION_SUBSCRIPTION_BACKEND_URL = 'https://geobelair.irceline.be/air/belair_channel.debug.php';
+const NOTIFICATION_SUBSCRIPTION_BACKEND_URL = `${environment.API_BASE_URL}/air/belair_channel.php`;
+// const NOTIFICATION_SUBSCRIPTION_BACKEND_URL = `${environment.API_BASE_URL}/air/belair_channel.debug.php`;
 const USER_LOCATION_SUBSCRIPTIONS_PARAM = 'user_location_subscriptions';
 
 @Injectable({

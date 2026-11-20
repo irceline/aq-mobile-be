@@ -80,7 +80,7 @@ export class FeedbackService {
     //     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
     //   }
     // });
-    return this.httpSrvc.post<FeedbackStats>(environment.FEEDBACK_SERVICE_URL, encriptedFeedback, {
+    return this.httpSrvc.post<FeedbackStats>(environment.API_BASE_URL + '/air/belair_report.php', encriptedFeedback, {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
       }
@@ -90,7 +90,7 @@ export class FeedbackService {
   public getFeedbackStats(): Observable<FeedbackStats> {
     // old code use helgoland
     // return this.httpSrvc.client({ expirationAtMs: 1000 * 60 * 60 }).get<FeedbackStats>(FEEDBACK_SERVICE_URL);
-    return this.httpSrvc.get<FeedbackStats>(environment.FEEDBACK_SERVICE_URL);
+    return this.httpSrvc.get<FeedbackStats>(environment.API_BASE_URL + '/air/belair_report.php');
   }
 
   private createKey() {
