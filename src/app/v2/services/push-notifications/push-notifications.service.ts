@@ -243,6 +243,17 @@ export class PushNotificationsService {
             this.onNotifTapped(notification)
           } else {
             console.log('Notification handler failed, probably because title or body not exist on data');
+            Sentry.captureMessage('Tapped notification payload incomplete', {
+              level: 'warning',
+              extra: {
+                hasTitle: !!extraData.title,
+                hasBody: !!extraData.body,
+                hasExpiration: !!extraData.expiration,
+                hasTopic: !!extraData.topic,
+                dataKeys: extraData ? Object.keys(extraData) : null,
+                notificationKeys: data ? Object.keys(data) : null
+              }
+            });
           }
         })
       }
@@ -299,26 +310,18 @@ export class PushNotificationsService {
   }
 
   onNotifTapped(notification: PushNotification) {
-    console.log('onNotifTapped', notification.topic)
     // Remember the tapped notification so the main screen can show it after
     // the navigation completes — on a cold start the session state the
     // popover used to read from doesn't exist yet (NEB-777).
     this.pendingNotification.set(notification);
-    if (notification.topic.startsWith('belair_')) return this.zone.run(
-      async () => {
-        const alert = await this.alertCtrl.create({
-          header: notification.title,
-          message: notification.body,
-          buttons: [{
-            text: this.translate.instant('controls.ok'),
-            handler: () => {
-              alert.dismiss()
-            },
-          }],
-        });
-        await alert.present();
-      })
-    // loc notif
-    return this.zone.run(() => this.nav.navigateBack('main', { queryParams: { popNotif: true } }))
+    // Always route through the main screen: it consumes the pending
+    // notification via PendingNotificationService and opens the popover
+    // showing the (!) icon + message text (client expectation, NEB-777).
+    // The former belair_ direct-alert branch bypassed this flow —
+    // AlertController presented during cold-start bootstrap is unreliable,
+    // and it left the app on the last screen without any message.
+    // navigateRoot instead of navigateBack: on a cold start from the
+    // notification tray there is no back stack yet.
+    return this.zone.run(() => this.nav.navigateRoot('main', { queryParams: { popNotif: true } }));
   }
 }

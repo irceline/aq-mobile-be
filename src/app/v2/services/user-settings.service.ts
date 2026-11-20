@@ -180,6 +180,10 @@ export class UserSettingsService {
             }
           );
       } else {
+        // Notifications currently off: nothing to register now. When the
+        // user re-enables notifications, subscribeNotification() →
+        // subscribeLocation() will register and persist the subscription
+        // (uniqueId included) before any removal can happen.
         this.saveLocations();
       }
     }
