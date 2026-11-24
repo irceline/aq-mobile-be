@@ -113,7 +113,9 @@ export class GeneralNotificationService {
     this.storage.set(GENERAL_NOTIFICATION_STORAGE_KEY, notif);
     if (this.expirationTimer && !this.expirationTimer.closed) {
       this.expirationTimer.unsubscribe();
-      this.storage.remove(GENERAL_NOTIFICATION_STORAGE_KEY);
+      // NOTE: deliberately do NOT remove storage here — the NEW notification
+      // was just written to storage above; removing it here would make the
+      // notification disappear after an app restart.
     }
     this.expirationTimer = timer(notif.expiration).subscribe(() => {
       // @ts-ignore

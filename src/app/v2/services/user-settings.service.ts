@@ -411,6 +411,9 @@ export class UserSettingsService {
     ul.notification = null;
     // @ts-ignore
     this.notificationExpirationTimer.delete(ul.id);
+    // Persist the removal, otherwise the expired notification comes back
+    // from localStorage on the next cold start.
+    this.saveLocations();
   }
 
 }

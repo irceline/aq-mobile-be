@@ -23,8 +23,7 @@ export interface UserLocationNotification {
   notification: PushNotification
 }
 
-// const NOTIFICATION_SUBSCRIPTION_BACKEND_URL = `${environment.API_BASE_URL}/air/belair_channel.php`;
-const NOTIFICATION_SUBSCRIPTION_BACKEND_URL = `https://api-production-065b.up.railway.app/air/belair_channel.php`;
+const NOTIFICATION_SUBSCRIPTION_BACKEND_URL = `${environment.API_BASE_URL}/air/belair_channel.php`;
 // const NOTIFICATION_SUBSCRIPTION_BACKEND_URL = `${environment.API_BASE_URL}/air/belair_channel.debug.php`;
 const USER_LOCATION_SUBSCRIPTIONS_PARAM = 'user_location_subscriptions';
 
