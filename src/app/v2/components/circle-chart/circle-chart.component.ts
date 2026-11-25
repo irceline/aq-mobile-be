@@ -136,14 +136,24 @@ export class CircleChartComponent implements OnInit {
       // (NEB-777): on a cold start the tap handler runs before any session
       // state exists, so the payload comes from the tap event itself.
       const tapped = this.pendingNotification.take();
-      if (tapped) {
+      // Ignore tapped payloads that have already expired by the time the
+      // popover opens — otherwise they sit in the popover forever.
+      if (tapped && new Date(tapped.expiration).getTime() > Date.now()) {
         notifications.push(tapped);
       }
-      if (this.notification) {
-        notifications.push(this.notification);
-      }
-      if (this.activeUserLocation?.notification) {
-        notifications.push(this.activeUserLocation.notification);
+      // The FCM listeners fan one payload out into several state buckets:
+      // pendingNotification (tap path), generalNotification (this.notification)
+      // and the active user location's notification. Without dedupe the same
+      // title/body renders twice in the popover (NEB-777).
+      const isDuplicate = (n: PushNotification) => notifications.some(x =>
+        x.topic === n.topic && x.title === n.title && x.body === n.body
+        && String(x.expiration) === String(n.expiration)
+      );
+      for (const n of [this.notification, this.activeUserLocation?.notification]) {
+        if (!n || new Date(n.expiration).getTime() <= Date.now()) continue;
+        if (!isDuplicate(n)) {
+          notifications.push(n);
+        }
       }
       if (notifications.length > 0) {
         this.popoverController.create({

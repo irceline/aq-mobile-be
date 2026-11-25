@@ -5,6 +5,7 @@ import 'leaflet.markercluster';
 import { Observable } from 'rxjs';
 
 import { BelAQIService } from '../../../services/bel-aqi.service';
+import { environment } from 'src/environments/environment';
 
 var inlineIcon = L.icon({
   iconUrl: 'assets/images/icons/inline.svg',
@@ -140,7 +141,7 @@ export class FeedbackStatsMapComponent implements AfterViewInit, OnInit {
 
   private getFeatures(name: string): Observable<GeoJSON.GeoJsonObject> {
     // const bbox = this.map.getBounds().toBBoxString();
-    const url = 'https://geobelair.irceline.be/belair/ows?'
+    const url = `${environment.API_BASE_URL}/belair/ows?`
     return this.http.get<GeoJSON.GeoJsonObject>(url, {
       params: {
         service: 'WFS',

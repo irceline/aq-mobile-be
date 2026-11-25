@@ -10,6 +10,7 @@ import { EncryptionService } from '../encryption/encryption.service';
 import { PushNotificationsService } from '../push-notifications/push-notifications.service';
 import { PushNotification } from './../push-notifications/push-notifications.service';
 import { UserLocationTopicGeneratorService } from './user-location-topic-generator.service';
+import { environment } from 'src/environments/environment';
 
 export enum UserLocationSubscriptionError {
   BackendRegistration,
@@ -22,8 +23,8 @@ export interface UserLocationNotification {
   notification: PushNotification
 }
 
-const NOTIFICATION_SUBSCRIPTION_BACKEND_URL = 'https://geobelair.irceline.be/air/belair_channel.php';
-// const NOTIFICATION_SUBSCRIPTION_BACKEND_URL = 'https://geobelair.irceline.be/air/belair_channel.debug.php';
+const NOTIFICATION_SUBSCRIPTION_BACKEND_URL = `${environment.API_BASE_URL}/air/belair_channel.php`;
+// const NOTIFICATION_SUBSCRIPTION_BACKEND_URL = `${environment.API_BASE_URL}/air/belair_channel.debug.php`;
 const USER_LOCATION_SUBSCRIPTIONS_PARAM = 'user_location_subscriptions';
 
 @Injectable({
@@ -131,6 +132,14 @@ export class UserLocationNotificationsService {
             level: 'warning',
             extra: { lat: location.latitude, lng: location.longitude, error: String(error) }
           });
+          // Persist a uniqueId-only stub so a later removal always has the id
+          // the backend row will carry (the generated id is echoed back and
+          // stored by the backend even when the register failed here). Without
+          // this stub the DELETE would skip the backend entirely or match
+          // nothing (NEB-613 stale-row fix).
+          if (!location.subscription) {
+            location.subscription = { uniqueId: this.generateKey() };
+          }
           observer.next(false);
           observer.complete();
         });
@@ -164,18 +173,21 @@ export class UserLocationNotificationsService {
         )
       };
 
-      if (location.subscription) {
+      if (location.subscription?.uniqueId) {
         const subscription: LocationSubscription = location.subscription;
 
         if (performUpdate) {
           // Language-change flow: only the FCM topic needs to be released.
-          unsubscribeTopic(subscription.lat, subscription.lng, subscription.language);
+          unsubscribeTopic(subscription.lat ?? location.latitude!, subscription.lng ?? location.longitude!, subscription.language ?? langCode);
         } else {
           // unregister from Backend, then release the topic either way so a
           // failed backend delete can't leave a stale subscription behind.
+          // Works for BOTH a full subscription and a uniqueId-only stub:
+          // deleteSubscription omits absent params, so a stub (no key)
+          // produces a key-less DELETE the backend's legacy handler accepts.
           this.deleteSubscription(subscription).subscribe(
-            () => unsubscribeTopic(subscription.lat, subscription.lng, subscription.language),
-            () => unsubscribeTopic(subscription.lat, subscription.lng, subscription.language)
+            () => unsubscribeTopic(subscription.lat ?? location.latitude!, subscription.lng ?? location.longitude!, subscription.language ?? langCode),
+            () => unsubscribeTopic(subscription.lat ?? location.latitude!, subscription.lng ?? location.longitude!, subscription.language ?? langCode)
           );
         }
       } else {
@@ -218,7 +230,15 @@ export class UserLocationNotificationsService {
 
   private deleteSubscription(subscription: LocationSubscription): Observable<boolean> {
     return new Observable<boolean>((observer: Observer<boolean>) => {
-      this.http.delete(`${NOTIFICATION_SUBSCRIPTION_BACKEND_URL}?key=${subscription.key}&uniqueId=${subscription.uniqueId}`, {
+      // Build the query defensively: omit params that are absent instead of
+      // sending the literal string "null"/"undefined" (which the backend
+      // treats as a real value and matches nothing). A key-less DELETE hits
+      // the backend's legacy handler for stub-only subscriptions.
+      const params: string[] = [];
+      if (subscription.key) params.push(`key=${subscription.key}`);
+      if (subscription.uniqueId) params.push(`uniqueId=${subscription.uniqueId}`);
+      const query = params.length ? `?${params.join('&')}` : '';
+      this.http.delete(`${NOTIFICATION_SUBSCRIPTION_BACKEND_URL}${query}`, {
         observe: 'response',
         responseType: 'text'
       }).subscribe(
