@@ -187,24 +187,7 @@
   }
 }
 
-.keyboard-shown {
-  :host {
-    swiper-container {
-      ::ng-deep swiper-slide {
-        padding-bottom: 50px;
-
-        .slide {
-          overflow: auto;
-        }
-      }
-
-      ::ng-deep .swiper-pagination {
-        bottom: 20px;
-      }
-    }
-
-    .next {
-      bottom: 0px;
-    }
-  }
-}
+/* NOTE: dead rules removed — the previous block nested .keyboard-shown { :host { ... } }
+   which can never match (a descendant can't precede its ancestor), and the class is
+   toggled on the onboarding screen's <ion-content>, not on this component's host.
+   The keyboard adjustments now live in onboarding-screen.component.scss. */

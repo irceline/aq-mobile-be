@@ -26,14 +26,21 @@ export interface UserLocation {
 }
 
 export interface LocationSubscription {
-    lat: number;
-    lng: number;
-    language: string;
-    location_name: string;
+    /**
+     * All fields optional: a subscription object may be a partial stub
+     * (uniqueId only) persisted when the backend registration could not
+     * complete (no FCM token / permission). The stub keeps the uniqueId
+     * stable across re-registrations so the DELETE can always address the
+     * same backend row (NEB-613).
+     */
+    lat?: number;
+    lng?: number;
+    language?: string;
+    location_name?: string;
     index?: number;
-    key: string;
-    version: string;
-    uniqueId: string;
+    key?: string;
+    version?: string;
+    uniqueId?: string;
 }
 
 export interface IBarChartData {

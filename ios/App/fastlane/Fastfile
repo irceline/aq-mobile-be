@@ -6,6 +6,16 @@ before_all do
   Dotenv.overload '../../../.env'
 end
 
+# Dedicated per-run keychain, so signing does not depend on the state of the login keychain.
+KEYCHAIN = "belair-ci"
+
+def delete_ci_keychain
+  delete_keychain(name: KEYCHAIN) if File.exist?(File.expand_path("~/Library/Keychains/#{KEYCHAIN}-db"))
+end
+
+after_all { |_lane| delete_ci_keychain }
+error { |_lane, _exception| delete_ci_keychain }
+
 platform :ios do
   team_id = CredentialsManager::AppfileConfig.try_fetch_value(:team_id)
   app_identifier = CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
@@ -19,16 +29,28 @@ platform :ios do
       ]
     )
 
-    unlock_keychain(
-      path: "login.keychain-db",
-      password: ENV["KEYCHAIN_PASSWORD"]
+    delete_ci_keychain
+    create_keychain(
+      name: KEYCHAIN,
+      password: ENV["KEYCHAIN_PASSWORD"],
+      unlock: true,
+      timeout: 3600,
+      lock_when_sleeps: false,
+      add_to_search_list: false,
+      default_keychain: false,
     )
+    # Search ours first: the same signing identity may also exist in other keychains on the machine.
+    keychain_path = File.expand_path("~/Library/Keychains/#{KEYCHAIN}-db")
+    others = sh("security", "list-keychains", "-d", "user", log: false).shellsplit - [keychain_path]
+    sh("security", "list-keychains", "-d", "user", "-s", keychain_path, *others, log: false)
 
     match(
       type: "appstore",
       app_identifier: app_identifier,
       team_id: team_id,
       readonly: true,
+      keychain_name: KEYCHAIN,
+      keychain_password: ENV["KEYCHAIN_PASSWORD"],
     )
   end
 
